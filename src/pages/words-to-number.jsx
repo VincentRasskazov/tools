@@ -17,8 +17,12 @@ export default function WordsToNumber() {
       let result = 0;
       let current = 0;
 
-      tokens.forEach(token => {
+      for (const token of tokens) {
         const value = wordValues[token];
+        if (value === undefined) {
+          setNumber('Invalid input');
+          return;
+        }
         if (value >= 1000) {
           result += current * value;
           current = 0;
@@ -27,7 +31,7 @@ export default function WordsToNumber() {
         } else {
           current += value;
         }
-      });
+      }
 
       setNumber((result + current).toString());
     } catch {
