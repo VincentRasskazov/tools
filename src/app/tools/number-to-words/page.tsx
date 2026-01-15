@@ -11,6 +11,7 @@ function toWords(num: number): string {
   if (num < 1000) return a[Math.floor(num / 100)] + " hundred" + (num % 100 ? " and " + toWords(num % 100) : "");
   if (num < 1000000) return toWords(Math.floor(num / 1000)) + " thousand" + (num % 1000 ? " " + toWords(num % 1000) : "");
   return "";
+  function toWords(num: number): string {
 }
 
 export default function NumberToWords() {
