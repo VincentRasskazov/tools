@@ -67,6 +67,7 @@ const tools = [
     { name: "Volume Converter", path: "/tools/volume-converter" },
     { name: "Weight Converter", path: "/tools/weight-converter" },
     { name: "IP to Binary Converter", path: "/tools/ip-to-binary" },
+    { name: "Binary to IP Converter", path: "/tools/binary-to-ip" },
 ];
 
 export default function ToolsPage() {
