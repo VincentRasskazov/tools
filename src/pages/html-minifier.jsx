@@ -5,10 +5,12 @@ export default function HTMLMinifier() {
   const [output, setOutput] = useState('');
 
   const minify = () => {
+    // Note: This tool is for minifying HTML code, not for sanitizing untrusted input.
+    // Users should not use the output in contexts where XSS is a concern without proper sanitization.
     const minified = input
-      .replace(/\s+/g, ' ')
-      .replace(/>\s+</g, '><')
-      .replace(/<!--.*?-->/g, '')
+      .replace(/<!--[\s\S]*?-->/g, '')  // Remove comments (including multiline)
+      .replace(/\s+/g, ' ')              // Replace multiple whitespace with single space
+      .replace(/>\s+</g, '><')           // Remove whitespace between tags
       .trim();
     setOutput(minified);
   };
