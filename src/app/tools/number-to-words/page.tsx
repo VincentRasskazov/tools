@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 
-function toWords(num: number) {
+function toWords(num: number): string {
   if (isNaN(num) || num < 0 || num > 999999) return "";
   const a = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
   const b = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
