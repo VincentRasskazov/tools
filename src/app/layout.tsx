@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Ultimate Online Tools Hub",
     description: "A massive collection of free, fast, and beautiful online tools. Stopwatch, timer, calculator, converters, password generator, QR code, color picker, and more.",
-    url: "https://yourdomain.com/",
+    url: "https://vincentrasskazov.github.io/tools/",
     siteName: "Ultimate Online Tools Hub",
     images: [
       {
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     description: "A massive collection of free, fast, and beautiful online tools. Stopwatch, timer, calculator, converters, password generator, QR code, color picker, and more.",
     images: ["/og-image.png"]
   },
-  metadataBase: new URL("https://yourdomain.com")
+  metadataBase: new URL("https://vincentrasskazov.github.io/tools/")
 };
 
 export default function RootLayout({
