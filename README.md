@@ -1,7 +1,8 @@
 
+
 # Ultimate Online Tools Hub
 
->A massive, SEO-friendly website with every online tool you need—fully functional, beautiful, and blazing fast.
+> A massive, SEO-friendly website with every online tool you need—fully functional, beautiful, and blazing fast.
 
 ## ✨ Features
 
@@ -26,7 +27,6 @@ npm run dev
 # Open http://localhost:3000
 ```
 
-
 ## 🌍 Deploying to GitHub Pages
 
 This project is configured for static export and automatic deployment to GitHub Pages using GitHub Actions.
@@ -35,14 +35,13 @@ This project is configured for static export and automatic deployment to GitHub 
 
 - On every push to `main`, the site is built and exported to static HTML in the `out/` directory.
 - The static site is published to the `gh-pages` branch and served at:
-	- `https://<your-username>.github.io/tools/`
+  - `https://<your-username>.github.io/tools/`
 
 ### Local static export
 
 ```bash
 export GITHUB_PAGES=true
 npm run build
-npm run export
 # The static site will be in the out/ folder
 ```
 
@@ -53,10 +52,42 @@ npm run export
 
 ---
 
-## 🛠️ Add More Tools
+## 🛠️ Tool URLs
 
-Add new tools by creating a new folder in `src/app/tools/` and adding a `page.tsx` file for your tool. Link it from `src/app/tools/page.tsx`.
+After deployment, your tools will be available at:
+
+- **Landing Page:** `https://<your-username>.github.io/tools/`
+- **All Tools:** `https://<your-username>.github.io/tools/tools/`
+- **Stopwatch:** `https://<your-username>.github.io/tools/tools/stopwatch/`
+- **Timer:** `https://<your-username>.github.io/tools/tools/timer/`
+- **Calculator:** `https://<your-username>.github.io/tools/tools/calculator/`
+- **Unit Converter:** `https://<your-username>.github.io/tools/tools/unit-converter/`
+- **Currency Converter:** `https://<your-username>.github.io/tools/tools/currency-converter/`
+- **Password Generator:** `https://<your-username>.github.io/tools/tools/password-generator/`
+- **BMI Calculator:** `https://<your-username>.github.io/tools/tools/bmi-calculator/`
+- **QR Code Generator:** `https://<your-username>.github.io/tools/tools/qr-code-generator/`
+- **Color Picker:** `https://<your-username>.github.io/tools/tools/color-picker/`
+
+## 🍴 Forking & Customization
+
+1. Fork this repo on GitHub.
+2. Clone your fork:
+	```bash
+	git clone https://github.com/<your-username>/tools.git
+	cd tools
+	```
+3. Install dependencies and run locally:
+	```bash
+	npm install
+	npm run dev
+	```
+4. Push to your `main` branch to deploy to your own GitHub Pages.
+5. To add new tools, create a new folder in `src/app/tools/` and add a `page.tsx` file. Link it from `src/app/tools/page.tsx`.
 
 ## 📄 License
 
-MIT
+This project is MIT licensed. You should keep a license file if you want others to use, modify, or contribute to your project. If you want to restrict use, choose a different license.
+
+---
+
+**Happy hacking!**
