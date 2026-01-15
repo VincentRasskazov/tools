@@ -2,16 +2,17 @@
 import React, { useState } from "react";
 
 
+
 function toRoman(num: number): string {
-  num = Number(num);
-  if (isNaN(num) || num < 1 || num > 3999) return "";
+  let n = Number(num);
+  if (isNaN(n) || n < 1 || n > 3999) return "";
   const map = [
     [1000, "M"], [900, "CM"], [500, "D"], [400, "CD"], [100, "C"], [90, "XC"],
     [50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]
   ];
   let res = "";
   for (const [v, s] of map) {
-    while (num >= v) { res += s; num -= v; }
+    while (n >= v) { res += s; n -= v; }
   }
   return res;
 }
