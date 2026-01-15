@@ -68,6 +68,10 @@ const tools = [
     { name: "Weight Converter", path: "/tools/weight-converter" },
     { name: "IP to Binary Converter", path: "/tools/ip-to-binary" },
     { name: "Binary to IP Converter", path: "/tools/binary-to-ip" },
+    { name: "Hex to Binary Converter", path: "/tools/hex-to-binary" },
+    { name: "Binary to Hex Converter", path: "/tools/binary-to-hex" },
+    { name: "Hex to ASCII Converter", path: "/tools/hex-to-ascii" },
+    { name: "ASCII to Hex Converter", path: "/tools/ascii-to-hex" },
 ];
 
 export default function ToolsPage() {
