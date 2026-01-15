@@ -81,6 +81,15 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../src/app/tools/caesar-cipher/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/caesar-cipher">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/caesar-cipher/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/tools/calculator/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/calculator">> = Specific
@@ -144,6 +153,24 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../src/app/tools/html-entity-decoder/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/html-entity-decoder">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/html-entity-decoder/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/html-entity-encoder/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/html-entity-encoder">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/html-entity-encoder/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/tools/ip-address-lookup/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/ip-address-lookup">> = Specific
@@ -193,6 +220,15 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/markdown-preview">> = Specific
   const handler = {} as typeof import("../../src/app/tools/markdown-preview/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/number-to-words/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/number-to-words">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/number-to-words/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
@@ -256,6 +292,24 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/rgb-to-hex">> = Specific
   const handler = {} as typeof import("../../src/app/tools/rgb-to-hex/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/roman-numeral-converter/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/roman-numeral-converter">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/roman-numeral-converter/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/slug-generator/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/slug-generator">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/slug-generator/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
@@ -333,10 +387,28 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../src/app/tools/vigenere-cipher/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/vigenere-cipher">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/vigenere-cipher/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/tools/word-counter/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/word-counter">> = Specific
   const handler = {} as typeof import("../../src/app/tools/word-counter/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/words-to-number/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/words-to-number">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/words-to-number/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
