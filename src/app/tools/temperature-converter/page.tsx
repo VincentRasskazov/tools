@@ -1,5 +1,6 @@
-import ToolPageLayout from "../../ToolPageLayout";
+"use client";
 import React, { useState } from "react";
+
 
 export default function TemperatureConverter() {
   const [celsius, setCelsius] = useState("");
@@ -18,15 +19,16 @@ export default function TemperatureConverter() {
   };
 
   return (
-    <ToolPageLayout title="Temperature Converter" desc="Convert between Celsius and Fahrenheit.">
-      <div className="flex flex-col gap-4 max-w-md mx-auto">
+    <div className="max-w-md mx-auto p-6 bg-white rounded shadow mt-8">
+      <h1 className="text-2xl font-bold mb-4">Temperature Converter</h1>
+      <div className="flex flex-col gap-4">
         <label className="flex flex-col">
           Celsius
           <input
             type="number"
             value={celsius}
             onChange={handleCelsiusChange}
-            className="input input-bordered mt-1"
+            className="border rounded px-2 py-1 mt-1 w-24"
             placeholder="Celsius"
           />
         </label>
@@ -36,11 +38,16 @@ export default function TemperatureConverter() {
             type="number"
             value={fahrenheit}
             onChange={handleFahrenheitChange}
-            className="input input-bordered mt-1"
+            className="border rounded px-2 py-1 mt-1 w-24"
             placeholder="Fahrenheit"
           />
         </label>
+        {(celsius || fahrenheit) && (
+          <div className="text-lg font-semibold bg-blue-100 text-blue-900 rounded px-4 py-2 mt-2 shadow">
+            {celsius && `Celsius: ${celsius}`} {fahrenheit && `Fahrenheit: ${fahrenheit}`}
+          </div>
+        )}
       </div>
-    </ToolPageLayout>
+    </div>
   );
 }
