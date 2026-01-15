@@ -58,6 +58,7 @@ After deployment, your tools will be available at:
 
 - **Landing Page:** `https://<your-username>.github.io/tools/`
 - **All Tools:** `https://<your-username>.github.io/tools/tools/`
+
 - **Stopwatch:** `https://<your-username>.github.io/tools/tools/stopwatch/`
 - **Timer:** `https://<your-username>.github.io/tools/tools/timer/`
 - **Calculator:** `https://<your-username>.github.io/tools/tools/calculator/`
@@ -67,6 +68,16 @@ After deployment, your tools will be available at:
 - **BMI Calculator:** `https://<your-username>.github.io/tools/tools/bmi-calculator/`
 - **QR Code Generator:** `https://<your-username>.github.io/tools/tools/qr-code-generator/`
 - **Color Picker:** `https://<your-username>.github.io/tools/tools/color-picker/`
+- **Date Difference Calculator:** `https://<your-username>.github.io/tools/tools/date-difference/`
+- **Age Calculator:** `https://<your-username>.github.io/tools/tools/age-calculator/`
+- **Lorem Ipsum Generator:** `https://<your-username>.github.io/tools/tools/lorem-ipsum/`
+- **JSON Formatter:** `https://<your-username>.github.io/tools/tools/json-formatter/`
+- **Base64 Encoder:** `https://<your-username>.github.io/tools/tools/base64-encoder/`
+- **Base64 Decoder:** `https://<your-username>.github.io/tools/tools/base64-decoder/`
+- **Text Case Converter:** `https://<your-username>.github.io/tools/tools/text-case-converter/`
+- **UUID Generator:** `https://<your-username>.github.io/tools/tools/uuid-generator/`
+- **Random Number Generator:** `https://<your-username>.github.io/tools/tools/random-number/`
+- **Prime Number Checker:** `https://<your-username>.github.io/tools/tools/prime-checker/`
 
 ## 🍴 Forking & Customization
 

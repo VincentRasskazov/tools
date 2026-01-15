@@ -10,6 +10,16 @@ const tools = [
   { name: "BMI Calculator", path: "/tools/bmi-calculator" },
   { name: "QR Code Generator", path: "/tools/qr-code-generator" },
   { name: "Color Picker", path: "/tools/color-picker" },
+  { name: "Date Difference Calculator", path: "/tools/date-difference" },
+  { name: "Age Calculator", path: "/tools/age-calculator" },
+  { name: "Lorem Ipsum Generator", path: "/tools/lorem-ipsum" },
+  { name: "JSON Formatter", path: "/tools/json-formatter" },
+  { name: "Base64 Encoder", path: "/tools/base64-encoder" },
+  { name: "Base64 Decoder", path: "/tools/base64-decoder" },
+  { name: "Text Case Converter", path: "/tools/text-case-converter" },
+  { name: "UUID Generator", path: "/tools/uuid-generator" },
+  { name: "Random Number Generator", path: "/tools/random-number" },
+  { name: "Prime Number Checker", path: "/tools/prime-checker" },
 ];
 
 export default function ToolsPage() {
