@@ -7,7 +7,7 @@ export default function Base64Decoder() {
   const decode = () => {
     try {
       setOutput(atob(input));
-    } catch (e) {
+    } catch {
       setOutput('Error: Invalid Base64 string');
     }
   };

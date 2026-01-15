@@ -1,5 +1,14 @@
 import { useState } from 'react';
 
+const Button = ({ value, onClick, className = '' }) => (
+  <button
+    onClick={onClick}
+    className={`px-6 py-4 text-xl font-semibold rounded-lg shadow hover:shadow-lg transition ${className}`}
+  >
+    {value}
+  </button>
+);
+
 export default function Calculator() {
   const [display, setDisplay] = useState('0');
   const [prevValue, setPrevValue] = useState(null);
@@ -71,15 +80,6 @@ export default function Calculator() {
       setDisplay('0');
     }
   };
-
-  const Button = ({ value, onClick, className = '' }) => (
-    <button
-      onClick={onClick}
-      className={`px-6 py-4 text-xl font-semibold rounded-lg shadow hover:shadow-lg transition ${className}`}
-    >
-      {value}
-    </button>
-  );
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-100 to-slate-200">

@@ -7,7 +7,7 @@ export default function URLDecoder() {
   const decode = () => {
     try {
       setOutput(decodeURIComponent(input));
-    } catch (e) {
+    } catch {
       setOutput('Error: Invalid URL encoding');
     }
   };

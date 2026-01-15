@@ -1,12 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export default function Notepad() {
-  const [text, setText] = useState('');
-
-  useEffect(() => {
+  const [text, setText] = useState(() => {
     const saved = localStorage.getItem('notepad');
-    if (saved) setText(saved);
-  }, []);
+    return saved || '';
+  });
 
   const save = () => {
     localStorage.setItem('notepad', text);

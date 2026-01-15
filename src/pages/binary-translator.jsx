@@ -14,7 +14,7 @@ export default function BinaryTranslator() {
     try {
       const result = input.split(' ').map(bin => String.fromCharCode(parseInt(bin, 2))).join('');
       setOutput(result);
-    } catch (e) {
+    } catch {
       setOutput('Error: Invalid binary');
     }
   };

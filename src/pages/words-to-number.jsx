@@ -30,7 +30,7 @@ export default function WordsToNumber() {
       });
 
       setNumber((result + current).toString());
-    } catch (e) {
+    } catch {
       setNumber('Invalid input');
     }
   };
