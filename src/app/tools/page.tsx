@@ -50,6 +50,22 @@ const tools = [
   { name: "Atbash Cipher", path: "/tools/atbash-cipher" },
   { name: "ROT13 Cipher", path: "/tools/rot13-cipher" },
   { name: "Leet Speak Converter", path: "/tools/leet-speak-converter" },
+    { name: "Angle Converter", path: "/tools/angle-converter" },
+    { name: "Area Converter", path: "/tools/area-converter" },
+    { name: "Data Size Converter", path: "/tools/data-size-converter" },
+    { name: "Energy Converter", path: "/tools/energy-converter" },
+    { name: "Field Strength Converter", path: "/tools/field-strength-converter" },
+    { name: "Force Converter", path: "/tools/force-converter" },
+    { name: "Frequency Converter", path: "/tools/frequency-converter" },
+    { name: "Length Converter", path: "/tools/length-converter" },
+    { name: "Lighting Converter", path: "/tools/lighting-converter" },
+    { name: "Power Converter", path: "/tools/power-converter" },
+    { name: "Pressure Converter", path: "/tools/pressure-converter" },
+    { name: "Speed Converter", path: "/tools/speed-converter" },
+    { name: "Temperature Converter", path: "/tools/temperature-converter" },
+    { name: "Time Converter", path: "/tools/time-converter" },
+    { name: "Volume Converter", path: "/tools/volume-converter" },
+    { name: "Weight Converter", path: "/tools/weight-converter" },
 ];
 
 export default function ToolsPage() {
