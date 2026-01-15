@@ -67,6 +67,7 @@ import VolumeConverter from './pages/volume-converter.jsx';
 import TimeConverter from './pages/time-converter.jsx';
 import DataConverter from './pages/data-converter.jsx';
 import AngleConverter from './pages/angle-converter.jsx';
+import Sitemap from './pages/sitemap.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -135,6 +136,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/time-converter" element={<TimeConverter />} />
         <Route path="/data-converter" element={<DataConverter />} />
         <Route path="/angle-converter" element={<AngleConverter />} />
+        <Route path="/sitemap" element={<Sitemap />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,
