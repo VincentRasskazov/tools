@@ -162,10 +162,28 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../src/app/tools/loan-calculator/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/loan-calculator">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/loan-calculator/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/tools/lorem-ipsum/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/lorem-ipsum">> = Specific
   const handler = {} as typeof import("../../src/app/tools/lorem-ipsum/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/markdown-editor/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/markdown-editor">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/markdown-editor/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
@@ -193,6 +211,15 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/password-generator">> = Specific
   const handler = {} as typeof import("../../src/app/tools/password-generator/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/percentage-calculator/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/percentage-calculator">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/percentage-calculator/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
