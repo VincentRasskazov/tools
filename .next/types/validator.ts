@@ -54,6 +54,15 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../src/app/tools/atbash-cipher/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/atbash-cipher">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/atbash-cipher/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/tools/base64-decoder/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/base64-decoder">> = Specific
@@ -67,6 +76,15 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/base64-encoder">> = Specific
   const handler = {} as typeof import("../../src/app/tools/base64-encoder/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/binary-to-decimal/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/binary-to-decimal">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/binary-to-decimal/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
@@ -135,10 +153,37 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../src/app/tools/decimal-to-binary/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/decimal-to-binary">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/decimal-to-binary/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/decimal-to-hex/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/decimal-to-hex">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/decimal-to-hex/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/tools/epoch-converter/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/epoch-converter">> = Specific
   const handler = {} as typeof import("../../src/app/tools/epoch-converter/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/hex-to-decimal/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/hex-to-decimal">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/hex-to-decimal/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
@@ -180,10 +225,28 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../src/app/tools/ip-subnet-calculator/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/ip-subnet-calculator">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/ip-subnet-calculator/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/tools/json-formatter/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/json-formatter">> = Specific
   const handler = {} as typeof import("../../src/app/tools/json-formatter/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/leet-speak-converter/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/leet-speak-converter">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/leet-speak-converter/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
@@ -220,6 +283,24 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/markdown-preview">> = Specific
   const handler = {} as typeof import("../../src/app/tools/markdown-preview/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/morse-code-decoder/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/morse-code-decoder">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/morse-code-decoder/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/morse-code-encoder/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/morse-code-encoder">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/morse-code-encoder/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
@@ -301,6 +382,15 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/roman-numeral-converter">> = Specific
   const handler = {} as typeof import("../../src/app/tools/roman-numeral-converter/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/rot13-cipher/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/rot13-cipher">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/rot13-cipher/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
