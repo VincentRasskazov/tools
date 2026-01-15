@@ -90,6 +90,15 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../src/app/tools/character-counter/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/character-counter">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/character-counter/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/tools/color-picker/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/color-picker">> = Specific
@@ -117,6 +126,33 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../src/app/tools/epoch-converter/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/epoch-converter">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/epoch-converter/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/hex-to-rgb/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/hex-to-rgb">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/hex-to-rgb/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/ip-address-lookup/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/ip-address-lookup">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/ip-address-lookup/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/tools/json-formatter/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/json-formatter">> = Specific
@@ -130,6 +166,15 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/lorem-ipsum">> = Specific
   const handler = {} as typeof import("../../src/app/tools/lorem-ipsum/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/markdown-preview/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/markdown-preview">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/markdown-preview/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
@@ -180,6 +225,15 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../src/app/tools/rgb-to-hex/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/rgb-to-hex">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/rgb-to-hex/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/tools/stopwatch/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/stopwatch">> = Specific
@@ -216,10 +270,46 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../src/app/tools/unix-timestamp/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/unix-timestamp">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/unix-timestamp/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/url-decoder/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/url-decoder">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/url-decoder/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/url-encoder/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/url-encoder">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/url-encoder/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/tools/uuid-generator/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/uuid-generator">> = Specific
   const handler = {} as typeof import("../../src/app/tools/uuid-generator/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/word-counter/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/word-counter">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/word-counter/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
