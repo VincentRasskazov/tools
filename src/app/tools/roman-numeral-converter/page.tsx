@@ -1,7 +1,9 @@
 "use client";
 import React, { useState } from "react";
 
-function toRoman(num: number) {
+
+function toRoman(num: number): string {
+  num = Number(num);
   if (isNaN(num) || num < 1 || num > 3999) return "";
   const map = [
     [1000, "M"], [900, "CM"], [500, "D"], [400, "CD"], [100, "C"], [90, "XC"],

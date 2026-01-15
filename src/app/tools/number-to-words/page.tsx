@@ -24,5 +24,5 @@ export default function NumberToWords() {
       <div className="bg-gray-100 p-2 rounded text-xs break-all">{words}</div>
     </div>
   );
-}
+// removed extraneous closing brace
 }
