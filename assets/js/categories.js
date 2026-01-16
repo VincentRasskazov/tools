@@ -20,11 +20,12 @@ window.renderCategories = function () {
         </ul>
       </div>
     `).join('');
+  console.log('[DEBUG] Categories HTML:', container.innerHTML.length, 'chars');
 };
 
 window.renderTools = function (list) {
   const container = document.getElementById('tools-list');
-  console.log('[DEBUG] Rendering tools:', list.length, list);
+  console.log('[DEBUG] Rendering tools:', list.length, list.slice(0, 3));
   container.innerHTML = `
     <div class="tools-grid">
       ${list.map(t => `
@@ -36,4 +37,5 @@ window.renderTools = function (list) {
       `).join('')}
     </div>
   `;
+  console.log('[DEBUG] Tools HTML:', container.innerHTML.length, 'chars');
 };
