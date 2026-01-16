@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JSON Validator | Ultimate Tools Hub</title>
+  <meta name="description" content="Validate and format JSON instantly. Free, fast, and beautiful online JSON validator.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/landing-polish.css">
+  <style>
+    .jsonv-container { max-width: 520px; margin: 40px auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 24px #1976d233; padding: 32px 28px; }
+    .jsonv-title { font-size: 2rem; font-weight: 700; color: #1976d2; margin-bottom: 18px; }
+    .jsonv-desc { color: #555; margin-bottom: 22px; }
+    textarea { width: 100%; min-height: 80px; font-size: 1.1rem; border-radius: 8px; border: 1px solid #d1d5db; padding: 12px; margin-bottom: 18px; }
+    .result-label { font-weight: 600; color: #283593; margin-bottom: 6px; }
+    .result-box { background: #f6f8fa; border-radius: 8px; padding: 12px; font-family: monospace; font-size: 1.1rem; word-break: break-all; margin-bottom: 8px; }
+    button { background: #1976d2; color: #fff; border: none; border-radius: 8px; padding: 10px 22px; font-size: 1rem; font-weight: 600; cursor: pointer; margin-top: 8px; transition: background 0.2s; }
+    button:hover { background: #0d47a1; }
+  </style>
+</head>
+<body>
+  <div class="jsonv-container">
+    <div class="jsonv-title">JSON Validator</div>
+    <div class="jsonv-desc">Paste JSON below to validate and format it instantly.</div>
+    <textarea id="jsonInput" placeholder="Paste JSON here..."></textarea>
+    <button onclick="validateJSON()">Validate JSON</button>
+    <div class="result-label" style="margin-top:18px;">Result:</div>
+    <div class="result-box" id="jsonResult"></div>
+  </div>
+  <script>
+    function validateJSON() {
+      const input = document.getElementById('jsonInput').value;
+      try {
+        const obj = JSON.parse(input);
+        document.getElementById('jsonResult').textContent = JSON.stringify(obj, null, 2);
+      } catch (e) {
+        document.getElementById('jsonResult').textContent = 'Invalid JSON: ' + e.message;
+      }
+    }
+  </script>
+</body>
+</html>

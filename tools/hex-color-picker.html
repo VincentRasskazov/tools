@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hex Color Picker | Ultimate Tools Hub</title>
+  <meta name="description" content="Pick a color and get its HEX, RGB, and HSL values instantly. Free, beautiful, and fast online color picker.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/landing-polish.css">
+  <style>
+    .color-container { max-width: 420px; margin: 40px auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 24px #1976d233; padding: 32px 28px; }
+    .color-title { font-size: 2rem; font-weight: 700; color: #1976d2; margin-bottom: 18px; }
+    .color-desc { color: #555; margin-bottom: 22px; }
+    input[type=color] { width: 60px; height: 60px; border: none; border-radius: 50%; margin-bottom: 18px; box-shadow: 0 2px 8px #1976d233; cursor: pointer; }
+    .result-label { font-weight: 600; color: #283593; margin-bottom: 6px; }
+    .result-box { background: #f6f8fa; border-radius: 8px; padding: 12px; font-family: monospace; font-size: 1.1rem; word-break: break-all; margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+  <div class="color-container">
+    <div class="color-title">Hex Color Picker</div>
+    <div class="color-desc">Pick a color to instantly see its HEX, RGB, and HSL values.</div>
+    <input type="color" id="colorInput" value="#1976d2" onchange="showColor()">
+    <div class="result-label">HEX:</div>
+    <div class="result-box" id="hexResult"></div>
+    <div class="result-label">RGB:</div>
+    <div class="result-box" id="rgbResult"></div>
+    <div class="result-label">HSL:</div>
+    <div class="result-box" id="hslResult"></div>
+  </div>
+  <script>
+    function hexToRgb(hex) {
+      hex = hex.replace('#', '');
+      if (hex.length === 3) hex = hex.split('').map(x => x + x).join('');
+      const num = parseInt(hex, 16);
+      return [num >> 16, (num >> 8) & 255, num & 255];
+    }
+    function rgbToHsl(r, g, b) {
+      r /= 255; g /= 255; b /= 255;
+      const max = Math.max(r, g, b), min = Math.min(r, g, b);
+      let h, s, l = (max + min) / 2;
+      if (max === min) { h = s = 0; }
+      else {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch (max) {
+          case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+          case g: h = (b - r) / d + 2; break;
+          case b: h = (r - g) / d + 4; break;
+        }
+        h /= 6;
+      }
+      return [Math.round(h * 360), Math.round(s * 100), Math.round(l * 100)];
+    }
+    function showColor() {
+      const hex = document.getElementById('colorInput').value;
+      const [r, g, b] = hexToRgb(hex);
+      const [h, s, l] = rgbToHsl(r, g, b);
+      document.getElementById('hexResult').textContent = hex.toUpperCase();
+      document.getElementById('rgbResult').textContent = `rgb(${r}, ${g}, ${b})`;
+      document.getElementById('hslResult').textContent = `hsl(${h}, ${s}%, ${l}%)`;
+    }
+    showColor();
+  </script>
+</body>
+</html>
