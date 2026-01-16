@@ -109,6 +109,25 @@ npm run build
 **Fibonacci Generator:** `https://<your-username>.github.io/tools/tools/batch2/fibonacci-generator/`
 **Factorial Calculator:** `https://<your-username>.github.io/tools/tools/batch2/factorial-calculator/`
 **Fibonacci Sequence Generator:** `https://<your-username>.github.io/tools/tools/batch3/fibonacci-sequence/`
+**Palindrome Checker:** `https://<your-username>.github.io/tools/tools/batch3/palindrome-checker/`
+**Anagram Solver:** `https://<your-username>.github.io/tools/tools/batch3/anagram-solver/`
+**Text Reverser:** `https://<your-username>.github.io/tools/tools/batch3/text-reverser/`
+**Text to Binary Converter:** `https://<your-username>.github.io/tools/tools/batch3/text-to-binary/`
+**Binary to Text Converter:** `https://<your-username>.github.io/tools/tools/batch3/binary-to-text/`
+**Hex to Octal Converter:** `https://<your-username>.github.io/tools/tools/batch3/hex-to-octal/`
+**Octal to Hex Converter:** `https://<your-username>.github.io/tools/tools/batch3/octal-to-hex/`
+**Octal to Decimal Converter:** `https://<your-username>.github.io/tools/tools/batch3/octal-to-decimal/`
+**Decimal to Octal Converter:** `https://<your-username>.github.io/tools/tools/batch3/decimal-to-octal/`
+**Octal to Binary Converter:** `https://<your-username>.github.io/tools/tools/batch3/octal-to-binary/`
+**Binary to Octal Converter:** `https://<your-username>.github.io/tools/tools/batch3/binary-to-octal/`
+**Base32 Encoder:** `https://<your-username>.github.io/tools/tools/batch3/base32-encoder/`
+**Base32 Decoder:** `https://<your-username>.github.io/tools/tools/batch3/base32-decoder/`
+**SHA-256 Hash Generator:** `https://<your-username>.github.io/tools/tools/batch3/sha256-hash-generator/`
+**SHA-1 Hash Generator:** `https://<your-username>.github.io/tools/tools/batch3/sha1-hash-generator/`
+**MD5 Hash Generator:** `https://<your-username>.github.io/tools/tools/batch3/md5-hash-generator/`
+**UUID v4 Generator:** `https://<your-username>.github.io/tools/tools/batch3/uuid-v4-generator/`
+**Random String Generator:** `https://<your-username>.github.io/tools/tools/batch3/random-string-generator/`
+**Random Password Generator:** `https://<your-username>.github.io/tools/tools/batch3/random-password-generator/`
 **Morse Code Decoder:** `https://<your-username>.github.io/tools/tools/morse-code-decoder/`
 **Atbash Cipher:** `https://<your-username>.github.io/tools/tools/atbash-cipher/`
 **ROT13 Cipher:** `https://<your-username>.github.io/tools/tools/rot13-cipher/`
