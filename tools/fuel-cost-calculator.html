@@ -20,15 +20,29 @@
 
   <p>This is a starter tool page for <strong>fuel cost calculator</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="distance">Distance (km):</label>
+  <input id="distance" type="number" placeholder="e.g. 100">
+  <label for="consumption">Consumption (L/100km):</label>
+  <input id="consumption" type="number" placeholder="e.g. 8">
+  <label for="price">Fuel Price (per L):</label>
+  <input id="price" type="number" placeholder="e.g. 1.5">
+  <button onclick="run()">Calculate Cost</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const distance = parseFloat(document.getElementById('distance').value);
+      const consumption = parseFloat(document.getElementById('consumption').value);
+      const price = parseFloat(document.getElementById('price').value);
+      if (isNaN(distance) || isNaN(consumption) || isNaN(price) || distance < 0 || consumption < 0 || price < 0) {
+        document.getElementById('output').innerText = "Please enter valid values.";
+        return;
+      }
+      const liters = distance * consumption / 100;
+      const cost = liters * price;
+      document.getElementById('output').innerText = `Fuel needed: ${liters.toFixed(2)} L, Total cost: $${cost.toFixed(2)}`;
     }
   </script>
 

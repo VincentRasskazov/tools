@@ -20,15 +20,41 @@
 
   <p>This is a starter tool page for <strong>data size converter</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="input">Value:</label>
+  <input id="input" type="number" placeholder="Enter value">
+  <select id="from">
+    <option value="B">Bytes</option>
+    <option value="KB">KB</option>
+    <option value="MB">MB</option>
+    <option value="GB">GB</option>
+    <option value="TB">TB</option>
+  </select>
+  <span>to</span>
+  <select id="to">
+    <option value="B">Bytes</option>
+    <option value="KB">KB</option>
+    <option value="MB">MB</option>
+    <option value="GB">GB</option>
+    <option value="TB">TB</option>
+  </select>
+  <button onclick="run()">Convert</button>
 
   <p id="output"></p>
 
   <script>
+    const units = { B: 1, KB: 1024, MB: 1024*1024, GB: 1024*1024*1024, TB: 1024*1024*1024*1024 };
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const value = parseFloat(document.getElementById('input').value);
+      const from = document.getElementById('from').value;
+      const to = document.getElementById('to').value;
+      if (isNaN(value) || value < 0) {
+        document.getElementById('output').innerText = "Please enter a valid value.";
+        return;
+      }
+      const bytes = value * units[from];
+      const result = bytes / units[to];
+      document.getElementById('output').innerText = `${value} ${from} = ${result} ${to}`;
     }
   </script>
 

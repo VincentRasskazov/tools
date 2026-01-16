@@ -20,15 +20,34 @@
 
   <p>This is a starter tool page for <strong>caesar cipher</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="input">Text:</label>
+  <input id="input" placeholder="Enter text">
+  <label for="shift">Shift:</label>
+  <input id="shift" type="number" value="3">
+  <button onclick="run()">Encode</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const text = document.getElementById('input').value;
+      const shift = parseInt(document.getElementById('shift').value, 10);
+      if (!text || isNaN(shift)) {
+        document.getElementById('output').innerText = "Please enter text and shift.";
+        return;
+      }
+      let result = '';
+      for (let c of text) {
+        if (c >= 'a' && c <= 'z') {
+          result += String.fromCharCode((c.charCodeAt(0) - 97 + shift + 26) % 26 + 97);
+        } else if (c >= 'A' && c <= 'Z') {
+          result += String.fromCharCode((c.charCodeAt(0) - 65 + shift + 26) % 26 + 65);
+        } else {
+          result += c;
+        }
+      }
+      document.getElementById('output').innerText = result;
     }
   </script>
 

@@ -20,15 +20,23 @@
 
   <p>This is a starter tool page for <strong>random number</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <input id="min" type="number" placeholder="Min" style="width:80px;">
+  <input id="max" type="number" placeholder="Max" style="width:80px;">
+  <button onclick="run()">Generate</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const min = parseInt(document.getElementById('min').value, 10);
+      const max = parseInt(document.getElementById('max').value, 10);
+      if (isNaN(min) || isNaN(max) || min > max) {
+        document.getElementById('output').innerText = 'Enter valid min and max.';
+        return;
+      }
+      const rand = Math.floor(Math.random() * (max - min + 1)) + min;
+      document.getElementById('output').innerText = 'Random number: ' + rand;
     }
   </script>
 

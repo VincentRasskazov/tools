@@ -20,15 +20,19 @@
 
   <p>This is a starter tool page for <strong>html entity encoder</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="input">Text:</label>
+  <input id="input" placeholder="e.g. <>&">
+  <button onclick="run()">Encode</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value;
+      const txt = document.createElement('textarea');
+      txt.textContent = v;
+      document.getElementById('output').innerText = txt.innerHTML;
     }
   </script>
 

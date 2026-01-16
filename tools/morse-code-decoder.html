@@ -20,15 +20,28 @@
 
   <p>This is a starter tool page for <strong>morse code decoder</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <input id="input" placeholder="Enter Morse code (use . and -)" style="width:100%">
+  <button onclick="run()">Decode</button>
 
   <p id="output"></p>
 
   <script>
+    const morseToText = {
+      '.-':'A','-...':'B','-.-.':'C','-..':'D','.':'E','..-.':'F','--.':'G','....':'H','..':'I',
+      '.---':'J','-.-':'K','.-..':'L','--':'M','-.':'N','---':'O','.--.':'P','--.-':'Q','.-.':'R',
+      '...':'S','-':'T','..-':'U','...-':'V','.--':'W','-..-':'X','-.--':'Y','--..':'Z',
+      '-----':'0','.----':'1','..---':'2','...--':'3','....-':'4','.....':'5','-....':'6','--...':'7','---..':'8','----.':'9',
+      '.-.-.-':'.','--..--':',','..--..':'?','-.-.--':'!','-....-':'-','.-..-.':'"','---...':':','-.-.-.':';','..--.-':'_','.-.-.':'+','-...-':'=','.-.-.':'@','/':' '
+    };
+    function decodeMorse(str) {
+      return str.trim().split(' / ').map(word =>
+        word.split(' ').map(code => morseToText[code] || '?').join('')
+      ).join(' ');
+    }
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value;
+      document.getElementById('output').innerText = decodeMorse(v);
     }
   </script>
 

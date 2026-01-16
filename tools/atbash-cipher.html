@@ -20,15 +20,29 @@
 
   <p>This is a starter tool page for <strong>atbash cipher</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="input">Text:</label>
+  <input id="input" placeholder="Enter text">
+  <button onclick="run()">Encode/Decode</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value;
+      if (!v) {
+        document.getElementById('output').innerText = "Please enter text.";
+        return;
+      }
+      const a = 'abcdefghijklmnopqrstuvwxyz';
+      const A = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      let out = '';
+      for (let c of v) {
+        if (a.includes(c)) out += a[25 - a.indexOf(c)];
+        else if (A.includes(c)) out += A[25 - A.indexOf(c)];
+        else out += c;
+      }
+      document.getElementById('output').innerText = out;
     }
   </script>
 

@@ -20,15 +20,28 @@
 
   <p>This is a starter tool page for <strong>age calculator</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="dob">Enter your date of birth:</label>
+  <input id="dob" type="date" placeholder="YYYY-MM-DD">
+  <button onclick="run()">Calculate Age</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const dob = document.getElementById('dob').value;
+      if (!dob) {
+        document.getElementById('output').innerText = "Please enter your date of birth.";
+        return;
+      }
+      const birthDate = new Date(dob);
+      const today = new Date();
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+      document.getElementById('output').innerText = `You are ${age} years old.`;
     }
   </script>
 

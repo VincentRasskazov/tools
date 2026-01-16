@@ -20,15 +20,30 @@
 
   <p>This is a starter tool page for <strong>prime checker</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="input">Enter a number:</label>
+  <input id="input" type="number" placeholder="e.g. 17">
+  <button onclick="run()">Check Prime</button>
 
   <p id="output"></p>
 
   <script>
+    function isPrime(n) {
+      if (n <= 1) return false;
+      if (n <= 3) return true;
+      if (n % 2 === 0 || n % 3 === 0) return false;
+      for (let i = 5; i * i <= n; i += 6) {
+        if (n % i === 0 || n % (i + 2) === 0) return false;
+      }
+      return true;
+    }
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = parseInt(document.getElementById('input').value, 10);
+      if (isNaN(v)) {
+        document.getElementById('output').innerText = "Please enter a valid number.";
+        return;
+      }
+      document.getElementById('output').innerText = isPrime(v) ? `${v} is a prime number.` : `${v} is not a prime number.`;
     }
   </script>
 

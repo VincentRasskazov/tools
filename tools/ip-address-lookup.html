@@ -20,15 +20,32 @@
 
   <p>This is a starter tool page for <strong>ip address lookup</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="input">IP Address:</label>
+  <input id="input" placeholder="e.g. 8.8.8.8">
+  <button onclick="run()">Lookup</button>
 
   <p id="output"></p>
 
   <script>
-    function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+    async function run() {
+      const ip = document.getElementById('input').value.trim();
+      if (!ip) {
+        document.getElementById('output').innerText = "Please enter an IP address.";
+        return;
+      }
+      document.getElementById('output').innerText = "Looking up...";
+      try {
+        const res = await fetch(`https://ip-api.com/json/${ip}`);
+        const data = await res.json();
+        if (data.status === 'success') {
+          document.getElementById('output').innerText = `Country: ${data.country}\nRegion: ${data.regionName}\nCity: ${data.city}\nISP: ${data.isp}`;
+        } else {
+          document.getElementById('output').innerText = "Lookup failed.";
+        }
+      } catch {
+        document.getElementById('output').innerText = "Error fetching data.";
+      }
     }
   </script>
 

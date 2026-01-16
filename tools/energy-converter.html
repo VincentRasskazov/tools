@@ -20,15 +20,41 @@
 
   <p>This is a starter tool page for <strong>energy converter</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="input">Value:</label>
+  <input id="input" type="number" placeholder="Enter value">
+  <select id="from">
+    <option value="J">Joules</option>
+    <option value="kJ">kJ</option>
+    <option value="Wh">Wh</option>
+    <option value="kWh">kWh</option>
+    <option value="cal">cal</option>
+  </select>
+  <span>to</span>
+  <select id="to">
+    <option value="J">Joules</option>
+    <option value="kJ">kJ</option>
+    <option value="Wh">Wh</option>
+    <option value="kWh">kWh</option>
+    <option value="cal">cal</option>
+  </select>
+  <button onclick="run()">Convert</button>
 
   <p id="output"></p>
 
   <script>
+    const factors = { J: 1, kJ: 1000, Wh: 3600, kWh: 3600000, cal: 4.184 };
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const value = parseFloat(document.getElementById('input').value);
+      const from = document.getElementById('from').value;
+      const to = document.getElementById('to').value;
+      if (isNaN(value) || value < 0) {
+        document.getElementById('output').innerText = "Please enter a valid value.";
+        return;
+      }
+      const joules = value * factors[from];
+      const result = joules / factors[to];
+      document.getElementById('output').innerText = `${value} ${from} = ${result} ${to}`;
     }
   </script>
 

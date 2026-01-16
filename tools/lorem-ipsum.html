@@ -20,15 +20,21 @@
 
   <p>This is a starter tool page for <strong>lorem ipsum</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
 
-  <p id="output"></p>
+  <input id="input" type="number" min="1" max="10" value="1" placeholder="Paragraphs (1-10)">
+  <button onclick="run()">Generate</button>
+
+  <div id="output"></div>
 
   <script>
+    const LOREM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.";
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      let n = parseInt(document.getElementById('input').value, 10);
+      if (isNaN(n) || n < 1) n = 1;
+      if (n > 10) n = 10;
+      let html = '';
+      for (let i = 0; i < n; i++) html += `<p>${LOREM}</p>`;
+      document.getElementById('output').innerHTML = html;
     }
   </script>
 

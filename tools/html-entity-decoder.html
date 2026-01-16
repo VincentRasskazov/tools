@@ -20,15 +20,19 @@
 
   <p>This is a starter tool page for <strong>html entity decoder</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="input">HTML Entities:</label>
+  <input id="input" placeholder="e.g. &amp;lt;&amp;gt;&amp;amp;">
+  <button onclick="run()">Decode</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value;
+      const txt = document.createElement('textarea');
+      txt.innerHTML = v;
+      document.getElementById('output').innerText = txt.value;
     }
   </script>
 

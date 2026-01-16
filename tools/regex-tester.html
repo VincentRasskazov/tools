@@ -20,15 +20,32 @@
 
   <p>This is a starter tool page for <strong>regex tester</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
 
-  <p id="output"></p>
+  <input id="pattern" placeholder="Regex pattern (e.g. ^[a-z]+$)" style="width:60%">
+  <input id="flags" placeholder="Flags (e.g. gi)" style="width:20%">
+  <br><textarea id="input" placeholder="Test text here..." rows="6" style="width:100%"></textarea>
+  <button onclick="run()">Test</button>
+
+  <pre id="output"></pre>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const pattern = document.getElementById('pattern').value;
+      const flags = document.getElementById('flags').value;
+      const text = document.getElementById('input').value;
+      let re;
+      try {
+        re = new RegExp(pattern, flags);
+      } catch (e) {
+        document.getElementById('output').innerText = 'Invalid regex: ' + e.message;
+        return;
+      }
+      const matches = [...text.matchAll(re)];
+      if (matches.length === 0) {
+        document.getElementById('output').innerText = 'No matches.';
+      } else {
+        document.getElementById('output').innerText = matches.map(m => `Match: "${m[0]}" at index ${m.index}`).join('\n');
+      }
     }
   </script>
 

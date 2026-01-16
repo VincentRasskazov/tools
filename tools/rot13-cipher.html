@@ -20,15 +20,22 @@
 
   <p>This is a starter tool page for <strong>rot13 cipher</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <input id="input" placeholder="Enter text" style="width:100%">
+  <button onclick="run()">Encode/Decode</button>
 
   <p id="output"></p>
 
   <script>
+    function rot13(str) {
+      return str.replace(/[a-zA-Z]/g, c => {
+        const base = c <= 'Z' ? 65 : 97;
+        return String.fromCharCode(((c.charCodeAt(0) - base + 13) % 26) + base);
+      });
+    }
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value;
+      document.getElementById('output').innerText = rot13(v);
     }
   </script>
 

@@ -20,15 +20,30 @@
 
   <p>This is a starter tool page for <strong>rgb to hex</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <input id="r" type="number" min="0" max="255" placeholder="R" style="width:60px;">
+  <input id="g" type="number" min="0" max="255" placeholder="G" style="width:60px;">
+  <input id="b" type="number" min="0" max="255" placeholder="B" style="width:60px;">
+  <button onclick="run()">Convert</button>
 
   <p id="output"></p>
 
   <script>
+    function toHex(n) {
+      return n.toString(16).padStart(2, '0');
+    }
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const r = parseInt(document.getElementById('r').value, 10);
+      const g = parseInt(document.getElementById('g').value, 10);
+      const b = parseInt(document.getElementById('b').value, 10);
+      if ([r, g, b].some(x => isNaN(x) || x < 0 || x > 255)) {
+        document.getElementById('output').innerText = 'Enter valid RGB values (0-255).';
+        return;
+      }
+      const hex = '#' + toHex(r) + toHex(g) + toHex(b);
+      document.getElementById('output').innerText = hex;
+      document.getElementById('output').style.background = hex;
+      document.getElementById('output').style.color = '#fff';
     }
   </script>
 

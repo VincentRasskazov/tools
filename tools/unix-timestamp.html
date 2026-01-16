@@ -20,15 +20,28 @@
 
   <p>This is a starter tool page for <strong>unix timestamp</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <input id="input" placeholder="Enter timestamp or date (YYYY-MM-DD HH:MM:SS)" style="width:100%">
+  <button onclick="run()">Convert</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value.trim();
+      if (/^\d+$/.test(v)) {
+        // Timestamp to date
+        const d = new Date(parseInt(v, 10) * 1000);
+        document.getElementById('output').innerText = d.toLocaleString();
+      } else {
+        // Date to timestamp
+        const d = new Date(v.replace(' ', 'T'));
+        if (isNaN(d.getTime())) {
+          document.getElementById('output').innerText = 'Invalid input.';
+        } else {
+          document.getElementById('output').innerText = Math.floor(d.getTime() / 1000);
+        }
+      }
     }
   </script>
 

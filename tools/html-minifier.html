@@ -20,15 +20,27 @@
 
   <p>This is a starter tool page for <strong>html minifier</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="input">HTML:</label>
+  <textarea id="input" placeholder="Paste HTML here"></textarea>
+  <button onclick="run()">Minify</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      let html = document.getElementById('input').value;
+      if (!html) {
+        document.getElementById('output').innerText = "Please enter HTML.";
+        return;
+      }
+      // Remove comments
+      html = html.replace(/<!--([\s\S]*?)-->/g, '');
+      // Remove whitespace between tags
+      html = html.replace(/>\s+</g, '><');
+      // Remove leading/trailing whitespace
+      html = html.trim();
+      document.getElementById('output').innerText = html;
     }
   </script>
 

@@ -20,15 +20,30 @@
 
   <p>This is a starter tool page for <strong>js minifier</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <textarea id="input" placeholder="Paste JavaScript code here" rows="8" style="width:100%"></textarea>
+  <button onclick="run()">Minify</button>
 
   <p id="output"></p>
 
   <script>
+    function minifyJS(code) {
+      // Remove comments, whitespace, and line breaks (simple minifier)
+      return code
+        .replace(/\/\*[\s\S]*?\*\//g, '') // block comments
+        .replace(/\/\/.*$/gm, '') // line comments
+        .replace(/\s+/g, ' ') // whitespace
+        .replace(/\s*([{};,:=\(\)\[\]])\s*/g, '$1') // space around symbols
+        .trim();
+    }
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value;
+      try {
+        const minified = minifyJS(v);
+        document.getElementById('output').innerText = minified;
+      } catch (e) {
+        document.getElementById('output').innerText = 'Error minifying code.';
+      }
     }
   </script>
 

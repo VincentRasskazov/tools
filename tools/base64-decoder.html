@@ -20,15 +20,26 @@
 
   <p>This is a starter tool page for <strong>base64 decoder</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="input">Base64:</label>
+  <input id="input" placeholder="Enter Base64 string">
+  <button onclick="run()">Decode</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value;
+      if (!v) {
+        document.getElementById('output').innerText = "Please enter a Base64 string.";
+        return;
+      }
+      try {
+        const decoded = atob(v);
+        document.getElementById('output').innerText = decoded;
+      } catch {
+        document.getElementById('output').innerText = "Invalid Base64 input.";
+      }
     }
   </script>
 

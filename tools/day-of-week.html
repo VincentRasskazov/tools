@@ -20,15 +20,23 @@
 
   <p>This is a starter tool page for <strong>day of week</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="input">Date:</label>
+  <input id="input" type="date">
+  <button onclick="run()">Get Day</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value;
+      if (!v) {
+        document.getElementById('output').innerText = "Please select a date.";
+        return;
+      }
+      const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      const d = new Date(v);
+      document.getElementById('output').innerText = days[d.getDay()];
     }
   </script>
 

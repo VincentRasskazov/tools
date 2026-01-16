@@ -20,15 +20,27 @@
 
   <p>This is a starter tool page for <strong>css minifier</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="input">CSS:</label>
+  <textarea id="input" placeholder="Paste CSS here"></textarea>
+  <button onclick="run()">Minify</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      let css = document.getElementById('input').value;
+      if (!css) {
+        document.getElementById('output').innerText = "Please enter CSS.";
+        return;
+      }
+      // Remove comments
+      css = css.replace(/\/\*[^*]*\*+([^/*][^*]*\*+)*\//g, '');
+      // Remove whitespace
+      css = css.replace(/\s+/g, ' ');
+      css = css.replace(/\s*([{}:;,])\s*/g, '$1');
+      css = css.replace(/;}/g, '}');
+      document.getElementById('output').innerText = css.trim();
     }
   </script>
 

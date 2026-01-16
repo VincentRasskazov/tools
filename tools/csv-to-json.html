@@ -20,15 +20,30 @@
 
   <p>This is a starter tool page for <strong>csv to json</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="input">CSV:</label>
+  <textarea id="input" placeholder="Paste CSV here"></textarea>
+  <button onclick="run()">Convert to JSON</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const csv = document.getElementById('input').value.trim();
+      if (!csv) {
+        document.getElementById('output').innerText = "Please enter CSV data.";
+        return;
+      }
+      const lines = csv.split(/\r?\n/);
+      const headers = lines[0].split(',');
+      const result = lines.slice(1).filter(Boolean).map(line => {
+        const obj = {};
+        line.split(',').forEach((val, i) => {
+          obj[headers[i]] = val;
+        });
+        return obj;
+      });
+      document.getElementById('output').innerText = JSON.stringify(result, null, 2);
     }
   </script>
 

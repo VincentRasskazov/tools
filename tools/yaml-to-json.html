@@ -20,15 +20,29 @@
 
   <p>This is a starter tool page for <strong>yaml to json</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
 
-  <p id="output"></p>
+  <textarea id="input" placeholder="Paste YAML here" rows="8" style="width:100%"></textarea>
+  <button onclick="run()">Convert</button>
+
+  <pre id="output"></pre>
 
   <script>
+    // Very basic YAML to JSON (no nested objects, only key: value)
+    function yamlToJson(yaml) {
+      const obj = {};
+      yaml.split(/\r?\n/).forEach(line => {
+        const m = line.match(/^\s*([^:]+):\s*(.*)$/);
+        if (m) obj[m[1].trim()] = m[2].trim();
+      });
+      return JSON.stringify(obj, null, 2);
+    }
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value;
+      try {
+        document.getElementById('output').innerText = yamlToJson(v);
+      } catch (e) {
+        document.getElementById('output').innerText = 'Invalid YAML.';
+      }
     }
   </script>
 

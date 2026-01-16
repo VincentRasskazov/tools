@@ -20,15 +20,49 @@
 
   <p>This is a starter tool page for <strong>calorie calculator</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="weight">Weight (kg):</label>
+  <input id="weight" type="number" placeholder="e.g. 70">
+  <label for="height">Height (cm):</label>
+  <input id="height" type="number" placeholder="e.g. 170">
+  <label for="age">Age (years):</label>
+  <input id="age" type="number" placeholder="e.g. 30">
+  <label for="gender">Gender:</label>
+  <select id="gender">
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+  </select>
+  <label for="activity">Activity Level:</label>
+  <select id="activity">
+    <option value="1.2">Sedentary</option>
+    <option value="1.375">Lightly active</option>
+    <option value="1.55">Moderately active</option>
+    <option value="1.725">Very active</option>
+    <option value="1.9">Extra active</option>
+  </select>
+  <button onclick="run()">Calculate Calories</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const weight = parseFloat(document.getElementById('weight').value);
+      const height = parseFloat(document.getElementById('height').value);
+      const age = parseFloat(document.getElementById('age').value);
+      const gender = document.getElementById('gender').value;
+      const activity = parseFloat(document.getElementById('activity').value);
+      if (isNaN(weight) || isNaN(height) || isNaN(age) || isNaN(activity) || weight <= 0 || height <= 0 || age <= 0) {
+        document.getElementById('output').innerText = "Please enter valid weight, height, age, and activity.";
+        return;
+      }
+      let bmr;
+      if (gender === 'male') {
+        bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+      } else {
+        bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+      }
+      const tdee = bmr * activity;
+      document.getElementById('output').innerText = `Estimated daily calories: ${tdee.toFixed(0)} kcal`;
     }
   </script>
 

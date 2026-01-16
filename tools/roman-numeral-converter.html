@@ -20,15 +20,42 @@
 
   <p>This is a starter tool page for <strong>roman numeral converter</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <input id="input" placeholder="Enter number or Roman numeral" style="width:200px;">
+  <button onclick="run()">Convert</button>
 
   <p id="output"></p>
 
   <script>
+    const romanMap = [
+      ['M',1000],['CM',900],['D',500],['CD',400],['C',100],['XC',90],['L',50],['XL',40],['X',10],['IX',9],['V',5],['IV',4],['I',1]
+    ];
+    function toRoman(num) {
+      let n = num, res = '';
+      for (const [r, v] of romanMap) {
+        while (n >= v) { res += r; n -= v; }
+      }
+      return res;
+    }
+    function fromRoman(str) {
+      let s = str.toUpperCase(), n = 0;
+      for (const [r, v] of romanMap) {
+        while (s.startsWith(r)) { n += v; s = s.slice(r.length); }
+      }
+      return s.length === 0 ? n : null;
+    }
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value.trim();
+      if (!v) { document.getElementById('output').innerText = 'Enter a value.'; return; }
+      if (/^\d+$/.test(v)) {
+        const n = parseInt(v, 10);
+        if (n < 1 || n > 3999) { document.getElementById('output').innerText = 'Number must be 1-3999.'; return; }
+        document.getElementById('output').innerText = toRoman(n);
+      } else {
+        const n = fromRoman(v);
+        if (n == null) { document.getElementById('output').innerText = 'Invalid Roman numeral.'; return; }
+        document.getElementById('output').innerText = n;
+      }
     }
   </script>
 

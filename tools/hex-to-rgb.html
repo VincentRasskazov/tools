@@ -20,15 +20,24 @@
 
   <p>This is a starter tool page for <strong>hex to rgb</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="input">Hex:</label>
+  <input id="input" placeholder="#RRGGBB or RRGGBB">
+  <button onclick="run()">Convert to RGB</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      let v = document.getElementById('input').value.trim().replace(/^#/, '');
+      if (!/^[0-9a-fA-F]{6}$/.test(v)) {
+        document.getElementById('output').innerText = "Please enter a valid 6-digit hex color.";
+        return;
+      }
+      const r = parseInt(v.substr(0,2),16);
+      const g = parseInt(v.substr(2,2),16);
+      const b = parseInt(v.substr(4,2),16);
+      document.getElementById('output').innerText = `rgb(${r}, ${g}, ${b})`;
     }
   </script>
 

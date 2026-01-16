@@ -20,15 +20,32 @@
 
   <p>This is a starter tool page for <strong>countdown timer</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="input">Seconds:</label>
+  <input id="input" type="number" placeholder="Enter seconds">
+  <button onclick="run()">Start Countdown</button>
 
   <p id="output"></p>
 
   <script>
+    let timer;
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      clearInterval(timer);
+      let seconds = parseInt(document.getElementById('input').value, 10);
+      if (isNaN(seconds) || seconds < 1) {
+        document.getElementById('output').innerText = "Please enter a positive number.";
+        return;
+      }
+      document.getElementById('output').innerText = seconds + ' seconds left';
+      timer = setInterval(() => {
+        seconds--;
+        if (seconds > 0) {
+          document.getElementById('output').innerText = seconds + ' seconds left';
+        } else {
+          document.getElementById('output').innerText = 'Time\'s up!';
+          clearInterval(timer);
+        }
+      }, 1000);
     }
   </script>
 

@@ -20,15 +20,32 @@
 
   <p>This is a starter tool page for <strong>sunrise sunset</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
 
-  <p id="output"></p>
+  <input id="lat" type="number" placeholder="Latitude" style="width:120px;">
+  <input id="lng" type="number" placeholder="Longitude" style="width:120px;">
+  <button onclick="run()">Get Times</button>
+
+  <div id="output"></div>
 
   <script>
-    function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+    async function run() {
+      const lat = document.getElementById('lat').value;
+      const lng = document.getElementById('lng').value;
+      if (!lat || !lng) {
+        document.getElementById('output').innerText = 'Enter latitude and longitude.';
+        return;
+      }
+      document.getElementById('output').innerText = 'Loading...';
+      try {
+        const res = await fetch(`https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&formatted=0`);
+        const data = await res.json();
+        if (data.status !== 'OK') throw new Error('API error');
+        const sunrise = new Date(data.results.sunrise).toLocaleTimeString();
+        const sunset = new Date(data.results.sunset).toLocaleTimeString();
+        document.getElementById('output').innerText = `Sunrise: ${sunrise}\nSunset: ${sunset}`;
+      } catch (e) {
+        document.getElementById('output').innerText = 'Error fetching data.';
+      }
     }
   </script>
 

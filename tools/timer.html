@@ -20,16 +20,49 @@
 
   <p>This is a starter tool page for <strong>timer</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
 
-  <p id="output"></p>
+  <input id="seconds" type="number" placeholder="Seconds" style="width:120px;">
+  <button onclick="start()">Start</button>
+  <button onclick="stop()">Stop</button>
+  <button onclick="reset()">Reset</button>
+  <div id="display" style="font-size:2em; margin:10px 0;">00:00</div>
 
   <script>
-    function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+    let interval, remaining = 0;
+    function updateDisplay() {
+      let min = Math.floor(remaining / 60);
+      let sec = remaining % 60;
+      document.getElementById('display').innerText =
+        String(min).padStart(2, '0') + ':' + String(sec).padStart(2, '0');
     }
+    function start() {
+      if (interval) return;
+      remaining = parseInt(document.getElementById('seconds').value, 10);
+      if (isNaN(remaining) || remaining < 1) {
+        document.getElementById('display').innerText = 'Enter seconds > 0';
+        return;
+      }
+      updateDisplay();
+      interval = setInterval(() => {
+        if (remaining > 0) {
+          remaining--;
+          updateDisplay();
+        } else {
+          stop();
+          document.getElementById('display').innerText = 'Time\'s up!';
+        }
+      }, 1000);
+    }
+    function stop() {
+      clearInterval(interval);
+      interval = null;
+    }
+    function reset() {
+      stop();
+      remaining = 0;
+      updateDisplay();
+    }
+    updateDisplay();
   </script>
 
   <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>

@@ -20,15 +20,23 @@
 
   <p>This is a starter tool page for <strong>lighting lux calculator</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <input id="lumens" type="number" placeholder="Lumens (lm)" style="width:120px;">
+  <input id="area" type="number" placeholder="Area (m²)" style="width:120px;">
+  <button onclick="run()">Calculate Lux</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const lumens = parseFloat(document.getElementById('lumens').value);
+      const area = parseFloat(document.getElementById('area').value);
+      if (isNaN(lumens) || isNaN(area) || area <= 0) {
+        document.getElementById('output').innerText = 'Enter valid lumens and area.';
+        return;
+      }
+      const lux = lumens / area;
+      document.getElementById('output').innerText = lumens + ' lm over ' + area + ' m² = ' + lux + ' lux';
     }
   </script>
 

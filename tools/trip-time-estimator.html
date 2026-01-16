@@ -20,15 +20,25 @@
 
   <p>This is a starter tool page for <strong>trip time estimator</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <input id="distance" type="number" placeholder="Distance (km)" style="width:120px;">
+  <input id="speed" type="number" placeholder="Speed (km/h)" style="width:120px;">
+  <button onclick="run()">Estimate</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const distance = parseFloat(document.getElementById('distance').value);
+      const speed = parseFloat(document.getElementById('speed').value);
+      if (isNaN(distance) || isNaN(speed) || distance <= 0 || speed <= 0) {
+        document.getElementById('output').innerText = 'Enter valid distance and speed.';
+        return;
+      }
+      const hours = distance / speed;
+      const h = Math.floor(hours);
+      const m = Math.round((hours - h) * 60);
+      document.getElementById('output').innerText = `Estimated time: ${h}h ${m}m`;
     }
   </script>
 

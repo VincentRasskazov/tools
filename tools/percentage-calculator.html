@@ -20,15 +20,25 @@
 
   <p>This is a starter tool page for <strong>percentage calculator</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="part">Part:</label>
+  <input id="part" type="number" placeholder="e.g. 25">
+  <label for="whole">Whole:</label>
+  <input id="whole" type="number" placeholder="e.g. 200">
+  <button onclick="run()">Calculate Percentage</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const part = parseFloat(document.getElementById('part').value);
+      const whole = parseFloat(document.getElementById('whole').value);
+      if (isNaN(part) || isNaN(whole) || whole === 0) {
+        document.getElementById('output').innerText = "Please enter valid numbers (whole cannot be zero).";
+        return;
+      }
+      const percent = (part / whole) * 100;
+      document.getElementById('output').innerText = `${part} is ${percent.toFixed(2)}% of ${whole}.`;
     }
   </script>
 

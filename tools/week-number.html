@@ -20,15 +20,28 @@
 
   <p>This is a starter tool page for <strong>week number</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <input id="input" type="date">
+  <button onclick="run()">Get Week Number</button>
 
   <p id="output"></p>
 
   <script>
+    function getWeekNumber(dateStr) {
+      const d = new Date(dateStr);
+      d.setHours(0,0,0,0);
+      d.setDate(d.getDate() + 4 - (d.getDay()||7));
+      const yearStart = new Date(d.getFullYear(),0,1);
+      const weekNo = Math.ceil((((d - yearStart) / 86400000) + 1)/7);
+      return weekNo;
+    }
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value;
+      if (!v) {
+        document.getElementById('output').innerText = 'Enter a date.';
+        return;
+      }
+      document.getElementById('output').innerText = 'ISO Week Number: ' + getWeekNumber(v);
     }
   </script>
 

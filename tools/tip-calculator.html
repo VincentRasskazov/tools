@@ -20,15 +20,28 @@
 
   <p>This is a starter tool page for <strong>tip calculator</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <input id="amount" type="number" placeholder="Bill Amount" style="width:120px;">
+  <input id="tip" type="number" placeholder="Tip %" style="width:80px;">
+  <input id="people" type="number" placeholder="People" value="1" style="width:60px;">
+  <button onclick="run()">Calculate</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const amount = parseFloat(document.getElementById('amount').value);
+      const tip = parseFloat(document.getElementById('tip').value);
+      const people = parseInt(document.getElementById('people').value, 10);
+      if (isNaN(amount) || isNaN(tip) || isNaN(people) || amount <= 0 || tip < 0 || people < 1) {
+        document.getElementById('output').innerText = 'Enter valid values.';
+        return;
+      }
+      const tipAmt = amount * tip / 100;
+      const total = amount + tipAmt;
+      document.getElementById('output').innerText =
+        'Tip: $' + (tipAmt/people).toFixed(2) + ' per person\n' +
+        'Total: $' + (total/people).toFixed(2) + ' per person';
     }
   </script>
 

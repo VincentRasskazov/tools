@@ -20,15 +20,43 @@
 
   <p>This is a starter tool page for <strong>volume converter</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <input id="value" type="number" placeholder="Enter value" style="width:120px;">
+  <select id="from">
+    <option value="l">Liter (L)</option>
+    <option value="ml">Milliliter (mL)</option>
+    <option value="m3">Cubic Meter (m³)</option>
+    <option value="gal">Gallon (US)</option>
+  </select>
+  to
+  <select id="to">
+    <option value="l">Liter (L)</option>
+    <option value="ml">Milliliter (mL)</option>
+    <option value="m3">Cubic Meter (m³)</option>
+    <option value="gal">Gallon (US)</option>
+  </select>
+  <button onclick="run()">Convert</button>
 
   <p id="output"></p>
 
   <script>
+    const factors = {
+      l: 1,
+      ml: 0.001,
+      m3: 1000,
+      gal: 3.78541
+    };
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const value = parseFloat(document.getElementById('value').value);
+      const from = document.getElementById('from').value;
+      const to = document.getElementById('to').value;
+      if (isNaN(value)) {
+        document.getElementById('output').innerText = 'Enter a valid number.';
+        return;
+      }
+      const liters = value * factors[from];
+      const result = liters / factors[to];
+      document.getElementById('output').innerText = value + ' ' + from + ' = ' + result + ' ' + to;
     }
   </script>
 

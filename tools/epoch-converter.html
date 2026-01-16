@@ -20,15 +20,35 @@
 
   <p>This is a starter tool page for <strong>epoch converter</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="input">Epoch (seconds):</label>
+  <input id="input" type="number" placeholder="e.g. 1609459200">
+  <button onclick="run()">To Date</button>
+  <br><br>
+  <label for="date">Date:</label>
+  <input id="date" type="datetime-local">
+  <button onclick="run2()">To Epoch</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = parseInt(document.getElementById('input').value, 10);
+      if (isNaN(v)) {
+        document.getElementById('output').innerText = "Please enter a valid epoch time.";
+        return;
+      }
+      const d = new Date(v * 1000);
+      document.getElementById('output').innerText = d.toISOString().replace('T', ' ').replace('Z', ' UTC');
+    }
+    function run2() {
+      const v = document.getElementById('date').value;
+      if (!v) {
+        document.getElementById('output').innerText = "Please select a date/time.";
+        return;
+      }
+      const d = new Date(v);
+      document.getElementById('output').innerText = Math.floor(d.getTime() / 1000);
     }
   </script>
 

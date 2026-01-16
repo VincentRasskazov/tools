@@ -20,15 +20,25 @@
 
   <p>This is a starter tool page for <strong>discount calculator</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="price">Original Price:</label>
+  <input id="price" type="number" placeholder="e.g. 100">
+  <label for="discount">Discount (%):</label>
+  <input id="discount" type="number" placeholder="e.g. 20">
+  <button onclick="run()">Calculate Discount</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const price = parseFloat(document.getElementById('price').value);
+      const discount = parseFloat(document.getElementById('discount').value);
+      if (isNaN(price) || isNaN(discount) || price < 0 || discount < 0) {
+        document.getElementById('output').innerText = "Please enter valid price and discount.";
+        return;
+      }
+      const final = price * (1 - discount / 100);
+      document.getElementById('output').innerText = `Final price: $${final.toFixed(2)}`;
     }
   </script>
 

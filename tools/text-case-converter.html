@@ -20,15 +20,34 @@
 
   <p>This is a starter tool page for <strong>text case converter</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <textarea id="input" placeholder="Enter text here..." rows="4" style="width:100%"></textarea>
+  <select id="caseType">
+    <option value="upper">UPPER CASE</option>
+    <option value="lower">lower case</option>
+    <option value="title">Title Case</option>
+    <option value="sentence">Sentence case</option>
+  </select>
+  <button onclick="run()">Convert</button>
 
   <p id="output"></p>
 
   <script>
+    function toTitleCase(str) {
+      return str.replace(/\w\S*/g, w => w.charAt(0).toUpperCase() + w.substr(1).toLowerCase());
+    }
+    function toSentenceCase(str) {
+      return str.replace(/(^|[.!?]\s+)([a-z])/g, (m, p1, p2) => p1 + p2.toUpperCase());
+    }
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value;
+      const type = document.getElementById('caseType').value;
+      let out = '';
+      if (type === 'upper') out = v.toUpperCase();
+      else if (type === 'lower') out = v.toLowerCase();
+      else if (type === 'title') out = toTitleCase(v);
+      else if (type === 'sentence') out = toSentenceCase(v);
+      document.getElementById('output').innerText = out;
     }
   </script>
 

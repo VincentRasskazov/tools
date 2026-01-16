@@ -20,15 +20,21 @@
 
   <p>This is a starter tool page for <strong>decimal to binary</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="input">Decimal:</label>
+  <input id="input" type="number" placeholder="Enter decimal number">
+  <button onclick="run()">Convert to Binary</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = parseInt(document.getElementById('input').value, 10);
+      if (isNaN(v)) {
+        document.getElementById('output').innerText = "Please enter a valid decimal number.";
+        return;
+      }
+      document.getElementById('output').innerText = v.toString(2);
     }
   </script>
 

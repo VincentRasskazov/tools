@@ -20,15 +20,40 @@
 
   <p>This is a starter tool page for <strong>moon phase</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <input id="input" type="date" placeholder="YYYY-MM-DD">
+  <button onclick="run()">Get Moon Phase</button>
 
   <p id="output"></p>
 
   <script>
+    // Simple moon phase calculation (Conway's algorithm)
+    function getMoonPhase(dateStr) {
+      const date = dateStr ? new Date(dateStr) : new Date();
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
+      let r = year % 100;
+      r %= 19;
+      if (r > 9) r -= 19;
+      let phase = ((r * 11) % 30) + month + day;
+      if (month < 3) phase += 2;
+      phase -= (year < 2000) ? 4 : 8.3;
+      phase = Math.floor(phase + 0.5) % 30;
+      if (phase < 0) phase += 30;
+      if (phase < 1) return 'New Moon';
+      if (phase < 7) return 'Waxing Crescent';
+      if (phase < 9) return 'First Quarter';
+      if (phase < 15) return 'Waxing Gibbous';
+      if (phase < 17) return 'Full Moon';
+      if (phase < 23) return 'Waning Gibbous';
+      if (phase < 25) return 'Last Quarter';
+      return 'Waning Crescent';
+    }
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value;
+      const phase = getMoonPhase(v);
+      document.getElementById('output').innerText = 'Moon Phase: ' + phase;
     }
   </script>
 

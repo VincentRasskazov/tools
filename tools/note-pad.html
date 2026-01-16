@@ -20,15 +20,27 @@
 
   <p>This is a starter tool page for <strong>note pad</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
 
-  <p id="output"></p>
+  <textarea id="input" placeholder="Type your notes here..." rows="12" style="width:100%"></textarea>
+  <div>
+    <button onclick="save()">Save</button>
+    <button onclick="clearNote()">Clear</button>
+  </div>
+  <div id="output" style="color:green;"></div>
 
   <script>
-    function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+    const KEY = 'notepad-content';
+    window.onload = function() {
+      document.getElementById('input').value = localStorage.getItem(KEY) || '';
+    };
+    function save() {
+      localStorage.setItem(KEY, document.getElementById('input').value);
+      document.getElementById('output').innerText = 'Note saved!';
+    }
+    function clearNote() {
+      document.getElementById('input').value = '';
+      localStorage.removeItem(KEY);
+      document.getElementById('output').innerText = 'Note cleared!';
     }
   </script>
 

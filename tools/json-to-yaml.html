@@ -20,15 +20,35 @@
 
   <p>This is a starter tool page for <strong>json to yaml</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
 
-  <p id="output"></p>
+  <textarea id="input" placeholder="Paste JSON here" rows="8" style="width:100%"></textarea>
+  <button onclick="run()">Convert</button>
+
+  <pre id="output"></pre>
 
   <script>
+    // Simple JSON to YAML converter (limited, for demo)
+    function jsonToYaml(obj, indent = 0) {
+      if (typeof obj !== 'object' || obj === null) return String(obj);
+      if (Array.isArray(obj)) {
+        return obj.map(item => ' '.repeat(indent) + '- ' + jsonToYaml(item, indent + 2)).join('\n');
+      }
+      return Object.entries(obj).map(([k, v]) => {
+        if (typeof v === 'object' && v !== null) {
+          return ' '.repeat(indent) + k + ':\n' + jsonToYaml(v, indent + 2);
+        } else {
+          return ' '.repeat(indent) + k + ': ' + jsonToYaml(v, 0);
+        }
+      }).join('\n');
+    }
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value;
+      try {
+        const obj = JSON.parse(v);
+        document.getElementById('output').innerText = jsonToYaml(obj);
+      } catch (e) {
+        document.getElementById('output').innerText = 'Invalid JSON.';
+      }
     }
   </script>
 

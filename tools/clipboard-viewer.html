@@ -20,15 +20,23 @@
 
   <p>This is a starter tool page for <strong>clipboard viewer</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <button onclick="run()">Show Clipboard Text</button>
 
   <p id="output"></p>
 
   <script>
-    function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+    async function run() {
+      if (navigator.clipboard && navigator.clipboard.readText) {
+        try {
+          const text = await navigator.clipboard.readText();
+          document.getElementById('output').innerText = text ? text : '(Clipboard is empty)';
+        } catch (e) {
+          document.getElementById('output').innerText = 'Clipboard access denied.';
+        }
+      } else {
+        document.getElementById('output').innerText = 'Clipboard API not supported.';
+      }
     }
   </script>
 

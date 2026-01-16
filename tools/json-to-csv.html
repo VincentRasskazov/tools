@@ -20,15 +20,35 @@
 
   <p>This is a starter tool page for <strong>json to csv</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
 
-  <p id="output"></p>
+  <textarea id="input" placeholder="Paste JSON array here" rows="8" style="width:100%"></textarea>
+  <button onclick="run()">Convert</button>
+
+  <pre id="output"></pre>
 
   <script>
+    function jsonToCsv(json) {
+      if (!Array.isArray(json) || json.length === 0) return '';
+      const keys = Object.keys(json[0]);
+      const csv = [keys.join(',')];
+      for (const row of json) {
+        csv.push(keys.map(k => {
+          let val = row[k] == null ? '' : row[k];
+          if (typeof val === 'string' && (val.includes(',') || val.includes('"') || val.includes('\n')))
+            val = '"' + val.replace(/"/g, '""') + '"';
+          return val;
+        }).join(','));
+      }
+      return csv.join('\n');
+    }
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value;
+      try {
+        const arr = JSON.parse(v);
+        document.getElementById('output').innerText = jsonToCsv(arr);
+      } catch (e) {
+        document.getElementById('output').innerText = 'Invalid JSON array.';
+      }
     }
   </script>
 

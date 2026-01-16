@@ -20,15 +20,35 @@
 
   <p>This is a starter tool page for <strong>base converter</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="input">Number:</label>
+  <input id="input" placeholder="Enter number">
+  <label for="from">From base:</label>
+  <input id="from" type="number" min="2" max="36" value="10">
+  <label for="to">To base:</label>
+  <input id="to" type="number" min="2" max="36" value="2">
+  <button onclick="run()">Convert</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const num = document.getElementById('input').value.trim();
+      const from = parseInt(document.getElementById('from').value, 10);
+      const to = parseInt(document.getElementById('to').value, 10);
+      if (!num || isNaN(from) || isNaN(to) || from < 2 || from > 36 || to < 2 || to > 36) {
+        document.getElementById('output').innerText = "Please enter valid number and bases (2-36).";
+        return;
+      }
+      let dec;
+      try {
+        dec = parseInt(num, from);
+        if (isNaN(dec)) throw new Error();
+      } catch {
+        document.getElementById('output').innerText = "Invalid number for base " + from;
+        return;
+      }
+      document.getElementById('output').innerText = dec.toString(to);
     }
   </script>
 

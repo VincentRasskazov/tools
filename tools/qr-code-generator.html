@@ -20,15 +20,21 @@
 
   <p>This is a starter tool page for <strong>qr code generator</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
 
-  <p id="output"></p>
+  <input id="input" placeholder="Enter text or URL" style="width:100%">
+  <button onclick="run()">Generate</button>
+
+  <div id="output"></div>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value.trim();
+      if (!v) {
+        document.getElementById('output').innerText = 'Enter text or URL.';
+        return;
+      }
+      const url = 'https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=' + encodeURIComponent(v);
+      document.getElementById('output').innerHTML = `<img src="${url}" alt="QR Code">`;
     }
   </script>
 

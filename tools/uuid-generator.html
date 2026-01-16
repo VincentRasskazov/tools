@@ -20,15 +20,20 @@
 
   <p>This is a starter tool page for <strong>uuid generator</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <button onclick="run()">Generate UUID</button>
 
   <p id="output"></p>
 
   <script>
+    function uuidv4() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+        const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
+    }
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      document.getElementById('output').innerText = uuidv4();
     }
   </script>
 

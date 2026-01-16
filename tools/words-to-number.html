@@ -20,15 +20,31 @@
 
   <p>This is a starter tool page for <strong>words to number</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <input id="input" placeholder="Enter number in words (e.g. 'one thousand two')" style="width:100%">
+  <button onclick="run()">Convert</button>
 
   <p id="output"></p>
 
   <script>
+    const numWords = {
+      zero:0,one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10,eleven:11,twelve:12,thirteen:13,fourteen:14,fifteen:15,sixteen:16,seventeen:17,eighteen:18,nineteen:19,twenty:20,thirty:30,forty:40,fifty:50,sixty:60,seventy:70,eighty:80,ninety:90
+    };
+    function wordsToNum(str) {
+      str = str.toLowerCase().replace(/-/g,' ');
+      let parts = str.split(/\s+/);
+      let n = 0, temp = 0;
+      for (let w of parts) {
+        if (w === 'thousand') { n += temp * 1000; temp = 0; }
+        else if (w === 'hundred') { temp *= 100; }
+        else if (numWords[w] !== undefined) { temp += numWords[w]; }
+      }
+      return n + temp;
+    }
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value;
+      const n = wordsToNum(v);
+      document.getElementById('output').innerText = isNaN(n) ? 'Invalid input.' : n;
     }
   </script>
 

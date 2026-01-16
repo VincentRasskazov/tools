@@ -20,15 +20,21 @@
 
   <p>This is a starter tool page for <strong>water intake calculator</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <input id="weight" type="number" placeholder="Weight (kg)" style="width:120px;">
+  <button onclick="run()">Calculate</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const weight = parseFloat(document.getElementById('weight').value);
+      if (isNaN(weight) || weight <= 0) {
+        document.getElementById('output').innerText = 'Enter a valid weight.';
+        return;
+      }
+      const intake = weight * 35; // 35 ml per kg
+      document.getElementById('output').innerText = 'Recommended: ' + (intake/1000).toFixed(2) + ' liters/day';
     }
   </script>
 

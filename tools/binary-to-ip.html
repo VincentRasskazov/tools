@@ -20,15 +20,22 @@
 
   <p>This is a starter tool page for <strong>binary to ip</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="input">Binary (32 bits):</label>
+  <input id="input" placeholder="e.g. 11000000101010000000000100000001">
+  <button onclick="run()">Convert to IP</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value.trim();
+      if (!/^[01]{32}$/.test(v)) {
+        document.getElementById('output').innerText = "Please enter a 32-bit binary string.";
+        return;
+      }
+      const ip = [0,1,2,3].map(i => parseInt(v.slice(i*8, (i+1)*8), 2)).join('.');
+      document.getElementById('output').innerText = ip;
     }
   </script>
 

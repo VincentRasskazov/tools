@@ -20,15 +20,33 @@
 
   <p>This is a starter tool page for <strong>ideal weight calculator</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="height">Height (cm):</label>
+  <input id="height" type="number" placeholder="e.g. 170">
+  <label for="gender">Gender:</label>
+  <select id="gender">
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+  </select>
+  <button onclick="run()">Calculate Ideal Weight</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const height = parseFloat(document.getElementById('height').value);
+      const gender = document.getElementById('gender').value;
+      if (isNaN(height) || height <= 0) {
+        document.getElementById('output').innerText = "Please enter a valid height.";
+        return;
+      }
+      let ideal;
+      if (gender === 'male') {
+        ideal = 50 + 2.3 * ((height / 2.54) - 60);
+      } else {
+        ideal = 45.5 + 2.3 * ((height / 2.54) - 60);
+      }
+      document.getElementById('output').innerText = `Ideal weight: ${ideal.toFixed(2)} kg`;
     }
   </script>
 

@@ -20,15 +20,52 @@
 
   <p>This is a starter tool page for <strong>body fat calculator</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="gender">Gender:</label>
+  <select id="gender">
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+  </select>
+  <label for="waist">Waist (cm):</label>
+  <input id="waist" type="number" placeholder="e.g. 80">
+  <label for="neck">Neck (cm):</label>
+  <input id="neck" type="number" placeholder="e.g. 40">
+  <label for="height">Height (cm):</label>
+  <input id="height" type="number" placeholder="e.g. 170">
+  <span id="hip-label" style="display:none;"><label for="hip">Hip (cm):</label>
+  <input id="hip" type="number" placeholder="e.g. 90"></span>
+  <button onclick="run()">Calculate Body Fat %</button>
 
   <p id="output"></p>
 
   <script>
+    document.getElementById('gender').addEventListener('change', function() {
+      document.getElementById('hip-label').style.display = this.value === 'female' ? '' : 'none';
+    });
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const gender = document.getElementById('gender').value;
+      const waist = parseFloat(document.getElementById('waist').value);
+      const neck = parseFloat(document.getElementById('neck').value);
+      const height = parseFloat(document.getElementById('height').value);
+      let hip = 0;
+      if (gender === 'female') {
+        hip = parseFloat(document.getElementById('hip').value);
+        if (isNaN(hip) || hip <= 0) {
+          document.getElementById('output').innerText = "Please enter valid hip measurement.";
+          return;
+        }
+      }
+      if (isNaN(waist) || isNaN(neck) || isNaN(height) || waist <= 0 || neck <= 0 || height <= 0) {
+        document.getElementById('output').innerText = "Please enter valid measurements.";
+        return;
+      }
+      let bodyFat;
+      if (gender === 'male') {
+        bodyFat = 495 / (1.0324 - 0.19077 * Math.log10(waist - neck) + 0.15456 * Math.log10(height)) - 450;
+      } else {
+        bodyFat = 495 / (1.29579 - 0.35004 * Math.log10(waist + hip - neck) + 0.22100 * Math.log10(height)) - 450;
+      }
+      document.getElementById('output').innerText = `Estimated Body Fat: ${bodyFat.toFixed(2)}%`;
     }
   </script>
 

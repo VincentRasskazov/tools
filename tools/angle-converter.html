@@ -20,15 +20,32 @@
 
   <p>This is a starter tool page for <strong>angle converter</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="angle">Angle:</label>
+  <input id="angle" type="number" placeholder="Enter value">
+  <select id="direction">
+    <option value="deg2rad">Degrees to Radians</option>
+    <option value="rad2deg">Radians to Degrees</option>
+  </select>
+  <button onclick="run()">Convert</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const angle = parseFloat(document.getElementById('angle').value);
+      const dir = document.getElementById('direction').value;
+      if (isNaN(angle)) {
+        document.getElementById('output').innerText = "Please enter a valid angle.";
+        return;
+      }
+      let result;
+      if (dir === 'deg2rad') {
+        result = (angle * Math.PI / 180).toFixed(6) + ' radians';
+      } else {
+        result = (angle * 180 / Math.PI).toFixed(6) + ' degrees';
+      }
+      document.getElementById('output').innerText = result;
     }
   </script>
 

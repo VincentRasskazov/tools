@@ -20,15 +20,21 @@
 
   <p>This is a starter tool page for <strong>json formatter</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
 
-  <p id="output"></p>
+  <textarea id="input" placeholder="Paste JSON here" rows="8" style="width:100%"></textarea>
+  <button onclick="run()">Format</button>
+
+  <pre id="output"></pre>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value;
+      try {
+        const obj = JSON.parse(v);
+        document.getElementById('output').innerText = JSON.stringify(obj, null, 2);
+      } catch (e) {
+        document.getElementById('output').innerText = 'Invalid JSON.';
+      }
     }
   </script>
 

@@ -20,15 +20,30 @@
 
   <p>This is a starter tool page for <strong>ip to binary</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <input id="input" placeholder="Enter IPv4 address (e.g. 192.168.1.1)">
+  <button onclick="run()">Convert</button>
 
   <p id="output"></p>
 
   <script>
+    function ipToBinary(ip) {
+      const parts = ip.trim().split('.');
+      if (parts.length !== 4) return null;
+      return parts.map(part => {
+        const n = parseInt(part, 10);
+        if (isNaN(n) || n < 0 || n > 255) return null;
+        return n.toString(2).padStart(8, '0');
+      });
+    }
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value;
+      const bin = ipToBinary(v);
+      if (!bin || bin.includes(null)) {
+        document.getElementById('output').innerText = "Invalid IPv4 address.";
+      } else {
+        document.getElementById('output').innerText = bin.join('.') + "\n(Binary)";
+      }
     }
   </script>
 

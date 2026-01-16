@@ -20,15 +20,20 @@
 
   <p>This is a starter tool page for <strong>url decoder</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <textarea id="input" placeholder="Paste URL-encoded string here..." rows="4" style="width:100%"></textarea>
+  <button onclick="run()">Decode</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value;
+      try {
+        document.getElementById('output').innerText = decodeURIComponent(v);
+      } catch (e) {
+        document.getElementById('output').innerText = 'Invalid input.';
+      }
     }
   </script>
 

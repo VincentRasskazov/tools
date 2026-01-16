@@ -20,15 +20,33 @@
 
   <p>This is a starter tool page for <strong>markdown preview</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
 
-  <p id="output"></p>
+  <textarea id="input" placeholder="Paste Markdown here..." rows="10" style="width:100%"></textarea>
+  <div>
+    <button onclick="run()">Preview</button>
+  </div>
+  <div id="output" style="border:1px solid #ccc; padding:10px; margin-top:10px;"></div>
 
   <script>
+    // Simple Markdown to HTML (same as editor)
+    function simpleMarkdown(md) {
+      return md
+        .replace(/^###### (.*$)/gim, '<h6>$1</h6>')
+        .replace(/^##### (.*$)/gim, '<h5>$1</h5>')
+        .replace(/^#### (.*$)/gim, '<h4>$1</h4>')
+        .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+        .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+        .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+        .replace(/\*\*(.*?)\*\*/gim, '<b>$1</b>')
+        .replace(/\*(.*?)\*/gim, '<i>$1</i>')
+        .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" target="_blank">$1</a>')
+        .replace(/^\s*\n/gim, '<br>')
+        .replace(/^\s*\* (.*$)/gim, '<li>$1</li>')
+        .replace(/\n/g, '<br>');
+    }
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value;
+      document.getElementById('output').innerHTML = simpleMarkdown(v);
     }
   </script>
 

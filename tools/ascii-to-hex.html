@@ -20,15 +20,22 @@
 
   <p>This is a starter tool page for <strong>ascii to hex</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="input">ASCII Text:</label>
+  <input id="input" placeholder="Enter ASCII text">
+  <button onclick="run()">Convert to Hex</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value;
+      if (!v) {
+        document.getElementById('output').innerText = "Please enter ASCII text.";
+        return;
+      }
+      const hex = Array.from(v).map(c => c.charCodeAt(0).toString(16).padStart(2, '0')).join(' ');
+      document.getElementById('output').innerText = hex;
     }
   </script>
 

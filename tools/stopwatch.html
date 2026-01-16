@@ -20,16 +20,41 @@
 
   <p>This is a starter tool page for <strong>stopwatch</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
 
-  <p id="output"></p>
+  <div id="display" style="font-size:2em; margin-bottom:10px;">00:00.00</div>
+  <button onclick="start()">Start</button>
+  <button onclick="stop()">Stop</button>
+  <button onclick="reset()">Reset</button>
 
   <script>
-    function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+    let startTime, interval, elapsed = 0;
+    function updateDisplay() {
+      let ms = elapsed;
+      let min = Math.floor(ms / 60000);
+      ms %= 60000;
+      let sec = Math.floor(ms / 1000);
+      ms = Math.floor((ms % 1000) / 10);
+      document.getElementById('display').innerText =
+        String(min).padStart(2, '0') + ':' + String(sec).padStart(2, '0') + '.' + String(ms).padStart(2, '0');
     }
+    function start() {
+      if (interval) return;
+      startTime = Date.now() - elapsed;
+      interval = setInterval(() => {
+        elapsed = Date.now() - startTime;
+        updateDisplay();
+      }, 10);
+    }
+    function stop() {
+      clearInterval(interval);
+      interval = null;
+    }
+    function reset() {
+      stop();
+      elapsed = 0;
+      updateDisplay();
+    }
+    updateDisplay();
   </script>
 
   <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>

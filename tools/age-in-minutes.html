@@ -20,15 +20,29 @@
 
   <p>This is a starter tool page for <strong>age in minutes</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="dob">Enter your date of birth:</label>
+  <input id="dob" type="date" placeholder="YYYY-MM-DD">
+  <button onclick="run()">Calculate Minutes</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const dob = document.getElementById('dob').value;
+      if (!dob) {
+        document.getElementById('output').innerText = "Please enter your date of birth.";
+        return;
+      }
+      const birthDate = new Date(dob);
+      const now = new Date();
+      const diffMs = now - birthDate;
+      if (diffMs < 0) {
+        document.getElementById('output').innerText = "Date of birth cannot be in the future.";
+        return;
+      }
+      const diffMinutes = Math.floor(diffMs / 60000);
+      document.getElementById('output').innerText = `You are ${diffMinutes.toLocaleString()} minutes old.`;
     }
   </script>
 

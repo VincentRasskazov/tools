@@ -20,15 +20,26 @@
 
   <p>This is a starter tool page for <strong>loan calculator</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <input id="amount" type="number" placeholder="Loan Amount" style="width:120px;">
+  <input id="rate" type="number" placeholder="Annual Rate (%)" style="width:120px;">
+  <input id="years" type="number" placeholder="Years" style="width:80px;">
+  <button onclick="run()">Calculate</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const amount = parseFloat(document.getElementById('amount').value);
+      const rate = parseFloat(document.getElementById('rate').value) / 100 / 12;
+      const years = parseInt(document.getElementById('years').value, 10);
+      const n = years * 12;
+      if (isNaN(amount) || isNaN(rate) || isNaN(years) || amount <= 0 || years <= 0) {
+        document.getElementById('output').innerText = 'Enter valid loan, rate, and years.';
+        return;
+      }
+      const payment = (amount * rate) / (1 - Math.pow(1 + rate, -n));
+      document.getElementById('output').innerText = 'Monthly Payment: $' + payment.toFixed(2);
     }
   </script>
 

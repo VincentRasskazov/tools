@@ -20,15 +20,39 @@
 
   <p>This is a starter tool page for <strong>jwt decoder</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
 
-  <p id="output"></p>
+  <input id="input" placeholder="Paste JWT here" style="width:100%">
+  <button onclick="run()">Decode</button>
+
+  <pre id="output"></pre>
 
   <script>
+    function decodeBase64Url(str) {
+      str = str.replace(/-/g, '+').replace(/_/g, '/');
+      while (str.length % 4) str += '=';
+      try {
+        return decodeURIComponent(escape(atob(str)));
+      } catch (e) {
+        return null;
+      }
+    }
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value.trim();
+      const parts = v.split('.');
+      if (parts.length !== 3) {
+        document.getElementById('output').innerText = 'Invalid JWT format.';
+        return;
+      }
+      const [header, payload, signature] = parts;
+      let decoded = '';
+      try {
+        decoded += 'Header:\n' + JSON.stringify(JSON.parse(decodeBase64Url(header)), null, 2) + '\n\n';
+        decoded += 'Payload:\n' + JSON.stringify(JSON.parse(decodeBase64Url(payload)), null, 2) + '\n\n';
+        decoded += 'Signature:\n' + signature;
+      } catch (e) {
+        decoded = 'Error decoding JWT.';
+      }
+      document.getElementById('output').innerText = decoded;
     }
   </script>
 

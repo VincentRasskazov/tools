@@ -20,15 +20,21 @@
 
   <p>This is a starter tool page for <strong>hex to decimal</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="input">Hex:</label>
+  <input id="input" placeholder="Enter hex (e.g. 1A3F)">
+  <button onclick="run()">Convert to Decimal</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value.trim();
+      if (!/^[0-9a-fA-F]+$/.test(v)) {
+        document.getElementById('output').innerText = "Please enter a valid hex string.";
+        return;
+      }
+      document.getElementById('output').innerText = parseInt(v, 16).toString(10);
     }
   </script>
 

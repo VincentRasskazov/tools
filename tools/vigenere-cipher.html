@@ -20,15 +20,47 @@
 
   <p>This is a starter tool page for <strong>vigenere cipher</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <input id="input" placeholder="Enter text" style="width:100%">
+  <input id="key" placeholder="Key" style="width:120px;">
+  <select id="mode">
+    <option value="encode">Encode</option>
+    <option value="decode">Decode</option>
+  </select>
+  <button onclick="run()">Go</button>
 
   <p id="output"></p>
 
   <script>
+    function vigenere(text, key, encode = true) {
+      text = text.toUpperCase();
+      key = key.toUpperCase();
+      let out = '', j = 0;
+      for (let i = 0; i < text.length; i++) {
+        const c = text.charCodeAt(i);
+        if (c >= 65 && c <= 90) {
+          const k = key.charCodeAt(j % key.length) - 65;
+          if (encode)
+            out += String.fromCharCode(((c - 65 + k) % 26) + 65);
+          else
+            out += String.fromCharCode(((c - 65 - k + 26) % 26) + 65);
+          j++;
+        } else {
+          out += text[i];
+        }
+      }
+      return out;
+    }
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const text = document.getElementById('input').value;
+      const key = document.getElementById('key').value;
+      const mode = document.getElementById('mode').value;
+      if (!key) {
+        document.getElementById('output').innerText = 'Enter a key.';
+        return;
+      }
+      const result = vigenere(text, key, mode === 'encode');
+      document.getElementById('output').innerText = result;
     }
   </script>
 

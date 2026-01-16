@@ -20,15 +20,40 @@
 
   <p>This is a starter tool page for <strong>ip subnet calculator</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="input">CIDR (e.g. 192.168.1.0/24):</label>
+  <input id="input" placeholder="e.g. 192.168.1.0/24">
+  <button onclick="run()">Calculate</button>
 
   <p id="output"></p>
 
   <script>
+    function ipToInt(ip) {
+      return ip.split('.').reduce((acc, oct) => (acc << 8) + parseInt(oct, 10), 0) >>> 0;
+    }
+    function intToIp(int) {
+      return [24,16,8,0].map(s => (int >>> s) & 255).join('.');
+    }
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value.trim();
+      const match = v.match(/^([0-9.]+)\/(\d{1,2})$/);
+      if (!match) {
+        document.getElementById('output').innerText = "Please enter a valid CIDR (e.g. 192.168.1.0/24).";
+        return;
+      }
+      const ip = match[1];
+      const mask = parseInt(match[2], 10);
+      if (mask < 0 || mask > 32) {
+        document.getElementById('output').innerText = "Invalid subnet mask.";
+        return;
+      }
+      const ipInt = ipToInt(ip);
+      const maskInt = mask === 0 ? 0 : (~0 << (32 - mask)) >>> 0;
+      const network = ipInt & maskInt;
+      const broadcast = network | (~maskInt >>> 0);
+      const first = network + 1;
+      const last = broadcast - 1;
+      document.getElementById('output').innerText = `Network: ${intToIp(network)}\nBroadcast: ${intToIp(broadcast)}\nFirst: ${intToIp(first)}\nLast: ${intToIp(last)}`;
     }
   </script>
 

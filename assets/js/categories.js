@@ -25,7 +25,10 @@ window.renderCategories = function () {
 
 window.renderTools = function (list) {
   const container = document.getElementById('tools-list');
-  console.log('[DEBUG] Rendering tools:', list.length, list.slice(0, 3));
+  if (!list.length) {
+    container.innerHTML = `<div style="text-align:center;padding:40px 0;color:#888;font-size:1.2rem;">No tools found. Try a different search!</div>`;
+    return;
+  }
   container.innerHTML = `
     <div class="tools-grid">
       ${list.map(t => `
@@ -37,5 +40,4 @@ window.renderTools = function (list) {
       `).join('')}
     </div>
   `;
-  console.log('[DEBUG] Tools HTML:', container.innerHTML.length, 'chars');
 };

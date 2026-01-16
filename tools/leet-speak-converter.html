@@ -20,15 +20,28 @@
 
   <p>This is a starter tool page for <strong>leet speak converter</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <input id="input" placeholder="Enter text" style="width:100%">
+  <button onclick="run()">Convert</button>
 
   <p id="output"></p>
 
   <script>
+    const leetMap = {
+      'A': '4', 'B': '8', 'C': '(', 'D': '|)', 'E': '3', 'F': 'ph', 'G': '6', 'H': '#',
+      'I': '1', 'J': '_|', 'K': '|<', 'L': '1', 'M': '|\/|', 'N': '|\|', 'O': '0', 'P': '|*',
+      'Q': '0_', 'R': '|2', 'S': '5', 'T': '7', 'U': '|_|', 'V': '\/', 'W': '\/\/', 'X': '><',
+      'Y': '`/', 'Z': '2', 'a': '4', 'b': '8', 'c': '(', 'd': '|)', 'e': '3', 'f': 'ph',
+      'g': '6', 'h': '#', 'i': '1', 'j': '_|', 'k': '|<', 'l': '1', 'm': '|\/|', 'n': '|\|',
+      'o': '0', 'p': '|*', 'q': '0_', 'r': '|2', 's': '5', 't': '7', 'u': '|_|', 'v': '\/',
+      'w': '\/\/', 'x': '><', 'y': '`/', 'z': '2'
+    };
+    function toLeetSpeak(str) {
+      return str.split('').map(c => leetMap[c] || c).join('');
+    }
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value;
+      document.getElementById('output').innerText = toLeetSpeak(v);
     }
   </script>
 

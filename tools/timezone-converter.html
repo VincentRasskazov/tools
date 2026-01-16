@@ -20,15 +20,40 @@
 
   <p>This is a starter tool page for <strong>timezone converter</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <input id="date" type="datetime-local" style="width:200px;">
+  <select id="from">
+    <option value="UTC">UTC</option>
+    <option value="America/New_York">New York</option>
+    <option value="Europe/London">London</option>
+    <option value="Asia/Tokyo">Tokyo</option>
+    <option value="Australia/Sydney">Sydney</option>
+  </select>
+  to
+  <select id="to">
+    <option value="UTC">UTC</option>
+    <option value="America/New_York">New York</option>
+    <option value="Europe/London">London</option>
+    <option value="Asia/Tokyo">Tokyo</option>
+    <option value="Australia/Sydney">Sydney</option>
+  </select>
+  <button onclick="run()">Convert</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const dateStr = document.getElementById('date').value;
+      const from = document.getElementById('from').value;
+      const to = document.getElementById('to').value;
+      if (!dateStr) {
+        document.getElementById('output').innerText = 'Enter a date and time.';
+        return;
+      }
+      const date = new Date(dateStr + 'Z');
+      const options = { timeZone: to, hour12: false, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+      const fmt = new Intl.DateTimeFormat('en-GB', options);
+      document.getElementById('output').innerText = fmt.format(date) + ' (' + to + ')';
     }
   </script>
 

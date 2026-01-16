@@ -20,15 +20,32 @@
 
   <p>This is a starter tool page for <strong>text diff</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
 
-  <p id="output"></p>
+  <textarea id="a" placeholder="Text A..." rows="6" style="width:100%"></textarea>
+  <textarea id="b" placeholder="Text B..." rows="6" style="width:100%"></textarea>
+  <button onclick="run()">Diff</button>
+
+  <pre id="output"></pre>
 
   <script>
+    function diffLines(a, b) {
+      const aLines = a.split('\n');
+      const bLines = b.split('\n');
+      let out = '';
+      const max = Math.max(aLines.length, bLines.length);
+      for (let i = 0; i < max; i++) {
+        if (aLines[i] === bLines[i]) out += '  ' + (aLines[i] || '') + '\n';
+        else {
+          if (aLines[i] !== undefined) out += '- ' + aLines[i] + '\n';
+          if (bLines[i] !== undefined) out += '+ ' + bLines[i] + '\n';
+        }
+      }
+      return out;
+    }
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const a = document.getElementById('a').value;
+      const b = document.getElementById('b').value;
+      document.getElementById('output').innerText = diffLines(a, b);
     }
   </script>
 

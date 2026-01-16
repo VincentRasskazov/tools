@@ -20,15 +20,18 @@
 
   <p>This is a starter tool page for <strong>word counter</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <textarea id="input" placeholder="Enter text here..." rows="6" style="width:100%"></textarea>
+  <button onclick="run()">Count</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const v = document.getElementById('input').value;
+      const words = v.trim().split(/\s+/).filter(Boolean).length;
+      const chars = v.length;
+      document.getElementById('output').innerText = `Words: ${words}\nCharacters: ${chars}`;
     }
   </script>
 

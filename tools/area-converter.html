@@ -20,15 +20,32 @@
 
   <p>This is a starter tool page for <strong>area converter</strong>.</p>
 
-  <input id="input" placeholder="Enter value">
-  <button onclick="run()">Run</button>
+
+  <label for="area">Area:</label>
+  <input id="area" type="number" placeholder="Enter value">
+  <select id="direction">
+    <option value="m2ft">Square Meters to Square Feet</option>
+    <option value="ft2m">Square Feet to Square Meters</option>
+  </select>
+  <button onclick="run()">Convert</button>
 
   <p id="output"></p>
 
   <script>
     function run() {
-      const v = document.getElementById('input').value
-      document.getElementById('output').innerText = "Output: " + v
+      const area = parseFloat(document.getElementById('area').value);
+      const dir = document.getElementById('direction').value;
+      if (isNaN(area)) {
+        document.getElementById('output').innerText = "Please enter a valid area.";
+        return;
+      }
+      let result;
+      if (dir === 'm2ft') {
+        result = (area * 10.7639).toFixed(4) + ' ft²';
+      } else {
+        result = (area / 10.7639).toFixed(4) + ' m²';
+      }
+      document.getElementById('output').innerText = result;
     }
   </script>
 
