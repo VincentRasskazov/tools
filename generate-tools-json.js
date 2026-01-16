@@ -1,28 +1,28 @@
-const fs = require('fs')
-const path = require('path')
-const { JSDOM } = require('jsdom')
+const fs = require('fs');
+const path = require('path');
 
-const toolsDir = path.join(__dirname, 'tools')
-const outputFile = path.join(__dirname, 'tools.json')
+const toolsDir = path.join(__dirname, 'tools');
+const outFile = path.join(__dirname, 'tools.json');
 
-const tools = []
+function extractMeta(html, name) {
+  const meta = new RegExp(`<meta[^>]+name=["']${name}["'][^>]+content=["']([^"']+)["']`, 'i').exec(html);
+  return meta ? meta[1] : '';
+}
 
-fs.readdirSync(toolsDir).forEach(file => {
-  if (!file.endsWith('.html')) return
+function extractTitle(html) {
+  const match = /<title>([^<]+)<\/title>/i.exec(html);
+  return match ? match[1].trim() : '';
+}
 
-  const html = fs.readFileSync(path.join(toolsDir, file), 'utf8')
-  const dom = new JSDOM(html)
-  const doc = dom.window.document
-
-  const name = doc.querySelector('title')?.textContent || file.replace('.html', '')
-  const category = doc.querySelector('meta[name="category"]')?.content || 'Uncategorized'
-
-  tools.push({
+const files = fs.readdirSync(toolsDir).filter(f => f.endsWith('.html'));
+const tools = files.map(file => {
+  const html = fs.readFileSync(path.join(toolsDir, file), 'utf8');
+  return {
     file,
-    name,
-    category
-  })
-})
+    name: extractTitle(html),
+    category: extractMeta(html, 'category')
+  };
+});
 
-fs.writeFileSync(outputFile, JSON.stringify(tools, null, 2))
-console.log('tools.json updated with', tools.length, 'tools')
+fs.writeFileSync(outFile, JSON.stringify(tools, null, 2));
+console.log(`Generated ${outFile} with ${tools.length} tools.`);

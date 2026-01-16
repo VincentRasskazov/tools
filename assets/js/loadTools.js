@@ -1,13 +1,16 @@
-window.tools = []
+window.tools = [];
 
-async function loadTools() {
-  const res = await fetch('../tools.json')
-  const tools = await res.json()
-
-  window.tools = tools
-
-  window.renderCategories()
-  window.renderTools(tools)
+function loadToolsJson(cb) {
+  fetch('/tools.json')
+    .then(res => res.json())
+    .then(data => {
+      window.tools = data;
+      if (typeof cb === 'function') cb();
+      if (typeof renderCategories === 'function') renderCategories();
+      if (typeof renderTools === 'function') renderTools();
+    });
 }
 
-loadTools()
+document.addEventListener('DOMContentLoaded', function() {
+  loadToolsJson();
+});
