@@ -72,6 +72,7 @@ const tools = [
     { name: "Binary to Hex Converter", path: "/tools/binary-to-hex" },
     { name: "Hex to ASCII Converter", path: "/tools/hex-to-ascii" },
     { name: "ASCII to Hex Converter", path: "/tools/ascii-to-hex" },
+    { name: "Prime Factorization", path: "/tools/batch1/prime-factorization" },
 ];
 
 export default function ToolsPage() {
