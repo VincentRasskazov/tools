@@ -7,6 +7,8 @@ window.renderCategories = function () {
     categories[tool.category].push(tool);
   }
 
+  console.log('[DEBUG] Rendering categories:', Object.keys(categories));
+
   container.innerHTML = Object.keys(categories)
     .map(cat => `
       <div class="category-card">
@@ -22,6 +24,7 @@ window.renderCategories = function () {
 
 window.renderTools = function (list) {
   const container = document.getElementById('tools-list');
+  console.log('[DEBUG] Rendering tools:', list.length, list);
   container.innerHTML = `
     <div class="tools-grid">
       ${list.map(t => `

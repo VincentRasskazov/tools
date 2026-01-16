@@ -6,5 +6,6 @@ searchInput.addEventListener('input', () => {
     t.name.toLowerCase().includes(q) ||
     t.category.toLowerCase().includes(q)
   );
+  console.log('[DEBUG] Search query:', q, 'Results:', filtered.length);
   window.renderTools(filtered);
 });
