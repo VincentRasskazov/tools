@@ -108,6 +108,7 @@ npm run build
 **LCM Calculator:** `https://<your-username>.github.io/tools/tools/batch2/lcm-calculator/`
 **Fibonacci Generator:** `https://<your-username>.github.io/tools/tools/batch2/fibonacci-generator/`
 **Factorial Calculator:** `https://<your-username>.github.io/tools/tools/batch2/factorial-calculator/`
+**Fibonacci Sequence Generator:** `https://<your-username>.github.io/tools/tools/batch3/fibonacci-sequence/`
 **Morse Code Decoder:** `https://<your-username>.github.io/tools/tools/morse-code-decoder/`
 **Atbash Cipher:** `https://<your-username>.github.io/tools/tools/atbash-cipher/`
 **ROT13 Cipher:** `https://<your-username>.github.io/tools/tools/rot13-cipher/`

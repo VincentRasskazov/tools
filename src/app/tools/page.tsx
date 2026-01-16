@@ -78,6 +78,7 @@ const tools = [
     { name: "LCM Calculator", path: "/tools/batch2/lcm-calculator" },
     { name: "Fibonacci Generator", path: "/tools/batch2/fibonacci-generator" },
     { name: "Factorial Calculator", path: "/tools/batch2/factorial-calculator" },
+    { name: "Fibonacci Sequence Generator", path: "/tools/batch3/fibonacci-sequence" },
 ];
 
 export default function ToolsPage() {

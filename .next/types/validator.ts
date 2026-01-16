@@ -72,6 +72,15 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../src/app/tools/ascii-to-hex/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/ascii-to-hex">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/ascii-to-hex/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/tools/atbash-cipher/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/atbash-cipher">> = Specific
@@ -99,10 +108,73 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../src/app/tools/batch1/prime-factorization/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/batch1/prime-factorization">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/batch1/prime-factorization/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/batch2/factorial-calculator/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/batch2/factorial-calculator">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/batch2/factorial-calculator/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/batch2/fibonacci-generator/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/batch2/fibonacci-generator">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/batch2/fibonacci-generator/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/batch2/gcd-calculator/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/batch2/gcd-calculator">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/batch2/gcd-calculator/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/batch2/lcm-calculator/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/batch2/lcm-calculator">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/batch2/lcm-calculator/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/tools/binary-to-decimal/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/binary-to-decimal">> = Specific
   const handler = {} as typeof import("../../src/app/tools/binary-to-decimal/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/binary-to-hex/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/binary-to-hex">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/binary-to-hex/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/binary-to-ip/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/binary-to-ip">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/binary-to-ip/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
@@ -243,6 +315,24 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../src/app/tools/hex-to-ascii/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/hex-to-ascii">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/hex-to-ascii/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/hex-to-binary/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/hex-to-binary">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/hex-to-binary/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/tools/hex-to-decimal/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/hex-to-decimal">> = Specific
@@ -292,6 +382,15 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/ip-subnet-calculator">> = Specific
   const handler = {} as typeof import("../../src/app/tools/ip-subnet-calculator/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/ip-to-binary/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/ip-to-binary">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/ip-to-binary/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
