@@ -2,7 +2,9 @@ window.tools = [];
 
 
 function loadToolsJson(cb) {
-  fetch('/tools.json')
+  // Always fetch from the absolute GitHub Pages URL
+  const jsonUrl = 'https://vincentrasskazov.github.io/tools/tools.json';
+  fetch(jsonUrl)
     .then(res => res.json())
     .then(data => {
       window.tools = data;
