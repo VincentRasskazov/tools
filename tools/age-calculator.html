@@ -1,52 +1,108 @@
+
+
+<!-- SEO-optimized Age Calculator Tool Page (Upgraded Template) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="../assets/css/tool-style.css">
   <meta charset="UTF-8">
-  <title>age calculator Tool</title>
-  <meta name="description" content="age calculator online tool.">
-  <meta name="category" content="Calculators">
+  <title>Age Calculator Online – Calculate Your Age in Years, Months & Days</title>
+  <meta name="description" content="Instantly calculate your age in years, months, and days with our free Age Calculator. Perfect for birthdays, events, and official use.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/tools/age-calculator.html">
+  <meta property="og:title" content="Age Calculator Online – Calculate Your Age in Years, Months & Days">
+  <meta property="og:description" content="Instantly calculate your age in years, months, and days with our free Age Calculator. Perfect for birthdays, events, and official use.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/tools/age-calculator.html">
+  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Age Calculator Online – Calculate Your Age in Years, Months & Days">
+  <meta name="twitter:description" content="Instantly calculate your age in years, months, and days with our free Age Calculator. Perfect for birthdays, events, and official use.">
+  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
   <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/landing-polish.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Age Calculator",
+    "url": "https://vincentrasskazov.github.io/tools/tools/age-calculator.html",
+    "applicationCategory": "Calculator",
+    "description": "Instantly calculate your age in years, months, and days with our free Age Calculator. Perfect for birthdays, events, and official use."
+  }
+  </script>
+  <style>
+    .tool-container { max-width: 520px; margin: 40px auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 24px #1976d233; padding: 32px 28px; }
+    .tool-title { font-size: 2rem; font-weight: 700; color: #1976d2; margin-bottom: 18px; }
+    .tool-desc { color: #555; margin-bottom: 22px; }
+    .result-label { font-weight: 600; color: #283593; margin-bottom: 6px; }
+    .result-box { background: #f6f8fa; border-radius: 8px; padding: 12px; font-family: monospace; font-size: 1.1rem; word-break: break-all; margin-bottom: 8px; }
+    button { background: #1976d2; color: #fff; border: none; border-radius: 8px; padding: 10px 22px; font-size: 1rem; font-weight: 600; cursor: pointer; margin-top: 8px; transition: background 0.2s; }
+    button:hover { background: #0d47a1; }
+    .related-tools { margin-top: 36px; }
+    .related-tools h2 { font-size: 1.1rem; color: #1976d2; margin-bottom: 10px; }
+    .related-tools ul { list-style: none; padding: 0; }
+    .related-tools li { margin-bottom: 6px; }
+    .related-tools a { color: #283593; text-decoration: none; }
+    .related-tools a:hover { text-decoration: underline; }
+    .faq-section { margin-top: 36px; }
+    .faq-section h2 { font-size: 1.1rem; color: #1976d2; margin-bottom: 10px; }
+    .faq-section h3 { font-size: 1rem; color: #283593; margin-bottom: 4px; }
+    .faq-section p { color: #444; margin-bottom: 12px; }
+    label { font-weight: 500; }
+    input[type="date"] { padding: 8px; border-radius: 6px; border: 1px solid #bdbdbd; margin: 0 8px 12px 0; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">age calculator Tool</h1>
-  </div>
-
-  <h1>age calculator Tool</h1>
-
-  <p>This is a starter tool page for <strong>age calculator</strong>.</p>
-
-
-  <label for="dob">Enter your date of birth:</label>
-  <input id="dob" type="date" placeholder="YYYY-MM-DD">
-  <button onclick="run()">Calculate Age</button>
-
-  <p id="output"></p>
-
-  <script>
-    function run() {
-      const dob = document.getElementById('dob').value;
-      if (!dob) {
-        document.getElementById('output').innerText = "Please enter your date of birth.";
-        return;
+    <h1 class="tool-title">Age Calculator</h1>
+    <div class="tool-desc">Instantly find your exact age in years, months, and days. Great for birthdays, anniversaries, and official purposes.</div>
+    <label for="dob">Enter your date of birth:</label>
+    <input id="dob" type="date" placeholder="YYYY-MM-DD">
+    <button onclick="run()">Calculate Age</button>
+    <div class="result-label" style="margin-top:18px;">Result:</div>
+    <div id="output" class="result-box"></div>
+    <script>
+      function run() {
+        const dob = document.getElementById('dob').value;
+        if (!dob) {
+          document.getElementById('output').innerText = "Please enter your date of birth.";
+          return;
+        }
+        const birthDate = new Date(dob);
+        const today = new Date();
+        let years = today.getFullYear() - birthDate.getFullYear();
+        let months = today.getMonth() - birthDate.getMonth();
+        let days = today.getDate() - birthDate.getDate();
+        if (days < 0) {
+          months--;
+          days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+        }
+        if (months < 0) {
+          years--;
+          months += 12;
+        }
+        document.getElementById('output').innerText = `You are ${years} years, ${months} months, and ${days} days old.`;
       }
-      const birthDate = new Date(dob);
-      const today = new Date();
-      let age = today.getFullYear() - birthDate.getFullYear();
-      const m = today.getMonth() - birthDate.getMonth();
-      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-      }
-      document.getElementById('output').innerText = `You are ${age} years old.`;
-    }
-  </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
+    </script>
+    <div class="related-tools">
+      <h2>Related Tools</h2>
+      <ul>
+        <li><a href="age-in-minutes.html">Age in Minutes Calculator</a></li>
+        <li><a href="date-difference.html">Date Difference Calculator</a></li>
+        <li><a href="day-of-week.html">Day of Week Finder</a></li>
+        <li><a href="bmi-calculator.html">BMI Calculator</a></li>
+        <li><a href="ideal-weight-calculator.html">Ideal Weight Calculator</a></li>
+      </ul>
+    </div>
+    <div class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+      <h3>How do I calculate my age in years, months, and days?</h3>
+      <p>Simply enter your date of birth and click "Calculate Age." The tool instantly computes your age in years, months, and days, accounting for leap years and month lengths.</p>
+      <h3>Is this age calculator suitable for official purposes?</h3>
+      <p>Yes, this calculator provides a precise age calculation, but always check with the relevant authority if you need certified proof of age for legal or official documents.</p>
+      <h3>Is my date of birth data private?</h3>
+      <p>Absolutely. All calculations are performed in your browser and your data is never sent or stored anywhere.</p>
+    </div>
   </div>
 </body>
 </html>

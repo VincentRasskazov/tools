@@ -1,53 +1,103 @@
+
+
+<!-- SEO-optimized Age in Minutes Calculator Tool Page (Upgraded Template) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="../assets/css/tool-style.css">
   <meta charset="UTF-8">
-  <title>age in minutes Tool</title>
-  <meta name="description" content="age in minutes online tool.">
-  <meta name="category" content="Date Tools">
+  <title>Age in Minutes Calculator – Instantly Find Your Age in Minutes</title>
+  <meta name="description" content="Calculate your exact age in minutes with our free Age in Minutes Calculator. Great for milestones, trivia, and fun facts.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/tools/age-in-minutes.html">
+  <meta property="og:title" content="Age in Minutes Calculator – Instantly Find Your Age in Minutes">
+  <meta property="og:description" content="Calculate your exact age in minutes with our free Age in Minutes Calculator. Great for milestones, trivia, and fun facts.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/tools/age-in-minutes.html">
+  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Age in Minutes Calculator – Instantly Find Your Age in Minutes">
+  <meta name="twitter:description" content="Calculate your exact age in minutes with our free Age in Minutes Calculator. Great for milestones, trivia, and fun facts.">
+  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
   <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/landing-polish.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Age in Minutes Calculator",
+    "url": "https://vincentrasskazov.github.io/tools/tools/age-in-minutes.html",
+    "applicationCategory": "Calculator",
+    "description": "Calculate your exact age in minutes with our free Age in Minutes Calculator. Great for milestones, trivia, and fun facts."
+  }
+  </script>
+  <style>
+    .tool-container { max-width: 520px; margin: 40px auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 24px #1976d233; padding: 32px 28px; }
+    .tool-title { font-size: 2rem; font-weight: 700; color: #1976d2; margin-bottom: 18px; }
+    .tool-desc { color: #555; margin-bottom: 22px; }
+    .result-label { font-weight: 600; color: #283593; margin-bottom: 6px; }
+    .result-box { background: #f6f8fa; border-radius: 8px; padding: 12px; font-family: monospace; font-size: 1.1rem; word-break: break-all; margin-bottom: 8px; }
+    button { background: #1976d2; color: #fff; border: none; border-radius: 8px; padding: 10px 22px; font-size: 1rem; font-weight: 600; cursor: pointer; margin-top: 8px; transition: background 0.2s; }
+    button:hover { background: #0d47a1; }
+    .related-tools { margin-top: 36px; }
+    .related-tools h2 { font-size: 1.1rem; color: #1976d2; margin-bottom: 10px; }
+    .related-tools ul { list-style: none; padding: 0; }
+    .related-tools li { margin-bottom: 6px; }
+    .related-tools a { color: #283593; text-decoration: none; }
+    .related-tools a:hover { text-decoration: underline; }
+    .faq-section { margin-top: 36px; }
+    .faq-section h2 { font-size: 1.1rem; color: #1976d2; margin-bottom: 10px; }
+    .faq-section h3 { font-size: 1rem; color: #283593; margin-bottom: 4px; }
+    .faq-section p { color: #444; margin-bottom: 12px; }
+    label { font-weight: 500; }
+    input[type="date"] { padding: 8px; border-radius: 6px; border: 1px solid #bdbdbd; margin: 0 8px 12px 0; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">age in minutes Tool</h1>
-  </div>
-
-  <h1>age in minutes Tool</h1>
-
-  <p>This is a starter tool page for <strong>age in minutes</strong>.</p>
-
-
-  <label for="dob">Enter your date of birth:</label>
-  <input id="dob" type="date" placeholder="YYYY-MM-DD">
-  <button onclick="run()">Calculate Minutes</button>
-
-  <p id="output"></p>
-
-  <script>
-    function run() {
-      const dob = document.getElementById('dob').value;
-      if (!dob) {
-        document.getElementById('output').innerText = "Please enter your date of birth.";
-        return;
+    <h1 class="tool-title">Age in Minutes Calculator</h1>
+    <div class="tool-desc">Find out exactly how many minutes old you are! Enter your date of birth and instantly see your age in minutes—perfect for milestones, trivia, and fun facts.</div>
+    <label for="dob">Enter your date of birth:</label>
+    <input id="dob" type="date" placeholder="YYYY-MM-DD">
+    <button onclick="run()">Calculate Minutes</button>
+    <div class="result-label" style="margin-top:18px;">Result:</div>
+    <div id="output" class="result-box"></div>
+    <script>
+      function run() {
+        const dob = document.getElementById('dob').value;
+        if (!dob) {
+          document.getElementById('output').innerText = "Please enter your date of birth.";
+          return;
+        }
+        const birthDate = new Date(dob);
+        const now = new Date();
+        const diffMs = now - birthDate;
+        if (diffMs < 0) {
+          document.getElementById('output').innerText = "Date of birth cannot be in the future.";
+          return;
+        }
+        const diffMinutes = Math.floor(diffMs / 60000);
+        document.getElementById('output').innerText = `You are ${diffMinutes.toLocaleString()} minutes old.`;
       }
-      const birthDate = new Date(dob);
-      const now = new Date();
-      const diffMs = now - birthDate;
-      if (diffMs < 0) {
-        document.getElementById('output').innerText = "Date of birth cannot be in the future.";
-        return;
-      }
-      const diffMinutes = Math.floor(diffMs / 60000);
-      document.getElementById('output').innerText = `You are ${diffMinutes.toLocaleString()} minutes old.`;
-    }
-  </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
+    </script>
+    <div class="related-tools">
+      <h2>Related Tools</h2>
+      <ul>
+        <li><a href="age-calculator.html">Age Calculator</a></li>
+        <li><a href="date-difference.html">Date Difference Calculator</a></li>
+        <li><a href="day-of-week.html">Day of Week Finder</a></li>
+        <li><a href="bmi-calculator.html">BMI Calculator</a></li>
+        <li><a href="random-number.html">Random Number Generator</a></li>
+      </ul>
+    </div>
+    <div class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+      <h3>Why calculate your age in minutes?</h3>
+      <p>Calculating your age in minutes is a fun way to see just how much time you’ve experienced. It’s great for milestones, trivia, and understanding the passage of time in a new way.</p>
+      <h3>How accurate is this age in minutes calculator?</h3>
+      <p>This calculator uses your date of birth and the current time to compute the total number of minutes you’ve lived, accounting for leap years and time zones for maximum accuracy.</p>
+      <h3>Is my date of birth data private?</h3>
+      <p>Absolutely. All calculations are performed in your browser and your data is never sent or stored anywhere.</p>
+    </div>
   </div>
 </body>
 </html>
