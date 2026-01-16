@@ -54,6 +54,24 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../src/app/tools/angle-converter/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/angle-converter">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/angle-converter/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/area-converter/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/area-converter">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/area-converter/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/tools/atbash-cipher/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/atbash-cipher">> = Specific
@@ -144,6 +162,15 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../src/app/tools/data-size-converter/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/data-size-converter">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/data-size-converter/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/tools/date-difference/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/date-difference">> = Specific
@@ -171,10 +198,46 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../src/app/tools/energy-converter/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/energy-converter">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/energy-converter/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/tools/epoch-converter/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/epoch-converter">> = Specific
   const handler = {} as typeof import("../../src/app/tools/epoch-converter/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/field-strength-converter/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/field-strength-converter">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/field-strength-converter/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/force-converter/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/force-converter">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/force-converter/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/frequency-converter/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/frequency-converter">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/frequency-converter/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
@@ -247,6 +310,24 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/leet-speak-converter">> = Specific
   const handler = {} as typeof import("../../src/app/tools/leet-speak-converter/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/length-converter/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/length-converter">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/length-converter/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/lighting-converter/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/lighting-converter">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/lighting-converter/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
@@ -342,6 +423,24 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../src/app/tools/power-converter/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/power-converter">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/power-converter/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/pressure-converter/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/pressure-converter">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/pressure-converter/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/tools/prime-checker/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/prime-checker">> = Specific
@@ -405,6 +504,15 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../src/app/tools/speed-converter/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/speed-converter">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/speed-converter/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/tools/stopwatch/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/stopwatch">> = Specific
@@ -414,10 +522,28 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../src/app/tools/temperature-converter/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/temperature-converter">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/temperature-converter/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/tools/text-case-converter/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/text-case-converter">> = Specific
   const handler = {} as typeof import("../../src/app/tools/text-case-converter/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/time-converter/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/time-converter">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/time-converter/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
@@ -481,6 +607,24 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
 {
   type __IsExpected<Specific extends AppPageConfig<"/tools/vigenere-cipher">> = Specific
   const handler = {} as typeof import("../../src/app/tools/vigenere-cipher/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/volume-converter/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/volume-converter">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/volume-converter/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/tools/weight-converter/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/tools/weight-converter">> = Specific
+  const handler = {} as typeof import("../../src/app/tools/weight-converter/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check

@@ -54,8 +54,6 @@ npm run build
 
 ## 🛠️ Tool URLs
 
-After deployment, your tools will be available at:
-
 - **Landing Page:** `https://<your-username>.github.io/tools/`
 - **All Tools:** `https://<your-username>.github.io/tools/tools/`
 
@@ -105,6 +103,11 @@ After deployment, your tools will be available at:
 **Decimal to Hex:** `https://<your-username>.github.io/tools/tools/decimal-to-hex/`
 **IP Subnet Calculator:** `https://<your-username>.github.io/tools/tools/ip-subnet-calculator/`
 **Morse Code Encoder:** `https://<your-username>.github.io/tools/tools/morse-code-encoder/`
+**Prime Factorization:** `https://<your-username>.github.io/tools/tools/batch1/prime-factorization/`
+**GCD Calculator:** `https://<your-username>.github.io/tools/tools/batch2/gcd-calculator/`
+**LCM Calculator:** `https://<your-username>.github.io/tools/tools/batch2/lcm-calculator/`
+**Fibonacci Generator:** `https://<your-username>.github.io/tools/tools/batch2/fibonacci-generator/`
+**Factorial Calculator:** `https://<your-username>.github.io/tools/tools/batch2/factorial-calculator/`
 **Morse Code Decoder:** `https://<your-username>.github.io/tools/tools/morse-code-decoder/`
 **Atbash Cipher:** `https://<your-username>.github.io/tools/tools/atbash-cipher/`
 **ROT13 Cipher:** `https://<your-username>.github.io/tools/tools/rot13-cipher/`
