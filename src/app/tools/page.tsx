@@ -73,6 +73,7 @@ const tools = [
     { name: "Hex to ASCII Converter", path: "/tools/hex-to-ascii" },
     { name: "ASCII to Hex Converter", path: "/tools/ascii-to-hex" },
     { name: "Prime Factorization", path: "/tools/batch1/prime-factorization" },
+    { name: "GCD & LCM Calculator", path: "/tools/batch2/gcd-lcm-calculator" },
     { name: "GCD Calculator", path: "/tools/batch2/gcd-calculator" },
     { name: "LCM Calculator", path: "/tools/batch2/lcm-calculator" },
     { name: "Fibonacci Generator", path: "/tools/batch2/fibonacci-generator" },
