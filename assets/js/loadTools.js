@@ -1,34 +1,37 @@
-window.tools = [];
+document.addEventListener("DOMContentLoaded", function() {
+    // 1. Point to the file we just created
+    // We use './tools.json' to make sure it looks in the same folder
+    fetch('./tools.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("HTTP error " + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const container = document.getElementById('tools-list'); // Make sure this ID matches your HTML
+            if (!container) return;
 
+            // 2. Clear the "No tools found" message
+            container.innerHTML = '';
 
-function loadToolsJson(cb) {
-  // Always fetch from the absolute GitHub Pages URL
-  const jsonUrl = 'https://vincentrasskazov.github.io/tools/tools.json';
-  console.log('[DEBUG] Fetching tools.json from:', jsonUrl);
-  fetch(jsonUrl)
-    .then(res => {
-      console.log('[DEBUG] Response status:', res.status);
-      return res.json();
-    })
-    .then(data => {
-      window.tools = data;
-      console.log('[DEBUG] tools.json loaded:', window.tools.length, 'tools');
-      if (typeof cb === 'function') cb();
-      if (typeof renderCategories === 'function') {
-        console.log('[DEBUG] Calling renderCategories');
-        renderCategories();
-      }
-      if (typeof renderTools === 'function') {
-        console.log('[DEBUG] Calling renderTools with', window.tools.length, 'tools');
-        renderTools(window.tools);
-      }
-    })
-    .catch(err => {
-      console.error('[DEBUG] Failed to load tools.json:', err);
-    });
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('[DEBUG] DOMContentLoaded');
-  loadToolsJson();
+            // 3. Generate the cards
+            data.forEach(tool => {
+                const card = document.createElement('div');
+                card.className = 'tool-card'; // Ensure this class matches your CSS
+                card.innerHTML = `
+                    <h3><a href="${tool.url}">${tool.name}</a></h3>
+                    <p class="category">${tool.category}</p>
+                    <p class="desc">${tool.description}</p>
+                `;
+                container.appendChild(card);
+            });
+        })
+        .catch(function(error) {
+            console.error('Error loading tools:', error);
+            const container = document.getElementById('tools-list');
+            if (container) {
+                container.innerHTML = '<p>Error loading tools. Please try again later.</p>';
+            }
+        });
 });
