@@ -1,63 +1,38 @@
+---
+layout: default
+title: "HTML Entity Encoder - Escape Special Characters"
+description: "Convert text to HTML entities instantly. Escape characters like <, >, and & for safe HTML usage."
+category: "Developer Tools"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>HTML Entity Encoder – Encode Text to HTML Entities Online</title>
-  <meta name="description" content="Encode text to HTML entities instantly with our free HTML Entity Encoder. Perfect for developers, webmasters, and students.">
+  <title>HTML Entity Encoder</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/html-entity-encoder.html">
-  <meta property="og:title" content="HTML Entity Encoder – Encode Text to HTML Entities Online">
-  <meta property="og:description" content="Encode text to HTML entities instantly with our free HTML Entity Encoder. Perfect for developers, webmasters, and students.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/html-entity-encoder.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="HTML Entity Encoder – Encode Text to HTML Entities Online">
-  <meta name="twitter:description" content="Encode text to HTML entities instantly with our free HTML Entity Encoder. Perfect for developers, webmasters, and students.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "HTML Entity Encoder",
-    "url": "https://vincentrasskazov.github.io/tools/html-entity-encoder.html",
-    "applicationCategory": "Encoding Tools",
-    "description": "Encode text to HTML entities instantly with our free HTML Entity Encoder. Perfect for developers, webmasters, and students."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    textarea { width: 100%; height: 150px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-family: monospace; margin-bottom: 20px; }
+    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">html entity encoder Tool</h1>
+    <h1>HTML Entity Encoder</h1>
+    <label>Input Text</label>
+    <textarea id="input" placeholder="<div class='box'> & 'Quote'"></textarea>
+    <button onclick="encode()">Encode</button>
+    <label style="margin-top:20px; display:block;">Encoded Output</label>
+    <textarea id="output" readonly></textarea>
   </div>
-
-  <h1>html entity encoder Tool</h1>
-
-  <p>This is a starter tool page for <strong>html entity encoder</strong>.</p>
-
-
-  <label for="input">Text:</label>
-  <input id="input" placeholder="e.g. <>&">
-  <button onclick="run()">Encode</button>
-
-  <p id="output"></p>
-
   <script>
-    function run() {
-      const v = document.getElementById('input').value;
-      const txt = document.createElement('textarea');
-      txt.textContent = v;
-      document.getElementById('output').innerText = txt.innerHTML;
+    function encode() {
+      const val = document.getElementById('input').value;
+      const el = document.createElement('div');
+      el.innerText = val;
+      document.getElementById('output').value = el.innerHTML;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

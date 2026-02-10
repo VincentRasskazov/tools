@@ -1,73 +1,42 @@
+---
+layout: default
+title: "Morse Code Encoder - Text to Morse"
+description: "Convert text into Morse code dots and dashes instantly. Fun and educational utility."
+category: "Text Tools"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Morse Code Encoder – Encode Text to Morse Instantly</title>
-  <meta name="description" content="Encode text to Morse code instantly with our free Morse Code Encoder. Perfect for radio, history, and cryptography enthusiasts.">
+  <title>Morse Code Encoder</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/morse-code-encoder.html">
-  <meta property="og:title" content="Morse Code Encoder – Encode Text to Morse Instantly">
-  <meta property="og:description" content="Encode text to Morse code instantly with our free Morse Code Encoder. Perfect for radio, history, and cryptography enthusiasts.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/morse-code-encoder.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Morse Code Encoder – Encode Text to Morse Instantly">
-  <meta name="twitter:description" content="Encode text to Morse code instantly with our free Morse Code Encoder. Perfect for radio, history, and cryptography enthusiasts.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Morse Code Encoder",
-    "url": "https://vincentrasskazov.github.io/tools/morse-code-encoder.html",
-    "applicationCategory": "Cipher Tools",
-    "description": "Encode text to Morse code instantly with our free Morse Code Encoder. Perfect for radio, history, and cryptography enthusiasts."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    textarea { width: 100%; height: 150px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-size: 16px; }
+    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">morse code encoder Tool</h1>
+    <h1>Morse Code Encoder</h1>
+    <label>Input Text</label>
+    <textarea id="input" placeholder="SOS"></textarea>
+    <button onclick="encode()">Encode to Morse</button>
+    <label style="margin-top:20px; display:block;">Morse Output</label>
+    <textarea id="output" readonly></textarea>
   </div>
-
-  <h1>morse code encoder Tool</h1>
-
-  <p>This is a starter tool page for <strong>morse code encoder</strong>.</p>
-
-
-  <input id="input" placeholder="Enter text" style="width:100%">
-  <button onclick="run()">Encode</button>
-
-  <p id="output"></p>
-
   <script>
-    const textToMorse = {
-      'A':'.-','B':'-...','C':'-.-.','D':'-..','E':'.','F':'..-.','G':'--.','H':'....','I':'..',
-      'J':'.---','K':'-.-','L':'.-..','M':'--','N':'-.','O':'---','P':'.--.','Q':'--.-','R':'.-.',
-      'S':'...','T':'-','U':'..-','V':'...-','W':'.--','X':'-..-','Y':'-.--','Z':'--..',
-      '0':'-----','1':'.----','2':'..---','3':'...--','4':'....-','5':'.....','6':'-....','7':'--...','8':'---..','9':'----.',
-      '.':'.-.-.-',',':'--..--','?':'..--..','!':'-.-.--','-':'-....-','"':'.-..-.',':':'---...',';':'-.-.-.','_':'..--.-','+':'.-.-.','=':'-...-','@':'.--.-.'
-    };
-    function encodeMorse(str) {
-      return str.toUpperCase().split('').map(c => {
-        if (c === ' ') return '/';
-        return textToMorse[c] || '?';
-      }).join(' ');
-    }
-    function run() {
-      const v = document.getElementById('input').value;
-      document.getElementById('output').innerText = encodeMorse(v);
+    const morseMap = { 'A':'.-', 'B':'-...', 'C':'-.-.', 'D':'-..', 'E':'.', 'F':'..-.', 'G':'--.', 'H':'....', 'I':'..', 'J':'.---', 'K':'-.-', 'L':'.-..', 'M':'--', 'N':'-.', 'O':'---', 'P':'.--.', 'Q':'--.-', 'R':'.-.', 'S':'...', 'T':'-', 'U':'..-', 'V':'...-', 'W':'.--', 'X':'-..-', 'Y':'-.--', 'Z':'--..', '1':'.----', '2':'..---', '3':'...--', '4':'....-', '5':'.....', '6':'-....', '7':'--...', '8':'---..', '9':'----.', '0':'-----', ' ': '/' };
+    
+    function encode() {
+      const text = document.getElementById('input').value.toUpperCase();
+      let res = "";
+      for(let char of text) {
+        res += (morseMap[char] || char) + " ";
+      }
+      document.getElementById('output').value = res.trim();
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

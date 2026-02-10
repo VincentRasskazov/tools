@@ -1,493 +1,442 @@
 import os
 
 tools = {
-    "tools/ip-address-lookup.html": r"""---
+    "tools/html-minifier.html": r"""---
 layout: default
-title: "My IP Address Lookup - Geo Location"
-description: "Find your public IP address, location, ISP, and coordinates instantly."
-category: "Utility"
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>IP Address Lookup</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { color: #2563eb; text-align: center; }
-    .data-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; }
-    .label { font-weight: bold; color: #64748b; }
-    .value { font-family: monospace; color: #1e293b; font-size: 1.1rem; }
-    #loading { text-align: center; color: #64748b; margin: 20px 0; }
-    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; margin-top: 20px; font-weight: bold; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1>IP Address Lookup</h1>
-    <div id="loading">Scanning network...</div>
-    <div id="results" style="display:none;">
-      <div class="data-row"><span class="label">IP Address</span><span class="value" id="ip"></span></div>
-      <div class="data-row"><span class="label">City</span><span class="value" id="city"></span></div>
-      <div class="data-row"><span class="label">Region</span><span class="value" id="region"></span></div>
-      <div class="data-row"><span class="label">Country</span><span class="value" id="country"></span></div>
-      <div class="data-row"><span class="label">ISP</span><span class="value" id="org"></span></div>
-    </div>
-    <button onclick="fetchIP()">Refresh Data</button>
-  </div>
-  <script>
-    async function fetchIP() {
-      const loader = document.getElementById('loading');
-      const results = document.getElementById('results');
-      loader.style.display = 'block';
-      results.style.display = 'none';
-      
-      try {
-        const response = await fetch('https://ipapi.co/json/');
-        const data = await response.json();
-        
-        document.getElementById('ip').innerText = data.ip;
-        document.getElementById('city').innerText = data.city;
-        document.getElementById('region').innerText = data.region;
-        document.getElementById('country').innerText = data.country_name;
-        document.getElementById('org').innerText = data.org;
-        
-        loader.style.display = 'none';
-        results.style.display = 'block';
-      } catch (e) {
-        loader.innerText = "Error fetching IP data. Adblocker might be interfering.";
-      }
-    }
-    window.onload = fetchIP;
-  </script>
-</body>
-</html>""",
-
-    "tools/color-picker.html": r"""---
-layout: default
-title: "Online Color Picker - HEX, RGB, HSL"
-description: "Pick colors visually and get HEX, RGB, and HSL codes instantly."
-category: "Utility"
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Color Picker</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
-    input[type="color"] { width: 100px; height: 100px; border: none; cursor: pointer; background: none; }
-    .codes { margin-top: 30px; text-align: left; }
-    .code-row { display: flex; justify-content: space-between; margin-bottom: 10px; background: #f8fafc; padding: 10px; border-radius: 6px; }
-    .val { font-family: monospace; font-weight: bold; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1>Color Picker</h1>
-    <input type="color" id="picker" value="#2563eb" oninput="updateColor()">
-    
-    <div class="codes">
-      <div class="code-row"><span>HEX</span><span class="val" id="hex">#2563eb</span></div>
-      <div class="code-row"><span>RGB</span><span class="val" id="rgb">rgb(37, 99, 235)</span></div>
-    </div>
-  </div>
-  <script>
-    function updateColor() {
-      const hex = document.getElementById('picker').value;
-      document.getElementById('hex').innerText = hex;
-      
-      const r = parseInt(hex.slice(1, 3), 16);
-      const g = parseInt(hex.slice(3, 5), 16);
-      const b = parseInt(hex.slice(5, 7), 16);
-      document.getElementById('rgb').innerText = `rgb(${r}, ${g}, ${b})`;
-    }
-  </script>
-</body>
-</html>""",
-
-    "tools/hex-to-rgb.html": r"""---
-layout: default
-title: "HEX to RGB Converter"
-description: "Convert Hexadecimal color codes to RGB format instantly."
-category: "Converters"
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>HEX to RGB</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; margin-bottom: 20px; }
-    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-    #preview { height: 50px; border-radius: 6px; margin-top: 20px; border: 1px solid #eee; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1 style="text-align: center; color: #2563eb;">HEX to RGB</h1>
-    <label>HEX Code</label>
-    <input type="text" id="hex" placeholder="#2563eb">
-    <button onclick="convert()">Convert</button>
-    <label style="margin-top:20px; display:block;">RGB Result</label>
-    <input type="text" id="rgb" readonly>
-    <div id="preview"></div>
-  </div>
-  <script>
-    function convert() {
-      let hex = document.getElementById('hex').value.replace('#', '');
-      if(hex.length === 3) hex = hex.split('').map(c => c+c).join('');
-      if(hex.length !== 6) return alert("Invalid HEX code");
-      
-      const r = parseInt(hex.substring(0,2), 16);
-      const g = parseInt(hex.substring(2,4), 16);
-      const b = parseInt(hex.substring(4,6), 16);
-      
-      const result = `rgb(${r}, ${g}, ${b})`;
-      document.getElementById('rgb').value = result;
-      document.getElementById('preview').style.backgroundColor = result;
-    }
-  </script>
-</body>
-</html>""",
-
-    "tools/rgb-to-hex.html": r"""---
-layout: default
-title: "RGB to HEX Converter"
-description: "Convert RGB values to Hexadecimal color codes instantly."
-category: "Converters"
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>RGB to HEX</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    .input-row { display: flex; gap: 10px; margin-bottom: 20px; }
-    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; text-align: center; }
-    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-    #preview { height: 50px; border-radius: 6px; margin-top: 20px; border: 1px solid #eee; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1 style="text-align: center; color: #2563eb;">RGB to HEX</h1>
-    <div class="input-row">
-      <input type="number" id="r" placeholder="R" min="0" max="255">
-      <input type="number" id="g" placeholder="G" min="0" max="255">
-      <input type="number" id="b" placeholder="B" min="0" max="255">
-    </div>
-    <button onclick="convert()">Convert</button>
-    <label style="margin-top:20px; display:block;">HEX Result</label>
-    <input type="text" id="hex" readonly style="text-align: left; margin-top: 5px;">
-    <div id="preview"></div>
-  </div>
-  <script>
-    function componentToHex(c) {
-      const hex = parseInt(c).toString(16);
-      return hex.length == 1 ? "0" + hex : hex;
-    }
-    function convert() {
-      const r = document.getElementById('r').value;
-      const g = document.getElementById('g').value;
-      const b = document.getElementById('b').value;
-      
-      if(!r || !g || !b) return;
-      
-      const hex = "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-      document.getElementById('hex').value = hex;
-      document.getElementById('preview').style.backgroundColor = hex;
-    }
-  </script>
-</body>
-</html>""",
-
-    "tools/image-to-base64.html": r"""---
-layout: default
-title: "Image to Base64 Converter"
-description: "Convert image files (PNG, JPG) to Base64 strings instantly. Useful for embedding images in HTML/CSS."
-category: "Converters"
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Image to Base64</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 700px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    input[type="file"] { margin-bottom: 20px; }
-    textarea { width: 100%; height: 200px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-family: monospace; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1 style="text-align: center; color: #2563eb;">Image to Base64</h1>
-    <p style="text-align: center; color: #666;">Select an image to convert it to a Data URI.</p>
-    
-    <input type="file" id="fileInput" accept="image/*" onchange="convert()">
-    
-    <label>Base64 Output</label>
-    <textarea id="output" readonly placeholder="Result will appear here..."></textarea>
-  </div>
-  <script>
-    function convert() {
-      const file = document.getElementById('fileInput').files[0];
-      if(!file) return;
-      
-      const reader = new FileReader();
-      reader.onloadend = function() {
-        document.getElementById('output').value = reader.result;
-      }
-      reader.readAsDataURL(file);
-    }
-  </script>
-</body>
-</html>""",
-
-    "tools/loan-calculator.html": r"""---
-layout: default
-title: "Loan Calculator - Estimate Monthly Payments"
-description: "Calculate estimated monthly loan payments, total interest, and total repayment amount."
-category: "Calculators"
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Loan Calculator</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    .input-group { margin-bottom: 15px; }
-    label { display: block; font-weight: 600; margin-bottom: 5px; }
-    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
-    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; }
-    #result { margin-top: 20px; padding: 15px; background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 6px; display: none; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1 style="text-align: center; color: #2563eb;">Loan Calculator</h1>
-    <div class="input-group">
-      <label>Loan Amount ($)</label>
-      <input type="number" id="amount" placeholder="10000">
-    </div>
-    <div class="input-group">
-      <label>Interest Rate (%)</label>
-      <input type="number" id="rate" placeholder="5.5">
-    </div>
-    <div class="input-group">
-      <label>Loan Term (Years)</label>
-      <input type="number" id="years" placeholder="5">
-    </div>
-    <button onclick="calculate()">Calculate Payment</button>
-    <div id="result"></div>
-  </div>
-  <script>
-    function calculate() {
-      const amount = parseFloat(document.getElementById('amount').value);
-      const rate = parseFloat(document.getElementById('rate').value) / 100 / 12;
-      const terms = parseFloat(document.getElementById('years').value) * 12;
-      
-      if(!amount || !rate || !terms) return alert("Please fill all fields");
-      
-      const x = Math.pow(1 + rate, terms);
-      const monthly = (amount * x * rate) / (x - 1);
-      const total = monthly * terms;
-      const interest = total - amount;
-      
-      const res = document.getElementById('result');
-      res.style.display = 'block';
-      res.innerHTML = `
-        <strong>Monthly Payment:</strong> $${monthly.toFixed(2)}<br>
-        <strong>Total Interest:</strong> $${interest.toFixed(2)}<br>
-        <strong>Total Payment:</strong> $${total.toFixed(2)}
-      `;
-    }
-  </script>
-</body>
-</html>""",
-
-    "tools/day-of-week.html": r"""---
-layout: default
-title: "Day of the Week Calculator"
-description: "Find out what day of the week a specific date falls on."
-category: "Utility"
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Day of the Week</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
-    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-size: 16px; }
-    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-    #result { font-size: 2rem; font-weight: 800; color: #16a34a; margin-top: 20px; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1>Day of the Week</h1>
-    <label style="display:block; margin-bottom:10px;">Select a Date</label>
-    <input type="date" id="date">
-    <button onclick="calculate()">Find Day</button>
-    <div id="result"></div>
-  </div>
-  <script>
-    function calculate() {
-      const val = document.getElementById('date').value;
-      if(!val) return;
-      const date = new Date(val);
-      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-      document.getElementById('result').innerText = days[date.getUTCDay()];
-    }
-  </script>
-</body>
-</html>""",
-
-    "tools/date-difference.html": r"""---
-layout: default
-title: "Date Difference Calculator - Days Between Dates"
-description: "Calculate the number of days, weeks, and months between two dates."
-category: "Calculators"
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Date Difference</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    label { display: block; font-weight: 600; margin-bottom: 5px; }
-    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 15px; }
-    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-    #result { margin-top: 20px; font-size: 1.2rem; text-align: center; color: #1e293b; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1 style="text-align: center; color: #2563eb;">Date Difference</h1>
-    <label>Start Date</label>
-    <input type="date" id="start">
-    <label>End Date</label>
-    <input type="date" id="end">
-    <button onclick="calc()">Calculate Duration</button>
-    <div id="result"></div>
-  </div>
-  <script>
-    function calc() {
-      const start = new Date(document.getElementById('start').value);
-      const end = new Date(document.getElementById('end').value);
-      
-      if(isNaN(start) || isNaN(end)) return alert("Select both dates");
-      
-      const diffTime = Math.abs(end - start);
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-      
-      document.getElementById('result').innerHTML = `Difference: <strong>${diffDays} days</strong>`;
-    }
-  </script>
-</body>
-</html>""",
-
-    "tools/markdown-preview.html": r"""---
-layout: default
-title: "Markdown Preview - Live Editor"
-description: "Write and preview Markdown in real-time. Convert Markdown to HTML instantly."
+title: "HTML Minifier - Compress HTML Code"
+description: "Minify your HTML code instantly. Remove whitespace, comments, and newlines to speed up your website."
 category: "Developer Tools"
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Markdown Preview</title>
+  <title>HTML Minifier</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
-    .tool-container { max-width: 1000px; margin: 40px auto; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    .editor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; height: 500px; }
-    textarea { padding: 15px; border: 1px solid #ccc; border-radius: 6px; font-family: monospace; resize: none; }
-    #preview { padding: 15px; border: 1px solid #eee; border-radius: 6px; overflow-y: auto; background: #fafafa; }
-    h1 { text-align: center; color: #2563eb; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    textarea { width: 100%; height: 200px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-family: monospace; font-size: 14px; margin-bottom: 20px; }
+    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; }
+    button:hover { background: #1d4ed8; }
   </style>
 </head>
 <body>
   <div class="tool-container">
-    <h1>Markdown Live Preview</h1>
-    <div class="editor-grid">
-      <textarea id="editor" oninput="update()"># Hello World
-This is a **Markdown** editor.
-
-* List item 1
-* List item 2</textarea>
-      <div id="preview"></div>
-    </div>
+    <h1>HTML Minifier</h1>
+    <label>Input HTML</label>
+    <textarea id="input" placeholder="<div class='test'>
+  Hello World
+</div>"></textarea>
+    <button onclick="minify()">Minify HTML</button>
+    <label style="margin-top:20px; display:block;">Minified Output</label>
+    <textarea id="output" readonly></textarea>
   </div>
   <script>
-    function update() {
-      const val = document.getElementById('editor').value;
-      document.getElementById('preview').innerHTML = marked.parse(val);
+    function minify() {
+      let html = document.getElementById('input').value;
+      // Remove comments
+      html = html.replace(//g, "");
+      // Remove whitespace between tags
+      html = html.replace(/>\s+</g, "><");
+      // Remove whitespace start/end
+      html = html.trim();
+      document.getElementById('output').value = html;
     }
-    window.onload = update;
   </script>
 </body>
 </html>""",
 
-    "tools/prime-checker.html": r"""---
+    "tools/css-minifier.html": r"""---
 layout: default
-title: "Prime Number Checker"
-description: "Check if a number is prime instantly. Simple math utility."
-category: "Calculators"
+title: "CSS Minifier - Compress CSS Code"
+description: "Minify CSS code instantly. Reduce file size by removing spaces, indentation, and comments."
+category: "Developer Tools"
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Prime Checker</title>
+  <title>CSS Minifier</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
-    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-size: 16px; text-align: center; }
-    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-    #result { font-size: 1.5rem; font-weight: bold; margin-top: 20px; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    textarea { width: 100%; height: 200px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-family: monospace; font-size: 14px; margin-bottom: 20px; }
+    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; }
+    button:hover { background: #1d4ed8; }
   </style>
 </head>
 <body>
   <div class="tool-container">
-    <h1>Prime Number Checker</h1>
-    <input type="number" id="num" placeholder="Enter a number (e.g. 17)">
-    <button onclick="check()">Check</button>
-    <div id="result"></div>
+    <h1>CSS Minifier</h1>
+    <label>Input CSS</label>
+    <textarea id="input" placeholder="body {
+  color: white;
+  background: black;
+}"></textarea>
+    <button onclick="minify()">Minify CSS</button>
+    <label style="margin-top:20px; display:block;">Minified Output</label>
+    <textarea id="output" readonly></textarea>
   </div>
   <script>
-    function check() {
-      const n = parseInt(document.getElementById('num').value);
-      const res = document.getElementById('result');
-      if(!n) return;
+    function minify() {
+      let css = document.getElementById('input').value;
+      // Remove comments
+      css = css.replace(/\/\*[\s\S]*?\*\//g, "");
+      // Remove whitespace
+      css = css.replace(/\s+/g, " ");
+      // Remove space around symbols
+      css = css.replace(/\s?([\{\}\:\;\,])\s?/g, "$1");
+      css = css.replace(/;\}/g, "}");
+      document.getElementById('output').value = css.trim();
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/slug-generator.html": r"""---
+layout: default
+title: "URL Slug Generator - SEO Friendly URLs"
+description: "Convert text to clean URL slugs. Removes special characters and replaces spaces with dashes."
+category: "Text Tools"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Slug Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-size: 16px; }
+    .result { background: #f8fafc; padding: 15px; border: 1px solid #e2e8f0; border-radius: 6px; font-family: monospace; color: #334155; word-break: break-all; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Slug Generator</h1>
+    <label>Enter Title</label>
+    <input type="text" id="input" placeholder="Hello World! This is a Post Title." oninput="generate()">
+    <label>Generated Slug</label>
+    <div class="result" id="output">hello-world-this-is-a-post-title</div>
+  </div>
+  <script>
+    function generate() {
+      const val = document.getElementById('input').value;
+      const slug = val.toLowerCase()
+                      .replace(/[^a-z0-9\s-]/g, '') // remove invalid chars
+                      .replace(/\s+/g, '-')         // replace whitespace with -
+                      .replace(/-+/g, '-');         // collapse dashes
+      document.getElementById('output').innerText = slug;
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/html-entity-encoder.html": r"""---
+layout: default
+title: "HTML Entity Encoder - Escape Special Characters"
+description: "Convert text to HTML entities instantly. Escape characters like <, >, and & for safe HTML usage."
+category: "Developer Tools"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML Entity Encoder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    textarea { width: 100%; height: 150px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-family: monospace; margin-bottom: 20px; }
+    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>HTML Entity Encoder</h1>
+    <label>Input Text</label>
+    <textarea id="input" placeholder="<div class='box'> & 'Quote'"></textarea>
+    <button onclick="encode()">Encode</button>
+    <label style="margin-top:20px; display:block;">Encoded Output</label>
+    <textarea id="output" readonly></textarea>
+  </div>
+  <script>
+    function encode() {
+      const val = document.getElementById('input').value;
+      const el = document.createElement('div');
+      el.innerText = val;
+      document.getElementById('output').value = el.innerHTML;
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/html-entity-decoder.html": r"""---
+layout: default
+title: "HTML Entity Decoder - Unescape Characters"
+description: "Convert HTML entities back to readable text. Decode &amp;, &lt;, and other special characters."
+category: "Developer Tools"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML Entity Decoder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    textarea { width: 100%; height: 150px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-family: monospace; margin-bottom: 20px; }
+    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>HTML Entity Decoder</h1>
+    <label>Input Entities</label>
+    <textarea id="input" placeholder="&lt;div class='box'&gt;"></textarea>
+    <button onclick="decode()">Decode</button>
+    <label style="margin-top:20px; display:block;">Decoded Output</label>
+    <textarea id="output" readonly></textarea>
+  </div>
+  <script>
+    function decode() {
+      const val = document.getElementById('input').value;
+      const el = document.createElement('textarea');
+      el.innerHTML = val;
+      document.getElementById('output').value = el.value;
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/caesar-cipher.html": r"""---
+layout: default
+title: "Caesar Cipher - Online Encryption/Decryption"
+description: "Encrypt and decrypt text using the classic Caesar Cipher method. Shift letters by a set amount."
+category: "Text Tools"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Caesar Cipher</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    textarea { width: 100%; height: 120px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-size: 16px; }
+    .controls { display: flex; gap: 10px; align-items: center; margin-bottom: 20px; }
+    input[type="number"] { width: 80px; padding: 10px; border-radius: 6px; border: 1px solid #ccc; }
+    button { padding: 10px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Caesar Cipher</h1>
+    <textarea id="input" placeholder="Type your secret message..."></textarea>
+    
+    <div class="controls">
+      <label>Shift:</label>
+      <input type="number" id="shift" value="3">
+      <button onclick="run(1)">Encrypt</button>
+      <button onclick="run(-1)" style="background:#4b5563">Decrypt</button>
+    </div>
+    
+    <label>Result</label>
+    <textarea id="output" readonly></textarea>
+  </div>
+  <script>
+    function run(direction) {
+      const text = document.getElementById('input').value;
+      const shift = parseInt(document.getElementById('shift').value) * direction;
       
-      let isPrime = true;
-      if (n <= 1) isPrime = false;
-      for (let i = 2; i <= Math.sqrt(n); i++) {
-        if (n % i === 0) { isPrime = false; break; }
+      let result = "";
+      for (let i = 0; i < text.length; i++) {
+        let char = text[i];
+        if (char.match(/[a-z]/i)) {
+          const code = text.charCodeAt(i);
+          // Uppercase
+          if (code >= 65 && code <= 90) {
+            char = String.fromCharCode(((code - 65 + shift) % 26 + 26) % 26 + 65);
+          }
+          // Lowercase
+          else if (code >= 97 && code <= 122) {
+            char = String.fromCharCode(((code - 97 + shift) % 26 + 26) % 26 + 97);
+          }
+        }
+        result += char;
       }
-      
-      if(isPrime) {
-        res.innerText = n + " is a Prime Number!";
-        res.style.color = "#16a34a";
-      } else {
-        res.innerText = n + " is NOT Prime.";
-        res.style.color = "#dc2626";
+      document.getElementById('output').value = result;
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/rot13-cipher.html": r"""---
+layout: default
+title: "ROT13 Cipher - Text Encryption"
+description: "Simple ROT13 encryption tool. Shifts every letter 13 places in the alphabet."
+category: "Text Tools"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ROT13 Cipher</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    textarea { width: 100%; height: 150px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-size: 16px; }
+    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>ROT13 Cipher</h1>
+    <label>Input Text</label>
+    <textarea id="input" placeholder="Type here..."></textarea>
+    <button onclick="rot13()">Encrypt / Decrypt (Toggle)</button>
+    <label style="margin-top:20px; display:block;">Output</label>
+    <textarea id="output" readonly></textarea>
+  </div>
+  <script>
+    function rot13() {
+      const str = document.getElementById('input').value;
+      const res = str.replace(/[a-zA-Z]/g, function(c){
+        return String.fromCharCode((c <= "Z" ? 90 : 122) >= (c = c.charCodeAt(0) + 13) ? c : c - 26);
+      });
+      document.getElementById('output').value = res;
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/morse-code-encoder.html": r"""---
+layout: default
+title: "Morse Code Encoder - Text to Morse"
+description: "Convert text into Morse code dots and dashes instantly. Fun and educational utility."
+category: "Text Tools"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Morse Code Encoder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    textarea { width: 100%; height: 150px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-size: 16px; }
+    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Morse Code Encoder</h1>
+    <label>Input Text</label>
+    <textarea id="input" placeholder="SOS"></textarea>
+    <button onclick="encode()">Encode to Morse</button>
+    <label style="margin-top:20px; display:block;">Morse Output</label>
+    <textarea id="output" readonly></textarea>
+  </div>
+  <script>
+    const morseMap = { 'A':'.-', 'B':'-...', 'C':'-.-.', 'D':'-..', 'E':'.', 'F':'..-.', 'G':'--.', 'H':'....', 'I':'..', 'J':'.---', 'K':'-.-', 'L':'.-..', 'M':'--', 'N':'-.', 'O':'---', 'P':'.--.', 'Q':'--.-', 'R':'.-.', 'S':'...', 'T':'-', 'U':'..-', 'V':'...-', 'W':'.--', 'X':'-..-', 'Y':'-.--', 'Z':'--..', '1':'.----', '2':'..---', '3':'...--', '4':'....-', '5':'.....', '6':'-....', '7':'--...', '8':'---..', '9':'----.', '0':'-----', ' ': '/' };
+    
+    function encode() {
+      const text = document.getElementById('input').value.toUpperCase();
+      let res = "";
+      for(let char of text) {
+        res += (morseMap[char] || char) + " ";
       }
+      document.getElementById('output').value = res.trim();
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/morse-code-decoder.html": r"""---
+layout: default
+title: "Morse Code Decoder - Morse to Text"
+description: "Translate Morse code dots and dashes back into readable text."
+category: "Text Tools"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Morse Code Decoder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    textarea { width: 100%; height: 150px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-size: 16px; }
+    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Morse Code Decoder</h1>
+    <label>Input Morse Code (Use spaces between letters)</label>
+    <textarea id="input" placeholder="... --- ..."></textarea>
+    <button onclick="decode()">Decode to Text</button>
+    <label style="margin-top:20px; display:block;">Text Output</label>
+    <textarea id="output" readonly></textarea>
+  </div>
+  <script>
+    const morseMap = { '.-':'A', '-...':'B', '-.-.':'C', '-..':'D', '.':'E', '..-.':'F', '--.':'G', '....':'H', '..':'I', '.---':'J', '-.-':'K', '.-..':'L', '--':'M', '-.':'N', '---':'O', '.--.':'P', '--.-':'Q', '.-.':'R', '...':'S', '-':'T', '..-':'U', '...-':'V', '.--':'W', '-..-':'X', '-.--':'Y', '--..':'Z', '.----':'1', '..---':'2', '...--':'3', '....-':'4', '.....':'5', '-....':'6', '--...':'7', '---..':'8', '----.':'9', '-----':'0', '/':' ' };
+
+    function decode() {
+      const code = document.getElementById('input').value.trim();
+      const parts = code.split(' ');
+      let res = "";
+      for(let p of parts) {
+        res += (morseMap[p] || "?");
+      }
+      document.getElementById('output').value = res;
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/binary-to-hex.html": r"""---
+layout: default
+title: "Binary to Hex Converter"
+description: "Convert binary code to hexadecimal format instantly."
+category: "Converters"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Binary to Hex</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-size: 16px; font-family: monospace; }
+    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Binary to Hex</h1>
+    <label>Binary Input</label>
+    <input type="text" id="input" placeholder="10101100">
+    <button onclick="convert()">Convert</button>
+    <label style="margin-top:20px; display:block;">Hex Output</label>
+    <input type="text" id="output" readonly>
+  </div>
+  <script>
+    function convert() {
+      const bin = document.getElementById('input').value;
+      if(!/^[01]+$/.test(bin)) return alert("Invalid Binary");
+      const hex = parseInt(bin, 2).toString(16).toUpperCase();
+      document.getElementById('output').value = hex;
     }
   </script>
 </body>

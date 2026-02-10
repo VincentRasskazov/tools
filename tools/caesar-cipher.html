@@ -1,78 +1,62 @@
+---
+layout: default
+title: "Caesar Cipher - Online Encryption/Decryption"
+description: "Encrypt and decrypt text using the classic Caesar Cipher method. Shift letters by a set amount."
+category: "Text Tools"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Caesar Cipher – Encode and Decode Text Online</title>
-  <meta name="description" content="Encode and decode text using Caesar Cipher instantly with our free tool. Perfect for cryptography, puzzles, and learning.">
+  <title>Caesar Cipher</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/caesar-cipher.html">
-  <meta property="og:title" content="Caesar Cipher – Encode and Decode Text Online">
-  <meta property="og:description" content="Encode and decode text using Caesar Cipher instantly with our free tool. Perfect for cryptography, puzzles, and learning.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/caesar-cipher.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Caesar Cipher – Encode and Decode Text Online">
-  <meta name="twitter:description" content="Encode and decode text using Caesar Cipher instantly with our free tool. Perfect for cryptography, puzzles, and learning.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Caesar Cipher",
-    "url": "https://vincentrasskazov.github.io/tools/caesar-cipher.html",
-    "applicationCategory": "Cipher Tools",
-    "description": "Encode and decode text using Caesar Cipher instantly with our free tool. Perfect for cryptography, puzzles, and learning."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    textarea { width: 100%; height: 120px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-size: 16px; }
+    .controls { display: flex; gap: 10px; align-items: center; margin-bottom: 20px; }
+    input[type="number"] { width: 80px; padding: 10px; border-radius: 6px; border: 1px solid #ccc; }
+    button { padding: 10px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">caesar cipher Tool</h1>
+    <h1>Caesar Cipher</h1>
+    <textarea id="input" placeholder="Type your secret message..."></textarea>
+    
+    <div class="controls">
+      <label>Shift:</label>
+      <input type="number" id="shift" value="3">
+      <button onclick="run(1)">Encrypt</button>
+      <button onclick="run(-1)" style="background:#4b5563">Decrypt</button>
+    </div>
+    
+    <label>Result</label>
+    <textarea id="output" readonly></textarea>
   </div>
-
-  <h1>caesar cipher Tool</h1>
-
-  <p>This is a starter tool page for <strong>caesar cipher</strong>.</p>
-
-
-  <label for="input">Text:</label>
-  <input id="input" placeholder="Enter text">
-  <label for="shift">Shift:</label>
-  <input id="shift" type="number" value="3">
-  <button onclick="run()">Encode</button>
-
-  <p id="output"></p>
-
   <script>
-    function run() {
+    function run(direction) {
       const text = document.getElementById('input').value;
-      const shift = parseInt(document.getElementById('shift').value, 10);
-      if (!text || isNaN(shift)) {
-        document.getElementById('output').innerText = "Please enter text and shift.";
-        return;
-      }
-      let result = '';
-      for (let c of text) {
-        if (c >= 'a' && c <= 'z') {
-          result += String.fromCharCode((c.charCodeAt(0) - 97 + shift + 26) % 26 + 97);
-        } else if (c >= 'A' && c <= 'Z') {
-          result += String.fromCharCode((c.charCodeAt(0) - 65 + shift + 26) % 26 + 65);
-        } else {
-          result += c;
+      const shift = parseInt(document.getElementById('shift').value) * direction;
+      
+      let result = "";
+      for (let i = 0; i < text.length; i++) {
+        let char = text[i];
+        if (char.match(/[a-z]/i)) {
+          const code = text.charCodeAt(i);
+          // Uppercase
+          if (code >= 65 && code <= 90) {
+            char = String.fromCharCode(((code - 65 + shift) % 26 + 26) % 26 + 65);
+          }
+          // Lowercase
+          else if (code >= 97 && code <= 122) {
+            char = String.fromCharCode(((code - 97 + shift) % 26 + 26) % 26 + 97);
+          }
         }
+        result += char;
       }
-      document.getElementById('output').innerText = result;
+      document.getElementById('output').value = result;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

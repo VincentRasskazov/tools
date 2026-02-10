@@ -1,71 +1,45 @@
+---
+layout: default
+title: "HTML Minifier - Compress HTML Code"
+description: "Minify your HTML code instantly. Remove whitespace, comments, and newlines to speed up your website."
+category: "Developer Tools"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>HTML Minifier – Minify HTML Code Instantly Online</title>
-  <meta name="description" content="Minify your HTML code instantly with our free HTML Minifier. Remove whitespace, comments, and optimize your HTML for faster websites.">
+  <title>HTML Minifier</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/html-minifier.html">
-  <meta property="og:title" content="HTML Minifier – Minify HTML Code Instantly Online">
-  <meta property="og:description" content="Minify your HTML code instantly with our free HTML Minifier. Remove whitespace, comments, and optimize your HTML for faster websites.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/html-minifier.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="HTML Minifier – Minify HTML Code Instantly Online">
-  <meta name="twitter:description" content="Minify your HTML code instantly with our free HTML Minifier. Remove whitespace, comments, and optimize your HTML for faster websites.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "HTML Minifier",
-    "url": "https://vincentrasskazov.github.io/tools/html-minifier.html",
-    "applicationCategory": "Developer Tools",
-    "description": "Minify your HTML code instantly with our free HTML Minifier. Remove whitespace, comments, and optimize your HTML for faster websites."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    textarea { width: 100%; height: 200px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-family: monospace; font-size: 14px; margin-bottom: 20px; }
+    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; }
+    button:hover { background: #1d4ed8; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">html minifier Tool</h1>
+    <h1>HTML Minifier</h1>
+    <label>Input HTML</label>
+    <textarea id="input" placeholder="<div class='test'>
+  Hello World
+</div>"></textarea>
+    <button onclick="minify()">Minify HTML</button>
+    <label style="margin-top:20px; display:block;">Minified Output</label>
+    <textarea id="output" readonly></textarea>
   </div>
-
-  <h1>html minifier Tool</h1>
-
-  <p>This is a starter tool page for <strong>html minifier</strong>.</p>
-
-
-  <label for="input">HTML:</label>
-  <textarea id="input" placeholder="Paste HTML here"></textarea>
-  <button onclick="run()">Minify</button>
-
-  <p id="output"></p>
-
   <script>
-    function run() {
+    function minify() {
       let html = document.getElementById('input').value;
-      if (!html) {
-        document.getElementById('output').innerText = "Please enter HTML.";
-        return;
-      }
       // Remove comments
-      html = html.replace(/<!--([\s\S]*?)-->/g, '');
+      html = html.replace(//g, "");
       // Remove whitespace between tags
-      html = html.replace(/>\s+</g, '><');
-      // Remove leading/trailing whitespace
+      html = html.replace(/>\s+</g, "><");
+      // Remove whitespace start/end
       html = html.trim();
-      document.getElementById('output').innerText = html;
+      document.getElementById('output').value = html;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

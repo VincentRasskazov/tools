@@ -1,65 +1,38 @@
+---
+layout: default
+title: "Binary to Hex Converter"
+description: "Convert binary code to hexadecimal format instantly."
+category: "Converters"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Binary to Hex Converter – Convert Binary Numbers to Hex Instantly</title>
-  <meta name="description" content="Convert binary numbers to hexadecimal values instantly with our free Binary to Hex Converter. Perfect for programmers, students, and engineers.">
+  <title>Binary to Hex</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/binary-to-hex.html">
-  <meta property="og:title" content="Binary to Hex Converter – Convert Binary Numbers to Hex Instantly">
-  <meta property="og:description" content="Convert binary numbers to hexadecimal values instantly with our free Binary to Hex Converter. Perfect for programmers, students, and engineers.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/binary-to-hex.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Binary to Hex Converter – Convert Binary Numbers to Hex Instantly">
-  <meta name="twitter:description" content="Convert binary numbers to hexadecimal values instantly with our free Binary to Hex Converter. Perfect for programmers, students, and engineers.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Binary to Hex Converter",
-    "url": "https://vincentrasskazov.github.io/tools/binary-to-hex.html",
-    "applicationCategory": "Math Tools",
-    "description": "Convert binary numbers to hexadecimal values instantly with our free Binary to Hex Converter. Perfect for programmers, students, and engineers."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-size: 16px; font-family: monospace; }
+    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">binary to hex Tool</h1>
+    <h1>Binary to Hex</h1>
+    <label>Binary Input</label>
+    <input type="text" id="input" placeholder="10101100">
+    <button onclick="convert()">Convert</button>
+    <label style="margin-top:20px; display:block;">Hex Output</label>
+    <input type="text" id="output" readonly>
   </div>
-
-  <h1>binary to hex Tool</h1>
-
-  <p>This is a starter tool page for <strong>binary to hex</strong>.</p>
-
-
-  <label for="input">Binary:</label>
-  <input id="input" placeholder="Enter binary number">
-  <button onclick="run()">Convert to Hex</button>
-
-  <p id="output"></p>
-
   <script>
-    function run() {
-      const v = document.getElementById('input').value.trim();
-      if (!/^[01]+$/.test(v)) {
-        document.getElementById('output').innerText = "Please enter a valid binary number.";
-        return;
-      }
-      document.getElementById('output').innerText = parseInt(v, 2).toString(16).toUpperCase();
+    function convert() {
+      const bin = document.getElementById('input').value;
+      if(!/^[01]+$/.test(bin)) return alert("Invalid Binary");
+      const hex = parseInt(bin, 2).toString(16).toUpperCase();
+      document.getElementById('output').value = hex;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>
