@@ -2,15 +2,15 @@
 layout: null
 ---
 [
-  {% assign tools = site.pages | where_exp: "item", "item.path contains 'tools/'" %}
+  {% assign tools = site.static_files | where_exp: "item", "item.path contains '/tools/'" %}
   {% for tool in tools %}
-    {% unless tool.name == 'index.html' or tool.name == '404.html' %}
+    {% if tool.extname == '.html' %}
     {
-      "name": "{{ tool.title | default: tool.name | replace: '-', ' ' | replace: '.html', '' | capitalize }}",
-      "url": "{{ site.baseurl }}{{ tool.url }}",
-      "category": "{{ tool.category | default: 'General' }}",
-      "description": "{{ tool.description | default: 'Free online tool.' }}"
+      "name": "{{ tool.basename | replace: '-', ' ' | capitalize }}",
+      "url": "{{ site.baseurl }}{{ tool.path }}",
+      "category": "Utility",
+      "description": "Free online tool."
     }{% unless forloop.last %},{% endunless %}
-    {% endunless %}
+    {% endif %}
   {% endfor %}
 ]
