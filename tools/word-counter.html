@@ -1,86 +1,52 @@
+---
+layout: default
+title: "Word Counter - Count Words & Characters"
+description: "Free online word and character counter. Check text length, paragraph count, and reading time instantly."
+category: "Text Tools"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Word Counter – Free Online Tool</title>
-  <meta name="description" content="Count words and characters in your text instantly. Perfect for essays, SEO, and content writing.">
+  <title>Word Counter</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/word-counter.html">
-  <meta property="og:title" content="Word Counter – Free Online Tool">
-  <meta property="og:description" content="Count words and characters in your text instantly. Perfect for essays, SEO, and content writing.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/word-counter.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Word Counter – Free Online Tool">
-  <meta name="twitter:description" content="Count words and characters in your text instantly. Perfect for essays, SEO, and content writing.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Word Counter",
-    "url": "https://vincentrasskazov.github.io/tools/word-counter.html",
-    "applicationCategory": "Text Tools",
-    "description": "Count words and characters in your text instantly. Perfect for essays, SEO, and content writing."
-  }
-  </script>
   <style>
-    .tool-container { max-width: 520px; margin: 40px auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 24px #1976d233; padding: 32px 28px; }
-    .tool-title { font-size: 2rem; font-weight: 700; color: #1976d2; margin-bottom: 18px; }
-    .tool-desc { color: #555; margin-bottom: 22px; }
-    .result-label { font-weight: 600; color: #283593; margin-bottom: 6px; }
-    .result-box { background: #f6f8fa; border-radius: 8px; padding: 12px; font-family: monospace; font-size: 1.1rem; word-break: break-all; margin-bottom: 8px; }
-    button { background: #1976d2; color: #fff; border: none; border-radius: 8px; padding: 10px 22px; font-size: 1rem; font-weight: 600; cursor: pointer; margin-top: 8px; transition: background 0.2s; }
-    button:hover { background: #0d47a1; }
-    .related-tools { margin-top: 36px; }
-    .related-tools h2 { font-size: 1.1rem; color: #1976d2; margin-bottom: 10px; }
-    .related-tools ul { list-style: none; padding: 0; }
-    .related-tools li { margin-bottom: 6px; }
-    .related-tools a { color: #283593; text-decoration: none; }
-    .related-tools a:hover { text-decoration: underline; }
-    .faq-section { margin-top: 36px; }
-    .faq-section h2 { font-size: 1.1rem; color: #1976d2; margin-bottom: 10px; }
-    .faq-section h3 { font-size: 1rem; color: #283593; margin-bottom: 4px; }
-    .faq-section p { color: #444; margin-bottom: 12px; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    textarea { width: 100%; height: 250px; padding: 15px; border: 1px solid #ccc; border-radius: 8px; font-family: sans-serif; font-size: 16px; resize: vertical; margin-bottom: 20px; }
+    .stats { display: flex; justify-content: space-around; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; }
+    .stat-item { text-align: center; }
+    .stat-val { font-size: 1.5rem; font-weight: bold; color: #2563eb; }
+    .stat-label { color: #64748b; font-size: 0.9rem; }
   </style>
 </head>
 <body>
   <div class="tool-container">
-    <h1 class="tool-title">Word Counter</h1>
-    <div class="tool-desc">Count words and characters in your text instantly. Perfect for essays, SEO, and content writing.</div>
-    <textarea id="input" placeholder="Enter text here..." rows="6" style="width:100%;margin-bottom:12px;"></textarea>
-    <button onclick="run()">Count</button>
-    <div class="result-label" style="margin-top:18px;">Result:</div>
-    <div class="result-box" id="output"></div>
-    <div class="related-tools">
-      <h2>Related Tools</h2>
-      <ul>
-        <li><a href="character-counter.html">Character Counter</a></li>
-        <li><a href="slug-generator.html">Slug Generator</a></li>
-        <li><a href="text-case-converter.html">Text Case Converter</a></li>
-        <li><a href="lorem-ipsum.html">Lorem Ipsum Generator</a></li>
-        <li><a href="leet-speak-converter.html">Leet Speak Converter</a></li>
-      </ul>
-    </div>
-    <div class="faq-section">
-      <h2>Frequently Asked Questions</h2>
-      <h3>How do I count words in my text?</h3>
-      <p>Paste or type your text and click Count. The tool will instantly show the total word and character count.</p>
-      <h3>Why is word count important?</h3>
-      <p>Word count is essential for essays, SEO, content writing, and meeting publishing requirements.</p>
-      <h3>Does this tool count numbers and symbols?</h3>
-      <p>Yes, all words separated by spaces are counted, regardless of content.</p>
+    <h1>Word Counter</h1>
+    <textarea id="textInput" placeholder="Type or paste your text here..." oninput="countStats()"></textarea>
+    <div class="stats">
+      <div class="stat-item">
+        <div class="stat-val" id="words">0</div>
+        <div class="stat-label">Words</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val" id="chars">0</div>
+        <div class="stat-label">Characters</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val" id="paragraphs">0</div>
+        <div class="stat-label">Paragraphs</div>
+      </div>
     </div>
   </div>
   <script>
-    function run() {
-      const v = document.getElementById('input').value;
-      const words = v.trim().split(/\s+/).filter(Boolean).length;
-      const chars = v.length;
-      document.getElementById('output').innerText = `Words: ${words}\nCharacters: ${chars}`;
+    function countStats() {
+      const text = document.getElementById('textInput').value;
+      const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+      document.getElementById('words').innerText = words;
+      document.getElementById('chars').innerText = text.length;
+      const paragraphs = text.replace(/\n$/gm, '').split(/\n/).length;
+      document.getElementById('paragraphs').innerText = text.trim() === '' ? 0 : paragraphs;
     }
   </script>
 </body>
