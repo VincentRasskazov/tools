@@ -1,284 +1,574 @@
 import os
 
-# Define the tools and their code
 tools = {
-    "tools/age-calculator.html": r"""---
+    "tools/qr-code-generator.html": r"""---
 layout: default
-title: "Age Calculator Online - Calculate Your Exact Age"
-description: "Instantly calculate your age in years, months, and days. Free, fast, and accurate online age calculator."
+title: "QR Code Generator - Free Online QR Creator"
+description: "Generate free, high-quality QR codes instantly. Perfect for URLs, text, Wi-Fi passwords, and more."
+category: "Generator"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QR Code Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-size: 16px; }
+    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; }
+    button:hover { background: #1d4ed8; }
+    #qrcode { margin-top: 30px; display: flex; justify-content: center; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>QR Code Generator</h1>
+    <input type="text" id="text" placeholder="Enter URL or text here (e.g., https://google.com)">
+    <button onclick="generateQR()">Generate QR Code</button>
+    <div id="qrcode"></div>
+  </div>
+  <script>
+    function generateQR() {
+      const text = document.getElementById("text").value;
+      const container = document.getElementById("qrcode");
+      container.innerHTML = ""; // Clear previous
+      if (text) {
+        new QRCode(container, {
+          text: text,
+          width: 200,
+          height: 200
+        });
+      } else {
+        alert("Please enter some text or a URL!");
+      }
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/discount-calculator.html": r"""---
+layout: default
+title: "Discount Calculator - Calculate Savings"
+description: "Calculate final price after discount instantly. See how much you save on sales."
 category: "Calculators"
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Age Calculator Online</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); padding: 30px; }
-    h1 { color: #2563eb; margin-bottom: 20px; text-align: center; }
-    label { display: block; margin-bottom: 8px; font-weight: 600; }
-    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-size: 16px; }
-    button { width: 100%; padding: 14px; background: #2563eb; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; font-weight: bold; }
-    button:hover { background: #1d4ed8; }
-    .result-box { margin-top: 25px; padding: 20px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; text-align: center; font-size: 1.2rem; color: #1e293b; display: none; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1>Age Calculator</h1>
-    <label for="dob">Enter your Date of Birth</label>
-    <input type="date" id="dob">
-    <button onclick="calculateAge()">Calculate Age</button>
-    <div id="result" class="result-box"></div>
-  </div>
-  <script>
-    function calculateAge() {
-      const dobInput = document.getElementById('dob').value;
-      if (!dobInput) return alert('Please select a date.');
-      const dob = new Date(dobInput);
-      const today = new Date();
-      let years = today.getFullYear() - dob.getFullYear();
-      let months = today.getMonth() - dob.getMonth();
-      let days = today.getDate() - dob.getDate();
-      if (days < 0) {
-        months--;
-        days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
-      }
-      if (months < 0) {
-        years--;
-        months += 12;
-      }
-      const result = document.getElementById('result');
-      result.style.display = 'block';
-      result.innerHTML = `<strong>You are:</strong><br>${years} years, ${months} months, and ${days} days old.`;
-    }
-  </script>
-</body>
-</html>""",
-
-    "tools/password-generator.html": r"""---
-layout: default
-title: "Strong Password Generator - Secure & Random"
-description: "Generate strong, secure, and random passwords instantly. Customizable length and characters."
-category: "Security Tools"
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Strong Password Generator</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-    h1 { color: #2563eb; text-align: center; }
-    .result { background: #f1f5f9; padding: 15px; border-radius: 6px; font-family: monospace; font-size: 1.2rem; word-break: break-all; margin-bottom: 20px; border: 1px solid #cbd5e1; display: flex; justify-content: space-between; align-items: center; }
-    .options { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
-    label { display: flex; align-items: center; gap: 8px; cursor: pointer; }
-    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
-    button:hover { background: #1d4ed8; }
-    .copy-btn { background: none; color: #2563eb; border: none; cursor: pointer; font-size: 0.9rem; width: auto; padding: 5px; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1>Password Generator</h1>
-    <div class="result">
-      <span id="password">Click Generate</span>
-      <button class="copy-btn" onclick="copyPass()">Copy</button>
-    </div>
-    <label>Length: <span id="len-val">16</span></label>
-    <input type="range" id="length" min="6" max="50" value="16" oninput="document.getElementById('len-val').innerText = this.value">
-    <div class="options">
-      <label><input type="checkbox" id="uppercase" checked> Uppercase (A-Z)</label>
-      <label><input type="checkbox" id="lowercase" checked> Lowercase (a-z)</label>
-      <label><input type="checkbox" id="numbers" checked> Numbers (0-9)</label>
-      <label><input type="checkbox" id="symbols" checked> Symbols (!@#$)</label>
-    </div>
-    <button onclick="generatePassword()">Generate New Password</button>
-  </div>
-  <script>
-    function generatePassword() {
-      const length = document.getElementById('length').value;
-      const charset = {
-        upper: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-        lower: "abcdefghijklmnopqrstuvwxyz",
-        number: "0123456789",
-        symbol: "!@#$%^&*()_+~`|}{[]:;?><,./-="
-      };
-      let characters = "";
-      if(document.getElementById('uppercase').checked) characters += charset.upper;
-      if(document.getElementById('lowercase').checked) characters += charset.lower;
-      if(document.getElementById('numbers').checked) characters += charset.number;
-      if(document.getElementById('symbols').checked) characters += charset.symbol;
-      if(characters === "") return alert("Please select at least one character type!");
-      let password = "";
-      for (let i = 0; i < length; i++) {
-        password += characters.charAt(Math.floor(Math.random() * characters.length));
-      }
-      document.getElementById('password').innerText = password;
-    }
-    function copyPass() {
-      const pass = document.getElementById('password').innerText;
-      if(pass === "Click Generate") return;
-      navigator.clipboard.writeText(pass);
-      alert("Password copied!");
-    }
-    window.onload = generatePassword;
-  </script>
-</body>
-</html>""",
-
-    "tools/bmi-calculator.html": r"""---
-layout: default
-title: "BMI Calculator - Body Mass Index"
-description: "Calculate your Body Mass Index (BMI) instantly. Free health tool for checking if you are in a healthy weight range."
-category: "Health Tools"
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>BMI Calculator</title>
+  <title>Discount Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { color: #2563eb; text-align: center; margin-bottom: 25px; }
     .input-group { margin-bottom: 15px; }
     label { display: block; font-weight: 600; margin-bottom: 5px; }
     input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
-    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; margin-top: 10px; }
-    button:hover { background: #1d4ed8; }
-    #result { margin-top: 20px; padding: 15px; border-radius: 6px; text-align: center; display: none; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+    #result { margin-top: 20px; padding: 15px; background: #ecfdf5; border: 1px solid #10b981; border-radius: 6px; color: #064e3b; display: none; }
   </style>
 </head>
 <body>
   <div class="tool-container">
-    <h1>BMI Calculator</h1>
+    <h1 style="text-align: center; color: #2563eb;">Discount Calculator</h1>
     <div class="input-group">
-      <label>Weight (kg)</label>
-      <input type="number" id="weight" placeholder="e.g. 70">
+      <label>Original Price ($)</label>
+      <input type="number" id="price" placeholder="100.00">
     </div>
     <div class="input-group">
-      <label>Height (cm)</label>
-      <input type="number" id="height" placeholder="e.g. 175">
+      <label>Discount (%)</label>
+      <input type="number" id="discount" placeholder="20">
     </div>
-    <button onclick="calculateBMI()">Calculate BMI</button>
+    <button onclick="calcDiscount()">Calculate Savings</button>
     <div id="result"></div>
   </div>
   <script>
-    function calculateBMI() {
-      const weight = parseFloat(document.getElementById('weight').value);
-      const height = parseFloat(document.getElementById('height').value);
-      if (!weight || !height) return alert("Please enter valid numbers.");
-      const bmi = (weight / ((height / 100) ** 2)).toFixed(1);
-      let category = "";
-      let color = "";
-      if (bmi < 18.5) { category = "Underweight"; color = "#facc15"; }
-      else if (bmi < 25) { category = "Normal weight"; color = "#4ade80"; }
-      else if (bmi < 30) { category = "Overweight"; color = "#fb923c"; }
-      else { category = "Obese"; color = "#f87171"; }
-      const result = document.getElementById('result');
-      result.style.display = "block";
-      result.style.backgroundColor = color;
-      result.innerHTML = `Your BMI is <strong>${bmi}</strong><br>Category: <strong>${category}</strong>`;
+    function calcDiscount() {
+      const price = parseFloat(document.getElementById('price').value);
+      const discount = parseFloat(document.getElementById('discount').value);
+      if(!price || !discount) return alert("Please enter valid numbers");
+      
+      const saved = (price * discount) / 100;
+      const finalPrice = price - saved;
+      
+      const res = document.getElementById('result');
+      res.style.display = 'block';
+      res.innerHTML = `<strong>Final Price:</strong> $${finalPrice.toFixed(2)}<br><strong>You Save:</strong> $${saved.toFixed(2)}`;
     }
   </script>
 </body>
 </html>""",
 
-    "tools/word-counter.html": r"""---
+    "tools/percentage-calculator.html": r"""---
 layout: default
-title: "Word Counter - Count Words & Characters"
-description: "Free online word and character counter. Check text length, paragraph count, and reading time instantly."
-category: "Text Tools"
+title: "Percentage Calculator - Online Math Tool"
+description: "Solve simple percentage problems. Calculate X% of Y, or find what percentage X is of Y."
+category: "Calculators"
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Word Counter</title>
+  <title>Percentage Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { color: #2563eb; text-align: center; }
-    textarea { width: 100%; height: 250px; padding: 15px; border: 1px solid #ccc; border-radius: 8px; font-family: sans-serif; font-size: 16px; resize: vertical; margin-bottom: 20px; }
-    .stats { display: flex; justify-content: space-around; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; }
-    .stat-item { text-align: center; }
-    .stat-val { font-size: 1.5rem; font-weight: bold; color: #2563eb; }
-    .stat-label { color: #64748b; font-size: 0.9rem; }
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h2 { color: #2563eb; font-size: 1.2rem; margin-top: 0; }
+    .calc-row { display: flex; align-items: center; gap: 10px; margin-bottom: 25px; flex-wrap: wrap; }
+    input { width: 80px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+    button { padding: 8px 16px; background: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    .result { font-weight: bold; color: #16a34a; margin-left: 10px; }
   </style>
 </head>
 <body>
   <div class="tool-container">
-    <h1>Word Counter</h1>
-    <textarea id="textInput" placeholder="Type or paste your text here..." oninput="countStats()"></textarea>
-    <div class="stats">
-      <div class="stat-item">
-        <div class="stat-val" id="words">0</div>
-        <div class="stat-label">Words</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-val" id="chars">0</div>
-        <div class="stat-label">Characters</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-val" id="paragraphs">0</div>
-        <div class="stat-label">Paragraphs</div>
-      </div>
+    <h1 style="text-align: center; margin-bottom: 30px;">Percentage Calculator</h1>
+    
+    <h2>What is X% of Y?</h2>
+    <div class="calc-row">
+      <span>What is</span>
+      <input type="number" id="num1A" placeholder="20">
+      <span>% of</span>
+      <input type="number" id="num1B" placeholder="100">
+      <button onclick="calc1()">Calculate</button>
+      <span class="result" id="res1"></span>
+    </div>
+
+    <h2>X is what percent of Y?</h2>
+    <div class="calc-row">
+      <input type="number" id="num2A" placeholder="5">
+      <span>is what % of</span>
+      <input type="number" id="num2B" placeholder="20">
+      <button onclick="calc2()">Calculate</button>
+      <span class="result" id="res2"></span>
     </div>
   </div>
   <script>
-    function countStats() {
-      const text = document.getElementById('textInput').value;
-      const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
-      document.getElementById('words').innerText = words;
-      document.getElementById('chars').innerText = text.length;
-      const paragraphs = text.replace(/\n$/gm, '').split(/\n/).length;
-      document.getElementById('paragraphs').innerText = text.trim() === '' ? 0 : paragraphs;
+    function calc1() {
+      const a = parseFloat(document.getElementById('num1A').value);
+      const b = parseFloat(document.getElementById('num1B').value);
+      if(a && b) document.getElementById('res1').innerText = "= " + ((a/100)*b).toFixed(2);
+    }
+    function calc2() {
+      const a = parseFloat(document.getElementById('num2A').value);
+      const b = parseFloat(document.getElementById('num2B').value);
+      if(a && b) document.getElementById('res2').innerText = "= " + ((a/b)*100).toFixed(2) + "%";
     }
   </script>
 </body>
 </html>""",
 
-    "tools/base64-encoder.html": r"""---
+    "tools/lorem-ipsum.html": r"""---
 layout: default
-title: "Base64 Encoder - Text to Base64"
-description: "Convert text to Base64 format instantly. Secure client-side encoding for developers."
+title: "Lorem Ipsum Generator - Dummy Text"
+description: "Generate Lorem Ipsum placeholder text for web design, graphics, and layouts."
+category: "Generator"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lorem Ipsum Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    textarea { width: 100%; height: 300px; padding: 15px; border: 1px solid #ccc; border-radius: 8px; margin-top: 20px; line-height: 1.6; }
+    .controls { display: flex; align-items: center; gap: 15px; }
+    button { padding: 10px 20px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Lorem Ipsum Generator</h1>
+    <div class="controls">
+      <label>Paragraphs:</label>
+      <input type="number" id="count" value="3" min="1" max="20" style="width: 60px; padding: 8px;">
+      <button onclick="generate()">Generate</button>
+      <button onclick="copy()" style="background: #4b5563;">Copy Text</button>
+    </div>
+    <textarea id="output" readonly></textarea>
+  </div>
+  <script>
+    const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+    
+    function generate() {
+      const count = document.getElementById('count').value;
+      let text = "";
+      for(let i=0; i<count; i++) {
+        text += lorem + "\n\n";
+      }
+      document.getElementById('output').value = text.trim();
+    }
+    function copy() {
+      const el = document.getElementById('output');
+      el.select();
+      document.execCommand('copy');
+      alert("Copied to clipboard!");
+    }
+    window.onload = generate;
+  </script>
+</body>
+</html>""",
+
+    "tools/stopwatch.html": r"""---
+layout: default
+title: "Online Stopwatch - Precise Time Tracker"
+description: "Simple online stopwatch with start, stop, and reset functions. Track time accurately."
+category: "Utility"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Online Stopwatch</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+    #display { font-size: 4rem; font-family: monospace; font-weight: bold; color: #1e293b; margin-bottom: 30px; }
+    .btn-group { display: flex; justify-content: center; gap: 15px; }
+    button { padding: 12px 30px; font-size: 1.2rem; border: none; border-radius: 8px; cursor: pointer; color: white; transition: opacity 0.2s; }
+    .start { background: #16a34a; }
+    .stop { background: #dc2626; }
+    .reset { background: #4b5563; }
+    button:hover { opacity: 0.9; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Stopwatch</h1>
+    <div id="display">00:00:00</div>
+    <div class="btn-group">
+      <button class="start" onclick="startTimer()">Start</button>
+      <button class="stop" onclick="stopTimer()">Stop</button>
+      <button class="reset" onclick="resetTimer()">Reset</button>
+    </div>
+  </div>
+  <script>
+    let startTime;
+    let updatedTime;
+    let difference;
+    let tInterval;
+    let running = false;
+    
+    const display = document.getElementById('display');
+    
+    function startTimer(){
+      if(!running){
+        startTime = new Date().getTime() - (difference || 0);
+        tInterval = setInterval(getShowTime, 10);
+        running = true;
+      }
+    }
+    
+    function stopTimer(){
+      if(running){
+        clearInterval(tInterval);
+        difference = new Date().getTime() - startTime;
+        running = false;
+      }
+    }
+    
+    function resetTimer(){
+      clearInterval(tInterval);
+      running = false;
+      difference = 0;
+      display.innerHTML = "00:00:00";
+    }
+    
+    function getShowTime(){
+      updatedTime = new Date().getTime();
+      difference = updatedTime - startTime;
+      
+      let hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      let minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      let seconds = Math.floor((difference % (1000 * 60)) / 1000);
+      let ms = Math.floor((difference % 1000) / 10); // Hundredths
+      
+      hours = (hours < 10) ? "0" + hours : hours;
+      minutes = (minutes < 10) ? "0" + minutes : minutes;
+      seconds = (seconds < 10) ? "0" + seconds : seconds;
+      
+      display.innerHTML = hours + ':' + minutes + ':' + seconds;
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/tip-calculator.html": r"""---
+layout: default
+title: "Tip Calculator - Easy Bill Splitter"
+description: "Calculate tips and split bills instantly. Perfect for dining out with friends."
+category: "Utility"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tip Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    .input-group { margin-bottom: 20px; }
+    label { display: block; font-weight: 600; margin-bottom: 5px; }
+    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; }
+    button { width: 100%; padding: 14px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; }
+    #result { margin-top: 25px; background: #f8fafc; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0; display: none; }
+    .res-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 1.1rem; }
+    .total-row { font-weight: bold; color: #2563eb; border-top: 1px solid #cbd5e1; padding-top: 10px; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1 style="text-align: center; color: #2563eb;">Tip Calculator</h1>
+    
+    <div class="input-group">
+      <label>Bill Amount ($)</label>
+      <input type="number" id="bill" placeholder="e.g. 50.00">
+    </div>
+    <div class="input-group">
+      <label>Tip Percentage (%)</label>
+      <input type="number" id="tip" placeholder="e.g. 15">
+    </div>
+    <div class="input-group">
+      <label>Number of People</label>
+      <input type="number" id="people" placeholder="1" value="1">
+    </div>
+    
+    <button onclick="calculateTip()">Calculate</button>
+    
+    <div id="result">
+      <div class="res-row"><span>Tip Amount:</span> <span id="tipAmount">$0.00</span></div>
+      <div class="res-row"><span>Total Bill:</span> <span id="totalBill">$0.00</span></div>
+      <div class="res-row total-row"><span>Per Person:</span> <span id="perPerson">$0.00</span></div>
+    </div>
+  </div>
+  <script>
+    function calculateTip() {
+      const bill = parseFloat(document.getElementById('bill').value);
+      const tipPercent = parseFloat(document.getElementById('tip').value);
+      const people = parseInt(document.getElementById('people').value) || 1;
+      
+      if(!bill || !tipPercent) return alert("Please enter bill and tip amount.");
+      
+      const tipAmount = (bill * tipPercent) / 100;
+      const total = bill + tipAmount;
+      const perPerson = total / people;
+      
+      document.getElementById('tipAmount').innerText = "$" + tipAmount.toFixed(2);
+      document.getElementById('totalBill').innerText = "$" + total.toFixed(2);
+      document.getElementById('perPerson').innerText = "$" + perPerson.toFixed(2);
+      document.getElementById('result').style.display = 'block';
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/uuid-generator.html": r"""---
+layout: default
+title: "UUID Generator - Version 4"
+description: "Generate random UUIDs (Version 4) instantly. Free developer tool for creating unique identifiers."
 category: "Developer Tools"
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Base64 Encoder</title>
+  <title>UUID Generator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { color: #2563eb; text-align: center; margin-bottom: 30px; }
-    label { font-weight: 600; display: block; margin-bottom: 8px; }
-    textarea { width: 100%; height: 150px; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-family: monospace; font-size: 14px; margin-bottom: 20px; }
-    button { padding: 10px 20px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; }
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+    .uuid-box { background: #f1f5f9; padding: 20px; font-family: monospace; font-size: 1.5rem; border: 1px solid #cbd5e1; border-radius: 8px; margin: 20px 0; word-break: break-all; }
+    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; margin: 5px; }
     button:hover { background: #1d4ed8; }
+    .secondary { background: #64748b; }
   </style>
 </head>
 <body>
   <div class="tool-container">
-    <h1>Base64 Encoder</h1>
-    <label>Input Text</label>
-    <textarea id="input" placeholder="Type text here to encode..."></textarea>
-    <button onclick="encode()">Encode to Base64 &darr;</button>
-    <label style="margin-top: 20px;">Base64 Output</label>
-    <textarea id="output" readonly placeholder="Result will appear here..."></textarea>
+    <h1>UUID Generator (v4)</h1>
+    <p>Generate a Universally Unique Identifier.</p>
+    
+    <div class="uuid-box" id="uuid">Generating...</div>
+    
+    <button onclick="generate()">Generate New</button>
+    <button class="secondary" onclick="copy()">Copy UUID</button>
   </div>
   <script>
-    function encode() {
-      const input = document.getElementById('input').value;
+    function generate() {
+      const uuid = crypto.randomUUID();
+      document.getElementById('uuid').innerText = uuid;
+    }
+    function copy() {
+      const text = document.getElementById('uuid').innerText;
+      navigator.clipboard.writeText(text);
+      alert("Copied to clipboard!");
+    }
+    window.onload = generate;
+  </script>
+</body>
+</html>""",
+
+    "tools/binary-to-decimal.html": r"""---
+layout: default
+title: "Binary to Decimal Converter"
+description: "Convert binary numbers (0s and 1s) to decimal integers instantly. Simple and fast conversion tool."
+category: "Converters"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Binary to Decimal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { text-align: center; color: #2563eb; }
+    label { font-weight: 600; display: block; margin-bottom: 8px; }
+    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 18px; font-family: monospace; margin-bottom: 20px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Binary to Decimal</h1>
+    
+    <label>Binary Number (e.g., 1010)</label>
+    <input type="text" id="binary" placeholder="101010">
+    
+    <button onclick="convert()">Convert &darr;</button>
+    
+    <label style="margin-top: 20px;">Decimal Result</label>
+    <input type="text" id="decimal" readonly placeholder="Result will appear here">
+  </div>
+  <script>
+    function convert() {
+      const bin = document.getElementById('binary').value;
+      if (!/^[01]+$/.test(bin)) {
+        return alert("Please enter a valid binary number (only 0s and 1s).");
+      }
+      const dec = parseInt(bin, 2);
+      document.getElementById('decimal').value = dec;
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/temperature-converter.html": r"""---
+layout: default
+title: "Temperature Converter - Celsius to Fahrenheit"
+description: "Convert temperatures between Celsius, Fahrenheit, and Kelvin instantly."
+category: "Converters"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Temperature Converter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    .input-row { display: flex; gap: 20px; margin-bottom: 20px; }
+    .input-group { flex: 1; }
+    label { display: block; font-weight: 600; margin-bottom: 5px; }
+    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1 style="text-align: center; color: #2563eb;">Temperature Converter</h1>
+    
+    <div class="input-row">
+      <div class="input-group">
+        <label>Celsius (°C)</label>
+        <input type="number" id="celsius" oninput="convert('C')">
+      </div>
+      <div class="input-group">
+        <label>Fahrenheit (°F)</label>
+        <input type="number" id="fahrenheit" oninput="convert('F')">
+      </div>
+    </div>
+    
+    <div class="input-group">
+      <label>Kelvin (K)</label>
+      <input type="number" id="kelvin" oninput="convert('K')">
+    </div>
+  </div>
+  <script>
+    function convert(type) {
+      const c = document.getElementById('celsius');
+      const f = document.getElementById('fahrenheit');
+      const k = document.getElementById('kelvin');
+      
+      let val;
+      
+      if(type === 'C') {
+        val = parseFloat(c.value);
+        f.value = (val * 9/5) + 32;
+        k.value = val + 273.15;
+      } else if(type === 'F') {
+        val = parseFloat(f.value);
+        c.value = (val - 32) * 5/9;
+        k.value = (val - 32) * 5/9 + 273.15;
+      } else if(type === 'K') {
+        val = parseFloat(k.value);
+        c.value = val - 273.15;
+        f.value = (val - 273.15) * 9/5 + 32;
+      }
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/json-formatter.html": r"""---
+layout: default
+title: "JSON Formatter - Beautify JSON Code"
+description: "Format, validate, and beautify your JSON data. Readable output for developers."
+category: "Developer Tools"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JSON Formatter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .tool-container { max-width: 900px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { text-align: center; color: #2563eb; }
+    textarea { width: 100%; height: 300px; padding: 15px; border: 1px solid #ccc; border-radius: 8px; font-family: monospace; font-size: 14px; margin-bottom: 20px; resize: vertical; background: #f9fafb; }
+    .controls { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; }
+    button { padding: 10px 20px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    button:hover { background: #1d4ed8; }
+    .clear { background: #ef4444; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>JSON Formatter</h1>
+    <div class="controls">
+      <button onclick="format()">Format / Beautify</button>
+      <button onclick="minify()">Minify</button>
+      <button class="clear" onclick="document.getElementById('input').value=''">Clear</button>
+    </div>
+    <textarea id="input" placeholder='Paste your JSON here (e.g. {"name":"John", "age":30})'></textarea>
+  </div>
+  <script>
+    function format() {
+      const el = document.getElementById('input');
       try {
-        const output = btoa(input);
-        document.getElementById('output').value = output;
-      } catch (e) {
-        alert("Error: Input contains characters that cannot be encoded in Latin1 range.");
+        const obj = JSON.parse(el.value);
+        el.value = JSON.stringify(obj, null, 4);
+      } catch(e) {
+        alert("Invalid JSON: " + e.message);
+      }
+    }
+    function minify() {
+      const el = document.getElementById('input');
+      try {
+        const obj = JSON.parse(el.value);
+        el.value = JSON.stringify(obj);
+      } catch(e) {
+        alert("Invalid JSON: " + e.message);
       }
     }
   </script>

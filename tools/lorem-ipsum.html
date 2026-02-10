@@ -1,92 +1,51 @@
+---
+layout: default
+title: "Lorem Ipsum Generator - Dummy Text"
+description: "Generate Lorem Ipsum placeholder text for web design, graphics, and layouts."
+category: "Generator"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Lorem Ipsum Generator – Free Online Tool</title>
-  <meta name="description" content="Generate lorem ipsum placeholder text instantly. Perfect for designers, developers, and writers.">
+  <title>Lorem Ipsum Generator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/lorem-ipsum.html">
-  <meta property="og:title" content="Lorem Ipsum Generator – Free Online Tool">
-  <meta property="og:description" content="Generate lorem ipsum placeholder text instantly. Perfect for designers, developers, and writers.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/lorem-ipsum.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Lorem Ipsum Generator – Free Online Tool">
-  <meta name="twitter:description" content="Generate lorem ipsum placeholder text instantly. Perfect for designers, developers, and writers.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-    <title>Lorem Ipsum Generator – Generate Dummy Text Instantly Online</title>
-    <meta name="description" content="Generate Lorem Ipsum dummy text instantly with our free Lorem Ipsum Generator. Perfect for designers, developers, and content creators.">
-    <meta property="og:title" content="Lorem Ipsum Generator – Generate Dummy Text Instantly Online">
-    <meta property="og:description" content="Generate Lorem Ipsum dummy text instantly with our free Lorem Ipsum Generator. Perfect for designers, developers, and content creators.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://vincentrasskazov.github.io/tools/lorem-ipsum.html">
-    <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Lorem Ipsum Generator – Generate Dummy Text Instantly Online">
-    <meta name="twitter:description" content="Generate Lorem Ipsum dummy text instantly with our free Lorem Ipsum Generator. Perfect for designers, developers, and content creators.">
-    <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  }
-  </script>
   <style>
-    .tool-container { max-width: 520px; margin: 40px auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 24px #1976d233; padding: 32px 28px; }
-    .tool-title { font-size: 2rem; font-weight: 700; color: #1976d2; margin-bottom: 18px; }
-    .tool-desc { color: #555; margin-bottom: 22px; }
-    .result-label { font-weight: 600; color: #283593; margin-bottom: 6px; }
-    .result-box { background: #f6f8fa; border-radius: 8px; padding: 12px; font-family: monospace; font-size: 1.1rem; word-break: break-all; margin-bottom: 8px; }
-    button { background: #1976d2; color: #fff; border: none; border-radius: 8px; padding: 10px 22px; font-size: 1rem; font-weight: 600; cursor: pointer; margin-top: 8px; transition: background 0.2s; }
-    button:hover { background: #0d47a1; }
-    .related-tools { margin-top: 36px; }
-    .related-tools h2 { font-size: 1.1rem; color: #1976d2; margin-bottom: 10px; }
-    .related-tools ul { list-style: none; padding: 0; }
-    .related-tools li { margin-bottom: 6px; }
-    .related-tools a { color: #283593; text-decoration: none; }
-    .related-tools a:hover { text-decoration: underline; }
-    .faq-section { margin-top: 36px; }
-    .faq-section h2 { font-size: 1.1rem; color: #1976d2; margin-bottom: 10px; }
-    .faq-section h3 { font-size: 1rem; color: #283593; margin-bottom: 4px; }
-    .faq-section p { color: #444; margin-bottom: 12px; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    textarea { width: 100%; height: 300px; padding: 15px; border: 1px solid #ccc; border-radius: 8px; margin-top: 20px; line-height: 1.6; }
+    .controls { display: flex; align-items: center; gap: 15px; }
+    button { padding: 10px 20px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; }
   </style>
 </head>
 <body>
   <div class="tool-container">
-    <h1 class="tool-title">Lorem Ipsum Generator</h1>
-    <div class="tool-desc">Generate lorem ipsum placeholder text instantly. Perfect for designers, developers, and writers.</div>
-    <input id="input" type="number" min="1" max="10" value="1" placeholder="Paragraphs (1-10)" style="margin-bottom:12px;">
-    <button onclick="run()">Generate</button>
-    <div class="result-label" style="margin-top:18px;">Result:</div>
-    <div class="result-box" id="output"></div>
-    <div class="related-tools">
-      <h2>Related Tools</h2>
-      <ul>
-        <li><a href="word-counter.html">Word Counter</a></li>
-        <li><a href="character-counter.html">Character Counter</a></li>
-        <li><a href="slug-generator.html">Slug Generator</a></li>
-        <li><a href="text-case-converter.html">Text Case Converter</a></li>
-        <li><a href="leet-speak-converter.html">Leet Speak Converter</a></li>
-      </ul>
+    <h1>Lorem Ipsum Generator</h1>
+    <div class="controls">
+      <label>Paragraphs:</label>
+      <input type="number" id="count" value="3" min="1" max="20" style="width: 60px; padding: 8px;">
+      <button onclick="generate()">Generate</button>
+      <button onclick="copy()" style="background: #4b5563;">Copy Text</button>
     </div>
-    <div class="faq-section">
-      <h2>Frequently Asked Questions</h2>
-      <h3>What is lorem ipsum?</h3>
-      <p>Lorem ipsum is placeholder text used in design and publishing to fill space and demonstrate visual form.</p>
-      <h3>How do I generate multiple paragraphs?</h3>
-      <p>Enter the number of paragraphs and click Generate. The tool will create that many paragraphs of lorem ipsum text.</p>
-      <h3>Why use lorem ipsum?</h3>
-      <p>Lorem ipsum helps designers and developers focus on layout and typography, not content.</p>
-    </div>
+    <textarea id="output" readonly></textarea>
   </div>
   <script>
-    const LOREM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.";
-    function run() {
-      let n = parseInt(document.getElementById('input').value, 10);
-      if (isNaN(n) || n < 1) n = 1;
-      if (n > 10) n = 10;
-      let html = '';
-      for (let i = 0; i < n; i++) html += `<p>${LOREM}</p>`;
-      document.getElementById('output').innerHTML = html;
+    const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+    
+    function generate() {
+      const count = document.getElementById('count').value;
+      let text = "";
+      for(let i=0; i<count; i++) {
+        text += lorem + "\n\n";
+      }
+      document.getElementById('output').value = text.trim();
     }
+    function copy() {
+      const el = document.getElementById('output');
+      el.select();
+      document.execCommand('copy');
+      alert("Copied to clipboard!");
+    }
+    window.onload = generate;
   </script>
 </body>
 </html>

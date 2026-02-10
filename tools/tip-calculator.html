@@ -1,52 +1,68 @@
+---
+layout: default
+title: "Tip Calculator - Easy Bill Splitter"
+description: "Calculate tips and split bills instantly. Perfect for dining out with friends."
+category: "Utility"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="../assets/css/tool-style.css">
   <meta charset="UTF-8">
-  <title>tip calculator Tool</title>
-  <meta name="description" content="tip calculator online tool.">
-  <meta name="category" content="Calculators">
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <title>Tip Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    .input-group { margin-bottom: 20px; }
+    label { display: block; font-weight: 600; margin-bottom: 5px; }
+    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; }
+    button { width: 100%; padding: 14px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; }
+    #result { margin-top: 25px; background: #f8fafc; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0; display: none; }
+    .res-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 1.1rem; }
+    .total-row { font-weight: bold; color: #2563eb; border-top: 1px solid #cbd5e1; padding-top: 10px; margin-top: 10px; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">tip calculator Tool</h1>
+    <h1 style="text-align: center; color: #2563eb;">Tip Calculator</h1>
+    
+    <div class="input-group">
+      <label>Bill Amount ($)</label>
+      <input type="number" id="bill" placeholder="e.g. 50.00">
+    </div>
+    <div class="input-group">
+      <label>Tip Percentage (%)</label>
+      <input type="number" id="tip" placeholder="e.g. 15">
+    </div>
+    <div class="input-group">
+      <label>Number of People</label>
+      <input type="number" id="people" placeholder="1" value="1">
+    </div>
+    
+    <button onclick="calculateTip()">Calculate</button>
+    
+    <div id="result">
+      <div class="res-row"><span>Tip Amount:</span> <span id="tipAmount">$0.00</span></div>
+      <div class="res-row"><span>Total Bill:</span> <span id="totalBill">$0.00</span></div>
+      <div class="res-row total-row"><span>Per Person:</span> <span id="perPerson">$0.00</span></div>
+    </div>
   </div>
-
-  <h1>tip calculator Tool</h1>
-
-  <p>This is a starter tool page for <strong>tip calculator</strong>.</p>
-
-
-  <input id="amount" type="number" placeholder="Bill Amount" style="width:120px;">
-  <input id="tip" type="number" placeholder="Tip %" style="width:80px;">
-  <input id="people" type="number" placeholder="People" value="1" style="width:60px;">
-  <button onclick="run()">Calculate</button>
-
-  <p id="output"></p>
-
   <script>
-    function run() {
-      const amount = parseFloat(document.getElementById('amount').value);
-      const tip = parseFloat(document.getElementById('tip').value);
-      const people = parseInt(document.getElementById('people').value, 10);
-      if (isNaN(amount) || isNaN(tip) || isNaN(people) || amount <= 0 || tip < 0 || people < 1) {
-        document.getElementById('output').innerText = 'Enter valid values.';
-        return;
-      }
-      const tipAmt = amount * tip / 100;
-      const total = amount + tipAmt;
-      document.getElementById('output').innerText =
-        'Tip: $' + (tipAmt/people).toFixed(2) + ' per person\n' +
-        'Total: $' + (total/people).toFixed(2) + ' per person';
+    function calculateTip() {
+      const bill = parseFloat(document.getElementById('bill').value);
+      const tipPercent = parseFloat(document.getElementById('tip').value);
+      const people = parseInt(document.getElementById('people').value) || 1;
+      
+      if(!bill || !tipPercent) return alert("Please enter bill and tip amount.");
+      
+      const tipAmount = (bill * tipPercent) / 100;
+      const total = bill + tipAmount;
+      const perPerson = total / people;
+      
+      document.getElementById('tipAmount').innerText = "$" + tipAmount.toFixed(2);
+      document.getElementById('totalBill').innerText = "$" + total.toFixed(2);
+      document.getElementById('perPerson').innerText = "$" + perPerson.toFixed(2);
+      document.getElementById('result').style.display = 'block';
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

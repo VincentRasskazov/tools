@@ -1,69 +1,58 @@
+---
+layout: default
+title: "Percentage Calculator - Online Math Tool"
+description: "Solve simple percentage problems. Calculate X% of Y, or find what percentage X is of Y."
+category: "Calculators"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="../assets/css/tool-style.css">
   <meta charset="UTF-8">
-  <title>percentage calculator Tool</title>
-  <meta name="description" content="percentage calculator online tool.">
-  <meta name="category" content="Calculators">
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <title>Percentage Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h2 { color: #2563eb; font-size: 1.2rem; margin-top: 0; }
+    .calc-row { display: flex; align-items: center; gap: 10px; margin-bottom: 25px; flex-wrap: wrap; }
+    input { width: 80px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+    button { padding: 8px 16px; background: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    .result { font-weight: bold; color: #16a34a; margin-left: 10px; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">percentage calculator Tool</h1>
+    <h1 style="text-align: center; margin-bottom: 30px;">Percentage Calculator</h1>
+    
+    <h2>What is X% of Y?</h2>
+    <div class="calc-row">
+      <span>What is</span>
+      <input type="number" id="num1A" placeholder="20">
+      <span>% of</span>
+      <input type="number" id="num1B" placeholder="100">
+      <button onclick="calc1()">Calculate</button>
+      <span class="result" id="res1"></span>
+    </div>
+
+    <h2>X is what percent of Y?</h2>
+    <div class="calc-row">
+      <input type="number" id="num2A" placeholder="5">
+      <span>is what % of</span>
+      <input type="number" id="num2B" placeholder="20">
+      <button onclick="calc2()">Calculate</button>
+      <span class="result" id="res2"></span>
+    </div>
   </div>
-
-  <h1>percentage calculator Tool</h1>
-
-  <p>This is a starter tool page for <strong>percentage calculator</strong>.</p>
-
-
-  <label for="part">Part:</label>
-  <input id="part" type="number" placeholder="e.g. 25">
-  <label for="whole">Whole:</label>
-  <input id="whole" type="number" placeholder="e.g. 200">
-  <button onclick="run()">Calculate Percentage</button>
-
-  <p id="output"></p>
-
   <script>
-    <meta charset="UTF-8">
-    <title>Percentage Calculator – Calculate Percentages Instantly Online</title>
-    <meta name="description" content="Calculate percentages instantly with our free Percentage Calculator. Perfect for students, finance, and everyday math.">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="canonical" href="https://vincentrasskazov.github.io/tools/percentage-calculator.html">
-    <meta property="og:title" content="Percentage Calculator – Calculate Percentages Instantly Online">
-    <meta property="og:description" content="Calculate percentages instantly with our free Percentage Calculator. Perfect for students, finance, and everyday math.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://vincentrasskazov.github.io/tools/percentage-calculator.html">
-    <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Percentage Calculator – Calculate Percentages Instantly Online">
-    <meta name="twitter:description" content="Calculate percentages instantly with our free Percentage Calculator. Perfect for students, finance, and everyday math.">
-    <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/landing-polish.css">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Percentage Calculator",
-      "url": "https://vincentrasskazov.github.io/tools/percentage-calculator.html",
-      "applicationCategory": "Math Tools",
-      "description": "Calculate percentages instantly with our free Percentage Calculator. Perfect for students, finance, and everyday math."
+    function calc1() {
+      const a = parseFloat(document.getElementById('num1A').value);
+      const b = parseFloat(document.getElementById('num1B').value);
+      if(a && b) document.getElementById('res1').innerText = "= " + ((a/100)*b).toFixed(2);
     }
-    </script>
-      }
-      const percent = (part / whole) * 100;
-      document.getElementById('output').innerText = `${part} is ${percent.toFixed(2)}% of ${whole}.`;
+    function calc2() {
+      const a = parseFloat(document.getElementById('num2A').value);
+      const b = parseFloat(document.getElementById('num2B').value);
+      if(a && b) document.getElementById('res2').innerText = "= " + ((a/b)*100).toFixed(2) + "%";
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

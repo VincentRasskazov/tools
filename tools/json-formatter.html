@@ -1,65 +1,54 @@
+---
+layout: default
+title: "JSON Formatter - Beautify JSON Code"
+description: "Format, validate, and beautify your JSON data. Readable output for developers."
+category: "Developer Tools"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>JSON Formatter – Format and Beautify JSON Instantly Online</title>
-  <meta name="description" content="Format and beautify JSON data instantly with our free JSON Formatter. Perfect for developers, data analysts, and debugging JSON.">
+  <title>JSON Formatter</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/json-formatter.html">
-  <meta property="og:title" content="JSON Formatter – Format and Beautify JSON Instantly Online">
-  <meta property="og:description" content="Format and beautify JSON data instantly with our free JSON Formatter. Perfect for developers, data analysts, and debugging JSON.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/json-formatter.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="JSON Formatter – Format and Beautify JSON Instantly Online">
-  <meta name="twitter:description" content="Format and beautify JSON data instantly with our free JSON Formatter. Perfect for developers, data analysts, and debugging JSON.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "JSON Formatter",
-    "url": "https://vincentrasskazov.github.io/tools/json-formatter.html",
-    "applicationCategory": "Developer Tools",
-    "description": "Format and beautify JSON data instantly with our free JSON Formatter. Perfect for developers, data analysts, and debugging JSON."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 900px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { text-align: center; color: #2563eb; }
+    textarea { width: 100%; height: 300px; padding: 15px; border: 1px solid #ccc; border-radius: 8px; font-family: monospace; font-size: 14px; margin-bottom: 20px; resize: vertical; background: #f9fafb; }
+    .controls { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; }
+    button { padding: 10px 20px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    button:hover { background: #1d4ed8; }
+    .clear { background: #ef4444; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">json formatter Tool</h1>
+    <h1>JSON Formatter</h1>
+    <div class="controls">
+      <button onclick="format()">Format / Beautify</button>
+      <button onclick="minify()">Minify</button>
+      <button class="clear" onclick="document.getElementById('input').value=''">Clear</button>
+    </div>
+    <textarea id="input" placeholder='Paste your JSON here (e.g. {"name":"John", "age":30})'></textarea>
   </div>
-
-  <h1>json formatter Tool</h1>
-
-  <p>This is a starter tool page for <strong>json formatter</strong>.</p>
-
-
-  <textarea id="input" placeholder="Paste JSON here" rows="8" style="width:100%"></textarea>
-  <button onclick="run()">Format</button>
-
-  <pre id="output"></pre>
-
   <script>
-    function run() {
-      const v = document.getElementById('input').value;
+    function format() {
+      const el = document.getElementById('input');
       try {
-        const obj = JSON.parse(v);
-        document.getElementById('output').innerText = JSON.stringify(obj, null, 2);
-      } catch (e) {
-        document.getElementById('output').innerText = 'Invalid JSON.';
+        const obj = JSON.parse(el.value);
+        el.value = JSON.stringify(obj, null, 4);
+      } catch(e) {
+        alert("Invalid JSON: " + e.message);
+      }
+    }
+    function minify() {
+      const el = document.getElementById('input');
+      try {
+        const obj = JSON.parse(el.value);
+        el.value = JSON.stringify(obj);
+      } catch(e) {
+        alert("Invalid JSON: " + e.message);
       }
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

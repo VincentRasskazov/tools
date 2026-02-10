@@ -1,69 +1,51 @@
+---
+layout: default
+title: "Discount Calculator - Calculate Savings"
+description: "Calculate final price after discount instantly. See how much you save on sales."
+category: "Calculators"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Discount Calculator – Calculate Discounts Instantly Online</title>
-  <meta name="description" content="Calculate discounts and final prices instantly with our free Discount Calculator. Enter original price and discount percentage. Perfect for shopping and sales.">
+  <title>Discount Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/discount-calculator.html">
-  <meta property="og:title" content="Discount Calculator – Calculate Discounts Instantly Online">
-  <meta property="og:description" content="Calculate discounts and final prices instantly with our free Discount Calculator. Enter original price and discount percentage. Perfect for shopping and sales.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/discount-calculator.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Discount Calculator – Calculate Discounts Instantly Online">
-  <meta name="twitter:description" content="Calculate discounts and final prices instantly with our free Discount Calculator. Enter original price and discount percentage. Perfect for shopping and sales.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Discount Calculator",
-    "url": "https://vincentrasskazov.github.io/tools/discount-calculator.html",
-    "applicationCategory": "Calculators",
-    "description": "Calculate discounts and final prices instantly with our free Discount Calculator. Enter original price and discount percentage. Perfect for shopping and sales."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    .input-group { margin-bottom: 15px; }
+    label { display: block; font-weight: 600; margin-bottom: 5px; }
+    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+    #result { margin-top: 20px; padding: 15px; background: #ecfdf5; border: 1px solid #10b981; border-radius: 6px; color: #064e3b; display: none; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">discount calculator Tool</h1>
+    <h1 style="text-align: center; color: #2563eb;">Discount Calculator</h1>
+    <div class="input-group">
+      <label>Original Price ($)</label>
+      <input type="number" id="price" placeholder="100.00">
+    </div>
+    <div class="input-group">
+      <label>Discount (%)</label>
+      <input type="number" id="discount" placeholder="20">
+    </div>
+    <button onclick="calcDiscount()">Calculate Savings</button>
+    <div id="result"></div>
   </div>
-
-  <h1>discount calculator Tool</h1>
-
-  <p>This is a starter tool page for <strong>discount calculator</strong>.</p>
-
-
-  <label for="price">Original Price:</label>
-  <input id="price" type="number" placeholder="e.g. 100">
-  <label for="discount">Discount (%):</label>
-  <input id="discount" type="number" placeholder="e.g. 20">
-  <button onclick="run()">Calculate Discount</button>
-
-  <p id="output"></p>
-
   <script>
-    function run() {
+    function calcDiscount() {
       const price = parseFloat(document.getElementById('price').value);
       const discount = parseFloat(document.getElementById('discount').value);
-      if (isNaN(price) || isNaN(discount) || price < 0 || discount < 0) {
-        document.getElementById('output').innerText = "Please enter valid price and discount.";
-        return;
-      }
-      const final = price * (1 - discount / 100);
-      document.getElementById('output').innerText = `Final price: $${final.toFixed(2)}`;
+      if(!price || !discount) return alert("Please enter valid numbers");
+      
+      const saved = (price * discount) / 100;
+      const finalPrice = price - saved;
+      
+      const res = document.getElementById('result');
+      res.style.display = 'block';
+      res.innerHTML = `<strong>Final Price:</strong> $${finalPrice.toFixed(2)}<br><strong>You Save:</strong> $${saved.toFixed(2)}`;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

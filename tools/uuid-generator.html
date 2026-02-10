@@ -1,64 +1,44 @@
+---
+layout: default
+title: "UUID Generator - Version 4"
+description: "Generate random UUIDs (Version 4) instantly. Free developer tool for creating unique identifiers."
+category: "Developer Tools"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>UUID Generator – Generate UUIDs Instantly Online</title>
-  <meta name="description" content="Generate UUIDs (Universally Unique Identifiers) instantly with our free UUID Generator. Perfect for developers, databases, and unique keys.">
+  <title>UUID Generator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/uuid-generator.html">
-  <meta property="og:title" content="UUID Generator – Generate UUIDs Instantly Online">
-  <meta property="og:description" content="Generate UUIDs (Universally Unique Identifiers) instantly with our free UUID Generator. Perfect for developers, databases, and unique keys.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/uuid-generator.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="UUID Generator – Generate UUIDs Instantly Online">
-  <meta name="twitter:description" content="Generate UUIDs (Universally Unique Identifiers) instantly with our free UUID Generator. Perfect for developers, databases, and unique keys.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "UUID Generator",
-    "url": "https://vincentrasskazov.github.io/tools/uuid-generator.html",
-    "applicationCategory": "Generators",
-    "description": "Generate UUIDs (Universally Unique Identifiers) instantly with our free UUID Generator. Perfect for developers, databases, and unique keys."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+    .uuid-box { background: #f1f5f9; padding: 20px; font-family: monospace; font-size: 1.5rem; border: 1px solid #cbd5e1; border-radius: 8px; margin: 20px 0; word-break: break-all; }
+    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; margin: 5px; }
+    button:hover { background: #1d4ed8; }
+    .secondary { background: #64748b; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">uuid generator Tool</h1>
+    <h1>UUID Generator (v4)</h1>
+    <p>Generate a Universally Unique Identifier.</p>
+    
+    <div class="uuid-box" id="uuid">Generating...</div>
+    
+    <button onclick="generate()">Generate New</button>
+    <button class="secondary" onclick="copy()">Copy UUID</button>
   </div>
-
-  <h1>uuid generator Tool</h1>
-
-  <p>This is a starter tool page for <strong>uuid generator</strong>.</p>
-
-
-  <button onclick="run()">Generate UUID</button>
-
-  <p id="output"></p>
-
   <script>
-    function uuidv4() {
-      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
-        const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-      });
+    function generate() {
+      const uuid = crypto.randomUUID();
+      document.getElementById('uuid').innerText = uuid;
     }
-    function run() {
-      document.getElementById('output').innerText = uuidv4();
+    function copy() {
+      const text = document.getElementById('uuid').innerText;
+      navigator.clipboard.writeText(text);
+      alert("Copied to clipboard!");
     }
+    window.onload = generate;
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

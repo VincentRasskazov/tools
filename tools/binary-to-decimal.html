@@ -1,65 +1,44 @@
+---
+layout: default
+title: "Binary to Decimal Converter"
+description: "Convert binary numbers (0s and 1s) to decimal integers instantly. Simple and fast conversion tool."
+category: "Converters"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Binary to Decimal Converter – Convert Binary to Decimal Instantly Online</title>
-  <meta name="description" content="Convert binary numbers to decimal instantly with our free Binary to Decimal Converter. Perfect for students, developers, and math enthusiasts.">
+  <title>Binary to Decimal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/binary-to-decimal.html">
-  <meta property="og:title" content="Binary to Decimal Converter – Convert Binary to Decimal Instantly Online">
-  <meta property="og:description" content="Convert binary numbers to decimal instantly with our free Binary to Decimal Converter. Perfect for students, developers, and math enthusiasts.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/binary-to-decimal.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Binary to Decimal Converter – Convert Binary to Decimal Instantly Online">
-  <meta name="twitter:description" content="Convert binary numbers to decimal instantly with our free Binary to Decimal Converter. Perfect for students, developers, and math enthusiasts.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Binary to Decimal Converter",
-    "url": "https://vincentrasskazov.github.io/tools/binary-to-decimal.html",
-    "applicationCategory": "Math Tools",
-    "description": "Convert binary numbers to decimal instantly with our free Binary to Decimal Converter. Perfect for students, developers, and math enthusiasts."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { text-align: center; color: #2563eb; }
+    label { font-weight: 600; display: block; margin-bottom: 8px; }
+    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 18px; font-family: monospace; margin-bottom: 20px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">binary to decimal Tool</h1>
+    <h1>Binary to Decimal</h1>
+    
+    <label>Binary Number (e.g., 1010)</label>
+    <input type="text" id="binary" placeholder="101010">
+    
+    <button onclick="convert()">Convert &darr;</button>
+    
+    <label style="margin-top: 20px;">Decimal Result</label>
+    <input type="text" id="decimal" readonly placeholder="Result will appear here">
   </div>
-
-  <h1>binary to decimal Tool</h1>
-
-  <p>This is a starter tool page for <strong>binary to decimal</strong>.</p>
-
-
-  <label for="input">Binary:</label>
-  <input id="input" placeholder="Enter binary number">
-  <button onclick="run()">Convert to Decimal</button>
-
-  <p id="output"></p>
-
   <script>
-    function run() {
-      const v = document.getElementById('input').value.trim();
-      if (!/^[01]+$/.test(v)) {
-        document.getElementById('output').innerText = "Please enter a valid binary number.";
-        return;
+    function convert() {
+      const bin = document.getElementById('binary').value;
+      if (!/^[01]+$/.test(bin)) {
+        return alert("Please enter a valid binary number (only 0s and 1s).");
       }
-      document.getElementById('output').innerText = parseInt(v, 2).toString(10);
+      const dec = parseInt(bin, 2);
+      document.getElementById('decimal').value = dec;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

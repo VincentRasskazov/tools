@@ -1,84 +1,83 @@
+---
+layout: default
+title: "Online Stopwatch - Precise Time Tracker"
+description: "Simple online stopwatch with start, stop, and reset functions. Track time accurately."
+category: "Utility"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Stopwatch – Online Stopwatch Timer Tool</title>
-  <meta name="description" content="Use our free online Stopwatch to time events with precision. Start, stop, and reset the timer instantly. Perfect for productivity, sports, and more.">
+  <title>Online Stopwatch</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/stopwatch.html">
-  <meta property="og:title" content="Stopwatch – Online Stopwatch Timer Tool">
-  <meta property="og:description" content="Use our free online Stopwatch to time events with precision. Start, stop, and reset the timer instantly. Perfect for productivity, sports, and more.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/stopwatch.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Stopwatch – Online Stopwatch Timer Tool">
-  <meta name="twitter:description" content="Use our free online Stopwatch to time events with precision. Start, stop, and reset the timer instantly. Perfect for productivity, sports, and more.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Stopwatch",
-    "url": "https://vincentrasskazov.github.io/tools/stopwatch.html",
-    "applicationCategory": "Utility Tools",
-    "description": "Use our free online Stopwatch to time events with precision. Start, stop, and reset the timer instantly. Perfect for productivity, sports, and more."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+    #display { font-size: 4rem; font-family: monospace; font-weight: bold; color: #1e293b; margin-bottom: 30px; }
+    .btn-group { display: flex; justify-content: center; gap: 15px; }
+    button { padding: 12px 30px; font-size: 1.2rem; border: none; border-radius: 8px; cursor: pointer; color: white; transition: opacity 0.2s; }
+    .start { background: #16a34a; }
+    .stop { background: #dc2626; }
+    .reset { background: #4b5563; }
+    button:hover { opacity: 0.9; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">stopwatch Tool</h1>
+    <h1>Stopwatch</h1>
+    <div id="display">00:00:00</div>
+    <div class="btn-group">
+      <button class="start" onclick="startTimer()">Start</button>
+      <button class="stop" onclick="stopTimer()">Stop</button>
+      <button class="reset" onclick="resetTimer()">Reset</button>
+    </div>
   </div>
-
-  <h1>stopwatch Tool</h1>
-
-  <p>This is a starter tool page for <strong>stopwatch</strong>.</p>
-
-
-  <div id="display" style="font-size:2em; margin-bottom:10px;">00:00.00</div>
-  <button onclick="start()">Start</button>
-  <button onclick="stop()">Stop</button>
-  <button onclick="reset()">Reset</button>
-
   <script>
-    let startTime, interval, elapsed = 0;
-    function updateDisplay() {
-      let ms = elapsed;
-      let min = Math.floor(ms / 60000);
-      ms %= 60000;
-      let sec = Math.floor(ms / 1000);
-      ms = Math.floor((ms % 1000) / 10);
-      document.getElementById('display').innerText =
-        String(min).padStart(2, '0') + ':' + String(sec).padStart(2, '0') + '.' + String(ms).padStart(2, '0');
+    let startTime;
+    let updatedTime;
+    let difference;
+    let tInterval;
+    let running = false;
+    
+    const display = document.getElementById('display');
+    
+    function startTimer(){
+      if(!running){
+        startTime = new Date().getTime() - (difference || 0);
+        tInterval = setInterval(getShowTime, 10);
+        running = true;
+      }
     }
-    function start() {
-      if (interval) return;
-      startTime = Date.now() - elapsed;
-      interval = setInterval(() => {
-        elapsed = Date.now() - startTime;
-        updateDisplay();
-      }, 10);
+    
+    function stopTimer(){
+      if(running){
+        clearInterval(tInterval);
+        difference = new Date().getTime() - startTime;
+        running = false;
+      }
     }
-    function stop() {
-      clearInterval(interval);
-      interval = null;
+    
+    function resetTimer(){
+      clearInterval(tInterval);
+      running = false;
+      difference = 0;
+      display.innerHTML = "00:00:00";
     }
-    function reset() {
-      stop();
-      elapsed = 0;
-      updateDisplay();
+    
+    function getShowTime(){
+      updatedTime = new Date().getTime();
+      difference = updatedTime - startTime;
+      
+      let hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      let minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      let seconds = Math.floor((difference % (1000 * 60)) / 1000);
+      let ms = Math.floor((difference % 1000) / 10); // Hundredths
+      
+      hours = (hours < 10) ? "0" + hours : hours;
+      minutes = (minutes < 10) ? "0" + minutes : minutes;
+      seconds = (seconds < 10) ? "0" + seconds : seconds;
+      
+      display.innerHTML = hours + ':' + minutes + ':' + seconds;
     }
-    updateDisplay();
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>
