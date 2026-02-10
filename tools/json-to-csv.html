@@ -1,79 +1,49 @@
+---
+layout: default
+title: "JSON to CSV Converter - Free Online Tool"
+description: "Convert JSON arrays to CSV format instantly. Free developer utility."
+category: "Converters"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>JSON to CSV Converter – Convert JSON to CSV Instantly Online</title>
-  <meta name="description" content="Convert JSON data to CSV format instantly with our free JSON to CSV Converter. Perfect for developers, data analysts, and spreadsheet tasks.">
+  <title>JSON to CSV</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/json-to-csv.html">
-  <meta property="og:title" content="JSON to CSV Converter – Convert JSON to CSV Instantly Online">
-  <meta property="og:description" content="Convert JSON data to CSV format instantly with our free JSON to CSV Converter. Perfect for developers, data analysts, and spreadsheet tasks.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/json-to-csv.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="JSON to CSV Converter – Convert JSON to CSV Instantly Online">
-  <meta name="twitter:description" content="Convert JSON data to CSV format instantly with our free JSON to CSV Converter. Perfect for developers, data analysts, and spreadsheet tasks.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "JSON to CSV Converter",
-    "url": "https://vincentrasskazov.github.io/tools/json-to-csv.html",
-    "applicationCategory": "Developer Tools",
-    "description": "Convert JSON data to CSV format instantly with our free JSON to CSV Converter. Perfect for developers, data analysts, and spreadsheet tasks."
-  }
-  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+  <style>
+    .tool-container { max-width: 900px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    .row { display: flex; gap: 20px; }
+    .col { flex: 1; }
+    textarea { width: 100%; height: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-family: monospace; resize: vertical; }
+    button { padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; width: 100%; margin-top: 10px; font-weight: bold; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">json to csv Tool</h1>
+    <h1 style="text-align: center; color: #2563eb;">JSON to CSV</h1>
+    <div class="row">
+      <div class="col">
+        <label>JSON Input</label>
+        <textarea id="json" placeholder='[{"name":"John", "age":30}]'></textarea>
+      </div>
+      <div class="col">
+        <label>CSV Output</label>
+        <textarea id="csv" readonly></textarea>
+      </div>
+    </div>
+    <button onclick="convert()">Convert JSON to CSV &rarr;</button>
   </div>
-
-  <h1>json to csv Tool</h1>
-
-  <p>This is a starter tool page for <strong>json to csv</strong>.</p>
-
-
-  <textarea id="input" placeholder="Paste JSON array here" rows="8" style="width:100%"></textarea>
-  <button onclick="run()">Convert</button>
-
-  <pre id="output"></pre>
-
   <script>
-    function jsonToCsv(json) {
-      if (!Array.isArray(json) || json.length === 0) return '';
-      const keys = Object.keys(json[0]);
-      const csv = [keys.join(',')];
-      for (const row of json) {
-        csv.push(keys.map(k => {
-          let val = row[k] == null ? '' : row[k];
-          if (typeof val === 'string' && (val.includes(',') || val.includes('"') || val.includes('\n')))
-            val = '"' + val.replace(/"/g, '""') + '"';
-          return val;
-        }).join(','));
-      }
-      return csv.join('\n');
-    }
-    function run() {
-      const v = document.getElementById('input').value;
+    function convert() {
       try {
-        const arr = JSON.parse(v);
-        document.getElementById('output').innerText = jsonToCsv(arr);
-      } catch (e) {
-        document.getElementById('output').innerText = 'Invalid JSON array.';
+        const json = JSON.parse(document.getElementById('json').value);
+        const csv = Papa.unparse(json);
+        document.getElementById('csv').value = csv;
+      } catch(e) {
+        alert("Invalid JSON: " + e.message);
       }
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

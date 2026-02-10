@@ -1,61 +1,38 @@
+---
+layout: default
+title: "SHA256 Hash Generator - Online Secure Hashing"
+description: "Generate SHA256 hashes instantly. Secure, client-side hashing for developers."
+category: "Security Tools"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>SHA-256 Hash Generator – Generate SHA-256 Hash Instantly Online</title>
-  <meta name="description" content="Generate SHA-256 hashes instantly with our free SHA-256 Hash Generator. Perfect for developers, security, and data integrity checks.">
+  <title>SHA256 Hash Generator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/sha256-hash-generator.html">
-  <meta property="og:title" content="SHA-256 Hash Generator – Generate SHA-256 Hash Instantly Online">
-  <meta property="og:description" content="Generate SHA-256 hashes instantly with our free SHA-256 Hash Generator. Perfect for developers, security, and data integrity checks.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/sha256-hash-generator.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SHA-256 Hash Generator – Generate SHA-256 Hash Instantly Online">
-  <meta name="twitter:description" content="Generate SHA-256 hashes instantly with our free SHA-256 Hash Generator. Perfect for developers, security, and data integrity checks.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "SHA-256 Hash Generator",
-    "url": "https://vincentrasskazov.github.io/tools/sha256-hash-generator.html",
-    "applicationCategory": "Hash Tools",
-    "description": "Generate SHA-256 hashes instantly with our free SHA-256 Hash Generator. Perfect for developers, security, and data integrity checks."
-  }
-  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   <style>
-    .hash-container { max-width: 480px; margin: 40px auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 24px #1976d233; padding: 32px 28px; }
-    .hash-title { font-size: 2rem; font-weight: 700; color: #1976d2; margin-bottom: 18px; }
-    .hash-desc { color: #555; margin-bottom: 22px; }
-    textarea { width: 100%; min-height: 80px; font-size: 1.1rem; border-radius: 8px; border: 1px solid #d1d5db; padding: 12px; margin-bottom: 18px; }
-    .result-label { font-weight: 600; color: #283593; margin-bottom: 6px; }
-    .result-box { background: #f6f8fa; border-radius: 8px; padding: 12px; font-family: monospace; font-size: 1.1rem; word-break: break-all; }
-    button { background: #1976d2; color: #fff; border: none; border-radius: 8px; padding: 10px 22px; font-size: 1rem; font-weight: 600; cursor: pointer; margin-top: 8px; transition: background 0.2s; }
-    button:hover { background: #0d47a1; }
+    .tool-container { max-width: 700px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    textarea { width: 100%; height: 120px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-family: monospace; }
+    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; }
+    .result-box { margin-top: 20px; background: #f8fafc; padding: 15px; border: 1px solid #e2e8f0; border-radius: 6px; word-break: break-all; font-family: monospace; color: #334155; }
   </style>
 </head>
 <body>
-  <div class="hash-container">
-    <div class="hash-title">SHA256 Hash Generator</div>
-    <div class="hash-desc">Enter any text below to instantly generate its SHA256 hash. Useful for security, verification, and cryptography.</div>
-    <textarea id="inputText" placeholder="Type or paste text..."></textarea>
-    <button onclick="generateHash()">Generate SHA256 Hash</button>
-    <div class="result-label" style="margin-top:18px;">SHA256 Hash:</div>
-    <div class="result-box" id="hashResult"></div>
+  <div class="tool-container">
+    <h1>SHA256 Generator</h1>
+    <label>Input Text</label>
+    <textarea id="input" placeholder="Type here..."></textarea>
+    <button onclick="generate()">Generate SHA256</button>
+    <div class="result-box" id="output">Result will appear here...</div>
   </div>
   <script>
-    async function generateHash() {
-      const text = document.getElementById('inputText').value;
-      const encoder = new TextEncoder();
-      const data = encoder.encode(text);
-      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-      document.getElementById('hashResult').textContent = hashHex;
+    function generate() {
+      const input = document.getElementById('input').value;
+      if(!input) return alert("Enter some text first");
+      const hash = CryptoJS.SHA256(input).toString();
+      document.getElementById('output').innerText = hash;
     }
   </script>
 </body>

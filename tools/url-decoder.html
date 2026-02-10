@@ -1,44 +1,40 @@
+---
+layout: default
+title: "URL Decoder - Decode URLs Instantly"
+description: "Free online URL decoder. Convert percent-encoded URLs back to readable text."
+category: "Developer Tools"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="../assets/css/tool-style.css">
   <meta charset="UTF-8">
-  <title>url decoder Tool</title>
-  <meta name="description" content="url decoder online tool.">
-  <meta name="category" content="Encoding Tools">
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <title>URL Decoder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    textarea { width: 100%; height: 150px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-family: monospace; margin-bottom: 20px; }
+    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">url decoder Tool</h1>
+    <h1>URL Decoder</h1>
+    <label>Encoded URL</label>
+    <textarea id="input" placeholder="https%3A%2F%2Fexample.com%2Fsearch%3Fq%3Dhello%20world"></textarea>
+    <button onclick="decode()">Decode</button>
+    <label style="margin-top:20px; display:block;">Decoded Result</label>
+    <textarea id="output" readonly></textarea>
   </div>
-
-  <h1>url decoder Tool</h1>
-
-  <p>This is a starter tool page for <strong>url decoder</strong>.</p>
-
-
-  <textarea id="input" placeholder="Paste URL-encoded string here..." rows="4" style="width:100%"></textarea>
-  <button onclick="run()">Decode</button>
-
-  <p id="output"></p>
-
   <script>
-    function run() {
-      const v = document.getElementById('input').value;
+    function decode() {
+      const val = document.getElementById('input').value;
       try {
-        document.getElementById('output').innerText = decodeURIComponent(v);
-      } catch (e) {
-        document.getElementById('output').innerText = 'Invalid input.';
+        document.getElementById('output').value = decodeURIComponent(val);
+      } catch(e) {
+        alert("Invalid URL encoding");
       }
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

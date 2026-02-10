@@ -1,72 +1,48 @@
+---
+layout: default
+title: "Unix Timestamp Converter - Epoch Time"
+description: "Convert Unix timestamps to human-readable dates and vice versa. Current Epoch time tool."
+category: "Utility"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Unix Timestamp Converter – Convert Timestamps Instantly Online</title>
-  <meta name="description" content="Convert Unix timestamps to human-readable dates and vice versa instantly with our free Unix Timestamp Converter. Perfect for developers, sysadmins, and students.">
+  <title>Unix Timestamp Converter</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/unix-timestamp.html">
-  <meta property="og:title" content="Unix Timestamp Converter – Convert Timestamps Instantly Online">
-  <meta property="og:description" content="Convert Unix timestamps to human-readable dates and vice versa instantly with our free Unix Timestamp Converter. Perfect for developers, sysadmins, and students.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/unix-timestamp.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Unix Timestamp Converter – Convert Timestamps Instantly Online">
-  <meta name="twitter:description" content="Convert Unix timestamps to human-readable dates and vice versa instantly with our free Unix Timestamp Converter. Perfect for developers, sysadmins, and students.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Unix Timestamp Converter",
-    "url": "https://vincentrasskazov.github.io/tools/unix-timestamp.html",
-    "applicationCategory": "Date Tools",
-    "description": "Convert Unix timestamps to human-readable dates and vice versa instantly with our free Unix Timestamp Converter. Perfect for developers, sysadmins, and students."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+    .current-time { font-size: 2rem; font-weight: bold; color: #2563eb; margin: 20px 0; }
+    input { padding: 10px; width: 70%; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 10px; }
+    button { padding: 10px 20px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; }
+    .result { margin-top: 15px; font-weight: bold; color: #334155; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">unix timestamp Tool</h1>
+    <h1>Unix Timestamp Converter</h1>
+    <p>Current Unix Epoch Time:</p>
+    <div class="current-time" id="now">Loading...</div>
+    
+    <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+    
+    <h3>Convert Timestamp to Date</h3>
+    <input type="number" id="tsInput" placeholder="1672531200">
+    <button onclick="convert()">Convert</button>
+    <div class="result" id="resDate"></div>
   </div>
-
-  <h1>unix timestamp Tool</h1>
-
-  <p>This is a starter tool page for <strong>unix timestamp</strong>.</p>
-
-
-  <input id="input" placeholder="Enter timestamp or date (YYYY-MM-DD HH:MM:SS)" style="width:100%">
-  <button onclick="run()">Convert</button>
-
-  <p id="output"></p>
-
   <script>
-    function run() {
-      const v = document.getElementById('input').value.trim();
-      if (/^\d+$/.test(v)) {
-        // Timestamp to date
-        const d = new Date(parseInt(v, 10) * 1000);
-        document.getElementById('output').innerText = d.toLocaleString();
-      } else {
-        // Date to timestamp
-        const d = new Date(v.replace(' ', 'T'));
-        if (isNaN(d.getTime())) {
-          document.getElementById('output').innerText = 'Invalid input.';
-        } else {
-          document.getElementById('output').innerText = Math.floor(d.getTime() / 1000);
-        }
-      }
+    // Update current time every second
+    setInterval(() => {
+      document.getElementById('now').innerText = Math.floor(Date.now() / 1000);
+    }, 1000);
+
+    function convert() {
+      const ts = document.getElementById('tsInput').value;
+      if(!ts) return;
+      const date = new Date(ts * 1000);
+      document.getElementById('resDate').innerText = date.toUTCString() + " | " + date.toLocaleTimeString();
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

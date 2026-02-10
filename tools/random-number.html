@@ -1,67 +1,41 @@
+---
+layout: default
+title: "Random Number Generator - RNG Tool"
+description: "Generate random numbers within a specific range instantly. True randomness for games and lotteries."
+category: "Utility"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Random Number Generator – Generate Random Numbers Instantly Online</title>
-  <meta name="description" content="Generate random numbers instantly with our free Random Number Generator. Perfect for games, statistics, and simulations.">
+  <title>Random Number Generator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/random-number.html">
-  <meta property="og:title" content="Random Number Generator – Generate Random Numbers Instantly Online">
-  <meta property="og:description" content="Generate random numbers instantly with our free Random Number Generator. Perfect for games, statistics, and simulations.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/random-number.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Random Number Generator – Generate Random Numbers Instantly Online">
-  <meta name="twitter:description" content="Generate random numbers instantly with our free Random Number Generator. Perfect for games, statistics, and simulations.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Random Number Generator",
-    "url": "https://vincentrasskazov.github.io/tools/random-number.html",
-    "applicationCategory": "Math Tools",
-    "description": "Generate random numbers instantly with our free Random Number Generator. Perfect for games, statistics, and simulations."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+    #result { font-size: 5rem; font-weight: 800; color: #2563eb; margin: 20px 0; }
+    .inputs { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; }
+    input { width: 80px; padding: 10px; text-align: center; border: 1px solid #ccc; border-radius: 6px; }
+    button { padding: 12px 30px; background: #16a34a; color: white; border: none; border-radius: 6px; font-size: 1.2rem; cursor: pointer; }
+    button:hover { background: #15803d; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">random number Tool</h1>
+    <h1>Random Number</h1>
+    <div id="result">0</div>
+    <div class="inputs">
+      <input type="number" id="min" value="1" placeholder="Min">
+      <input type="number" id="max" value="100" placeholder="Max">
+    </div>
+    <button onclick="generate()">Generate</button>
   </div>
-
-  <h1>random number Tool</h1>
-
-  <p>This is a starter tool page for <strong>random number</strong>.</p>
-
-
-  <input id="min" type="number" placeholder="Min" style="width:80px;">
-  <input id="max" type="number" placeholder="Max" style="width:80px;">
-  <button onclick="run()">Generate</button>
-
-  <p id="output"></p>
-
   <script>
-    function run() {
-      const min = parseInt(document.getElementById('min').value, 10);
-      const max = parseInt(document.getElementById('max').value, 10);
-      if (isNaN(min) || isNaN(max) || min > max) {
-        document.getElementById('output').innerText = 'Enter valid min and max.';
-        return;
-      }
-      const rand = Math.floor(Math.random() * (max - min + 1)) + min;
-      document.getElementById('output').innerText = 'Random number: ' + rand;
+    function generate() {
+      const min = Math.ceil(document.getElementById('min').value);
+      const max = Math.floor(document.getElementById('max').value);
+      const random = Math.floor(Math.random() * (max - min + 1) + min);
+      document.getElementById('result').innerText = random;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>
