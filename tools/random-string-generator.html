@@ -1,56 +1,45 @@
+---
+layout: default
+title: "Random String Generator"
+description: "Generate random strings of characters, numbers, and symbols. Useful for API keys or test data."
+category: "Generator"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Random String Generator – Generate Secure Strings Online</title>
-  <meta name="description" content="Generate random strings instantly for passwords, tokens, and more. Free, secure, and customizable.">
+  <title>Random String Generator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/random-string-generator.html">
-  <meta property="og:title" content="Random String Generator – Generate Secure Strings Online">
-  <meta property="og:description" content="Generate random strings instantly for passwords, tokens, and more. Free, secure, and customizable.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/random-string-generator.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Random String Generator – Generate Secure Strings Online">
-  <meta name="twitter:description" content="Generate random strings instantly for passwords, tokens, and more. Free, secure, and customizable.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Random String Generator",
-    "url": "https://vincentrasskazov.github.io/tools/random-string-generator.html",
-    "applicationCategory": "Generators",
-    "description": "Generate random strings instantly for passwords, tokens, and more. Free, secure, and customizable."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    .result { background: #f8fafc; padding: 15px; border-radius: 6px; font-family: monospace; word-break: break-all; border: 1px solid #e2e8f0; margin: 20px 0; font-size: 1.2rem; min-height: 50px; }
+    label { display: block; margin: 10px 0 5px; font-weight: 600; }
+    input { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+    button { padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; width: 100%; margin-top: 20px; font-weight: bold; }
+  </style>
 </head>
 <body>
   <div class="tool-container">
-    <div class="tool-header">
-      <a class="tool-back" href="../index.html">← Back</a>
-      <h1 class="tool-title">Random String Generator</h1>
-    </div>
-    <p>Generate a secure random string for passwords, tokens, or any use case.</p>
-    <label for="length">Length:</label>
-    <input id="length" type="number" min="1" max="256" value="16">
-    <button onclick="generate()">Generate</button>
-    <p id="output"></p>
-    <script>
-      function generate() {
-        const len = parseInt(document.getElementById('length').value, 10);
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
-        let result = '';
-        for (let i = 0; i < len; i++) {
-          result += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        document.getElementById('output').innerText = result;
-      }
-    </script>
-    <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
+    <h1>Random String Generator</h1>
+    <div class="result" id="output"></div>
+    <label>Length</label>
+    <input type="number" id="length" value="32" min="1" max="1000">
+    <label>Allowed Characters</label>
+    <input type="text" id="chars" value="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" style="width: 100%">
+    <button onclick="generate()">Generate String</button>
   </div>
+  <script>
+    function generate() {
+      const len = parseInt(document.getElementById('length').value);
+      const chars = document.getElementById('chars').value;
+      let result = '';
+      for (let i = 0; i < len; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      document.getElementById('output').innerText = result;
+    }
+    window.onload = generate;
+  </script>
 </body>
 </html>

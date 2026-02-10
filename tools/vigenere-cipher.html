@@ -1,71 +1,56 @@
+---
+layout: default
+title: "Vigenère Cipher - Polyalphabetic Substitution"
+description: "Encrypt and decrypt text using the Vigenère Cipher method with a keyword."
+category: "Text Tools"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="../assets/css/tool-style.css">
   <meta charset="UTF-8">
-  <title>vigenere cipher Tool</title>
-  <meta name="description" content="vigenere cipher online tool.">
-  <meta name="category" content="Cipher Tools">
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <title>Vigenère Cipher</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    textarea { width: 100%; height: 120px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; }
+    input { padding: 10px; border: 1px solid #ccc; border-radius: 6px; width: 200px; }
+    .controls { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+    button { padding: 10px 20px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">vigenere cipher Tool</h1>
+    <h1>Vigenère Cipher</h1>
+    <label>Message</label>
+    <textarea id="input" placeholder="Secret Message"></textarea>
+    <div class="controls">
+      <input type="text" id="key" placeholder="Key (e.g., LEMON)">
+      <button onclick="crypt(false)">Encrypt</button>
+      <button onclick="crypt(true)" style="background:#4b5563">Decrypt</button>
+    </div>
+    <label>Result</label>
+    <textarea id="output" readonly></textarea>
   </div>
-
-  <h1>vigenere cipher Tool</h1>
-
-  <p>This is a starter tool page for <strong>vigenere cipher</strong>.</p>
-
-
-  <input id="input" placeholder="Enter text" style="width:100%">
-  <input id="key" placeholder="Key" style="width:120px;">
-  <select id="mode">
-    <option value="encode">Encode</option>
-    <option value="decode">Decode</option>
-  </select>
-  <button onclick="run()">Go</button>
-
-  <p id="output"></p>
-
   <script>
-    function vigenere(text, key, encode = true) {
-      text = text.toUpperCase();
-      key = key.toUpperCase();
-      let out = '', j = 0;
-      for (let i = 0; i < text.length; i++) {
-        const c = text.charCodeAt(i);
+    function crypt(isDecrypt) {
+      const input = document.getElementById('input').value;
+      const key = document.getElementById('key').value.replace(/[^A-Za-z]/g, "").toUpperCase();
+      if(!key) return alert("Please enter a valid key (letters only)");
+      
+      let res = "";
+      for (let i = 0, j = 0; i < input.length; i++) {
+        const c = input.charCodeAt(i);
         if (c >= 65 && c <= 90) {
-          const k = key.charCodeAt(j % key.length) - 65;
-          if (encode)
-            out += String.fromCharCode(((c - 65 + k) % 26) + 65);
-          else
-            out += String.fromCharCode(((c - 65 - k + 26) % 26) + 65);
-          j++;
+          res += String.fromCharCode((c - 65 + (isDecrypt ? -1 : 1) * (key.charCodeAt(j++ % key.length) - 65) + 26) % 26 + 65);
+        } else if (c >= 97 && c <= 122) {
+          res += String.fromCharCode((c - 97 + (isDecrypt ? -1 : 1) * (key.charCodeAt(j++ % key.length) - 65) + 26) % 26 + 97);
         } else {
-          out += text[i];
+          res += input.charAt(i);
         }
       }
-      return out;
-    }
-    function run() {
-      const text = document.getElementById('input').value;
-      const key = document.getElementById('key').value;
-      const mode = document.getElementById('mode').value;
-      if (!key) {
-        document.getElementById('output').innerText = 'Enter a key.';
-        return;
-      }
-      const result = vigenere(text, key, mode === 'encode');
-      document.getElementById('output').innerText = result;
+      document.getElementById('output').value = res;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

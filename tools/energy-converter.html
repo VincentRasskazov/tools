@@ -1,85 +1,40 @@
+---
+layout: default
+title: "Energy Converter"
+description: "Convert between Joules, Kilojoules, Calories, and Kilowatt-hours."
+category: "Converters"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Energy Converter – Convert Energy Units Instantly Online</title>
-  <meta name="description" content="Convert energy units (Joules, kJ, Wh, kWh, cal) instantly with our free Energy Converter. Perfect for engineers, students, and scientists.">
+  <title>Energy Converter</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/energy-converter.html">
-  <meta property="og:title" content="Energy Converter – Convert Energy Units Instantly Online">
-  <meta property="og:description" content="Convert energy units (Joules, kJ, Wh, kWh, cal) instantly with our free Energy Converter. Perfect for engineers, students, and scientists.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/energy-converter.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Energy Converter – Convert Energy Units Instantly Online">
-  <meta name="twitter:description" content="Convert energy units (Joules, kJ, Wh, kWh, cal) instantly with our free Energy Converter. Perfect for engineers, students, and scientists.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Energy Converter",
-    "url": "https://vincentrasskazov.github.io/tools/energy-converter.html",
-    "applicationCategory": "Converters",
-    "description": "Convert energy units (Joules, kJ, Wh, kWh, cal) instantly with our free Energy Converter. Perfect for engineers, students, and scientists."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    .input-group { margin-bottom: 15px; }
+    label { display: block; font-weight: 600; margin-bottom: 5px; }
+    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">energy converter Tool</h1>
+    <h1>Energy Converter</h1>
+    <div class="input-group"><label>Joules (J)</label><input type="number" id="j" oninput="conv('j',this.value)"></div>
+    <div class="input-group"><label>Kilojoules (kJ)</label><input type="number" id="kj" oninput="conv('kj',this.value)"></div>
+    <div class="input-group"><label>Calories (cal)</label><input type="number" id="cal" oninput="conv('cal',this.value)"></div>
+    <div class="input-group"><label>Kilowatt-hour (kWh)</label><input type="number" id="kwh" oninput="conv('kwh',this.value)"></div>
   </div>
-
-  <h1>energy converter Tool</h1>
-
-  <p>This is a starter tool page for <strong>energy converter</strong>.</p>
-
-
-  <label for="input">Value:</label>
-  <input id="input" type="number" placeholder="Enter value">
-  <select id="from">
-    <option value="J">Joules</option>
-    <option value="kJ">kJ</option>
-    <option value="Wh">Wh</option>
-    <option value="kWh">kWh</option>
-    <option value="cal">cal</option>
-  </select>
-  <span>to</span>
-  <select id="to">
-    <option value="J">Joules</option>
-    <option value="kJ">kJ</option>
-    <option value="Wh">Wh</option>
-    <option value="kWh">kWh</option>
-    <option value="cal">cal</option>
-  </select>
-  <button onclick="run()">Convert</button>
-
-  <p id="output"></p>
-
   <script>
-    const factors = { J: 1, kJ: 1000, Wh: 3600, kWh: 3600000, cal: 4.184 };
-    function run() {
-      const value = parseFloat(document.getElementById('input').value);
-      const from = document.getElementById('from').value;
-      const to = document.getElementById('to').value;
-      if (isNaN(value) || value < 0) {
-        document.getElementById('output').innerText = "Please enter a valid value.";
-        return;
-      }
-      const joules = value * factors[from];
-      const result = joules / factors[to];
-      document.getElementById('output').innerText = `${value} ${from} = ${result} ${to}`;
+    function conv(id, val) {
+      val = parseFloat(val);
+      const j = id === 'j' ? val : id === 'kj' ? val * 1000 : id === 'cal' ? val * 4.184 : val * 3600000;
+      if(id !== 'j') document.getElementById('j').value = j;
+      if(id !== 'kj') document.getElementById('kj').value = j / 1000;
+      if(id !== 'cal') document.getElementById('cal').value = j / 4.184;
+      if(id !== 'kwh') document.getElementById('kwh').value = j / 3600000;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

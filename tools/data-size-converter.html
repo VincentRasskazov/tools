@@ -1,65 +1,40 @@
+---
+layout: default
+title: "Data Size Converter"
+description: "Convert between Bytes, Kilobytes, Megabytes, Gigabytes, and Terabytes."
+category: "Converters"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="../assets/css/tool-style.css">
   <meta charset="UTF-8">
-  <title>data size converter Tool</title>
-  <meta name="description" content="data size converter online tool.">
-  <meta name="category" content="Converters">
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <title>Data Size Converter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    .input-group { margin-bottom: 15px; }
+    label { display: block; font-weight: 600; margin-bottom: 5px; }
+    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">data size converter Tool</h1>
+    <h1>Data Size Converter</h1>
+    <div class="input-group"><label>Megabytes (MB)</label><input type="number" id="mb" oninput="conv('mb',this.value)"></div>
+    <div class="input-group"><label>Gigabytes (GB)</label><input type="number" id="gb" oninput="conv('gb',this.value)"></div>
+    <div class="input-group"><label>Terabytes (TB)</label><input type="number" id="tb" oninput="conv('tb',this.value)"></div>
+    <div class="input-group"><label>Kilobytes (KB)</label><input type="number" id="kb" oninput="conv('kb',this.value)"></div>
   </div>
-
-  <h1>data size converter Tool</h1>
-
-  <p>This is a starter tool page for <strong>data size converter</strong>.</p>
-
-
-  <label for="input">Value:</label>
-  <input id="input" type="number" placeholder="Enter value">
-  <select id="from">
-    <option value="B">Bytes</option>
-    <option value="KB">KB</option>
-    <option value="MB">MB</option>
-    <option value="GB">GB</option>
-    <option value="TB">TB</option>
-  </select>
-  <span>to</span>
-  <select id="to">
-    <option value="B">Bytes</option>
-    <option value="KB">KB</option>
-    <option value="MB">MB</option>
-    <option value="GB">GB</option>
-    <option value="TB">TB</option>
-  </select>
-  <button onclick="run()">Convert</button>
-
-  <p id="output"></p>
-
   <script>
-    const units = { B: 1, KB: 1024, MB: 1024*1024, GB: 1024*1024*1024, TB: 1024*1024*1024*1024 };
-    function run() {
-      const value = parseFloat(document.getElementById('input').value);
-      const from = document.getElementById('from').value;
-      const to = document.getElementById('to').value;
-      if (isNaN(value) || value < 0) {
-        document.getElementById('output').innerText = "Please enter a valid value.";
-        return;
-      }
-      const bytes = value * units[from];
-      const result = bytes / units[to];
-      document.getElementById('output').innerText = `${value} ${from} = ${result} ${to}`;
+    function conv(id, val) {
+      val = parseFloat(val);
+      const mb = id === 'mb' ? val : id === 'gb' ? val * 1024 : id === 'tb' ? val * 1048576 : val / 1024;
+      if(id !== 'mb') document.getElementById('mb').value = mb;
+      if(id !== 'gb') document.getElementById('gb').value = mb / 1024;
+      if(id !== 'tb') document.getElementById('tb').value = mb / 1048576;
+      if(id !== 'kb') document.getElementById('kb').value = mb * 1024;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

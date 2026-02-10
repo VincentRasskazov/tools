@@ -1,99 +1,42 @@
+---
+layout: default
+title: "Length Converter"
+description: "Convert between meters, feet, inches, kilometers, miles, and more."
+category: "Converters"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Length Converter – Convert Length Units Instantly Online</title>
-  <meta name="description" content="Convert length units instantly with our free Length Converter. Perfect for students, engineers, and everyday conversions.">
+  <title>Length Converter</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/length-converter.html">
-  <meta property="og:title" content="Length Converter – Convert Length Units Instantly Online">
-  <meta property="og:description" content="Convert length units instantly with our free Length Converter. Perfect for students, engineers, and everyday conversions.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/length-converter.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Length Converter – Convert Length Units Instantly Online">
-  <meta name="twitter:description" content="Convert length units instantly with our free Length Converter. Perfect for students, engineers, and everyday conversions.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Length Converter",
-    "url": "https://vincentrasskazov.github.io/tools/length-converter.html",
-    "applicationCategory": "Unit Converter",
-    "description": "Convert length units instantly with our free Length Converter. Perfect for students, engineers, and everyday conversions."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    .input-group { margin-bottom: 15px; }
+    label { display: block; font-weight: 600; margin-bottom: 5px; }
+    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">length converter Tool</h1>
+    <h1>Length Converter</h1>
+    <div class="input-group"><label>Meters (m)</label><input type="number" id="m" oninput="conv('m',this.value)"></div>
+    <div class="input-group"><label>Kilometers (km)</label><input type="number" id="km" oninput="conv('km',this.value)"></div>
+    <div class="input-group"><label>Feet (ft)</label><input type="number" id="ft" oninput="conv('ft',this.value)"></div>
+    <div class="input-group"><label>Inches (in)</label><input type="number" id="in" oninput="conv('in',this.value)"></div>
+    <div class="input-group"><label>Miles (mi)</label><input type="number" id="mi" oninput="conv('mi',this.value)"></div>
   </div>
-
-  <h1>length converter Tool</h1>
-
-  <p>This is a starter tool page for <strong>length converter</strong>.</p>
-
-
-  <input id="value" type="number" placeholder="Enter value" style="width:120px;">
-  <select id="from">
-    <option value="m">Meters</option>
-    <option value="cm">Centimeters</option>
-    <option value="mm">Millimeters</option>
-    <option value="km">Kilometers</option>
-    <option value="in">Inches</option>
-    <option value="ft">Feet</option>
-    <option value="yd">Yards</option>
-    <option value="mi">Miles</option>
-  </select>
-  to
-  <select id="to">
-    <option value="m">Meters</option>
-    <option value="cm">Centimeters</option>
-    <option value="mm">Millimeters</option>
-    <option value="km">Kilometers</option>
-    <option value="in">Inches</option>
-    <option value="ft">Feet</option>
-    <option value="yd">Yards</option>
-    <option value="mi">Miles</option>
-  </select>
-  <button onclick="run()">Convert</button>
-
-  <p id="output"></p>
-
   <script>
-    const factors = {
-      m: 1,
-      cm: 0.01,
-      mm: 0.001,
-      km: 1000,
-      in: 0.0254,
-      ft: 0.3048,
-      yd: 0.9144,
-      mi: 1609.344
-    };
-    function run() {
-      const value = parseFloat(document.getElementById('value').value);
-      const from = document.getElementById('from').value;
-      const to = document.getElementById('to').value;
-      if (isNaN(value)) {
-        document.getElementById('output').innerText = 'Enter a valid number.';
-        return;
-      }
-      const meters = value * factors[from];
-      const result = meters / factors[to];
-      document.getElementById('output').innerText = value + ' ' + from + ' = ' + result + ' ' + to;
+    function conv(id, val) {
+      val = parseFloat(val);
+      const m = id === 'm' ? val : id === 'km' ? val * 1000 : id === 'ft' ? val / 3.28084 : id === 'in' ? val / 39.3701 : val * 1609.34;
+      if (id !== 'm') document.getElementById('m').value = m;
+      if (id !== 'km') document.getElementById('km').value = m / 1000;
+      if (id !== 'ft') document.getElementById('ft').value = m * 3.28084;
+      if (id !== 'in') document.getElementById('in').value = m * 39.3701;
+      if (id !== 'mi') document.getElementById('mi').value = m / 1609.34;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

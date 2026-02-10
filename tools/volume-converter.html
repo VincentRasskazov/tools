@@ -1,87 +1,40 @@
+---
+layout: default
+title: "Volume Converter"
+description: "Convert between Liters, Gallons, Milliliters, and Cups."
+category: "Converters"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Volume Converter – Convert Volume Units Instantly</title>
-  <meta name="description" content="Convert between liters, milliliters, cubic meters, and gallons instantly with our free Volume Converter. Perfect for science, cooking, and engineering.">
+  <title>Volume Converter</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/volume-converter.html">
-  <meta property="og:title" content="Volume Converter – Convert Volume Units Instantly">
-  <meta property="og:description" content="Convert between liters, milliliters, cubic meters, and gallons instantly with our free Volume Converter. Perfect for science, cooking, and engineering.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/volume-converter.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Volume Converter – Convert Volume Units Instantly">
-  <meta name="twitter:description" content="Convert between liters, milliliters, cubic meters, and gallons instantly with our free Volume Converter. Perfect for science, cooking, and engineering.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Volume Converter",
-    "url": "https://vincentrasskazov.github.io/tools/volume-converter.html",
-    "applicationCategory": "Converters",
-    "description": "Convert between liters, milliliters, cubic meters, and gallons instantly with our free Volume Converter. Perfect for science, cooking, and engineering."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    .input-group { margin-bottom: 15px; }
+    label { display: block; font-weight: 600; margin-bottom: 5px; }
+    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">volume converter Tool</h1>
+    <h1>Volume Converter</h1>
+    <div class="input-group"><label>Liters (L)</label><input type="number" id="l" oninput="conv('l',this.value)"></div>
+    <div class="input-group"><label>Milliliters (ml)</label><input type="number" id="ml" oninput="conv('ml',this.value)"></div>
+    <div class="input-group"><label>Gallons (US)</label><input type="number" id="gal" oninput="conv('gal',this.value)"></div>
+    <div class="input-group"><label>Cups</label><input type="number" id="cup" oninput="conv('cup',this.value)"></div>
   </div>
-
-  <h1>volume converter Tool</h1>
-
-  <p>This is a starter tool page for <strong>volume converter</strong>.</p>
-
-
-  <input id="value" type="number" placeholder="Enter value" style="width:120px;">
-  <select id="from">
-    <option value="l">Liter (L)</option>
-    <option value="ml">Milliliter (mL)</option>
-    <option value="m3">Cubic Meter (m³)</option>
-    <option value="gal">Gallon (US)</option>
-  </select>
-  to
-  <select id="to">
-    <option value="l">Liter (L)</option>
-    <option value="ml">Milliliter (mL)</option>
-    <option value="m3">Cubic Meter (m³)</option>
-    <option value="gal">Gallon (US)</option>
-  </select>
-  <button onclick="run()">Convert</button>
-
-  <p id="output"></p>
-
   <script>
-    const factors = {
-      l: 1,
-      ml: 0.001,
-      m3: 1000,
-      gal: 3.78541
-    };
-    function run() {
-      const value = parseFloat(document.getElementById('value').value);
-      const from = document.getElementById('from').value;
-      const to = document.getElementById('to').value;
-      if (isNaN(value)) {
-        document.getElementById('output').innerText = 'Enter a valid number.';
-        return;
-      }
-      const liters = value * factors[from];
-      const result = liters / factors[to];
-      document.getElementById('output').innerText = value + ' ' + from + ' = ' + result + ' ' + to;
+    function conv(id, val) {
+      val = parseFloat(val);
+      const l = id === 'l' ? val : id === 'ml' ? val / 1000 : id === 'gal' ? val * 3.78541 : val * 0.236588;
+      if(id !== 'l') document.getElementById('l').value = l;
+      if(id !== 'ml') document.getElementById('ml').value = l * 1000;
+      if(id !== 'gal') document.getElementById('gal').value = l / 3.78541;
+      if(id !== 'cup') document.getElementById('cup').value = l / 0.236588;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

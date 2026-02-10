@@ -1,87 +1,40 @@
+---
+layout: default
+title: "Pressure Converter"
+description: "Convert between Pascal, Bar, PSI, and Atmosphere."
+category: "Converters"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Pressure Converter – Convert Pressure Units Instantly Online</title>
-  <meta name="description" content="Convert pressure units instantly with our free Pressure Converter. Perfect for engineers, students, and everyday conversions.">
+  <title>Pressure Converter</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/pressure-converter.html">
-  <meta property="og:title" content="Pressure Converter – Convert Pressure Units Instantly Online">
-  <meta property="og:description" content="Convert pressure units instantly with our free Pressure Converter. Perfect for engineers, students, and everyday conversions.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/pressure-converter.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Pressure Converter – Convert Pressure Units Instantly Online">
-  <meta name="twitter:description" content="Convert pressure units instantly with our free Pressure Converter. Perfect for engineers, students, and everyday conversions.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Pressure Converter",
-    "url": "https://vincentrasskazov.github.io/tools/pressure-converter.html",
-    "applicationCategory": "Unit Converter",
-    "description": "Convert pressure units instantly with our free Pressure Converter. Perfect for engineers, students, and everyday conversions."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    .input-group { margin-bottom: 15px; }
+    label { display: block; font-weight: 600; margin-bottom: 5px; }
+    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">pressure converter Tool</h1>
+    <h1>Pressure Converter</h1>
+    <div class="input-group"><label>Pascal (Pa)</label><input type="number" id="pa" oninput="conv('pa',this.value)"></div>
+    <div class="input-group"><label>Bar</label><input type="number" id="bar" oninput="conv('bar',this.value)"></div>
+    <div class="input-group"><label>PSI</label><input type="number" id="psi" oninput="conv('psi',this.value)"></div>
+    <div class="input-group"><label>Standard Atmosphere (atm)</label><input type="number" id="atm" oninput="conv('atm',this.value)"></div>
   </div>
-
-  <h1>pressure converter Tool</h1>
-
-  <p>This is a starter tool page for <strong>pressure converter</strong>.</p>
-
-
-  <input id="value" type="number" placeholder="Enter value" style="width:120px;">
-  <select id="from">
-    <option value="Pa">Pascal (Pa)</option>
-    <option value="bar">Bar</option>
-    <option value="psi">PSI</option>
-    <option value="atm">Atmosphere (atm)</option>
-  </select>
-  to
-  <select id="to">
-    <option value="Pa">Pascal (Pa)</option>
-    <option value="bar">Bar</option>
-    <option value="psi">PSI</option>
-    <option value="atm">Atmosphere (atm)</option>
-  </select>
-  <button onclick="run()">Convert</button>
-
-  <p id="output"></p>
-
   <script>
-    const factors = {
-      Pa: 1,
-      bar: 100000,
-      psi: 6894.757,
-      atm: 101325
-    };
-    function run() {
-      const value = parseFloat(document.getElementById('value').value);
-      const from = document.getElementById('from').value;
-      const to = document.getElementById('to').value;
-      if (isNaN(value)) {
-        document.getElementById('output').innerText = 'Enter a valid number.';
-        return;
-      }
-      const pascals = value * factors[from];
-      const result = pascals / factors[to];
-      document.getElementById('output').innerText = value + ' ' + from + ' = ' + result + ' ' + to;
+    function conv(id, val) {
+      val = parseFloat(val);
+      const pa = id === 'pa' ? val : id === 'bar' ? val * 100000 : id === 'psi' ? val * 6894.76 : val * 101325;
+      if(id !== 'pa') document.getElementById('pa').value = pa;
+      if(id !== 'bar') document.getElementById('bar').value = pa / 100000;
+      if(id !== 'psi') document.getElementById('psi').value = pa / 6894.76;
+      if(id !== 'atm') document.getElementById('atm').value = pa / 101325;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>
