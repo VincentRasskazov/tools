@@ -1,0 +1,14 @@
+---
+layout: null
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>{{ site.url }}{{ site.baseurl }}/</loc>
+  </url>
+{% for file in site.static_files %}{% if file.extname == '.html' and file.path contains '/tools/' %}
+  <url>
+    <loc>{{ site.url }}{{ site.baseurl }}{{ file.path | replace: '/index.html', '/' }}</loc>
+  </url>
+{% endif %}{% endfor %}
+</urlset>
