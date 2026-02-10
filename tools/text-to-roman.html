@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text to Roman Numerals - Online Tool</title>
+  <meta name="description" content="Convert numbers to Roman numerals. Copy and paste your stylish Roman numeral text anywhere! Free, fast, and SEO-optimized tool.">
+  <meta property="og:title" content="Text to Roman Numerals - Online Tool">
+  <meta property="og:description" content="Convert numbers to Roman numerals. Copy and paste your stylish Roman numeral text anywhere! Free, fast, and SEO-optimized tool.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourdomain.com/tools/text-to-roman.html">
+  <meta property="og:image" content="https://yourdomain.com/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Text to Roman Numerals - Online Tool">
+  <meta name="twitter:description" content="Convert numbers to Roman numerals. Copy and paste your stylish Roman numeral text anywhere! Free, fast, and SEO-optimized tool.">
+  <meta name="twitter:image" content="https://yourdomain.com/assets/og-image.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Text to Roman Numerals",
+    "description": "Convert numbers to Roman numerals. Copy and paste your stylish Roman numeral text anywhere!",
+    "applicationCategory": "Text Tool",
+    "operatingSystem": "All",
+    "url": "https://yourdomain.com/tools/text-to-roman.html"
+  }
+  </script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; background: #f9f9f9; }
+    h1 { color: #333; }
+    textarea { width: 100%; min-height: 80px; margin-bottom: 1rem; font-size: 1.1rem; }
+    button { padding: 0.5rem 1.5rem; font-size: 1rem; cursor: pointer; }
+    #output { background: #fff; border: 1px solid #ccc; padding: 1rem; min-height: 60px; font-size: 1.2rem; margin-top: 1rem; word-break: break-all; }
+  </style>
+</head>
+<body>
+  <h1>Text to Roman Numerals</h1>
+  <p>Convert numbers to Roman numerals. Copy and paste it anywhere!</p>
+  <textarea id="input" placeholder="Enter a number..."></textarea>
+  <br>
+  <button onclick="toRoman()">Convert to Roman Numerals</button>
+  <button onclick="copyOutput()">Copy Output</button>
+  <div id="output" aria-live="polite"></div>
+  <script>
+    function toRoman() {
+      const input = document.getElementById('input').value;
+      let num = parseInt(input.replace(/[^\d]/g, ''));
+      if (isNaN(num) || num <= 0) {
+        document.getElementById('output').innerText = 'Invalid number';
+        return;
+      }
+      const roman = [
+        ['M',1000],['CM',900],['D',500],['CD',400],['C',100],['XC',90],['L',50],['XL',40],['X',10],['IX',9],['V',5],['IV',4],['I',1]
+      ];
+      let result = '';
+      for (let [r, v] of roman) {
+        while (num >= v) {
+          result += r;
+          num -= v;
+        }
+      }
+      document.getElementById('output').innerText = result;
+    }
+    function copyOutput() {
+      const output = document.getElementById('output').innerText;
+      if (output) {
+        navigator.clipboard.writeText(output);
+        alert('Roman numeral text copied to clipboard!');
+      }
+    }
+  </script>
+</body>
+</html>

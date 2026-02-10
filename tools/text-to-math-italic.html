@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text to Math Italic - Online Tool</title>
+  <meta name="description" content="Convert normal text to math italic Unicode style. Copy and paste your stylish math italic text anywhere! Free, fast, and SEO-optimized tool.">
+  <meta property="og:title" content="Text to Math Italic - Online Tool">
+  <meta property="og:description" content="Convert normal text to math italic Unicode style. Copy and paste your stylish math italic text anywhere! Free, fast, and SEO-optimized tool.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourdomain.com/tools/text-to-math-italic.html">
+  <meta property="og:image" content="https://yourdomain.com/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Text to Math Italic - Online Tool">
+  <meta name="twitter:description" content="Convert normal text to math italic Unicode style. Copy and paste your stylish math italic text anywhere! Free, fast, and SEO-optimized tool.">
+  <meta name="twitter:image" content="https://yourdomain.com/assets/og-image.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Text to Math Italic",
+    "description": "Convert normal text to math italic Unicode style. Copy and paste your stylish math italic text anywhere!",
+    "applicationCategory": "Text Tool",
+    "operatingSystem": "All",
+    "url": "https://yourdomain.com/tools/text-to-math-italic.html"
+  }
+  </script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; background: #f9f9f9; }
+    h1 { color: #333; }
+    textarea { width: 100%; min-height: 80px; margin-bottom: 1rem; font-size: 1.1rem; }
+    button { padding: 0.5rem 1.5rem; font-size: 1rem; cursor: pointer; }
+    #output { background: #fff; border: 1px solid #ccc; padding: 1rem; min-height: 60px; font-size: 1.2rem; margin-top: 1rem; word-break: break-all; }
+  </style>
+</head>
+<body>
+  <h1>Text to Math Italic</h1>
+  <p>Convert your normal text into math italic Unicode text. Copy and paste it anywhere!</p>
+  <textarea id="input" placeholder="Enter your text here..."></textarea>
+  <br>
+  <button onclick="toMathItalic()">Convert to Math Italic</button>
+  <button onclick="copyOutput()">Copy Output</button>
+  <div id="output" aria-live="polite"></div>
+  <script>
+    function toMathItalic() {
+      const map = {
+        'A':'𝐴','B':'𝐵','C':'𝐶','D':'𝐷','E':'𝐸','F':'𝐹','G':'𝐺','H':'𝐻','I':'𝐼','J':'𝐽','K':'𝐾','L':'𝐿','M':'𝑀','N':'𝑁','O':'𝑂','P':'𝑃','Q':'𝑄','R':'𝑅','S':'𝑆','T':'𝑇','U':'𝑈','V':'𝑉','W':'𝑊','X':'𝑋','Y':'𝑌','Z':'𝑍',
+        'a':'𝑎','b':'𝑏','c':'𝑐','d':'𝑑','e':'𝑒','f':'𝑓','g':'𝑔','h':'ℎ','i':'𝑖','j':'𝑗','k':'𝑘','l':'𝑙','m':'𝑚','n':'𝑛','o':'𝑜','p':'𝑝','q':'𝑞','r':'𝑟','s':'𝑠','t':'𝑡','u':'𝑢','v':'𝑣','w':'𝑤','x':'𝑥','y':'𝑦','z':'𝑧'
+      };
+      const input = document.getElementById('input').value;
+      const mathItalic = input.split('').map(c => map[c] || c).join('');
+      document.getElementById('output').innerText = mathItalic;
+    }
+    function copyOutput() {
+      const output = document.getElementById('output').innerText;
+      if (output) {
+        navigator.clipboard.writeText(output);
+        alert('Math italic text copied to clipboard!');
+      }
+    }
+  </script>
+</body>
+</html>

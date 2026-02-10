@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text to Script - Online Tool</title>
+  <meta name="description" content="Convert normal text to script (cursive) Unicode style. Copy and paste your stylish script text anywhere! Free, fast, and SEO-optimized tool.">
+  <meta property="og:title" content="Text to Script - Online Tool">
+  <meta property="og:description" content="Convert normal text to script (cursive) Unicode style. Copy and paste your stylish script text anywhere! Free, fast, and SEO-optimized tool.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourdomain.com/tools/text-to-script.html">
+  <meta property="og:image" content="https://yourdomain.com/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Text to Script - Online Tool">
+  <meta name="twitter:description" content="Convert normal text to script (cursive) Unicode style. Copy and paste your stylish script text anywhere! Free, fast, and SEO-optimized tool.">
+  <meta name="twitter:image" content="https://yourdomain.com/assets/og-image.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Text to Script",
+    "description": "Convert normal text to script (cursive) Unicode style. Copy and paste your stylish script text anywhere!",
+    "applicationCategory": "Text Tool",
+    "operatingSystem": "All",
+    "url": "https://yourdomain.com/tools/text-to-script.html"
+  }
+  </script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; background: #f9f9f9; }
+    h1 { color: #333; }
+    textarea { width: 100%; min-height: 80px; margin-bottom: 1rem; font-size: 1.1rem; }
+    button { padding: 0.5rem 1.5rem; font-size: 1rem; cursor: pointer; }
+    #output { background: #fff; border: 1px solid #ccc; padding: 1rem; min-height: 60px; font-size: 1.2rem; margin-top: 1rem; word-break: break-all; }
+  </style>
+</head>
+<body>
+  <h1>Text to Script</h1>
+  <p>Convert your normal text into stylish script (cursive) Unicode text. Copy and paste it anywhere!</p>
+  <textarea id="input" placeholder="Enter your text here..."></textarea>
+  <br>
+  <button onclick="toScript()">Convert to Script</button>
+  <button onclick="copyOutput()">Copy Output</button>
+  <div id="output" aria-live="polite"></div>
+  <script>
+    function toScript() {
+      const map = {
+        'A':'𝒜','B':'ℬ','C':'𝒞','D':'𝒟','E':'ℰ','F':'ℱ','G':'𝒢','H':'ℋ','I':'ℐ','J':'𝒥','K':'𝒦','L':'ℒ','M':'ℳ','N':'𝒩','O':'𝒪','P':'𝒫','Q':'𝒬','R':'ℛ','S':'𝒮','T':'𝒯','U':'𝒰','V':'𝒱','W':'𝒲','X':'𝒳','Y':'𝒴','Z':'𝒵',
+        'a':'𝒶','b':'𝒷','c':'𝒸','d':'𝒹','e':'ℯ','f':'𝒻','g':'ℊ','h':'𝒽','i':'𝒾','j':'𝒿','k':'𝓀','l':'𝓁','m':'𝓂','n':'𝓃','o':'ℴ','p':'𝓅','q':'𝓆','r':'𝓇','s':'𝓈','t':'𝓉','u':'𝓊','v':'𝓋','w':'𝓌','x':'𝓍','y':'𝓎','z':'𝓏'
+      };
+      const input = document.getElementById('input').value;
+      const script = input.split('').map(c => map[c] || c).join('');
+      document.getElementById('output').innerText = script;
+    }
+    function copyOutput() {
+      const output = document.getElementById('output').innerText;
+      if (output) {
+        navigator.clipboard.writeText(output);
+        alert('Script text copied to clipboard!');
+      }
+    }
+  </script>
+</body>
+</html>

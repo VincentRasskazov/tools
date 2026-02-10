@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text to Math Mono - Online Tool</title>
+  <meta name="description" content="Convert normal text to math monospace Unicode style. Copy and paste your stylish math monospace text anywhere! Free, fast, and SEO-optimized tool.">
+  <meta property="og:title" content="Text to Math Mono - Online Tool">
+  <meta property="og:description" content="Convert normal text to math monospace Unicode style. Copy and paste your stylish math monospace text anywhere! Free, fast, and SEO-optimized tool.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourdomain.com/tools/text-to-math-mono.html">
+  <meta property="og:image" content="https://yourdomain.com/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Text to Math Mono - Online Tool">
+  <meta name="twitter:description" content="Convert normal text to math monospace Unicode style. Copy and paste your stylish math monospace text anywhere! Free, fast, and SEO-optimized tool.">
+  <meta name="twitter:image" content="https://yourdomain.com/assets/og-image.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Text to Math Mono",
+    "description": "Convert normal text to math monospace Unicode style. Copy and paste your stylish math monospace text anywhere!",
+    "applicationCategory": "Text Tool",
+    "operatingSystem": "All",
+    "url": "https://yourdomain.com/tools/text-to-math-mono.html"
+  }
+  </script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; background: #f9f9f9; }
+    h1 { color: #333; }
+    textarea { width: 100%; min-height: 80px; margin-bottom: 1rem; font-size: 1.1rem; }
+    button { padding: 0.5rem 1.5rem; font-size: 1rem; cursor: pointer; }
+    #output { background: #fff; border: 1px solid #ccc; padding: 1rem; min-height: 60px; font-size: 1.2rem; margin-top: 1rem; word-break: break-all; }
+  </style>
+</head>
+<body>
+  <h1>Text to Math Mono</h1>
+  <p>Convert your normal text into math monospace Unicode text. Copy and paste it anywhere!</p>
+  <textarea id="input" placeholder="Enter your text here..."></textarea>
+  <br>
+  <button onclick="toMathMono()">Convert to Math Mono</button>
+  <button onclick="copyOutput()">Copy Output</button>
+  <div id="output" aria-live="polite"></div>
+  <script>
+    function toMathMono() {
+      const map = {
+        'A':'𝙰','B':'𝙱','C':'𝙲','D':'𝙳','E':'𝙴','F':'𝙵','G':'𝙶','H':'𝙷','I':'𝙸','J':'𝙹','K':'𝙺','L':'𝙻','M':'𝙼','N':'𝙽','O':'𝙾','P':'𝙿','Q':'𝚀','R':'𝚁','S':'𝚂','T':'𝚃','U':'𝚄','V':'𝚅','W':'𝚆','X':'𝚇','Y':'𝚈','Z':'𝚉',
+        'a':'𝚊','b':'𝚋','c':'𝚌','d':'𝚍','e':'𝚎','f':'𝚏','g':'𝚐','h':'𝚑','i':'𝚒','j':'𝚓','k':'𝚔','l':'𝚕','m':'𝚖','n':'𝚗','o':'𝚘','p':'𝚙','q':'𝚚','r':'𝚛','s':'𝚜','t':'𝚝','u':'𝚞','v':'𝚟','w':'𝚠','x':'𝚡','y':'𝚢','z':'𝚣',
+        '0':'𝟶','1':'𝟷','2':'𝟸','3':'𝟹','4':'𝟺','5':'𝟻','6':'𝟼','7':'𝟽','8':'𝟾','9':'𝟿'
+      };
+      const input = document.getElementById('input').value;
+      const mathMono = input.split('').map(c => map[c] || c).join('');
+      document.getElementById('output').innerText = mathMono;
+    }
+    function copyOutput() {
+      const output = document.getElementById('output').innerText;
+      if (output) {
+        navigator.clipboard.writeText(output);
+        alert('Math monospace text copied to clipboard!');
+      }
+    }
+  </script>
+</body>
+</html>

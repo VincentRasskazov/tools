@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text to Math Sans - Online Tool</title>
+  <meta name="description" content="Convert normal text to math sans-serif Unicode style. Copy and paste your stylish math sans-serif text anywhere! Free, fast, and SEO-optimized tool.">
+  <meta property="og:title" content="Text to Math Sans - Online Tool">
+  <meta property="og:description" content="Convert normal text to math sans-serif Unicode style. Copy and paste your stylish math sans-serif text anywhere! Free, fast, and SEO-optimized tool.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourdomain.com/tools/text-to-math-sans.html">
+  <meta property="og:image" content="https://yourdomain.com/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Text to Math Sans - Online Tool">
+  <meta name="twitter:description" content="Convert normal text to math sans-serif Unicode style. Copy and paste your stylish math sans-serif text anywhere! Free, fast, and SEO-optimized tool.">
+  <meta name="twitter:image" content="https://yourdomain.com/assets/og-image.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Text to Math Sans",
+    "description": "Convert normal text to math sans-serif Unicode style. Copy and paste your stylish math sans-serif text anywhere!",
+    "applicationCategory": "Text Tool",
+    "operatingSystem": "All",
+    "url": "https://yourdomain.com/tools/text-to-math-sans.html"
+  }
+  </script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; background: #f9f9f9; }
+    h1 { color: #333; }
+    textarea { width: 100%; min-height: 80px; margin-bottom: 1rem; font-size: 1.1rem; }
+    button { padding: 0.5rem 1.5rem; font-size: 1rem; cursor: pointer; }
+    #output { background: #fff; border: 1px solid #ccc; padding: 1rem; min-height: 60px; font-size: 1.2rem; margin-top: 1rem; word-break: break-all; }
+  </style>
+</head>
+<body>
+  <h1>Text to Math Sans</h1>
+  <p>Convert your normal text into math sans-serif Unicode text. Copy and paste it anywhere!</p>
+  <textarea id="input" placeholder="Enter your text here..."></textarea>
+  <br>
+  <button onclick="toMathSans()">Convert to Math Sans</button>
+  <button onclick="copyOutput()">Copy Output</button>
+  <div id="output" aria-live="polite"></div>
+  <script>
+    function toMathSans() {
+      const map = {
+        'A':'𝖠','B':'𝖡','C':'𝖢','D':'𝖣','E':'𝖤','F':'𝖥','G':'𝖦','H':'𝖧','I':'𝖨','J':'𝖩','K':'𝖪','L':'𝖫','M':'𝖬','N':'𝖭','O':'𝖮','P':'𝖯','Q':'𝖰','R':'𝖱','S':'𝖲','T':'𝖳','U':'𝖴','V':'𝖵','W':'𝖶','X':'𝖷','Y':'𝖸','Z':'𝖹',
+        'a':'𝖺','b':'𝖻','c':'𝖼','d':'𝖽','e':'𝖾','f':'𝖿','g':'𝗀','h':'𝗁','i':'𝗂','j':'𝗃','k':'𝗄','l':'𝗅','m':'𝗆','n':'𝗇','o':'𝗈','p':'𝗉','q':'𝗊','r':'𝗋','s':'𝗌','t':'𝗍','u':'𝗎','v':'𝗏','w':'𝗐','x':'𝗑','y':'𝗒','z':'𝗓',
+        '0':'𝟢','1':'𝟣','2':'𝟤','3':'𝟥','4':'𝟦','5':'𝟧','6':'𝟨','7':'𝟩','8':'𝟪','9':'𝟫'
+      };
+      const input = document.getElementById('input').value;
+      const mathSans = input.split('').map(c => map[c] || c).join('');
+      document.getElementById('output').innerText = mathSans;
+    }
+    function copyOutput() {
+      const output = document.getElementById('output').innerText;
+      if (output) {
+        navigator.clipboard.writeText(output);
+        alert('Math sans-serif text copied to clipboard!');
+      }
+    }
+  </script>
+</body>
+</html>

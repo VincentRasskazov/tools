@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Base32 Encoder – Encode Text to Base32 Instantly</title>
+  <meta name="description" content="Encode any text to Base32 instantly with our free Base32 Encoder tool. Useful for encoding data for URLs, QR codes, and more.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/base32-encoder.html">
+  <meta property="og:title" content="Base32 Encoder – Encode Text to Base32 Instantly">
+  <meta property="og:description" content="Encode any text to Base32 instantly with our free Base32 Encoder tool. Useful for encoding data for URLs, QR codes, and more.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/base32-encoder.html">
+  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Base32 Encoder – Encode Text to Base32 Instantly">
+  <meta name="twitter:description" content="Encode any text to Base32 instantly with our free Base32 Encoder tool. Useful for encoding data for URLs, QR codes, and more.">
+  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/landing-polish.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Base32 Encoder",
+    "url": "https://vincentrasskazov.github.io/tools/base32-encoder.html",
+    "applicationCategory": "Encoding Tools",
+    "description": "Encode any text to Base32 instantly with our free Base32 Encoder tool. Useful for encoding data for URLs, QR codes, and more."
+  }
+  </script>
+</head>
+<body>
+  <div class="tool-container">
+    <div class="tool-header">
+      <a class="tool-back" href="../index.html">← Back</a>
+      <h1 class="tool-title">Base32 Encoder</h1>
+    </div>
+    <p>Encode any text to Base32 for safe transmission and storage.</p>
+    <textarea id="input" placeholder="Type or paste text..."></textarea>
+    <button onclick="encodeBase32()">Encode</button>
+    <pre id="output"></pre>
+    <script>
+      function encodeBase32() {
+        const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+        let input = document.getElementById('input').value;
+        let bits = '';
+        let output = '';
+        for (let i = 0; i < input.length; i++) {
+          bits += input[i].charCodeAt(0).toString(2).padStart(8, '0');
+        }
+        for (let i = 0; i < bits.length; i += 5) {
+          const chunk = bits.substr(i, 5);
+          if (chunk.length < 5) {
+            output += alphabet[parseInt(chunk.padEnd(5, '0'), 2)];
+          } else {
+            output += alphabet[parseInt(chunk, 2)];
+          }
+        }
+        while (output.length % 8 !== 0) output += '=';
+        document.getElementById('output').innerText = output;
+      }
+    </script>
+    <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
+  </div>
+</body>
+</html>

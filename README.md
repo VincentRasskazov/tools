@@ -1,8 +1,35 @@
 
 
+
 # Ultimate Online Tools Hub
 
 > A massive, SEO-friendly website with every online tool you need—fully functional, beautiful, and blazing fast.
+>
+> **Currently features 120+ tools!**
+>
+> **Recent additions:**
+> - Currency Converter
+> - Habit Tracker
+> - Compound Interest Calculator
+> - Reading Time Estimator
+> - Pomodoro Timer
+> - Resume Builder
+> - Loan Amortization Schedule Generator
+> - Secure Notes
+> - Periodic Table Explorer
+> - Invoice Generator
+> - Daily Calorie Tracker
+> - Password Strength Checker
+> - File Metadata Viewer
+> - Flashcard Study Tool
+> - Markdown to PDF Converter
+> - Regex Pattern Generator
+> - Mind Map Creator
+> - Website Uptime Monitor
+> - Time Zone Converter
+> - Gantt Chart Maker
+> - Text Similarity Checker
+> - Flowchart Maker
 
 ## ✨ Features
 
