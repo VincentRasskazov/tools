@@ -1,74 +1,49 @@
+---
+layout: default
+title: "Prime Number Checker"
+description: "Check if a number is prime instantly. Simple math utility."
+category: "Calculators"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Prime Checker – Check Prime Numbers Instantly Online</title>
-  <meta name="description" content="Check if a number is prime instantly with our free Prime Checker. Perfect for students, teachers, and math enthusiasts.">
+  <title>Prime Checker</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/prime-checker.html">
-  <meta property="og:title" content="Prime Checker – Check Prime Numbers Instantly Online">
-  <meta property="og:description" content="Check if a number is prime instantly with our free Prime Checker. Perfect for students, teachers, and math enthusiasts.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/prime-checker.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Prime Checker – Check Prime Numbers Instantly Online">
-  <meta name="twitter:description" content="Check if a number is prime instantly with our free Prime Checker. Perfect for students, teachers, and math enthusiasts.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Prime Checker",
-    "url": "https://vincentrasskazov.github.io/tools/prime-checker.html",
-    "applicationCategory": "Math Tools",
-    "description": "Check if a number is prime instantly with our free Prime Checker. Perfect for students, teachers, and math enthusiasts."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-size: 16px; text-align: center; }
+    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    #result { font-size: 1.5rem; font-weight: bold; margin-top: 20px; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">prime checker Tool</h1>
+    <h1>Prime Number Checker</h1>
+    <input type="number" id="num" placeholder="Enter a number (e.g. 17)">
+    <button onclick="check()">Check</button>
+    <div id="result"></div>
   </div>
-
-  <h1>prime checker Tool</h1>
-
-  <p>This is a starter tool page for <strong>prime checker</strong>.</p>
-
-
-  <label for="input">Enter a number:</label>
-  <input id="input" type="number" placeholder="e.g. 17">
-  <button onclick="run()">Check Prime</button>
-
-  <p id="output"></p>
-
   <script>
-    function isPrime(n) {
-      if (n <= 1) return false;
-      if (n <= 3) return true;
-      if (n % 2 === 0 || n % 3 === 0) return false;
-      for (let i = 5; i * i <= n; i += 6) {
-        if (n % i === 0 || n % (i + 2) === 0) return false;
+    function check() {
+      const n = parseInt(document.getElementById('num').value);
+      const res = document.getElementById('result');
+      if(!n) return;
+      
+      let isPrime = true;
+      if (n <= 1) isPrime = false;
+      for (let i = 2; i <= Math.sqrt(n); i++) {
+        if (n % i === 0) { isPrime = false; break; }
       }
-      return true;
-    }
-    function run() {
-      const v = parseInt(document.getElementById('input').value, 10);
-      if (isNaN(v)) {
-        document.getElementById('output').innerText = "Please enter a valid number.";
-        return;
+      
+      if(isPrime) {
+        res.innerText = n + " is a Prime Number!";
+        res.style.color = "#16a34a";
+      } else {
+        res.innerText = n + " is NOT Prime.";
+        res.style.color = "#dc2626";
       }
-      document.getElementById('output').innerText = isPrime(v) ? `${v} is a prime number.` : `${v} is not a prime number.`;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

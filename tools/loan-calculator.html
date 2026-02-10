@@ -1,70 +1,63 @@
+---
+layout: default
+title: "Loan Calculator - Estimate Monthly Payments"
+description: "Calculate estimated monthly loan payments, total interest, and total repayment amount."
+category: "Calculators"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Loan Calculator – Calculate Loan Payments Instantly Online</title>
-  <meta name="description" content="Calculate loan payments, interest, and amortization instantly with our free Loan Calculator. Perfect for home, auto, and personal loans.">
+  <title>Loan Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/loan-calculator.html">
-  <meta property="og:title" content="Loan Calculator – Calculate Loan Payments Instantly Online">
-  <meta property="og:description" content="Calculate loan payments, interest, and amortization instantly with our free Loan Calculator. Perfect for home, auto, and personal loans.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/loan-calculator.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Loan Calculator – Calculate Loan Payments Instantly Online">
-  <meta name="twitter:description" content="Calculate loan payments, interest, and amortization instantly with our free Loan Calculator. Perfect for home, auto, and personal loans.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Loan Calculator",
-    "url": "https://vincentrasskazov.github.io/tools/loan-calculator.html",
-    "applicationCategory": "Financial Tools",
-    "description": "Calculate loan payments, interest, and amortization instantly with our free Loan Calculator. Perfect for home, auto, and personal loans."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    .input-group { margin-bottom: 15px; }
+    label { display: block; font-weight: 600; margin-bottom: 5px; }
+    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+    #result { margin-top: 20px; padding: 15px; background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 6px; display: none; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">loan calculator Tool</h1>
+    <h1 style="text-align: center; color: #2563eb;">Loan Calculator</h1>
+    <div class="input-group">
+      <label>Loan Amount ($)</label>
+      <input type="number" id="amount" placeholder="10000">
+    </div>
+    <div class="input-group">
+      <label>Interest Rate (%)</label>
+      <input type="number" id="rate" placeholder="5.5">
+    </div>
+    <div class="input-group">
+      <label>Loan Term (Years)</label>
+      <input type="number" id="years" placeholder="5">
+    </div>
+    <button onclick="calculate()">Calculate Payment</button>
+    <div id="result"></div>
   </div>
-
-  <h1>loan calculator Tool</h1>
-
-  <p>This is a starter tool page for <strong>loan calculator</strong>.</p>
-
-
-  <input id="amount" type="number" placeholder="Loan Amount" style="width:120px;">
-  <input id="rate" type="number" placeholder="Annual Rate (%)" style="width:120px;">
-  <input id="years" type="number" placeholder="Years" style="width:80px;">
-  <button onclick="run()">Calculate</button>
-
-  <p id="output"></p>
-
   <script>
-    function run() {
+    function calculate() {
       const amount = parseFloat(document.getElementById('amount').value);
       const rate = parseFloat(document.getElementById('rate').value) / 100 / 12;
-      const years = parseInt(document.getElementById('years').value, 10);
-      const n = years * 12;
-      if (isNaN(amount) || isNaN(rate) || isNaN(years) || amount <= 0 || years <= 0) {
-        document.getElementById('output').innerText = 'Enter valid loan, rate, and years.';
-        return;
-      }
-      const payment = (amount * rate) / (1 - Math.pow(1 + rate, -n));
-      document.getElementById('output').innerText = 'Monthly Payment: $' + payment.toFixed(2);
+      const terms = parseFloat(document.getElementById('years').value) * 12;
+      
+      if(!amount || !rate || !terms) return alert("Please fill all fields");
+      
+      const x = Math.pow(1 + rate, terms);
+      const monthly = (amount * x * rate) / (x - 1);
+      const total = monthly * terms;
+      const interest = total - amount;
+      
+      const res = document.getElementById('result');
+      res.style.display = 'block';
+      res.innerHTML = `
+        <strong>Monthly Payment:</strong> $${monthly.toFixed(2)}<br>
+        <strong>Total Interest:</strong> $${interest.toFixed(2)}<br>
+        <strong>Total Payment:</strong> $${total.toFixed(2)}
+      `;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

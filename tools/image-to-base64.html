@@ -1,40 +1,40 @@
+---
+layout: default
+title: "Image to Base64 Converter"
+description: "Convert image files (PNG, JPG) to Base64 strings instantly. Useful for embedding images in HTML/CSS."
+category: "Converters"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Image to Base64 Converter | Ultimate Tools Hub</title>
-  <meta name="description" content="Convert any image to a Base64 string instantly. Free, fast, and secure online image to Base64 converter.">
+  <title>Image to Base64</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
   <style>
-    .imgb64-container { max-width: 520px; margin: 40px auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 24px #1976d233; padding: 32px 28px; }
-    .imgb64-title { font-size: 2rem; font-weight: 700; color: #1976d2; margin-bottom: 18px; }
-    .imgb64-desc { color: #555; margin-bottom: 22px; }
-    input[type=file] { margin-bottom: 18px; }
-    .result-label { font-weight: 600; color: #283593; margin-bottom: 6px; }
-    .result-box { background: #f6f8fa; border-radius: 8px; padding: 12px; font-family: monospace; font-size: 1.1rem; word-break: break-all; margin-bottom: 8px; }
-    button { background: #1976d2; color: #fff; border: none; border-radius: 8px; padding: 10px 22px; font-size: 1rem; font-weight: 600; cursor: pointer; margin-top: 8px; transition: background 0.2s; }
-    button:hover { background: #0d47a1; }
+    .tool-container { max-width: 700px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    input[type="file"] { margin-bottom: 20px; }
+    textarea { width: 100%; height: 200px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-family: monospace; }
   </style>
 </head>
 <body>
-  <div class="imgb64-container">
-    <div class="imgb64-title">Image to Base64 Converter</div>
-    <div class="imgb64-desc">Upload an image to instantly get its Base64 string representation.</div>
-    <input type="file" id="imgInput" accept="image/*">
-    <button onclick="convertToBase64()">Convert to Base64</button>
-    <div class="result-label" style="margin-top:18px;">Base64 String:</div>
-    <div class="result-box" id="b64Result"></div>
+  <div class="tool-container">
+    <h1 style="text-align: center; color: #2563eb;">Image to Base64</h1>
+    <p style="text-align: center; color: #666;">Select an image to convert it to a Data URI.</p>
+    
+    <input type="file" id="fileInput" accept="image/*" onchange="convert()">
+    
+    <label>Base64 Output</label>
+    <textarea id="output" readonly placeholder="Result will appear here..."></textarea>
   </div>
   <script>
-    function convertToBase64() {
-      const file = document.getElementById('imgInput').files[0];
-      if (!file) return;
+    function convert() {
+      const file = document.getElementById('fileInput').files[0];
+      if(!file) return;
+      
       const reader = new FileReader();
-      reader.onload = function(e) {
-        document.getElementById('b64Result').textContent = e.target.result;
-      };
+      reader.onloadend = function() {
+        document.getElementById('output').value = reader.result;
+      }
       reader.readAsDataURL(file);
     }
   </script>

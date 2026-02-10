@@ -1,68 +1,46 @@
+---
+layout: default
+title: "HEX to RGB Converter"
+description: "Convert Hexadecimal color codes to RGB format instantly."
+category: "Converters"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Hex to RGB Converter – Convert Hex Colors to RGB Instantly</title>
-  <meta name="description" content="Convert hex color codes to RGB values instantly with our free Hex to RGB Converter. Perfect for designers, developers, and color enthusiasts.">
+  <title>HEX to RGB</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/hex-to-rgb.html">
-  <meta property="og:title" content="Hex to RGB Converter – Convert Hex Colors to RGB Instantly">
-  <meta property="og:description" content="Convert hex color codes to RGB values instantly with our free Hex to RGB Converter. Perfect for designers, developers, and color enthusiasts.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/hex-to-rgb.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Hex to RGB Converter – Convert Hex Colors to RGB Instantly">
-  <meta name="twitter:description" content="Convert hex color codes to RGB values instantly with our free Hex to RGB Converter. Perfect for designers, developers, and color enthusiasts.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Hex to RGB Converter",
-    "url": "https://vincentrasskazov.github.io/tools/hex-to-rgb.html",
-    "applicationCategory": "Color Tools",
-    "description": "Convert hex color codes to RGB values instantly with our free Hex to RGB Converter. Perfect for designers, developers, and color enthusiasts."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; margin-bottom: 20px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    #preview { height: 50px; border-radius: 6px; margin-top: 20px; border: 1px solid #eee; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">hex to rgb Tool</h1>
+    <h1 style="text-align: center; color: #2563eb;">HEX to RGB</h1>
+    <label>HEX Code</label>
+    <input type="text" id="hex" placeholder="#2563eb">
+    <button onclick="convert()">Convert</button>
+    <label style="margin-top:20px; display:block;">RGB Result</label>
+    <input type="text" id="rgb" readonly>
+    <div id="preview"></div>
   </div>
-
-  <h1>hex to rgb Tool</h1>
-
-  <p>This is a starter tool page for <strong>hex to rgb</strong>.</p>
-
-
-  <label for="input">Hex:</label>
-  <input id="input" placeholder="#RRGGBB or RRGGBB">
-  <button onclick="run()">Convert to RGB</button>
-
-  <p id="output"></p>
-
   <script>
-    function run() {
-      let v = document.getElementById('input').value.trim().replace(/^#/, '');
-      if (!/^[0-9a-fA-F]{6}$/.test(v)) {
-        document.getElementById('output').innerText = "Please enter a valid 6-digit hex color.";
-        return;
-      }
-      const r = parseInt(v.substr(0,2),16);
-      const g = parseInt(v.substr(2,2),16);
-      const b = parseInt(v.substr(4,2),16);
-      document.getElementById('output').innerText = `rgb(${r}, ${g}, ${b})`;
+    function convert() {
+      let hex = document.getElementById('hex').value.replace('#', '');
+      if(hex.length === 3) hex = hex.split('').map(c => c+c).join('');
+      if(hex.length !== 6) return alert("Invalid HEX code");
+      
+      const r = parseInt(hex.substring(0,2), 16);
+      const g = parseInt(hex.substring(2,4), 16);
+      const b = parseInt(hex.substring(4,6), 16);
+      
+      const result = `rgb(${r}, ${g}, ${b})`;
+      document.getElementById('rgb').value = result;
+      document.getElementById('preview').style.backgroundColor = result;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

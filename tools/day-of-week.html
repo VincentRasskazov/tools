@@ -1,67 +1,38 @@
+---
+layout: default
+title: "Day of the Week Calculator"
+description: "Find out what day of the week a specific date falls on."
+category: "Utility"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Day of Week Calculator – Find the Day for Any Date Instantly</title>
-  <meta name="description" content="Find the day of the week for any date instantly with our free Day of Week Calculator. Perfect for planning, history, and curiosity.">
+  <title>Day of the Week</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/day-of-week.html">
-  <meta property="og:title" content="Day of Week Calculator – Find the Day for Any Date Instantly">
-  <meta property="og:description" content="Find the day of the week for any date instantly with our free Day of Week Calculator. Perfect for planning, history, and curiosity.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/day-of-week.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Day of Week Calculator – Find the Day for Any Date Instantly">
-  <meta name="twitter:description" content="Find the day of the week for any date instantly with our free Day of Week Calculator. Perfect for planning, history, and curiosity.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Day of Week Calculator",
-    "url": "https://vincentrasskazov.github.io/tools/day-of-week.html",
-    "applicationCategory": "Date Tools",
-    "description": "Find the day of the week for any date instantly with our free Day of Week Calculator. Perfect for planning, history, and curiosity."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-size: 16px; }
+    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    #result { font-size: 2rem; font-weight: 800; color: #16a34a; margin-top: 20px; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">day of week Tool</h1>
+    <h1>Day of the Week</h1>
+    <label style="display:block; margin-bottom:10px;">Select a Date</label>
+    <input type="date" id="date">
+    <button onclick="calculate()">Find Day</button>
+    <div id="result"></div>
   </div>
-
-  <h1>day of week Tool</h1>
-
-  <p>This is a starter tool page for <strong>day of week</strong>.</p>
-
-
-  <label for="input">Date:</label>
-  <input id="input" type="date">
-  <button onclick="run()">Get Day</button>
-
-  <p id="output"></p>
-
   <script>
-    function run() {
-      const v = document.getElementById('input').value;
-      if (!v) {
-        document.getElementById('output').innerText = "Please select a date.";
-        return;
-      }
-      const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-      const d = new Date(v);
-      document.getElementById('output').innerText = days[d.getDay()];
+    function calculate() {
+      const val = document.getElementById('date').value;
+      if(!val) return;
+      const date = new Date(val);
+      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      document.getElementById('result').innerText = days[date.getUTCDay()];
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

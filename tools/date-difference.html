@@ -1,50 +1,45 @@
+---
+layout: default
+title: "Date Difference Calculator - Days Between Dates"
+description: "Calculate the number of days, weeks, and months between two dates."
+category: "Calculators"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="../assets/css/tool-style.css">
   <meta charset="UTF-8">
-  <title>date difference Tool</title>
-  <meta name="description" content="date difference online tool.">
-  <meta name="category" content="Date Tools">
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <title>Date Difference</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    label { display: block; font-weight: 600; margin-bottom: 5px; }
+    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 15px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    #result { margin-top: 20px; font-size: 1.2rem; text-align: center; color: #1e293b; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">date difference Tool</h1>
+    <h1 style="text-align: center; color: #2563eb;">Date Difference</h1>
+    <label>Start Date</label>
+    <input type="date" id="start">
+    <label>End Date</label>
+    <input type="date" id="end">
+    <button onclick="calc()">Calculate Duration</button>
+    <div id="result"></div>
   </div>
-
-  <h1>date difference Tool</h1>
-
-  <p>This is a starter tool page for <strong>date difference</strong>.</p>
-
-
-  <label for="date1">Start Date:</label>
-  <input id="date1" type="date">
-  <label for="date2">End Date:</label>
-  <input id="date2" type="date">
-  <button onclick="run()">Calculate Difference</button>
-
-  <p id="output"></p>
-
   <script>
-    function run() {
-      const d1 = document.getElementById('date1').value;
-      const d2 = document.getElementById('date2').value;
-      if (!d1 || !d2) {
-        document.getElementById('output').innerText = "Please select both dates.";
-        return;
-      }
-      const diff = Math.abs(new Date(d2) - new Date(d1));
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      document.getElementById('output').innerText = `Difference: ${days} day(s)`;
+    function calc() {
+      const start = new Date(document.getElementById('start').value);
+      const end = new Date(document.getElementById('end').value);
+      
+      if(isNaN(start) || isNaN(end)) return alert("Select both dates");
+      
+      const diffTime = Math.abs(end - start);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+      
+      document.getElementById('result').innerHTML = `Difference: <strong>${diffDays} days</strong>`;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

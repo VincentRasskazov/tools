@@ -1,76 +1,62 @@
+---
+layout: default
+title: "My IP Address Lookup - Geo Location"
+description: "Find your public IP address, location, ISP, and coordinates instantly."
+category: "Utility"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>IP Address Lookup – Find IP Address Information Instantly</title>
-  <meta name="description" content="Find information about any IP address instantly with our free IP Address Lookup tool. Perfect for networking, security, and research.">
+  <title>IP Address Lookup</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/ip-address-lookup.html">
-  <meta property="og:title" content="IP Address Lookup – Find IP Address Information Instantly">
-  <meta property="og:description" content="Find information about any IP address instantly with our free IP Address Lookup tool. Perfect for networking, security, and research.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/ip-address-lookup.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="IP Address Lookup – Find IP Address Information Instantly">
-  <meta name="twitter:description" content="Find information about any IP address instantly with our free IP Address Lookup tool. Perfect for networking, security, and research.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "IP Address Lookup",
-    "url": "https://vincentrasskazov.github.io/tools/ip-address-lookup.html",
-    "applicationCategory": "Networking Tools",
-    "description": "Find information about any IP address instantly with our free IP Address Lookup tool. Perfect for networking, security, and research."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    .data-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; }
+    .label { font-weight: bold; color: #64748b; }
+    .value { font-family: monospace; color: #1e293b; font-size: 1.1rem; }
+    #loading { text-align: center; color: #64748b; margin: 20px 0; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; margin-top: 20px; font-weight: bold; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">ip address lookup Tool</h1>
+    <h1>IP Address Lookup</h1>
+    <div id="loading">Scanning network...</div>
+    <div id="results" style="display:none;">
+      <div class="data-row"><span class="label">IP Address</span><span class="value" id="ip"></span></div>
+      <div class="data-row"><span class="label">City</span><span class="value" id="city"></span></div>
+      <div class="data-row"><span class="label">Region</span><span class="value" id="region"></span></div>
+      <div class="data-row"><span class="label">Country</span><span class="value" id="country"></span></div>
+      <div class="data-row"><span class="label">ISP</span><span class="value" id="org"></span></div>
+    </div>
+    <button onclick="fetchIP()">Refresh Data</button>
   </div>
-
-  <h1>ip address lookup Tool</h1>
-
-  <p>This is a starter tool page for <strong>ip address lookup</strong>.</p>
-
-
-  <label for="input">IP Address:</label>
-  <input id="input" placeholder="e.g. 8.8.8.8">
-  <button onclick="run()">Lookup</button>
-
-  <p id="output"></p>
-
   <script>
-    async function run() {
-      const ip = document.getElementById('input').value.trim();
-      if (!ip) {
-        document.getElementById('output').innerText = "Please enter an IP address.";
-        return;
-      }
-      document.getElementById('output').innerText = "Looking up...";
+    async function fetchIP() {
+      const loader = document.getElementById('loading');
+      const results = document.getElementById('results');
+      loader.style.display = 'block';
+      results.style.display = 'none';
+      
       try {
-        const res = await fetch(`https://ip-api.com/json/${ip}`);
-        const data = await res.json();
-        if (data.status === 'success') {
-          document.getElementById('output').innerText = `Country: ${data.country}\nRegion: ${data.regionName}\nCity: ${data.city}\nISP: ${data.isp}`;
-        } else {
-          document.getElementById('output').innerText = "Lookup failed.";
-        }
-      } catch {
-        document.getElementById('output').innerText = "Error fetching data.";
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+        
+        document.getElementById('ip').innerText = data.ip;
+        document.getElementById('city').innerText = data.city;
+        document.getElementById('region').innerText = data.region;
+        document.getElementById('country').innerText = data.country_name;
+        document.getElementById('org').innerText = data.org;
+        
+        loader.style.display = 'none';
+        results.style.display = 'block';
+      } catch (e) {
+        loader.innerText = "Error fetching IP data. Adblocker might be interfering.";
       }
     }
+    window.onload = fetchIP;
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

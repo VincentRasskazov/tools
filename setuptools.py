@@ -1,4 +1,3 @@
-cat <<'PYTHON_EOF' > setuptools.py
 import os
 
 tools = {
@@ -100,7 +99,6 @@ category: "Utility"
       const hex = document.getElementById('picker').value;
       document.getElementById('hex').innerText = hex;
       
-      // Convert to RGB
       const r = parseInt(hex.slice(1, 3), 16);
       const g = parseInt(hex.slice(3, 5), 16);
       const b = parseInt(hex.slice(5, 7), 16);
@@ -504,4 +502,3 @@ for filename, content in tools.items():
     with open(filename, "w", encoding="utf-8") as f:
         f.write(content)
     print(f"✅ Created {filename}")
-PYTHON_EOF
