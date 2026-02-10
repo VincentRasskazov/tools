@@ -1,65 +1,39 @@
+---
+layout: default
+title: "Water Intake Calculator"
+description: "Calculate your daily recommended water intake based on your weight."
+category: "Health Tools"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Water Intake Calculator – Calculate Daily Water Needs Online</title>
-  <meta name="description" content="Calculate your daily water intake needs instantly with our free Water Intake Calculator. Perfect for health, fitness, and wellness.">
+  <title>Water Intake Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/water-intake-calculator.html">
-  <meta property="og:title" content="Water Intake Calculator – Calculate Daily Water Needs Online">
-  <meta property="og:description" content="Calculate your daily water intake needs instantly with our free Water Intake Calculator. Perfect for health, fitness, and wellness.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/water-intake-calculator.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Water Intake Calculator – Calculate Daily Water Needs Online">
-  <meta name="twitter:description" content="Calculate your daily water intake needs instantly with our free Water Intake Calculator. Perfect for health, fitness, and wellness.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Water Intake Calculator",
-    "url": "https://vincentrasskazov.github.io/tools/water-intake-calculator.html",
-    "applicationCategory": "Health Tools",
-    "description": "Calculate your daily water intake needs instantly with our free Water Intake Calculator. Perfect for health, fitness, and wellness."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    .input-group { margin-bottom: 15px; }
+    label { display: block; font-weight: 600; margin-bottom: 5px; }
+    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+    #result { margin-top: 20px; font-weight: bold; text-align: center; font-size: 1.5rem; color: #16a34a; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">water intake calculator Tool</h1>
+    <h1>Water Intake Calculator</h1>
+    <div class="input-group"><label>Weight (kg)</label><input type="number" id="weight"></div>
+    <button onclick="calculate()">Calculate</button>
+    <div id="result"></div>
   </div>
-
-  <h1>water intake calculator Tool</h1>
-
-  <p>This is a starter tool page for <strong>water intake calculator</strong>.</p>
-
-
-  <input id="weight" type="number" placeholder="Weight (kg)" style="width:120px;">
-  <button onclick="run()">Calculate</button>
-
-  <p id="output"></p>
-
   <script>
-    function run() {
+    function calculate() {
       const weight = parseFloat(document.getElementById('weight').value);
-      if (isNaN(weight) || weight <= 0) {
-        document.getElementById('output').innerText = 'Enter a valid weight.';
-        return;
-      }
-      const intake = weight * 35; // 35 ml per kg
-      document.getElementById('output').innerText = 'Recommended: ' + (intake/1000).toFixed(2) + ' liters/day';
+      // Roughly 35ml per kg
+      const intake = weight * 0.035;
+      document.getElementById('result').innerText = `${intake.toFixed(1)} Liters / day`;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

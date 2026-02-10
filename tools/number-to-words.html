@@ -1,97 +1,48 @@
+---
+layout: default
+title: "Number to Words Converter"
+description: "Convert numbers into English words instantly. Useful for writing checks."
+category: "Converters"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Number to Words Converter – Convert Numbers to Words Instantly Online</title>
-  <meta name="description" content="Convert numbers to words instantly with our free Number to Words Converter. Perfect for writing checks, legal documents, and educational purposes.">
+  <title>Number to Words</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/number-to-words.html">
-  <meta property="og:title" content="Number to Words Converter – Convert Numbers to Words Instantly Online">
-  <meta property="og:description" content="Convert numbers to words instantly with our free Number to Words Converter. Perfect for writing checks, legal documents, and educational purposes.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/number-to-words.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Number to Words Converter – Convert Numbers to Words Instantly Online">
-  <meta name="twitter:description" content="Convert numbers to words instantly with our free Number to Words Converter. Perfect for writing checks, legal documents, and educational purposes.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Number to Words Converter",
-    "url": "https://vincentrasskazov.github.io/tools/number-to-words.html",
-    "applicationCategory": "Text Tools",
-    "description": "Convert numbers to words instantly with our free Number to Words Converter. Perfect for writing checks, legal documents, and educational purposes."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; margin-bottom: 20px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    #result { margin-top: 20px; font-size: 1.2rem; font-weight: bold; color: #334155; }
+  </style>
 </head>
-
-    <meta name="description" content="Convert numbers to words instantly with our free Number to Words Converter. Perfect for writing checks, legal documents, and educational purposes.">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="canonical" href="https://vincentrasskazov.github.io/tools/number-to-words.html">
-    <meta property="og:title" content="Number to Words Converter – Convert Numbers to Words Instantly">
-    <meta property="og:description" content="Convert numbers to words instantly with our free Number to Words Converter. Perfect for writing checks, legal documents, and educational purposes.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://vincentrasskazov.github.io/tools/number-to-words.html">
-    <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Number to Words Converter – Convert Numbers to Words Instantly">
-    <meta name="twitter:description" content="Convert numbers to words instantly with our free Number to Words Converter. Perfect for writing checks, legal documents, and educational purposes.">
-    <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/landing-polish.css">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Number to Words Converter",
-      "url": "https://vincentrasskazov.github.io/tools/number-to-words.html",
-      "applicationCategory": "Text Tools",
-      "description": "Convert numbers to words instantly with our free Number to Words Converter. Perfect for writing checks, legal documents, and educational purposes."
-    }
-    </script>
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">number to words Tool</h1>
+<body>
+  <div class="tool-container">
+    <h1>Number to Words</h1>
+    <label>Enter Number</label>
+    <input type="number" id="input" placeholder="12345">
+    <button onclick="convert()">Convert</button>
+    <div id="result"></div>
   </div>
-
-  <h1>number to words Tool</h1>
-
-  <p>This is a starter tool page for <strong>number to words</strong>.</p>
-
-
-  <input id="input" type="number" placeholder="Enter number" style="width:200px;">
-  <button onclick="run()">Convert</button>
-
-  <p id="output"></p>
-
   <script>
-    // Simple number to words (0-9999)
-    const ones = ["zero","one","two","three","four","five","six","seven","eight","nine"];
-    const teens = ["ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"];
-    const tens = ["","","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"];
-    function numToWords(n) {
-      if (n < 10) return ones[n];
-      if (n < 20) return teens[n-10];
-      if (n < 100) return tens[Math.floor(n/10)] + (n%10?'-'+ones[n%10]:'');
-      if (n < 1000) return ones[Math.floor(n/100)] + ' hundred' + (n%100?' '+numToWords(n%100):'');
-      if (n < 10000) return ones[Math.floor(n/1000)] + ' thousand' + (n%1000?' '+numToWords(n%1000):'');
-      return n;
+    const ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+    const tens = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+    
+    function numToWords(num) {
+      if (num === 0) return "zero";
+      if (num < 20) return ones[num];
+      if (num < 100) return tens[Math.floor(num / 10)] + (num % 10 !== 0 ? "-" + ones[num % 10] : "");
+      if (num < 1000) return ones[Math.floor(num / 100)] + " hundred" + (num % 100 !== 0 ? " and " + numToWords(num % 100) : "");
+      if (num < 1000000) return numToWords(Math.floor(num / 1000)) + " thousand" + (num % 1000 !== 0 ? " " + numToWords(num % 1000) : "");
+      return "Number too large";
     }
-    function run() {
-      const v = parseInt(document.getElementById('input').value, 10);
-      if (isNaN(v) || v < 0 || v > 9999) {
-        document.getElementById('output').innerText = 'Enter a number from 0 to 9999.';
-        return;
-      }
-      document.getElementById('output').innerText = numToWords(v);
+
+    function convert() {
+      const val = parseInt(document.getElementById('input').value);
+      document.getElementById('result').innerText = numToWords(val);
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

@@ -1,74 +1,38 @@
+---
+layout: default
+title: "IP to Binary Converter"
+description: "Convert an IP address into a 32-bit binary string."
+category: "Converters"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>IP to Binary Converter – Convert IPv4 Address to Binary Instantly</title>
-  <meta name="description" content="Convert IPv4 addresses to binary format instantly with our free IP to Binary Converter. Perfect for networking, students, and developers.">
+  <title>IP to Binary</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/ip-to-binary.html">
-  <meta property="og:title" content="IP to Binary Converter – Convert IPv4 Address to Binary Instantly">
-  <meta property="og:description" content="Convert IPv4 addresses to binary format instantly with our free IP to Binary Converter. Perfect for networking, students, and developers.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/ip-to-binary.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="IP to Binary Converter – Convert IPv4 Address to Binary Instantly">
-  <meta name="twitter:description" content="Convert IPv4 addresses to binary format instantly with our free IP to Binary Converter. Perfect for networking, students, and developers.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "IP to Binary Converter",
-    "url": "https://vincentrasskazov.github.io/tools/ip-to-binary.html",
-    "applicationCategory": "Networking Tools",
-    "description": "Convert IPv4 addresses to binary format instantly with our free IP to Binary Converter. Perfect for networking, students, and developers."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">ip to binary Tool</h1>
+    <h1>IP to Binary</h1>
+    <label>IP Address</label>
+    <input type="text" id="input" placeholder="192.168.1.1">
+    <button onclick="convert()">Convert to Binary</button>
+    <label style="margin-top:20px; display:block;">Binary Output</label>
+    <input type="text" id="output" readonly>
   </div>
-
-  <h1>ip to binary Tool</h1>
-
-  <p>This is a starter tool page for <strong>ip to binary</strong>.</p>
-
-
-  <input id="input" placeholder="Enter IPv4 address (e.g. 192.168.1.1)">
-  <button onclick="run()">Convert</button>
-
-  <p id="output"></p>
-
   <script>
-    function ipToBinary(ip) {
-      const parts = ip.trim().split('.');
-      if (parts.length !== 4) return null;
-      return parts.map(part => {
-        const n = parseInt(part, 10);
-        if (isNaN(n) || n < 0 || n > 255) return null;
-        return n.toString(2).padStart(8, '0');
-      });
-    }
-    function run() {
-      const v = document.getElementById('input').value;
-      const bin = ipToBinary(v);
-      if (!bin || bin.includes(null)) {
-        document.getElementById('output').innerText = "Invalid IPv4 address.";
-      } else {
-        document.getElementById('output').innerText = bin.join('.') + "\n(Binary)";
-      }
+    function convert() {
+      const parts = document.getElementById('input').value.split('.');
+      if(parts.length !== 4) return alert("Invalid IP");
+      const bin = parts.map(n => parseInt(n).toString(2).padStart(8,'0')).join('');
+      document.getElementById('output').value = bin;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

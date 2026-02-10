@@ -1,68 +1,39 @@
+---
+layout: default
+title: "Binary to IP Converter"
+description: "Convert a 32-bit binary string into a readable IP address."
+category: "Converters"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Binary to IP Converter – Convert Binary to IPv4 Instantly</title>
-  <meta name="description" content="Convert 32-bit binary numbers to IPv4 addresses instantly with our free Binary to IP Converter. Perfect for networking, students, and developers.">
+  <title>Binary to IP</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/binary-to-ip.html">
-  <meta property="og:title" content="Binary to IP Converter – Convert Binary to IPv4 Instantly">
-  <meta property="og:description" content="Convert 32-bit binary numbers to IPv4 addresses instantly with our free Binary to IP Converter. Perfect for networking, students, and developers.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/binary-to-ip.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Binary to IP Converter – Convert Binary to IPv4 Instantly">
-  <meta name="twitter:description" content="Convert 32-bit binary numbers to IPv4 addresses instantly with our free Binary to IP Converter. Perfect for networking, students, and developers.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-    <title>Binary to IP Converter – Convert Binary to IP Address Instantly Online</title>
-    <meta name="description" content="Convert binary numbers to IP addresses instantly with our free Binary to IP Converter. Perfect for network engineers, students, and developers.">
-    <meta property="og:title" content="Binary to IP Converter – Convert Binary to IP Address Instantly Online">
-    <meta property="og:description" content="Convert binary numbers to IP addresses instantly with our free Binary to IP Converter. Perfect for network engineers, students, and developers.">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Binary to IP Converter",
-    "url": "https://vincentrasskazov.github.io/tools/binary-to-ip.html",
-    "applicationCategory": "Networking Tools",
-    "description": "Convert 32-bit binary numbers to IPv4 addresses instantly with our free Binary to IP Converter. Perfect for networking, students, and developers."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">binary to ip Tool</h1>
+    <h1>Binary to IP</h1>
+    <label>Binary (32-bit)</label>
+    <input type="text" id="input" placeholder="11000000101010000000000100000001">
+    <button onclick="convert()">Convert to IP</button>
+    <label style="margin-top:20px; display:block;">IP Address</label>
+    <input type="text" id="output" readonly>
   </div>
-
-  <h1>binary to ip Tool</h1>
-
-  <p>This is a starter tool page for <strong>binary to ip</strong>.</p>
-
-
-  <label for="input">Binary (32 bits):</label>
-  <input id="input" placeholder="e.g. 11000000101010000000000100000001">
-  <button onclick="run()">Convert to IP</button>
-
-  <p id="output"></p>
-
   <script>
-    function run() {
-      const v = document.getElementById('input').value.trim();
-      if (!/^[01]{32}$/.test(v)) {
-        document.getElementById('output').innerText = "Please enter a 32-bit binary string.";
-        return;
-      }
-      const ip = [0,1,2,3].map(i => parseInt(v.slice(i*8, (i+1)*8), 2)).join('.');
-      document.getElementById('output').innerText = ip;
+    function convert() {
+      const bin = document.getElementById('input').value.replace(/\s/g,'');
+      if(bin.length !== 32) return alert("Must be 32 bits");
+      const octets = [];
+      for(let i=0; i<32; i+=8) octets.push(parseInt(bin.substr(i,8), 2));
+      document.getElementById('output').value = octets.join('.');
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

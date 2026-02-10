@@ -1,73 +1,57 @@
+---
+layout: default
+title: "Calorie Calculator"
+description: "Calculate daily calorie needs based on age, weight, height, and activity level."
+category: "Health Tools"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="../assets/css/tool-style.css">
   <meta charset="UTF-8">
-  <title>calorie calculator Tool</title>
-  <meta name="description" content="calorie calculator online tool.">
-  <meta name="category" content="Health Tools">
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <title>Calorie Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    .input-group { margin-bottom: 15px; }
+    label { display: block; font-weight: 600; margin-bottom: 5px; }
+    input, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+    #result { margin-top: 20px; font-weight: bold; text-align: center; font-size: 1.5rem; color: #16a34a; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">calorie calculator Tool</h1>
+    <h1>Calorie Calculator</h1>
+    <div class="input-group"><label>Age</label><input type="number" id="age"></div>
+    <div class="input-group"><label>Gender</label><select id="gender"><option value="m">Male</option><option value="f">Female</option></select></div>
+    <div class="input-group"><label>Weight (kg)</label><input type="number" id="weight"></div>
+    <div class="input-group"><label>Height (cm)</label><input type="number" id="height"></div>
+    <div class="input-group">
+      <label>Activity</label>
+      <select id="activity">
+        <option value="1.2">Sedentary</option>
+        <option value="1.375">Light Activity</option>
+        <option value="1.55">Moderate Activity</option>
+        <option value="1.725">Very Active</option>
+      </select>
+    </div>
+    <button onclick="calculate()">Calculate</button>
+    <div id="result"></div>
   </div>
-
-  <h1>calorie calculator Tool</h1>
-
-  <p>This is a starter tool page for <strong>calorie calculator</strong>.</p>
-
-
-  <label for="weight">Weight (kg):</label>
-  <input id="weight" type="number" placeholder="e.g. 70">
-  <label for="height">Height (cm):</label>
-  <input id="height" type="number" placeholder="e.g. 170">
-  <label for="age">Age (years):</label>
-  <input id="age" type="number" placeholder="e.g. 30">
-  <label for="gender">Gender:</label>
-  <select id="gender">
-    <option value="male">Male</option>
-    <option value="female">Female</option>
-  </select>
-  <label for="activity">Activity Level:</label>
-  <select id="activity">
-    <option value="1.2">Sedentary</option>
-    <option value="1.375">Lightly active</option>
-    <option value="1.55">Moderately active</option>
-    <option value="1.725">Very active</option>
-    <option value="1.9">Extra active</option>
-  </select>
-  <button onclick="run()">Calculate Calories</button>
-
-  <p id="output"></p>
-
   <script>
-    function run() {
-      const weight = parseFloat(document.getElementById('weight').value);
-      const height = parseFloat(document.getElementById('height').value);
+    function calculate() {
       const age = parseFloat(document.getElementById('age').value);
       const gender = document.getElementById('gender').value;
+      const weight = parseFloat(document.getElementById('weight').value);
+      const height = parseFloat(document.getElementById('height').value);
       const activity = parseFloat(document.getElementById('activity').value);
-      if (isNaN(weight) || isNaN(height) || isNaN(age) || isNaN(activity) || weight <= 0 || height <= 0 || age <= 0) {
-        document.getElementById('output').innerText = "Please enter valid weight, height, age, and activity.";
-        return;
-      }
-      let bmr;
-      if (gender === 'male') {
-        bmr = 10 * weight + 6.25 * height - 5 * age + 5;
-      } else {
-        bmr = 10 * weight + 6.25 * height - 5 * age - 161;
-      }
-      const tdee = bmr * activity;
-      document.getElementById('output').innerText = `Estimated daily calories: ${tdee.toFixed(0)} kcal`;
+      
+      let bmr = (10 * weight) + (6.25 * height) - (5 * age) + (gender === 'm' ? 5 : -161);
+      const tdee = Math.round(bmr * activity);
+      
+      document.getElementById('result').innerText = `${tdee} Calories / day`;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

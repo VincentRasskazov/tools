@@ -1,14 +1,14 @@
 ---
 layout: default
-title: "Text to ASCII Converter"
-description: "Convert text characters to their ASCII decimal codes."
+title: "ASCII to Text Converter"
+description: "Convert space-separated ASCII decimal codes back to text."
 category: "Converters"
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Text to ASCII</title>
+  <title>ASCII to Text</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
@@ -19,19 +19,19 @@ category: "Converters"
 </head>
 <body>
   <div class="tool-container">
-    <h1>Text to ASCII</h1>
-    <label>Input Text</label>
-    <textarea id="input" placeholder="Hello"></textarea>
-    <button onclick="convert()">Convert to ASCII</button>
-    <label style="margin-top:20px; display:block;">ASCII Output</label>
+    <h1>ASCII to Text</h1>
+    <label>Input ASCII (Space separated)</label>
+    <textarea id="input" placeholder="72 101 108 108 111"></textarea>
+    <button onclick="convert()">Convert to Text</button>
+    <label style="margin-top:20px; display:block;">Text Output</label>
     <textarea id="output" readonly></textarea>
   </div>
   <script>
     function convert() {
-      const val = document.getElementById('input').value;
-      const arr = [];
-      for(let i=0; i<val.length; i++) arr.push(val.charCodeAt(i));
-      document.getElementById('output').value = arr.join(' ');
+      const val = document.getElementById('input').value.trim().split(/\s+/);
+      let res = "";
+      for(let c of val) res += String.fromCharCode(parseInt(c));
+      document.getElementById('output').value = res;
     }
   </script>
 </body>

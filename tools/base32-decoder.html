@@ -1,64 +1,39 @@
+---
+layout: default
+title: "Base32 Decoder"
+description: "Decode Base32 strings back to readable text."
+category: "Developer Tools"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Base32 Decoder – Decode Base32 Instantly Online</title>
-  <meta name="description" content="Decode Base32-encoded text instantly with our free Base32 Decoder tool. Useful for decoding data from URLs, QR codes, and more.">
+  <title>Base32 Decoder</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/base32-decoder.html">
-  <meta property="og:title" content="Base32 Decoder – Decode Base32 Instantly Online">
-  <meta property="og:description" content="Decode Base32-encoded text instantly with our free Base32 Decoder tool. Useful for decoding data from URLs, QR codes, and more.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/base32-decoder.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Base32 Decoder – Decode Base32 Instantly Online">
-  <meta name="twitter:description" content="Decode Base32-encoded text instantly with our free Base32 Decoder tool. Useful for decoding data from URLs, QR codes, and more.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Base32 Decoder",
-    "url": "https://vincentrasskazov.github.io/tools/base32-decoder.html",
-    "applicationCategory": "Encoding Tools",
-    "description": "Decode Base32-encoded text instantly with our free Base32 Decoder tool. Useful for decoding data from URLs, QR codes, and more."
-  }
-  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hi-base32/0.5.1/base32.min.js"></script>
+  <style>
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    textarea { width: 100%; height: 150px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-family: monospace; margin-bottom: 20px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+  </style>
 </head>
 <body>
   <div class="tool-container">
-    <div class="tool-header">
-      <a class="tool-back" href="../index.html">← Back</a>
-      <h1 class="tool-title">Base32 Decoder</h1>
-    </div>
-    <p>Decode Base32-encoded text to its original form.</p>
-    <textarea id="input" placeholder="Paste Base32 here..."></textarea>
-    <button onclick="decodeBase32()">Decode</button>
-    <pre id="output"></pre>
-    <script>
-      function decodeBase32() {
-        const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
-        let input = document.getElementById('input').value.replace(/=+$/, '');
-        let bits = '';
-        for (let i = 0; i < input.length; i++) {
-          const idx = alphabet.indexOf(input[i].toUpperCase());
-          if (idx === -1) continue;
-          bits += idx.toString(2).padStart(5, '0');
-        }
-        let output = '';
-        for (let i = 0; i < bits.length; i += 8) {
-          const byte = bits.substr(i, 8);
-          if (byte.length === 8) {
-            output += String.fromCharCode(parseInt(byte, 2));
-          }
-        }
-        document.getElementById('output').innerText = output;
-      }
-    </script>
-    <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
+    <h1>Base32 Decoder</h1>
+    <label>Input Base32</label>
+    <textarea id="input" placeholder="JBSWY3DPEBLW64TMMQ======"></textarea>
+    <button onclick="decode()">Decode to Text</button>
+    <label style="margin-top:20px; display:block;">Output</label>
+    <textarea id="output" readonly></textarea>
   </div>
+  <script>
+    function decode() {
+      const val = document.getElementById('input').value;
+      try {
+        if(window.base32) document.getElementById('output').value = base32.decode(val);
+      } catch(e) { alert("Invalid Base32"); }
+    }
+  </script>
 </body>
 </html>

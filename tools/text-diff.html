@@ -1,76 +1,52 @@
+---
+layout: default
+title: "Text Diff Checker"
+description: "Compare two text files and find the differences."
+category: "Text Tools"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Text Diff Tool – Compare Text Online Instantly</title>
-  <meta name="description" content="Compare and highlight differences between two text blocks instantly with our free Text Diff Tool. Perfect for writers, coders, and editors.">
+  <title>Text Diff Checker</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/text-diff.html">
-  <meta property="og:title" content="Text Diff Tool – Compare Text Online Instantly">
-  <meta property="og:description" content="Compare and highlight differences between two text blocks instantly with our free Text Diff Tool. Perfect for writers, coders, and editors.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/text-diff.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Text Diff Tool – Compare Text Online Instantly">
-  <meta name="twitter:description" content="Compare and highlight differences between two text blocks instantly with our free Text Diff Tool. Perfect for writers, coders, and editors.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Text Diff Tool",
-    "url": "https://vincentrasskazov.github.io/tools/text-diff.html",
-    "applicationCategory": "Utility Tools",
-    "description": "Compare and highlight differences between two text blocks instantly with our free Text Diff Tool. Perfect for writers, coders, and editors."
-  }
-  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsdiff/5.1.0/diff.min.js"></script>
+  <style>
+    .tool-container { max-width: 900px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    .cols { display: flex; gap: 20px; }
+    .col { flex: 1; }
+    textarea { width: 100%; height: 200px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; margin: 20px 0; font-weight: bold; }
+    #result { white-space: pre-wrap; padding: 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; }
+    .added { background-color: #d1fae5; color: #065f46; }
+    .removed { background-color: #fee2e2; color: #991b1b; text-decoration: line-through; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">text diff Tool</h1>
+    <h1 style="text-align: center; color: #2563eb;">Text Diff Checker</h1>
+    <div class="cols">
+      <div class="col"><label>Original Text</label><textarea id="text1">Hello World</textarea></div>
+      <div class="col"><label>New Text</label><textarea id="text2">Hello New World</textarea></div>
+    </div>
+    <button onclick="compare()">Compare Texts</button>
+    <div id="result"></div>
   </div>
-
-  <h1>text diff Tool</h1>
-
-  <p>This is a starter tool page for <strong>text diff</strong>.</p>
-
-
-  <textarea id="a" placeholder="Text A..." rows="6" style="width:100%"></textarea>
-  <textarea id="b" placeholder="Text B..." rows="6" style="width:100%"></textarea>
-  <button onclick="run()">Diff</button>
-
-  <pre id="output"></pre>
-
   <script>
-    function diffLines(a, b) {
-      const aLines = a.split('\n');
-      const bLines = b.split('\n');
-      let out = '';
-      const max = Math.max(aLines.length, bLines.length);
-      for (let i = 0; i < max; i++) {
-        if (aLines[i] === bLines[i]) out += '  ' + (aLines[i] || '') + '\n';
-        else {
-          if (aLines[i] !== undefined) out += '- ' + aLines[i] + '\n';
-          if (bLines[i] !== undefined) out += '+ ' + bLines[i] + '\n';
-        }
-      }
-      return out;
-    }
-    function run() {
-      const a = document.getElementById('a').value;
-      const b = document.getElementById('b').value;
-      document.getElementById('output').innerText = diffLines(a, b);
+    function compare() {
+      const one = document.getElementById('text1').value;
+      const other = document.getElementById('text2').value;
+      const diff = Diff.diffWords(one, other);
+      const display = document.getElementById('result');
+      display.innerHTML = '';
+
+      diff.forEach((part) => {
+        const span = document.createElement('span');
+        span.className = part.added ? 'added' : part.removed ? 'removed' : 'common';
+        span.appendChild(document.createTextNode(part.value));
+        display.appendChild(span);
+      });
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

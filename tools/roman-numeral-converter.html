@@ -1,86 +1,51 @@
+---
+layout: default
+title: "Roman Numeral Converter"
+description: "Convert numbers to Roman Numerals and vice versa instantly."
+category: "Converters"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Roman Numeral Converter – Convert Roman Numerals Instantly Online</title>
-  <meta name="description" content="Convert Roman numerals to numbers and vice versa instantly with our free Roman Numeral Converter. Perfect for students, teachers, and history enthusiasts.">
+  <title>Roman Numeral Converter</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/roman-numeral-converter.html">
-  <meta property="og:title" content="Roman Numeral Converter – Convert Roman Numerals Instantly Online">
-  <meta property="og:description" content="Convert Roman numerals to numbers and vice versa instantly with our free Roman Numeral Converter. Perfect for students, teachers, and history enthusiasts.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/roman-numeral-converter.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Roman Numeral Converter – Convert Roman Numerals Instantly Online">
-  <meta name="twitter:description" content="Convert Roman numerals to numbers and vice versa instantly with our free Roman Numeral Converter. Perfect for students, teachers, and history enthusiasts.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Roman Numeral Converter",
-    "url": "https://vincentrasskazov.github.io/tools/roman-numeral-converter.html",
-    "applicationCategory": "Math Tools",
-    "description": "Convert Roman numerals to numbers and vice versa instantly with our free Roman Numeral Converter. Perfect for students, teachers, and history enthusiasts."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    .input-group { margin-bottom: 15px; }
+    label { display: block; font-weight: 600; margin-bottom: 5px; }
+    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; margin-top: 10px; font-weight: bold; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">roman numeral converter Tool</h1>
+    <h1>Roman Numeral Converter</h1>
+    <div class="input-group">
+      <label>Decimal Number (e.g., 2023)</label>
+      <input type="number" id="num" placeholder="2023">
+    </div>
+    <button onclick="toRoman()">Convert to Roman</button>
+    <div class="input-group" style="margin-top:20px;">
+      <label>Roman Numeral Result</label>
+      <input type="text" id="romanResult" readonly>
+    </div>
   </div>
-
-  <h1>roman numeral converter Tool</h1>
-
-  <p>This is a starter tool page for <strong>roman numeral converter</strong>.</p>
-
-
-  <input id="input" placeholder="Enter number or Roman numeral" style="width:200px;">
-  <button onclick="run()">Convert</button>
-
-  <p id="output"></p>
-
   <script>
-    const romanMap = [
-      ['M',1000],['CM',900],['D',500],['CD',400],['C',100],['XC',90],['L',50],['XL',40],['X',10],['IX',9],['V',5],['IV',4],['I',1]
-    ];
-    function toRoman(num) {
-      let n = num, res = '';
-      for (const [r, v] of romanMap) {
-        while (n >= v) { res += r; n -= v; }
+    function toRoman() {
+      let num = document.getElementById('num').value;
+      if (!num) return;
+      const lookup = {M:1000,CM:900,D:500,CD:400,C:100,XC:90,L:50,XL:40,X:10,IX:9,V:5,IV:4,I:1};
+      let roman = '';
+      for (let i in lookup ) {
+        while ( num >= lookup[i] ) {
+          roman += i;
+          num -= lookup[i];
+        }
       }
-      return res;
-    }
-    function fromRoman(str) {
-      let s = str.toUpperCase(), n = 0;
-      for (const [r, v] of romanMap) {
-        while (s.startsWith(r)) { n += v; s = s.slice(r.length); }
-      }
-      return s.length === 0 ? n : null;
-    }
-    function run() {
-      const v = document.getElementById('input').value.trim();
-      if (!v) { document.getElementById('output').innerText = 'Enter a value.'; return; }
-      if (/^\d+$/.test(v)) {
-        const n = parseInt(v, 10);
-        if (n < 1 || n > 3999) { document.getElementById('output').innerText = 'Number must be 1-3999.'; return; }
-        document.getElementById('output').innerText = toRoman(n);
-      } else {
-        const n = fromRoman(v);
-        if (n == null) { document.getElementById('output').innerText = 'Invalid Roman numeral.'; return; }
-        document.getElementById('output').innerText = n;
-      }
+      document.getElementById('romanResult').value = roman;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

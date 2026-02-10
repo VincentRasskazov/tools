@@ -1,51 +1,53 @@
+---
+layout: default
+title: "Word Frequency Counter"
+description: "Analyze text and count the frequency of every word. Great for SEO and writing analysis."
+category: "Text Tools"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Word Frequency Counter | Ultimate Tools Hub</title>
-  <meta name="description" content="Count word frequency in any text. Free, fast, and beautiful online word frequency counter.">
+  <title>Word Frequency Counter</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
   <style>
-    .freq-container { max-width: 520px; margin: 40px auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 24px #1976d233; padding: 32px 28px; }
-    .freq-title { font-size: 2rem; font-weight: 700; color: #1976d2; margin-bottom: 18px; }
-    .freq-desc { color: #555; margin-bottom: 22px; }
-    textarea { width: 100%; min-height: 80px; font-size: 1.1rem; border-radius: 8px; border: 1px solid #d1d5db; padding: 12px; margin-bottom: 18px; }
-    .result-label { font-weight: 600; color: #283593; margin-bottom: 6px; }
-    .result-box { background: #f6f8fa; border-radius: 8px; padding: 12px; font-family: monospace; font-size: 1.1rem; word-break: break-all; margin-bottom: 8px; }
-    table { width: 100%; border-collapse: collapse; margin-top: 18px; }
-    th, td { text-align: left; padding: 8px 6px; }
-    th { color: #1976d2; font-weight: 700; }
-    tr:nth-child(even) { background: #f6f8fa; }
-    button { background: #1976d2; color: #fff; border: none; border-radius: 8px; padding: 10px 22px; font-size: 1rem; font-weight: 600; cursor: pointer; margin-top: 8px; transition: background 0.2s; }
-    button:hover { background: #0d47a1; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    textarea { width: 100%; height: 200px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-family: sans-serif; margin-bottom: 20px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    table { width: 100%; margin-top: 20px; border-collapse: collapse; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background-color: #f2f2f2; }
   </style>
 </head>
 <body>
-  <div class="freq-container">
-    <div class="freq-title">Word Frequency Counter</div>
-    <div class="freq-desc">Paste or type text below to see the frequency of each word.</div>
-    <textarea id="freqInput" placeholder="Paste or type text..."></textarea>
-    <button onclick="countWords()">Count Words</button>
-    <div id="freqResult"></div>
+  <div class="tool-container">
+    <h1>Word Frequency Counter</h1>
+    <textarea id="text" placeholder="Paste your text here..."></textarea>
+    <button onclick="analyze()">Analyze Text</button>
+    <table id="resultTable" style="display:none;">
+      <thead><tr><th>Word</th><th>Count</th><th>%</th></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
   </div>
   <script>
-    function countWords() {
-      const text = document.getElementById('freqInput').value;
-      const words = text.toLowerCase().match(/\b\w+\b/g);
-      if (!words) {
-        document.getElementById('freqResult').innerHTML = '<div style="color:#d32f2f;">No words found.</div>';
-        return;
-      }
+    function analyze() {
+      const text = document.getElementById('text').value.toLowerCase().replace(/[^\w\s]/g, '');
+      const words = text.split(/\s+/).filter(w => w.length > 0);
+      const total = words.length;
       const freq = {};
+      
       words.forEach(w => freq[w] = (freq[w] || 0) + 1);
-      let html = '<table><tr><th>Word</th><th>Count</th></tr>';
-      Object.entries(freq).sort((a,b) => b[1]-a[1]).forEach(([w, c]) => {
-        html += `<tr><td>${w}</td><td>${c}</td></tr>`;
+      
+      const sorted = Object.entries(freq).sort((a,b) => b[1] - a[1]);
+      const tbody = document.getElementById('tbody');
+      tbody.innerHTML = '';
+      
+      sorted.forEach(([word, count]) => {
+        const row = `<tr><td>${word}</td><td>${count}</td><td>${((count/total)*100).toFixed(1)}%</td></tr>`;
+        tbody.innerHTML += row;
       });
-      html += '</table>';
-      document.getElementById('freqResult').innerHTML = html;
+      document.getElementById('resultTable').style.display = 'table';
     }
   </script>
 </body>

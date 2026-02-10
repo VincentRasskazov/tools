@@ -1,83 +1,45 @@
+---
+layout: default
+title: "BMR Calculator - Basal Metabolic Rate"
+description: "Calculate your Basal Metabolic Rate to know how many calories your body burns at rest."
+category: "Health Tools"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>BMR Calculator – Calculate Basal Metabolic Rate Instantly</title>
-  <meta name="description" content="Calculate your Basal Metabolic Rate (BMR) instantly with our free BMR Calculator. Enter your weight, height, age, and gender to get your BMR. Perfect for health and fitness.">
+  <title>BMR Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/bmr-calculator.html">
-  <meta property="og:title" content="BMR Calculator – Calculate Basal Metabolic Rate Instantly">
-  <meta property="og:description" content="Calculate your Basal Metabolic Rate (BMR) instantly with our free BMR Calculator. Enter your weight, height, age, and gender to get your BMR. Perfect for health and fitness.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/bmr-calculator.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="BMR Calculator – Calculate Basal Metabolic Rate Instantly">
-  <meta name="twitter:description" content="Calculate your Basal Metabolic Rate (BMR) instantly with our free BMR Calculator. Enter your weight, height, age, and gender to get your BMR. Perfect for health and fitness.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "BMR Calculator",
-    "url": "https://vincentrasskazov.github.io/tools/bmr-calculator.html",
-    "applicationCategory": "Health Tools",
-    "description": "Calculate your Basal Metabolic Rate (BMR) instantly with our free BMR Calculator. Enter your weight, height, age, and gender to get your BMR. Perfect for health and fitness."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    .input-group { margin-bottom: 15px; }
+    label { display: block; font-weight: 600; margin-bottom: 5px; }
+    input, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+    #result { margin-top: 20px; font-weight: bold; text-align: center; font-size: 1.5rem; color: #16a34a; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">bmr calculator Tool</h1>
+    <h1>BMR Calculator</h1>
+    <div class="input-group"><label>Age</label><input type="number" id="age"></div>
+    <div class="input-group"><label>Gender</label><select id="gender"><option value="m">Male</option><option value="f">Female</option></select></div>
+    <div class="input-group"><label>Weight (kg)</label><input type="number" id="weight"></div>
+    <div class="input-group"><label>Height (cm)</label><input type="number" id="height"></div>
+    <button onclick="calculate()">Calculate BMR</button>
+    <div id="result"></div>
   </div>
-
-  <h1>bmr calculator Tool</h1>
-
-  <p>This is a starter tool page for <strong>bmr calculator</strong>.</p>
-
-
-  <label for="weight">Weight (kg):</label>
-  <input id="weight" type="number" placeholder="e.g. 70">
-  <label for="height">Height (cm):</label>
-  <input id="height" type="number" placeholder="e.g. 170">
-  <label for="age">Age (years):</label>
-  <input id="age" type="number" placeholder="e.g. 30">
-  <label for="gender">Gender:</label>
-  <select id="gender">
-    <option value="male">Male</option>
-    <option value="female">Female</option>
-  </select>
-  <button onclick="run()">Calculate BMR</button>
-
-  <p id="output"></p>
-
   <script>
-    function run() {
-      const weight = parseFloat(document.getElementById('weight').value);
-      const height = parseFloat(document.getElementById('height').value);
+    function calculate() {
       const age = parseFloat(document.getElementById('age').value);
       const gender = document.getElementById('gender').value;
-      if (isNaN(weight) || isNaN(height) || isNaN(age) || weight <= 0 || height <= 0 || age <= 0) {
-        document.getElementById('output').innerText = "Please enter valid weight, height, and age.";
-        return;
-      }
-      let bmr;
-      if (gender === 'male') {
-        bmr = 10 * weight + 6.25 * height - 5 * age + 5;
-      } else {
-        bmr = 10 * weight + 6.25 * height - 5 * age - 161;
-      }
-      document.getElementById('output').innerText = `Your BMR is ${bmr.toFixed(2)} kcal/day.`;
+      const weight = parseFloat(document.getElementById('weight').value);
+      const height = parseFloat(document.getElementById('height').value);
+      
+      const bmr = (10 * weight) + (6.25 * height) - (5 * age) + (gender === 'm' ? 5 : -161);
+      document.getElementById('result').innerText = `${Math.round(bmr)} Calories / day`;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

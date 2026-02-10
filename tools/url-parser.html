@@ -1,61 +1,45 @@
+---
+layout: default
+title: "URL Parser"
+description: "Parse and split URL into protocol, host, path, and query parameters."
+category: "Developer Tools"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>URL Parser | Ultimate Tools Hub</title>
-  <meta name="description" content="Parse and analyze any URL. Instantly see protocol, host, path, query, and more.">
+  <title>URL Parser</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
   <style>
-    .url-container { max-width: 520px; margin: 40px auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 24px #1976d233; padding: 32px 28px; }
-    .url-title { font-size: 2rem; font-weight: 700; color: #1976d2; margin-bottom: 18px; }
-    .url-desc { color: #555; margin-bottom: 22px; }
-    input[type=text] { width: 100%; font-size: 1.1rem; border-radius: 8px; border: 1px solid #d1d5db; padding: 12px; margin-bottom: 18px; }
-    .result-label { font-weight: 600; color: #283593; margin-bottom: 6px; }
-    .result-box { background: #f6f8fa; border-radius: 8px; padding: 12px; font-family: monospace; font-size: 1.1rem; word-break: break-all; margin-bottom: 8px; }
-    button { background: #1976d2; color: #fff; border: none; border-radius: 8px; padding: 10px 22px; font-size: 1rem; font-weight: 600; cursor: pointer; margin-top: 8px; transition: background 0.2s; }
-    button:hover { background: #0d47a1; }
-    .url-table { width: 100%; border-collapse: collapse; margin-top: 18px; }
-    .url-table th, .url-table td { text-align: left; padding: 8px 6px; }
-    .url-table th { color: #1976d2; font-weight: 700; }
-    .url-table tr:nth-child(even) { background: #f6f8fa; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    .result-row { display: flex; border-bottom: 1px solid #eee; padding: 10px 0; }
+    .key { font-weight: bold; width: 150px; color: #64748b; }
+    .val { font-family: monospace; color: #334155; }
   </style>
 </head>
 <body>
-  <div class="url-container">
-    <div class="url-title">URL Parser</div>
-    <div class="url-desc">Paste a URL below to instantly see its protocol, host, path, query, and more.</div>
-    <input id="urlInput" type="text" placeholder="Paste a URL here...">
-    <button onclick="parseUrl()">Parse URL</button>
-    <div id="urlResult"></div>
+  <div class="tool-container">
+    <h1>URL Parser</h1>
+    <input type="text" id="url" placeholder="https://example.com/path?query=123#hash">
+    <button onclick="parse()">Parse URL</button>
+    <div id="results" style="margin-top:20px;"></div>
   </div>
   <script>
-    function parseUrl() {
-      const urlStr = document.getElementById('urlInput').value;
-      let url;
+    function parse() {
       try {
-        url = new URL(urlStr);
-      } catch (e) {
-        document.getElementById('urlResult').innerHTML = '<div style="color:#d32f2f;">Invalid URL</div>';
-        return;
-      }
-      const rows = [
-        ['Protocol', url.protocol],
-        ['Host', url.host],
-        ['Hostname', url.hostname],
-        ['Port', url.port || '(default)'],
-        ['Pathname', url.pathname],
-        ['Search', url.search],
-        ['Hash', url.hash],
-        ['Origin', url.origin]
-      ];
-      let html = '<table class="url-table">';
-      for (const [k, v] of rows) {
-        html += `<tr><th>${k}</th><td>${v}</td></tr>`;
-      }
-      html += '</table>';
-      document.getElementById('urlResult').innerHTML = html;
+        const url = new URL(document.getElementById('url').value);
+        const res = document.getElementById('results');
+        res.innerHTML = `
+          <div class="result-row"><span class="key">Protocol</span><span class="val">${url.protocol}</span></div>
+          <div class="result-row"><span class="key">Host</span><span class="val">${url.host}</span></div>
+          <div class="result-row"><span class="key">Path</span><span class="val">${url.pathname}</span></div>
+          <div class="result-row"><span class="key">Query</span><span class="val">${url.search}</span></div>
+          <div class="result-row"><span class="key">Hash</span><span class="val">${url.hash}</span></div>
+        `;
+      } catch(e) { alert("Invalid URL"); }
     }
   </script>
 </body>

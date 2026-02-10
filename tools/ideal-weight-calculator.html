@@ -1,77 +1,44 @@
+---
+layout: default
+title: "Ideal Weight Calculator"
+description: "Calculate your ideal weight based on height using popular formulas (Devine, Robinson)."
+category: "Health Tools"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Ideal Weight Calculator – Free Online Tool</title>
-  <meta name="description" content="Calculate your ideal weight based on height and gender. Free, fast, and easy-to-use ideal weight calculator for health and fitness.">
+  <title>Ideal Weight Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/ideal-weight-calculator.html">
-  <meta property="og:title" content="Ideal Weight Calculator – Free Online Tool">
-  <meta property="og:description" content="Calculate your ideal weight based on height and gender. Free, fast, and easy-to-use ideal weight calculator for health and fitness.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/ideal-weight-calculator.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Ideal Weight Calculator – Free Online Tool">
-  <meta name="twitter:description" content="Calculate your ideal weight based on height and gender. Free, fast, and easy-to-use ideal weight calculator for health and fitness.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Ideal Weight Calculator",
-    "url": "https://vincentrasskazov.github.io/tools/ideal-weight-calculator.html",
-    "applicationCategory": "Health Tools",
-    "description": "Calculate your ideal weight based on height and gender. Free, fast, and easy-to-use ideal weight calculator for health and fitness."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    .input-group { margin-bottom: 15px; }
+    label { display: block; font-weight: 600; margin-bottom: 5px; }
+    input, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+    #result { margin-top: 20px; font-weight: bold; text-align: center; font-size: 1.2rem; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">ideal weight calculator Tool</h1>
+    <h1>Ideal Weight Calculator</h1>
+    <div class="input-group"><label>Gender</label><select id="gender"><option value="m">Male</option><option value="f">Female</option></select></div>
+    <div class="input-group"><label>Height (cm)</label><input type="number" id="height"></div>
+    <button onclick="calculate()">Calculate</button>
+    <div id="result"></div>
   </div>
-
-  <h1>ideal weight calculator Tool</h1>
-
-  <p>This is a starter tool page for <strong>ideal weight calculator</strong>.</p>
-
-
-  <label for="height">Height (cm):</label>
-  <input id="height" type="number" placeholder="e.g. 170">
-  <label for="gender">Gender:</label>
-  <select id="gender">
-    <option value="male">Male</option>
-    <option value="female">Female</option>
-  </select>
-  <button onclick="run()">Calculate Ideal Weight</button>
-
-  <p id="output"></p>
-
   <script>
-    function run() {
-      const height = parseFloat(document.getElementById('height').value);
-      const gender = document.getElementById('gender').value;
-      if (isNaN(height) || height <= 0) {
-        document.getElementById('output').innerText = "Please enter a valid height.";
-        return;
-      }
-      let ideal;
-      if (gender === 'male') {
-        ideal = 50 + 2.3 * ((height / 2.54) - 60);
-      } else {
-        ideal = 45.5 + 2.3 * ((height / 2.54) - 60);
-      }
-      document.getElementById('output').innerText = `Ideal weight: ${ideal.toFixed(2)} kg`;
+    function calculate() {
+      const h = parseFloat(document.getElementById('height').value);
+      const g = document.getElementById('gender').value;
+      if(!h) return;
+      
+      const inchesOver60 = (h / 2.54) - 60;
+      let ideal = g === 'm' ? 50 + (2.3 * inchesOver60) : 45.5 + (2.3 * inchesOver60);
+      
+      document.getElementById('result').innerText = `Ideal Weight: ${ideal.toFixed(1)} kg`;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>
