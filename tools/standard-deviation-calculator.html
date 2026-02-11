@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Calculate the population and sample standard deviation of a dataset.">
+  <meta property="og:title" content="Standard Deviation Calculator">
+  <meta property="og:description" content="Calculate the population and sample standard deviation of a dataset.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Standard Deviation Calculator">
+  <meta name="twitter:description" content="Calculate the population and sample standard deviation of a dataset.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>Standard Deviation</title><style>.tool-container{max-width:600px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} textarea{width:100%;height:100px;padding:10px;border:1px solid #ccc;border-radius:6px;margin-bottom:15px;} button{width:100%;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;} #res{margin-top:20px;font-size:1.2rem;background:#f8fafc;padding:15px;border-radius:6px;border:1px solid #cbd5e1;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Standard Deviation</h1><label>Data Set (comma separated)</label><textarea id="in" placeholder="10, 12, 23, 23, 16, 23, 21, 16"></textarea><button onclick="c()">Calculate</button><div id="res"></div></div>
+<script>function c(){ let a=document.getElementById('in').value.split(',').map(Number).filter(n=>!isNaN(n)); if(a.length<2)return; let m=a.reduce((s,n)=>s+n,0)/a.length; let sqDiffs=a.map(n=>Math.pow(n-m, 2)); let sumSq=sqDiffs.reduce((s,n)=>s+n,0); let pSd=Math.sqrt(sumSq/a.length), sSd=Math.sqrt(sumSq/(a.length-1)); document.getElementById('res').innerHTML = `Population Std Dev (σ): <strong>${pSd.toFixed(4)}</strong><br>Sample Std Dev (s): <strong>${sSd.toFixed(4)}</strong>`; }</script></body></html>

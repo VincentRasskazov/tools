@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Extract a list of all object keys from a JSON payload.">
+  <meta property="og:title" content="JSON Key Extractor">
+  <meta property="og:description" content="Extract a list of all object keys from a JSON payload.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="JSON Key Extractor">
+  <meta name="twitter:description" content="Extract a list of all object keys from a JSON payload.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>JSON Key Extractor</title><style>.tool-container{max-width:800px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} textarea{width:100%;height:150px;padding:10px;border:1px solid #ccc;border-radius:6px;margin-bottom:15px;font-family:monospace;} button{width:100%;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">JSON Key Extractor</h1><textarea id="in" placeholder='{"id": 1, "user": {"name": "Alice"}}'></textarea><button onclick="c()">Extract Keys</button><textarea id="out" readonly style="margin-top:20px;"></textarea></div>
+<script>function getKeys(obj, pre='') { let keys=[]; for(let k in obj){ let p = pre ? pre+'.'+k : k; keys.push(p); if(typeof obj[k]==='object'&&obj[k]!==null&&!Array.isArray(obj[k])) keys=keys.concat(getKeys(obj[k], p)); } return keys; } function c(){ try{ const j=JSON.parse(document.getElementById('in').value); document.getElementById('out').value = getKeys(j).join('\n'); }catch(e){document.getElementById('out').value="Invalid JSON";} }</script></body></html>

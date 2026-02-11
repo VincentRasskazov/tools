@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Format block text to wrap at exactly N characters.">
+  <meta property="og:title" content="Word Wrap Formatter">
+  <meta property="og:description" content="Format block text to wrap at exactly N characters.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Word Wrap Formatter">
+  <meta name="twitter:description" content="Format block text to wrap at exactly N characters.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>Word Wrap</title><style>.tool-container{max-width:800px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} textarea{width:100%;height:150px;padding:10px;border:1px solid #ccc;border-radius:6px;margin-bottom:15px;font-family:monospace;} input{width:100px;padding:10px;border:1px solid #ccc;border-radius:6px;margin-right:10px;} button{padding:12px 24px;background:#2563eb;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Word Wrap Formatter</h1><textarea id="in" placeholder="Very long single line of text..."></textarea><div><label>Wrap at length:</label> <input type="number" id="len" value="80"><button onclick="c()">Format Text</button></div><textarea id="out" readonly style="margin-top:20px;"></textarea></div>
+<script>function c(){ const t=document.getElementById('in').value; const l=parseInt(document.getElementById('len').value); const re=new RegExp(`(?![^\\n]{1,${l}}$)([^\\n]{1,${l}})\\s`, 'g'); document.getElementById('out').value=t.replace(re, '$1\n'); }</script></body></html>

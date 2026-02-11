@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Calculate statistical mean, median, and mode from a dataset.">
+  <meta property="og:title" content="Mean, Median, Mode Calculator">
+  <meta property="og:description" content="Calculate statistical mean, median, and mode from a dataset.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mean, Median, Mode Calculator">
+  <meta name="twitter:description" content="Calculate statistical mean, median, and mode from a dataset.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>Mean Median Mode</title><style>.tool-container{max-width:600px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} textarea{width:100%;height:100px;padding:10px;border:1px solid #ccc;border-radius:6px;margin-bottom:15px;} button{width:100%;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;} #res{margin-top:20px;font-size:1.2rem;background:#f8fafc;padding:15px;border-radius:6px;border:1px solid #cbd5e1;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Mean, Median, Mode</h1><label>Data Set (comma separated)</label><textarea id="in" placeholder="1, 2, 3, 4, 4, 5"></textarea><button onclick="c()">Calculate Statistics</button><div id="res"></div></div>
+<script>function c(){ let a = document.getElementById('in').value.split(',').map(Number).filter(n=>!isNaN(n)).sort((x,y)=>x-y); if(!a.length)return; let sum=a.reduce((s,n)=>s+n,0), mean=sum/a.length, mid=Math.floor(a.length/2), med=a.length%2!==0?a[mid]:(a[mid-1]+a[mid])/2; let counts={}, max=0, mode=[]; a.forEach(n=>{counts[n]=(counts[n]||0)+1; if(counts[n]>max)max=counts[n];}); for(let k in counts) if(counts[k]===max) mode.push(k); document.getElementById('res').innerHTML = `Mean: <strong>${mean.toFixed(4)}</strong><br>Median: <strong>${med}</strong><br>Mode: <strong>${mode.join(', ')}</strong>`; }</script></body></html>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Extract data from a Markdown table and convert it back to CSV format.">
+  <meta property="og:title" content="Markdown Table to CSV">
+  <meta property="og:description" content="Extract data from a Markdown table and convert it back to CSV format.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Markdown Table to CSV">
+  <meta name="twitter:description" content="Extract data from a Markdown table and convert it back to CSV format.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>MD Table to CSV</title><style>.tool-container{max-width:800px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;} textarea{width:100%;height:200px;padding:10px;border:1px solid #ccc;border-radius:6px;font-family:monospace;margin-bottom:15px;} button{grid-column:1/-1;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Markdown Table to CSV</h1><div class="grid"><div><label>Markdown Input</label><textarea id="in" placeholder="| Col | Col |\n|---|---|\n| A | B |"></textarea></div><div><label>CSV Output</label><textarea id="out" readonly></textarea></div><button onclick="c()">Convert to CSV</button></div></div>
+<script>function c(){ const lines = document.getElementById('in').value.split('\n').filter(l=>l.includes('|') && !l.includes('---')); let csv = lines.map(l => l.split('|').filter((_,i,a)=>i!==0&&i!==a.length-1).map(c=>c.trim()).join(',')); document.getElementById('out').value = csv.join('\n'); }</script></body></html>
