@@ -1,0 +1,20 @@
+---
+layout: default
+title: "UUID v1 Generator"
+description: "Generate timestamp-based Version 1 UUIDs."
+category: "Developer Tools"
+---
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>UUID v1</title><style>.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);text-align:center;} button{width:100%;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;cursor:pointer;font-weight:bold;} #out{font-family:monospace;font-size:1.5rem;background:#f8fafc;padding:20px;border-radius:6px;margin-bottom:20px;word-break:break-all;}</style></head>
+<body><div class="tool-container"><h1 style="color:#2563eb;">UUID v1 Generator</h1><div id="out">...</div><button onclick="c()">Generate UUID</button></div>
+<script>
+function c(){ 
+  let d = new Date().getTime();
+  let uuid = 'xxxxxxxx-xxxx-1xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    let r = (d + Math.random()*16)%16 | 0;
+    d = Math.floor(d/16);
+    return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+  });
+  document.getElementById('out').innerText = uuid; 
+} window.onload=c;
+</script></body></html>

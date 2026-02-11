@@ -1,0 +1,16 @@
+---
+layout: default
+title: "Twitter Card Generator"
+description: "Generate Twitter Card HTML tags for perfect X/Twitter embeds."
+category: "Developer Tools"
+---
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Twitter Card</title><style>.tool-container{max-width:800px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} input,textarea{width:100%;padding:10px;margin-bottom:15px;border:1px solid #ccc;border-radius:6px;} button{width:100%;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;cursor:pointer;font-weight:bold;} #out{background:#1e293b;color:#a5b4fc;padding:15px;margin-top:20px;font-family:monospace;height:150px;}</style></head>
+<body><div class="tool-container"><h1>Twitter Card Generator</h1>
+<input type="text" id="t" placeholder="twitter:title">
+<input type="text" id="d" placeholder="twitter:description">
+<input type="text" id="i" placeholder="twitter:image (URL)">
+<input type="text" id="s" placeholder="twitter:site (@username)">
+<button onclick="c()">Generate Tags</button>
+<textarea id="out" readonly></textarea></div>
+<script>function c(){ const t=document.getElementById('t').value, d=document.getElementById('d').value, i=document.getElementById('i').value, s=document.getElementById('s').value; document.getElementById('out').value = `<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:site" content="${s}">\n<meta name="twitter:title" content="${t}">\n<meta name="twitter:description" content="${d}">\n<meta name="twitter:image" content="${i}">`; }</script></body></html>

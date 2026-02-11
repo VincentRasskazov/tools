@@ -1,0 +1,10 @@
+---
+layout: default
+title: "Random Hex Generator"
+description: "Generate random cryptographic hex strings for keys, IDs, and tokens."
+category: "Developer Tools"
+---
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Random Hex</title><style>.tool-container{max-width:600px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);text-align:center;} input{width:100%;padding:12px;border:1px solid #ccc;border-radius:6px;font-size:16px;margin-bottom:20px;} button{width:100%;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;cursor:pointer;font-weight:bold;} #out{font-family:monospace;font-size:1.5rem;background:#f8fafc;padding:20px;border-radius:6px;margin-top:20px;word-break:break-all;}</style></head>
+<body><div class="tool-container"><h1 style="color:#2563eb;">Random Hex Generator</h1><label>Length (bytes)</label><input type="number" id="len" value="16" min="1" max="512"><button onclick="c()">Generate Hex</button><div id="out">...</div></div>
+<script>function c(){ const len=parseInt(document.getElementById('len').value); const arr=new Uint8Array(len); crypto.getRandomValues(arr); document.getElementById('out').innerText = Array.from(arr).map(b=>b.toString(16).padStart(2,'0')).join(''); } window.onload=c;</script></body></html>
