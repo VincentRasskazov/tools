@@ -1,79 +1,47 @@
+---
+layout: default
+title: "Epoch Converter - Unix Timestamp to Date"
+description: "Convert Unix epoch timestamps to human-readable dates and local time instantly."
+category: "Developer Tools"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Epoch Converter – Convert Epoch Time Instantly Online</title>
-  <meta name="description" content="Convert epoch time (Unix timestamp) to human-readable date and vice versa instantly with our free Epoch Converter. Perfect for developers, sysadmins, and students.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/epoch-converter.html">
-  <meta property="og:title" content="Epoch Converter – Convert Epoch Time Instantly Online">
-  <meta property="og:description" content="Convert epoch time (Unix timestamp) to human-readable date and vice versa instantly with our free Epoch Converter. Perfect for developers, sysadmins, and students.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/epoch-converter.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Epoch Converter – Convert Epoch Time Instantly Online">
-  <meta name="twitter:description" content="Convert epoch time (Unix timestamp) to human-readable date and vice versa instantly with our free Epoch Converter. Perfect for developers, sysadmins, and students.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Epoch Converter",
-    "url": "https://vincentrasskazov.github.io/tools/epoch-converter.html",
-    "applicationCategory": "Date Tools",
-    "description": "Convert epoch time (Unix timestamp) to human-readable date and vice versa instantly with our free Epoch Converter. Perfect for developers, sysadmins, and students."
-  }
-  </script>
+  <title>Epoch Converter</title>
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+    h1 { color: #2563eb; }
+    .now { font-size: 2.5rem; font-weight: bold; color: #16a34a; margin: 20px 0; font-family: monospace; }
+    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 18px; margin-bottom: 20px; text-align: center; font-family: monospace; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 16px; }
+    .res { margin-top: 20px; font-family: monospace; background: #f8fafc; padding: 20px; border-radius: 6px; text-align: left; font-size: 1.1rem; border: 1px solid #e2e8f0; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">epoch converter Tool</h1>
+    <h1>Epoch Converter</h1>
+    <p style="color: #64748b; font-weight: bold;">Current Epoch Time (Seconds):</p>
+    <div class="now" id="now">...</div>
+    <hr style="border:0; border-top:1px solid #e2e8f0; margin:30px 0;">
+    <label style="display:block; margin-bottom:10px; font-weight:bold; text-align: left;">Convert Timestamp</label>
+    <input type="number" id="ts" placeholder="e.g. 1672531200">
+    <button onclick="conv()">Convert to Date</button>
+    <div class="res" id="out" style="display:none;"></div>
   </div>
-
-  <h1>epoch converter Tool</h1>
-
-  <p>This is a starter tool page for <strong>epoch converter</strong>.</p>
-
-
-  <label for="input">Epoch (seconds):</label>
-  <input id="input" type="number" placeholder="e.g. 1609459200">
-  <button onclick="run()">To Date</button>
-  <br><br>
-  <label for="date">Date:</label>
-  <input id="date" type="datetime-local">
-  <button onclick="run2()">To Epoch</button>
-
-  <p id="output"></p>
-
   <script>
-    function run() {
-      const v = parseInt(document.getElementById('input').value, 10);
-      if (isNaN(v)) {
-        document.getElementById('output').innerText = "Please enter a valid epoch time.";
-        return;
-      }
-      const d = new Date(v * 1000);
-      document.getElementById('output').innerText = d.toISOString().replace('T', ' ').replace('Z', ' UTC');
-    }
-    function run2() {
-      const v = document.getElementById('date').value;
-      if (!v) {
-        document.getElementById('output').innerText = "Please select a date/time.";
-        return;
-      }
-      const d = new Date(v);
-      document.getElementById('output').innerText = Math.floor(d.getTime() / 1000);
+    setInterval(() => document.getElementById('now').innerText = Math.floor(Date.now() / 1000), 1000);
+    function conv() {
+      let ts = parseInt(document.getElementById('ts').value);
+      if(isNaN(ts)) return;
+      if(ts < 10000000000) ts *= 1000; // auto-detect seconds vs ms
+      const d = new Date(ts);
+      document.getElementById('out').style.display = 'block';
+      document.getElementById('out').innerHTML = `
+        <span style="color:#64748b">GMT:</span><br><strong>${d.toUTCString()}</strong><br><br>
+        <span style="color:#64748b">Local Time:</span><br><strong>${d.toLocaleString()}</strong>
+      `;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

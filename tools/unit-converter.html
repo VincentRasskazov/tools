@@ -1,90 +1,71 @@
+---
+layout: default
+title: "Unit Converter - Length, Weight & More"
+description: "Free online unit converter. Easily convert between different units of length and weight."
+category: "Converters"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="../assets/css/tool-style.css">
   <meta charset="UTF-8">
-  <title>unit converter Tool</title>
-  <meta name="description" content="unit converter online tool.">
-  <meta name="category" content="Converters">
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <title>Unit Converter</title>
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    .row { display: flex; gap: 15px; margin-bottom: 20px; }
+    .col { flex: 1; }
+    select, input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; margin-top: 5px; }
+    label { font-weight: 600; color: #334155; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">unit converter Tool</h1>
+    <h1>Unit Converter</h1>
+    <label>Category</label>
+    <select id="cat" onchange="updateUnits()" style="margin-bottom: 20px;">
+      <option value="length">Length</option>
+      <option value="weight">Weight</option>
+    </select>
+    <div class="row">
+      <div class="col">
+        <label>From</label>
+        <input type="number" id="valA" value="1" oninput="calc('A')">
+        <select id="unitA" onchange="calc('A')"></select>
+      </div>
+      <div class="col">
+        <label>To</label>
+        <input type="number" id="valB" oninput="calc('B')">
+        <select id="unitB" onchange="calc('A')"></select>
+      </div>
+    </div>
   </div>
-
-  <h1>unit converter Tool</h1>
-
-  <p>This is a starter tool page for <strong>unit converter</strong>.</p>
-
-
-  <input id="value" type="number" placeholder="Enter value" style="width:120px;">
-  <select id="from">
-    <option value="m">Meter</option>
-    <option value="cm">Centimeter</option>
-    <option value="mm">Millimeter</option>
-    <option value="km">Kilometer</option>
-    <option value="g">Gram</option>
-    <option value="kg">Kilogram</option>
-    <option value="mg">Milligram</option>
-    <option value="l">Liter</option>
-    <option value="ml">Milliliter</option>
-  </select>
-  to
-  <select id="to">
-    <option value="m">Meter</option>
-    <option value="cm">Centimeter</option>
-    <option value="mm">Millimeter</option>
-    <option value="km">Kilometer</option>
-    <option value="g">Gram</option>
-    <option value="kg">Kilogram</option>
-    <option value="mg">Milligram</option>
-    <option value="l">Liter</option>
-    <option value="ml">Milliliter</option>
-  </select>
-  <button onclick="run()">Convert</button>
-
-  <p id="output"></p>
-
   <script>
-    const factors = {
-      m: 1, cm: 0.01, mm: 0.001, km: 1000,
-      g: 1, kg: 1000, mg: 0.001,
-      l: 1, ml: 0.001
+    const units = {
+      length: { m: 1, km: 1000, cm: 0.01, mm: 0.001, mi: 1609.34, yd: 0.9144, ft: 0.3048, in: 0.0254 },
+      weight: { kg: 1, g: 0.001, mg: 0.000001, lb: 0.453592, oz: 0.0283495 }
     };
-    function run() {
-      const value = parseFloat(document.getElementById('value').value);
-      const from = document.getElementById('from').value;
-      const to = document.getElementById('to').value;
-      if (isNaN(value)) {
-        document.getElementById('output').innerText = 'Enter a valid number.';
-        return;
-      }
-      let base;
-      if (from in factors && to in factors) {
-        if ((from === 'm' || from === 'cm' || from === 'mm' || from === 'km') && (to === 'm' || to === 'cm' || to === 'mm' || to === 'km')) {
-          base = value * factors[from];
-          document.getElementById('output').innerText = value + ' ' + from + ' = ' + (base / factors[to]) + ' ' + to;
-        } else if ((from === 'g' || from === 'kg' || from === 'mg') && (to === 'g' || to === 'kg' || to === 'mg')) {
-          base = value * factors[from];
-          document.getElementById('output').innerText = value + ' ' + from + ' = ' + (base / factors[to]) + ' ' + to;
-        } else if ((from === 'l' || from === 'ml') && (to === 'l' || to === 'ml')) {
-          base = value * factors[from];
-          document.getElementById('output').innerText = value + ' ' + from + ' = ' + (base / factors[to]) + ' ' + to;
-        } else {
-          document.getElementById('output').innerText = 'Incompatible units.';
-        }
+    function updateUnits() {
+      const cat = document.getElementById('cat').value;
+      const u = Object.keys(units[cat]);
+      let html = u.map(x => `<option value="${x}">${x.toUpperCase()}</option>`).join('');
+      document.getElementById('unitA').innerHTML = html;
+      document.getElementById('unitB').innerHTML = html;
+      document.getElementById('unitB').selectedIndex = 1 % u.length;
+      calc('A');
+    }
+    function calc(source) {
+      const cat = document.getElementById('cat').value;
+      const uA = document.getElementById('unitA').value;
+      const uB = document.getElementById('unitB').value;
+      const vA = document.getElementById('valA');
+      const vB = document.getElementById('valB');
+      if(source === 'A') {
+        vB.value = (vA.value * units[cat][uA] / units[cat][uB]).toFixed(5).replace(/\.?0+$/, '');
       } else {
-        document.getElementById('output').innerText = 'Unknown unit.';
+        vA.value = (vB.value * units[cat][uB] / units[cat][uA]).toFixed(5).replace(/\.?0+$/, '');
       }
     }
+    updateUnits();
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>
