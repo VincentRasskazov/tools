@@ -1,22 +1,22 @@
+---
+layout: default
+title: "Regex Pattern Generator"
+description: "Generate simple regular expressions for common tasks like email or date matching."
+category: "Developer Tools"
+---
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Generate regular expressions from natural language descriptions and test them live with this free Regex Pattern Generator tool.">
-  <title>Regex Pattern Generator - Free Online Tool</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
-</head>
-<body>
-  <div class="tool-container">
-    <h1>Regex Pattern Generator</h1>
-    <input type="text" id="regex-desc" placeholder="Describe your pattern">
-    <button id="generate-btn">Generate Regex</button>
-    <div id="regex-result"></div>
-    <input type="text" id="test-string" placeholder="Test string">
-    <button id="test-btn">Test Regex</button>
-    <div id="test-result"></div>
-  </div>
-  <script src="../assets/js/regex-pattern-generator.js"></script>
-</body>
-</html>
+<html lang="en"><head><meta charset="UTF-8"><title>Regex Generator</title><style>.tool-container{max-width:600px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} select, input{width:100%;padding:10px;margin-bottom:15px;border:1px solid #ccc;border-radius:6px;} .res{font-family:monospace;background:#f8fafc;padding:15px;border-radius:6px;word-break:break-all;font-size:1.2rem;color:#2563eb;}</style></head>
+<body><div class="tool-container"><h1>Regex Pattern Generator</h1>
+<label>I want to match:</label>
+<select id="sel" onchange="gen()">
+  <option value="email">Email Address</option>
+  <option value="date">Date (YYYY-MM-DD)</option>
+  <option value="phone">Phone Number (US)</option>
+  <option value="url">URL</option>
+  <option value="num">Only Numbers</option>
+</select>
+<div class="res" id="out">^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$</div></div>
+<script>
+const patterns = { email: '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$', date: '^\\d{4}-\\d{2}-\\d{2}$', phone: '^\\(\\d{3}\\)\\s\\d{3}-\\d{4}$', url: '^(https?:\\/\\/)?([\\da-z.-]+)\\.([a-z.]{2,6})([\\/\\w .-]*)*\\/?$', num: '^\\d+$' };
+function gen(){ document.getElementById('out').innerText = patterns[document.getElementById('sel').value]; }
+</script></body></html>

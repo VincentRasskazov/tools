@@ -1,22 +1,25 @@
+---
+layout: default
+title: "Time Zone Converter"
+description: "Convert a specific time from one time zone to another."
+category: "Utility"
+---
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Convert times between multiple time zones with this free Time Zone Converter tool. Supports daylight saving changes.">
-  <title>Time Zone Converter - Free Online Tool</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
-</head>
-<body>
-  <div class="tool-container">
-    <h1>Time Zone Converter</h1>
-    <input type="datetime-local" id="datetime-input">
-    <select id="from-tz"></select>
-    <span>to</span>
-    <select id="to-tz"></select>
-    <button id="convert-btn">Convert</button>
-    <div id="tz-result"></div>
-  </div>
-  <script src="../assets/js/time-zone-converter.js"></script>
-</body>
-</html>
+<html lang="en"><head><meta charset="UTF-8"><title>TZ Converter</title><style>.tool-container{max-width:600px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} input, select{width:100%;padding:10px;margin-bottom:15px;border:1px solid #ccc;border-radius:6px;}</style></head>
+<body><div class="tool-container"><h1>Time Zone Converter</h1>
+<input type="datetime-local" id="t" oninput="calc()">
+<label>To Time Zone:</label>
+<select id="z" onchange="calc()">
+  <option value="UTC">UTC</option><option value="America/New_York">New York (EST)</option><option value="Europe/London">London (GMT)</option><option value="Asia/Tokyo">Tokyo</option>
+</select>
+<div id="r" style="text-align:center;font-size:1.5rem;font-weight:bold;color:#2563eb;margin-top:20px;"></div></div>
+<script>
+function calc(){
+  const t = document.getElementById('t').value;
+  const z = document.getElementById('z').value;
+  if(t){
+    const d = new Date(t);
+    document.getElementById('r').innerText = d.toLocaleString('en-US', { timeZone: z });
+  }
+}
+</script></body></html>

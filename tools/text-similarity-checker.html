@@ -1,20 +1,21 @@
+---
+layout: default
+title: "Text Similarity Checker"
+description: "Check how similar two pieces of text are using a percentage score."
+category: "Text Tools"
+---
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Analyze, visualize, and compare text similarity with this free Text Similarity Checker tool. Useful for plagiarism detection and content comparison.">
-  <title>Text Similarity Checker - Free Online Tool</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
-</head>
-<body>
-  <div class="tool-container">
-    <h1>Text Similarity Checker</h1>
-    <textarea id="text1" rows="4" placeholder="Enter first text..."></textarea>
-    <textarea id="text2" rows="4" placeholder="Enter second text..."></textarea>
-    <button id="check-btn">Check Similarity</button>
-    <div id="similarity-result"></div>
-  </div>
-  <script src="../assets/js/text-similarity-checker.js"></script>
-</body>
-</html>
+<html lang="en"><head><meta charset="UTF-8"><title>Similarity Checker</title><style>.tool-container{max-width:800px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} textarea{width:100%;height:150px;padding:10px;border:1px solid #ccc;border-radius:6px;}</style></head>
+<body><div class="tool-container"><h1>Text Similarity Checker</h1>
+<textarea id="a" placeholder="Text One"></textarea><textarea id="b" style="margin-top:10px" placeholder="Text Two"></textarea>
+<button onclick="check()" style="width:100%;padding:12px;margin-top:10px;background:#2563eb;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;">Compare</button>
+<h2 id="r" style="text-align:center;margin-top:20px;"></h2></div>
+<script>
+function check(){
+  const s1=document.getElementById('a').value, s2=document.getElementById('b').value;
+  let matches = 0; const a1=s1.split(' '), a2=s2.split(' ');
+  a1.forEach(w => { if(a2.includes(w)) matches++; });
+  const score = ((matches*2)/(a1.length+a2.length)*100).toFixed(1);
+  document.getElementById('r').innerText = `Similarity: ${score}%`;
+}
+</script></body></html>

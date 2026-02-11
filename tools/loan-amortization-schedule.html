@@ -1,23 +1,26 @@
+---
+layout: default
+title: "Loan Amortization Schedule Generator"
+description: "Generate a full payment schedule for your loan, including interest and principal breakdowns."
+category: "Calculators"
+---
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Generate detailed loan amortization schedules with this free online Loan Amortization Schedule Generator tool.">
-  <title>Loan Amortization Schedule Generator - Free Online Tool</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
-</head>
-<body>
-  <div class="tool-container">
-    <h1>Loan Amortization Schedule Generator</h1>
-    <form id="amortization-form">
-      <input type="number" id="loan-amount" placeholder="Loan Amount ($)" required>
-      <input type="number" id="interest-rate" placeholder="Interest Rate (%)" required>
-      <input type="number" id="years" placeholder="Years" required>
-      <button type="submit">Generate Schedule</button>
-    </form>
-    <div id="amortization-result"></div>
-  </div>
-  <script src="../assets/js/loan-amortization-schedule.js"></script>
-</body>
-</html>
+<html lang="en"><head><meta charset="UTF-8"><title>Amortization Schedule</title><style>.tool-container{max-width:800px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} input{width:100%;padding:10px;margin-bottom:15px;border:1px solid #ccc;border-radius:6px;} button{width:100%;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;} table{width:100%;margin-top:20px;border-collapse:collapse;} th,td{border:1px solid #ddd;padding:8px;text-align:right;} th{background:#f2f2f2;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Amortization Schedule</h1>
+<label>Loan Amount ($)</label><input type="number" id="p" value="10000">
+<label>Interest Rate (%)</label><input type="number" id="r" value="5">
+<label>Years</label><input type="number" id="y" value="3">
+<button onclick="calc()">Generate Schedule</button>
+<table id="st" style="display:none;"><thead><tr><th>Month</th><th>Payment</th><th>Principal</th><th>Interest</th><th>Balance</th></tr></thead><tbody id="sb"></tbody></table></div>
+<script>
+function calc(){
+  const P=parseFloat(document.getElementById('p').value), r=parseFloat(document.getElementById('r').value)/100/12, n=parseFloat(document.getElementById('y').value)*12;
+  const pay = (P*r)/(1-Math.pow(1+r,-n));
+  let bal = P, html = '';
+  for(let i=1;i<=n;i++){
+    let intr = bal*r, prin = pay-intr; bal -= prin;
+    html += `<tr><td>${i}</td><td>${pay.toFixed(2)}</td><td>${prin.toFixed(2)}</td><td>${intr.toFixed(2)}</td><td>${Math.max(0,bal).toFixed(2)}</td></tr>`;
+  }
+  document.getElementById('sb').innerHTML = html; document.getElementById('st').style.display='table';
+}
+</script></body></html>

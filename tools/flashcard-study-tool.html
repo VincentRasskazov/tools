@@ -1,17 +1,23 @@
+---
+layout: default
+title: "Flashcard Study Tool"
+description: "Create and study simple flashcards to help you memorize anything."
+category: "Utility"
+---
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Create, review, and share flashcard decks for efficient memorization and spaced repetition with this free Flashcard Study Tool.">
-  <title>Flashcard Study Tool - Free Online Tool</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
-</head>
-<body>
-  <div class="tool-container">
-    <h1>Flashcard Study Tool</h1>
-    <div id="flashcard-app"></div>
-  </div>
-  <script src="../assets/js/flashcard-study-tool.js"></script>
-</body>
-</html>
+<html lang="en"><head><meta charset="UTF-8"><title>Flashcards</title><style>.tool-container{max-width:600px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);text-align:center;} .card{height:200px;border:2px solid #2563eb;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:2rem;cursor:pointer;margin:20px 0;transition:0.3s;padding:20px;} .card:hover{background:#f0f9ff;}</style></head>
+<body><div class="tool-container"><h1>Flashcards</h1>
+<div id="card" class="card" onclick="flip()">Click to Add First Card</div>
+<div id="controls" style="display:none;"><button onclick="prev()">Prev</button> <button onclick="next()">Next</button></div>
+<hr><input id="q" placeholder="Question"><input id="a" placeholder="Answer"><button onclick="add()">Add Card</button></div>
+<script>
+let cards = [], cur = 0, side = 0;
+function add(){
+  const q=document.getElementById('q').value, a=document.getElementById('a').value;
+  if(q&&a){ cards.push({q,a}); document.getElementById('controls').style.display='block'; show(); }
+}
+function flip(){ if(cards.length) { side = 1-side; show(); } }
+function next(){ cur = (cur+1)%cards.length; side=0; show(); }
+function prev(){ cur = (cur-1+cards.length)%cards.length; side=0; show(); }
+function show(){ document.getElementById('card').innerText = side === 0 ? cards[cur].q : cards[cur].a; }
+</script></body></html>

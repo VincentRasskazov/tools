@@ -1,0 +1,20 @@
+---
+layout: default
+title: "Anagram Solver"
+description: "Find if two words are anagrams of each other."
+category: "Text Tools"
+---
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Anagram Solver</title><style>.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} input{width:100%;padding:10px;margin-bottom:15px;border:1px solid #ccc;border-radius:6px;} .res{text-align:center;font-size:1.5rem;font-weight:bold;}</style></head>
+<body><div class="tool-container"><h1>Anagram Solver</h1>
+<input type="text" id="a" placeholder="Listen" oninput="solve()">
+<input type="text" id="b" placeholder="Silent" oninput="solve()">
+<div id="r" class="res"></div></div>
+<script>
+function solve(){
+  const s1 = document.getElementById('a').value.toLowerCase().replace(/[^a-z]/g,'').split('').sort().join('');
+  const s2 = document.getElementById('b').value.toLowerCase().replace(/[^a-z]/g,'').split('').sort().join('');
+  document.getElementById('r').innerText = (s1 && s1 === s2) ? "✅ Anagrams!" : "❌ Not Anagrams";
+  document.getElementById('r').style.color = (s1 && s1 === s2) ? "#16a34a" : "#dc2626";
+}
+</script></body></html>

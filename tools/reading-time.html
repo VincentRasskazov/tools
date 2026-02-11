@@ -1,0 +1,24 @@
+---
+layout: default
+title: "Advanced Reading Time Estimator"
+description: "Get detailed insights on reading time based on word complexity."
+category: "Text Tools"
+---
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Reading Time</title><style>.tool-container{max-width:800px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} textarea{width:100%;height:200px;padding:10px;border:1px solid #ccc;border-radius:6px;} .stats{display:flex;justify-content:space-around;margin-top:20px;text-align:center;}</style></head>
+<body><div class="tool-container"><h1>Reading Time Estimator</h1>
+<textarea id="in" placeholder="Paste your text..." oninput="calc()"></textarea>
+<div class="stats">
+  <div><h3 id="slow">0</h3><p>Slow (150 wpm)</p></div>
+  <div><h3 id="avg">0</h3><p>Avg (220 wpm)</p></div>
+  <div><h3 id="fast">0</h3><p>Fast (300 wpm)</p></div>
+</div></div>
+<script>
+function calc(){
+  const text = document.getElementById('in').value.trim();
+  const w = text ? text.split(/\s+/).length : 0;
+  document.getElementById('slow').innerText = Math.ceil(w/150) + ' min';
+  document.getElementById('avg').innerText = Math.ceil(w/220) + ' min';
+  document.getElementById('fast').innerText = Math.ceil(w/300) + ' min';
+}
+</script></body></html>
