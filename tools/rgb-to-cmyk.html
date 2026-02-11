@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Convert digital RGB colors to print-ready CMYK values.">
+  <meta property="og:title" content="RGB to CMYK Converter">
+  <meta property="og:description" content="Convert digital RGB colors to print-ready CMYK values.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="RGB to CMYK Converter">
+  <meta name="twitter:description" content="Convert digital RGB colors to print-ready CMYK values.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>RGB to CMYK</title><style>.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} .row{display:flex;gap:10px;margin-bottom:15px;} input{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;text-align:center;} .res{font-family:monospace;font-size:1.2rem;background:#f8fafc;padding:15px;border-radius:6px;text-align:center;margin-top:20px;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">RGB to CMYK</h1>
+<div class="row"><div><label>R</label><input type="number" id="r" value="37" max="255" oninput="c()"></div><div><label>G</label><input type="number" id="g" value="99" max="255" oninput="c()"></div><div><label>B</label><input type="number" id="b" value="235" max="255" oninput="c()"></div></div>
+<div class="res" id="out"></div></div>
+<script>function c(){ let r=document.getElementById('r').value/255, g=document.getElementById('g').value/255, b=document.getElementById('b').value/255; let k = 1 - Math.max(r,g,b); if(k===1){ document.getElementById('out').innerText = "cmyk(0%, 0%, 0%, 100%)"; return; } let cy=(1-r-k)/(1-k), m=(1-g-k)/(1-k), y=(1-b-k)/(1-k); document.getElementById('out').innerText = `cmyk(${Math.round(cy*100)}%, ${Math.round(m*100)}%, ${Math.round(y*100)}%, ${Math.round(k*100)}%)`; } window.onload=c;</script></body></html>

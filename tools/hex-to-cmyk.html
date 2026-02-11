@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Convert hex color codes to print-ready CMYK values.">
+  <meta property="og:title" content="Hex to CMYK Converter">
+  <meta property="og:description" content="Convert hex color codes to print-ready CMYK values.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hex to CMYK Converter">
+  <meta name="twitter:description" content="Convert hex color codes to print-ready CMYK values.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>Hex to CMYK</title><style>.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} input{width:100%;padding:12px;border:1px solid #ccc;border-radius:6px;margin-bottom:20px;} .res{font-family:monospace;font-size:1.5rem;background:#f8fafc;padding:15px;border-radius:6px;text-align:center;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Hex to CMYK</h1>
+<input type="text" id="in" placeholder="#2563EB" value="#2563EB" oninput="c()">
+<div class="res" id="out"></div></div>
+<script>function c(){ let hex=document.getElementById('in').value.replace('#',''); if(hex.length!==6)return; let r=parseInt(hex.substr(0,2),16)/255, g=parseInt(hex.substr(2,2),16)/255, b=parseInt(hex.substr(4,2),16)/255; let k = 1 - Math.max(r,g,b); if(k===1){ document.getElementById('out').innerText="cmyk(0%, 0%, 0%, 100%)"; return; } let cy=(1-r-k)/(1-k), m=(1-g-k)/(1-k), y=(1-b-k)/(1-k); document.getElementById('out').innerText = `cmyk(${Math.round(cy*100)}%, ${Math.round(m*100)}%, ${Math.round(y*100)}%, ${Math.round(k*100)}%)`; } window.onload=c;</script></body></html>

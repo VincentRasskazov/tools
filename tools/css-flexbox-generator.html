@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Visually build and generate CSS Flexbox layouts.">
+  <meta property="og:title" content="CSS Flexbox Generator">
+  <meta property="og:description" content="Visually build and generate CSS Flexbox layouts.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CSS Flexbox Generator">
+  <meta name="twitter:description" content="Visually build and generate CSS Flexbox layouts.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>Flexbox Generator</title><style>.tool-container{max-width:800px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;} select{width:100%;padding:10px;border-radius:6px;border:1px solid #ccc;} #box{display:flex;height:150px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:6px;padding:10px;} .item{width:50px;height:50px;background:#2563eb;color:white;display:flex;align-items:center;justify-content:center;font-weight:bold;margin:2px;} textarea{width:100%;height:80px;padding:10px;border-radius:6px;border:1px solid #ccc;font-family:monospace;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">CSS Flexbox Generator</h1>
+<div class="grid">
+  <div><label>justify-content</label><select id="jc" onchange="u()"><option value="flex-start">flex-start</option><option value="flex-end">flex-end</option><option value="center">center</option><option value="space-between">space-between</option><option value="space-around">space-around</option></select></div>
+  <div><label>align-items</label><select id="ai" onchange="u()"><option value="stretch">stretch</option><option value="flex-start">flex-start</option><option value="flex-end">flex-end</option><option value="center">center</option></select></div>
+  <div><label>flex-direction</label><select id="fd" onchange="u()"><option value="row">row</option><option value="row-reverse">row-reverse</option><option value="column">column</option><option value="column-reverse">column-reverse</option></select></div>
+  <div><label>flex-wrap</label><select id="fw" onchange="u()"><option value="nowrap">nowrap</option><option value="wrap">wrap</option></select></div>
+</div>
+<div id="box"><div class="item">1</div><div class="item">2</div><div class="item">3</div></div>
+<textarea id="out" readonly style="margin-top:20px;"></textarea></div>
+<script>function u(){ const jc=document.getElementById('jc').value, ai=document.getElementById('ai').value, fd=document.getElementById('fd').value, fw=document.getElementById('fw').value; const b=document.getElementById('box'); b.style.justifyContent=jc; b.style.alignItems=ai; b.style.flexDirection=fd; b.style.flexWrap=fw; document.getElementById('out').value=`display: flex;\njustify-content: ${jc};\nalign-items: ${ai};\nflex-direction: ${fd};\nflex-wrap: ${fw};`; } window.onload=u;</script></body></html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Convert print CMYK values to digital RGB colors.">
+  <meta property="og:title" content="CMYK to RGB Converter">
+  <meta property="og:description" content="Convert print CMYK values to digital RGB colors.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CMYK to RGB Converter">
+  <meta name="twitter:description" content="Convert print CMYK values to digital RGB colors.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>CMYK to RGB</title><style>.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} .row{display:flex;gap:10px;margin-bottom:15px;} input{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;text-align:center;} .res{font-family:monospace;font-size:1.2rem;background:#f8fafc;padding:15px;border-radius:6px;text-align:center;margin-top:20px;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">CMYK to RGB</h1>
+<div class="row"><div><label>C</label><input type="number" id="c" value="84" max="100" oninput="cv()"></div><div><label>M</label><input type="number" id="m" value="58" max="100" oninput="cv()"></div><div><label>Y</label><input type="number" id="y" value="0" max="100" oninput="cv()"></div><div><label>K</label><input type="number" id="k" value="8" max="100" oninput="cv()"></div></div>
+<div class="res" id="out"></div></div>
+<script>function cv(){ let c=document.getElementById('c').value/100, m=document.getElementById('m').value/100, y=document.getElementById('y').value/100, k=document.getElementById('k').value/100; let r=255*(1-c)*(1-k), g=255*(1-m)*(1-k), b=255*(1-y)*(1-k); document.getElementById('out').innerText = `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)})`; } window.onload=cv;</script></body></html>
