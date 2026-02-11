@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Parse URL query strings into readable JSON-like key-value pairs.">
+  <meta property="og:title" content="Query String Parser">
+  <meta property="og:description" content="Parse URL query strings into readable JSON-like key-value pairs.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Query String Parser">
+  <meta name="twitter:description" content="Parse URL query strings into readable JSON-like key-value pairs.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>Query String Parser</title><style>.tool-container{max-width:800px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} textarea,input{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;font-family:monospace;margin-bottom:15px;} button{width:100%;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;cursor:pointer;font-weight:bold;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Query String Parser</h1><input type="text" id="in" placeholder="?utm_source=google&utm_medium=cpc&campaign=spring"><button onclick="c()">Parse Query Parameters</button><textarea id="out" readonly style="margin-top:20px;height:200px;"></textarea></div>
+<script>function c(){ try { let q = document.getElementById('in').value; if(q.includes('?')) q = q.split('?')[1]; const p = new URLSearchParams(q); let res = {}; for(const [k, v] of p.entries()) { res[k] = v; } document.getElementById('out').value = JSON.stringify(res, null, 2); } catch(e) { document.getElementById('out').value = "Error parsing string."; } }</script></body></html>

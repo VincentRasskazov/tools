@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Test if a credit card number is valid using the Luhn Algorithm. 100% offline.">
+  <meta property="og:title" content="Credit Card Validator">
+  <meta property="og:description" content="Test if a credit card number is valid using the Luhn Algorithm. 100% offline.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Credit Card Validator">
+  <meta name="twitter:description" content="Test if a credit card number is valid using the Luhn Algorithm. 100% offline.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>CC Validator</title><style>.tool-container{max-width:600px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);text-align:center;} input{width:100%;padding:12px;border:1px solid #ccc;border-radius:6px;margin-bottom:15px;font-size:18px;} button{width:100%;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;cursor:pointer;font-weight:bold;} #res{margin-top:20px;font-size:1.5rem;font-weight:bold;}</style></head>
+<body><div class="tool-container"><h1 style="color:#2563eb;">Credit Card Validator</h1><input type="text" id="in" placeholder="0000 0000 0000 0000"><button onclick="c()">Validate using Luhn Algorithm</button><div id="res"></div><p style="font-size:12px;color:#666;">Runs completely in your browser. No data is sent anywhere.</p></div>
+<script>function c(){ const v = document.getElementById('in').value.replace(/\D/g, ''); if(!v){ document.getElementById('res').innerText=''; return; } let sum = 0; let shouldDouble = false; for(let i=v.length-1; i>=0; i--){ let d = parseInt(v.charAt(i)); if(shouldDouble){ d *= 2; if(d > 9) d -= 9; } sum += d; shouldDouble = !shouldDouble; } const valid = (sum % 10 === 0); document.getElementById('res').innerText = valid ? "✅ Valid Card Number" : "❌ Invalid Card Number"; document.getElementById('res').style.color = valid ? "#16a34a" : "#dc2626"; }</script></body></html>
