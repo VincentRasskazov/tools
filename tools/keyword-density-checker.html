@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Analyze your text to see which words appear the most and their frequency percentage.">
+  <meta property="og:title" content="Keyword Density Checker">
+  <meta property="og:description" content="Analyze your text to see which words appear the most and their frequency percentage.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Keyword Density Checker">
+  <meta name="twitter:description" content="Analyze your text to see which words appear the most and their frequency percentage.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>Keyword Density</title><style>.tool-container{max-width:800px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} textarea{width:100%;height:150px;padding:10px;border:1px solid #ccc;border-radius:6px;margin-bottom:15px;} button{width:100%;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;cursor:pointer;font-weight:bold;} #out{margin-top:20px;padding:15px;background:#f8fafc;border-radius:6px;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Keyword Density</h1><textarea id="in" placeholder="Paste your article here..."></textarea><button onclick="c()">Analyze Keywords</button><div id="out"></div></div>
+<script>function c(){ const t=document.getElementById('in').value.toLowerCase().replace(/[^a-z0-9\s]/g,''); if(!t)return; const w=t.split(/\s+/).filter(x=>x.length>0); const m={}; w.forEach(x=>m[x]=(m[x]||0)+1); const s=Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,10); let h='<b>Top 10 Words:</b><br><br>'; s.forEach(x=>{ h+=`${x[0]}: ${x[1]} times (${((x[1]/w.length)*100).toFixed(1)}%)<br>`; }); document.getElementById('out').innerHTML=h; }</script></body></html>
