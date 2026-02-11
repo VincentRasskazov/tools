@@ -1,73 +1,41 @@
+---
+layout: default
+title: "Fuel Cost Calculator"
+description: "Calculate how much your road trip will cost based on distance and fuel efficiency."
+category: "Utility"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Fuel Cost Calculator – Calculate Your Trip Fuel Expenses Online</title>
-  <meta name="description" content="Calculate your trip's fuel cost instantly with our free Fuel Cost Calculator. Enter distance, consumption, and price to get total cost. Perfect for travel planning and budgeting.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/fuel-cost-calculator.html">
-  <meta property="og:title" content="Fuel Cost Calculator – Calculate Your Trip Fuel Expenses Online">
-  <meta property="og:description" content="Calculate your trip's fuel cost instantly with our free Fuel Cost Calculator. Enter distance, consumption, and price to get total cost. Perfect for travel planning and budgeting.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/fuel-cost-calculator.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Fuel Cost Calculator – Calculate Your Trip Fuel Expenses Online">
-  <meta name="twitter:description" content="Calculate your trip's fuel cost instantly with our free Fuel Cost Calculator. Enter distance, consumption, and price to get total cost. Perfect for travel planning and budgeting.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Fuel Cost Calculator",
-    "url": "https://vincentrasskazov.github.io/tools/fuel-cost-calculator.html",
-    "applicationCategory": "Travel Tools",
-    "description": "Calculate your trip's fuel cost instantly with our free Fuel Cost Calculator. Enter distance, consumption, and price to get total cost. Perfect for travel planning and budgeting."
-  }
-  </script>
+  <title>Fuel Cost</title>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    label { display: block; font-weight: 600; margin-bottom: 5px; margin-top: 15px; }
+    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 20px; }
+    #result { margin-top: 20px; font-size: 1.5rem; text-align: center; color: #dc2626; font-weight: bold; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">fuel cost calculator Tool</h1>
+    <h1>Fuel Cost Calculator</h1>
+    <label>Distance (Miles or Km)</label><input type="number" id="dist">
+    <label>Fuel Efficiency (MPG or Km/L)</label><input type="number" id="eff">
+    <label>Gas Price per Gallon/Liter ($)</label><input type="number" id="price">
+    <button onclick="calc()">Calculate Cost</button>
+    <div id="result"></div>
   </div>
-
-  <h1>fuel cost calculator Tool</h1>
-
-  <p>This is a starter tool page for <strong>fuel cost calculator</strong>.</p>
-
-
-  <label for="distance">Distance (km):</label>
-  <input id="distance" type="number" placeholder="e.g. 100">
-  <label for="consumption">Consumption (L/100km):</label>
-  <input id="consumption" type="number" placeholder="e.g. 8">
-  <label for="price">Fuel Price (per L):</label>
-  <input id="price" type="number" placeholder="e.g. 1.5">
-  <button onclick="run()">Calculate Cost</button>
-
-  <p id="output"></p>
-
   <script>
-    function run() {
-      const distance = parseFloat(document.getElementById('distance').value);
-      const consumption = parseFloat(document.getElementById('consumption').value);
-      const price = parseFloat(document.getElementById('price').value);
-      if (isNaN(distance) || isNaN(consumption) || isNaN(price) || distance < 0 || consumption < 0 || price < 0) {
-        document.getElementById('output').innerText = "Please enter valid values.";
-        return;
-      }
-      const liters = distance * consumption / 100;
-      const cost = liters * price;
-      document.getElementById('output').innerText = `Fuel needed: ${liters.toFixed(2)} L, Total cost: $${cost.toFixed(2)}`;
+    function calc() {
+      const d = parseFloat(document.getElementById('dist').value);
+      const e = parseFloat(document.getElementById('eff').value);
+      const p = parseFloat(document.getElementById('price').value);
+      if(!d || !e || !p) return;
+      const cost = (d / e) * p;
+      document.getElementById('result').innerText = `Total Cost: $${cost.toFixed(2)}`;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

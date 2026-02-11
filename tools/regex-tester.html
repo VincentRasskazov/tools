@@ -1,76 +1,50 @@
+---
+layout: default
+title: "Regex Tester"
+description: "Test your regular expressions in real-time."
+category: "Developer Tools"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Regex Tester – Test Regular Expressions Instantly Online</title>
-  <meta name="description" content="Test and debug regular expressions instantly with our free Regex Tester. Enter your pattern and test string. Perfect for developers and learners.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/regex-tester.html">
-  <meta property="og:title" content="Regex Tester – Test Regular Expressions Instantly Online">
-  <meta property="og:description" content="Test and debug regular expressions instantly with our free Regex Tester. Enter your pattern and test string. Perfect for developers and learners.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/regex-tester.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Regex Tester – Test Regular Expressions Instantly Online">
-  <meta name="twitter:description" content="Test and debug regular expressions instantly with our free Regex Tester. Enter your pattern and test string. Perfect for developers and learners.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Regex Tester",
-    "url": "https://vincentrasskazov.github.io/tools/regex-tester.html",
-    "applicationCategory": "Developer Tools",
-    "description": "Test and debug regular expressions instantly with our free Regex Tester. Enter your pattern and test string. Perfect for developers and learners."
-  }
-  </script>
+  <title>Regex Tester</title>
+  <style>
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    input, textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 15px; font-family: monospace; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    #result { padding: 15px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; margin-top: 15px; min-height: 50px; }
+    .match { background: #fef08a; padding: 2px; border-radius: 3px; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">regex tester Tool</h1>
+    <h1>Regex Tester</h1>
+    <label>Regular Expression</label>
+    <div style="display:flex; gap:10px;">
+      <span style="font-size:1.5rem;">/</span>
+      <input type="text" id="regex" placeholder="[a-z]+">
+      <span style="font-size:1.5rem;">/</span>
+      <input type="text" id="flags" placeholder="g" style="width:50px;">
+    </div>
+    <label>Test String</label>
+    <textarea id="text" placeholder="Type text to test..."></textarea>
+    <button onclick="testRegex()">Test Match</button>
+    <div id="result">Matches will highlight here...</div>
   </div>
-
-  <h1>regex tester Tool</h1>
-
-  <p>This is a starter tool page for <strong>regex tester</strong>.</p>
-
-
-  <input id="pattern" placeholder="Regex pattern (e.g. ^[a-z]+$)" style="width:60%">
-  <input id="flags" placeholder="Flags (e.g. gi)" style="width:20%">
-  <br><textarea id="input" placeholder="Test text here..." rows="6" style="width:100%"></textarea>
-  <button onclick="run()">Test</button>
-
-  <pre id="output"></pre>
-
   <script>
-    function run() {
-      const pattern = document.getElementById('pattern').value;
-      const flags = document.getElementById('flags').value;
-      const text = document.getElementById('input').value;
-      let re;
+    function testRegex() {
       try {
-        re = new RegExp(pattern, flags);
-      } catch (e) {
-        document.getElementById('output').innerText = 'Invalid regex: ' + e.message;
-        return;
-      }
-      const matches = [...text.matchAll(re)];
-      if (matches.length === 0) {
-        document.getElementById('output').innerText = 'No matches.';
-      } else {
-        document.getElementById('output').innerText = matches.map(m => `Match: "${m[0]}" at index ${m.index}`).join('\n');
-      }
+        const reStr = document.getElementById('regex').value;
+        const flags = document.getElementById('flags').value;
+        const text = document.getElementById('text').value;
+        const regex = new RegExp(reStr, flags);
+        
+        let html = text.replace(regex, match => `<span class="match">${match}</span>`);
+        document.getElementById('result').innerHTML = html;
+      } catch (e) { document.getElementById('result').innerText = "Invalid Regex"; }
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

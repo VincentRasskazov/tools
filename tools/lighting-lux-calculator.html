@@ -1,67 +1,39 @@
+---
+layout: default
+title: "Lux / Lumens Calculator"
+description: "Calculate Lux from Lumens and Area, or vice versa."
+category: "Calculators"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Lighting Lux Calculator – Free Online Tool</title>
-  <meta name="description" content="Calculate lighting lux easily. Enter lumens and area to get lux instantly. Perfect for lighting design, engineering, and home improvement.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/lighting-lux-calculator.html">
-  <meta property="og:title" content="Lighting Lux Calculator – Free Online Tool">
-  <meta property="og:description" content="Calculate lighting lux easily. Enter lumens and area to get lux instantly. Perfect for lighting design, engineering, and home improvement.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/lighting-lux-calculator.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Lighting Lux Calculator – Free Online Tool">
-  <meta name="twitter:description" content="Calculate lighting lux easily. Enter lumens and area to get lux instantly. Perfect for lighting design, engineering, and home improvement.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Lighting Lux Calculator",
-    "url": "https://vincentrasskazov.github.io/tools/lighting-lux-calculator.html",
-    "applicationCategory": "Lighting Tools",
-    "description": "Calculate lighting lux easily. Enter lumens and area to get lux instantly. Perfect for lighting design, engineering, and home improvement."
-  }
-  </script>
+  <title>Lux Calculator</title>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    label { display: block; font-weight: 600; margin-bottom: 5px; margin-top: 15px; }
+    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 20px; }
+    #result { margin-top: 20px; font-size: 1.5rem; text-align: center; color: #16a34a; font-weight: bold; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">lighting lux calculator Tool</h1>
+    <h1>Lux Calculator</h1>
+    <label>Lumens (lm)</label><input type="number" id="lm">
+    <label>Area (Square Meters)</label><input type="number" id="area">
+    <button onclick="calc()">Calculate Lux</button>
+    <div id="result"></div>
   </div>
-
-  <h1>lighting lux calculator Tool</h1>
-
-  <p>This is a starter tool page for <strong>lighting lux calculator</strong>.</p>
-
-
-  <input id="lumens" type="number" placeholder="Lumens (lm)" style="width:120px;">
-  <input id="area" type="number" placeholder="Area (m²)" style="width:120px;">
-  <button onclick="run()">Calculate Lux</button>
-
-  <p id="output"></p>
-
   <script>
-    function run() {
-      const lumens = parseFloat(document.getElementById('lumens').value);
+    function calc() {
+      const lm = parseFloat(document.getElementById('lm').value);
       const area = parseFloat(document.getElementById('area').value);
-      if (isNaN(lumens) || isNaN(area) || area <= 0) {
-        document.getElementById('output').innerText = 'Enter valid lumens and area.';
-        return;
+      if(lm && area) {
+        document.getElementById('result').innerText = `${(lm / area).toFixed(2)} Lux (lx)`;
       }
-      const lux = lumens / area;
-      document.getElementById('output').innerText = lumens + ' lm over ' + area + ' m² = ' + lux + ' lux';
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

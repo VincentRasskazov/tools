@@ -1,73 +1,40 @@
+---
+layout: default
+title: "Atbash Cipher"
+description: "Encrypt and decrypt text using the Atbash cipher (A->Z, B->Y)."
+category: "Text Tools"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Atbash Cipher – Encode and Decode Atbash Instantly Online</title>
-  <meta name="description" content="Encode and decode Atbash ciphers instantly with our free Atbash Cipher tool. Perfect for puzzles, cryptography, and fun.">
+  <title>Atbash Cipher</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/atbash-cipher.html">
-  <meta property="og:title" content="Atbash Cipher – Encode and Decode Atbash Instantly Online">
-  <meta property="og:description" content="Encode and decode Atbash ciphers instantly with our free Atbash Cipher tool. Perfect for puzzles, cryptography, and fun.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/atbash-cipher.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Atbash Cipher – Encode and Decode Atbash Instantly Online">
-  <meta name="twitter:description" content="Encode and decode Atbash ciphers instantly with our free Atbash Cipher tool. Perfect for puzzles, cryptography, and fun.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Atbash Cipher",
-    "url": "https://vincentrasskazov.github.io/tools/atbash-cipher.html",
-    "applicationCategory": "Cipher Tools",
-    "description": "Encode and decode Atbash ciphers instantly with our free Atbash Cipher tool. Perfect for puzzles, cryptography, and fun."
-  }
-  </script>
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    textarea { width: 100%; height: 120px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-size: 16px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">atbash cipher Tool</h1>
+    <h1>Atbash Cipher</h1>
+    <label>Input Text</label>
+    <textarea id="input" placeholder="Type here..."></textarea>
+    <button onclick="convert()">Encrypt / Decrypt</button>
+    <label style="margin-top:20px; display:block;">Output Text</label>
+    <textarea id="output" readonly></textarea>
   </div>
-
-  <h1>atbash cipher Tool</h1>
-
-  <p>This is a starter tool page for <strong>atbash cipher</strong>.</p>
-
-
-  <label for="input">Text:</label>
-  <input id="input" placeholder="Enter text">
-  <button onclick="run()">Encode/Decode</button>
-
-  <p id="output"></p>
-
   <script>
-    function run() {
-      const v = document.getElementById('input').value;
-      if (!v) {
-        document.getElementById('output').innerText = "Please enter text.";
-        return;
-      }
-      const a = 'abcdefghijklmnopqrstuvwxyz';
-      const A = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-      let out = '';
-      for (let c of v) {
-        if (a.includes(c)) out += a[25 - a.indexOf(c)];
-        else if (A.includes(c)) out += A[25 - A.indexOf(c)];
-        else out += c;
-      }
-      document.getElementById('output').innerText = out;
+    function convert() {
+      const val = document.getElementById('input').value;
+      const res = val.replace(/[a-z]/gi, c => {
+        const code = c.charCodeAt(0);
+        return String.fromCharCode(code <= 90 ? 155 - code : 219 - code);
+      });
+      document.getElementById('output').value = res;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

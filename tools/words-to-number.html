@@ -1,75 +1,37 @@
+---
+layout: default
+title: "Words to Number Converter"
+description: "Convert basic number words (e.g. one, two) back to digits."
+category: "Converters"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Words to Number Converter – Convert Words to Numbers Instantly Online</title>
-  <meta name="description" content="Convert numbers written in words to digits instantly with our free Words to Number Converter. Perfect for students, teachers, and math enthusiasts.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/words-to-number.html">
-  <meta property="og:title" content="Words to Number Converter – Convert Words to Numbers Instantly Online">
-  <meta property="og:description" content="Convert numbers written in words to digits instantly with our free Words to Number Converter. Perfect for students, teachers, and math enthusiasts.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/words-to-number.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Words to Number Converter – Convert Words to Numbers Instantly Online">
-  <meta name="twitter:description" content="Convert numbers written in words to digits instantly with our free Words to Number Converter. Perfect for students, teachers, and math enthusiasts.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Words to Number Converter",
-    "url": "https://vincentrasskazov.github.io/tools/words-to-number.html",
-    "applicationCategory": "Math Tools",
-    "description": "Convert numbers written in words to digits instantly with our free Words to Number Converter. Perfect for students, teachers, and math enthusiasts."
-  }
-  </script>
+  <title>Words to Number</title>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+    h1 { color: #2563eb; }
+    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-size: 16px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    #result { margin-top: 20px; font-size: 2rem; font-weight: bold; color: #334155; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">words to number Tool</h1>
+    <h1>Words to Number</h1>
+    <input type="text" id="words" placeholder="e.g. forty two">
+    <button onclick="convert()">Convert</button>
+    <div id="result"></div>
   </div>
-
-  <h1>words to number Tool</h1>
-
-  <p>This is a starter tool page for <strong>words to number</strong>.</p>
-
-
-  <input id="input" placeholder="Enter number in words (e.g. 'one thousand two')" style="width:100%">
-  <button onclick="run()">Convert</button>
-
-  <p id="output"></p>
-
   <script>
-    const numWords = {
-      zero:0,one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10,eleven:11,twelve:12,thirteen:13,fourteen:14,fifteen:15,sixteen:16,seventeen:17,eighteen:18,nineteen:19,twenty:20,thirty:30,forty:40,fifty:50,sixty:60,seventy:70,eighty:80,ninety:90
-    };
-    function wordsToNum(str) {
-      str = str.toLowerCase().replace(/-/g,' ');
-      let parts = str.split(/\s+/);
-      let n = 0, temp = 0;
-      for (let w of parts) {
-        if (w === 'thousand') { n += temp * 1000; temp = 0; }
-        else if (w === 'hundred') { temp *= 100; }
-        else if (numWords[w] !== undefined) { temp += numWords[w]; }
-      }
-      return n + temp;
-    }
-    function run() {
-      const v = document.getElementById('input').value;
-      const n = wordsToNum(v);
-      document.getElementById('output').innerText = isNaN(n) ? 'Invalid input.' : n;
+    const nums = {"zero":0,"one":1,"two":2,"three":3,"four":4,"five":5,"six":6,"seven":7,"eight":8,"nine":9,"ten":10,"eleven":11,"twelve":12,"thirteen":13,"fourteen":14,"fifteen":15,"sixteen":16,"seventeen":17,"eighteen":18,"nineteen":19,"twenty":20,"thirty":30,"forty":40,"fifty":50,"sixty":60,"seventy":70,"eighty":80,"ninety":90};
+    function convert() {
+      const arr = document.getElementById('words').value.toLowerCase().split(/[\s-]+/);
+      let total = 0;
+      for(let w of arr) { if(nums[w] !== undefined) total += nums[w]; }
+      document.getElementById('result').innerText = total > 0 ? total : "0";
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

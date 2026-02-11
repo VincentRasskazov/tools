@@ -1,72 +1,58 @@
+---
+layout: default
+title: "Timer - Online Alarm"
+description: "Set a simple countdown timer in minutes and seconds."
+category: "Utility"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="../assets/css/tool-style.css">
   <meta charset="UTF-8">
-  <title>timer Tool</title>
-  <meta name="description" content="timer online tool.">
-  <meta name="category" content="Utility Tools">
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <title>Timer</title>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+    .inputs { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; }
+    input { width: 80px; padding: 10px; font-size: 1.5rem; text-align: center; border: 1px solid #ccc; border-radius: 6px; }
+    #display { font-size: 4rem; font-family: monospace; font-weight: bold; color: #1e293b; margin: 20px 0; }
+    button { padding: 12px 24px; font-size: 1.1rem; border: none; border-radius: 6px; cursor: pointer; color: white; margin: 5px; }
+    .start { background: #16a34a; } .stop { background: #dc2626; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">timer Tool</h1>
+    <h1 style="color: #2563eb; margin-top:0;">Timer</h1>
+    <div class="inputs" id="setup">
+      <input type="number" id="min" placeholder="Min" value="5" min="0"> :
+      <input type="number" id="sec" placeholder="Sec" value="0" min="0" max="59">
+    </div>
+    <div id="display" style="display:none;">05:00</div>
+    <button class="start" onclick="start()">Start</button>
+    <button class="stop" onclick="stop()">Stop / Reset</button>
   </div>
-
-  <h1>timer Tool</h1>
-
-  <p>This is a starter tool page for <strong>timer</strong>.</p>
-
-
-  <input id="seconds" type="number" placeholder="Seconds" style="width:120px;">
-  <button onclick="start()">Start</button>
-  <button onclick="stop()">Stop</button>
-  <button onclick="reset()">Reset</button>
-  <div id="display" style="font-size:2em; margin:10px 0;">00:00</div>
-
   <script>
-    let interval, remaining = 0;
-    function updateDisplay() {
-      let min = Math.floor(remaining / 60);
-      let sec = remaining % 60;
-      document.getElementById('display').innerText =
-        String(min).padStart(2, '0') + ':' + String(sec).padStart(2, '0');
-    }
+    let interval, totalSecs;
     function start() {
-      if (interval) return;
-      remaining = parseInt(document.getElementById('seconds').value, 10);
-      if (isNaN(remaining) || remaining < 1) {
-        document.getElementById('display').innerText = 'Enter seconds > 0';
-        return;
+      if(!interval) {
+        document.getElementById('setup').style.display = 'none';
+        document.getElementById('display').style.display = 'block';
+        totalSecs = (parseInt(document.getElementById('min').value||0) * 60) + parseInt(document.getElementById('sec').value||0);
+        updateDisplay();
+        interval = setInterval(() => {
+          if(totalSecs <= 0) { stop(); alert("Time's Up!"); return; }
+          totalSecs--; updateDisplay();
+        }, 1000);
       }
-      updateDisplay();
-      interval = setInterval(() => {
-        if (remaining > 0) {
-          remaining--;
-          updateDisplay();
-        } else {
-          stop();
-          document.getElementById('display').innerText = 'Time\'s up!';
-        }
-      }, 1000);
     }
     function stop() {
-      clearInterval(interval);
-      interval = null;
+      clearInterval(interval); interval = null;
+      document.getElementById('setup').style.display = 'flex';
+      document.getElementById('display').style.display = 'none';
     }
-    function reset() {
-      stop();
-      remaining = 0;
-      updateDisplay();
+    function updateDisplay() {
+      const m = Math.floor(totalSecs / 60).toString().padStart(2, '0');
+      const s = (totalSecs % 60).toString().padStart(2, '0');
+      document.getElementById('display').innerText = `${m}:${s}`;
     }
-    updateDisplay();
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

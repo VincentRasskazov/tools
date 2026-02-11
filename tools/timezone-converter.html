@@ -1,64 +1,48 @@
+---
+layout: default
+title: "Timezone Converter"
+description: "Convert current time across major world timezones."
+category: "Utility"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="../assets/css/tool-style.css">
   <meta charset="UTF-8">
-  <title>timezone converter Tool</title>
-  <meta name="description" content="timezone converter online tool.">
-  <meta name="category" content="Date Tools">
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <title>Timezone Converter</title>
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    .tz-row { display: flex; justify-content: space-between; padding: 15px; border-bottom: 1px solid #eee; font-size: 1.2rem; }
+    .tz-name { font-weight: bold; color: #334155; }
+    .tz-time { font-family: monospace; color: #2563eb; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">timezone converter Tool</h1>
+    <h1>World Clock</h1>
+    <div id="clocks"></div>
   </div>
-
-  <h1>timezone converter Tool</h1>
-
-  <p>This is a starter tool page for <strong>timezone converter</strong>.</p>
-
-
-  <input id="date" type="datetime-local" style="width:200px;">
-  <select id="from">
-    <option value="UTC">UTC</option>
-    <option value="America/New_York">New York</option>
-    <option value="Europe/London">London</option>
-    <option value="Asia/Tokyo">Tokyo</option>
-    <option value="Australia/Sydney">Sydney</option>
-  </select>
-  to
-  <select id="to">
-    <option value="UTC">UTC</option>
-    <option value="America/New_York">New York</option>
-    <option value="Europe/London">London</option>
-    <option value="Asia/Tokyo">Tokyo</option>
-    <option value="Australia/Sydney">Sydney</option>
-  </select>
-  <button onclick="run()">Convert</button>
-
-  <p id="output"></p>
-
   <script>
-    function run() {
-      const dateStr = document.getElementById('date').value;
-      const from = document.getElementById('from').value;
-      const to = document.getElementById('to').value;
-      if (!dateStr) {
-        document.getElementById('output').innerText = 'Enter a date and time.';
-        return;
-      }
-      const date = new Date(dateStr + 'Z');
-      const options = { timeZone: to, hour12: false, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
-      const fmt = new Intl.DateTimeFormat('en-GB', options);
-      document.getElementById('output').innerText = fmt.format(date) + ' (' + to + ')';
+    const zones = [
+      { name: "Local Time", tz: undefined },
+      { name: "UTC / GMT", tz: "UTC" },
+      { name: "New York", tz: "America/New_York" },
+      { name: "London", tz: "Europe/London" },
+      { name: "Tokyo", tz: "Asia/Tokyo" },
+      { name: "Sydney", tz: "Australia/Sydney" }
+    ];
+    
+    function update() {
+      let html = '';
+      const now = new Date();
+      zones.forEach(z => {
+        const time = now.toLocaleTimeString('en-US', { timeZone: z.tz, hour: '2-digit', minute:'2-digit', second:'2-digit' });
+        html += `<div class="tz-row"><span class="tz-name">${z.name}</span><span class="tz-time">${time}</span></div>`;
+      });
+      document.getElementById('clocks').innerHTML = html;
     }
+    setInterval(update, 1000);
+    update();
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

@@ -1,67 +1,45 @@
+---
+layout: default
+title: "Unit Price Calculator"
+description: "Compare prices to find the best deal based on unit cost."
+category: "Utility"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Unit Price Calculator – Calculate Price Per Unit Online</title>
-  <meta name="description" content="Calculate price per unit instantly with our free Unit Price Calculator. Perfect for shopping, budgeting, and saving money.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/unit-price-calculator.html">
-  <meta property="og:title" content="Unit Price Calculator – Calculate Price Per Unit Online">
-  <meta property="og:description" content="Calculate price per unit instantly with our free Unit Price Calculator. Perfect for shopping, budgeting, and saving money.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/unit-price-calculator.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Unit Price Calculator – Calculate Price Per Unit Online">
-  <meta name="twitter:description" content="Calculate price per unit instantly with our free Unit Price Calculator. Perfect for shopping, budgeting, and saving money.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Unit Price Calculator",
-    "url": "https://vincentrasskazov.github.io/tools/unit-price-calculator.html",
-    "applicationCategory": "Shopping Tools",
-    "description": "Calculate price per unit instantly with our free Unit Price Calculator. Perfect for shopping, budgeting, and saving money."
-  }
-  </script>
+  <title>Unit Price Calculator</title>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    .row { display: flex; gap: 10px; margin-bottom: 15px; }
+    .col { flex: 1; }
+    label { display: block; font-weight: 600; margin-bottom: 5px; }
+    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    #result { margin-top: 20px; font-size: 1.2rem; text-align: center; background: #f8fafc; padding: 15px; border-radius: 6px; border: 1px solid #e2e8f0; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">unit price calculator Tool</h1>
+    <h1>Unit Price Calculator</h1>
+    <div class="row">
+      <div class="col"><label>Total Price ($)</label><input type="number" id="price"></div>
+      <div class="col"><label>Quantity / Size</label><input type="number" id="qty"></div>
+    </div>
+    <button onclick="calc()">Calculate Unit Price</button>
+    <div id="result" style="display:none;"></div>
   </div>
-
-  <h1>unit price calculator Tool</h1>
-
-  <p>This is a starter tool page for <strong>unit price calculator</strong>.</p>
-
-
-  <input id="price" type="number" placeholder="Total Price" style="width:120px;">
-  <input id="qty" type="number" placeholder="Quantity" style="width:80px;">
-  <button onclick="run()">Calculate</button>
-
-  <p id="output"></p>
-
   <script>
-    function run() {
-      const price = parseFloat(document.getElementById('price').value);
-      const qty = parseFloat(document.getElementById('qty').value);
-      if (isNaN(price) || isNaN(qty) || price <= 0 || qty <= 0) {
-        document.getElementById('output').innerText = 'Enter valid price and quantity.';
-        return;
-      }
-      const unit = price / qty;
-      document.getElementById('output').innerText = 'Unit Price: $' + unit.toFixed(2);
+    function calc() {
+      const p = parseFloat(document.getElementById('price').value);
+      const q = parseFloat(document.getElementById('qty').value);
+      if(!p || !q) return;
+      const unit = p / q;
+      const res = document.getElementById('result');
+      res.style.display = 'block';
+      res.innerHTML = `Price per unit: <strong>$${unit.toFixed(4)}</strong>`;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

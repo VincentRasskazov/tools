@@ -1,904 +1,1071 @@
 import os
 
 tools = {
-    "tools/roman-numeral-converter.html": r"""---
+    "tools/atbash-cipher.html": r"""---
 layout: default
-title: "Roman Numeral Converter"
-description: "Convert numbers to Roman Numerals and vice versa instantly."
-category: "Converters"
+title: "Atbash Cipher"
+description: "Encrypt and decrypt text using the Atbash cipher (A->Z, B->Y)."
+category: "Text Tools"
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Roman Numeral Converter</title>
+  <title>Atbash Cipher</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
     h1 { color: #2563eb; text-align: center; }
-    .input-group { margin-bottom: 15px; }
-    label { display: block; font-weight: 600; margin-bottom: 5px; }
-    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; }
-    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; margin-top: 10px; font-weight: bold; }
+    textarea { width: 100%; height: 120px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-size: 16px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
   </style>
 </head>
 <body>
   <div class="tool-container">
-    <h1>Roman Numeral Converter</h1>
-    <div class="input-group">
-      <label>Decimal Number (e.g., 2023)</label>
-      <input type="number" id="num" placeholder="2023">
-    </div>
-    <button onclick="toRoman()">Convert to Roman</button>
-    <div class="input-group" style="margin-top:20px;">
-      <label>Roman Numeral Result</label>
-      <input type="text" id="romanResult" readonly>
-    </div>
+    <h1>Atbash Cipher</h1>
+    <label>Input Text</label>
+    <textarea id="input" placeholder="Type here..."></textarea>
+    <button onclick="convert()">Encrypt / Decrypt</button>
+    <label style="margin-top:20px; display:block;">Output Text</label>
+    <textarea id="output" readonly></textarea>
   </div>
   <script>
-    function toRoman() {
-      let num = document.getElementById('num').value;
-      if (!num) return;
-      const lookup = {M:1000,CM:900,D:500,CD:400,C:100,XC:90,L:50,XL:40,X:10,IX:9,V:5,IV:4,I:1};
-      let roman = '';
-      for (let i in lookup ) {
-        while ( num >= lookup[i] ) {
-          roman += i;
-          num -= lookup[i];
-        }
-      }
-      document.getElementById('romanResult').value = roman;
+    function convert() {
+      const val = document.getElementById('input').value;
+      const res = val.replace(/[a-z]/gi, c => {
+        const code = c.charCodeAt(0);
+        return String.fromCharCode(code <= 90 ? 155 - code : 219 - code);
+      });
+      document.getElementById('output').value = res;
     }
   </script>
 </body>
 </html>""",
 
-    "tools/number-to-words.html": r"""---
+    "tools/decimal-to-binary.html": r"""---
 layout: default
-title: "Number to Words Converter"
-description: "Convert numbers into English words instantly. Useful for writing checks."
+title: "Decimal to Binary Converter"
+description: "Convert decimal numbers to binary format instantly."
 category: "Converters"
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Number to Words</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Decimal to Binary</title>
   <style>
-    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
     h1 { color: #2563eb; text-align: center; }
-    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; margin-bottom: 20px; }
+    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-size: 16px; }
     button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-    #result { margin-top: 20px; font-size: 1.2rem; font-weight: bold; color: #334155; }
   </style>
 </head>
 <body>
   <div class="tool-container">
-    <h1>Number to Words</h1>
-    <label>Enter Number</label>
-    <input type="number" id="input" placeholder="12345">
+    <h1>Decimal to Binary</h1>
+    <input type="number" id="dec" placeholder="e.g., 42">
+    <button onclick="convert()">Convert</button>
+    <label style="margin-top:20px; display:block;">Binary Result</label>
+    <input type="text" id="bin" readonly>
+  </div>
+  <script>
+    function convert() {
+      const val = parseInt(document.getElementById('dec').value, 10);
+      if(!isNaN(val)) document.getElementById('bin').value = val.toString(2);
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/hex-to-decimal.html": r"""---
+layout: default
+title: "Hex to Decimal Converter"
+description: "Convert hexadecimal values to decimal numbers instantly."
+category: "Converters"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hex to Decimal</title>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-size: 16px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Hex to Decimal</h1>
+    <input type="text" id="hex" placeholder="e.g., 2A">
+    <button onclick="convert()">Convert</button>
+    <label style="margin-top:20px; display:block;">Decimal Result</label>
+    <input type="text" id="dec" readonly>
+  </div>
+  <script>
+    function convert() {
+      const val = parseInt(document.getElementById('hex').value, 16);
+      if(!isNaN(val)) document.getElementById('dec').value = val.toString(10);
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/js-minifier.html": r"""---
+layout: default
+title: "JS Minifier"
+description: "Compress JavaScript code to reduce file size and improve load times."
+category: "Developer Tools"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Minifier</title>
+  <style>
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    textarea { width: 100%; height: 200px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-family: monospace; margin-bottom: 20px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>JS Minifier</h1>
+    <textarea id="input" placeholder="function hello() {&#10;  console.log('world');&#10;}"></textarea>
+    <button onclick="minify()">Minify JS</button>
+    <label style="margin-top:20px; display:block;">Minified Output</label>
+    <textarea id="output" readonly></textarea>
+  </div>
+  <script>
+    function minify() {
+      let code = document.getElementById('input').value;
+      code = code.replace(/\/\*[\s\S]*?\*\/|\/\/.*/g, ''); // Remove comments
+      code = code.replace(/\s+/g, ' ').replace(/\s*([\{\}\(\)\;\:\,\=\+\-\*\/])\s*/g, '$1'); // Remove whitespace
+      document.getElementById('output').value = code.trim();
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/json-to-yaml.html": r"""---
+layout: default
+title: "JSON to YAML Converter"
+description: "Convert JSON data into YAML format instantly."
+category: "Developer Tools"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JSON to YAML</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <style>
+    .tool-container { max-width: 900px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    .grid { display: flex; gap: 20px; }
+    textarea { width: 100%; height: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-family: monospace; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 15px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>JSON to YAML</h1>
+    <div class="grid">
+      <div style="flex:1;"><label>JSON</label><textarea id="json"></textarea></div>
+      <div style="flex:1;"><label>YAML</label><textarea id="yaml" readonly></textarea></div>
+    </div>
+    <button onclick="convert()">Convert to YAML &rarr;</button>
+  </div>
+  <script>
+    function convert() {
+      try {
+        const obj = JSON.parse(document.getElementById('json').value);
+        document.getElementById('yaml').value = jsyaml.dump(obj);
+      } catch(e) { alert("Invalid JSON"); }
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/yaml-to-json.html": r"""---
+layout: default
+title: "YAML to JSON Converter"
+description: "Convert YAML data into JSON format instantly."
+category: "Developer Tools"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>YAML to JSON</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <style>
+    .tool-container { max-width: 900px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    .grid { display: flex; gap: 20px; }
+    textarea { width: 100%; height: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-family: monospace; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 15px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>YAML to JSON</h1>
+    <div class="grid">
+      <div style="flex:1;"><label>YAML</label><textarea id="yaml"></textarea></div>
+      <div style="flex:1;"><label>JSON</label><textarea id="json" readonly></textarea></div>
+    </div>
+    <button onclick="convert()">Convert to JSON &rarr;</button>
+  </div>
+  <script>
+    function convert() {
+      try {
+        const obj = jsyaml.load(document.getElementById('yaml').value);
+        document.getElementById('json').value = JSON.stringify(obj, null, 2);
+      } catch(e) { alert("Invalid YAML"); }
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/jwt-decoder.html": r"""---
+layout: default
+title: "JWT Decoder"
+description: "Decode JSON Web Tokens (JWT) to view payload and header data."
+category: "Developer Tools"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JWT Decoder</title>
+  <style>
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    textarea { width: 100%; height: 100px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-family: monospace; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin: 15px 0; }
+    .output-box { background: #f8fafc; padding: 15px; border-radius: 6px; font-family: monospace; white-space: pre-wrap; word-break: break-all; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>JWT Decoder</h1>
+    <label>Encoded JWT</label>
+    <textarea id="jwt" placeholder="eyJhbGci..."></textarea>
+    <button onclick="decode()">Decode Token</button>
+    <label>Header</label>
+    <div class="output-box" id="header"></div>
+    <label>Payload</label>
+    <div class="output-box" id="payload"></div>
+  </div>
+  <script>
+    function decode() {
+      try {
+        const token = document.getElementById('jwt').value.split('.');
+        const head = JSON.parse(atob(token[0].replace(/-/g, '+').replace(/_/g, '/')));
+        const pay = JSON.parse(atob(token[1].replace(/-/g, '+').replace(/_/g, '/')));
+        document.getElementById('header').innerText = JSON.stringify(head, null, 2);
+        document.getElementById('payload').innerText = JSON.stringify(pay, null, 2);
+      } catch(e) { alert("Invalid JWT"); }
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/xml-formatter.html": r"""---
+layout: default
+title: "XML Formatter"
+description: "Format and beautify XML code to make it readable."
+category: "Developer Tools"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>XML Formatter</title>
+  <style>
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    textarea { width: 100%; height: 200px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-family: monospace; font-size: 14px; margin-bottom: 20px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>XML Formatter</h1>
+    <textarea id="input" placeholder="<root><child>Data</child></root>"></textarea>
+    <button onclick="format()">Beautify XML</button>
+    <label style="margin-top:20px; display:block;">Formatted Output</label>
+    <textarea id="output" readonly></textarea>
+  </div>
+  <script>
+    function format() {
+      let xml = document.getElementById('input').value;
+      let formatted = '', pad = 0;
+      xml = xml.replace(/(>)(<)(\/*)/g, '$1\r\n$2$3');
+      xml.split('\r\n').forEach(node => {
+        let indent = 0;
+        if (node.match(/.+<\/\w[^>]*>$/)) indent = 0;
+        else if (node.match(/^<\/\w/)) { if (pad !== 0) pad -= 1; }
+        else if (node.match(/^<\w[^>]*[^\/]>.*$/)) indent = 1;
+        else indent = 0;
+        formatted += '  '.repeat(pad) + node + '\r\n';
+        pad += indent;
+      });
+      document.getElementById('output').value = formatted.trim();
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/regex-tester.html": r"""---
+layout: default
+title: "Regex Tester"
+description: "Test your regular expressions in real-time."
+category: "Developer Tools"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Regex Tester</title>
+  <style>
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    input, textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 15px; font-family: monospace; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    #result { padding: 15px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; margin-top: 15px; min-height: 50px; }
+    .match { background: #fef08a; padding: 2px; border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Regex Tester</h1>
+    <label>Regular Expression</label>
+    <div style="display:flex; gap:10px;">
+      <span style="font-size:1.5rem;">/</span>
+      <input type="text" id="regex" placeholder="[a-z]+">
+      <span style="font-size:1.5rem;">/</span>
+      <input type="text" id="flags" placeholder="g" style="width:50px;">
+    </div>
+    <label>Test String</label>
+    <textarea id="text" placeholder="Type text to test..."></textarea>
+    <button onclick="testRegex()">Test Match</button>
+    <div id="result">Matches will highlight here...</div>
+  </div>
+  <script>
+    function testRegex() {
+      try {
+        const reStr = document.getElementById('regex').value;
+        const flags = document.getElementById('flags').value;
+        const text = document.getElementById('text').value;
+        const regex = new RegExp(reStr, flags);
+        
+        let html = text.replace(regex, match => `<span class="match">${match}</span>`);
+        document.getElementById('result').innerHTML = html;
+      } catch (e) { document.getElementById('result').innerText = "Invalid Regex"; }
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/note-pad.html": r"""---
+layout: default
+title: "Online Notepad"
+description: "A simple online notepad that saves automatically to your browser."
+category: "Utility"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Online Notepad</title>
+  <style>
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    textarea { width: 100%; height: 500px; padding: 15px; border: 1px solid #ccc; border-radius: 6px; font-family: sans-serif; font-size: 16px; resize: vertical; }
+    .status { color: #16a34a; font-size: 0.9rem; margin-top: 10px; text-align: right; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1 style="color: #2563eb; margin-top:0;">Notepad</h1>
+    <textarea id="note" oninput="saveNote()" placeholder="Start typing..."></textarea>
+    <div class="status" id="status">Ready</div>
+  </div>
+  <script>
+    document.getElementById('note').value = localStorage.getItem('autosave_note') || '';
+    function saveNote() {
+      localStorage.setItem('autosave_note', document.getElementById('note').value);
+      document.getElementById('status').innerText = 'Saved automatically.';
+      setTimeout(() => document.getElementById('status').innerText = '', 2000);
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/countdown-timer.html": r"""---
+layout: default
+title: "Countdown Timer"
+description: "Create a countdown to a specific date and time."
+category: "Utility"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Countdown Timer</title>
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-size: 16px; }
+    button { padding: 12px 30px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    #display { font-size: 3rem; font-weight: bold; color: #1e293b; margin-top: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1 style="color: #2563eb;">Countdown Timer</h1>
+    <label style="display:block;margin-bottom:10px;">Target Date & Time</label>
+    <input type="datetime-local" id="target">
+    <button onclick="start()">Start Countdown</button>
+    <div id="display">00d 00h 00m 00s</div>
+  </div>
+  <script>
+    let timer;
+    function start() {
+      clearInterval(timer);
+      const targetDate = new Date(document.getElementById('target').value).getTime();
+      
+      timer = setInterval(() => {
+        const now = new Date().getTime();
+        const dist = targetDate - now;
+        
+        if (dist < 0) {
+          clearInterval(timer);
+          document.getElementById('display').innerText = "EXPIRED";
+          return;
+        }
+        
+        const d = Math.floor(dist / (1000 * 60 * 60 * 24));
+        const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((dist % (1000 * 60)) / 1000);
+        
+        document.getElementById('display').innerText = `${d}d ${h}h ${m}m ${s}s`;
+      }, 1000);
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/timer.html": r"""---
+layout: default
+title: "Timer - Online Alarm"
+description: "Set a simple countdown timer in minutes and seconds."
+category: "Utility"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Timer</title>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+    .inputs { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; }
+    input { width: 80px; padding: 10px; font-size: 1.5rem; text-align: center; border: 1px solid #ccc; border-radius: 6px; }
+    #display { font-size: 4rem; font-family: monospace; font-weight: bold; color: #1e293b; margin: 20px 0; }
+    button { padding: 12px 24px; font-size: 1.1rem; border: none; border-radius: 6px; cursor: pointer; color: white; margin: 5px; }
+    .start { background: #16a34a; } .stop { background: #dc2626; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1 style="color: #2563eb; margin-top:0;">Timer</h1>
+    <div class="inputs" id="setup">
+      <input type="number" id="min" placeholder="Min" value="5" min="0"> :
+      <input type="number" id="sec" placeholder="Sec" value="0" min="0" max="59">
+    </div>
+    <div id="display" style="display:none;">05:00</div>
+    <button class="start" onclick="start()">Start</button>
+    <button class="stop" onclick="stop()">Stop / Reset</button>
+  </div>
+  <script>
+    let interval, totalSecs;
+    function start() {
+      if(!interval) {
+        document.getElementById('setup').style.display = 'none';
+        document.getElementById('display').style.display = 'block';
+        totalSecs = (parseInt(document.getElementById('min').value||0) * 60) + parseInt(document.getElementById('sec').value||0);
+        updateDisplay();
+        interval = setInterval(() => {
+          if(totalSecs <= 0) { stop(); alert("Time's Up!"); return; }
+          totalSecs--; updateDisplay();
+        }, 1000);
+      }
+    }
+    function stop() {
+      clearInterval(interval); interval = null;
+      document.getElementById('setup').style.display = 'flex';
+      document.getElementById('display').style.display = 'none';
+    }
+    function updateDisplay() {
+      const m = Math.floor(totalSecs / 60).toString().padStart(2, '0');
+      const s = (totalSecs % 60).toString().padStart(2, '0');
+      document.getElementById('display').innerText = `${m}:${s}`;
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/timezone-converter.html": r"""---
+layout: default
+title: "Timezone Converter"
+description: "Convert current time across major world timezones."
+category: "Utility"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Timezone Converter</title>
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    .tz-row { display: flex; justify-content: space-between; padding: 15px; border-bottom: 1px solid #eee; font-size: 1.2rem; }
+    .tz-name { font-weight: bold; color: #334155; }
+    .tz-time { font-family: monospace; color: #2563eb; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>World Clock</h1>
+    <div id="clocks"></div>
+  </div>
+  <script>
+    const zones = [
+      { name: "Local Time", tz: undefined },
+      { name: "UTC / GMT", tz: "UTC" },
+      { name: "New York", tz: "America/New_York" },
+      { name: "London", tz: "Europe/London" },
+      { name: "Tokyo", tz: "Asia/Tokyo" },
+      { name: "Sydney", tz: "Australia/Sydney" }
+    ];
+    
+    function update() {
+      let html = '';
+      const now = new Date();
+      zones.forEach(z => {
+        const time = now.toLocaleTimeString('en-US', { timeZone: z.tz, hour: '2-digit', minute:'2-digit', second:'2-digit' });
+        html += `<div class="tz-row"><span class="tz-name">${z.name}</span><span class="tz-time">${time}</span></div>`;
+      });
+      document.getElementById('clocks').innerHTML = html;
+    }
+    setInterval(update, 1000);
+    update();
+  </script>
+</body>
+</html>""",
+
+    "tools/trip-time-estimator.html": r"""---
+layout: default
+title: "Trip Time Estimator"
+description: "Estimate driving or travel time based on distance and speed."
+category: "Utility"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Trip Time Estimator</title>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    label { display: block; font-weight: 600; margin-bottom: 5px; }
+    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 15px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    #result { margin-top: 20px; font-size: 1.5rem; text-align: center; color: #16a34a; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Trip Time Estimator</h1>
+    <label>Distance (Miles or Km)</label>
+    <input type="number" id="dist" placeholder="e.g. 100">
+    <label>Average Speed</label>
+    <input type="number" id="speed" placeholder="e.g. 60">
+    <button onclick="calc()">Estimate Time</button>
+    <div id="result"></div>
+  </div>
+  <script>
+    function calc() {
+      const d = parseFloat(document.getElementById('dist').value);
+      const s = parseFloat(document.getElementById('speed').value);
+      if(!d || !s) return;
+      const hours = Math.floor(d / s);
+      const minutes = Math.round(((d / s) - hours) * 60);
+      document.getElementById('result').innerText = `${hours} hrs ${minutes} mins`;
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/unit-price-calculator.html": r"""---
+layout: default
+title: "Unit Price Calculator"
+description: "Compare prices to find the best deal based on unit cost."
+category: "Utility"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Unit Price Calculator</title>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    .row { display: flex; gap: 10px; margin-bottom: 15px; }
+    .col { flex: 1; }
+    label { display: block; font-weight: 600; margin-bottom: 5px; }
+    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    #result { margin-top: 20px; font-size: 1.2rem; text-align: center; background: #f8fafc; padding: 15px; border-radius: 6px; border: 1px solid #e2e8f0; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Unit Price Calculator</h1>
+    <div class="row">
+      <div class="col"><label>Total Price ($)</label><input type="number" id="price"></div>
+      <div class="col"><label>Quantity / Size</label><input type="number" id="qty"></div>
+    </div>
+    <button onclick="calc()">Calculate Unit Price</button>
+    <div id="result" style="display:none;"></div>
+  </div>
+  <script>
+    function calc() {
+      const p = parseFloat(document.getElementById('price').value);
+      const q = parseFloat(document.getElementById('qty').value);
+      if(!p || !q) return;
+      const unit = p / q;
+      const res = document.getElementById('result');
+      res.style.display = 'block';
+      res.innerHTML = `Price per unit: <strong>$${unit.toFixed(4)}</strong>`;
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/fuel-cost-calculator.html": r"""---
+layout: default
+title: "Fuel Cost Calculator"
+description: "Calculate how much your road trip will cost based on distance and fuel efficiency."
+category: "Utility"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fuel Cost</title>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    label { display: block; font-weight: 600; margin-bottom: 5px; margin-top: 15px; }
+    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 20px; }
+    #result { margin-top: 20px; font-size: 1.5rem; text-align: center; color: #dc2626; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Fuel Cost Calculator</h1>
+    <label>Distance (Miles or Km)</label><input type="number" id="dist">
+    <label>Fuel Efficiency (MPG or Km/L)</label><input type="number" id="eff">
+    <label>Gas Price per Gallon/Liter ($)</label><input type="number" id="price">
+    <button onclick="calc()">Calculate Cost</button>
+    <div id="result"></div>
+  </div>
+  <script>
+    function calc() {
+      const d = parseFloat(document.getElementById('dist').value);
+      const e = parseFloat(document.getElementById('eff').value);
+      const p = parseFloat(document.getElementById('price').value);
+      if(!d || !e || !p) return;
+      const cost = (d / e) * p;
+      document.getElementById('result').innerText = `Total Cost: $${cost.toFixed(2)}`;
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/moon-phase.html": r"""---
+layout: default
+title: "Moon Phase Calculator"
+description: "Estimate the current phase of the moon based on simple lunar cycles."
+category: "Utility"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Moon Phase</title>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+    h1 { color: #2563eb; }
+    .phase { font-size: 5rem; margin: 20px 0; }
+    .phase-text { font-size: 1.5rem; font-weight: bold; color: #334155; }
+    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Moon Phase Today</h1>
+    <div class="phase" id="icon">🌕</div>
+    <div class="phase-text" id="text">Loading...</div>
+    <button onclick="calcPhase()">Check Current Phase</button>
+  </div>
+  <script>
+    function calcPhase() {
+      const now = new Date();
+      // Known new moon approx: 2000-01-06
+      const knownNewMoon = new Date(Date.UTC(2000, 0, 6, 18, 14));
+      const lunarDays = 29.53058867;
+      
+      const diffDays = (now - knownNewMoon) / (1000 * 60 * 60 * 24);
+      const cyclePos = (diffDays % lunarDays) / lunarDays;
+      
+      let phase, icon;
+      if (cyclePos < 0.05) { phase = "New Moon"; icon = "🌑"; }
+      else if (cyclePos < 0.25) { phase = "Waxing Crescent"; icon = "🌒"; }
+      else if (cyclePos < 0.3) { phase = "First Quarter"; icon = "🌓"; }
+      else if (cyclePos < 0.5) { phase = "Waxing Gibbous"; icon = "🌔"; }
+      else if (cyclePos < 0.55) { phase = "Full Moon"; icon = "🌕"; }
+      else if (cyclePos < 0.75) { phase = "Waning Gibbous"; icon = "🌖"; }
+      else if (cyclePos < 0.8) { phase = "Last Quarter"; icon = "🌗"; }
+      else { phase = "Waning Crescent"; icon = "🌘"; }
+      
+      document.getElementById('icon').innerText = icon;
+      document.getElementById('text').innerText = phase;
+    }
+    window.onload = calcPhase;
+  </script>
+</body>
+</html>""",
+
+    "tools/sunrise-sunset.html": r"""---
+layout: default
+title: "Sunrise & Sunset Calculator"
+description: "Get today's sunrise and sunset times based on your current location."
+category: "Utility"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sunrise Sunset</title>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+    h1 { color: #2563eb; }
+    .data-box { background: #f8fafc; padding: 20px; border-radius: 8px; margin-top: 20px; font-size: 1.2rem; }
+    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Sunrise / Sunset</h1>
+    <p>We need your location to calculate times.</p>
+    <button onclick="getLocation()">Get Times</button>
+    <div class="data-box" id="result" style="display:none;"></div>
+  </div>
+  <script>
+    function getLocation() {
+      document.getElementById('result').style.display = 'block';
+      document.getElementById('result').innerHTML = "Locating...";
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(fetchTimes, () => {
+          document.getElementById('result').innerHTML = "Location access denied.";
+        });
+      } else {
+        document.getElementById('result').innerHTML = "Geolocation not supported.";
+      }
+    }
+    async function fetchTimes(position) {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+      try {
+        const res = await fetch(`https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&formatted=0`);
+        const data = await res.json();
+        
+        const sunrise = new Date(data.results.sunrise).toLocaleTimeString();
+        const sunset = new Date(data.results.sunset).toLocaleTimeString();
+        
+        document.getElementById('result').innerHTML = `<strong>Sunrise:</strong> ${sunrise}<br><br><strong>Sunset:</strong> ${sunset}`;
+      } catch(e) { document.getElementById('result').innerHTML = "Error fetching data."; }
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/lighting-converter.html": r"""---
+layout: default
+title: "Lighting Converter"
+description: "Convert illumination and luminance values (Lux, Foot-candles)."
+category: "Converters"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lighting Converter</title>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    .input-group { margin-bottom: 15px; }
+    label { display: block; font-weight: 600; margin-bottom: 5px; }
+    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Lighting Converter</h1>
+    <div class="input-group"><label>Lux (lx)</label><input type="number" id="lux" oninput="conv('lux',this.value)"></div>
+    <div class="input-group"><label>Foot-candle (fc)</label><input type="number" id="fc" oninput="conv('fc',this.value)"></div>
+  </div>
+  <script>
+    function conv(id, val) {
+      val = parseFloat(val);
+      if(id === 'lux') document.getElementById('fc').value = val * 0.092903;
+      if(id === 'fc') document.getElementById('lux').value = val / 0.092903;
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/lighting-lux-calculator.html": r"""---
+layout: default
+title: "Lux / Lumens Calculator"
+description: "Calculate Lux from Lumens and Area, or vice versa."
+category: "Calculators"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lux Calculator</title>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    label { display: block; font-weight: 600; margin-bottom: 5px; margin-top: 15px; }
+    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 20px; }
+    #result { margin-top: 20px; font-size: 1.5rem; text-align: center; color: #16a34a; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Lux Calculator</h1>
+    <label>Lumens (lm)</label><input type="number" id="lm">
+    <label>Area (Square Meters)</label><input type="number" id="area">
+    <button onclick="calc()">Calculate Lux</button>
+    <div id="result"></div>
+  </div>
+  <script>
+    function calc() {
+      const lm = parseFloat(document.getElementById('lm').value);
+      const area = parseFloat(document.getElementById('area').value);
+      if(lm && area) {
+        document.getElementById('result').innerText = `${(lm / area).toFixed(2)} Lux (lx)`;
+      }
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/field-strength-converter.html": r"""---
+layout: default
+title: "Field Strength Converter"
+description: "Convert Electric Field Strength (V/m to dBuV/m)."
+category: "Converters"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Field Strength</title>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    label { display: block; font-weight: 600; margin-bottom: 5px; margin-top: 15px; }
+    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Field Strength Converter</h1>
+    <label>Volts per Meter (V/m)</label>
+    <input type="number" id="vm" oninput="conv('vm')">
+    <label>dB microVolts per Meter (dBµV/m)</label>
+    <input type="number" id="dbuv" oninput="conv('dbuv')">
+  </div>
+  <script>
+    function conv(id) {
+      if(id === 'vm') {
+        const vm = parseFloat(document.getElementById('vm').value);
+        document.getElementById('dbuv').value = 20 * Math.log10(vm * 1e6);
+      } else {
+        const dbuv = parseFloat(document.getElementById('dbuv').value);
+        document.getElementById('vm').value = Math.pow(10, dbuv / 20) / 1e6;
+      }
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/clipboard-viewer.html": r"""---
+layout: default
+title: "Clipboard Viewer"
+description: "Safely read and view the current text stored in your clipboard."
+category: "Utility"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Clipboard Viewer</title>
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+    h1 { color: #2563eb; }
+    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-bottom: 20px; }
+    textarea { width: 100%; height: 200px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-family: monospace; resize: vertical; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Clipboard Viewer</h1>
+    <p>Click below to paste and view your clipboard contents securely.</p>
+    <button onclick="readClip()">Read Clipboard</button>
+    <textarea id="output" readonly placeholder="Clipboard text will appear here..."></textarea>
+  </div>
+  <script>
+    async function readClip() {
+      try {
+        const text = await navigator.clipboard.readText();
+        document.getElementById('output').value = text;
+      } catch(e) {
+        document.getElementById('output').value = "Permission denied or empty clipboard.";
+      }
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/markdown-editor.html": r"""---
+layout: default
+title: "Markdown Editor"
+description: "A simple, clean markdown text editor."
+category: "Developer Tools"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Markdown Editor</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    .tool-container { max-width: 1000px; margin: 40px auto; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    .split { display: flex; gap: 20px; height: 60vh; }
+    textarea, .preview { flex: 1; padding: 15px; border: 1px solid #ccc; border-radius: 6px; overflow-y: auto; }
+    .preview { background: #f8fafc; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Markdown Editor</h1>
+    <div class="split">
+      <textarea id="editor" placeholder="Write markdown here..." oninput="update()"></textarea>
+      <div class="preview" id="preview"></div>
+    </div>
+  </div>
+  <script>
+    function update() {
+      document.getElementById('preview').innerHTML = marked.parse(document.getElementById('editor').value);
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/week-number.html": r"""---
+layout: default
+title: "Week Number Calculator"
+description: "Find out what week of the year a specific date falls in."
+category: "Utility"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Week Number</title>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+    h1 { color: #2563eb; }
+    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-size: 16px; }
+    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; }
+    #result { margin-top: 20px; font-size: 2rem; font-weight: bold; color: #16a34a; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Week Number</h1>
+    <input type="date" id="date">
+    <button onclick="calc()">Get Week Number</button>
+    <div id="result"></div>
+  </div>
+  <script>
+    function calc() {
+      const d = new Date(document.getElementById('date').value);
+      if(isNaN(d)) return;
+      const start = new Date(d.getFullYear(), 0, 1);
+      const days = Math.floor((d - start) / (24 * 60 * 60 * 1000));
+      const week = Math.ceil((d.getDay() + 1 + days) / 7);
+      document.getElementById('result').innerText = `Week ${week}`;
+    }
+  </script>
+</body>
+</html>""",
+
+    "tools/words-to-number.html": r"""---
+layout: default
+title: "Words to Number Converter"
+description: "Convert basic number words (e.g. one, two) back to digits."
+category: "Converters"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Words to Number</title>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+    h1 { color: #2563eb; }
+    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-size: 16px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    #result { margin-top: 20px; font-size: 2rem; font-weight: bold; color: #334155; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Words to Number</h1>
+    <input type="text" id="words" placeholder="e.g. forty two">
     <button onclick="convert()">Convert</button>
     <div id="result"></div>
   </div>
   <script>
-    const ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
-    const tens = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
-    
-    function numToWords(num) {
-      if (num === 0) return "zero";
-      if (num < 20) return ones[num];
-      if (num < 100) return tens[Math.floor(num / 10)] + (num % 10 !== 0 ? "-" + ones[num % 10] : "");
-      if (num < 1000) return ones[Math.floor(num / 100)] + " hundred" + (num % 100 !== 0 ? " and " + numToWords(num % 100) : "");
-      if (num < 1000000) return numToWords(Math.floor(num / 1000)) + " thousand" + (num % 1000 !== 0 ? " " + numToWords(num % 1000) : "");
-      return "Number too large";
-    }
-
+    const nums = {"zero":0,"one":1,"two":2,"three":3,"four":4,"five":5,"six":6,"seven":7,"eight":8,"nine":9,"ten":10,"eleven":11,"twelve":12,"thirteen":13,"fourteen":14,"fifteen":15,"sixteen":16,"seventeen":17,"eighteen":18,"nineteen":19,"twenty":20,"thirty":30,"forty":40,"fifty":50,"sixty":60,"seventy":70,"eighty":80,"ninety":90};
     function convert() {
-      const val = parseInt(document.getElementById('input').value);
-      document.getElementById('result').innerText = numToWords(val);
-    }
-  </script>
-</body>
-</html>""",
-
-    "tools/word-frequency-counter.html": r"""---
-layout: default
-title: "Word Frequency Counter"
-description: "Analyze text and count the frequency of every word. Great for SEO and writing analysis."
-category: "Text Tools"
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Word Frequency Counter</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { color: #2563eb; text-align: center; }
-    textarea { width: 100%; height: 200px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-family: sans-serif; margin-bottom: 20px; }
-    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-    table { width: 100%; margin-top: 20px; border-collapse: collapse; }
-    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-    th { background-color: #f2f2f2; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1>Word Frequency Counter</h1>
-    <textarea id="text" placeholder="Paste your text here..."></textarea>
-    <button onclick="analyze()">Analyze Text</button>
-    <table id="resultTable" style="display:none;">
-      <thead><tr><th>Word</th><th>Count</th><th>%</th></tr></thead>
-      <tbody id="tbody"></tbody>
-    </table>
-  </div>
-  <script>
-    function analyze() {
-      const text = document.getElementById('text').value.toLowerCase().replace(/[^\w\s]/g, '');
-      const words = text.split(/\s+/).filter(w => w.length > 0);
-      const total = words.length;
-      const freq = {};
-      
-      words.forEach(w => freq[w] = (freq[w] || 0) + 1);
-      
-      const sorted = Object.entries(freq).sort((a,b) => b[1] - a[1]);
-      const tbody = document.getElementById('tbody');
-      tbody.innerHTML = '';
-      
-      sorted.forEach(([word, count]) => {
-        const row = `<tr><td>${word}</td><td>${count}</td><td>${((count/total)*100).toFixed(1)}%</td></tr>`;
-        tbody.innerHTML += row;
-      });
-      document.getElementById('resultTable').style.display = 'table';
-    }
-  </script>
-</body>
-</html>""",
-
-    "tools/text-reverser.html": r"""---
-layout: default
-title: "Text Reverser"
-description: "Reverse text, words, or letters instantly."
-category: "Text Tools"
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Text Reverser</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    textarea { width: 100%; height: 150px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; }
-    button { padding: 10px 20px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; margin-right: 10px; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1 style="text-align: center; color: #2563eb;">Text Reverser</h1>
-    <textarea id="input" placeholder="Type here..."></textarea>
-    <button onclick="reverseText()">Reverse Text</button>
-    <button onclick="reverseWords()" style="background:#4b5563">Reverse Word Order</button>
-    <textarea id="output" readonly style="margin-top:20px; background:#f9fafb;"></textarea>
-  </div>
-  <script>
-    function reverseText() {
-      const val = document.getElementById('input').value;
-      document.getElementById('output').value = val.split('').reverse().join('');
-    }
-    function reverseWords() {
-      const val = document.getElementById('input').value;
-      document.getElementById('output').value = val.split(' ').reverse().join(' ');
-    }
-  </script>
-</body>
-</html>""",
-
-    "tools/text-diff.html": r"""---
-layout: default
-title: "Text Diff Checker"
-description: "Compare two text files and find the differences."
-category: "Text Tools"
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Text Diff Checker</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsdiff/5.1.0/diff.min.js"></script>
-  <style>
-    .tool-container { max-width: 900px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    .cols { display: flex; gap: 20px; }
-    .col { flex: 1; }
-    textarea { width: 100%; height: 200px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
-    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; margin: 20px 0; font-weight: bold; }
-    #result { white-space: pre-wrap; padding: 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; }
-    .added { background-color: #d1fae5; color: #065f46; }
-    .removed { background-color: #fee2e2; color: #991b1b; text-decoration: line-through; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1 style="text-align: center; color: #2563eb;">Text Diff Checker</h1>
-    <div class="cols">
-      <div class="col"><label>Original Text</label><textarea id="text1">Hello World</textarea></div>
-      <div class="col"><label>New Text</label><textarea id="text2">Hello New World</textarea></div>
-    </div>
-    <button onclick="compare()">Compare Texts</button>
-    <div id="result"></div>
-  </div>
-  <script>
-    function compare() {
-      const one = document.getElementById('text1').value;
-      const other = document.getElementById('text2').value;
-      const diff = Diff.diffWords(one, other);
-      const display = document.getElementById('result');
-      display.innerHTML = '';
-
-      diff.forEach((part) => {
-        const span = document.createElement('span');
-        span.className = part.added ? 'added' : part.removed ? 'removed' : 'common';
-        span.appendChild(document.createTextNode(part.value));
-        display.appendChild(span);
-      });
-    }
-  </script>
-</body>
-</html>""",
-
-    "tools/frequency-converter.html": r"""---
-layout: default
-title: "Frequency Converter"
-description: "Convert between Hertz (Hz), Kilohertz (kHz), Megahertz (MHz), and Gigahertz (GHz)."
-category: "Converters"
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Frequency Converter</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { color: #2563eb; text-align: center; }
-    .input-group { margin-bottom: 15px; }
-    label { display: block; font-weight: 600; margin-bottom: 5px; }
-    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1>Frequency Converter</h1>
-    <div class="input-group"><label>Hertz (Hz)</label><input type="number" id="hz" oninput="conv('hz',this.value)"></div>
-    <div class="input-group"><label>Kilohertz (kHz)</label><input type="number" id="khz" oninput="conv('khz',this.value)"></div>
-    <div class="input-group"><label>Megahertz (MHz)</label><input type="number" id="mhz" oninput="conv('mhz',this.value)"></div>
-    <div class="input-group"><label>Gigahertz (GHz)</label><input type="number" id="ghz" oninput="conv('ghz',this.value)"></div>
-  </div>
-  <script>
-    function conv(id, val) {
-      val = parseFloat(val);
-      const h = id === 'hz' ? val : id === 'khz' ? val * 1000 : id === 'mhz' ? val * 1e6 : val * 1e9;
-      if(id !== 'hz') document.getElementById('hz').value = h;
-      if(id !== 'khz') document.getElementById('khz').value = h / 1000;
-      if(id !== 'mhz') document.getElementById('mhz').value = h / 1e6;
-      if(id !== 'ghz') document.getElementById('ghz').value = h / 1e9;
-    }
-  </script>
-</body>
-</html>""",
-
-    "tools/force-converter.html": r"""---
-layout: default
-title: "Force Converter"
-description: "Convert between Newton, Dyne, Kilogram-force, and Pound-force."
-category: "Converters"
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Force Converter</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { color: #2563eb; text-align: center; }
-    .input-group { margin-bottom: 15px; }
-    label { display: block; font-weight: 600; margin-bottom: 5px; }
-    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1>Force Converter</h1>
-    <div class="input-group"><label>Newton (N)</label><input type="number" id="n" oninput="conv('n',this.value)"></div>
-    <div class="input-group"><label>Dyne (dyn)</label><input type="number" id="dyn" oninput="conv('dyn',this.value)"></div>
-    <div class="input-group"><label>Kilogram-force (kgf)</label><input type="number" id="kgf" oninput="conv('kgf',this.value)"></div>
-    <div class="input-group"><label>Pound-force (lbf)</label><input type="number" id="lbf" oninput="conv('lbf',this.value)"></div>
-  </div>
-  <script>
-    function conv(id, val) {
-      val = parseFloat(val);
-      const n = id === 'n' ? val : id === 'dyn' ? val / 100000 : id === 'kgf' ? val * 9.80665 : val * 4.44822;
-      if(id !== 'n') document.getElementById('n').value = n;
-      if(id !== 'dyn') document.getElementById('dyn').value = n * 100000;
-      if(id !== 'kgf') document.getElementById('kgf').value = n / 9.80665;
-      if(id !== 'lbf') document.getElementById('lbf').value = n / 4.44822;
-    }
-  </script>
-</body>
-</html>""",
-
-    "tools/base32-encoder.html": r"""---
-layout: default
-title: "Base32 Encoder"
-description: "Convert text to Base32 string format."
-category: "Developer Tools"
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Base32 Encoder</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/hi-base32/0.5.1/base32.min.js"></script>
-  <style>
-    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { color: #2563eb; text-align: center; }
-    textarea { width: 100%; height: 150px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-family: monospace; margin-bottom: 20px; }
-    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1>Base32 Encoder</h1>
-    <label>Input Text</label>
-    <textarea id="input" placeholder="Type here..."></textarea>
-    <button onclick="encode()">Encode to Base32</button>
-    <label style="margin-top:20px; display:block;">Output</label>
-    <textarea id="output" readonly></textarea>
-  </div>
-  <script>
-    function encode() {
-      const val = document.getElementById('input').value;
-      if(window.base32) document.getElementById('output').value = base32.encode(val);
-      else alert("Library loading...");
-    }
-  </script>
-</body>
-</html>""",
-
-    "tools/base32-decoder.html": r"""---
-layout: default
-title: "Base32 Decoder"
-description: "Decode Base32 strings back to readable text."
-category: "Developer Tools"
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Base32 Decoder</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/hi-base32/0.5.1/base32.min.js"></script>
-  <style>
-    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { color: #2563eb; text-align: center; }
-    textarea { width: 100%; height: 150px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-family: monospace; margin-bottom: 20px; }
-    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1>Base32 Decoder</h1>
-    <label>Input Base32</label>
-    <textarea id="input" placeholder="JBSWY3DPEBLW64TMMQ======"></textarea>
-    <button onclick="decode()">Decode to Text</button>
-    <label style="margin-top:20px; display:block;">Output</label>
-    <textarea id="output" readonly></textarea>
-  </div>
-  <script>
-    function decode() {
-      const val = document.getElementById('input').value;
-      try {
-        if(window.base32) document.getElementById('output').value = base32.decode(val);
-      } catch(e) { alert("Invalid Base32"); }
-    }
-  </script>
-</body>
-</html>""",
-
-    "tools/url-parser.html": r"""---
-layout: default
-title: "URL Parser"
-description: "Parse and split URL into protocol, host, path, and query parameters."
-category: "Developer Tools"
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>URL Parser</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { color: #2563eb; text-align: center; }
-    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; }
-    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-    .result-row { display: flex; border-bottom: 1px solid #eee; padding: 10px 0; }
-    .key { font-weight: bold; width: 150px; color: #64748b; }
-    .val { font-family: monospace; color: #334155; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1>URL Parser</h1>
-    <input type="text" id="url" placeholder="https://example.com/path?query=123#hash">
-    <button onclick="parse()">Parse URL</button>
-    <div id="results" style="margin-top:20px;"></div>
-  </div>
-  <script>
-    function parse() {
-      try {
-        const url = new URL(document.getElementById('url').value);
-        const res = document.getElementById('results');
-        res.innerHTML = `
-          <div class="result-row"><span class="key">Protocol</span><span class="val">${url.protocol}</span></div>
-          <div class="result-row"><span class="key">Host</span><span class="val">${url.host}</span></div>
-          <div class="result-row"><span class="key">Path</span><span class="val">${url.pathname}</span></div>
-          <div class="result-row"><span class="key">Query</span><span class="val">${url.search}</span></div>
-          <div class="result-row"><span class="key">Hash</span><span class="val">${url.hash}</span></div>
-        `;
-      } catch(e) { alert("Invalid URL"); }
-    }
-  </script>
-</body>
-</html>""",
-
-    "tools/calorie-calculator.html": r"""---
-layout: default
-title: "Calorie Calculator"
-description: "Calculate daily calorie needs based on age, weight, height, and activity level."
-category: "Health Tools"
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Calorie Calculator</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { color: #2563eb; text-align: center; }
-    .input-group { margin-bottom: 15px; }
-    label { display: block; font-weight: 600; margin-bottom: 5px; }
-    input, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
-    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; }
-    #result { margin-top: 20px; font-weight: bold; text-align: center; font-size: 1.5rem; color: #16a34a; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1>Calorie Calculator</h1>
-    <div class="input-group"><label>Age</label><input type="number" id="age"></div>
-    <div class="input-group"><label>Gender</label><select id="gender"><option value="m">Male</option><option value="f">Female</option></select></div>
-    <div class="input-group"><label>Weight (kg)</label><input type="number" id="weight"></div>
-    <div class="input-group"><label>Height (cm)</label><input type="number" id="height"></div>
-    <div class="input-group">
-      <label>Activity</label>
-      <select id="activity">
-        <option value="1.2">Sedentary</option>
-        <option value="1.375">Light Activity</option>
-        <option value="1.55">Moderate Activity</option>
-        <option value="1.725">Very Active</option>
-      </select>
-    </div>
-    <button onclick="calculate()">Calculate</button>
-    <div id="result"></div>
-  </div>
-  <script>
-    function calculate() {
-      const age = parseFloat(document.getElementById('age').value);
-      const gender = document.getElementById('gender').value;
-      const weight = parseFloat(document.getElementById('weight').value);
-      const height = parseFloat(document.getElementById('height').value);
-      const activity = parseFloat(document.getElementById('activity').value);
-      
-      let bmr = (10 * weight) + (6.25 * height) - (5 * age) + (gender === 'm' ? 5 : -161);
-      const tdee = Math.round(bmr * activity);
-      
-      document.getElementById('result').innerText = `${tdee} Calories / day`;
-    }
-  </script>
-</body>
-</html>""",
-
-    "tools/ideal-weight-calculator.html": r"""---
-layout: default
-title: "Ideal Weight Calculator"
-description: "Calculate your ideal weight based on height using popular formulas (Devine, Robinson)."
-category: "Health Tools"
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Ideal Weight Calculator</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { color: #2563eb; text-align: center; }
-    .input-group { margin-bottom: 15px; }
-    label { display: block; font-weight: 600; margin-bottom: 5px; }
-    input, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
-    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; }
-    #result { margin-top: 20px; font-weight: bold; text-align: center; font-size: 1.2rem; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1>Ideal Weight Calculator</h1>
-    <div class="input-group"><label>Gender</label><select id="gender"><option value="m">Male</option><option value="f">Female</option></select></div>
-    <div class="input-group"><label>Height (cm)</label><input type="number" id="height"></div>
-    <button onclick="calculate()">Calculate</button>
-    <div id="result"></div>
-  </div>
-  <script>
-    function calculate() {
-      const h = parseFloat(document.getElementById('height').value);
-      const g = document.getElementById('gender').value;
-      if(!h) return;
-      
-      const inchesOver60 = (h / 2.54) - 60;
-      let ideal = g === 'm' ? 50 + (2.3 * inchesOver60) : 45.5 + (2.3 * inchesOver60);
-      
-      document.getElementById('result').innerText = `Ideal Weight: ${ideal.toFixed(1)} kg`;
-    }
-  </script>
-</body>
-</html>""",
-
-    "tools/body-fat-calculator.html": r"""---
-layout: default
-title: "Body Fat Calculator"
-description: "Estimate your body fat percentage using the US Navy method."
-category: "Health Tools"
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Body Fat Calculator</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { color: #2563eb; text-align: center; }
-    .input-group { margin-bottom: 15px; }
-    label { display: block; font-weight: 600; margin-bottom: 5px; }
-    input, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
-    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; }
-    #result { margin-top: 20px; font-weight: bold; text-align: center; font-size: 1.5rem; color: #16a34a; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1>Body Fat Calculator</h1>
-    <div class="input-group"><label>Gender</label><select id="gender"><option value="m">Male</option><option value="f">Female</option></select></div>
-    <div class="input-group"><label>Waist (cm)</label><input type="number" id="waist"></div>
-    <div class="input-group"><label>Neck (cm)</label><input type="number" id="neck"></div>
-    <div class="input-group"><label>Height (cm)</label><input type="number" id="height"></div>
-    <button onclick="calculate()">Calculate</button>
-    <div id="result"></div>
-  </div>
-  <script>
-    function calculate() {
-      const g = document.getElementById('gender').value;
-      const w = parseFloat(document.getElementById('waist').value);
-      const n = parseFloat(document.getElementById('neck').value);
-      const h = parseFloat(document.getElementById('height').value);
-      
-      let bf = 0;
-      if(g === 'm') {
-        bf = 495 / (1.0324 - 0.19077 * Math.log10(w - n) + 0.15456 * Math.log10(h)) - 450;
-      } else {
-        bf = 495 / (1.29579 - 0.35004 * Math.log10(w + n - n) + 0.22100 * Math.log10(h)) - 450; 
-        // Simplified logic placeholder, real female formula requires hips.
-        // For accurate female calc, adding hip field would be needed, keeping simple for this batch.
-      }
-      document.getElementById('result').innerText = `Body Fat: ${bf.toFixed(1)}%`;
-    }
-  </script>
-</body>
-</html>""",
-
-    "tools/bmr-calculator.html": r"""---
-layout: default
-title: "BMR Calculator - Basal Metabolic Rate"
-description: "Calculate your Basal Metabolic Rate to know how many calories your body burns at rest."
-category: "Health Tools"
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>BMR Calculator</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { color: #2563eb; text-align: center; }
-    .input-group { margin-bottom: 15px; }
-    label { display: block; font-weight: 600; margin-bottom: 5px; }
-    input, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
-    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; }
-    #result { margin-top: 20px; font-weight: bold; text-align: center; font-size: 1.5rem; color: #16a34a; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1>BMR Calculator</h1>
-    <div class="input-group"><label>Age</label><input type="number" id="age"></div>
-    <div class="input-group"><label>Gender</label><select id="gender"><option value="m">Male</option><option value="f">Female</option></select></div>
-    <div class="input-group"><label>Weight (kg)</label><input type="number" id="weight"></div>
-    <div class="input-group"><label>Height (cm)</label><input type="number" id="height"></div>
-    <button onclick="calculate()">Calculate BMR</button>
-    <div id="result"></div>
-  </div>
-  <script>
-    function calculate() {
-      const age = parseFloat(document.getElementById('age').value);
-      const gender = document.getElementById('gender').value;
-      const weight = parseFloat(document.getElementById('weight').value);
-      const height = parseFloat(document.getElementById('height').value);
-      
-      const bmr = (10 * weight) + (6.25 * height) - (5 * age) + (gender === 'm' ? 5 : -161);
-      document.getElementById('result').innerText = `${Math.round(bmr)} Calories / day`;
-    }
-  </script>
-</body>
-</html>""",
-
-    "tools/water-intake-calculator.html": r"""---
-layout: default
-title: "Water Intake Calculator"
-description: "Calculate your daily recommended water intake based on your weight."
-category: "Health Tools"
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Water Intake Calculator</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { color: #2563eb; text-align: center; }
-    .input-group { margin-bottom: 15px; }
-    label { display: block; font-weight: 600; margin-bottom: 5px; }
-    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
-    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; }
-    #result { margin-top: 20px; font-weight: bold; text-align: center; font-size: 1.5rem; color: #16a34a; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1>Water Intake Calculator</h1>
-    <div class="input-group"><label>Weight (kg)</label><input type="number" id="weight"></div>
-    <button onclick="calculate()">Calculate</button>
-    <div id="result"></div>
-  </div>
-  <script>
-    function calculate() {
-      const weight = parseFloat(document.getElementById('weight').value);
-      // Roughly 35ml per kg
-      const intake = weight * 0.035;
-      document.getElementById('result').innerText = `${intake.toFixed(1)} Liters / day`;
-    }
-  </script>
-</body>
-</html>""",
-
-    "tools/base-converter.html": r"""---
-layout: default
-title: "Base Converter - Any Base to Any Base"
-description: "Convert numbers between Binary, Octal, Decimal, and Hexadecimal instantly."
-category: "Converters"
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Base Converter</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { color: #2563eb; text-align: center; }
-    .input-group { margin-bottom: 15px; }
-    label { display: block; font-weight: 600; margin-bottom: 5px; }
-    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1>Base Converter</h1>
-    <div class="input-group"><label>Decimal</label><input type="text" id="dec" oninput="convert('dec', this.value)"></div>
-    <div class="input-group"><label>Binary</label><input type="text" id="bin" oninput="convert('bin', this.value)"></div>
-    <div class="input-group"><label>Octal</label><input type="text" id="oct" oninput="convert('oct', this.value)"></div>
-    <div class="input-group"><label>Hexadecimal</label><input type="text" id="hex" oninput="convert('hex', this.value)"></div>
-  </div>
-  <script>
-    function convert(id, val) {
-      if(!val) return;
-      let dec = 0;
-      if(id==='dec') dec = parseInt(val, 10);
-      if(id==='bin') dec = parseInt(val, 2);
-      if(id==='oct') dec = parseInt(val, 8);
-      if(id==='hex') dec = parseInt(val, 16);
-      
-      if(isNaN(dec)) return;
-
-      if(id!=='dec') document.getElementById('dec').value = dec.toString(10);
-      if(id!=='bin') document.getElementById('bin').value = dec.toString(2);
-      if(id!=='oct') document.getElementById('oct').value = dec.toString(8);
-      if(id!=='hex') document.getElementById('hex').value = dec.toString(16).toUpperCase();
-    }
-  </script>
-</body>
-</html>""",
-
-    "tools/binary-to-ip.html": r"""---
-layout: default
-title: "Binary to IP Converter"
-description: "Convert a 32-bit binary string into a readable IP address."
-category: "Converters"
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Binary to IP</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { color: #2563eb; text-align: center; }
-    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; }
-    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1>Binary to IP</h1>
-    <label>Binary (32-bit)</label>
-    <input type="text" id="input" placeholder="11000000101010000000000100000001">
-    <button onclick="convert()">Convert to IP</button>
-    <label style="margin-top:20px; display:block;">IP Address</label>
-    <input type="text" id="output" readonly>
-  </div>
-  <script>
-    function convert() {
-      const bin = document.getElementById('input').value.replace(/\s/g,'');
-      if(bin.length !== 32) return alert("Must be 32 bits");
-      const octets = [];
-      for(let i=0; i<32; i+=8) octets.push(parseInt(bin.substr(i,8), 2));
-      document.getElementById('output').value = octets.join('.');
-    }
-  </script>
-</body>
-</html>""",
-
-    "tools/ip-to-binary.html": r"""---
-layout: default
-title: "IP to Binary Converter"
-description: "Convert an IP address into a 32-bit binary string."
-category: "Converters"
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>IP to Binary</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { color: #2563eb; text-align: center; }
-    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; }
-    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1>IP to Binary</h1>
-    <label>IP Address</label>
-    <input type="text" id="input" placeholder="192.168.1.1">
-    <button onclick="convert()">Convert to Binary</button>
-    <label style="margin-top:20px; display:block;">Binary Output</label>
-    <input type="text" id="output" readonly>
-  </div>
-  <script>
-    function convert() {
-      const parts = document.getElementById('input').value.split('.');
-      if(parts.length !== 4) return alert("Invalid IP");
-      const bin = parts.map(n => parseInt(n).toString(2).padStart(8,'0')).join('');
-      document.getElementById('output').value = bin;
-    }
-  </script>
-</body>
-</html>""",
-
-    "tools/text-to-ascii.html": r"""---
-layout: default
-title: "Text to ASCII Converter"
-description: "Convert text characters to their ASCII decimal codes."
-category: "Converters"
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Text to ASCII</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { color: #2563eb; text-align: center; }
-    textarea { width: 100%; height: 120px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; }
-    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1>Text to ASCII</h1>
-    <label>Input Text</label>
-    <textarea id="input" placeholder="Hello"></textarea>
-    <button onclick="convert()">Convert to ASCII</button>
-    <label style="margin-top:20px; display:block;">ASCII Output</label>
-    <textarea id="output" readonly></textarea>
-  </div>
-  <script>
-    function convert() {
-      const val = document.getElementById('input').value;
-      const arr = [];
-      for(let i=0; i<val.length; i++) arr.push(val.charCodeAt(i));
-      document.getElementById('output').value = arr.join(' ');
-    }
-  </script>
-</body>
-</html>""",
-
-    "tools/ascii-to-text.html": r"""---
-layout: default
-title: "ASCII to Text Converter"
-description: "Convert space-separated ASCII decimal codes back to text."
-category: "Converters"
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>ASCII to Text</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { color: #2563eb; text-align: center; }
-    textarea { width: 100%; height: 120px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; }
-    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1>ASCII to Text</h1>
-    <label>Input ASCII (Space separated)</label>
-    <textarea id="input" placeholder="72 101 108 108 111"></textarea>
-    <button onclick="convert()">Convert to Text</button>
-    <label style="margin-top:20px; display:block;">Text Output</label>
-    <textarea id="output" readonly></textarea>
-  </div>
-  <script>
-    function convert() {
-      const val = document.getElementById('input').value.trim().split(/\s+/);
-      let res = "";
-      for(let c of val) res += String.fromCharCode(parseInt(c));
-      document.getElementById('output').value = res;
+      const arr = document.getElementById('words').value.toLowerCase().split(/[\s-]+/);
+      let total = 0;
+      for(let w of arr) { if(nums[w] !== undefined) total += nums[w]; }
+      document.getElementById('result').innerText = total > 0 ? total : "0";
     }
   </script>
 </body>

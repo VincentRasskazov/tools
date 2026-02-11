@@ -1,83 +1,43 @@
+---
+layout: default
+title: "JWT Decoder"
+description: "Decode JSON Web Tokens (JWT) to view payload and header data."
+category: "Developer Tools"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>JWT Decoder – Decode JSON Web Tokens Instantly</title>
-  <meta name="description" content="Decode JWT (JSON Web Tokens) instantly with our free JWT Decoder. View header, payload, and signature. Perfect for developers and security testing.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/jwt-decoder.html">
-  <meta property="og:title" content="JWT Decoder – Decode JSON Web Tokens Instantly">
-  <meta property="og:description" content="Decode JWT (JSON Web Tokens) instantly with our free JWT Decoder. View header, payload, and signature. Perfect for developers and security testing.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/jwt-decoder.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="JWT Decoder – Decode JSON Web Tokens Instantly">
-  <meta name="twitter:description" content="Decode JWT (JSON Web Tokens) instantly with our free JWT Decoder. View header, payload, and signature. Perfect for developers and security testing.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "JWT Decoder",
-    "url": "https://vincentrasskazov.github.io/tools/jwt-decoder.html",
-    "applicationCategory": "Developer Tools",
-    "description": "Decode JWT (JSON Web Tokens) instantly with our free JWT Decoder. View header, payload, and signature. Perfect for developers and security testing."
-  }
-  </script>
+  <title>JWT Decoder</title>
+  <style>
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    textarea { width: 100%; height: 100px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-family: monospace; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin: 15px 0; }
+    .output-box { background: #f8fafc; padding: 15px; border-radius: 6px; font-family: monospace; white-space: pre-wrap; word-break: break-all; margin-bottom: 10px; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">jwt decoder Tool</h1>
+    <h1>JWT Decoder</h1>
+    <label>Encoded JWT</label>
+    <textarea id="jwt" placeholder="eyJhbGci..."></textarea>
+    <button onclick="decode()">Decode Token</button>
+    <label>Header</label>
+    <div class="output-box" id="header"></div>
+    <label>Payload</label>
+    <div class="output-box" id="payload"></div>
   </div>
-
-  <h1>jwt decoder Tool</h1>
-
-  <p>This is a starter tool page for <strong>jwt decoder</strong>.</p>
-
-
-  <input id="input" placeholder="Paste JWT here" style="width:100%">
-  <button onclick="run()">Decode</button>
-
-  <pre id="output"></pre>
-
   <script>
-    function decodeBase64Url(str) {
-      str = str.replace(/-/g, '+').replace(/_/g, '/');
-      while (str.length % 4) str += '=';
+    function decode() {
       try {
-        return decodeURIComponent(escape(atob(str)));
-      } catch (e) {
-        return null;
-      }
-    }
-    function run() {
-      const v = document.getElementById('input').value.trim();
-      const parts = v.split('.');
-      if (parts.length !== 3) {
-        document.getElementById('output').innerText = 'Invalid JWT format.';
-        return;
-      }
-      const [header, payload, signature] = parts;
-      let decoded = '';
-      try {
-        decoded += 'Header:\n' + JSON.stringify(JSON.parse(decodeBase64Url(header)), null, 2) + '\n\n';
-        decoded += 'Payload:\n' + JSON.stringify(JSON.parse(decodeBase64Url(payload)), null, 2) + '\n\n';
-        decoded += 'Signature:\n' + signature;
-      } catch (e) {
-        decoded = 'Error decoding JWT.';
-      }
-      document.getElementById('output').innerText = decoded;
+        const token = document.getElementById('jwt').value.split('.');
+        const head = JSON.parse(atob(token[0].replace(/-/g, '+').replace(/_/g, '/')));
+        const pay = JSON.parse(atob(token[1].replace(/-/g, '+').replace(/_/g, '/')));
+        document.getElementById('header').innerText = JSON.stringify(head, null, 2);
+        document.getElementById('payload').innerText = JSON.stringify(pay, null, 2);
+      } catch(e) { alert("Invalid JWT"); }
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

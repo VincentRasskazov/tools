@@ -1,74 +1,36 @@
+---
+layout: default
+title: "JS Minifier"
+description: "Compress JavaScript code to reduce file size and improve load times."
+category: "Developer Tools"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>JS Minifier – Minify JavaScript Instantly Online</title>
-  <meta name="description" content="Minify your JavaScript code instantly with our free JS Minifier. Remove whitespace, comments, and optimize your JS for faster websites.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/js-minifier.html">
-  <meta property="og:title" content="JS Minifier – Minify JavaScript Instantly Online">
-  <meta property="og:description" content="Minify your JavaScript code instantly with our free JS Minifier. Remove whitespace, comments, and optimize your JS for faster websites.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/js-minifier.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="JS Minifier – Minify JavaScript Instantly Online">
-  <meta name="twitter:description" content="Minify your JavaScript code instantly with our free JS Minifier. Remove whitespace, comments, and optimize your JS for faster websites.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "JS Minifier",
-    "url": "https://vincentrasskazov.github.io/tools/js-minifier.html",
-    "applicationCategory": "Developer Tools",
-    "description": "Minify your JavaScript code instantly with our free JS Minifier. Remove whitespace, comments, and optimize your JS for faster websites."
-  }
-  </script>
+  <title>JS Minifier</title>
+  <style>
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    textarea { width: 100%; height: 200px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-family: monospace; margin-bottom: 20px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">js minifier Tool</h1>
+    <h1>JS Minifier</h1>
+    <textarea id="input" placeholder="function hello() {&#10;  console.log('world');&#10;}"></textarea>
+    <button onclick="minify()">Minify JS</button>
+    <label style="margin-top:20px; display:block;">Minified Output</label>
+    <textarea id="output" readonly></textarea>
   </div>
-
-  <h1>js minifier Tool</h1>
-
-  <p>This is a starter tool page for <strong>js minifier</strong>.</p>
-
-
-  <textarea id="input" placeholder="Paste JavaScript code here" rows="8" style="width:100%"></textarea>
-  <button onclick="run()">Minify</button>
-
-  <p id="output"></p>
-
   <script>
-    function minifyJS(code) {
-      // Remove comments, whitespace, and line breaks (simple minifier)
-      return code
-        .replace(/\/\*[\s\S]*?\*\//g, '') // block comments
-        .replace(/\/\/.*$/gm, '') // line comments
-        .replace(/\s+/g, ' ') // whitespace
-        .replace(/\s*([{};,:=\(\)\[\]])\s*/g, '$1') // space around symbols
-        .trim();
-    }
-    function run() {
-      const v = document.getElementById('input').value;
-      try {
-        const minified = minifyJS(v);
-        document.getElementById('output').innerText = minified;
-      } catch (e) {
-        document.getElementById('output').innerText = 'Error minifying code.';
-      }
+    function minify() {
+      let code = document.getElementById('input').value;
+      code = code.replace(/\/\*[\s\S]*?\*\/|\/\/.*/g, ''); // Remove comments
+      code = code.replace(/\s+/g, ' ').replace(/\s*([\{\}\(\)\;\:\,\=\+\-\*\/])\s*/g, '$1'); // Remove whitespace
+      document.getElementById('output').value = code.trim();
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

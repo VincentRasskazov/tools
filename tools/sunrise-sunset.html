@@ -1,76 +1,53 @@
+---
+layout: default
+title: "Sunrise & Sunset Calculator"
+description: "Get today's sunrise and sunset times based on your current location."
+category: "Utility"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Sunrise & Sunset Calculator – Find Sunrise and Sunset Times Instantly</title>
-  <meta name="description" content="Find sunrise and sunset times for any location instantly with our free Sunrise & Sunset Calculator. Perfect for travelers, photographers, and astronomy enthusiasts.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/sunrise-sunset.html">
-  <meta property="og:title" content="Sunrise & Sunset Calculator – Find Sunrise and Sunset Times Instantly">
-  <meta property="og:description" content="Find sunrise and sunset times for any location instantly with our free Sunrise & Sunset Calculator. Perfect for travelers, photographers, and astronomy enthusiasts.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/sunrise-sunset.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Sunrise & Sunset Calculator – Find Sunrise and Sunset Times Instantly">
-  <meta name="twitter:description" content="Find sunrise and sunset times for any location instantly with our free Sunrise & Sunset Calculator. Perfect for travelers, photographers, and astronomy enthusiasts.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Sunrise & Sunset Calculator",
-    "url": "https://vincentrasskazov.github.io/tools/sunrise-sunset.html",
-    "applicationCategory": "Astronomy Tools",
-    "description": "Find sunrise and sunset times for any location instantly with our free Sunrise & Sunset Calculator. Perfect for travelers, photographers, and astronomy enthusiasts."
-  }
-  </script>
+  <title>Sunrise Sunset</title>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+    h1 { color: #2563eb; }
+    .data-box { background: #f8fafc; padding: 20px; border-radius: 8px; margin-top: 20px; font-size: 1.2rem; }
+    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">sunrise sunset Tool</h1>
+    <h1>Sunrise / Sunset</h1>
+    <p>We need your location to calculate times.</p>
+    <button onclick="getLocation()">Get Times</button>
+    <div class="data-box" id="result" style="display:none;"></div>
   </div>
-
-  <h1>sunrise sunset Tool</h1>
-
-  <p>This is a starter tool page for <strong>sunrise sunset</strong>.</p>
-
-
-  <input id="lat" type="number" placeholder="Latitude" style="width:120px;">
-  <input id="lng" type="number" placeholder="Longitude" style="width:120px;">
-  <button onclick="run()">Get Times</button>
-
-  <div id="output"></div>
-
   <script>
-    async function run() {
-      const lat = document.getElementById('lat').value;
-      const lng = document.getElementById('lng').value;
-      if (!lat || !lng) {
-        document.getElementById('output').innerText = 'Enter latitude and longitude.';
-        return;
+    function getLocation() {
+      document.getElementById('result').style.display = 'block';
+      document.getElementById('result').innerHTML = "Locating...";
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(fetchTimes, () => {
+          document.getElementById('result').innerHTML = "Location access denied.";
+        });
+      } else {
+        document.getElementById('result').innerHTML = "Geolocation not supported.";
       }
-      document.getElementById('output').innerText = 'Loading...';
+    }
+    async function fetchTimes(position) {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
       try {
         const res = await fetch(`https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&formatted=0`);
         const data = await res.json();
-        if (data.status !== 'OK') throw new Error('API error');
+        
         const sunrise = new Date(data.results.sunrise).toLocaleTimeString();
         const sunset = new Date(data.results.sunset).toLocaleTimeString();
-        document.getElementById('output').innerText = `Sunrise: ${sunrise}\nSunset: ${sunset}`;
-      } catch (e) {
-        document.getElementById('output').innerText = 'Error fetching data.';
-      }
+        
+        document.getElementById('result').innerHTML = `<strong>Sunrise:</strong> ${sunrise}<br><br><strong>Sunset:</strong> ${sunset}`;
+      } catch(e) { document.getElementById('result').innerHTML = "Error fetching data."; }
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

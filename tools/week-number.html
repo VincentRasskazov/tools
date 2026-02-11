@@ -1,72 +1,38 @@
+---
+layout: default
+title: "Week Number Calculator"
+description: "Find out what week of the year a specific date falls in."
+category: "Utility"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Week Number Calculator – Find ISO Week Number Instantly</title>
-  <meta name="description" content="Find the ISO week number for any date instantly with our free Week Number Calculator. Perfect for scheduling, planning, and business.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/week-number.html">
-  <meta property="og:title" content="Week Number Calculator – Find ISO Week Number Instantly">
-  <meta property="og:description" content="Find the ISO week number for any date instantly with our free Week Number Calculator. Perfect for scheduling, planning, and business.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/week-number.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Week Number Calculator – Find ISO Week Number Instantly">
-  <meta name="twitter:description" content="Find the ISO week number for any date instantly with our free Week Number Calculator. Perfect for scheduling, planning, and business.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Week Number Calculator",
-    "url": "https://vincentrasskazov.github.io/tools/week-number.html",
-    "applicationCategory": "Date Tools",
-    "description": "Find the ISO week number for any date instantly with our free Week Number Calculator. Perfect for scheduling, planning, and business."
-  }
-  </script>
+  <title>Week Number</title>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+    h1 { color: #2563eb; }
+    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-size: 16px; }
+    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; }
+    #result { margin-top: 20px; font-size: 2rem; font-weight: bold; color: #16a34a; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">week number Tool</h1>
+    <h1>Week Number</h1>
+    <input type="date" id="date">
+    <button onclick="calc()">Get Week Number</button>
+    <div id="result"></div>
   </div>
-
-  <h1>week number Tool</h1>
-
-  <p>This is a starter tool page for <strong>week number</strong>.</p>
-
-
-  <input id="input" type="date">
-  <button onclick="run()">Get Week Number</button>
-
-  <p id="output"></p>
-
   <script>
-    function getWeekNumber(dateStr) {
-      const d = new Date(dateStr);
-      d.setHours(0,0,0,0);
-      d.setDate(d.getDate() + 4 - (d.getDay()||7));
-      const yearStart = new Date(d.getFullYear(),0,1);
-      const weekNo = Math.ceil((((d - yearStart) / 86400000) + 1)/7);
-      return weekNo;
-    }
-    function run() {
-      const v = document.getElementById('input').value;
-      if (!v) {
-        document.getElementById('output').innerText = 'Enter a date.';
-        return;
-      }
-      document.getElementById('output').innerText = 'ISO Week Number: ' + getWeekNumber(v);
+    function calc() {
+      const d = new Date(document.getElementById('date').value);
+      if(isNaN(d)) return;
+      const start = new Date(d.getFullYear(), 0, 1);
+      const days = Math.floor((d - start) / (24 * 60 * 60 * 1000));
+      const week = Math.ceil((d.getDay() + 1 + days) / 7);
+      document.getElementById('result').innerText = `Week ${week}`;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

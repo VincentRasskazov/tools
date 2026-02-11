@@ -1,45 +1,34 @@
+---
+layout: default
+title: "Hex to Decimal Converter"
+description: "Convert hexadecimal values to decimal numbers instantly."
+category: "Converters"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="../assets/css/tool-style.css">
   <meta charset="UTF-8">
-  <title>hex to decimal Tool</title>
-  <meta name="description" content="hex to decimal online tool.">
-  <meta name="category" content="Math Tools">
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <title>Hex to Decimal</title>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-size: 16px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">hex to decimal Tool</h1>
+    <h1>Hex to Decimal</h1>
+    <input type="text" id="hex" placeholder="e.g., 2A">
+    <button onclick="convert()">Convert</button>
+    <label style="margin-top:20px; display:block;">Decimal Result</label>
+    <input type="text" id="dec" readonly>
   </div>
-
-  <h1>hex to decimal Tool</h1>
-
-  <p>This is a starter tool page for <strong>hex to decimal</strong>.</p>
-
-
-  <label for="input">Hex:</label>
-  <input id="input" placeholder="Enter hex (e.g. 1A3F)">
-  <button onclick="run()">Convert to Decimal</button>
-
-  <p id="output"></p>
-
   <script>
-    function run() {
-      const v = document.getElementById('input').value.trim();
-      if (!/^[0-9a-fA-F]+$/.test(v)) {
-        document.getElementById('output').innerText = "Please enter a valid hex string.";
-        return;
-      }
-      document.getElementById('output').innerText = parseInt(v, 16).toString(10);
+    function convert() {
+      const val = parseInt(document.getElementById('hex').value, 16);
+      if(!isNaN(val)) document.getElementById('dec').value = val.toString(10);
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

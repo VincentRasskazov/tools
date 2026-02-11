@@ -1,71 +1,33 @@
+---
+layout: default
+title: "Online Notepad"
+description: "A simple online notepad that saves automatically to your browser."
+category: "Utility"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Note Pad – Free Online Tool</title>
-  <meta name="description" content="A simple online notepad for quick notes. Write, save, and clear notes instantly. Perfect for productivity and quick reminders.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/note-pad.html">
-  <meta property="og:title" content="Note Pad – Free Online Tool">
-  <meta property="og:description" content="A simple online notepad for quick notes. Write, save, and clear notes instantly. Perfect for productivity and quick reminders.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/note-pad.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Note Pad – Free Online Tool">
-  <meta name="twitter:description" content="A simple online notepad for quick notes. Write, save, and clear notes instantly. Perfect for productivity and quick reminders.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Note Pad",
-    "url": "https://vincentrasskazov.github.io/tools/note-pad.html",
-    "applicationCategory": "Utility Tools",
-    "description": "A simple online notepad for quick notes. Write, save, and clear notes instantly. Perfect for productivity and quick reminders."
-  }
-  </script>
+  <title>Online Notepad</title>
+  <style>
+    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    textarea { width: 100%; height: 500px; padding: 15px; border: 1px solid #ccc; border-radius: 6px; font-family: sans-serif; font-size: 16px; resize: vertical; }
+    .status { color: #16a34a; font-size: 0.9rem; margin-top: 10px; text-align: right; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">note pad Tool</h1>
+    <h1 style="color: #2563eb; margin-top:0;">Notepad</h1>
+    <textarea id="note" oninput="saveNote()" placeholder="Start typing..."></textarea>
+    <div class="status" id="status">Ready</div>
   </div>
-
-  <h1>note pad Tool</h1>
-
-  <p>This is a starter tool page for <strong>note pad</strong>.</p>
-
-
-  <textarea id="input" placeholder="Type your notes here..." rows="12" style="width:100%"></textarea>
-  <div>
-    <button onclick="save()">Save</button>
-    <button onclick="clearNote()">Clear</button>
-  </div>
-  <div id="output" style="color:green;"></div>
-
   <script>
-    const KEY = 'notepad-content';
-    window.onload = function() {
-      document.getElementById('input').value = localStorage.getItem(KEY) || '';
-    };
-    function save() {
-      localStorage.setItem(KEY, document.getElementById('input').value);
-      document.getElementById('output').innerText = 'Note saved!';
-    }
-    function clearNote() {
-      document.getElementById('input').value = '';
-      localStorage.removeItem(KEY);
-      document.getElementById('output').innerText = 'Note cleared!';
+    document.getElementById('note').value = localStorage.getItem('autosave_note') || '';
+    function saveNote() {
+      localStorage.setItem('autosave_note', document.getElementById('note').value);
+      document.getElementById('status').innerText = 'Saved automatically.';
+      setTimeout(() => document.getElementById('status').innerText = '', 2000);
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

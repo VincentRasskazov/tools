@@ -1,76 +1,53 @@
+---
+layout: default
+title: "Countdown Timer"
+description: "Create a countdown to a specific date and time."
+category: "Utility"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Countdown Timer – Online Countdown Timer Tool</title>
-  <meta name="description" content="Use our free online Countdown Timer to track time for any event. Set, start, and reset the timer instantly. Perfect for productivity, cooking, and more.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/countdown-timer.html">
-  <meta property="og:title" content="Countdown Timer – Online Countdown Timer Tool">
-  <meta property="og:description" content="Use our free online Countdown Timer to track time for any event. Set, start, and reset the timer instantly. Perfect for productivity, cooking, and more.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/countdown-timer.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Countdown Timer – Online Countdown Timer Tool">
-  <meta name="twitter:description" content="Use our free online Countdown Timer to track time for any event. Set, start, and reset the timer instantly. Perfect for productivity, cooking, and more.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Countdown Timer",
-    "url": "https://vincentrasskazov.github.io/tools/countdown-timer.html",
-    "applicationCategory": "Utility Tools",
-    "description": "Use our free online Countdown Timer to track time for any event. Set, start, and reset the timer instantly. Perfect for productivity, cooking, and more."
-  }
-  </script>
+  <title>Countdown Timer</title>
+  <style>
+    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-size: 16px; }
+    button { padding: 12px 30px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    #display { font-size: 3rem; font-weight: bold; color: #1e293b; margin-top: 30px; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">countdown timer Tool</h1>
+    <h1 style="color: #2563eb;">Countdown Timer</h1>
+    <label style="display:block;margin-bottom:10px;">Target Date & Time</label>
+    <input type="datetime-local" id="target">
+    <button onclick="start()">Start Countdown</button>
+    <div id="display">00d 00h 00m 00s</div>
   </div>
-
-  <h1>countdown timer Tool</h1>
-
-  <p>This is a starter tool page for <strong>countdown timer</strong>.</p>
-
-
-  <label for="input">Seconds:</label>
-  <input id="input" type="number" placeholder="Enter seconds">
-  <button onclick="run()">Start Countdown</button>
-
-  <p id="output"></p>
-
   <script>
     let timer;
-    function run() {
+    function start() {
       clearInterval(timer);
-      let seconds = parseInt(document.getElementById('input').value, 10);
-      if (isNaN(seconds) || seconds < 1) {
-        document.getElementById('output').innerText = "Please enter a positive number.";
-        return;
-      }
-      document.getElementById('output').innerText = seconds + ' seconds left';
+      const targetDate = new Date(document.getElementById('target').value).getTime();
+      
       timer = setInterval(() => {
-        seconds--;
-        if (seconds > 0) {
-          document.getElementById('output').innerText = seconds + ' seconds left';
-        } else {
-          document.getElementById('output').innerText = 'Time\'s up!';
+        const now = new Date().getTime();
+        const dist = targetDate - now;
+        
+        if (dist < 0) {
           clearInterval(timer);
+          document.getElementById('display').innerText = "EXPIRED";
+          return;
         }
+        
+        const d = Math.floor(dist / (1000 * 60 * 60 * 24));
+        const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((dist % (1000 * 60)) / 1000);
+        
+        document.getElementById('display').innerText = `${d}d ${h}h ${m}m ${s}s`;
       }, 1000);
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

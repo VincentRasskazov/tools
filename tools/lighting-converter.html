@@ -1,117 +1,34 @@
+---
+layout: default
+title: "Lighting Converter"
+description: "Convert illumination and luminance values (Lux, Foot-candles)."
+category: "Converters"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Lighting Converter – Convert Lighting Units Instantly Online</title>
-  <meta name="description" content="Convert lighting units instantly with our free Lighting Converter. Perfect for engineers, lighting designers, and students.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/lighting-converter.html">
-  <meta property="og:title" content="Lighting Converter – Convert Lighting Units Instantly Online">
-  <meta property="og:description" content="Convert lighting units instantly with our free Lighting Converter. Perfect for engineers, lighting designers, and students.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/lighting-converter.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Lighting Converter – Convert Lighting Units Instantly Online">
-  <meta name="twitter:description" content="Convert lighting units instantly with our free Lighting Converter. Perfect for engineers, lighting designers, and students.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Lighting Converter",
-    "url": "https://vincentrasskazov.github.io/tools/lighting-converter.html",
-    "applicationCategory": "Unit Converter",
-    "description": "Convert lighting units instantly with our free Lighting Converter. Perfect for engineers, lighting designers, and students."
-  }
-  </script>
+  <title>Lighting Converter</title>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    .input-group { margin-bottom: 15px; }
+    label { display: block; font-weight: 600; margin-bottom: 5px; }
+    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+  </style>
 </head>
-
-    <meta name="description" content="Convert lighting units instantly with our free Lighting Converter. Perfect for engineers, lighting designers, and students.">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="canonical" href="https://vincentrasskazov.github.io/tools/lighting-converter.html">
-    <meta property="og:title" content="Lighting Converter – Convert Lighting Units Instantly Online">
-    <meta property="og:description" content="Convert lighting units instantly with our free Lighting Converter. Perfect for engineers, lighting designers, and students.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://vincentrasskazov.github.io/tools/lighting-converter.html">
-    <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Lighting Converter – Convert Lighting Units Instantly Online">
-    <meta name="twitter:description" content="Convert lighting units instantly with our free Lighting Converter. Perfect for engineers, lighting designers, and students.">
-    <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/landing-polish.css">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Lighting Converter",
-      "url": "https://vincentrasskazov.github.io/tools/lighting-converter.html",
-      "applicationCategory": "Unit Converter",
-      "description": "Convert lighting units instantly with our free Lighting Converter. Perfect for engineers, lighting designers, and students."
-    }
-    </script>
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">lighting converter Tool</h1>
+<body>
+  <div class="tool-container">
+    <h1>Lighting Converter</h1>
+    <div class="input-group"><label>Lux (lx)</label><input type="number" id="lux" oninput="conv('lux',this.value)"></div>
+    <div class="input-group"><label>Foot-candle (fc)</label><input type="number" id="fc" oninput="conv('fc',this.value)"></div>
   </div>
-
-  <h1>lighting converter Tool</h1>
-
-  <p>This is a starter tool page for <strong>lighting converter</strong>.</p>
-
-
-  <input id="value" type="number" placeholder="Enter value" style="width:120px;">
-  <select id="from">
-    <option value="lm">Lumens (lm)</option>
-    <option value="lx">Lux (lx)</option>
-    <option value="cd">Candela (cd)</option>
-  </select>
-  to
-  <select id="to">
-    <option value="lm">Lumens (lm)</option>
-    <option value="lx">Lux (lx)</option>
-    <option value="cd">Candela (cd)</option>
-  </select>
-  <button onclick="run()">Convert</button>
-
-  <p id="output"></p>
-
   <script>
-    // Assumes 1 candela = 12.57 lumens (in all directions), 1 lux = 1 lumen/m^2
-    function convertLighting(value, from, to) {
-      if (from === to) return value;
-      // Convert to lumens first
-      let lumens;
-      if (from === 'lm') lumens = value;
-      else if (from === 'cd') lumens = value * 12.57;
-      else if (from === 'lx') lumens = value; // Needs area for real conversion
-      // Convert from lumens to target
-      if (to === 'lm') return lumens;
-      else if (to === 'cd') return lumens / 12.57;
-      else if (to === 'lx') return lumens; // Needs area for real conversion
-      return null;
-    }
-    function run() {
-      const value = parseFloat(document.getElementById('value').value);
-      const from = document.getElementById('from').value;
-      const to = document.getElementById('to').value;
-      if (isNaN(value)) {
-        document.getElementById('output').innerText = 'Enter a valid number.';
-        return;
-      }
-      if ((from === 'lx' || to === 'lx')) {
-        document.getElementById('output').innerText = 'Lux conversion requires area (not supported in this simple tool).';
-        return;
-      }
-      const result = convertLighting(value, from, to);
-      document.getElementById('output').innerText = value + ' ' + from + ' = ' + result + ' ' + to;
+    function conv(id, val) {
+      val = parseFloat(val);
+      if(id === 'lux') document.getElementById('fc').value = val * 0.092903;
+      if(id === 'fc') document.getElementById('lux').value = val / 0.092903;
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

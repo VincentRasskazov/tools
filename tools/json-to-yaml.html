@@ -1,80 +1,39 @@
+---
+layout: default
+title: "JSON to YAML Converter"
+description: "Convert JSON data into YAML format instantly."
+category: "Developer Tools"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="../assets/css/tool-style.css">
   <meta charset="UTF-8">
-  <title>json to yaml Tool</title>
-    <meta name="description" content="Convert JSON data to YAML format instantly with our free JSON to YAML Converter. Perfect for developers, DevOps, and configuration tasks.">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="canonical" href="https://vincentrasskazov.github.io/tools/json-to-yaml.html">
-    <meta property="og:title" content="JSON to YAML Converter – Convert JSON to YAML Instantly Online">
-    <meta property="og:description" content="Convert JSON data to YAML format instantly with our free JSON to YAML Converter. Perfect for developers, DevOps, and configuration tasks.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://vincentrasskazov.github.io/tools/json-to-yaml.html">
-    <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="JSON to YAML Converter – Convert JSON to YAML Instantly Online">
-    <meta name="twitter:description" content="Convert JSON data to YAML format instantly with our free JSON to YAML Converter. Perfect for developers, DevOps, and configuration tasks.">
-    <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/landing-polish.css">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "JSON to YAML Converter",
-      "url": "https://vincentrasskazov.github.io/tools/json-to-yaml.html",
-      "applicationCategory": "JSON Tools",
-      "description": "Convert JSON data to YAML format instantly with our free JSON to YAML Converter. Perfect for developers, DevOps, and configuration tasks."
-    }
-    </script>
+  <title>JSON to YAML</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <style>
+    .tool-container { max-width: 900px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; text-align: center; }
+    .grid { display: flex; gap: 20px; }
+    textarea { width: 100%; height: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-family: monospace; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 15px; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">json to yaml Tool</h1>
+    <h1>JSON to YAML</h1>
+    <div class="grid">
+      <div style="flex:1;"><label>JSON</label><textarea id="json"></textarea></div>
+      <div style="flex:1;"><label>YAML</label><textarea id="yaml" readonly></textarea></div>
+    </div>
+    <button onclick="convert()">Convert to YAML &rarr;</button>
   </div>
-
-  <h1>json to yaml Tool</h1>
-
-  <p>This is a starter tool page for <strong>json to yaml</strong>.</p>
-
-
-  <textarea id="input" placeholder="Paste JSON here" rows="8" style="width:100%"></textarea>
-  <button onclick="run()">Convert</button>
-
-  <pre id="output"></pre>
-
   <script>
-    // Simple JSON to YAML converter (limited, for demo)
-    function jsonToYaml(obj, indent = 0) {
-      if (typeof obj !== 'object' || obj === null) return String(obj);
-      if (Array.isArray(obj)) {
-        return obj.map(item => ' '.repeat(indent) + '- ' + jsonToYaml(item, indent + 2)).join('\n');
-      }
-      return Object.entries(obj).map(([k, v]) => {
-        if (typeof v === 'object' && v !== null) {
-          return ' '.repeat(indent) + k + ':\n' + jsonToYaml(v, indent + 2);
-        } else {
-          return ' '.repeat(indent) + k + ': ' + jsonToYaml(v, 0);
-        }
-      }).join('\n');
-    }
-    function run() {
-      const v = document.getElementById('input').value;
+    function convert() {
       try {
-        const obj = JSON.parse(v);
-        document.getElementById('output').innerText = jsonToYaml(obj);
-      } catch (e) {
-        document.getElementById('output').innerText = 'Invalid JSON.';
-      }
+        const obj = JSON.parse(document.getElementById('json').value);
+        document.getElementById('yaml').value = jsyaml.dump(obj);
+      } catch(e) { alert("Invalid JSON"); }
     }
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>

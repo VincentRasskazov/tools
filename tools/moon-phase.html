@@ -1,84 +1,53 @@
+---
+layout: default
+title: "Moon Phase Calculator"
+description: "Estimate the current phase of the moon based on simple lunar cycles."
+category: "Utility"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Moon Phase Calculator – Find Current Moon Phase Instantly</title>
-  <meta name="description" content="Find the current moon phase instantly with our free Moon Phase Calculator. Perfect for astronomers, stargazers, and enthusiasts.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://vincentrasskazov.github.io/tools/moon-phase.html">
-  <meta property="og:title" content="Moon Phase Calculator – Find Current Moon Phase Instantly">
-  <meta property="og:description" content="Find the current moon phase instantly with our free Moon Phase Calculator. Perfect for astronomers, stargazers, and enthusiasts.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vincentrasskazov.github.io/tools/moon-phase.html">
-  <meta property="og:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Moon Phase Calculator – Find Current Moon Phase Instantly">
-  <meta name="twitter:description" content="Find the current moon phase instantly with our free Moon Phase Calculator. Perfect for astronomers, stargazers, and enthusiasts.">
-  <meta name="twitter:image" content="https://vincentrasskazov.github.io/tools/assets/og-default.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/landing-polish.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Moon Phase Calculator",
-    "url": "https://vincentrasskazov.github.io/tools/moon-phase.html",
-    "applicationCategory": "Astronomy Tools",
-    "description": "Find the current moon phase instantly with our free Moon Phase Calculator. Perfect for astronomers, stargazers, and enthusiasts."
-  }
-  </script>
+  <title>Moon Phase</title>
+  <style>
+    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+    h1 { color: #2563eb; }
+    .phase { font-size: 5rem; margin: 20px 0; }
+    .phase-text { font-size: 1.5rem; font-weight: bold; color: #334155; }
+    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 20px; }
+  </style>
 </head>
-
 <body>
   <div class="tool-container">
-  <div class="tool-header">
-    <a class="tool-back" href="../index.html">← Back</a>
-    <h1 class="tool-title">moon phase Tool</h1>
+    <h1>Moon Phase Today</h1>
+    <div class="phase" id="icon">🌕</div>
+    <div class="phase-text" id="text">Loading...</div>
+    <button onclick="calcPhase()">Check Current Phase</button>
   </div>
-
-  <h1>moon phase Tool</h1>
-
-  <p>This is a starter tool page for <strong>moon phase</strong>.</p>
-
-
-  <input id="input" type="date" placeholder="YYYY-MM-DD">
-  <button onclick="run()">Get Moon Phase</button>
-
-  <p id="output"></p>
-
   <script>
-    // Simple moon phase calculation (Conway's algorithm)
-    function getMoonPhase(dateStr) {
-      const date = dateStr ? new Date(dateStr) : new Date();
-      const year = date.getFullYear();
-      const month = date.getMonth() + 1;
-      const day = date.getDate();
-      let r = year % 100;
-      r %= 19;
-      if (r > 9) r -= 19;
-      let phase = ((r * 11) % 30) + month + day;
-      if (month < 3) phase += 2;
-      phase -= (year < 2000) ? 4 : 8.3;
-      phase = Math.floor(phase + 0.5) % 30;
-      if (phase < 0) phase += 30;
-      if (phase < 1) return 'New Moon';
-      if (phase < 7) return 'Waxing Crescent';
-      if (phase < 9) return 'First Quarter';
-      if (phase < 15) return 'Waxing Gibbous';
-      if (phase < 17) return 'Full Moon';
-      if (phase < 23) return 'Waning Gibbous';
-      if (phase < 25) return 'Last Quarter';
-      return 'Waning Crescent';
+    function calcPhase() {
+      const now = new Date();
+      // Known new moon approx: 2000-01-06
+      const knownNewMoon = new Date(Date.UTC(2000, 0, 6, 18, 14));
+      const lunarDays = 29.53058867;
+      
+      const diffDays = (now - knownNewMoon) / (1000 * 60 * 60 * 24);
+      const cyclePos = (diffDays % lunarDays) / lunarDays;
+      
+      let phase, icon;
+      if (cyclePos < 0.05) { phase = "New Moon"; icon = "🌑"; }
+      else if (cyclePos < 0.25) { phase = "Waxing Crescent"; icon = "🌒"; }
+      else if (cyclePos < 0.3) { phase = "First Quarter"; icon = "🌓"; }
+      else if (cyclePos < 0.5) { phase = "Waxing Gibbous"; icon = "🌔"; }
+      else if (cyclePos < 0.55) { phase = "Full Moon"; icon = "🌕"; }
+      else if (cyclePos < 0.75) { phase = "Waning Gibbous"; icon = "🌖"; }
+      else if (cyclePos < 0.8) { phase = "Last Quarter"; icon = "🌗"; }
+      else { phase = "Waning Crescent"; icon = "🌘"; }
+      
+      document.getElementById('icon').innerText = icon;
+      document.getElementById('text').innerText = phase;
     }
-    function run() {
-      const v = document.getElementById('input').value;
-      const phase = getMoonPhase(v);
-      document.getElementById('output').innerText = 'Moon Phase: ' + phase;
-    }
+    window.onload = calcPhase;
   </script>
-
-  <div class="tool-footer">&copy; 2026 Ultimate Tools Hub</div>
-
-  </div>
 </body>
 </html>
