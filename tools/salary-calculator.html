@@ -1,0 +1,14 @@
+---
+layout: default
+title: "Salary Calculator"
+description: "Convert hourly wage to yearly salary and vice versa."
+category: "Calculators"
+---
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Salary Calculator</title><style>.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} input{width:100%;padding:10px;margin-bottom:15px;border:1px solid #ccc;border-radius:6px;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Salary Calculator</h1>
+<label>Hourly Wage ($)</label><input type="number" id="h" oninput="calc('h')">
+<label>Weekly Income ($)</label><input type="number" id="w" oninput="calc('w')">
+<label>Yearly Salary ($)</label><input type="number" id="y" oninput="calc('y')">
+<p style="font-size:0.8rem;color:#666;text-align:center;">Assumes 40 hours/week, 52 weeks/year.</p></div>
+<script>function calc(type){ const h=document.getElementById('h'), w=document.getElementById('w'), y=document.getElementById('y'); if(type==='h'){ w.value=(h.value*40).toFixed(2); y.value=(h.value*2080).toFixed(2); }else if(type==='w'){ h.value=(w.value/40).toFixed(2); y.value=(w.value*52).toFixed(2); }else{ h.value=(y.value/2080).toFixed(2); w.value=(y.value/52).toFixed(2); } }</script></body></html>

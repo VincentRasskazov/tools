@@ -1,0 +1,21 @@
+---
+layout: default
+title: "Prefix & Suffix Text Adder"
+description: "Add a prefix or suffix to every line of text instantly."
+category: "Text Tools"
+---
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Prefix/Suffix Adder</title><style>.tool-container{max-width:800px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} textarea,input{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;margin-bottom:15px;} .row{display:flex;gap:10px;} button{padding:12px 24px;background:#2563eb;color:white;border:none;border-radius:6px;cursor:pointer;font-weight:bold;width:100%;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Add Prefix & Suffix</h1>
+<textarea id="in" placeholder="Line 1&#10;Line 2"></textarea>
+<div class="row"><div><label>Prefix</label><input type="text" id="pre" placeholder="- "></div><div><label>Suffix</label><input type="text" id="suf" placeholder=","></div></div>
+<button onclick="add()">Process Lines</button>
+<textarea id="out" readonly style="margin-top:20px;"></textarea></div>
+<script>
+  function add(){ 
+    const pre = document.getElementById('pre').value;
+    const suf = document.getElementById('suf').value;
+    const lines = document.getElementById('in').value.split('\n');
+    document.getElementById('out').value = lines.map(l => l.trim().length > 0 ? pre + l + suf : l).join('\n'); 
+  }
+</script></body></html>

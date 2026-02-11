@@ -1,24 +1,14 @@
+---
+layout: default
+title: "Compound Interest Calculator"
+description: "Calculate future value of investments with compound interest."
+category: "Calculators"
+---
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Calculate compound interest and future investment value with this free online Compound Interest Calculator tool.">
-  <title>Compound Interest Calculator - Free Online Tool</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
-</head>
-<body>
-  <div class="tool-container">
-    <h1>Compound Interest Calculator</h1>
-    <form id="compound-form">
-      <input type="number" id="principal" placeholder="Principal ($)" required>
-      <input type="number" id="rate" placeholder="Annual Rate (%)" required>
-      <input type="number" id="years" placeholder="Years" required>
-      <input type="number" id="times" placeholder="Compounds/Year" value="1" required>
-      <button type="submit">Calculate</button>
-    </form>
-    <div id="compound-result"></div>
-  </div>
-  <script src="../assets/js/compound-interest-calculator.js"></script>
-</body>
-</html>
+<html lang="en"><head><meta charset="UTF-8"><title>Compound Interest</title><style>.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} input{width:100%;padding:10px;margin-bottom:15px;border:1px solid #ccc;border-radius:6px;} button{width:100%;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;} #res{margin-top:20px;font-size:1.5rem;text-align:center;color:#16a34a;font-weight:bold;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Compound Interest</h1>
+<label>Principal Amount ($)</label><input type="number" id="p" value="1000">
+<label>Annual Interest Rate (%)</label><input type="number" id="r" value="5">
+<label>Years</label><input type="number" id="t" value="10">
+<button onclick="calc()">Calculate Future Value</button><div id="res"></div></div>
+<script>function calc(){ const p=parseFloat(document.getElementById('p').value), r=parseFloat(document.getElementById('r').value)/100, t=parseFloat(document.getElementById('t').value); const a = p * Math.pow(1 + r, t); document.getElementById('res').innerText = '$' + a.toFixed(2); }</script></body></html>

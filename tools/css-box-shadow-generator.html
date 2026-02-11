@@ -1,0 +1,24 @@
+---
+layout: default
+title: "CSS Box Shadow Generator"
+description: "Generate CSS box shadow code visually."
+category: "Developer Tools"
+---
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Box Shadow Generator</title><style>.tool-container{max-width:600px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} #box{width:150px;height:150px;background:#2563eb;margin:40px auto;} .row{display:flex;justify-content:space-between;margin-bottom:10px;} input[type=range]{width:70%;} textarea{width:100%;padding:10px;font-family:monospace;border:1px solid #ccc;border-radius:6px;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Box Shadow</h1>
+<div id="box"></div>
+<div class="row"><label>X Offset</label><input type="range" id="x" min="-50" max="50" value="10" oninput="update()"></div>
+<div class="row"><label>Y Offset</label><input type="range" id="y" min="-50" max="50" value="10" oninput="update()"></div>
+<div class="row"><label>Blur</label><input type="range" id="b" min="0" max="50" value="15" oninput="update()"></div>
+<div class="row"><label>Spread</label><input type="range" id="s" min="-50" max="50" value="0" oninput="update()"></div>
+<textarea id="css" readonly rows="2"></textarea></div>
+<script>
+  function update(){
+    const x = document.getElementById('x').value, y = document.getElementById('y').value, b = document.getElementById('b').value, s = document.getElementById('s').value;
+    const shadow = `${x}px ${y}px ${b}px ${s}px rgba(0,0,0,0.3)`;
+    document.getElementById('box').style.boxShadow = shadow;
+    document.getElementById('css').value = `box-shadow: ${shadow};`;
+  }
+  window.onload = update;
+</script></body></html>

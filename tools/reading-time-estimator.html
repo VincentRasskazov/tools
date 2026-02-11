@@ -1,19 +1,19 @@
+---
+layout: default
+title: "Reading Time Estimator"
+description: "Calculate how long it takes to read an article or text block."
+category: "Text Tools"
+---
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Estimate reading time for any text or document with this free online Reading Time Estimator tool.">
-  <title>Reading Time Estimator - Free Online Tool</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
-</head>
-<body>
-  <div class="tool-container">
-    <h1>Reading Time Estimator</h1>
-    <textarea id="reading-text" rows="8" placeholder="Paste your text here..."></textarea>
-    <button id="estimate-btn">Estimate Reading Time</button>
-    <div id="reading-result"></div>
-  </div>
-  <script src="../assets/js/reading-time-estimator.js"></script>
-</body>
-</html>
+<html lang="en"><head><meta charset="UTF-8"><title>Reading Time</title><style>.tool-container{max-width:800px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} textarea{width:100%;height:200px;padding:10px;border:1px solid #ccc;border-radius:6px;} #res{margin-top:20px;font-size:1.5rem;font-weight:bold;text-align:center;color:#2563eb;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Reading Time Estimator</h1>
+<textarea id="in" placeholder="Paste your article here..." oninput="calc()"></textarea>
+<div id="res">0 min read</div></div>
+<script>
+  function calc(){ 
+    const t = document.getElementById('in').value.trim();
+    const w = t ? t.split(/\s+/).length : 0;
+    const m = Math.ceil(w / 200); // 200 words per min avg
+    document.getElementById('res').innerText = `${m} min read (${w} words)`; 
+  }
+</script></body></html>

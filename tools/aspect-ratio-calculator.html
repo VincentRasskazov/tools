@@ -1,0 +1,21 @@
+---
+layout: default
+title: "Aspect Ratio Calculator"
+description: "Calculate missing dimensions based on aspect ratios."
+category: "Calculators"
+---
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Aspect Ratio</title><style>.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} .row{display:flex;gap:10px;} input{width:100%;padding:10px;margin-bottom:15px;border:1px solid #ccc;border-radius:6px;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Aspect Ratio</h1>
+<p>Original Ratio (W1 : H1)</p>
+<div class="row"><input type="number" id="w1" value="1920" oninput="calc()"><input type="number" id="h1" value="1080" oninput="calc()"></div>
+<p>New Dimensions (W2 : H2)</p>
+<div class="row">
+  <div><label>New Width</label><input type="number" id="w2" oninput="calcW()"></div>
+  <div><label>New Height</label><input type="number" id="h2" oninput="calcH()"></div>
+</div></div>
+<script>
+  function calcW(){ const w1=document.getElementById('w1').value, h1=document.getElementById('h1').value, w2=document.getElementById('w2').value; document.getElementById('h2').value = (h1/w1)*w2; }
+  function calcH(){ const w1=document.getElementById('w1').value, h1=document.getElementById('h1').value, h2=document.getElementById('h2').value; document.getElementById('w2').value = (w1/h1)*h2; }
+  function calc(){ calcW(); }
+</script></body></html>

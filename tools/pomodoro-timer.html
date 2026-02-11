@@ -1,17 +1,31 @@
+---
+layout: default
+title: "Pomodoro Timer"
+description: "Boost productivity with this 25-minute Pomodoro focus timer."
+category: "Utility"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Boost productivity with a free online Pomodoro Timer. Customizable work and break intervals, stats, and notifications.">
-  <title>Pomodoro Timer - Free Online Tool</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <meta charset="UTF-8"><title>Pomodoro Timer</title>
+  <style>.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:40px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);text-align:center;} #time{font-size:5rem;font-weight:bold;color:#1e293b;margin:20px 0;} button{padding:12px 24px;font-size:1.1rem;border:none;border-radius:6px;cursor:pointer;color:white;margin:5px;} .start{background:#16a34a;} .stop{background:#dc2626;} .mode{background:#2563eb;}</style>
 </head>
 <body>
   <div class="tool-container">
-    <h1>Pomodoro Timer</h1>
-    <div id="pomodoro-app"></div>
+    <h1 id="status">Focus Mode</h1>
+    <div id="time">25:00</div>
+    <button class="start" onclick="start()">Start</button>
+    <button class="stop" onclick="reset()">Reset</button>
+    <br><br>
+    <button class="mode" onclick="setMode(25, 'Focus')">Pomodoro (25m)</button>
+    <button class="mode" onclick="setMode(5, 'Break')">Short Break (5m)</button>
   </div>
-  <script src="../assets/js/pomodoro-timer.js"></script>
+  <script>
+    let t, secs = 1500, running = false;
+    function update() { document.getElementById('time').innerText = `${String(Math.floor(secs/60)).padStart(2,'0')}:${String(secs%60).padStart(2,'0')}`; }
+    function start() { if(!running) { running = true; t = setInterval(()=>{ if(secs>0){secs--; update();}else{clearInterval(t); alert("Time's up!");} }, 1000); } }
+    function reset() { clearInterval(t); running = false; update(); }
+    function setMode(m, name) { clearInterval(t); running = false; secs = m*60; document.getElementById('status').innerText = name + ' Mode'; update(); }
+  </script>
 </body>
 </html>
