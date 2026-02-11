@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Visually generate CSS 2D transforms (Scale, Rotate, Translate, Skew).">
+  <meta property="og:title" content="CSS Transform Generator">
+  <meta property="og:description" content="Visually generate CSS 2D transforms (Scale, Rotate, Translate, Skew).">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CSS Transform Generator">
+  <meta name="twitter:description" content="Visually generate CSS 2D transforms (Scale, Rotate, Translate, Skew).">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>CSS Transform</title><style>.tool-container{max-width:800px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} #box-wrapper{height:250px;display:flex;align-items:center;justify-content:center;border:1px solid #eee;margin-bottom:20px;background:#f8fafc;overflow:hidden;} #box{width:100px;height:100px;background:#2563eb;color:white;display:flex;align-items:center;justify-content:center;font-weight:bold;} .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;} input[type=range]{width:100%;} textarea{width:100%;padding:10px;font-family:monospace;border-radius:6px;border:1px solid #ccc;margin-top:20px;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">CSS Transform Generator</h1>
+<div id="box-wrapper"><div id="box">Box</div></div>
+<div class="grid">
+  <div><label>Scale (<span id="sv">1</span>)</label><input type="range" id="sc" min="0" max="3" step="0.1" value="1" oninput="u()"></div>
+  <div><label>Rotate (<span id="rv">0</span>deg)</label><input type="range" id="ro" min="0" max="360" value="0" oninput="u()"></div>
+  <div><label>Translate X (<span id="txv">0</span>px)</label><input type="range" id="tx" min="-100" max="100" value="0" oninput="u()"></div>
+  <div><label>Translate Y (<span id="tyv">0</span>px)</label><input type="range" id="ty" min="-100" max="100" value="0" oninput="u()"></div>
+  <div><label>Skew X (<span id="sxv">0</span>deg)</label><input type="range" id="sx" min="-90" max="90" value="0" oninput="u()"></div>
+  <div><label>Skew Y (<span id="syv">0</span>deg)</label><input type="range" id="sy" min="-90" max="90" value="0" oninput="u()"></div>
+</div>
+<textarea id="out" readonly></textarea></div>
+<script>
+function u(){
+  const sc=document.getElementById('sc').value, ro=document.getElementById('ro').value, tx=document.getElementById('tx').value, ty=document.getElementById('ty').value, sx=document.getElementById('sx').value, sy=document.getElementById('sy').value;
+  document.getElementById('sv').innerText=sc; document.getElementById('rv').innerText=ro; document.getElementById('txv').innerText=tx; document.getElementById('tyv').innerText=ty; document.getElementById('sxv').innerText=sx; document.getElementById('syv').innerText=sy;
+  const t = `scale(${sc}) rotate(${ro}deg) translate(${tx}px, ${ty}px) skew(${sx}deg, ${sy}deg)`;
+  document.getElementById('box').style.transform = t;
+  document.getElementById('out').value = `transform: ${t};`;
+} window.onload=u;
+</script></body></html>

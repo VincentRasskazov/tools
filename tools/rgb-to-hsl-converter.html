@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Convert RGB color codes to HSL (Hue, Saturation, Lightness).">
+  <meta property="og:title" content="RGB to HSL Converter">
+  <meta property="og:description" content="Convert RGB color codes to HSL (Hue, Saturation, Lightness).">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="RGB to HSL Converter">
+  <meta name="twitter:description" content="Convert RGB color codes to HSL (Hue, Saturation, Lightness).">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>RGB to HSL</title><style>.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} .row{display:flex;gap:10px;} input{width:100%;padding:10px;margin-bottom:15px;border:1px solid #ccc;border-radius:6px;text-align:center;} #box{height:100px;border-radius:6px;margin-top:20px;border:1px solid #ccc;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">RGB to HSL</h1>
+<div class="row">
+  <div><label>R</label><input type="number" id="r" value="37" min="0" max="255" oninput="calc()"></div>
+  <div><label>G</label><input type="number" id="g" value="99" min="0" max="255" oninput="calc()"></div>
+  <div><label>B</label><input type="number" id="b" value="235" min="0" max="255" oninput="calc()"></div>
+</div>
+<label>HSL Result</label><input type="text" id="out" readonly>
+<div id="box" style="background:rgb(37,99,235)"></div></div>
+<script>
+function calc(){
+  let r=document.getElementById('r').value/255, g=document.getElementById('g').value/255, b=document.getElementById('b').value/255;
+  document.getElementById('box').style.background = `rgb(${r*255},${g*255},${b*255})`;
+  let max=Math.max(r,g,b), min=Math.min(r,g,b), h, s, l=(max+min)/2;
+  if(max===min){ h=s=0; } else {
+    let d=max-min; s=l>0.5?d/(2-max-min):d/(max+min);
+    switch(max){ case r: h=(g-b)/d+(g<b?6:0); break; case g: h=(b-r)/d+2; break; case b: h=(r-g)/d+4; break; } h/=6;
+  }
+  document.getElementById('out').value = `hsl(${Math.round(h*360)}, ${Math.round(s*100)}%, ${Math.round(l*100)}%)`;
+} window.onload=calc;
+</script></body></html>
