@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Convert Annual Percentage Yield (APY) back to Annual Percentage Rate (APR).">
+  <meta property="og:title" content="APY to APR Converter">
+  <meta property="og:description" content="Convert Annual Percentage Yield (APY) back to Annual Percentage Rate (APR).">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="APY to APR Converter">
+  <meta name="twitter:description" content="Convert Annual Percentage Yield (APY) back to Annual Percentage Rate (APR).">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>APY to APR</title><style>.tool-container{max-width:600px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} input,select{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;margin-bottom:15px;} button{width:100%;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;} #res{margin-top:20px;font-size:1.5rem;text-align:center;font-weight:bold;color:#16a34a;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">APY to APR</h1><label>APY (%)</label><input type="number" id="y" placeholder="5.12"><label>Compounding Frequency</label><select id="n"><option value="1">Annually</option><option value="2">Semi-Annually</option><option value="4">Quarterly</option><option value="12" selected>Monthly</option><option value="365">Daily</option></select><button onclick="c()">Convert</button><div id="res"></div></div>
+<script>function c(){ const y=parseFloat(document.getElementById('y').value)/100, n=parseFloat(document.getElementById('n').value); if(y){ const apr = n * (Math.pow(1 + y, 1/n) - 1) * 100; document.getElementById('res').innerText = apr.toFixed(3) + "% APR"; } }</script></body></html>

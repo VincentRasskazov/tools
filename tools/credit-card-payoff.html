@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Find out how long it will take to pay off your credit card balance.">
+  <meta property="og:title" content="Credit Card Payoff Calculator">
+  <meta property="og:description" content="Find out how long it will take to pay off your credit card balance.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Credit Card Payoff Calculator">
+  <meta name="twitter:description" content="Find out how long it will take to pay off your credit card balance.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>Payoff Calculator</title><style>.tool-container{max-width:600px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} input{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;margin-bottom:15px;} button{width:100%;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;} #res{margin-top:20px;font-size:1.2rem;background:#f8fafc;padding:15px;border-radius:6px;border:1px solid #cbd5e1;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Credit Card Payoff</h1><label>Balance ($)</label><input type="number" id="b"><label>Interest Rate (APR %)</label><input type="number" id="i"><label>Monthly Payment ($)</label><input type="number" id="p"><button onclick="c()">Calculate</button><div id="res"></div></div>
+<script>function c(){ const b=parseFloat(document.getElementById('b').value), i=parseFloat(document.getElementById('i').value)/100/12, p=parseFloat(document.getElementById('p').value); if(b&&i&&p){ if(p<=b*i) return document.getElementById('res').innerText="Payment too low to cover interest."; const n = -Math.log(1 - (i*b)/p) / Math.log(1+i); document.getElementById('res').innerHTML=`Months to Payoff: <strong>${Math.ceil(n)}</strong><br>Total Interest: <strong>$${(Math.ceil(n)*p - b).toFixed(2)}</strong>`; } }</script></body></html>
