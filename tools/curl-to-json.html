@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Convert a cURL command into a structured JSON object.">
+  <meta property="og:title" content="cURL to JSON Converter">
+  <meta property="og:description" content="Convert a cURL command into a structured JSON object.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="cURL to JSON Converter">
+  <meta name="twitter:description" content="Convert a cURL command into a structured JSON object.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>cURL to JSON</title><style>.tool-container{max-width:800px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} textarea{width:100%;height:150px;padding:10px;border:1px solid #ccc;border-radius:6px;margin-bottom:15px;font-family:monospace;} button{width:100%;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;cursor:pointer;font-weight:bold;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">cURL to JSON</h1><textarea id="in" placeholder="curl -X POST https://api.com -d 'foo=bar'"></textarea><button onclick="c()">Convert</button><textarea id="out" readonly style="margin-top:20px;"></textarea></div>
+<script>function c(){ const t=document.getElementById('in').value; let o={method:'GET', url:'', headers:{}, data:''}; const u=t.match(/['"](https?:\/\/[^'"]+)['"]/); if(u)o.url=u[1]; if(t.includes('-X POST')||t.includes('--data'))o.method='POST'; const d=t.match(/--data ['"]([^'"]+)['"]/); if(d)o.data=d[1]; document.getElementById('out').value=JSON.stringify(o,null,2); }</script></body></html>

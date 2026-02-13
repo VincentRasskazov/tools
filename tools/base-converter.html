@@ -1,58 +1,18 @@
----
-layout: null
-title: "Base Converter"
-category: "Converter"
-description: "Convert numbers between any base."
-permalink: /tools/base-converter.html
----
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta name="description" content="Convert numbers between Binary, Octal, Decimal, and Hexadecimal instantly.">
-  <meta property="og:title" content="Base Converter - Any Base to Any Base">
-  <meta property="og:description" content="Convert numbers between Binary, Octal, Decimal, and Hexadecimal instantly.">
+<html lang="en"><head>
+  <meta name="description" content="Convert numbers between Binary, Octal, Decimal, and Hexadecimal.">
+  <meta property="og:title" content="Number Base Converter">
+  <meta property="og:description" content="Convert numbers between Binary, Octal, Decimal, and Hexadecimal.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Base Converter - Any Base to Any Base">
-  <meta name="twitter:description" content="Convert numbers between Binary, Octal, Decimal, and Hexadecimal instantly.">
-  
-  <meta charset="UTF-8">
-  <title>Base Converter</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { color: #2563eb; text-align: center; }
-    .input-group { margin-bottom: 15px; }
-    label { display: block; font-weight: 600; margin-bottom: 5px; }
-    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1>Base Converter</h1>
-    <div class="input-group"><label>Decimal</label><input type="text" id="dec" oninput="convert('dec', this.value)"></div>
-    <div class="input-group"><label>Binary</label><input type="text" id="bin" oninput="convert('bin', this.value)"></div>
-    <div class="input-group"><label>Octal</label><input type="text" id="oct" oninput="convert('oct', this.value)"></div>
-    <div class="input-group"><label>Hexadecimal</label><input type="text" id="hex" oninput="convert('hex', this.value)"></div>
-  </div>
-  <script>
-    function convert(id, val) {
-      if(!val) return;
-      let dec = 0;
-      if(id==='dec') dec = parseInt(val, 10);
-      if(id==='bin') dec = parseInt(val, 2);
-      if(id==='oct') dec = parseInt(val, 8);
-      if(id==='hex') dec = parseInt(val, 16);
-      
-      if(isNaN(dec)) return;
-
-      if(id!=='dec') document.getElementById('dec').value = dec.toString(10);
-      if(id!=='bin') document.getElementById('bin').value = dec.toString(2);
-      if(id!=='oct') document.getElementById('oct').value = dec.toString(8);
-      if(id!=='hex') document.getElementById('hex').value = dec.toString(16).toUpperCase();
-    }
-  </script>
-</body>
-</html>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Number Base Converter">
+  <meta name="twitter:description" content="Convert numbers between Binary, Octal, Decimal, and Hexadecimal.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>Base Converter</title><style>.tool-container{max-width:600px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} input{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;margin-bottom:10px;} label{font-weight:bold;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Base Converter</h1>
+<label>Decimal (10)</label><input type="number" id="dec" oninput="c('dec')">
+<label>Binary (2)</label><input type="text" id="bin" oninput="c('bin')">
+<label>Octal (8)</label><input type="text" id="oct" oninput="c('oct')">
+<label>Hex (16)</label><input type="text" id="hex" oninput="c('hex')"></div>
+<script>function c(id){ let val=document.getElementById(id).value; let d; if(id==='dec')d=parseInt(val,10); else if(id==='bin')d=parseInt(val,2); else if(id==='oct')d=parseInt(val,8); else if(id==='hex')d=parseInt(val,16); 
+if(!isNaN(d)){ if(id!=='dec')document.getElementById('dec').value=d; if(id!=='bin')document.getElementById('bin').value=d.toString(2); if(id!=='oct')document.getElementById('oct').value=d.toString(8); if(id!=='hex')document.getElementById('hex').value=d.toString(16).toUpperCase(); } }</script></body></html>
