@@ -1,79 +1,13 @@
----
-layout: null
-title: "Tip Calculator"
-category: "Finance"
-description: "Calculate tips and split bills."
-permalink: /tools/tip-calculator.html
----
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta name="description" content="Calculate tips and split bills instantly. Perfect for dining out with friends.">
-  <meta property="og:title" content="Tip Calculator - Easy Bill Splitter">
-  <meta property="og:description" content="Calculate tips and split bills instantly. Perfect for dining out with friends.">
+<html lang="en"><head>
+  <meta name="description" content="Calculate tip amounts and split the bill among multiple people.">
+  <meta property="og:title" content="Tip Calculator">
+  <meta property="og:description" content="Calculate tip amounts and split the bill among multiple people.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Tip Calculator - Easy Bill Splitter">
-  <meta name="twitter:description" content="Calculate tips and split bills instantly. Perfect for dining out with friends.">
-  
-  <meta charset="UTF-8">
-  <title>Tip Calculator</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    .input-group { margin-bottom: 20px; }
-    label { display: block; font-weight: 600; margin-bottom: 5px; }
-    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; }
-    button { width: 100%; padding: 14px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; }
-    #result { margin-top: 25px; background: #f8fafc; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0; display: none; }
-    .res-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 1.1rem; }
-    .total-row { font-weight: bold; color: #2563eb; border-top: 1px solid #cbd5e1; padding-top: 10px; margin-top: 10px; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1 style="text-align: center; color: #2563eb;">Tip Calculator</h1>
-    
-    <div class="input-group">
-      <label>Bill Amount ($)</label>
-      <input type="number" id="bill" placeholder="e.g. 50.00">
-    </div>
-    <div class="input-group">
-      <label>Tip Percentage (%)</label>
-      <input type="number" id="tip" placeholder="e.g. 15">
-    </div>
-    <div class="input-group">
-      <label>Number of People</label>
-      <input type="number" id="people" placeholder="1" value="1">
-    </div>
-    
-    <button onclick="calculateTip()">Calculate</button>
-    
-    <div id="result">
-      <div class="res-row"><span>Tip Amount:</span> <span id="tipAmount">$0.00</span></div>
-      <div class="res-row"><span>Total Bill:</span> <span id="totalBill">$0.00</span></div>
-      <div class="res-row total-row"><span>Per Person:</span> <span id="perPerson">$0.00</span></div>
-    </div>
-  </div>
-  <script>
-    function calculateTip() {
-      const bill = parseFloat(document.getElementById('bill').value);
-      const tipPercent = parseFloat(document.getElementById('tip').value);
-      const people = parseInt(document.getElementById('people').value) || 1;
-      
-      if(!bill || !tipPercent) return alert("Please enter bill and tip amount.");
-      
-      const tipAmount = (bill * tipPercent) / 100;
-      const total = bill + tipAmount;
-      const perPerson = total / people;
-      
-      document.getElementById('tipAmount').innerText = "$" + tipAmount.toFixed(2);
-      document.getElementById('totalBill').innerText = "$" + total.toFixed(2);
-      document.getElementById('perPerson').innerText = "$" + perPerson.toFixed(2);
-      document.getElementById('result').style.display = 'block';
-    }
-  </script>
-</body>
-</html>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tip Calculator">
+  <meta name="twitter:description" content="Calculate tip amounts and split the bill among multiple people.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>Tip Calculator</title><style>.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} input{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;margin-bottom:15px;} button{width:100%;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;} #res{margin-top:20px;background:#f8fafc;padding:15px;border-radius:6px;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Tip Calculator</h1><label>Bill Amount ($)</label><input type="number" id="b"><label>Tip (%)</label><input type="number" id="t" value="15"><label>Split Between (People)</label><input type="number" id="p" value="1"><button onclick="c()">Calculate</button><div id="res"></div></div>
+<script>function c(){ const b=parseFloat(document.getElementById('b').value), t=parseFloat(document.getElementById('t').value), p=parseFloat(document.getElementById('p').value); if(b){ const tip=(b*t)/100; const tot=b+tip; const per=tot/p; document.getElementById('res').innerHTML=`Tip Amount: <strong>$${tip.toFixed(2)}</strong><br>Total Bill: <strong>$${tot.toFixed(2)}</strong><br>Per Person: <strong>$${per.toFixed(2)}</strong>`; } }</script></body></html>

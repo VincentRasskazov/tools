@@ -1,51 +1,18 @@
----
-layout: null
-title: "Pressure Calc"
-category: "Science"
-description: "Convert pressure units (Pascal, Bar, PSI)."
-permalink: /tools/pressure-converter.html
----
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta name="description" content="Convert between Pascal, Bar, PSI, and Atmosphere.">
+<html lang="en"><head>
+  <meta name="description" content="Convert pressure units including Pascal, Bar, PSI, and Atmosphere.">
   <meta property="og:title" content="Pressure Converter">
-  <meta property="og:description" content="Convert between Pascal, Bar, PSI, and Atmosphere.">
+  <meta property="og:description" content="Convert pressure units including Pascal, Bar, PSI, and Atmosphere.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Pressure Converter">
-  <meta name="twitter:description" content="Convert between Pascal, Bar, PSI, and Atmosphere.">
-  
-  <meta charset="UTF-8">
-  <title>Pressure Converter</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { color: #2563eb; text-align: center; }
-    .input-group { margin-bottom: 15px; }
-    label { display: block; font-weight: 600; margin-bottom: 5px; }
-    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1>Pressure Converter</h1>
-    <div class="input-group"><label>Pascal (Pa)</label><input type="number" id="pa" oninput="conv('pa',this.value)"></div>
-    <div class="input-group"><label>Bar</label><input type="number" id="bar" oninput="conv('bar',this.value)"></div>
-    <div class="input-group"><label>PSI</label><input type="number" id="psi" oninput="conv('psi',this.value)"></div>
-    <div class="input-group"><label>Standard Atmosphere (atm)</label><input type="number" id="atm" oninput="conv('atm',this.value)"></div>
-  </div>
-  <script>
-    function conv(id, val) {
-      val = parseFloat(val);
-      const pa = id === 'pa' ? val : id === 'bar' ? val * 100000 : id === 'psi' ? val * 6894.76 : val * 101325;
-      if(id !== 'pa') document.getElementById('pa').value = pa;
-      if(id !== 'bar') document.getElementById('bar').value = pa / 100000;
-      if(id !== 'psi') document.getElementById('psi').value = pa / 6894.76;
-      if(id !== 'atm') document.getElementById('atm').value = pa / 101325;
-    }
-  </script>
-</body>
-</html>
+  <meta name="twitter:description" content="Convert pressure units including Pascal, Bar, PSI, and Atmosphere.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>Pressure Converter</title><style>.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} input{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;margin-bottom:10px;} label{font-weight:bold;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Pressure Converter</h1>
+<label>Pascal (Pa)</label><input type="number" id="pa" oninput="c('pa')">
+<label>Bar</label><input type="number" id="bar" oninput="c('bar')">
+<label>PSI (Pound/sq inch)</label><input type="number" id="psi" oninput="c('psi')">
+<label>Standard Atmosphere (atm)</label><input type="number" id="atm" oninput="c('atm')"></div>
+<script>function c(id){ const v=parseFloat(document.getElementById(id).value); if(isNaN(v))return; const pa = id==='pa'?v : id==='bar'?v*100000 : id==='psi'?v*6894.76 : v*101325; 
+if(id!=='pa')document.getElementById('pa').value=pa; if(id!=='bar')document.getElementById('bar').value=pa/100000; if(id!=='psi')document.getElementById('psi').value=pa/6894.76; if(id!=='atm')document.getElementById('atm').value=pa/101325; }</script></body></html>

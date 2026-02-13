@@ -1,51 +1,18 @@
----
-layout: null
-title: "Energy Converter"
-category: "Converter"
-description: "Convert between Joules, Calories, etc."
-permalink: /tools/energy-converter.html
----
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta name="description" content="Convert between Joules, Kilojoules, Calories, and Kilowatt-hours.">
+<html lang="en"><head>
+  <meta name="description" content="Convert energy units including Joules, Calories, and Kilowatt-hours.">
   <meta property="og:title" content="Energy Converter">
-  <meta property="og:description" content="Convert between Joules, Kilojoules, Calories, and Kilowatt-hours.">
+  <meta property="og:description" content="Convert energy units including Joules, Calories, and Kilowatt-hours.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Energy Converter">
-  <meta name="twitter:description" content="Convert between Joules, Kilojoules, Calories, and Kilowatt-hours.">
-  
-  <meta charset="UTF-8">
-  <title>Energy Converter</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { color: #2563eb; text-align: center; }
-    .input-group { margin-bottom: 15px; }
-    label { display: block; font-weight: 600; margin-bottom: 5px; }
-    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1>Energy Converter</h1>
-    <div class="input-group"><label>Joules (J)</label><input type="number" id="j" oninput="conv('j',this.value)"></div>
-    <div class="input-group"><label>Kilojoules (kJ)</label><input type="number" id="kj" oninput="conv('kj',this.value)"></div>
-    <div class="input-group"><label>Calories (cal)</label><input type="number" id="cal" oninput="conv('cal',this.value)"></div>
-    <div class="input-group"><label>Kilowatt-hour (kWh)</label><input type="number" id="kwh" oninput="conv('kwh',this.value)"></div>
-  </div>
-  <script>
-    function conv(id, val) {
-      val = parseFloat(val);
-      const j = id === 'j' ? val : id === 'kj' ? val * 1000 : id === 'cal' ? val * 4.184 : val * 3600000;
-      if(id !== 'j') document.getElementById('j').value = j;
-      if(id !== 'kj') document.getElementById('kj').value = j / 1000;
-      if(id !== 'cal') document.getElementById('cal').value = j / 4.184;
-      if(id !== 'kwh') document.getElementById('kwh').value = j / 3600000;
-    }
-  </script>
-</body>
-</html>
+  <meta name="twitter:description" content="Convert energy units including Joules, Calories, and Kilowatt-hours.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>Energy Converter</title><style>.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} input{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;margin-bottom:10px;} label{font-weight:bold;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Energy Converter</h1>
+<label>Joules (J)</label><input type="number" id="j" oninput="c('j')">
+<label>Kilojoules (kJ)</label><input type="number" id="kj" oninput="c('kj')">
+<label>Calories (cal)</label><input type="number" id="cal" oninput="c('cal')">
+<label>Kilowatt-hour (kWh)</label><input type="number" id="kwh" oninput="c('kwh')"></div>
+<script>function c(id){ const v=parseFloat(document.getElementById(id).value); if(isNaN(v))return; const j = id==='j'?v : id==='kj'?v*1000 : id==='cal'?v*4.184 : v*3600000;
+if(id!=='j')document.getElementById('j').value=j; if(id!=='kj')document.getElementById('kj').value=j/1000; if(id!=='cal')document.getElementById('cal').value=j/4.184; if(id!=='kwh')document.getElementById('kwh').value=j/3600000; }</script></body></html>
