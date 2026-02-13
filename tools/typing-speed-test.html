@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Test your typing speed in Words Per Minute (WPM) with this simple tool.">
+  <meta property="og:title" content="Typing Speed Test (WPM)">
+  <meta property="og:description" content="Test your typing speed in Words Per Minute (WPM) with this simple tool.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Typing Speed Test (WPM)">
+  <meta name="twitter:description" content="Test your typing speed in Words Per Minute (WPM) with this simple tool.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>Typing Test</title><style>.tool-container{max-width:800px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} #text-display{padding:15px;background:#f1f5f9;border-radius:6px;font-size:1.2rem;line-height:1.6;margin-bottom:20px;color:#64748b;user-select:none;} textarea{width:100%;height:100px;padding:10px;font-size:1.2rem;border:1px solid #ccc;border-radius:6px;} .active{color:#000;font-weight:bold;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Typing Speed Test</h1><div id="text-display">The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump!</div><textarea id="in" placeholder="Start typing..." oninput="check()"></textarea><h2 id="res" style="text-align:center;">WPM: 0 | Time: 0s</h2><button onclick="reset()" style="padding:10px;width:100%;background:#ef4444;color:white;border:none;border-radius:6px;cursor:pointer;font-weight:bold;">Reset</button></div>
+<script>
+const target = document.getElementById('text-display').innerText; let start=0, timer, running=false;
+function check(){
+  if(!running){ running=true; start=Date.now(); timer=setInterval(update, 100); }
+  const val = document.getElementById('in').value;
+  if(val === target){ clearInterval(timer); document.getElementById('in').disabled=true; }
+}
+function update(){ const s=(Date.now()-start)/1000; const w=document.getElementById('in').value.split(' ').length; const wpm = Math.round((w/s)*60); document.getElementById('res').innerText = `WPM: ${wpm} | Time: ${s.toFixed(1)}s`; }
+function reset(){ clearInterval(timer); running=false; document.getElementById('in').value=''; document.getElementById('in').disabled=false; document.getElementById('res').innerText="WPM: 0 | Time: 0s"; }
+</script></body></html>
