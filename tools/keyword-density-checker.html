@@ -1,20 +1,46 @@
 ---
 layout: null
-title: "Keyword Density"
+title: "Keyword Density Checker"
 category: "SEO"
-description: "Check keyword usage in text."
+description: "Analyze text to find the most frequently used words and their density percentage."
 permalink: /tools/keyword-density-checker.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Analyze your text to see which words appear the most and their frequency percentage.">
+  <meta name="description" content="Analyze text to find the most frequently used words and their density percentage.">
   <meta property="og:title" content="Keyword Density Checker">
-  <meta property="og:description" content="Analyze your text to see which words appear the most and their frequency percentage.">
+  <meta property="og:description" content="Analyze text to find the most frequently used words and their density percentage.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Keyword Density Checker">
-  <meta name="twitter:description" content="Analyze your text to see which words appear the most and their frequency percentage.">
-  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>Keyword Density</title><style>.tool-container{max-width:800px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} textarea{width:100%;height:150px;padding:10px;border:1px solid #ccc;border-radius:6px;margin-bottom:15px;} button{width:100%;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;cursor:pointer;font-weight:bold;} #out{margin-top:20px;padding:15px;background:#f8fafc;border-radius:6px;}</style></head>
-<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Keyword Density</h1><textarea id="in" placeholder="Paste your article here..."></textarea><button onclick="c()">Analyze Keywords</button><div id="out"></div></div>
-<script>function c(){ const t=document.getElementById('in').value.toLowerCase().replace(/[^a-z0-9\s]/g,''); if(!t)return; const w=t.split(/\s+/).filter(x=>x.length>0); const m={}; w.forEach(x=>m[x]=(m[x]||0)+1); const s=Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,10); let h='<b>Top 10 Words:</b><br><br>'; s.forEach(x=>{ h+=`${x[0]}: ${x[1]} times (${((x[1]/w.length)*100).toFixed(1)}%)<br>`; }); document.getElementById('out').innerHTML=h; }</script></body></html>
+  <meta name="twitter:description" content="Analyze text to find the most frequently used words and their density percentage.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Keyword Density Checker</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Keyword Density</h1>
+<textarea id="in" rows="6" placeholder="Paste your article here..."></textarea>
+<button onclick="c()">Analyze Density</button>
+<div id="res" style="margin-top:20px;display:grid;gap:10px;"></div>
+<script>function c(){ const txt=document.getElementById('in').value.toLowerCase().replace(/[^a-z0-9\s]/g,''); if(!txt.trim())return; const words=txt.split(/\s+/).filter(w=>w.length>2); const tot=words.length; const f={}; words.forEach(w=>f[w]=(f[w]||0)+1); const s=Object.entries(f).sort((a,b)=>b[1]-a[1]).slice(0,10); let h=`<div style="text-align:center;font-weight:bold;margin-bottom:10px;">Total Words: ${tot}</div>`; s.forEach(arr=>{ const pct=((arr[1]/tot)*100).toFixed(2); h+=`<div style="display:flex;justify-content:space-between;background:var(--bg);padding:10px;border-radius:6px;border:1px solid var(--border);"><span><strong>${arr[0]}</strong></span><span>${arr[1]} uses (${pct}%)</span></div>`; }); document.getElementById('res').innerHTML=h; }</script>
+  </div>
+</body>
+</html>
