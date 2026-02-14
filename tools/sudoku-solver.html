@@ -1,0 +1,56 @@
+---
+layout: null
+title: "Sudoku Solver"
+category: "Games"
+description: "Automatically solve any Sudoku puzzle instantly using a backtracking algorithm."
+permalink: /tools/sudoku-solver.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Automatically solve any Sudoku puzzle instantly using a backtracking algorithm.">
+  <meta property="og:title" content="Sudoku Solver">
+  <meta property="og:description" content="Automatically solve any Sudoku puzzle instantly using a backtracking algorithm.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sudoku Solver">
+  <meta name="twitter:description" content="Automatically solve any Sudoku puzzle instantly using a backtracking algorithm.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Sudoku Solver</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.2rem; font-weight: 700; border: 2px dashed var(--border); color: var(--primary); }
+.sudoku-grid { display: grid; grid-template-columns: repeat(9, 1fr); gap: 2px; background: #334155; padding: 2px; border: 2px solid #334155; margin-bottom: 20px; }
+.sudoku-grid input { width: 100%; height: 45px; margin: 0; padding: 0; text-align: center; border: none; border-radius: 0; background: #fff; font-size: 1.2rem; }
+.sudoku-grid input:nth-child(3n) { border-right: 2px solid #334155; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Sudoku Solver</h1>
+<div class="sudoku-grid" id="grid"></div>
+<button onclick="solve()">Solve Puzzle</button>
+<button onclick="clearGrid()" style="background:var(--danger)">Clear</button>
+<script>
+const g = document.getElementById('grid');
+for(let i=0; i<81; i++) g.innerHTML += `<input type="number" min="1" max="9" id="s${i}">`;
+function getBoard(){ let b=[]; for(let i=0;i<9;i++){ b.push([]); for(let j=0;j<9;j++){ b[i].push(parseInt(document.getElementById('s'+(i*9+j)).value)||0); } } return b; }
+function setBoard(b){ for(let i=0;i<9;i++) for(let j=0;j<9;j++) document.getElementById('s'+(i*9+j)).value = b[i][j]||''; }
+function isValid(b, r, c, k){ for(let i=0;i<9;i++){ if(b[r][i]===k||b[i][c]===k) return false; } let sr=Math.floor(r/3)*3, sc=Math.floor(c/3)*3; for(let i=0;i<3;i++) for(let j=0;j<3;j++) if(b[sr+i][sc+j]===k) return false; return true; }
+function solver(b){ for(let r=0;r<9;r++) for(let c=0;c<9;c++) if(b[r][c]===0){ for(let k=1;k<=9;k++) if(isValid(b,r,c,k)){ b[r][c]=k; if(solver(b)) return true; b[r][c]=0; } return false; } return true; }
+function solve(){ let b = getBoard(); if(solver(b)) setBoard(b); else alert("No solution exists!"); }
+function clearGrid(){ for(let i=0;i<81;i++) document.getElementById('s'+i).value = ''; }
+</script>
+  </div>
+</body>
+</html>

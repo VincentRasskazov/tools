@@ -1,0 +1,53 @@
+---
+layout: null
+title: "Hex to CMYK Pro"
+category: "Design"
+description: "Convert HEX color codes to CMYK for professional printing."
+permalink: /tools/hex-to-cmyk-pro.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Convert HEX color codes to CMYK for professional printing.">
+  <meta property="og:title" content="Hex to CMYK Pro">
+  <meta property="og:description" content="Convert HEX color codes to CMYK for professional printing.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hex to CMYK Pro">
+  <meta name="twitter:description" content="Convert HEX color codes to CMYK for professional printing.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Hex to CMYK Pro</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.2rem; font-weight: 700; border: 2px dashed var(--border); color: var(--primary); }
+.sudoku-grid { display: grid; grid-template-columns: repeat(9, 1fr); gap: 2px; background: #334155; padding: 2px; border: 2px solid #334155; margin-bottom: 20px; }
+.sudoku-grid input { width: 100%; height: 45px; margin: 0; padding: 0; text-align: center; border: none; border-radius: 0; background: #fff; font-size: 1.2rem; }
+.sudoku-grid input:nth-child(3n) { border-right: 2px solid #334155; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Hex to CMYK</h1>
+<input type="text" id="in" value="#3b82f6" oninput="c()">
+<div id="res" class="res">C: 76% M: 47% Y: 0% K: 4%</div>
+<script>
+function c(){
+  let h=document.getElementById('in').value.replace('#','');
+  let r=parseInt(h.slice(0,2),16)/255, g=parseInt(h.slice(2,4),16)/255, b=parseInt(h.slice(4,6),16)/255;
+  let k=1-Math.max(r,g,b), cyan=(1-r-k)/(1-k)||0, mag=(1-g-k)/(1-k)||0, yel=(1-b-k)/(1-k)||0;
+  document.getElementById('res').innerText = `C: ${Math.round(cyan*100)}% M: ${Math.round(mag*100)}% Y: ${Math.round(yel*100)}% K: ${Math.round(k*100)}%`;
+}
+</script>
+  </div>
+</body>
+</html>
