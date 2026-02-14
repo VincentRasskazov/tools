@@ -1,13 +1,30 @@
+---
+layout: null
+title: "Tic tac toe"
+category: "Games"
+description: "Play classic Tic-Tac-Toe against a friend locally."
+permalink: /tools/tic-tac-toe.html
+---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Play classic Tic-Tac-Toe against a friend locally in your browser.">
-  <meta property="og:title" content="Tic-Tac-Toe">
-  <meta property="og:description" content="Play classic Tic-Tac-Toe against a friend locally in your browser.">
+  <meta name="description" content="Play classic Tic-Tac-Toe against a friend locally.">
+  <meta property="og:title" content="Tic tac toe">
+  <meta property="og:description" content="Play classic Tic-Tac-Toe against a friend locally.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Tic-Tac-Toe">
-  <meta name="twitter:description" content="Play classic Tic-Tac-Toe against a friend locally in your browser.">
-  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>Tic-Tac-Toe</title><style>.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);text-align:center;} .board{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px auto;max-width:300px;} .cell{height:100px;background:#f8fafc;border:2px solid #cbd5e1;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:3rem;font-weight:bold;cursor:pointer;color:#2563eb;} button{padding:12px 24px;background:#2563eb;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;margin-top:20px;} #msg{font-size:1.5rem;font-weight:bold;margin-top:20px;}</style></head>
-<body><div class="tool-container"><h1 style="color:#2563eb;">Tic-Tac-Toe</h1><div class="board" id="board"></div><div id="msg">Player X's Turn</div><button onclick="rst()">Restart Game</button></div>
-<script>let bd=Array(9).fill(''), turn='X', act=true; const win=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]; function init(){document.getElementById('board').innerHTML=bd.map((_,i)=>`<div class="cell" onclick="clk(${i})" id="c${i}"></div>`).join('');} function clk(i){if(!act||bd[i])return; bd[i]=turn; document.getElementById(`c${i}`).innerText=turn; check(); if(act){turn=turn==='X'?'O':'X'; document.getElementById('msg').innerText=`Player ${turn}'s Turn`;}} function check(){let w=false; for(let c of win){if(bd[c[0]]&&bd[c[0]]===bd[c[1]]&&bd[c[0]]===bd[c[2]])w=true;} if(w){document.getElementById('msg').innerText=`Player ${turn} Wins!`; act=false;}else if(!bd.includes('')){document.getElementById('msg').innerText="It's a Draw!"; act=false;}} function rst(){bd=Array(9).fill(''); turn='X'; act=true; document.getElementById('msg').innerText="Player X's Turn"; init();} init();</script></body></html>
+  <meta name="twitter:title" content="Tic tac toe">
+  <meta name="twitter:description" content="Play classic Tic-Tac-Toe against a friend locally.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Tic tac toe</title>
+  
+  <style>
+.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);text-align:center;} .board{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px auto;max-width:300px;} .cell{height:100px;background:#f8fafc;border:2px solid #cbd5e1;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:3rem;font-weight:bold;cursor:pointer;color:#2563eb;} button{padding:12px 24px;background:#2563eb;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;margin-top:20px;} #msg{font-size:1.5rem;font-weight:bold;margin-top:20px;}
+  </style>
+</head>
+<body>
+<div class="tool-container"><h1 style="color:#2563eb;">Tic-Tac-Toe</h1><div class="board" id="board"></div><div id="msg">Player X's Turn</div><button onclick="rst()">Restart Game</button></div>
+<script>let bd=Array(9).fill(''), turn='X', act=true; const win=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]; function init(){document.getElementById('board').innerHTML=bd.map((_,i)=>`<div class="cell" onclick="clk(${i})" id="c${i}"></div>`).join('');} function clk(i){if(!act||bd[i])return; bd[i]=turn; document.getElementById(`c${i}`).innerText=turn; check(); if(act){turn=turn==='X'?'O':'X'; document.getElementById('msg').innerText=`Player ${turn}'s Turn`;}} function check(){let w=false; for(let c of win){if(bd[c[0]]&&bd[c[0]]===bd[c[1]]&&bd[c[0]]===bd[c[2]])w=true;} if(w){document.getElementById('msg').innerText=`Player ${turn} Wins!`; act=false;}else if(!bd.includes('')){document.getElementById('msg').innerText="It's a Draw!"; act=false;}} function rst(){bd=Array(9).fill(''); turn='X'; act=true; document.getElementById('msg').innerText="Player X's Turn"; init();} init();</script>
+</body>
+</html>

@@ -1,16 +1,33 @@
+---
+layout: null
+title: "Download time calculator"
+category: "Utility"
+description: "Estimate download time based on file size and internet speed."
+permalink: /tools/download-time-calculator.html
+---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Estimate how long it will take to download a file based on your internet speed.">
-  <meta property="og:title" content="Download Time Calculator">
-  <meta property="og:description" content="Estimate how long it will take to download a file based on your internet speed.">
+  <meta name="description" content="Estimate download time based on file size and internet speed.">
+  <meta property="og:title" content="Download time calculator">
+  <meta property="og:description" content="Estimate download time based on file size and internet speed.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Download Time Calculator">
-  <meta name="twitter:description" content="Estimate how long it will take to download a file based on your internet speed.">
-  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>Download Time</title><style>.tool-container{max-width:600px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} .row{display:flex;gap:10px;margin-bottom:15px;} input,select{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;} button{width:100%;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;} #res{margin-top:20px;font-size:1.5rem;text-align:center;font-weight:bold;color:#16a34a;}</style></head>
-<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Download Time</h1>
+  <meta name="twitter:title" content="Download time calculator">
+  <meta name="twitter:description" content="Estimate download time based on file size and internet speed.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Download time calculator</title>
+  
+  <style>
+.tool-container{max-width:600px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} .row{display:flex;gap:10px;margin-bottom:15px;} input,select{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;} button{width:100%;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;} #res{margin-top:20px;font-size:1.5rem;text-align:center;font-weight:bold;color:#16a34a;}
+  </style>
+</head>
+<body>
+<div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Download Time</h1>
 <div class="row"><input type="number" id="fs" placeholder="File Size"><select id="fu"><option value="mb">MB</option><option value="gb">GB</option><option value="tb">TB</option></select></div>
 <div class="row"><input type="number" id="ss" placeholder="Internet Speed"><select id="su"><option value="mbps">Mbps</option><option value="gbps">Gbps</option><option value="kbps">Kbps</option></select></div>
 <button onclick="c()">Calculate Time</button><div id="res"></div></div>
-<script>function c(){ const fs=parseFloat(document.getElementById('fs').value), fu=document.getElementById('fu').value, ss=parseFloat(document.getElementById('ss').value), su=document.getElementById('su').value; if(!fs||!ss)return; let bits = fs * (fu==='gb'?8e9 : fu==='tb'?8e12 : 8e6); let speed = ss * (su==='gbps'?1e9 : su==='kbps'?1e3 : 1e6); let sec = bits/speed; let h=Math.floor(sec/3600), m=Math.floor((sec%3600)/60), s=Math.floor(sec%60); document.getElementById('res').innerText = `${h}h ${m}m ${s}s`; }</script></body></html>
+<script>function c(){ const fs=parseFloat(document.getElementById('fs').value), fu=document.getElementById('fu').value, ss=parseFloat(document.getElementById('ss').value), su=document.getElementById('su').value; if(!fs||!ss)return; let bits = fs * (fu==='gb'?8e9 : fu==='tb'?8e12 : 8e6); let speed = ss * (su==='gbps'?1e9 : su==='kbps'?1e3 : 1e6); let sec = bits/speed; let h=Math.floor(sec/3600), m=Math.floor((sec%3600)/60), s=Math.floor(sec%60); document.getElementById('res').innerText = `${h}h ${m}m ${s}s`; }</script>
+</body>
+</html>

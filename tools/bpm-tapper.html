@@ -1,13 +1,30 @@
+---
+layout: null
+title: "Bpm tapper"
+category: "Audio"
+description: "Calculate Beats Per Minute (BPM) by tapping any key or clicking."
+permalink: /tools/bpm-tapper.html
+---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Calculate Beats Per Minute (BPM) by tapping any key or clicking the button.">
-  <meta property="og:title" content="BPM Tapper">
-  <meta property="og:description" content="Calculate Beats Per Minute (BPM) by tapping any key or clicking the button.">
+  <meta name="description" content="Calculate Beats Per Minute (BPM) by tapping any key or clicking.">
+  <meta property="og:title" content="Bpm tapper">
+  <meta property="og:description" content="Calculate Beats Per Minute (BPM) by tapping any key or clicking.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="BPM Tapper">
-  <meta name="twitter:description" content="Calculate Beats Per Minute (BPM) by tapping any key or clicking the button.">
-  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>BPM Tapper</title><style>.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:40px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);text-align:center;} #bpm{font-size:6rem;font-weight:bold;color:#2563eb;margin:20px 0;} button{padding:15px 30px;font-size:1.2rem;background:#2563eb;color:white;border:none;border-radius:6px;cursor:pointer;font-weight:bold;margin-top:10px;}</style></head>
-<body><div class="tool-container"><h1 style="color:#2563eb;">BPM Tapper</h1><div id="bpm">0</div><p>Tap spacebar or click below</p><button onmousedown="tap()">TAP HERE</button><button onclick="reset()" style="background:#ef4444;margin-left:10px;">Reset</button></div>
-<script>let taps=[], last=0; function tap(){ const n=Date.now(); if(n-last>2000)taps=[]; last=n; taps.push(n); if(taps.length>1){ const diffs=taps.slice(1).map((t,i)=>t-taps[i]); const avg=diffs.reduce((a,b)=>a+b)/diffs.length; document.getElementById('bpm').innerText=Math.round(60000/avg); } } function reset(){taps=[];document.getElementById('bpm').innerText=0;} window.addEventListener('keydown',e=>{if(e.code==='Space')tap();});</script></body></html>
+  <meta name="twitter:title" content="Bpm tapper">
+  <meta name="twitter:description" content="Calculate Beats Per Minute (BPM) by tapping any key or clicking.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Bpm tapper</title>
+  
+  <style>
+.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:40px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);text-align:center;} #bpm{font-size:6rem;font-weight:bold;color:#2563eb;margin:20px 0;} button{padding:15px 30px;font-size:1.2rem;background:#2563eb;color:white;border:none;border-radius:6px;cursor:pointer;font-weight:bold;margin-top:10px;}
+  </style>
+</head>
+<body>
+<div class="tool-container"><h1 style="color:#2563eb;">BPM Tapper</h1><div id="bpm">0</div><p>Tap spacebar or click below</p><button onmousedown="tap()">TAP HERE</button><button onclick="reset()" style="background:#ef4444;margin-left:10px;">Reset</button></div>
+<script>let taps=[], last=0; function tap(){ const n=Date.now(); if(n-last>2000)taps=[]; last=n; taps.push(n); if(taps.length>1){ const diffs=taps.slice(1).map((t,i)=>t-taps[i]); const avg=diffs.reduce((a,b)=>a+b)/diffs.length; document.getElementById('bpm').innerText=Math.round(60000/avg); } } function reset(){taps=[];document.getElementById('bpm').innerText=0;} window.addEventListener('keydown',e=>{if(e.code==='Space')tap();});</script>
+</body>
+</html>

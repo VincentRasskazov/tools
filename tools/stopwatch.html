@@ -1,13 +1,30 @@
+---
+layout: null
+title: "Stopwatch"
+category: "Time"
+description: "A simple, precise online stopwatch with milliseconds."
+permalink: /tools/stopwatch.html
+---
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta name="description" content="A simple, precise online stopwatch with milliseconds.">
-  <meta property="og:title" content="Online Stopwatch">
+  <meta property="og:title" content="Stopwatch">
   <meta property="og:description" content="A simple, precise online stopwatch with milliseconds.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Online Stopwatch">
+  <meta name="twitter:title" content="Stopwatch">
   <meta name="twitter:description" content="A simple, precise online stopwatch with milliseconds.">
-  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>Stopwatch</title><style>.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:40px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);text-align:center;} #time{font-size:4rem;font-weight:bold;font-family:monospace;color:#1e293b;margin-bottom:20px;} .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;} button{padding:15px;font-size:1.2rem;font-weight:bold;border:none;border-radius:6px;cursor:pointer;color:white;} .start{background:#16a34a;} .stop{background:#ef4444;} .reset{background:#64748b;grid-column:1/-1;}</style></head>
-<body><div class="tool-container"><h1 style="color:#2563eb;">Stopwatch</h1><div id="time">00:00:00.00</div><div class="grid"><button class="start" onclick="st()">Start</button><button class="stop" onclick="sp()">Stop</button><button class="reset" onclick="rs()">Reset</button></div></div>
-<script>let t0, tm, el=0, run=false; function f(ms){let h=Math.floor(ms/3600000), m=Math.floor((ms%3600000)/60000), s=Math.floor((ms%60000)/1000), ms2=Math.floor((ms%1000)/10); return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}.${String(ms2).padStart(2,'0')}`;} function st(){if(!run){t0=Date.now()-el; tm=setInterval(()=>{el=Date.now()-t0; document.getElementById('time').innerText=f(el);},10); run=true;}} function sp(){clearInterval(tm); run=false;} function rs(){clearInterval(tm); run=false; el=0; document.getElementById('time').innerText="00:00:00.00";}</script></body></html>
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Stopwatch</title>
+  
+  <style>
+.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:40px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);text-align:center;} #time{font-size:4rem;font-weight:bold;font-family:monospace;color:#1e293b;margin-bottom:20px;} .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;} button{padding:15px;font-size:1.2rem;font-weight:bold;border:none;border-radius:6px;cursor:pointer;color:white;} .start{background:#16a34a;} .stop{background:#ef4444;} .reset{background:#64748b;grid-column:1/-1;}
+  </style>
+</head>
+<body>
+<div class="tool-container"><h1 style="color:#2563eb;">Stopwatch</h1><div id="time">00:00:00.00</div><div class="grid"><button class="start" onclick="st()">Start</button><button class="stop" onclick="sp()">Stop</button><button class="reset" onclick="rs()">Reset</button></div></div>
+<script>let t0, tm, el=0, run=false; function f(ms){let h=Math.floor(ms/3600000), m=Math.floor((ms%3600000)/60000), s=Math.floor((ms%60000)/1000), ms2=Math.floor((ms%1000)/10); return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}.${String(ms2).padStart(2,'0')}`;} function st(){if(!run){t0=Date.now()-el; tm=setInterval(()=>{el=Date.now()-t0; document.getElementById('time').innerText=f(el);},10); run=true;}} function sp(){clearInterval(tm); run=false;} function rs(){clearInterval(tm); run=false; el=0; document.getElementById('time').innerText="00:00:00.00";}</script>
+</body>
+</html>

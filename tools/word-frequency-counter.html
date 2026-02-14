@@ -1,13 +1,30 @@
+---
+layout: null
+title: "Word frequency counter"
+category: "Text"
+description: "Count the frequency of each word in a text document."
+permalink: /tools/word-frequency-counter.html
+---
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta name="description" content="Count the frequency of each word in a text document.">
-  <meta property="og:title" content="Word Frequency Counter">
+  <meta property="og:title" content="Word frequency counter">
   <meta property="og:description" content="Count the frequency of each word in a text document.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Word Frequency Counter">
+  <meta name="twitter:title" content="Word frequency counter">
   <meta name="twitter:description" content="Count the frequency of each word in a text document.">
-  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>Word Frequency</title><style>.tool-container{max-width:800px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} textarea{width:100%;height:150px;padding:10px;border:1px solid #ccc;border-radius:6px;margin-bottom:15px;} button{width:100%;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;} #out{margin-top:20px;background:#f8fafc;padding:15px;border-radius:6px;border:1px solid #e2e8f0;white-space:pre-wrap;font-family:monospace;}</style></head>
-<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Word Frequency Counter</h1><textarea id="in" placeholder="Paste your text here..."></textarea><button onclick="c()">Count Words</button><div id="out"></div></div>
-<script>function c(){ const t=document.getElementById('in').value.toLowerCase().match(/\b\w+\b/g); if(!t)return; const counts={}; t.forEach(w=>counts[w]=(counts[w]||0)+1); const sorted=Object.entries(counts).sort((a,b)=>b[1]-a[1]); let html=''; sorted.forEach(arr=>{html+=`${arr[0]}: ${arr[1]}\n`;}); document.getElementById('out').innerText=html; }</script></body></html>
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Word frequency counter</title>
+  
+  <style>
+.tool-container{max-width:800px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} textarea{width:100%;height:150px;padding:10px;border:1px solid #ccc;border-radius:6px;margin-bottom:15px;} button{width:100%;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;} #out{margin-top:20px;background:#f8fafc;padding:15px;border-radius:6px;border:1px solid #e2e8f0;white-space:pre-wrap;font-family:monospace;}
+  </style>
+</head>
+<body>
+<div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Word Frequency Counter</h1><textarea id="in" placeholder="Paste your text here..."></textarea><button onclick="c()">Count Words</button><div id="out"></div></div>
+<script>function c(){ const t=document.getElementById('in').value.toLowerCase().match(/\b\w+\b/g); if(!t)return; const counts={}; t.forEach(w=>counts[w]=(counts[w]||0)+1); const sorted=Object.entries(counts).sort((a,b)=>b[1]-a[1]); let html=''; sorted.forEach(arr=>{html+=`${arr[0]}: ${arr[1]}\n`;}); document.getElementById('out').innerText=html; }</script>
+</body>
+</html>

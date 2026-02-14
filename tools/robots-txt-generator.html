@@ -1,19 +1,36 @@
+---
+layout: null
+title: "Robots txt generator"
+category: "Developer"
+description: "Generate a robots.txt file to control search engine crawlers."
+permalink: /tools/robots-txt-generator.html
+---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a robots.txt file to control how search engines crawl your website.">
-  <meta property="og:title" content="Robots.txt Generator">
-  <meta property="og:description" content="Generate a robots.txt file to control how search engines crawl your website.">
+  <meta name="description" content="Generate a robots.txt file to control search engine crawlers.">
+  <meta property="og:title" content="Robots txt generator">
+  <meta property="og:description" content="Generate a robots.txt file to control search engine crawlers.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Robots.txt Generator">
-  <meta name="twitter:description" content="Generate a robots.txt file to control how search engines crawl your website.">
-  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>Robots.txt Generator</title><style>.tool-container{max-width:600px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} .row{margin-bottom:15px;} select,input{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;} button{width:100%;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;} textarea{width:100%;height:150px;padding:10px;margin-top:20px;border:1px solid #ccc;border-radius:6px;font-family:monospace;}</style></head>
-<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Robots.txt Generator</h1>
+  <meta name="twitter:title" content="Robots txt generator">
+  <meta name="twitter:description" content="Generate a robots.txt file to control search engine crawlers.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Robots txt generator</title>
+  
+  <style>
+.tool-container{max-width:600px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} .row{margin-bottom:15px;} select,input{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;} button{width:100%;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;} textarea{width:100%;height:150px;padding:10px;margin-top:20px;border:1px solid #ccc;border-radius:6px;font-family:monospace;}
+  </style>
+</head>
+<body>
+<div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Robots.txt Generator</h1>
 <div class="row"><label>User Agent</label><input type="text" id="ua" value="*"></div>
 <div class="row"><label>Allow / Disallow</label><select id="type"><option value="Disallow">Disallow</option><option value="Allow">Allow</option></select></div>
 <div class="row"><label>Path (e.g. /admin/)</label><input type="text" id="path" placeholder="/"></div>
 <button onclick="add()">Add Rule</button>
 <div class="row" style="margin-top:20px;"><label>Sitemap URL (Optional)</label><input type="text" id="sitemap" placeholder="https://example.com/sitemap.xml" oninput="u()"></div>
 <textarea id="out" readonly>User-agent: *</textarea></div>
-<script>let rules = []; function add(){ const ua=document.getElementById('ua').value, type=document.getElementById('type').value, path=document.getElementById('path').value; rules.push(`User-agent: ${ua}\n${type}: ${path}`); u(); } function u(){ let t = rules.join('\n\n'); const s = document.getElementById('sitemap').value; if(s) t += `\n\nSitemap: ${s}`; document.getElementById('out').value = t || "User-agent: *"; }</script></body></html>
+<script>let rules = []; function add(){ const ua=document.getElementById('ua').value, type=document.getElementById('type').value, path=document.getElementById('path').value; rules.push(`User-agent: ${ua}\n${type}: ${path}`); u(); } function u(){ let t = rules.join('\n\n'); const s = document.getElementById('sitemap').value; if(s) t += `\n\nSitemap: ${s}`; document.getElementById('out').value = t || "User-agent: *"; }</script>
+</body>
+</html>

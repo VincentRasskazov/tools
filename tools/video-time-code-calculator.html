@@ -1,13 +1,30 @@
+---
+layout: null
+title: "Video time code calculator"
+category: "Media"
+description: "Add or subtract video timecodes (HH:MM:SS:FF) easily."
+permalink: /tools/video-time-code-calculator.html
+---
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta name="description" content="Add or subtract video timecodes (HH:MM:SS:FF) easily.">
-  <meta property="og:title" content="Video Timecode Calculator">
+  <meta property="og:title" content="Video time code calculator">
   <meta property="og:description" content="Add or subtract video timecodes (HH:MM:SS:FF) easily.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Video Timecode Calculator">
+  <meta name="twitter:title" content="Video time code calculator">
   <meta name="twitter:description" content="Add or subtract video timecodes (HH:MM:SS:FF) easily.">
-  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>Timecode Calc</title><style>.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);text-align:center;} input{width:100px;padding:10px;text-align:center;border:1px solid #ccc;border-radius:6px;margin:5px;} .row{margin-bottom:15px;} button{padding:10px 20px;background:#2563eb;color:white;border:none;border-radius:6px;cursor:pointer;font-weight:bold;}</style></head>
-<body><div class="tool-container"><h1 style="color:#2563eb;">Timecode Calculator</h1><div class="row"><input type="text" id="t1" placeholder="01:00:00:00"> + <input type="text" id="t2" placeholder="00:30:00:00"></div><button onclick="c()">Add Timecodes</button><h2 id="res" style="margin-top:20px;">00:00:00:00</h2></div>
-<script>function p(t){const a=t.split(':').map(Number); return (a[0]*3600+a[1]*60+a[2])*24+a[3];} function f(fr){const h=Math.floor(fr/(3600*24)); fr%=3600*24; const m=Math.floor(fr/(60*24)); fr%=60*24; const s=Math.floor(fr/24); const f=fr%24; return [h,m,s,f].map(x=>String(x).padStart(2,'0')).join(':');} function c(){ document.getElementById('res').innerText=f(p(document.getElementById('t1').value)+p(document.getElementById('t2').value)); }</script></body></html>
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Video time code calculator</title>
+  
+  <style>
+.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);text-align:center;} input{width:100px;padding:10px;text-align:center;border:1px solid #ccc;border-radius:6px;margin:5px;} .row{margin-bottom:15px;} button{padding:10px 20px;background:#2563eb;color:white;border:none;border-radius:6px;cursor:pointer;font-weight:bold;}
+  </style>
+</head>
+<body>
+<div class="tool-container"><h1 style="color:#2563eb;">Timecode Calculator</h1><div class="row"><input type="text" id="t1" placeholder="01:00:00:00"> + <input type="text" id="t2" placeholder="00:30:00:00"></div><button onclick="c()">Add Timecodes</button><h2 id="res" style="margin-top:20px;">00:00:00:00</h2></div>
+<script>function p(t){const a=t.split(':').map(Number); return (a[0]*3600+a[1]*60+a[2])*24+a[3];} function f(fr){const h=Math.floor(fr/(3600*24)); fr%=3600*24; const m=Math.floor(fr/(60*24)); fr%=60*24; const s=Math.floor(fr/24); const f=fr%24; return [h,m,s,f].map(x=>String(x).padStart(2,'0')).join(':');} function c(){ document.getElementById('res').innerText=f(p(document.getElementById('t1').value)+p(document.getElementById('t2').value)); }</script>
+</body>
+</html>
