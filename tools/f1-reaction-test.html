@@ -1,0 +1,48 @@
+---
+layout: null
+title: "Starting Lights Reaction Test"
+category: "Games"
+description: "Test your reaction time exactly like an F1 driver with the 5 red lights sequence."
+permalink: /tools/f1-reaction-test.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Test your reaction time exactly like an F1 driver with the 5 red lights sequence.">
+  <meta property="og:title" content="Starting Lights Reaction Test">
+  <meta property="og:description" content="Test your reaction time exactly like an F1 driver with the 5 red lights sequence.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Starting Lights Reaction Test">
+  <meta name="twitter:description" content="Test your reaction time exactly like an F1 driver with the 5 red lights sequence.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Starting Lights Reaction Test</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Starting Lights Test</h1>
+<div style="display:flex;justify-content:center;gap:10px;margin:30px 0;background:#1e293b;padding:20px;border-radius:12px;">
+  <div class="lt" id="l1" style="width:40px;height:40px;border-radius:50%;background:#334155;"></div><div class="lt" id="l2" style="width:40px;height:40px;border-radius:50%;background:#334155;"></div><div class="lt" id="l3" style="width:40px;height:40px;border-radius:50%;background:#334155;"></div><div class="lt" id="l4" style="width:40px;height:40px;border-radius:50%;background:#334155;"></div><div class="lt" id="l5" style="width:40px;height:40px;border-radius:50%;background:#334155;"></div>
+</div>
+<button id="btn" onclick="act()" style="height:80px;font-size:1.5rem;">Start Sequence</button>
+<div id="res" class="res" style="display:none;"></div>
+<script>let state=0, t0, tm; function act(){ const b=document.getElementById('btn'); if(state===0){ state=1; b.innerText="Wait..."; document.getElementById('res').style.display='none'; for(let i=1;i<=5;i++){ setTimeout(()=>document.getElementById('l'+i).style.background='var(--danger)', i*1000); } tm=setTimeout(()=>{for(let i=1;i<=5;i++)document.getElementById('l'+i).style.background='#334155'; t0=Date.now(); state=2; b.innerText="CLICK!"; b.style.background='var(--success)';}, 5000 + Math.random()*3000); } else if(state===1){ clearTimeout(tm); state=0; b.innerText="Jump Start! Try Again"; for(let i=1;i<=5;i++)document.getElementById('l'+i).style.background='#334155'; } else if(state===2){ const diff=Date.now()-t0; state=0; b.innerText="Start Sequence"; b.style.background='var(--primary)'; document.getElementById('res').style.display='block'; document.getElementById('res').innerHTML=`Reaction Time:<br><span style="font-size:3rem;">${diff} ms</span>`; } }</script>
+  </div>
+</body>
+</html>

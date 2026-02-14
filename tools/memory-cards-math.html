@@ -1,0 +1,50 @@
+---
+layout: null
+title: "Math Memory Match Game"
+category: "Games"
+description: "A brain-bending memory game where you match equations to their answers."
+permalink: /tools/memory-cards-math.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="A brain-bending memory game where you match equations to their answers.">
+  <meta property="og:title" content="Math Memory Match Game">
+  <meta property="og:description" content="A brain-bending memory game where you match equations to their answers.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Math Memory Match Game">
+  <meta name="twitter:description" content="A brain-bending memory game where you match equations to their answers.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Math Memory Match Game</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Math Memory</h1>
+<div id="grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px;"></div>
+<button onclick="st()">Restart Game</button>
+<script>
+let deck=[], f1=null, lock=false, m=0;
+function st(){ m=0; f1=null; lock=false; const pairs=[{q:'2+2',a:'4'},{q:'3x3',a:'9'},{q:'10/2',a:'5'},{q:'7-1',a:'6'}]; let arr=[]; pairs.forEach(p=>{arr.push({v:p.q, id:p.a},{v:p.a, id:p.a});}); deck=arr.sort(()=>0.5-Math.random()).map(x=>({...x, flip:false, match:false})); rnd(); }
+function rnd(){ document.getElementById('grid').innerHTML=deck.map((c,i)=>`<div style="height:80px;background:${c.flip||c.match?'#fff':'var(--primary)'};border:2px solid ${c.match?'var(--success)':'var(--border)'};border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:bold;cursor:pointer;color:var(--text);" onclick="clk(${i})">${c.flip||c.match?c.v:''}</div>`).join(''); }
+function clk(i){ if(lock||deck[i].flip||deck[i].match)return; deck[i].flip=true; rnd(); if(!f1) f1={i,id:deck[i].id}; else { lock=true; if(f1.id===deck[i].id){ deck[f1.i].match=deck[i].match=true; m++; lock=false; f1=null; rnd(); if(m===4)setTimeout(()=>alert("You Win!"),200); } else { setTimeout(()=>{ deck[f1.i].flip=deck[i].flip=false; f1=null; lock=false; rnd(); }, 1000); } } } st();
+</script>
+  </div>
+</body>
+</html>
