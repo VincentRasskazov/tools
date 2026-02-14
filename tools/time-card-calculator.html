@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Base58 Encoder"
-category: "Developer"
-description: "Encode text into Base58 format (commonly used in cryptocurrency)."
-permalink: /tools/base58-encoder.html
+title: "Time Card Calculator"
+category: "Business"
+description: "Calculate total hours worked minus break time for payroll and tracking."
+permalink: /tools/time-card-calculator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Encode text into Base58 format (commonly used in cryptocurrency).">
-  <meta property="og:title" content="Base58 Encoder">
-  <meta property="og:description" content="Encode text into Base58 format (commonly used in cryptocurrency).">
+  <meta name="description" content="Calculate total hours worked minus break time for payroll and tracking.">
+  <meta property="og:title" content="Time Card Calculator">
+  <meta property="og:description" content="Calculate total hours worked minus break time for payroll and tracking.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Base58 Encoder">
-  <meta name="twitter:description" content="Encode text into Base58 format (commonly used in cryptocurrency).">
+  <meta name="twitter:title" content="Time Card Calculator">
+  <meta name="twitter:description" content="Calculate total hours worked minus break time for payroll and tracking.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Base58 Encoder</title>
+  <title>Time Card Calculator</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -37,11 +37,12 @@ canvas { display: block; margin: 0 auto; background: #1e293b; border-radius: 12p
 </head>
 <body>
   <div class="tool-container">
-    <h1>Base58 Encoder</h1>
-<textarea id="in" rows="4" placeholder="Hello World"></textarea>
-<button onclick="c()">Encode</button>
-<textarea id="out" rows="4" readonly style="margin-top:20px;font-family:monospace;"></textarea>
-<script>const b58="123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"; function enc(str){ let d=[]; for(let i=0;i<str.length;i++){ let carry=str.charCodeAt(i); for(let j=0;j<d.length;j++){ carry+=d[j]<<8; d[j]=carry%58; carry=(carry/58)|0; } while(carry>0){ d.push(carry%58); carry=(carry/58)|0; } } let z=0; while(str[z]==='\0'){d.push(0); z++;} return d.reverse().map(x=>b58[x]).join(''); } function c(){ document.getElementById('out').value=enc(document.getElementById('in').value); }</script>
+    <h1>Time Card Calculator</h1>
+<div class="row"><div><label>Clock In</label><input type="time" id="in" value="09:00"></div><div><label>Clock Out</label><input type="time" id="out" value="17:00"></div></div>
+<label>Break Deductions (Minutes)</label><input type="number" id="b" value="30">
+<button onclick="c()">Calculate Hours</button>
+<div id="res" class="res"></div>
+<script>function c(){ const i=document.getElementById('in').value, o=document.getElementById('out').value, b=parseInt(document.getElementById('b').value)||0; if(i&&o){ let d1=new Date('1/1/2000 '+i), d2=new Date('1/1/2000 '+o); let diff=(d2-d1)/60000; if(diff<0)diff+=24*60; diff-=b; const h=Math.floor(diff/60), m=diff%60; const dec=(diff/60).toFixed(2); document.getElementById('res').innerHTML=`<strong>${h}h ${m}m</strong><br><span style="font-size:1.2rem;color:#64748b;">(${dec} Decimal Hours)</span>`; } }</script>
   </div>
 </body>
 </html>

@@ -1,54 +1,50 @@
 ---
 layout: null
 title: "JWT Decoder"
-category: "Security"
-description: "Decode JSON Web Tokens."
+category: "Developer"
+description: "Decode JSON Web Tokens (JWT) locally to view header and payload data."
 permalink: /tools/jwt-decoder.html
 ---
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta name="description" content="Decode JSON Web Tokens (JWT) to view payload and header data.">
+<html lang="en"><head>
+  <meta name="description" content="Decode JSON Web Tokens (JWT) locally to view header and payload data.">
   <meta property="og:title" content="JWT Decoder">
-  <meta property="og:description" content="Decode JSON Web Tokens (JWT) to view payload and header data.">
+  <meta property="og:description" content="Decode JSON Web Tokens (JWT) locally to view header and payload data.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="JWT Decoder">
-  <meta name="twitter:description" content="Decode JSON Web Tokens (JWT) to view payload and header data.">
-  
+  <meta name="twitter:description" content="Decode JSON Web Tokens (JWT) locally to view header and payload data.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
   <title>JWT Decoder</title>
+  
   <style>
-    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { color: #2563eb; text-align: center; }
-    textarea { width: 100%; height: 100px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-family: monospace; }
-    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin: 15px 0; }
-    .output-box { background: #f8fafc; padding: 15px; border-radius: 6px; font-family: monospace; white-space: pre-wrap; word-break: break-all; margin-bottom: 10px; }
-  </style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+canvas { display: block; margin: 0 auto; background: #1e293b; border-radius: 12px; box-shadow: inset 0 4px 6px rgba(0,0,0,0.3); max-width: 100%; }
+</style>
 </head>
 <body>
   <div class="tool-container">
     <h1>JWT Decoder</h1>
-    <label>Encoded JWT</label>
-    <textarea id="jwt" placeholder="eyJhbGci..."></textarea>
-    <button onclick="decode()">Decode Token</button>
-    <label>Header</label>
-    <div class="output-box" id="header"></div>
-    <label>Payload</label>
-    <div class="output-box" id="payload"></div>
+<textarea id="in" rows="4" placeholder="eyJhbG..."></textarea>
+<button onclick="c()">Decode JWT</button>
+<label style="margin-top:20px;">Header</label>
+<textarea id="head" rows="3" readonly></textarea>
+<label>Payload</label>
+<textarea id="pay" rows="6" readonly></textarea>
+<script>function c(){ try{ const pts=document.getElementById('in').value.split('.'); if(pts.length!==3) throw "Invalid"; document.getElementById('head').value=JSON.stringify(JSON.parse(atob(pts[0])),null,2); document.getElementById('pay').value=JSON.stringify(JSON.parse(atob(pts[1])),null,2); }catch(e){ document.getElementById('pay').value="Invalid JWT"; } }</script>
   </div>
-  <script>
-    function decode() {
-      try {
-        const token = document.getElementById('jwt').value.split('.');
-        const head = JSON.parse(atob(token[0].replace(/-/g, '+').replace(/_/g, '/')));
-        const pay = JSON.parse(atob(token[1].replace(/-/g, '+').replace(/_/g, '/')));
-        document.getElementById('header').innerText = JSON.stringify(head, null, 2);
-        document.getElementById('payload').innerText = JSON.stringify(pay, null, 2);
-      } catch(e) { alert("Invalid JWT"); }
-    }
-  </script>
 </body>
 </html>

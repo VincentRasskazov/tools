@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Base58 Encoder"
-category: "Developer"
-description: "Encode text into Base58 format (commonly used in cryptocurrency)."
-permalink: /tools/base58-encoder.html
+title: "Regular Polygon Area Calculator"
+category: "Math"
+description: "Calculate the area of any regular polygon based on sides and length."
+permalink: /tools/polygon-area-calculator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Encode text into Base58 format (commonly used in cryptocurrency).">
-  <meta property="og:title" content="Base58 Encoder">
-  <meta property="og:description" content="Encode text into Base58 format (commonly used in cryptocurrency).">
+  <meta name="description" content="Calculate the area of any regular polygon based on sides and length.">
+  <meta property="og:title" content="Regular Polygon Area Calculator">
+  <meta property="og:description" content="Calculate the area of any regular polygon based on sides and length.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Base58 Encoder">
-  <meta name="twitter:description" content="Encode text into Base58 format (commonly used in cryptocurrency).">
+  <meta name="twitter:title" content="Regular Polygon Area Calculator">
+  <meta name="twitter:description" content="Calculate the area of any regular polygon based on sides and length.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Base58 Encoder</title>
+  <title>Regular Polygon Area Calculator</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -37,11 +37,11 @@ canvas { display: block; margin: 0 auto; background: #1e293b; border-radius: 12p
 </head>
 <body>
   <div class="tool-container">
-    <h1>Base58 Encoder</h1>
-<textarea id="in" rows="4" placeholder="Hello World"></textarea>
-<button onclick="c()">Encode</button>
-<textarea id="out" rows="4" readonly style="margin-top:20px;font-family:monospace;"></textarea>
-<script>const b58="123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"; function enc(str){ let d=[]; for(let i=0;i<str.length;i++){ let carry=str.charCodeAt(i); for(let j=0;j<d.length;j++){ carry+=d[j]<<8; d[j]=carry%58; carry=(carry/58)|0; } while(carry>0){ d.push(carry%58); carry=(carry/58)|0; } } let z=0; while(str[z]==='\0'){d.push(0); z++;} return d.reverse().map(x=>b58[x]).join(''); } function c(){ document.getElementById('out').value=enc(document.getElementById('in').value); }</script>
+    <h1>Polygon Area</h1>
+<div class="row"><div><label>Number of Sides (n)</label><input type="number" id="n" value="5" min="3"></div><div><label>Side Length (s)</label><input type="number" id="s" value="10"></div></div>
+<button onclick="c()">Calculate Area</button>
+<div id="res" class="res"></div>
+<script>function c(){ const n=parseInt(document.getElementById('n').value), s=parseFloat(document.getElementById('s').value); if(n>=3&&s>0){ const area=(n*s*s)/(4*Math.tan(Math.PI/n)); document.getElementById('res').innerHTML=`Area: <br><span style="font-size:3rem;color:var(--primary)">${area.toFixed(2)}</span>`; } }</script>
   </div>
 </body>
 </html>

@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Base58 Encoder"
-category: "Developer"
-description: "Encode text into Base58 format (commonly used in cryptocurrency)."
-permalink: /tools/base58-encoder.html
+title: "Temperature Converter Pro"
+category: "Converter"
+description: "Convert instantly between Celsius, Fahrenheit, and Kelvin."
+permalink: /tools/temperature-converter-pro.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Encode text into Base58 format (commonly used in cryptocurrency).">
-  <meta property="og:title" content="Base58 Encoder">
-  <meta property="og:description" content="Encode text into Base58 format (commonly used in cryptocurrency).">
+  <meta name="description" content="Convert instantly between Celsius, Fahrenheit, and Kelvin.">
+  <meta property="og:title" content="Temperature Converter Pro">
+  <meta property="og:description" content="Convert instantly between Celsius, Fahrenheit, and Kelvin.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Base58 Encoder">
-  <meta name="twitter:description" content="Encode text into Base58 format (commonly used in cryptocurrency).">
+  <meta name="twitter:title" content="Temperature Converter Pro">
+  <meta name="twitter:description" content="Convert instantly between Celsius, Fahrenheit, and Kelvin.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Base58 Encoder</title>
+  <title>Temperature Converter Pro</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -37,11 +37,11 @@ canvas { display: block; margin: 0 auto; background: #1e293b; border-radius: 12p
 </head>
 <body>
   <div class="tool-container">
-    <h1>Base58 Encoder</h1>
-<textarea id="in" rows="4" placeholder="Hello World"></textarea>
-<button onclick="c()">Encode</button>
-<textarea id="out" rows="4" readonly style="margin-top:20px;font-family:monospace;"></textarea>
-<script>const b58="123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"; function enc(str){ let d=[]; for(let i=0;i<str.length;i++){ let carry=str.charCodeAt(i); for(let j=0;j<d.length;j++){ carry+=d[j]<<8; d[j]=carry%58; carry=(carry/58)|0; } while(carry>0){ d.push(carry%58); carry=(carry/58)|0; } } let z=0; while(str[z]==='\0'){d.push(0); z++;} return d.reverse().map(x=>b58[x]).join(''); } function c(){ document.getElementById('out').value=enc(document.getElementById('in').value); }</script>
+    <h1>Temperature Converter</h1>
+<label>Celsius (°C)</label><input type="number" id="c" oninput="u('c')">
+<label>Fahrenheit (°F)</label><input type="number" id="f" oninput="u('f')">
+<label>Kelvin (K)</label><input type="number" id="k" oninput="u('k')">
+<script>function u(src){ const c=document.getElementById('c'), f=document.getElementById('f'), k=document.getElementById('k'); let val; if(src==='c'){ val=parseFloat(c.value); if(!isNaN(val)){ f.value=(val*9/5)+32; k.value=val+273.15; } } else if(src==='f'){ val=parseFloat(f.value); if(!isNaN(val)){ c.value=(val-32)*5/9; k.value=(val-32)*5/9+273.15; } } else if(src==='k'){ val=parseFloat(k.value); if(!isNaN(val)){ c.value=val-273.15; f.value=(val-273.15)*9/5+32; } } }</script>
   </div>
 </body>
 </html>
