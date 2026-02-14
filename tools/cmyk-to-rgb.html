@@ -1,22 +1,53 @@
 ---
 layout: null
-title: "CMYK to RGB"
+title: "CMYK to RGB Converter"
 category: "Design"
-description: "Convert CMYK color codes to RGB."
+description: "Convert CMYK print percentages back into RGB values for screens."
 permalink: /tools/cmyk-to-rgb.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert print CMYK values to digital RGB colors.">
+  <meta name="description" content="Convert CMYK print percentages back into RGB values for screens.">
   <meta property="og:title" content="CMYK to RGB Converter">
-  <meta property="og:description" content="Convert print CMYK values to digital RGB colors.">
+  <meta property="og:description" content="Convert CMYK print percentages back into RGB values for screens.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="CMYK to RGB Converter">
-  <meta name="twitter:description" content="Convert print CMYK values to digital RGB colors.">
-  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>CMYK to RGB</title><style>.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} .row{display:flex;gap:10px;margin-bottom:15px;} input{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;text-align:center;} .res{font-family:monospace;font-size:1.2rem;background:#f8fafc;padding:15px;border-radius:6px;text-align:center;margin-top:20px;}</style></head>
-<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">CMYK to RGB</h1>
-<div class="row"><div><label>C</label><input type="number" id="c" value="84" max="100" oninput="cv()"></div><div><label>M</label><input type="number" id="m" value="58" max="100" oninput="cv()"></div><div><label>Y</label><input type="number" id="y" value="0" max="100" oninput="cv()"></div><div><label>K</label><input type="number" id="k" value="8" max="100" oninput="cv()"></div></div>
-<div class="res" id="out"></div></div>
-<script>function cv(){ let c=document.getElementById('c').value/100, m=document.getElementById('m').value/100, y=document.getElementById('y').value/100, k=document.getElementById('k').value/100; let r=255*(1-c)*(1-k), g=255*(1-m)*(1-k), b=255*(1-y)*(1-k); document.getElementById('out').innerText = `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)})`; } window.onload=cv;</script></body></html>
+  <meta name="twitter:description" content="Convert CMYK print percentages back into RGB values for screens.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>CMYK to RGB Converter</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CMYK to RGB</h1>
+<div class="row">
+  <div><label>C (%)</label><input type="number" id="c" value="76" min="0" max="100" oninput="u()"></div>
+  <div><label>M (%)</label><input type="number" id="m" value="47" min="0" max="100" oninput="u()"></div>
+</div>
+<div class="row">
+  <div><label>Y (%)</label><input type="number" id="y" value="0" min="0" max="100" oninput="u()"></div>
+  <div><label>K (%)</label><input type="number" id="k" value="4" min="0" max="100" oninput="u()"></div>
+</div>
+<div id="box" style="height:100px;border-radius:12px;margin-bottom:20px;border:2px solid var(--border);"></div>
+<div id="res" class="res"></div>
+<script>function u(){ const c=document.getElementById('c').value/100, m=document.getElementById('m').value/100, y=document.getElementById('y').value/100, k=document.getElementById('k').value/100; const r=Math.round(255*(1-c)*(1-k)), g=Math.round(255*(1-m)*(1-k)), b=Math.round(255*(1-y)*(1-k)); document.getElementById('box').style.background=`rgb(${r},${g},${b})`; document.getElementById('res').innerText=`rgb(${r}, ${g}, ${b})`; } u();</script>
+  </div>
+</body>
+</html>

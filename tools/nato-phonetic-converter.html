@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "CSV to Markdown Table Converter"
-category: "Developer"
-description: "Easily convert comma-separated values (CSV) into GitHub-flavored Markdown tables."
-permalink: /tools/csv-to-markdown-table.html
+title: "Text to NATO Phonetic Alphabet"
+category: "Converter"
+description: "Convert standard text into the NATO phonetic alphabet (Alpha, Bravo, Charlie)."
+permalink: /tools/nato-phonetic-converter.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Easily convert comma-separated values (CSV) into GitHub-flavored Markdown tables.">
-  <meta property="og:title" content="CSV to Markdown Table Converter">
-  <meta property="og:description" content="Easily convert comma-separated values (CSV) into GitHub-flavored Markdown tables.">
+  <meta name="description" content="Convert standard text into the NATO phonetic alphabet (Alpha, Bravo, Charlie).">
+  <meta property="og:title" content="Text to NATO Phonetic Alphabet">
+  <meta property="og:description" content="Convert standard text into the NATO phonetic alphabet (Alpha, Bravo, Charlie).">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CSV to Markdown Table Converter">
-  <meta name="twitter:description" content="Easily convert comma-separated values (CSV) into GitHub-flavored Markdown tables.">
+  <meta name="twitter:title" content="Text to NATO Phonetic Alphabet">
+  <meta name="twitter:description" content="Convert standard text into the NATO phonetic alphabet (Alpha, Bravo, Charlie).">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>CSV to Markdown Table Converter</title>
+  <title>Text to NATO Phonetic Alphabet</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -36,11 +36,10 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>CSV to Markdown Table</h1>
-<textarea id="in" rows="5" placeholder="Header 1,Header 2&#10;Data 1,Data 2"></textarea>
-<button onclick="c()">Convert to Markdown</button>
-<textarea id="out" rows="6" readonly style="margin-top:20px;font-family:monospace;"></textarea>
-<script>function c(){ const lines=document.getElementById('in').value.trim().split('\n'); if(!lines.length || lines[0]==='') return; let h=""; const headers = lines[0].split(','); h += "| " + headers.map(x=>x.trim()).join(" | ") + " |\n"; h += "|" + headers.map(()=>"---").join("|") + "|\n"; for(let i=1; i<lines.length; i++){ h += "| " + lines[i].split(',').map(x=>x.trim()).join(" | ") + " |\n"; } document.getElementById('out').value=h; }</script>
+    <h1>NATO Phonetic Converter</h1>
+<textarea id="in" rows="4" placeholder="Hello" oninput="c()"></textarea>
+<textarea id="out" rows="5" readonly style="margin-top:20px;font-family:monospace;" placeholder="HOTEL ECHO LIMA LIMA OSCAR"></textarea>
+<script>const nato={A:"ALPHA",B:"BRAVO",C:"CHARLIE",D:"DELTA",E:"ECHO",F:"FOXTROT",G:"GOLF",H:"HOTEL",I:"INDIA",J:"JULIET",K:"KILO",L:"LIMA",M:"MIKE",N:"NOVEMBER",O:"OSCAR",P:"PAPA",Q:"QUEBEC",R:"ROMEO",S:"SIERRA",T:"TANGO",U:"UNIFORM",V:"VICTOR",W:"WHISKEY",X:"X-RAY",Y:"YANKEE",Z:"ZULU","0":"ZERO","1":"ONE","2":"TWO","3":"THREE","4":"FOUR","5":"FIVE","6":"SIX","7":"SEVEN","8":"EIGHT","9":"NINE"}; function c(){ document.getElementById('out').value=document.getElementById('in').value.toUpperCase().split('').map(c=>nato[c]||c).join(' ').replace(/\s+/g,' '); }</script>
   </div>
 </body>
 </html>

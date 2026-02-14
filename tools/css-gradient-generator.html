@@ -1,33 +1,50 @@
 ---
 layout: null
-title: "Gradient Gen"
+title: "CSS Linear Gradient Generator"
 category: "Design"
-description: "Create CSS linear and radial gradients."
+description: "Visually generate and copy CSS linear-gradient code with dual color pickers."
 permalink: /tools/css-gradient-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate CSS linear gradients easily.">
-  <meta property="og:title" content="CSS Gradient Generator">
-  <meta property="og:description" content="Generate CSS linear gradients easily.">
+  <meta name="description" content="Visually generate and copy CSS linear-gradient code with dual color pickers.">
+  <meta property="og:title" content="CSS Linear Gradient Generator">
+  <meta property="og:description" content="Visually generate and copy CSS linear-gradient code with dual color pickers.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CSS Linear Gradient Generator">
+  <meta name="twitter:description" content="Visually generate and copy CSS linear-gradient code with dual color pickers.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="CSS Gradient Generator">
-  <meta name="twitter:description" content="Generate CSS linear gradients easily.">
-  <meta charset="UTF-8"><title>CSS Gradient Generator</title><style>.tool-container{max-width:600px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} #preview{height:150px;border-radius:8px;margin-bottom:20px;border:1px solid #ccc;} .row{display:flex;gap:10px;margin-bottom:15px;} input[type=color]{width:100%;height:40px;} textarea{width:100%;padding:10px;font-family:monospace;border:1px solid #ccc;border-radius:6px;}</style></head>
-<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">CSS Gradient</h1>
-<div id="preview"></div>
-<div class="row"><input type="color" id="c1" value="#2563eb" oninput="update()"><input type="color" id="c2" value="#4ade80" oninput="update()"></div>
-<label>Angle</label><input type="range" id="angle" min="0" max="360" value="90" style="width:100%" oninput="update()">
-<textarea id="css" readonly rows="3"></textarea></div>
-<script>
-  function update(){
-    const c1 = document.getElementById('c1').value, c2 = document.getElementById('c2').value, a = document.getElementById('angle').value;
-    const grad = `linear-gradient(${a}deg, ${c1}, ${c2})`;
-    document.getElementById('preview').style.background = grad;
-    document.getElementById('css').value = `background: ${grad};`;
-  }
-  window.onload = update;
-</script></body></html>
+  <meta charset="UTF-8">
+  <title>CSS Linear Gradient Generator</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CSS Gradient Generator</h1>
+<div id="box" style="height:150px;border-radius:12px;margin-bottom:20px;background:linear-gradient(90deg, #3b82f6, #10b981);"></div>
+<div class="row">
+  <div><label>Color 1</label><input type="color" id="c1" value="#3b82f6" oninput="u()"></div>
+  <div><label>Color 2</label><input type="color" id="c2" value="#10b981" oninput="u()"></div>
+  <div><label>Angle (°)</label><input type="number" id="a" value="90" oninput="u()"></div>
+</div>
+<textarea id="out" rows="2" readonly style="font-family:monospace;text-align:center;font-size:1.1rem;"></textarea>
+<script>function u(){ const c1=document.getElementById('c1').value, c2=document.getElementById('c2').value, a=document.getElementById('a').value; const css=`linear-gradient(${a}deg, ${c1}, ${c2})`; document.getElementById('box').style.background=css; document.getElementById('out').value=`background: ${css};`; } u();</script>
+  </div>
+</body>
+</html>
