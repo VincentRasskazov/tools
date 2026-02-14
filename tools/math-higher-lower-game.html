@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "One Rep Max Calculator"
-category: "Health"
-description: "Estimate your 1RM (One Rep Max) for weightlifting using the Epley formula."
-permalink: /tools/one-rep-max-calculator.html
+title: "Higher or Lower Game"
+category: "Games"
+description: "Guess if the next random number (1-100) will be higher or lower! Build your streak."
+permalink: /tools/math-higher-lower-game.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Estimate your 1RM (One Rep Max) for weightlifting using the Epley formula.">
-  <meta property="og:title" content="One Rep Max Calculator">
-  <meta property="og:description" content="Estimate your 1RM (One Rep Max) for weightlifting using the Epley formula.">
+  <meta name="description" content="Guess if the next random number (1-100) will be higher or lower! Build your streak.">
+  <meta property="og:title" content="Higher or Lower Game">
+  <meta property="og:description" content="Guess if the next random number (1-100) will be higher or lower! Build your streak.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="One Rep Max Calculator">
-  <meta name="twitter:description" content="Estimate your 1RM (One Rep Max) for weightlifting using the Epley formula.">
+  <meta name="twitter:title" content="Higher or Lower Game">
+  <meta name="twitter:description" content="Guess if the next random number (1-100) will be higher or lower! Build your streak.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>One Rep Max Calculator</title>
+  <title>Higher or Lower Game</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -36,11 +36,14 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>One Rep Max (1RM)</h1>
-<div class="row"><div><label>Weight Lifted</label><input type="number" id="w" value="200"></div><div><label>Reps Performed</label><input type="number" id="r" value="5"></div></div>
-<button onclick="c()">Calculate 1RM</button>
-<div id="res" class="res"></div>
-<script>function c(){ const w=parseFloat(document.getElementById('w').value), r=parseInt(document.getElementById('r').value); if(w&&r){ const rm = w * (1 + (r/30)); document.getElementById('res').innerHTML=`Estimated 1RM:<br><span style="font-size:3rem;color:var(--primary)">${Math.round(rm)}</span>`; } }</script>
+    <h1>Higher or Lower</h1>
+<div id="sc" style="text-align:center;font-weight:bold;color:#64748b;">Streak: 0</div>
+<div id="num" style="font-size:6rem;font-weight:bold;color:var(--primary);text-align:center;margin:20px 0;">50</div>
+<div class="row">
+  <button onclick="g('h')" style="background:var(--success)">Higher ⬆️</button>
+  <button onclick="g('l')" style="background:var(--danger)">Lower ⬇️</button>
+</div>
+<script>let cur=50, s=0; function g(dir){ const n=Math.floor(Math.random()*100)+1; const higher=n>cur; if(n===cur){ document.getElementById('num').innerText=n; return; } if((dir==='h'&&higher) || (dir==='l'&&!higher)){ s++; document.getElementById('sc').innerText="Streak: "+s; }else{ s=0; document.getElementById('sc').innerText="Wrong! Streak reset to 0"; } cur=n; document.getElementById('num').innerText=cur; }</script>
   </div>
 </body>
 </html>

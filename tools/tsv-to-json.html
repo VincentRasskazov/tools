@@ -1,20 +1,46 @@
 ---
 layout: null
-title: "TSV to JSON"
-category: "Converter"
-description: "Convert TSV data to JSON."
+title: "TSV to JSON Converter"
+category: "Developer"
+description: "Convert Tab-Separated Values (TSV) into a structured JSON array."
 permalink: /tools/tsv-to-json.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert Tab-Separated Values (TSV) into structured JSON arrays.">
+  <meta name="description" content="Convert Tab-Separated Values (TSV) into a structured JSON array.">
   <meta property="og:title" content="TSV to JSON Converter">
-  <meta property="og:description" content="Convert Tab-Separated Values (TSV) into structured JSON arrays.">
+  <meta property="og:description" content="Convert Tab-Separated Values (TSV) into a structured JSON array.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="TSV to JSON Converter">
-  <meta name="twitter:description" content="Convert Tab-Separated Values (TSV) into structured JSON arrays.">
-  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>TSV to JSON</title><script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script><style>.tool-container{max-width:800px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;} textarea{width:100%;height:200px;padding:10px;border:1px solid #ccc;border-radius:6px;font-family:monospace;margin-bottom:15px;} button{grid-column:1/-1;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;}</style></head>
-<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">TSV to JSON</h1><div class="grid"><div><label>TSV Input</label><textarea id="in" placeholder="id	name\n1	Alice"></textarea></div><div><label>JSON Output</label><textarea id="out" readonly></textarea></div><button onclick="c()">Convert to JSON</button></div></div>
-<script>function c(){ Papa.parse(document.getElementById('in').value, {delimiter:"\t", header:true, skipEmptyLines:true, complete:function(r){document.getElementById('out').value=JSON.stringify(r.data,null,2);}}); }</script></body></html>
+  <meta name="twitter:description" content="Convert Tab-Separated Values (TSV) into a structured JSON array.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>TSV to JSON Converter</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>TSV to JSON</h1>
+<textarea id="in" rows="5" placeholder="id	name	age&#10;1	John	30"></textarea>
+<button onclick="c()">Convert to JSON</button>
+<textarea id="out" rows="6" readonly style="margin-top:20px;font-family:monospace;"></textarea>
+<script>function c(){ const lines=document.getElementById('in').value.trim().split('\n'); if(lines.length<2)return; const h=lines[0].split('\t').map(x=>x.trim()); const res=[]; for(let i=1;i<lines.length;i++){ const obj={}; const row=lines[i].split('\t'); h.forEach((key,j)=>{obj[key]=row[j]||'';}); res.push(obj); } document.getElementById('out').value=JSON.stringify(res,null,2); }</script>
+  </div>
+</body>
+</html>
