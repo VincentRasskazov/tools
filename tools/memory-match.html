@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Test your memory by finding matching pairs of emojis.">
+  <meta property="og:title" content="Emoji Memory Match Game">
+  <meta property="og:description" content="Test your memory by finding matching pairs of emojis.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Emoji Memory Match Game">
+  <meta name="twitter:description" content="Test your memory by finding matching pairs of emojis.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>Memory Match</title><style>.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);text-align:center;} .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:20px;} .card{height:80px;background:#cbd5e1;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:2rem;cursor:pointer;user-select:none;} .flipped{background:#fff;border:2px solid #cbd5e1;} .matched{background:#dcfce7;opacity:0.5;cursor:default;} button{margin-top:20px;padding:10px 20px;background:#2563eb;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;}</style></head>
+<body><div class="tool-container"><h1 style="color:#2563eb;">Memory Match</h1><div class="grid" id="grid"></div><button onclick="init()">Restart Game</button></div>
+<script>const em=['🐶','🐱','🐭','🐹','🐰','🦊','🐻','🐼']; let cards=[], f1=null, f2=null, lock=false, m=0; function init(){ const deck=[...em,...em].sort(()=>0.5-Math.random()); cards=deck.map(e=>({e, flip:false, match:false})); f1=f2=null; lock=false; m=0; render(); } function render(){ document.getElementById('grid').innerHTML=cards.map((c,i)=>`<div class="card ${c.flip||c.match?'flipped':''} ${c.match?'matched':''}" onclick="clk(${i})">${c.flip||c.match?c.e:''}</div>`).join(''); } function clk(i){ if(lock||cards[i].flip||cards[i].match)return; cards[i].flip=true; render(); if(!f1) f1={i,e:cards[i].e}; else { f2={i,e:cards[i].e}; lock=true; if(f1.e===f2.e){ cards[f1.i].match=cards[f2.i].match=true; m++; lock=false; f1=f2=null; render(); if(m===8)setTimeout(()=>alert("You Win!"),300); } else { setTimeout(()=>{ cards[f1.i].flip=cards[f2.i].flip=false; f1=f2=null; lock=false; render(); }, 1000); } } } init();</script></body></html>

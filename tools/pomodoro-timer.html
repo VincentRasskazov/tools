@@ -1,42 +1,13 @@
----
-layout: null
-title: "Pomodoro Timer"
-category: "Productivity"
-description: "Focus timer using the Pomodoro technique."
-permalink: /tools/pomodoro-timer.html
----
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta name="description" content="Boost productivity with this 25-minute Pomodoro focus timer.">
+<html lang="en"><head>
+  <meta name="description" content="Boost your productivity with this classic 25-minute Pomodoro technique timer.">
   <meta property="og:title" content="Pomodoro Timer">
-  <meta property="og:description" content="Boost productivity with this 25-minute Pomodoro focus timer.">
+  <meta property="og:description" content="Boost your productivity with this classic 25-minute Pomodoro technique timer.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Pomodoro Timer">
-  <meta name="twitter:description" content="Boost productivity with this 25-minute Pomodoro focus timer.">
-  
-  <meta charset="UTF-8"><title>Pomodoro Timer</title>
-  <style>.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:40px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);text-align:center;} #time{font-size:5rem;font-weight:bold;color:#1e293b;margin:20px 0;} button{padding:12px 24px;font-size:1.1rem;border:none;border-radius:6px;cursor:pointer;color:white;margin:5px;} .start{background:#16a34a;} .stop{background:#dc2626;} .mode{background:#2563eb;}</style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1 id="status">Focus Mode</h1>
-    <div id="time">25:00</div>
-    <button class="start" onclick="start()">Start</button>
-    <button class="stop" onclick="reset()">Reset</button>
-    <br><br>
-    <button class="mode" onclick="setMode(25, 'Focus')">Pomodoro (25m)</button>
-    <button class="mode" onclick="setMode(5, 'Break')">Short Break (5m)</button>
-  </div>
-  <script>
-    let t, secs = 1500, running = false;
-    function update() { document.getElementById('time').innerText = `${String(Math.floor(secs/60)).padStart(2,'0')}:${String(secs%60).padStart(2,'0')}`; }
-    function start() { if(!running) { running = true; t = setInterval(()=>{ if(secs>0){secs--; update();}else{clearInterval(t); alert("Time's up!");} }, 1000); } }
-    function reset() { clearInterval(t); running = false; update(); }
-    function setMode(m, name) { clearInterval(t); running = false; secs = m*60; document.getElementById('status').innerText = name + ' Mode'; update(); }
-  </script>
-</body>
-</html>
+  <meta name="twitter:description" content="Boost your productivity with this classic 25-minute Pomodoro technique timer.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>Pomodoro</title><style>.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:40px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);text-align:center;} #time{font-size:6rem;font-weight:bold;font-family:monospace;color:#ef4444;margin:20px 0;} .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;} button{padding:15px;font-size:1.2rem;font-weight:bold;border:none;border-radius:6px;cursor:pointer;color:white;} .start{background:#2563eb;} .reset{background:#64748b;} .modes{display:flex;justify-content:center;gap:10px;margin-bottom:20px;} .btn-m{background:#f1f5f9;color:#334155;border:1px solid #cbd5e1;padding:8px 15px;}</style></head>
+<body><div class="tool-container"><h1 style="color:#ef4444;">Pomodoro Timer</h1><div class="modes"><button class="btn-m" onclick="set(25)">Work (25m)</button><button class="btn-m" onclick="set(5)">Break (5m)</button></div><div id="time">25:00</div><div class="grid"><button class="start" onclick="tg()" id="bt">Start</button><button class="reset" onclick="rs()">Reset</button></div></div>
+<script>let t=1500, tm, run=false; function f(s){let m=Math.floor(s/60), sc=s%60; return `${String(m).padStart(2,'0')}:${String(sc).padStart(2,'0')}`;} function set(m){clearInterval(tm); run=false; t=m*60; document.getElementById('time').innerText=f(t); document.getElementById('bt').innerText="Start";} function tg(){if(run){clearInterval(tm); document.getElementById('bt').innerText="Start";}else{tm=setInterval(()=>{if(t>0){t--; document.getElementById('time').innerText=f(t);}else{clearInterval(tm); alert("Time's up!");}},1000); document.getElementById('bt').innerText="Pause";} run=!run;} function rs(){set(25);}</script></body></html>

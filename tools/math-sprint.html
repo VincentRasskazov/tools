@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Solve as many simple math problems as you can in 30 seconds.">
+  <meta property="og:title" content="Math Sprint Game">
+  <meta property="og:description" content="Solve as many simple math problems as you can in 30 seconds.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Math Sprint Game">
+  <meta name="twitter:description" content="Solve as many simple math problems as you can in 30 seconds.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>Math Sprint</title><style>.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);text-align:center;} #q{font-size:3rem;font-weight:bold;margin:20px 0;} input{width:100%;padding:10px;font-size:2rem;text-align:center;border:2px solid #ccc;border-radius:6px;} #stats{font-size:1.2rem;font-weight:bold;color:#64748b;margin-bottom:10px;} button{width:100%;padding:12px;background:#16a34a;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;margin-top:20px;}</style></head>
+<body><div class="tool-container"><h1 style="color:#2563eb;">Math Sprint</h1><div id="stats">Score: 0 | Time: 30s</div><div id="q">Press Start</div><input type="number" id="in" disabled oninput="chk()"><button id="btn" onclick="st()">Start Game</button></div>
+<script>let s=0, t=30, ans=0, tm; function rQ(){const a=Math.floor(Math.random()*20)+1, b=Math.floor(Math.random()*20)+1, op=['+','-'][Math.floor(Math.random()*2)]; ans=op==='+'?a+b:a-b; document.getElementById('q').innerText=`${a} ${op} ${b}`;} function st(){s=0; t=30; document.getElementById('btn').style.display='none'; const i=document.getElementById('in'); i.disabled=false; i.value=''; i.focus(); rQ(); tm=setInterval(()=>{t--; document.getElementById('stats').innerText=`Score: ${s} | Time: ${t}s`; if(t<=0){clearInterval(tm); i.disabled=true; document.getElementById('q').innerText="Game Over!"; document.getElementById('btn').style.display='block';}},1000);} function chk(){const i=document.getElementById('in'); if(parseInt(i.value)===ans){s++; document.getElementById('stats').innerText=`Score: ${s} | Time: ${t}s`; i.value=''; rQ();}}</script></body></html>
