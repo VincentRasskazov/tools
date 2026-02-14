@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "SHA-384 Hash Generator"
-category: "Security"
-description: "Generate a secure SHA-384 cryptographic hash from any text string."
-permalink: /tools/sha384-hash-generator.html
+title: "Random Trivia Generator"
+category: "Games"
+description: "Test your knowledge with random trivia questions and click to reveal the answers."
+permalink: /tools/random-trivia-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a secure SHA-384 cryptographic hash from any text string.">
-  <meta property="og:title" content="SHA-384 Hash Generator">
-  <meta property="og:description" content="Generate a secure SHA-384 cryptographic hash from any text string.">
+  <meta name="description" content="Test your knowledge with random trivia questions and click to reveal the answers.">
+  <meta property="og:title" content="Random Trivia Generator">
+  <meta property="og:description" content="Test your knowledge with random trivia questions and click to reveal the answers.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SHA-384 Hash Generator">
-  <meta name="twitter:description" content="Generate a secure SHA-384 cryptographic hash from any text string.">
+  <meta name="twitter:title" content="Random Trivia Generator">
+  <meta name="twitter:description" content="Test your knowledge with random trivia questions and click to reveal the answers.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>SHA-384 Hash Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>Random Trivia Generator</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -36,10 +36,11 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>SHA-384 Generator</h1>
-<textarea id="in" rows="4" placeholder="Type string here..." oninput="c()"></textarea>
-<div id="res" class="res" style="font-size:1rem;font-family:monospace;word-break:break-all;">Waiting for input...</div>
-<script>function c(){ const v=document.getElementById('in').value; document.getElementById('res').innerText=v?CryptoJS.SHA384(v).toString():'Waiting for input...'; }</script>
+    <h1>Random Trivia</h1>
+<div id="q" style="font-size:1.5rem;font-weight:bold;text-align:center;padding:30px;background:var(--bg);border-radius:12px 12px 0 0;border:1px solid var(--border);border-bottom:none;">Click Generate!</div>
+<div id="a" style="font-size:1.5rem;font-weight:bold;color:var(--success);text-align:center;padding:30px;background:var(--bg);border-radius:0 0 12px 12px;border:1px solid var(--border);cursor:pointer;user-select:none;" onclick="rev()">Tap to Reveal Answer</div>
+<button onclick="nx()" style="margin-top:20px;">Next Question</button>
+<script>const t=[{q:"What is the rarest M&M color?",a:"Brown"},{q:"What is the powerhouse of the cell?",a:"Mitochondria"},{q:"Which planet has the most moons?",a:"Saturn"},{q:"What is the only mammal capable of true sustained flight?",a:"Bat"},{q:"What is the hardest natural substance on Earth?",a:"Diamond"},{q:"How many bones do sharks have?",a:"Zero"}]; let cur={}; function nx(){cur=t[Math.floor(Math.random()*t.length)]; document.getElementById('q').innerText=cur.q; document.getElementById('a').innerText="Tap to Reveal Answer"; document.getElementById('a').style.color="var(--text)";} function rev(){if(cur.a){document.getElementById('a').innerText=cur.a; document.getElementById('a').style.color="var(--success)";}} nx();</script>
   </div>
 </body>
 </html>

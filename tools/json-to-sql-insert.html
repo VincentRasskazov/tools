@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "SHA-384 Hash Generator"
-category: "Security"
-description: "Generate a secure SHA-384 cryptographic hash from any text string."
-permalink: /tools/sha384-hash-generator.html
+title: "JSON to SQL Insert Converter"
+category: "Developer"
+description: "Convert an array of JSON objects into SQL INSERT query statements."
+permalink: /tools/json-to-sql-insert.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a secure SHA-384 cryptographic hash from any text string.">
-  <meta property="og:title" content="SHA-384 Hash Generator">
-  <meta property="og:description" content="Generate a secure SHA-384 cryptographic hash from any text string.">
+  <meta name="description" content="Convert an array of JSON objects into SQL INSERT query statements.">
+  <meta property="og:title" content="JSON to SQL Insert Converter">
+  <meta property="og:description" content="Convert an array of JSON objects into SQL INSERT query statements.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SHA-384 Hash Generator">
-  <meta name="twitter:description" content="Generate a secure SHA-384 cryptographic hash from any text string.">
+  <meta name="twitter:title" content="JSON to SQL Insert Converter">
+  <meta name="twitter:description" content="Convert an array of JSON objects into SQL INSERT query statements.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>SHA-384 Hash Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>JSON to SQL Insert Converter</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -36,10 +36,12 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>SHA-384 Generator</h1>
-<textarea id="in" rows="4" placeholder="Type string here..." oninput="c()"></textarea>
-<div id="res" class="res" style="font-size:1rem;font-family:monospace;word-break:break-all;">Waiting for input...</div>
-<script>function c(){ const v=document.getElementById('in').value; document.getElementById('res').innerText=v?CryptoJS.SHA384(v).toString():'Waiting for input...'; }</script>
+    <h1>JSON to SQL INSERT</h1>
+<label>Table Name</label><input type="text" id="tbl" value="users">
+<textarea id="in" rows="5" placeholder='[{"id":1, "name":"John"}, {"id":2, "name":"Jane"}]'></textarea>
+<button onclick="c()">Generate SQL</button>
+<textarea id="out" rows="6" readonly style="margin-top:20px;font-family:monospace;white-space:pre;"></textarea>
+<script>function c(){ try{ const t=document.getElementById('tbl').value||'table_name'; const arr=JSON.parse(document.getElementById('in').value); if(!Array.isArray(arr)||!arr.length) throw "Needs JSON Array"; const headers=Object.keys(arr[0]); let sql=''; arr.forEach(obj=>{ const vals=headers.map(h=>{ const v=obj[h]; return typeof v==='number'?v:`'${String(v).replace(/'/g,"''")}'`; }); sql+=`INSERT INTO ${t} (${headers.join(', ')}) VALUES (${vals.join(', ')});\n`; }); document.getElementById('out').value=sql; }catch(e){document.getElementById('out').value="Invalid JSON Array";} }</script>
   </div>
 </body>
 </html>

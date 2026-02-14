@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "SHA-384 Hash Generator"
-category: "Security"
-description: "Generate a secure SHA-384 cryptographic hash from any text string."
-permalink: /tools/sha384-hash-generator.html
+title: "Mini Clicker Idle Game"
+category: "Games"
+description: "A miniature idle clicker game! Click the button, buy upgrades, and watch numbers go up."
+permalink: /tools/clicker-idle-game.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a secure SHA-384 cryptographic hash from any text string.">
-  <meta property="og:title" content="SHA-384 Hash Generator">
-  <meta property="og:description" content="Generate a secure SHA-384 cryptographic hash from any text string.">
+  <meta name="description" content="A miniature idle clicker game! Click the button, buy upgrades, and watch numbers go up.">
+  <meta property="og:title" content="Mini Clicker Idle Game">
+  <meta property="og:description" content="A miniature idle clicker game! Click the button, buy upgrades, and watch numbers go up.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SHA-384 Hash Generator">
-  <meta name="twitter:description" content="Generate a secure SHA-384 cryptographic hash from any text string.">
+  <meta name="twitter:title" content="Mini Clicker Idle Game">
+  <meta name="twitter:description" content="A miniature idle clicker game! Click the button, buy upgrades, and watch numbers go up.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>SHA-384 Hash Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>Mini Clicker Idle Game</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -36,10 +36,15 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>SHA-384 Generator</h1>
-<textarea id="in" rows="4" placeholder="Type string here..." oninput="c()"></textarea>
-<div id="res" class="res" style="font-size:1rem;font-family:monospace;word-break:break-all;">Waiting for input...</div>
-<script>function c(){ const v=document.getElementById('in').value; document.getElementById('res').innerText=v?CryptoJS.SHA384(v).toString():'Waiting for input...'; }</script>
+    <h1>Mini Idle Clicker</h1>
+<div id="sc" style="font-size:4rem;font-weight:900;color:var(--primary);text-align:center;margin-bottom:10px;">0</div>
+<div id="gps" style="text-align:center;font-weight:bold;color:#64748b;margin-bottom:20px;">0 Gold / sec</div>
+<button onclick="clk()" style="height:100px;font-size:2rem;margin-bottom:20px;">⛏️ MINE GOLD</button>
+<div style="background:var(--bg);padding:20px;border-radius:12px;border:1px solid var(--border);">
+  <h3>Upgrades</h3>
+  <button id="upg" onclick="buy()" style="background:var(--warning);color:#000;">Buy Auto-Miner (Cost: 50)</button>
+</div>
+<script>let s=0, gps=0, cost=50, int; function upd(){document.getElementById('sc').innerText=s; document.getElementById('gps').innerText=gps+" Gold / sec"; document.getElementById('upg').innerText=`Buy Auto-Miner (Cost: ${cost})`;} function clk(){s++; upd();} function buy(){if(s>=cost){s-=cost; gps++; cost=Math.floor(cost*1.5); upd(); if(!int)int=setInterval(()=>{s+=gps; upd();}, 1000);}}</script>
   </div>
 </body>
 </html>

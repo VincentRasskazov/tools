@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "SHA-384 Hash Generator"
-category: "Security"
-description: "Generate a secure SHA-384 cryptographic hash from any text string."
-permalink: /tools/sha384-hash-generator.html
+title: "Price Per Unit Calculator"
+category: "Finance"
+description: "Compare two products to see which one has the better price per unit (oz, lbs, pieces)."
+permalink: /tools/price-per-unit-calculator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a secure SHA-384 cryptographic hash from any text string.">
-  <meta property="og:title" content="SHA-384 Hash Generator">
-  <meta property="og:description" content="Generate a secure SHA-384 cryptographic hash from any text string.">
+  <meta name="description" content="Compare two products to see which one has the better price per unit (oz, lbs, pieces).">
+  <meta property="og:title" content="Price Per Unit Calculator">
+  <meta property="og:description" content="Compare two products to see which one has the better price per unit (oz, lbs, pieces).">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SHA-384 Hash Generator">
-  <meta name="twitter:description" content="Generate a secure SHA-384 cryptographic hash from any text string.">
+  <meta name="twitter:title" content="Price Per Unit Calculator">
+  <meta name="twitter:description" content="Compare two products to see which one has the better price per unit (oz, lbs, pieces).">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>SHA-384 Hash Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>Price Per Unit Calculator</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -36,10 +36,14 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>SHA-384 Generator</h1>
-<textarea id="in" rows="4" placeholder="Type string here..." oninput="c()"></textarea>
-<div id="res" class="res" style="font-size:1rem;font-family:monospace;word-break:break-all;">Waiting for input...</div>
-<script>function c(){ const v=document.getElementById('in').value; document.getElementById('res').innerText=v?CryptoJS.SHA384(v).toString():'Waiting for input...'; }</script>
+    <h1>Price Per Unit Compare</h1>
+<div class="row">
+  <div style="background:var(--bg);padding:20px;border-radius:12px;"><strong>Item A</strong><br><label>Price ($)</label><input type="number" id="p1" value="12.99"><label>Quantity/Size</label><input type="number" id="q1" value="20"></div>
+  <div style="background:var(--bg);padding:20px;border-radius:12px;"><strong>Item B</strong><br><label>Price ($)</label><input type="number" id="p2" value="18.50"><label>Quantity/Size</label><input type="number" id="q2" value="32"></div>
+</div>
+<button onclick="c()" style="margin-top:20px;">Compare Value</button>
+<div id="res" class="res" style="font-size:1.2rem;line-height:1.6;"></div>
+<script>function c(){ const p1=parseFloat(document.getElementById('p1').value), q1=parseFloat(document.getElementById('q1').value), p2=parseFloat(document.getElementById('p2').value), q2=parseFloat(document.getElementById('q2').value); if(p1&&q1&&p2&&q2){ const u1=p1/q1, u2=p2/q2; let h=`Item A: <strong>$${u1.toFixed(4)}</strong> per unit<br>Item B: <strong>$${u2.toFixed(4)}</strong> per unit<br><br>`; if(u1<u2) h+=`<span style="color:var(--success);font-size:1.5rem;font-weight:bold;">🏆 Item A is the better deal!</span>`; else if(u2<u1) h+=`<span style="color:var(--success);font-size:1.5rem;font-weight:bold;">🏆 Item B is the better deal!</span>`; else h+=`<strong>They are exactly the same value!</strong>`; document.getElementById('res').innerHTML=h; } }</script>
   </div>
 </body>
 </html>

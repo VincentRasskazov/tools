@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "SHA-384 Hash Generator"
-category: "Security"
-description: "Generate a secure SHA-384 cryptographic hash from any text string."
-permalink: /tools/sha384-hash-generator.html
+title: "Bulk UUID v4 Generator"
+category: "Developer"
+description: "Generate up to 1,000 random UUIDs (v4) simultaneously in one click."
+permalink: /tools/bulk-uuid-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a secure SHA-384 cryptographic hash from any text string.">
-  <meta property="og:title" content="SHA-384 Hash Generator">
-  <meta property="og:description" content="Generate a secure SHA-384 cryptographic hash from any text string.">
+  <meta name="description" content="Generate up to 1,000 random UUIDs (v4) simultaneously in one click.">
+  <meta property="og:title" content="Bulk UUID v4 Generator">
+  <meta property="og:description" content="Generate up to 1,000 random UUIDs (v4) simultaneously in one click.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SHA-384 Hash Generator">
-  <meta name="twitter:description" content="Generate a secure SHA-384 cryptographic hash from any text string.">
+  <meta name="twitter:title" content="Bulk UUID v4 Generator">
+  <meta name="twitter:description" content="Generate up to 1,000 random UUIDs (v4) simultaneously in one click.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>SHA-384 Hash Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>Bulk UUID v4 Generator</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -36,10 +36,11 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>SHA-384 Generator</h1>
-<textarea id="in" rows="4" placeholder="Type string here..." oninput="c()"></textarea>
-<div id="res" class="res" style="font-size:1rem;font-family:monospace;word-break:break-all;">Waiting for input...</div>
-<script>function c(){ const v=document.getElementById('in').value; document.getElementById('res').innerText=v?CryptoJS.SHA384(v).toString():'Waiting for input...'; }</script>
+    <h1>Bulk UUID Generator</h1>
+<label>How many UUIDs? (Max 1000)</label>
+<div class="row"><input type="number" id="n" value="10" min="1" max="1000"><button onclick="c()">Generate Bulk</button></div>
+<textarea id="out" rows="8" readonly style="margin-top:10px;font-family:monospace;white-space:pre;"></textarea>
+<script>function c(){ const n=parseInt(document.getElementById('n').value); if(n<1||n>1000)return; let r=''; for(let i=0;i<n;i++) r+=crypto.randomUUID()+'\n'; document.getElementById('out').value=r.trim(); }</script>
   </div>
 </body>
 </html>

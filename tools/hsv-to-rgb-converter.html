@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "SHA-384 Hash Generator"
-category: "Security"
-description: "Generate a secure SHA-384 cryptographic hash from any text string."
-permalink: /tools/sha384-hash-generator.html
+title: "HSV to RGB Converter"
+category: "Design"
+description: "Convert Hue, Saturation, Value (HSV/HSB) color parameters into standard RGB."
+permalink: /tools/hsv-to-rgb-converter.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a secure SHA-384 cryptographic hash from any text string.">
-  <meta property="og:title" content="SHA-384 Hash Generator">
-  <meta property="og:description" content="Generate a secure SHA-384 cryptographic hash from any text string.">
+  <meta name="description" content="Convert Hue, Saturation, Value (HSV/HSB) color parameters into standard RGB.">
+  <meta property="og:title" content="HSV to RGB Converter">
+  <meta property="og:description" content="Convert Hue, Saturation, Value (HSV/HSB) color parameters into standard RGB.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SHA-384 Hash Generator">
-  <meta name="twitter:description" content="Generate a secure SHA-384 cryptographic hash from any text string.">
+  <meta name="twitter:title" content="HSV to RGB Converter">
+  <meta name="twitter:description" content="Convert Hue, Saturation, Value (HSV/HSB) color parameters into standard RGB.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>SHA-384 Hash Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>HSV to RGB Converter</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -36,10 +36,15 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>SHA-384 Generator</h1>
-<textarea id="in" rows="4" placeholder="Type string here..." oninput="c()"></textarea>
-<div id="res" class="res" style="font-size:1rem;font-family:monospace;word-break:break-all;">Waiting for input...</div>
-<script>function c(){ const v=document.getElementById('in').value; document.getElementById('res').innerText=v?CryptoJS.SHA384(v).toString():'Waiting for input...'; }</script>
+    <h1>HSV to RGB</h1>
+<div class="row">
+    <div><label>Hue (0-360)</label><input type="number" id="h" value="217" min="0" max="360" oninput="c()"></div>
+    <div><label>Sat (%)</label><input type="number" id="s" value="90" min="0" max="100" oninput="c()"></div>
+    <div><label>Value (%)</label><input type="number" id="v" value="96" min="0" max="100" oninput="c()"></div>
+</div>
+<div id="box" style="height:100px;border-radius:12px;margin-bottom:20px;border:2px solid var(--border);"></div>
+<div id="res" class="res" style="font-family:monospace;"></div>
+<script>function c(){ let h=parseFloat(document.getElementById('h').value)||0, s=(parseFloat(document.getElementById('s').value)||0)/100, v=(parseFloat(document.getElementById('v').value)||0)/100; let r,g,b, i=Math.floor(h/60), f=h/60-i, p=v*(1-s), q=v*(1-f*s), t=v*(1-(1-f)*s); switch(i%6){case 0:r=v,g=t,b=p;break;case 1:r=q,g=v,b=p;break;case 2:r=p,g=v,b=t;break;case 3:r=p,g=q,b=v;break;case 4:r=t,g=p,b=v;break;case 5:r=v,g=p,b=q;break;} r=Math.round(r*255); g=Math.round(g*255); b=Math.round(b*255); document.getElementById('box').style.background=`rgb(${r},${g},${b})`; document.getElementById('res').innerText=`rgb(${r}, ${g}, ${b})`; } c();</script>
   </div>
 </body>
 </html>

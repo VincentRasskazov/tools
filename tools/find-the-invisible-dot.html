@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "SHA-384 Hash Generator"
-category: "Security"
-description: "Generate a secure SHA-384 cryptographic hash from any text string."
-permalink: /tools/sha384-hash-generator.html
+title: "Hot & Cold Treasure Hunt"
+category: "Games"
+description: "Move your mouse around the box to find the invisible treasure. Red means Hot, Blue means Cold!"
+permalink: /tools/find-the-invisible-dot.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a secure SHA-384 cryptographic hash from any text string.">
-  <meta property="og:title" content="SHA-384 Hash Generator">
-  <meta property="og:description" content="Generate a secure SHA-384 cryptographic hash from any text string.">
+  <meta name="description" content="Move your mouse around the box to find the invisible treasure. Red means Hot, Blue means Cold!">
+  <meta property="og:title" content="Hot & Cold Treasure Hunt">
+  <meta property="og:description" content="Move your mouse around the box to find the invisible treasure. Red means Hot, Blue means Cold!">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SHA-384 Hash Generator">
-  <meta name="twitter:description" content="Generate a secure SHA-384 cryptographic hash from any text string.">
+  <meta name="twitter:title" content="Hot & Cold Treasure Hunt">
+  <meta name="twitter:description" content="Move your mouse around the box to find the invisible treasure. Red means Hot, Blue means Cold!">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>SHA-384 Hash Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>Hot & Cold Treasure Hunt</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -36,10 +36,12 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>SHA-384 Generator</h1>
-<textarea id="in" rows="4" placeholder="Type string here..." oninput="c()"></textarea>
-<div id="res" class="res" style="font-size:1rem;font-family:monospace;word-break:break-all;">Waiting for input...</div>
-<script>function c(){ const v=document.getElementById('in').value; document.getElementById('res').innerText=v?CryptoJS.SHA384(v).toString():'Waiting for input...'; }</script>
+    <h1>Hot & Cold Game</h1>
+<p style="text-align:center;font-weight:bold;color:#64748b;">Move your mouse inside the box. Red = Hot, Blue = Cold!</p>
+<div id="box" style="width:100%;height:300px;background:#3b82f6;border-radius:12px;position:relative;overflow:hidden;cursor:crosshair;transition:background 0.1s;" onmousemove="mv(event)" onclick="chk(event)"></div>
+<div id="res" class="res" style="display:none;"></div>
+<button onclick="st()" style="margin-top:20px;">Play Again</button>
+<script>let tx, ty, won=false; function st(){ const b=document.getElementById('box'); tx=Math.random()*b.clientWidth; ty=Math.random()*b.clientHeight; won=false; b.style.background='#3b82f6'; document.getElementById('res').style.display='none'; } function mv(e){ if(won)return; const b=document.getElementById('box'); const r=b.getBoundingClientRect(); const x=e.clientX-r.left, y=e.clientY-r.top; const dist=Math.sqrt(Math.pow(x-tx,2)+Math.pow(y-ty,2)); const maxDist=Math.sqrt(Math.pow(b.clientWidth,2)+Math.pow(b.clientHeight,2)); const pct=1-(dist/maxDist); const red=Math.floor(255*pct), blue=Math.floor(255*(1-pct)); b.style.background=`rgb(${red}, 0, ${blue})`; } function chk(e){ if(won)return; const b=document.getElementById('box'); const r=b.getBoundingClientRect(); const x=e.clientX-r.left, y=e.clientY-r.top; const dist=Math.sqrt(Math.pow(x-tx,2)+Math.pow(y-ty,2)); if(dist<20){ won=true; b.style.background='var(--success)'; document.getElementById('res').style.display='block'; document.getElementById('res').innerHTML="🎉 YOU FOUND IT! 🎉"; } } st();</script>
   </div>
 </body>
 </html>

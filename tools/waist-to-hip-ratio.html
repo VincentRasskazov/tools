@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "SHA-384 Hash Generator"
-category: "Security"
-description: "Generate a secure SHA-384 cryptographic hash from any text string."
-permalink: /tools/sha384-hash-generator.html
+title: "Waist-to-Hip Ratio Calculator"
+category: "Health"
+description: "Calculate your Waist-to-Hip Ratio (WHR) to assess potential health risks."
+permalink: /tools/waist-to-hip-ratio.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a secure SHA-384 cryptographic hash from any text string.">
-  <meta property="og:title" content="SHA-384 Hash Generator">
-  <meta property="og:description" content="Generate a secure SHA-384 cryptographic hash from any text string.">
+  <meta name="description" content="Calculate your Waist-to-Hip Ratio (WHR) to assess potential health risks.">
+  <meta property="og:title" content="Waist-to-Hip Ratio Calculator">
+  <meta property="og:description" content="Calculate your Waist-to-Hip Ratio (WHR) to assess potential health risks.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SHA-384 Hash Generator">
-  <meta name="twitter:description" content="Generate a secure SHA-384 cryptographic hash from any text string.">
+  <meta name="twitter:title" content="Waist-to-Hip Ratio Calculator">
+  <meta name="twitter:description" content="Calculate your Waist-to-Hip Ratio (WHR) to assess potential health risks.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>SHA-384 Hash Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>Waist-to-Hip Ratio Calculator</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -36,10 +36,12 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>SHA-384 Generator</h1>
-<textarea id="in" rows="4" placeholder="Type string here..." oninput="c()"></textarea>
-<div id="res" class="res" style="font-size:1rem;font-family:monospace;word-break:break-all;">Waiting for input...</div>
-<script>function c(){ const v=document.getElementById('in').value; document.getElementById('res').innerText=v?CryptoJS.SHA384(v).toString():'Waiting for input...'; }</script>
+    <h1>Waist-to-Hip Ratio</h1>
+<div class="row"><div><label>Waist Circumference</label><input type="number" id="w" value="32"></div><div><label>Hip Circumference</label><input type="number" id="h" value="38"></div></div>
+<label>Biological Sex</label><select id="g"><option value="m">Male</option><option value="f">Female</option></select>
+<button onclick="c()">Calculate WHR</button>
+<div id="res" class="res"></div>
+<script>function c(){ const w=parseFloat(document.getElementById('w').value), h=parseFloat(document.getElementById('h').value), g=document.getElementById('g').value; if(w&&h){ const r=w/h; let risk=''; if(g==='m'){ if(r<=0.95)risk='<span style="color:var(--success)">Low Risk</span>'; else if(r<=1.0)risk='<span style="color:var(--warning)">Moderate Risk</span>'; else risk='<span style="color:var(--danger)">High Risk</span>'; } else { if(r<=0.80)risk='<span style="color:var(--success)">Low Risk</span>'; else if(r<=0.85)risk='<span style="color:var(--warning)">Moderate Risk</span>'; else risk='<span style="color:var(--danger)">High Risk</span>'; } document.getElementById('res').innerHTML=`Your Ratio: <strong style="font-size:2rem;">${r.toFixed(2)}</strong><br>${risk}`; } }</script>
   </div>
 </body>
 </html>

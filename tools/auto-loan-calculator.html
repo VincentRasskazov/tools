@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "SHA-384 Hash Generator"
-category: "Security"
-description: "Generate a secure SHA-384 cryptographic hash from any text string."
-permalink: /tools/sha384-hash-generator.html
+title: "Auto Loan Calculator"
+category: "Finance"
+description: "Calculate your estimated monthly car payment based on price, down payment, and rate."
+permalink: /tools/auto-loan-calculator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a secure SHA-384 cryptographic hash from any text string.">
-  <meta property="og:title" content="SHA-384 Hash Generator">
-  <meta property="og:description" content="Generate a secure SHA-384 cryptographic hash from any text string.">
+  <meta name="description" content="Calculate your estimated monthly car payment based on price, down payment, and rate.">
+  <meta property="og:title" content="Auto Loan Calculator">
+  <meta property="og:description" content="Calculate your estimated monthly car payment based on price, down payment, and rate.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SHA-384 Hash Generator">
-  <meta name="twitter:description" content="Generate a secure SHA-384 cryptographic hash from any text string.">
+  <meta name="twitter:title" content="Auto Loan Calculator">
+  <meta name="twitter:description" content="Calculate your estimated monthly car payment based on price, down payment, and rate.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>SHA-384 Hash Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>Auto Loan Calculator</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -36,10 +36,13 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>SHA-384 Generator</h1>
-<textarea id="in" rows="4" placeholder="Type string here..." oninput="c()"></textarea>
-<div id="res" class="res" style="font-size:1rem;font-family:monospace;word-break:break-all;">Waiting for input...</div>
-<script>function c(){ const v=document.getElementById('in').value; document.getElementById('res').innerText=v?CryptoJS.SHA384(v).toString():'Waiting for input...'; }</script>
+    <h1>Auto Loan Calculator</h1>
+<label>Car Price ($)</label><input type="number" id="p" value="25000">
+<div class="row"><div><label>Down Payment ($)</label><input type="number" id="d" value="5000"></div><div><label>Trade-in Value ($)</label><input type="number" id="t" value="0"></div></div>
+<div class="row"><div><label>Interest Rate (%)</label><input type="number" id="r" value="5.5" step="0.1"></div><div><label>Loan Term (Months)</label><input type="number" id="m" value="60"></div></div>
+<button onclick="c()">Calculate Payment</button>
+<div id="res" class="res"></div>
+<script>function c(){ const p=parseFloat(document.getElementById('p').value), d=parseFloat(document.getElementById('d').value)||0, t=parseFloat(document.getElementById('t').value)||0, r=parseFloat(document.getElementById('r').value)/100/12, m=parseInt(document.getElementById('m').value); const prin = p-d-t; if(prin<=0||!m)return; let pmt; if(r===0) pmt=prin/m; else pmt = prin * (r * Math.pow(1+r, m)) / (Math.pow(1+r, m) - 1); document.getElementById('res').innerHTML=`Estimated Monthly Payment:<br><span style="font-size:3rem;color:var(--primary)">$${pmt.toFixed(2)}</span><br><span style="font-size:1rem;color:#64748b;">Total Loan Amount: $${prin.toFixed(2)}</span>`; }</script>
   </div>
 </body>
 </html>
