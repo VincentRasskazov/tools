@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="description" content="Visually generate and copy CSS box-shadow code.">
-  <meta property="og:title" content="CSS Box Shadow Generator">
-  <meta property="og:description" content="Visually generate and copy CSS box-shadow code.">
+  <meta name="description" content="Convert normal text into cursive, bold, and aesthetic unicode fonts for social media.">
+  <meta property="og:title" content="Fancy Text Generator">
+  <meta property="og:description" content="Convert normal text into cursive, bold, and aesthetic unicode fonts for social media.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CSS Box Shadow Generator">
-  <meta name="twitter:description" content="Visually generate and copy CSS box-shadow code.">
+  <meta name="twitter:title" content="Fancy Text Generator">
+  <meta name="twitter:description" content="Convert normal text into cursive, bold, and aesthetic unicode fonts for social media.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>CSS Box Shadow Generator</title>
+  <title>Fancy Text Generator</title>
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -31,16 +31,12 @@ input[type=range] { padding: 0; border: none; background: transparent; box-shado
 </head>
 <body>
   <div class="tool-container">
-    <h1>Box Shadow Generator</h1>
-<div id="box" style="width:150px;height:150px;background:#fff;border-radius:16px;margin:0 auto 40px;border:1px solid #e2e8f0;box-shadow:0px 0px 0px rgba(0,0,0,0);"></div>
-<div class="row"><div><label>X Offset</label><input type="range" id="x" min="-50" max="50" value="10" oninput="u()"></div><div><label>Y Offset</label><input type="range" id="y" min="-50" max="50" value="10" oninput="u()"></div></div>
-<div class="row"><div><label>Blur</label><input type="range" id="b" min="0" max="100" value="25" oninput="u()"></div><div><label>Spread</label><input type="range" id="s" min="-50" max="50" value="-5" oninput="u()"></div></div>
-<label>Shadow Color</label><input type="color" id="c" value="#000000" oninput="u()">
-<label>Opacity</label><input type="range" id="o" min="0" max="1" step="0.05" value="0.2" oninput="u()">
-<div id="res" class="res" style="font-size:1rem;font-family:monospace;">box-shadow: 10px 10px 25px -5px rgba(0, 0, 0, 0.2);</div>
-<script>function u(){ const x=document.getElementById('x').value, y=document.getElementById('y').value, b=document.getElementById('b').value, s=document.getElementById('s').value, c=document.getElementById('c').value, o=document.getElementById('o').value;
-const hex2rgb = (hex) => { const r=parseInt(hex.slice(1,3),16), g=parseInt(hex.slice(3,5),16), bl=parseInt(hex.slice(5,7),16); return `${r}, ${g}, ${bl}`; };
-const css = `${x}px ${y}px ${b}px ${s}px rgba(${hex2rgb(c)}, ${o})`; document.getElementById('box').style.boxShadow=css; document.getElementById('res').innerText=`box-shadow: ${css};`; } u();</script>
+    <h1>Fancy Text Generator</h1>
+<input type="text" id="in" placeholder="Type here..." oninput="c()">
+<div class="res" id="r1" style="font-family:serif;font-style:italic;"></div>
+<div class="res" id="r2" style="font-weight:900;"></div>
+<div class="res" id="r3" style="letter-spacing:5px;"></div>
+<script>function mapC(t, offset){return t.split('').map(c=>{const k=c.charCodeAt(0); return (k>=65&&k<=90)?String.fromCodePoint(k+offset):(k>=97&&k<=122)?String.fromCodePoint(k+offset-6):c;}).join('');} function c(){ const v=document.getElementById('in').value; document.getElementById('r1').innerText=mapC(v, 119951); document.getElementById('r2').innerText=mapC(v, 119743); document.getElementById('r3').innerText=v.split('').join(' '); }</script>
   </div>
 </body>
 </html>
