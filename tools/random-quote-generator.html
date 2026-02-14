@@ -1,20 +1,45 @@
 ---
 layout: null
-title: "Random Quote"
-category: "Random"
-description: "Generate an inspiring random quote."
+title: "Random Quote Generator"
+category: "Utility"
+description: "Get a random motivational, inspirational, or famous quote."
 permalink: /tools/random-quote-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Get instant inspiration with a randomly generated famous quote.">
+  <meta name="description" content="Get a random motivational, inspirational, or famous quote.">
   <meta property="og:title" content="Random Quote Generator">
-  <meta property="og:description" content="Get instant inspiration with a randomly generated famous quote.">
+  <meta property="og:description" content="Get a random motivational, inspirational, or famous quote.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Random Quote Generator">
-  <meta name="twitter:description" content="Get instant inspiration with a randomly generated famous quote.">
-  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>Random Quote</title><style>.tool-container{max-width:600px;margin:40px auto;background:#fff;padding:40px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);text-align:center;} blockquote{font-size:1.5rem;font-style:italic;color:#334155;margin:20px 0;background:#f8fafc;padding:20px;border-left:5px solid #2563eb;} button{padding:12px 24px;background:#2563eb;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;font-size:1.1rem;}</style></head>
-<body><div class="tool-container"><h1 style="color:#2563eb;">Random Quote</h1><blockquote id="q">"Click the button below to generate a quote."</blockquote><button onclick="c()">New Quote</button></div>
-<script>const qs=["The only way to do great work is to love what you do. - Steve Jobs","Life is what happens when you're busy making other plans. - John Lennon","Get busy living or get busy dying. - Stephen King","Whether you think you can or you think you can't, you're right. - Henry Ford","The best time to plant a tree was 20 years ago. The second best time is now. - Chinese Proverb"]; function c(){ document.getElementById('q').innerText = qs[Math.floor(Math.random()*qs.length)]; }</script></body></html>
+  <meta name="twitter:description" content="Get a random motivational, inspirational, or famous quote.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Random Quote Generator</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Random Quote</h1>
+<div id="res" style="font-size:1.5rem;font-style:italic;line-height:1.6;color:var(--text);padding:40px;background:var(--bg);border-left:5px solid var(--primary);border-radius:0 12px 12px 0;margin-bottom:20px;">"Click the button to get inspired."</div>
+<button onclick="c()">Inspire Me</button>
+<script>const q=[{"t":"The only way to do great work is to love what you do.","a":"Steve Jobs"},{"t":"Life is what happens when you're busy making other plans.","a":"John Lennon"},{"t":"The future belongs to those who believe in the beauty of their dreams.","a":"Eleanor Roosevelt"},{"t":"It does not matter how slowly you go as long as you do not stop.","a":"Confucius"},{"t":"You miss 100% of the shots you don't take.","a":"Wayne Gretzky"},{"t":"Whether you think you can or you think you can't, you're right.","a":"Henry Ford"}]; function c(){ const rand = q[Math.floor(Math.random()*q.length)]; document.getElementById('res').innerHTML=`"${rand.t}"<br><br><span style="font-size:1rem;font-style:normal;font-weight:bold;color:var(--primary);">- ${rand.a}</span>`; }</script>
+  </div>
+</body>
+</html>

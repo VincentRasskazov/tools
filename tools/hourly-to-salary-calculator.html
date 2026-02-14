@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "YAML to JSON Converter"
-category: "Developer"
-description: "Convert YAML configuration files into valid JSON format."
-permalink: /tools/yaml-to-json.html
+title: "Hourly to Salary Calculator"
+category: "Finance"
+description: "Convert your hourly wage into weekly, monthly, and annual salary estimates."
+permalink: /tools/hourly-to-salary-calculator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert YAML configuration files into valid JSON format.">
-  <meta property="og:title" content="YAML to JSON Converter">
-  <meta property="og:description" content="Convert YAML configuration files into valid JSON format.">
+  <meta name="description" content="Convert your hourly wage into weekly, monthly, and annual salary estimates.">
+  <meta property="og:title" content="Hourly to Salary Calculator">
+  <meta property="og:description" content="Convert your hourly wage into weekly, monthly, and annual salary estimates.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="YAML to JSON Converter">
-  <meta name="twitter:description" content="Convert YAML configuration files into valid JSON format.">
+  <meta name="twitter:title" content="Hourly to Salary Calculator">
+  <meta name="twitter:description" content="Convert your hourly wage into weekly, monthly, and annual salary estimates.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>YAML to JSON Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <title>Hourly to Salary Calculator</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -36,14 +36,11 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>YAML to JSON</h1>
-<textarea id="in" rows="6" placeholder="key: value
-list:
-  - item1
-  - item2"></textarea>
-<button onclick="c()">Convert to JSON</button>
-<textarea id="out" rows="6" readonly style="margin-top:20px;font-family:monospace;"></textarea>
-<script>function c(){ try{ const doc = jsyaml.load(document.getElementById('in').value); document.getElementById('out').value = JSON.stringify(doc, null, 2); }catch(e){ document.getElementById('out').value = "Invalid YAML format"; } }</script>
+    <h1>Hourly to Salary</h1>
+<div class="row"><div><label>Hourly Wage ($)</label><input type="number" id="hw" value="25"></div><div><label>Hours/Week</label><input type="number" id="hpw" value="40"></div></div>
+<button onclick="c()">Calculate Salary</button>
+<div id="res" style="margin-top:20px;display:grid;gap:10px;"></div>
+<script>function c(){ const hw=parseFloat(document.getElementById('hw').value), hpw=parseFloat(document.getElementById('hpw').value); if(hw&&hpw){ const wk=hw*hpw, yr=wk*52, mo=yr/12; document.getElementById('res').innerHTML=`<div style="background:var(--bg);padding:15px;border-radius:8px;border:1px solid var(--border);text-align:center;"><strong>Annual Salary</strong><br><span style="font-size:2rem;color:var(--success)">$${yr.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</span></div><div style="background:var(--bg);padding:15px;border-radius:8px;border:1px solid var(--border);text-align:center;"><strong>Monthly</strong><br><span style="font-size:1.5rem;color:var(--primary)">$${mo.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</span></div><div style="background:var(--bg);padding:15px;border-radius:8px;border:1px solid var(--border);text-align:center;"><strong>Weekly</strong><br><span style="font-size:1.5rem;color:var(--text)">$${wk.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</span></div>`; } }</script>
   </div>
 </body>
 </html>

@@ -1,57 +1,46 @@
 ---
 layout: null
-title: "Hex to RGB"
+title: "Hex to RGB Converter"
 category: "Design"
-description: "Convert Hex codes to RGB values."
+description: "Convert Hexadecimal color codes into their Red, Green, Blue (RGB) values."
 permalink: /tools/hex-to-rgb.html
 ---
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta name="description" content="Convert Hexadecimal color codes to RGB format instantly.">
-  <meta property="og:title" content="HEX to RGB Converter">
-  <meta property="og:description" content="Convert Hexadecimal color codes to RGB format instantly.">
+<html lang="en"><head>
+  <meta name="description" content="Convert Hexadecimal color codes into their Red, Green, Blue (RGB) values.">
+  <meta property="og:title" content="Hex to RGB Converter">
+  <meta property="og:description" content="Convert Hexadecimal color codes into their Red, Green, Blue (RGB) values.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hex to RGB Converter">
+  <meta name="twitter:description" content="Convert Hexadecimal color codes into their Red, Green, Blue (RGB) values.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="HEX to RGB Converter">
-  <meta name="twitter:description" content="Convert Hexadecimal color codes to RGB format instantly.">
-  
   <meta charset="UTF-8">
-  <title>HEX to RGB</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hex to RGB Converter</title>
+  
   <style>
-    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; margin-bottom: 20px; }
-    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-    #preview { height: 50px; border-radius: 6px; margin-top: 20px; border: 1px solid #eee; }
-  </style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+</style>
 </head>
 <body>
   <div class="tool-container">
-    <h1 style="text-align: center; color: #2563eb;">HEX to RGB</h1>
-    <label>HEX Code</label>
-    <input type="text" id="hex" placeholder="#2563eb">
-    <button onclick="convert()">Convert</button>
-    <label style="margin-top:20px; display:block;">RGB Result</label>
-    <input type="text" id="rgb" readonly>
-    <div id="preview"></div>
+    <h1>Hex to RGB</h1>
+<input type="text" id="in" placeholder="#3B82F6" oninput="c()" style="text-align:center;font-size:1.5rem;font-weight:bold;">
+<div id="box" style="height:100px;border-radius:12px;margin-bottom:20px;border:2px solid var(--border);transition:0.3s;"></div>
+<div id="res" class="res" style="font-family:monospace;">rgb(59, 130, 246)</div>
+<script>function c(){ let h = document.getElementById('in').value.trim().replace('#',''); if(h.length===3) h=h.split('').map(x=>x+x).join(''); if(h.length===6 && /^[0-9A-Fa-f]{6}$/.test(h)){ const r=parseInt(h.slice(0,2),16), g=parseInt(h.slice(2,4),16), b=parseInt(h.slice(4,6),16); const rgb=`rgb(${r}, ${g}, ${b})`; document.getElementById('box').style.background=rgb; document.getElementById('res').innerText=rgb; } else { document.getElementById('res').innerText="Invalid Hex"; } }</script>
   </div>
-  <script>
-    function convert() {
-      let hex = document.getElementById('hex').value.replace('#', '');
-      if(hex.length === 3) hex = hex.split('').map(c => c+c).join('');
-      if(hex.length !== 6) return alert("Invalid HEX code");
-      
-      const r = parseInt(hex.substring(0,2), 16);
-      const g = parseInt(hex.substring(2,4), 16);
-      const b = parseInt(hex.substring(4,6), 16);
-      
-      const result = `rgb(${r}, ${g}, ${b})`;
-      document.getElementById('rgb').value = result;
-      document.getElementById('preview').style.backgroundColor = result;
-    }
-  </script>
 </body>
 </html>

@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "YAML to JSON Converter"
-category: "Developer"
-description: "Convert YAML configuration files into valid JSON format."
-permalink: /tools/yaml-to-json.html
+title: "HSL to Hex Converter"
+category: "Design"
+description: "Convert Hue, Saturation, and Lightness (HSL) values into Hex color codes."
+permalink: /tools/hsl-to-hex.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert YAML configuration files into valid JSON format.">
-  <meta property="og:title" content="YAML to JSON Converter">
-  <meta property="og:description" content="Convert YAML configuration files into valid JSON format.">
+  <meta name="description" content="Convert Hue, Saturation, and Lightness (HSL) values into Hex color codes.">
+  <meta property="og:title" content="HSL to Hex Converter">
+  <meta property="og:description" content="Convert Hue, Saturation, and Lightness (HSL) values into Hex color codes.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="YAML to JSON Converter">
-  <meta name="twitter:description" content="Convert YAML configuration files into valid JSON format.">
+  <meta name="twitter:title" content="HSL to Hex Converter">
+  <meta name="twitter:description" content="Convert Hue, Saturation, and Lightness (HSL) values into Hex color codes.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>YAML to JSON Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <title>HSL to Hex Converter</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -36,14 +36,15 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>YAML to JSON</h1>
-<textarea id="in" rows="6" placeholder="key: value
-list:
-  - item1
-  - item2"></textarea>
-<button onclick="c()">Convert to JSON</button>
-<textarea id="out" rows="6" readonly style="margin-top:20px;font-family:monospace;"></textarea>
-<script>function c(){ try{ const doc = jsyaml.load(document.getElementById('in').value); document.getElementById('out').value = JSON.stringify(doc, null, 2); }catch(e){ document.getElementById('out').value = "Invalid YAML format"; } }</script>
+    <h1>HSL to Hex</h1>
+<div class="row">
+    <div><label>Hue (0-360)</label><input type="number" id="h" value="217" min="0" max="360" oninput="c()"></div>
+    <div><label>Sat (%)</label><input type="number" id="s" value="91" min="0" max="100" oninput="c()"></div>
+    <div><label>Light (%)</label><input type="number" id="l" value="60" min="0" max="100" oninput="c()"></div>
+</div>
+<div id="box" style="height:100px;border-radius:12px;margin-bottom:20px;border:2px solid var(--border);"></div>
+<div id="res" class="res" style="font-family:monospace;">#3B82F6</div>
+<script>function c(){ let h=parseFloat(document.getElementById('h').value)||0, s=parseFloat(document.getElementById('s').value)||0, l=parseFloat(document.getElementById('l').value)||0; s/=100; l/=100; const a=s*Math.min(l, 1-l); const f=(n,k=(n+h/30)%12)=>l-a*Math.max(Math.min(k-3, 9-k, 1), -1); const toHex=x=>Math.round(x*255).toString(16).padStart(2,'0'); const hex=`#${toHex(f(0))}${toHex(f(8))}${toHex(f(4))}`.toUpperCase(); document.getElementById('box').style.background=hex; document.getElementById('res').innerText=hex; } c();</script>
   </div>
 </body>
 </html>

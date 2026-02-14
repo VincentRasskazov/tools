@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "CSS Triangle Generator"
+title: "CSS Button Generator"
 category: "Design"
-description: "Visually generate the pure CSS border hack required to make perfect triangles."
-permalink: /tools/css-triangle-generator.html
+description: "Design sleek, modern CSS buttons visually and copy the code instantly."
+permalink: /tools/css-button-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Visually generate the pure CSS border hack required to make perfect triangles.">
-  <meta property="og:title" content="CSS Triangle Generator">
-  <meta property="og:description" content="Visually generate the pure CSS border hack required to make perfect triangles.">
+  <meta name="description" content="Design sleek, modern CSS buttons visually and copy the code instantly.">
+  <meta property="og:title" content="CSS Button Generator">
+  <meta property="og:description" content="Design sleek, modern CSS buttons visually and copy the code instantly.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CSS Triangle Generator">
-  <meta name="twitter:description" content="Visually generate the pure CSS border hack required to make perfect triangles.">
+  <meta name="twitter:title" content="CSS Button Generator">
+  <meta name="twitter:description" content="Design sleek, modern CSS buttons visually and copy the code instantly.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>CSS Triangle Generator</title>
+  <title>CSS Button Generator</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -36,22 +36,26 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>CSS Triangle Generator</h1>
-<div style="height:150px;display:flex;align-items:center;justify-content:center;background:var(--bg);border-radius:12px;margin-bottom:20px;"><div id="tri" style="width:0;height:0;border-left:50px solid transparent;border-right:50px solid transparent;border-bottom:100px solid var(--primary);"></div></div>
-<div class="row"><div><label>Direction</label><select id="dir" onchange="u()"><option value="up">Up</option><option value="down">Down</option><option value="left">Left</option><option value="right">Right</option></select></div><div><label>Color</label><input type="color" id="c" value="#3b82f6" oninput="u()"></div></div>
-<div class="row"><div><label>Width</label><input type="range" id="w" min="10" max="200" value="100" oninput="u()"></div><div><label>Height</label><input type="range" id="h" min="10" max="200" value="100" oninput="u()"></div></div>
+    <h1>CSS Button Generator</h1>
+<div style="height:150px;display:flex;align-items:center;justify-content:center;background:var(--bg);border-radius:12px;margin-bottom:20px;border:1px solid var(--border);"><button id="preview" style="width:auto;margin:0;">Hover Me</button></div>
+<div class="row"><div><label>Background</label><input type="color" id="bg" value="#3b82f6" oninput="u()"></div><div><label>Text Color</label><input type="color" id="tc" value="#ffffff" oninput="u()"></div></div>
+<div class="row"><div><label>Padding Y (<span id="vpy">16</span>px)</label><input type="range" id="py" min="5" max="30" value="16" oninput="u()"></div><div><label>Padding X (<span id="vpx">24</span>px)</label><input type="range" id="px" min="10" max="60" value="24" oninput="u()"></div></div>
+<div class="row"><div><label>Border Radius (<span id="vbr">10</span>px)</label><input type="range" id="br" min="0" max="50" value="10" oninput="u()"></div></div>
 <textarea id="out" rows="6" readonly style="font-family:monospace;"></textarea>
-<script>function u(){ const d=document.getElementById('dir').value, c=document.getElementById('c').value, w=document.getElementById('w').value, h=document.getElementById('h').value; let css=`width: 0;
-height: 0;
-`; if(d==='up')css+=`border-left: ${w/2}px solid transparent;
-border-right: ${w/2}px solid transparent;
-border-bottom: ${h}px solid ${c};`; else if(d==='down')css+=`border-left: ${w/2}px solid transparent;
-border-right: ${w/2}px solid transparent;
-border-top: ${h}px solid ${c};`; else if(d==='left')css+=`border-top: ${h/2}px solid transparent;
-border-bottom: ${h/2}px solid transparent;
-border-right: ${w}px solid ${c};`; else if(d==='right')css+=`border-top: ${h/2}px solid transparent;
-border-bottom: ${h/2}px solid transparent;
-border-left: ${w}px solid ${c};`; document.getElementById('tri').style.cssText=css.replace(/\n/g,' '); document.getElementById('out').value=css; } u();</script>
+<script>function u(){ const bg=document.getElementById('bg').value, tc=document.getElementById('tc').value, py=document.getElementById('py').value, px=document.getElementById('px').value, br=document.getElementById('br').value; document.getElementById('vpy').innerText=py; document.getElementById('vpx').innerText=px; document.getElementById('vbr').innerText=br; const css=`.custom-btn {
+  background-color: ${bg};
+  color: ${tc};
+  padding: ${py}px ${px}px;
+  border-radius: ${br}px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+.custom-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}`; document.getElementById('preview').style.cssText=`background-color:${bg};color:${tc};padding:${py}px ${px}px;border-radius:${br}px;border:none;cursor:pointer;font-weight:bold;width:auto;margin:0;`; document.getElementById('out').value=css; } u();</script>
   </div>
 </body>
 </html>

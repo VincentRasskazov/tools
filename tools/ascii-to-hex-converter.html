@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "YAML to JSON Converter"
-category: "Developer"
-description: "Convert YAML configuration files into valid JSON format."
-permalink: /tools/yaml-to-json.html
+title: "ASCII to Hex Converter"
+category: "Converter"
+description: "Convert plain ASCII text directly into Hexadecimal formatting."
+permalink: /tools/ascii-to-hex-converter.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert YAML configuration files into valid JSON format.">
-  <meta property="og:title" content="YAML to JSON Converter">
-  <meta property="og:description" content="Convert YAML configuration files into valid JSON format.">
+  <meta name="description" content="Convert plain ASCII text directly into Hexadecimal formatting.">
+  <meta property="og:title" content="ASCII to Hex Converter">
+  <meta property="og:description" content="Convert plain ASCII text directly into Hexadecimal formatting.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="YAML to JSON Converter">
-  <meta name="twitter:description" content="Convert YAML configuration files into valid JSON format.">
+  <meta name="twitter:title" content="ASCII to Hex Converter">
+  <meta name="twitter:description" content="Convert plain ASCII text directly into Hexadecimal formatting.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>YAML to JSON Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <title>ASCII to Hex Converter</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -36,14 +36,11 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>YAML to JSON</h1>
-<textarea id="in" rows="6" placeholder="key: value
-list:
-  - item1
-  - item2"></textarea>
-<button onclick="c()">Convert to JSON</button>
-<textarea id="out" rows="6" readonly style="margin-top:20px;font-family:monospace;"></textarea>
-<script>function c(){ try{ const doc = jsyaml.load(document.getElementById('in').value); document.getElementById('out').value = JSON.stringify(doc, null, 2); }catch(e){ document.getElementById('out').value = "Invalid YAML format"; } }</script>
+    <h1>ASCII to Hex</h1>
+<textarea id="in" rows="4" placeholder="Hello World"></textarea>
+<button onclick="c()">Convert to Hex</button>
+<textarea id="out" rows="4" readonly style="margin-top:20px;font-family:monospace;"></textarea>
+<script>function c(){ document.getElementById('out').value=document.getElementById('in').value.split('').map(c=>c.charCodeAt(0).toString(16).padStart(2,'0').toUpperCase()).join(' '); }</script>
   </div>
 </body>
 </html>

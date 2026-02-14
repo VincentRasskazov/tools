@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "YAML to JSON Converter"
-category: "Developer"
-description: "Convert YAML configuration files into valid JSON format."
-permalink: /tools/yaml-to-json.html
+title: "Character Frequency Counter"
+category: "Text"
+description: "Count and analyze the exact frequency of every individual character in a text block."
+permalink: /tools/character-frequency-counter.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert YAML configuration files into valid JSON format.">
-  <meta property="og:title" content="YAML to JSON Converter">
-  <meta property="og:description" content="Convert YAML configuration files into valid JSON format.">
+  <meta name="description" content="Count and analyze the exact frequency of every individual character in a text block.">
+  <meta property="og:title" content="Character Frequency Counter">
+  <meta property="og:description" content="Count and analyze the exact frequency of every individual character in a text block.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="YAML to JSON Converter">
-  <meta name="twitter:description" content="Convert YAML configuration files into valid JSON format.">
+  <meta name="twitter:title" content="Character Frequency Counter">
+  <meta name="twitter:description" content="Count and analyze the exact frequency of every individual character in a text block.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>YAML to JSON Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <title>Character Frequency Counter</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -36,14 +36,11 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>YAML to JSON</h1>
-<textarea id="in" rows="6" placeholder="key: value
-list:
-  - item1
-  - item2"></textarea>
-<button onclick="c()">Convert to JSON</button>
-<textarea id="out" rows="6" readonly style="margin-top:20px;font-family:monospace;"></textarea>
-<script>function c(){ try{ const doc = jsyaml.load(document.getElementById('in').value); document.getElementById('out').value = JSON.stringify(doc, null, 2); }catch(e){ document.getElementById('out').value = "Invalid YAML format"; } }</script>
+    <h1>Character Frequency</h1>
+<textarea id="in" rows="5" placeholder="Type text here..."></textarea>
+<button onclick="c()">Analyze Characters</button>
+<div id="res" style="margin-top:20px;display:grid;grid-template-columns:repeat(auto-fill, minmax(100px, 1fr));gap:10px;"></div>
+<script>function c(){ const txt=document.getElementById('in').value; if(!txt)return; const counts={}; for(let char of txt){ counts[char]=(counts[char]||0)+1; } const sorted=Object.entries(counts).sort((a,b)=>b[1]-a[1]); let html=''; sorted.forEach(arr=>{ const displayChar = arr[0]===' '?'Space':arr[0]==='\n'?'Newline':arr[0]; html+=`<div style="background:var(--bg);padding:10px;text-align:center;border-radius:8px;border:1px solid var(--border);"><strong>${displayChar}</strong><br><span style="color:var(--primary);font-size:1.2rem;">${arr[1]}</span></div>`; }); document.getElementById('res').innerHTML=html; }</script>
   </div>
 </body>
 </html>

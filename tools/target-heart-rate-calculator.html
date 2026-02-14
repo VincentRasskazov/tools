@@ -1,0 +1,46 @@
+---
+layout: null
+title: "Target Heart Rate Calculator"
+category: "Health"
+description: "Calculate your optimal heart rate zones for fat burning and cardio training."
+permalink: /tools/target-heart-rate-calculator.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Calculate your optimal heart rate zones for fat burning and cardio training.">
+  <meta property="og:title" content="Target Heart Rate Calculator">
+  <meta property="og:description" content="Calculate your optimal heart rate zones for fat burning and cardio training.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Target Heart Rate Calculator">
+  <meta name="twitter:description" content="Calculate your optimal heart rate zones for fat burning and cardio training.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Target Heart Rate Calculator</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Target Heart Rate</h1>
+<div class="row"><div><label>Your Age</label><input type="number" id="a" value="30"></div><div><label>Resting Heart Rate (Optional)</label><input type="number" id="rhr" placeholder="e.g. 60"></div></div>
+<button onclick="c()">Calculate Zones</button>
+<div id="res" style="margin-top:20px;display:grid;gap:10px;"></div>
+<script>function c(){ const a=parseInt(document.getElementById('a').value), rhr=parseInt(document.getElementById('rhr').value); if(!a)return; const max=220-a; let h=''; if(rhr){ const res=max-rhr; const zone=(pct)=>Math.round((res*(pct/100))+rhr); h+=`<div style="background:var(--bg);padding:15px;border-radius:8px;border:1px solid var(--border);"><strong>Fat Burn (50-70%)</strong><br><span style="font-size:1.5rem;color:var(--success)">${zone(50)} - ${zone(70)} BPM</span></div>`; h+=`<div style="background:var(--bg);padding:15px;border-radius:8px;border:1px solid var(--border);"><strong>Cardio (70-85%)</strong><br><span style="font-size:1.5rem;color:var(--warning)">${zone(70)} - ${zone(85)} BPM</span></div>`; }else{ const zone=(pct)=>Math.round(max*(pct/100)); h+=`<div style="background:var(--bg);padding:15px;border-radius:8px;border:1px solid var(--border);"><strong>Fat Burn (50-70%)</strong><br><span style="font-size:1.5rem;color:var(--success)">${zone(50)} - ${zone(70)} BPM</span></div>`; h+=`<div style="background:var(--bg);padding:15px;border-radius:8px;border:1px solid var(--border);"><strong>Cardio (70-85%)</strong><br><span style="font-size:1.5rem;color:var(--warning)">${zone(70)} - ${zone(85)} BPM</span></div>`; } document.getElementById('res').innerHTML=`<p style="text-align:center;font-weight:bold;">Max HR: ${max} BPM</p>`+h; }</script>
+  </div>
+</body>
+</html>

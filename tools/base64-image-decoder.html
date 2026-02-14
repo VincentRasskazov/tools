@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "YAML to JSON Converter"
+title: "Base64 to Image Decoder"
 category: "Developer"
-description: "Convert YAML configuration files into valid JSON format."
-permalink: /tools/yaml-to-json.html
+description: "Paste a Base64 data URI string to decode and preview the actual image."
+permalink: /tools/base64-image-decoder.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert YAML configuration files into valid JSON format.">
-  <meta property="og:title" content="YAML to JSON Converter">
-  <meta property="og:description" content="Convert YAML configuration files into valid JSON format.">
+  <meta name="description" content="Paste a Base64 data URI string to decode and preview the actual image.">
+  <meta property="og:title" content="Base64 to Image Decoder">
+  <meta property="og:description" content="Paste a Base64 data URI string to decode and preview the actual image.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="YAML to JSON Converter">
-  <meta name="twitter:description" content="Convert YAML configuration files into valid JSON format.">
+  <meta name="twitter:title" content="Base64 to Image Decoder">
+  <meta name="twitter:description" content="Paste a Base64 data URI string to decode and preview the actual image.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>YAML to JSON Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <title>Base64 to Image Decoder</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -36,14 +36,14 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>YAML to JSON</h1>
-<textarea id="in" rows="6" placeholder="key: value
-list:
-  - item1
-  - item2"></textarea>
-<button onclick="c()">Convert to JSON</button>
-<textarea id="out" rows="6" readonly style="margin-top:20px;font-family:monospace;"></textarea>
-<script>function c(){ try{ const doc = jsyaml.load(document.getElementById('in').value); document.getElementById('out').value = JSON.stringify(doc, null, 2); }catch(e){ document.getElementById('out').value = "Invalid YAML format"; } }</script>
+    <h1>Base64 to Image</h1>
+<textarea id="in" rows="5" placeholder="data:image/png;base64,iVBORw0KGgo..."></textarea>
+<button onclick="c()">Decode & Preview</button>
+<div style="margin-top:20px;text-align:center;padding:20px;background:var(--bg);border:1px solid var(--border);border-radius:12px;min-height:100px;">
+    <img id="img" style="max-width:100%;max-height:300px;display:none;">
+    <span id="msg" style="color:#64748b;">Preview will appear here</span>
+</div>
+<script>function c(){ const t=document.getElementById('in').value.trim(); const img=document.getElementById('img'), msg=document.getElementById('msg'); if(t){ img.src=t; img.style.display='inline-block'; msg.style.display='none'; } }</script>
   </div>
 </body>
 </html>

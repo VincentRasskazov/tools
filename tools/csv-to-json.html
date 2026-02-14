@@ -1,64 +1,48 @@
 ---
 layout: null
-title: "CSV to JSON"
-category: "Converter"
-description: "Convert CSV data to JSON format."
+title: "CSV to JSON Converter"
+category: "Developer"
+description: "Convert comma-separated values (CSV) into a structured JSON array."
 permalink: /tools/csv-to-json.html
 ---
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta name="description" content="Convert CSV data to JSON format instantly. Simple, client-side, and secure.">
-  <meta property="og:title" content="CSV to JSON Converter - Free Online Tool">
-  <meta property="og:description" content="Convert CSV data to JSON format instantly. Simple, client-side, and secure.">
+<html lang="en"><head>
+  <meta name="description" content="Convert comma-separated values (CSV) into a structured JSON array.">
+  <meta property="og:title" content="CSV to JSON Converter">
+  <meta property="og:description" content="Convert comma-separated values (CSV) into a structured JSON array.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CSV to JSON Converter">
+  <meta name="twitter:description" content="Convert comma-separated values (CSV) into a structured JSON array.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="CSV to JSON Converter - Free Online Tool">
-  <meta name="twitter:description" content="Convert CSV data to JSON format instantly. Simple, client-side, and secure.">
-  
   <meta charset="UTF-8">
-  <title>CSV to JSON</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CSV to JSON Converter</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
   <style>
-    .tool-container { max-width: 900px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    .row { display: flex; gap: 20px; }
-    .col { flex: 1; }
-    textarea { width: 100%; height: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-family: monospace; resize: vertical; }
-    button { padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; width: 100%; margin-top: 10px; font-weight: bold; }
-  </style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+</style>
 </head>
 <body>
   <div class="tool-container">
-    <h1 style="text-align: center; color: #2563eb;">CSV to JSON</h1>
-    <div class="row">
-      <div class="col">
-        <label>CSV Input</label>
-        <textarea id="csv" placeholder="name,age\nJohn,30\nJane,25"></textarea>
-      </div>
-      <div class="col">
-        <label>JSON Output</label>
-        <textarea id="json" readonly></textarea>
-      </div>
-    </div>
-    <button onclick="convert()">Convert CSV to JSON &rarr;</button>
+    <h1>CSV to JSON</h1>
+<textarea id="in" rows="6" placeholder="name,age,city
+John,30,New York
+Jane,25,London"></textarea>
+<button onclick="c()">Convert to JSON</button>
+<textarea id="out" rows="6" readonly style="margin-top:20px;font-family:monospace;"></textarea>
+<script>function c(){ const txt = document.getElementById('in').value.trim(); if(!txt) return; const parsed = Papa.parse(txt, {header: true}); document.getElementById('out').value = JSON.stringify(parsed.data, null, 2); }</script>
   </div>
-  <script>
-    function convert() {
-      const csv = document.getElementById('csv').value;
-      Papa.parse(csv, {
-        header: true,
-        skipEmptyLines: true,
-        complete: function(results) {
-          document.getElementById('json').value = JSON.stringify(results.data, null, 2);
-        },
-        error: function(err) {
-          alert("Error parsing CSV");
-        }
-      });
-    }
-  </script>
 </body>
 </html>
