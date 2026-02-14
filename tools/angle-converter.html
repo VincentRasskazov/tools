@@ -2,40 +2,44 @@
 layout: null
 title: "Angle Converter"
 category: "Converter"
-description: "Convert between degrees, radians, and gradians."
+description: "Convert geometric angles between Degrees, Radians, and Gradians."
 permalink: /tools/angle-converter.html
 ---
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta name="description" content="Convert angles between Degrees, Radians, and Gradians.">
+<html lang="en"><head>
+  <meta name="description" content="Convert geometric angles between Degrees, Radians, and Gradians.">
   <meta property="og:title" content="Angle Converter">
-  <meta property="og:description" content="Convert angles between Degrees, Radians, and Gradians.">
+  <meta property="og:description" content="Convert geometric angles between Degrees, Radians, and Gradians.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Angle Converter">
-  <meta name="twitter:description" content="Convert angles between Degrees, Radians, and Gradians.">
+  <meta name="twitter:description" content="Convert geometric angles between Degrees, Radians, and Gradians.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Angle Converter</title>
   
-  <meta charset="UTF-8"><title>Angle Converter</title>
-  <style>.tool-container{max-width:600px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} input{width:100%;padding:10px;margin-bottom:15px;border-radius:6px;border:1px solid #ccc;}</style>
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+</style>
 </head>
 <body>
   <div class="tool-container">
-    <h1 style="color:#2563eb;text-align:center;">Angle Converter</h1>
-    <label>Degrees (°)</label><input type="number" id="deg" oninput="conv('deg',this.value)">
-    <label>Radians (rad)</label><input type="number" id="rad" oninput="conv('rad',this.value)">
-    <label>Gradians (grad)</label><input type="number" id="grad" oninput="conv('grad',this.value)">
+    <h1>Angle Converter</h1>
+<div class="row"><div><input type="number" id="deg" oninput="u('deg')"><label>Degrees (°)</label></div><div><input type="number" id="rad" oninput="u('rad')"><label>Radians (rad)</label></div></div>
+<div class="row"><div><input type="number" id="grad" oninput="u('grad')"><label>Gradians (gon)</label></div></div>
+<script>function u(id){ const v=parseFloat(document.getElementById(id).value); if(isNaN(v))return; const deg = id==='deg'?v : id==='rad'?v*(180/Math.PI) : v*0.9; document.getElementById('deg').value=id==='deg'?v:(deg).toFixed(4); document.getElementById('rad').value=id==='rad'?v:(deg*(Math.PI/180)).toFixed(6); document.getElementById('grad').value=id==='grad'?v:(deg/0.9).toFixed(4); }</script>
   </div>
-  <script>
-    function conv(id, val) {
-      val = parseFloat(val); if(isNaN(val)) return;
-      const deg = id === 'deg' ? val : id === 'rad' ? val * (180/Math.PI) : val * 0.9;
-      if(id !== 'deg') document.getElementById('deg').value = deg;
-      if(id !== 'rad') document.getElementById('rad').value = deg * (Math.PI/180);
-      if(id !== 'grad') document.getElementById('grad').value = deg / 0.9;
-    }
-  </script>
 </body>
 </html>

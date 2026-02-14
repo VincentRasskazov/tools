@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Random Boolean Generator"
-category: "Developer"
-description: "Generate a random True or False value for testing or decision making."
-permalink: /tools/random-boolean-generator.html
+title: "Volume Converter Pro"
+category: "Converter"
+description: "Convert volume between Liters, Milliliters, Gallons, Quarts, and Cups."
+permalink: /tools/volume-converter-pro.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a random True or False value for testing or decision making.">
-  <meta property="og:title" content="Random Boolean Generator">
-  <meta property="og:description" content="Generate a random True or False value for testing or decision making.">
+  <meta name="description" content="Convert volume between Liters, Milliliters, Gallons, Quarts, and Cups.">
+  <meta property="og:title" content="Volume Converter Pro">
+  <meta property="og:description" content="Convert volume between Liters, Milliliters, Gallons, Quarts, and Cups.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Random Boolean Generator">
-  <meta name="twitter:description" content="Generate a random True or False value for testing or decision making.">
+  <meta name="twitter:title" content="Volume Converter Pro">
+  <meta name="twitter:description" content="Convert volume between Liters, Milliliters, Gallons, Quarts, and Cups.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Random Boolean Generator</title>
+  <title>Volume Converter Pro</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -36,10 +36,10 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>Random Boolean</h1>
-<button onclick="c()" style="margin-bottom:20px;">Generate</button>
-<div id="res" class="res" style="font-size:4rem;font-family:monospace;">TRUE</div>
-<script>function c(){ const v=Math.random()>0.5; const r=document.getElementById('res'); r.innerText=v?'TRUE':'FALSE'; r.style.color=v?'var(--success)':'var(--danger)'; } c();</script>
+    <h1>Volume Converter</h1>
+<div class="row"><div><input type="number" id="l" oninput="u('l')"><label>Liters</label></div><div><input type="number" id="ml" oninput="u('ml')"><label>Milliliters</label></div></div>
+<div class="row"><div><input type="number" id="gal" oninput="u('gal')"><label>US Gallons</label></div><div><input type="number" id="cup" oninput="u('cup')"><label>US Cups</label></div></div>
+<script>function u(id){ const v=parseFloat(document.getElementById(id).value); if(isNaN(v))return; const l = id==='l'?v : id==='ml'?v/1000 : id==='gal'?v*3.78541 : v/4.22675; document.getElementById('l').value=id==='l'?v:(l).toFixed(4); document.getElementById('ml').value=id==='ml'?v:(l*1000).toFixed(4); document.getElementById('gal').value=id==='gal'?v:(l/3.78541).toFixed(4); document.getElementById('cup').value=id==='cup'?v:(l*4.22675).toFixed(4); }</script>
   </div>
 </body>
 </html>
