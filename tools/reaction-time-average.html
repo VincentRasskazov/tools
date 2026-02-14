@@ -1,0 +1,56 @@
+---
+layout: null
+title: "Reaction Time Average Test"
+category: "Games"
+description: "Take 5 attempts at a reaction time test to calculate your true average speed."
+permalink: /tools/reaction-time-average.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Take 5 attempts at a reaction time test to calculate your true average speed.">
+  <meta property="og:title" content="Reaction Time Average Test">
+  <meta property="og:description" content="Take 5 attempts at a reaction time test to calculate your true average speed.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Reaction Time Average Test">
+  <meta name="twitter:description" content="Take 5 attempts at a reaction time test to calculate your true average speed.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Reaction Time Average Test</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+canvas { display: block; margin: 0 auto; background: #1e293b; border-radius: 12px; box-shadow: inset 0 4px 6px rgba(0,0,0,0.3); max-width: 100%; }
+.chk-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; text-align: center; margin-bottom: 20px; }
+.chk-grid div { background: var(--bg); padding: 10px; border-radius: 8px; border: 1px solid var(--border); }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Average Reaction Time</h1>
+<div id="box" style="height:250px;background:var(--danger);border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;font-size:2rem;font-weight:bold;cursor:pointer;user-select:none;margin-bottom:20px;" onmousedown="clk()">Click to Start</div>
+<div id="sc" style="text-align:center;font-weight:bold;font-size:1.2rem;">Attempt: 0 / 5</div>
+<div id="res" class="res" style="display:none;"></div>
+<script>
+let state=0, t0, tm, att=0, times=[]; const b=document.getElementById('box');
+function clk(){
+  if(state===0){ state=1; b.style.background='var(--danger)'; b.innerText="Wait for green..."; const r=2000+Math.random()*3000; tm=setTimeout(()=>{state=2;b.style.background='var(--success)';b.innerText="CLICK NOW!";t0=Date.now();},r); }
+  else if(state===1){ clearTimeout(tm); state=0; b.innerText="Too early! Click to try again."; }
+  else if(state===2){ const diff=Date.now()-t0; times.push(diff); att++; document.getElementById('sc').innerText=`Attempt: ${att} / 5`; state=0; if(att>=5){ b.style.display='none'; const avg=times.reduce((a,b)=>a+b)/5; document.getElementById('res').style.display='block'; document.getElementById('res').innerHTML=`Average Reaction Time:<br><span style="font-size:3rem;color:var(--primary)">${Math.round(avg)} ms</span><br><button onclick="location.reload()" style="margin-top:20px;">Try Again</button>`; } else { b.style.background='var(--primary)'; b.innerText=`${diff} ms. Click to continue.`; } }
+}
+</script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+---
+layout: null
+title: "Roman Numeral Math"
+category: "Math"
+description: "Add, subtract, or multiply Roman Numerals directly without converting them first."
+permalink: /tools/roman-numeral-math.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Add, subtract, or multiply Roman Numerals directly without converting them first.">
+  <meta property="og:title" content="Roman Numeral Math">
+  <meta property="og:description" content="Add, subtract, or multiply Roman Numerals directly without converting them first.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Roman Numeral Math">
+  <meta name="twitter:description" content="Add, subtract, or multiply Roman Numerals directly without converting them first.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Roman Numeral Math</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+canvas { display: block; margin: 0 auto; background: #1e293b; border-radius: 12px; box-shadow: inset 0 4px 6px rgba(0,0,0,0.3); max-width: 100%; }
+.chk-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; text-align: center; margin-bottom: 20px; }
+.chk-grid div { background: var(--bg); padding: 10px; border-radius: 8px; border: 1px solid var(--border); }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Roman Numeral Math</h1>
+<div class="row"><div><input type="text" id="a" placeholder="XIV" style="text-transform:uppercase;"></div><div><select id="op"><option value="+">+</option><option value="-">-</option><option value="*">×</option></select></div><div><input type="text" id="b" placeholder="V" style="text-transform:uppercase;"></div></div>
+<button onclick="c()">Calculate</button>
+<div id="res" class="res" style="font-size:3rem;font-family:serif;"></div>
+<script>
+const map={I:1,V:5,X:10,L:50,C:100,D:500,M:1000};
+function p(s){ s=s.toUpperCase(); let r=0; for(let i=0;i<s.length;i++){ const c=map[s[i]], n=map[s[i+1]]; if(n>c){r+=n-c;i++}else{r+=c} } return r; }
+function toR(n){if(n<1||n>3999)return'Out of range';const r=[[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,'XC'],[50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']];let s='';for(let[v,c]of r){while(n>=v){s+=c;n-=v;}}return s;}
+function c(){ const a=p(document.getElementById('a').value), b=p(document.getElementById('b').value), op=document.getElementById('op').value; if(isNaN(a)||isNaN(b))return document.getElementById('res').innerText='Error'; let ans=0; if(op==='+')ans=a+b; if(op==='-')ans=a-b; if(op==='*')ans=a*b; document.getElementById('res').innerText=toR(ans); }
+</script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+---
+layout: null
+title: "XML to CSV Converter"
+category: "Developer"
+description: "Convert simple XML datasets into comma-separated values (CSV)."
+permalink: /tools/xml-to-csv-converter.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Convert simple XML datasets into comma-separated values (CSV).">
+  <meta property="og:title" content="XML to CSV Converter">
+  <meta property="og:description" content="Convert simple XML datasets into comma-separated values (CSV).">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="XML to CSV Converter">
+  <meta name="twitter:description" content="Convert simple XML datasets into comma-separated values (CSV).">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>XML to CSV Converter</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+canvas { display: block; margin: 0 auto; background: #1e293b; border-radius: 12px; box-shadow: inset 0 4px 6px rgba(0,0,0,0.3); max-width: 100%; }
+.chk-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; text-align: center; margin-bottom: 20px; }
+.chk-grid div { background: var(--bg); padding: 10px; border-radius: 8px; border: 1px solid var(--border); }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>XML to CSV</h1>
+<textarea id="in" rows="6" placeholder="<users>\n  <user>\n    <name>John</name>\n    <age>30</age>\n  </user>\n</users>"></textarea>
+<button onclick="c()">Convert to CSV</button>
+<textarea id="out" rows="6" readonly style="margin-top:20px;font-family:monospace;"></textarea>
+<script>function c(){ try{ const p=new DOMParser(); const doc=p.parseFromString(document.getElementById('in').value, "text/xml"); if(doc.querySelector("parsererror"))throw "Invalid"; const root=doc.documentElement; const items=root.children; if(!items.length)return; let headers=Array.from(items[0].children).map(n=>n.nodeName); let csv=headers.join(',')+'\n'; for(let i=0;i<items.length;i++){ let row=[]; headers.forEach(h=>{ const el=items[i].querySelector(h); row.push(el?`"${el.textContent.replace(/"/g,'""')}"`:""); }); csv+=row.join(',')+'\n'; } document.getElementById('out').value=csv; }catch(e){ document.getElementById('out').value="Invalid XML Format"; } }</script>
+  </div>
+</body>
+</html>
