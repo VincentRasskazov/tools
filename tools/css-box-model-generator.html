@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "SHA-1 Hash Generator"
-category: "Security"
-description: "Generate a SHA-1 cryptographic hash from any text string."
-permalink: /tools/sha1-hash-generator.html
+title: "CSS Box Model Visualizer"
+category: "Design"
+description: "Visually adjust Padding, Border, and Margin to see how the CSS Box Model works."
+permalink: /tools/css-box-model-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a SHA-1 cryptographic hash from any text string.">
-  <meta property="og:title" content="SHA-1 Hash Generator">
-  <meta property="og:description" content="Generate a SHA-1 cryptographic hash from any text string.">
+  <meta name="description" content="Visually adjust Padding, Border, and Margin to see how the CSS Box Model works.">
+  <meta property="og:title" content="CSS Box Model Visualizer">
+  <meta property="og:description" content="Visually adjust Padding, Border, and Margin to see how the CSS Box Model works.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SHA-1 Hash Generator">
-  <meta name="twitter:description" content="Generate a SHA-1 cryptographic hash from any text string.">
+  <meta name="twitter:title" content="CSS Box Model Visualizer">
+  <meta name="twitter:description" content="Visually adjust Padding, Border, and Margin to see how the CSS Box Model works.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>SHA-1 Hash Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>CSS Box Model Visualizer</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -38,10 +38,21 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>SHA-1 Generator</h1>
-<textarea id="in" rows="4" placeholder="Type string here..." oninput="c()"></textarea>
-<div id="res" class="res" style="font-size:1.1rem;font-family:monospace;word-break:break-all;"></div>
-<script>function c(){ document.getElementById('res').innerText=CryptoJS.SHA1(document.getElementById('in').value).toString(); }</script>
+    <h1>Box Model Visualizer</h1>
+<div style="background:#f1f5f9;padding:40px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:center;">
+    <div id="m-box" style="background:#fcd34d;padding:20px;transition:0.2s;">
+        <div id="b-box" style="background:#f87171;padding:5px;transition:0.2s;">
+            <div id="p-box" style="background:#86efac;padding:20px;transition:0.2s;">
+                <div style="background:#93c5fd;width:100px;height:50px;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#1e3a8a;">Content</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row"><div><label>Margin (<span id="vm">20</span>px)</label><input type="range" id="m" min="0" max="50" value="20" oninput="u()"></div><div><label>Border (<span id="vb">5</span>px)</label><input type="range" id="b" min="0" max="20" value="5" oninput="u()"></div><div><label>Padding (<span id="vp">20</span>px)</label><input type="range" id="p" min="0" max="50" value="20" oninput="u()"></div></div>
+<div class="row" style="text-align:center;font-weight:bold;font-size:0.9rem;margin-bottom:10px;">
+    <div style="color:#b45309">Margin (Outer)</div><div style="color:#991b1b">Border</div><div style="color:#166534">Padding (Inner)</div>
+</div>
+<script>function u(){ const m=document.getElementById('m').value, b=document.getElementById('b').value, p=document.getElementById('p').value; document.getElementById('vm').innerText=m; document.getElementById('vb').innerText=b; document.getElementById('vp').innerText=p; document.getElementById('m-box').style.padding=m+'px'; document.getElementById('b-box').style.padding=b+'px'; document.getElementById('p-box').style.padding=p+'px'; } u();</script>
   </div>
 </body>
 </html>

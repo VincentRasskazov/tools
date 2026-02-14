@@ -1,24 +1,49 @@
 ---
 layout: null
-title: "Sales Tax Calc"
+title: "Sales Tax Calculator"
 category: "Finance"
-description: "Calculate sales tax and total price."
+description: "Quickly add or subtract sales tax from a price."
 permalink: /tools/sales-tax-calculator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Add sales tax to a price or find the pre-tax price.">
+  <meta name="description" content="Quickly add or subtract sales tax from a price.">
   <meta property="og:title" content="Sales Tax Calculator">
-  <meta property="og:description" content="Add sales tax to a price or find the pre-tax price.">
+  <meta property="og:description" content="Quickly add or subtract sales tax from a price.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Sales Tax Calculator">
-  <meta name="twitter:description" content="Add sales tax to a price or find the pre-tax price.">
-  <meta charset="UTF-8"><title>Sales Tax</title><style>.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} input{width:100%;padding:10px;margin-bottom:15px;border:1px solid #ccc;border-radius:6px;} button{width:100%;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;} #res{margin-top:20px;font-size:1.2rem;text-align:center;}</style></head>
-<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Sales Tax</h1>
-<label>Price Before Tax ($)</label><input type="number" id="p">
-<label>Tax Rate (%)</label><input type="number" id="t" value="8">
-<button onclick="calc()">Calculate Total</button><div id="res"></div></div>
-<script>function calc(){ const p=parseFloat(document.getElementById('p').value), t=parseFloat(document.getElementById('t').value); if(p && t){ const tax = p*(t/100); const tot = p+tax; document.getElementById('res').innerHTML = `Tax Amount: $${tax.toFixed(2)}<br><strong>Total: $${tot.toFixed(2)}</strong>`; } }</script></body></html>
+  <meta name="twitter:description" content="Quickly add or subtract sales tax from a price.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Sales Tax Calculator</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+.grid-4x4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 20px auto; max-width: 400px; }
+.react-cell { height: 80px; background: var(--border); border-radius: 12px; cursor: pointer; transition: 0.1s; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Sales Tax Calculator</h1>
+<div class="row"><div><label>Amount ($)</label><input type="number" id="a" value="100"></div><div><label>Tax Rate (%)</label><input type="number" id="r" value="8.5"></div></div>
+<button onclick="c(1)">Add Tax</button>
+<button onclick="c(-1)" style="background:var(--warning)">Extract Tax (Find Pre-Tax)</button>
+<div id="res" class="res"></div>
+<script>function c(dir){ const a=parseFloat(document.getElementById('a').value), r=parseFloat(document.getElementById('r').value); if(a&&r){ if(dir===1){ const t=a*(r/100); document.getElementById('res').innerHTML=`Tax Amount: <strong>$${t.toFixed(2)}</strong><br>Total Price: <strong style="color:var(--success)">$${(a+t).toFixed(2)}</strong>`; } else { const base=a/(1+(r/100)); const t=a-base; document.getElementById('res').innerHTML=`Pre-Tax Price: <strong>$${base.toFixed(2)}</strong><br>Tax Amount: <strong style="color:var(--warning)">$${t.toFixed(2)}</strong>`; } } }</script>
+  </div>
+</body>
+</html>

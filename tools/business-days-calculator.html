@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "SHA-1 Hash Generator"
-category: "Security"
-description: "Generate a SHA-1 cryptographic hash from any text string."
-permalink: /tools/sha1-hash-generator.html
+title: "Business Days Calculator"
+category: "Time"
+description: "Calculate the exact number of working business days (excluding weekends) between two dates."
+permalink: /tools/business-days-calculator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a SHA-1 cryptographic hash from any text string.">
-  <meta property="og:title" content="SHA-1 Hash Generator">
-  <meta property="og:description" content="Generate a SHA-1 cryptographic hash from any text string.">
+  <meta name="description" content="Calculate the exact number of working business days (excluding weekends) between two dates.">
+  <meta property="og:title" content="Business Days Calculator">
+  <meta property="og:description" content="Calculate the exact number of working business days (excluding weekends) between two dates.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SHA-1 Hash Generator">
-  <meta name="twitter:description" content="Generate a SHA-1 cryptographic hash from any text string.">
+  <meta name="twitter:title" content="Business Days Calculator">
+  <meta name="twitter:description" content="Calculate the exact number of working business days (excluding weekends) between two dates.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>SHA-1 Hash Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>Business Days Calculator</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -38,10 +38,11 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>SHA-1 Generator</h1>
-<textarea id="in" rows="4" placeholder="Type string here..." oninput="c()"></textarea>
-<div id="res" class="res" style="font-size:1.1rem;font-family:monospace;word-break:break-all;"></div>
-<script>function c(){ document.getElementById('res').innerText=CryptoJS.SHA1(document.getElementById('in').value).toString(); }</script>
+    <h1>Business Days Calc</h1>
+<div class="row"><div><label>Start Date</label><input type="date" id="d1"></div><div><label>End Date</label><input type="date" id="d2"></div></div>
+<button onclick="c()">Calculate Working Days</button>
+<div id="res" class="res"></div>
+<script>function c(){ const s=new Date(document.getElementById('d1').value), e=new Date(document.getElementById('d2').value); if(s&&e&&s<=e){ let count=0; let cur=new Date(s); while(cur<=e){ const day=cur.getDay(); if(day!==0&&day!==6) count++; cur.setDate(cur.getDate()+1); } document.getElementById('res').innerHTML=`<span style="font-size:3rem;color:var(--primary)">${count}</span><br>Business Days`; } }</script>
   </div>
 </body>
 </html>

@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "SHA-1 Hash Generator"
-category: "Security"
-description: "Generate a SHA-1 cryptographic hash from any text string."
-permalink: /tools/sha1-hash-generator.html
+title: "Pace to Speed Converter"
+category: "Health"
+description: "Convert running pace (minutes per km/mile) into speed (km/h or mph)."
+permalink: /tools/pace-to-speed-converter.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a SHA-1 cryptographic hash from any text string.">
-  <meta property="og:title" content="SHA-1 Hash Generator">
-  <meta property="og:description" content="Generate a SHA-1 cryptographic hash from any text string.">
+  <meta name="description" content="Convert running pace (minutes per km/mile) into speed (km/h or mph).">
+  <meta property="og:title" content="Pace to Speed Converter">
+  <meta property="og:description" content="Convert running pace (minutes per km/mile) into speed (km/h or mph).">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SHA-1 Hash Generator">
-  <meta name="twitter:description" content="Generate a SHA-1 cryptographic hash from any text string.">
+  <meta name="twitter:title" content="Pace to Speed Converter">
+  <meta name="twitter:description" content="Convert running pace (minutes per km/mile) into speed (km/h or mph).">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>SHA-1 Hash Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>Pace to Speed Converter</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -38,10 +38,11 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>SHA-1 Generator</h1>
-<textarea id="in" rows="4" placeholder="Type string here..." oninput="c()"></textarea>
-<div id="res" class="res" style="font-size:1.1rem;font-family:monospace;word-break:break-all;"></div>
-<script>function c(){ document.getElementById('res').innerText=CryptoJS.SHA1(document.getElementById('in').value).toString(); }</script>
+    <h1>Pace to Speed</h1>
+<div class="row"><div><label>Pace (Minutes)</label><input type="number" id="m" value="5"></div><div><label>Pace (Seconds)</label><input type="number" id="s" value="30"></div></div>
+<button onclick="c()">Convert to Speed</button>
+<div id="res" class="res"></div>
+<script>function c(){ const m=parseFloat(document.getElementById('m').value)||0, s=parseFloat(document.getElementById('s').value)||0; const totalMins = m + (s/60); if(totalMins>0){ const speed = 60 / totalMins; document.getElementById('res').innerHTML=`Speed:<br><span style="font-size:3rem;color:var(--primary)">${speed.toFixed(2)}</span><br>units/hour`; } }</script>
   </div>
 </body>
 </html>

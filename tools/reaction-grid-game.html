@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "SHA-1 Hash Generator"
-category: "Security"
-description: "Generate a SHA-1 cryptographic hash from any text string."
-permalink: /tools/sha1-hash-generator.html
+title: "Reaction Grid Test"
+category: "Games"
+description: "Click the green square as fast as it appears in the 4x4 grid!"
+permalink: /tools/reaction-grid-game.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a SHA-1 cryptographic hash from any text string.">
-  <meta property="og:title" content="SHA-1 Hash Generator">
-  <meta property="og:description" content="Generate a SHA-1 cryptographic hash from any text string.">
+  <meta name="description" content="Click the green square as fast as it appears in the 4x4 grid!">
+  <meta property="og:title" content="Reaction Grid Test">
+  <meta property="og:description" content="Click the green square as fast as it appears in the 4x4 grid!">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SHA-1 Hash Generator">
-  <meta name="twitter:description" content="Generate a SHA-1 cryptographic hash from any text string.">
+  <meta name="twitter:title" content="Reaction Grid Test">
+  <meta name="twitter:description" content="Click the green square as fast as it appears in the 4x4 grid!">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>SHA-1 Hash Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>Reaction Grid Test</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -38,10 +38,11 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>SHA-1 Generator</h1>
-<textarea id="in" rows="4" placeholder="Type string here..." oninput="c()"></textarea>
-<div id="res" class="res" style="font-size:1.1rem;font-family:monospace;word-break:break-all;"></div>
-<script>function c(){ document.getElementById('res').innerText=CryptoJS.SHA1(document.getElementById('in').value).toString(); }</script>
+    <h1>Reaction Grid</h1>
+<button onclick="st()" id="btn">Start Game</button>
+<div id="sc" style="text-align:center;font-size:1.5rem;font-weight:bold;color:var(--primary);margin-top:10px;">Hits: 0 | Time: 15s</div>
+<div class="grid-4x4" id="grid"></div>
+<script>let s=0, t=15, cur=-1, int, run=false; const g=document.getElementById('grid'); for(let i=0;i<16;i++)g.innerHTML+=`<div class="react-cell" id="c${i}" onmousedown="clk(${i})"></div>`; function st(){s=0;t=15;run=true;document.getElementById('btn').style.display='none';nx();clearInterval(int);int=setInterval(()=>{t--;document.getElementById('sc').innerText=`Hits: ${s} | Time: ${t}s`;if(t<=0){clearInterval(int);run=false;document.getElementById('c'+cur).style.background='var(--border)';document.getElementById('btn').style.display='block';alert("Time's up! You got "+s+" hits.");}},1000);} function nx(){if(cur!==-1)document.getElementById('c'+cur).style.background='var(--border)'; cur=Math.floor(Math.random()*16); document.getElementById('c'+cur).style.background='var(--success)';} function clk(i){if(run&&i===cur){s++;document.getElementById('sc').innerText=`Hits: ${s} | Time: ${t}s`;nx();}}</script>
   </div>
 </body>
 </html>

@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "SHA-1 Hash Generator"
-category: "Security"
-description: "Generate a SHA-1 cryptographic hash from any text string."
-permalink: /tools/sha1-hash-generator.html
+title: "Spacebar Clicker Game"
+category: "Games"
+description: "How fast can you hit the spacebar in 10 seconds? Test your speed!"
+permalink: /tools/spacebar-counter.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a SHA-1 cryptographic hash from any text string.">
-  <meta property="og:title" content="SHA-1 Hash Generator">
-  <meta property="og:description" content="Generate a SHA-1 cryptographic hash from any text string.">
+  <meta name="description" content="How fast can you hit the spacebar in 10 seconds? Test your speed!">
+  <meta property="og:title" content="Spacebar Clicker Game">
+  <meta property="og:description" content="How fast can you hit the spacebar in 10 seconds? Test your speed!">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SHA-1 Hash Generator">
-  <meta name="twitter:description" content="Generate a SHA-1 cryptographic hash from any text string.">
+  <meta name="twitter:title" content="Spacebar Clicker Game">
+  <meta name="twitter:description" content="How fast can you hit the spacebar in 10 seconds? Test your speed!">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>SHA-1 Hash Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>Spacebar Clicker Game</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -38,10 +38,11 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>SHA-1 Generator</h1>
-<textarea id="in" rows="4" placeholder="Type string here..." oninput="c()"></textarea>
-<div id="res" class="res" style="font-size:1.1rem;font-family:monospace;word-break:break-all;"></div>
-<script>function c(){ document.getElementById('res').innerText=CryptoJS.SHA1(document.getElementById('in').value).toString(); }</script>
+    <h1>Spacebar Counter</h1>
+<div id="time" style="font-size:1.5rem;font-weight:bold;color:var(--danger);text-align:center;">Time: 10.0</div>
+<div id="count" style="font-size:6rem;font-weight:bold;color:var(--primary);text-align:center;margin:20px 0;">0</div>
+<button onclick="st()" id="btn">Start (Press Space)</button>
+<script>let c=0, t=10, run=false, int; function st(){c=0;t=10;run=true;document.getElementById('count').innerText=0;document.getElementById('btn').style.display='none'; document.getElementById('time').innerText="Time: 10.0"; clearInterval(int); int=setInterval(()=>{t-=0.1; document.getElementById('time').innerText="Time: "+t.toFixed(1); if(t<=0){clearInterval(int);run=false;document.getElementById('btn').style.display='block';document.getElementById('btn').innerText="Play Again";alert("Time's up! Score: "+c);}},100);} window.addEventListener('keydown',e=>{if(e.code==='Space'){e.preventDefault(); if(!run && document.getElementById('btn').style.display!=='none')st(); else if(run){c++; document.getElementById('count').innerText=c;}}});</script>
   </div>
 </body>
 </html>

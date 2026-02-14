@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "SHA-1 Hash Generator"
-category: "Security"
-description: "Generate a SHA-1 cryptographic hash from any text string."
-permalink: /tools/sha1-hash-generator.html
+title: "Aim Trainer Game"
+category: "Games"
+description: "Improve your mouse or touch accuracy by clicking the targets as fast as possible."
+permalink: /tools/aim-trainer-game.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a SHA-1 cryptographic hash from any text string.">
-  <meta property="og:title" content="SHA-1 Hash Generator">
-  <meta property="og:description" content="Generate a SHA-1 cryptographic hash from any text string.">
+  <meta name="description" content="Improve your mouse or touch accuracy by clicking the targets as fast as possible.">
+  <meta property="og:title" content="Aim Trainer Game">
+  <meta property="og:description" content="Improve your mouse or touch accuracy by clicking the targets as fast as possible.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SHA-1 Hash Generator">
-  <meta name="twitter:description" content="Generate a SHA-1 cryptographic hash from any text string.">
+  <meta name="twitter:title" content="Aim Trainer Game">
+  <meta name="twitter:description" content="Improve your mouse or touch accuracy by clicking the targets as fast as possible.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>SHA-1 Hash Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>Aim Trainer Game</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -38,10 +38,13 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>SHA-1 Generator</h1>
-<textarea id="in" rows="4" placeholder="Type string here..." oninput="c()"></textarea>
-<div id="res" class="res" style="font-size:1.1rem;font-family:monospace;word-break:break-all;"></div>
-<script>function c(){ document.getElementById('res').innerText=CryptoJS.SHA1(document.getElementById('in').value).toString(); }</script>
+    <h1>Aim Trainer</h1>
+<div class="row" style="margin-bottom:15px;"><div id="sc" style="font-size:1.2rem;font-weight:bold;">Score: 0</div><div id="tm" style="font-size:1.2rem;font-weight:bold;color:var(--danger);text-align:right;">Time: 20</div></div>
+<div id="arena" style="width:100%;height:300px;background:var(--bg);border:2px solid var(--border);border-radius:12px;position:relative;overflow:hidden;cursor:crosshair;">
+  <div id="tgt" onclick="hit(event)" style="width:30px;height:30px;background:var(--primary);border-radius:50%;position:absolute;display:none;top:135px;left:285px;"></div>
+</div>
+<button onclick="st()" id="btn" style="margin-top:20px;">Start Training</button>
+<script>let s=0, t=20, int, run=false; function st(){s=0;t=20;run=true;document.getElementById('sc').innerText="Score: 0";document.getElementById('btn').style.display='none';document.getElementById('tgt').style.display='block';mv();clearInterval(int);int=setInterval(()=>{t--;document.getElementById('tm').innerText="Time: "+t;if(t<=0){clearInterval(int);run=false;document.getElementById('tgt').style.display='none';document.getElementById('btn').style.display='block';document.getElementById('btn').innerText="Try Again";alert("Finished! Hits: "+s);}},1000);} function hit(e){if(!run)return; e.stopPropagation(); s++; document.getElementById('sc').innerText="Score: "+s; mv();} function mv(){const a=document.getElementById('arena'), tgt=document.getElementById('tgt'); tgt.style.top=Math.random()*(a.clientHeight-30)+'px'; tgt.style.left=Math.random()*(a.clientWidth-30)+'px';}</script>
   </div>
 </body>
 </html>

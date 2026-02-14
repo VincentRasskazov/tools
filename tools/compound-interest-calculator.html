@@ -1,25 +1,49 @@
 ---
 layout: null
-title: "Compound Interest"
+title: "Compound Interest Calculator"
 category: "Finance"
-description: "Calculate compound interest over time."
+description: "Calculate how your money grows over time with compound interest."
 permalink: /tools/compound-interest-calculator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Calculate future value of investments with compound interest.">
+  <meta name="description" content="Calculate how your money grows over time with compound interest.">
   <meta property="og:title" content="Compound Interest Calculator">
-  <meta property="og:description" content="Calculate future value of investments with compound interest.">
+  <meta property="og:description" content="Calculate how your money grows over time with compound interest.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Compound Interest Calculator">
-  <meta name="twitter:description" content="Calculate future value of investments with compound interest.">
-  <meta charset="UTF-8"><title>Compound Interest</title><style>.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} input{width:100%;padding:10px;margin-bottom:15px;border:1px solid #ccc;border-radius:6px;} button{width:100%;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;} #res{margin-top:20px;font-size:1.5rem;text-align:center;color:#16a34a;font-weight:bold;}</style></head>
-<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Compound Interest</h1>
-<label>Principal Amount ($)</label><input type="number" id="p" value="1000">
-<label>Annual Interest Rate (%)</label><input type="number" id="r" value="5">
-<label>Years</label><input type="number" id="t" value="10">
-<button onclick="calc()">Calculate Future Value</button><div id="res"></div></div>
-<script>function calc(){ const p=parseFloat(document.getElementById('p').value), r=parseFloat(document.getElementById('r').value)/100, t=parseFloat(document.getElementById('t').value); const a = p * Math.pow(1 + r, t); document.getElementById('res').innerText = '$' + a.toFixed(2); }</script></body></html>
+  <meta name="twitter:description" content="Calculate how your money grows over time with compound interest.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Compound Interest Calculator</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+.grid-4x4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 20px auto; max-width: 400px; }
+.react-cell { height: 80px; background: var(--border); border-radius: 12px; cursor: pointer; transition: 0.1s; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Compound Interest</h1>
+<div class="row"><div><label>Principal ($)</label><input type="number" id="p" value="1000"></div><div><label>Annual Rate (%)</label><input type="number" id="r" value="5"></div></div>
+<div class="row"><div><label>Years</label><input type="number" id="t" value="10"></div><div><label>Compounded</label><select id="n"><option value="1">Annually</option><option value="12" selected>Monthly</option><option value="365">Daily</option></select></div></div>
+<button onclick="c()">Calculate Growth</button>
+<div id="res" class="res"></div>
+<script>function c(){ const p=parseFloat(document.getElementById('p').value), r=parseFloat(document.getElementById('r').value)/100, t=parseFloat(document.getElementById('t').value), n=parseFloat(document.getElementById('n').value); if(p&&r&&t){ const a = p * Math.pow(1 + (r/n), n*t); const earn = a - p; document.getElementById('res').innerHTML=`Total Value: <strong style="color:var(--success)">$${a.toFixed(2)}</strong><br>Interest Earned: <strong>$${earn.toFixed(2)}</strong>`; } }</script>
+  </div>
+</body>
+</html>

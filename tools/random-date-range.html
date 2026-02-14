@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "SHA-1 Hash Generator"
-category: "Security"
-description: "Generate a SHA-1 cryptographic hash from any text string."
-permalink: /tools/sha1-hash-generator.html
+title: "Random Date Generator (Range)"
+category: "Time"
+description: "Generate a completely random date and time between two specific dates."
+permalink: /tools/random-date-range.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a SHA-1 cryptographic hash from any text string.">
-  <meta property="og:title" content="SHA-1 Hash Generator">
-  <meta property="og:description" content="Generate a SHA-1 cryptographic hash from any text string.">
+  <meta name="description" content="Generate a completely random date and time between two specific dates.">
+  <meta property="og:title" content="Random Date Generator (Range)">
+  <meta property="og:description" content="Generate a completely random date and time between two specific dates.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SHA-1 Hash Generator">
-  <meta name="twitter:description" content="Generate a SHA-1 cryptographic hash from any text string.">
+  <meta name="twitter:title" content="Random Date Generator (Range)">
+  <meta name="twitter:description" content="Generate a completely random date and time between two specific dates.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>SHA-1 Hash Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>Random Date Generator (Range)</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -38,10 +38,15 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>SHA-1 Generator</h1>
-<textarea id="in" rows="4" placeholder="Type string here..." oninput="c()"></textarea>
-<div id="res" class="res" style="font-size:1.1rem;font-family:monospace;word-break:break-all;"></div>
-<script>function c(){ document.getElementById('res').innerText=CryptoJS.SHA1(document.getElementById('in').value).toString(); }</script>
+    <h1>Random Date Generator</h1>
+<div class="row"><div><label>Start Date</label><input type="date" id="d1"></div><div><label>End Date</label><input type="date" id="d2"></div></div>
+<button onclick="c()">Generate Random Date</button>
+<div id="res" class="res" style="font-size:1.5rem;"></div>
+<script>
+// Set default dates
+document.getElementById('d1').value = "2000-01-01"; document.getElementById('d2').value = new Date().toISOString().split('T')[0];
+function c(){ const s=new Date(document.getElementById('d1').value).getTime(), e=new Date(document.getElementById('d2').value).getTime(); if(s&&e&&s<=e){ const r=new Date(s + Math.random()*(e-s)); document.getElementById('res').innerHTML=r.toLocaleDateString() + "<br><span style='font-size:1rem;color:#64748b;'>"+r.toLocaleTimeString()+"</span>"; } } c();
+</script>
   </div>
 </body>
 </html>
