@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "Markdown to HTML Converter"
-category: "Developer"
-description: "Convert raw Markdown text directly into clean, copyable HTML code."
-permalink: /tools/markdown-to-html.html
+title: "Typing Race Game"
+category: "Games"
+description: "Type the random words as fast as you can. Don't make mistakes!"
+permalink: /tools/typing-race.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
-  <meta property="og:title" content="Markdown to HTML Converter">
-  <meta property="og:description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
+  <meta name="description" content="Type the random words as fast as you can. Don't make mistakes!">
+  <meta property="og:title" content="Typing Race Game">
+  <meta property="og:description" content="Type the random words as fast as you can. Don't make mistakes!">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Markdown to HTML Converter">
-  <meta name="twitter:description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
+  <meta name="twitter:title" content="Typing Race Game">
+  <meta name="twitter:description" content="Type the random words as fast as you can. Don't make mistakes!">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Markdown to HTML Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+  <title>Typing Race Game</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -41,13 +41,15 @@ canvas { display: block; margin: 0 auto; background: #1e293b; border-radius: 12p
 </head>
 <body>
   <div class="tool-container">
-    <h1>Markdown to HTML</h1>
-<textarea id="in" rows="6" placeholder="# Hello World
-
-This is **bold** text."></textarea>
-<button onclick="c()">Convert to HTML</button>
-<textarea id="out" rows="6" readonly placeholder="<h1 id='hello-world'>Hello World</h1>..."></textarea>
-<script>function c(){ document.getElementById('out').value = marked.parse(document.getElementById('in').value); }</script>
+    <h1>Typing Race</h1>
+<div id="wrd" style="font-size:3rem;font-weight:bold;text-align:center;margin:20px 0;color:var(--primary);">Press Start</div>
+<input type="text" id="in" disabled oninput="chk()" placeholder="Type the word above..." style="text-align:center;font-size:1.5rem;">
+<div class="row">
+    <div id="sc" style="font-size:1.2rem;font-weight:bold;">Score: 0</div>
+    <div id="tm" style="font-size:1.2rem;font-weight:bold;color:var(--danger);text-align:right;">Time: 30</div>
+</div>
+<button id="btn" onclick="st()" style="margin-top:20px;">Start Game</button>
+<script>const lib=["function","variable","javascript","developer","browser","internet","keyboard","monitor","network","server","database","boolean","string","object","array"]; let s=0, t=30, cur="", int; function nx(){cur=lib[Math.floor(Math.random()*lib.length)]; document.getElementById('wrd').innerText=cur; document.getElementById('in').value='';} function st(){s=0;t=30;document.getElementById('sc').innerText="Score: 0"; document.getElementById('btn').style.display='none'; document.getElementById('in').disabled=false; document.getElementById('in').focus(); nx(); clearInterval(int); int=setInterval(()=>{t--; document.getElementById('tm').innerText="Time: "+t; if(t<=0){clearInterval(int);document.getElementById('in').disabled=true;document.getElementById('btn').style.display='block';document.getElementById('wrd').innerText="Game Over!";}},1000);} function chk(){if(document.getElementById('in').value.toLowerCase()===cur){s++; document.getElementById('sc').innerText="Score: "+s; nx();}}</script>
   </div>
 </body>
 </html>

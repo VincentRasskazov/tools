@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "Markdown to HTML Converter"
-category: "Developer"
-description: "Convert raw Markdown text directly into clean, copyable HTML code."
-permalink: /tools/markdown-to-html.html
+title: "Math Flashcards"
+category: "Games"
+description: "Practice your mental math skills with these rapid-fire flashcards."
+permalink: /tools/math-flashcards.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
-  <meta property="og:title" content="Markdown to HTML Converter">
-  <meta property="og:description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
+  <meta name="description" content="Practice your mental math skills with these rapid-fire flashcards.">
+  <meta property="og:title" content="Math Flashcards">
+  <meta property="og:description" content="Practice your mental math skills with these rapid-fire flashcards.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Markdown to HTML Converter">
-  <meta name="twitter:description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
+  <meta name="twitter:title" content="Math Flashcards">
+  <meta name="twitter:description" content="Practice your mental math skills with these rapid-fire flashcards.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Markdown to HTML Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+  <title>Math Flashcards</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -41,13 +41,12 @@ canvas { display: block; margin: 0 auto; background: #1e293b; border-radius: 12p
 </head>
 <body>
   <div class="tool-container">
-    <h1>Markdown to HTML</h1>
-<textarea id="in" rows="6" placeholder="# Hello World
-
-This is **bold** text."></textarea>
-<button onclick="c()">Convert to HTML</button>
-<textarea id="out" rows="6" readonly placeholder="<h1 id='hello-world'>Hello World</h1>..."></textarea>
-<script>function c(){ document.getElementById('out').value = marked.parse(document.getElementById('in').value); }</script>
+    <h1>Math Flashcards</h1>
+<div id="card" style="width:100%;height:150px;background:var(--primary);color:white;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:4rem;font-weight:bold;margin-bottom:20px;">?</div>
+<input type="number" id="in" placeholder="Answer..." oninput="chk()" style="text-align:center;font-size:1.5rem;">
+<div id="res" style="text-align:center;font-weight:bold;font-size:1.5rem;height:30px;"></div>
+<button onclick="nx()" style="margin-top:20px;">Skip / Next</button>
+<script>let ans=0; function nx(){const a=Math.floor(Math.random()*12)+1, b=Math.floor(Math.random()*12)+1, op=['+','-','*'][Math.floor(Math.random()*3)]; if(op==='+')ans=a+b; if(op==='-')ans=a-b; if(op==='*')ans=a*b; document.getElementById('card').innerText=`${a} ${op} ${b}`; document.getElementById('in').value=''; document.getElementById('res').innerText='';} function chk(){if(parseInt(document.getElementById('in').value)===ans){document.getElementById('res').innerHTML='<span style="color:var(--success)">Correct!</span>'; setTimeout(nx, 800);}} nx();</script>
   </div>
 </body>
 </html>

@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "Markdown to HTML Converter"
-category: "Developer"
-description: "Convert raw Markdown text directly into clean, copyable HTML code."
-permalink: /tools/markdown-to-html.html
+title: "Simon Says Memory Game"
+category: "Games"
+description: "Follow the pattern! A fun interactive memory sequence game."
+permalink: /tools/simon-says-game.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
-  <meta property="og:title" content="Markdown to HTML Converter">
-  <meta property="og:description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
+  <meta name="description" content="Follow the pattern! A fun interactive memory sequence game.">
+  <meta property="og:title" content="Simon Says Memory Game">
+  <meta property="og:description" content="Follow the pattern! A fun interactive memory sequence game.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Markdown to HTML Converter">
-  <meta name="twitter:description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
+  <meta name="twitter:title" content="Simon Says Memory Game">
+  <meta name="twitter:description" content="Follow the pattern! A fun interactive memory sequence game.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Markdown to HTML Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+  <title>Simon Says Memory Game</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -41,13 +41,22 @@ canvas { display: block; margin: 0 auto; background: #1e293b; border-radius: 12p
 </head>
 <body>
   <div class="tool-container">
-    <h1>Markdown to HTML</h1>
-<textarea id="in" rows="6" placeholder="# Hello World
-
-This is **bold** text."></textarea>
-<button onclick="c()">Convert to HTML</button>
-<textarea id="out" rows="6" readonly placeholder="<h1 id='hello-world'>Hello World</h1>..."></textarea>
-<script>function c(){ document.getElementById('out').value = marked.parse(document.getElementById('in').value); }</script>
+    <h1>Simon Says</h1>
+<button onclick="st()">Start Game</button>
+<div id="lvl" style="text-align:center;font-weight:bold;font-size:1.5rem;margin-bottom:15px;color:var(--primary);">Level: 1</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;max-width:300px;margin:0 auto;">
+    <div class="simon-btn" id="b0" style="background:#ef4444;" onclick="clk(0)"></div>
+    <div class="simon-btn" id="b1" style="background:#3b82f6;" onclick="clk(1)"></div>
+    <div class="simon-btn" id="b2" style="background:#10b981;" onclick="clk(2)"></div>
+    <div class="simon-btn" id="b3" style="background:#f59e0b;" onclick="clk(3)"></div>
+</div>
+<script>
+let seq=[], usr=[], lvl=0, playing=false;
+function st(){ seq=[]; usr=[]; lvl=0; next(); }
+function next(){ usr=[]; lvl++; document.getElementById('lvl').innerText="Level: "+lvl; seq.push(Math.floor(Math.random()*4)); playing=false; let i=0; const int=setInterval(()=>{ if(i>=seq.length){clearInterval(int);playing=true;return;} flash(seq[i]); i++; }, 800); }
+function flash(i){ const b=document.getElementById('b'+i); b.classList.add('active'); setTimeout(()=>b.classList.remove('active'), 400); }
+function clk(i){ if(!playing)return; flash(i); usr.push(i); if(usr[usr.length-1]!==seq[usr.length-1]){ playing=false; alert("Wrong! You reached Level: "+lvl); document.getElementById('lvl').innerText="Game Over"; return; } if(usr.length===seq.length){ playing=false; setTimeout(next, 1000); } }
+</script>
   </div>
 </body>
 </html>

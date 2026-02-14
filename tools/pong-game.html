@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "Markdown to HTML Converter"
-category: "Developer"
-description: "Convert raw Markdown text directly into clean, copyable HTML code."
-permalink: /tools/markdown-to-html.html
+title: "Solo Pong Game"
+category: "Games"
+description: "Play a solo version of classic Pong against the wall. Don't let the ball drop!"
+permalink: /tools/pong-game.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
-  <meta property="og:title" content="Markdown to HTML Converter">
-  <meta property="og:description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
+  <meta name="description" content="Play a solo version of classic Pong against the wall. Don't let the ball drop!">
+  <meta property="og:title" content="Solo Pong Game">
+  <meta property="og:description" content="Play a solo version of classic Pong against the wall. Don't let the ball drop!">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Markdown to HTML Converter">
-  <meta name="twitter:description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
+  <meta name="twitter:title" content="Solo Pong Game">
+  <meta name="twitter:description" content="Play a solo version of classic Pong against the wall. Don't let the ball drop!">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Markdown to HTML Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+  <title>Solo Pong Game</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -41,13 +41,27 @@ canvas { display: block; margin: 0 auto; background: #1e293b; border-radius: 12p
 </head>
 <body>
   <div class="tool-container">
-    <h1>Markdown to HTML</h1>
-<textarea id="in" rows="6" placeholder="# Hello World
-
-This is **bold** text."></textarea>
-<button onclick="c()">Convert to HTML</button>
-<textarea id="out" rows="6" readonly placeholder="<h1 id='hello-world'>Hello World</h1>..."></textarea>
-<script>function c(){ document.getElementById('out').value = marked.parse(document.getElementById('in').value); }</script>
+    <h1>Solo Pong</h1>
+<button onclick="st()">Start Game</button>
+<p style="text-align:center;font-weight:bold;color:var(--success);" id="score">Score: 0</p>
+<canvas id="c" width="400" height="400" style="touch-action:none;"></canvas>
+<script>
+const cvs=document.getElementById('c'), ctx=cvs.getContext('2d');
+let ball, pad, int, score=0, run=false;
+function st(){ score=0; run=true; document.getElementById('score').innerText="Score: 0"; ball={x:200,y:200,dx:4,dy:-4,r:8}; pad={x:150,y:380,w:100,h:10}; if(int)clearInterval(int); int=setInterval(update, 20); }
+function update(){
+    ctx.fillStyle='#1e293b'; ctx.fillRect(0,0,400,400);
+    ctx.fillStyle='white'; ctx.beginPath(); ctx.arc(ball.x,ball.y,ball.r,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle='var(--primary)'; ctx.fillRect(pad.x,pad.y,pad.w,pad.h);
+    ball.x+=ball.dx; ball.y+=ball.dy;
+    if(ball.x-ball.r<0 || ball.x+ball.r>400) ball.dx*=-1;
+    if(ball.y-ball.r<0) ball.dy*=-1;
+    if(ball.y+ball.r>=pad.y && ball.x>=pad.x && ball.x<=pad.x+pad.w){ ball.dy=-Math.abs(ball.dy)*1.05; score++; document.getElementById('score').innerText="Score: "+score; }
+    if(ball.y+ball.r>400){ clearInterval(int); run=false; alert("Game Over! Score: "+score); }
+}
+cvs.addEventListener('mousemove', e=>{ const r=cvs.getBoundingClientRect(); pad.x=e.clientX-r.left-pad.w/2; });
+cvs.addEventListener('touchmove', e=>{ const r=cvs.getBoundingClientRect(); pad.x=e.touches[0].clientX-r.left-pad.w/2; e.preventDefault(); });
+</script>
   </div>
 </body>
 </html>

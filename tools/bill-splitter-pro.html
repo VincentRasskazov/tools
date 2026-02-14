@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "Markdown to HTML Converter"
-category: "Developer"
-description: "Convert raw Markdown text directly into clean, copyable HTML code."
-permalink: /tools/markdown-to-html.html
+title: "Advanced Bill Splitter"
+category: "Finance"
+description: "Split the bill and calculate tip per person accurately."
+permalink: /tools/bill-splitter-pro.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
-  <meta property="og:title" content="Markdown to HTML Converter">
-  <meta property="og:description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
+  <meta name="description" content="Split the bill and calculate tip per person accurately.">
+  <meta property="og:title" content="Advanced Bill Splitter">
+  <meta property="og:description" content="Split the bill and calculate tip per person accurately.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Markdown to HTML Converter">
-  <meta name="twitter:description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
+  <meta name="twitter:title" content="Advanced Bill Splitter">
+  <meta name="twitter:description" content="Split the bill and calculate tip per person accurately.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Markdown to HTML Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+  <title>Advanced Bill Splitter</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -41,13 +41,12 @@ canvas { display: block; margin: 0 auto; background: #1e293b; border-radius: 12p
 </head>
 <body>
   <div class="tool-container">
-    <h1>Markdown to HTML</h1>
-<textarea id="in" rows="6" placeholder="# Hello World
-
-This is **bold** text."></textarea>
-<button onclick="c()">Convert to HTML</button>
-<textarea id="out" rows="6" readonly placeholder="<h1 id='hello-world'>Hello World</h1>..."></textarea>
-<script>function c(){ document.getElementById('out').value = marked.parse(document.getElementById('in').value); }</script>
+    <h1>Bill Splitter Pro</h1>
+<div class="row"><div><label>Total Bill ($)</label><input type="number" id="b" value="100"></div><div><label>Tip (%)</label><input type="number" id="t" value="15"></div></div>
+<label>Number of People</label><input type="number" id="p" value="4">
+<button onclick="c()">Calculate Share</button>
+<div id="res" class="res"></div>
+<script>function c(){ const b=parseFloat(document.getElementById('b').value), t=parseFloat(document.getElementById('t').value)/100, p=parseInt(document.getElementById('p').value); if(b&&p){ const tip=b*t, tot=b+tip, pp=tot/p; document.getElementById('res').innerHTML=`Total with Tip: <strong>$${tot.toFixed(2)}</strong><br>Each Person Pays: <span style="font-size:2.5rem;display:block;color:var(--success);">$${pp.toFixed(2)}</span>`; } }</script>
   </div>
 </body>
 </html>

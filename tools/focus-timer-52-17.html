@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "Markdown to HTML Converter"
-category: "Developer"
-description: "Convert raw Markdown text directly into clean, copyable HTML code."
-permalink: /tools/markdown-to-html.html
+title: "52/17 Focus Timer"
+category: "Time"
+description: "Boost productivity using the science-backed 52 minutes of work, 17 minutes of break system."
+permalink: /tools/focus-timer-52-17.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
-  <meta property="og:title" content="Markdown to HTML Converter">
-  <meta property="og:description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
+  <meta name="description" content="Boost productivity using the science-backed 52 minutes of work, 17 minutes of break system.">
+  <meta property="og:title" content="52/17 Focus Timer">
+  <meta property="og:description" content="Boost productivity using the science-backed 52 minutes of work, 17 minutes of break system.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Markdown to HTML Converter">
-  <meta name="twitter:description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
+  <meta name="twitter:title" content="52/17 Focus Timer">
+  <meta name="twitter:description" content="Boost productivity using the science-backed 52 minutes of work, 17 minutes of break system.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Markdown to HTML Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+  <title>52/17 Focus Timer</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -41,13 +41,14 @@ canvas { display: block; margin: 0 auto; background: #1e293b; border-radius: 12p
 </head>
 <body>
   <div class="tool-container">
-    <h1>Markdown to HTML</h1>
-<textarea id="in" rows="6" placeholder="# Hello World
-
-This is **bold** text."></textarea>
-<button onclick="c()">Convert to HTML</button>
-<textarea id="out" rows="6" readonly placeholder="<h1 id='hello-world'>Hello World</h1>..."></textarea>
-<script>function c(){ document.getElementById('out').value = marked.parse(document.getElementById('in').value); }</script>
+    <h1>52/17 Focus Timer</h1>
+<div id="time" style="font-size:5rem;font-weight:bold;font-family:monospace;text-align:center;color:var(--primary);margin:20px 0;">52:00</div>
+<div class="row">
+    <button onclick="st(52, 'var(--primary)')">Work (52m)</button>
+    <button onclick="st(17, 'var(--success)')" style="background:var(--success);">Break (17m)</button>
+</div>
+<button onclick="sp()" style="background:var(--danger);margin-top:10px;">Pause / Stop</button>
+<script>let t=3120, tm, run=false; function f(s){let m=Math.floor(s/60), sc=s%60; return `${String(m).padStart(2,'0')}:${String(sc).padStart(2,'0')}`;} function st(m, col){clearInterval(tm); run=true; t=m*60; document.getElementById('time').style.color=col; document.getElementById('time').innerText=f(t); tm=setInterval(()=>{t--; document.getElementById('time').innerText=f(t); if(t<=0){clearInterval(tm);alert("Time's up!");}},1000);} function sp(){clearInterval(tm); run=false;}</script>
   </div>
 </body>
 </html>

@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "Markdown to HTML Converter"
-category: "Developer"
-description: "Convert raw Markdown text directly into clean, copyable HTML code."
-permalink: /tools/markdown-to-html.html
+title: "Color Match Reflex Test"
+category: "Games"
+description: "Click the button when the TEXT matches the COLOR. A classic brain-teaser game!"
+permalink: /tools/color-reflex-test.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
-  <meta property="og:title" content="Markdown to HTML Converter">
-  <meta property="og:description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
+  <meta name="description" content="Click the button when the TEXT matches the COLOR. A classic brain-teaser game!">
+  <meta property="og:title" content="Color Match Reflex Test">
+  <meta property="og:description" content="Click the button when the TEXT matches the COLOR. A classic brain-teaser game!">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Markdown to HTML Converter">
-  <meta name="twitter:description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
+  <meta name="twitter:title" content="Color Match Reflex Test">
+  <meta name="twitter:description" content="Click the button when the TEXT matches the COLOR. A classic brain-teaser game!">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Markdown to HTML Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+  <title>Color Match Reflex Test</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -41,13 +41,14 @@ canvas { display: block; margin: 0 auto; background: #1e293b; border-radius: 12p
 </head>
 <body>
   <div class="tool-container">
-    <h1>Markdown to HTML</h1>
-<textarea id="in" rows="6" placeholder="# Hello World
-
-This is **bold** text."></textarea>
-<button onclick="c()">Convert to HTML</button>
-<textarea id="out" rows="6" readonly placeholder="<h1 id='hello-world'>Hello World</h1>..."></textarea>
-<script>function c(){ document.getElementById('out').value = marked.parse(document.getElementById('in').value); }</script>
+    <h1>Color Reflex Match</h1>
+<div id="wrd" style="font-size:4rem;font-weight:900;text-align:center;margin:30px 0;">BLUE</div>
+<div class="row">
+    <button onclick="chk(true)" style="background:var(--success)">MATCH</button>
+    <button onclick="chk(false)" style="background:var(--danger)">NO MATCH</button>
+</div>
+<div id="sc" style="text-align:center;font-size:1.5rem;font-weight:bold;margin-top:20px;">Score: 0</div>
+<script>const c=[{n:'RED',h:'#ef4444'},{n:'BLUE',h:'#3b82f6'},{n:'GREEN',h:'#10b981'},{n:'YELLOW',h:'#f59e0b'}]; let s=0, isMatch=false; function nx(){const text=c[Math.floor(Math.random()*c.length)]; isMatch=Math.random()>0.5; const col=isMatch?text:c[Math.floor(Math.random()*c.length)]; const el=document.getElementById('wrd'); el.innerText=text.n; el.style.color=col.h;} function chk(g){if(g===isMatch){s++; document.getElementById('sc').innerHTML=`<span style="color:var(--success)">Correct! Score: ${s}</span>`; nx();}else{s=0; document.getElementById('sc').innerHTML=`<span style="color:var(--danger)">Wrong! Score reset to 0</span>`; nx();}} nx();</script>
   </div>
 </body>
 </html>

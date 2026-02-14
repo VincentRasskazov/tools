@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "Markdown to HTML Converter"
+title: "URL Parameter Extractor"
 category: "Developer"
-description: "Convert raw Markdown text directly into clean, copyable HTML code."
-permalink: /tools/markdown-to-html.html
+description: "Paste a URL to automatically extract and format its query parameters into a clean list."
+permalink: /tools/url-parameter-extractor.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
-  <meta property="og:title" content="Markdown to HTML Converter">
-  <meta property="og:description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
+  <meta name="description" content="Paste a URL to automatically extract and format its query parameters into a clean list.">
+  <meta property="og:title" content="URL Parameter Extractor">
+  <meta property="og:description" content="Paste a URL to automatically extract and format its query parameters into a clean list.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Markdown to HTML Converter">
-  <meta name="twitter:description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
+  <meta name="twitter:title" content="URL Parameter Extractor">
+  <meta name="twitter:description" content="Paste a URL to automatically extract and format its query parameters into a clean list.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Markdown to HTML Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+  <title>URL Parameter Extractor</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -41,13 +41,11 @@ canvas { display: block; margin: 0 auto; background: #1e293b; border-radius: 12p
 </head>
 <body>
   <div class="tool-container">
-    <h1>Markdown to HTML</h1>
-<textarea id="in" rows="6" placeholder="# Hello World
-
-This is **bold** text."></textarea>
-<button onclick="c()">Convert to HTML</button>
-<textarea id="out" rows="6" readonly placeholder="<h1 id='hello-world'>Hello World</h1>..."></textarea>
-<script>function c(){ document.getElementById('out').value = marked.parse(document.getElementById('in').value); }</script>
+    <h1>URL Params Extractor</h1>
+<input type="text" id="in" placeholder="https://example.com?user=john&id=123&src=twitter">
+<button onclick="c()">Extract Parameters</button>
+<div id="res" class="res" style="text-align:left;font-size:1.1rem;font-family:monospace;white-space:pre-wrap;"></div>
+<script>function c(){ try{ const u=new URL(document.getElementById('in').value); const p=new URLSearchParams(u.search); let h=""; for(let [k,v] of p.entries()){ h+=`<strong style="color:var(--primary)">${k}</strong> : ${v}\n`; } document.getElementById('res').innerHTML=h||"No parameters found."; }catch(e){document.getElementById('res').innerText="Invalid URL.";} }</script>
   </div>
 </body>
 </html>

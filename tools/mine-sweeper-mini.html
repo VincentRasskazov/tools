@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "Markdown to HTML Converter"
-category: "Developer"
-description: "Convert raw Markdown text directly into clean, copyable HTML code."
-permalink: /tools/markdown-to-html.html
+title: "Mini Minesweeper"
+category: "Games"
+description: "A quick 5x5 grid of Minesweeper. Find the safe spots, avoid the bombs!"
+permalink: /tools/mine-sweeper-mini.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
-  <meta property="og:title" content="Markdown to HTML Converter">
-  <meta property="og:description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
+  <meta name="description" content="A quick 5x5 grid of Minesweeper. Find the safe spots, avoid the bombs!">
+  <meta property="og:title" content="Mini Minesweeper">
+  <meta property="og:description" content="A quick 5x5 grid of Minesweeper. Find the safe spots, avoid the bombs!">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Markdown to HTML Converter">
-  <meta name="twitter:description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
+  <meta name="twitter:title" content="Mini Minesweeper">
+  <meta name="twitter:description" content="A quick 5x5 grid of Minesweeper. Find the safe spots, avoid the bombs!">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Markdown to HTML Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+  <title>Mini Minesweeper</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -41,13 +41,11 @@ canvas { display: block; margin: 0 auto; background: #1e293b; border-radius: 12p
 </head>
 <body>
   <div class="tool-container">
-    <h1>Markdown to HTML</h1>
-<textarea id="in" rows="6" placeholder="# Hello World
-
-This is **bold** text."></textarea>
-<button onclick="c()">Convert to HTML</button>
-<textarea id="out" rows="6" readonly placeholder="<h1 id='hello-world'>Hello World</h1>..."></textarea>
-<script>function c(){ document.getElementById('out').value = marked.parse(document.getElementById('in').value); }</script>
+    <h1>Mini Minesweeper</h1>
+<button onclick="st()">Start Game</button>
+<div id="grid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:5px;max-width:300px;margin:20px auto;"></div>
+<div id="res" style="text-align:center;font-size:1.5rem;font-weight:bold;color:var(--primary);"></div>
+<script>let b=[], s=0; function st(){b=[];s=0;document.getElementById('res').innerText=''; let h=''; for(let i=0;i<25;i++){b.push(Math.random()<0.2); h+=`<div id="c${i}" style="height:50px;background:var(--border);border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.5rem;" onclick="clk(${i})"></div>`;} document.getElementById('grid').innerHTML=h;} function clk(i){const el=document.getElementById('c'+i); if(el.style.background!=='var(--border)')return; if(b[i]){el.innerText='💣'; el.style.background='var(--danger)'; document.getElementById('res').innerHTML='<span style="color:var(--danger)">Game Over!</span>';}else{el.style.background='var(--success)'; s++; if(s===(25-b.filter(x=>x).length))document.getElementById('res').innerHTML='<span style="color:var(--success)">You Win! 🎉</span>';}} st();</script>
   </div>
 </body>
 </html>

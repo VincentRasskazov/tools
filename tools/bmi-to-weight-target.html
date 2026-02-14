@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "Markdown to HTML Converter"
-category: "Developer"
-description: "Convert raw Markdown text directly into clean, copyable HTML code."
-permalink: /tools/markdown-to-html.html
+title: "Target Weight Calculator (via BMI)"
+category: "Health"
+description: "Find out exactly how much you need to weigh to hit a specific target BMI."
+permalink: /tools/bmi-to-weight-target.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
-  <meta property="og:title" content="Markdown to HTML Converter">
-  <meta property="og:description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
+  <meta name="description" content="Find out exactly how much you need to weigh to hit a specific target BMI.">
+  <meta property="og:title" content="Target Weight Calculator (via BMI)">
+  <meta property="og:description" content="Find out exactly how much you need to weigh to hit a specific target BMI.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Markdown to HTML Converter">
-  <meta name="twitter:description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
+  <meta name="twitter:title" content="Target Weight Calculator (via BMI)">
+  <meta name="twitter:description" content="Find out exactly how much you need to weigh to hit a specific target BMI.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Markdown to HTML Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+  <title>Target Weight Calculator (via BMI)</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -41,13 +41,12 @@ canvas { display: block; margin: 0 auto; background: #1e293b; border-radius: 12p
 </head>
 <body>
   <div class="tool-container">
-    <h1>Markdown to HTML</h1>
-<textarea id="in" rows="6" placeholder="# Hello World
-
-This is **bold** text."></textarea>
-<button onclick="c()">Convert to HTML</button>
-<textarea id="out" rows="6" readonly placeholder="<h1 id='hello-world'>Hello World</h1>..."></textarea>
-<script>function c(){ document.getElementById('out').value = marked.parse(document.getElementById('in').value); }</script>
+    <h1>Target Weight Calculator</h1>
+<div class="row"><div><label>Height (cm)</label><input type="number" id="h" value="175"></div><div><label>Target BMI</label><input type="number" id="b" value="22" step="0.1"></div></div>
+<button onclick="c()">Calculate Target Weight</button>
+<div id="res" class="res"></div>
+<p style="text-align:center;font-size:0.85rem;color:#64748b;">(Normal BMI is typically between 18.5 and 24.9)</p>
+<script>function c(){ const h=parseFloat(document.getElementById('h').value)/100, b=parseFloat(document.getElementById('b').value); if(h&&b){ const w = b * (h*h); document.getElementById('res').innerHTML=`To hit a BMI of ${b},<br>your target weight is:<br><span style="font-size:3rem;color:var(--primary)">${w.toFixed(1)} kg</span>`; } }</script>
   </div>
 </body>
 </html>

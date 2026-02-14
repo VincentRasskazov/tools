@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "Markdown to HTML Converter"
-category: "Developer"
-description: "Convert raw Markdown text directly into clean, copyable HTML code."
-permalink: /tools/markdown-to-html.html
+title: "Number Memory Test"
+category: "Games"
+description: "Memorize the sequence of numbers! How many digits can you remember?"
+permalink: /tools/number-memory-test.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
-  <meta property="og:title" content="Markdown to HTML Converter">
-  <meta property="og:description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
+  <meta name="description" content="Memorize the sequence of numbers! How many digits can you remember?">
+  <meta property="og:title" content="Number Memory Test">
+  <meta property="og:description" content="Memorize the sequence of numbers! How many digits can you remember?">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Markdown to HTML Converter">
-  <meta name="twitter:description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
+  <meta name="twitter:title" content="Number Memory Test">
+  <meta name="twitter:description" content="Memorize the sequence of numbers! How many digits can you remember?">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Markdown to HTML Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+  <title>Number Memory Test</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -41,13 +41,11 @@ canvas { display: block; margin: 0 auto; background: #1e293b; border-radius: 12p
 </head>
 <body>
   <div class="tool-container">
-    <h1>Markdown to HTML</h1>
-<textarea id="in" rows="6" placeholder="# Hello World
-
-This is **bold** text."></textarea>
-<button onclick="c()">Convert to HTML</button>
-<textarea id="out" rows="6" readonly placeholder="<h1 id='hello-world'>Hello World</h1>..."></textarea>
-<script>function c(){ document.getElementById('out').value = marked.parse(document.getElementById('in').value); }</script>
+    <h1>Number Memory</h1>
+<div id="display" style="font-size:3rem;font-weight:bold;text-align:center;margin:30px 0;color:var(--primary);letter-spacing:5px;">Ready?</div>
+<input type="number" id="in" placeholder="Type the number..." style="display:none;text-align:center;font-size:1.5rem;">
+<button id="btn" onclick="st()">Start Test</button>
+<script>let num="", lvl=1; function st(){ document.getElementById('in').style.display='none'; document.getElementById('btn').style.display='none'; num+=Math.floor(Math.random()*10); document.getElementById('display').innerText=num; setTimeout(()=>{ document.getElementById('display').innerText="???"; document.getElementById('in').style.display='block'; document.getElementById('in').value=''; document.getElementById('in').focus(); document.getElementById('btn').innerText="Submit"; document.getElementById('btn').style.display='block'; document.getElementById('btn').onclick=chk; }, 1000 + (lvl*300)); } function chk(){ if(document.getElementById('in').value===num){ lvl++; document.getElementById('btn').onclick=st; st(); } else { document.getElementById('display').innerHTML=`<span style="color:var(--danger)">Wrong!</span><br><span style="font-size:1.2rem">It was: ${num}</span>`; document.getElementById('btn').innerText="Restart"; document.getElementById('btn').onclick=rs; document.getElementById('in').style.display='none'; } } function rs(){num="";lvl=1;st();}</script>
   </div>
 </body>
 </html>

@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "Markdown to HTML Converter"
-category: "Developer"
-description: "Convert raw Markdown text directly into clean, copyable HTML code."
-permalink: /tools/markdown-to-html.html
+title: "Whack-A-Mole Game"
+category: "Games"
+description: "Test your reflexes! Whack as many moles as you can in 30 seconds."
+permalink: /tools/whack-a-mole.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
-  <meta property="og:title" content="Markdown to HTML Converter">
-  <meta property="og:description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
+  <meta name="description" content="Test your reflexes! Whack as many moles as you can in 30 seconds.">
+  <meta property="og:title" content="Whack-A-Mole Game">
+  <meta property="og:description" content="Test your reflexes! Whack as many moles as you can in 30 seconds.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Markdown to HTML Converter">
-  <meta name="twitter:description" content="Convert raw Markdown text directly into clean, copyable HTML code.">
+  <meta name="twitter:title" content="Whack-A-Mole Game">
+  <meta name="twitter:description" content="Test your reflexes! Whack as many moles as you can in 30 seconds.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Markdown to HTML Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+  <title>Whack-A-Mole Game</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -41,13 +41,20 @@ canvas { display: block; margin: 0 auto; background: #1e293b; border-radius: 12p
 </head>
 <body>
   <div class="tool-container">
-    <h1>Markdown to HTML</h1>
-<textarea id="in" rows="6" placeholder="# Hello World
-
-This is **bold** text."></textarea>
-<button onclick="c()">Convert to HTML</button>
-<textarea id="out" rows="6" readonly placeholder="<h1 id='hello-world'>Hello World</h1>..."></textarea>
-<script>function c(){ document.getElementById('out').value = marked.parse(document.getElementById('in').value); }</script>
+    <h1>Whack-A-Mole</h1>
+<div class="row" style="margin-bottom:15px;text-align:center;">
+    <div style="flex:1;font-size:1.5rem;font-weight:bold;color:var(--primary);" id="sc">Score: 0</div>
+    <div style="flex:1;font-size:1.5rem;font-weight:bold;color:var(--danger);" id="tm">Time: 30</div>
+</div>
+<button onclick="st()">Start Game</button>
+<div class="grid-3x3" id="g"></div>
+<script>
+const g=document.getElementById('g'); let s=0, t=30, mTimer, gTimer, active=false;
+for(let i=0;i<9;i++) g.innerHTML+=`<div class="mole-hole" id="h${i}" onmousedown="whack(${i})"></div>`;
+function st(){ s=0; t=30; active=true; document.getElementById('sc').innerText="Score: 0"; document.getElementById('tm').innerText="Time: 30"; clearInterval(gTimer); clearInterval(mTimer); gTimer=setInterval(()=>{t--; document.getElementById('tm').innerText="Time: "+t; if(t<=0){clearInterval(gTimer);clearInterval(mTimer);active=false;alert("Game Over! Score: "+s);for(let i=0;i<9;i++)document.getElementById('h'+i).innerText='';}},1000); pop(); mTimer=setInterval(pop, 800); }
+function pop(){ for(let i=0;i<9;i++) document.getElementById('h'+i).innerText=''; const r=Math.floor(Math.random()*9); document.getElementById('h'+r).innerText='🐹'; }
+function whack(i){ const h=document.getElementById('h'+i); if(active && h.innerText==='🐹'){ s+=10; document.getElementById('sc').innerText="Score: "+s; h.innerText='💥'; } }
+</script>
   </div>
 </body>
 </html>
