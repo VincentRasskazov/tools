@@ -1,57 +1,13 @@
----
-layout: null
-title: "URL Parser"
-category: "Dev Tools"
-description: "Parse URL into components."
-permalink: /tools/url-parser.html
----
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta name="description" content="Parse and split URL into protocol, host, path, and query parameters.">
+<html lang="en"><head>
+  <meta name="description" content="Parse and extract parts of a URL (protocol, host, path, parameters).">
   <meta property="og:title" content="URL Parser">
-  <meta property="og:description" content="Parse and split URL into protocol, host, path, and query parameters.">
+  <meta property="og:description" content="Parse and extract parts of a URL (protocol, host, path, parameters).">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="URL Parser">
-  <meta name="twitter:description" content="Parse and split URL into protocol, host, path, and query parameters.">
-  
-  <meta charset="UTF-8">
-  <title>URL Parser</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .tool-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { color: #2563eb; text-align: center; }
-    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; }
-    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-    .result-row { display: flex; border-bottom: 1px solid #eee; padding: 10px 0; }
-    .key { font-weight: bold; width: 150px; color: #64748b; }
-    .val { font-family: monospace; color: #334155; }
-  </style>
-</head>
-<body>
-  <div class="tool-container">
-    <h1>URL Parser</h1>
-    <input type="text" id="url" placeholder="https://example.com/path?query=123#hash">
-    <button onclick="parse()">Parse URL</button>
-    <div id="results" style="margin-top:20px;"></div>
-  </div>
-  <script>
-    function parse() {
-      try {
-        const url = new URL(document.getElementById('url').value);
-        const res = document.getElementById('results');
-        res.innerHTML = `
-          <div class="result-row"><span class="key">Protocol</span><span class="val">${url.protocol}</span></div>
-          <div class="result-row"><span class="key">Host</span><span class="val">${url.host}</span></div>
-          <div class="result-row"><span class="key">Path</span><span class="val">${url.pathname}</span></div>
-          <div class="result-row"><span class="key">Query</span><span class="val">${url.search}</span></div>
-          <div class="result-row"><span class="key">Hash</span><span class="val">${url.hash}</span></div>
-        `;
-      } catch(e) { alert("Invalid URL"); }
-    }
-  </script>
-</body>
-</html>
+  <meta name="twitter:description" content="Parse and extract parts of a URL (protocol, host, path, parameters).">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>URL Parser</title><style>.tool-container{max-width:800px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} input{width:100%;padding:12px;border:1px solid #ccc;border-radius:6px;margin-bottom:15px;} textarea{width:100%;height:250px;padding:10px;font-family:monospace;border:1px solid #ccc;border-radius:6px;} button{width:100%;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">URL Parser</h1><input type="text" id="in" placeholder="https://example.com:8080/path/page?name=test#hash"><button onclick="c()">Parse URL</button><textarea id="out" readonly style="margin-top:20px;"></textarea></div>
+<script>function c(){ try{ const u=new URL(document.getElementById('in').value); const obj={ href: u.href, protocol: u.protocol, host: u.host, hostname: u.hostname, port: u.port, pathname: u.pathname, search: u.search, hash: u.hash }; document.getElementById('out').value=JSON.stringify(obj,null,2); }catch(e){document.getElementById('out').value="Invalid URL";} }</script></body></html>

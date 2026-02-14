@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Sort all keys in a JSON object alphabetically.">
+  <meta property="og:title" content="JSON Key Sorter">
+  <meta property="og:description" content="Sort all keys in a JSON object alphabetically.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="JSON Key Sorter">
+  <meta name="twitter:description" content="Sort all keys in a JSON object alphabetically.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>JSON Key Sorter</title><style>.tool-container{max-width:800px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} textarea{width:100%;height:200px;padding:10px;border:1px solid #ccc;border-radius:6px;margin-bottom:15px;font-family:monospace;} button{width:100%;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;}</style></head>
+<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">JSON Key Sorter</h1><textarea id="in" placeholder='{"b":1, "a":2}'></textarea><button onclick="c()">Sort Keys Alphabetically</button><textarea id="out" readonly style="margin-top:20px;"></textarea></div>
+<script>function sortKeys(obj){ if(typeof obj!=='object'||obj===null) return obj; if(Array.isArray(obj)) return obj.map(sortKeys); return Object.keys(obj).sort().reduce((r,k)=>{r[k]=sortKeys(obj[k]);return r;},{}); } function c(){ try{ const j=JSON.parse(document.getElementById('in').value); document.getElementById('out').value=JSON.stringify(sortKeys(j),null,2); }catch(e){document.getElementById('out').value="Invalid JSON";} }</script></body></html>
