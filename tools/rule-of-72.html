@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "JSON Minifier"
-category: "Developer"
-description: "Compress and minify JSON data to save space and reduce file sizes."
-permalink: /tools/json-minifier.html
+title: "Rule of 72 Calculator"
+category: "Finance"
+description: "Estimate exactly how many years it will take to double your investment."
+permalink: /tools/rule-of-72.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Compress and minify JSON data to save space and reduce file sizes.">
-  <meta property="og:title" content="JSON Minifier">
-  <meta property="og:description" content="Compress and minify JSON data to save space and reduce file sizes.">
+  <meta name="description" content="Estimate exactly how many years it will take to double your investment.">
+  <meta property="og:title" content="Rule of 72 Calculator">
+  <meta property="og:description" content="Estimate exactly how many years it will take to double your investment.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="JSON Minifier">
-  <meta name="twitter:description" content="Compress and minify JSON data to save space and reduce file sizes.">
+  <meta name="twitter:title" content="Rule of 72 Calculator">
+  <meta name="twitter:description" content="Estimate exactly how many years it will take to double your investment.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>JSON Minifier</title>
+  <title>Rule of 72 Calculator</title>
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -36,11 +36,12 @@ input[type=range] { padding: 0; border: none; background: transparent; box-shado
 </head>
 <body>
   <div class="tool-container">
-    <h1>JSON Minifier</h1>
-<textarea id="in" rows="6" placeholder='{ "key": "value" }'></textarea>
-<button onclick="c()">Minify JSON</button>
-<textarea id="out" rows="6" readonly style="margin-top:20px;" placeholder="Result..."></textarea>
-<script>function c(){ try{ document.getElementById('out').value=JSON.stringify(JSON.parse(document.getElementById('in').value)); }catch(e){ document.getElementById('out').value="Invalid JSON"; } }</script>
+    <h1>Rule of 72</h1>
+<label>Annual Interest Rate (%)</label>
+<input type="number" id="r" value="8" step="0.1">
+<button onclick="c()">Calculate Years to Double</button>
+<div id="res" class="res"></div>
+<script>function c(){ const r=parseFloat(document.getElementById('r').value); if(r>0) document.getElementById('res').innerHTML=`<span style="font-size:3rem;color:var(--primary)">${(72/r).toFixed(1)}</span><br>Years to double investment`; }</script>
   </div>
 </body>
 </html>

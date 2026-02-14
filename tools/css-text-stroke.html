@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "JSON Minifier"
-category: "Developer"
-description: "Compress and minify JSON data to save space and reduce file sizes."
-permalink: /tools/json-minifier.html
+title: "CSS Text Stroke Generator"
+category: "Design"
+description: "Generate outlined CSS text stroke effects for bold typography."
+permalink: /tools/css-text-stroke.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Compress and minify JSON data to save space and reduce file sizes.">
-  <meta property="og:title" content="JSON Minifier">
-  <meta property="og:description" content="Compress and minify JSON data to save space and reduce file sizes.">
+  <meta name="description" content="Generate outlined CSS text stroke effects for bold typography.">
+  <meta property="og:title" content="CSS Text Stroke Generator">
+  <meta property="og:description" content="Generate outlined CSS text stroke effects for bold typography.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="JSON Minifier">
-  <meta name="twitter:description" content="Compress and minify JSON data to save space and reduce file sizes.">
+  <meta name="twitter:title" content="CSS Text Stroke Generator">
+  <meta name="twitter:description" content="Generate outlined CSS text stroke effects for bold typography.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>JSON Minifier</title>
+  <title>CSS Text Stroke Generator</title>
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -36,11 +36,12 @@ input[type=range] { padding: 0; border: none; background: transparent; box-shado
 </head>
 <body>
   <div class="tool-container">
-    <h1>JSON Minifier</h1>
-<textarea id="in" rows="6" placeholder='{ "key": "value" }'></textarea>
-<button onclick="c()">Minify JSON</button>
-<textarea id="out" rows="6" readonly style="margin-top:20px;" placeholder="Result..."></textarea>
-<script>function c(){ try{ document.getElementById('out').value=JSON.stringify(JSON.parse(document.getElementById('in').value)); }catch(e){ document.getElementById('out').value="Invalid JSON"; } }</script>
+    <h1>Text Stroke Generator</h1>
+<div id="box" style="font-size:4rem;font-weight:900;text-align:center;margin:30px 0;color:transparent;-webkit-text-stroke: 2px #3b82f6;">OUTLINE</div>
+<div class="row"><div><label>Stroke Width</label><input type="range" id="w" min="1" max="10" value="2" oninput="u()"></div><div><label>Stroke Color</label><input type="color" id="c" value="#3b82f6" oninput="u()"></div></div>
+<textarea id="out" rows="3" readonly></textarea>
+<script>function u(){ const w=document.getElementById('w').value, c=document.getElementById('c').value; const css=`color: transparent;
+-webkit-text-stroke: ${w}px ${c};`; document.getElementById('box').style.cssText=`font-size:4rem;font-weight:900;text-align:center;margin:30px 0;${css}`; document.getElementById('out').value=css; } u();</script>
   </div>
 </body>
 </html>

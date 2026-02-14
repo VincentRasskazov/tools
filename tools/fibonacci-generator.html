@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "JSON Minifier"
-category: "Developer"
-description: "Compress and minify JSON data to save space and reduce file sizes."
-permalink: /tools/json-minifier.html
+title: "Fibonacci Generator"
+category: "Math"
+description: "Generate the first N numbers of the Fibonacci sequence."
+permalink: /tools/fibonacci-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Compress and minify JSON data to save space and reduce file sizes.">
-  <meta property="og:title" content="JSON Minifier">
-  <meta property="og:description" content="Compress and minify JSON data to save space and reduce file sizes.">
+  <meta name="description" content="Generate the first N numbers of the Fibonacci sequence.">
+  <meta property="og:title" content="Fibonacci Generator">
+  <meta property="og:description" content="Generate the first N numbers of the Fibonacci sequence.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="JSON Minifier">
-  <meta name="twitter:description" content="Compress and minify JSON data to save space and reduce file sizes.">
+  <meta name="twitter:title" content="Fibonacci Generator">
+  <meta name="twitter:description" content="Generate the first N numbers of the Fibonacci sequence.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>JSON Minifier</title>
+  <title>Fibonacci Generator</title>
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -36,11 +36,11 @@ input[type=range] { padding: 0; border: none; background: transparent; box-shado
 </head>
 <body>
   <div class="tool-container">
-    <h1>JSON Minifier</h1>
-<textarea id="in" rows="6" placeholder='{ "key": "value" }'></textarea>
-<button onclick="c()">Minify JSON</button>
-<textarea id="out" rows="6" readonly style="margin-top:20px;" placeholder="Result..."></textarea>
-<script>function c(){ try{ document.getElementById('out').value=JSON.stringify(JSON.parse(document.getElementById('in').value)); }catch(e){ document.getElementById('out').value="Invalid JSON"; } }</script>
+    <h1>Fibonacci Sequence</h1>
+<label>How many numbers? (Max 100)</label>
+<div class="row"><input type="number" id="n" value="10" min="1" max="100"><button onclick="c()">Generate</button></div>
+<textarea id="out" rows="6" readonly style="margin-top:20px;"></textarea>
+<script>function c(){ const n=parseInt(document.getElementById('n').value); if(n>100||n<1)return; let s=[0,1]; for(let i=2;i<n;i++)s.push(s[i-1]+s[i-2]); document.getElementById('out').value=s.slice(0,n).join(', '); }</script>
   </div>
 </body>
 </html>

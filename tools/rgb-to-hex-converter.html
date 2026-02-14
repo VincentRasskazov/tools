@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "JSON Minifier"
-category: "Developer"
-description: "Compress and minify JSON data to save space and reduce file sizes."
-permalink: /tools/json-minifier.html
+title: "RGB to Hex Converter"
+category: "Design"
+description: "Convert Red, Green, Blue (RGB) values directly into Hexadecimal color codes."
+permalink: /tools/rgb-to-hex-converter.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Compress and minify JSON data to save space and reduce file sizes.">
-  <meta property="og:title" content="JSON Minifier">
-  <meta property="og:description" content="Compress and minify JSON data to save space and reduce file sizes.">
+  <meta name="description" content="Convert Red, Green, Blue (RGB) values directly into Hexadecimal color codes.">
+  <meta property="og:title" content="RGB to Hex Converter">
+  <meta property="og:description" content="Convert Red, Green, Blue (RGB) values directly into Hexadecimal color codes.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="JSON Minifier">
-  <meta name="twitter:description" content="Compress and minify JSON data to save space and reduce file sizes.">
+  <meta name="twitter:title" content="RGB to Hex Converter">
+  <meta name="twitter:description" content="Convert Red, Green, Blue (RGB) values directly into Hexadecimal color codes.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>JSON Minifier</title>
+  <title>RGB to Hex Converter</title>
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -36,11 +36,11 @@ input[type=range] { padding: 0; border: none; background: transparent; box-shado
 </head>
 <body>
   <div class="tool-container">
-    <h1>JSON Minifier</h1>
-<textarea id="in" rows="6" placeholder='{ "key": "value" }'></textarea>
-<button onclick="c()">Minify JSON</button>
-<textarea id="out" rows="6" readonly style="margin-top:20px;" placeholder="Result..."></textarea>
-<script>function c(){ try{ document.getElementById('out').value=JSON.stringify(JSON.parse(document.getElementById('in').value)); }catch(e){ document.getElementById('out').value="Invalid JSON"; } }</script>
+    <h1>RGB to Hex</h1>
+<div class="row"><div><label>R</label><input type="number" id="r" value="59" min="0" max="255" oninput="c()"></div><div><label>G</label><input type="number" id="g" value="130" min="0" max="255" oninput="c()"></div><div><label>B</label><input type="number" id="b" value="246" min="0" max="255" oninput="c()"></div></div>
+<div id="box" style="height:100px;border-radius:12px;margin-bottom:20px;border:2px solid var(--border);"></div>
+<div id="res" class="res" style="font-family:monospace;">#3B82F6</div>
+<script>function c(){ const r=parseInt(document.getElementById('r').value)||0, g=parseInt(document.getElementById('g').value)||0, b=parseInt(document.getElementById('b').value)||0; const hex='#'+[r,g,b].map(x=>x.toString(16).padStart(2,'0')).join('').toUpperCase(); document.getElementById('box').style.background=hex; document.getElementById('res').innerText=hex; } c();</script>
   </div>
 </body>
 </html>

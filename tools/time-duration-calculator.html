@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "JSON Minifier"
-category: "Developer"
-description: "Compress and minify JSON data to save space and reduce file sizes."
-permalink: /tools/json-minifier.html
+title: "Time Duration Calculator"
+category: "Time"
+description: "Calculate the exact duration in hours and minutes between two times."
+permalink: /tools/time-duration-calculator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Compress and minify JSON data to save space and reduce file sizes.">
-  <meta property="og:title" content="JSON Minifier">
-  <meta property="og:description" content="Compress and minify JSON data to save space and reduce file sizes.">
+  <meta name="description" content="Calculate the exact duration in hours and minutes between two times.">
+  <meta property="og:title" content="Time Duration Calculator">
+  <meta property="og:description" content="Calculate the exact duration in hours and minutes between two times.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="JSON Minifier">
-  <meta name="twitter:description" content="Compress and minify JSON data to save space and reduce file sizes.">
+  <meta name="twitter:title" content="Time Duration Calculator">
+  <meta name="twitter:description" content="Calculate the exact duration in hours and minutes between two times.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>JSON Minifier</title>
+  <title>Time Duration Calculator</title>
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -36,11 +36,11 @@ input[type=range] { padding: 0; border: none; background: transparent; box-shado
 </head>
 <body>
   <div class="tool-container">
-    <h1>JSON Minifier</h1>
-<textarea id="in" rows="6" placeholder='{ "key": "value" }'></textarea>
-<button onclick="c()">Minify JSON</button>
-<textarea id="out" rows="6" readonly style="margin-top:20px;" placeholder="Result..."></textarea>
-<script>function c(){ try{ document.getElementById('out').value=JSON.stringify(JSON.parse(document.getElementById('in').value)); }catch(e){ document.getElementById('out').value="Invalid JSON"; } }</script>
+    <h1>Time Duration</h1>
+<div class="row"><div><label>Start Time</label><input type="time" id="s" value="09:00"></div><div><label>End Time</label><input type="time" id="e" value="17:30"></div></div>
+<button onclick="c()">Calculate Duration</button>
+<div id="res" class="res"></div>
+<script>function c(){ const s=document.getElementById('s').value, e=document.getElementById('e').value; if(s&&e){ const d1=new Date('1/1/2000 '+s), d2=new Date('1/1/2000 '+e); let diff=(d2-d1)/60000; if(diff<0)diff+=24*60; const h=Math.floor(diff/60), m=diff%60; document.getElementById('res').innerHTML=`<strong>${h}</strong> Hours & <strong>${m}</strong> Minutes`; } }</script>
   </div>
 </body>
 </html>

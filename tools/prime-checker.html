@@ -1,60 +1,46 @@
 ---
 layout: null
-title: "Prime Checker"
+title: "Prime Number Checker"
 category: "Math"
-description: "Check if a number is a prime number."
+description: "Instantly check if a given number is a prime number."
 permalink: /tools/prime-checker.html
 ---
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta name="description" content="Check if a number is prime instantly. Simple math utility.">
+<html lang="en"><head>
+  <meta name="description" content="Instantly check if a given number is a prime number.">
   <meta property="og:title" content="Prime Number Checker">
-  <meta property="og:description" content="Check if a number is prime instantly. Simple math utility.">
+  <meta property="og:description" content="Instantly check if a given number is a prime number.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Prime Number Checker">
-  <meta name="twitter:description" content="Check if a number is prime instantly. Simple math utility.">
-  
+  <meta name="twitter:description" content="Instantly check if a given number is a prime number.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Prime Checker</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prime Number Checker</title>
   <style>
-    .tool-container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
-    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-size: 16px; text-align: center; }
-    button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-    #result { font-size: 1.5rem; font-weight: bold; margin-top: 20px; }
-  </style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+input[type=range] { padding: 0; border: none; background: transparent; box-shadow: none; }
+</style>
 </head>
 <body>
   <div class="tool-container">
-    <h1>Prime Number Checker</h1>
-    <input type="number" id="num" placeholder="Enter a number (e.g. 17)">
-    <button onclick="check()">Check</button>
-    <div id="result"></div>
+    <h1>Prime Checker</h1>
+<label>Enter a Number</label>
+<input type="number" id="in" placeholder="e.g. 17" oninput="c()">
+<div id="res" class="res">Waiting for number...</div>
+<script>function c(){ const n=parseInt(document.getElementById('in').value); const r=document.getElementById('res'); if(!n){r.innerText='Waiting...'; return;} if(n<2){r.innerHTML='<span style="color:var(--danger)">Not Prime</span>'; return;} for(let i=2;i<=Math.sqrt(n);i++){ if(n%i===0){ r.innerHTML='<span style="color:var(--danger)">Not Prime</span><br><span style="font-size:1rem;color:#64748b;">(Divisible by '+i+')</span>'; return; } } r.innerHTML='<span style="color:var(--success)">Yes, it is Prime!</span>'; }</script>
   </div>
-  <script>
-    function check() {
-      const n = parseInt(document.getElementById('num').value);
-      const res = document.getElementById('result');
-      if(!n) return;
-      
-      let isPrime = true;
-      if (n <= 1) isPrime = false;
-      for (let i = 2; i <= Math.sqrt(n); i++) {
-        if (n % i === 0) { isPrime = false; break; }
-      }
-      
-      if(isPrime) {
-        res.innerText = n + " is a Prime Number!";
-        res.style.color = "#16a34a";
-      } else {
-        res.innerText = n + " is NOT Prime.";
-        res.style.color = "#dc2626";
-      }
-    }
-  </script>
 </body>
 </html>

@@ -1,65 +1,46 @@
 ---
 layout: null
 title: "JSON Formatter"
-category: "Dev Tools"
-description: "Validate and format JSON."
+category: "Developer"
+description: "Beautify and format messy JSON data into readable, structured code."
 permalink: /tools/json-formatter.html
 ---
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta name="description" content="Format, validate, and beautify your JSON data. Readable output for developers.">
-  <meta property="og:title" content="JSON Formatter - Beautify JSON Code">
-  <meta property="og:description" content="Format, validate, and beautify your JSON data. Readable output for developers.">
+<html lang="en"><head>
+  <meta name="description" content="Beautify and format messy JSON data into readable, structured code.">
+  <meta property="og:title" content="JSON Formatter">
+  <meta property="og:description" content="Beautify and format messy JSON data into readable, structured code.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="JSON Formatter">
+  <meta name="twitter:description" content="Beautify and format messy JSON data into readable, structured code.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="JSON Formatter - Beautify JSON Code">
-  <meta name="twitter:description" content="Format, validate, and beautify your JSON data. Readable output for developers.">
-  
   <meta charset="UTF-8">
   <title>JSON Formatter</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    .tool-container { max-width: 900px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { text-align: center; color: #2563eb; }
-    textarea { width: 100%; height: 300px; padding: 15px; border: 1px solid #ccc; border-radius: 8px; font-family: monospace; font-size: 14px; margin-bottom: 20px; resize: vertical; background: #f9fafb; }
-    .controls { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; }
-    button { padding: 10px 20px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-    button:hover { background: #1d4ed8; }
-    .clear { background: #ef4444; }
-  </style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+input[type=range] { padding: 0; border: none; background: transparent; box-shadow: none; }
+</style>
 </head>
 <body>
   <div class="tool-container">
     <h1>JSON Formatter</h1>
-    <div class="controls">
-      <button onclick="format()">Format / Beautify</button>
-      <button onclick="minify()">Minify</button>
-      <button class="clear" onclick="document.getElementById('input').value=''">Clear</button>
-    </div>
-    <textarea id="input" placeholder='Paste your JSON here (e.g. {"name":"John", "age":30})'></textarea>
+<textarea id="in" rows="6" placeholder='{"key":"value"}'></textarea>
+<button onclick="c()">Format JSON</button>
+<textarea id="out" rows="10" readonly style="margin-top:20px;" placeholder="Result..."></textarea>
+<script>function c(){ try{ document.getElementById('out').value=JSON.stringify(JSON.parse(document.getElementById('in').value), null, 4); }catch(e){ document.getElementById('out').value="Invalid JSON"; } }</script>
   </div>
-  <script>
-    function format() {
-      const el = document.getElementById('input');
-      try {
-        const obj = JSON.parse(el.value);
-        el.value = JSON.stringify(obj, null, 4);
-      } catch(e) {
-        alert("Invalid JSON: " + e.message);
-      }
-    }
-    function minify() {
-      const el = document.getElementById('input');
-      try {
-        const obj = JSON.parse(el.value);
-        el.value = JSON.stringify(obj);
-      } catch(e) {
-        alert("Invalid JSON: " + e.message);
-      }
-    }
-  </script>
 </body>
 </html>

@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "JSON Minifier"
+title: "CIDR to Netmask Converter"
 category: "Developer"
-description: "Compress and minify JSON data to save space and reduce file sizes."
-permalink: /tools/json-minifier.html
+description: "Convert CIDR routing prefixes (e.g., /24) into IPv4 Subnet Masks."
+permalink: /tools/cidr-to-netmask.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Compress and minify JSON data to save space and reduce file sizes.">
-  <meta property="og:title" content="JSON Minifier">
-  <meta property="og:description" content="Compress and minify JSON data to save space and reduce file sizes.">
+  <meta name="description" content="Convert CIDR routing prefixes (e.g., /24) into IPv4 Subnet Masks.">
+  <meta property="og:title" content="CIDR to Netmask Converter">
+  <meta property="og:description" content="Convert CIDR routing prefixes (e.g., /24) into IPv4 Subnet Masks.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="JSON Minifier">
-  <meta name="twitter:description" content="Compress and minify JSON data to save space and reduce file sizes.">
+  <meta name="twitter:title" content="CIDR to Netmask Converter">
+  <meta name="twitter:description" content="Convert CIDR routing prefixes (e.g., /24) into IPv4 Subnet Masks.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>JSON Minifier</title>
+  <title>CIDR to Netmask Converter</title>
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -36,11 +36,11 @@ input[type=range] { padding: 0; border: none; background: transparent; box-shado
 </head>
 <body>
   <div class="tool-container">
-    <h1>JSON Minifier</h1>
-<textarea id="in" rows="6" placeholder='{ "key": "value" }'></textarea>
-<button onclick="c()">Minify JSON</button>
-<textarea id="out" rows="6" readonly style="margin-top:20px;" placeholder="Result..."></textarea>
-<script>function c(){ try{ document.getElementById('out').value=JSON.stringify(JSON.parse(document.getElementById('in').value)); }catch(e){ document.getElementById('out').value="Invalid JSON"; } }</script>
+    <h1>CIDR to Netmask</h1>
+<label>CIDR Prefix (e.g., 24)</label>
+<div class="row"><input type="number" id="c" value="24" min="0" max="32"><button onclick="calc()">Convert</button></div>
+<div id="res" class="res" style="font-family:monospace;">255.255.255.0</div>
+<script>function calc(){ const c=parseInt(document.getElementById('c').value); if(c<0||c>32)return; const m=(0xffffffff<<(32-c))>>>0; document.getElementById('res').innerText=`${(m>>>24)&255}.${(m>>>16)&255}.${(m>>>8)&255}.${m&255}`; }</script>
   </div>
 </body>
 </html>
