@@ -7,50 +7,80 @@ permalink: /tools/random-tool-picker.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Celebrate 1,000 tools! Don't know what to use? Click the button and discover a random tool from the massive hub.">
-  <meta property="og:title" content="The Hub Random Tool Picker">
-  <meta property="og:description" content="Celebrate 1,000 tools! Don't know what to use? Click the button and discover a random tool from the massive hub.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="The Hub Random Tool Picker">
-  <meta name="twitter:description" content="Celebrate 1,000 tools! Don't know what to use? Click the button and discover a random tool from the massive hub.">
-  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>The Hub Random Tool Picker</title>
-  
   <style>
-:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
-body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
-.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
-h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
-label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
-input[type="text"], input[type="number"], input[type="url"], input[type="email"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
-input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
-button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
-button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
-button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
-button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
-.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
-.row { display: flex; gap: 20px; } .row > div { flex: 1; }
-.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
-.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
-</style>
+    :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; display: flex; align-items: center; justify-content: center; }
+    .tool-container { width: 100%; max-width: 500px; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); text-align: center; }
+    h1 { color: var(--primary); margin: 0 0 10px 0; font-size: 2rem; font-weight: 800; }
+    .subtitle { color: #64748b; margin-bottom: 30px; font-size: 1rem; }
+    .dice { font-size: 5rem; margin-bottom: 20px; transition: transform 0.5s ease; }
+    button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.2rem; font-weight: 800; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); }
+    button:hover { background: var(--primary-hover); transform: translateY(-2px); }
+    button:disabled { background: #94a3b8; cursor: wait; }
+    .loading-text { font-size: 0.8rem; color: #94a3b8; margin-top: 15px; }
+    .spinning { animation: rotate 0.5s linear infinite; }
+    @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  </style>
 </head>
 <body>
   <div class="tool-container">
-    <h1>Discover a Random Tool</h1>
-<div class="card" style="text-align:center;padding:50px;">
-  <div style="font-size:5rem;margin-bottom:20px;">🎲</div>
-  <div style="font-size:1.5rem;color:#64748b;font-weight:bold;">Welcome to the 1,000 Tool Hub.</div>
-  <div style="font-size:1rem;color:#94a3b8;margin-bottom:30px;">Click below to explore something new.</div>
-  <button onclick="r()" style="font-size:1.5rem;padding:20px;">Spin the Wheel!</button>
-</div>
-<script>
-// A selection of some of the best tools across categories!
-const t=["/tools/css-mesh-gradient-generator.html","/tools/api-random-dog-viewer.html","/tools/secure-password-generator-pro.html","/tools/json-validator-linter.html","/tools/markdown-editor-live-preview.html","/tools/game-schulte-table.html","/tools/rule-of-72-calculator.html","/tools/css-glassmorphism-generator.html","/tools/text-to-leetspeak.html","/tools/base64-to-file-downloader.html"];
-function r(){ window.location.href = t[Math.floor(Math.random()*t.length)]; }
-</script>
+    <div id="dice" class="dice">🎲</div>
+    <h1>Tool Roulette</h1>
+    <p class="subtitle">Exploring 1,000+ possibilities. <br>Where will you land?</p>
+    
+    <button id="spin-btn" onclick="pickRandomTool()" disabled>Loading Tools...</button>
+    <p id="status" class="loading-text">Fetching the hub index...</p>
   </div>
+
+<script>
+let toolsData = [];
+
+// Fetch the central JSON file instead of hardcoding
+async function init() {
+  const btn = document.getElementById('spin-btn');
+  const status = document.getElementById('status');
+  
+  try {
+    // Note: Adjust path if your tools.json is in a different subfolder
+    const response = await fetch('assets/js/tools.json');
+    if (!response.ok) throw new Error('Could not load tools');
+    
+    toolsData = await response.json();
+    
+    btn.disabled = false;
+    btn.innerText = "Spin the Wheel!";
+    status.innerText = `${toolsData.length} tools ready to roll.`;
+  } catch (err) {
+    status.innerText = "Error loading tools. Please refresh.";
+    console.error(err);
+  }
+}
+
+function pickRandomTool() {
+  const dice = document.getElementById('dice');
+  const btn = document.getElementById('spin-btn');
+  
+  // Visual feedback
+  dice.classList.add('spinning');
+  btn.disabled = true;
+  btn.innerText = "Selecting...";
+
+  setTimeout(() => {
+    const randomIndex = Math.floor(Math.random() * toolsData.length);
+    const selectedTool = toolsData[randomIndex];
+    
+    // Safety check for pathing
+    let url = selectedTool.url;
+    
+    // Ensure URL doesn't double up on the base path if your JSON already includes it
+    window.location.href = url;
+  }, 600);
+}
+
+init();
+</script>
 </body>
 </html>
