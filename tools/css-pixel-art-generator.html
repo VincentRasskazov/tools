@@ -1,0 +1,65 @@
+---
+layout: null
+title: "CSS Pixel Art Generator"
+category: "Developer"
+description: "Draw on an 8x8 grid and instantly generate a single-div CSS box-shadow pixel art masterpiece."
+permalink: /tools/css-pixel-art-generator.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Draw on an 8x8 grid and instantly generate a single-div CSS box-shadow pixel art masterpiece.">
+  <meta property="og:title" content="CSS Pixel Art Generator">
+  <meta property="og:description" content="Draw on an 8x8 grid and instantly generate a single-div CSS box-shadow pixel art masterpiece.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CSS Pixel Art Generator">
+  <meta name="twitter:description" content="Draw on an 8x8 grid and instantly generate a single-div CSS box-shadow pixel art masterpiece.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>CSS Pixel Art Generator</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CSS Pixel Art Maker</h1>
+<p style="text-align:center;color:#64748b;margin-top:-15px;">Click grid cells to draw. Generates pure CSS box-shadows!</p>
+<div class="row" style="margin-bottom:20px;">
+  <div style="flex:0.3;"><input type="color" id="clr" value="#3b82f6" style="height:100%;padding:4px;"></div>
+  <button onclick="st()" style="background:var(--danger);margin:0;">Clear Grid</button>
+</div>
+<div id="grid" style="display:grid; grid-template-columns:repeat(8, 1fr); gap:1px; width:280px; height:280px; background:#e2e8f0; border:2px solid var(--border); margin:0 auto 20px;"></div>
+<textarea id="out" rows="6" readonly style="font-family:monospace;font-size:0.85rem;"></textarea>
+<script>
+let px = Array(64).fill('transparent');
+function st(){ px=Array(64).fill('transparent'); drw(); u(); }
+function drw(){
+  const g=document.getElementById('grid'); g.innerHTML='';
+  px.forEach((c,i) => { g.innerHTML+=`<div style="background:${c};cursor:pointer;" onclick="clk(${i})"></div>`; });
+}
+function clk(i){ px[i] = px[i]==='transparent' ? document.getElementById('clr').value : 'transparent'; drw(); u(); }
+function u(){
+  let s=[];
+  for(let i=0;i<64;i++){ if(px[i]!=='transparent'){ const x=(i%8)*10, y=Math.floor(i/8)*10; s.push(`${x}px ${y}px ${px[i]}`); } }
+  document.getElementById('out').value = s.length ? `.pixel-art {\n  width: 10px;\n  height: 10px;\n  background: transparent;\n  box-shadow:\n    ${s.join(',\n    ')};\n}` : "/* Draw something! */";
+} st();
+</script>
+  </div>
+</body>
+</html>
