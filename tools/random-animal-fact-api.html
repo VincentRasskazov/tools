@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Octal to Binary Converter"
-category: "Developer"
-description: "Convert Base-8 Octal numbers directly into Base-2 Binary sequences."
-permalink: /tools/octal-to-binary.html
+title: "API Random Animal Fact"
+category: "Utility"
+description: "Fetch a completely random, interesting fact about animals via public API."
+permalink: /tools/random-animal-fact-api.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert Base-8 Octal numbers directly into Base-2 Binary sequences.">
-  <meta property="og:title" content="Octal to Binary Converter">
-  <meta property="og:description" content="Convert Base-8 Octal numbers directly into Base-2 Binary sequences.">
+  <meta name="description" content="Fetch a completely random, interesting fact about animals via public API.">
+  <meta property="og:title" content="API Random Animal Fact">
+  <meta property="og:description" content="Fetch a completely random, interesting fact about animals via public API.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Octal to Binary Converter">
-  <meta name="twitter:description" content="Convert Base-8 Octal numbers directly into Base-2 Binary sequences.">
+  <meta name="twitter:title" content="API Random Animal Fact">
+  <meta name="twitter:description" content="Fetch a completely random, interesting fact about animals via public API.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Octal to Binary Converter</title>
+  <title>API Random Animal Fact</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,10 +39,14 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Octal to Binary</h1>
-<div class="card"><label>Octal Input</label><input type="text" id="in" placeholder="17" oninput="c()"></div>
-<div id="res" class="res" style="font-family:monospace;font-size:3rem;letter-spacing:3px;">1111</div>
-<script>function c(){ const o=document.getElementById('in').value.replace(/[^0-7]/g,''); if(o){ document.getElementById('res').innerText=parseInt(o,8).toString(2); } else document.getElementById('res').innerText=""; } c();</script>
+    <h1>Random Animal Fact</h1>
+<div style="text-align:center;font-size:4rem;margin-bottom:10px;">🐾</div>
+<div class="card"><div id="fact" style="font-size:1.2rem;line-height:1.6;font-weight:bold;text-align:center;color:var(--primary);">Loading...</div></div>
+<button onclick="n()">Fetch New Fact</button>
+<script>
+async function n(){ document.getElementById('fact').innerText="Loading..."; document.getElementById('fact').style.color="var(--text)"; try{ const r=await fetch('https://catfact.ninja/fact'); const j=await r.json(); document.getElementById('fact').innerText=j.fact; document.getElementById('fact').style.color="var(--primary)"; }catch(e){document.getElementById('fact').innerText="API Error";} }
+n();
+</script>
   </div>
 </body>
 </html>

@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Octal to Binary Converter"
-category: "Developer"
-description: "Convert Base-8 Octal numbers directly into Base-2 Binary sequences."
-permalink: /tools/octal-to-binary.html
+title: "Random Country Fact Fetcher"
+category: "Utility"
+description: "Fetch a completely random country via API and learn about its capital, population, and region."
+permalink: /tools/random-country-api.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert Base-8 Octal numbers directly into Base-2 Binary sequences.">
-  <meta property="og:title" content="Octal to Binary Converter">
-  <meta property="og:description" content="Convert Base-8 Octal numbers directly into Base-2 Binary sequences.">
+  <meta name="description" content="Fetch a completely random country via API and learn about its capital, population, and region.">
+  <meta property="og:title" content="Random Country Fact Fetcher">
+  <meta property="og:description" content="Fetch a completely random country via API and learn about its capital, population, and region.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Octal to Binary Converter">
-  <meta name="twitter:description" content="Convert Base-8 Octal numbers directly into Base-2 Binary sequences.">
+  <meta name="twitter:title" content="Random Country Fact Fetcher">
+  <meta name="twitter:description" content="Fetch a completely random country via API and learn about its capital, population, and region.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Octal to Binary Converter</title>
+  <title>Random Country Fact Fetcher</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,10 +39,20 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Octal to Binary</h1>
-<div class="card"><label>Octal Input</label><input type="text" id="in" placeholder="17" oninput="c()"></div>
-<div id="res" class="res" style="font-family:monospace;font-size:3rem;letter-spacing:3px;">1111</div>
-<script>function c(){ const o=document.getElementById('in').value.replace(/[^0-7]/g,''); if(o){ document.getElementById('res').innerText=parseInt(o,8).toString(2); } else document.getElementById('res').innerText=""; } c();</script>
+    <h1>Random Country Fetcher</h1>
+<div class="card" id="box" style="text-align:center;display:none;">
+  <div id="flag" style="font-size:5rem;margin-bottom:10px;"></div>
+  <div id="name" style="font-size:2rem;font-weight:bold;color:var(--primary);margin-bottom:15px;"></div>
+  <div id="info" style="font-size:1.1rem;color:#334155;line-height:1.6;"></div>
+</div>
+<div id="msg" style="text-align:center;font-weight:bold;color:#64748b;margin-bottom:20px;">Fetching global data...</div>
+<button onclick="r()">Discover a Country</button>
+<script>
+let data=[];
+async function init(){ try{ const res=await fetch('https://restcountries.com/v3.1/all'); data=await res.json(); r(); document.getElementById('msg').style.display='none'; }catch(e){document.getElementById('msg').innerText="API Error";} }
+function r(){ if(!data.length)return; const c=data[Math.floor(Math.random()*data.length)]; document.getElementById('box').style.display='block'; document.getElementById('flag').innerText=c.flag||'🌍'; document.getElementById('name').innerText=c.name.common; document.getElementById('info').innerHTML=`<strong>Capital:</strong> ${c.capital?c.capital[0]:'N/A'}<br><strong>Region:</strong> ${c.region}<br><strong>Population:</strong> ${c.population.toLocaleString()}`; }
+init();
+</script>
   </div>
 </body>
 </html>

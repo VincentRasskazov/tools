@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Octal to Binary Converter"
+title: "Binary to ASCII Converter"
 category: "Developer"
-description: "Convert Base-8 Octal numbers directly into Base-2 Binary sequences."
-permalink: /tools/octal-to-binary.html
+description: "Convert raw binary strings (1s and 0s) back into readable ASCII text."
+permalink: /tools/binary-to-ascii-converter.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert Base-8 Octal numbers directly into Base-2 Binary sequences.">
-  <meta property="og:title" content="Octal to Binary Converter">
-  <meta property="og:description" content="Convert Base-8 Octal numbers directly into Base-2 Binary sequences.">
+  <meta name="description" content="Convert raw binary strings (1s and 0s) back into readable ASCII text.">
+  <meta property="og:title" content="Binary to ASCII Converter">
+  <meta property="og:description" content="Convert raw binary strings (1s and 0s) back into readable ASCII text.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Octal to Binary Converter">
-  <meta name="twitter:description" content="Convert Base-8 Octal numbers directly into Base-2 Binary sequences.">
+  <meta name="twitter:title" content="Binary to ASCII Converter">
+  <meta name="twitter:description" content="Convert raw binary strings (1s and 0s) back into readable ASCII text.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Octal to Binary Converter</title>
+  <title>Binary to ASCII Converter</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,10 +39,18 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Octal to Binary</h1>
-<div class="card"><label>Octal Input</label><input type="text" id="in" placeholder="17" oninput="c()"></div>
-<div id="res" class="res" style="font-family:monospace;font-size:3rem;letter-spacing:3px;">1111</div>
-<script>function c(){ const o=document.getElementById('in').value.replace(/[^0-7]/g,''); if(o){ document.getElementById('res').innerText=parseInt(o,8).toString(2); } else document.getElementById('res').innerText=""; } c();</script>
+    <h1>Binary to ASCII</h1>
+<div class="card"><textarea id="in" rows="5" placeholder="01001000 01100101 01101100 01101100 01101111" oninput="c()"></textarea></div>
+<div class="card"><label>✨ Text Output</label><textarea id="out" rows="4" readonly></textarea></div>
+<script>
+function c(){
+  try{
+    const bin = document.getElementById('in').value.trim().split(/\s+/);
+    if(bin[0]==='') return document.getElementById('out').value='';
+    document.getElementById('out').value = bin.map(b => String.fromCharCode(parseInt(b, 2))).join('');
+  }catch(e){ document.getElementById('out').value="Invalid Binary Format"; }
+}
+</script>
   </div>
 </body>
 </html>

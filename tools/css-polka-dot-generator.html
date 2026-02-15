@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Octal to Binary Converter"
-category: "Developer"
-description: "Convert Base-8 Octal numbers directly into Base-2 Binary sequences."
-permalink: /tools/octal-to-binary.html
+title: "CSS Polka Dot Background"
+category: "Design"
+description: "Generate perfect polka dot background patterns using CSS radial gradients."
+permalink: /tools/css-polka-dot-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert Base-8 Octal numbers directly into Base-2 Binary sequences.">
-  <meta property="og:title" content="Octal to Binary Converter">
-  <meta property="og:description" content="Convert Base-8 Octal numbers directly into Base-2 Binary sequences.">
+  <meta name="description" content="Generate perfect polka dot background patterns using CSS radial gradients.">
+  <meta property="og:title" content="CSS Polka Dot Background">
+  <meta property="og:description" content="Generate perfect polka dot background patterns using CSS radial gradients.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Octal to Binary Converter">
-  <meta name="twitter:description" content="Convert Base-8 Octal numbers directly into Base-2 Binary sequences.">
+  <meta name="twitter:title" content="CSS Polka Dot Background">
+  <meta name="twitter:description" content="Generate perfect polka dot background patterns using CSS radial gradients.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Octal to Binary Converter</title>
+  <title>CSS Polka Dot Background</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,10 +39,26 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Octal to Binary</h1>
-<div class="card"><label>Octal Input</label><input type="text" id="in" placeholder="17" oninput="c()"></div>
-<div id="res" class="res" style="font-family:monospace;font-size:3rem;letter-spacing:3px;">1111</div>
-<script>function c(){ const o=document.getElementById('in').value.replace(/[^0-7]/g,''); if(o){ document.getElementById('res').innerText=parseInt(o,8).toString(2); } else document.getElementById('res').innerText=""; } c();</script>
+    <h1>Polka Dot Background</h1>
+<div id="box" style="height:200px; border-radius:16px; margin-bottom:20px; border:1px solid var(--border); background-color:#f8fafc; background-image: radial-gradient(#3b82f6 20%, transparent 20%), radial-gradient(#3b82f6 20%, transparent 20%); background-position: 0 0, 25px 25px; background-size: 50px 50px;"></div>
+<div class="row">
+  <div class="card"><label>Dot Color</label><input type="color" id="dc" value="#3b82f6" oninput="u()"></div>
+  <div class="card"><label>Background Color</label><input type="color" id="bc" value="#f8fafc" oninput="u()"></div>
+</div>
+<div class="row">
+  <div class="card"><label>Dot Size (%)</label><input type="range" id="ds" min="5" max="50" value="20" oninput="u()"></div>
+  <div class="card"><label>Spacing (px)</label><input type="range" id="sp" min="20" max="100" value="50" oninput="u()"></div>
+</div>
+<textarea id="out" rows="6" readonly style="font-family:monospace; font-size:0.85rem;"></textarea>
+<script>
+function u(){
+  const dc=document.getElementById('dc').value, bc=document.getElementById('bc').value, ds=document.getElementById('ds').value, sp=document.getElementById('sp').value;
+  const half = sp/2;
+  const css = `background-color: ${bc};\nbackground-image: radial-gradient(${dc} ${ds}%, transparent ${ds}%), radial-gradient(${dc} ${ds}%, transparent ${ds}%);\nbackground-position: 0 0, ${half}px ${half}px;\nbackground-size: ${sp}px ${sp}px;`;
+  document.getElementById('box').style.cssText = `height:200px; border-radius:16px; margin-bottom:20px; border:1px solid var(--border); ${css.replace(/\n/g,' ')}`;
+  document.getElementById('out').value = css;
+} u();
+</script>
   </div>
 </body>
 </html>

@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Octal to Binary Converter"
-category: "Developer"
-description: "Convert Base-8 Octal numbers directly into Base-2 Binary sequences."
-permalink: /tools/octal-to-binary.html
+title: "CSS Flexbox Visualizer"
+category: "Design"
+description: "Visually test and generate CSS Flexbox layouts adjusting alignment and direction."
+permalink: /tools/css-flexbox-visualizer.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert Base-8 Octal numbers directly into Base-2 Binary sequences.">
-  <meta property="og:title" content="Octal to Binary Converter">
-  <meta property="og:description" content="Convert Base-8 Octal numbers directly into Base-2 Binary sequences.">
+  <meta name="description" content="Visually test and generate CSS Flexbox layouts adjusting alignment and direction.">
+  <meta property="og:title" content="CSS Flexbox Visualizer">
+  <meta property="og:description" content="Visually test and generate CSS Flexbox layouts adjusting alignment and direction.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Octal to Binary Converter">
-  <meta name="twitter:description" content="Convert Base-8 Octal numbers directly into Base-2 Binary sequences.">
+  <meta name="twitter:title" content="CSS Flexbox Visualizer">
+  <meta name="twitter:description" content="Visually test and generate CSS Flexbox layouts adjusting alignment and direction.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Octal to Binary Converter</title>
+  <title>CSS Flexbox Visualizer</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,10 +39,29 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Octal to Binary</h1>
-<div class="card"><label>Octal Input</label><input type="text" id="in" placeholder="17" oninput="c()"></div>
-<div id="res" class="res" style="font-family:monospace;font-size:3rem;letter-spacing:3px;">1111</div>
-<script>function c(){ const o=document.getElementById('in').value.replace(/[^0-7]/g,''); if(o){ document.getElementById('res').innerText=parseInt(o,8).toString(2); } else document.getElementById('res').innerText=""; } c();</script>
+    <h1>Flexbox Visualizer</h1>
+<div style="background:var(--bg); border:2px dashed var(--border); border-radius:12px; height:200px; display:flex; padding:10px; margin-bottom:20px;" id="box">
+  <div style="background:var(--primary); color:#fff; padding:15px; border-radius:8px; font-weight:bold;">1</div>
+  <div style="background:var(--success); color:#fff; padding:15px; border-radius:8px; font-weight:bold;">2</div>
+  <div style="background:var(--warning); color:#fff; padding:15px; border-radius:8px; font-weight:bold;">3</div>
+</div>
+<div class="row">
+  <div class="card"><label>Direction</label><select id="fd" onchange="u()"><option value="row">row</option><option value="column">column</option></select></div>
+  <div class="card"><label>Justify Content</label><select id="jc" onchange="u()"><option value="flex-start">flex-start</option><option value="center">center</option><option value="flex-end">flex-end</option><option value="space-between">space-between</option><option value="space-around">space-around</option></select></div>
+</div>
+<div class="row">
+  <div class="card"><label>Align Items</label><select id="ai" onchange="u()"><option value="stretch">stretch</option><option value="flex-start">flex-start</option><option value="center">center</option><option value="flex-end">flex-end</option></select></div>
+  <div class="card"><label>Gap (px)</label><input type="number" id="g" value="10" oninput="u()"></div>
+</div>
+<textarea id="out" rows="5" readonly style="font-family:monospace;"></textarea>
+<script>
+function u(){
+  const fd=document.getElementById('fd').value, jc=document.getElementById('jc').value, ai=document.getElementById('ai').value, g=document.getElementById('g').value;
+  const css = `display: flex;\nflex-direction: ${fd};\njustify-content: ${jc};\nalign-items: ${ai};\ngap: ${g}px;`;
+  document.getElementById('box').style.cssText = `background:var(--bg); border:2px dashed var(--border); border-radius:12px; height:200px; padding:10px; margin-bottom:20px; ${css.replace(/\n/g,' ')}`;
+  document.getElementById('out').value = css;
+} u();
+</script>
   </div>
 </body>
 </html>
