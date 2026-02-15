@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Pressure Converter"
-category: "Converter"
-description: "Convert pressure values between Pascal, Bar, PSI, and Atmospheres."
-permalink: /tools/pressure-converter.html
+title: "All-in-One Base Converter"
+category: "Developer"
+description: "Convert any number between Base 2 (Binary), Base 8 (Octal), Base 10 (Decimal), and Base 16 (Hexadecimal)."
+permalink: /tools/number-base-converter.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert pressure values between Pascal, Bar, PSI, and Atmospheres.">
-  <meta property="og:title" content="Pressure Converter">
-  <meta property="og:description" content="Convert pressure values between Pascal, Bar, PSI, and Atmospheres.">
+  <meta name="description" content="Convert any number between Base 2 (Binary), Base 8 (Octal), Base 10 (Decimal), and Base 16 (Hexadecimal).">
+  <meta property="og:title" content="All-in-One Base Converter">
+  <meta property="og:description" content="Convert any number between Base 2 (Binary), Base 8 (Octal), Base 10 (Decimal), and Base 16 (Hexadecimal).">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Pressure Converter">
-  <meta name="twitter:description" content="Convert pressure values between Pascal, Bar, PSI, and Atmospheres.">
+  <meta name="twitter:title" content="All-in-One Base Converter">
+  <meta name="twitter:description" content="Convert any number between Base 2 (Binary), Base 8 (Octal), Base 10 (Decimal), and Base 16 (Hexadecimal).">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Pressure Converter</title>
+  <title>All-in-One Base Converter</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -36,17 +36,26 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>Pressure Converter</h1>
-<div class="row"><div><label>Pascal (Pa)</label><input type="number" id="pa" oninput="u('pa')"></div><div><label>Bar</label><input type="number" id="bar" oninput="u('bar')"></div></div>
-<div class="row"><div><label>PSI</label><input type="number" id="psi" oninput="u('psi')"></div><div><label>Atmospheres (atm)</label><input type="number" id="atm" oninput="u('atm')"></div></div>
+    <h1>Base Converter</h1>
+<div class="row">
+  <div><label>Input Number</label><input type="text" id="n" value="255"></div>
+  <div><label>From Base</label><select id="fb"><option value="2">Binary (2)</option><option value="8">Octal (8)</option><option value="10" selected>Decimal (10)</option><option value="16">Hex (16)</option></select></div>
+</div>
+<button onclick="c()">Convert Bases</button>
+<div id="res" style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:20px;"></div>
 <script>
-function u(id){
-  const v=parseFloat(document.getElementById(id).value); if(isNaN(v))return;
-  const pa = id==='pa'?v : id==='bar'?v*100000 : id==='psi'?v*6894.76 : v*101325;
-  document.getElementById('pa').value=id==='pa'?v:pa.toFixed(2);
-  document.getElementById('bar').value=id==='bar'?v:(pa/100000).toFixed(6);
-  document.getElementById('psi').value=id==='psi'?v:(pa/6894.76).toFixed(6);
-  document.getElementById('atm').value=id==='atm'?v:(pa/101325).toFixed(6);
+function c(){
+  const n = document.getElementById('n').value.trim();
+  const fb = parseInt(document.getElementById('fb').value);
+  try {
+    const dec = parseInt(n, fb);
+    if(isNaN(dec)) throw "Invalid Input";
+    let h = `<div class="res" style="margin-top:0;"><strong>Binary</strong><br>${dec.toString(2)}</div>`;
+    h += `<div class="res" style="margin-top:0;"><strong>Octal</strong><br>${dec.toString(8)}</div>`;
+    h += `<div class="res" style="margin-top:0;"><strong>Decimal</strong><br>${dec.toString(10)}</div>`;
+    h += `<div class="res" style="margin-top:0;"><strong>Hex</strong><br>${dec.toString(16).toUpperCase()}</div>`;
+    document.getElementById('res').innerHTML = h;
+  } catch(e) { document.getElementById('res').innerHTML = `<div class="res" style="grid-column:1/-1; color:var(--danger);">Invalid Number for Base ${fb}</div>`; }
 }
 </script>
   </div>

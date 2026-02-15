@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Pressure Converter"
-category: "Converter"
-description: "Convert pressure values between Pascal, Bar, PSI, and Atmospheres."
-permalink: /tools/pressure-converter.html
+title: "Random Hex Color Code"
+category: "Design"
+description: "Quickly generate a random Hex color code and preview it instantly."
+permalink: /tools/random-hex-color-code.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert pressure values between Pascal, Bar, PSI, and Atmospheres.">
-  <meta property="og:title" content="Pressure Converter">
-  <meta property="og:description" content="Convert pressure values between Pascal, Bar, PSI, and Atmospheres.">
+  <meta name="description" content="Quickly generate a random Hex color code and preview it instantly.">
+  <meta property="og:title" content="Random Hex Color Code">
+  <meta property="og:description" content="Quickly generate a random Hex color code and preview it instantly.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Pressure Converter">
-  <meta name="twitter:description" content="Convert pressure values between Pascal, Bar, PSI, and Atmospheres.">
+  <meta name="twitter:title" content="Random Hex Color Code">
+  <meta name="twitter:description" content="Quickly generate a random Hex color code and preview it instantly.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Pressure Converter</title>
+  <title>Random Hex Color Code</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -36,17 +36,15 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>Pressure Converter</h1>
-<div class="row"><div><label>Pascal (Pa)</label><input type="number" id="pa" oninput="u('pa')"></div><div><label>Bar</label><input type="number" id="bar" oninput="u('bar')"></div></div>
-<div class="row"><div><label>PSI</label><input type="number" id="psi" oninput="u('psi')"></div><div><label>Atmospheres (atm)</label><input type="number" id="atm" oninput="u('atm')"></div></div>
+    <h1>Random Hex Color</h1>
+<div id="box" style="height:150px; border-radius:12px; margin-bottom:20px; background:#3b82f6; transition:0.2s;"></div>
+<button onclick="c()">Generate Color</button>
+<div id="res" class="res" style="font-family:monospace; font-size:2rem; letter-spacing:2px;">#3B82F6</div>
 <script>
-function u(id){
-  const v=parseFloat(document.getElementById(id).value); if(isNaN(v))return;
-  const pa = id==='pa'?v : id==='bar'?v*100000 : id==='psi'?v*6894.76 : v*101325;
-  document.getElementById('pa').value=id==='pa'?v:pa.toFixed(2);
-  document.getElementById('bar').value=id==='bar'?v:(pa/100000).toFixed(6);
-  document.getElementById('psi').value=id==='psi'?v:(pa/6894.76).toFixed(6);
-  document.getElementById('atm').value=id==='atm'?v:(pa/101325).toFixed(6);
+function c(){
+  const h = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0').toUpperCase();
+  document.getElementById('box').style.background = h;
+  document.getElementById('res').innerText = h;
 }
 </script>
   </div>

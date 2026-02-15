@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Pressure Converter"
-category: "Converter"
-description: "Convert pressure values between Pascal, Bar, PSI, and Atmospheres."
-permalink: /tools/pressure-converter.html
+title: "Random Playing Card Drawer"
+category: "Games"
+description: "Draw a random card from a standard 52-card deck."
+permalink: /tools/random-playing-card.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert pressure values between Pascal, Bar, PSI, and Atmospheres.">
-  <meta property="og:title" content="Pressure Converter">
-  <meta property="og:description" content="Convert pressure values between Pascal, Bar, PSI, and Atmospheres.">
+  <meta name="description" content="Draw a random card from a standard 52-card deck.">
+  <meta property="og:title" content="Random Playing Card Drawer">
+  <meta property="og:description" content="Draw a random card from a standard 52-card deck.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Pressure Converter">
-  <meta name="twitter:description" content="Convert pressure values between Pascal, Bar, PSI, and Atmospheres.">
+  <meta name="twitter:title" content="Random Playing Card Drawer">
+  <meta name="twitter:description" content="Draw a random card from a standard 52-card deck.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Pressure Converter</title>
+  <title>Random Playing Card Drawer</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -36,17 +36,18 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>Pressure Converter</h1>
-<div class="row"><div><label>Pascal (Pa)</label><input type="number" id="pa" oninput="u('pa')"></div><div><label>Bar</label><input type="number" id="bar" oninput="u('bar')"></div></div>
-<div class="row"><div><label>PSI</label><input type="number" id="psi" oninput="u('psi')"></div><div><label>Atmospheres (atm)</label><input type="number" id="atm" oninput="u('atm')"></div></div>
+    <h1>Random Playing Card</h1>
+<button onclick="c()" style="margin-bottom:20px;">Draw a Card</button>
+<div id="res" style="height:250px; width:180px; margin:0 auto; background:#fff; border:2px solid var(--border); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:5rem; font-weight:bold; box-shadow:0 10px 15px rgba(0,0,0,0.1);">🃏</div>
 <script>
-function u(id){
-  const v=parseFloat(document.getElementById(id).value); if(isNaN(v))return;
-  const pa = id==='pa'?v : id==='bar'?v*100000 : id==='psi'?v*6894.76 : v*101325;
-  document.getElementById('pa').value=id==='pa'?v:pa.toFixed(2);
-  document.getElementById('bar').value=id==='bar'?v:(pa/100000).toFixed(6);
-  document.getElementById('psi').value=id==='psi'?v:(pa/6894.76).toFixed(6);
-  document.getElementById('atm').value=id==='atm'?v:(pa/101325).toFixed(6);
+const suits = [{s:'♠',c:'#0f172a'}, {s:'♥',c:'#ef4444'}, {s:'♦',c:'#ef4444'}, {s:'♣',c:'#0f172a'}];
+const ranks = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
+function c(){
+  const suit = suits[Math.floor(Math.random()*suits.length)];
+  const rank = ranks[Math.floor(Math.random()*ranks.length)];
+  const el = document.getElementById('res');
+  el.style.color = suit.c;
+  el.innerHTML = `<div style="text-align:center; line-height:1;"><span style="font-size:3rem;">${rank}</span><br>${suit.s}</div>`;
 }
 </script>
   </div>

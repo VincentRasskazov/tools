@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Pressure Converter"
+title: "Text to Braille Converter"
 category: "Converter"
-description: "Convert pressure values between Pascal, Bar, PSI, and Atmospheres."
-permalink: /tools/pressure-converter.html
+description: "Convert standard English text into Unicode Braille patterns instantly."
+permalink: /tools/text-to-braille.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert pressure values between Pascal, Bar, PSI, and Atmospheres.">
-  <meta property="og:title" content="Pressure Converter">
-  <meta property="og:description" content="Convert pressure values between Pascal, Bar, PSI, and Atmospheres.">
+  <meta name="description" content="Convert standard English text into Unicode Braille patterns instantly.">
+  <meta property="og:title" content="Text to Braille Converter">
+  <meta property="og:description" content="Convert standard English text into Unicode Braille patterns instantly.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Pressure Converter">
-  <meta name="twitter:description" content="Convert pressure values between Pascal, Bar, PSI, and Atmospheres.">
+  <meta name="twitter:title" content="Text to Braille Converter">
+  <meta name="twitter:description" content="Convert standard English text into Unicode Braille patterns instantly.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Pressure Converter</title>
+  <title>Text to Braille Converter</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -36,18 +36,12 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>Pressure Converter</h1>
-<div class="row"><div><label>Pascal (Pa)</label><input type="number" id="pa" oninput="u('pa')"></div><div><label>Bar</label><input type="number" id="bar" oninput="u('bar')"></div></div>
-<div class="row"><div><label>PSI</label><input type="number" id="psi" oninput="u('psi')"></div><div><label>Atmospheres (atm)</label><input type="number" id="atm" oninput="u('atm')"></div></div>
+    <h1>Text to Braille</h1>
+<textarea id="in" rows="4" placeholder="Type here..." oninput="c()"></textarea>
+<textarea id="out" rows="5" readonly style="font-size:2rem; letter-spacing:5px;" placeholder="⠠⠞⠽⠏⠑ ⠓⠑⠗⠑"></textarea>
 <script>
-function u(id){
-  const v=parseFloat(document.getElementById(id).value); if(isNaN(v))return;
-  const pa = id==='pa'?v : id==='bar'?v*100000 : id==='psi'?v*6894.76 : v*101325;
-  document.getElementById('pa').value=id==='pa'?v:pa.toFixed(2);
-  document.getElementById('bar').value=id==='bar'?v:(pa/100000).toFixed(6);
-  document.getElementById('psi').value=id==='psi'?v:(pa/6894.76).toFixed(6);
-  document.getElementById('atm').value=id==='atm'?v:(pa/101325).toFixed(6);
-}
+const m = {'a':'⠁','b':'⠃','c':'⠉','d':'⠙','e':'⠑','f':'⠋','g':'⠛','h':'⠓','i':'⠊','j':'⠚','k':'⠅','l':'⠇','m':'⠍','n':'⠝','o':'⠕','p':'⠏','q':'⠟','r':'⠗','s':'⠎','t':'⠞','u':'⠥','v':'⠧','w':'⠺','x':'⠭','y':'⠽','z':'⠵',' ':' ','1':'⠼⠁','2':'⠼⠃','3':'⠼⠉','4':'⠼⠙','5':'⠼⠑','6':'⠼⠋','7':'⠼⠛','8':'⠼⠓','9':'⠼⠊','0':'⠼⠚'};
+function c(){ document.getElementById('out').value = document.getElementById('in').value.toLowerCase().split('').map(char => m[char] || char).join(''); }
 </script>
   </div>
 </body>

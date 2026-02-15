@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Pressure Converter"
-category: "Converter"
-description: "Convert pressure values between Pascal, Bar, PSI, and Atmospheres."
-permalink: /tools/pressure-converter.html
+title: "IPv4 to Binary Converter"
+category: "Developer"
+description: "Convert a standard IPv4 address into its 32-bit binary representation."
+permalink: /tools/ipv4-to-binary.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert pressure values between Pascal, Bar, PSI, and Atmospheres.">
-  <meta property="og:title" content="Pressure Converter">
-  <meta property="og:description" content="Convert pressure values between Pascal, Bar, PSI, and Atmospheres.">
+  <meta name="description" content="Convert a standard IPv4 address into its 32-bit binary representation.">
+  <meta property="og:title" content="IPv4 to Binary Converter">
+  <meta property="og:description" content="Convert a standard IPv4 address into its 32-bit binary representation.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Pressure Converter">
-  <meta name="twitter:description" content="Convert pressure values between Pascal, Bar, PSI, and Atmospheres.">
+  <meta name="twitter:title" content="IPv4 to Binary Converter">
+  <meta name="twitter:description" content="Convert a standard IPv4 address into its 32-bit binary representation.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Pressure Converter</title>
+  <title>IPv4 to Binary Converter</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -36,17 +36,20 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>Pressure Converter</h1>
-<div class="row"><div><label>Pascal (Pa)</label><input type="number" id="pa" oninput="u('pa')"></div><div><label>Bar</label><input type="number" id="bar" oninput="u('bar')"></div></div>
-<div class="row"><div><label>PSI</label><input type="number" id="psi" oninput="u('psi')"></div><div><label>Atmospheres (atm)</label><input type="number" id="atm" oninput="u('atm')"></div></div>
+    <h1>IPv4 to Binary</h1>
+<input type="text" id="in" placeholder="192.168.1.1" oninput="c()">
+<div id="res" class="res" style="font-family:monospace; font-size:1.5rem; letter-spacing:2px;"></div>
 <script>
-function u(id){
-  const v=parseFloat(document.getElementById(id).value); if(isNaN(v))return;
-  const pa = id==='pa'?v : id==='bar'?v*100000 : id==='psi'?v*6894.76 : v*101325;
-  document.getElementById('pa').value=id==='pa'?v:pa.toFixed(2);
-  document.getElementById('bar').value=id==='bar'?v:(pa/100000).toFixed(6);
-  document.getElementById('psi').value=id==='psi'?v:(pa/6894.76).toFixed(6);
-  document.getElementById('atm').value=id==='atm'?v:(pa/101325).toFixed(6);
+function c(){
+  const ip = document.getElementById('in').value.trim();
+  const parts = ip.split('.');
+  if(parts.length === 4 && parts.every(p => p !== '' && !isNaN(p) && p >= 0 && p <= 255)){
+    document.getElementById('res').innerText = parts.map(p => parseInt(p).toString(2).padStart(8, '0')).join('.');
+    document.getElementById('res').style.color = "var(--primary)";
+  } else {
+    document.getElementById('res').innerText = "Invalid IPv4";
+    document.getElementById('res').style.color = "var(--danger)";
+  }
 }
 </script>
   </div>
