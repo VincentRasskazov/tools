@@ -8,14 +8,13 @@ layout: null
     <priority>1.0</priority>
   </url>
 
-{% for file in site.static_files %}
-  {% if file.extname == ".html" and file.path contains "/tools/" %}
-  <url>
-    <loc>{{ site.url }}{{ site.baseurl }}{{ file.path | replace: '/tools/tools/', '/tools/' | replace: '//', '/' }}</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  {% endif %}
-{% endfor %}
+  {% for p in site.pages %}
+    {% if p.path contains "tools/" and p.ext == ".html" %}
+    <url>
+      <loc>{{ site.url }}{{ site.baseurl }}{{ p.url }}</loc>
+      <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+      <priority>0.8</priority>
+    </url>
+    {% endif %}
+  {% endfor %}
 </urlset>
