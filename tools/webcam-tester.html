@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Open Graph (OG) Tag Generator"
-category: "SEO"
-description: "Generate Open Graph `<meta>` tags to make your links look perfect when shared on Facebook and LinkedIn."
-permalink: /tools/open-graph-generator.html
+title: "Webcam & Camera Tester"
+category: "Utility"
+description: "Test your webcam to ensure it is working correctly. Processes locally, no data is recorded."
+permalink: /tools/webcam-tester.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate Open Graph `<meta>` tags to make your links look perfect when shared on Facebook and LinkedIn.">
-  <meta property="og:title" content="Open Graph (OG) Tag Generator">
-  <meta property="og:description" content="Generate Open Graph `<meta>` tags to make your links look perfect when shared on Facebook and LinkedIn.">
+  <meta name="description" content="Test your webcam to ensure it is working correctly. Processes locally, no data is recorded.">
+  <meta property="og:title" content="Webcam & Camera Tester">
+  <meta property="og:description" content="Test your webcam to ensure it is working correctly. Processes locally, no data is recorded.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Open Graph (OG) Tag Generator">
-  <meta name="twitter:description" content="Generate Open Graph `<meta>` tags to make your links look perfect when shared on Facebook and LinkedIn.">
+  <meta name="twitter:title" content="Webcam & Camera Tester">
+  <meta name="twitter:description" content="Test your webcam to ensure it is working correctly. Processes locally, no data is recorded.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Open Graph (OG) Tag Generator</title>
+  <title>Webcam & Camera Tester</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -38,16 +38,13 @@ button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 13
 </head>
 <body>
   <div class="tool-container">
-    <h1>Open Graph Generator</h1>
-<div class="card">
-  <label>OG Title</label><input type="text" id="t" placeholder="Article Title" oninput="c()">
-  <label>OG Description</label><textarea id="d" rows="2" placeholder="Summary of the article..." oninput="c()"></textarea>
-  <label>OG URL</label><input type="url" id="u" placeholder="https://example.com/article" oninput="c()">
-  <label>OG Image URL</label><input type="url" id="i" placeholder="https://example.com/image.jpg" oninput="c()">
-  <label>Type</label><select id="ty" onchange="c()"><option value="website">Website</option><option value="article">Article</option></select>
+    <h1>Webcam Tester</h1>
+<p style="text-align:center;color:#64748b;">This tool asks for camera permission to display a live feed. Video is never saved or transmitted.</p>
+<div class="card" style="display:flex;justify-content:center;padding:10px;">
+  <video id="vid" width="100%" autoplay playsinline style="border-radius:12px;background:#000;min-height:300px;"></video>
 </div>
-<div class="card"><textarea id="out" rows="7" readonly style="font-family:monospace;white-space:pre;"></textarea></div>
-<script>function c(){ const t=document.getElementById('t').value, d=document.getElementById('d').value, u=document.getElementById('u').value, i=document.getElementById('i').value, ty=document.getElementById('ty').value; let h=`<meta property="og:type" content="${ty}">\n`; if(t) h+=`<meta property="og:title" content="${t}">\n`; if(d) h+=`<meta property="og:description" content="${d}">\n`; if(u) h+=`<meta property="og:url" content="${u}">\n`; if(i) h+=`<meta property="og:image" content="${i}">`; document.getElementById('out').value=h; } c();</script>
+<button onclick="st()" id="btn">Request Camera Access</button>
+<script>async function st(){ const b=document.getElementById('btn'); try{ const stream = await navigator.mediaDevices.getUserMedia({video: true}); document.getElementById('vid').srcObject = stream; b.style.display='none'; }catch(e){ alert("Camera access denied or device not found."); b.innerText="Try Again"; b.style.background="var(--danger)"; } }</script>
   </div>
 </body>
 </html>

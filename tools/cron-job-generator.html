@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Open Graph (OG) Tag Generator"
-category: "SEO"
-description: "Generate Open Graph `<meta>` tags to make your links look perfect when shared on Facebook and LinkedIn."
-permalink: /tools/open-graph-generator.html
+title: "Cron Expression Generator"
+category: "Developer"
+description: "Easily generate cron schedule expressions using a visual UI builder."
+permalink: /tools/cron-job-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate Open Graph `<meta>` tags to make your links look perfect when shared on Facebook and LinkedIn.">
-  <meta property="og:title" content="Open Graph (OG) Tag Generator">
-  <meta property="og:description" content="Generate Open Graph `<meta>` tags to make your links look perfect when shared on Facebook and LinkedIn.">
+  <meta name="description" content="Easily generate cron schedule expressions using a visual UI builder.">
+  <meta property="og:title" content="Cron Expression Generator">
+  <meta property="og:description" content="Easily generate cron schedule expressions using a visual UI builder.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Open Graph (OG) Tag Generator">
-  <meta name="twitter:description" content="Generate Open Graph `<meta>` tags to make your links look perfect when shared on Facebook and LinkedIn.">
+  <meta name="twitter:title" content="Cron Expression Generator">
+  <meta name="twitter:description" content="Easily generate cron schedule expressions using a visual UI builder.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Open Graph (OG) Tag Generator</title>
+  <title>Cron Expression Generator</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -38,16 +38,20 @@ button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 13
 </head>
 <body>
   <div class="tool-container">
-    <h1>Open Graph Generator</h1>
-<div class="card">
-  <label>OG Title</label><input type="text" id="t" placeholder="Article Title" oninput="c()">
-  <label>OG Description</label><textarea id="d" rows="2" placeholder="Summary of the article..." oninput="c()"></textarea>
-  <label>OG URL</label><input type="url" id="u" placeholder="https://example.com/article" oninput="c()">
-  <label>OG Image URL</label><input type="url" id="i" placeholder="https://example.com/image.jpg" oninput="c()">
-  <label>Type</label><select id="ty" onchange="c()"><option value="website">Website</option><option value="article">Article</option></select>
+    <h1>Cron Expression Builder</h1>
+<div class="card" style="display:flex;gap:10px;text-align:center;">
+  <div style="flex:1;"><label style="justify-content:center;">Minute</label><input type="text" id="m" value="*" oninput="c()"></div>
+  <div style="flex:1;"><label style="justify-content:center;">Hour</label><input type="text" id="h" value="*" oninput="c()"></div>
+  <div style="flex:1;"><label style="justify-content:center;">Day (Mo)</label><input type="text" id="dm" value="*" oninput="c()"></div>
+  <div style="flex:1;"><label style="justify-content:center;">Month</label><input type="text" id="mo" value="*" oninput="c()"></div>
+  <div style="flex:1;"><label style="justify-content:center;">Day (Wk)</label><input type="text" id="dw" value="*" oninput="c()"></div>
 </div>
-<div class="card"><textarea id="out" rows="7" readonly style="font-family:monospace;white-space:pre;"></textarea></div>
-<script>function c(){ const t=document.getElementById('t').value, d=document.getElementById('d').value, u=document.getElementById('u').value, i=document.getElementById('i').value, ty=document.getElementById('ty').value; let h=`<meta property="og:type" content="${ty}">\n`; if(t) h+=`<meta property="og:title" content="${t}">\n`; if(d) h+=`<meta property="og:description" content="${d}">\n`; if(u) h+=`<meta property="og:url" content="${u}">\n`; if(i) h+=`<meta property="og:image" content="${i}">`; document.getElementById('out').value=h; } c();</script>
+<div class="row">
+  <button onclick="s('*/5','*','*','*','*')" style="background:var(--success)">Every 5 Mins</button>
+  <button onclick="s('0','0','*','*','*')" style="background:var(--warning)">Daily at Midnight</button>
+</div>
+<div id="res" class="res" style="font-size:4rem;font-family:monospace;letter-spacing:10px;">* * * * *</div>
+<script>function s(m,h,dm,mo,dw){document.getElementById('m').value=m; document.getElementById('h').value=h; document.getElementById('dm').value=dm; document.getElementById('mo').value=mo; document.getElementById('dw').value=dw; c();} function c(){ const expr = `${document.getElementById('m').value} ${document.getElementById('h').value} ${document.getElementById('dm').value} ${document.getElementById('mo').value} ${document.getElementById('dw').value}`; document.getElementById('res').innerText=expr; }</script>
   </div>
 </body>
 </html>

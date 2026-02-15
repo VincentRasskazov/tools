@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Open Graph (OG) Tag Generator"
-category: "SEO"
-description: "Generate Open Graph `<meta>` tags to make your links look perfect when shared on Facebook and LinkedIn."
-permalink: /tools/open-graph-generator.html
+title: "CSS Corner Ribbon Generator"
+category: "Design"
+description: "Generate pure CSS diagonal corner ribbons for 'Sale' or 'New' product badges."
+permalink: /tools/css-ribbon-badge-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate Open Graph `<meta>` tags to make your links look perfect when shared on Facebook and LinkedIn.">
-  <meta property="og:title" content="Open Graph (OG) Tag Generator">
-  <meta property="og:description" content="Generate Open Graph `<meta>` tags to make your links look perfect when shared on Facebook and LinkedIn.">
+  <meta name="description" content="Generate pure CSS diagonal corner ribbons for 'Sale' or 'New' product badges.">
+  <meta property="og:title" content="CSS Corner Ribbon Generator">
+  <meta property="og:description" content="Generate pure CSS diagonal corner ribbons for 'Sale' or 'New' product badges.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Open Graph (OG) Tag Generator">
-  <meta name="twitter:description" content="Generate Open Graph `<meta>` tags to make your links look perfect when shared on Facebook and LinkedIn.">
+  <meta name="twitter:title" content="CSS Corner Ribbon Generator">
+  <meta name="twitter:description" content="Generate pure CSS diagonal corner ribbons for 'Sale' or 'New' product badges.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Open Graph (OG) Tag Generator</title>
+  <title>CSS Corner Ribbon Generator</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -38,16 +38,22 @@ button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 13
 </head>
 <body>
   <div class="tool-container">
-    <h1>Open Graph Generator</h1>
-<div class="card">
-  <label>OG Title</label><input type="text" id="t" placeholder="Article Title" oninput="c()">
-  <label>OG Description</label><textarea id="d" rows="2" placeholder="Summary of the article..." oninput="c()"></textarea>
-  <label>OG URL</label><input type="url" id="u" placeholder="https://example.com/article" oninput="c()">
-  <label>OG Image URL</label><input type="url" id="i" placeholder="https://example.com/image.jpg" oninput="c()">
-  <label>Type</label><select id="ty" onchange="c()"><option value="website">Website</option><option value="article">Article</option></select>
+    <h1>CSS Ribbon Generator</h1>
+<div style="height:200px;background:var(--bg);border-radius:12px;margin-bottom:20px;position:relative;overflow:hidden;border:1px solid var(--border);">
+  <div id="rib" style="position:absolute;top:20px;right:-35px;background:var(--danger);color:#fff;padding:5px 40px;font-weight:bold;text-align:center;transform:rotate(45deg);box-shadow:0 2px 4px rgba(0,0,0,0.2);">SALE</div>
 </div>
-<div class="card"><textarea id="out" rows="7" readonly style="font-family:monospace;white-space:pre;"></textarea></div>
-<script>function c(){ const t=document.getElementById('t').value, d=document.getElementById('d').value, u=document.getElementById('u').value, i=document.getElementById('i').value, ty=document.getElementById('ty').value; let h=`<meta property="og:type" content="${ty}">\n`; if(t) h+=`<meta property="og:title" content="${t}">\n`; if(d) h+=`<meta property="og:description" content="${d}">\n`; if(u) h+=`<meta property="og:url" content="${u}">\n`; if(i) h+=`<meta property="og:image" content="${i}">`; document.getElementById('out').value=h; } c();</script>
+<div class="row">
+  <div class="card"><label>Text</label><input type="text" id="t" value="SALE" oninput="u()"></div>
+  <div class="card"><label>Background</label><input type="color" id="c" value="#ef4444" oninput="u()"></div>
+</div>
+<textarea id="out" rows="8" readonly style="font-family:monospace;font-size:0.85rem;"></textarea>
+<script>
+function u(){
+  const t=document.getElementById('t').value, c=document.getElementById('c').value;
+  document.getElementById('rib').innerText=t; document.getElementById('rib').style.background=c;
+  document.getElementById('out').value = `.container { position: relative; overflow: hidden; }\n.ribbon {\n  position: absolute;\n  top: 20px; right: -35px;\n  background: ${c};\n  color: #fff;\n  padding: 5px 40px;\n  font-weight: bold;\n  text-align: center;\n  transform: rotate(45deg);\n}`;
+} u();
+</script>
   </div>
 </body>
 </html>

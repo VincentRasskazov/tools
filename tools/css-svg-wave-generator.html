@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Open Graph (OG) Tag Generator"
-category: "SEO"
-description: "Generate Open Graph `<meta>` tags to make your links look perfect when shared on Facebook and LinkedIn."
-permalink: /tools/open-graph-generator.html
+title: "CSS SVG Wave Generator"
+category: "Design"
+description: "Generate dynamic, curvy SVG wave dividers for modern landing page designs."
+permalink: /tools/css-svg-wave-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate Open Graph `<meta>` tags to make your links look perfect when shared on Facebook and LinkedIn.">
-  <meta property="og:title" content="Open Graph (OG) Tag Generator">
-  <meta property="og:description" content="Generate Open Graph `<meta>` tags to make your links look perfect when shared on Facebook and LinkedIn.">
+  <meta name="description" content="Generate dynamic, curvy SVG wave dividers for modern landing page designs.">
+  <meta property="og:title" content="CSS SVG Wave Generator">
+  <meta property="og:description" content="Generate dynamic, curvy SVG wave dividers for modern landing page designs.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Open Graph (OG) Tag Generator">
-  <meta name="twitter:description" content="Generate Open Graph `<meta>` tags to make your links look perfect when shared on Facebook and LinkedIn.">
+  <meta name="twitter:title" content="CSS SVG Wave Generator">
+  <meta name="twitter:description" content="Generate dynamic, curvy SVG wave dividers for modern landing page designs.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Open Graph (OG) Tag Generator</title>
+  <title>CSS SVG Wave Generator</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -38,16 +38,23 @@ button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 13
 </head>
 <body>
   <div class="tool-container">
-    <h1>Open Graph Generator</h1>
-<div class="card">
-  <label>OG Title</label><input type="text" id="t" placeholder="Article Title" oninput="c()">
-  <label>OG Description</label><textarea id="d" rows="2" placeholder="Summary of the article..." oninput="c()"></textarea>
-  <label>OG URL</label><input type="url" id="u" placeholder="https://example.com/article" oninput="c()">
-  <label>OG Image URL</label><input type="url" id="i" placeholder="https://example.com/image.jpg" oninput="c()">
-  <label>Type</label><select id="ty" onchange="c()"><option value="website">Website</option><option value="article">Article</option></select>
+    <h1>SVG Wave Generator</h1>
+<div id="box" style="height:150px;background:var(--bg);border-radius:12px;margin-bottom:20px;overflow:hidden;position:relative;border:1px solid var(--border);">
+  <svg id="svg" viewBox="0 0 1440 320" style="position:absolute;bottom:0;width:100%;height:auto;display:block;"><path id="pth" fill="#3b82f6" fill-opacity="1" d="M0,160L48,170.7C96,181,192,203,288,197.3C384,192,480,160,576,149.3C672,139,768,149,864,176C960,203,1056,245,1152,240C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
 </div>
-<div class="card"><textarea id="out" rows="7" readonly style="font-family:monospace;white-space:pre;"></textarea></div>
-<script>function c(){ const t=document.getElementById('t').value, d=document.getElementById('d').value, u=document.getElementById('u').value, i=document.getElementById('i').value, ty=document.getElementById('ty').value; let h=`<meta property="og:type" content="${ty}">\n`; if(t) h+=`<meta property="og:title" content="${t}">\n`; if(d) h+=`<meta property="og:description" content="${d}">\n`; if(u) h+=`<meta property="og:url" content="${u}">\n`; if(i) h+=`<meta property="og:image" content="${i}">`; document.getElementById('out').value=h; } c();</script>
+<div class="row">
+  <div class="card"><label>🎨 Color</label><input type="color" id="c" value="#3b82f6" oninput="u()"></div>
+  <button onclick="r()" style="margin:25px 0;">🎲 Randomize Wave</button>
+</div>
+<textarea id="out" rows="6" readonly style="font-family:monospace;font-size:0.8rem;"></textarea>
+<script>
+function u(){ document.getElementById('pth').setAttribute('fill', document.getElementById('c').value); document.getElementById('out').value=document.getElementById('box').innerHTML.trim(); }
+function r(){
+  let d="M0,160"; let py=160;
+  for(let x=100; x<=1440; x+=150){ const cy=Math.random()*200+50; d+=`C${x-75},${py},${x-75},${cy},${x},${cy}`; py=cy; }
+  d+="L1440,320L0,320Z"; document.getElementById('pth').setAttribute('d', d); u();
+} u();
+</script>
   </div>
 </body>
 </html>
