@@ -26,5 +26,9 @@ permalink: /tools/stopwatch.html
 <body>
 <div class="tool-container"><h1 style="color:#2563eb;">Stopwatch</h1><div id="time">00:00:00.00</div><div class="grid"><button class="start" onclick="st()">Start</button><button class="stop" onclick="sp()">Stop</button><button class="reset" onclick="rs()">Reset</button></div></div>
 <script>let t0, tm, el=0, run=false; function f(ms){let h=Math.floor(ms/3600000), m=Math.floor((ms%3600000)/60000), s=Math.floor((ms%60000)/1000), ms2=Math.floor((ms%1000)/10); return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}.${String(ms2).padStart(2,'0')}`;} function st(){if(!run){t0=Date.now()-el; tm=setInterval(()=>{el=Date.now()-t0; document.getElementById('time').innerText=f(el);},10); run=true;}} function sp(){clearInterval(tm); run=false;} function rs(){clearInterval(tm); run=false; el=0; document.getElementById('time').innerText="00:00:00.00";}</script>
+
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;">
+    🏠 Back to Hub
+  </a>
 </body>
 </html>

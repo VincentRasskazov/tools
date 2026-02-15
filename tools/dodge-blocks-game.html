@@ -43,5 +43,9 @@ canvas { display: block; margin: 0 auto; background: #1e293b; border-radius: 12p
 <canvas id="c" width="300" height="400" style="touch-action:none;"></canvas>
 <script>const cvs=document.getElementById('c'), ctx=cvs.getContext('2d'); let p={x:130,y:350,s:40}, blks=[], sc=0, int, run=false, fr=0; function st(){ p.x=130; blks=[]; sc=0; fr=0; run=true; document.getElementById('sc').innerText="Score: 0"; if(int)clearInterval(int); int=setInterval(upd, 20); } function upP(e){ const r=cvs.getBoundingClientRect(); let x; if(e.touches) x=e.touches[0].clientX-r.left; else x=e.clientX-r.left; p.x=x-p.s/2; if(p.x<0)p.x=0; if(p.x>300-p.s)p.x=300-p.s; if(e.touches)e.preventDefault(); } cvs.addEventListener('mousemove',upP); cvs.addEventListener('touchmove',upP); function upd(){ ctx.fillStyle='#1e293b'; ctx.fillRect(0,0,300,400); ctx.fillStyle='var(--primary)'; ctx.fillRect(p.x,p.y,p.s,p.s); if(fr%30===0) blks.push({x:Math.random()*260, y:-40, s:40}); ctx.fillStyle='var(--danger)'; for(let i=0;i<blks.length;i++){ let b=blks[i]; b.y+=4+(sc/10); ctx.fillRect(b.x,b.y,b.s,b.s); if(p.x<b.x+b.s && p.x+p.s>b.x && p.y<b.y+b.s && p.y+p.s>b.y){ run=false; clearInterval(int); alert("Game Over! Score: "+sc); return; } if(b.y===400){sc++; document.getElementById('sc').innerText="Score: "+sc;} } blks=blks.filter(b=>b.y<=400); fr++; }</script>
   </div>
+
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;">
+    🏠 Back to Hub
+  </a>
 </body>
 </html>

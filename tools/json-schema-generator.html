@@ -45,5 +45,9 @@ canvas { display: block; margin: 0 auto; background: #1e293b; border-radius: 12p
 <textarea id="out" rows="8" readonly style="margin-top:20px;font-family:monospace;"></textarea>
 <script>function getType(v){ if(Array.isArray(v))return 'array'; if(v===null)return 'null'; return typeof v; } function gen(obj){ if(getType(obj)==='object'){ let props={}; for(let k in obj) props[k]=gen(obj[k]); return {type:'object', properties:props}; } if(getType(obj)==='array'){ return {type:'array', items: obj.length>0 ? gen(obj[0]) : {}}; } return {type: getType(obj)}; } function c(){ try{ const obj=JSON.parse(document.getElementById('in').value); const schema = gen(obj); document.getElementById('out').value=JSON.stringify(schema, null, 2); }catch(e){ document.getElementById('out').value="Invalid JSON"; } }</script>
   </div>
+
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;">
+    🏠 Back to Hub
+  </a>
 </body>
 </html>

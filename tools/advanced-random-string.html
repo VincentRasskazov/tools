@@ -48,5 +48,9 @@ button:active { transform: translateY(0); box-shadow: none; }
 <button onclick="c()">Generate String</button>
 <script>function c(){ const l=parseInt(document.getElementById('l').value)||32, up=document.getElementById('up').checked, lo=document.getElementById('lo').checked, num=document.getElementById('num').checked, sym=document.getElementById('sym').checked; let chars=''; if(up)chars+='ABCDEFGHIJKLMNOPQRSTUVWXYZ'; if(lo)chars+='abcdefghijklmnopqrstuvwxyz'; if(num)chars+='0123456789'; if(sym)chars+='!@#$%^&*()_+~`|}{[]:;?><,./-='; if(!chars)return alert('Select a character type!'); let r=''; const a=new Uint32Array(l); crypto.getRandomValues(a); for(let i=0;i<l;i++) r+=chars[a[i]%chars.length]; document.getElementById('res').innerText=r; } c();</script>
   </div>
+
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;">
+    🏠 Back to Hub
+  </a>
 </body>
 </html>

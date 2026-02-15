@@ -42,5 +42,9 @@ button:active { transform: translateY(0); box-shadow: none; }
 <div id="res" class="res" style="font-size:1.2rem;line-height:1.8;text-align:left;"></div>
 <script>function count(obj){ let keys=0, vals=0, arrs=0; function traverse(o){ if(Array.isArray(o)){ arrs++; o.forEach(traverse); } else if(o!==null && typeof o==='object'){ for(let k in o){ keys++; traverse(o[k]); } } else { vals++; } } traverse(obj); return {keys, vals, arrs}; } function c(){ try{ const o=JSON.parse(document.getElementById('in').value); const st=count(o); document.getElementById('res').innerHTML=`Total Keys: <strong>${st.keys}</strong><br>Total Primitive Values: <strong>${st.vals}</strong><br>Total Arrays: <strong>${st.arrs}</strong>`; }catch(e){ document.getElementById('res').innerHTML="<span style='color:var(--danger)'>Invalid JSON</span>"; } }</script>
   </div>
+
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;">
+    🏠 Back to Hub
+  </a>
 </body>
 </html>

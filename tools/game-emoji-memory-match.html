@@ -52,5 +52,9 @@ function drw(){ document.getElementById('grid').innerHTML=deck.map((c,i)=>`<div 
 function clk(i){ if(lock||deck[i].flip||deck[i].match)return; deck[i].flip=true; drw(); if(!f1) f1={i,v:deck[i].v}; else { moves++; document.getElementById('msg').innerText="Moves: "+moves; lock=true; if(f1.v===deck[i].v){ deck[f1.i].match=deck[i].match=true; m++; lock=false; f1=null; drw(); if(m===8)setTimeout(()=>alert(`You Win in ${moves} moves!`),200); } else { setTimeout(()=>{ deck[f1.i].flip=deck[i].flip=false; f1=null; lock=false; drw(); }, 800); } } } st();
 </script>
   </div>
+
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;">
+    🏠 Back to Hub
+  </a>
 </body>
 </html>

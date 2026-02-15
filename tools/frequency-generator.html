@@ -42,5 +42,9 @@ button:active { transform: translateY(0); box-shadow: none; }
 <button id="btn" onclick="tg()">Play Tone</button>
 <script>let actx, osc, run=false; function u(){ const v=document.getElementById('hz').value; document.getElementById('res').innerText=v+' Hz'; if(run)osc.frequency.value=v; } function tg(){ if(run){ osc.stop(); run=false; document.getElementById('btn').innerText='Play Tone'; document.getElementById('btn').style.background='var(--primary)'; }else{ actx=new (window.AudioContext||window.webkitAudioContext)(); osc=actx.createOscillator(); osc.type='sine'; osc.frequency.value=document.getElementById('hz').value; osc.connect(actx.destination); osc.start(); run=true; document.getElementById('btn').innerText='Stop Tone'; document.getElementById('btn').style.background='var(--danger)'; } }</script>
   </div>
+
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;">
+    🏠 Back to Hub
+  </a>
 </body>
 </html>

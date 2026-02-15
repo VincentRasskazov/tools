@@ -42,5 +42,9 @@ button:active { transform: translateY(0); box-shadow: none; }
 <div id="res" style="margin-top:20px;display:grid;gap:10px;"></div>
 <script>function c(){ const txt=document.getElementById('in').value.toLowerCase().replace(/[^a-z0-9\s]/g,''); if(!txt.trim())return; const words=txt.split(/\s+/).filter(w=>w.length>2); const tot=words.length; const f={}; words.forEach(w=>f[w]=(f[w]||0)+1); const s=Object.entries(f).sort((a,b)=>b[1]-a[1]).slice(0,10); let h=`<div style="text-align:center;font-weight:bold;margin-bottom:10px;">Total Words: ${tot}</div>`; s.forEach(arr=>{ const pct=((arr[1]/tot)*100).toFixed(2); h+=`<div style="display:flex;justify-content:space-between;background:var(--bg);padding:10px;border-radius:6px;border:1px solid var(--border);"><span><strong>${arr[0]}</strong></span><span>${arr[1]} uses (${pct}%)</span></div>`; }); document.getElementById('res').innerHTML=h; }</script>
   </div>
+
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;">
+    🏠 Back to Hub
+  </a>
 </body>
 </html>

@@ -26,5 +26,9 @@ permalink: /tools/tic-tac-toe.html
 <body>
 <div class="tool-container"><h1 style="color:#2563eb;">Tic-Tac-Toe</h1><div class="board" id="board"></div><div id="msg">Player X's Turn</div><button onclick="rst()">Restart Game</button></div>
 <script>let bd=Array(9).fill(''), turn='X', act=true; const win=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]; function init(){document.getElementById('board').innerHTML=bd.map((_,i)=>`<div class="cell" onclick="clk(${i})" id="c${i}"></div>`).join('');} function clk(i){if(!act||bd[i])return; bd[i]=turn; document.getElementById(`c${i}`).innerText=turn; check(); if(act){turn=turn==='X'?'O':'X'; document.getElementById('msg').innerText=`Player ${turn}'s Turn`;}} function check(){let w=false; for(let c of win){if(bd[c[0]]&&bd[c[0]]===bd[c[1]]&&bd[c[0]]===bd[c[2]])w=true;} if(w){document.getElementById('msg').innerText=`Player ${turn} Wins!`; act=false;}else if(!bd.includes('')){document.getElementById('msg').innerText="It's a Draw!"; act=false;}} function rst(){bd=Array(9).fill(''); turn='X'; act=true; document.getElementById('msg').innerText="Player X's Turn"; init();} init();</script>
+
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;">
+    🏠 Back to Hub
+  </a>
 </body>
 </html>

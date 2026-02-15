@@ -43,5 +43,9 @@ button:active { transform: translateY(0); box-shadow: none; }
 <div id="res" class="res" style="display:none;"></div>
 <script>let rnd=0, t0, times=[], cur=-1; function st(){rnd=0; times=[]; document.getElementById('btn').style.display='none'; document.getElementById('res').style.display='none'; nxt();} function nxt(){ if(rnd>=10){ document.getElementById('grid').innerHTML=''; const avg=times.reduce((a,b)=>a+b)/times.length; document.getElementById('res').style.display='block'; document.getElementById('res').innerHTML=`Average Reaction Time:<br><span style="font-size:3rem;color:var(--primary)">${Math.round(avg)} ms</span>`; document.getElementById('btn').style.display='block'; document.getElementById('btn').innerText="Play Again"; return; } document.getElementById('sc').innerText=`Round: ${rnd+1} / 10`; cur=Math.floor(Math.random()*16); let h=''; for(let i=0;i<16;i++){ h+=`<div style="background:${i===cur?'var(--danger)':'var(--primary)'};border-radius:8px;cursor:${i===cur?'pointer':'default'};" onmousedown="${i===cur?'clk()':''}"></div>`; } document.getElementById('grid').innerHTML=h; t0=Date.now(); } function clk(){ times.push(Date.now()-t0); rnd++; nxt(); }</script>
   </div>
+
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;">
+    🏠 Back to Hub
+  </a>
 </body>
 </html>

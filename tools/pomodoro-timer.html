@@ -26,5 +26,9 @@ permalink: /tools/pomodoro-timer.html
 <body>
 <div class="tool-container"><h1 style="color:#ef4444;">Pomodoro Timer</h1><div class="modes"><button class="btn-m" onclick="set(25)">Work (25m)</button><button class="btn-m" onclick="set(5)">Break (5m)</button></div><div id="time">25:00</div><div class="grid"><button class="start" onclick="tg()" id="bt">Start</button><button class="reset" onclick="rs()">Reset</button></div></div>
 <script>let t=1500, tm, run=false; function f(s){let m=Math.floor(s/60), sc=s%60; return `${String(m).padStart(2,'0')}:${String(sc).padStart(2,'0')}`;} function set(m){clearInterval(tm); run=false; t=m*60; document.getElementById('time').innerText=f(t); document.getElementById('bt').innerText="Start";} function tg(){if(run){clearInterval(tm); document.getElementById('bt').innerText="Start";}else{tm=setInterval(()=>{if(t>0){t--; document.getElementById('time').innerText=f(t);}else{clearInterval(tm); alert("Time's up!");}},1000); document.getElementById('bt').innerText="Pause";} run=!run;} function rs(){set(25);}</script>
+
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;">
+    🏠 Back to Hub
+  </a>
 </body>
 </html>

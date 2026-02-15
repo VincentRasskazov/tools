@@ -42,5 +42,9 @@ canvas { display: block; margin: 0 auto; background: #1e293b; border-radius: 12p
 <div id="grid" style="display:grid;gap:5px;width:300px;height:300px;margin:0 auto 20px;"></div>
 <script>let lvl=1; function st(){ const size=Math.min(10, Math.floor(lvl/3)+2); const total=size*size; const g=document.getElementById('grid'); g.style.gridTemplateColumns=`repeat(${size}, 1fr)`; g.innerHTML=''; const r=Math.floor(Math.random()*200), gr=Math.floor(Math.random()*200), b=Math.floor(Math.random()*200); const diff=Math.max(5, 50-(lvl*2)); const oddR=r+diff, oddG=gr+diff, oddB=b+diff; const target=Math.floor(Math.random()*total); for(let i=0;i<total;i++){ const d=document.createElement('div'); d.style.borderRadius='8px'; d.style.cursor='pointer'; if(i===target){ d.style.background=`rgb(${oddR},${oddG},${oddB})`; d.onclick=()=>{lvl++;st();}; } else { d.style.background=`rgb(${r},${gr},${b})`; d.onclick=()=>{alert('Game Over! Reached Level: '+lvl);lvl=1;st();}; } g.appendChild(d); } document.getElementById('lvl').innerText='Level: '+lvl; } st();</script>
   </div>
+
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;">
+    🏠 Back to Hub
+  </a>
 </body>
 </html>

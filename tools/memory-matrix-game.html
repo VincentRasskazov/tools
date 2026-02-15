@@ -45,5 +45,9 @@ canvas { display: block; margin: 0 auto; background: #1e293b; border-radius: 12p
 <button onclick="st()" id="btn">Start Game</button>
 <script>let active=[], user=[], lvl=1, size=3, playing=false; function st(){document.getElementById('btn').style.display='none'; lvl=1; size=3; next();} function next(){user=[]; active=[]; document.getElementById('lvl').innerText='Level '+lvl; const g=document.getElementById('grid'); g.style.gridTemplateColumns=`repeat(${size},1fr)`; g.innerHTML=''; for(let i=0;i<size*size;i++) g.innerHTML+=`<div id="c${i}" style="background:var(--border);border-radius:8px;cursor:pointer;transition:0.2s;" onclick="clk(${i})"></div>`; const tilesToRemember = Math.min(Math.floor(lvl/2)+3, (size*size)-1); while(active.length<tilesToRemember){ const r=Math.floor(Math.random()*(size*size)); if(!active.includes(r)) active.push(r); } playing=false; active.forEach(i=>document.getElementById('c'+i).style.background='var(--primary)'); setTimeout(()=>{active.forEach(i=>document.getElementById('c'+i).style.background='var(--border)'); playing=true;}, 1000 + (lvl*100)); } function clk(i){if(!playing)return; if(active.includes(i)){document.getElementById('c'+i).style.background='var(--success)'; user.push(i); if(user.length===active.length){playing=false; lvl++; if(lvl%3===0)size++; setTimeout(next, 1000);}}else{document.getElementById('c'+i).style.background='var(--danger)'; playing=false; alert('Game Over! Reached Level '+lvl); document.getElementById('btn').style.display='block';}}</script>
   </div>
+
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;">
+    🏠 Back to Hub
+  </a>
 </body>
 </html>

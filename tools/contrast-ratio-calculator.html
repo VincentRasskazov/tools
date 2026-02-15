@@ -44,5 +44,9 @@ canvas { display: block; margin: 0 auto; background: #1e293b; border-radius: 12p
 <div id="res" class="res" style="font-size:3rem;">1:1</div>
 <script>function lum(hex){ let rgb=hex.replace('#','').match(/.{2}/g).map(x=>parseInt(x,16)/255); rgb=rgb.map(c=>c<=0.03928 ? c/12.92 : Math.pow((c+0.055)/1.055, 2.4)); return 0.2126*rgb[0] + 0.7152*rgb[1] + 0.0722*rgb[2]; } function c(){ const l1=lum(document.getElementById('c1').value), l2=lum(document.getElementById('c2').value); const r=(Math.max(l1,l2)+0.05)/(Math.min(l1,l2)+0.05); document.getElementById('res').innerHTML=`<span style="color:${r>=4.5?'var(--success)':'var(--danger)'}">${r.toFixed(2)} : 1</span>`; } c();</script>
   </div>
+
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;">
+    🏠 Back to Hub
+  </a>
 </body>
 </html>

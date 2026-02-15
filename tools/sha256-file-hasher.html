@@ -43,5 +43,9 @@ button:active { transform: translateY(0); box-shadow: none; }
 <div id="res" class="res" style="font-size:1.2rem;font-family:monospace;word-break:break-all;">Waiting for file...</div>
 <script>async function c(){ const f=document.getElementById('f').files[0]; if(!f)return; document.getElementById('res').innerText="Calculating..."; const buf=await f.arrayBuffer(); const hash=await crypto.subtle.digest('SHA-256', buf); const hex=Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,'0')).join(''); document.getElementById('res').innerText=hex; }</script>
   </div>
+
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;">
+    🏠 Back to Hub
+  </a>
 </body>
 </html>

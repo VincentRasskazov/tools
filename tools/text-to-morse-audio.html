@@ -48,5 +48,9 @@ let actx, run=false;
 async function p(){ if(run)return; run=true; document.getElementById('btn').disabled=true; actx=new (window.AudioContext||window.webkitAudioContext)(); const txt=document.getElementById('in').value.toUpperCase().replace(/[^A-Z0-9 ]/g,''); let str=''; for(let i=0;i<txt.length;i++){ if(txt[i]===' ')str+=' / '; else str+=m[txt[i]]+' '; } document.getElementById('res').innerText=str; const dot=100; for(let i=0;i<str.length;i++){ if(str[i]==='.'||str[i]==='-'){ const osc=actx.createOscillator(); osc.type='sine'; osc.frequency.value=600; osc.connect(actx.destination); osc.start(); await new Promise(r=>setTimeout(r, str[i]==='.'?dot:dot*3)); osc.stop(); await new Promise(r=>setTimeout(r, dot)); } else if(str[i]===' ') await new Promise(r=>setTimeout(r, dot*3)); else if(str[i]==='/') await new Promise(r=>setTimeout(r, dot*7)); } run=false; document.getElementById('btn').disabled=false; }
 </script>
   </div>
+
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;">
+    🏠 Back to Hub
+  </a>
 </body>
 </html>
