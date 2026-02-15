@@ -5,10 +5,17 @@ layout: null
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>{{ site.url }}{{ site.baseurl }}/</loc>
+    <priority>1.0</priority>
   </url>
-{% for file in site.static_files %}{% if file.extname == '.html' and file.path contains '/tools/' %}
+
+{% for file in site.static_files %}
+  {% if file.extname == ".html" and file.path contains "/tools/" %}
   <url>
-    <loc>{{ site.url }}{{ site.baseurl }}{{ file.path | replace: '/index.html', '/' }}</loc>
+    <loc>{{ site.url }}{{ site.baseurl }}{{ file.path | replace: '/tools/tools/', '/tools/' | replace: '//', '/' }}</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
-{% endif %}{% endfor %}
+  {% endif %}
+{% endfor %}
 </urlset>
