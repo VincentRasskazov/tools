@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "XML Beautifier & Formatter"
-category: "Developer"
-description: "Quickly format and perfectly indent messy or minified XML strings."
-permalink: /tools/xml-beautifier.html
+title: "Sort Lines by Length"
+category: "Text"
+description: "Sort a list of text lines based on character length (shortest to longest)."
+permalink: /tools/sort-lines-length.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Quickly format and perfectly indent messy or minified XML strings.">
-  <meta property="og:title" content="XML Beautifier & Formatter">
-  <meta property="og:description" content="Quickly format and perfectly indent messy or minified XML strings.">
+  <meta name="description" content="Sort a list of text lines based on character length (shortest to longest).">
+  <meta property="og:title" content="Sort Lines by Length">
+  <meta property="og:description" content="Sort a list of text lines based on character length (shortest to longest).">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="XML Beautifier & Formatter">
-  <meta name="twitter:description" content="Quickly format and perfectly indent messy or minified XML strings.">
+  <meta name="twitter:title" content="Sort Lines by Length">
+  <meta name="twitter:description" content="Sort a list of text lines based on character length (shortest to longest).">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>XML Beautifier & Formatter</title>
+  <title>Sort Lines by Length</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,26 +39,14 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>XML Beautifier</h1>
-<div class="card"><textarea id="in" rows="6" placeholder="<root><item>Data</item></root>"></textarea></div>
-<button onclick="c()">Format XML</button>
-<div class="card"><textarea id="out" rows="8" readonly style="font-family:monospace;white-space:pre;"></textarea></div>
-<script>
-function c(){
-  let xml = document.getElementById('in').value.replace(/(>)(<)(\/*)/g, '$1\n$2$3');
-  let pad = 0, out = '';
-  xml.split('\n').forEach(l => {
-    let indent = 0;
-    if (l.match(/.+<\/\w[^>]*>$/)) indent = 0;
-    else if (l.match(/^<\/\w/)) { if (pad !== 0) pad -= 1; }
-    else if (l.match(/^<\w[^>]*[^\/]>.*$/)) indent = 1;
-    else indent = 0;
-    out += '  '.repeat(pad) + l + '\n';
-    pad += indent;
-  });
-  document.getElementById('out').value = out.trim();
-}
-</script>
+    <h1>Sort by Length</h1>
+<div class="card"><textarea id="in" rows="6" placeholder="Pineapple\nApple\nWatermelon\nFig"></textarea></div>
+<div class="row">
+  <button onclick="c(1)">Shortest First</button>
+  <button onclick="c(-1)" style="background:var(--warning)">Longest First</button>
+</div>
+<div class="card"><textarea id="out" rows="6" readonly></textarea></div>
+<script>function c(dir){ document.getElementById('out').value=document.getElementById('in').value.split('\n').filter(x=>x.trim()).sort((a,b)=>(a.length-b.length)*dir).join('\n'); }</script>
   </div>
 </body>
 </html>

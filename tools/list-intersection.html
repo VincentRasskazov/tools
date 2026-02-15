@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "XML Beautifier & Formatter"
-category: "Developer"
-description: "Quickly format and perfectly indent messy or minified XML strings."
-permalink: /tools/xml-beautifier.html
+title: "List Intersection (Common Items)"
+category: "Text"
+description: "Compare two lists and extract only the items that appear in BOTH lists."
+permalink: /tools/list-intersection.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Quickly format and perfectly indent messy or minified XML strings.">
-  <meta property="og:title" content="XML Beautifier & Formatter">
-  <meta property="og:description" content="Quickly format and perfectly indent messy or minified XML strings.">
+  <meta name="description" content="Compare two lists and extract only the items that appear in BOTH lists.">
+  <meta property="og:title" content="List Intersection (Common Items)">
+  <meta property="og:description" content="Compare two lists and extract only the items that appear in BOTH lists.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="XML Beautifier & Formatter">
-  <meta name="twitter:description" content="Quickly format and perfectly indent messy or minified XML strings.">
+  <meta name="twitter:title" content="List Intersection (Common Items)">
+  <meta name="twitter:description" content="Compare two lists and extract only the items that appear in BOTH lists.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>XML Beautifier & Formatter</title>
+  <title>List Intersection (Common Items)</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,24 +39,19 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>XML Beautifier</h1>
-<div class="card"><textarea id="in" rows="6" placeholder="<root><item>Data</item></root>"></textarea></div>
-<button onclick="c()">Format XML</button>
-<div class="card"><textarea id="out" rows="8" readonly style="font-family:monospace;white-space:pre;"></textarea></div>
+    <h1>List Intersection</h1>
+<div class="row">
+  <div class="card"><label>List A</label><textarea id="a" rows="5" placeholder="Apple\nBanana\nOrange"></textarea></div>
+  <div class="card"><label>List B</label><textarea id="b" rows="5" placeholder="Banana\nGrape\nApple"></textarea></div>
+</div>
+<button onclick="c()">Find Common Items</button>
+<div class="card"><textarea id="out" rows="5" readonly></textarea></div>
 <script>
 function c(){
-  let xml = document.getElementById('in').value.replace(/(>)(<)(\/*)/g, '$1\n$2$3');
-  let pad = 0, out = '';
-  xml.split('\n').forEach(l => {
-    let indent = 0;
-    if (l.match(/.+<\/\w[^>]*>$/)) indent = 0;
-    else if (l.match(/^<\/\w/)) { if (pad !== 0) pad -= 1; }
-    else if (l.match(/^<\w[^>]*[^\/]>.*$/)) indent = 1;
-    else indent = 0;
-    out += '  '.repeat(pad) + l + '\n';
-    pad += indent;
-  });
-  document.getElementById('out').value = out.trim();
+  const a=new Set(document.getElementById('a').value.split('\n').map(x=>x.trim()).filter(x=>x));
+  const b=new Set(document.getElementById('b').value.split('\n').map(x=>x.trim()).filter(x=>x));
+  const inter=[...a].filter(x => b.has(x));
+  document.getElementById('out').value=inter.join('\n') || "No common items found.";
 }
 </script>
   </div>

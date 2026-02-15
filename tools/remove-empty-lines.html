@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "XML Beautifier & Formatter"
-category: "Developer"
-description: "Quickly format and perfectly indent messy or minified XML strings."
-permalink: /tools/xml-beautifier.html
+title: "Remove Empty Lines"
+category: "Text"
+description: "Clean up code or text by completely removing all blank or empty lines."
+permalink: /tools/remove-empty-lines.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Quickly format and perfectly indent messy or minified XML strings.">
-  <meta property="og:title" content="XML Beautifier & Formatter">
-  <meta property="og:description" content="Quickly format and perfectly indent messy or minified XML strings.">
+  <meta name="description" content="Clean up code or text by completely removing all blank or empty lines.">
+  <meta property="og:title" content="Remove Empty Lines">
+  <meta property="og:description" content="Clean up code or text by completely removing all blank or empty lines.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="XML Beautifier & Formatter">
-  <meta name="twitter:description" content="Quickly format and perfectly indent messy or minified XML strings.">
+  <meta name="twitter:title" content="Remove Empty Lines">
+  <meta name="twitter:description" content="Clean up code or text by completely removing all blank or empty lines.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>XML Beautifier & Formatter</title>
+  <title>Remove Empty Lines</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,26 +39,11 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>XML Beautifier</h1>
-<div class="card"><textarea id="in" rows="6" placeholder="<root><item>Data</item></root>"></textarea></div>
-<button onclick="c()">Format XML</button>
-<div class="card"><textarea id="out" rows="8" readonly style="font-family:monospace;white-space:pre;"></textarea></div>
-<script>
-function c(){
-  let xml = document.getElementById('in').value.replace(/(>)(<)(\/*)/g, '$1\n$2$3');
-  let pad = 0, out = '';
-  xml.split('\n').forEach(l => {
-    let indent = 0;
-    if (l.match(/.+<\/\w[^>]*>$/)) indent = 0;
-    else if (l.match(/^<\/\w/)) { if (pad !== 0) pad -= 1; }
-    else if (l.match(/^<\w[^>]*[^\/]>.*$/)) indent = 1;
-    else indent = 0;
-    out += '  '.repeat(pad) + l + '\n';
-    pad += indent;
-  });
-  document.getElementById('out').value = out.trim();
-}
-</script>
+    <h1>Remove Empty Lines</h1>
+<div class="card"><textarea id="in" rows="6" placeholder="Line 1\n\n\nLine 2\n\nLine 3"></textarea></div>
+<button onclick="c()">Clean Text</button>
+<div class="card"><textarea id="out" rows="6" readonly></textarea></div>
+<script>function c(){ document.getElementById('out').value=document.getElementById('in').value.replace(/^(?=\n)$|^\s*|\s*$|\n\n+/gm, '\n').trim(); }</script>
   </div>
 </body>
 </html>

@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "XML Beautifier & Formatter"
-category: "Developer"
-description: "Quickly format and perfectly indent messy or minified XML strings."
-permalink: /tools/xml-beautifier.html
+title: "Roman Numeral to Number"
+category: "Math"
+description: "Convert classic Roman Numerals back into standard numerical digits."
+permalink: /tools/roman-to-number.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Quickly format and perfectly indent messy or minified XML strings.">
-  <meta property="og:title" content="XML Beautifier & Formatter">
-  <meta property="og:description" content="Quickly format and perfectly indent messy or minified XML strings.">
+  <meta name="description" content="Convert classic Roman Numerals back into standard numerical digits.">
+  <meta property="og:title" content="Roman Numeral to Number">
+  <meta property="og:description" content="Convert classic Roman Numerals back into standard numerical digits.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="XML Beautifier & Formatter">
-  <meta name="twitter:description" content="Quickly format and perfectly indent messy or minified XML strings.">
+  <meta name="twitter:title" content="Roman Numeral to Number">
+  <meta name="twitter:description" content="Convert classic Roman Numerals back into standard numerical digits.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>XML Beautifier & Formatter</title>
+  <title>Roman Numeral to Number</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,24 +39,14 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>XML Beautifier</h1>
-<div class="card"><textarea id="in" rows="6" placeholder="<root><item>Data</item></root>"></textarea></div>
-<button onclick="c()">Format XML</button>
-<div class="card"><textarea id="out" rows="8" readonly style="font-family:monospace;white-space:pre;"></textarea></div>
+    <h1>Roman Numeral to Number</h1>
+<div class="card"><label>🏛️ Enter Roman Numeral</label><input type="text" id="in" value="MMXXIV" oninput="c()" style="text-transform:uppercase;"></div>
+<div id="res" class="res" style="font-size:4rem;">2024</div>
 <script>
 function c(){
-  let xml = document.getElementById('in').value.replace(/(>)(<)(\/*)/g, '$1\n$2$3');
-  let pad = 0, out = '';
-  xml.split('\n').forEach(l => {
-    let indent = 0;
-    if (l.match(/.+<\/\w[^>]*>$/)) indent = 0;
-    else if (l.match(/^<\/\w/)) { if (pad !== 0) pad -= 1; }
-    else if (l.match(/^<\w[^>]*[^\/]>.*$/)) indent = 1;
-    else indent = 0;
-    out += '  '.repeat(pad) + l + '\n';
-    pad += indent;
-  });
-  document.getElementById('out').value = out.trim();
+  const s=document.getElementById('in').value.toUpperCase(); const m={I:1,V:5,X:10,L:50,C:100,D:500,M:1000}; let res=0;
+  for(let i=0;i<s.length;i++){ const cur=m[s[i]], nxt=m[s[i+1]]; if(nxt>cur) res-=cur; else res+=cur; }
+  document.getElementById('res').innerText=res||"Invalid Input";
 }
 </script>
   </div>

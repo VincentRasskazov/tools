@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "XML Beautifier & Formatter"
+title: "JSON String Escaper"
 category: "Developer"
-description: "Quickly format and perfectly indent messy or minified XML strings."
-permalink: /tools/xml-beautifier.html
+description: "Escape quotes, tabs, and line breaks in a text block so it can be safely used as a JSON string value."
+permalink: /tools/json-string-escaper.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Quickly format and perfectly indent messy or minified XML strings.">
-  <meta property="og:title" content="XML Beautifier & Formatter">
-  <meta property="og:description" content="Quickly format and perfectly indent messy or minified XML strings.">
+  <meta name="description" content="Escape quotes, tabs, and line breaks in a text block so it can be safely used as a JSON string value.">
+  <meta property="og:title" content="JSON String Escaper">
+  <meta property="og:description" content="Escape quotes, tabs, and line breaks in a text block so it can be safely used as a JSON string value.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="XML Beautifier & Formatter">
-  <meta name="twitter:description" content="Quickly format and perfectly indent messy or minified XML strings.">
+  <meta name="twitter:title" content="JSON String Escaper">
+  <meta name="twitter:description" content="Escape quotes, tabs, and line breaks in a text block so it can be safely used as a JSON string value.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>XML Beautifier & Formatter</title>
+  <title>JSON String Escaper</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,26 +39,11 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>XML Beautifier</h1>
-<div class="card"><textarea id="in" rows="6" placeholder="<root><item>Data</item></root>"></textarea></div>
-<button onclick="c()">Format XML</button>
-<div class="card"><textarea id="out" rows="8" readonly style="font-family:monospace;white-space:pre;"></textarea></div>
-<script>
-function c(){
-  let xml = document.getElementById('in').value.replace(/(>)(<)(\/*)/g, '$1\n$2$3');
-  let pad = 0, out = '';
-  xml.split('\n').forEach(l => {
-    let indent = 0;
-    if (l.match(/.+<\/\w[^>]*>$/)) indent = 0;
-    else if (l.match(/^<\/\w/)) { if (pad !== 0) pad -= 1; }
-    else if (l.match(/^<\w[^>]*[^\/]>.*$/)) indent = 1;
-    else indent = 0;
-    out += '  '.repeat(pad) + l + '\n';
-    pad += indent;
-  });
-  document.getElementById('out').value = out.trim();
-}
-</script>
+    <h1>JSON String Escaper</h1>
+<div class="card"><label>📝 Raw Text</label><textarea id="in" rows="5" placeholder='He said, "Hello World!"\nNew line here.'></textarea></div>
+<button onclick="c()">Escape String</button>
+<div class="card"><label>✨ Escaped for JSON</label><textarea id="out" rows="5" readonly style="font-family:monospace;"></textarea></div>
+<script>function c(){ const t=document.getElementById('in').value; document.getElementById('out').value = JSON.stringify(t).slice(1, -1); }</script>
   </div>
 </body>
 </html>
