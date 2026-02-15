@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "EBITDA Calculator"
-category: "Finance"
-description: "Calculate Earnings Before Interest, Taxes, Depreciation, and Amortization (EBITDA) for business analysis."
-permalink: /tools/ebitda-calculator.html
+title: "CSS Zig-Zag Border Generator"
+category: "Design"
+description: "Create a cool, jagged zig-zag border effect for tickets and receipts using CSS background gradients."
+permalink: /tools/css-zig-zag-border.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Calculate Earnings Before Interest, Taxes, Depreciation, and Amortization (EBITDA) for business analysis.">
-  <meta property="og:title" content="EBITDA Calculator">
-  <meta property="og:description" content="Calculate Earnings Before Interest, Taxes, Depreciation, and Amortization (EBITDA) for business analysis.">
+  <meta name="description" content="Create a cool, jagged zig-zag border effect for tickets and receipts using CSS background gradients.">
+  <meta property="og:title" content="CSS Zig-Zag Border Generator">
+  <meta property="og:description" content="Create a cool, jagged zig-zag border effect for tickets and receipts using CSS background gradients.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="EBITDA Calculator">
-  <meta name="twitter:description" content="Calculate Earnings Before Interest, Taxes, Depreciation, and Amortization (EBITDA) for business analysis.">
+  <meta name="twitter:title" content="CSS Zig-Zag Border Generator">
+  <meta name="twitter:description" content="Create a cool, jagged zig-zag border effect for tickets and receipts using CSS background gradients.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>EBITDA Calculator</title>
+  <title>CSS Zig-Zag Border Generator</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,21 +39,24 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>EBITDA Calculator</h1>
-<div class="row">
-  <div class="card"><label>Net Income ($)</label><input type="number" id="n" value="100000" oninput="c()"></div>
-  <div class="card"><label>Interest ($)</label><input type="number" id="i" value="5000" oninput="c()"></div>
+    <h1>CSS Zig-Zag Border</h1>
+<div style="padding:40px;background:var(--bg);border-radius:16px;margin-bottom:20px;">
+  <div id="box" style="height:100px;background:var(--primary);position:relative;">
+    <div id="zig" style="position:absolute;bottom:-10px;left:0;width:100%;height:10px;background:linear-gradient(-45deg, transparent 33.33%, var(--bg) 33.33%, var(--bg) 66.66%, transparent 66.66%), linear-gradient(45deg, transparent 33.33%, var(--bg) 33.33%, var(--bg) 66.66%, transparent 66.66%);background-size:20px 20px;"></div>
+  </div>
 </div>
 <div class="row">
-  <div class="card"><label>Taxes ($)</label><input type="number" id="t" value="15000" oninput="c()"></div>
-  <div class="card"><label>Deprec. & Amort. ($)</label><input type="number" id="d" value="20000" oninput="c()"></div>
+  <div class="card"><label>Size (px)</label><input type="range" id="s" min="10" max="40" value="20" step="2" oninput="u()"></div>
 </div>
-<div id="res" class="res" style="font-size:3rem;color:var(--success);"></div>
+<textarea id="out" rows="6" readonly style="font-family:monospace;font-size:0.85rem;"></textarea>
 <script>
-function c(){
-  const n=parseFloat(document.getElementById('n').value)||0, i=parseFloat(document.getElementById('i').value)||0, t=parseFloat(document.getElementById('t').value)||0, d=parseFloat(document.getElementById('d').value)||0;
-  document.getElementById('res').innerHTML = `EBITDA:<br>$${(n+i+t+d).toLocaleString()}`;
-} c();
+function u(){
+  const s=parseInt(document.getElementById('s').value); const h=s/2;
+  const css = `position: relative;\n/* Apply to a ::after pseudo-element */\ncontent: '';\nposition: absolute;\nbottom: -${h}px; left: 0; width: 100%; height: ${h}px;\nbackground: linear-gradient(-45deg, transparent 33.3%, var(--bg-color) 33.3%, var(--bg-color) 66.6%, transparent 66.6%), linear-gradient(45deg, transparent 33.3%, var(--bg-color) 33.3%, var(--bg-color) 66.6%, transparent 66.6%);\nbackground-size: ${s}px ${s}px;`;
+  document.getElementById('zig').style.height = `${h}px`; document.getElementById('zig').style.bottom = `-${h}px`;
+  document.getElementById('zig').style.backgroundSize = `${s}px ${s}px`;
+  document.getElementById('out').value = css;
+} u();
 </script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">

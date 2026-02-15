@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "EBITDA Calculator"
-category: "Finance"
-description: "Calculate Earnings Before Interest, Taxes, Depreciation, and Amortization (EBITDA) for business analysis."
-permalink: /tools/ebitda-calculator.html
+title: "NATO Phonetic Translator"
+category: "Text"
+description: "Translate any word or name into the official NATO phonetic alphabet (Alpha, Bravo, Charlie) for clear spelling over the phone."
+permalink: /tools/nato-phonetic-alphabet-translator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Calculate Earnings Before Interest, Taxes, Depreciation, and Amortization (EBITDA) for business analysis.">
-  <meta property="og:title" content="EBITDA Calculator">
-  <meta property="og:description" content="Calculate Earnings Before Interest, Taxes, Depreciation, and Amortization (EBITDA) for business analysis.">
+  <meta name="description" content="Translate any word or name into the official NATO phonetic alphabet (Alpha, Bravo, Charlie) for clear spelling over the phone.">
+  <meta property="og:title" content="NATO Phonetic Translator">
+  <meta property="og:description" content="Translate any word or name into the official NATO phonetic alphabet (Alpha, Bravo, Charlie) for clear spelling over the phone.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="EBITDA Calculator">
-  <meta name="twitter:description" content="Calculate Earnings Before Interest, Taxes, Depreciation, and Amortization (EBITDA) for business analysis.">
+  <meta name="twitter:title" content="NATO Phonetic Translator">
+  <meta name="twitter:description" content="Translate any word or name into the official NATO phonetic alphabet (Alpha, Bravo, Charlie) for clear spelling over the phone.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>EBITDA Calculator</title>
+  <title>NATO Phonetic Translator</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,21 +39,17 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>EBITDA Calculator</h1>
-<div class="row">
-  <div class="card"><label>Net Income ($)</label><input type="number" id="n" value="100000" oninput="c()"></div>
-  <div class="card"><label>Interest ($)</label><input type="number" id="i" value="5000" oninput="c()"></div>
-</div>
-<div class="row">
-  <div class="card"><label>Taxes ($)</label><input type="number" id="t" value="15000" oninput="c()"></div>
-  <div class="card"><label>Deprec. & Amort. ($)</label><input type="number" id="d" value="20000" oninput="c()"></div>
-</div>
-<div id="res" class="res" style="font-size:3rem;color:var(--success);"></div>
+    <h1>NATO Phonetic Translator</h1>
+<div class="card"><label>📝 Name or Word</label><input type="text" id="in" placeholder="Hello" oninput="c()"></div>
+<div class="card"><label>✈️ Phonetic Spelling</label><textarea id="out" rows="6" readonly style="font-size:1.2rem;line-height:1.6;"></textarea></div>
 <script>
+const nato={"A":"Alpha","B":"Bravo","C":"Charlie","D":"Delta","E":"Echo","F":"Foxtrot","G":"Golf","H":"Hotel","I":"India","J":"Juliett","K":"Kilo","L":"Lima","M":"Mike","N":"November","O":"Oscar","P":"Papa","Q":"Quebec","R":"Romeo","S":"Sierra","T":"Tango","U":"Uniform","V":"Victor","W":"Whiskey","X":"X-ray","Y":"Yankee","Z":"Zulu","0":"Zero","1":"One","2":"Two","3":"Three","4":"Four","5":"Five","6":"Six","7":"Seven","8":"Eight","9":"Nine"};
 function c(){
-  const n=parseFloat(document.getElementById('n').value)||0, i=parseFloat(document.getElementById('i').value)||0, t=parseFloat(document.getElementById('t').value)||0, d=parseFloat(document.getElementById('d').value)||0;
-  document.getElementById('res').innerHTML = `EBITDA:<br>$${(n+i+t+d).toLocaleString()}`;
-} c();
+  const str = document.getElementById('in').value.toUpperCase();
+  let res = [];
+  for(let i=0; i<str.length; i++){ if(nato[str[i]]) res.push(nato[str[i]]); else if(str[i]===' ') res.push('(space)'); }
+  document.getElementById('out').value = res.join(' - ');
+}
 </script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
