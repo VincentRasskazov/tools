@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Memorable Password Generator"
-category: "Security"
-description: "Generate highly secure but completely memorable passwords by combining random dictionary words."
-permalink: /tools/memorable-password-generator.html
+title: "Cooking Volume Converter"
+category: "Utility"
+description: "Quickly convert cooking measurements between Cups, Tablespoons, Teaspoons, and Milliliters."
+permalink: /tools/cooking-volume-converter.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate highly secure but completely memorable passwords by combining random dictionary words.">
-  <meta property="og:title" content="Memorable Password Generator">
-  <meta property="og:description" content="Generate highly secure but completely memorable passwords by combining random dictionary words.">
+  <meta name="description" content="Quickly convert cooking measurements between Cups, Tablespoons, Teaspoons, and Milliliters.">
+  <meta property="og:title" content="Cooking Volume Converter">
+  <meta property="og:description" content="Quickly convert cooking measurements between Cups, Tablespoons, Teaspoons, and Milliliters.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Memorable Password Generator">
-  <meta name="twitter:description" content="Generate highly secure but completely memorable passwords by combining random dictionary words.">
+  <meta name="twitter:title" content="Cooking Volume Converter">
+  <meta name="twitter:description" content="Quickly convert cooking measurements between Cups, Tablespoons, Teaspoons, and Milliliters.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Memorable Password Generator</title>
+  <title>Cooking Volume Converter</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,22 +39,24 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Memorable Password Generator</h1>
-<p style="text-align:center;color:#64748b;">Creates 'correct-horse-battery-staple' style passwords.</p>
-<div class="card">
-  <label>Number of Words</label>
-  <input type="range" id="w" min="3" max="6" value="4" oninput="document.getElementById('wLbl').innerText=this.value">
-  <div style="text-align:center;font-weight:bold;color:#64748b;margin-top:-10px;" id="wLbl">4</div>
+    <h1>Cooking Volume Converter</h1>
+<div class="row">
+  <div class="card"><label>Cups</label><input type="number" id="cup" value="1" oninput="c('cup')"></div>
+  <div class="card"><label>Tablespoons (Tbsp)</label><input type="number" id="tbsp" value="16" oninput="c('tbsp')"></div>
 </div>
-<button onclick="c()" style="padding:20px;font-size:1.2rem;">Generate Password</button>
-<div id="res" class="res" style="font-size:2rem;color:var(--primary);letter-spacing:1px;font-family:monospace;"></div>
+<div class="row">
+  <div class="card"><label>Teaspoons (Tsp)</label><input type="number" id="tsp" value="48" oninput="c('tsp')"></div>
+  <div class="card"><label>Milliliters (ml)</label><input type="number" id="ml" value="240" oninput="c('ml')"></div>
+</div>
 <script>
-const dict=["apple","ocean","breeze","tiger","mountain","coffee","planet","guitar","robot","puzzle","shadow","sunset","river","falcon","stone","emerald","laser","forest","cactus","dragon","rocket","engine","silver","thunder","velvet","mango","pirate","ninja","ghost","crystal"];
-function c(){
-  const num=parseInt(document.getElementById('w').value); let p=[];
-  for(let i=0;i<num;i++) p.push(dict[Math.floor(Math.random()*dict.length)]);
-  document.getElementById('res').innerText = p.join('-');
-} c();
+function c(t){
+  const cup=document.getElementById('cup'), tbsp=document.getElementById('tbsp'), tsp=document.getElementById('tsp'), ml=document.getElementById('ml');
+  let v=0;
+  if(t==='cup'){ v=parseFloat(cup.value)||0; tbsp.value=(v*16).toFixed(2).replace(/\.?0+$/,''); tsp.value=(v*48).toFixed(2).replace(/\.?0+$/,''); ml.value=(v*236.588).toFixed(2).replace(/\.?0+$/,''); }
+  if(t==='tbsp'){ v=parseFloat(tbsp.value)||0; cup.value=(v/16).toFixed(2).replace(/\.?0+$/,''); tsp.value=(v*3).toFixed(2).replace(/\.?0+$/,''); ml.value=(v*14.7868).toFixed(2).replace(/\.?0+$/,''); }
+  if(t==='tsp'){ v=parseFloat(tsp.value)||0; cup.value=(v/48).toFixed(2).replace(/\.?0+$/,''); tbsp.value=(v/3).toFixed(2).replace(/\.?0+$/,''); ml.value=(v*4.92892).toFixed(2).replace(/\.?0+$/,''); }
+  if(t==='ml'){ v=parseFloat(ml.value)||0; cup.value=(v/236.588).toFixed(2).replace(/\.?0+$/,''); tbsp.value=(v/14.7868).toFixed(2).replace(/\.?0+$/,''); tsp.value=(v/4.92892).toFixed(2).replace(/\.?0+$/,''); }
+}
 </script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">

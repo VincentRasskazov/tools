@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Memorable Password Generator"
-category: "Security"
-description: "Generate highly secure but completely memorable passwords by combining random dictionary words."
-permalink: /tools/memorable-password-generator.html
+title: "Browser Stopwatch Timer"
+category: "Time"
+description: "A precise, clean digital stopwatch with built-in lap time tracking."
+permalink: /tools/browser-stopwatch-lap-timer.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate highly secure but completely memorable passwords by combining random dictionary words.">
-  <meta property="og:title" content="Memorable Password Generator">
-  <meta property="og:description" content="Generate highly secure but completely memorable passwords by combining random dictionary words.">
+  <meta name="description" content="A precise, clean digital stopwatch with built-in lap time tracking.">
+  <meta property="og:title" content="Browser Stopwatch Timer">
+  <meta property="og:description" content="A precise, clean digital stopwatch with built-in lap time tracking.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Memorable Password Generator">
-  <meta name="twitter:description" content="Generate highly secure but completely memorable passwords by combining random dictionary words.">
+  <meta name="twitter:title" content="Browser Stopwatch Timer">
+  <meta name="twitter:description" content="A precise, clean digital stopwatch with built-in lap time tracking.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Memorable Password Generator</title>
+  <title>Browser Stopwatch Timer</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,22 +39,23 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Memorable Password Generator</h1>
-<p style="text-align:center;color:#64748b;">Creates 'correct-horse-battery-staple' style passwords.</p>
-<div class="card">
-  <label>Number of Words</label>
-  <input type="range" id="w" min="3" max="6" value="4" oninput="document.getElementById('wLbl').innerText=this.value">
-  <div style="text-align:center;font-weight:bold;color:#64748b;margin-top:-10px;" id="wLbl">4</div>
+    <h1>Stopwatch Timer</h1>
+<div class="card" style="text-align:center;padding:40px;">
+  <div id="tm" style="font-size:5rem;font-weight:900;color:var(--text);font-family:monospace;line-height:1;">00:00.00</div>
 </div>
-<button onclick="c()" style="padding:20px;font-size:1.2rem;">Generate Password</button>
-<div id="res" class="res" style="font-size:2rem;color:var(--primary);letter-spacing:1px;font-family:monospace;"></div>
+<div class="row">
+  <button id="bS" onclick="st()" style="background:var(--success);">Start</button>
+  <button id="bL" onclick="lap()" style="background:var(--primary);" disabled>Lap</button>
+  <button onclick="rs()" style="background:var(--danger);">Reset</button>
+</div>
+<div id="laps" class="card" style="display:none;max-height:200px;overflow-y:auto;text-align:left;font-family:monospace;font-size:1.2rem;line-height:1.8;"></div>
 <script>
-const dict=["apple","ocean","breeze","tiger","mountain","coffee","planet","guitar","robot","puzzle","shadow","sunset","river","falcon","stone","emerald","laser","forest","cactus","dragon","rocket","engine","silver","thunder","velvet","mango","pirate","ninja","ghost","crystal"];
-function c(){
-  const num=parseInt(document.getElementById('w').value); let p=[];
-  for(let i=0;i<num;i++) p.push(dict[Math.floor(Math.random()*dict.length)]);
-  document.getElementById('res').innerText = p.join('-');
-} c();
+let t0, t=0, int, run=false, lapCnt=0;
+function fmt(ms){ const m=Math.floor(ms/60000), s=Math.floor((ms%60000)/1000), cs=Math.floor((ms%1000)/10); return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}.${String(cs).padStart(2,'0')}`; }
+function u(){ document.getElementById('tm').innerText=fmt(t + (run ? Date.now()-t0 : 0)); }
+function st(){ if(run){run=false; clearInterval(int); t+=Date.now()-t0; document.getElementById('bS').innerText='Resume'; document.getElementById('bS').style.background='var(--success)'; document.getElementById('bL').disabled=true;} else {run=true; t0=Date.now(); int=setInterval(u,10); document.getElementById('bS').innerText='Stop'; document.getElementById('bS').style.background='var(--warning)'; document.getElementById('bL').disabled=false;} }
+function rs(){ run=false; clearInterval(int); t=0; u(); document.getElementById('bS').innerText='Start'; document.getElementById('bS').style.background='var(--success)'; document.getElementById('bL').disabled=true; lapCnt=0; document.getElementById('laps').innerHTML=''; document.getElementById('laps').style.display='none'; }
+function lap(){ lapCnt++; const l=document.getElementById('laps'); l.style.display='block'; l.innerHTML=`<strong>Lap ${lapCnt}:</strong> ${fmt(t + (Date.now()-t0))}<br>` + l.innerHTML; }
 </script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">

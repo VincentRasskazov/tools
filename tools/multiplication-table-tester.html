@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Memorable Password Generator"
-category: "Security"
-description: "Generate highly secure but completely memorable passwords by combining random dictionary words."
-permalink: /tools/memorable-password-generator.html
+title: "Multiplication Table Tester"
+category: "Games"
+description: "Test your basic math skills. See how quickly and accurately you can answer 10 multiplication problems."
+permalink: /tools/multiplication-table-tester.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate highly secure but completely memorable passwords by combining random dictionary words.">
-  <meta property="og:title" content="Memorable Password Generator">
-  <meta property="og:description" content="Generate highly secure but completely memorable passwords by combining random dictionary words.">
+  <meta name="description" content="Test your basic math skills. See how quickly and accurately you can answer 10 multiplication problems.">
+  <meta property="og:title" content="Multiplication Table Tester">
+  <meta property="og:description" content="Test your basic math skills. See how quickly and accurately you can answer 10 multiplication problems.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Memorable Password Generator">
-  <meta name="twitter:description" content="Generate highly secure but completely memorable passwords by combining random dictionary words.">
+  <meta name="twitter:title" content="Multiplication Table Tester">
+  <meta name="twitter:description" content="Test your basic math skills. See how quickly and accurately you can answer 10 multiplication problems.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Memorable Password Generator</title>
+  <title>Multiplication Table Tester</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,22 +39,21 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Memorable Password Generator</h1>
-<p style="text-align:center;color:#64748b;">Creates 'correct-horse-battery-staple' style passwords.</p>
-<div class="card">
-  <label>Number of Words</label>
-  <input type="range" id="w" min="3" max="6" value="4" oninput="document.getElementById('wLbl').innerText=this.value">
-  <div style="text-align:center;font-weight:bold;color:#64748b;margin-top:-10px;" id="wLbl">4</div>
+    <h1>Multiplication Tester</h1>
+<div class="row" style="margin-bottom:15px;text-align:center;">
+  <div id="sc" style="font-size:1.2rem;font-weight:bold;color:var(--primary);">Question: 1 / 10</div>
 </div>
-<button onclick="c()" style="padding:20px;font-size:1.2rem;">Generate Password</button>
-<div id="res" class="res" style="font-size:2rem;color:var(--primary);letter-spacing:1px;font-family:monospace;"></div>
+<div class="card"><div id="eq" style="font-size:5rem;font-weight:bold;color:var(--text);text-align:center;">READY</div></div>
+<div class="row">
+  <input type="number" id="in" placeholder="Answer..." onkeypress="if(event.key==='Enter') c()" disabled style="font-size:2rem;text-align:center;margin:0;">
+  <button id="btn" onclick="st()" style="flex:0.5;margin:0;">Start</button>
+</div>
+<div id="res" class="res" style="display:none;"></div>
 <script>
-const dict=["apple","ocean","breeze","tiger","mountain","coffee","planet","guitar","robot","puzzle","shadow","sunset","river","falcon","stone","emerald","laser","forest","cactus","dragon","rocket","engine","silver","thunder","velvet","mango","pirate","ninja","ghost","crystal"];
-function c(){
-  const num=parseInt(document.getElementById('w').value); let p=[];
-  for(let i=0;i<num;i++) p.push(dict[Math.floor(Math.random()*dict.length)]);
-  document.getElementById('res').innerText = p.join('-');
-} c();
+let ans=0, q=0, correct=0, run=false, t0;
+function st(){ q=1; correct=0; run=true; document.getElementById('res').style.display='none'; document.getElementById('sc').innerText="Question: 1 / 10"; document.getElementById('btn').innerText='Submit'; document.getElementById('btn').onclick=c; document.getElementById('in').disabled=false; document.getElementById('in').focus(); t0=Date.now(); nx(); }
+function nx(){ if(q>10){ run=false; const time=((Date.now()-t0)/1000).toFixed(1); document.getElementById('in').disabled=true; document.getElementById('eq').innerText="DONE!"; document.getElementById('btn').innerText='Play Again'; document.getElementById('btn').onclick=st; const r=document.getElementById('res'); r.style.display='block'; r.innerHTML=`Score: <strong style="color:var(--success)">${correct}/10</strong><br>Time: <strong style="color:var(--primary)">${time}s</strong>`; return; } const a=Math.floor(Math.random()*12)+1, b=Math.floor(Math.random()*12)+1; ans=a*b; document.getElementById('eq').innerText=`${a} × ${b}`; document.getElementById('in').value=''; document.getElementById('sc').innerText=`Question: ${q} / 10`; }
+function c(){ if(!run)return; if(parseInt(document.getElementById('in').value)===ans) correct++; q++; nx(); }
 </script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">

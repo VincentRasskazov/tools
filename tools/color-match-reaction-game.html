@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Memorable Password Generator"
-category: "Security"
-description: "Generate highly secure but completely memorable passwords by combining random dictionary words."
-permalink: /tools/memorable-password-generator.html
+title: "Color Match Reaction Game"
+category: "Games"
+description: "Wait for the two boxes to turn the EXACT same color, then click as fast as you can!"
+permalink: /tools/color-match-reaction-game.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate highly secure but completely memorable passwords by combining random dictionary words.">
-  <meta property="og:title" content="Memorable Password Generator">
-  <meta property="og:description" content="Generate highly secure but completely memorable passwords by combining random dictionary words.">
+  <meta name="description" content="Wait for the two boxes to turn the EXACT same color, then click as fast as you can!">
+  <meta property="og:title" content="Color Match Reaction Game">
+  <meta property="og:description" content="Wait for the two boxes to turn the EXACT same color, then click as fast as you can!">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Memorable Password Generator">
-  <meta name="twitter:description" content="Generate highly secure but completely memorable passwords by combining random dictionary words.">
+  <meta name="twitter:title" content="Color Match Reaction Game">
+  <meta name="twitter:description" content="Wait for the two boxes to turn the EXACT same color, then click as fast as you can!">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Memorable Password Generator</title>
+  <title>Color Match Reaction Game</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,22 +39,18 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Memorable Password Generator</h1>
-<p style="text-align:center;color:#64748b;">Creates 'correct-horse-battery-staple' style passwords.</p>
-<div class="card">
-  <label>Number of Words</label>
-  <input type="range" id="w" min="3" max="6" value="4" oninput="document.getElementById('wLbl').innerText=this.value">
-  <div style="text-align:center;font-weight:bold;color:#64748b;margin-top:-10px;" id="wLbl">4</div>
+    <h1>Color Match Reaction</h1>
+<p style="text-align:center;color:#64748b;font-weight:bold;">Wait for the colors to match, then click the button!</p>
+<div class="row" style="margin-bottom:20px;">
+  <div id="b1" class="card" style="height:150px;background:#ef4444;transition:0.1s;"></div>
+  <div id="b2" class="card" style="height:150px;background:#3b82f6;transition:0.1s;"></div>
 </div>
-<button onclick="c()" style="padding:20px;font-size:1.2rem;">Generate Password</button>
-<div id="res" class="res" style="font-size:2rem;color:var(--primary);letter-spacing:1px;font-family:monospace;"></div>
+<button id="btn" onclick="clk()" style="font-size:1.5rem;padding:20px;">Start Game</button>
+<div id="res" class="res" style="display:none;"></div>
 <script>
-const dict=["apple","ocean","breeze","tiger","mountain","coffee","planet","guitar","robot","puzzle","shadow","sunset","river","falcon","stone","emerald","laser","forest","cactus","dragon","rocket","engine","silver","thunder","velvet","mango","pirate","ninja","ghost","crystal"];
-function c(){
-  const num=parseInt(document.getElementById('w').value); let p=[];
-  for(let i=0;i<num;i++) p.push(dict[Math.floor(Math.random()*dict.length)]);
-  document.getElementById('res').innerText = p.join('-');
-} c();
+const cols=['#ef4444','#3b82f6','#10b981','#f59e0b','#8b5cf6']; let run=false, t0, tm, int;
+function st(){ document.getElementById('res').style.display='none'; document.getElementById('btn').innerText='CLICK WHEN MATCHED!'; run=true; int=setInterval(()=>{document.getElementById('b1').style.background=cols[Math.floor(Math.random()*cols.length)]; document.getElementById('b2').style.background=cols[Math.floor(Math.random()*cols.length)];}, 300); tm=setTimeout(()=>{clearInterval(int); const match=cols[Math.floor(Math.random()*cols.length)]; document.getElementById('b1').style.background=match; document.getElementById('b2').style.background=match; t0=Date.now();}, 2000+Math.random()*5000); }
+function clk(){ if(!run){st();} else { if(document.getElementById('b1').style.background === document.getElementById('b2').style.background){ const diff=Date.now()-t0; run=false; document.getElementById('btn').innerText='Play Again'; const r=document.getElementById('res'); r.style.display='block'; r.innerHTML=`Reaction Time:<br><span style="font-size:3rem;color:var(--success)">${diff} ms</span>`; } else { clearTimeout(tm); clearInterval(int); run=false; document.getElementById('btn').innerText='Try Again'; const r=document.getElementById('res'); r.style.display='block'; r.innerHTML=`<span style="color:var(--danger)">You clicked too early!</span>`; } } }
 </script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">

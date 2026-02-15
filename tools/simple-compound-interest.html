@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Memorable Password Generator"
-category: "Security"
-description: "Generate highly secure but completely memorable passwords by combining random dictionary words."
-permalink: /tools/memorable-password-generator.html
+title: "Simple Compound Interest"
+category: "Finance"
+description: "A straightforward compound interest calculator to see how your money grows over time."
+permalink: /tools/simple-compound-interest.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate highly secure but completely memorable passwords by combining random dictionary words.">
-  <meta property="og:title" content="Memorable Password Generator">
-  <meta property="og:description" content="Generate highly secure but completely memorable passwords by combining random dictionary words.">
+  <meta name="description" content="A straightforward compound interest calculator to see how your money grows over time.">
+  <meta property="og:title" content="Simple Compound Interest">
+  <meta property="og:description" content="A straightforward compound interest calculator to see how your money grows over time.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Memorable Password Generator">
-  <meta name="twitter:description" content="Generate highly secure but completely memorable passwords by combining random dictionary words.">
+  <meta name="twitter:title" content="Simple Compound Interest">
+  <meta name="twitter:description" content="A straightforward compound interest calculator to see how your money grows over time.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Memorable Password Generator</title>
+  <title>Simple Compound Interest</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,21 +39,20 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Memorable Password Generator</h1>
-<p style="text-align:center;color:#64748b;">Creates 'correct-horse-battery-staple' style passwords.</p>
-<div class="card">
-  <label>Number of Words</label>
-  <input type="range" id="w" min="3" max="6" value="4" oninput="document.getElementById('wLbl').innerText=this.value">
-  <div style="text-align:center;font-weight:bold;color:#64748b;margin-top:-10px;" id="wLbl">4</div>
+    <h1>Simple Compound Interest</h1>
+<div class="row">
+  <div class="card"><label>Principal ($)</label><input type="number" id="p" value="1000" oninput="c()"></div>
+  <div class="card"><label>Interest Rate (%)</label><input type="number" id="r" value="5" oninput="c()"></div>
 </div>
-<button onclick="c()" style="padding:20px;font-size:1.2rem;">Generate Password</button>
-<div id="res" class="res" style="font-size:2rem;color:var(--primary);letter-spacing:1px;font-family:monospace;"></div>
+<div class="card"><label>Time (Years)</label><input type="number" id="t" value="10" oninput="c()"></div>
+<div id="res" class="res" style="font-size:3rem;color:var(--success);"></div>
 <script>
-const dict=["apple","ocean","breeze","tiger","mountain","coffee","planet","guitar","robot","puzzle","shadow","sunset","river","falcon","stone","emerald","laser","forest","cactus","dragon","rocket","engine","silver","thunder","velvet","mango","pirate","ninja","ghost","crystal"];
 function c(){
-  const num=parseInt(document.getElementById('w').value); let p=[];
-  for(let i=0;i<num;i++) p.push(dict[Math.floor(Math.random()*dict.length)]);
-  document.getElementById('res').innerText = p.join('-');
+  const p=parseFloat(document.getElementById('p').value), r=parseFloat(document.getElementById('r').value), t=parseFloat(document.getElementById('t').value);
+  if(p>0&&r>0&&t>0){
+    const amt = p * Math.pow(1 + (r/100), t);
+    document.getElementById('res').innerHTML = `$${amt.toFixed(2)}<br><span style="font-size:1.2rem;color:#64748b;">Total Future Value</span>`;
+  } else { document.getElementById('res').innerText="?"; }
 } c();
 </script>
   </div>
