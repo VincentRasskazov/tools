@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "XML Minifier & Compressor"
-category: "Developer"
-description: "Compress XML code by removing all line breaks, spaces, and unnecessary whitespace."
-permalink: /tools/xml-minifier.html
+title: "Mortgage Payoff Calculator"
+category: "Finance"
+description: "See how much time and interest you save by adding extra payments to your monthly mortgage."
+permalink: /tools/mortgage-payoff-calculator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Compress XML code by removing all line breaks, spaces, and unnecessary whitespace.">
-  <meta property="og:title" content="XML Minifier & Compressor">
-  <meta property="og:description" content="Compress XML code by removing all line breaks, spaces, and unnecessary whitespace.">
+  <meta name="description" content="See how much time and interest you save by adding extra payments to your monthly mortgage.">
+  <meta property="og:title" content="Mortgage Payoff Calculator">
+  <meta property="og:description" content="See how much time and interest you save by adding extra payments to your monthly mortgage.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="XML Minifier & Compressor">
-  <meta name="twitter:description" content="Compress XML code by removing all line breaks, spaces, and unnecessary whitespace.">
+  <meta name="twitter:title" content="Mortgage Payoff Calculator">
+  <meta name="twitter:description" content="See how much time and interest you save by adding extra payments to your monthly mortgage.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>XML Minifier & Compressor</title>
+  <title>Mortgage Payoff Calculator</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,11 +39,32 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>XML Minifier</h1>
-<div class="card"><textarea id="in" rows="6" placeholder="<root>\n  <item>Data</item>\n</root>"></textarea></div>
-<button onclick="c()">Minify XML</button>
-<div class="card"><textarea id="out" rows="6" readonly style="font-family:monospace;"></textarea></div>
-<script>function c(){ document.getElementById('out').value=document.getElementById('in').value.replace(/>\s+</g, '><').trim(); }</script>
+    <h1>Mortgage Payoff</h1>
+<div class="row">
+  <div class="card"><label>Remaining Balance ($)</label><input type="number" id="b" value="250000"></div>
+  <div class="card"><label>Interest Rate (%)</label><input type="number" id="r" value="4.5"></div>
+</div>
+<div class="row">
+  <div class="card"><label>Standard Payment ($)</label><input type="number" id="p" value="1500"></div>
+  <div class="card"><label>Extra Payment ($)</label><input type="number" id="ex" value="200"></div>
+</div>
+<button onclick="c()">Calculate Savings</button>
+<div id="res" class="res" style="font-size:1.2rem;line-height:1.6;display:none;"></div>
+<script>
+function calc(bal, rate, pmt){
+  let months=0; while(bal>0 && months<1200){ bal+=(bal*rate); bal-=pmt; months++; } return months;
+}
+function c(){
+  const b=parseFloat(document.getElementById('b').value), r=(parseFloat(document.getElementById('r').value)/100)/12, p=parseFloat(document.getElementById('p').value), ex=parseFloat(document.getElementById('ex').value)||0;
+  if(b>0&&r>0&&p>0){
+    const baseM = calc(b, r, p); const newM = calc(b, r, p+ex);
+    if(baseM>=1200){document.getElementById('res').innerHTML="Payment too low to cover interest.";document.getElementById('res').style.display='block';return;}
+    const saved = baseM - newM;
+    document.getElementById('res').innerHTML = `You will pay off your loan <strong><span style="color:var(--success);font-size:1.5rem;">${Math.floor(saved/12)} Years and ${saved%12} Months</span></strong> earlier!`;
+    document.getElementById('res').style.display='block';
+  }
+}
+</script>
   </div>
 </body>
 </html>

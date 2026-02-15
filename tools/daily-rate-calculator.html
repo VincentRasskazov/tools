@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "XML Minifier & Compressor"
-category: "Developer"
-description: "Compress XML code by removing all line breaks, spaces, and unnecessary whitespace."
-permalink: /tools/xml-minifier.html
+title: "Salary to Daily Rate Calculator"
+category: "Finance"
+description: "Convert an annual salary into your exact daily working rate for freelancing or contracting."
+permalink: /tools/daily-rate-calculator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Compress XML code by removing all line breaks, spaces, and unnecessary whitespace.">
-  <meta property="og:title" content="XML Minifier & Compressor">
-  <meta property="og:description" content="Compress XML code by removing all line breaks, spaces, and unnecessary whitespace.">
+  <meta name="description" content="Convert an annual salary into your exact daily working rate for freelancing or contracting.">
+  <meta property="og:title" content="Salary to Daily Rate Calculator">
+  <meta property="og:description" content="Convert an annual salary into your exact daily working rate for freelancing or contracting.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="XML Minifier & Compressor">
-  <meta name="twitter:description" content="Compress XML code by removing all line breaks, spaces, and unnecessary whitespace.">
+  <meta name="twitter:title" content="Salary to Daily Rate Calculator">
+  <meta name="twitter:description" content="Convert an annual salary into your exact daily working rate for freelancing or contracting.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>XML Minifier & Compressor</title>
+  <title>Salary to Daily Rate Calculator</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,11 +39,19 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>XML Minifier</h1>
-<div class="card"><textarea id="in" rows="6" placeholder="<root>\n  <item>Data</item>\n</root>"></textarea></div>
-<button onclick="c()">Minify XML</button>
-<div class="card"><textarea id="out" rows="6" readonly style="font-family:monospace;"></textarea></div>
-<script>function c(){ document.getElementById('out').value=document.getElementById('in').value.replace(/>\s+</g, '><').trim(); }</script>
+    <h1>Salary to Daily Rate</h1>
+<div class="row">
+  <div class="card"><label>Annual Salary ($)</label><input type="number" id="s" value="80000"></div>
+  <div class="card"><label>Working Days per Year</label><input type="number" id="d" value="260"></div>
+</div>
+<button onclick="c()">Calculate Daily Rate</button>
+<div id="res" class="res" style="font-size:1.5rem;line-height:1.4;"></div>
+<script>
+function c(){
+  const s=parseFloat(document.getElementById('s').value), d=parseFloat(document.getElementById('d').value);
+  if(s>0 && d>0) document.getElementById('res').innerHTML=`Daily Rate:<br><span style="font-size:4rem;color:var(--primary);font-weight:900;">$${(s/d).toFixed(2)}</span>`;
+} c();
+</script>
   </div>
 </body>
 </html>
