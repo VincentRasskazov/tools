@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Break-Even Point Calculator"
-category: "Finance"
-description: "Calculate the exact number of units you need to sell to cover your fixed and variable costs."
-permalink: /tools/break-even-calculator.html
+title: "Sentence Shuffler"
+category: "Text"
+description: "Randomize and shuffle the order of full sentences within a paragraph of text."
+permalink: /tools/sentence-shuffler.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Calculate the exact number of units you need to sell to cover your fixed and variable costs.">
-  <meta property="og:title" content="Break-Even Point Calculator">
-  <meta property="og:description" content="Calculate the exact number of units you need to sell to cover your fixed and variable costs.">
+  <meta name="description" content="Randomize and shuffle the order of full sentences within a paragraph of text.">
+  <meta property="og:title" content="Sentence Shuffler">
+  <meta property="og:description" content="Randomize and shuffle the order of full sentences within a paragraph of text.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Break-Even Point Calculator">
-  <meta name="twitter:description" content="Calculate the exact number of units you need to sell to cover your fixed and variable costs.">
+  <meta name="twitter:title" content="Sentence Shuffler">
+  <meta name="twitter:description" content="Randomize and shuffle the order of full sentences within a paragraph of text.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Break-Even Point Calculator</title>
+  <title>Sentence Shuffler</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -37,12 +37,11 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Break-Even Point</h1>
-<label>Total Fixed Costs ($)</label><input type="number" id="f" value="10000">
-<div class="row"><div><label>Price Per Unit ($)</label><input type="number" id="p" value="50"></div><div><label>Variable Cost / Unit ($)</label><input type="number" id="v" value="30"></div></div>
-<button onclick="c()">Calculate Break-Even</button>
-<div id="res" class="res"></div>
-<script>function c(){ const f=parseFloat(document.getElementById('f').value), p=parseFloat(document.getElementById('p').value), v=parseFloat(document.getElementById('v').value); if(f>=0&&p>v){ const bep=Math.ceil(f/(p-v)); document.getElementById('res').innerHTML=`Units needed to Break-Even:<br><span style="font-size:3rem;color:var(--success)">${bep}</span>`; }else{document.getElementById('res').innerHTML=`<span style="color:var(--danger)">Price must be greater than variable cost.</span>`;} }</script>
+    <h1>Sentence Shuffler</h1>
+<textarea id="in" rows="5" placeholder="First sentence here. Second sentence here. Third sentence here!"></textarea>
+<button onclick="c()">Shuffle Sentences</button>
+<textarea id="out" rows="5" readonly style="margin-top:20px;"></textarea>
+<script>function c(){ const t=document.getElementById('in').value; const s=t.match(/[^.!?]+[.!?]+/g); if(!s)return document.getElementById('out').value=t; document.getElementById('out').value=s.map(x=>x.trim()).sort(()=>0.5-Math.random()).join(' '); }</script>
   </div>
 </body>
 </html>
