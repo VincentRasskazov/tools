@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Sleep Cycle Calculator"
-category: "Health"
-description: "Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles."
-permalink: /tools/sleep-cycle-calculator.html
+title: "Hex Color Flashcards"
+category: "Games"
+description: "A game for designers! Look at the hex code and guess which color is being displayed."
+permalink: /tools/game-hex-color-flashcards.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles.">
-  <meta property="og:title" content="Sleep Cycle Calculator">
-  <meta property="og:description" content="Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles.">
+  <meta name="description" content="A game for designers! Look at the hex code and guess which color is being displayed.">
+  <meta property="og:title" content="Hex Color Flashcards">
+  <meta property="og:description" content="A game for designers! Look at the hex code and guess which color is being displayed.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Sleep Cycle Calculator">
-  <meta name="twitter:description" content="Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles.">
+  <meta name="twitter:title" content="Hex Color Flashcards">
+  <meta name="twitter:description" content="A game for designers! Look at the hex code and guess which color is being displayed.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Sleep Cycle Calculator</title>
+  <title>Hex Color Flashcards</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -41,21 +41,16 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Sleep Cycle Calculator</h1>
-<p style="text-align:center;color:#64748b;font-weight:bold;">If you fall asleep right now, you should wake up at:</p>
-<div id="res" class="card" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:30px;"></div>
-<button onclick="c()">Calculate for Right Now</button>
+    <h1>Hex Flashcards</h1>
+<div id="sc" style="text-align:center;font-weight:bold;color:var(--success);margin-bottom:10px;">Streak: 0</div>
+<div class="card"><div id="q" style="font-size:4rem;font-weight:900;text-align:center;font-family:monospace;letter-spacing:3px;">#FF0000</div></div>
+<div class="row" style="flex-wrap:wrap;" id="opts"></div>
 <script>
-function c(){
-  const now = new Date(); now.setMinutes(now.getMinutes()+15); // Avg time to fall asleep
-  let h=''; const cycles=[6,5,4,3]; // 9, 7.5, 6, 4.5 hours
-  cycles.forEach((c, i)=>{
-    const wake = new Date(now.getTime() + (c * 90 * 60000));
-    const time = wake.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-    let col = i===0 ? 'var(--success)' : i===1 ? 'var(--primary)' : 'var(--warning)';
-    h+=`<div style="flex:1;min-width:120px;text-align:center;padding:20px;border-radius:12px;background:${col};color:#fff;font-weight:bold;font-size:1.5rem;box-shadow:0 4px 6px rgba(0,0,0,0.1);">${time}<br><span style="font-size:0.9rem;font-weight:normal;">${c} Cycles</span></div>`;
-  }); document.getElementById('res').innerHTML=h;
-} c();
+const cols=[{h:'#EF4444',n:'Red'},{h:'#3B82F6',n:'Blue'},{h:'#10B981',n:'Green'},{h:'#F59E0B',n:'Yellow'},{h:'#A855F7',n:'Purple'},{h:'#EC4899',n:'Pink'},{h:'#000000',n:'Black'},{h:'#FFFFFF',n:'White'}];
+let ans='', s=0;
+function n(){ const c=cols[Math.floor(Math.random()*cols.length)]; ans=c.n; document.getElementById('q').innerText=c.h; let o=[ans]; while(o.length<4){ const r=cols[Math.floor(Math.random()*cols.length)].n; if(!o.includes(r))o.push(r); } o=o.sort(()=>0.5-Math.random()); let h=''; o.forEach(x=>{ h+=`<button onclick="chk('${x}')" style="flex:1;min-width:120px;background:var(--surface);color:var(--text);border:2px solid var(--border);">${x}</button>`; }); document.getElementById('opts').innerHTML=h; }
+function chk(g){ if(g===ans){ s++; document.getElementById('sc').innerText="Streak: "+s; } else { alert("Wrong! It was " + ans); s=0; document.getElementById('sc').innerText="Streak: 0"; } n(); }
+n();
 </script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">

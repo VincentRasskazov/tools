@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Sleep Cycle Calculator"
-category: "Health"
-description: "Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles."
-permalink: /tools/sleep-cycle-calculator.html
+title: "RPG Dice Roller"
+category: "Games"
+description: "Instantly roll standard TTRPG dice (D4, D6, D8, D10, D12, D20, D100) for your campaigns."
+permalink: /tools/rpg-dice-roller.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles.">
-  <meta property="og:title" content="Sleep Cycle Calculator">
-  <meta property="og:description" content="Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles.">
+  <meta name="description" content="Instantly roll standard TTRPG dice (D4, D6, D8, D10, D12, D20, D100) for your campaigns.">
+  <meta property="og:title" content="RPG Dice Roller">
+  <meta property="og:description" content="Instantly roll standard TTRPG dice (D4, D6, D8, D10, D12, D20, D100) for your campaigns.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Sleep Cycle Calculator">
-  <meta name="twitter:description" content="Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles.">
+  <meta name="twitter:title" content="RPG Dice Roller">
+  <meta name="twitter:description" content="Instantly roll standard TTRPG dice (D4, D6, D8, D10, D12, D20, D100) for your campaigns.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Sleep Cycle Calculator</title>
+  <title>RPG Dice Roller</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -41,22 +41,21 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Sleep Cycle Calculator</h1>
-<p style="text-align:center;color:#64748b;font-weight:bold;">If you fall asleep right now, you should wake up at:</p>
-<div id="res" class="card" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:30px;"></div>
-<button onclick="c()">Calculate for Right Now</button>
-<script>
-function c(){
-  const now = new Date(); now.setMinutes(now.getMinutes()+15); // Avg time to fall asleep
-  let h=''; const cycles=[6,5,4,3]; // 9, 7.5, 6, 4.5 hours
-  cycles.forEach((c, i)=>{
-    const wake = new Date(now.getTime() + (c * 90 * 60000));
-    const time = wake.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-    let col = i===0 ? 'var(--success)' : i===1 ? 'var(--primary)' : 'var(--warning)';
-    h+=`<div style="flex:1;min-width:120px;text-align:center;padding:20px;border-radius:12px;background:${col};color:#fff;font-weight:bold;font-size:1.5rem;box-shadow:0 4px 6px rgba(0,0,0,0.1);">${time}<br><span style="font-size:0.9rem;font-weight:normal;">${c} Cycles</span></div>`;
-  }); document.getElementById('res').innerHTML=h;
-} c();
-</script>
+    <h1>RPG Dice Roller</h1>
+<div class="card" style="text-align:center;padding:40px;">
+  <div id="res" style="font-size:6rem;font-weight:900;color:var(--primary);line-height:1;">0</div>
+  <div id="lbl" style="font-size:1.2rem;color:#64748b;font-weight:bold;margin-top:10px;">Select a die to roll</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:10px;">
+  <button onclick="r(4)" style="flex:1;min-width:80px;">D4</button>
+  <button onclick="r(6)" style="flex:1;min-width:80px;">D6</button>
+  <button onclick="r(8)" style="flex:1;min-width:80px;">D8</button>
+  <button onclick="r(10)" style="flex:1;min-width:80px;">D10</button>
+  <button onclick="r(12)" style="flex:1;min-width:80px;">D12</button>
+  <button onclick="r(20)" style="flex:1;min-width:80px;background:var(--danger)">D20</button>
+  <button onclick="r(100)" style="flex:1;min-width:80px;background:var(--success)">D100</button>
+</div>
+<script>function r(sides){ document.getElementById('res').innerText=Math.floor(Math.random()*sides)+1; document.getElementById('lbl').innerText=`Rolled a D${sides}`; }</script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
     🏠 Back to Hub

@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Sleep Cycle Calculator"
-category: "Health"
-description: "Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles."
-permalink: /tools/sleep-cycle-calculator.html
+title: "Random Excuse Generator"
+category: "Utility"
+description: "Need to get out of plans? Click the button to generate a totally believable (or ridiculous) excuse."
+permalink: /tools/random-excuse-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles.">
-  <meta property="og:title" content="Sleep Cycle Calculator">
-  <meta property="og:description" content="Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles.">
+  <meta name="description" content="Need to get out of plans? Click the button to generate a totally believable (or ridiculous) excuse.">
+  <meta property="og:title" content="Random Excuse Generator">
+  <meta property="og:description" content="Need to get out of plans? Click the button to generate a totally believable (or ridiculous) excuse.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Sleep Cycle Calculator">
-  <meta name="twitter:description" content="Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles.">
+  <meta name="twitter:title" content="Random Excuse Generator">
+  <meta name="twitter:description" content="Need to get out of plans? Click the button to generate a totally believable (or ridiculous) excuse.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Sleep Cycle Calculator</title>
+  <title>Random Excuse Generator</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -41,21 +41,14 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Sleep Cycle Calculator</h1>
-<p style="text-align:center;color:#64748b;font-weight:bold;">If you fall asleep right now, you should wake up at:</p>
-<div id="res" class="card" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:30px;"></div>
-<button onclick="c()">Calculate for Right Now</button>
+    <h1>Excuse Generator</h1>
+<div class="card" style="text-align:center;padding:50px;min-height:150px;display:flex;align-items:center;justify-content:center;">
+  <div id="res" style="font-size:1.8rem;font-weight:bold;color:var(--primary);line-height:1.4;">I can't make it tonight because...</div>
+</div>
+<button onclick="g()" style="background:var(--warning);color:#000;">Give me an excuse!</button>
 <script>
-function c(){
-  const now = new Date(); now.setMinutes(now.getMinutes()+15); // Avg time to fall asleep
-  let h=''; const cycles=[6,5,4,3]; // 9, 7.5, 6, 4.5 hours
-  cycles.forEach((c, i)=>{
-    const wake = new Date(now.getTime() + (c * 90 * 60000));
-    const time = wake.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-    let col = i===0 ? 'var(--success)' : i===1 ? 'var(--primary)' : 'var(--warning)';
-    h+=`<div style="flex:1;min-width:120px;text-align:center;padding:20px;border-radius:12px;background:${col};color:#fff;font-weight:bold;font-size:1.5rem;box-shadow:0 4px 6px rgba(0,0,0,0.1);">${time}<br><span style="font-size:0.9rem;font-weight:normal;">${c} Cycles</span></div>`;
-  }); document.getElementById('res').innerHTML=h;
-} c();
+const e=["my dog ate my car keys.","I accidentally locked myself in the bathroom.","my internet went down and I'm trapped in the dark ages.","I have a sudden, extreme allergy to leaving my house.","I forgot I have to water my plastic plants.","my cat is sleeping on my lap and it is illegal to move.","I'm currently engaged in a staring contest with a squirrel.","I am waiting for a very important package of absolutely nothing.","I got abducted by aliens, but they brought me back because I complained too much."];
+function g(){ document.getElementById('res').innerText=`"I can't make it because ${e[Math.floor(Math.random()*e.length)]}"`; }
 </script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">

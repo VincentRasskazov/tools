@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Sleep Cycle Calculator"
-category: "Health"
-description: "Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles."
-permalink: /tools/sleep-cycle-calculator.html
+title: "Guess the Number Game"
+category: "Games"
+description: "I am thinking of a number between 1 and 100. Use the clues to guess it in the fewest attempts!"
+permalink: /tools/game-guess-the-number.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles.">
-  <meta property="og:title" content="Sleep Cycle Calculator">
-  <meta property="og:description" content="Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles.">
+  <meta name="description" content="I am thinking of a number between 1 and 100. Use the clues to guess it in the fewest attempts!">
+  <meta property="og:title" content="Guess the Number Game">
+  <meta property="og:description" content="I am thinking of a number between 1 and 100. Use the clues to guess it in the fewest attempts!">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Sleep Cycle Calculator">
-  <meta name="twitter:description" content="Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles.">
+  <meta name="twitter:title" content="Guess the Number Game">
+  <meta name="twitter:description" content="I am thinking of a number between 1 and 100. Use the clues to guess it in the fewest attempts!">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Sleep Cycle Calculator</title>
+  <title>Guess the Number Game</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -41,21 +41,16 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Sleep Cycle Calculator</h1>
-<p style="text-align:center;color:#64748b;font-weight:bold;">If you fall asleep right now, you should wake up at:</p>
-<div id="res" class="card" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:30px;"></div>
-<button onclick="c()">Calculate for Right Now</button>
+    <h1>Guess the Number</h1>
+<div id="msg" class="res" style="font-size:2rem;margin-top:0;margin-bottom:20px;">Guess a number from 1 to 100</div>
+<div class="row">
+  <input type="number" id="in" placeholder="Your guess..." min="1" max="100" onkeypress="if(event.key==='Enter') c()" style="font-size:1.5rem;text-align:center;margin:0;">
+  <button onclick="c()" style="flex:0.5;margin:0;">Guess</button>
+</div>
+<button onclick="st()" style="margin-top:20px;background:var(--warning);color:#000;">Restart Game</button>
 <script>
-function c(){
-  const now = new Date(); now.setMinutes(now.getMinutes()+15); // Avg time to fall asleep
-  let h=''; const cycles=[6,5,4,3]; // 9, 7.5, 6, 4.5 hours
-  cycles.forEach((c, i)=>{
-    const wake = new Date(now.getTime() + (c * 90 * 60000));
-    const time = wake.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-    let col = i===0 ? 'var(--success)' : i===1 ? 'var(--primary)' : 'var(--warning)';
-    h+=`<div style="flex:1;min-width:120px;text-align:center;padding:20px;border-radius:12px;background:${col};color:#fff;font-weight:bold;font-size:1.5rem;box-shadow:0 4px 6px rgba(0,0,0,0.1);">${time}<br><span style="font-size:0.9rem;font-weight:normal;">${c} Cycles</span></div>`;
-  }); document.getElementById('res').innerHTML=h;
-} c();
+let tgt=0, att=0; function st(){ tgt=Math.floor(Math.random()*100)+1; att=0; document.getElementById('msg').innerText="Thinking of a number..."; document.getElementById('msg').style.color="var(--text)"; document.getElementById('in').value=''; }
+function c(){ const g=parseInt(document.getElementById('in').value); if(isNaN(g))return; att++; const m=document.getElementById('msg'); if(g===tgt){ m.innerHTML=`🎉 YOU GOT IT!<br><span style="font-size:1.2rem;">Took ${att} attempts</span>`; m.style.color="var(--success)"; } else if(g<tgt){ m.innerText="Too Low! ⬆️"; m.style.color="var(--primary)"; } else { m.innerText="Too High! ⬇️"; m.style.color="var(--danger)"; } document.getElementById('in').value=''; document.getElementById('in').focus(); } st();
 </script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">

@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Sleep Cycle Calculator"
-category: "Health"
-description: "Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles."
-permalink: /tools/sleep-cycle-calculator.html
+title: "Decimal to Fraction Calculator"
+category: "Math"
+description: "Convert floating-point decimal numbers directly into their simplified mathematical fractions."
+permalink: /tools/decimal-to-fraction-calculator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles.">
-  <meta property="og:title" content="Sleep Cycle Calculator">
-  <meta property="og:description" content="Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles.">
+  <meta name="description" content="Convert floating-point decimal numbers directly into their simplified mathematical fractions.">
+  <meta property="og:title" content="Decimal to Fraction Calculator">
+  <meta property="og:description" content="Convert floating-point decimal numbers directly into their simplified mathematical fractions.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Sleep Cycle Calculator">
-  <meta name="twitter:description" content="Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles.">
+  <meta name="twitter:title" content="Decimal to Fraction Calculator">
+  <meta name="twitter:description" content="Convert floating-point decimal numbers directly into their simplified mathematical fractions.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Sleep Cycle Calculator</title>
+  <title>Decimal to Fraction Calculator</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -41,20 +41,17 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Sleep Cycle Calculator</h1>
-<p style="text-align:center;color:#64748b;font-weight:bold;">If you fall asleep right now, you should wake up at:</p>
-<div id="res" class="card" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:30px;"></div>
-<button onclick="c()">Calculate for Right Now</button>
+    <h1>Decimal to Fraction</h1>
+<div class="card"><label>🔢 Enter Decimal</label><input type="number" id="in" value="0.75" step="0.01" oninput="c()"></div>
+<div id="res" class="res" style="font-size:4rem;letter-spacing:5px;color:var(--success);">3/4</div>
 <script>
+function gcd(a,b){return b?gcd(b,a%b):a;}
 function c(){
-  const now = new Date(); now.setMinutes(now.getMinutes()+15); // Avg time to fall asleep
-  let h=''; const cycles=[6,5,4,3]; // 9, 7.5, 6, 4.5 hours
-  cycles.forEach((c, i)=>{
-    const wake = new Date(now.getTime() + (c * 90 * 60000));
-    const time = wake.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-    let col = i===0 ? 'var(--success)' : i===1 ? 'var(--primary)' : 'var(--warning)';
-    h+=`<div style="flex:1;min-width:120px;text-align:center;padding:20px;border-radius:12px;background:${col};color:#fff;font-weight:bold;font-size:1.5rem;box-shadow:0 4px 6px rgba(0,0,0,0.1);">${time}<br><span style="font-size:0.9rem;font-weight:normal;">${c} Cycles</span></div>`;
-  }); document.getElementById('res').innerHTML=h;
+  const v=document.getElementById('in').value; if(!v||isNaN(v))return document.getElementById('res').innerText="?";
+  const dec=parseFloat(v); if(Number.isInteger(dec))return document.getElementById('res').innerText=dec;
+  const len=v.includes('.')?v.split('.')[1].length:0;
+  const den=Math.pow(10,len), num=dec*den; const g=Math.abs(gcd(num,den));
+  document.getElementById('res').innerText=`${num/g}/${den/g}`;
 } c();
 </script>
   </div>

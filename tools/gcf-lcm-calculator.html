@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Sleep Cycle Calculator"
-category: "Health"
-description: "Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles."
-permalink: /tools/sleep-cycle-calculator.html
+title: "GCF & LCM Calculator"
+category: "Math"
+description: "Instantly calculate both the Greatest Common Factor and Least Common Multiple of two numbers."
+permalink: /tools/gcf-lcm-calculator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles.">
-  <meta property="og:title" content="Sleep Cycle Calculator">
-  <meta property="og:description" content="Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles.">
+  <meta name="description" content="Instantly calculate both the Greatest Common Factor and Least Common Multiple of two numbers.">
+  <meta property="og:title" content="GCF & LCM Calculator">
+  <meta property="og:description" content="Instantly calculate both the Greatest Common Factor and Least Common Multiple of two numbers.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Sleep Cycle Calculator">
-  <meta name="twitter:description" content="Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles.">
+  <meta name="twitter:title" content="GCF & LCM Calculator">
+  <meta name="twitter:description" content="Instantly calculate both the Greatest Common Factor and Least Common Multiple of two numbers.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Sleep Cycle Calculator</title>
+  <title>GCF & LCM Calculator</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -41,20 +41,21 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Sleep Cycle Calculator</h1>
-<p style="text-align:center;color:#64748b;font-weight:bold;">If you fall asleep right now, you should wake up at:</p>
-<div id="res" class="card" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:30px;"></div>
-<button onclick="c()">Calculate for Right Now</button>
+    <h1>GCF & LCM Calculator</h1>
+<div class="row">
+  <div class="card"><label>Number A</label><input type="number" id="a" value="12" oninput="c()"></div>
+  <div class="card"><label>Number B</label><input type="number" id="b" value="18" oninput="c()"></div>
+</div>
+<div class="row">
+  <div class="card" style="text-align:center;"><strong>GCF</strong><br><span id="gcf" style="font-size:3rem;color:var(--primary);display:block;margin-top:10px;">6</span></div>
+  <div class="card" style="text-align:center;"><strong>LCM</strong><br><span id="lcm" style="font-size:3rem;color:var(--success);display:block;margin-top:10px;">36</span></div>
+</div>
 <script>
+function gcd(a,b){return b?gcd(b,a%b):a;}
 function c(){
-  const now = new Date(); now.setMinutes(now.getMinutes()+15); // Avg time to fall asleep
-  let h=''; const cycles=[6,5,4,3]; // 9, 7.5, 6, 4.5 hours
-  cycles.forEach((c, i)=>{
-    const wake = new Date(now.getTime() + (c * 90 * 60000));
-    const time = wake.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-    let col = i===0 ? 'var(--success)' : i===1 ? 'var(--primary)' : 'var(--warning)';
-    h+=`<div style="flex:1;min-width:120px;text-align:center;padding:20px;border-radius:12px;background:${col};color:#fff;font-weight:bold;font-size:1.5rem;box-shadow:0 4px 6px rgba(0,0,0,0.1);">${time}<br><span style="font-size:0.9rem;font-weight:normal;">${c} Cycles</span></div>`;
-  }); document.getElementById('res').innerHTML=h;
+  const a=Math.abs(parseInt(document.getElementById('a').value)), b=Math.abs(parseInt(document.getElementById('b').value));
+  if(a&&b){ const g=gcd(a,b); document.getElementById('gcf').innerText=g; document.getElementById('lcm').innerText=(a*b)/g; }
+  else{ document.getElementById('gcf').innerText="-"; document.getElementById('lcm').innerText="-"; }
 } c();
 </script>
   </div>

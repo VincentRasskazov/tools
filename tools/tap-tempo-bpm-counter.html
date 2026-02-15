@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Sleep Cycle Calculator"
-category: "Health"
-description: "Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles."
-permalink: /tools/sleep-cycle-calculator.html
+title: "Tap Tempo BPM Counter"
+category: "Audio"
+description: "Tap any key or click the button to the beat of a song to instantly find its exact BPM (Beats Per Minute)."
+permalink: /tools/tap-tempo-bpm-counter.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles.">
-  <meta property="og:title" content="Sleep Cycle Calculator">
-  <meta property="og:description" content="Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles.">
+  <meta name="description" content="Tap any key or click the button to the beat of a song to instantly find its exact BPM (Beats Per Minute).">
+  <meta property="og:title" content="Tap Tempo BPM Counter">
+  <meta property="og:description" content="Tap any key or click the button to the beat of a song to instantly find its exact BPM (Beats Per Minute).">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Sleep Cycle Calculator">
-  <meta name="twitter:description" content="Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles.">
+  <meta name="twitter:title" content="Tap Tempo BPM Counter">
+  <meta name="twitter:description" content="Tap any key or click the button to the beat of a song to instantly find its exact BPM (Beats Per Minute).">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Sleep Cycle Calculator</title>
+  <title>Tap Tempo BPM Counter</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -41,21 +41,27 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Sleep Cycle Calculator</h1>
-<p style="text-align:center;color:#64748b;font-weight:bold;">If you fall asleep right now, you should wake up at:</p>
-<div id="res" class="card" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:30px;"></div>
-<button onclick="c()">Calculate for Right Now</button>
+    <h1>Tap Tempo BPM</h1>
+<p style="text-align:center;color:#64748b;">Tap the button or press any key to the beat.</p>
+<div class="card" style="text-align:center;padding:50px;">
+  <div id="bpm" style="font-size:6rem;font-weight:900;color:var(--primary);line-height:1;">0</div>
+  <div style="color:#64748b;font-weight:bold;margin-top:10px;font-size:1.2rem;">BPM</div>
+</div>
+<button id="tapBtn" onclick="tap()" style="height:120px;font-size:2rem;background:var(--success);">TAP HERE</button>
+<button onclick="reset()" style="background:var(--danger);margin-top:10px;">Reset</button>
 <script>
-function c(){
-  const now = new Date(); now.setMinutes(now.getMinutes()+15); // Avg time to fall asleep
-  let h=''; const cycles=[6,5,4,3]; // 9, 7.5, 6, 4.5 hours
-  cycles.forEach((c, i)=>{
-    const wake = new Date(now.getTime() + (c * 90 * 60000));
-    const time = wake.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-    let col = i===0 ? 'var(--success)' : i===1 ? 'var(--primary)' : 'var(--warning)';
-    h+=`<div style="flex:1;min-width:120px;text-align:center;padding:20px;border-radius:12px;background:${col};color:#fff;font-weight:bold;font-size:1.5rem;box-shadow:0 4px 6px rgba(0,0,0,0.1);">${time}<br><span style="font-size:0.9rem;font-weight:normal;">${c} Cycles</span></div>`;
-  }); document.getElementById('res').innerHTML=h;
-} c();
+let taps=[]; 
+function tap(){
+  const now = Date.now(); taps.push(now);
+  if(taps.length > 10) taps.shift();
+  if(taps.length >= 2){
+    let diffs=[]; for(let i=1;i<taps.length;i++) diffs.push(taps[i]-taps[i-1]);
+    const avg = diffs.reduce((a,b)=>a+b)/diffs.length;
+    document.getElementById('bpm').innerText = Math.round(60000/avg);
+  }
+}
+function reset(){ taps=[]; document.getElementById('bpm').innerText='0'; }
+window.addEventListener('keydown', tap);
 </script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">

@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Sleep Cycle Calculator"
-category: "Health"
-description: "Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles."
-permalink: /tools/sleep-cycle-calculator.html
+title: "Blind Typing Challenge"
+category: "Games"
+description: "Test your muscle memory! Type the target sentence correctly without being able to see what you are typing."
+permalink: /tools/game-blind-typing-challenge.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles.">
-  <meta property="og:title" content="Sleep Cycle Calculator">
-  <meta property="og:description" content="Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles.">
+  <meta name="description" content="Test your muscle memory! Type the target sentence correctly without being able to see what you are typing.">
+  <meta property="og:title" content="Blind Typing Challenge">
+  <meta property="og:description" content="Test your muscle memory! Type the target sentence correctly without being able to see what you are typing.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Sleep Cycle Calculator">
-  <meta name="twitter:description" content="Find the perfect time to wake up feeling refreshed by calculating 90-minute sleep cycles.">
+  <meta name="twitter:title" content="Blind Typing Challenge">
+  <meta name="twitter:description" content="Test your muscle memory! Type the target sentence correctly without being able to see what you are typing.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Sleep Cycle Calculator</title>
+  <title>Blind Typing Challenge</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -41,21 +41,17 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Sleep Cycle Calculator</h1>
-<p style="text-align:center;color:#64748b;font-weight:bold;">If you fall asleep right now, you should wake up at:</p>
-<div id="res" class="card" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:30px;"></div>
-<button onclick="c()">Calculate for Right Now</button>
+    <h1>Blind Typing Challenge</h1>
+<div class="card" style="text-align:center;">
+  <div id="tgt" style="font-size:1.5rem;font-weight:bold;color:var(--text);margin-bottom:20px;user-select:none;">The quick brown fox jumps over the lazy dog.</div>
+  <input type="password" id="in" placeholder="Type here blindly..." style="font-size:2rem;text-align:center;letter-spacing:5px;" onkeypress="if(event.key==='Enter') c()">
+</div>
+<button onclick="c()" style="background:var(--success);">Check Answer</button>
+<div id="res" class="res" style="display:none;"></div>
 <script>
-function c(){
-  const now = new Date(); now.setMinutes(now.getMinutes()+15); // Avg time to fall asleep
-  let h=''; const cycles=[6,5,4,3]; // 9, 7.5, 6, 4.5 hours
-  cycles.forEach((c, i)=>{
-    const wake = new Date(now.getTime() + (c * 90 * 60000));
-    const time = wake.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-    let col = i===0 ? 'var(--success)' : i===1 ? 'var(--primary)' : 'var(--warning)';
-    h+=`<div style="flex:1;min-width:120px;text-align:center;padding:20px;border-radius:12px;background:${col};color:#fff;font-weight:bold;font-size:1.5rem;box-shadow:0 4px 6px rgba(0,0,0,0.1);">${time}<br><span style="font-size:0.9rem;font-weight:normal;">${c} Cycles</span></div>`;
-  }); document.getElementById('res').innerHTML=h;
-} c();
+const s=["The quick brown fox jumps over the lazy dog.","A journey of a thousand miles begins with a single step.","To be or not to be, that is the question."];
+let cur=s[0]; function n(){ cur=s[Math.floor(Math.random()*s.length)]; document.getElementById('tgt').innerText=cur; document.getElementById('in').value=''; document.getElementById('res').style.display='none'; }
+function c(){ const v=document.getElementById('in').value; const r=document.getElementById('res'); r.style.display='block'; if(v===cur){ r.innerHTML=`<span style="color:var(--success)">Perfect! Flawless muscle memory.</span>`; setTimeout(n,2000); } else { r.innerHTML=`<span style="color:var(--danger)">Mistake made!</span><br><span style="font-size:1rem;color:#64748b;">You typed: ${v}</span>`; } }
 </script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">

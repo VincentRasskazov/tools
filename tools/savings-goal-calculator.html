@@ -1,33 +1,65 @@
 ---
 layout: null
-title: "Savings goal calculator"
+title: "Savings Goal Calculator"
 category: "Finance"
-description: "Calculate how much to save monthly to reach a financial goal."
+description: "Find out exactly how much you need to save each month to hit your financial target."
 permalink: /tools/savings-goal-calculator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Calculate how much to save monthly to reach a financial goal.">
-  <meta property="og:title" content="Savings goal calculator">
-  <meta property="og:description" content="Calculate how much to save monthly to reach a financial goal.">
+  <meta name="description" content="Find out exactly how much you need to save each month to hit your financial target.">
+  <meta property="og:title" content="Savings Goal Calculator">
+  <meta property="og:description" content="Find out exactly how much you need to save each month to hit your financial target.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Savings goal calculator">
-  <meta name="twitter:description" content="Calculate how much to save monthly to reach a financial goal.">
+  <meta name="twitter:title" content="Savings Goal Calculator">
+  <meta name="twitter:description" content="Find out exactly how much you need to save each month to hit your financial target.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Savings goal calculator</title>
+  <title>Savings Goal Calculator</title>
   
   <style>
-.tool-container{max-width:600px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} input{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;margin-bottom:15px;} button{width:100%;padding:12px;background:#2563eb;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;} #res{margin-top:20px;font-size:1.5rem;text-align:center;font-weight:bold;color:#16a34a;}
-  </style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+.grid-game { display: grid; gap: 10px; margin: 0 auto 20px; }
+.grid-cell { background: var(--surface); border: 2px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: bold; cursor: pointer; transition: 0.1s; user-select: none; }
+</style>
 </head>
 <body>
-<div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Savings Goal</h1><label>Goal Amount ($)</label><input type="number" id="g"><label>Months to Reach Goal</label><input type="number" id="m"><button onclick="c()">Calculate</button><div id="res"></div></div>
-<script>function c(){ const g=parseFloat(document.getElementById('g').value), m=parseFloat(document.getElementById('m').value); if(g&&m) document.getElementById('res').innerText = "$" + (g/m).toFixed(2) + " / month"; }</script>
-
-  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;">
+  <div class="tool-container">
+    <h1>Savings Goal Calculator</h1>
+<div class="row">
+  <div class="card"><label>🎯 Goal Amount ($)</label><input type="number" id="g" value="5000" oninput="c()"></div>
+  <div class="card"><label>💰 Current Savings ($)</label><input type="number" id="s" value="500" oninput="c()"></div>
+</div>
+<div class="card"><label>⏳ Months to Reach Goal</label><input type="number" id="m" value="12" min="1" oninput="c()"></div>
+<div id="res" class="res" style="font-size:1.5rem;line-height:1.6;"></div>
+<script>
+function c(){
+  const g=parseFloat(document.getElementById('g').value), s=parseFloat(document.getElementById('s').value)||0, m=parseInt(document.getElementById('m').value);
+  if(g>0 && m>0){
+    const left = g - s; const perMonth = left / m;
+    if(left<=0) document.getElementById('res').innerHTML="<span style='color:var(--success);'>You already reached your goal!</span>";
+    else document.getElementById('res').innerHTML=`You need to save:<br><strong style="font-size:3rem;color:var(--success);display:block;">$${perMonth.toFixed(2)}</strong> per month.`;
+  }
+} c();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
     🏠 Back to Hub
   </a>
 </body>
