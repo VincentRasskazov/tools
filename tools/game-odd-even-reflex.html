@@ -1,0 +1,64 @@
+---
+layout: null
+title: "Odd or Even Reflex"
+category: "Games"
+description: "A rapid reflex game. Is the number odd or even? Tap the correct button before time runs out!"
+permalink: /tools/game-odd-even-reflex.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="A rapid reflex game. Is the number odd or even? Tap the correct button before time runs out!">
+  <meta property="og:title" content="Odd or Even Reflex">
+  <meta property="og:description" content="A rapid reflex game. Is the number odd or even? Tap the correct button before time runs out!">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Odd or Even Reflex">
+  <meta name="twitter:description" content="A rapid reflex game. Is the number odd or even? Tap the correct button before time runs out!">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Odd or Even Reflex</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+.grid-game { display: grid; gap: 10px; margin: 0 auto 20px; }
+.grid-cell { background: var(--surface); border: 2px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; cursor: pointer; transition: 0.1s; user-select: none; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Odd or Even?</h1>
+<div class="row" style="margin-bottom:15px;text-align:center;">
+  <div id="sc" style="font-size:1.5rem;font-weight:bold;color:var(--success);">Score: 0</div>
+  <div id="tm" style="font-size:1.5rem;font-weight:bold;color:var(--danger);">Time: 5.0s</div>
+</div>
+<div class="card"><div id="num" style="font-size:6rem;font-weight:900;text-align:center;color:var(--primary);">READY</div></div>
+<div class="row">
+  <button id="bO" onclick="c(1)" style="background:var(--warning);color:#000;" disabled>ODD</button>
+  <button id="bE" onclick="c(0)" style="background:var(--success);" disabled>EVEN</button>
+</div>
+<button onclick="st()" id="btn" style="margin-top:20px;background:#64748b;">Start</button>
+<script>
+let cur=0, s=0, t=5.0, int, run=false;
+function st(){ s=0; t=5.0; run=true; document.getElementById('sc').innerText="Score: 0"; document.getElementById('btn').style.display='none'; document.getElementById('bO').disabled=false; document.getElementById('bE').disabled=false; nx(); clearInterval(int); int=setInterval(()=>{t-=0.1; document.getElementById('tm').innerText='Time: '+t.toFixed(1)+'s'; if(t<=0){end();}},100); }
+function nx(){ cur=Math.floor(Math.random()*100)+1; document.getElementById('num').innerText=cur; }
+function c(ans){ if(!run)return; if(cur%2===ans){ s++; document.getElementById('sc').innerText="Score: "+s; t=Math.min(5.0, t+0.5); nx(); } else { end(); } }
+function end(){ clearInterval(int); run=false; document.getElementById('bO').disabled=true; document.getElementById('bE').disabled=true; document.getElementById('num').innerText="GAME OVER"; document.getElementById('btn').style.display='block'; document.getElementById('btn').innerText='Play Again'; alert("Final Score: "+s); }
+</script>
+  </div>
+</body>
+</html>

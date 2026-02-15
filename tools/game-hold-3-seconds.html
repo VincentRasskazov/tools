@@ -1,0 +1,55 @@
+---
+layout: null
+title: "Hold for 3 Seconds"
+category: "Games"
+description: "Hold the button down and release it as close to exactly 3.00 seconds as possible (No timer visible!)."
+permalink: /tools/game-hold-3-seconds.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Hold the button down and release it as close to exactly 3.00 seconds as possible (No timer visible!).">
+  <meta property="og:title" content="Hold for 3 Seconds">
+  <meta property="og:description" content="Hold the button down and release it as close to exactly 3.00 seconds as possible (No timer visible!).">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hold for 3 Seconds">
+  <meta name="twitter:description" content="Hold the button down and release it as close to exactly 3.00 seconds as possible (No timer visible!).">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Hold for 3 Seconds</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+.grid-game { display: grid; gap: 10px; margin: 0 auto 20px; }
+.grid-cell { background: var(--surface); border: 2px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; cursor: pointer; transition: 0.1s; user-select: none; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Blind 3s Challenge</h1>
+<p style="text-align:center;color:#64748b;margin-bottom:20px;">Hold the button. Release at exactly 3.000s. You cannot see the timer!</p>
+<div id="btn" style="height:150px;background:var(--primary);border-radius:16px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:2rem;font-weight:bold;cursor:pointer;user-select:none;margin-bottom:20px;box-shadow:0 10px 20px rgba(59,130,246,0.3);" onmousedown="dn()" onmouseup="up()" ontouchstart="dn()" ontouchend="up()">HOLD ME</div>
+<div id="res" class="res" style="display:none;"></div>
+<script>
+let t0, run=false;
+function dn(){ if(run)return; run=true; t0=Date.now(); document.getElementById('btn').style.background='var(--warning)'; document.getElementById('btn').innerText='HOLDING...'; document.getElementById('res').style.display='none'; }
+function up(){ if(!run)return; run=false; const diff=Math.abs(3000-(Date.now()-t0))/1000; const time=((Date.now()-t0)/1000).toFixed(3); document.getElementById('btn').style.background='var(--primary)'; document.getElementById('btn').innerText='HOLD ME'; document.getElementById('res').style.display='block'; if(diff===0){document.getElementById('res').innerHTML=`🎉 EXACTLY 3.000s! 🎉`;}else{document.getElementById('res').innerHTML=`You held for: <strong>${time}s</strong><br>Off by: <span style="color:${diff<0.2?'var(--success)':'var(--danger)'}">${diff.toFixed(3)}s</span>`;} }
+</script>
+  </div>
+</body>
+</html>
