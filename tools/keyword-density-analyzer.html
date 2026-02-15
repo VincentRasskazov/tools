@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "JSON Minifier & Compressor"
-category: "Developer"
-description: "Compress and minify JSON data by removing all whitespace and line breaks to save space."
-permalink: /tools/json-minifier.html
+title: "Keyword Density Analyzer"
+category: "SEO"
+description: "Paste your article to find the most frequently used words and their density percentages."
+permalink: /tools/keyword-density-analyzer.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Compress and minify JSON data by removing all whitespace and line breaks to save space.">
-  <meta property="og:title" content="JSON Minifier & Compressor">
-  <meta property="og:description" content="Compress and minify JSON data by removing all whitespace and line breaks to save space.">
+  <meta name="description" content="Paste your article to find the most frequently used words and their density percentages.">
+  <meta property="og:title" content="Keyword Density Analyzer">
+  <meta property="og:description" content="Paste your article to find the most frequently used words and their density percentages.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="JSON Minifier & Compressor">
-  <meta name="twitter:description" content="Compress and minify JSON data by removing all whitespace and line breaks to save space.">
+  <meta name="twitter:title" content="Keyword Density Analyzer">
+  <meta name="twitter:description" content="Paste your article to find the most frequently used words and their density percentages.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>JSON Minifier & Compressor</title>
+  <title>Keyword Density Analyzer</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,11 +39,23 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>JSON Minifier</h1>
-<div class="card"><label>📄 Formatted JSON</label><textarea id="in" rows="6" placeholder='{\n  "name": "John",\n  "age": 30\n}'></textarea></div>
-<button onclick="c()">Minify JSON</button>
-<div class="card"><label>✨ Minified Output</label><textarea id="out" rows="4" readonly style="font-family:monospace;"></textarea></div>
-<script>function c(){ try{ const o=JSON.parse(document.getElementById('in').value); document.getElementById('out').value=JSON.stringify(o); }catch(e){document.getElementById('out').value="Invalid JSON";} }</script>
+    <h1>Keyword Density Analyzer</h1>
+<div class="card"><textarea id="in" rows="6" placeholder="Paste your article or text here..."></textarea></div>
+<button onclick="c()">Analyze Keywords</button>
+<div id="res" class="card" style="display:none;text-align:left;"></div>
+<script>
+function c(){
+  const text=document.getElementById('in').value.toLowerCase().replace(/[^a-z0-9\s]/g,'');
+  if(!text)return;
+  const words=text.split(/\s+/).filter(w=>w.length>2);
+  const total=words.length; if(total===0)return;
+  const counts={}; words.forEach(w=>counts[w]=(counts[w]||0)+1);
+  const sorted=Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  let h=`<h3 style="margin-top:0;">Top 10 Keywords (Total Words: ${total})</h3><table style="width:100%;text-align:left;border-collapse:collapse;"><tr><th style="border-bottom:2px solid var(--border);padding:8px;">Keyword</th><th style="border-bottom:2px solid var(--border);padding:8px;">Count</th><th style="border-bottom:2px solid var(--border);padding:8px;">Density</th></tr>`;
+  sorted.forEach(s=>{ h+=`<tr><td style="padding:8px;border-bottom:1px solid var(--border);">${s[0]}</td><td style="padding:8px;border-bottom:1px solid var(--border);">${s[1]}</td><td style="padding:8px;border-bottom:1px solid var(--border);color:var(--primary);font-weight:bold;">${((s[1]/total)*100).toFixed(2)}%</td></tr>`; });
+  h+='</table>'; document.getElementById('res').innerHTML=h; document.getElementById('res').style.display='block';
+}
+</script>
   </div>
 </body>
 </html>
