@@ -19,6 +19,6 @@ permalink: /tools/mean-median-mode.html
 <body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Mean, Median, Mode</h1><label>Data Set (comma separated)</label><textarea id="in" placeholder="1, 2, 3, 4, 4, 5"></textarea><button onclick="c()">Calculate Statistics</button><div id="res"></div></div>
 <script>function c(){ let a = document.getElementById('in').value.split(',').map(Number).filter(n=>!isNaN(n)).sort((x,y)=>x-y); if(!a.length)return; let sum=a.reduce((s,n)=>s+n,0), mean=sum/a.length, mid=Math.floor(a.length/2), med=a.length%2!==0?a[mid]:(a[mid-1]+a[mid])/2; let counts={}, max=0, mode=[]; a.forEach(n=>{counts[n]=(counts[n]||0)+1; if(counts[n]>max)max=counts[n];}); for(let k in counts) if(counts[k]===max) mode.push(k); document.getElementById('res').innerHTML = `Mean: <strong>${mean.toFixed(4)}</strong><br>Median: <strong>${med}</strong><br>Mode: <strong>${mode.join(', ')}</strong>`; }</script>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;">
-    🏠 Back to Hub
+    🏠 Return to tool chooser
   </a>
 </body></html>

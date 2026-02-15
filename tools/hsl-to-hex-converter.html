@@ -19,6 +19,6 @@ permalink: /tools/hsl-to-hex-converter.html
 <body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">HSL to Hex</h1><div class="row"><div><label>H</label><input type="number" id="h" value="221" max="360" oninput="c()"></div><div><label>S</label><input type="number" id="s" value="83" max="100" oninput="c()"></div><div><label>L</label><input type="number" id="l" value="53" max="100" oninput="c()"></div></div><input type="text" id="out" readonly><div id="box"></div></div>
 <script>function c(){ let h=document.getElementById('h').value/360, s=document.getElementById('s').value/100, l=document.getElementById('l').value/100; let r,g,b; if(s===0){r=g=b=l;}else{const h2r=(p,q,t)=>{if(t<0)t+=1;if(t>1)t-=1;if(t<1/6)return p+(q-p)*6*t;if(t<1/2)return q;if(t<2/3)return p+(q-p)*(2/3-t)*6;return p;}; let q=l<0.5?l*(1+s):l+s-l*s, p=2*l-q; r=h2r(p,q,h+1/3); g=h2r(p,q,h); b=h2r(p,q,h-1/3);} const hex = '#'+[r,g,b].map(x=>Math.round(x*255).toString(16).padStart(2,'0')).join(''); document.getElementById('out').value=hex.toUpperCase(); document.getElementById('box').style.background=hex; } window.onload=c;</script>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;">
-    🏠 Back to Hub
+    🏠 Return to tool chooser
   </a>
 </body></html>

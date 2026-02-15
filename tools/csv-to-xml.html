@@ -19,6 +19,6 @@ permalink: /tools/csv-to-xml.html
 <body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">CSV to XML</h1><textarea id="in" placeholder="id,name\n1,Alice\n2,Bob"></textarea><button onclick="c()">Convert to XML</button><textarea id="out" readonly style="margin-top:20px;height:250px;"></textarea></div>
 <script>function c(){ const lines=document.getElementById('in').value.trim().split('\n'); if(lines.length<2)return; const headers=lines[0].split(','); let xml='<?xml version="1.0" encoding="UTF-8"?>\n<rows>\n'; for(let i=1;i<lines.length;i++){ let data=lines[i].split(','); xml+='  <row>\n'; headers.forEach((h,j)=>{ xml+=`    <${h.trim()}>${data[j]?data[j].trim():''}</${h.trim()}>\n`; }); xml+='  </row>\n'; } xml+='</rows>'; document.getElementById('out').value=xml; }</script>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;">
-    🏠 Back to Hub
+    🏠 Return to tool chooser
   </a>
 </body></html>
