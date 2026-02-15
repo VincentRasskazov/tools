@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Ohm's Law Calculator"
-category: "Math"
-description: "Calculate Voltage (V), Current (I), Resistance (R), or Power (P) using Ohm's Law."
-permalink: /tools/ohms-law-calculator.html
+title: "Vigenère Cipher Encoder"
+category: "Security"
+description: "Encrypt and decrypt secret messages using the polyalphabetic Vigenère Cipher."
+permalink: /tools/vigenere-cipher-encoder.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Calculate Voltage (V), Current (I), Resistance (R), or Power (P) using Ohm's Law.">
-  <meta property="og:title" content="Ohm's Law Calculator">
-  <meta property="og:description" content="Calculate Voltage (V), Current (I), Resistance (R), or Power (P) using Ohm's Law.">
+  <meta name="description" content="Encrypt and decrypt secret messages using the polyalphabetic Vigenère Cipher.">
+  <meta property="og:title" content="Vigenère Cipher Encoder">
+  <meta property="og:description" content="Encrypt and decrypt secret messages using the polyalphabetic Vigenère Cipher.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Ohm's Law Calculator">
-  <meta name="twitter:description" content="Calculate Voltage (V), Current (I), Resistance (R), or Power (P) using Ohm's Law.">
+  <meta name="twitter:title" content="Vigenère Cipher Encoder">
+  <meta name="twitter:description" content="Encrypt and decrypt secret messages using the polyalphabetic Vigenère Cipher.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Ohm's Law Calculator</title>
+  <title>Vigenère Cipher Encoder</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -37,22 +37,12 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Ohm's Law Calculator</h1>
-<p style="text-align:center;color:#64748b;">Enter exactly TWO values to calculate the rest.</p>
-<div class="row"><div><label>Voltage (V)</label><input type="number" id="v"></div><div><label>Current (I - Amps)</label><input type="number" id="i"></div></div>
-<div class="row"><div><label>Resistance (R - Ohms)</label><input type="number" id="r"></div><div><label>Power (P - Watts)</label><input type="number" id="p"></div></div>
-<button onclick="c()">Calculate</button>
-<script>
-function c(){
-  const v=parseFloat(document.getElementById('v').value), i=parseFloat(document.getElementById('i').value), r=parseFloat(document.getElementById('r').value), p=parseFloat(document.getElementById('p').value);
-  let v1=v, i1=i, r1=r, p1=p;
-  if(v&&i){r1=v/i; p1=v*i;} else if(v&&r){i1=v/r; p1=(v*v)/r;} else if(v&&p){i1=p/v; r1=(v*v)/p;} else if(i&&r){v1=i*r; p1=(i*i)*r;} else if(i&&p){v1=p/i; r1=p/(i*i);} else if(r&&p){v1=Math.sqrt(p*r); i1=Math.sqrt(p/r);}
-  document.getElementById('v').value=isNaN(v1)?'':v1.toFixed(4).replace(/\.?0+$/,'');
-  document.getElementById('i').value=isNaN(i1)?'':i1.toFixed(4).replace(/\.?0+$/,'');
-  document.getElementById('r').value=isNaN(r1)?'':r1.toFixed(4).replace(/\.?0+$/,'');
-  document.getElementById('p').value=isNaN(p1)?'':p1.toFixed(4).replace(/\.?0+$/,'');
-}
-</script>
+    <h1>Vigenère Cipher</h1>
+<div class="row"><div><label>Mode</label><select id="m"><option value="1">Encrypt</option><option value="-1">Decrypt</option></select></div><div><label>Secret Key</label><input type="text" id="k" value="KEY" oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')"></div></div>
+<textarea id="in" rows="4" placeholder="Enter message here..."></textarea>
+<button onclick="c()">Process Message</button>
+<textarea id="out" rows="4" readonly style="margin-top:20px;"></textarea>
+<script>function c(){ const t=document.getElementById('in').value, k=document.getElementById('k').value.toUpperCase(), d=parseInt(document.getElementById('m').value); if(!k)return alert('Key required!'); let res=''; for(let i=0, j=0; i<t.length; i++){ let c=t.charCodeAt(i); if(c>=65&&c<=90){ res+=String.fromCharCode((c-65+d*(k.charCodeAt(j%k.length)-65)+26)%26+65); j++; } else if(c>=97&&c<=122){ res+=String.fromCharCode((c-97+d*(k.charCodeAt(j%k.length)-65)+26)%26+97); j++; } else { res+=t.charAt(i); } } document.getElementById('out').value=res; }</script>
   </div>
 </body>
 </html>

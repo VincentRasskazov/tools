@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Ohm's Law Calculator"
+title: "Speed, Distance, Time Calculator"
 category: "Math"
-description: "Calculate Voltage (V), Current (I), Resistance (R), or Power (P) using Ohm's Law."
-permalink: /tools/ohms-law-calculator.html
+description: "Solve for Speed, Distance, or Time by entering any two known variables."
+permalink: /tools/speed-distance-time-calculator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Calculate Voltage (V), Current (I), Resistance (R), or Power (P) using Ohm's Law.">
-  <meta property="og:title" content="Ohm's Law Calculator">
-  <meta property="og:description" content="Calculate Voltage (V), Current (I), Resistance (R), or Power (P) using Ohm's Law.">
+  <meta name="description" content="Solve for Speed, Distance, or Time by entering any two known variables.">
+  <meta property="og:title" content="Speed, Distance, Time Calculator">
+  <meta property="og:description" content="Solve for Speed, Distance, or Time by entering any two known variables.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Ohm's Law Calculator">
-  <meta name="twitter:description" content="Calculate Voltage (V), Current (I), Resistance (R), or Power (P) using Ohm's Law.">
+  <meta name="twitter:title" content="Speed, Distance, Time Calculator">
+  <meta name="twitter:description" content="Solve for Speed, Distance, or Time by entering any two known variables.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Ohm's Law Calculator</title>
+  <title>Speed, Distance, Time Calculator</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -37,20 +37,20 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Ohm's Law Calculator</h1>
-<p style="text-align:center;color:#64748b;">Enter exactly TWO values to calculate the rest.</p>
-<div class="row"><div><label>Voltage (V)</label><input type="number" id="v"></div><div><label>Current (I - Amps)</label><input type="number" id="i"></div></div>
-<div class="row"><div><label>Resistance (R - Ohms)</label><input type="number" id="r"></div><div><label>Power (P - Watts)</label><input type="number" id="p"></div></div>
-<button onclick="c()">Calculate</button>
+    <h1>Speed, Distance, Time</h1>
+<p style="text-align:center;color:#64748b;">Enter exactly TWO values to calculate the third.</p>
+<div class="row">
+  <div><label>Speed (e.g. km/h)</label><input type="number" id="s"></div>
+  <div><label>Distance (e.g. km)</label><input type="number" id="d"></div>
+  <div><label>Time (e.g. hours)</label><input type="number" id="t"></div>
+</div>
+<button onclick="c()">Calculate Missing</button>
 <script>
 function c(){
-  const v=parseFloat(document.getElementById('v').value), i=parseFloat(document.getElementById('i').value), r=parseFloat(document.getElementById('r').value), p=parseFloat(document.getElementById('p').value);
-  let v1=v, i1=i, r1=r, p1=p;
-  if(v&&i){r1=v/i; p1=v*i;} else if(v&&r){i1=v/r; p1=(v*v)/r;} else if(v&&p){i1=p/v; r1=(v*v)/p;} else if(i&&r){v1=i*r; p1=(i*i)*r;} else if(i&&p){v1=p/i; r1=p/(i*i);} else if(r&&p){v1=Math.sqrt(p*r); i1=Math.sqrt(p/r);}
-  document.getElementById('v').value=isNaN(v1)?'':v1.toFixed(4).replace(/\.?0+$/,'');
-  document.getElementById('i').value=isNaN(i1)?'':i1.toFixed(4).replace(/\.?0+$/,'');
-  document.getElementById('r').value=isNaN(r1)?'':r1.toFixed(4).replace(/\.?0+$/,'');
-  document.getElementById('p').value=isNaN(p1)?'':p1.toFixed(4).replace(/\.?0+$/,'');
+  const s=parseFloat(document.getElementById('s').value), d=parseFloat(document.getElementById('d').value), t=parseFloat(document.getElementById('t').value);
+  if(!isNaN(d)&&!isNaN(t)&&isNaN(s)){ document.getElementById('s').value=(d/t).toFixed(4).replace(/\.?0+$/,''); }
+  else if(!isNaN(s)&&!isNaN(t)&&isNaN(d)){ document.getElementById('d').value=(s*t).toFixed(4).replace(/\.?0+$/,''); }
+  else if(!isNaN(s)&&!isNaN(d)&&isNaN(t)){ document.getElementById('t').value=(d/s).toFixed(4).replace(/\.?0+$/,''); }
 }
 </script>
   </div>

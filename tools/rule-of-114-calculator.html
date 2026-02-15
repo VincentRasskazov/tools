@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Ohm's Law Calculator"
-category: "Math"
-description: "Calculate Voltage (V), Current (I), Resistance (R), or Power (P) using Ohm's Law."
-permalink: /tools/ohms-law-calculator.html
+title: "Rule of 114 Calculator"
+category: "Finance"
+description: "Estimate exactly how many years it will take to TRIPLE your investment based on the interest rate."
+permalink: /tools/rule-of-114-calculator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Calculate Voltage (V), Current (I), Resistance (R), or Power (P) using Ohm's Law.">
-  <meta property="og:title" content="Ohm's Law Calculator">
-  <meta property="og:description" content="Calculate Voltage (V), Current (I), Resistance (R), or Power (P) using Ohm's Law.">
+  <meta name="description" content="Estimate exactly how many years it will take to TRIPLE your investment based on the interest rate.">
+  <meta property="og:title" content="Rule of 114 Calculator">
+  <meta property="og:description" content="Estimate exactly how many years it will take to TRIPLE your investment based on the interest rate.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Ohm's Law Calculator">
-  <meta name="twitter:description" content="Calculate Voltage (V), Current (I), Resistance (R), or Power (P) using Ohm's Law.">
+  <meta name="twitter:title" content="Rule of 114 Calculator">
+  <meta name="twitter:description" content="Estimate exactly how many years it will take to TRIPLE your investment based on the interest rate.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Ohm's Law Calculator</title>
+  <title>Rule of 114 Calculator</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -37,22 +37,11 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Ohm's Law Calculator</h1>
-<p style="text-align:center;color:#64748b;">Enter exactly TWO values to calculate the rest.</p>
-<div class="row"><div><label>Voltage (V)</label><input type="number" id="v"></div><div><label>Current (I - Amps)</label><input type="number" id="i"></div></div>
-<div class="row"><div><label>Resistance (R - Ohms)</label><input type="number" id="r"></div><div><label>Power (P - Watts)</label><input type="number" id="p"></div></div>
-<button onclick="c()">Calculate</button>
-<script>
-function c(){
-  const v=parseFloat(document.getElementById('v').value), i=parseFloat(document.getElementById('i').value), r=parseFloat(document.getElementById('r').value), p=parseFloat(document.getElementById('p').value);
-  let v1=v, i1=i, r1=r, p1=p;
-  if(v&&i){r1=v/i; p1=v*i;} else if(v&&r){i1=v/r; p1=(v*v)/r;} else if(v&&p){i1=p/v; r1=(v*v)/p;} else if(i&&r){v1=i*r; p1=(i*i)*r;} else if(i&&p){v1=p/i; r1=p/(i*i);} else if(r&&p){v1=Math.sqrt(p*r); i1=Math.sqrt(p/r);}
-  document.getElementById('v').value=isNaN(v1)?'':v1.toFixed(4).replace(/\.?0+$/,'');
-  document.getElementById('i').value=isNaN(i1)?'':i1.toFixed(4).replace(/\.?0+$/,'');
-  document.getElementById('r').value=isNaN(r1)?'':r1.toFixed(4).replace(/\.?0+$/,'');
-  document.getElementById('p').value=isNaN(p1)?'':p1.toFixed(4).replace(/\.?0+$/,'');
-}
-</script>
+    <h1>Rule of 114 (Triple)</h1>
+<label>Annual Interest Rate (%)</label><input type="number" id="r" value="6" step="0.1">
+<button onclick="c()">Calculate Tripling Time</button>
+<div id="res" class="res"></div>
+<script>function c(){ const r=parseFloat(document.getElementById('r').value); if(r>0) document.getElementById('res').innerHTML=`<span style="font-size:3rem;color:var(--success)">${(114/r).toFixed(1)}</span><br>Years to triple investment`; }</script>
   </div>
 </body>
 </html>
