@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "SHA-224 Hash Generator"
-category: "Security"
-description: "Generate a secure SHA-224 cryptographic hash from any text string."
-permalink: /tools/sha224-hash-generator.html
+title: "Text to Hexdump Converter"
+category: "Developer"
+description: "Convert standard text into a classic Unix-style hexdump format (Address, Hex, ASCII)."
+permalink: /tools/text-to-hexdump.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a secure SHA-224 cryptographic hash from any text string.">
-  <meta property="og:title" content="SHA-224 Hash Generator">
-  <meta property="og:description" content="Generate a secure SHA-224 cryptographic hash from any text string.">
+  <meta name="description" content="Convert standard text into a classic Unix-style hexdump format (Address, Hex, ASCII).">
+  <meta property="og:title" content="Text to Hexdump Converter">
+  <meta property="og:description" content="Convert standard text into a classic Unix-style hexdump format (Address, Hex, ASCII).">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SHA-224 Hash Generator">
-  <meta name="twitter:description" content="Generate a secure SHA-224 cryptographic hash from any text string.">
+  <meta name="twitter:title" content="Text to Hexdump Converter">
+  <meta name="twitter:description" content="Convert standard text into a classic Unix-style hexdump format (Address, Hex, ASCII).">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>SHA-224 Hash Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>Text to Hexdump Converter</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -39,10 +39,25 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>SHA-224 Generator</h1>
-<div class="card"><textarea id="in" rows="4" placeholder="Enter text to hash..." oninput="c()"></textarea></div>
-<div class="card"><label>🔐 SHA-224 Hash</label><textarea id="out" rows="2" readonly style="font-family:monospace;word-break:break-all;"></textarea></div>
-<script>function c(){ const t=document.getElementById('in').value; document.getElementById('out').value=t?CryptoJS.SHA224(t).toString():''; }</script>
+    <h1>Text to Hexdump</h1>
+<div class="card"><label>📝 Input Text</label><textarea id="in" rows="4" placeholder="Hello World!" oninput="c()"></textarea></div>
+<div class="card"><label>🛠️ Hexdump Output</label><textarea id="out" rows="8" readonly style="font-family:monospace;white-space:pre;font-size:0.85rem;line-height:1.4;"></textarea></div>
+<script>
+function c(){
+  const t=document.getElementById('in').value; if(!t)return document.getElementById('out').value='';
+  let res='';
+  for(let i=0;i<t.length;i+=16){
+    const chunk=t.substr(i,16); let hex='', ascii='';
+    for(let j=0;j<16;j++){
+      if(j<chunk.length){
+        const code=chunk.charCodeAt(j); hex+=code.toString(16).padStart(2,'0')+' ';
+        ascii+= (code>=32&&code<=126) ? chunk[j] : '.';
+      } else { hex+='   '; }
+    }
+    res+= i.toString(16).padStart(8,'0') + '  ' + hex + ' |' + ascii + '|\n';
+  } document.getElementById('out').value=res;
+}
+</script>
   </div>
 </body>
 </html>

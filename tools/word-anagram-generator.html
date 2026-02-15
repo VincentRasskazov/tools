@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "SHA-224 Hash Generator"
-category: "Security"
-description: "Generate a secure SHA-224 cryptographic hash from any text string."
-permalink: /tools/sha224-hash-generator.html
+title: "Word Anagram Generator"
+category: "Text"
+description: "Randomly shuffle the letters of a word to create 10 unique, jumbled anagrams."
+permalink: /tools/word-anagram-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a secure SHA-224 cryptographic hash from any text string.">
-  <meta property="og:title" content="SHA-224 Hash Generator">
-  <meta property="og:description" content="Generate a secure SHA-224 cryptographic hash from any text string.">
+  <meta name="description" content="Randomly shuffle the letters of a word to create 10 unique, jumbled anagrams.">
+  <meta property="og:title" content="Word Anagram Generator">
+  <meta property="og:description" content="Randomly shuffle the letters of a word to create 10 unique, jumbled anagrams.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SHA-224 Hash Generator">
-  <meta name="twitter:description" content="Generate a secure SHA-224 cryptographic hash from any text string.">
+  <meta name="twitter:title" content="Word Anagram Generator">
+  <meta name="twitter:description" content="Randomly shuffle the letters of a word to create 10 unique, jumbled anagrams.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>SHA-224 Hash Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>Word Anagram Generator</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -39,10 +39,22 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>SHA-224 Generator</h1>
-<div class="card"><textarea id="in" rows="4" placeholder="Enter text to hash..." oninput="c()"></textarea></div>
-<div class="card"><label>🔐 SHA-224 Hash</label><textarea id="out" rows="2" readonly style="font-family:monospace;word-break:break-all;"></textarea></div>
-<script>function c(){ const t=document.getElementById('in').value; document.getElementById('out').value=t?CryptoJS.SHA224(t).toString():''; }</script>
+    <h1>Anagram Generator</h1>
+<div class="row">
+  <div class="card" style="flex:3;"><input type="text" id="in" placeholder="Enter a word (e.g. listen)" value="listen" oninput="c()"></div>
+  <button onclick="c()" style="flex:1;">Shuffle</button>
+</div>
+<div class="card"><textarea id="out" rows="6" readonly style="font-size:1.5rem;text-align:center;letter-spacing:3px;"></textarea></div>
+<script>
+function c(){
+  const t=document.getElementById('in').value.trim(); if(!t)return document.getElementById('out').value='';
+  let res=new Set(); let attempts=0;
+  while(res.size<Math.min(10, Math.pow(2, t.length)) && attempts<100){
+    res.add(t.split('').sort(()=>0.5-Math.random()).join('')); attempts++;
+  }
+  document.getElementById('out').value = Array.from(res).join('\n');
+} c();
+</script>
   </div>
 </body>
 </html>

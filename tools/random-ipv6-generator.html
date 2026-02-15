@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "SHA-224 Hash Generator"
-category: "Security"
-description: "Generate a secure SHA-224 cryptographic hash from any text string."
-permalink: /tools/sha224-hash-generator.html
+title: "Random IPv6 Generator"
+category: "Developer"
+description: "Generate completely random, mathematically valid IPv6 network addresses for testing."
+permalink: /tools/random-ipv6-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a secure SHA-224 cryptographic hash from any text string.">
-  <meta property="og:title" content="SHA-224 Hash Generator">
-  <meta property="og:description" content="Generate a secure SHA-224 cryptographic hash from any text string.">
+  <meta name="description" content="Generate completely random, mathematically valid IPv6 network addresses for testing.">
+  <meta property="og:title" content="Random IPv6 Generator">
+  <meta property="og:description" content="Generate completely random, mathematically valid IPv6 network addresses for testing.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SHA-224 Hash Generator">
-  <meta name="twitter:description" content="Generate a secure SHA-224 cryptographic hash from any text string.">
+  <meta name="twitter:title" content="Random IPv6 Generator">
+  <meta name="twitter:description" content="Generate completely random, mathematically valid IPv6 network addresses for testing.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>SHA-224 Hash Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>Random IPv6 Generator</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -39,10 +39,16 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>SHA-224 Generator</h1>
-<div class="card"><textarea id="in" rows="4" placeholder="Enter text to hash..." oninput="c()"></textarea></div>
-<div class="card"><label>🔐 SHA-224 Hash</label><textarea id="out" rows="2" readonly style="font-family:monospace;word-break:break-all;"></textarea></div>
-<script>function c(){ const t=document.getElementById('in').value; document.getElementById('out').value=t?CryptoJS.SHA224(t).toString():''; }</script>
+    <h1>Random IPv6 Generator</h1>
+<button onclick="c()" style="margin-bottom:20px;">Generate IPv6</button>
+<div id="res" class="res" style="font-size:2rem;font-family:monospace;word-break:break-all;"></div>
+<script>
+function c(){
+  let ip=[]; for(let i=0;i<8;i++){
+    ip.push(Math.floor(Math.random()*65536).toString(16).padStart(4,'0'));
+  } document.getElementById('res').innerText=ip.join(':');
+} c();
+</script>
   </div>
 </body>
 </html>

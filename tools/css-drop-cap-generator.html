@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "SHA-224 Hash Generator"
-category: "Security"
-description: "Generate a secure SHA-224 cryptographic hash from any text string."
-permalink: /tools/sha224-hash-generator.html
+title: "CSS Drop Cap Generator"
+category: "Design"
+description: "Generate the CSS `::first-letter` pseudo-element styling needed for elegant, editorial drop caps."
+permalink: /tools/css-drop-cap-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a secure SHA-224 cryptographic hash from any text string.">
-  <meta property="og:title" content="SHA-224 Hash Generator">
-  <meta property="og:description" content="Generate a secure SHA-224 cryptographic hash from any text string.">
+  <meta name="description" content="Generate the CSS `::first-letter` pseudo-element styling needed for elegant, editorial drop caps.">
+  <meta property="og:title" content="CSS Drop Cap Generator">
+  <meta property="og:description" content="Generate the CSS `::first-letter` pseudo-element styling needed for elegant, editorial drop caps.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SHA-224 Hash Generator">
-  <meta name="twitter:description" content="Generate a secure SHA-224 cryptographic hash from any text string.">
+  <meta name="twitter:title" content="CSS Drop Cap Generator">
+  <meta name="twitter:description" content="Generate the CSS `::first-letter` pseudo-element styling needed for elegant, editorial drop caps.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>SHA-224 Hash Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>CSS Drop Cap Generator</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -39,10 +39,24 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>SHA-224 Generator</h1>
-<div class="card"><textarea id="in" rows="4" placeholder="Enter text to hash..." oninput="c()"></textarea></div>
-<div class="card"><label>🔐 SHA-224 Hash</label><textarea id="out" rows="2" readonly style="font-family:monospace;word-break:break-all;"></textarea></div>
-<script>function c(){ const t=document.getElementById('in').value; document.getElementById('out').value=t?CryptoJS.SHA224(t).toString():''; }</script>
+    <h1>CSS Drop Cap Generator</h1>
+<div class="card" style="margin-bottom:20px;">
+  <p id="pv" style="line-height:1.6;font-size:1.1rem;color:var(--text);margin:0;">This is a preview paragraph. The first letter of this text block will be styled as a classic editorial drop cap. You can adjust the size, color, and floating properties below to see how it affects the layout of the surrounding typography.</p>
+</div>
+<div class="row">
+  <div class="card"><label>🎨 Color</label><input type="color" id="c" value="#3b82f6" oninput="u()"></div>
+  <div class="card"><label>📏 Font Size (em)</label><input type="range" id="s" min="2" max="6" step="0.5" value="3.5" oninput="u()"></div>
+</div>
+<textarea id="out" rows="8" readonly style="font-family:monospace;font-size:0.85rem;"></textarea>
+<style id="dyn"></style>
+<script>
+function u(){
+  const c=document.getElementById('c').value, s=document.getElementById('s').value;
+  const css = `p::first-letter {\n  color: ${c};\n  font-size: ${s}em;\n  float: left;\n  line-height: 1;\n  margin-right: 8px;\n  margin-top: -2px;\n  font-weight: bold;\n}`;
+  document.getElementById('dyn').innerHTML = css.replace('p::', '#pv::');
+  document.getElementById('out').value = css;
+} u();
+</script>
   </div>
 </body>
 </html>

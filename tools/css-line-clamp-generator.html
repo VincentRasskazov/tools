@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "SHA-224 Hash Generator"
-category: "Security"
-description: "Generate a secure SHA-224 cryptographic hash from any text string."
-permalink: /tools/sha224-hash-generator.html
+title: "CSS Line Clamp Generator"
+category: "Design"
+description: "Generate WebKit line-clamp CSS to cleanly truncate multi-line paragraphs with an ellipsis."
+permalink: /tools/css-line-clamp-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a secure SHA-224 cryptographic hash from any text string.">
-  <meta property="og:title" content="SHA-224 Hash Generator">
-  <meta property="og:description" content="Generate a secure SHA-224 cryptographic hash from any text string.">
+  <meta name="description" content="Generate WebKit line-clamp CSS to cleanly truncate multi-line paragraphs with an ellipsis.">
+  <meta property="og:title" content="CSS Line Clamp Generator">
+  <meta property="og:description" content="Generate WebKit line-clamp CSS to cleanly truncate multi-line paragraphs with an ellipsis.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SHA-224 Hash Generator">
-  <meta name="twitter:description" content="Generate a secure SHA-224 cryptographic hash from any text string.">
+  <meta name="twitter:title" content="CSS Line Clamp Generator">
+  <meta name="twitter:description" content="Generate WebKit line-clamp CSS to cleanly truncate multi-line paragraphs with an ellipsis.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>SHA-224 Hash Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>CSS Line Clamp Generator</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -39,10 +39,13 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>SHA-224 Generator</h1>
-<div class="card"><textarea id="in" rows="4" placeholder="Enter text to hash..." oninput="c()"></textarea></div>
-<div class="card"><label>🔐 SHA-224 Hash</label><textarea id="out" rows="2" readonly style="font-family:monospace;word-break:break-all;"></textarea></div>
-<script>function c(){ const t=document.getElementById('in').value; document.getElementById('out').value=t?CryptoJS.SHA224(t).toString():''; }</script>
+    <h1>CSS Line Clamp</h1>
+<div class="card" style="height:150px;margin-bottom:20px;display:flex;align-items:center;">
+  <p id="pv" style="margin:0;font-size:1.1rem;line-height:1.5;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden;-webkit-line-clamp:3;">This is a very long block of text. When you apply the webkit-line-clamp property, it forces the text to cut off precisely after a specific number of lines, automatically appending an ellipsis (...) at the end. This is absolutely essential for creating clean, uniform cards in a grid layout without relying on fragile JavaScript truncation methods.</p>
+</div>
+<div class="card"><label>📏 Max Lines to Show (<span id="v">3</span>)</label><input type="range" id="l" min="1" max="6" value="3" oninput="u()"></div>
+<textarea id="out" rows="5" readonly style="font-family:monospace;font-size:0.9rem;"></textarea>
+<script>function u(){ const l=document.getElementById('l').value; document.getElementById('v').innerText=l; document.getElementById('pv').style.webkitLineClamp=l; document.getElementById('out').value=`display: -webkit-box;\n-webkit-box-orient: vertical;\noverflow: hidden;\n-webkit-line-clamp: ${l};`; } u();</script>
   </div>
 </body>
 </html>

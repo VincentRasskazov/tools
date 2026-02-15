@@ -2,50 +2,61 @@
 layout: null
 title: "URL Parameter Extractor"
 category: "Developer"
-description: "Paste a URL to automatically extract and format its query parameters into a clean list."
+description: "Paste a URL and instantly extract and list all of its query string parameters in a clean format."
 permalink: /tools/url-parameter-extractor.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Paste a URL to automatically extract and format its query parameters into a clean list.">
+  <meta name="description" content="Paste a URL and instantly extract and list all of its query string parameters in a clean format.">
   <meta property="og:title" content="URL Parameter Extractor">
-  <meta property="og:description" content="Paste a URL to automatically extract and format its query parameters into a clean list.">
+  <meta property="og:description" content="Paste a URL and instantly extract and list all of its query string parameters in a clean format.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="URL Parameter Extractor">
-  <meta name="twitter:description" content="Paste a URL to automatically extract and format its query parameters into a clean list.">
+  <meta name="twitter:description" content="Paste a URL and instantly extract and list all of its query string parameters in a clean format.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
   <title>URL Parameter Extractor</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
-body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
-.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
-h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
-label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
-input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
-input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
-button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
-button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
-button:active { transform: translateY(0); box-shadow: none; }
-.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
-.row { display: flex; gap: 15px; } .row > div { flex: 1; }
-canvas { display: block; margin: 0 auto; background: #1e293b; border-radius: 12px; box-shadow: inset 0 4px 6px rgba(0,0,0,0.3); max-width: 100%; }
-.grid-3x3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px auto; max-width: 300px; }
-.mole-hole { height: 80px; background: var(--border); border-radius: 12px; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 3rem; }
-.simon-btn { height: 100px; border-radius: 12px; cursor: pointer; opacity: 0.5; transition: 0.1s; }
-.simon-btn.active { opacity: 1; box-shadow: 0 0 20px currentColor; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
 </style>
 </head>
 <body>
   <div class="tool-container">
-    <h1>URL Params Extractor</h1>
-<input type="text" id="in" placeholder="https://example.com?user=john&id=123&src=twitter">
-<button onclick="c()">Extract Parameters</button>
-<div id="res" class="res" style="text-align:left;font-size:1.1rem;font-family:monospace;white-space:pre-wrap;"></div>
-<script>function c(){ try{ const u=new URL(document.getElementById('in').value); const p=new URLSearchParams(u.search); let h=""; for(let [k,v] of p.entries()){ h+=`<strong style="color:var(--primary)">${k}</strong> : ${v}\n`; } document.getElementById('res').innerHTML=h||"No parameters found."; }catch(e){document.getElementById('res').innerText="Invalid URL.";} }</script>
+    <h1>URL Parameter Extractor</h1>
+<div class="card"><label>🔗 Enter URL</label><input type="text" id="in" placeholder="https://example.com/page?source=google&campaign=summer_sale&id=123" oninput="c()"></div>
+<div id="res" class="card" style="font-family:monospace;line-height:1.8;text-align:left;display:none;"></div>
+<script>
+function c(){
+  const raw=document.getElementById('in').value.trim(); const r=document.getElementById('res');
+  if(!raw){r.style.display='none';return;}
+  try{
+    const url = new URL(raw.startsWith('http') ? raw : 'http://'+raw);
+    const params = new URLSearchParams(url.search);
+    let h='<strong style="color:var(--primary);font-size:1.2rem;">Query Parameters:</strong><br><br>';
+    let count=0;
+    params.forEach((v, k)=>{ h+=`<span style="color:var(--warning)">${k}</span> = <strong style="color:var(--success)">${v}</strong><br>`; count++; });
+    if(count===0) h+="<em>No parameters found in this URL.</em>";
+    r.innerHTML=h; r.style.display='block';
+  }catch(e){ r.innerHTML="<span style='color:var(--danger)'>Invalid URL format</span>"; r.style.display='block'; }
+}
+</script>
   </div>
 </body>
 </html>

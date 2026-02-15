@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "SHA-224 Hash Generator"
-category: "Security"
-description: "Generate a secure SHA-224 cryptographic hash from any text string."
-permalink: /tools/sha224-hash-generator.html
+title: "Random Hex Pattern Generator"
+category: "Design"
+description: "Generate a completely unique, abstract geometric background pattern using CSS repeating-linear-gradients."
+permalink: /tools/random-hex-pattern-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a secure SHA-224 cryptographic hash from any text string.">
-  <meta property="og:title" content="SHA-224 Hash Generator">
-  <meta property="og:description" content="Generate a secure SHA-224 cryptographic hash from any text string.">
+  <meta name="description" content="Generate a completely unique, abstract geometric background pattern using CSS repeating-linear-gradients.">
+  <meta property="og:title" content="Random Hex Pattern Generator">
+  <meta property="og:description" content="Generate a completely unique, abstract geometric background pattern using CSS repeating-linear-gradients.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SHA-224 Hash Generator">
-  <meta name="twitter:description" content="Generate a secure SHA-224 cryptographic hash from any text string.">
+  <meta name="twitter:title" content="Random Hex Pattern Generator">
+  <meta name="twitter:description" content="Generate a completely unique, abstract geometric background pattern using CSS repeating-linear-gradients.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>SHA-224 Hash Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>Random Hex Pattern Generator</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -39,10 +39,19 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>SHA-224 Generator</h1>
-<div class="card"><textarea id="in" rows="4" placeholder="Enter text to hash..." oninput="c()"></textarea></div>
-<div class="card"><label>🔐 SHA-224 Hash</label><textarea id="out" rows="2" readonly style="font-family:monospace;word-break:break-all;"></textarea></div>
-<script>function c(){ const t=document.getElementById('in').value; document.getElementById('out').value=t?CryptoJS.SHA224(t).toString():''; }</script>
+    <h1>Abstract Pattern Generator</h1>
+<div id="box" style="height:250px;border-radius:16px;margin-bottom:20px;box-shadow:0 10px 20px rgba(0,0,0,0.1);transition:0.3s;"></div>
+<button onclick="r()">Generate Random Pattern</button>
+<textarea id="out" rows="4" readonly style="font-family:monospace;font-size:0.8rem;margin-top:20px;"></textarea>
+<script>
+const hex=()=>'#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');
+function r(){
+  const a=Math.floor(Math.random()*360); const c1=hex(), c2=hex(), c3=hex(); const w=Math.floor(Math.random()*40)+10;
+  const css = `background: repeating-linear-gradient(${a}deg, ${c1}, ${c1} ${w}px, ${c2} ${w}px, ${c2} ${w*2}px, ${c3} ${w*2}px, ${c3} ${w*3}px);`;
+  document.getElementById('box').style.cssText = `height:250px;border-radius:16px;margin-bottom:20px;box-shadow:0 10px 20px rgba(0,0,0,0.1); ${css}`;
+  document.getElementById('out').value = css;
+} r();
+</script>
   </div>
 </body>
 </html>

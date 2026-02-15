@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "SHA-224 Hash Generator"
-category: "Security"
-description: "Generate a secure SHA-224 cryptographic hash from any text string."
-permalink: /tools/sha224-hash-generator.html
+title: "CSV to HTML Table Converter"
+category: "Developer"
+description: "Convert tabular CSV data into clean, semantic HTML <table> markup instantly."
+permalink: /tools/csv-to-html-table-pro.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a secure SHA-224 cryptographic hash from any text string.">
-  <meta property="og:title" content="SHA-224 Hash Generator">
-  <meta property="og:description" content="Generate a secure SHA-224 cryptographic hash from any text string.">
+  <meta name="description" content="Convert tabular CSV data into clean, semantic HTML <table> markup instantly.">
+  <meta property="og:title" content="CSV to HTML Table Converter">
+  <meta property="og:description" content="Convert tabular CSV data into clean, semantic HTML <table> markup instantly.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SHA-224 Hash Generator">
-  <meta name="twitter:description" content="Generate a secure SHA-224 cryptographic hash from any text string.">
+  <meta name="twitter:title" content="CSV to HTML Table Converter">
+  <meta name="twitter:description" content="Convert tabular CSV data into clean, semantic HTML <table> markup instantly.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>SHA-224 Hash Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>CSV to HTML Table Converter</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -39,10 +39,26 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>SHA-224 Generator</h1>
-<div class="card"><textarea id="in" rows="4" placeholder="Enter text to hash..." oninput="c()"></textarea></div>
-<div class="card"><label>🔐 SHA-224 Hash</label><textarea id="out" rows="2" readonly style="font-family:monospace;word-break:break-all;"></textarea></div>
-<script>function c(){ const t=document.getElementById('in').value; document.getElementById('out').value=t?CryptoJS.SHA224(t).toString():''; }</script>
+    <h1>CSV to HTML Table</h1>
+<div class="card"><label>📄 CSV Data</label><textarea id="in" rows="5" placeholder="id,name,role\n1,Admin,Super\n2,User,Basic"></textarea></div>
+<button onclick="c()">Generate HTML Table</button>
+<div class="card"><label>✨ HTML Output</label><textarea id="out" rows="8" readonly style="font-family:monospace;white-space:pre;"></textarea></div>
+<script>
+function c(){
+  const t=document.getElementById('in').value.trim(); if(!t)return;
+  const p=Papa.parse(t); if(!p.data.length)return;
+  let h='<table border="1">\n';
+  p.data.forEach((row, i) => {
+    if(!row.join('').trim()) return;
+    h+='  <tr>\n';
+    const tag = i===0 ? 'th' : 'td';
+    row.forEach(cell => { h+=`    <${tag}>${cell}</${tag}>\n`; });
+    h+='  </tr>\n';
+  });
+  h+='</table>';
+  document.getElementById('out').value=h;
+}
+</script>
   </div>
 </body>
 </html>

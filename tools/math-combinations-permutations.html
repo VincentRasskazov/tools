@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "SHA-224 Hash Generator"
-category: "Security"
-description: "Generate a secure SHA-224 cryptographic hash from any text string."
-permalink: /tools/sha224-hash-generator.html
+title: "Combinations & Permutations"
+category: "Math"
+description: "Calculate nCr (Combinations) and nPr (Permutations) for probability and statistics."
+permalink: /tools/math-combinations-permutations.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a secure SHA-224 cryptographic hash from any text string.">
-  <meta property="og:title" content="SHA-224 Hash Generator">
-  <meta property="og:description" content="Generate a secure SHA-224 cryptographic hash from any text string.">
+  <meta name="description" content="Calculate nCr (Combinations) and nPr (Permutations) for probability and statistics.">
+  <meta property="og:title" content="Combinations & Permutations">
+  <meta property="og:description" content="Calculate nCr (Combinations) and nPr (Permutations) for probability and statistics.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SHA-224 Hash Generator">
-  <meta name="twitter:description" content="Generate a secure SHA-224 cryptographic hash from any text string.">
+  <meta name="twitter:title" content="Combinations & Permutations">
+  <meta name="twitter:description" content="Calculate nCr (Combinations) and nPr (Permutations) for probability and statistics.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>SHA-224 Hash Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>Combinations & Permutations</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -39,10 +39,25 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>SHA-224 Generator</h1>
-<div class="card"><textarea id="in" rows="4" placeholder="Enter text to hash..." oninput="c()"></textarea></div>
-<div class="card"><label>🔐 SHA-224 Hash</label><textarea id="out" rows="2" readonly style="font-family:monospace;word-break:break-all;"></textarea></div>
-<script>function c(){ const t=document.getElementById('in').value; document.getElementById('out').value=t?CryptoJS.SHA224(t).toString():''; }</script>
+    <h1>Combinations & Permutations</h1>
+<div class="row">
+  <div class="card"><label>Total Items (n)</label><input type="number" id="n" value="5" min="0" max="170" oninput="c()"></div>
+  <div class="card"><label>Items Chosen (r)</label><input type="number" id="r" value="3" min="0" max="170" oninput="c()"></div>
+</div>
+<div class="row">
+  <div class="card" style="text-align:center;"><strong>Combinations (nCr)</strong><br><span id="ncr" style="font-size:3rem;color:var(--primary);display:block;margin-top:10px;">10</span></div>
+  <div class="card" style="text-align:center;"><strong>Permutations (nPr)</strong><br><span id="npr" style="font-size:3rem;color:var(--success);display:block;margin-top:10px;">60</span></div>
+</div>
+<script>
+function fact(num){ if(num===0||num===1)return 1; let res=1; for(let i=2;i<=num;i++)res*=i; return res; }
+function c(){
+  const n=parseInt(document.getElementById('n').value), r=parseInt(document.getElementById('r').value);
+  if(isNaN(n)||isNaN(r)||n<0||r<0||r>n||n>170){ document.getElementById('ncr').innerText='-'; document.getElementById('npr').innerText='-'; return; }
+  const fn=fact(n), fr=fact(r), fnr=fact(n-r);
+  document.getElementById('ncr').innerText = Math.round(fn / (fr * fnr));
+  document.getElementById('npr').innerText = Math.round(fn / fnr);
+} c();
+</script>
   </div>
 </body>
 </html>
