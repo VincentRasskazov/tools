@@ -1,0 +1,46 @@
+---
+layout: null
+title: "Longest Word Finder"
+category: "Text"
+description: "Analyze a block of text and instantly extract the longest word inside it."
+permalink: /tools/longest-word-finder.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Analyze a block of text and instantly extract the longest word inside it.">
+  <meta property="og:title" content="Longest Word Finder">
+  <meta property="og:description" content="Analyze a block of text and instantly extract the longest word inside it.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Longest Word Finder">
+  <meta name="twitter:description" content="Analyze a block of text and instantly extract the longest word inside it.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Longest Word Finder</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Longest Word Finder</h1>
+<textarea id="in" rows="5" placeholder="The quick brown fox jumped over the extraordinarily long obstacle."></textarea>
+<button onclick="c()">Find Longest Word</button>
+<div id="res" class="res" style="font-size:1.5rem;"></div>
+<script>function c(){ const words=document.getElementById('in').value.split(/[^a-zA-Z0-9]/).filter(w=>w.trim()!==''); if(!words.length)return; let lw=""; words.forEach(w=>{if(w.length>lw.length)lw=w;}); document.getElementById('res').innerHTML=`Longest Word:<br><span style="font-size:3rem;color:var(--primary);word-break:break-all;">${lw}</span><br><span style="color:#64748b;font-size:1rem;">(${lw.length} characters)</span>`; }</script>
+  </div>
+</body>
+</html>
