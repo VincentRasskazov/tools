@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Remove Numbers from Text"
-category: "Text"
-description: "Instantly strip all digits and numbers out of a block of text, leaving only the letters and symbols."
-permalink: /tools/remove-numbers-from-text.html
+title: "Double Discount Calculator"
+category: "Finance"
+description: "Calculate the true final price when a store offers a discount on top of an already discounted item (e.g. 20% off, then an extra 10% off)."
+permalink: /tools/double-discount-calculator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Instantly strip all digits and numbers out of a block of text, leaving only the letters and symbols.">
-  <meta property="og:title" content="Remove Numbers from Text">
-  <meta property="og:description" content="Instantly strip all digits and numbers out of a block of text, leaving only the letters and symbols.">
+  <meta name="description" content="Calculate the true final price when a store offers a discount on top of an already discounted item (e.g. 20% off, then an extra 10% off).">
+  <meta property="og:title" content="Double Discount Calculator">
+  <meta property="og:description" content="Calculate the true final price when a store offers a discount on top of an already discounted item (e.g. 20% off, then an extra 10% off).">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Remove Numbers from Text">
-  <meta name="twitter:description" content="Instantly strip all digits and numbers out of a block of text, leaving only the letters and symbols.">
+  <meta name="twitter:title" content="Double Discount Calculator">
+  <meta name="twitter:description" content="Calculate the true final price when a store offers a discount on top of an already discounted item (e.g. 20% off, then an extra 10% off).">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Remove Numbers from Text</title>
+  <title>Double Discount Calculator</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,11 +39,22 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Remove Numbers</h1>
-<div class="card"><textarea id="in" rows="5" placeholder="I have 2 apples and 45 bananas!" oninput="c()"></textarea></div>
-<div class="card"><textarea id="out" rows="5" readonly placeholder="I have  apples and  bananas!"></textarea></div>
+    <h1>Double Discount Calculator</h1>
+<div class="card"><label>Original Price ($)</label><input type="number" id="p" value="100" oninput="c()"></div>
+<div class="row">
+  <div class="card"><label>First Discount (%)</label><input type="number" id="d1" value="20" oninput="c()"></div>
+  <div class="card"><label>Second Discount (%)</label><input type="number" id="d2" value="10" oninput="c()"></div>
+</div>
+<div id="res" class="res" style="font-size:1.5rem;line-height:1.6;text-align:left;"></div>
 <script>
-function c(){ document.getElementById('out').value = document.getElementById('in').value.replace(/[0-9]/g, ''); }
+function c(){
+  const p=parseFloat(document.getElementById('p').value), d1=parseFloat(document.getElementById('d1').value)||0, d2=parseFloat(document.getElementById('d2').value)||0;
+  if(p>0){
+    const afterFirst = p - (p*(d1/100)); const final = afterFirst - (afterFirst*(d2/100));
+    const totalPct = ((p-final)/p)*100;
+    document.getElementById('res').innerHTML = `<strong>Final Price:</strong> <span style="font-size:3rem;color:var(--success);display:block;margin-bottom:10px;">$${final.toFixed(2)}</span><strong>Actual Total Discount:</strong> <span style="color:var(--warning)">${totalPct.toFixed(1)}%</span> <span style="font-size:0.9rem;color:#64748b;">(Not ${d1+d2}%)</span>`;
+  }
+} c();
 </script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">

@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Remove Numbers from Text"
-category: "Text"
-description: "Instantly strip all digits and numbers out of a block of text, leaving only the letters and symbols."
-permalink: /tools/remove-numbers-from-text.html
+title: "Secure Passphrase Generator"
+category: "Security"
+description: "Generate highly secure, memorable passwords by combining multiple random dictionary words."
+permalink: /tools/secure-passphrase-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Instantly strip all digits and numbers out of a block of text, leaving only the letters and symbols.">
-  <meta property="og:title" content="Remove Numbers from Text">
-  <meta property="og:description" content="Instantly strip all digits and numbers out of a block of text, leaving only the letters and symbols.">
+  <meta name="description" content="Generate highly secure, memorable passwords by combining multiple random dictionary words.">
+  <meta property="og:title" content="Secure Passphrase Generator">
+  <meta property="og:description" content="Generate highly secure, memorable passwords by combining multiple random dictionary words.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Remove Numbers from Text">
-  <meta name="twitter:description" content="Instantly strip all digits and numbers out of a block of text, leaving only the letters and symbols.">
+  <meta name="twitter:title" content="Secure Passphrase Generator">
+  <meta name="twitter:description" content="Generate highly secure, memorable passwords by combining multiple random dictionary words.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Remove Numbers from Text</title>
+  <title>Secure Passphrase Generator</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,11 +39,18 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Remove Numbers</h1>
-<div class="card"><textarea id="in" rows="5" placeholder="I have 2 apples and 45 bananas!" oninput="c()"></textarea></div>
-<div class="card"><textarea id="out" rows="5" readonly placeholder="I have  apples and  bananas!"></textarea></div>
+    <h1>Passphrase Generator</h1>
+<p style="text-align:center;color:#64748b;">Combines random words to make a password that is easy to remember but incredibly hard for computers to guess.</p>
+<div class="card"><label>Number of Words</label><input type="range" id="w" min="3" max="8" value="4" oninput="document.getElementById('wLbl').innerText=this.value"><div style="text-align:center;font-weight:bold;color:#64748b;margin-top:-10px;" id="wLbl">4</div></div>
+<button onclick="c()" style="padding:20px;font-size:1.2rem;">Generate Passphrase</button>
+<div id="res" class="res" style="font-size:2rem;color:var(--primary);font-family:monospace;"></div>
 <script>
-function c(){ document.getElementById('out').value = document.getElementById('in').value.replace(/[0-9]/g, ''); }
+const words=["apple","river","stone","eagle","cloud","tiger","ocean","flame","brave","quiet","happy","smart","train","house","mouse","plant","chair","table","clock","glass","water","bread","toast","sugar","spice","magic","dream","night","light","spark"];
+function c(){
+  const num=parseInt(document.getElementById('w').value); let p=[];
+  for(let i=0;i<num;i++) p.push(words[Math.floor(Math.random()*words.length)]);
+  document.getElementById('res').innerText = p.join('-');
+} c();
 </script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">

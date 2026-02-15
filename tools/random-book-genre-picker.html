@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Remove Numbers from Text"
-category: "Text"
-description: "Instantly strip all digits and numbers out of a block of text, leaving only the letters and symbols."
-permalink: /tools/remove-numbers-from-text.html
+title: "Random Book Genre Picker"
+category: "Utility"
+description: "Can't decide what to read next? Let the tool randomly pick a literary genre for you."
+permalink: /tools/random-book-genre-picker.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Instantly strip all digits and numbers out of a block of text, leaving only the letters and symbols.">
-  <meta property="og:title" content="Remove Numbers from Text">
-  <meta property="og:description" content="Instantly strip all digits and numbers out of a block of text, leaving only the letters and symbols.">
+  <meta name="description" content="Can't decide what to read next? Let the tool randomly pick a literary genre for you.">
+  <meta property="og:title" content="Random Book Genre Picker">
+  <meta property="og:description" content="Can't decide what to read next? Let the tool randomly pick a literary genre for you.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Remove Numbers from Text">
-  <meta name="twitter:description" content="Instantly strip all digits and numbers out of a block of text, leaving only the letters and symbols.">
+  <meta name="twitter:title" content="Random Book Genre Picker">
+  <meta name="twitter:description" content="Can't decide what to read next? Let the tool randomly pick a literary genre for you.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Remove Numbers from Text</title>
+  <title>Random Book Genre Picker</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,11 +39,15 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Remove Numbers</h1>
-<div class="card"><textarea id="in" rows="5" placeholder="I have 2 apples and 45 bananas!" oninput="c()"></textarea></div>
-<div class="card"><textarea id="out" rows="5" readonly placeholder="I have  apples and  bananas!"></textarea></div>
+    <h1>Book Genre Picker</h1>
+<div class="card" style="text-align:center;padding:60px;">
+  <div style="font-size:4rem;margin-bottom:10px;">📚</div>
+  <div id="res" style="font-size:3rem;font-weight:900;color:var(--success);text-transform:uppercase;">Mystery</div>
+</div>
+<button onclick="g()" style="font-size:1.5rem;padding:20px;">Pick a Genre</button>
 <script>
-function c(){ document.getElementById('out').value = document.getElementById('in').value.replace(/[0-9]/g, ''); }
+const genres=["Mystery","Science Fiction","Fantasy","Historical Fiction","Biography","Romance","Thriller","Horror","Self-Help","Poetry","True Crime","Young Adult","Memoir","Dystopian"];
+function g(){ document.getElementById('res').innerText=genres[Math.floor(Math.random()*genres.length)]; } g();
 </script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">

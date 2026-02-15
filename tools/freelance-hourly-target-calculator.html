@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Remove Numbers from Text"
-category: "Text"
-description: "Instantly strip all digits and numbers out of a block of text, leaving only the letters and symbols."
-permalink: /tools/remove-numbers-from-text.html
+title: "Freelance Hourly Rate Target"
+category: "Finance"
+description: "Calculate what you need to charge per hour as a freelancer to hit your dream annual income goal."
+permalink: /tools/freelance-hourly-target-calculator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Instantly strip all digits and numbers out of a block of text, leaving only the letters and symbols.">
-  <meta property="og:title" content="Remove Numbers from Text">
-  <meta property="og:description" content="Instantly strip all digits and numbers out of a block of text, leaving only the letters and symbols.">
+  <meta name="description" content="Calculate what you need to charge per hour as a freelancer to hit your dream annual income goal.">
+  <meta property="og:title" content="Freelance Hourly Rate Target">
+  <meta property="og:description" content="Calculate what you need to charge per hour as a freelancer to hit your dream annual income goal.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Remove Numbers from Text">
-  <meta name="twitter:description" content="Instantly strip all digits and numbers out of a block of text, leaving only the letters and symbols.">
+  <meta name="twitter:title" content="Freelance Hourly Rate Target">
+  <meta name="twitter:description" content="Calculate what you need to charge per hour as a freelancer to hit your dream annual income goal.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Remove Numbers from Text</title>
+  <title>Freelance Hourly Rate Target</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,11 +39,24 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Remove Numbers</h1>
-<div class="card"><textarea id="in" rows="5" placeholder="I have 2 apples and 45 bananas!" oninput="c()"></textarea></div>
-<div class="card"><textarea id="out" rows="5" readonly placeholder="I have  apples and  bananas!"></textarea></div>
+    <h1>Target Hourly Rate</h1>
+<div class="row">
+  <div class="card"><label>Target Annual Income ($)</label><input type="number" id="i" value="100000" oninput="c()"></div>
+</div>
+<div class="row">
+  <div class="card"><label>Vacation Weeks/Year</label><input type="number" id="v" value="4" oninput="c()"></div>
+  <div class="card"><label>Billable Hours/Week</label><input type="number" id="h" value="30" oninput="c()"></div>
+</div>
+<div id="res" class="res" style="font-size:1.5rem;line-height:1.6;"></div>
 <script>
-function c(){ document.getElementById('out').value = document.getElementById('in').value.replace(/[0-9]/g, ''); }
+function c(){
+  const inc=parseFloat(document.getElementById('i').value), v=parseInt(document.getElementById('v').value)||0, h=parseInt(document.getElementById('h').value)||0;
+  if(inc>0 && h>0){
+    const weeksWorked = 52 - v; const totalHours = weeksWorked * h;
+    const rate = inc / totalHours;
+    document.getElementById('res').innerHTML = `You need to charge:<br><strong style="font-size:4rem;color:var(--primary);">$${rate.toFixed(2)} / hr</strong><br><span style="font-size:1rem;color:#64748b;">Based on ${totalHours} billable hours a year.</span>`;
+  }
+} c();
 </script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">

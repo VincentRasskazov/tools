@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Remove Numbers from Text"
-category: "Text"
-description: "Instantly strip all digits and numbers out of a block of text, leaving only the letters and symbols."
-permalink: /tools/remove-numbers-from-text.html
+title: "CSS Bouncing Animation Maker"
+category: "Design"
+description: "Generate smooth, continuous CSS keyframe code to make icons, arrows, or buttons bounce up and down."
+permalink: /tools/css-bouncing-animation.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Instantly strip all digits and numbers out of a block of text, leaving only the letters and symbols.">
-  <meta property="og:title" content="Remove Numbers from Text">
-  <meta property="og:description" content="Instantly strip all digits and numbers out of a block of text, leaving only the letters and symbols.">
+  <meta name="description" content="Generate smooth, continuous CSS keyframe code to make icons, arrows, or buttons bounce up and down.">
+  <meta property="og:title" content="CSS Bouncing Animation Maker">
+  <meta property="og:description" content="Generate smooth, continuous CSS keyframe code to make icons, arrows, or buttons bounce up and down.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Remove Numbers from Text">
-  <meta name="twitter:description" content="Instantly strip all digits and numbers out of a block of text, leaving only the letters and symbols.">
+  <meta name="twitter:title" content="CSS Bouncing Animation Maker">
+  <meta name="twitter:description" content="Generate smooth, continuous CSS keyframe code to make icons, arrows, or buttons bounce up and down.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Remove Numbers from Text</title>
+  <title>CSS Bouncing Animation Maker</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,11 +39,24 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Remove Numbers</h1>
-<div class="card"><textarea id="in" rows="5" placeholder="I have 2 apples and 45 bananas!" oninput="c()"></textarea></div>
-<div class="card"><textarea id="out" rows="5" readonly placeholder="I have  apples and  bananas!"></textarea></div>
+    <h1>Bouncing Animation Maker</h1>
+<div style="background:var(--bg);padding:60px;border-radius:16px;margin-bottom:20px;display:flex;justify-content:center;">
+  <div id="ball" style="width:50px;height:50px;background:var(--danger);border-radius:50%;animation:bounce 1s infinite alternate cubic-bezier(0.5, 0.05, 1, 0.5);"></div>
+</div>
+<div class="row">
+  <div class="card"><label>Bounce Height (px)</label><input type="range" id="h" min="10" max="100" value="30" oninput="u()"></div>
+  <div class="card"><label>Speed (s)</label><input type="range" id="s" min="0.2" max="2" step="0.1" value="0.5" oninput="u()"></div>
+</div>
+<textarea id="out" rows="6" readonly style="font-family:monospace;font-size:0.85rem;"></textarea>
+<style id="dyn">@keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-30px); } }</style>
 <script>
-function c(){ document.getElementById('out').value = document.getElementById('in').value.replace(/[0-9]/g, ''); }
+function u(){
+  const h=document.getElementById('h').value, s=document.getElementById('s').value;
+  const css = `animation: bounce ${s}s infinite alternate cubic-bezier(0.5, 0.05, 1, 0.5);`;
+  document.getElementById('ball').style.animation = `bounce ${s}s infinite alternate cubic-bezier(0.5, 0.05, 1, 0.5)`;
+  document.getElementById('dyn').innerHTML = `@keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-${h}px); } }`;
+  document.getElementById('out').value = `.bouncing-element {\n  ${css}\n}\n@keyframes bounce {\n  from { transform: translateY(0); }\n  to { transform: translateY(-${h}px); }\n}`;
+} u();
 </script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
