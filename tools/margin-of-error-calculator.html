@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "UUID v1 Generator"
-category: "Developer"
-description: "Generate Version 1 UUIDs, which are based on the current timestamp and computer MAC address."
-permalink: /tools/uuid-v1-generator.html
+title: "Margin of Error Calculator"
+category: "Math"
+description: "Calculate the margin of error for sample surveys based on confidence level and sample size."
+permalink: /tools/margin-of-error-calculator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate Version 1 UUIDs, which are based on the current timestamp and computer MAC address.">
-  <meta property="og:title" content="UUID v1 Generator">
-  <meta property="og:description" content="Generate Version 1 UUIDs, which are based on the current timestamp and computer MAC address.">
+  <meta name="description" content="Calculate the margin of error for sample surveys based on confidence level and sample size.">
+  <meta property="og:title" content="Margin of Error Calculator">
+  <meta property="og:description" content="Calculate the margin of error for sample surveys based on confidence level and sample size.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="UUID v1 Generator">
-  <meta name="twitter:description" content="Generate Version 1 UUIDs, which are based on the current timestamp and computer MAC address.">
+  <meta name="twitter:title" content="Margin of Error Calculator">
+  <meta name="twitter:description" content="Calculate the margin of error for sample surveys based on confidence level and sample size.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>UUID v1 Generator</title>
+  <title>Margin of Error Calculator</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -36,18 +36,14 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>UUID v1 Generator</h1>
-<button onclick="c()" style="margin-bottom:20px;">Generate Timestamp UUID (v1)</button>
-<div id="res" class="res" style="font-family:monospace;font-size:1.2rem;"></div>
-<script>
-function c(){
-  const now = new Date().getTime(); const hexTime = now.toString(16).padStart(12, '0');
-  const mac = Array.from({length:6},()=>Math.floor(Math.random()*256).toString(16).padStart(2,'0')).join('');
-  const rnd = Math.floor(Math.random()*65536).toString(16).padStart(4,'0');
-  const u = `${hexTime.slice(4,12)}-${hexTime.slice(0,4)}-1${rnd.slice(1,4)}-a${rnd.slice(1,4)}-${mac}`;
-  document.getElementById('res').innerText = u;
-} c();
-</script>
+    <h1>Margin of Error</h1>
+<div class="row">
+  <div><label>Sample Size (n)</label><input type="number" id="n" value="1000"></div>
+  <div><label>Confidence Level</label><select id="c"><option value="1.645">90%</option><option value="1.96" selected>95%</option><option value="2.576">99%</option></select></div>
+</div>
+<button onclick="calc()">Calculate MOE</button>
+<div id="res" class="res" style="font-size:3rem;"></div>
+<script>function calc(){ const n=parseFloat(document.getElementById('n').value), z=parseFloat(document.getElementById('c').value); if(n>0){ const moe = z * Math.sqrt((0.5*0.5)/n) * 100; document.getElementById('res').innerText = `± ${moe.toFixed(2)}%`; } }</script>
   </div>
 </body>
 </html>

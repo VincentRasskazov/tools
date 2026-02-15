@@ -1,23 +1,57 @@
 ---
 layout: null
-title: "Grid Generator"
+title: "CSS Grid Generator"
 category: "Design"
-description: "Generate CSS Grid layouts."
+description: "Visually build CSS Grid layouts and copy the generated CSS code instantly."
 permalink: /tools/css-grid-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Visually generate basic CSS Grid layouts and get the code.">
+  <meta name="description" content="Visually build CSS Grid layouts and copy the generated CSS code instantly.">
   <meta property="og:title" content="CSS Grid Generator">
-  <meta property="og:description" content="Visually generate basic CSS Grid layouts and get the code.">
+  <meta property="og:description" content="Visually build CSS Grid layouts and copy the generated CSS code instantly.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="CSS Grid Generator">
-  <meta name="twitter:description" content="Visually generate basic CSS Grid layouts and get the code.">
-  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"><meta charset="UTF-8"><title>Grid Generator</title><style>.tool-container{max-width:800px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} .row{display:flex;gap:15px;margin-bottom:20px;} input{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;} #box{display:grid;height:200px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:6px;} .item{background:#2563eb;color:white;display:flex;align-items:center;justify-content:center;border:1px solid #1e40af;} textarea{width:100%;height:80px;padding:10px;border-radius:6px;border:1px solid #ccc;font-family:monospace;margin-top:20px;}</style></head>
-<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">CSS Grid Generator</h1>
-<div class="row"><div><label>Columns</label><input type="number" id="c" value="3" oninput="u()"></div><div><label>Rows</label><input type="number" id="r" value="2" oninput="u()"></div><div><label>Gap (px)</label><input type="number" id="g" value="10" oninput="u()"></div></div>
-<div id="box"></div>
-<textarea id="out" readonly></textarea></div>
-<script>function u(){ const c=document.getElementById('c').value, r=document.getElementById('r').value, g=document.getElementById('g').value, b=document.getElementById('box'); b.style.gridTemplateColumns=`repeat(${c}, 1fr)`; b.style.gridTemplateRows=`repeat(${r}, 1fr)`; b.style.gap=`${g}px`; b.innerHTML=''; for(let i=0;i<c*r;i++) b.innerHTML+=`<div class="item">${i+1}</div>`; document.getElementById('out').value=`display: grid;\ngrid-template-columns: repeat(${c}, 1fr);\ngrid-template-rows: repeat(${r}, 1fr);\ngap: ${g}px;`; } window.onload=u;</script></body></html>
+  <meta name="twitter:description" content="Visually build CSS Grid layouts and copy the generated CSS code instantly.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>CSS Grid Generator</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CSS Grid Generator</h1>
+<div class="row"><div><label>Columns</label><input type="number" id="c" value="3" min="1" max="6" oninput="u()"></div><div><label>Rows</label><input type="number" id="r" value="3" min="1" max="6" oninput="u()"></div><div><label>Gap (px)</label><input type="number" id="g" value="10" min="0" max="50" oninput="u()"></div></div>
+<div id="grid" style="display:grid; background:var(--bg); border:1px solid var(--border); padding:10px; border-radius:12px; margin-bottom:20px; height:200px;"></div>
+<textarea id="out" rows="4" readonly style="font-family:monospace;"></textarea>
+<script>
+function u(){
+  const c=document.getElementById('c').value, r=document.getElementById('r').value, g=document.getElementById('g').value;
+  const grid=document.getElementById('grid');
+  grid.style.gridTemplateColumns=`repeat(${c}, 1fr)`;
+  grid.style.gridTemplateRows=`repeat(${r}, 1fr)`;
+  grid.style.gap=`${g}px`;
+  grid.innerHTML='';
+  for(let i=0;i<c*r;i++) grid.innerHTML+=`<div style="background:var(--primary);border-radius:4px;opacity:0.8;"></div>`;
+  document.getElementById('out').value=`display: grid;\ngrid-template-columns: repeat(${c}, 1fr);\ngrid-template-rows: repeat(${r}, 1fr);\ngap: ${g}px;`;
+} u();
+</script>
+  </div>
+</body>
+</html>

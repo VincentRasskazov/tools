@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "UUID v1 Generator"
-category: "Developer"
-description: "Generate Version 1 UUIDs, which are based on the current timestamp and computer MAC address."
-permalink: /tools/uuid-v1-generator.html
+title: "Rule of Three Calculator"
+category: "Math"
+description: "Solve proportions easily with the Rule of Three (Cross Multiplication) calculator."
+permalink: /tools/rule-of-three-calculator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate Version 1 UUIDs, which are based on the current timestamp and computer MAC address.">
-  <meta property="og:title" content="UUID v1 Generator">
-  <meta property="og:description" content="Generate Version 1 UUIDs, which are based on the current timestamp and computer MAC address.">
+  <meta name="description" content="Solve proportions easily with the Rule of Three (Cross Multiplication) calculator.">
+  <meta property="og:title" content="Rule of Three Calculator">
+  <meta property="og:description" content="Solve proportions easily with the Rule of Three (Cross Multiplication) calculator.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="UUID v1 Generator">
-  <meta name="twitter:description" content="Generate Version 1 UUIDs, which are based on the current timestamp and computer MAC address.">
+  <meta name="twitter:title" content="Rule of Three Calculator">
+  <meta name="twitter:description" content="Solve proportions easily with the Rule of Three (Cross Multiplication) calculator.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>UUID v1 Generator</title>
+  <title>Rule of Three Calculator</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -36,18 +36,16 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>UUID v1 Generator</h1>
-<button onclick="c()" style="margin-bottom:20px;">Generate Timestamp UUID (v1)</button>
-<div id="res" class="res" style="font-family:monospace;font-size:1.2rem;"></div>
-<script>
-function c(){
-  const now = new Date().getTime(); const hexTime = now.toString(16).padStart(12, '0');
-  const mac = Array.from({length:6},()=>Math.floor(Math.random()*256).toString(16).padStart(2,'0')).join('');
-  const rnd = Math.floor(Math.random()*65536).toString(16).padStart(4,'0');
-  const u = `${hexTime.slice(4,12)}-${hexTime.slice(0,4)}-1${rnd.slice(1,4)}-a${rnd.slice(1,4)}-${mac}`;
-  document.getElementById('res').innerText = u;
-} c();
-</script>
+    <h1>Rule of Three (Proportions)</h1>
+<p style="text-align:center;color:#64748b;margin-bottom:20px;">If <strong>A</strong> equals <strong>B</strong>, then <strong>C</strong> equals <strong>X</strong>.</p>
+<div class="row" style="align-items:center;margin-bottom:10px;">
+  <div><label>Value A</label><input type="number" id="a" value="10"></div><div style="font-size:2rem;text-align:center;flex:0.2;">&rarr;</div><div><label>Value B</label><input type="number" id="b" value="50"></div>
+</div>
+<div class="row" style="align-items:center;">
+  <div><label>Value C</label><input type="number" id="c" value="25"></div><div style="font-size:2rem;text-align:center;flex:0.2;">&rarr;</div><div><label>Result X</label><div id="x" style="font-size:2rem;font-weight:bold;color:var(--success);text-align:center;background:var(--bg);border-radius:8px;padding:10px;border:1px solid var(--border);">?</div></div>
+</div>
+<button onclick="calc()" style="margin-top:20px;">Calculate X</button>
+<script>function calc(){ const a=parseFloat(document.getElementById('a').value), b=parseFloat(document.getElementById('b').value), c=parseFloat(document.getElementById('c').value); if(a!==0){ document.getElementById('x').innerText=((b*c)/a).toFixed(2).replace(/\.00$/,''); } }</script>
   </div>
 </body>
 </html>

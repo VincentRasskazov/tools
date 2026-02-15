@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "UUID v1 Generator"
-category: "Developer"
-description: "Generate Version 1 UUIDs, which are based on the current timestamp and computer MAC address."
-permalink: /tools/uuid-v1-generator.html
+title: "Browser Guitar Tuner"
+category: "Audio"
+description: "Tune your guitar using perfectly generated standard E A D G B E audio frequencies."
+permalink: /tools/guitar-tuner-tones.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate Version 1 UUIDs, which are based on the current timestamp and computer MAC address.">
-  <meta property="og:title" content="UUID v1 Generator">
-  <meta property="og:description" content="Generate Version 1 UUIDs, which are based on the current timestamp and computer MAC address.">
+  <meta name="description" content="Tune your guitar using perfectly generated standard E A D G B E audio frequencies.">
+  <meta property="og:title" content="Browser Guitar Tuner">
+  <meta property="og:description" content="Tune your guitar using perfectly generated standard E A D G B E audio frequencies.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="UUID v1 Generator">
-  <meta name="twitter:description" content="Generate Version 1 UUIDs, which are based on the current timestamp and computer MAC address.">
+  <meta name="twitter:title" content="Browser Guitar Tuner">
+  <meta name="twitter:description" content="Tune your guitar using perfectly generated standard E A D G B E audio frequencies.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>UUID v1 Generator</title>
+  <title>Browser Guitar Tuner</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -36,17 +36,26 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>UUID v1 Generator</h1>
-<button onclick="c()" style="margin-bottom:20px;">Generate Timestamp UUID (v1)</button>
-<div id="res" class="res" style="font-family:monospace;font-size:1.2rem;"></div>
+    <h1>Guitar Tuner Tones</h1>
+<p style="text-align:center;color:#64748b;margin-bottom:20px;">Click a string to play its tuning frequency.</p>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+  <button onclick="p(329.63, 'High E')">High E (329.63 Hz)</button>
+  <button onclick="p(246.94, 'B')">B (246.94 Hz)</button>
+  <button onclick="p(196.00, 'G')">G (196.00 Hz)</button>
+  <button onclick="p(146.83, 'D')">D (146.83 Hz)</button>
+  <button onclick="p(110.00, 'A')">A (110.00 Hz)</button>
+  <button onclick="p(82.41, 'Low E')">Low E (82.41 Hz)</button>
+</div>
+<button onclick="s()" style="background:var(--danger);margin-top:20px;">Stop All Sounds</button>
+<div id="res" class="res" style="font-size:2rem;display:none;"></div>
 <script>
-function c(){
-  const now = new Date().getTime(); const hexTime = now.toString(16).padStart(12, '0');
-  const mac = Array.from({length:6},()=>Math.floor(Math.random()*256).toString(16).padStart(2,'0')).join('');
-  const rnd = Math.floor(Math.random()*65536).toString(16).padStart(4,'0');
-  const u = `${hexTime.slice(4,12)}-${hexTime.slice(0,4)}-1${rnd.slice(1,4)}-a${rnd.slice(1,4)}-${mac}`;
-  document.getElementById('res').innerText = u;
-} c();
+let actx, osc;
+function p(f, n){
+  s(); actx=new (window.AudioContext||window.webkitAudioContext)(); osc=actx.createOscillator();
+  osc.type='sine'; osc.frequency.value=f; osc.connect(actx.destination); osc.start();
+  document.getElementById('res').style.display='block'; document.getElementById('res').innerText=`Playing: ${n}`;
+}
+function s(){ if(osc){osc.stop();osc.disconnect();} document.getElementById('res').style.display='none'; }
 </script>
   </div>
 </body>

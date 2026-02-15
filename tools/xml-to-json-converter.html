@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "UUID v1 Generator"
+title: "XML to JSON Converter"
 category: "Developer"
-description: "Generate Version 1 UUIDs, which are based on the current timestamp and computer MAC address."
-permalink: /tools/uuid-v1-generator.html
+description: "Instantly convert structured XML data directly into a clean JSON format."
+permalink: /tools/xml-to-json-converter.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate Version 1 UUIDs, which are based on the current timestamp and computer MAC address.">
-  <meta property="og:title" content="UUID v1 Generator">
-  <meta property="og:description" content="Generate Version 1 UUIDs, which are based on the current timestamp and computer MAC address.">
+  <meta name="description" content="Instantly convert structured XML data directly into a clean JSON format.">
+  <meta property="og:title" content="XML to JSON Converter">
+  <meta property="og:description" content="Instantly convert structured XML data directly into a clean JSON format.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="UUID v1 Generator">
-  <meta name="twitter:description" content="Generate Version 1 UUIDs, which are based on the current timestamp and computer MAC address.">
+  <meta name="twitter:title" content="XML to JSON Converter">
+  <meta name="twitter:description" content="Instantly convert structured XML data directly into a clean JSON format.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>UUID v1 Generator</title>
+  <title>XML to JSON Converter</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -36,17 +36,30 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>UUID v1 Generator</h1>
-<button onclick="c()" style="margin-bottom:20px;">Generate Timestamp UUID (v1)</button>
-<div id="res" class="res" style="font-family:monospace;font-size:1.2rem;"></div>
+    <h1>XML to JSON</h1>
+<textarea id="in" rows="6" placeholder="<root>\n  <item>Hello</item>\n</root>"></textarea>
+<button onclick="c()">Convert to JSON</button>
+<textarea id="out" rows="8" readonly style="margin-top:20px;font-family:monospace;"></textarea>
 <script>
-function c(){
-  const now = new Date().getTime(); const hexTime = now.toString(16).padStart(12, '0');
-  const mac = Array.from({length:6},()=>Math.floor(Math.random()*256).toString(16).padStart(2,'0')).join('');
-  const rnd = Math.floor(Math.random()*65536).toString(16).padStart(4,'0');
-  const u = `${hexTime.slice(4,12)}-${hexTime.slice(0,4)}-1${rnd.slice(1,4)}-a${rnd.slice(1,4)}-${mac}`;
-  document.getElementById('res').innerText = u;
-} c();
+function xmlToJson(xml) {
+  let obj = {};
+  if (xml.nodeType == 1) {
+    if (xml.attributes.length > 0) { obj["@attributes"] = {}; for (let j = 0; j < xml.attributes.length; j++) { let attribute = xml.attributes.item(j); obj["@attributes"][attribute.nodeName] = attribute.nodeValue; } }
+  } else if (xml.nodeType == 3) { obj = xml.nodeValue; }
+  if (xml.hasChildNodes()) {
+    for (let i = 0; i < xml.childNodes.length; i++) {
+      let item = xml.childNodes.item(i); let nodeName = item.nodeName;
+      if (typeof(obj[nodeName]) == "undefined") {
+        if(nodeName === '#text'){ if(item.nodeValue.trim() !== '') obj = item.nodeValue.trim(); } else { obj[nodeName] = xmlToJson(item); }
+      } else {
+        if (typeof(obj[nodeName].push) == "undefined") { let old = obj[nodeName]; obj[nodeName] = []; obj[nodeName].push(old); }
+        obj[nodeName].push(xmlToJson(item));
+      }
+    }
+  }
+  return obj;
+}
+function c(){ try{ const p=new DOMParser(); const doc=p.parseFromString(document.getElementById('in').value, "text/xml"); if(doc.querySelector("parsererror"))throw "Invalid"; document.getElementById('out').value=JSON.stringify(xmlToJson(doc), null, 2); }catch(e){ document.getElementById('out').value="Invalid XML Format"; } }
 </script>
   </div>
 </body>
