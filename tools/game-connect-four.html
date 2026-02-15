@@ -1,0 +1,57 @@
+---
+layout: null
+title: "Connect Four Game"
+category: "Games"
+description: "Play a classic game of Connect Four locally against a friend directly in your browser."
+permalink: /tools/game-connect-four.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Play a classic game of Connect Four locally against a friend directly in your browser.">
+  <meta property="og:title" content="Connect Four Game">
+  <meta property="og:description" content="Play a classic game of Connect Four locally against a friend directly in your browser.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Connect Four Game">
+  <meta name="twitter:description" content="Play a classic game of Connect Four locally against a friend directly in your browser.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Connect Four Game</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Connect Four</h1>
+<div id="msg" style="text-align:center;font-weight:bold;font-size:1.5rem;color:var(--danger);margin-bottom:15px;">Red's Turn</div>
+<div id="brd" style="background:var(--primary);padding:10px;border-radius:12px;display:grid;grid-template-columns:repeat(7, 1fr);gap:10px;width:350px;margin:0 auto 20px;"></div>
+<button onclick="st()">Restart Game</button>
+<script>
+const cols=7, rows=6; let bd=[], cur=1, run=true; const grid=document.getElementById('brd'), msg=document.getElementById('msg');
+function st(){ bd=Array(rows).fill(null).map(()=>Array(cols).fill(0)); cur=1; run=true; msg.innerText="Red's Turn"; msg.style.color="var(--danger)"; drw(); }
+function drw(){ grid.innerHTML=''; for(let r=0;r<rows;r++){ for(let c=0;c<cols;c++){ let col='#fff'; if(bd[r][c]===1)col='var(--danger)'; else if(bd[r][c]===2)col='var(--warning)'; grid.innerHTML+=`<div style="height:40px;width:40px;background:${col};border-radius:50%;cursor:pointer;" onclick="drop(${c})"></div>`; } } }
+function drop(c){ if(!run)return; for(let r=rows-1;r>=0;r--){ if(bd[r][c]===0){ bd[r][c]=cur; if(chk(r,c)){ drw(); run=false; msg.innerText=(cur===1?'Red':'Yellow')+" Wins!"; msg.style.color=cur===1?'var(--danger)':'var(--warning)'; return; } cur=cur===1?2:1; msg.innerText=(cur===1?'Red':'Yellow')+"'s Turn"; msg.style.color=cur===1?'var(--danger)':'var(--warning)'; drw(); return; } } }
+function chk(r,c){ const v=bd[r][c]; let count=0;
+  for(let i=Math.max(0,c-3);i<=Math.min(cols-1,c+3);i++) { count=(bd[r][i]===v)?count+1:0; if(count>=4)return true; } count=0;
+  for(let i=Math.max(0,r-3);i<=Math.min(rows-1,r+3);i++) { count=(bd[i][c]===v)?count+1:0; if(count>=4)return true; } count=0;
+  for(let i=-3;i<=3;i++){ if(r+i>=0 && r+i<rows && c+i>=0 && c+i<cols){ count=(bd[r+i][c+i]===v)?count+1:0; if(count>=4)return true; } } count=0;
+  for(let i=-3;i<=3;i++){ if(r-i>=0 && r-i<rows && c+i>=0 && c+i<cols){ count=(bd[r-i][c+i]===v)?count+1:0; if(count>=4)return true; } } return false;
+} st();
+</script>
+  </div>
+</body>
+</html>

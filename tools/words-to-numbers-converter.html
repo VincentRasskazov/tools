@@ -1,0 +1,56 @@
+---
+layout: null
+title: "Words to Numbers Converter"
+category: "Text"
+description: "Convert written English number words (e.g. one hundred) directly into digits."
+permalink: /tools/words-to-numbers-converter.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Convert written English number words (e.g. one hundred) directly into digits.">
+  <meta property="og:title" content="Words to Numbers Converter">
+  <meta property="og:description" content="Convert written English number words (e.g. one hundred) directly into digits.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Words to Numbers Converter">
+  <meta name="twitter:description" content="Convert written English number words (e.g. one hundred) directly into digits.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Words to Numbers Converter</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Words to Numbers</h1>
+<textarea id="in" rows="4" placeholder="One hundred twenty five" oninput="c()"></textarea>
+<div id="res" class="res" style="font-size:3rem;font-family:monospace;">125</div>
+<script>
+const Small = {'zero':0,'one':1,'two':2,'three':3,'four':4,'five':5,'six':6,'seven':7,'eight':8,'nine':9,'ten':10,'eleven':11,'twelve':12,'thirteen':13,'fourteen':14,'fifteen':15,'sixteen':16,'seventeen':17,'eighteen':18,'nineteen':19,'twenty':20,'thirty':30,'forty':40,'fifty':50,'sixty':60,'seventy':70,'eighty':80,'ninety':90};
+const Magnitude = {'hundred':100,'thousand':1000,'million':1000000,'billion':1000000000};
+function textToNum(s){
+  let a = s.toLowerCase().replace(/[^a-z\s]/g,'').split(/\s+/); let n=0, g=0;
+  for(let w of a){
+    if(Small[w]!=null) g+=Small[w];
+    else if(Magnitude[w]!=null){ g=g===0?Magnitude[w]:g*Magnitude[w]; if(Magnitude[w]>=1000){ n+=g; g=0; } }
+  } return n+g;
+}
+function c(){ const t=document.getElementById('in').value; document.getElementById('res').innerText=t?textToNum(t):'0'; }
+</script>
+  </div>
+</body>
+</html>

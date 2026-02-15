@@ -1,0 +1,51 @@
+---
+layout: null
+title: "CSS Border Image Generator"
+category: "Design"
+description: "Visually generate the CSS border-image property for advanced custom frames."
+permalink: /tools/css-border-image-generator.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Visually generate the CSS border-image property for advanced custom frames.">
+  <meta property="og:title" content="CSS Border Image Generator">
+  <meta property="og:description" content="Visually generate the CSS border-image property for advanced custom frames.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CSS Border Image Generator">
+  <meta name="twitter:description" content="Visually generate the CSS border-image property for advanced custom frames.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>CSS Border Image Generator</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CSS Border Image</h1>
+<div id="box" style="height:150px;width:100%;margin-bottom:20px;border:10px solid transparent;border-image:url('https://placehold.co/30x30/3b82f6/fff') 10 round;"></div>
+<div class="row">
+  <div><label>Border Width</label><input type="range" id="w" min="1" max="30" value="10" oninput="u()"></div>
+  <div><label>Slice</label><input type="range" id="s" min="1" max="50" value="10" oninput="u()"></div>
+</div>
+<label>Repeat Style</label>
+<select id="r" onchange="u()"><option value="stretch">Stretch</option><option value="round" selected>Round</option><option value="repeat">Repeat</option></select>
+<textarea id="out" rows="3" readonly style="font-family:monospace;margin-top:20px;"></textarea>
+<script>function u(){ const w=document.getElementById('w').value, s=document.getElementById('s').value, r=document.getElementById('r').value; const css=`border: ${w}px solid transparent;\nborder-image: url('https://placehold.co/30x30/3b82f6/fff') ${s} ${r};`; document.getElementById('box').style.cssText=css.replace(/\n/g,''); document.getElementById('out').value=css; } u();</script>
+  </div>
+</body>
+</html>
