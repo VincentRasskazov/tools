@@ -1,52 +1,63 @@
 ---
 layout: null
-title: "IP Subnet Calculator"
+title: "IPv4 Subnet Calculator"
 category: "Developer"
-description: "Calculate network ranges, broadcast addresses, and usable IPs from a CIDR block."
+description: "Calculate Subnet Mask, Network Address, and Broadcast Address from an IP and CIDR block."
 permalink: /tools/subnet-calculator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Calculate network ranges, broadcast addresses, and usable IPs from a CIDR block.">
-  <meta property="og:title" content="IP Subnet Calculator">
-  <meta property="og:description" content="Calculate network ranges, broadcast addresses, and usable IPs from a CIDR block.">
+  <meta name="description" content="Calculate Subnet Mask, Network Address, and Broadcast Address from an IP and CIDR block.">
+  <meta property="og:title" content="IPv4 Subnet Calculator">
+  <meta property="og:description" content="Calculate Subnet Mask, Network Address, and Broadcast Address from an IP and CIDR block.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="IP Subnet Calculator">
-  <meta name="twitter:description" content="Calculate network ranges, broadcast addresses, and usable IPs from a CIDR block.">
+  <meta name="twitter:title" content="IPv4 Subnet Calculator">
+  <meta name="twitter:description" content="Calculate Subnet Mask, Network Address, and Broadcast Address from an IP and CIDR block.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>IP Subnet Calculator</title>
+  <title>IPv4 Subnet Calculator</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
-body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
-.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
-h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
-label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
-input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
-input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
-button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
-button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
-button:active { transform: translateY(0); box-shadow: none; }
-.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
-.row { display: flex; gap: 15px; } .row > div { flex: 1; }
-canvas { display: block; margin: 0 auto; background: #1e293b; border-radius: 12px; box-shadow: inset 0 4px 6px rgba(0,0,0,0.3); max-width: 100%; }
-.grid-3x3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px auto; max-width: 300px; }
-.mole-hole { height: 80px; background: var(--border); border-radius: 12px; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 3rem; }
-.simon-btn { height: 100px; border-radius: 12px; cursor: pointer; opacity: 0.5; transition: 0.1s; }
-.simon-btn.active { opacity: 1; box-shadow: 0 0 20px currentColor; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
 </style>
 </head>
 <body>
   <div class="tool-container">
     <h1>Subnet Calculator</h1>
-<label>IP Address</label><input type="text" id="ip" value="192.168.1.1">
-<label>CIDR Prefix (/)</label><input type="number" id="c" value="24" min="0" max="32">
-<button onclick="calc()">Calculate</button>
-<div id="res" class="res" style="font-size:1.1rem;text-align:left;"></div>
-<script>function calc(){ const ipStr=document.getElementById('ip').value, c=parseInt(document.getElementById('c').value); const parts=ipStr.split('.').map(Number); if(parts.length!==4||c<0||c>32)return; const ip=(parts[0]<<24)|(parts[1]<<16)|(parts[2]<<8)|parts[3]; const mask=(0xffffffff<<(32-c))>>>0; const net=(ip&mask)>>>0; const bc=(net|~mask)>>>0; const u=c>=31?0:(bc-net-1); const ipStrFn=n=>`${(n>>>24)&255}.${(n>>>16)&255}.${(n>>>8)&255}.${n&255}`; document.getElementById('res').innerHTML=`Network: <strong>${ipStrFn(net)}</strong><br>Broadcast: <strong>${ipStrFn(bc)}</strong><br>Netmask: <strong>${ipStrFn(mask)}</strong><br>Usable Hosts: <strong>${u}</strong>`; }</script>
+<div class="row">
+  <div class="card"><label>🌐 IP Address</label><input type="text" id="ip" value="192.168.1.10"></div>
+  <div class="card"><label>📐 CIDR (e.g. 24)</label><input type="number" id="cidr" value="24" min="1" max="32"></div>
+</div>
+<button onclick="c()">Calculate Subnet</button>
+<div id="res" class="card" style="font-family:monospace;line-height:1.8;display:none;"></div>
+<script>
+function c(){
+  const ipStr=document.getElementById('ip').value.trim(), cidr=parseInt(document.getElementById('cidr').value);
+  const p=ipStr.split('.').map(Number); if(p.length!==4||p.some(isNaN))return alert("Invalid IP");
+  const ipNum=(p[0]<<24)|(p[1]<<16)|(p[2]<<8)|p[3];
+  const maskNum=0xFFFFFFFF<<(32-cidr);
+  const netNum=ipNum&maskNum; const broadNum=netNum|(~maskNum);
+  const toIP=(n)=>`${(n>>>24)&255}.${(n>>>16)&255}.${(n>>>8)&255}.${n&255}`;
+  document.getElementById('res').innerHTML=`<strong>Subnet Mask:</strong> <span style="color:var(--primary)">${toIP(maskNum)}</span><br><strong>Network Address:</strong> <span style="color:var(--success)">${toIP(netNum)}</span><br><strong>Broadcast Address:</strong> <span style="color:var(--danger)">${toIP(broadNum)}</span><br><strong>Total Hosts:</strong> ${Math.pow(2, 32-cidr)-2}`;
+  document.getElementById('res').style.display='block';
+}
+</script>
   </div>
 </body>
 </html>

@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Image to Base64 Encoder"
+title: "Markdown Table Builder"
 category: "Developer"
-description: "Convert JPG, PNG, or SVG images directly into Base64 data URIs for embedding in CSS or HTML."
-permalink: /tools/image-to-base64.html
+description: "Quickly generate the Markdown syntax for an empty table of a specific size."
+permalink: /tools/markdown-table-builder.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert JPG, PNG, or SVG images directly into Base64 data URIs for embedding in CSS or HTML.">
-  <meta property="og:title" content="Image to Base64 Encoder">
-  <meta property="og:description" content="Convert JPG, PNG, or SVG images directly into Base64 data URIs for embedding in CSS or HTML.">
+  <meta name="description" content="Quickly generate the Markdown syntax for an empty table of a specific size.">
+  <meta property="og:title" content="Markdown Table Builder">
+  <meta property="og:description" content="Quickly generate the Markdown syntax for an empty table of a specific size.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Image to Base64 Encoder">
-  <meta name="twitter:description" content="Convert JPG, PNG, or SVG images directly into Base64 data URIs for embedding in CSS or HTML.">
+  <meta name="twitter:title" content="Markdown Table Builder">
+  <meta name="twitter:description" content="Quickly generate the Markdown syntax for an empty table of a specific size.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Image to Base64 Encoder</title>
+  <title>Markdown Table Builder</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,23 +39,20 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Image to Base64</h1>
-<div class="card" style="text-align:center;">
-  <label style="justify-content:center;margin-bottom:15px;">🖼️ Select Image (Processed Locally)</label>
-  <input type="file" id="f" accept="image/*" style="padding:10px;background:var(--bg);" onchange="c()">
-  <img id="pv" style="max-width:100%;max-height:200px;border-radius:8px;margin-top:10px;display:none;">
+    <h1>Markdown Table Builder</h1>
+<div class="row">
+  <div class="card"><label>📏 Columns</label><input type="number" id="c" value="3" min="1" max="10" oninput="g()"></div>
+  <div class="card"><label>📐 Rows</label><input type="number" id="r" value="3" min="1" max="20" oninput="g()"></div>
 </div>
-<div class="card"><label>✨ Base64 Output</label><textarea id="out" rows="6" readonly style="font-family:monospace;"></textarea></div>
+<div class="card"><textarea id="out" rows="8" readonly style="font-family:monospace;white-space:pre;"></textarea></div>
 <script>
-function c(){
-  const f=document.getElementById('f').files[0]; if(!f)return;
-  const r=new FileReader();
-  r.onload=(e)=>{
-    document.getElementById('out').value=e.target.result;
-    document.getElementById('pv').src=e.target.result;
-    document.getElementById('pv').style.display='inline-block';
-  }; r.readAsDataURL(f);
-}
+function g(){
+  const c=parseInt(document.getElementById('c').value)||3, r=parseInt(document.getElementById('r').value)||3;
+  let md = '| ' + Array(c).fill('Header').join(' | ') + ' |\n';
+  md += '|' + Array(c).fill('---').join('|') + '|\n';
+  for(let i=0;i<r;i++) md += '| ' + Array(c).fill('Data').join(' | ') + ' |\n';
+  document.getElementById('out').value = md;
+} g();
 </script>
   </div>
 </body>

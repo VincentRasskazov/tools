@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Image to Base64 Encoder"
-category: "Developer"
-description: "Convert JPG, PNG, or SVG images directly into Base64 data URIs for embedding in CSS or HTML."
-permalink: /tools/image-to-base64.html
+title: "Random Harmonious HSL Palette"
+category: "Design"
+description: "Generate a beautiful, mathematically harmonious color palette using HSL color space offsets."
+permalink: /tools/random-hsl-palette.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert JPG, PNG, or SVG images directly into Base64 data URIs for embedding in CSS or HTML.">
-  <meta property="og:title" content="Image to Base64 Encoder">
-  <meta property="og:description" content="Convert JPG, PNG, or SVG images directly into Base64 data URIs for embedding in CSS or HTML.">
+  <meta name="description" content="Generate a beautiful, mathematically harmonious color palette using HSL color space offsets.">
+  <meta property="og:title" content="Random Harmonious HSL Palette">
+  <meta property="og:description" content="Generate a beautiful, mathematically harmonious color palette using HSL color space offsets.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Image to Base64 Encoder">
-  <meta name="twitter:description" content="Convert JPG, PNG, or SVG images directly into Base64 data URIs for embedding in CSS or HTML.">
+  <meta name="twitter:title" content="Random Harmonious HSL Palette">
+  <meta name="twitter:description" content="Generate a beautiful, mathematically harmonious color palette using HSL color space offsets.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Image to Base64 Encoder</title>
+  <title>Random Harmonious HSL Palette</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,23 +39,17 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Image to Base64</h1>
-<div class="card" style="text-align:center;">
-  <label style="justify-content:center;margin-bottom:15px;">🖼️ Select Image (Processed Locally)</label>
-  <input type="file" id="f" accept="image/*" style="padding:10px;background:var(--bg);" onchange="c()">
-  <img id="pv" style="max-width:100%;max-height:200px;border-radius:8px;margin-top:10px;display:none;">
-</div>
-<div class="card"><label>✨ Base64 Output</label><textarea id="out" rows="6" readonly style="font-family:monospace;"></textarea></div>
+    <h1>Harmonious HSL Palette</h1>
+<div id="pal" style="display:flex;height:150px;border-radius:16px;overflow:hidden;margin-bottom:20px;box-shadow:0 10px 15px rgba(0,0,0,0.1);"></div>
+<button onclick="c()">Generate Palette</button>
 <script>
 function c(){
-  const f=document.getElementById('f').files[0]; if(!f)return;
-  const r=new FileReader();
-  r.onload=(e)=>{
-    document.getElementById('out').value=e.target.result;
-    document.getElementById('pv').src=e.target.result;
-    document.getElementById('pv').style.display='inline-block';
-  }; r.readAsDataURL(f);
-}
+  const h=Math.floor(Math.random()*360), s=70+Math.floor(Math.random()*30), l=50; let html='';
+  for(let i=0;i<5;i++){
+    const hue=(h+(i*30))%360; const hsl=`hsl(${hue}, ${s}%, ${l}%)`;
+    html+=`<div style="flex:1;background:${hsl};display:flex;align-items:flex-end;justify-content:center;padding-bottom:15px;color:#fff;font-weight:bold;text-shadow:1px 1px 2px #000;cursor:pointer;" onclick="navigator.clipboard.writeText('${hsl}');alert('Copied!')">${hue}°</div>`;
+  } document.getElementById('pal').innerHTML=html;
+} c();
 </script>
   </div>
 </body>

@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Image to Base64 Encoder"
-category: "Developer"
-description: "Convert JPG, PNG, or SVG images directly into Base64 data URIs for embedding in CSS or HTML."
-permalink: /tools/image-to-base64.html
+title: "CSS Transform-Origin Visualizer"
+category: "Design"
+description: "See how transform-origin affects CSS rotations and scaling animations."
+permalink: /tools/css-transform-origin.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert JPG, PNG, or SVG images directly into Base64 data URIs for embedding in CSS or HTML.">
-  <meta property="og:title" content="Image to Base64 Encoder">
-  <meta property="og:description" content="Convert JPG, PNG, or SVG images directly into Base64 data URIs for embedding in CSS or HTML.">
+  <meta name="description" content="See how transform-origin affects CSS rotations and scaling animations.">
+  <meta property="og:title" content="CSS Transform-Origin Visualizer">
+  <meta property="og:description" content="See how transform-origin affects CSS rotations and scaling animations.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Image to Base64 Encoder">
-  <meta name="twitter:description" content="Convert JPG, PNG, or SVG images directly into Base64 data URIs for embedding in CSS or HTML.">
+  <meta name="twitter:title" content="CSS Transform-Origin Visualizer">
+  <meta name="twitter:description" content="See how transform-origin affects CSS rotations and scaling animations.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Image to Base64 Encoder</title>
+  <title>CSS Transform-Origin Visualizer</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,24 +39,23 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Image to Base64</h1>
-<div class="card" style="text-align:center;">
-  <label style="justify-content:center;margin-bottom:15px;">🖼️ Select Image (Processed Locally)</label>
-  <input type="file" id="f" accept="image/*" style="padding:10px;background:var(--bg);" onchange="c()">
-  <img id="pv" style="max-width:100%;max-height:200px;border-radius:8px;margin-top:10px;display:none;">
+    <h1>Transform-Origin</h1>
+<div class="card" style="height:300px;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+  <div id="box" style="width:100px;height:100px;background:var(--primary);border-radius:8px;transform-origin:center center;animation:spin 3s linear infinite;position:relative;">
+    <div style="position:absolute;width:6px;height:6px;background:var(--danger);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);" id="dot"></div>
+  </div>
 </div>
-<div class="card"><label>✨ Base64 Output</label><textarea id="out" rows="6" readonly style="font-family:monospace;"></textarea></div>
-<script>
-function c(){
-  const f=document.getElementById('f').files[0]; if(!f)return;
-  const r=new FileReader();
-  r.onload=(e)=>{
-    document.getElementById('out').value=e.target.result;
-    document.getElementById('pv').src=e.target.result;
-    document.getElementById('pv').style.display='inline-block';
-  }; r.readAsDataURL(f);
-}
-</script>
+<div class="row">
+  <div class="card"><label>📍 Transform Origin</label>
+    <select id="to" onchange="u()">
+      <option value="center center">center center</option><option value="top left">top left</option><option value="top right">top right</option>
+      <option value="bottom left">bottom left</option><option value="bottom right">bottom right</option><option value="50% 100%">50% 100% (bottom center)</option>
+    </select>
+  </div>
+</div>
+<textarea id="out" rows="2" readonly style="font-family:monospace;text-align:center;"></textarea>
+<style>@keyframes spin{to{transform:rotate(360deg);}}</style>
+<script>function u(){ const v=document.getElementById('to').value; document.getElementById('box').style.transformOrigin=v; const pts=v.split(' '); document.getElementById('dot').style.top=pts[0]==='top'?'0%':pts[0]==='bottom'?'100%':pts[0]==='center'?'50%':pts[0]; document.getElementById('dot').style.left=pts[1]==='left'?'0%':pts[1]==='right'?'100%':pts[1]==='center'?'50%':pts[1]||'50%'; document.getElementById('out').value=`transform-origin: ${v};`; } u();</script>
   </div>
 </body>
 </html>

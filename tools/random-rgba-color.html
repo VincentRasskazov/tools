@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Image to Base64 Encoder"
-category: "Developer"
-description: "Convert JPG, PNG, or SVG images directly into Base64 data URIs for embedding in CSS or HTML."
-permalink: /tools/image-to-base64.html
+title: "Random RGBA Color Generator"
+category: "Design"
+description: "Generate completely random colors with a random alpha (transparency) channel."
+permalink: /tools/random-rgba-color.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert JPG, PNG, or SVG images directly into Base64 data URIs for embedding in CSS or HTML.">
-  <meta property="og:title" content="Image to Base64 Encoder">
-  <meta property="og:description" content="Convert JPG, PNG, or SVG images directly into Base64 data URIs for embedding in CSS or HTML.">
+  <meta name="description" content="Generate completely random colors with a random alpha (transparency) channel.">
+  <meta property="og:title" content="Random RGBA Color Generator">
+  <meta property="og:description" content="Generate completely random colors with a random alpha (transparency) channel.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Image to Base64 Encoder">
-  <meta name="twitter:description" content="Convert JPG, PNG, or SVG images directly into Base64 data URIs for embedding in CSS or HTML.">
+  <meta name="twitter:title" content="Random RGBA Color Generator">
+  <meta name="twitter:description" content="Generate completely random colors with a random alpha (transparency) channel.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Image to Base64 Encoder</title>
+  <title>Random RGBA Color Generator</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,23 +39,16 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Image to Base64</h1>
-<div class="card" style="text-align:center;">
-  <label style="justify-content:center;margin-bottom:15px;">🖼️ Select Image (Processed Locally)</label>
-  <input type="file" id="f" accept="image/*" style="padding:10px;background:var(--bg);" onchange="c()">
-  <img id="pv" style="max-width:100%;max-height:200px;border-radius:8px;margin-top:10px;display:none;">
-</div>
-<div class="card"><label>✨ Base64 Output</label><textarea id="out" rows="6" readonly style="font-family:monospace;"></textarea></div>
+    <h1>Random RGBA Color</h1>
+<div id="box" style="height:150px;border-radius:16px;margin-bottom:20px;background:rgba(59,130,246,0.5);border:2px dashed var(--border);"></div>
+<button onclick="c()">Generate RGBA Color</button>
+<div id="res" class="res" style="font-family:monospace;font-size:2rem;margin-top:20px;">rgba(59, 130, 246, 0.5)</div>
 <script>
 function c(){
-  const f=document.getElementById('f').files[0]; if(!f)return;
-  const r=new FileReader();
-  r.onload=(e)=>{
-    document.getElementById('out').value=e.target.result;
-    document.getElementById('pv').src=e.target.result;
-    document.getElementById('pv').style.display='inline-block';
-  }; r.readAsDataURL(f);
-}
+  const r=Math.floor(Math.random()*256), g=Math.floor(Math.random()*256), b=Math.floor(Math.random()*256), a=(Math.random()).toFixed(2);
+  const col=`rgba(${r}, ${g}, ${b}, ${a})`;
+  document.getElementById('box').style.background=col; document.getElementById('res').innerText=col;
+} c();
 </script>
   </div>
 </body>
