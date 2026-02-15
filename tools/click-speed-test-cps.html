@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "MD5 Hash Generator"
-category: "Security"
-description: "Generate a 128-bit MD5 cryptographic hash from any text string. (Processed safely in your browser)."
-permalink: /tools/md5-hash-generator.html
+title: "Click Speed Test (CPS)"
+category: "Games"
+description: "Test your gaming reflexes! How many times can you click the button in exactly 5 seconds?"
+permalink: /tools/click-speed-test-cps.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a 128-bit MD5 cryptographic hash from any text string. (Processed safely in your browser).">
-  <meta property="og:title" content="MD5 Hash Generator">
-  <meta property="og:description" content="Generate a 128-bit MD5 cryptographic hash from any text string. (Processed safely in your browser).">
+  <meta name="description" content="Test your gaming reflexes! How many times can you click the button in exactly 5 seconds?">
+  <meta property="og:title" content="Click Speed Test (CPS)">
+  <meta property="og:description" content="Test your gaming reflexes! How many times can you click the button in exactly 5 seconds?">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="MD5 Hash Generator">
-  <meta name="twitter:description" content="Generate a 128-bit MD5 cryptographic hash from any text string. (Processed safely in your browser).">
+  <meta name="twitter:title" content="Click Speed Test (CPS)">
+  <meta name="twitter:description" content="Test your gaming reflexes! How many times can you click the button in exactly 5 seconds?">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>MD5 Hash Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>Click Speed Test (CPS)</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
@@ -39,10 +39,22 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>MD5 Hash Generator</h1>
-<div class="card"><textarea id="in" rows="4" placeholder="Enter text to hash..." oninput="c()"></textarea></div>
-<div class="card"><label>🔐 MD5 Hash</label><textarea id="out" rows="2" readonly style="font-family:monospace;word-break:break-all;font-size:1.2rem;"></textarea></div>
-<script>function c(){ const t=document.getElementById('in').value; document.getElementById('out').value=t?CryptoJS.MD5(t).toString():''; }</script>
+    <h1>Click Speed Test (CPS)</h1>
+<div class="row" style="margin-bottom:15px;text-align:center;">
+  <div id="sc" style="font-size:1.5rem;font-weight:bold;color:var(--primary);">Clicks: 0</div>
+  <div id="tm" style="font-size:1.5rem;font-weight:bold;color:var(--danger);">5.0s</div>
+</div>
+<button id="tgt" onmousedown="hit()" style="height:250px;font-size:3rem;border-radius:16px;">CLICK TO START</button>
+<div id="res" class="res" style="display:none;font-size:2rem;line-height:1.4;"></div>
+<script>
+let s=0, t=5.0, int, run=false, done=false;
+function hit(){
+  if(done){ done=false; s=0; t=5.0; document.getElementById('sc').innerText="Clicks: 0"; document.getElementById('tm').innerText="5.0s"; document.getElementById('tgt').innerText="CLICK ME!"; document.getElementById('tgt').style.background="var(--primary)"; document.getElementById('res').style.display='none'; }
+  if(!run){ run=true; int=setInterval(()=>{t-=0.1; document.getElementById('tm').innerText=t.toFixed(1)+'s'; if(t<=0){end();}}, 100); }
+  s++; document.getElementById('sc').innerText="Clicks: "+s;
+}
+function end(){ clearInterval(int); run=false; done=true; document.getElementById('tgt').innerText="FINISHED!"; document.getElementById('tgt').style.background="var(--success)"; const r=document.getElementById('res'); r.style.display='block'; r.innerHTML=`Your Score:<br><span style="font-size:4rem;color:var(--success);font-weight:900;">${(s/5).toFixed(1)} CPS</span><br><span style="font-size:1rem;color:#64748b;">(Clicks Per Second)</span>`; }
+</script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
     🏠 Return to tool chooser

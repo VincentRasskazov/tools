@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "MD5 Hash Generator"
-category: "Security"
-description: "Generate a 128-bit MD5 cryptographic hash from any text string. (Processed safely in your browser)."
-permalink: /tools/md5-hash-generator.html
+title: "CSS Ticket Shape Generator"
+category: "Design"
+description: "Generate a beautiful CSS cutout shape that looks exactly like a movie or concert ticket."
+permalink: /tools/css-ticket-shape-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a 128-bit MD5 cryptographic hash from any text string. (Processed safely in your browser).">
-  <meta property="og:title" content="MD5 Hash Generator">
-  <meta property="og:description" content="Generate a 128-bit MD5 cryptographic hash from any text string. (Processed safely in your browser).">
+  <meta name="description" content="Generate a beautiful CSS cutout shape that looks exactly like a movie or concert ticket.">
+  <meta property="og:title" content="CSS Ticket Shape Generator">
+  <meta property="og:description" content="Generate a beautiful CSS cutout shape that looks exactly like a movie or concert ticket.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="MD5 Hash Generator">
-  <meta name="twitter:description" content="Generate a 128-bit MD5 cryptographic hash from any text string. (Processed safely in your browser).">
+  <meta name="twitter:title" content="CSS Ticket Shape Generator">
+  <meta name="twitter:description" content="Generate a beautiful CSS cutout shape that looks exactly like a movie or concert ticket.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>MD5 Hash Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>CSS Ticket Shape Generator</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
@@ -39,10 +39,24 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>MD5 Hash Generator</h1>
-<div class="card"><textarea id="in" rows="4" placeholder="Enter text to hash..." oninput="c()"></textarea></div>
-<div class="card"><label>🔐 MD5 Hash</label><textarea id="out" rows="2" readonly style="font-family:monospace;word-break:break-all;font-size:1.2rem;"></textarea></div>
-<script>function c(){ const t=document.getElementById('in').value; document.getElementById('out').value=t?CryptoJS.MD5(t).toString():''; }</script>
+    <h1>CSS Ticket Shape</h1>
+<div style="background:var(--bg);padding:40px;border-radius:16px;margin-bottom:20px;display:flex;justify-content:center;">
+  <div id="box" style="width:250px;height:120px;background:var(--primary);mask-image:radial-gradient(circle at 0 50%, transparent 15px, black 16px), radial-gradient(circle at 100% 50%, transparent 15px, black 16px);mask-size:51% 100%;mask-repeat:no-repeat;mask-position:left, right;display:flex;align-items:center;justify-content:center;color:#fff;font-size:2rem;font-weight:bold;letter-spacing:5px;">TICKET</div>
+</div>
+<div class="row">
+  <div class="card"><label>Cutout Size (px)</label><input type="range" id="s" min="5" max="30" value="15" oninput="u()"></div>
+  <div class="card"><label>Color</label><input type="color" id="c" value="#3b82f6" oninput="u()"></div>
+</div>
+<textarea id="out" rows="6" readonly style="font-family:monospace;font-size:0.85rem;"></textarea>
+<script>
+function u(){
+  const s=document.getElementById('s').value, c=document.getElementById('c').value;
+  const css = `background: ${c};\n-webkit-mask-image: radial-gradient(circle at 0 50%, transparent ${s}px, black ${parseInt(s)+1}px), radial-gradient(circle at 100% 50%, transparent ${s}px, black ${parseInt(s)+1}px);\n-webkit-mask-size: 51% 100%;\n-webkit-mask-repeat: no-repeat;\n-webkit-mask-position: left, right;`;
+  document.getElementById('box').style.background = c;
+  document.getElementById('box').style.webkitMaskImage = `radial-gradient(circle at 0 50%, transparent ${s}px, black ${parseInt(s)+1}px), radial-gradient(circle at 100% 50%, transparent ${s}px, black ${parseInt(s)+1}px)`;
+  document.getElementById('out').value = css;
+} u();
+</script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
     🏠 Return to tool chooser

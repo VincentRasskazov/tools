@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "MD5 Hash Generator"
-category: "Security"
-description: "Generate a 128-bit MD5 cryptographic hash from any text string. (Processed safely in your browser)."
-permalink: /tools/md5-hash-generator.html
+title: "CSS Claymorphism Generator"
+category: "Design"
+description: "Generate soft, fluffy, 3D clay-like UI elements using CSS inset box-shadows."
+permalink: /tools/css-claymorphism-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a 128-bit MD5 cryptographic hash from any text string. (Processed safely in your browser).">
-  <meta property="og:title" content="MD5 Hash Generator">
-  <meta property="og:description" content="Generate a 128-bit MD5 cryptographic hash from any text string. (Processed safely in your browser).">
+  <meta name="description" content="Generate soft, fluffy, 3D clay-like UI elements using CSS inset box-shadows.">
+  <meta property="og:title" content="CSS Claymorphism Generator">
+  <meta property="og:description" content="Generate soft, fluffy, 3D clay-like UI elements using CSS inset box-shadows.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="MD5 Hash Generator">
-  <meta name="twitter:description" content="Generate a 128-bit MD5 cryptographic hash from any text string. (Processed safely in your browser).">
+  <meta name="twitter:title" content="CSS Claymorphism Generator">
+  <meta name="twitter:description" content="Generate soft, fluffy, 3D clay-like UI elements using CSS inset box-shadows.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>MD5 Hash Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>CSS Claymorphism Generator</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
@@ -39,10 +39,24 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>MD5 Hash Generator</h1>
-<div class="card"><textarea id="in" rows="4" placeholder="Enter text to hash..." oninput="c()"></textarea></div>
-<div class="card"><label>🔐 MD5 Hash</label><textarea id="out" rows="2" readonly style="font-family:monospace;word-break:break-all;font-size:1.2rem;"></textarea></div>
-<script>function c(){ const t=document.getElementById('in').value; document.getElementById('out').value=t?CryptoJS.MD5(t).toString():''; }</script>
+    <h1>Claymorphism Generator</h1>
+<div style="background:#f1f5f9;padding:60px;border-radius:16px;margin-bottom:20px;display:flex;justify-content:center;">
+  <div id="box" style="width:150px;height:150px;background:#f8fafc;border-radius:30px;box-shadow:8px 8px 16px rgba(0,0,0,0.1), inset -6px -6px 12px rgba(0,0,0,0.1), inset 6px 6px 12px rgba(255,255,255,1);"></div>
+</div>
+<div class="row">
+  <div class="card"><label>Color</label><input type="color" id="c" value="#f8fafc" oninput="u()"></div>
+  <div class="card"><label>Fluffiness (px)</label><input type="range" id="f" min="2" max="20" value="6" oninput="u()"></div>
+</div>
+<textarea id="out" rows="4" readonly style="font-family:monospace;font-size:0.85rem;"></textarea>
+<script>
+function u(){
+  const c=document.getElementById('c').value, f=document.getElementById('f').value;
+  const shd = `${f*1.3}px ${f*1.3}px ${f*2.5}px rgba(0,0,0,0.1), inset -${f}px -${f}px ${f*2}px rgba(0,0,0,0.1), inset ${f}px ${f}px ${f*2}px rgba(255,255,255,0.9)`;
+  const css = `background: ${c};\nborder-radius: 30px;\nbox-shadow: ${shd};`;
+  document.getElementById('box').style.cssText = `width:150px;height:150px;${css.replace(/\n/g,' ')}`;
+  document.getElementById('out').value = css;
+} u();
+</script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
     🏠 Return to tool chooser

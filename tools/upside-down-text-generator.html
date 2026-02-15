@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "MD5 Hash Generator"
-category: "Security"
-description: "Generate a 128-bit MD5 cryptographic hash from any text string. (Processed safely in your browser)."
-permalink: /tools/md5-hash-generator.html
+title: "Upside Down Text Generator"
+category: "Text"
+description: "Flip your text completely upside down using special Unicode characters. Great for social media!"
+permalink: /tools/upside-down-text-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Generate a 128-bit MD5 cryptographic hash from any text string. (Processed safely in your browser).">
-  <meta property="og:title" content="MD5 Hash Generator">
-  <meta property="og:description" content="Generate a 128-bit MD5 cryptographic hash from any text string. (Processed safely in your browser).">
+  <meta name="description" content="Flip your text completely upside down using special Unicode characters. Great for social media!">
+  <meta property="og:title" content="Upside Down Text Generator">
+  <meta property="og:description" content="Flip your text completely upside down using special Unicode characters. Great for social media!">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="MD5 Hash Generator">
-  <meta name="twitter:description" content="Generate a 128-bit MD5 cryptographic hash from any text string. (Processed safely in your browser).">
+  <meta name="twitter:title" content="Upside Down Text Generator">
+  <meta name="twitter:description" content="Flip your text completely upside down using special Unicode characters. Great for social media!">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>MD5 Hash Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>Upside Down Text Generator</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
@@ -39,10 +39,15 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>MD5 Hash Generator</h1>
-<div class="card"><textarea id="in" rows="4" placeholder="Enter text to hash..." oninput="c()"></textarea></div>
-<div class="card"><label>🔐 MD5 Hash</label><textarea id="out" rows="2" readonly style="font-family:monospace;word-break:break-all;font-size:1.2rem;"></textarea></div>
-<script>function c(){ const t=document.getElementById('in').value; document.getElementById('out').value=t?CryptoJS.MD5(t).toString():''; }</script>
+    <h1>Upside Down Text</h1>
+<div class="card"><textarea id="in" rows="4" placeholder="Type here to flip your text..." oninput="c()"></textarea></div>
+<div class="card"><textarea id="out" rows="4" readonly placeholder="...ʇxǝʇ ɹnoʎ dıןɟ oʇ ǝɹǝɥ ǝdʎ⊥" style="font-size:1.5rem;text-align:right;"></textarea></div>
+<script>
+const chars = {"a":"ɐ","b":"q","c":"ɔ","d":"p","e":"ǝ","f":"ɟ","g":"ƃ","h":"ɥ","i":"ı","j":"ɾ","k":"ʞ","l":"ן","m":"ɯ","n":"u","o":"o","p":"d","q":"b","r":"ɹ","s":"s","t":"ʇ","u":"n","v":"ʌ","w":"ʍ","x":"x","y":"ʎ","z":"z","A":"∀","B":"𐐒","C":"Ɔ","D":"◖","E":"Ǝ","F":"Ⅎ","G":"⅁","H":"H","I":"I","J":"ſ","K":"ʞ","L":"˥","M":"W","N":"N","O":"O","P":"Ԁ","Q":"Ό","R":"ᴚ","S":"S","T":"⊥","U":"∩","V":"Λ","W":"M","X":"X","Y":"⅄","Z":"Z","1":"Ɩ","2":"ᄅ","3":"Ɛ","4":"ㄣ","5":"ϛ","6":"9","7":"ㄥ","8":"8","9":"6","0":"0",".":"˙",",":"'","'":",","\"":",,","!":"¡","?":"¿","<":">",">":"<","[":"]","]":"[","(":")",")":"(","{":"}","}":"{"};
+function c(){
+  document.getElementById('out').value = document.getElementById('in').value.split('').map(c => chars[c] || c).reverse().join('');
+}
+</script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
     🏠 Return to tool chooser
