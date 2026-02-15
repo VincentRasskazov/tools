@@ -1,0 +1,56 @@
+---
+layout: null
+title: "Unbeatable Tic-Tac-Toe AI"
+category: "Games"
+description: "Play Tic-Tac-Toe against a perfect AI. Can you manage to force a draw?"
+permalink: /tools/game-unbeatable-tic-tac-toe.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Play Tic-Tac-Toe against a perfect AI. Can you manage to force a draw?">
+  <meta property="og:title" content="Unbeatable Tic-Tac-Toe AI">
+  <meta property="og:description" content="Play Tic-Tac-Toe against a perfect AI. Can you manage to force a draw?">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Unbeatable Tic-Tac-Toe AI">
+  <meta name="twitter:description" content="Play Tic-Tac-Toe against a perfect AI. Can you manage to force a draw?">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Unbeatable Tic-Tac-Toe AI</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Unbeatable Tic-Tac-Toe</h1>
+<div id="msg" style="text-align:center;font-weight:bold;font-size:1.5rem;color:var(--primary);margin-bottom:15px;">You are X. Your Turn!</div>
+<div id="brd" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:300px;margin:0 auto 20px;"></div>
+<button onclick="st()">Restart Game</button>
+<script>
+let b=Array(9).fill(null), act=true;
+const win=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+function st(){ b=Array(9).fill(null); act=true; document.getElementById('msg').innerText="You are X. Your Turn!"; drw(); }
+function drw(){ const d=document.getElementById('brd'); d.innerHTML=''; b.forEach((v,i)=>{ d.innerHTML+=`<div style="height:90px;background:var(--bg);border:2px solid var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:3rem;font-weight:bold;color:${v==='X'?'var(--primary)':'var(--danger)'};cursor:pointer;" onclick="clk(${i})">${v||''}</div>`; }); }
+function cWin(bd,p){ return win.some(c=>bd[c[0]]===p&&bd[c[1]]===p&&bd[c[2]]===p); }
+function clk(i){ if(!act||b[i])return; b[i]='X'; drw(); if(cWin(b,'X')){end("You Win! (Wait, how?)");return;} if(!b.includes(null)){end("It's a Draw!");return;} act=false; setTimeout(ai, 300); }
+function ai(){ let best=-Infinity, m; for(let i=0;i<9;i++){ if(!b[i]){ b[i]='O'; let sc=mm(b,0,false); b[i]=null; if(sc>best){best=sc;m=i;} } } b[m]='O'; drw(); if(cWin(b,'O')){end("AI Wins!");return;} if(!b.includes(null)){end("It's a Draw!");return;} act=true; }
+function mm(bd,d,isMax){ if(cWin(bd,'O'))return 10-d; if(cWin(bd,'X'))return d-10; if(!bd.includes(null))return 0; if(isMax){ let best=-Infinity; for(let i=0;i<9;i++){ if(!bd[i]){ bd[i]='O'; best=Math.max(best,mm(bd,d+1,!isMax)); bd[i]=null; } } return best; } else { let best=Infinity; for(let i=0;i<9;i++){ if(!bd[i]){ bd[i]='X'; best=Math.min(best,mm(bd,d+1,!isMax)); bd[i]=null; } } return best; } }
+function end(t){ act=false; document.getElementById('msg').innerText=t; } st();
+</script>
+  </div>
+</body>
+</html>

@@ -1,90 +1,60 @@
-# 🛠️ Ultimate Online Tools Hub
+# 🛠️ Vincent's Tools Hub
 
-A massive, SEO-friendly collection of 120+ functional, beautiful, and blazing-fast online tools. Built for performance and privacy, all tools run entirely in your browser.
+![Tools Count](https://img.shields.io/badge/Tools-650%2B-blue?style=for-the-badge)
+![Tech Stack](https://img.shields.io/badge/Tech-HTML%20%7C%20CSS%20%7C%20JS-success?style=for-the-badge)
+![Open Source](https://img.shields.io/badge/Open_Source-Yes-brightgreen?style=for-the-badge)
 
-> **🚀 Live Demo:** [https://vincentrasskazov.github.io/tools/](https://vincentrasskazov.github.io/tools/)
+Welcome to **Vincent's Tools Hub**—a massive, ever-expanding collection of **650+ free, incredibly fast, browser-based utilities**. 
 
----
+From complex developer converters and cryptographic hash generators to sleek design tools, financial calculators, and interactive mini-games, this hub has a tool for almost everything.
 
-## ✨ Features
+## ✨ Key Features
 
-- **Privacy First:** No data is ever sent to a server. All processing happens client-side.
-- **Blazing Fast:** Built with vanilla HTML5, CSS3, and JavaScript (ES6+).
-- **SEO Optimized:** Meta tags, JSON-LD structured data, and OpenGraph support for every tool.
-- **Responsive Design:** Mobile-first UI that works on any device.
-- **120+ Tools & Counting:** From developer utilities to health calculators.
+* **⚡ Blazing Fast:** 100% client-side execution. No server delays, no API calls, no loading screens.
+* **🔒 Privacy-First:** Everything runs locally in your browser. Your data, text, and files never leave your device.
+* **🎨 Premium UI:** Every tool utilizes a unified, modern, and fully responsive CSS design system.
+* **🔍 SEO Optimized:** Fully integrated with Jekyll frontmatter, dynamic OpenGraph `<meta>` tags, and Twitter cards for perfect sharing.
 
-### 🆕 Recent Additions
-* **Finance:** Loan Amortization, Compound Interest, ROI, Salary, & Margin Calculators.
-* **Productivity:** Habit Tracker, Pomodoro Timer, Resume Builder, & Gantt Chart Maker.
-* **Developer:** Regex Pattern Generator, JSON/YAML Converters, JWT Decoder, & Markdown Preview.
-* **Misc:** Periodic Table Explorer, Mind Map Creator, & Website Uptime Monitor.
+## 🗂️ Tool Categories
 
----
+With over 650 tools, the hub is broken down into highly specialized categories:
 
-## 🚀 Getting Started (Local)
+* **💻 Developer Tools:** JSON formatters, YAML converters, Base64 encoders, Regex testers, and Unix permissions.
+* **🎨 Design Tools:** CSS generators (Flexbox, Grid, Glassmorphism, Neumorphism), color wheel visualizers, and Hex/RGB/CMYK converters.
+* **📈 Finance & Business:** Margin/Markup calculators, ROI, CAGR, Auto Loans, and Rule of 72.
+* **🧮 Math & Science:** Pythagorean theorem solvers, quadratic formulas, fraction simplifiers, and standard deviation.
+* **📝 Text & Formatting:** Markdown to HTML converters, word counters, Zalgo text, Leetspeak, and case converters.
+* **🔐 Security:** SHA-256, SHA-512, PBKDF2, MD5 hashes, and highly customizable secure password generators.
+* **⏱️ Time & Health:** Global timezone converters, Unix epoch clocks, Pomodoro timers, BMI, and calorie trackers.
+* **🎮 Games & Boredom Busters:** Connect Four, Snake, Aim Trainers, Reaction Grids, and Math Flashcards.
 
-If you want to run this project locally or contribute:
+## 🚀 Local Development
 
-1.  **Clone the repository:**
-    ```bash
-    git clone [https://github.com/VincentRasskazov/tools.git](https://github.com/VincentRasskazov/tools.git)
-    ```
-2.  **Navigate to the folder:**
-    ```bash
-    cd tools
-    ```
-3.  **Open in Browser:**
-    Simply open `index.html` in any modern web browser.
+To run this repository locally, you can use any basic HTTP server, or run it through Jekyll to process the frontmatter layouts.
 
----
+**Using Python (Quickest):**
+```bash
+# Run this inside the repository folder
+python3 -m http.server 8000
+# Then open http://localhost:8000/tools/your-tool-file.html
+```
 
-## 🛠️ Tool Index (Quick Links)
+**Using Node.js (http-server):**
+```bash
+npx http-server
+```
 
-Every tool is accessible via a clean URL structure under the `/tools/` directory.
+**Using Jekyll:**
+```bash
+bundle exec jekyll serve
+```
 
-### 🔢 Calculators & Math
-- [Age Calculator](https://vincentrasskazov.github.io/tools/tools/age-calculator.html)
-- [BMI Calculator](https://vincentrasskazov.github.io/tools/tools/bmi-calculator.html)
-- [Loan Calculator](https://vincentrasskazov.github.io/tools/tools/loan-calculator.html)
-- [Percentage Calculator](https://vincentrasskazov.github.io/tools/tools/percentage-calculator.html)
-- [Prime Checker](https://vincentrasskazov.github.io/tools/tools/prime-checker.html)
-- [Discount Calculator](https://vincentrasskazov.github.io/tools/tools/discount-calculator.html)
+## 🏗️ Architecture
 
-### 💻 Developer Utilities
-- [JSON Formatter](https://vincentrasskazov.github.io/tools/tools/json-formatter.html)
-- [Base64 Encoder](https://vincentrasskazov.github.io/tools/tools/base64-encoder.html)
-- [JWT Decoder](https://vincentrasskazov.github.io/tools/tools/jwt-decoder.html)
-- [Markdown Preview](https://vincentrasskazov.github.io/tools/tools/markdown-preview.html)
-- [UUID Generator](https://vincentrasskazov.github.io/tools/tools/uuid-generator.html)
-- [SQL Formatter](https://vincentrasskazov.github.io/tools/tools/sql-formatter.html)
-
-### 🔄 Converters
-- [Unit Converter](https://vincentrasskazov.github.io/tools/tools/unit-converter.html)
-- [Binary to Decimal](https://vincentrasskazov.github.io/tools/tools/binary-to-decimal.html)
-- [HEX to RGB](https://vincentrasskazov.github.io/tools/tools/hex-to-rgb.html)
-- [CSV to JSON](https://vincentrasskazov.github.io/tools/tools/csv-to-json.html)
-- [Unix Timestamp](https://vincentrasskazov.github.io/tools/tools/unix-timestamp.html)
-
-### 📝 Text Tools
-- [Word Counter](https://vincentrasskazov.github.io/tools/tools/word-counter.html)
-- [Slug Generator](https://vincentrasskazov.github.io/tools/tools/slug-generator.html)
-- [Case Converter](https://vincentrasskazov.github.io/tools/tools/text-case-converter.html)
-- [Lorem Ipsum](https://vincentrasskazov.github.io/tools/tools/lorem-ipsum.html)
+Each tool is constructed as a lightweight, single-page application (SPA).
+* **Logic:** Vanilla JavaScript. No bulky frameworks (React/Vue) to slow down the initial load.
+* **Styling:** A centralized, modern CSS variable system featuring soft shadows, rounded corners, and fluid typography.
+* **Metadata:** Managed via Jekyll `layout: null` frontmatter, allowing seamless injection of SEO descriptions and categories.
 
 ---
-
-## 🍴 Customization
-
-Want to add your own tool?
-1. Create a new `.html` file in the `tools/` folder.
-2. Use the standard SEO template.
-3. Add the logic in a `<script>` tag.
-4. Update `tools.json` to include your new tool in the homepage search.
-
-## 📄 License
-
-This project is licensed under the **MIT License**. Feel free to use, modify, and distribute as you see fit.
-
----
-**Happy hacking!** 🚀
+*no profit :<*
