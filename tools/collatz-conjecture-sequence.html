@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Century Calculator"
-category: "Time"
-description: "Enter a historical year to instantly find out what century it officially belongs to."
-permalink: /tools/time-century-calculator.html
+title: "Collatz Conjecture Sequencer"
+category: "Math"
+description: "Enter any number to map out its famous '3n+1' mathematical sequence until it reaches 1."
+permalink: /tools/collatz-conjecture-sequence.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Enter a historical year to instantly find out what century it officially belongs to.">
-  <meta property="og:title" content="Century Calculator">
-  <meta property="og:description" content="Enter a historical year to instantly find out what century it officially belongs to.">
+  <meta name="description" content="Enter any number to map out its famous '3n+1' mathematical sequence until it reaches 1.">
+  <meta property="og:title" content="Collatz Conjecture Sequencer">
+  <meta property="og:description" content="Enter any number to map out its famous '3n+1' mathematical sequence until it reaches 1.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Century Calculator">
-  <meta name="twitter:description" content="Enter a historical year to instantly find out what century it officially belongs to.">
+  <meta name="twitter:title" content="Collatz Conjecture Sequencer">
+  <meta name="twitter:description" content="Enter any number to map out its famous '3n+1' mathematical sequence until it reaches 1.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Century Calculator</title>
+  <title>Collatz Conjecture Sequencer</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,16 +39,21 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Century Calculator</h1>
-<div class="card"><label>📅 Enter a Year</label><input type="number" id="y" value="1999" oninput="c()"></div>
-<div id="res" class="res" style="font-size:3rem;color:var(--primary);">20th Century</div>
+    <h1>Collatz Conjecture (3n+1)</h1>
+<div class="row">
+  <div class="card" style="flex:3;"><label>Starting Number</label><input type="number" id="in" value="12" min="1" onkeypress="if(event.key==='Enter') c()"></div>
+  <button onclick="c()" style="flex:1;">Generate</button>
+</div>
+<div class="card"><textarea id="out" rows="6" readonly style="font-family:monospace;font-size:1.1rem;word-break:break-all;"></textarea></div>
 <script>
-function suffix(i) { const j=i%10, k=i%100; if(j==1&&k!=11)return i+"st"; if(j==2&&k!=12)return i+"nd"; if(j==3&&k!=13)return i+"rd"; return i+"th"; }
 function c(){
-  const y=parseInt(document.getElementById('y').value);
-  if(isNaN(y)||y<=0)return document.getElementById('res').innerText="?";
-  const cent = Math.ceil(y/100);
-  document.getElementById('res').innerText = suffix(cent) + " Century";
+  let n=parseInt(document.getElementById('in').value); if(isNaN(n)||n<=0)return;
+  let seq=[n];
+  while(n!==1 && seq.length<1000){
+    if(n%2===0) n=n/2; else n=(n*3)+1;
+    seq.push(n);
+  }
+  document.getElementById('out').value = `Total Steps: ${seq.length-1}\n\n${seq.join(' ➔ ')}`;
 } c();
 </script>
   </div>

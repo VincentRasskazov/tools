@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Century Calculator"
-category: "Time"
-description: "Enter a historical year to instantly find out what century it officially belongs to."
-permalink: /tools/time-century-calculator.html
+title: "Unix Timestamp to Hex"
+category: "Developer"
+description: "Convert a standard Unix epoch timestamp directly into a hexadecimal string (often required for embedded systems)."
+permalink: /tools/unix-timestamp-to-hex.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Enter a historical year to instantly find out what century it officially belongs to.">
-  <meta property="og:title" content="Century Calculator">
-  <meta property="og:description" content="Enter a historical year to instantly find out what century it officially belongs to.">
+  <meta name="description" content="Convert a standard Unix epoch timestamp directly into a hexadecimal string (often required for embedded systems).">
+  <meta property="og:title" content="Unix Timestamp to Hex">
+  <meta property="og:description" content="Convert a standard Unix epoch timestamp directly into a hexadecimal string (often required for embedded systems).">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Century Calculator">
-  <meta name="twitter:description" content="Enter a historical year to instantly find out what century it officially belongs to.">
+  <meta name="twitter:title" content="Unix Timestamp to Hex">
+  <meta name="twitter:description" content="Convert a standard Unix epoch timestamp directly into a hexadecimal string (often required for embedded systems).">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Century Calculator</title>
+  <title>Unix Timestamp to Hex</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,16 +39,14 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Century Calculator</h1>
-<div class="card"><label>📅 Enter a Year</label><input type="number" id="y" value="1999" oninput="c()"></div>
-<div id="res" class="res" style="font-size:3rem;color:var(--primary);">20th Century</div>
+    <h1>Unix Timestamp to Hex</h1>
+<div class="card"><label>⏱️ Unix Timestamp</label><input type="number" id="in" value="1710000000" oninput="c()"></div>
+<div id="res" class="res" style="font-size:3rem;font-family:monospace;letter-spacing:2px;color:var(--danger);">65ED6380</div>
 <script>
-function suffix(i) { const j=i%10, k=i%100; if(j==1&&k!=11)return i+"st"; if(j==2&&k!=12)return i+"nd"; if(j==3&&k!=13)return i+"rd"; return i+"th"; }
 function c(){
-  const y=parseInt(document.getElementById('y').value);
-  if(isNaN(y)||y<=0)return document.getElementById('res').innerText="?";
-  const cent = Math.ceil(y/100);
-  document.getElementById('res').innerText = suffix(cent) + " Century";
+  const v=parseInt(document.getElementById('in').value);
+  if(!isNaN(v)) document.getElementById('res').innerText = v.toString(16).toUpperCase();
+  else document.getElementById('res').innerText="?";
 } c();
 </script>
   </div>

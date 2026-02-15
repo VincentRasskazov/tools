@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Century Calculator"
-category: "Time"
-description: "Enter a historical year to instantly find out what century it officially belongs to."
-permalink: /tools/time-century-calculator.html
+title: "CSS Hover Underline Animation"
+category: "Design"
+description: "Generate modern, sleek CSS code for an underline that animates outwards when you hover over a link."
+permalink: /tools/css-hover-underline-animation.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Enter a historical year to instantly find out what century it officially belongs to.">
-  <meta property="og:title" content="Century Calculator">
-  <meta property="og:description" content="Enter a historical year to instantly find out what century it officially belongs to.">
+  <meta name="description" content="Generate modern, sleek CSS code for an underline that animates outwards when you hover over a link.">
+  <meta property="og:title" content="CSS Hover Underline Animation">
+  <meta property="og:description" content="Generate modern, sleek CSS code for an underline that animates outwards when you hover over a link.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Century Calculator">
-  <meta name="twitter:description" content="Enter a historical year to instantly find out what century it officially belongs to.">
+  <meta name="twitter:title" content="CSS Hover Underline Animation">
+  <meta name="twitter:description" content="Generate modern, sleek CSS code for an underline that animates outwards when you hover over a link.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Century Calculator</title>
+  <title>CSS Hover Underline Animation</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,17 +39,23 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Century Calculator</h1>
-<div class="card"><label>📅 Enter a Year</label><input type="number" id="y" value="1999" oninput="c()"></div>
-<div id="res" class="res" style="font-size:3rem;color:var(--primary);">20th Century</div>
+    <h1>Hover Underline Animation</h1>
+<div style="background:var(--bg);padding:60px 20px;border-radius:16px;margin-bottom:20px;display:flex;justify-content:center;">
+  <a href="#" id="link" style="font-size:2rem;font-weight:bold;color:var(--text);text-decoration:none;position:relative;padding-bottom:5px;">Hover Me!</a>
+</div>
+<div class="row">
+  <div class="card"><label>Underline Color</label><input type="color" id="c" value="#3b82f6" oninput="u()"></div>
+  <div class="card"><label>Thickness (px)</label><input type="range" id="t" min="1" max="10" value="3" oninput="u()"></div>
+</div>
+<textarea id="out" rows="10" readonly style="font-family:monospace;font-size:0.85rem;"></textarea>
+<style id="dyn"></style>
 <script>
-function suffix(i) { const j=i%10, k=i%100; if(j==1&&k!=11)return i+"st"; if(j==2&&k!=12)return i+"nd"; if(j==3&&k!=13)return i+"rd"; return i+"th"; }
-function c(){
-  const y=parseInt(document.getElementById('y').value);
-  if(isNaN(y)||y<=0)return document.getElementById('res').innerText="?";
-  const cent = Math.ceil(y/100);
-  document.getElementById('res').innerText = suffix(cent) + " Century";
-} c();
+function u(){
+  const c=document.getElementById('c').value, t=document.getElementById('t').value;
+  const css = `.hover-link {\n  position: relative;\n  text-decoration: none;\n}\n.hover-link::after {\n  content: '';\n  position: absolute;\n  width: 100%; height: ${t}px;\n  bottom: 0; left: 0;\n  background-color: ${c};\n  transform: scaleX(0);\n  transform-origin: bottom right;\n  transition: transform 0.3s ease-out;\n}\n.hover-link:hover::after {\n  transform: scaleX(1);\n  transform-origin: bottom left;\n}`;
+  document.getElementById('dyn').innerHTML = css.replace('.hover-link', '#link').replace('.hover-link:hover', '#link:hover');
+  document.getElementById('out').value = css;
+} u();
 </script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">

@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Century Calculator"
-category: "Time"
-description: "Enter a historical year to instantly find out what century it officially belongs to."
-permalink: /tools/time-century-calculator.html
+title: "Hexspeak Word Generator"
+category: "Developer"
+description: "Convert English words into programmer 'Hexspeak' (using letters A-F and numbers like 0 for O) to see if they make valid hex colors."
+permalink: /tools/hexspeak-word-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Enter a historical year to instantly find out what century it officially belongs to.">
-  <meta property="og:title" content="Century Calculator">
-  <meta property="og:description" content="Enter a historical year to instantly find out what century it officially belongs to.">
+  <meta name="description" content="Convert English words into programmer 'Hexspeak' (using letters A-F and numbers like 0 for O) to see if they make valid hex colors.">
+  <meta property="og:title" content="Hexspeak Word Generator">
+  <meta property="og:description" content="Convert English words into programmer 'Hexspeak' (using letters A-F and numbers like 0 for O) to see if they make valid hex colors.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Century Calculator">
-  <meta name="twitter:description" content="Enter a historical year to instantly find out what century it officially belongs to.">
+  <meta name="twitter:title" content="Hexspeak Word Generator">
+  <meta name="twitter:description" content="Convert English words into programmer 'Hexspeak' (using letters A-F and numbers like 0 for O) to see if they make valid hex colors.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Century Calculator</title>
+  <title>Hexspeak Word Generator</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,16 +39,27 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Century Calculator</h1>
-<div class="card"><label>📅 Enter a Year</label><input type="number" id="y" value="1999" oninput="c()"></div>
-<div id="res" class="res" style="font-size:3rem;color:var(--primary);">20th Century</div>
+    <h1>Hexspeak Generator</h1>
+<div class="card">
+  <label>📝 Enter a Word (A-F, O, I, S, T)</label>
+  <input type="text" id="in" placeholder="Badass" oninput="c()">
+</div>
+<div class="row" style="align-items:center;">
+  <div class="card" style="text-align:center;">
+    <div style="font-weight:bold;color:#64748b;">Hexspeak</div>
+    <div id="hs" style="font-size:2.5rem;font-weight:900;color:var(--text);font-family:monospace;letter-spacing:2px;">BADA55</div>
+  </div>
+  <div id="col" class="card" style="height:120px;background:#BADA55;border:2px solid var(--border);border-radius:16px;"></div>
+</div>
 <script>
-function suffix(i) { const j=i%10, k=i%100; if(j==1&&k!=11)return i+"st"; if(j==2&&k!=12)return i+"nd"; if(j==3&&k!=13)return i+"rd"; return i+"th"; }
 function c(){
-  const y=parseInt(document.getElementById('y').value);
-  if(isNaN(y)||y<=0)return document.getElementById('res').innerText="?";
-  const cent = Math.ceil(y/100);
-  document.getElementById('res').innerText = suffix(cent) + " Century";
+  let t=document.getElementById('in').value.toUpperCase();
+  t = t.replace(/O/g,'0').replace(/I/g,'1').replace(/S/g,'5').replace(/T/g,'7').replace(/L/g,'1');
+  if(/^[0-9A-F]*$/.test(t) && t.length>0){
+    document.getElementById('hs').innerText = t;
+    if(t.length===3 || t.length===6) document.getElementById('col').style.background = '#'+t;
+    else document.getElementById('col').style.background = 'transparent';
+  } else { document.getElementById('hs').innerText = "Invalid Letters"; document.getElementById('col').style.background = 'transparent'; }
 } c();
 </script>
   </div>

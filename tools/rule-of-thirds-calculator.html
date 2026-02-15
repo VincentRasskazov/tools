@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Century Calculator"
-category: "Time"
-description: "Enter a historical year to instantly find out what century it officially belongs to."
-permalink: /tools/time-century-calculator.html
+title: "Rule of Thirds Grid Calculator"
+category: "Design"
+description: "Input image dimensions to instantly find the exact pixel coordinates for the 4 Rule of Thirds focal points."
+permalink: /tools/rule-of-thirds-calculator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Enter a historical year to instantly find out what century it officially belongs to.">
-  <meta property="og:title" content="Century Calculator">
-  <meta property="og:description" content="Enter a historical year to instantly find out what century it officially belongs to.">
+  <meta name="description" content="Input image dimensions to instantly find the exact pixel coordinates for the 4 Rule of Thirds focal points.">
+  <meta property="og:title" content="Rule of Thirds Grid Calculator">
+  <meta property="og:description" content="Input image dimensions to instantly find the exact pixel coordinates for the 4 Rule of Thirds focal points.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Century Calculator">
-  <meta name="twitter:description" content="Enter a historical year to instantly find out what century it officially belongs to.">
+  <meta name="twitter:title" content="Rule of Thirds Grid Calculator">
+  <meta name="twitter:description" content="Input image dimensions to instantly find the exact pixel coordinates for the 4 Rule of Thirds focal points.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Century Calculator</title>
+  <title>Rule of Thirds Grid Calculator</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,16 +39,27 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Century Calculator</h1>
-<div class="card"><label>📅 Enter a Year</label><input type="number" id="y" value="1999" oninput="c()"></div>
-<div id="res" class="res" style="font-size:3rem;color:var(--primary);">20th Century</div>
+    <h1>Rule of Thirds Grid</h1>
+<div class="row">
+  <div class="card"><label>Image Width (px)</label><input type="number" id="w" value="1920" oninput="c()"></div>
+  <div class="card"><label>Image Height (px)</label><input type="number" id="h" value="1080" oninput="c()"></div>
+</div>
+<div class="row" style="flex-wrap:wrap;">
+  <div class="card" style="text-align:center;"><strong>Top Left</strong><br><span id="p1" style="color:var(--primary);font-weight:bold;font-size:1.5rem;"></span></div>
+  <div class="card" style="text-align:center;"><strong>Top Right</strong><br><span id="p2" style="color:var(--primary);font-weight:bold;font-size:1.5rem;"></span></div>
+  <div class="card" style="text-align:center;"><strong>Bottom Left</strong><br><span id="p3" style="color:var(--primary);font-weight:bold;font-size:1.5rem;"></span></div>
+  <div class="card" style="text-align:center;"><strong>Bottom Right</strong><br><span id="p4" style="color:var(--primary);font-weight:bold;font-size:1.5rem;"></span></div>
+</div>
 <script>
-function suffix(i) { const j=i%10, k=i%100; if(j==1&&k!=11)return i+"st"; if(j==2&&k!=12)return i+"nd"; if(j==3&&k!=13)return i+"rd"; return i+"th"; }
 function c(){
-  const y=parseInt(document.getElementById('y').value);
-  if(isNaN(y)||y<=0)return document.getElementById('res').innerText="?";
-  const cent = Math.ceil(y/100);
-  document.getElementById('res').innerText = suffix(cent) + " Century";
+  const w=parseFloat(document.getElementById('w').value), h=parseFloat(document.getElementById('h').value);
+  if(w>0 && h>0){
+    const x1=Math.round(w/3), x2=Math.round(w*2/3), y1=Math.round(h/3), y2=Math.round(h*2/3);
+    document.getElementById('p1').innerText=`X:${x1}, Y:${y1}`;
+    document.getElementById('p2').innerText=`X:${x2}, Y:${y1}`;
+    document.getElementById('p3').innerText=`X:${x1}, Y:${y2}`;
+    document.getElementById('p4').innerText=`X:${x2}, Y:${y2}`;
+  }
 } c();
 </script>
   </div>
