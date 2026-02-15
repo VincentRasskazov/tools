@@ -9,12 +9,24 @@ layout: null
   </url>
 
   {% for p in site.pages %}
-    {% if p.path contains "tools/" and p.ext == ".html" %}
+    {% if p.url contains "/tools/" and p.name != "index.html" %}
     <url>
-      <loc>{{ site.url }}{{ site.baseurl }}{{ p.url }}</loc>
+      <loc>{{ site.url | append: site.baseurl | append: p.url }}</loc>
       <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
       <priority>0.8</priority>
     </url>
+    {% endif %}
+  {% endfor %}
+
+  {% for collection in site.collections %}
+    {% if collection.label != "posts" %}
+      {% for doc in collection.docs %}
+        <url>
+          <loc>{{ site.url | append: site.baseurl | append: doc.url }}</loc>
+          <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+          <priority>0.8</priority>
+        </url>
+      {% endfor %}
     {% endif %}
   {% endfor %}
 </urlset>
