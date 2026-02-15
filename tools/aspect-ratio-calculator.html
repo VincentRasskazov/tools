@@ -1,32 +1,62 @@
 ---
 layout: null
-title: "Aspect Ratio Calc"
-category: "Design"
-description: "Calculate aspect ratios for images and video."
+title: "Aspect Ratio Calculator"
+category: "Media"
+description: "Calculate proportional image and video dimensions to maintain your target aspect ratio."
 permalink: /tools/aspect-ratio-calculator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Calculate missing dimensions based on aspect ratios.">
+  <meta name="description" content="Calculate proportional image and video dimensions to maintain your target aspect ratio.">
   <meta property="og:title" content="Aspect Ratio Calculator">
-  <meta property="og:description" content="Calculate missing dimensions based on aspect ratios.">
+  <meta property="og:description" content="Calculate proportional image and video dimensions to maintain your target aspect ratio.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Aspect Ratio Calculator">
-  <meta name="twitter:description" content="Calculate missing dimensions based on aspect ratios.">
-  <meta charset="UTF-8"><title>Aspect Ratio</title><style>.tool-container{max-width:500px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);} .row{display:flex;gap:10px;} input{width:100%;padding:10px;margin-bottom:15px;border:1px solid #ccc;border-radius:6px;}</style></head>
-<body><div class="tool-container"><h1 style="text-align:center;color:#2563eb;">Aspect Ratio</h1>
-<p>Original Ratio (W1 : H1)</p>
-<div class="row"><input type="number" id="w1" value="1920" oninput="calc()"><input type="number" id="h1" value="1080" oninput="calc()"></div>
-<p>New Dimensions (W2 : H2)</p>
+  <meta name="twitter:description" content="Calculate proportional image and video dimensions to maintain your target aspect ratio.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Aspect Ratio Calculator</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Aspect Ratio Calculator</h1>
 <div class="row">
-  <div><label>New Width</label><input type="number" id="w2" oninput="calcW()"></div>
-  <div><label>New Height</label><input type="number" id="h2" oninput="calcH()"></div>
-</div></div>
+  <div><label>Original Width (W1)</label><input type="number" id="w1" value="1920" oninput="c('w1')"></div>
+  <div><label>Original Height (H1)</label><input type="number" id="h1" value="1080" oninput="c('h1')"></div>
+</div>
+<div class="row">
+  <div><label>New Width (W2)</label><input type="number" id="w2" value="1280" oninput="c('w2')"></div>
+  <div><label>New Height (H2)</label><input type="number" id="h2" oninput="c('h2')"></div>
+</div>
 <script>
-  function calcW(){ const w1=document.getElementById('w1').value, h1=document.getElementById('h1').value, w2=document.getElementById('w2').value; document.getElementById('h2').value = (h1/w1)*w2; }
-  function calcH(){ const w1=document.getElementById('w1').value, h1=document.getElementById('h1').value, h2=document.getElementById('h2').value; document.getElementById('w2').value = (w1/h1)*h2; }
-  function calc(){ calcW(); }
-</script></body></html>
+function c(src){
+  const w1=parseFloat(document.getElementById('w1').value), h1=parseFloat(document.getElementById('h1').value);
+  const w2=document.getElementById('w2'), h2=document.getElementById('h2');
+  if(!w1 || !h1) return;
+  if(src==='w2' || src==='w1' || src==='h1'){
+    if(w2.value) h2.value = (parseFloat(w2.value) * h1 / w1).toFixed(2).replace(/\.00$/,'');
+  } else if(src==='h2') {
+    if(h2.value) w2.value = (parseFloat(h2.value) * w1 / h1).toFixed(2).replace(/\.00$/,'');
+  }
+} c('w1');
+</script>
+  </div>
+</body>
+</html>

@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Regex Tester & Highlighter"
-category: "Developer"
-description: "Test your regular expressions in real-time to see if they match your input string."
-permalink: /tools/regex-tester.html
+title: "Monochromatic Palette Generator"
+category: "Design"
+description: "Generate a beautiful monochromatic color scheme by varying lightness of a base color."
+permalink: /tools/monochromatic-color-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Test your regular expressions in real-time to see if they match your input string.">
-  <meta property="og:title" content="Regex Tester & Highlighter">
-  <meta property="og:description" content="Test your regular expressions in real-time to see if they match your input string.">
+  <meta name="description" content="Generate a beautiful monochromatic color scheme by varying lightness of a base color.">
+  <meta property="og:title" content="Monochromatic Palette Generator">
+  <meta property="og:description" content="Generate a beautiful monochromatic color scheme by varying lightness of a base color.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Regex Tester & Highlighter">
-  <meta name="twitter:description" content="Test your regular expressions in real-time to see if they match your input string.">
+  <meta name="twitter:title" content="Monochromatic Palette Generator">
+  <meta name="twitter:description" content="Generate a beautiful monochromatic color scheme by varying lightness of a base color.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Regex Tester & Highlighter</title>
+  <title>Monochromatic Palette Generator</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -36,24 +36,13 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>Regex Tester</h1>
-<label>Regular Expression</label>
-<div class="row" style="margin-bottom:0;">
-  <div style="flex:3;"><input type="text" id="rgx" placeholder="\d+" oninput="c()"></div>
-  <div style="flex:1;"><input type="text" id="flg" value="g" oninput="c()" placeholder="Flags (g, i)"></div>
-</div>
-<textarea id="in" rows="4" placeholder="123 apples and 45 oranges" oninput="c()"></textarea>
-<div id="res" class="res" style="text-align:left; font-size:1.2rem; min-height:60px;"></div>
+    <h1>Monochromatic Palette</h1>
+<input type="color" id="clr" value="#3b82f6" oninput="u()" style="height:60px;">
+<div id="res" style="display:flex; height:120px; border-radius:12px; overflow:hidden; margin-top:20px;"></div>
 <script>
-function c(){
-  try {
-    const r=new RegExp(document.getElementById('rgx').value, document.getElementById('flg').value);
-    const t=document.getElementById('in').value;
-    if(!document.getElementById('rgx').value){ document.getElementById('res').innerHTML="Waiting for regex..."; return; }
-    const match = t.match(r);
-    document.getElementById('res').innerHTML = match ? `<span style="color:var(--success)">✅ Match Found:</span><br> [${match.join(', ')}]` : `<span style="color:var(--danger)">❌ No Matches</span>`;
-  } catch(e) { document.getElementById('res').innerHTML = `<span style="color:var(--danger)">Invalid Regex</span>`; }
-}
+function hexToHsl(h){let r=parseInt(h.slice(1,3),16)/255,g=parseInt(h.slice(3,5),16)/255,b=parseInt(h.slice(5,7),16)/255;let max=Math.max(r,g,b),min=Math.min(r,g,b);let h2,s,l=(max+min)/2;if(max==min)h2=s=0;else{let d=max-min;s=l>0.5?d/(2-max-min):d/(max+min);switch(max){case r:h2=(g-b)/d+(g<b?6:0);break;case g:h2=(b-r)/d+2;break;case b:h2=(r-g)/d+4;break;}h2/=6;}return [h2*360,s*100,l*100];}
+function hslToHex(h,s,l){s/=100;l/=100;let a=s*Math.min(l,1-l);let f=(n,k=(n+h/30)%12)=>l-a*Math.max(Math.min(k-3,9-k,1),-1);let toHex=x=>Math.round(x*255).toString(16).padStart(2,'0');return `#${toHex(f(0))}${toHex(f(8))}${toHex(f(4))}`;}
+function u(){ const hex=document.getElementById('clr').value; let [h,s,l]=hexToHsl(hex); let out=''; for(let i=10; i<=90; i+=20){ const nx=hslToHex(h,s,i).toUpperCase(); out+=`<div style="flex:1;background:${nx};display:flex;align-items:flex-end;justify-content:center;padding-bottom:10px;color:${i<50?'#fff':'#000'};font-weight:bold;font-size:0.8rem;">${nx}</div>`; } document.getElementById('res').innerHTML=out; } u();
 </script>
   </div>
 </body>

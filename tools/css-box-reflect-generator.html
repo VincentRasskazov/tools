@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Regex Tester & Highlighter"
-category: "Developer"
-description: "Test your regular expressions in real-time to see if they match your input string."
-permalink: /tools/regex-tester.html
+title: "CSS Box Reflect Generator"
+category: "Design"
+description: "Generate WebKit CSS reflections to create sleek mirror effects below images or text."
+permalink: /tools/css-box-reflect-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Test your regular expressions in real-time to see if they match your input string.">
-  <meta property="og:title" content="Regex Tester & Highlighter">
-  <meta property="og:description" content="Test your regular expressions in real-time to see if they match your input string.">
+  <meta name="description" content="Generate WebKit CSS reflections to create sleek mirror effects below images or text.">
+  <meta property="og:title" content="CSS Box Reflect Generator">
+  <meta property="og:description" content="Generate WebKit CSS reflections to create sleek mirror effects below images or text.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Regex Tester & Highlighter">
-  <meta name="twitter:description" content="Test your regular expressions in real-time to see if they match your input string.">
+  <meta name="twitter:title" content="CSS Box Reflect Generator">
+  <meta name="twitter:description" content="Generate WebKit CSS reflections to create sleek mirror effects below images or text.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Regex Tester & Highlighter</title>
+  <title>CSS Box Reflect Generator</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -36,24 +36,22 @@ button:active { transform: translateY(0); box-shadow: none; }
 </head>
 <body>
   <div class="tool-container">
-    <h1>Regex Tester</h1>
-<label>Regular Expression</label>
-<div class="row" style="margin-bottom:0;">
-  <div style="flex:3;"><input type="text" id="rgx" placeholder="\d+" oninput="c()"></div>
-  <div style="flex:1;"><input type="text" id="flg" value="g" oninput="c()" placeholder="Flags (g, i)"></div>
+    <h1>CSS Box Reflect</h1>
+<div style="height:250px;display:flex;flex-direction:column;align-items:center;background:var(--bg);border-radius:12px;margin-bottom:20px;padding-top:20px;">
+  <div id="box" style="font-size:3rem;font-weight:900;color:var(--primary); -webkit-box-reflect: below 5px linear-gradient(transparent, rgba(0,0,0,0.5));">REFLECTION</div>
 </div>
-<textarea id="in" rows="4" placeholder="123 apples and 45 oranges" oninput="c()"></textarea>
-<div id="res" class="res" style="text-align:left; font-size:1.2rem; min-height:60px;"></div>
+<div class="row">
+  <div><label>Offset (px)</label><input type="range" id="o" min="0" max="30" value="5" oninput="u()"></div>
+  <div><label>Fade Opacity</label><input type="range" id="op" min="0" max="1" step="0.1" value="0.5" oninput="u()"></div>
+</div>
+<textarea id="out" rows="2" readonly style="font-family:monospace;"></textarea>
 <script>
-function c(){
-  try {
-    const r=new RegExp(document.getElementById('rgx').value, document.getElementById('flg').value);
-    const t=document.getElementById('in').value;
-    if(!document.getElementById('rgx').value){ document.getElementById('res').innerHTML="Waiting for regex..."; return; }
-    const match = t.match(r);
-    document.getElementById('res').innerHTML = match ? `<span style="color:var(--success)">✅ Match Found:</span><br> [${match.join(', ')}]` : `<span style="color:var(--danger)">❌ No Matches</span>`;
-  } catch(e) { document.getElementById('res').innerHTML = `<span style="color:var(--danger)">Invalid Regex</span>`; }
-}
+function u(){
+  const o=document.getElementById('o').value, op=document.getElementById('op').value;
+  const css = `-webkit-box-reflect: below ${o}px linear-gradient(transparent, rgba(0,0,0,${op}));`;
+  document.getElementById('box').style.cssText = `font-size:3rem;font-weight:900;color:var(--primary); ${css}`;
+  document.getElementById('out').value = css;
+} u();
 </script>
   </div>
 </body>
