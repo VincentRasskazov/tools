@@ -1,0 +1,58 @@
+---
+layout: null
+title: "Blind Number Sequence"
+category: "Games"
+description: "A number will flash on the screen briefly. Type it from memory! Gets longer each level."
+permalink: /tools/blind-number-memory.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="A number will flash on the screen briefly. Type it from memory! Gets longer each level.">
+  <meta property="og:title" content="Blind Number Sequence">
+  <meta property="og:description" content="A number will flash on the screen briefly. Type it from memory! Gets longer each level.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Blind Number Sequence">
+  <meta name="twitter:description" content="A number will flash on the screen briefly. Type it from memory! Gets longer each level.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Blind Number Sequence</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+.grid-4x4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 300px; margin: 0 auto; }
+.grid-4x4 div { aspect-ratio: 1; background: var(--border); border-radius: 8px; cursor: pointer; transition: 0.2s; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Number Sequence</h1>
+<div id="lvl" style="text-align:center;font-weight:bold;color:var(--success);margin-bottom:10px;">Level: 1</div>
+<div id="num" class="res" style="font-size:4rem;letter-spacing:10px;margin-bottom:20px;color:var(--text);">READY</div>
+<div class="row">
+  <input type="number" id="in" placeholder="Type the number..." onkeypress="if(event.key==='Enter') c()" disabled>
+  <button id="gb" onclick="c()" disabled style="flex:0.5;">Submit</button>
+</div>
+<button onclick="st()" id="btn" style="margin-top:20px;">Start Game</button>
+<script>
+let seq='', l=1;
+function st(){ l=1; document.getElementById('btn').style.display='none'; nx(); }
+function nx(){ document.getElementById('lvl').innerText="Level: "+l; document.getElementById('in').value=''; document.getElementById('in').disabled=true; document.getElementById('gb').disabled=true; seq=''; for(let i=0;i<l;i++)seq+=Math.floor(Math.random()*10); document.getElementById('num').innerText=seq; setTimeout(()=>{document.getElementById('num').innerText="?"; document.getElementById('in').disabled=false; document.getElementById('gb').disabled=false; document.getElementById('in').focus();}, 1500+(l*200)); }
+function c(){ const g=document.getElementById('in').value; if(g===seq){ l++; nx(); } else { alert("Wrong! The number was: "+seq); document.getElementById('num').innerText="GAME OVER"; document.getElementById('btn').style.display='block'; document.getElementById('in').disabled=true; document.getElementById('gb').disabled=true; } }
+</script>
+  </div>
+</body>
+</html>

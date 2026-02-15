@@ -1,0 +1,57 @@
+---
+layout: null
+title: "Exact 5.00s Challenge"
+category: "Games"
+description: "Can you stop the timer at exactly 5.00 seconds? Test your internal clock!"
+permalink: /tools/exact-5-seconds-game.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Can you stop the timer at exactly 5.00 seconds? Test your internal clock!">
+  <meta property="og:title" content="Exact 5.00s Challenge">
+  <meta property="og:description" content="Can you stop the timer at exactly 5.00 seconds? Test your internal clock!">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Exact 5.00s Challenge">
+  <meta name="twitter:description" content="Can you stop the timer at exactly 5.00 seconds? Test your internal clock!">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Exact 5.00s Challenge</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+.grid-4x4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 300px; margin: 0 auto; }
+.grid-4x4 div { aspect-ratio: 1; background: var(--border); border-radius: 8px; cursor: pointer; transition: 0.2s; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>5.00s Challenge</h1>
+<p style="text-align:center;color:#64748b;margin-bottom:20px;">Stop the clock at exactly 5.000 seconds!</p>
+<div id="tm" style="font-size:5rem;font-family:monospace;font-weight:900;text-align:center;color:var(--text);margin-bottom:20px;">0.000</div>
+<button id="btn" onclick="act()" style="height:80px;font-size:1.5rem;">Start</button>
+<div id="res" class="res" style="display:none;"></div>
+<script>
+let t0, int, run=false;
+function act(){
+  const b=document.getElementById('btn');
+  if(!run){ t0=Date.now(); int=setInterval(()=>{document.getElementById('tm').innerText=((Date.now()-t0)/1000).toFixed(3);}, 10); run=true; b.innerText="STOP!"; b.style.background="var(--danger)"; document.getElementById('res').style.display='none'; document.getElementById('tm').style.color='var(--text)'; }
+  else { clearInterval(int); run=false; b.innerText="Try Again"; b.style.background="var(--primary)"; const diff=Math.abs(5000-(Date.now()-t0))/1000; const r=document.getElementById('res'); r.style.display='block'; if(diff===0){r.innerHTML="🎉 PERFECT! 5.000s! 🎉"; document.getElementById('tm').style.color='var(--success)';} else if(diff<=0.05){r.innerHTML=`Incredible! Off by ${diff.toFixed(3)}s`; document.getElementById('tm').style.color='var(--success)';} else {r.innerHTML=`Off by ${diff.toFixed(3)}s`; document.getElementById('tm').style.color='var(--danger)';} }
+}
+</script>
+  </div>
+</body>
+</html>

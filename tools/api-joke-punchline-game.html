@@ -1,0 +1,54 @@
+---
+layout: null
+title: "API Joke Punchline Guesser"
+category: "Games"
+description: "Read the setup of a random joke fetched via API, and try to guess the punchline before revealing it."
+permalink: /tools/api-joke-punchline-game.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Read the setup of a random joke fetched via API, and try to guess the punchline before revealing it.">
+  <meta property="og:title" content="API Joke Punchline Guesser">
+  <meta property="og:description" content="Read the setup of a random joke fetched via API, and try to guess the punchline before revealing it.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="API Joke Punchline Guesser">
+  <meta name="twitter:description" content="Read the setup of a random joke fetched via API, and try to guess the punchline before revealing it.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>API Joke Punchline Guesser</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+.grid-4x4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 300px; margin: 0 auto; }
+.grid-4x4 div { aspect-ratio: 1; background: var(--border); border-radius: 8px; cursor: pointer; transition: 0.2s; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Guess the Punchline</h1>
+<div id="q" style="font-size:1.5rem;font-weight:bold;text-align:center;padding:30px;background:var(--bg);border-radius:12px 12px 0 0;border:1px solid var(--border);border-bottom:none;">Loading...</div>
+<div id="a" style="font-size:1.5rem;font-weight:bold;color:var(--primary);text-align:center;padding:30px;background:var(--bg);border-radius:0 0 12px 12px;border:1px solid var(--border);cursor:pointer;user-select:none;" onclick="rev()">Tap to Reveal Punchline</div>
+<button onclick="n()" style="margin-top:20px;">Next Joke</button>
+<script>
+let ans='';
+async function n(){ document.getElementById('q').innerText="Loading..."; document.getElementById('a').innerText="Tap to Reveal Punchline"; document.getElementById('a').style.color="var(--text)"; ans=''; try{ const r=await fetch('https://official-joke-api.appspot.com/random_joke'); const j=await r.json(); document.getElementById('q').innerText=j.setup; ans=j.punchline; }catch(e){document.getElementById('q').innerText="API Error";} }
+function rev(){ if(ans){ document.getElementById('a').innerText=ans; document.getElementById('a').style.color="var(--primary)"; } }
+n();
+</script>
+  </div>
+</body>
+</html>

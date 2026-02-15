@@ -1,0 +1,56 @@
+---
+layout: null
+title: "Grid Pattern Recall"
+category: "Games"
+description: "Memorize the pattern of glowing squares on the 4x4 grid, then re-click them from memory."
+permalink: /tools/pattern-recall-memory.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Memorize the pattern of glowing squares on the 4x4 grid, then re-click them from memory.">
+  <meta property="og:title" content="Grid Pattern Recall">
+  <meta property="og:description" content="Memorize the pattern of glowing squares on the 4x4 grid, then re-click them from memory.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Grid Pattern Recall">
+  <meta name="twitter:description" content="Memorize the pattern of glowing squares on the 4x4 grid, then re-click them from memory.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Grid Pattern Recall</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
+input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
+button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
+button:active { transform: translateY(0); box-shadow: none; }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
+.row { display: flex; gap: 15px; } .row > div { flex: 1; }
+.grid-4x4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 300px; margin: 0 auto; }
+.grid-4x4 div { aspect-ratio: 1; background: var(--border); border-radius: 8px; cursor: pointer; transition: 0.2s; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Pattern Recall</h1>
+<div id="sc" style="text-align:center;font-weight:bold;color:var(--success);margin-bottom:10px;">Level: 1</div>
+<div id="grid" class="grid-4x4" style="margin-bottom:20px;"></div>
+<button id="btn" onclick="st()">Start</button>
+<script>
+let lvl=1, pat=[], usr=[], run=false;
+function drw(){ const g=document.getElementById('grid'); g.innerHTML=''; for(let i=0;i<16;i++){ g.innerHTML+=`<div id="c${i}" onclick="clk(${i})"></div>`; } }
+function st(){ lvl=1; drw(); document.getElementById('btn').style.display='none'; nxt(); }
+function nxt(){ usr=[]; pat=[]; document.getElementById('sc').innerText="Level: "+lvl; const count=Math.min(3+Math.floor(lvl/2), 12); while(pat.length<count){ const r=Math.floor(Math.random()*16); if(!pat.includes(r))pat.push(r); } run=false; pat.forEach(i=>document.getElementById('c'+i).style.background='var(--primary)'); setTimeout(()=>{ pat.forEach(i=>document.getElementById('c'+i).style.background='var(--border)'); run=true; }, 1000 + (lvl*100)); }
+function clk(i){ if(!run)return; const el=document.getElementById('c'+i); if(pat.includes(i)){ el.style.background='var(--success)'; if(!usr.includes(i))usr.push(i); if(usr.length===pat.length){ run=false; lvl++; setTimeout(nxt, 1000); } } else { el.style.background='var(--danger)'; run=false; alert("Wrong! You reached Level: "+lvl); document.getElementById('btn').style.display='block'; drw(); } }
+drw();
+</script>
+  </div>
+</body>
+</html>
