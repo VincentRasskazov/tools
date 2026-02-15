@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Sales Tax Calculator"
+title: "Road Trip Fuel Cost Calculator"
 category: "Finance"
-description: "Calculate the exact amount of sales tax and the final total price of an item."
-permalink: /tools/sales-tax-calculator.html
+description: "Estimate exactly how much you will spend on gas for your next road trip."
+permalink: /tools/road-trip-fuel-cost-calculator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Calculate the exact amount of sales tax and the final total price of an item.">
-  <meta property="og:title" content="Sales Tax Calculator">
-  <meta property="og:description" content="Calculate the exact amount of sales tax and the final total price of an item.">
+  <meta name="description" content="Estimate exactly how much you will spend on gas for your next road trip.">
+  <meta property="og:title" content="Road Trip Fuel Cost Calculator">
+  <meta property="og:description" content="Estimate exactly how much you will spend on gas for your next road trip.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Sales Tax Calculator">
-  <meta name="twitter:description" content="Calculate the exact amount of sales tax and the final total price of an item.">
+  <meta name="twitter:title" content="Road Trip Fuel Cost Calculator">
+  <meta name="twitter:description" content="Estimate exactly how much you will spend on gas for your next road trip.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Sales Tax Calculator</title>
+  <title>Road Trip Fuel Cost Calculator</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,19 +39,23 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Sales Tax Calculator</h1>
-<div class="row">
-  <div class="card"><label>💵 Pre-Tax Price ($)</label><input type="number" id="p" value="50.00" step="0.01" oninput="c()"></div>
-  <div class="card"><label>📊 Tax Rate (%)</label><input type="number" id="r" value="8" step="0.1" oninput="c()"></div>
+    <h1>Road Trip Fuel Cost</h1>
+<div class="card">
+  <label>🚗 Total Trip Distance (Miles)</label><input type="number" id="d" value="300" oninput="c()">
 </div>
-<div id="res" class="res" style="font-size:1.5rem;line-height:1.6;text-align:left;"></div>
+<div class="row">
+  <div class="card"><label>⛽ Car's MPG</label><input type="number" id="mpg" value="25" oninput="c()"></div>
+  <div class="card"><label>💲 Gas Price per Gallon</label><input type="number" id="p" value="3.50" oninput="c()" step="0.01"></div>
+</div>
+<div id="res" class="res" style="font-size:2rem;line-height:1.4;"></div>
 <script>
 function c(){
-  const p=parseFloat(document.getElementById('p').value), r=parseFloat(document.getElementById('r').value);
-  if(p>0 && r>=0){
-    const tax = p * (r/100); const tot = p + tax;
-    document.getElementById('res').innerHTML = `<strong>Tax Amount:</strong> <span style="color:var(--danger)">$${tax.toFixed(2)}</span><br><strong>Total Price:</strong> <span style="color:var(--primary);font-size:3rem;display:block;margin-top:10px;">$${tot.toFixed(2)}</span>`;
-  } else { document.getElementById('res').innerHTML = "Enter valid numbers."; }
+  const d=parseFloat(document.getElementById('d').value), mpg=parseFloat(document.getElementById('mpg').value), p=parseFloat(document.getElementById('p').value);
+  if(d>0 && mpg>0 && p>0){
+    const cost = (d / mpg) * p;
+    const gals = d / mpg;
+    document.getElementById('res').innerHTML = `Estimated Total Cost:<br><span style="font-size:4rem;color:var(--primary);font-weight:900;">$${cost.toFixed(2)}</span><br><span style="font-size:1.2rem;color:#64748b;">You will use ~${gals.toFixed(1)} gallons</span>`;
+  } else { document.getElementById('res').innerHTML = "?"; }
 } c();
 </script>
   </div>

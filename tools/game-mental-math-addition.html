@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Sales Tax Calculator"
-category: "Finance"
-description: "Calculate the exact amount of sales tax and the final total price of an item."
-permalink: /tools/sales-tax-calculator.html
+title: "Mental Math: Addition Sprint"
+category: "Games"
+description: "How many addition problems can you solve in your head in 30 seconds?"
+permalink: /tools/game-mental-math-addition.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Calculate the exact amount of sales tax and the final total price of an item.">
-  <meta property="og:title" content="Sales Tax Calculator">
-  <meta property="og:description" content="Calculate the exact amount of sales tax and the final total price of an item.">
+  <meta name="description" content="How many addition problems can you solve in your head in 30 seconds?">
+  <meta property="og:title" content="Mental Math: Addition Sprint">
+  <meta property="og:description" content="How many addition problems can you solve in your head in 30 seconds?">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Sales Tax Calculator">
-  <meta name="twitter:description" content="Calculate the exact amount of sales tax and the final total price of an item.">
+  <meta name="twitter:title" content="Mental Math: Addition Sprint">
+  <meta name="twitter:description" content="How many addition problems can you solve in your head in 30 seconds?">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Sales Tax Calculator</title>
+  <title>Mental Math: Addition Sprint</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,20 +39,19 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Sales Tax Calculator</h1>
-<div class="row">
-  <div class="card"><label>💵 Pre-Tax Price ($)</label><input type="number" id="p" value="50.00" step="0.01" oninput="c()"></div>
-  <div class="card"><label>📊 Tax Rate (%)</label><input type="number" id="r" value="8" step="0.1" oninput="c()"></div>
+    <h1>Addition Sprint</h1>
+<div class="row" style="margin-bottom:15px;text-align:center;">
+  <div id="sc" style="font-size:1.5rem;font-weight:bold;color:var(--success);">Score: 0</div>
+  <div id="tm" style="font-size:1.5rem;font-weight:bold;color:var(--danger);">30s</div>
 </div>
-<div id="res" class="res" style="font-size:1.5rem;line-height:1.6;text-align:left;"></div>
+<div class="card"><div id="eq" style="font-size:5rem;font-weight:bold;color:var(--primary);text-align:center;">READY</div></div>
+<input type="number" id="in" placeholder="Answer..." onkeypress="if(event.key==='Enter') c()" disabled style="font-size:2rem;text-align:center;">
+<button onclick="st()" id="btn" style="font-size:1.5rem;">Start Sprint</button>
 <script>
-function c(){
-  const p=parseFloat(document.getElementById('p').value), r=parseFloat(document.getElementById('r').value);
-  if(p>0 && r>=0){
-    const tax = p * (r/100); const tot = p + tax;
-    document.getElementById('res').innerHTML = `<strong>Tax Amount:</strong> <span style="color:var(--danger)">$${tax.toFixed(2)}</span><br><strong>Total Price:</strong> <span style="color:var(--primary);font-size:3rem;display:block;margin-top:10px;">$${tot.toFixed(2)}</span>`;
-  } else { document.getElementById('res').innerHTML = "Enter valid numbers."; }
-} c();
+let ans=0, s=0, t=30, int, run=false;
+function st(){ s=0; t=30; run=true; document.getElementById('sc').innerText="Score: 0"; document.getElementById('btn').style.display='none'; document.getElementById('in').disabled=false; document.getElementById('in').focus(); nx(); clearInterval(int); int=setInterval(()=>{t--; document.getElementById('tm').innerText=t+'s'; if(t<=0){clearInterval(int);run=false;document.getElementById('in').disabled=true;document.getElementById('eq').innerText="TIME'S UP!";document.getElementById('btn').style.display='block';document.getElementById('btn').innerText='Play Again';alert("Final Score: "+s);}},1000); }
+function nx(){ const a=Math.floor(Math.random()*50)+1, b=Math.floor(Math.random()*50)+1; ans=a+b; document.getElementById('eq').innerText=`${a} + ${b}`; document.getElementById('in').value=''; }
+function c(){ if(!run)return; if(parseInt(document.getElementById('in').value)===ans){ s++; document.getElementById('sc').innerText="Score: "+s; nx(); }else{ document.getElementById('in').value=''; } }
 </script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
