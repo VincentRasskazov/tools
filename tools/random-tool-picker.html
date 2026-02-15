@@ -6,79 +6,236 @@ description: "Celebrate 1,000 tools! Don't know what to use? Click the button an
 permalink: /tools/random-tool-picker.html
 ---
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="en">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>The Hub Random Tool Picker</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
-    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; display: flex; align-items: center; justify-content: center; }
-    .tool-container { width: 100%; max-width: 500px; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); text-align: center; }
-    h1 { color: var(--primary); margin: 0 0 10px 0; font-size: 2rem; font-weight: 800; }
-    .subtitle { color: #64748b; margin-bottom: 30px; font-size: 1rem; }
-    .dice { font-size: 5rem; margin-bottom: 20px; transition: transform 0.5s ease; }
-    button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.2rem; font-weight: 800; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); }
-    button:hover { background: var(--primary-hover); transform: translateY(-2px); }
-    button:disabled { background: #94a3b8; cursor: wait; }
-    .loading-text { font-size: 0.8rem; color: #94a3b8; margin-top: 15px; }
-    .spinning { animation: rotate 0.5s linear infinite; }
-    @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    :root {
+      --primary: #2563eb;
+      --accent: #7c3aed;
+      --bg: #0f172a;
+      --card: rgba(30, 41, 59, 0.7);
+      --text: #f8fafc;
+      --text-dim: #94a3b8;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at top left, #1e293b, #0f172a);
+      color: var(--text);
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Ambient Background Glow */
+    .glow {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: var(--primary);
+      filter: blur(120px);
+      opacity: 0.15;
+      z-index: -1;
+      border-radius: 50%;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 550px;
+      background: var(--card);
+      backdrop-filter: blur(16px);
+      padding: 50px 40px;
+      border-radius: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      position: relative;
+    }
+
+    .slot-icon {
+      font-size: 5rem;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin: 10px 0;
+      background: linear-gradient(to right, #60a5fa, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      color: var(--text-dim);
+      font-size: 1.1rem;
+      margin-bottom: 40px;
+    }
+
+    /* Action Button */
+    #spin-btn {
+      width: 100%;
+      padding: 20px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      border: none;
+      border-radius: 16px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4);
+    }
+
+    #spin-btn:hover:not(:disabled) {
+      transform: scale(1.02);
+      box-shadow: 0 15px 30px -5px rgba(37, 99, 235, 0.5);
+    }
+
+    #spin-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* Modal Styling */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.3s;
+      z-index: 100;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal {
+      background: #1e293b;
+      padding: 40px;
+      border-radius: 24px;
+      max-width: 400px;
+      width: 85%;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transform: translateY(20px);
+      transition: 0.3s;
+    }
+
+    .modal-overlay.active .modal {
+      transform: translateY(0);
+    }
+
+    .modal h2 { margin-top: 0; color: #60a5fa; }
+    .tool-preview {
+      background: rgba(15, 23, 42, 0.5);
+      padding: 20px;
+      border-radius: 12px;
+      margin: 20px 0;
+      border-left: 4px solid var(--primary);
+    }
+
+    .modal-btns { display: flex; gap: 12px; }
+    .modal-btns button { flex: 1; padding: 14px; border-radius: 12px; font-weight: 600; cursor: pointer; border: none; }
+    .go-btn { background: var(--primary); color: white; }
+    .cancel-btn { background: transparent; color: var(--text-dim); border: 1px solid #334155 !important; }
+
+    /* Animations */
+    .bounce { animation: bounce 0.6s infinite alternate; }
+    @keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-10px); } }
   </style>
 </head>
 <body>
-  <div class="tool-container">
-    <div id="dice" class="dice">🎲</div>
-    <h1>Tool Roulette</h1>
-    <p class="subtitle">Exploring 1,000+ possibilities. <br>Where will you land?</p>
+  <div class="glow"></div>
+  
+  <div class="container">
+    <div id="dice" class="slot-icon">🎲</div>
+    <h1>The Hub Roulette</h1>
+    <p class="subtitle">Accessing 1,000+ custom tools.<br>Ready to discover your next favorite?</p>
     
-    <button id="spin-btn" onclick="pickRandomTool()" disabled>Loading Tools...</button>
-    <p id="status" class="loading-text">Fetching the hub index...</p>
+    <button id="spin-btn" onclick="startSpin()" disabled>Initializing Hub...</button>
+    <p id="counter" style="margin-top:20px; color: var(--text-dim); font-size: 0.9rem;"></p>
+  </div>
+
+  <div id="modal-overlay" class="modal-overlay">
+    <div class="modal">
+      <div style="font-size: 2rem; margin-bottom: 10px;">✨ Tool Found!</div>
+      <h2 id="modal-tool-name">Tool Name</h2>
+      <div class="tool-preview">
+        <p id="modal-tool-desc" style="margin:0; font-size: 0.95rem; color: var(--text-dim);"></p>
+      </div>
+      <div class="modal-btns">
+        <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+        <button class="go-btn" id="confirm-go">Open Tool</button>
+      </div>
+    </div>
   </div>
 
 <script>
 let toolsData = [];
+const dice = document.getElementById('dice');
+const btn = document.getElementById('spin-btn');
+const overlay = document.getElementById('modal-overlay');
 
-// Fetch the central JSON file instead of hardcoding
 async function init() {
-  const btn = document.getElementById('spin-btn');
-  const status = document.getElementById('status');
-  
   try {
-    // Note: Adjust path if your tools.json is in a different subfolder
-    // This climbs up one level from /tools/random-tool-picker.html to /tools/tools.json
+    // Relative path to root from /tools/random-tool-picker.html
     const response = await fetch('../tools.json');
-    if (!response.ok) throw new Error('Could not load tools');
-    
+    if (!response.ok) throw new Error('Network error');
     toolsData = await response.json();
     
     btn.disabled = false;
-    btn.innerText = "Spin the Wheel!";
-    status.innerText = `${toolsData.length} tools ready to roll.`;
+    btn.innerText = "Spin the Wheel";
+    document.getElementById('counter').innerText = `${toolsData.length.toLocaleString()} tools indexed`;
   } catch (err) {
-    status.innerText = "Error loading tools. Please refresh.";
+    btn.innerText = "Connection Error";
     console.error(err);
   }
 }
 
-function pickRandomTool() {
-  const dice = document.getElementById('dice');
-  const btn = document.getElementById('spin-btn');
-  
-  // Visual feedback
-  dice.classList.add('spinning');
+function startSpin() {
   btn.disabled = true;
-  btn.innerText = "Selecting...";
-
+  btn.innerText = "Rolling...";
+  dice.classList.add('bounce');
+  
+  // Simulated rolling delay
   setTimeout(() => {
-    const randomIndex = Math.floor(Math.random() * toolsData.length);
-    const selectedTool = toolsData[randomIndex];
-    
-    // Safety check for pathing
-    let url = selectedTool.url;
-    
-    // Ensure URL doesn't double up on the base path if your JSON already includes it
-    window.location.href = url;
-  }, 600);
+    const selected = toolsData[Math.floor(Math.random() * toolsData.length)];
+    showConfirmation(selected);
+  }, 1200);
+}
+
+function showConfirmation(tool) {
+  dice.classList.remove('bounce');
+  document.getElementById('modal-tool-name').innerText = tool.name;
+  document.getElementById('modal-tool-desc').innerText = tool.description || "No description provided.";
+  
+  document.getElementById('confirm-go').onclick = () => {
+    window.location.href = tool.url;
+  };
+
+  overlay.classList.add('active');
+}
+
+function closeModal() {
+  overlay.classList.remove('active');
+  btn.disabled = false;
+  btn.innerText = "Spin Again";
 }
 
 init();
