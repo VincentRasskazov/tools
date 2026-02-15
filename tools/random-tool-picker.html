@@ -45,7 +45,8 @@ async function init() {
   
   try {
     // Note: Adjust path if your tools.json is in a different subfolder
-    const response = await fetch('./tools.json');
+    // This climbs up one level from /tools/random-tool-picker.html to /tools/tools.json
+    const response = await fetch('../tools.json');
     if (!response.ok) throw new Error('Could not load tools');
     
     toolsData = await response.json();
