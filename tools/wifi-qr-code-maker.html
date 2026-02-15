@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Zodiac Sign Finder"
+title: "Wi-Fi QR Code Maker"
 category: "Utility"
-description: "Enter your birthday and instantly discover your astrological Zodiac star sign."
-permalink: /tools/zodiac-sign-calculator.html
+description: "Generate a QR code that lets your friends and guests connect to your Wi-Fi instantly by just scanning it."
+permalink: /tools/wifi-qr-code-maker.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Enter your birthday and instantly discover your astrological Zodiac star sign.">
-  <meta property="og:title" content="Zodiac Sign Finder">
-  <meta property="og:description" content="Enter your birthday and instantly discover your astrological Zodiac star sign.">
+  <meta name="description" content="Generate a QR code that lets your friends and guests connect to your Wi-Fi instantly by just scanning it.">
+  <meta property="og:title" content="Wi-Fi QR Code Maker">
+  <meta property="og:description" content="Generate a QR code that lets your friends and guests connect to your Wi-Fi instantly by just scanning it.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Zodiac Sign Finder">
-  <meta name="twitter:description" content="Enter your birthday and instantly discover your astrological Zodiac star sign.">
+  <meta name="twitter:title" content="Wi-Fi QR Code Maker">
+  <meta name="twitter:description" content="Generate a QR code that lets your friends and guests connect to your Wi-Fi instantly by just scanning it.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Zodiac Sign Finder</title>
+  <title>Wi-Fi QR Code Maker</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,27 +39,28 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Zodiac Sign Finder</h1>
-<div class="card"><label>🎂 Select your Birthday</label><input type="date" id="d" onchange="c()"></div>
-<div id="res" class="res" style="font-size:3rem;display:none;"></div>
+    <h1>Wi-Fi QR Code Maker</h1>
+<div class="row">
+  <div class="card" style="flex:2;">
+    <label>📶 Network Name (SSID)</label><input type="text" id="s" placeholder="MyHomeWiFi" oninput="c()">
+    <label>🔒 Password</label><input type="text" id="p" placeholder="SuperSecret123" oninput="c()">
+  </div>
+  <div class="card" style="flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;">
+    <img id="qr" style="width:150px;height:150px;display:none;border-radius:8px;">
+    <span id="msg" style="color:#64748b;font-weight:bold;text-align:center;">Enter details to generate</span>
+  </div>
+</div>
+<p style="text-align:center;color:#64748b;font-size:0.9rem;">Your password is never saved. It is processed securely to create the barcode.</p>
 <script>
-function c(){
-  const d=new Date(document.getElementById('d').value); if(isNaN(d))return;
-  const m=d.getMonth()+1, day=d.getDate(); let s="";
-  if((m==3&&day>=21)||(m==4&&day<=19)) s="♈ Aries";
-  else if((m==4&&day>=20)||(m==5&&day<=20)) s="♉ Taurus";
-  else if((m==5&&day>=21)||(m==6&&day<=20)) s="♊ Gemini";
-  else if((m==6&&day>=21)||(m==7&&day<=22)) s="♋ Cancer";
-  else if((m==7&&day>=23)||(m==8&&day<=22)) s="♌ Leo";
-  else if((m==8&&day>=23)||(m==9&&day<=22)) s="♍ Virgo";
-  else if((m==9&&day>=23)||(m==10&&day<=22)) s="♎ Libra";
-  else if((m==10&&day>=23)||(m==11&&day<=21)) s="♏ Scorpio";
-  else if((m==11&&day>=22)||(m==12&&day<=21)) s="♐ Sagittarius";
-  else if((m==12&&day>=22)||(m==1&&day<=19)) s="♑ Capricorn";
-  else if((m==1&&day>=20)||(m==2&&day<=18)) s="♒ Aquarius";
-  else s="♓ Pisces";
-  document.getElementById('res').innerHTML=`Your sign is:<br><span style="color:var(--primary);font-weight:900;">${s}</span>`;
-  document.getElementById('res').style.display='block';
+let tm; function c(){
+  clearTimeout(tm); const s=document.getElementById('s').value, p=document.getElementById('p').value;
+  if(s){
+    tm=setTimeout(()=>{
+      const str=`WIFI:T:WPA;S:${s};P:${p};;`;
+      document.getElementById('qr').src=`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(str)}`;
+      document.getElementById('qr').style.display='block'; document.getElementById('msg').style.display='none';
+    }, 500);
+  } else { document.getElementById('qr').style.display='none'; document.getElementById('msg').style.display='block'; }
 }
 </script>
   </div>

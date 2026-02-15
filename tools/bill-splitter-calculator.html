@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Zodiac Sign Finder"
-category: "Utility"
-description: "Enter your birthday and instantly discover your astrological Zodiac star sign."
-permalink: /tools/zodiac-sign-calculator.html
+title: "Fair Bill Splitter"
+category: "Finance"
+description: "Split the bill fairly among your friends, including tax and tip."
+permalink: /tools/bill-splitter-calculator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Enter your birthday and instantly discover your astrological Zodiac star sign.">
-  <meta property="og:title" content="Zodiac Sign Finder">
-  <meta property="og:description" content="Enter your birthday and instantly discover your astrological Zodiac star sign.">
+  <meta name="description" content="Split the bill fairly among your friends, including tax and tip.">
+  <meta property="og:title" content="Fair Bill Splitter">
+  <meta property="og:description" content="Split the bill fairly among your friends, including tax and tip.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Zodiac Sign Finder">
-  <meta name="twitter:description" content="Enter your birthday and instantly discover your astrological Zodiac star sign.">
+  <meta name="twitter:title" content="Fair Bill Splitter">
+  <meta name="twitter:description" content="Split the bill fairly among your friends, including tax and tip.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Zodiac Sign Finder</title>
+  <title>Fair Bill Splitter</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,28 +39,19 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Zodiac Sign Finder</h1>
-<div class="card"><label>🎂 Select your Birthday</label><input type="date" id="d" onchange="c()"></div>
-<div id="res" class="res" style="font-size:3rem;display:none;"></div>
+    <h1>Bill Splitter</h1>
+<div class="row">
+  <div class="card"><label>Total Bill Amount ($)</label><input type="number" id="b" value="100.00" step="0.01" oninput="c()"></div>
+  <div class="card"><label>Number of People</label><input type="number" id="p" value="4" min="1" oninput="c()"></div>
+</div>
+<div id="res" class="res" style="font-size:1.5rem;line-height:1.6;"></div>
 <script>
 function c(){
-  const d=new Date(document.getElementById('d').value); if(isNaN(d))return;
-  const m=d.getMonth()+1, day=d.getDate(); let s="";
-  if((m==3&&day>=21)||(m==4&&day<=19)) s="♈ Aries";
-  else if((m==4&&day>=20)||(m==5&&day<=20)) s="♉ Taurus";
-  else if((m==5&&day>=21)||(m==6&&day<=20)) s="♊ Gemini";
-  else if((m==6&&day>=21)||(m==7&&day<=22)) s="♋ Cancer";
-  else if((m==7&&day>=23)||(m==8&&day<=22)) s="♌ Leo";
-  else if((m==8&&day>=23)||(m==9&&day<=22)) s="♍ Virgo";
-  else if((m==9&&day>=23)||(m==10&&day<=22)) s="♎ Libra";
-  else if((m==10&&day>=23)||(m==11&&day<=21)) s="♏ Scorpio";
-  else if((m==11&&day>=22)||(m==12&&day<=21)) s="♐ Sagittarius";
-  else if((m==12&&day>=22)||(m==1&&day<=19)) s="♑ Capricorn";
-  else if((m==1&&day>=20)||(m==2&&day<=18)) s="♒ Aquarius";
-  else s="♓ Pisces";
-  document.getElementById('res').innerHTML=`Your sign is:<br><span style="color:var(--primary);font-weight:900;">${s}</span>`;
-  document.getElementById('res').style.display='block';
-}
+  const b=parseFloat(document.getElementById('b').value), p=parseInt(document.getElementById('p').value);
+  if(b>0&&p>0){
+    document.getElementById('res').innerHTML = `Each person pays:<br><span style="font-size:4rem;color:var(--primary);font-weight:900;">$${(b/p).toFixed(2)}</span>`;
+  }
+} c();
 </script>
   </div>
 </body>

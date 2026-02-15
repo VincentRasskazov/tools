@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Zodiac Sign Finder"
-category: "Utility"
-description: "Enter your birthday and instantly discover your astrological Zodiac star sign."
-permalink: /tools/zodiac-sign-calculator.html
+title: "RGB to Hex Color Converter"
+category: "Design"
+description: "Convert RGB values into a web-ready Hex code for your stylesheets and UI designs."
+permalink: /tools/rgb-to-hex-designer.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Enter your birthday and instantly discover your astrological Zodiac star sign.">
-  <meta property="og:title" content="Zodiac Sign Finder">
-  <meta property="og:description" content="Enter your birthday and instantly discover your astrological Zodiac star sign.">
+  <meta name="description" content="Convert RGB values into a web-ready Hex code for your stylesheets and UI designs.">
+  <meta property="og:title" content="RGB to Hex Color Converter">
+  <meta property="og:description" content="Convert RGB values into a web-ready Hex code for your stylesheets and UI designs.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Zodiac Sign Finder">
-  <meta name="twitter:description" content="Enter your birthday and instantly discover your astrological Zodiac star sign.">
+  <meta name="twitter:title" content="RGB to Hex Color Converter">
+  <meta name="twitter:description" content="Convert RGB values into a web-ready Hex code for your stylesheets and UI designs.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Zodiac Sign Finder</title>
+  <title>RGB to Hex Color Converter</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,28 +39,22 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Zodiac Sign Finder</h1>
-<div class="card"><label>🎂 Select your Birthday</label><input type="date" id="d" onchange="c()"></div>
-<div id="res" class="res" style="font-size:3rem;display:none;"></div>
+    <h1>RGB to Hex</h1>
+<div class="row">
+  <div class="card"><label>Red</label><input type="number" id="r" value="16" min="0" max="255" oninput="c()"></div>
+  <div class="card"><label>Green</label><input type="number" id="g" value="185" min="0" max="255" oninput="c()"></div>
+  <div class="card"><label>Blue</label><input type="number" id="b" value="129" min="0" max="255" oninput="c()"></div>
+</div>
+<div class="card" style="display:flex;align-items:center;justify-content:center;gap:20px;background:#f8fafc;">
+  <div id="pv" style="width:80px;height:80px;border-radius:16px;background:#10b981;box-shadow:0 10px 15px rgba(0,0,0,0.1);"></div>
+  <div id="res" style="font-family:monospace;font-size:3rem;font-weight:bold;color:var(--success);">#10B981</div>
+</div>
 <script>
 function c(){
-  const d=new Date(document.getElementById('d').value); if(isNaN(d))return;
-  const m=d.getMonth()+1, day=d.getDate(); let s="";
-  if((m==3&&day>=21)||(m==4&&day<=19)) s="♈ Aries";
-  else if((m==4&&day>=20)||(m==5&&day<=20)) s="♉ Taurus";
-  else if((m==5&&day>=21)||(m==6&&day<=20)) s="♊ Gemini";
-  else if((m==6&&day>=21)||(m==7&&day<=22)) s="♋ Cancer";
-  else if((m==7&&day>=23)||(m==8&&day<=22)) s="♌ Leo";
-  else if((m==8&&day>=23)||(m==9&&day<=22)) s="♍ Virgo";
-  else if((m==9&&day>=23)||(m==10&&day<=22)) s="♎ Libra";
-  else if((m==10&&day>=23)||(m==11&&day<=21)) s="♏ Scorpio";
-  else if((m==11&&day>=22)||(m==12&&day<=21)) s="♐ Sagittarius";
-  else if((m==12&&day>=22)||(m==1&&day<=19)) s="♑ Capricorn";
-  else if((m==1&&day>=20)||(m==2&&day<=18)) s="♒ Aquarius";
-  else s="♓ Pisces";
-  document.getElementById('res').innerHTML=`Your sign is:<br><span style="color:var(--primary);font-weight:900;">${s}</span>`;
-  document.getElementById('res').style.display='block';
-}
+  const r=Math.max(0,Math.min(255,parseInt(document.getElementById('r').value)||0)), g=Math.max(0,Math.min(255,parseInt(document.getElementById('g').value)||0)), b=Math.max(0,Math.min(255,parseInt(document.getElementById('b').value)||0));
+  const hex = '#' + (1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1).toUpperCase();
+  document.getElementById('res').innerText=hex; document.getElementById('pv').style.background=hex;
+} c();
 </script>
   </div>
 </body>

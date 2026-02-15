@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Zodiac Sign Finder"
-category: "Utility"
-description: "Enter your birthday and instantly discover your astrological Zodiac star sign."
-permalink: /tools/zodiac-sign-calculator.html
+title: "Social Media Character Counter"
+category: "Text"
+description: "Count your characters and ensure your text fits perfectly within Twitter, SMS, or Meta limits."
+permalink: /tools/social-media-character-counter.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Enter your birthday and instantly discover your astrological Zodiac star sign.">
-  <meta property="og:title" content="Zodiac Sign Finder">
-  <meta property="og:description" content="Enter your birthday and instantly discover your astrological Zodiac star sign.">
+  <meta name="description" content="Count your characters and ensure your text fits perfectly within Twitter, SMS, or Meta limits.">
+  <meta property="og:title" content="Social Media Character Counter">
+  <meta property="og:description" content="Count your characters and ensure your text fits perfectly within Twitter, SMS, or Meta limits.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Zodiac Sign Finder">
-  <meta name="twitter:description" content="Enter your birthday and instantly discover your astrological Zodiac star sign.">
+  <meta name="twitter:title" content="Social Media Character Counter">
+  <meta name="twitter:description" content="Count your characters and ensure your text fits perfectly within Twitter, SMS, or Meta limits.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Zodiac Sign Finder</title>
+  <title>Social Media Character Counter</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,27 +39,18 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Zodiac Sign Finder</h1>
-<div class="card"><label>🎂 Select your Birthday</label><input type="date" id="d" onchange="c()"></div>
-<div id="res" class="res" style="font-size:3rem;display:none;"></div>
+    <h1>Social Media Counter</h1>
+<div class="card"><textarea id="in" rows="5" placeholder="Draft your tweet or message here..." oninput="c()"></textarea></div>
+<div class="row">
+  <div class="card" style="text-align:center;"><strong>Twitter / X</strong><br><span id="t" style="font-size:2rem;color:var(--primary);">0 / 280</span></div>
+  <div class="card" style="text-align:center;"><strong>SMS Text</strong><br><span id="s" style="font-size:2rem;color:var(--success);">0 / 160</span></div>
+</div>
 <script>
 function c(){
-  const d=new Date(document.getElementById('d').value); if(isNaN(d))return;
-  const m=d.getMonth()+1, day=d.getDate(); let s="";
-  if((m==3&&day>=21)||(m==4&&day<=19)) s="♈ Aries";
-  else if((m==4&&day>=20)||(m==5&&day<=20)) s="♉ Taurus";
-  else if((m==5&&day>=21)||(m==6&&day<=20)) s="♊ Gemini";
-  else if((m==6&&day>=21)||(m==7&&day<=22)) s="♋ Cancer";
-  else if((m==7&&day>=23)||(m==8&&day<=22)) s="♌ Leo";
-  else if((m==8&&day>=23)||(m==9&&day<=22)) s="♍ Virgo";
-  else if((m==9&&day>=23)||(m==10&&day<=22)) s="♎ Libra";
-  else if((m==10&&day>=23)||(m==11&&day<=21)) s="♏ Scorpio";
-  else if((m==11&&day>=22)||(m==12&&day<=21)) s="♐ Sagittarius";
-  else if((m==12&&day>=22)||(m==1&&day<=19)) s="♑ Capricorn";
-  else if((m==1&&day>=20)||(m==2&&day<=18)) s="♒ Aquarius";
-  else s="♓ Pisces";
-  document.getElementById('res').innerHTML=`Your sign is:<br><span style="color:var(--primary);font-weight:900;">${s}</span>`;
-  document.getElementById('res').style.display='block';
+  const len=document.getElementById('in').value.length;
+  const t=document.getElementById('t'), s=document.getElementById('s');
+  t.innerText=`${len} / 280`; t.style.color=len>280?'var(--danger)':'var(--primary)';
+  s.innerText=`${len} / 160`; s.style.color=len>160?'var(--danger)':'var(--success)';
 }
 </script>
   </div>

@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Zodiac Sign Finder"
+title: "Random Motivational Quote"
 category: "Utility"
-description: "Enter your birthday and instantly discover your astrological Zodiac star sign."
-permalink: /tools/zodiac-sign-calculator.html
+description: "Need a boost? Get a random motivational or inspirational quote to jumpstart your day."
+permalink: /tools/random-motivational-quote.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Enter your birthday and instantly discover your astrological Zodiac star sign.">
-  <meta property="og:title" content="Zodiac Sign Finder">
-  <meta property="og:description" content="Enter your birthday and instantly discover your astrological Zodiac star sign.">
+  <meta name="description" content="Need a boost? Get a random motivational or inspirational quote to jumpstart your day.">
+  <meta property="og:title" content="Random Motivational Quote">
+  <meta property="og:description" content="Need a boost? Get a random motivational or inspirational quote to jumpstart your day.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Zodiac Sign Finder">
-  <meta name="twitter:description" content="Enter your birthday and instantly discover your astrological Zodiac star sign.">
+  <meta name="twitter:title" content="Random Motivational Quote">
+  <meta name="twitter:description" content="Need a boost? Get a random motivational or inspirational quote to jumpstart your day.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Zodiac Sign Finder</title>
+  <title>Random Motivational Quote</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,28 +39,14 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Zodiac Sign Finder</h1>
-<div class="card"><label>🎂 Select your Birthday</label><input type="date" id="d" onchange="c()"></div>
-<div id="res" class="res" style="font-size:3rem;display:none;"></div>
+    <h1>Motivational Quotes</h1>
+<div class="card" style="padding:40px;text-align:center;min-height:150px;display:flex;align-items:center;justify-content:center;">
+  <div id="q" style="font-size:1.5rem;font-weight:bold;color:var(--primary);line-height:1.6;font-style:italic;">Click below to get inspired!</div>
+</div>
+<button onclick="c()" style="background:var(--success);">Inspire Me ✨</button>
 <script>
-function c(){
-  const d=new Date(document.getElementById('d').value); if(isNaN(d))return;
-  const m=d.getMonth()+1, day=d.getDate(); let s="";
-  if((m==3&&day>=21)||(m==4&&day<=19)) s="♈ Aries";
-  else if((m==4&&day>=20)||(m==5&&day<=20)) s="♉ Taurus";
-  else if((m==5&&day>=21)||(m==6&&day<=20)) s="♊ Gemini";
-  else if((m==6&&day>=21)||(m==7&&day<=22)) s="♋ Cancer";
-  else if((m==7&&day>=23)||(m==8&&day<=22)) s="♌ Leo";
-  else if((m==8&&day>=23)||(m==9&&day<=22)) s="♍ Virgo";
-  else if((m==9&&day>=23)||(m==10&&day<=22)) s="♎ Libra";
-  else if((m==10&&day>=23)||(m==11&&day<=21)) s="♏ Scorpio";
-  else if((m==11&&day>=22)||(m==12&&day<=21)) s="♐ Sagittarius";
-  else if((m==12&&day>=22)||(m==1&&day<=19)) s="♑ Capricorn";
-  else if((m==1&&day>=20)||(m==2&&day<=18)) s="♒ Aquarius";
-  else s="♓ Pisces";
-  document.getElementById('res').innerHTML=`Your sign is:<br><span style="color:var(--primary);font-weight:900;">${s}</span>`;
-  document.getElementById('res').style.display='block';
-}
+const q=["The secret of getting ahead is getting started.","It always seems impossible until it's done.","Don't watch the clock; do what it does. Keep going.","Believe you can and you're halfway there.","The only way to do great work is to love what you do.","Success is not final, failure is not fatal: it is the courage to continue that counts.","Act as if what you do makes a difference. It does.","You are never too old to set another goal or to dream a new dream."];
+function c(){ document.getElementById('q').innerText=`"${q[Math.floor(Math.random()*q.length)]}"`; } c();
 </script>
   </div>
 </body>

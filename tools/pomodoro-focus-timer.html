@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Zodiac Sign Finder"
-category: "Utility"
-description: "Enter your birthday and instantly discover your astrological Zodiac star sign."
-permalink: /tools/zodiac-sign-calculator.html
+title: "Pomodoro Focus Timer"
+category: "Time"
+description: "Boost your productivity! A simple 25-minute focus timer to help you study or work without distractions."
+permalink: /tools/pomodoro-focus-timer.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Enter your birthday and instantly discover your astrological Zodiac star sign.">
-  <meta property="og:title" content="Zodiac Sign Finder">
-  <meta property="og:description" content="Enter your birthday and instantly discover your astrological Zodiac star sign.">
+  <meta name="description" content="Boost your productivity! A simple 25-minute focus timer to help you study or work without distractions.">
+  <meta property="og:title" content="Pomodoro Focus Timer">
+  <meta property="og:description" content="Boost your productivity! A simple 25-minute focus timer to help you study or work without distractions.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Zodiac Sign Finder">
-  <meta name="twitter:description" content="Enter your birthday and instantly discover your astrological Zodiac star sign.">
+  <meta name="twitter:title" content="Pomodoro Focus Timer">
+  <meta name="twitter:description" content="Boost your productivity! A simple 25-minute focus timer to help you study or work without distractions.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Zodiac Sign Finder</title>
+  <title>Pomodoro Focus Timer</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,28 +39,22 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Zodiac Sign Finder</h1>
-<div class="card"><label>🎂 Select your Birthday</label><input type="date" id="d" onchange="c()"></div>
-<div id="res" class="res" style="font-size:3rem;display:none;"></div>
+    <h1>Focus Timer</h1>
+<div class="card" style="text-align:center;padding:50px;">
+  <div id="tm" style="font-size:6rem;font-weight:900;color:var(--primary);font-family:monospace;line-height:1;">25:00</div>
+  <div id="msg" style="color:#64748b;font-weight:bold;margin-top:10px;font-size:1.2rem;">Ready to focus?</div>
+</div>
+<div class="row">
+  <button id="bS" onclick="st()" style="background:var(--success);">Start Focus</button>
+  <button id="bP" onclick="sp()" style="background:var(--warning);" disabled>Pause</button>
+  <button onclick="rs()" style="background:var(--danger);">Reset</button>
+</div>
 <script>
-function c(){
-  const d=new Date(document.getElementById('d').value); if(isNaN(d))return;
-  const m=d.getMonth()+1, day=d.getDate(); let s="";
-  if((m==3&&day>=21)||(m==4&&day<=19)) s="♈ Aries";
-  else if((m==4&&day>=20)||(m==5&&day<=20)) s="♉ Taurus";
-  else if((m==5&&day>=21)||(m==6&&day<=20)) s="♊ Gemini";
-  else if((m==6&&day>=21)||(m==7&&day<=22)) s="♋ Cancer";
-  else if((m==7&&day>=23)||(m==8&&day<=22)) s="♌ Leo";
-  else if((m==8&&day>=23)||(m==9&&day<=22)) s="♍ Virgo";
-  else if((m==9&&day>=23)||(m==10&&day<=22)) s="♎ Libra";
-  else if((m==10&&day>=23)||(m==11&&day<=21)) s="♏ Scorpio";
-  else if((m==11&&day>=22)||(m==12&&day<=21)) s="♐ Sagittarius";
-  else if((m==12&&day>=22)||(m==1&&day<=19)) s="♑ Capricorn";
-  else if((m==1&&day>=20)||(m==2&&day<=18)) s="♒ Aquarius";
-  else s="♓ Pisces";
-  document.getElementById('res').innerHTML=`Your sign is:<br><span style="color:var(--primary);font-weight:900;">${s}</span>`;
-  document.getElementById('res').style.display='block';
-}
+let t=1500, int, run=false;
+function u(){ const m=Math.floor(t/60), s=t%60; document.getElementById('tm').innerText=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; }
+function st(){ if(run)return; run=true; document.getElementById('bS').disabled=true; document.getElementById('bP').disabled=false; document.getElementById('msg').innerText="Focus mode active! Keep working."; int=setInterval(()=>{t--; u(); if(t<=0){clearInterval(int);run=false;document.getElementById('msg').innerText="Time's up! Take a 5 minute break."; alert("Focus session complete!");}},1000); }
+function sp(){ run=false; clearInterval(int); document.getElementById('bS').disabled=false; document.getElementById('bP').disabled=true; document.getElementById('msg').innerText="Paused."; }
+function rs(){ run=false; clearInterval(int); t=1500; u(); document.getElementById('bS').disabled=false; document.getElementById('bP').disabled=true; document.getElementById('msg').innerText="Ready to focus?"; }
 </script>
   </div>
 </body>
