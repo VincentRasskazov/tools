@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "CSV to YAML Converter"
+title: "Octal to ASCII Converter"
 category: "Developer"
-description: "Convert tabular CSV data into structured YAML configuration arrays."
-permalink: /tools/csv-to-yaml-converter.html
+description: "Convert Base-8 Octal strings directly back into readable ASCII text."
+permalink: /tools/octal-to-ascii-converter.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert tabular CSV data into structured YAML configuration arrays.">
-  <meta property="og:title" content="CSV to YAML Converter">
-  <meta property="og:description" content="Convert tabular CSV data into structured YAML configuration arrays.">
+  <meta name="description" content="Convert Base-8 Octal strings directly back into readable ASCII text.">
+  <meta property="og:title" content="Octal to ASCII Converter">
+  <meta property="og:description" content="Convert Base-8 Octal strings directly back into readable ASCII text.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CSV to YAML Converter">
-  <meta name="twitter:description" content="Convert tabular CSV data into structured YAML configuration arrays.">
+  <meta name="twitter:title" content="Octal to ASCII Converter">
+  <meta name="twitter:description" content="Convert Base-8 Octal strings directly back into readable ASCII text.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>CSV to YAML Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <title>Octal to ASCII Converter</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -39,16 +39,16 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>CSV to YAML</h1>
-<div class="card"><textarea id="in" rows="6" placeholder="id,name,role\n1,Admin,Super\n2,User,Basic"></textarea></div>
-<button onclick="c()">Convert to YAML</button>
-<div class="card"><textarea id="out" rows="8" readonly style="font-family:monospace;white-space:pre;"></textarea></div>
+    <h1>Octal to ASCII</h1>
+<div class="card"><label>🔢 Octal Input</label><textarea id="in" rows="4" placeholder="110 145 154 154 157" oninput="c()"></textarea></div>
+<div class="card"><label>✨ Text Output</label><textarea id="out" rows="4" readonly style="font-family:monospace;"></textarea></div>
 <script>
 function c(){
-  const t=document.getElementById('in').value.trim(); if(!t)return;
-  const p=Papa.parse(t, {header:true, skipEmptyLines:true});
-  if(p.data && p.data.length){ document.getElementById('out').value=jsyaml.dump(p.data); }
-  else { document.getElementById('out').value="Invalid CSV."; }
+  try{
+    const arr = document.getElementById('in').value.trim().split(/\s+/);
+    if(arr[0]==='')return document.getElementById('out').value='';
+    document.getElementById('out').value = arr.map(o => String.fromCharCode(parseInt(o, 8))).join('');
+  }catch(e){ document.getElementById('out').value="Invalid Octal Format"; }
 }
 </script>
   </div>

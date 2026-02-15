@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "CSV to YAML Converter"
-category: "Developer"
-description: "Convert tabular CSV data into structured YAML configuration arrays."
-permalink: /tools/csv-to-yaml-converter.html
+title: "CSS Glowing Text Generator"
+category: "Design"
+description: "Generate intense, multi-layered CSS text-shadows to create realistic neon glowing text."
+permalink: /tools/css-glowing-text-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert tabular CSV data into structured YAML configuration arrays.">
-  <meta property="og:title" content="CSV to YAML Converter">
-  <meta property="og:description" content="Convert tabular CSV data into structured YAML configuration arrays.">
+  <meta name="description" content="Generate intense, multi-layered CSS text-shadows to create realistic neon glowing text.">
+  <meta property="og:title" content="CSS Glowing Text Generator">
+  <meta property="og:description" content="Generate intense, multi-layered CSS text-shadows to create realistic neon glowing text.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CSV to YAML Converter">
-  <meta name="twitter:description" content="Convert tabular CSV data into structured YAML configuration arrays.">
+  <meta name="twitter:title" content="CSS Glowing Text Generator">
+  <meta name="twitter:description" content="Generate intense, multi-layered CSS text-shadows to create realistic neon glowing text.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>CSV to YAML Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <title>CSS Glowing Text Generator</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -39,17 +39,22 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>CSV to YAML</h1>
-<div class="card"><textarea id="in" rows="6" placeholder="id,name,role\n1,Admin,Super\n2,User,Basic"></textarea></div>
-<button onclick="c()">Convert to YAML</button>
-<div class="card"><textarea id="out" rows="8" readonly style="font-family:monospace;white-space:pre;"></textarea></div>
+    <h1>Glowing Text Generator</h1>
+<div style="background:#0f172a;padding:50px 20px;border-radius:16px;margin-bottom:20px;text-align:center;">
+  <span id="txt" style="font-size:4rem;font-weight:900;color:#fff;text-shadow:0 0 5px #fff, 0 0 10px #fff, 0 0 20px #3b82f6, 0 0 40px #3b82f6, 0 0 80px #3b82f6;">GLOW</span>
+</div>
+<div class="row">
+  <div class="card"><label>🎨 Glow Color</label><input type="color" id="c" value="#3b82f6" oninput="u()"></div>
+  <div class="card"><label>✨ Intensity</label><input type="range" id="i" min="10" max="100" value="40" oninput="u()"></div>
+</div>
+<textarea id="out" rows="4" readonly style="font-family:monospace;"></textarea>
 <script>
-function c(){
-  const t=document.getElementById('in').value.trim(); if(!t)return;
-  const p=Papa.parse(t, {header:true, skipEmptyLines:true});
-  if(p.data && p.data.length){ document.getElementById('out').value=jsyaml.dump(p.data); }
-  else { document.getElementById('out').value="Invalid CSV."; }
-}
+function u(){
+  const c=document.getElementById('c').value, i=document.getElementById('i').value;
+  const css = `color: #fff;\ntext-shadow:\n  0 0 5px #fff,\n  0 0 10px #fff,\n  0 0 ${i/2}px ${c},\n  0 0 ${i}px ${c},\n  0 0 ${i*2}px ${c};`;
+  document.getElementById('txt').style.cssText = `font-size:4rem;font-weight:900;${css.replace(/\n/g,'')}`;
+  document.getElementById('out').value = css;
+} u();
 </script>
   </div>
 </body>

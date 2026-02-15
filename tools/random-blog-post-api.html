@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "CSV to YAML Converter"
-category: "Developer"
-description: "Convert tabular CSV data into structured YAML configuration arrays."
-permalink: /tools/csv-to-yaml-converter.html
+title: "API Random Blog Post Generator"
+category: "Utility"
+description: "Fetch completely random, fake blog post titles, bodies, and tags using DummyJSON."
+permalink: /tools/random-blog-post-api.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert tabular CSV data into structured YAML configuration arrays.">
-  <meta property="og:title" content="CSV to YAML Converter">
-  <meta property="og:description" content="Convert tabular CSV data into structured YAML configuration arrays.">
+  <meta name="description" content="Fetch completely random, fake blog post titles, bodies, and tags using DummyJSON.">
+  <meta property="og:title" content="API Random Blog Post Generator">
+  <meta property="og:description" content="Fetch completely random, fake blog post titles, bodies, and tags using DummyJSON.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CSV to YAML Converter">
-  <meta name="twitter:description" content="Convert tabular CSV data into structured YAML configuration arrays.">
+  <meta name="twitter:title" content="API Random Blog Post Generator">
+  <meta name="twitter:description" content="Fetch completely random, fake blog post titles, bodies, and tags using DummyJSON.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>CSV to YAML Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <title>API Random Blog Post Generator</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -39,17 +39,15 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>CSV to YAML</h1>
-<div class="card"><textarea id="in" rows="6" placeholder="id,name,role\n1,Admin,Super\n2,User,Basic"></textarea></div>
-<button onclick="c()">Convert to YAML</button>
-<div class="card"><textarea id="out" rows="8" readonly style="font-family:monospace;white-space:pre;"></textarea></div>
+    <h1>Random Blog Post Generator</h1>
+<div class="card" style="text-align:left;display:none;" id="box">
+  <div id="title" style="font-size:1.8rem;font-weight:900;color:var(--primary);margin-bottom:15px;"></div>
+  <div id="body" style="font-size:1.1rem;line-height:1.6;color:var(--text);margin-bottom:15px;"></div>
+  <div id="tags" style="color:#64748b;font-weight:bold;font-family:monospace;"></div>
+</div>
+<button onclick="n()" id="btn">Fetch Random Post</button>
 <script>
-function c(){
-  const t=document.getElementById('in').value.trim(); if(!t)return;
-  const p=Papa.parse(t, {header:true, skipEmptyLines:true});
-  if(p.data && p.data.length){ document.getElementById('out').value=jsyaml.dump(p.data); }
-  else { document.getElementById('out').value="Invalid CSV."; }
-}
+async function n(){ const b=document.getElementById('btn'); b.innerText="Loading..."; try{ const r=await fetch('https://dummyjson.com/posts/random'); const j=await r.json(); document.getElementById('box').style.display='block'; document.getElementById('title').innerText=j.title; document.getElementById('body').innerText=j.body; document.getElementById('tags').innerText="Tags: " + j.tags.join(', '); b.innerText="Fetch Another Post"; }catch(e){b.innerText="API Error";} }
 </script>
   </div>
 </body>

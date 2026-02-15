@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "CSV to YAML Converter"
-category: "Developer"
-description: "Convert tabular CSV data into structured YAML configuration arrays."
-permalink: /tools/csv-to-yaml-converter.html
+title: "Zalgo Glitch Text Generator"
+category: "Text"
+description: "Convert normal text into cursed, creepy, corrupted Zalgo glitch text using Unicode combining marks."
+permalink: /tools/zalgo-glitch-text-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert tabular CSV data into structured YAML configuration arrays.">
-  <meta property="og:title" content="CSV to YAML Converter">
-  <meta property="og:description" content="Convert tabular CSV data into structured YAML configuration arrays.">
+  <meta name="description" content="Convert normal text into cursed, creepy, corrupted Zalgo glitch text using Unicode combining marks.">
+  <meta property="og:title" content="Zalgo Glitch Text Generator">
+  <meta property="og:description" content="Convert normal text into cursed, creepy, corrupted Zalgo glitch text using Unicode combining marks.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CSV to YAML Converter">
-  <meta name="twitter:description" content="Convert tabular CSV data into structured YAML configuration arrays.">
+  <meta name="twitter:title" content="Zalgo Glitch Text Generator">
+  <meta name="twitter:description" content="Convert normal text into cursed, creepy, corrupted Zalgo glitch text using Unicode combining marks.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>CSV to YAML Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <title>Zalgo Glitch Text Generator</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -39,16 +39,19 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>CSV to YAML</h1>
-<div class="card"><textarea id="in" rows="6" placeholder="id,name,role\n1,Admin,Super\n2,User,Basic"></textarea></div>
-<button onclick="c()">Convert to YAML</button>
-<div class="card"><textarea id="out" rows="8" readonly style="font-family:monospace;white-space:pre;"></textarea></div>
+    <h1>Zalgo Glitch Text</h1>
+<div class="card"><label>📝 Normal Text</label><textarea id="in" rows="3" placeholder="I am corrupted..." oninput="c()"></textarea></div>
+<div class="card"><label>👹 Zalgo Text</label><textarea id="out" rows="6" readonly style="font-size:1.5rem;text-align:center;"></textarea></div>
 <script>
+const zUp=['\u030d','\u030e','\u0304','\u0305','\u033f','\u0311','\u0306','\u0310','\u0352','\u0351','\u030b','\u030c','\u0357','\u0309','\u0363','\u0364','\u0365'];
+const zMid=['\u0315','\u031b','\u0340','\u0341','\u0358','\u0332','\u0333','\u0336','\u0313'];
+const zDn=['\u0316','\u0317','\u0318','\u0319','\u031c','\u031d','\u0320','\u0324','\u0325','\u0326','\u0329','\u032a','\u032b','\u032c','\u032d','\u032e','\u032f','\u0330','\u0331','\u0339'];
+function r(arr, m){ let s=''; for(let i=0;i<m;i++) s+=arr[Math.floor(Math.random()*arr.length)]; return s; }
 function c(){
-  const t=document.getElementById('in').value.trim(); if(!t)return;
-  const p=Papa.parse(t, {header:true, skipEmptyLines:true});
-  if(p.data && p.data.length){ document.getElementById('out').value=jsyaml.dump(p.data); }
-  else { document.getElementById('out').value="Invalid CSV."; }
+  document.getElementById('out').value = document.getElementById('in').value.split('').map(char => {
+    if(/[a-zA-Z0-9]/.test(char)) return char + r(zUp,2) + r(zMid,1) + r(zDn,2);
+    return char;
+  }).join('');
 }
 </script>
   </div>

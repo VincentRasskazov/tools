@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "CSV to YAML Converter"
-category: "Developer"
-description: "Convert tabular CSV data into structured YAML configuration arrays."
-permalink: /tools/csv-to-yaml-converter.html
+title: "Capacitor Network Calculator"
+category: "Math"
+description: "Calculate the total equivalent capacitance for capacitors connected in Series or Parallel."
+permalink: /tools/capacitors-series-parallel-calculator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert tabular CSV data into structured YAML configuration arrays.">
-  <meta property="og:title" content="CSV to YAML Converter">
-  <meta property="og:description" content="Convert tabular CSV data into structured YAML configuration arrays.">
+  <meta name="description" content="Calculate the total equivalent capacitance for capacitors connected in Series or Parallel.">
+  <meta property="og:title" content="Capacitor Network Calculator">
+  <meta property="og:description" content="Calculate the total equivalent capacitance for capacitors connected in Series or Parallel.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CSV to YAML Converter">
-  <meta name="twitter:description" content="Convert tabular CSV data into structured YAML configuration arrays.">
+  <meta name="twitter:title" content="Capacitor Network Calculator">
+  <meta name="twitter:description" content="Calculate the total equivalent capacitance for capacitors connected in Series or Parallel.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>CSV to YAML Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <title>Capacitor Network Calculator</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -39,17 +39,22 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>CSV to YAML</h1>
-<div class="card"><textarea id="in" rows="6" placeholder="id,name,role\n1,Admin,Super\n2,User,Basic"></textarea></div>
-<button onclick="c()">Convert to YAML</button>
-<div class="card"><textarea id="out" rows="8" readonly style="font-family:monospace;white-space:pre;"></textarea></div>
+    <h1>Capacitor Network Calculator</h1>
+<div class="card">
+  <label>⚙️ Connection Type</label><select id="type" onchange="c()"><option value="parallel">Parallel (C1 + C2 + ...)</option><option value="series">Series (1/C1 + 1/C2 + ...)</option></select>
+  <label style="margin-top:15px;">⚡ Capacitance Values (Farads, comma separated)</label><textarea id="in" rows="3" placeholder="10, 20, 30" oninput="c()"></textarea>
+</div>
+<div id="res" class="res" style="font-size:3rem;"></div>
 <script>
 function c(){
-  const t=document.getElementById('in').value.trim(); if(!t)return;
-  const p=Papa.parse(t, {header:true, skipEmptyLines:true});
-  if(p.data && p.data.length){ document.getElementById('out').value=jsyaml.dump(p.data); }
-  else { document.getElementById('out').value="Invalid CSV."; }
-}
+  const type=document.getElementById('type').value;
+  const arr=document.getElementById('in').value.split(',').map(n=>parseFloat(n.trim())).filter(n=>!isNaN(n)&&n>0);
+  if(!arr.length)return document.getElementById('res').innerText="Waiting...";
+  let r=0;
+  if(type==='parallel'){ r=arr.reduce((a,b)=>a+b,0); }
+  else { r=1/(arr.reduce((a,b)=>a+(1/b),0)); }
+  document.getElementById('res').innerHTML = `<span style="color:var(--primary)">${r.toFixed(4).replace(/\.?0+$/,'')} F</span>`;
+} c();
 </script>
   </div>
 </body>

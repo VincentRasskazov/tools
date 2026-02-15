@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "CSV to YAML Converter"
-category: "Developer"
-description: "Convert tabular CSV data into structured YAML configuration arrays."
-permalink: /tools/csv-to-yaml-converter.html
+title: "Wind Chill Calculator"
+category: "Math"
+description: "Calculate the Wind Chill ('Feels Like' temperature) based on air temperature and wind speed."
+permalink: /tools/wind-chill-calculator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert tabular CSV data into structured YAML configuration arrays.">
-  <meta property="og:title" content="CSV to YAML Converter">
-  <meta property="og:description" content="Convert tabular CSV data into structured YAML configuration arrays.">
+  <meta name="description" content="Calculate the Wind Chill ('Feels Like' temperature) based on air temperature and wind speed.">
+  <meta property="og:title" content="Wind Chill Calculator">
+  <meta property="og:description" content="Calculate the Wind Chill ('Feels Like' temperature) based on air temperature and wind speed.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CSV to YAML Converter">
-  <meta name="twitter:description" content="Convert tabular CSV data into structured YAML configuration arrays.">
+  <meta name="twitter:title" content="Wind Chill Calculator">
+  <meta name="twitter:description" content="Calculate the Wind Chill ('Feels Like' temperature) based on air temperature and wind speed.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>CSV to YAML Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <title>Wind Chill Calculator</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -39,17 +39,21 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>CSV to YAML</h1>
-<div class="card"><textarea id="in" rows="6" placeholder="id,name,role\n1,Admin,Super\n2,User,Basic"></textarea></div>
-<button onclick="c()">Convert to YAML</button>
-<div class="card"><textarea id="out" rows="8" readonly style="font-family:monospace;white-space:pre;"></textarea></div>
+    <h1>Wind Chill Calculator</h1>
+<div class="row">
+  <div class="card"><label>🌡️ Temperature (°F)</label><input type="number" id="t" value="30"></div>
+  <div class="card"><label>💨 Wind Speed (mph)</label><input type="number" id="v" value="15"></div>
+</div>
+<button onclick="c()">Calculate Wind Chill</button>
+<div id="res" class="res" style="font-size:3rem;"></div>
 <script>
 function c(){
-  const t=document.getElementById('in').value.trim(); if(!t)return;
-  const p=Papa.parse(t, {header:true, skipEmptyLines:true});
-  if(p.data && p.data.length){ document.getElementById('out').value=jsyaml.dump(p.data); }
-  else { document.getElementById('out').value="Invalid CSV."; }
-}
+  const t=parseFloat(document.getElementById('t').value), v=parseFloat(document.getElementById('v').value);
+  if(t<=50 && v>=3){
+    const wc = 35.74 + 0.6215*t - 35.75*Math.pow(v,0.16) + 0.4275*t*Math.pow(v,0.16);
+    document.getElementById('res').innerHTML = `Feels Like:<br><span style="color:var(--primary);font-weight:900;">${wc.toFixed(1)} °F</span>`;
+  } else { document.getElementById('res').innerHTML = "<span style='font-size:1.2rem;color:var(--warning);'>Formula accurate only for T <= 50°F and Wind >= 3mph</span>"; }
+} c();
 </script>
   </div>
 </body>

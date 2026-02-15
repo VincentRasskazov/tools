@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "CSV to YAML Converter"
-category: "Developer"
-description: "Convert tabular CSV data into structured YAML configuration arrays."
-permalink: /tools/csv-to-yaml-converter.html
+title: "Heat Index Calculator"
+category: "Math"
+description: "Calculate the Heat Index ('Feels Like' temperature) based on air temperature and relative humidity."
+permalink: /tools/heat-index-calculator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert tabular CSV data into structured YAML configuration arrays.">
-  <meta property="og:title" content="CSV to YAML Converter">
-  <meta property="og:description" content="Convert tabular CSV data into structured YAML configuration arrays.">
+  <meta name="description" content="Calculate the Heat Index ('Feels Like' temperature) based on air temperature and relative humidity.">
+  <meta property="og:title" content="Heat Index Calculator">
+  <meta property="og:description" content="Calculate the Heat Index ('Feels Like' temperature) based on air temperature and relative humidity.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CSV to YAML Converter">
-  <meta name="twitter:description" content="Convert tabular CSV data into structured YAML configuration arrays.">
+  <meta name="twitter:title" content="Heat Index Calculator">
+  <meta name="twitter:description" content="Calculate the Heat Index ('Feels Like' temperature) based on air temperature and relative humidity.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>CSV to YAML Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <title>Heat Index Calculator</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -39,17 +39,22 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>CSV to YAML</h1>
-<div class="card"><textarea id="in" rows="6" placeholder="id,name,role\n1,Admin,Super\n2,User,Basic"></textarea></div>
-<button onclick="c()">Convert to YAML</button>
-<div class="card"><textarea id="out" rows="8" readonly style="font-family:monospace;white-space:pre;"></textarea></div>
+    <h1>Heat Index Calculator</h1>
+<div class="row">
+  <div class="card"><label>🌡️ Temperature (°F)</label><input type="number" id="t" value="90"></div>
+  <div class="card"><label>💧 Relative Humidity (%)</label><input type="number" id="h" value="70"></div>
+</div>
+<button onclick="c()">Calculate Heat Index</button>
+<div id="res" class="res" style="font-size:3rem;"></div>
 <script>
 function c(){
-  const t=document.getElementById('in').value.trim(); if(!t)return;
-  const p=Papa.parse(t, {header:true, skipEmptyLines:true});
-  if(p.data && p.data.length){ document.getElementById('out').value=jsyaml.dump(p.data); }
-  else { document.getElementById('out').value="Invalid CSV."; }
-}
+  const t=parseFloat(document.getElementById('t').value), h=parseFloat(document.getElementById('h').value);
+  if(t>=80 && h>=40){
+    const hi = -42.379 + 2.04901523*t + 10.14333127*h - 0.22475541*t*h - 0.00683783*t*t - 0.05481717*h*h + 0.00122874*t*t*h + 0.00085282*t*h*h - 0.00000199*t*t*h*h;
+    const col = hi>103?'var(--danger)':hi>90?'var(--warning)':'var(--success)';
+    document.getElementById('res').innerHTML = `Feels Like:<br><span style="color:${col};font-weight:900;">${hi.toFixed(1)} °F</span>`;
+  } else { document.getElementById('res').innerHTML = "<span style='font-size:1.2rem;color:var(--warning);'>Formula accurate only for T >= 80°F and Humidity >= 40%</span>"; }
+} c();
 </script>
   </div>
 </body>

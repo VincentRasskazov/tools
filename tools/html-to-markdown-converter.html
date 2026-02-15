@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "CSV to YAML Converter"
+title: "HTML to Markdown Converter"
 category: "Developer"
-description: "Convert tabular CSV data into structured YAML configuration arrays."
-permalink: /tools/csv-to-yaml-converter.html
+description: "Convert raw HTML code into clean, perfectly formatted Markdown syntax instantly."
+permalink: /tools/html-to-markdown-converter.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert tabular CSV data into structured YAML configuration arrays.">
-  <meta property="og:title" content="CSV to YAML Converter">
-  <meta property="og:description" content="Convert tabular CSV data into structured YAML configuration arrays.">
+  <meta name="description" content="Convert raw HTML code into clean, perfectly formatted Markdown syntax instantly.">
+  <meta property="og:title" content="HTML to Markdown Converter">
+  <meta property="og:description" content="Convert raw HTML code into clean, perfectly formatted Markdown syntax instantly.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CSV to YAML Converter">
-  <meta name="twitter:description" content="Convert tabular CSV data into structured YAML configuration arrays.">
+  <meta name="twitter:title" content="HTML to Markdown Converter">
+  <meta name="twitter:description" content="Convert raw HTML code into clean, perfectly formatted Markdown syntax instantly.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>CSV to YAML Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <title>HTML to Markdown Converter</title>
+  <script src="https://unpkg.com/turndown/dist/turndown.js"></script>
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -39,16 +39,16 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>CSV to YAML</h1>
-<div class="card"><textarea id="in" rows="6" placeholder="id,name,role\n1,Admin,Super\n2,User,Basic"></textarea></div>
-<button onclick="c()">Convert to YAML</button>
-<div class="card"><textarea id="out" rows="8" readonly style="font-family:monospace;white-space:pre;"></textarea></div>
+    <h1>HTML to Markdown</h1>
+<div class="card"><label>📄 HTML Input</label><textarea id="in" rows="6" placeholder="<h1>Hello</h1>\n<p>This is <strong>bold</strong>.</p>"></textarea></div>
+<button onclick="c()">Convert to Markdown</button>
+<div class="card"><label>✨ Markdown Output</label><textarea id="out" rows="6" readonly style="font-family:monospace;white-space:pre;"></textarea></div>
 <script>
 function c(){
-  const t=document.getElementById('in').value.trim(); if(!t)return;
-  const p=Papa.parse(t, {header:true, skipEmptyLines:true});
-  if(p.data && p.data.length){ document.getElementById('out').value=jsyaml.dump(p.data); }
-  else { document.getElementById('out').value="Invalid CSV."; }
+  try {
+    const ts = new TurndownService();
+    document.getElementById('out').value = ts.turndown(document.getElementById('in').value);
+  } catch(e) { document.getElementById('out').value = "Error parsing HTML."; }
 }
 </script>
   </div>

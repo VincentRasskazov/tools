@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "CSV to YAML Converter"
-category: "Developer"
-description: "Convert tabular CSV data into structured YAML configuration arrays."
-permalink: /tools/csv-to-yaml-converter.html
+title: "CSS Modular Scale Generator"
+category: "Design"
+description: "Generate mathematically beautiful typography scales (Perfect Fifth, Golden Ratio, etc.) for CSS variables."
+permalink: /tools/css-modular-scale-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert tabular CSV data into structured YAML configuration arrays.">
-  <meta property="og:title" content="CSV to YAML Converter">
-  <meta property="og:description" content="Convert tabular CSV data into structured YAML configuration arrays.">
+  <meta name="description" content="Generate mathematically beautiful typography scales (Perfect Fifth, Golden Ratio, etc.) for CSS variables.">
+  <meta property="og:title" content="CSS Modular Scale Generator">
+  <meta property="og:description" content="Generate mathematically beautiful typography scales (Perfect Fifth, Golden Ratio, etc.) for CSS variables.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CSV to YAML Converter">
-  <meta name="twitter:description" content="Convert tabular CSV data into structured YAML configuration arrays.">
+  <meta name="twitter:title" content="CSS Modular Scale Generator">
+  <meta name="twitter:description" content="Generate mathematically beautiful typography scales (Perfect Fifth, Golden Ratio, etc.) for CSS variables.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>CSV to YAML Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <title>CSS Modular Scale Generator</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -39,17 +39,21 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>CSV to YAML</h1>
-<div class="card"><textarea id="in" rows="6" placeholder="id,name,role\n1,Admin,Super\n2,User,Basic"></textarea></div>
-<button onclick="c()">Convert to YAML</button>
-<div class="card"><textarea id="out" rows="8" readonly style="font-family:monospace;white-space:pre;"></textarea></div>
+    <h1>Modular Scale Generator</h1>
+<div class="row">
+  <div class="card"><label>Base Size (px)</label><input type="number" id="b" value="16" oninput="u()"></div>
+  <div class="card"><label>Scale Ratio</label><select id="r" onchange="u()"><option value="1.250">Major Third (1.250)</option><option value="1.333">Perfect Fourth (1.333)</option><option value="1.500" selected>Perfect Fifth (1.500)</option><option value="1.618">Golden Ratio (1.618)</option></select></div>
+</div>
+<div class="card"><textarea id="out" rows="7" readonly style="font-family:monospace;white-space:pre;"></textarea></div>
 <script>
-function c(){
-  const t=document.getElementById('in').value.trim(); if(!t)return;
-  const p=Papa.parse(t, {header:true, skipEmptyLines:true});
-  if(p.data && p.data.length){ document.getElementById('out').value=jsyaml.dump(p.data); }
-  else { document.getElementById('out').value="Invalid CSV."; }
-}
+function u(){
+  const b=parseFloat(document.getElementById('b').value)||16, r=parseFloat(document.getElementById('r').value);
+  let css=':root {\n';
+  for(let i=5;i>=1;i--) css+=`  --text-${i}xl: ${(b*Math.pow(r, i)/b).toFixed(3)}rem; /* ${(b*Math.pow(r, i)).toFixed(1)}px */\n`;
+  css+=`  --text-base: 1rem; /* ${b}px */\n`;
+  for(let i=1;i<=2;i++) css+=`  --text-sm${i}: ${(b/Math.pow(r, i)/b).toFixed(3)}rem; /* ${(b/Math.pow(r, i)).toFixed(1)}px */\n`;
+  css+='}'; document.getElementById('out').value=css;
+} u();
 </script>
   </div>
 </body>

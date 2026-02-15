@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "CSV to YAML Converter"
+title: "IPv6 Compressor"
 category: "Developer"
-description: "Convert tabular CSV data into structured YAML configuration arrays."
-permalink: /tools/csv-to-yaml-converter.html
+description: "Compress a fully expanded IPv6 address into its shortest valid notation."
+permalink: /tools/ipv6-compressor.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert tabular CSV data into structured YAML configuration arrays.">
-  <meta property="og:title" content="CSV to YAML Converter">
-  <meta property="og:description" content="Convert tabular CSV data into structured YAML configuration arrays.">
+  <meta name="description" content="Compress a fully expanded IPv6 address into its shortest valid notation.">
+  <meta property="og:title" content="IPv6 Compressor">
+  <meta property="og:description" content="Compress a fully expanded IPv6 address into its shortest valid notation.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CSV to YAML Converter">
-  <meta name="twitter:description" content="Convert tabular CSV data into structured YAML configuration arrays.">
+  <meta name="twitter:title" content="IPv6 Compressor">
+  <meta name="twitter:description" content="Compress a fully expanded IPv6 address into its shortest valid notation.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>CSV to YAML Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <title>IPv6 Compressor</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -39,16 +39,15 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>CSV to YAML</h1>
-<div class="card"><textarea id="in" rows="6" placeholder="id,name,role\n1,Admin,Super\n2,User,Basic"></textarea></div>
-<button onclick="c()">Convert to YAML</button>
-<div class="card"><textarea id="out" rows="8" readonly style="font-family:monospace;white-space:pre;"></textarea></div>
+    <h1>IPv6 Compressor</h1>
+<div class="card"><label>🌐 Expanded IPv6</label><input type="text" id="in" placeholder="2001:0db8:0000:0000:0000:0000:0000:0001" oninput="c()"></div>
+<div id="res" class="res" style="font-family:monospace;font-size:1.8rem;letter-spacing:1px;color:var(--success);"></div>
 <script>
 function c(){
-  const t=document.getElementById('in').value.trim(); if(!t)return;
-  const p=Papa.parse(t, {header:true, skipEmptyLines:true});
-  if(p.data && p.data.length){ document.getElementById('out').value=jsyaml.dump(p.data); }
-  else { document.getElementById('out').value="Invalid CSV."; }
+  let ip=document.getElementById('in').value.trim(); if(!ip)return document.getElementById('res').innerText='';
+  let p=ip.split(':').map(x=>x.replace(/^0+/, '')||'0');
+  let mStr=p.join(':'); mStr=mStr.replace(/(?:^|:)0(?::0)+(?::|$)/, '::');
+  document.getElementById('res').innerText=mStr;
 }
 </script>
   </div>

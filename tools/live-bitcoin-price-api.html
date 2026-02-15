@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "CSV to YAML Converter"
-category: "Developer"
-description: "Convert tabular CSV data into structured YAML configuration arrays."
-permalink: /tools/csv-to-yaml-converter.html
+title: "Live Bitcoin Price Tracker"
+category: "Finance"
+description: "Fetch the current, real-time price of Bitcoin (BTC) in USD, GBP, and EUR via the CoinDesk API."
+permalink: /tools/live-bitcoin-price-api.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert tabular CSV data into structured YAML configuration arrays.">
-  <meta property="og:title" content="CSV to YAML Converter">
-  <meta property="og:description" content="Convert tabular CSV data into structured YAML configuration arrays.">
+  <meta name="description" content="Fetch the current, real-time price of Bitcoin (BTC) in USD, GBP, and EUR via the CoinDesk API.">
+  <meta property="og:title" content="Live Bitcoin Price Tracker">
+  <meta property="og:description" content="Fetch the current, real-time price of Bitcoin (BTC) in USD, GBP, and EUR via the CoinDesk API.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CSV to YAML Converter">
-  <meta name="twitter:description" content="Convert tabular CSV data into structured YAML configuration arrays.">
+  <meta name="twitter:title" content="Live Bitcoin Price Tracker">
+  <meta name="twitter:description" content="Fetch the current, real-time price of Bitcoin (BTC) in USD, GBP, and EUR via the CoinDesk API.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>CSV to YAML Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <title>Live Bitcoin Price Tracker</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -39,17 +39,17 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>CSV to YAML</h1>
-<div class="card"><textarea id="in" rows="6" placeholder="id,name,role\n1,Admin,Super\n2,User,Basic"></textarea></div>
-<button onclick="c()">Convert to YAML</button>
-<div class="card"><textarea id="out" rows="8" readonly style="font-family:monospace;white-space:pre;"></textarea></div>
+    <h1>Live Bitcoin Price</h1>
+<div class="card" style="text-align:center;padding:40px;">
+  <div style="font-size:4rem;color:#f59e0b;font-weight:900;margin-bottom:10px;">₿</div>
+  <div id="usd" style="font-size:3rem;font-weight:bold;color:var(--text);margin-bottom:10px;">Loading...</div>
+  <div id="eur" style="font-size:1.5rem;color:#64748b;"></div>
+  <div id="gbp" style="font-size:1.5rem;color:#64748b;"></div>
+</div>
+<button onclick="n()">Refresh Prices</button>
 <script>
-function c(){
-  const t=document.getElementById('in').value.trim(); if(!t)return;
-  const p=Papa.parse(t, {header:true, skipEmptyLines:true});
-  if(p.data && p.data.length){ document.getElementById('out').value=jsyaml.dump(p.data); }
-  else { document.getElementById('out').value="Invalid CSV."; }
-}
+async function n(){ document.getElementById('usd').innerText="Fetching..."; try{ const r=await fetch('https://api.coindesk.com/v1/bpi/currentprice.json'); const j=await r.json(); document.getElementById('usd').innerText=`$${j.bpi.USD.rate}`; document.getElementById('eur').innerText=`€${j.bpi.EUR.rate} EUR`; document.getElementById('gbp').innerText=`£${j.bpi.GBP.rate} GBP`; }catch(e){document.getElementById('usd').innerText="API Error";} }
+n();
 </script>
   </div>
 </body>

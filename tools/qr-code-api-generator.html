@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "CSV to YAML Converter"
-category: "Developer"
-description: "Convert tabular CSV data into structured YAML configuration arrays."
-permalink: /tools/csv-to-yaml-converter.html
+title: "QR Code API Generator"
+category: "Utility"
+description: "Instantly generate a downloadable QR code for any URL or text block."
+permalink: /tools/qr-code-api-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert tabular CSV data into structured YAML configuration arrays.">
-  <meta property="og:title" content="CSV to YAML Converter">
-  <meta property="og:description" content="Convert tabular CSV data into structured YAML configuration arrays.">
+  <meta name="description" content="Instantly generate a downloadable QR code for any URL or text block.">
+  <meta property="og:title" content="QR Code API Generator">
+  <meta property="og:description" content="Instantly generate a downloadable QR code for any URL or text block.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CSV to YAML Converter">
-  <meta name="twitter:description" content="Convert tabular CSV data into structured YAML configuration arrays.">
+  <meta name="twitter:title" content="QR Code API Generator">
+  <meta name="twitter:description" content="Instantly generate a downloadable QR code for any URL or text block.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>CSV to YAML Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <title>QR Code API Generator</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -39,17 +39,15 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>CSV to YAML</h1>
-<div class="card"><textarea id="in" rows="6" placeholder="id,name,role\n1,Admin,Super\n2,User,Basic"></textarea></div>
-<button onclick="c()">Convert to YAML</button>
-<div class="card"><textarea id="out" rows="8" readonly style="font-family:monospace;white-space:pre;"></textarea></div>
+    <h1>QR Code Generator</h1>
+<div class="card"><label>🔗 Enter URL or Text</label><input type="text" id="in" placeholder="https://example.com" value="https://example.com" oninput="c()"></div>
+<div class="card" style="text-align:center;padding:40px;">
+  <img id="img" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://example.com" style="width:200px;height:200px;border-radius:12px;box-shadow:0 10px 20px rgba(0,0,0,0.1);">
+</div>
+<button onclick="d()">Download QR Code</button>
 <script>
-function c(){
-  const t=document.getElementById('in').value.trim(); if(!t)return;
-  const p=Papa.parse(t, {header:true, skipEmptyLines:true});
-  if(p.data && p.data.length){ document.getElementById('out').value=jsyaml.dump(p.data); }
-  else { document.getElementById('out').value="Invalid CSV."; }
-}
+let tm; function c(){ clearTimeout(tm); tm=setTimeout(()=>{ const t=document.getElementById('in').value||'https://example.com'; document.getElementById('img').src=`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(t)}`; }, 500); }
+function d(){ const src=document.getElementById('img').src; fetch(src).then(r=>r.blob()).then(b=>{const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='qrcode.png'; a.click();}); }
 </script>
   </div>
 </body>

@@ -1,47 +1,57 @@
 ---
 layout: null
 title: "Hex to Binary Converter"
-category: "Converter"
-description: "Convert Hexadecimal code directly into Binary format."
+category: "Developer"
+description: "Convert Base-16 Hexadecimal strings directly into Base-2 Binary sequences."
 permalink: /tools/hex-to-binary-converter.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert Hexadecimal code directly into Binary format.">
+  <meta name="description" content="Convert Base-16 Hexadecimal strings directly into Base-2 Binary sequences.">
   <meta property="og:title" content="Hex to Binary Converter">
-  <meta property="og:description" content="Convert Hexadecimal code directly into Binary format.">
+  <meta property="og:description" content="Convert Base-16 Hexadecimal strings directly into Base-2 Binary sequences.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Hex to Binary Converter">
-  <meta name="twitter:description" content="Convert Hexadecimal code directly into Binary format.">
+  <meta name="twitter:description" content="Convert Base-16 Hexadecimal strings directly into Base-2 Binary sequences.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
   <title>Hex to Binary Converter</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
-body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
-.tool-container { max-width: 650px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); border: 1px solid var(--border); }
-h1 { text-align: center; color: var(--primary); margin: 0 0 25px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; }
-label { display: block; font-weight: 600; margin-bottom: 8px; color: #475569; font-size: 0.95rem; }
-input, select, textarea { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); }
-input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); background: #fff; }
-button { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); margin-bottom: 10px; }
-button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.3); }
-button:active { transform: translateY(0); box-shadow: none; }
-.res { margin-top: 25px; padding: 25px; background: var(--bg); border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed var(--border); color: var(--primary); word-break: break-word; }
-.row { display: flex; gap: 15px; } .row > div { flex: 1; }
-.grid-4x4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 20px auto; max-width: 400px; }
-.react-cell { height: 80px; background: var(--border); border-radius: 12px; cursor: pointer; transition: 0.1s; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
 </style>
 </head>
 <body>
   <div class="tool-container">
     <h1>Hex to Binary</h1>
-<textarea id="in" rows="4" placeholder="AB12" oninput="c()"></textarea>
-<div id="res" class="res" style="font-family:monospace;word-break:break-all;">1010101100010010</div>
-<script>function c(){ const h=document.getElementById('in').value.replace(/\s/g,''); if(/^[0-9A-Fa-f]+$/.test(h)){ document.getElementById('res').innerText=h.split('').map(x=>parseInt(x,16).toString(2).padStart(4,'0')).join(''); } else { document.getElementById('res').innerText="Invalid Hex"; } }</script>
+<div class="card"><label>🔢 Hex Input</label><textarea id="in" rows="4" placeholder="1A 2B 3C" oninput="c()"></textarea></div>
+<div class="card"><label>✨ Binary Output</label><textarea id="out" rows="4" readonly style="font-family:monospace;"></textarea></div>
+<script>
+function c(){
+  try{
+    document.getElementById('out').value = document.getElementById('in').value.replace(/\s+/g,'').split('').map(x=>{
+      if(!/[0-9A-Fa-f]/.test(x)) throw "Err";
+      return parseInt(x, 16).toString(2).padStart(4,'0');
+    }).join(' ');
+  }catch(e){ document.getElementById('out').value="Invalid Hex"; }
+}
+</script>
   </div>
 </body>
 </html>

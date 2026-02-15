@@ -1,24 +1,24 @@
 ---
 layout: null
-title: "CSV to YAML Converter"
-category: "Developer"
-description: "Convert tabular CSV data into structured YAML configuration arrays."
-permalink: /tools/csv-to-yaml-converter.html
+title: "SVG Donut Chart Generator"
+category: "Design"
+description: "Visually generate inline SVG donut charts and percentage rings for data dashboards."
+permalink: /tools/svg-donut-chart-generator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Convert tabular CSV data into structured YAML configuration arrays.">
-  <meta property="og:title" content="CSV to YAML Converter">
-  <meta property="og:description" content="Convert tabular CSV data into structured YAML configuration arrays.">
+  <meta name="description" content="Visually generate inline SVG donut charts and percentage rings for data dashboards.">
+  <meta property="og:title" content="SVG Donut Chart Generator">
+  <meta property="og:description" content="Visually generate inline SVG donut charts and percentage rings for data dashboards.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CSV to YAML Converter">
-  <meta name="twitter:description" content="Convert tabular CSV data into structured YAML configuration arrays.">
+  <meta name="twitter:title" content="SVG Donut Chart Generator">
+  <meta name="twitter:description" content="Visually generate inline SVG donut charts and percentage rings for data dashboards.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>CSV to YAML Converter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <title>SVG Donut Chart Generator</title>
+  
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
@@ -39,17 +39,25 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>CSV to YAML</h1>
-<div class="card"><textarea id="in" rows="6" placeholder="id,name,role\n1,Admin,Super\n2,User,Basic"></textarea></div>
-<button onclick="c()">Convert to YAML</button>
-<div class="card"><textarea id="out" rows="8" readonly style="font-family:monospace;white-space:pre;"></textarea></div>
+    <h1>SVG Donut Chart</h1>
+<div class="card" style="display:flex;justify-content:center;padding:40px;">
+  <svg viewBox="0 0 36 36" style="width:150px;height:150px;">
+    <path style="fill:none;stroke:#e2e8f0;stroke-width:3.8;" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+    <path id="ring" style="fill:none;stroke:var(--primary);stroke-width:3.8;stroke-dasharray:75, 100;" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+    <text id="txt" x="18" y="20.35" style="font-family:sans-serif;font-size:8px;font-weight:bold;fill:var(--text);text-anchor:middle;">75%</text>
+  </svg>
+</div>
+<div class="row">
+  <div class="card"><label>📈 Percentage</label><input type="range" id="p" min="0" max="100" value="75" oninput="u()"></div>
+  <div class="card"><label>🎨 Ring Color</label><input type="color" id="c" value="#3b82f6" oninput="u()"></div>
+</div>
+<textarea id="out" rows="4" readonly style="font-family:monospace;font-size:0.85rem;"></textarea>
 <script>
-function c(){
-  const t=document.getElementById('in').value.trim(); if(!t)return;
-  const p=Papa.parse(t, {header:true, skipEmptyLines:true});
-  if(p.data && p.data.length){ document.getElementById('out').value=jsyaml.dump(p.data); }
-  else { document.getElementById('out').value="Invalid CSV."; }
-}
+function u(){
+  const p=document.getElementById('p').value, c=document.getElementById('c').value;
+  document.getElementById('ring').style.stroke=c; document.getElementById('ring').style.strokeDasharray=`${p}, 100`; document.getElementById('txt').innerText=`${p}%`;
+  document.getElementById('out').value=`<svg viewBox="0 0 36 36" width="100" height="100">\n  <path fill="none" stroke="#e2e8f0" stroke-width="4" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />\n  <path fill="none" stroke="${c}" stroke-width="4" stroke-dasharray="${p}, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />\n  <text x="18" y="20.35" font-family="sans-serif" font-size="8px" font-weight="bold" text-anchor="middle">${p}%</text>\n</svg>`;
+} u();
 </script>
   </div>
 </body>
