@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tools-hub-v2';
+const CACHE_NAME = 'tools-hub-v3';
 const ASSETS = [
   '/tools/',
   '/tools/index.html',
