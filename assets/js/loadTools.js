@@ -30,22 +30,31 @@ document.addEventListener("DOMContentLoaded", function() {
     const loadingMsg = document.getElementById('loading-msg');
 
     // 1. Fetch Data
-    fetch('./tools.json')
-        .then(response => {
-            if (!response.ok) throw new Error("HTTP error " + response.status);
-            return response.json();
-        })
-        .then(data => {
-            allTools = data;
-            loadingMsg.style.display = 'none'; // Hide loading message
-            
+// Replace your existing Fetch block (Line 33-47) with this:
+fetch('./tools.json')
+    .then(response => {
+        if (!response.ok) throw new Error("File not found (404) or server error.");
+        return response.text(); // Get as text first to catch syntax errors
+    })
+    .then(text => {
+        try {
+            allTools = JSON.parse(text);
+            loadingMsg.style.display = 'none';
             generateCategories(allTools);
             displayTools(allTools);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            loadingMsg.textContent = 'Error loading tools. Please refresh.';
-        });
+        } catch (e) {
+            console.error("JSON Syntax Error:", e);
+            loadingMsg.innerHTML = `
+                <div style="color: #ef4444;">
+                    <i class="fas fa-bug"></i> <strong>JSON Syntax Error:</strong><br>
+                    Check line 8374 in tools.json.
+                </div>`;
+        }
+    })
+    .catch(error => {
+        console.error('Fetch Error:', error);
+        loadingMsg.textContent = 'Connection error. Please refresh.';
+    });
 
     // 2. Display Tools Function
     function displayTools(tools) {
