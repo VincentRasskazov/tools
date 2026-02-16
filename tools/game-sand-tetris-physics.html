@@ -1,0 +1,81 @@
+---
+layout: null
+title: "Sand Block Physics Puzzle"
+category: "Games"
+description: "Like classic block puzzles, but when the blocks hit the ground, they dissolve into physics-based sand! Match colors across the screen to clear them."
+permalink: /tools/game-sand-tetris-physics.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Like classic block puzzles, but when the blocks hit the ground, they dissolve into physics-based sand! Match colors across the screen to clear them.">
+  <meta property="og:title" content="Sand Block Physics Puzzle">
+  <meta property="og:description" content="Like classic block puzzles, but when the blocks hit the ground, they dissolve into physics-based sand! Match colors across the screen to clear them.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sand Block Physics Puzzle">
+  <meta name="twitter:description" content="Like classic block puzzles, but when the blocks hit the ground, they dissolve into physics-based sand! Match colors across the screen to clear them.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Sand Block Physics Puzzle</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+canvas { touch-action: none; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Sand Block Puzzle</h1>
+<div class="card" style="padding:0;background:#000;width:fit-content;margin:0 auto 20px;border:4px solid var(--border);">
+  <canvas id="cvs" width="200" height="300" style="display:block;"></canvas>
+</div>
+<button onclick="st()">Drop Blocks</button>
+<p style="text-align:center;color:#64748b;font-weight:bold;">Left/Right to Move. Up to Rotate. Down to Drop.</p>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+const W=50, H=75, S=4; let grid, p, run=false, frms=0;
+const pcs=[[[1,1,1,1]],[[1,1],[1,1]],[[0,1,0],[1,1,1]],[[1,0,0],[1,1,1]]];
+const cols=['#000','#ef4444','#3b82f6','#10b981','#f59e0b'];
+function st(){ grid=Array(W).fill().map(()=>Array(H).fill(0)); run=true; frms=0; np(); loop(); }
+function np(){ const t=pcs[Math.floor(Math.random()*pcs.length)]; p={x:20,y:0,t,c:Math.floor(Math.random()*4)+1}; }
+function col(ox,oy,t){ for(let r=0;r<t.length;r++)for(let c=0;c<t[0].length;c++)if(t[r][c] && (p.y+r+oy>=H || p.x+c+ox<0 || p.x+c+ox>=W || grid[p.x+c+ox][p.y+r+oy]>0))return true; return false; }
+window.onkeydown=e=>{if(!run)return; if(e.key==='ArrowLeft'&&!col(-1,0,p.t))p.x--; if(e.key==='ArrowRight'&&!col(1,0,p.t))p.x++; if(e.key==='ArrowDown'&&!col(0,1,p.t))p.y++; if(e.key==='ArrowUp'){ const nt=p.t[0].map((_,i)=>p.t.map(r=>r[i]).reverse()); if(!col(0,0,nt))p.t=nt; } if(e.key.includes('Arrow'))e.preventDefault();};
+function loop(){
+  if(!run)return; ctx.clearRect(0,0,200,300); frms++;
+  if(frms%15===0){ if(!col(0,1,p.t))p.y++; else{ p.t.forEach((r,y)=>r.forEach((v,x)=>{if(v)grid[p.x+x][p.y+y]=p.c;})); np(); if(col(0,0,p.t)){run=false;alert("Overflow!");return;} } }
+  // Sand Physics
+  for(let x=0;x<W;x++)for(let y=H-2;y>=0;y--){
+    if(grid[x][y]>0){
+      if(grid[x][y+1]===0){grid[x][y+1]=grid[x][y]; grid[x][y]=0;}
+      else{ const l=x>0&&grid[x-1][y+1]===0, r=x<W-1&&grid[x+1][y+1]===0; if(l&&r){grid[Math.random()>0.5?x-1:x+1][y+1]=grid[x][y]; grid[x][y]=0;} else if(l){grid[x-1][y+1]=grid[x][y]; grid[x][y]=0;} else if(r){grid[x+1][y+1]=grid[x][y]; grid[x][y]=0;} }
+    }
+  }
+  // Clear full rows of same color (simplified check)
+  for(let y=H-1;y>=0;y--){ let c1=0; for(let x=0;x<W;x++)if(grid[x][y]>0)c1++; if(c1===W){ for(let x=0;x<W;x++)grid[x][y]=0; } }
+  
+  for(let x=0;x<W;x++)for(let y=0;y<H;y++)if(grid[x][y]>0){ctx.fillStyle=cols[grid[x][y]]; ctx.fillRect(x*S,y*S,S,S);}
+  ctx.fillStyle=cols[p.c]; p.t.forEach((r,y)=>r.forEach((v,x)=>{if(v)ctx.fillRect((p.x+x)*S,(p.y+y)*S,S,S);}));
+  requestAnimationFrame(loop);
+}
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

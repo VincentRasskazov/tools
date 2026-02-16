@@ -1,0 +1,87 @@
+---
+layout: null
+title: "Interactive Logic Circuit Sandbox"
+category: "Developer"
+description: "Design working computer circuitry! Place Input switches and Logic Gates (AND, OR, NOT) on the grid to route electricity to the output bulb."
+permalink: /tools/developer-logic-gate-sandbox.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Design working computer circuitry! Place Input switches and Logic Gates (AND, OR, NOT) on the grid to route electricity to the output bulb.">
+  <meta property="og:title" content="Interactive Logic Circuit Sandbox">
+  <meta property="og:description" content="Design working computer circuitry! Place Input switches and Logic Gates (AND, OR, NOT) on the grid to route electricity to the output bulb.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Interactive Logic Circuit Sandbox">
+  <meta name="twitter:description" content="Design working computer circuitry! Place Input switches and Logic Gates (AND, OR, NOT) on the grid to route electricity to the output bulb.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Interactive Logic Circuit Sandbox</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+canvas { touch-action: none; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Logic Gate Sandbox</h1>
+<div class="row" style="margin-bottom:10px;">
+  <button onclick="m=1" style="background:#3b82f6;">Wire</button>
+  <button onclick="m=2" style="background:#10b981;">Input</button>
+  <button onclick="m=3" style="background:#a855f7;">NOT Gate</button>
+  <button onclick="m=4" style="background:#f59e0b;">Bulb</button>
+  <button onclick="m=0" style="background:#ef4444;">Erase</button>
+</div>
+<div class="card" style="padding:0;background:#0f172a;cursor:crosshair;display:flex;justify-content:center;" onmousedown="clk(event)">
+  <canvas id="cvs" width="400" height="300" style="display:block;"></canvas>
+</div>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+const w=20, h=15, s=20; let g=Array(w).fill().map(()=>Array(h).fill(0)), pow=Array(w).fill().map(()=>Array(h).fill(false)), m=1;
+function clk(e){
+  const r=cvs.getBoundingClientRect(), x=Math.floor((e.clientX-r.left)*(400/r.width)/s), y=Math.floor((e.clientY-r.top)*(300/r.height)/s);
+  if(x>=0&&x<w&&y>=0&&y<h) { if(m===2 && g[x][y]===2) pow[x][y]=!pow[x][y]; else g[x][y]=m; }
+}
+function loop(){
+  let np=Array(w).fill().map(()=>Array(h).fill(false));
+  for(let x=0;x<w;x++)for(let y=0;y<h;y++){
+    if(g[x][y]===2) np[x][y]=pow[x][y]; // Input holds state
+    if(g[x][y]===1 || g[x][y]===4){ // Wire / Bulb checks neighbors
+      let p=false; [[0,1],[1,0],[0,-1],[-1,0]].forEach(d=>{const nx=x+d[0],ny=y+d[1]; if(nx>=0&&nx<w&&ny>=0&&ny<h && pow[nx][ny] && g[nx][ny]!==4) p=true;}); np[x][y]=p;
+    }
+    if(g[x][y]===3){ // NOT gate
+      let p=false; [[0,1],[1,0],[0,-1],[-1,0]].forEach(d=>{const nx=x+d[0],ny=y+d[1]; if(nx>=0&&nx<w&&ny>=0&&ny<h && pow[nx][ny]) p=true;}); np[x][y]=!p;
+    }
+  } pow=np;
+  ctx.clearRect(0,0,400,300);
+  for(let x=0;x<w;x++)for(let y=0;y<h;y++){
+    ctx.strokeStyle='#1e293b'; ctx.strokeRect(x*s,y*s,s,s);
+    if(g[x][y]===1){ ctx.fillStyle=pow[x][y]?'#fde047':'#3b82f6'; ctx.fillRect(x*s+5,y*s+5,10,10); }
+    if(g[x][y]===2){ ctx.fillStyle=pow[x][y]?'#10b981':'#ef4444'; ctx.fillRect(x*s,y*s,s,s); ctx.fillStyle='#fff'; ctx.fillText('IN',x*s+2,y*s+14); }
+    if(g[x][y]===3){ ctx.fillStyle=pow[x][y]?'#d8b4fe':'#a855f7'; ctx.fillRect(x*s,y*s,s,s); ctx.fillStyle='#fff'; ctx.fillText('! ',x*s+4,y*s+14); }
+    if(g[x][y]===4){ ctx.fillStyle=pow[x][y]?'#fde047':'#334155'; ctx.beginPath(); ctx.arc(x*s+10,y*s+10,8,0,Math.PI*2); ctx.fill(); }
+  } setTimeout(()=>requestAnimationFrame(loop), 100);
+} loop();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

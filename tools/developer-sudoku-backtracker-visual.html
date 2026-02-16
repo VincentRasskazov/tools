@@ -1,0 +1,78 @@
+---
+layout: null
+title: "Sudoku Backtracking AI Visualizer"
+category: "Developer"
+description: "Watch a computer science algorithm dynamically solve a Sudoku puzzle in real-time. It uses Backtracking to guess, check, and reverse its decisions!"
+permalink: /tools/developer-sudoku-backtracker-visual.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Watch a computer science algorithm dynamically solve a Sudoku puzzle in real-time. It uses Backtracking to guess, check, and reverse its decisions!">
+  <meta property="og:title" content="Sudoku Backtracking AI Visualizer">
+  <meta property="og:description" content="Watch a computer science algorithm dynamically solve a Sudoku puzzle in real-time. It uses Backtracking to guess, check, and reverse its decisions!">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sudoku Backtracking AI Visualizer">
+  <meta name="twitter:description" content="Watch a computer science algorithm dynamically solve a Sudoku puzzle in real-time. It uses Backtracking to guess, check, and reverse its decisions!">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Sudoku Backtracking AI Visualizer</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+canvas { touch-action: none; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Sudoku AI Visualizer</h1>
+<div class="card" style="padding:10px;background:#000;width:fit-content;margin:0 auto 20px;">
+  <div id="brd" style="display:grid;grid-template-columns:repeat(9, 30px);gap:1px;background:#000;"></div>
+</div>
+<button onclick="st()" id="btn">Run Backtracking AI</button>
+<script>
+let b=[5,3,0,0,7,0,0,0,0, 6,0,0,1,9,5,0,0,0, 0,9,8,0,0,0,0,6,0, 8,0,0,0,6,0,0,0,3, 4,0,0,8,0,3,0,0,1, 7,0,0,0,2,0,0,0,6, 0,6,0,0,0,0,2,8,0, 0,0,0,4,1,9,0,0,5, 0,0,0,0,8,0,0,7,9];
+const orig=[...b]; let run=false;
+function drw(hi=-1){
+  const g=document.getElementById('brd'); g.innerHTML='';
+  b.forEach((v,i)=>{
+    const x=i%9, y=Math.floor(i/9), mb=y%3===2?'3px':'1px', mr=x%3===2?'3px':'1px';
+    const bg=i===hi?'#fde047':orig[i]!==0?'#e2e8f0':'#fff'; const col=orig[i]!==0?'#000':'var(--primary)';
+    g.innerHTML+=`<div style="width:30px;height:30px;background:${bg};color:${col};display:flex;align-items:center;justify-content:center;font-weight:bold;border-bottom:${mb} solid #000;border-right:${mr} solid #000;">${v||''}</div>`;
+  });
+}
+function chk(idx, val){
+  const r=Math.floor(idx/9), c=idx%9, br=Math.floor(r/3)*3, bc=Math.floor(c/3)*3;
+  for(let i=0;i<9;i++){ if(b[r*9+i]===val || b[i*9+c]===val)return false; }
+  for(let i=0;i<3;i++)for(let j=0;j<3;j++){ if(b[(br+i)*9+(bc+j)]===val)return false; } return true;
+}
+async function solve(idx=0){
+  if(!run)return false; if(idx===81)return true;
+  if(orig[idx]!==0) return await solve(idx+1);
+  for(let v=1;v<=9;v++){
+    if(chk(idx,v)){ b[idx]=v; drw(idx); await new Promise(r=>setTimeout(r, 10)); if(await solve(idx+1))return true; b[idx]=0; drw(idx); }
+  } return false;
+}
+async function st(){ if(run)return; run=true; b=[...orig]; document.getElementById('btn').disabled=true; await solve(); run=false; document.getElementById('btn').disabled=false; } drw();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

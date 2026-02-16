@@ -1,0 +1,74 @@
+---
+layout: null
+title: "Pro Theremin Synthesizer"
+category: "Audio"
+description: "Move your mouse horizontally for Pitch, and vertically for Volume. A visual oscilloscope traces the raw audio data you generate in real-time!"
+permalink: /tools/audio-pro-theremin-synth.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Move your mouse horizontally for Pitch, and vertically for Volume. A visual oscilloscope traces the raw audio data you generate in real-time!">
+  <meta property="og:title" content="Pro Theremin Synthesizer">
+  <meta property="og:description" content="Move your mouse horizontally for Pitch, and vertically for Volume. A visual oscilloscope traces the raw audio data you generate in real-time!">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pro Theremin Synthesizer">
+  <meta name="twitter:description" content="Move your mouse horizontally for Pitch, and vertically for Volume. A visual oscilloscope traces the raw audio data you generate in real-time!">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Pro Theremin Synthesizer</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+canvas { touch-action: none; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Pro Web Theremin</h1>
+<div class="card" style="padding:0;overflow:hidden;background:#0f172a;cursor:crosshair;height:300px;border:4px solid var(--border);position:relative;" onmousedown="on(event)" onmousemove="mm(event)" onmouseup="off()" onmouseleave="off()">
+  <canvas id="cvs" width="600" height="300" style="display:block;width:100%;height:100%;"></canvas>
+  <div id="dot" style="position:absolute;width:20px;height:20px;background:var(--success);border-radius:50%;transform:translate(-10px,-10px);pointer-events:none;opacity:0;box-shadow:0 0 20px var(--success);"></div>
+</div>
+<p style="text-align:center;color:#64748b;font-weight:bold;">Click & drag. X = Pitch, Y = Volume.</p>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+let actx, osc, gain, ana, data, play=false;
+function init(){
+  if(!actx){ actx=new (window.AudioContext||window.webkitAudioContext)(); osc=actx.createOscillator(); gain=actx.createGain(); ana=actx.createAnalyser(); ana.fftSize=2048; data=new Uint8Array(ana.frequencyBinCount); osc.type='sine'; osc.connect(gain); gain.connect(ana); ana.connect(actx.destination); osc.start(); gain.gain.value=0; loop(); }
+}
+function on(e){ init(); play=true; mm(e); document.getElementById('dot').style.opacity=1; }
+function off(){ play=false; if(gain) gain.gain.setTargetAtTime(0.001, actx.currentTime, 0.1); document.getElementById('dot').style.opacity=0; }
+function mm(e){
+  if(!play)return; const r=e.target.getBoundingClientRect(), x=Math.max(0,Math.min(1, (e.clientX-r.left)/r.width)), y=Math.max(0,Math.min(1, (e.clientY-r.top)/r.height));
+  osc.frequency.setTargetAtTime(100 + (x*1000), actx.currentTime, 0.05); gain.gain.setTargetAtTime(1 - y, actx.currentTime, 0.05);
+  const d=document.getElementById('dot'); d.style.left=(x*100)+'%'; d.style.top=(y*100)+'%';
+}
+function loop(){
+  requestAnimationFrame(loop); ana.getByteTimeDomainData(data); ctx.clearRect(0,0,600,300);
+  ctx.lineWidth=3; ctx.strokeStyle='#10b981'; ctx.beginPath();
+  const slice=600/data.length; let px=0;
+  for(let i=0;i<data.length;i++){ const v=data[i]/128.0, py=v*150; if(i===0)ctx.moveTo(px,py); else ctx.lineTo(px,py); px+=slice; } ctx.stroke();
+}
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
