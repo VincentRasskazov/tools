@@ -1,0 +1,77 @@
+---
+layout: null
+title: "Pong vs AI Game"
+category: "Games"
+description: "Play a classic game of table tennis against an embedded artificial intelligence. First to 5 points wins!"
+permalink: /tools/game-pong-vs-ai.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Play a classic game of table tennis against an embedded artificial intelligence. First to 5 points wins!">
+  <meta property="og:title" content="Pong vs AI Game">
+  <meta property="og:description" content="Play a classic game of table tennis against an embedded artificial intelligence. First to 5 points wins!">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pong vs AI Game">
+  <meta name="twitter:description" content="Play a classic game of table tennis against an embedded artificial intelligence. First to 5 points wins!">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Pong vs AI Game</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Pong vs AI</h1>
+<div class="row" style="margin-bottom:10px;text-align:center;font-size:2rem;font-weight:900;">
+  <div style="color:var(--success);">You: <span id="p1">0</span></div>
+  <div style="color:var(--danger);">AI: <span id="p2">0</span></div>
+</div>
+<div class="card" style="padding:0;overflow:hidden;background:#000;cursor:none;" onmousemove="my(event)">
+  <canvas id="cvs" width="600" height="300" style="width:100%;display:block;"></canvas>
+</div>
+<button onclick="st()">Start Match</button>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+let ball, pL, pR, s1=0, s2=0, run=false;
+function st(){ ball={x:300, y:150, dx:5, dy:3, r:8}; pL={y:110, h:80}; pR={y:110, h:80}; s1=0; s2=0; uSc(); run=true; loop(); }
+function my(e){ const rect=cvs.getBoundingClientRect(); pL.y = (e.clientY-rect.top)*(300/rect.height) - 40; }
+function uSc(){ document.getElementById('p1').innerText=s1; document.getElementById('p2').innerText=s2; if(s1>=5||s2>=5){run=false; alert(s1>=5?"You Win!":"AI Wins!");} }
+function rst(){ ball.x=300; ball.y=150; ball.dx*=-1; ball.dy=3; }
+function loop(){
+  if(!run)return; ctx.clearRect(0,0,600,300); ctx.fillStyle='#fff';
+  ctx.fillRect(298,0,4,300); ctx.beginPath(); ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI*2); ctx.fill(); // Net & Ball
+  ctx.fillStyle='var(--success)'; ctx.fillRect(20, pL.y, 10, pL.h); // Player
+  ctx.fillStyle='var(--danger)'; ctx.fillRect(570, pR.y, 10, pR.h); // AI
+  
+  ball.x+=ball.dx; ball.y+=ball.dy; pR.y += (ball.y - (pR.y + 40)) * 0.1; // AI logic
+  if(ball.y<ball.r || ball.y>300-ball.r) ball.dy*=-1; // Walls
+  if(ball.x<30 && ball.y>pL.y && ball.y<pL.y+pL.h) { ball.dx*=-1; ball.x=30; } // Hit Left
+  if(ball.x>570 && ball.y>pR.y && ball.y<pR.y+pR.h) { ball.dx*=-1; ball.x=570; } // Hit Right
+  if(ball.x<0){ s2++; uSc(); rst(); } if(ball.x>600){ s1++; uSc(); rst(); }
+  requestAnimationFrame(loop);
+} ctx.fillStyle='rgba(0,0,0,0.6)'; ctx.fillRect(0,0,600,300); ctx.fillStyle='#fff'; ctx.font='30px sans-serif'; ctx.fillText('Click Start', 230, 150);
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
