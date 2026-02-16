@@ -1,0 +1,83 @@
+---
+layout: null
+title: "3D Fractal Mountain Generator"
+category: "Design"
+description: "Click to generate a unique, infinitely varying 3D mountain landscape. Built purely using the Diamond-Square heightmap algorithm and 3D isometric projection."
+permalink: /tools/design-3d-mountain-generator.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Click to generate a unique, infinitely varying 3D mountain landscape. Built purely using the Diamond-Square heightmap algorithm and 3D isometric projection.">
+  <meta property="og:title" content="3D Fractal Mountain Generator">
+  <meta property="og:description" content="Click to generate a unique, infinitely varying 3D mountain landscape. Built purely using the Diamond-Square heightmap algorithm and 3D isometric projection.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="3D Fractal Mountain Generator">
+  <meta name="twitter:description" content="Click to generate a unique, infinitely varying 3D mountain landscape. Built purely using the Diamond-Square heightmap algorithm and 3D isometric projection.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>3D Fractal Mountain Generator</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+canvas { touch-action: none; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>3D Fractal Mountain</h1>
+<div class="card" style="padding:0;overflow:hidden;background:#0ea5e9;display:flex;justify-content:center;border:4px solid var(--border);">
+  <canvas id="cvs" width="500" height="300" style="display:block;"></canvas>
+</div>
+<button onclick="st()">Generate New Mountain</button>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+const s=16; // 17x17 grid (2^n + 1)
+function st(){
+  let map=Array(s+1).fill().map(()=>Array(s+1).fill(0));
+  map[0][0]=map[0][s]=map[s][0]=map[s][s]=Math.random()*50;
+  for(let step=s; step>1; step/=2){
+    const h=step/2; let scale=step*2;
+    for(let x=h; x<s; x+=step) for(let y=h; y<s; y+=step) map[x][y]=(map[x-h][y-h]+map[x+h][y-h]+map[x-h][y+h]+map[x+h][y+h])/4 + (Math.random()-0.5)*scale;
+    for(let x=0; x<=s; x+=h) for(let y=(x+h)%step; y<=s; y+=step){
+      let c=0, t=0;
+      if(x>=h){c+=map[x-h][y]; t++;} if(x+h<=s){c+=map[x+h][y]; t++;}
+      if(y>=h){c+=map[x][y-h]; t++;} if(y+h<=s){c+=map[x][y+h]; t++;}
+      map[x][y]=c/t + (Math.random()-0.5)*scale;
+    }
+  } drw(map);
+}
+function drw(m){
+  ctx.clearRect(0,0,500,300);
+  for(let y=0;y<s;y++) for(let x=0;x<s;x++){
+    const pts = [[x,y],[x+1,y],[x+1,y+1],[x,y+1]];
+    ctx.beginPath();
+    pts.forEach((p,i)=>{
+      const px = 250 + (p[0]-p[1])*15, py = 150 + (p[0]+p[1])*7.5 - m[p[0]][p[1]]*2;
+      if(i===0)ctx.moveTo(px,py); else ctx.lineTo(px,py);
+    }); ctx.closePath();
+    const h = m[x][y]; ctx.fillStyle=h>30?'#fff':h>15?'#94a3b8':'#22c55e'; ctx.fill(); ctx.strokeStyle='rgba(0,0,0,0.1)'; ctx.stroke();
+  }
+} st();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

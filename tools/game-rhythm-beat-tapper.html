@@ -1,0 +1,77 @@
+---
+layout: null
+title: "Rhythm Beat Tapper"
+category: "Games"
+description: "A rhythm arcade game! Press A, S, D, or F exactly when the falling notes hit the bottom target zones to score points."
+permalink: /tools/game-rhythm-beat-tapper.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="A rhythm arcade game! Press A, S, D, or F exactly when the falling notes hit the bottom target zones to score points.">
+  <meta property="og:title" content="Rhythm Beat Tapper">
+  <meta property="og:description" content="A rhythm arcade game! Press A, S, D, or F exactly when the falling notes hit the bottom target zones to score points.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Rhythm Beat Tapper">
+  <meta name="twitter:description" content="A rhythm arcade game! Press A, S, D, or F exactly when the falling notes hit the bottom target zones to score points.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Rhythm Beat Tapper</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+canvas { touch-action: none; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Rhythm Tapper</h1>
+<div class="row" style="margin-bottom:10px;text-align:center;"><div style="font-size:1.5rem;font-weight:bold;color:var(--primary);">Score: <span id="sc">0</span></div></div>
+<div class="card" style="padding:0;background:#1e293b;border:4px solid var(--border);height:400px;position:relative;" id="arena">
+  <div style="position:absolute;bottom:40px;left:0;width:100%;height:40px;background:rgba(255,255,255,0.1);border-top:2px solid #fff;border-bottom:2px solid #fff;"></div>
+  <div style="position:absolute;bottom:0;left:0;width:100%;display:flex;">
+    <div style="flex:1;text-align:center;color:#ef4444;font-weight:bold;font-size:1.5rem;">A</div><div style="flex:1;text-align:center;color:#3b82f6;font-weight:bold;font-size:1.5rem;">S</div>
+    <div style="flex:1;text-align:center;color:#10b981;font-weight:bold;font-size:1.5rem;">D</div><div style="flex:1;text-align:center;color:#f59e0b;font-weight:bold;font-size:1.5rem;">F</div>
+  </div>
+</div>
+<button onclick="st()">Start Track</button>
+<script>
+const keys=['a','s','d','f'], cols=['#ef4444','#3b82f6','#10b981','#f59e0b'];
+let notes=[], sc=0, run=false, int, frms=0;
+function st(){ document.querySelectorAll('.note').forEach(n=>n.remove()); notes=[]; sc=0; frms=0; document.getElementById('sc').innerText=0; run=true; clearInterval(int); int=setInterval(loop, 20); }
+window.onkeydown=e=>{
+  if(!run)return; const k=e.key.toLowerCase(); const idx=keys.indexOf(k); if(idx===-1)return;
+  let hit=false;
+  for(let i=0;i<notes.length;i++){ const n=notes[i]; if(n.k===idx && n.y>300 && n.y<380){ n.el.remove(); notes.splice(i,1); sc+=10; document.getElementById('sc').innerText=sc; hit=true; break; } }
+  if(!hit){ sc=Math.max(0,sc-5); document.getElementById('sc').innerText=sc; }
+};
+function loop(){
+  frms++;
+  if(frms%30===0){ const k=Math.floor(Math.random()*4); const el=document.createElement('div'); el.className='note'; el.style.position='absolute'; el.style.width='25%'; el.style.height='20px'; el.style.background=cols[k]; el.style.left=(k*25)+'%'; el.style.top='0px'; el.style.borderRadius='10px'; document.getElementById('arena').appendChild(el); notes.push({k:k, y:0, el:el}); }
+  for(let i=notes.length-1;i>=0;i--){
+    notes[i].y+=5; notes[i].el.style.top=notes[i].y+'px';
+    if(notes[i].y>400){ notes[i].el.remove(); notes.splice(i,1); sc=Math.max(0,sc-5); document.getElementById('sc').innerText=sc; }
+  }
+}
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

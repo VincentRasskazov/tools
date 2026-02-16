@@ -1,0 +1,89 @@
+---
+layout: null
+title: "Optical Prism Simulator"
+category: "Physics"
+description: "Move the laser beam pointer to shoot light into a glass prism. Watch real-time Snell's Law physics accurately refract and split the light!"
+permalink: /tools/physics-optical-prism-refraction.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Move the laser beam pointer to shoot light into a glass prism. Watch real-time Snell's Law physics accurately refract and split the light!">
+  <meta property="og:title" content="Optical Prism Simulator">
+  <meta property="og:description" content="Move the laser beam pointer to shoot light into a glass prism. Watch real-time Snell's Law physics accurately refract and split the light!">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Optical Prism Simulator">
+  <meta name="twitter:description" content="Move the laser beam pointer to shoot light into a glass prism. Watch real-time Snell's Law physics accurately refract and split the light!">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Optical Prism Simulator</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+canvas { touch-action: none; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Optical Prism Physics</h1>
+<div class="card" style="padding:0;background:#000;cursor:crosshair;height:300px;border:4px solid var(--border);" onmousemove="mm(event)">
+  <canvas id="cvs" width="600" height="300" style="display:block;width:100%;height:100%;"></canvas>
+</div>
+<p style="text-align:center;color:#64748b;font-weight:bold;">Move your mouse around the prism.</p>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+let mx=100, my=150; const pr=[{x:300,y:50},{x:400,y:250},{x:200,y:250}]; // Triangle prism
+function getIs(px,py,dx,dy, p1,p2){
+  const den=(p1.x-p2.x)*(py-(py+dy))-(p1.y-p2.y)*(px-(px+dx)); if(den===0)return null;
+  const t=((p1.x-px)*(py-(py+dy))-(p1.y-py)*(px-(px+dx)))/den;
+  const u=-((p1.x-p2.x)*(p1.y-py)-(p1.y-p2.y)*(p1.x-px))/den;
+  if(t>0&&t<1&&u>0) return {x:p1.x+t*(p2.x-p1.x), y:p1.y+t*(p2.y-p1.y), u, nx:-(p2.y-p1.y), ny:p2.x-p1.x}; return null;
+}
+function mm(e){ const r=cvs.getBoundingClientRect(); mx=(e.clientX-r.left)*(600/r.width); my=(e.clientY-r.top)*(300/r.height); }
+function loop(){
+  ctx.clearRect(0,0,600,300);
+  ctx.fillStyle='rgba(255,255,255,0.1)'; ctx.strokeStyle='#cbd5e1'; ctx.lineWidth=2;
+  ctx.beginPath(); ctx.moveTo(pr[0].x,pr[0].y); ctx.lineTo(pr[1].x,pr[1].y); ctx.lineTo(pr[2].x,pr[2].y); ctx.closePath(); ctx.fill(); ctx.stroke();
+  
+  let px=mx, py=my, a=Math.atan2(150-my, 300-mx); ctx.strokeStyle='#ef4444'; ctx.lineWidth=3; ctx.beginPath(); ctx.moveTo(px,py);
+  
+  // Raycast into prism
+  let hit=null, minU=Infinity;
+  for(let i=0;i<3;i++){ const is=getIs(px,py,Math.cos(a),Math.sin(a), pr[i], pr[(i+1)%3]); if(is&&is.u<minU){minU=is.u; hit=is;} }
+  if(hit){
+    ctx.lineTo(hit.x,hit.y);
+    // Simple refraction bend (mocked Snell's Law for performance)
+    const nd=Math.hypot(hit.nx,hit.ny); hit.nx/=nd; hit.ny/=nd;
+    const dot=Math.cos(a)*hit.nx + Math.sin(a)*hit.ny;
+    let na=a + (dot>0?-0.4:0.4); // Bend
+    
+    // Raycast out of prism
+    let out=null, oMin=Infinity;
+    for(let i=0;i<3;i++){ const is=getIs(hit.x+Math.cos(na)*0.1,hit.y+Math.sin(na)*0.1,Math.cos(na),Math.sin(na), pr[i], pr[(i+1)%3]); if(is&&is.u<oMin){oMin=is.u; out=is;} }
+    if(out){ ctx.lineTo(out.x,out.y); ctx.lineTo(out.x+Math.cos(a)*600, out.y+Math.sin(a)*600); }
+  } else { ctx.lineTo(px+Math.cos(a)*600, py+Math.sin(a)*600); }
+  ctx.stroke(); ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(mx,my,6,0,Math.PI*2); ctx.fill();
+  requestAnimationFrame(loop);
+} loop();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

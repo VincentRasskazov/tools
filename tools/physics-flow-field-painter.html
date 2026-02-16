@@ -1,0 +1,73 @@
+---
+layout: null
+title: "Vector Flow Field Painter"
+category: "Physics"
+description: "Draw directly on the canvas to paint invisible mathematical 'wind' vectors. Then watch thousands of particles get caught and flow along your custom currents!"
+permalink: /tools/physics-flow-field-painter.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Draw directly on the canvas to paint invisible mathematical 'wind' vectors. Then watch thousands of particles get caught and flow along your custom currents!">
+  <meta property="og:title" content="Vector Flow Field Painter">
+  <meta property="og:description" content="Draw directly on the canvas to paint invisible mathematical 'wind' vectors. Then watch thousands of particles get caught and flow along your custom currents!">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Vector Flow Field Painter">
+  <meta name="twitter:description" content="Draw directly on the canvas to paint invisible mathematical 'wind' vectors. Then watch thousands of particles get caught and flow along your custom currents!">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Vector Flow Field Painter</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+canvas { touch-action: none; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Vector Flow Painter</h1>
+<div class="row" style="margin-bottom:10px;">
+  <button onclick="a=0;this.innerText='Paint: Right'" id="dirBtn">Paint: Right ➡️</button>
+  <button onclick="a+=Math.PI/2; document.getElementById('dirBtn').innerText=`Paint: ${a%(Math.PI*2)===0?'Right ➡️':a%(Math.PI*2)===Math.PI/2?'Down ⬇️':a%(Math.PI*2)===Math.PI?'Left ⬅️':'Up ⬆️'}`" style="background:var(--warning);color:#000;">Rotate Brush</button>
+  <button onclick="st()" style="background:var(--danger);">Clear</button>
+</div>
+<div class="card" style="padding:0;overflow:hidden;background:#000;border:4px solid var(--border);cursor:crosshair;" onmousedown="dr=true;mm(event)" onmouseup="dr=false" onmouseleave="dr=false" onmousemove="mm(event)">
+  <canvas id="cvs" width="400" height="300" style="display:block;width:100%;"></canvas>
+</div>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+let grid, pts=[], dr=false, a=0;
+function st(){ grid=Array(40).fill().map(()=>Array(30).fill(null)); pts=[]; for(let i=0;i<500;i++)pts.push({x:Math.random()*400,y:Math.random()*300,vx:0,vy:0}); }
+function mm(e){ if(!dr)return; const r=cvs.getBoundingClientRect(), gx=Math.floor((e.clientX-r.left)*(400/r.width)/10), gy=Math.floor((e.clientY-r.top)*(300/r.height)/10); if(gx>=0&&gx<40&&gy>=0&&gy<30) grid[gx][gy]=a; }
+function loop(){
+  ctx.fillStyle='rgba(0,0,0,0.05)'; ctx.fillRect(0,0,400,300); ctx.fillStyle='#10b981';
+  pts.forEach(p=>{
+    const gx=Math.floor(p.x/10), gy=Math.floor(p.y/10);
+    if(gx>=0&&gx<40&&gy>=0&&gy<30 && grid[gx][gy]!==null){ p.vx+=Math.cos(grid[gx][gy])*0.5; p.vy+=Math.sin(grid[gx][gy])*0.5; }
+    p.vx*=0.9; p.vy*=0.9; p.x+=p.vx; p.y+=p.vy;
+    if(p.x<0)p.x=400; if(p.x>400)p.x=0; if(p.y<0)p.y=300; if(p.y>300)p.y=0;
+    ctx.fillRect(p.x,p.y,2,2);
+  }); requestAnimationFrame(loop);
+} st(); loop();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

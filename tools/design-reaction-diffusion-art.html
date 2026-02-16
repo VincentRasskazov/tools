@@ -1,0 +1,80 @@
+---
+layout: null
+title: "Reaction-Diffusion Art Generator"
+category: "Design"
+description: "Simulate the chemical processes that create patterns in nature (like zebra stripes and leopard spots) using the famous Reaction-Diffusion algorithm."
+permalink: /tools/design-reaction-diffusion-art.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Simulate the chemical processes that create patterns in nature (like zebra stripes and leopard spots) using the famous Reaction-Diffusion algorithm.">
+  <meta property="og:title" content="Reaction-Diffusion Art Generator">
+  <meta property="og:description" content="Simulate the chemical processes that create patterns in nature (like zebra stripes and leopard spots) using the famous Reaction-Diffusion algorithm.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Reaction-Diffusion Art Generator">
+  <meta name="twitter:description" content="Simulate the chemical processes that create patterns in nature (like zebra stripes and leopard spots) using the famous Reaction-Diffusion algorithm.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Reaction-Diffusion Art Generator</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+canvas { touch-action: none; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Turing Pattern Generator</h1>
+<div class="card" style="padding:0;overflow:hidden;background:#000;display:flex;justify-content:center;">
+  <canvas id="cvs" width="200" height="200" style="display:block;width:300px;height:300px;image-rendering:pixelated;"></canvas>
+</div>
+<button onclick="st()">Seed New Pattern</button>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+const W=100, H=100, dA=1.0, dB=0.5, feed=0.055, k=0.062; let grid=[];
+function st(){
+  grid=[]; for(let x=0;x<W;x++){ grid[x]=[]; for(let y=0;y<H;y++) grid[x][y]={a:1, b:0}; }
+  for(let i=0;i<10;i++){ const cx=Math.floor(Math.random()*(W-10)+5), cy=Math.floor(Math.random()*(H-10)+5); for(let x=cx;x<cx+5;x++)for(let y=cy;y<cy+5;y++) grid[x][y].b=1; }
+}
+function lap(x,y,c){
+  let sum=0; const w=0.2, a=0.05;
+  sum += grid[x][y][c] * -1;
+  sum += grid[x-1][y][c]*w + grid[x+1][y][c]*w + grid[x][y-1][c]*w + grid[x][y+1][c]*w;
+  sum += grid[x-1][y-1][c]*a + grid[x+1][y-1][c]*a + grid[x+1][y+1][c]*a + grid[x-1][y+1][c]*a; return sum;
+}
+function loop(){
+  let nxt=[]; for(let x=0;x<W;x++){ nxt[x]=[]; for(let y=0;y<H;y++) nxt[x][y]={a:grid[x][y].a, b:grid[x][y].b}; }
+  const img=ctx.createImageData(W,H);
+  for(let x=1;x<W-1;x++){
+    for(let y=1;y<H-1;y++){
+      const a=grid[x][y].a, b=grid[x][y].b;
+      nxt[x][y].a = a + (dA*lap(x,y,'a') - a*b*b + feed*(1-a));
+      nxt[x][y].b = b + (dB*lap(x,y,'b') + a*b*b - (k+feed)*b);
+      const c = Math.floor((nxt[x][y].a - nxt[x][y].b)*255);
+      const i=(x+y*W)*4; img.data[i]=0; img.data[i+1]=c; img.data[i+2]=c; img.data[i+3]=255;
+    }
+  } grid=nxt; ctx.putImageData(img,0,0); ctx.drawImage(cvs,0,0,200,200); requestAnimationFrame(loop);
+} st(); loop();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

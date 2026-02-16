@@ -1,0 +1,106 @@
+---
+layout: null
+title: "Retro Platformer Engine"
+category: "Games"
+description: "A fully functional 2D platforming game. Use the Arrow Keys to run, jump, collect all the gold coins, and reach the green exit flag!"
+permalink: /tools/game-retro-platformer-run.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="A fully functional 2D platforming game. Use the Arrow Keys to run, jump, collect all the gold coins, and reach the green exit flag!">
+  <meta property="og:title" content="Retro Platformer Engine">
+  <meta property="og:description" content="A fully functional 2D platforming game. Use the Arrow Keys to run, jump, collect all the gold coins, and reach the green exit flag!">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Retro Platformer Engine">
+  <meta name="twitter:description" content="A fully functional 2D platforming game. Use the Arrow Keys to run, jump, collect all the gold coins, and reach the green exit flag!">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Retro Platformer Engine</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+canvas { touch-action: none; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Retro Platformer</h1>
+<div class="row" style="margin-bottom:10px;text-align:center;"><div style="font-size:1.5rem;font-weight:bold;color:var(--warning);">Coins: <span id="sc">0</span></div></div>
+<div class="card" style="padding:0;background:#87CEEB;border:4px solid var(--border);overflow:hidden;">
+  <canvas id="cvs" width="600" height="300" style="display:block;width:100%;"></canvas>
+</div>
+<button onclick="st()">Start Level</button>
+<p style="text-align:center;color:#64748b;font-weight:bold;">Use Arrow Keys to Move & Jump.</p>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+const map=[
+  "11111111111111111111",
+  "10000000000000000001",
+  "100000002000000000E1",
+  "10000001110000001111",
+  "10000000000020000001",
+  "10000200000111000001",
+  "10001110000000000001",
+  "10000000000000002001",
+  "10200000200000011101",
+  "11111111111111111111"
+];
+const S=30; let p, coins=[], run=false, k={l:false,r:false,u:false};
+window.onkeydown=e=>{if(e.key==='ArrowLeft')k.l=true; if(e.key==='ArrowRight')k.r=true; if(e.key==='ArrowUp'){k.u=true;e.preventDefault();} if(e.key.includes('Arrow'))e.preventDefault();};
+window.onkeyup=e=>{if(e.key==='ArrowLeft')k.l=false; if(e.key==='ArrowRight')k.r=false; if(e.key==='ArrowUp')k.u=false;};
+function st(){
+  p={x:40,y:200,vx:0,vy:0,w:20,h:20,g:0.6,j:-10,spd:4}; coins=[];
+  for(let r=0;r<10;r++)for(let c=0;c<20;c++)if(map[r][c]==='2')coins.push({x:c*S+10,y:r*S+10});
+  document.getElementById('sc').innerText=0; run=true; loop();
+}
+function col(x,y){
+  const c1=Math.floor(x/S), c2=Math.floor((x+p.w-0.1)/S), r1=Math.floor(y/S), r2=Math.floor((y+p.h-0.1)/S);
+  if(c1<0||c2>=20||r1<0||r2>=10)return true;
+  return map[r1][c1]==='1'||map[r1][c2]==='1'||map[r2][c1]==='1'||map[r2][c2]==='1';
+}
+function loop(){
+  if(!run)return; ctx.clearRect(0,0,600,300);
+  if(k.l)p.vx=-p.spd; else if(k.r)p.vx=p.spd; else p.vx=0;
+  p.vy+=p.g;
+  if(!col(p.x+p.vx, p.y)) p.x+=p.vx; else { while(!col(p.x+Math.sign(p.vx), p.y)) p.x+=Math.sign(p.vx); p.vx=0; }
+  if(!col(p.x, p.y+p.vy)) { p.y+=p.vy; p.gnd=false; } else { while(!col(p.x, p.y+Math.sign(p.vy))) p.y+=Math.sign(p.vy); if(p.vy>0)p.gnd=true; p.vy=0; }
+  if(k.u && p.gnd) p.vy=p.j;
+  
+  for(let r=0;r<10;r++)for(let c=0;c<20;c++){
+    if(map[r][c]==='1'){ctx.fillStyle='#22c55e'; ctx.fillRect(c*S,r*S,S,S); ctx.strokeStyle='#166534'; ctx.strokeRect(c*S,r*S,S,S);}
+    if(map[r][c]==='E'){ctx.fillStyle='#10b981'; ctx.fillRect(c*S+5,r*S,5,S); ctx.fillStyle='#3b82f6'; ctx.fillRect(c*S+10,r*S+2,15,10);}
+  }
+  ctx.fillStyle='#facc15';
+  for(let i=coins.length-1;i>=0;i--){
+    const c=coins[i]; ctx.beginPath(); ctx.arc(c.x,c.y,6,0,Math.PI*2); ctx.fill();
+    if(Math.hypot(p.x+10-c.x, p.y+10-c.y)<15){ coins.splice(i,1); document.getElementById('sc').innerText=8-coins.length; }
+  }
+  ctx.fillStyle='#ef4444'; ctx.fillRect(p.x,p.y,p.w,p.h);
+  
+  const cx=Math.floor((p.x+10)/S), cy=Math.floor((p.y+10)/S);
+  if(map[cy][cx]==='E'){ run=false; setTimeout(()=>alert("Level Complete!"),100); }
+  if(run) requestAnimationFrame(loop);
+}
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

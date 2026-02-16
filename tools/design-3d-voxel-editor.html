@@ -1,0 +1,87 @@
+---
+layout: null
+title: "3D Voxel Builder"
+category: "Design"
+description: "Build your own Minecraft-style 3D models directly in your browser. Click to place blocks, Right-Click to destroy."
+permalink: /tools/design-3d-voxel-editor.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Build your own Minecraft-style 3D models directly in your browser. Click to place blocks, Right-Click to destroy.">
+  <meta property="og:title" content="3D Voxel Builder">
+  <meta property="og:description" content="Build your own Minecraft-style 3D models directly in your browser. Click to place blocks, Right-Click to destroy.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="3D Voxel Builder">
+  <meta name="twitter:description" content="Build your own Minecraft-style 3D models directly in your browser. Click to place blocks, Right-Click to destroy.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>3D Voxel Builder</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+canvas { touch-action: none; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>3D Voxel Builder</h1>
+<div class="row" style="margin-bottom:10px;justify-content:center;">
+  <input type="color" id="c" value="#10b981" style="width:100px;height:40px;margin:0;">
+  <button onclick="grid=Array(10).fill().map(()=>Array(10).fill().map(()=>Array(10).fill(null)));drw();" style="background:var(--danger);margin:0;width:150px;">Clear Map</button>
+</div>
+<div class="card" style="padding:0;overflow:hidden;background:#f8fafc;cursor:crosshair;display:flex;justify-content:center;" onmousedown="clk(event)" oncontextmenu="event.preventDefault();clk(event,true)">
+  <canvas id="cvs" width="400" height="400" style="display:block;"></canvas>
+</div>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+let grid=Array(10).fill().map(()=>Array(10).fill().map(()=>Array(10).fill(null)));
+grid[5][5][0]='#10b981'; // Start block
+function hexToRgb(h){ const r=parseInt(h.slice(1,3),16), g=parseInt(h.slice(3,5),16), b=parseInt(h.slice(5,7),16); return {r,g,b}; }
+function drw(){
+  ctx.clearRect(0,0,400,400);
+  for(let z=0;z<10;z++) for(let x=0;x<10;x++) for(let y=0;y<10;y++){
+    if(grid[x][y][z]){
+      const px=200+(x-y)*16, py=250+(x+y)*8 - z*16; const col=hexToRgb(grid[x][y][z]);
+      ctx.fillStyle=`rgb(${col.r},${col.g},${col.b})`; ctx.beginPath(); ctx.moveTo(px,py-16); ctx.lineTo(px+16,py-8); ctx.lineTo(px,py); ctx.lineTo(px-16,py-8); ctx.fill(); ctx.stroke();
+      ctx.fillStyle=`rgb(${col.r*0.8},${col.g*0.8},${col.b*0.8})`; ctx.beginPath(); ctx.moveTo(px-16,py-8); ctx.lineTo(px,py); ctx.lineTo(px,py+16); ctx.lineTo(px-16,py+8); ctx.fill(); ctx.stroke();
+      ctx.fillStyle=`rgb(${col.r*0.6},${col.g*0.6},${col.b*0.6})`; ctx.beginPath(); ctx.moveTo(px,py); ctx.lineTo(px+16,py-8); ctx.lineTo(px+16,py+8); ctx.lineTo(px,py+16); ctx.fill(); ctx.stroke();
+    }
+  }
+}
+function clk(e, rem=false){
+  const r=cvs.getBoundingClientRect(), mx=e.clientX-r.left, my=e.clientY-r.top;
+  // Naive raycast approximation for simplistic voxel editing
+  for(let z=9;z>=0;z--) for(let x=9;x>=0;x--) for(let y=9;y>=0;y--){
+    const px=200+(x-y)*16, py=250+(x+y)*8 - z*16;
+    if(Math.hypot(mx-px, my-(py-8)) < 12){
+      if(rem) grid[x][y][z]=null; else if(z<9 && !grid[x][y][z+1]) grid[x][y][z+1]=document.getElementById('c').value;
+      drw(); return;
+    }
+  }
+  // Base plane click
+  let bx=Math.floor(((mx-200)/16 + (my-250)/8)/2), by=Math.floor(((my-250)/8 - (mx-200)/16)/2);
+  if(!rem && bx>=0&&bx<10&&by>=0&&by<10 && !grid[bx][by][0]) { grid[bx][by][0]=document.getElementById('c').value; drw(); }
+} drw();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
