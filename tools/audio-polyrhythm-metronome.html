@@ -1,0 +1,81 @@
+---
+layout: null
+title: "Visual Polyrhythm Metronome"
+category: "Audio"
+description: "Learn to play complex overlapping rhythms (like 3 against 4). The metronome visually and audibly pulses two different mathematical beats perfectly in sync."
+permalink: /tools/audio-polyrhythm-metronome.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Learn to play complex overlapping rhythms (like 3 against 4). The metronome visually and audibly pulses two different mathematical beats perfectly in sync.">
+  <meta property="og:title" content="Visual Polyrhythm Metronome">
+  <meta property="og:description" content="Learn to play complex overlapping rhythms (like 3 against 4). The metronome visually and audibly pulses two different mathematical beats perfectly in sync.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Visual Polyrhythm Metronome">
+  <meta name="twitter:description" content="Learn to play complex overlapping rhythms (like 3 against 4). The metronome visually and audibly pulses two different mathematical beats perfectly in sync.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Visual Polyrhythm Metronome</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); font-family: inherit; }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Polyrhythm Metronome</h1>
+<div class="row" style="margin-bottom:20px;">
+  <div class="card"><label style="color:var(--primary);">Beat 1</label><input type="number" id="b1" value="3" min="1" max="12"></div>
+  <div style="display:flex;align-items:center;font-size:2rem;font-weight:bold;">AGAINST</div>
+  <div class="card"><label style="color:var(--danger);">Beat 2</label><input type="number" id="b2" value="4" min="1" max="12"></div>
+</div>
+<div class="row" style="margin-bottom:20px;">
+  <div class="card"><label>Base BPM</label><input type="number" id="bpm" value="60"></div>
+</div>
+<div class="card" style="height:100px;display:flex;position:relative;background:#1e293b;overflow:hidden;margin-bottom:20px;" id="vis">
+  <div id="bar" style="position:absolute;top:0;left:0;width:5px;height:100%;background:#fde047;transition:none;"></div>
+</div>
+<button id="btn" onclick="t()" style="background:var(--success);">Start Polyrhythm</button>
+<script>
+let actx, run=false, int;
+function bp(f, t){ const o=actx.createOscillator(), g=actx.createGain(); o.frequency.value=f; g.gain.setValueAtTime(0.5, t); g.gain.exponentialRampToValueAtTime(0.01, t+0.1); o.connect(g); g.connect(actx.destination); o.start(t); o.stop(t+0.1); }
+function t(){
+  const btn=document.getElementById('btn'), bar=document.getElementById('bar');
+  if(!run){
+    if(!actx) actx=new (window.AudioContext||window.webkitAudioContext)(); run=true;
+    const bpm=parseInt(document.getElementById('bpm').value), b1=parseInt(document.getElementById('b1').value), b2=parseInt(document.getElementById('b2').value);
+    const msPerMeasure = (60000/bpm)*4; // assuming 4/4 base for loop length
+    
+    // Schedule loop
+    const loop=()=>{
+      const now=actx.currentTime;
+      for(let i=0;i<b1;i++) bp(600, now + i*(msPerMeasure/1000/b1)); // High
+      for(let i=0;i<b2;i++) bp(400, now + i*(msPerMeasure/1000/b2)); // Low
+      bar.style.transition='none'; bar.style.left='0%'; setTimeout(()=>{bar.style.transition=`left ${msPerMeasure}ms linear`; bar.style.left='100%';},20);
+    }; loop(); int=setInterval(loop, msPerMeasure);
+    btn.innerText="Stop Metronome"; btn.style.background="var(--danger)";
+  } else { run=false; clearInterval(int); btn.innerText="Start Polyrhythm"; btn.style.background="var(--success)"; bar.style.transition='none'; bar.style.left='0%'; }
+}
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
