@@ -1,0 +1,78 @@
+---
+layout: null
+title: "Git Reset vs Revert Visualizer"
+category: "Developer"
+description: "Don't destroy your repository history! Visually see how `git reset` mathematically deletes commits by moving the HEAD pointer, while `git revert` safely appends a new inverse commit."
+permalink: /tools/dev-git-reset-vs-revert.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Don't destroy your repository history! Visually see how `git reset` mathematically deletes commits by moving the HEAD pointer, while `git revert` safely appends a new inverse commit.">
+  <meta property="og:title" content="Git Reset vs Revert Visualizer">
+  <meta property="og:description" content="Don't destroy your repository history! Visually see how `git reset` mathematically deletes commits by moving the HEAD pointer, while `git revert` safely appends a new inverse commit.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Git Reset vs Revert Visualizer">
+  <meta name="twitter:description" content="Don't destroy your repository history! Visually see how `git reset` mathematically deletes commits by moving the HEAD pointer, while `git revert` safely appends a new inverse commit.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Git Reset vs Revert Visualizer</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); font-family: inherit; }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+pre { margin: 0; font-family: monospace; white-space: pre-wrap; word-break: break-all; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Git Reset vs Revert</h1>
+<div class="row" style="margin-bottom:20px;">
+  <button onclick="act('rst')" style="background:var(--danger);">Execute: git reset --hard B</button>
+  <button onclick="act('rvt')" style="background:var(--success);">Execute: git revert C</button>
+</div>
+<div class="card" style="background:#1e293b;padding:40px;position:relative;height:150px;overflow-x:auto;">
+  <div style="position:absolute;top:70px;left:50px;width:500px;height:4px;background:#475569;"></div>
+  
+  <div class="cmt" style="left:50px;">A</div>
+  <div class="cmt" style="left:150px;" id="cb">B</div>
+  <div class="cmt rst-del" style="left:250px;">C</div>
+  
+  <div id="head" style="position:absolute;top:20px;left:250px;color:var(--warning);font-weight:bold;font-family:monospace;transition:0.3s;transform:translateX(-10px);">⬇ HEAD</div>
+  
+  <div class="cmt rvt-add" style="left:350px;background:var(--success);opacity:0;border-color:#fff;" id="cc">C' (Inverse)</div>
+</div>
+<style>.cmt{position:absolute;top:60px;width:24px;height:24px;background:var(--primary);border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:bold;border:2px solid #fff;transition:0.3s;}</style>
+<script>
+function act(t){
+  const h=document.getElementById('head'), rA=document.querySelector('.rvt-add');
+  document.querySelectorAll('.rst-del').forEach(el=>el.style.opacity=1); rA.style.opacity=0;
+  
+  if(t==='rst'){
+    h.style.left='150px';
+    setTimeout(()=>{ document.querySelectorAll('.rst-del').forEach(el=>el.style.opacity=0.2); }, 300);
+  } else {
+    h.style.left='350px'; rA.style.opacity=1;
+  }
+}
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
