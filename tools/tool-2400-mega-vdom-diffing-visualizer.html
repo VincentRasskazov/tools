@@ -1,0 +1,98 @@
+---
+layout: null
+title: "MILESTONE: React Virtual DOM Differ"
+category: "Developer"
+description: "THE 2,400 MEGA-MILESTONE. A deep, visual simulation of how React's Virtual DOM actually works. Run the diffing algorithm to mathematically calculate the UI patches required between two JSON states."
+permalink: /tools/tool-2400-mega-vdom-diffing-visualizer.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="THE 2,400 MEGA-MILESTONE. A deep, visual simulation of how React's Virtual DOM actually works. Run the diffing algorithm to mathematically calculate the UI patches required between two JSON states.">
+  <meta property="og:title" content="MILESTONE: React Virtual DOM Differ">
+  <meta property="og:description" content="THE 2,400 MEGA-MILESTONE. A deep, visual simulation of how React's Virtual DOM actually works. Run the diffing algorithm to mathematically calculate the UI patches required between two JSON states.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MILESTONE: React Virtual DOM Differ">
+  <meta name="twitter:description" content="THE 2,400 MEGA-MILESTONE. A deep, visual simulation of how React's Virtual DOM actually works. Run the diffing algorithm to mathematically calculate the UI patches required between two JSON states.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>MILESTONE: React Virtual DOM Differ</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); font-family: inherit; }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+pre { margin: 0; font-family: monospace; white-space: pre-wrap; word-break: break-all; }
+table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+th, td { padding: 12px; border: 1px solid var(--border); text-align: left; font-family: monospace; }
+th { background: var(--bg); font-weight: bold; color: var(--primary); }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>🌟 2,400 Virtual DOM Differ 🌟</h1>
+<p style="text-align:center;color:var(--primary);font-weight:900;text-transform:uppercase;letter-spacing:1px;">Milestone Achieved: Inside the UI Matrix</p>
+<div class="row" style="height:200px;">
+  <div class="card" style="flex:1;padding:10px;margin:0;"><h4 style="margin:0 0 5px 0;">State A (Old VDOM)</h4><textarea id="sA" style="width:100%;height:150px;font-family:monospace;font-size:0.75rem;">{
+  "type": "div",
+  "props": {"id": "box"},
+  "children": ["Hello"]
+}</textarea></div>
+  <div class="card" style="flex:1;padding:10px;margin:0;"><h4 style="margin:0 0 5px 0;">State B (New VDOM)</h4><textarea id="sB" style="width:100%;height:150px;font-family:monospace;font-size:0.75rem;">{
+  "type": "div",
+  "props": {"id": "box", "class": "active"},
+  "children": ["Hello", "World"]
+}</textarea></div>
+</div>
+<button onclick="runDiff()" style="background:var(--success);margin-top:10px;">Execute Diffing Algorithm</button>
+<div class="card" style="background:#0f172a;color:#fff;">
+  <h3 style="margin-top:0;color:#cbd5e1;">Generated DOM Patches:</h3>
+  <div id="patches" style="font-family:monospace;line-height:1.8;font-size:1.1rem;"></div>
+</div>
+<script>
+function diff(oldN, newN, path="root"){
+  let p=[];
+  if(!oldN && newN){ p.push(`<span style="color:var(--success);">+ INSERT at ${path}</span>`); }
+  else if(oldN && !newN){ p.push(`<span style="color:var(--danger);">- REMOVE at ${path}</span>`); }
+  else if(typeof oldN !== typeof newN || oldN.type !== newN.type){ p.push(`<span style="color:var(--warning);">~ REPLACE at ${path}</span>`); }
+  else if(typeof oldN === 'string' && oldN !== newN){ p.push(`<span style="color:var(--warning);">~ TEXT_UPDATE at ${path}: "${newN}"</span>`); }
+  else if(oldN.type){
+    // Diff Props
+    const allProps = new Set([...Object.keys(oldN.props||{}), ...Object.keys(newN.props||{})]);
+    allProps.forEach(k => {
+      if(oldN.props?.[k] !== newN.props?.[k]) p.push(`<span style="color:#a855f7;">@ PROP_UPDATE at ${path}.props.${k} -> ${newN.props?.[k]||'deleted'}</span>`);
+    });
+    // Diff Children
+    const max = Math.max((oldN.children||[]).length, (newN.children||[]).length);
+    for(let i=0;i<max;i++){ p = p.concat(diff(oldN.children?.[i], newN.children?.[i], `${path}.children[${i}]`)); }
+  }
+  return p;
+}
+function runDiff(){
+  const o=document.getElementById('patches');
+  try{
+    const a=JSON.parse(document.getElementById('sA').value), b=JSON.parse(document.getElementById('sB').value);
+    const res = diff(a,b);
+    o.innerHTML = res.length>0 ? res.join('<br>') : '<span style="color:#64748b;">No DOM changes required (Perfect Match)</span>';
+  }catch(e){ o.innerHTML=`<span style="color:var(--danger);">Error: Invalid VDOM JSON Structure</span>`; }
+}
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
