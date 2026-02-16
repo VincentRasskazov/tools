@@ -1,26 +1,39 @@
-const CACHE_NAME = 'tools-hub-v1';
+const CACHE_NAME = 'tools-hub-v2';
 const ASSETS = [
   '/tools/',
   '/tools/index.html',
   '/tools/tools.json',
-  // All your CSS files from the image
   '/tools/assets/css/style.css',
   '/tools/assets/css/tool-style.css',
-  '/tools/assets/css/landing-polish.css',
-  // External assets
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css',
-  'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap'
+  '/tools/assets/css/landing-polish.css'
 ];
 
-// Install: Cache all essential assets
+// 1. Install & Cache Core UI
 self.addEventListener('install', (e) => {
   e.waitUntil(
     caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
   );
 });
 
-// Fetch: Serve from cache if offline
+// 2. Smart Fetching
 self.addEventListener('fetch', (e) => {
+  const url = new URL(e.request.url);
+
+  // Check if request is an API call (External Domain)
+  if (url.hostname !== location.hostname) {
+    e.respondWith(
+      fetch(e.request).catch(() => {
+        // Fallback when API fails (Offline)
+        return new Response(
+          JSON.stringify({ error: "Offline: API unavailable" }), 
+          { headers: { 'Content-Type': 'application/json' } }
+        );
+      })
+    );
+    return;
+  }
+
+  // Standard Cache-First for local assets
   e.respondWith(
     caches.match(e.request).then((response) => {
       return response || fetch(e.request);
