@@ -1,0 +1,72 @@
+---
+layout: null
+title: "Classic Falling Blocks"
+category: "Games"
+description: "The ultimate arcade puzzle game. Use Arrow Keys to move and rotate falling blocks. Clear lines to score points and survive as the speed increases!"
+permalink: /tools/game-falling-blocks-puzzle.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="The ultimate arcade puzzle game. Use Arrow Keys to move and rotate falling blocks. Clear lines to score points and survive as the speed increases!">
+  <meta property="og:title" content="Classic Falling Blocks">
+  <meta property="og:description" content="The ultimate arcade puzzle game. Use Arrow Keys to move and rotate falling blocks. Clear lines to score points and survive as the speed increases!">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Classic Falling Blocks">
+  <meta name="twitter:description" content="The ultimate arcade puzzle game. Use Arrow Keys to move and rotate falling blocks. Clear lines to score points and survive as the speed increases!">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Classic Falling Blocks</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+canvas { touch-action: none; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Block Puzzle</h1>
+<div class="row" style="margin-bottom:10px;text-align:center;"><div style="font-size:1.5rem;font-weight:bold;color:var(--primary);">Score: <span id="sc">0</span></div><div style="font-size:1.5rem;font-weight:bold;color:var(--danger);">Level: <span id="lv">1</span></div></div>
+<div class="card" style="padding:0;background:#0f172a;width:fit-content;margin:0 auto;border:4px solid var(--border);">
+  <canvas id="cvs" width="200" height="400" style="display:block;"></canvas>
+</div>
+<button onclick="st()">Start Game</button>
+<p style="text-align:center;color:#64748b;font-weight:bold;">Left/Right to Move. Up to Rotate. Down to Drop.</p>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+const COLS=10, ROWS=20, SQ=20, VAC='#0f172a';
+const pcs=[[[1,1,1,1]],[[1,1],[1,1]],[[0,1,0],[1,1,1]],[[1,0,0],[1,1,1]],[[0,0,1],[1,1,1]],[[1,1,0],[0,1,1]],[[0,1,1],[1,1,0]]];
+const clrs=['#38bdf8','#facc15','#a855f7','#3b82f6','#f97316','#ef4444','#10b981'];
+let brd=[], p, sc=0, lv=1, run=false, drpStart=Date.now();
+function drwSq(x,y,c){ctx.fillStyle=c; ctx.fillRect(x*SQ,y*SQ,SQ,SQ); ctx.strokeStyle='#334155'; ctx.strokeRect(x*SQ,y*SQ,SQ,SQ);}
+function st(){ brd=Array(ROWS).fill().map(()=>Array(COLS).fill(VAC)); sc=0; lv=1; run=true; newP(); uSc(); loop(); }
+function uSc(){ document.getElementById('sc').innerText=sc; document.getElementById('lv').innerText=lv; }
+function newP(){ const r=Math.floor(Math.random()*pcs.length); p={x:3,y:0,tet:pcs[r],c:clrs[r]}; if(col(0,0,p.tet)){run=false; alert("Game Over! Score: "+sc);} }
+function drw(){ ctx.clearRect(0,0,200,400); for(let r=0;r<ROWS;r++){for(let c=0;c<COLS;c++){drwSq(c,r,brd[r][c]);}} p.tet.forEach((r,y)=>{r.forEach((v,x)=>{if(v)drwSq(p.x+x,p.y+y,p.c);});}); }
+function col(x,y,t){ for(let r=0;r<t.length;r++){for(let c=0;c<t[r].length;c++){if(!t[r][c])continue; let nx=p.x+c+x, ny=p.y+r+y; if(nx<0||nx>=COLS||ny>=ROWS||(ny>=0&&brd[ny][nx]!==VAC))return true;}} return false; }
+function lck(){ p.tet.forEach((r,y)=>{r.forEach((v,x)=>{if(v&&p.y+y>=0)brd[p.y+y][p.x+x]=p.c;});}); let lns=0; for(let r=0;r<ROWS;r++){let f=true; for(let c=0;c<COLS;c++)if(brd[r][c]===VAC)f=false; if(f){brd.splice(r,1); brd.unshift(Array(COLS).fill(VAC)); lns++;}} if(lns>0){sc+=lns*100; lv=Math.floor(sc/500)+1; uSc();} newP(); }
+function rot(){ const nt=p.tet[0].map((val,i)=>p.tet.map(row=>row[i]).reverse()); if(!col(0,0,nt)) p.tet=nt; }
+window.onkeydown=e=>{ if(!run)return; if(e.key==='ArrowLeft'&&!col(-1,0,p.tet))p.x--; if(e.key==='ArrowRight'&&!col(1,0,p.tet))p.x++; if(e.key==='ArrowUp')rot(); if(e.key==='ArrowDown'&&!col(0,1,p.tet))p.y++; if(e.key.includes('Arrow')){e.preventDefault(); drw();} };
+function loop(){ if(!run)return; const n=Date.now(); if(n-drpStart > Math.max(100, 1000-lv*100)){ if(!col(0,1,p.tet))p.y++; else lck(); drpStart=n; } drw(); requestAnimationFrame(loop); }
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

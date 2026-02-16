@@ -1,0 +1,88 @@
+---
+layout: null
+title: "Checkers vs Computer AI"
+category: "Games"
+description: "Play a classic game of Checkers (Draughts) against an automated opponent. Red goes first!"
+permalink: /tools/game-checkers-vs-ai.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Play a classic game of Checkers (Draughts) against an automated opponent. Red goes first!">
+  <meta property="og:title" content="Checkers vs Computer AI">
+  <meta property="og:description" content="Play a classic game of Checkers (Draughts) against an automated opponent. Red goes first!">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Checkers vs Computer AI">
+  <meta name="twitter:description" content="Play a classic game of Checkers (Draughts) against an automated opponent. Red goes first!">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Checkers vs Computer AI</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+canvas { touch-action: none; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Checkers vs AI</h1>
+<div id="brd" style="display:grid;grid-template-columns:repeat(8,40px);width:fit-content;margin:0 auto 20px;border:4px solid #1e293b;"></div>
+<button onclick="st()">Restart Game</button>
+<script>
+let b, turn=1, sel=null; // 1=Red(Pl), 2=Black(AI)
+function st(){ b=Array(64).fill(0); for(let i=0;i<24;i++)if((i+Math.floor(i/8))%2!==0)b[i]=2; for(let i=40;i<64;i++)if((i+Math.floor(i/8))%2!==0)b[i]=1; turn=1; sel=null; drw(); }
+function drw(){
+  const g=document.getElementById('brd'); g.innerHTML='';
+  b.forEach((v,i)=>{
+    const bg=(i+Math.floor(i/8))%2===0?'#f1f5f9':'#64748b';
+    let pc=''; if(v===1)pc='<div style="width:30px;height:30px;border-radius:50%;background:#ef4444;box-shadow:inset 0 0 5px #000;"></div>'; if(v===2)pc='<div style="width:30px;height:30px;border-radius:50%;background:#1e293b;box-shadow:inset 0 0 5px #000;"></div>';
+    g.innerHTML+=`<div style="width:40px;height:40px;background:${sel===i?'#fde047':bg};display:flex;align-items:center;justify-content:center;cursor:pointer;" onclick="clk(${i})">${pc}</div>`;
+  });
+}
+function clk(i){
+  if(turn!==1)return;
+  if(b[i]===1) sel=i;
+  else if(sel!==null && b[i]===0){
+    const d=i-sel;
+    if(d===-7||d===-9) { b[i]=1; b[sel]=0; sel=null; turn=2; drw(); setTimeout(ai,500); } // Move
+    else if((d===-14||d===-18) && b[sel+d/2]===2) { b[i]=1; b[sel]=0; b[sel+d/2]=0; sel=null; turn=2; drw(); setTimeout(ai,500); } // Jump
+  } drw();
+}
+function ai(){
+  let mvs=[];
+  for(let i=0;i<64;i++){
+    if(b[i]===2){
+      if(b[i+7]===0 && (i+7)%8<i%8) mvs.push({s:i, e:i+7});
+      if(b[i+9]===0 && (i+9)%8>i%8) mvs.push({s:i, e:i+9});
+      if(b[i+14]===0 && b[i+7]===1 && (i+14)%8<i%8) mvs.push({s:i, e:i+14, j:i+7, w:10}); // Prioritize jumps
+      if(b[i+18]===0 && b[i+9]===1 && (i+18)%8>i%8) mvs.push({s:i, e:i+18, j:i+9, w:10});
+    }
+  }
+  if(mvs.length>0){
+    mvs.sort((x,y)=>(y.w||0)-(x.w||0)); const m=mvs[0];
+    b[m.e]=2; b[m.s]=0; if(m.j)b[m.j]=0;
+  } else { alert("You Win!"); }
+  turn=1; drw();
+} st();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

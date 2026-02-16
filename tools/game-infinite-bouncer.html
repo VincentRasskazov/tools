@@ -1,0 +1,78 @@
+---
+layout: null
+title: "Infinite Bouncer Platformer"
+category: "Games"
+description: "Tilt or use Arrow Keys to bounce as high as possible. The screen auto-scrolls upwards as you ascend!"
+permalink: /tools/game-infinite-bouncer.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Tilt or use Arrow Keys to bounce as high as possible. The screen auto-scrolls upwards as you ascend!">
+  <meta property="og:title" content="Infinite Bouncer Platformer">
+  <meta property="og:description" content="Tilt or use Arrow Keys to bounce as high as possible. The screen auto-scrolls upwards as you ascend!">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Infinite Bouncer Platformer">
+  <meta name="twitter:description" content="Tilt or use Arrow Keys to bounce as high as possible. The screen auto-scrolls upwards as you ascend!">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Infinite Bouncer Platformer</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+canvas { touch-action: none; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Infinite Bouncer</h1>
+<div class="row" style="margin-bottom:10px;text-align:center;"><div style="font-size:1.5rem;font-weight:bold;color:var(--success);">Height: <span id="sc">0</span></div></div>
+<div class="card" style="padding:0;background:#e0f2fe;width:300px;margin:0 auto;border:4px solid var(--border);">
+  <canvas id="cvs" width="300" height="400" style="display:block;"></canvas>
+</div>
+<button onclick="st()">Start Bounce</button>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+let p, plats, sc, run=false, k={l:false,r:false}, camY;
+function st(){ p={x:150,y:200,vy:0}; plats=[{x:120,y:380}]; for(let i=0;i<10;i++)plats.push({x:Math.random()*240,y:300-i*40}); sc=0; camY=0; run=true; loop(); }
+window.onkeydown=e=>{if(e.key==='ArrowLeft')k.l=true; if(e.key==='ArrowRight')k.r=true; if(['ArrowLeft','ArrowRight'].includes(e.key))e.preventDefault();};
+window.onkeyup=e=>{if(e.key==='ArrowLeft')k.l=false; if(e.key==='ArrowRight')k.r=false;};
+function loop(){
+  if(!run)return; ctx.clearRect(0,0,300,400);
+  if(k.l)p.x-=5; if(k.r)p.x+=5; if(p.x<0)p.x=300; if(p.x>300)p.x=0;
+  p.vy+=0.3; p.y+=p.vy;
+  
+  if(p.y < 200){ const diff=200-p.y; p.y=200; camY+=diff; sc+=Math.floor(diff); document.getElementById('sc').innerText=sc; plats.forEach(pl=>pl.y+=diff); }
+  
+  plats.forEach(pl=>{ if(p.vy>0 && p.x>pl.x-20 && p.x<pl.x+60 && p.y>pl.y-20 && p.y<pl.y){ p.vy=-9; } });
+  
+  plats=plats.filter(pl=>pl.y<450); while(plats.length<10) plats.push({x:Math.random()*240, y:plats[plats.length-1].y-Math.random()*30-30});
+  
+  ctx.fillStyle='#10b981'; plats.forEach(pl=>ctx.fillRect(pl.x,pl.y,60,10));
+  ctx.fillStyle='#ef4444'; ctx.fillRect(p.x-10,p.y-10,20,20);
+  
+  if(p.y>400){ run=false; alert("Fell down! Score: "+sc); }
+  else requestAnimationFrame(loop);
+}
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
