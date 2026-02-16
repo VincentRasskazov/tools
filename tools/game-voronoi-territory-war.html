@@ -1,0 +1,85 @@
+---
+layout: null
+title: "Voronoi Territory Conquest"
+category: "Games"
+description: "Click to place your Blue capitals. The Red AI will place theirs. The map mathematically divides into Voronoi cells. Control more area than the AI to win!"
+permalink: /tools/game-voronoi-territory-war.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Click to place your Blue capitals. The Red AI will place theirs. The map mathematically divides into Voronoi cells. Control more area than the AI to win!">
+  <meta property="og:title" content="Voronoi Territory Conquest">
+  <meta property="og:description" content="Click to place your Blue capitals. The Red AI will place theirs. The map mathematically divides into Voronoi cells. Control more area than the AI to win!">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Voronoi Territory Conquest">
+  <meta name="twitter:description" content="Click to place your Blue capitals. The Red AI will place theirs. The map mathematically divides into Voronoi cells. Control more area than the AI to win!">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Voronoi Territory Conquest</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); font-family: inherit; }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+canvas { touch-action: none; user-select: none; max-width: 100%; display: block; margin: 0 auto; border-radius: 12px; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Voronoi Conquest</h1>
+<div class="row" style="margin-bottom:10px;text-align:center;font-weight:bold;font-size:1.5rem;">
+  <div style="color:var(--primary);">You (Blue): <span id="pS">0</span>%</div>
+  <div style="color:var(--danger);">AI (Red): <span id="aS">0</span>%</div>
+</div>
+<div class="card" style="padding:0;background:#000;cursor:crosshair;border:4px solid var(--border);" onclick="clk(event)">
+  <canvas id="cvs" width="400" height="300" style="display:block;width:100%;"></canvas>
+</div>
+<button id="btn" onclick="st()" style="background:var(--success);">Start War (10 Turns)</button>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d'), W=200, H=150; // Render lower res for speed
+let pts=[], turns=0, run=false;
+function st(){ pts=[]; turns=10; run=true; document.getElementById('btn').innerText="Game Active..."; drw(); }
+function drw(){
+  if(pts.length===0){ ctx.clearRect(0,0,400,300); return; }
+  const img=ctx.createImageData(W,H); let pC=0, aC=0;
+  for(let x=0;x<W;x++)for(let y=0;y<H;y++){
+    let md=Infinity, owner=null;
+    pts.forEach(p=>{ const d=(p.x-x)*(p.x-x)+(p.y-y)*(p.y-y); if(d<md){md=d; owner=p.t;} });
+    const idx=(y*W+x)*4;
+    if(owner===1){ img.data[idx]=59; img.data[idx+1]=130; img.data[idx+2]=246; img.data[idx+3]=255; pC++; }
+    else { img.data[idx]=239; img.data[idx+1]=68; img.data[idx+2]=68; img.data[idx+3]=255; aC++; }
+  }
+  // Fast scale up
+  const tmp=document.createElement('canvas'); tmp.width=W; tmp.height=H; tmp.getContext('2d').putImageData(img,0,0);
+  ctx.drawImage(tmp, 0,0,400,300);
+  pts.forEach(p=>{ ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(p.x*2,p.y*2,4,0,Math.PI*2); ctx.fill(); });
+  
+  const tot=pC+aC; document.getElementById('pS').innerText=((pC/tot)*100).toFixed(1); document.getElementById('aS').innerText=((aC/tot)*100).toFixed(1);
+  if(turns<=0){ run=false; document.getElementById('btn').innerText="Restart War"; setTimeout(()=>alert(pC>aC?"You Win!":"AI Wins!"), 100); }
+}
+function clk(e){
+  if(!run||turns<=0)return;
+  const r=cvs.getBoundingClientRect(), mx=(e.clientX-r.left)*(W/r.width), my=(e.clientY-r.top)*(H/r.height);
+  pts.push({x:mx, y:my, t:1}); turns--;
+  // AI Turn
+  setTimeout(()=>{ if(turns>0){ pts.push({x:Math.random()*W, y:Math.random()*H, t:2}); turns--; drw(); } }, 200); drw();
+}
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

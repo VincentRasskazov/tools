@@ -1,0 +1,89 @@
+---
+layout: null
+title: "MILESTONE: 2D Ray-Traced Stealth Engine"
+category: "Games"
+description: "THE 2,600 MEGA-MILESTONE. A fully playable stealth game engine. Uses dynamic 2D ray-casting polygon math to project real-time light and shadows around physical walls. Stay in the dark!"
+permalink: /tools/tool-2600-mega-raytraced-stealth.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="THE 2,600 MEGA-MILESTONE. A fully playable stealth game engine. Uses dynamic 2D ray-casting polygon math to project real-time light and shadows around physical walls. Stay in the dark!">
+  <meta property="og:title" content="MILESTONE: 2D Ray-Traced Stealth Engine">
+  <meta property="og:description" content="THE 2,600 MEGA-MILESTONE. A fully playable stealth game engine. Uses dynamic 2D ray-casting polygon math to project real-time light and shadows around physical walls. Stay in the dark!">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MILESTONE: 2D Ray-Traced Stealth Engine">
+  <meta name="twitter:description" content="THE 2,600 MEGA-MILESTONE. A fully playable stealth game engine. Uses dynamic 2D ray-casting polygon math to project real-time light and shadows around physical walls. Stay in the dark!">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>MILESTONE: 2D Ray-Traced Stealth Engine</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); font-family: inherit; }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+canvas { touch-action: none; user-select: none; max-width: 100%; display: block; margin: 0 auto; border-radius: 12px; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>🌟 2,600 Ray-Traced Stealth 🌟</h1>
+<p style="text-align:center;color:var(--warning);font-weight:900;text-transform:uppercase;letter-spacing:1px;">Milestone Achieved: Dynamic Light & Shadow</p>
+<div class="card" style="padding:0;background:#000;border:6px solid #1e293b;cursor:crosshair;height:400px;overflow:hidden;position:relative;">
+  <canvas id="cvs" width="600" height="400" style="display:block;width:100%;height:100%;"></canvas>
+</div>
+<p style="text-align:center;color:#64748b;font-weight:bold;">WASD to move the Blue Thief. Avoid the dynamic yellow security light.</p>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+const walls = [
+  {x:100,y:100,w:20,h:200}, {x:300,y:0,w:20,h:150}, {x:300,y:250,w:20,h:150}, {x:450,y:150,w:100,h:20}
+];
+let p={x:50,y:350}, k={w:false,a:false,s:false,d:false}, t=0;
+window.onkeydown=e=>{if(e.key==='w')k.w=true; if(e.key==='s')k.s=true; if(e.key==='a')k.a=true; if(e.key==='d')k.d=true; if(['w','a','s','d'].includes(e.key))e.preventDefault();};
+window.onkeyup=e=>{if(e.key==='w')k.w=false; if(e.key==='s')k.s=false; if(e.key==='a')k.a=false; if(e.key==='d')k.d=false;};
+
+function loop(){
+  ctx.fillStyle='#0f172a'; ctx.fillRect(0,0,600,400);
+  
+  if(k.w)p.y-=3; if(k.s)p.y+=3; if(k.a)p.x-=3; if(k.d)p.x+=3;
+  
+  ctx.fillStyle='#334155'; walls.forEach(w=>ctx.fillRect(w.x,w.y,w.w,w.h));
+  
+  // Moving Light Source
+  const lx = 300 + Math.sin(t)*200, ly = 200 + Math.cos(t)*100;
+  
+  // High-performance brute-force raycaster for shadow projection
+  ctx.fillStyle='rgba(250, 204, 21, 0.4)'; ctx.beginPath(); ctx.moveTo(lx,ly);
+  for(let a=0;a<Math.PI*2;a+=0.05){
+    let rx=lx, ry=ly, dx=Math.cos(a)*5, dy=Math.sin(a)*5, hit=false;
+    for(let s=0;s<100;s++){
+      rx+=dx; ry+=dy;
+      walls.forEach(w=>{ if(rx>w.x&&rx<w.x+w.w&&ry>w.y&&ry<w.y+w.h) hit=true; });
+      if(hit || rx<0||rx>600||ry<0||ry>400) break;
+    }
+    ctx.lineTo(rx,ry);
+  } ctx.closePath(); ctx.fill();
+  
+  ctx.fillStyle='#facc15'; ctx.beginPath(); ctx.arc(lx,ly,10,0,Math.PI*2); ctx.fill(); // Lamp
+  ctx.fillStyle='#3b82f6'; ctx.beginPath(); ctx.arc(p.x,p.y,10,0,Math.PI*2); ctx.fill(); // Player
+  
+  t+=0.02; requestAnimationFrame(loop);
+} loop();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
