@@ -1,0 +1,82 @@
+---
+layout: null
+title: "Verlet Soft Body Car"
+category: "Physics"
+description: "Press Right Arrow to drive! The car is built from points and spring constraints. Watch the soft suspension react to the bumpy procedural terrain."
+permalink: /tools/physics-verlet-soft-body-car.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Press Right Arrow to drive! The car is built from points and spring constraints. Watch the soft suspension react to the bumpy procedural terrain.">
+  <meta property="og:title" content="Verlet Soft Body Car">
+  <meta property="og:description" content="Press Right Arrow to drive! The car is built from points and spring constraints. Watch the soft suspension react to the bumpy procedural terrain.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Verlet Soft Body Car">
+  <meta name="twitter:description" content="Press Right Arrow to drive! The car is built from points and spring constraints. Watch the soft suspension react to the bumpy procedural terrain.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Verlet Soft Body Car</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+canvas { touch-action: none; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Soft Body Car Physics</h1>
+<div class="card" style="padding:0;overflow:hidden;background:#e0f2fe;border:4px solid var(--border);">
+  <canvas id="cvs" width="600" height="300" style="display:block;width:100%;"></canvas>
+</div>
+<p style="text-align:center;color:#64748b;font-weight:bold;">Hold Right Arrow to Drive.</p>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+let pts=[{x:100,y:150},{x:200,y:150},{x:200,y:200},{x:100,y:200},{x:80,y:220},{x:220,y:220}], lnks=[]; // 0-3 body, 4-5 wheels
+pts.forEach(p=>{p.ox=p.x; p.oy=p.y;});
+lnks=[[0,1,100],[1,2,50],[2,3,100],[3,0,50],[0,2,111],[1,3,111], [3,4,30],[0,4,76],[2,5,30],[1,5,76]]; // Chassis + Suspension
+let terr=[]; for(let x=0;x<2000;x+=20) terr.push({x:x, y:250+Math.sin(x*0.02)*40+Math.sin(x*0.05)*10});
+let k=false; window.onkeydown=e=>{if(e.key==='ArrowRight')k=true;}; window.onkeyup=e=>{if(e.key==='ArrowRight')k=false;};
+function loop(){
+  ctx.clearRect(0,0,600,300); const cam=pts[0].x-150;
+  
+  pts.forEach((p,i)=>{
+    const vx=(p.x-p.ox)*0.99, vy=(p.y-p.oy)*0.99; p.ox=p.x; p.oy=p.y; p.x+=vx; p.y+=vy+0.3;
+    if(k && i>=4) p.x+=2; // Drive wheels
+    const tx=Math.floor(p.x/20); if(terr[tx] && p.y>terr[tx].y-10) { p.y=terr[tx].y-10; p.x-=vx*0.5; p.ox-=vx*0.5; } // Terrain col
+  });
+  
+  for(let i=0;i<5;i++) lnks.forEach(l=>{
+    const p1=pts[l[0]], p2=pts[l[1]], dx=p2.x-p1.x, dy=p2.y-p1.y, d=Math.hypot(dx,dy), diff=(l[2]-d)/d*(l[0]>=4?0.1:0.5); // Suspension is softer
+    const ox=dx*diff, oy=dy*diff; p1.x-=ox; p1.y-=oy; p2.x+=ox; p2.y+=oy;
+  });
+  
+  ctx.fillStyle='#22c55e'; ctx.beginPath(); ctx.moveTo(0,300); terr.forEach(t=>ctx.lineTo(t.x-cam, t.y)); ctx.lineTo(600,300); ctx.fill();
+  
+  ctx.strokeStyle='#3b82f6'; ctx.lineWidth=4; ctx.lineCap='round'; ctx.beginPath(); lnks.forEach(l=>{ctx.moveTo(pts[l[0]].x-cam, pts[l[0]].y); ctx.lineTo(pts[l[1]].x-cam, pts[l[1]].y);}); ctx.stroke();
+  ctx.fillStyle='#0f172a'; ctx.beginPath(); ctx.arc(pts[4].x-cam, pts[4].y, 15, 0, Math.PI*2); ctx.arc(pts[5].x-cam, pts[5].y, 15, 0, Math.PI*2); ctx.fill();
+  
+  requestAnimationFrame(loop);
+} loop();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

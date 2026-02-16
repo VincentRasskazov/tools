@@ -1,0 +1,80 @@
+---
+layout: null
+title: "3D Isometric Snake Game"
+category: "Games"
+description: "Play the classic Snake game mapped entirely onto a 3D isometric plane! Use Arrow Keys to navigate the Z and X depth axes."
+permalink: /tools/game-3d-isometric-snake.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Play the classic Snake game mapped entirely onto a 3D isometric plane! Use Arrow Keys to navigate the Z and X depth axes.">
+  <meta property="og:title" content="3D Isometric Snake Game">
+  <meta property="og:description" content="Play the classic Snake game mapped entirely onto a 3D isometric plane! Use Arrow Keys to navigate the Z and X depth axes.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="3D Isometric Snake Game">
+  <meta name="twitter:description" content="Play the classic Snake game mapped entirely onto a 3D isometric plane! Use Arrow Keys to navigate the Z and X depth axes.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>3D Isometric Snake Game</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+canvas { touch-action: none; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>3D Isometric Snake</h1>
+<div class="row" style="margin-bottom:10px;text-align:center;"><div style="font-size:1.5rem;font-weight:bold;color:var(--success);">Score: <span id="sc">0</span></div></div>
+<div class="card" style="padding:0;overflow:hidden;background:#1e293b;border:4px solid var(--border);display:flex;justify-content:center;">
+  <canvas id="cvs" width="400" height="300" style="display:block;"></canvas>
+</div>
+<button onclick="st()">Start Game</button>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+const S=10; let snk, f, dx, dy, sc, int;
+function iso(tx,ty){ return {x:200+(tx-ty)*15, y:80+(tx+ty)*7.5}; }
+function drwSq(tx,ty,col,h){
+  const p=iso(tx,ty); ctx.fillStyle=col;
+  ctx.beginPath(); ctx.moveTo(p.x,p.y-h); ctx.lineTo(p.x+15,p.y+7.5-h); ctx.lineTo(p.x,p.y+15-h); ctx.lineTo(p.x-15,p.y+7.5-h); ctx.fill(); // Top
+  ctx.fillStyle='#0f172a'; ctx.beginPath(); ctx.moveTo(p.x-15,p.y+7.5-h); ctx.lineTo(p.x,p.y+15-h); ctx.lineTo(p.x,p.y+15); ctx.lineTo(p.x-15,p.y+7.5); ctx.fill(); // L
+  ctx.fillStyle='#334155'; ctx.beginPath(); ctx.moveTo(p.x,p.y+15-h); ctx.lineTo(p.x+15,p.y+7.5-h); ctx.lineTo(p.x+15,p.y+7.5); ctx.lineTo(p.x,p.y+15); ctx.fill(); // R
+}
+function pf(){ f={x:Math.floor(Math.random()*S), y:Math.floor(Math.random()*S)}; }
+function st(){ snk=[{x:5,y:5}]; dx=1; dy=0; sc=0; document.getElementById('sc').innerText=0; pf(); clearInterval(int); int=setInterval(loop, 150); }
+window.onkeydown=e=>{if(e.key==='ArrowUp'&&dx!==1){dx=-1;dy=0;} if(e.key==='ArrowDown'&&dx!==-1){dx=1;dy=0;} if(e.key==='ArrowLeft'&&dy!==1){dx=0;dy=-1;} if(e.key==='ArrowRight'&&dy!==-1){dx=0;dy=1;} if(e.key.includes('Arrow'))e.preventDefault();};
+function loop(){
+  const hd={x:snk[0].x+dx, y:snk[0].y+dy};
+  if(hd.x<0||hd.x>=S||hd.y<0||hd.y>=S||snk.some(s=>s.x===hd.x&&s.y===hd.y)){ clearInterval(int); alert("Game Over!"); return; }
+  snk.unshift(hd);
+  if(hd.x===f.x&&hd.y===f.y){ sc++; document.getElementById('sc').innerText=sc; pf(); } else snk.pop();
+  ctx.clearRect(0,0,400,300);
+  for(let x=0;x<S;x++)for(let y=0;y<S;y++) drwSq(x,y,'#64748b',0); // Floor
+  drwSq(f.x, f.y, '#ef4444', 10); // Food
+  // Draw snake sorted by depth (x+y)
+  const sorted=[...snk].sort((a,b)=>(a.x+a.y)-(b.x+b.y));
+  sorted.forEach(s=>drwSq(s.x, s.y, '#10b981', 10));
+} st();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
