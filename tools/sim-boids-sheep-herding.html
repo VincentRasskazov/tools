@@ -1,0 +1,93 @@
+---
+layout: null
+title: "Boids Sheep Herding Dynamics"
+category: "Games"
+description: "You are the sheepdog. Move your mouse to cast a repulsive radial force field. Herd the mathematically driven Boid particles into the green pen!"
+permalink: /tools/sim-boids-sheep-herding.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="You are the sheepdog. Move your mouse to cast a repulsive radial force field. Herd the mathematically driven Boid particles into the green pen!">
+  <meta property="og:title" content="Boids Sheep Herding Dynamics">
+  <meta property="og:description" content="You are the sheepdog. Move your mouse to cast a repulsive radial force field. Herd the mathematically driven Boid particles into the green pen!">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Boids Sheep Herding Dynamics">
+  <meta name="twitter:description" content="You are the sheepdog. Move your mouse to cast a repulsive radial force field. Herd the mathematically driven Boid particles into the green pen!">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Boids Sheep Herding Dynamics</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); font-family: inherit; }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+canvas { touch-action: none; user-select: none; max-width: 100%; display: block; margin: 0 auto; border-radius: 12px; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Boids Sheep Herding</h1>
+<div class="row" style="margin-bottom:10px;text-align:center;"><div style="font-weight:bold;font-size:1.5rem;color:var(--success);">Sheep Penned: <span id="sc">0</span>/30</div></div>
+<div class="card" style="padding:0;background:#000;border:4px solid #16a34a;cursor:none;overflow:hidden;position:relative;" onmousemove="mm(event)">
+  <canvas id="cvs" width="600" height="400" style="display:block;width:100%;height:100%;"></canvas>
+</div>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+let bds=[], mx=-100, my=-100, sc=0; 
+for(let i=0;i<30;i++) bds.push({x:Math.random()*200+50, y:Math.random()*300+50, vx:Math.random()*2-1, vy:Math.random()*2-1, safe:false});
+function mm(e){ const r=cvs.getBoundingClientRect(); mx=(e.clientX-r.left)*(600/r.width); my=(e.clientY-r.top)*(400/r.height); }
+function loop(){
+  ctx.fillStyle='rgba(15,23,42,0.6)'; ctx.fillRect(0,0,600,400);
+  ctx.fillStyle='rgba(16,185,129,0.2)'; ctx.fillRect(450,100,150,200); // Pen
+  ctx.strokeStyle='#10b981'; ctx.strokeRect(450,100,150,200);
+  
+  ctx.strokeStyle='rgba(239,68,68,0.5)'; ctx.beginPath(); ctx.arc(mx,my,60,0,Math.PI*2); ctx.stroke(); // Dog Aura
+  
+  sc=0;
+  bds.forEach(b=>{
+    if(b.safe) { sc++; ctx.fillStyle='#10b981'; ctx.beginPath(); ctx.arc(b.x,b.y,4,0,Math.PI*2); ctx.fill(); return; }
+    
+    let cx=0, cy=0, sx=0, sy=0, total=0;
+    bds.forEach(o=>{
+      if(b===o||o.safe)return; const dx=b.x-o.x, dy=b.y-o.y, d=Math.hypot(dx,dy);
+      if(d<40){ cx+=o.x; cy+=o.y; total++; if(d<15){sx+=dx; sy+=dy;} }
+    });
+    if(total>0){ b.vx+=((cx/total)-b.x)*0.01 + sx*0.05; b.vy+=((cy/total)-b.y)*0.01 + sy*0.05; }
+    
+    // Dog Repulsion
+    const dDx=b.x-mx, dDy=b.y-my, dD=Math.hypot(dDx,dDy);
+    if(dD<80){ b.vx+=(dDx/dD)*0.5; b.vy+=(dDy/dD)*0.5; }
+    
+    // Bounds
+    if(b.x<10)b.vx+=0.5; if(b.x>590)b.vx-=0.5; if(b.y<10)b.vy+=0.5; if(b.y>390)b.vy-=0.5;
+    
+    const spd=Math.hypot(b.vx,b.vy); if(spd>3){b.vx=(b.vx/spd)*3; b.vy=(b.vy/spd)*3;}
+    b.x+=b.vx; b.y+=b.vy;
+    
+    if(b.x>450 && b.x<600 && b.y>100 && b.y<300) b.safe=true; // Penned
+    
+    ctx.fillStyle='#f8fafc'; ctx.beginPath(); ctx.arc(b.x,b.y,4,0,Math.PI*2); ctx.fill();
+  });
+  document.getElementById('sc').innerText=sc;
+  if(sc===30) setTimeout(()=>alert("Flock Secured!"), 100);
+  else requestAnimationFrame(loop);
+} loop();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

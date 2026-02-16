@@ -1,0 +1,70 @@
+---
+layout: null
+title: "Cubic Bézier Track Builder"
+category: "Games"
+description: "Drag the 4 control points to alter the mathematical curve. Watch the cart utilize parametric interpolation `(1-t)^3 P0 + 3(1-t)^2 t P1...` to ride exactly along your drawn path."
+permalink: /tools/game-bezier-track-editor.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Drag the 4 control points to alter the mathematical curve. Watch the cart utilize parametric interpolation `(1-t)^3 P0 + 3(1-t)^2 t P1...` to ride exactly along your drawn path.">
+  <meta property="og:title" content="Cubic Bézier Track Builder">
+  <meta property="og:description" content="Drag the 4 control points to alter the mathematical curve. Watch the cart utilize parametric interpolation `(1-t)^3 P0 + 3(1-t)^2 t P1...` to ride exactly along your drawn path.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cubic Bézier Track Builder">
+  <meta name="twitter:description" content="Drag the 4 control points to alter the mathematical curve. Watch the cart utilize parametric interpolation `(1-t)^3 P0 + 3(1-t)^2 t P1...` to ride exactly along your drawn path.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Cubic Bézier Track Builder</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); font-family: inherit; }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+canvas { touch-action: none; user-select: none; max-width: 100%; display: block; margin: 0 auto; border-radius: 12px; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Bézier Track Engine</h1>
+<div class="card" style="padding:0;background:#000;border:4px solid var(--border);height:300px;position:relative;" onmousemove="mm(event)" onmouseup="dr=null">
+  <div class="nd" id="n0" style="left:50px;top:250px;" onmousedown="dr=0">P0</div><div class="nd" id="n1" style="left:200px;top:50px;background:var(--danger);" onmousedown="dr=1">P1</div>
+  <div class="nd" id="n2" style="left:400px;top:250px;background:var(--danger);" onmousedown="dr=2">P2</div><div class="nd" id="n3" style="left:550px;top:50px;" onmousedown="dr=3">P3</div>
+  <canvas id="cvs" width="600" height="300" style="position:absolute;inset:0;pointer-events:none;"></canvas>
+  <div id="cart" style="position:absolute;width:20px;height:20px;background:var(--warning);border-radius:4px;transform:translate(-10px,-10px);pointer-events:none;"></div>
+</div>
+<style>.nd{position:absolute;width:30px;height:30px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:bold;transform:translate(-15px,-15px);cursor:grab;}</style>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+let pts=[{x:50,y:250},{x:200,y:50},{x:400,y:250},{x:550,y:50}], dr=null, t=0;
+function mm(e){ if(dr!==null){ const r=cvs.getBoundingClientRect(); pts[dr]={x:e.clientX-r.left, y:e.clientY-r.top}; document.getElementById('n'+dr).style.left=pts[dr].x+'px'; document.getElementById('n'+dr).style.top=pts[dr].y+'px'; } }
+function loop(){
+  ctx.clearRect(0,0,600,300);
+  ctx.strokeStyle='rgba(255,255,255,0.2)'; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(pts[0].x,pts[0].y); ctx.lineTo(pts[1].x,pts[1].y); ctx.moveTo(pts[2].x,pts[2].y); ctx.lineTo(pts[3].x,pts[3].y); ctx.stroke();
+  ctx.strokeStyle='#10b981'; ctx.lineWidth=4; ctx.beginPath(); ctx.moveTo(pts[0].x,pts[0].y); ctx.bezierCurveTo(pts[1].x,pts[1].y,pts[2].x,pts[2].y,pts[3].x,pts[3].y); ctx.stroke();
+  
+  const it = 1-t;
+  const cx = it*it*it*pts[0].x + 3*it*it*t*pts[1].x + 3*it*t*t*pts[2].x + t*t*t*pts[3].x;
+  const cy = it*it*it*pts[0].y + 3*it*it*t*pts[1].y + 3*it*t*t*pts[2].y + t*t*t*pts[3].y;
+  document.getElementById('cart').style.left=cx+'px'; document.getElementById('cart').style.top=cy+'px';
+  t+=0.005; if(t>1)t=0; requestAnimationFrame(loop);
+} loop();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

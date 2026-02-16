@@ -1,0 +1,83 @@
+---
+layout: null
+title: "Hooke's Law Soft Body Physics"
+category: "Developer"
+description: "A highly technical demonstration of Hooke's Law spring physics. The 2D grid of particles is bound by structural and shear springs, resulting in incredibly fluid, bouncing jello."
+permalink: /tools/sim-soft-body-jello-cube.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="A highly technical demonstration of Hooke's Law spring physics. The 2D grid of particles is bound by structural and shear springs, resulting in incredibly fluid, bouncing jello.">
+  <meta property="og:title" content="Hooke's Law Soft Body Physics">
+  <meta property="og:description" content="A highly technical demonstration of Hooke's Law spring physics. The 2D grid of particles is bound by structural and shear springs, resulting in incredibly fluid, bouncing jello.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hooke's Law Soft Body Physics">
+  <meta name="twitter:description" content="A highly technical demonstration of Hooke's Law spring physics. The 2D grid of particles is bound by structural and shear springs, resulting in incredibly fluid, bouncing jello.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Hooke's Law Soft Body Physics</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); font-family: inherit; }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+canvas { touch-action: none; user-select: none; max-width: 100%; display: block; margin: 0 auto; border-radius: 12px; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Soft Body Mass-Spring</h1>
+<div class="card" style="padding:0;background:#1e293b;border:4px solid var(--border);height:400px;cursor:grab;" onmousedown="md(event)" onmousemove="mm(event)" onmouseup="dr=null" onmouseleave="dr=null">
+  <canvas id="cvs" width="600" height="400" style="display:block;width:100%;height:100%;"></canvas>
+</div>
+<p style="text-align:center;color:#64748b;font-weight:bold;">Drag the nodes to stretch the soft body.</p>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+let pts=[], lnks=[], dr=null, mx, my; const w=5, h=5, s=30;
+for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+  const p={x:250+x*s, y:100+y*s, vx:0, vy:0}; pts.push(p);
+  if(x>0)lnks.push({a:p, b:pts[pts.length-2], d:s, k:0.1}); // Structural H
+  if(y>0)lnks.push({a:p, b:pts[pts.length-w-1], d:s, k:0.1}); // Structural V
+  if(x>0&&y>0)lnks.push({a:p, b:pts[pts.length-w-2], d:Math.hypot(s,s), k:0.05}); // Shear diag
+  if(x<w-1&&y>0)lnks.push({a:p, b:pts[pts.length-w], d:Math.hypot(s,s), k:0.05}); // Shear diag
+}
+function md(e){ const r=cvs.getBoundingClientRect(); mx=(e.clientX-r.left)*(600/r.width); my=(e.clientY-r.top)*(400/r.height); let md=999; pts.forEach(p=>{const d=Math.hypot(p.x-mx,p.y-my); if(d<20&&d<md){md=d;dr=p;}}); }
+function mm(e){ if(dr){const r=cvs.getBoundingClientRect(); mx=(e.clientX-r.left)*(600/r.width); my=(e.clientY-r.top)*(400/r.height);} }
+function loop(){
+  ctx.clearRect(0,0,600,400); ctx.fillStyle='#334155'; ctx.fillRect(0,350,600,50);
+  
+  pts.forEach(p=>{
+    if(p!==dr){ p.vy+=0.5; p.x+=p.vx; p.y+=p.vy; p.vx*=0.9; p.vy*=0.9; } else { p.x=mx; p.y=my; p.vx=0; p.vy=0; }
+    if(p.y>340){p.y=340; p.vy*=-0.5; p.vx*=0.8;}
+    if(p.x<10){p.x=10; p.vx*=-0.5;} if(p.x>590){p.x=590; p.vx*=-0.5;}
+  });
+  
+  lnks.forEach(l=>{
+    const dx=l.b.x-l.a.x, dy=l.b.y-l.a.y, d=Math.hypot(dx,dy), diff=d-l.d;
+    const fx=(dx/d)*diff*l.k, fy=(dy/d)*diff*l.k;
+    if(l.a!==dr){ l.a.vx+=fx; l.a.vy+=fy; } if(l.b!==dr){ l.b.vx-=fx; l.b.vy-=fy; }
+  });
+  
+  ctx.strokeStyle='#3b82f6'; ctx.lineWidth=2; ctx.beginPath(); lnks.forEach(l=>{ctx.moveTo(l.a.x,l.a.y);ctx.lineTo(l.b.x,l.b.y);}); ctx.stroke();
+  ctx.fillStyle='#facc15'; pts.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,5,0,Math.PI*2);ctx.fill();});
+  requestAnimationFrame(loop);
+} loop();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

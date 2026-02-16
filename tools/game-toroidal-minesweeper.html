@@ -1,0 +1,91 @@
+---
+layout: null
+title: "Non-Euclidean Toroidal Minesweeper"
+category: "Games"
+description: "Standard Minesweeper, but the board exists on a mathematical Torus (a donut). The top edge wraps to the bottom, and the left edge wraps to the right!"
+permalink: /tools/game-toroidal-minesweeper.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Standard Minesweeper, but the board exists on a mathematical Torus (a donut). The top edge wraps to the bottom, and the left edge wraps to the right!">
+  <meta property="og:title" content="Non-Euclidean Toroidal Minesweeper">
+  <meta property="og:description" content="Standard Minesweeper, but the board exists on a mathematical Torus (a donut). The top edge wraps to the bottom, and the left edge wraps to the right!">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Non-Euclidean Toroidal Minesweeper">
+  <meta name="twitter:description" content="Standard Minesweeper, but the board exists on a mathematical Torus (a donut). The top edge wraps to the bottom, and the left edge wraps to the right!">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Non-Euclidean Toroidal Minesweeper</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); font-family: inherit; }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+canvas { touch-action: none; user-select: none; max-width: 100%; display: block; margin: 0 auto; border-radius: 12px; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Toroidal Minesweeper</h1>
+<div class="row" style="margin-bottom:10px;text-align:center;"><div style="font-size:1.5rem;font-weight:bold;color:var(--danger);">Mines: <span id="mc">15</span></div></div>
+<div class="card" style="padding:10px;background:#1e293b;width:fit-content;margin:0 auto;" oncontextmenu="event.preventDefault()">
+  <div id="brd" style="display:grid;grid-template-columns:repeat(10, 30px);gap:2px;"></div>
+</div>
+<button onclick="st()">Generate Torus Board</button>
+<script>
+const W=10, H=10, M=15; let b=[], run=true;
+function st(){
+  b=Array(W*H).fill().map(()=>({v:0,r:false,f:false})); run=true;
+  let p=0; while(p<M){const i=Math.floor(Math.random()*(W*H)); if(b[i].v!==9){b[i].v=9; p++;}}
+  for(let y=0;y<H;y++)for(let x=0;x<W;x++){
+    if(b[y*W+x].v===9)continue; let c=0;
+    // Toroidal wrapping logic using Modulo
+    for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){
+      const nx=(x+dx+W)%W, ny=(y+dy+H)%H;
+      if(b[ny*W+nx].v===9)c++;
+    } b[y*W+x].v=c;
+  } drw();
+}
+function drw(){
+  const g=document.getElementById('brd'); g.innerHTML=''; let flg=0;
+  b.forEach((c,i)=>{
+    if(c.f)flg++; const bg=c.r?(c.v===9?'#ef4444':'#f8fafc'):'#cbd5e1';
+    const txt=c.f?'🚩':(c.r?(c.v===9?'💣':(c.v>0?c.v:'')):'');
+    const cols=['#000','#3b82f6','#10b981','#ef4444','#4f46e5','#b91c1c','#0ea5e9','#f59e0b','#000'];
+    g.innerHTML+=`<div style="width:30px;height:30px;background:${bg};display:flex;align-items:center;justify-content:center;font-weight:900;color:${cols[c.v]||'#000'};cursor:pointer;border-radius:2px;" onclick="clk(${i})" oncontextmenu="fl(${i})">${txt}</div>`;
+  }); document.getElementById('mc').innerText=M-flg;
+  if(run && b.filter(x=>!x.r).length===M){ run=false; setTimeout(()=>alert("Torus Cleared! You Win."), 50); }
+}
+function clk(i){
+  if(!run||b[i].f||b[i].r)return; b[i].r=true;
+  if(b[i].v===9){ run=false; b.forEach(x=>x.r=true); drw(); setTimeout(()=>alert("BOOM!"), 50); return; }
+  if(b[i].v===0){
+    const q=[i]; while(q.length>0){
+      const cur=q.pop(), x=cur%W, y=Math.floor(cur/W);
+      for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){
+        const nx=(x+dx+W)%W, ny=(y+dy+H)%H, ni=ny*W+nx;
+        if(!b[ni].r && !b[ni].f){ b[ni].r=true; if(b[ni].v===0)q.push(ni); }
+      }
+    }
+  } drw();
+}
+function fl(i){ if(run && !b[i].r){ b[i].f=!b[i].f; drw(); } } st();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

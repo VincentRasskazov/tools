@@ -1,0 +1,79 @@
+---
+layout: null
+title: "ASCII 3D Engine Projection"
+category: "Developer"
+description: "Watch 3D coordinates mathematically project onto a 2D plane and get rendered purely using ASCII characters. A highly literal demonstration of early computer graphics."
+permalink: /tools/sim-ascii-3d-renderer.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Watch 3D coordinates mathematically project onto a 2D plane and get rendered purely using ASCII characters. A highly literal demonstration of early computer graphics.">
+  <meta property="og:title" content="ASCII 3D Engine Projection">
+  <meta property="og:description" content="Watch 3D coordinates mathematically project onto a 2D plane and get rendered purely using ASCII characters. A highly literal demonstration of early computer graphics.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ASCII 3D Engine Projection">
+  <meta name="twitter:description" content="Watch 3D coordinates mathematically project onto a 2D plane and get rendered purely using ASCII characters. A highly literal demonstration of early computer graphics.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>ASCII 3D Engine Projection</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); font-family: inherit; }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+canvas { touch-action: none; user-select: none; max-width: 100%; display: block; margin: 0 auto; border-radius: 12px; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>ASCII 3D Cube Renderer</h1>
+<div class="card" style="padding:20px;background:#0f172a;display:flex;justify-content:center;">
+  <pre id="out" style="color:var(--success);font-family:monospace;font-size:1rem;line-height:1;letter-spacing:4px;font-weight:bold;"></pre>
+</div>
+<script>
+const v = [[-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1], [-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]];
+const e = [[0,1],[1,2],[2,3],[3,0], [4,5],[5,6],[6,7],[7,4], [0,4],[1,5],[2,6],[3,7]];
+let t=0;
+function loop(){
+  let b=Array(20).fill().map(()=>Array(40).fill(' '));
+  const cA=Math.cos(t), sA=Math.sin(t), cB=Math.cos(t*0.5), sB=Math.sin(t*0.5);
+  const p = v.map(pt=>{
+    // Rot Y
+    let x=pt[0]*cA - pt[2]*sA, z=pt[0]*sA + pt[2]*cA;
+    // Rot X
+    let y=pt[1]*cB - z*sB; z=pt[1]*sB + z*cB;
+    z+=3; // Translate Z
+    return {x: Math.round((x/z)*15 + 20), y: Math.round((y/z)*10 + 10)}; // Project to 2D ASCII bounds
+  });
+  
+  e.forEach(l=>{
+    let x0=p[l[0]].x, y0=p[l[0]].y, x1=p[l[1]].x, y1=p[l[1]].y;
+    const dx=Math.abs(x1-x0), sx=x0<x1?1:-1, dy=-Math.abs(y1-y0), sy=y0<y1?1:-1; let err=dx+dy;
+    while(true){
+      if(x0>=0&&x0<40&&y0>=0&&y0<20) b[y0][x0]='#';
+      if(x0===x1&&y0===y1)break; const e2=2*err;
+      if(e2>=dy){err+=dy; x0+=sx;} if(e2<=dx){err+=dx; y0+=sy;}
+    }
+  });
+  document.getElementById('out').innerText = b.map(r=>r.join('')).join('\n');
+  t+=0.05; requestAnimationFrame(loop);
+} loop();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
