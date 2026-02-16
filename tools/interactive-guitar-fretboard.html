@@ -1,0 +1,67 @@
+---
+layout: null
+title: "Interactive Guitar Fretboard"
+category: "Music"
+description: "Click anywhere on the guitar fretboard to instantly see what musical note you are playing."
+permalink: /tools/interactive-guitar-fretboard.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Click anywhere on the guitar fretboard to instantly see what musical note you are playing.">
+  <meta property="og:title" content="Interactive Guitar Fretboard">
+  <meta property="og:description" content="Click anywhere on the guitar fretboard to instantly see what musical note you are playing.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Interactive Guitar Fretboard">
+  <meta name="twitter:description" content="Click anywhere on the guitar fretboard to instantly see what musical note you are playing.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Interactive Guitar Fretboard</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Guitar Fretboard</h1>
+<p style="text-align:center;color:#64748b;">Standard E Tuning. Click a fret to find its note.</p>
+<div id="board" style="display:flex;flex-direction:column;gap:4px;background:#8B4513;padding:20px;border-radius:12px;overflow-x:auto;"></div>
+<div id="res" class="res" style="font-size:4rem;font-weight:900;color:var(--primary);">Note</div>
+<script>
+const notes = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+const strings = [4, 11, 7, 2, 9, 4]; // E, B, G, D, A, E (High to Low)
+const b=document.getElementById('board');
+strings.forEach((s, stringIdx) => {
+  let r=`<div style="display:flex;gap:4px;">`;
+  r+=`<div style="width:30px;height:30px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:bold;">${notes[s]}</div>`;
+  for(let i=1;i<=12;i++){
+    const note = notes[(s+i)%12];
+    r+=`<div style="width:40px;height:30px;background:#d4d4d8;border-right:3px solid #94a3b8;cursor:pointer;position:relative;display:flex;align-items:center;justify-content:center;" onclick="document.getElementById('res').innerText='${note}'">
+      <div style="width:100%;height:4px;background:#cbd5e1;position:absolute;pointer-events:none;"></div>
+    </div>`;
+  }
+  r+=`</div>`; b.innerHTML+=r;
+});
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
