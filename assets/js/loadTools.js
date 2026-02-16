@@ -1,3 +1,27 @@
+async function callToolApi(url) {
+  if (!navigator.onLine) {
+    showOfflineWarning();
+    return;
+  }
+  
+  try {
+    const response = await fetch(url);
+    return await response.json();
+  } catch (error) {
+    showOfflineWarning();
+  }
+}
+
+function showOfflineWarning() {
+  const container = document.getElementById('result-container');
+  if (container) {
+    container.innerHTML = `
+      <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; color: #ef4444; padding: 15px; border-radius: 12px; margin-top: 10px;">
+        <i class="fas fa-exclamation-triangle"></i> 
+        <strong>Internet Required:</strong> This tool needs an external API to function.
+      </div>`;
+  }
+}
 document.addEventListener("DOMContentLoaded", function() {
     let allTools = [];
     const container = document.getElementById('tools-container');
