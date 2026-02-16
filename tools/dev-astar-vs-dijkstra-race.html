@@ -1,0 +1,78 @@
+---
+layout: null
+title: "Maze Math Race"
+category: "Developer"
+description: "Watch a mathematical drag race! Two pathfinding algorithms try to solve the same maze at the same time. A* uses a heuristic, while Dijkstra searches blindly."
+permalink: /tools/dev-astar-vs-dijkstra-race.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Watch a mathematical drag race! Two pathfinding algorithms try to solve the same maze at the same time. A* uses a heuristic, while Dijkstra searches blindly.">
+  <meta property="og:title" content="Maze Math Race">
+  <meta property="og:description" content="Watch a mathematical drag race! Two pathfinding algorithms try to solve the same maze at the same time. A* uses a heuristic, while Dijkstra searches blindly.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Maze Math Race">
+  <meta name="twitter:description" content="Watch a mathematical drag race! Two pathfinding algorithms try to solve the same maze at the same time. A* uses a heuristic, while Dijkstra searches blindly.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Maze Math Race</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+canvas { touch-action: none; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Maze Math Race</h1>
+<div class="row">
+  <div class="card" style="padding:10px;text-align:center;"><strong>A* Algorithm</strong><br><canvas id="ca" width="200" height="200" style="background:#f8fafc;border:2px solid #000;margin-top:5px;"></canvas></div>
+  <div class="card" style="padding:10px;text-align:center;"><strong>Dijkstra Search</strong><br><canvas id="cd" width="200" height="200" style="background:#f8fafc;border:2px solid #000;margin-top:5px;"></canvas></div>
+</div>
+<button onclick="st()">Generate Maze & Race!</button>
+<script>
+const c1=document.getElementById('ca').getContext('2d'), c2=document.getElementById('cd').getContext('2d');
+const s=10; let m=[];
+function drw(c, arr){
+  c.clearRect(0,0,200,200);
+  for(let x=0;x<20;x++)for(let y=0;y<20;y++){ c.fillStyle=(x===0&&y===0)?'#3b82f6':(x===19&&y===19)?'#10b981':arr[x][y]===1?'#334155':arr[x][y]===2?'#bae6fd':arr[x][y]===3?'#fde047':'#fff'; c.fillRect(x*s,y*s,s-1,s-1); }
+}
+async function run(c, isA){
+  let g=m.map(r=>[...r]), q=[{x:0,y:0,g:0,h:isA?Math.hypot(19,19):0,p:[]}], vis=Array(20).fill().map(()=>Array(20).fill(false)); vis[0][0]=true;
+  while(q.length>0){
+    q.sort((a,b)=>(a.g+a.h)-(b.g+b.h)); const curr=q.shift();
+    if(curr.x===19&&curr.y===19){ curr.p.forEach(p=>g[p.x][p.y]=3); drw(c,g); return; }
+    if(curr.x!==0||curr.y!==0) g[curr.x][curr.y]=2; drw(c,g); await new Promise(r=>setTimeout(r,10));
+    [[0,1],[1,0],[0,-1],[-1,0]].forEach(d=>{
+      const nx=curr.x+d[0], ny=curr.y+d[1];
+      if(nx>=0&&nx<20&&ny>=0&&ny<20 && !vis[nx][ny] && g[nx][ny]!==1){ vis[nx][ny]=true; q.push({x:nx,y:ny,g:curr.g+1,h:isA?Math.hypot(19-nx,19-ny):0,p:[...curr.p,{x:nx,y:ny}]}); }
+    });
+  }
+}
+function st(){
+  m=Array(20).fill().map(()=>Array(20).fill(0).map(()=>Math.random()>0.75?1:0)); m[0][0]=0; m[19][19]=0;
+  run(c1, true); run(c2, false);
+} st();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,85 @@
+---
+layout: null
+title: "Tangram Shape Builder"
+category: "Games"
+description: "A digital sandbox to play with classic Tangram geometry blocks. Drag and drop the polygons to build your own figures."
+permalink: /tools/game-tangram-drag-puzzle.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="A digital sandbox to play with classic Tangram geometry blocks. Drag and drop the polygons to build your own figures.">
+  <meta property="og:title" content="Tangram Shape Builder">
+  <meta property="og:description" content="A digital sandbox to play with classic Tangram geometry blocks. Drag and drop the polygons to build your own figures.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tangram Shape Builder">
+  <meta name="twitter:description" content="A digital sandbox to play with classic Tangram geometry blocks. Drag and drop the polygons to build your own figures.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Tangram Shape Builder</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+canvas { touch-action: none; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Tangram Builder</h1>
+<div class="card" style="padding:0;overflow:hidden;background:#f8fafc;border:4px solid var(--border);height:400px;cursor:grab;" onmousedown="md(event)" onmousemove="mm(event)" onmouseup="dr=null" onmouseleave="dr=null">
+  <canvas id="cvs" width="600" height="400" style="display:block;width:100%;height:100%;"></canvas>
+</div>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+const s=100;
+let plys=[
+  {c:'#ef4444', pts:[{x:0,y:0},{x:s*2,y:0},{x:s,y:s}], ox:50, oy:50}, // Lg Tri
+  {c:'#3b82f6', pts:[{x:0,y:0},{x:s,y:s},{x:0,y:s*2}], ox:50, oy:150}, // Lg Tri
+  {c:'#10b981', pts:[{x:0,y:0},{x:s,y:s},{x:-s,y:s}], ox:250, oy:50}, // Med Tri
+  {c:'#f59e0b', pts:[{x:0,y:0},{x:s,y:0},{x:s/2,y:s/2},{x:-s/2,y:s/2}], ox:250, oy:150}, // Parallelogram
+  {c:'#a855f7', pts:[{x:0,y:0},{x:s/2,y:s/2},{x:0,y:s},{x:-s/2,y:s/2}], ox:350, oy:100}, // Square
+  {c:'#0ea5e9', pts:[{x:0,y:0},{x:s,y:0},{x:s/2,y:s/2}], ox:150, oy:250}, // Sm Tri
+  {c:'#f43f5e', pts:[{x:0,y:0},{x:s/2,y:s/2},{x:-s/2,y:s/2}], ox:300, oy:250} // Sm Tri
+];
+let dr=null, mx, my;
+function drw(){
+  ctx.clearRect(0,0,600,400); ctx.lineWidth=2; ctx.lineJoin='round';
+  plys.forEach(p=>{
+    ctx.fillStyle=p.c; ctx.strokeStyle='#1e293b'; ctx.beginPath();
+    p.pts.forEach((pt,i)=>{if(i===0)ctx.moveTo(p.ox+pt.x, p.oy+pt.y); else ctx.lineTo(p.ox+pt.x, p.oy+pt.y);});
+    ctx.closePath(); ctx.fill(); ctx.stroke();
+  });
+}
+function md(e){
+  const r=cvs.getBoundingClientRect(); mx=(e.clientX-r.left)*(600/r.width); my=(e.clientY-r.top)*(400/r.height);
+  // Extremely simplified bounding box grab for UI performance
+  for(let i=plys.length-1;i>=0;i--){
+    const p=plys[i]; let xmin=999, xmax=-999, ymin=999, ymax=-999;
+    p.pts.forEach(pt=>{ xmin=Math.min(xmin,p.ox+pt.x); xmax=Math.max(xmax,p.ox+pt.x); ymin=Math.min(ymin,p.oy+pt.y); ymax=Math.max(ymax,p.oy+pt.y); });
+    if(mx>xmin && mx<xmax && my>ymin && my<ymax){ dr=p; plys.push(plys.splice(i,1)[0]); drw(); break; } // Bring to front
+  }
+}
+function mm(e){ if(dr){ const r=cvs.getBoundingClientRect(), cx=(e.clientX-r.left)*(600/r.width), cy=(e.clientY-r.top)*(400/r.height); dr.ox+=cx-mx; dr.oy+=cy-my; mx=cx; my=cy; drw(); } }
+drw();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
