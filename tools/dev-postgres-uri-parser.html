@@ -1,0 +1,72 @@
+---
+layout: null
+title: "PostgreSQL URI Parser to .env"
+category: "Developer"
+description: "Paste a combined `postgres://user:pass@host:5432/db` connection URI. The tool parses it securely and maps it into standard backend environment variables."
+permalink: /tools/dev-postgres-uri-parser.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Paste a combined `postgres://user:pass@host:5432/db` connection URI. The tool parses it securely and maps it into standard backend environment variables.">
+  <meta property="og:title" content="PostgreSQL URI Parser to .env">
+  <meta property="og:description" content="Paste a combined `postgres://user:pass@host:5432/db` connection URI. The tool parses it securely and maps it into standard backend environment variables.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PostgreSQL URI Parser to .env">
+  <meta name="twitter:description" content="Paste a combined `postgres://user:pass@host:5432/db` connection URI. The tool parses it securely and maps it into standard backend environment variables.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>PostgreSQL URI Parser to .env</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); font-family: inherit; }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+pre { margin: 0; font-family: monospace; white-space: pre-wrap; word-break: break-all; }
+table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+th, td { padding: 12px; border: 1px solid var(--border); text-align: left; font-family: monospace; font-size: 0.85rem; }
+th { background: var(--bg); font-weight: bold; color: var(--primary); }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PostgreSQL URI Parser</h1>
+<div class="card"><input type="text" id="uri" placeholder="postgresql://user:secret@localhost:5432/mydb?schema=public" oninput="p()" style="font-family:monospace;font-size:1.1rem;margin:0;"></div>
+<div class="card" style="background:#f8fafc;padding:0;overflow-x:auto;">
+  <table id="out" style="width:100%;font-family:monospace;margin:0;"></table>
+</div>
+<script>
+function p(){
+  const t=document.getElementById('uri').value.trim(); const o=document.getElementById('out');
+  if(!t){o.innerHTML='';return;}
+  try{
+    const u = new URL(t);
+    let h=`<tr><th>Environment Variable</th><th>Parsed Value</th></tr>`;
+    h+=`<tr><td style="font-weight:bold;color:var(--primary);">PGHOST</td><td>${u.hostname}</td></tr>`;
+    h+=`<tr><td style="font-weight:bold;color:var(--primary);">PGPORT</td><td>${u.port||'5432'}</td></tr>`;
+    h+=`<tr><td style="font-weight:bold;color:var(--primary);">PGUSER</td><td>${u.username}</td></tr>`;
+    h+=`<tr><td style="font-weight:bold;color:var(--danger);">PGPASSWORD</td><td>${u.password?'********* (Hidden for UI)':'[None]'}</td></tr>`;
+    h+=`<tr><td style="font-weight:bold;color:var(--primary);">PGDATABASE</td><td>${u.pathname.replace('/','')}</td></tr>`;
+    o.innerHTML = h;
+  }catch(e){ o.innerHTML=`<tr><td style="color:red;">Invalid URI Format. Must start with postgresql:// or postgres://</td></tr>`; }
+}
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
