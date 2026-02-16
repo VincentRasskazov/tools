@@ -1,0 +1,75 @@
+---
+layout: null
+title: "Local Storage Kanban Board"
+category: "Productivity"
+description: "A fully functional workflow board. Add tasks and drag them between columns. Your data is saved securely in your browser's local storage automatically."
+permalink: /tools/utility-localstorage-kanban.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="A fully functional workflow board. Add tasks and drag them between columns. Your data is saved securely in your browser's local storage automatically.">
+  <meta property="og:title" content="Local Storage Kanban Board">
+  <meta property="og:description" content="A fully functional workflow board. Add tasks and drag them between columns. Your data is saved securely in your browser's local storage automatically.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Local Storage Kanban Board">
+  <meta name="twitter:description" content="A fully functional workflow board. Add tasks and drag them between columns. Your data is saved securely in your browser's local storage automatically.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Local Storage Kanban Board</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); font-family: inherit; }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+canvas { touch-action: none; user-select: none; max-width: 100%; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Kanban Board</h1>
+<div class="row" style="margin-bottom:20px;">
+  <input type="text" id="nt" placeholder="New Task..." style="margin:0;flex:3;" onkeypress="if(event.key==='Enter')add()">
+  <button onclick="add()" style="margin:0;flex:1;">Add Task</button>
+</div>
+<div class="row" style="gap:10px;align-items:flex-start;">
+  <div class="card col" style="flex:1;background:#f1f5f9;min-height:200px;" ondragover="e=>e.preventDefault()" ondrop="dp(event, 'todo')"><h3 style="margin-top:0;text-align:center;color:#64748b;">To Do</h3><div id="todo"></div></div>
+  <div class="card col" style="flex:1;background:#e0f2fe;min-height:200px;" ondragover="e=>e.preventDefault()" ondrop="dp(event, 'prog')"><h3 style="margin-top:0;text-align:center;color:#0ea5e9;">In Progress</h3><div id="prog"></div></div>
+  <div class="card col" style="flex:1;background:#dcfce7;min-height:200px;" ondragover="e=>e.preventDefault()" ondrop="dp(event, 'done')"><h3 style="margin-top:0;text-align:center;color:#16a34a;">Done</h3><div id="done"></div></div>
+</div>
+<script>
+let t=JSON.parse(localStorage.getItem('kb')||'{"todo":[],"prog":[],"done":[]}');
+function sv(){ localStorage.setItem('kb', JSON.stringify(t)); rnd(); }
+function add(){ const v=document.getElementById('nt').value; if(v){t.todo.push({id:Date.now(),txt:v}); document.getElementById('nt').value=''; sv();} }
+function rnd(){
+  ['todo','prog','done'].forEach(col=>{
+    const cEl=document.getElementById(col); cEl.innerHTML='';
+    t[col].forEach(tk=>cEl.innerHTML+=`<div draggable="true" ondragstart="ds(event, ${tk.id}, '${col}')" style="background:#fff;padding:10px;margin-bottom:8px;border-radius:6px;box-shadow:0 2px 4px rgba(0,0,0,0.1);cursor:grab;border-left:4px solid var(--primary);">${tk.txt} <span style="float:right;color:#ef4444;cursor:pointer;" onclick="rm(${tk.id},'${col}')">×</span></div>`);
+  });
+}
+function ds(e, id, col){ e.dataTransfer.setData('id', id); e.dataTransfer.setData('col', col); }
+document.querySelectorAll('.col').forEach(c=>{ c.ondragover=e=>e.preventDefault(); c.ondrop=e=>{
+  const id=parseInt(e.dataTransfer.getData('id')), fC=e.dataTransfer.getData('col'), tC=c.querySelector('div[id]').id;
+  if(fC===tC)return; const tk=t[fC].find(x=>x.id===id); t[fC]=t[fC].filter(x=>x.id!==id); t[tC].push(tk); sv();
+};});
+function rm(id, col){ t[col]=t[col].filter(x=>x.id!==id); sv(); } rnd();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
