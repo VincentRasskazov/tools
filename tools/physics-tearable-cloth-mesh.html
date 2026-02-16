@@ -1,0 +1,81 @@
+---
+layout: null
+title: "Tearable Cloth Mesh Simulator"
+category: "Physics"
+description: "A high-performance physics grid. Drag the white nodes to stretch the cloth. Right-click and drag across the mesh to permanently cut and tear the fabric!"
+permalink: /tools/physics-tearable-cloth-mesh.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="A high-performance physics grid. Drag the white nodes to stretch the cloth. Right-click and drag across the mesh to permanently cut and tear the fabric!">
+  <meta property="og:title" content="Tearable Cloth Mesh Simulator">
+  <meta property="og:description" content="A high-performance physics grid. Drag the white nodes to stretch the cloth. Right-click and drag across the mesh to permanently cut and tear the fabric!">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tearable Cloth Mesh Simulator">
+  <meta name="twitter:description" content="A high-performance physics grid. Drag the white nodes to stretch the cloth. Right-click and drag across the mesh to permanently cut and tear the fabric!">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Tearable Cloth Mesh Simulator</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+canvas { touch-action: none; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Tearable Cloth Mesh</h1>
+<p style="text-align:center;color:#64748b;font-weight:bold;">Left-Click to Drag. Right-Click to TEAR!</p>
+<div class="card" style="padding:0;overflow:hidden;background:#000;cursor:crosshair;height:350px;" onmousedown="md(event)" onmousemove="mm(event)" onmouseup="dr=null;cut=false;" onmouseleave="dr=null;cut=false;" oncontextmenu="event.preventDefault(); cut=true;">
+  <canvas id="cvs" width="600" height="350" style="display:block;width:100%;height:100%;"></canvas>
+</div>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+let pts=[], lnks=[], dr=null, cut=false, mx, my, pmx, pmy; const W=30, H=15, SP=15;
+for(let y=0;y<H;y++) for(let x=0;x<W;x++){
+  const p={x:75+x*SP, y:10+y*SP, ox:75+x*SP, oy:10+y*SP, pnd:y===0}; pts.push(p);
+  if(x>0) lnks.push({p1:p, p2:pts[pts.length-2], d:SP}); if(y>0) lnks.push({p1:p, p2:pts[pts.length-W-1], d:SP});
+}
+function md(e){ if(e.button===2){cut=true; return;} const r=cvs.getBoundingClientRect(); mx=(e.clientX-r.left)*(600/r.width); my=(e.clientY-r.top)*(350/r.height); pmx=mx; pmy=my; let min=999; pts.forEach(p=>{ const d=Math.hypot(p.x-mx, p.y-my); if(d<20 && d<min){min=d; dr=p;} }); }
+function mm(e){ pmx=mx; pmy=my; const r=cvs.getBoundingClientRect(); mx=(e.clientX-r.left)*(600/r.width); my=(e.clientY-r.top)*(350/r.height); }
+function loop(){
+  ctx.clearRect(0,0,600,350);
+  pts.forEach(p=>{
+    if(p===dr){p.x=mx; p.y=my; p.ox=mx; p.oy=my;}
+    else if(!p.pnd){ const vx=(p.x-p.ox)*0.99, vy=(p.y-p.oy)*0.99; p.ox=p.x; p.oy=p.y; p.x+=vx; p.y+=vy+0.3; }
+  });
+  for(let i=0;i<3;i++){
+    for(let j=lnks.length-1;j>=0;j--){
+      const l=lnks[j], dx=l.p2.x-l.p1.x, dy=l.p2.y-l.p1.y, d=Math.hypot(dx,dy), diff=(SP-d)/d*0.5;
+      if(d>SP*4){ lnks.splice(j,1); continue; } // Snap
+      if(cut){ const d1=Math.hypot(l.p1.x-mx,l.p1.y-my), d2=Math.hypot(l.p2.x-mx,l.p2.y-my); if(d1<15||d2<15){lnks.splice(j,1); continue;} } // Mouse Cut
+      const ox=dx*diff, oy=dy*diff; if(!l.p1.pnd){l.p1.x-=ox; l.p1.y-=oy;} if(!l.p2.pnd){l.p2.x+=ox; l.p2.y+=oy;}
+    }
+  }
+  ctx.beginPath(); ctx.strokeStyle='rgba(255,255,255,0.4)'; ctx.lineWidth=1;
+  lnks.forEach(l=>{ ctx.moveTo(l.p1.x, l.p1.y); ctx.lineTo(l.p2.x, l.p2.y); }); ctx.stroke();
+  requestAnimationFrame(loop);
+} loop();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

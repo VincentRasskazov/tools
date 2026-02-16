@@ -1,0 +1,87 @@
+---
+layout: null
+title: "Stealth Line of Sight Simulator"
+category: "Games"
+description: "Use Arrow Keys to move the blue player. The red guard casts hundreds of dynamic light rays to scan the room. Don't get caught in the yellow cone of vision!"
+permalink: /tools/game-stealth-line-of-sight.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Use Arrow Keys to move the blue player. The red guard casts hundreds of dynamic light rays to scan the room. Don't get caught in the yellow cone of vision!">
+  <meta property="og:title" content="Stealth Line of Sight Simulator">
+  <meta property="og:description" content="Use Arrow Keys to move the blue player. The red guard casts hundreds of dynamic light rays to scan the room. Don't get caught in the yellow cone of vision!">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Stealth Line of Sight Simulator">
+  <meta name="twitter:description" content="Use Arrow Keys to move the blue player. The red guard casts hundreds of dynamic light rays to scan the room. Don't get caught in the yellow cone of vision!">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Stealth Line of Sight Simulator</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+canvas { touch-action: none; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Stealth Simulator</h1>
+<div class="card" style="padding:0;overflow:hidden;background:#0f172a;border:4px solid var(--border);">
+  <canvas id="cvs" width="400" height="300" style="display:block;width:100%;"></canvas>
+</div>
+<p style="text-align:center;color:#64748b;font-weight:bold;">Use Arrows to hide behind the gray walls.</p>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+let p={x:50,y:50}, e={x:200,y:150,a:0}, run=true;
+const w=[{x:100,y:100,w:20,h:100}, {x:250,y:50,w:80,h:20}, {x:250,y:200,w:20,h:80}];
+window.onkeydown=ev=>{if(!run)return; if(ev.key==='ArrowUp')p.y-=5; if(ev.key==='ArrowDown')p.y+=5; if(ev.key==='ArrowLeft')p.x-=5; if(ev.key==='ArrowRight')p.x+=5; if(ev.key.includes('Arrow'))ev.preventDefault();};
+function getIs(rx,ry,rdx,rdy, wx,wy,ww,wh){
+  const lines=[{x1:wx,y1:wy,x2:wx+ww,y2:wy},{x1:wx+ww,y1:wy,x2:wx+ww,y2:wy+wh},{x1:wx+ww,y1:wy+wh,x2:wx,y2:wy+wh},{x1:wx,y1:wy+wh,x2:wx,y2:wy}];
+  let minT=Infinity, is=null;
+  lines.forEach(l=>{
+    const den=(l.x1-l.x2)*(ry-(ry+rdy))-(l.y1-l.y2)*(rx-(rx+rdx)); if(den===0)return;
+    const t=((l.x1-rx)*(ry-(ry+rdy))-(l.y1-ry)*(rx-(rx+rdx)))/den;
+    const u=-((l.x1-l.x2)*(l.y1-ry)-(l.y1-l.y2)*(l.x1-rx))/den;
+    if(t>0&&t<1&&u>0&&u<minT){minT=u; is={x:l.x1+t*(l.x2-l.x1),y:l.y1+t*(l.y2-l.y1)};}
+  }); return is;
+}
+function loop(){
+  if(!run)return; ctx.clearRect(0,0,400,300);
+  ctx.fillStyle='#334155'; w.forEach(b=>ctx.fillRect(b.x,b.y,b.w,b.h));
+  ctx.fillStyle='#3b82f6'; ctx.beginPath(); ctx.arc(p.x,p.y,8,0,Math.PI*2); ctx.fill(); // Player
+  e.a+=0.02; ctx.fillStyle='rgba(253,224,71,0.3)'; ctx.beginPath(); ctx.moveTo(e.x,e.y);
+  let hit=false;
+  for(let a=-Math.PI/4; a<=Math.PI/4; a+=0.05){
+    const rdx=Math.cos(e.a+a), rdy=Math.sin(e.a+a); let end={x:e.x+rdx*400, y:e.y+rdy*400}, minD=400;
+    w.forEach(b=>{ const is=getIs(e.x,e.y,rdx,rdy, b.x,b.y,b.w,b.h); if(is){const d=Math.hypot(e.x-is.x,e.y-is.y); if(d<minD){minD=d; end=is;}} });
+    ctx.lineTo(end.x,end.y);
+    // Player detection
+    const pd=Math.hypot(e.x-p.x, e.y-p.y);
+    if(pd<minD){ const pa=Math.atan2(p.y-e.y, p.x-e.x); let da=pa-(e.a+a); while(da<-Math.PI)da+=Math.PI*2; while(da>Math.PI)da-=Math.PI*2; if(Math.abs(da)<0.05) hit=true; }
+  } ctx.lineTo(e.x,e.y); ctx.fill();
+  ctx.fillStyle='#ef4444'; ctx.beginPath(); ctx.arc(e.x,e.y,10,0,Math.PI*2); ctx.fill(); // Enemy
+  if(hit){ run=false; ctx.fillStyle='#ef4444'; ctx.font='30px sans-serif'; ctx.fillText('SPOTTED!', 130, 150); }
+  else requestAnimationFrame(loop);
+} loop();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
