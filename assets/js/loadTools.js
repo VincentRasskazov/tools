@@ -10,22 +10,34 @@ document.addEventListener("DOMContentLoaded", function() {
     const loadingMsg = document.getElementById('loading-msg');
 
     // 1. Fetch Data
-    fetch('./tools.json')
+// 1. Fetch Data with Auto-Fixer
+    fetch('./tools.json?v=' + Date.now()) // Bypass cache
         .then(response => {
             if (!response.ok) throw new Error("HTTP error " + response.status);
-            return response.json();
+            return response.text(); 
         })
-        .then(data => {
-            allTools = data;
-            filteredTools = data; // Start with all tools
-            loadingMsg.style.display = 'none';
-            
-            generateCategories(allTools);
-            displayTools(true); // Initial render
+        .then(rawText => {
+            try {
+                // Clean up potential trailing commas before parsing
+                const cleanText = rawText.replace(/,\s*([\]}])/g, '$1');
+                allTools = JSON.parse(cleanText);
+                
+                if (Array.isArray(allTools)) {
+                    filteredTools = allTools;
+                    loadingMsg.style.display = 'none';
+                    generateCategories(allTools);
+                    displayTools(true);
+                } else {
+                    throw new Error("JSON is not an array");
+                }
+            } catch (e) {
+                console.error('Parsing Error:', e);
+                loadingMsg.innerHTML = `Error: JSON Syntax issue. <button onclick="location.reload()">Retry</button>`;
+            }
         })
         .catch(error => {
-            console.error('Error:', error);
-            loadingMsg.textContent = 'Error loading tools. Please refresh.';
+            console.error('Fetch Error:', error);
+            loadingMsg.textContent = 'Connection error or file too large. Please refresh.';
         });
 
     // 2. Display Tools Function (With Lazy Loading Logic)
