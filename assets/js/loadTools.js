@@ -1,74 +1,51 @@
-async function callToolApi(url) {
-  if (!navigator.onLine) {
-    showOfflineWarning();
-    return;
-  }
-  
-  try {
-    const response = await fetch(url);
-    return await response.json();
-  } catch (error) {
-    showOfflineWarning();
-  }
-}
-
-function showOfflineWarning() {
-  const container = document.getElementById('result-container');
-  if (container) {
-    container.innerHTML = `
-      <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; color: #ef4444; padding: 15px; border-radius: 12px; margin-top: 10px;">
-        <i class="fas fa-exclamation-triangle"></i> 
-        <strong>Internet Required:</strong> This tool needs an external API to function.
-      </div>`;
-  }
-}
 document.addEventListener("DOMContentLoaded", function() {
     let allTools = [];
+    let filteredTools = [];
+    let itemsShown = 50; // Initial number of tools to show
+    const loadAmount = 50; // How many to load on scroll
+
     const container = document.getElementById('tools-container');
     const searchInput = document.getElementById('search-tools');
     const categoryContainer = document.getElementById('category-filters');
     const loadingMsg = document.getElementById('loading-msg');
 
     // 1. Fetch Data
-// Replace your existing Fetch block (Line 33-47) with this:
-fetch('./tools.json')
-    .then(response => {
-        if (!response.ok) throw new Error("File not found (404) or server error.");
-        return response.text(); // Get as text first to catch syntax errors
-    })
-    .then(text => {
-        try {
-            allTools = JSON.parse(text);
+    fetch('./tools.json')
+        .then(response => {
+            if (!response.ok) throw new Error("HTTP error " + response.status);
+            return response.json();
+        })
+        .then(data => {
+            allTools = data;
+            filteredTools = data; // Start with all tools
             loadingMsg.style.display = 'none';
+            
             generateCategories(allTools);
-            displayTools(allTools);
-        } catch (e) {
-            console.error("JSON Syntax Error:", e);
-            loadingMsg.innerHTML = `
-                <div style="color: #ef4444;">
-                    <i class="fas fa-bug"></i> <strong>JSON Syntax Error:</strong><br>
-                    Check line 8374 in tools.json.
-                </div>`;
-        }
-    })
-    .catch(error => {
-        console.error('Fetch Error:', error);
-        loadingMsg.textContent = 'Connection error. Please refresh.';
-    });
+            displayTools(true); // Initial render
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            loadingMsg.textContent = 'Error loading tools. Please refresh.';
+        });
 
-    // 2. Display Tools Function
-    function displayTools(tools) {
-        container.innerHTML = '';
+    // 2. Display Tools Function (With Lazy Loading Logic)
+    function displayTools(reset = false) {
+        if (reset) {
+            container.innerHTML = '';
+            itemsShown = 50;
+        }
         
-        if (tools.length === 0) {
+        if (filteredTools.length === 0) {
             container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #666;">No tools found matching your search.</p>';
             return;
         }
 
-        tools.forEach(tool => {
-            // Default category if missing
+        // Only slice the portion we want to show right now
+        const toolsToRender = filteredTools.slice(container.children.length, itemsShown);
+
+        const fragment = document.createDocumentFragment(); // Performance optimization
+        toolsToRender.forEach(tool => {
             const cat = tool.category || 'Utility';
-            
             const card = document.createElement('div');
             card.className = 'tool-card';
             card.innerHTML = `
@@ -76,30 +53,37 @@ fetch('./tools.json')
                 <h3><a href="${tool.url}">${tool.name}</a></h3>
                 <p class="tool-desc">${tool.description || 'Free online tool for daily tasks.'}</p>
             `;
-            container.appendChild(card);
+            fragment.appendChild(card);
         });
+        container.appendChild(fragment);
     }
 
-    // 3. Search Logic
+    // 3. Infinite Scroll Logic
+    window.addEventListener('scroll', () => {
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 500) {
+            if (itemsShown < filteredTools.length) {
+                itemsShown += loadAmount;
+                displayTools();
+            }
+        }
+    });
+
+    // 4. Search Logic
     searchInput.addEventListener('input', (e) => {
         const term = e.target.value.toLowerCase();
-        
-        // Reset category buttons when searching
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
         
-        const filtered = allTools.filter(tool => 
+        filteredTools = allTools.filter(tool => 
             tool.name.toLowerCase().includes(term) ||
             (tool.description && tool.description.toLowerCase().includes(term)) ||
             (tool.category && tool.category.toLowerCase().includes(term))
         );
-        displayTools(filtered);
+        displayTools(true);
     });
 
-    // 4. Generate Category Buttons
+    // 5. Generate Category Buttons
     function generateCategories(tools) {
-        // Get unique categories
         const categories = ['All', ...new Set(tools.map(t => t.category || 'Utility'))].sort();
-        
         categoryContainer.innerHTML = '';
         
         categories.forEach(cat => {
@@ -109,22 +93,17 @@ fetch('./tools.json')
             btn.textContent = cat;
             
             btn.addEventListener('click', () => {
-                // visual active state
                 document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                
-                // clear search
                 searchInput.value = '';
                 
-                // filter
                 if (cat === 'All') {
-                    displayTools(allTools);
+                    filteredTools = allTools;
                 } else {
-                    const filtered = allTools.filter(t => (t.category || 'Utility') === cat);
-                    displayTools(filtered);
+                    filteredTools = allTools.filter(t => (t.category || 'Utility') === cat);
                 }
+                displayTools(true);
             });
-            
             categoryContainer.appendChild(btn);
         });
     }
