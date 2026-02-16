@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Unbeatable Tic-Tac-Toe"
+title: "Classic Mine Sweeper"
 category: "Games"
-description: "Play against an AI programmed using the Minimax algorithm. It is mathematically impossible to beat it."
-permalink: /tools/game-unbeatable-tic-tac-toe.html
+description: "Clear the board without detonating any hidden bombs! Click to reveal a tile, and Shift-Click to plant a warning flag."
+permalink: /tools/game-minesweeper-pro.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Play against an AI programmed using the Minimax algorithm. It is mathematically impossible to beat it.">
-  <meta property="og:title" content="Unbeatable Tic-Tac-Toe">
-  <meta property="og:description" content="Play against an AI programmed using the Minimax algorithm. It is mathematically impossible to beat it.">
+  <meta name="description" content="Clear the board without detonating any hidden bombs! Click to reveal a tile, and Shift-Click to plant a warning flag.">
+  <meta property="og:title" content="Classic Mine Sweeper">
+  <meta property="og:description" content="Clear the board without detonating any hidden bombs! Click to reveal a tile, and Shift-Click to plant a warning flag.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Unbeatable Tic-Tac-Toe">
-  <meta name="twitter:description" content="Play against an AI programmed using the Minimax algorithm. It is mathematically impossible to beat it.">
+  <meta name="twitter:title" content="Classic Mine Sweeper">
+  <meta name="twitter:description" content="Clear the board without detonating any hidden bombs! Click to reveal a tile, and Shift-Click to plant a warning flag.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Unbeatable Tic-Tac-Toe</title>
+  <title>Classic Mine Sweeper</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,36 +39,50 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Unbeatable Tic-Tac-Toe</h1>
-<div id="msg" style="text-align:center;font-size:2rem;font-weight:bold;color:var(--primary);margin-bottom:20px;">Your Turn (X)</div>
-<div id="grid" style="display:grid;grid-template-columns:repeat(3,1fr); width:300px; height:300px; gap:5px; background:var(--border); padding:5px; border-radius:12px; margin:0 auto 20px;"></div>
-<button onclick="st()">Restart Game</button>
+    <h1>Mine Sweeper</h1>
+<div class="row" style="margin-bottom:10px;text-align:center;">
+  <div style="font-size:1.5rem;font-weight:bold;color:var(--danger);">Bombs: <span id="bmb">10</span></div>
+</div>
+<div id="brd" style="display:grid;grid-template-columns:repeat(10, 30px);gap:2px;background:var(--border);padding:4px;border-radius:8px;width:fit-content;margin:0 auto 20px;"></div>
+<button onclick="st()">Restart Map</button>
+<p style="text-align:center;color:#64748b;font-weight:bold;">Shift + Click to plant a Flag 🚩</p>
 <script>
-let b, run=true; const win=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
-function st(){ b=['','','','','','','','','']; run=true; msg("Your Turn (X)", 'var(--primary)'); drw(); }
-function msg(t,c){ const m=document.getElementById('msg'); m.innerText=t; m.style.color=c; }
-function chkW(brd, p){ return win.some(w=>brd[w[0]]===p&&brd[w[1]]===p&&brd[w[2]]===p); }
-function mm(brd, d, isMax){
-  if(chkW(brd,'O'))return 10-d; if(chkW(brd,'X'))return d-10; if(!brd.includes(''))return 0;
-  let bst = isMax?-999:999;
-  for(let i=0;i<9;i++){
-    if(brd[i]===''){ brd[i]=isMax?'O':'X'; const val=mm(brd, d+1, !isMax); brd[i]=''; bst=isMax?Math.max(bst,val):Math.min(bst,val); }
-  } return bst;
+const cols=['#fff','#3b82f6','#10b981','#ef4444','#4f46e5','#b91c1c','#0ea5e9','#1e293b','#000'];
+let b=[], run=true, bombs=10;
+function st(){
+  run=true; b=Array(100).fill().map(()=>({v:0, rev:false, flag:false}));
+  let placed=0; while(placed<10){ const r=Math.floor(Math.random()*100); if(b[r].v!==9){ b[r].v=9; placed++; } }
+  for(let i=0;i<100;i++){
+    if(b[i].v===9)continue; let c=0;
+    const x=i%10, y=Math.floor(i/10);
+    for(let dx=-1;dx<=1;dx++) for(let dy=-1;dy<=1;dy++){ const nx=x+dx, ny=y+dy; if(nx>=0&&nx<10&&ny>=0&&ny<10 && b[ny*10+nx].v===9) c++; }
+    b[i].v=c;
+  } drw();
 }
 function drw(){
-  const g=document.getElementById('grid'); g.innerHTML='';
-  b.forEach((v,i)=>g.innerHTML+=`<div style="background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:4rem;font-weight:bold;cursor:pointer;color:${v==='X'?'var(--primary)':'var(--danger)'};" onclick="clk(${i})">${v}</div>`);
+  const g=document.getElementById('brd'); g.innerHTML=''; let flg=0;
+  b.forEach((c,i)=>{
+    if(c.flag)flg++;
+    const bg=c.rev?(c.v===9?'#ef4444':'var(--surface)'):'#cbd5e1';
+    const txt=c.flag?'🚩':(c.rev?(c.v===9?'💣':(c.v>0?c.v:'')):'');
+    g.innerHTML+=`<div style="width:30px;height:30px;background:${bg};display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.2rem;cursor:pointer;color:${cols[c.v]||'#000'};box-shadow:${c.rev?'inset 1px 1px 3px rgba(0,0,0,0.1)':'inset -2px -2px 0 rgba(0,0,0,0.2)'}" onclick="clk(event, ${i})">${txt}</div>`;
+  }); document.getElementById('bmb').innerText=10-flg;
+  if(b.filter(c=>!c.rev).length===10 && run){ run=false; setTimeout(()=>alert("YOU CLEARED THE MINEFIELD!"), 100); }
 }
-function clk(i){
-  if(!run||b[i]!=='')return; b[i]='X'; drw();
-  if(chkW(b,'X')){run=false;return msg("You Win? (Bug)!", 'var(--success)');} if(!b.includes('')){run=false;return msg("It's a Draw!", '#64748b');}
-  msg("AI is thinking...", 'var(--danger)'); run=false;
-  setTimeout(()=>{
-    let bst=-999, mv=-1;
-    for(let j=0;j<9;j++){ if(b[j]===''){ b[j]='O'; const val=mm(b,0,false); b[j]=''; if(val>bst){bst=val; mv=j;} } }
-    b[mv]='O'; drw(); run=true; msg("Your Turn (X)", 'var(--primary)');
-    if(chkW(b,'O')){run=false; msg("AI Wins!", 'var(--danger)');} else if(!b.includes('')){run=false; msg("It's a Draw!", '#64748b');}
-  }, 100);
+function clk(e, i){
+  if(!run)return; if(e.shiftKey){ b[i].flag=!b[i].flag; return drw(); }
+  if(b[i].flag || b[i].rev)return;
+  b[i].rev=true; if(b[i].v===9){ run=false; b.forEach(c=>{if(c.v===9)c.rev=true;}); drw(); setTimeout(()=>alert("BOOM! Game Over."), 100); return; }
+  if(b[i].v===0){
+    const q=[i];
+    while(q.length>0){
+      const cur=q.pop(), x=cur%10, y=Math.floor(cur/10);
+      for(let dx=-1;dx<=1;dx++) for(let dy=-1;dy<=1;dy++){
+        const nx=x+dx, ny=y+dy, ni=ny*10+nx;
+        if(nx>=0&&nx<10&&ny>=0&&ny<10 && !b[ni].rev && !b[ni].flag){ b[ni].rev=true; if(b[ni].v===0) q.push(ni); }
+      }
+    }
+  } drw();
 } st();
 </script>
   </div>

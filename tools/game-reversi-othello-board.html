@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Unbeatable Tic-Tac-Toe"
+title: "Classic Reversi Board Game"
 category: "Games"
-description: "Play against an AI programmed using the Minimax algorithm. It is mathematically impossible to beat it."
-permalink: /tools/game-unbeatable-tic-tac-toe.html
+description: "Play the classic strategy game against the computer! Trap the computer's disks between your own to flip them to your color."
+permalink: /tools/game-reversi-othello-board.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Play against an AI programmed using the Minimax algorithm. It is mathematically impossible to beat it.">
-  <meta property="og:title" content="Unbeatable Tic-Tac-Toe">
-  <meta property="og:description" content="Play against an AI programmed using the Minimax algorithm. It is mathematically impossible to beat it.">
+  <meta name="description" content="Play the classic strategy game against the computer! Trap the computer's disks between your own to flip them to your color.">
+  <meta property="og:title" content="Classic Reversi Board Game">
+  <meta property="og:description" content="Play the classic strategy game against the computer! Trap the computer's disks between your own to flip them to your color.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Unbeatable Tic-Tac-Toe">
-  <meta name="twitter:description" content="Play against an AI programmed using the Minimax algorithm. It is mathematically impossible to beat it.">
+  <meta name="twitter:title" content="Classic Reversi Board Game">
+  <meta name="twitter:description" content="Play the classic strategy game against the computer! Trap the computer's disks between your own to flip them to your color.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Unbeatable Tic-Tac-Toe</title>
+  <title>Classic Reversi Board Game</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,36 +39,53 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Unbeatable Tic-Tac-Toe</h1>
-<div id="msg" style="text-align:center;font-size:2rem;font-weight:bold;color:var(--primary);margin-bottom:20px;">Your Turn (X)</div>
-<div id="grid" style="display:grid;grid-template-columns:repeat(3,1fr); width:300px; height:300px; gap:5px; background:var(--border); padding:5px; border-radius:12px; margin:0 auto 20px;"></div>
+    <h1>Reversi Game</h1>
+<div class="row" style="text-align:center;font-size:1.5rem;font-weight:bold;margin-bottom:10px;">
+  <div style="color:var(--text);">Black (You): <span id="sb">2</span></div>
+  <div style="color:#64748b;">White (AI): <span id="sw">2</span></div>
+</div>
+<div id="brd" style="display:grid;grid-template-columns:repeat(8, 40px);gap:2px;background:#166534;padding:8px;border-radius:12px;width:fit-content;margin:0 auto 20px;border:4px solid #064e3b;"></div>
+<div id="msg" style="text-align:center;font-weight:bold;color:var(--primary);margin-bottom:20px;">Your Turn!</div>
 <button onclick="st()">Restart Game</button>
 <script>
-let b, run=true; const win=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
-function st(){ b=['','','','','','','','','']; run=true; msg("Your Turn (X)", 'var(--primary)'); drw(); }
-function msg(t,c){ const m=document.getElementById('msg'); m.innerText=t; m.style.color=c; }
-function chkW(brd, p){ return win.some(w=>brd[w[0]]===p&&brd[w[1]]===p&&brd[w[2]]===p); }
-function mm(brd, d, isMax){
-  if(chkW(brd,'O'))return 10-d; if(chkW(brd,'X'))return d-10; if(!brd.includes(''))return 0;
-  let bst = isMax?-999:999;
-  for(let i=0;i<9;i++){
-    if(brd[i]===''){ brd[i]=isMax?'O':'X'; const val=mm(brd, d+1, !isMax); brd[i]=''; bst=isMax?Math.max(bst,val):Math.min(bst,val); }
-  } return bst;
+let b, turn; const dirs=[[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]];
+function st(){ b=Array(8).fill().map(()=>Array(8).fill(0)); b[3][3]=2; b[4][4]=2; b[3][4]=1; b[4][3]=1; turn=1; drw(); msg("Your Turn (Black)"); }
+function isValid(x,y,p){
+  if(b[y][x]!==0)return false;
+  for(let [dx,dy] of dirs){
+    let nx=x+dx, ny=y+dy, foundOpp=false;
+    while(nx>=0&&nx<8&&ny>=0&&ny<8&&b[ny][nx]===3-p){ foundOpp=true; nx+=dx; ny+=dy; }
+    if(foundOpp && nx>=0&&nx<8&&ny>=0&&ny<8&&b[ny][nx]===p) return true;
+  } return false;
+}
+function flip(x,y,p){
+  b[y][x]=p;
+  for(let [dx,dy] of dirs){
+    let nx=x+dx, ny=y+dy, flips=[];
+    while(nx>=0&&nx<8&&ny>=0&&ny<8&&b[ny][nx]===3-p){ flips.push([nx,ny]); nx+=dx; ny+=dy; }
+    if(nx>=0&&nx<8&&ny>=0&&ny<8&&b[ny][nx]===p) flips.forEach(([fx,fy])=>b[fy][fx]=p);
+  }
 }
 function drw(){
-  const g=document.getElementById('grid'); g.innerHTML='';
-  b.forEach((v,i)=>g.innerHTML+=`<div style="background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:4rem;font-weight:bold;cursor:pointer;color:${v==='X'?'var(--primary)':'var(--danger)'};" onclick="clk(${i})">${v}</div>`);
+  const g=document.getElementById('brd'); g.innerHTML=''; let sb=0, sw=0;
+  for(let y=0;y<8;y++){ for(let x=0;x<8;x++){
+    if(b[y][x]===1)sb++; if(b[y][x]===2)sw++;
+    const v = b[y][x]; const bg = v===1?'#000':v===2?'#fff':'transparent';
+    g.innerHTML+=`<div style="width:40px;height:40px;background:#15803d;display:flex;align-items:center;justify-content:center;cursor:pointer;" onclick="clk(${x},${y})"><div style="width:30px;height:30px;border-radius:50%;background:${bg};box-shadow:${v?'0 2px 4px rgba(0,0,0,0.5)':'none'};transition:0.3s;"></div></div>`;
+  }}
+  document.getElementById('sb').innerText=sb; document.getElementById('sw').innerText=sw;
+  if(!hasMoves(1) && !hasMoves(2)) msg(sb>sw?"Black Wins!":sw>sb?"White Wins!":"Tie!");
 }
-function clk(i){
-  if(!run||b[i]!=='')return; b[i]='X'; drw();
-  if(chkW(b,'X')){run=false;return msg("You Win? (Bug)!", 'var(--success)');} if(!b.includes('')){run=false;return msg("It's a Draw!", '#64748b');}
-  msg("AI is thinking...", 'var(--danger)'); run=false;
+function hasMoves(p){ for(let y=0;y<8;y++) for(let x=0;x<8;x++) if(isValid(x,y,p)) return true; return false; }
+function msg(t){ document.getElementById('msg').innerText=t; }
+function clk(x,y){
+  if(turn!==1 || !isValid(x,y,1))return; flip(x,y,1); turn=2; drw(); msg("AI is thinking...");
   setTimeout(()=>{
-    let bst=-999, mv=-1;
-    for(let j=0;j<9;j++){ if(b[j]===''){ b[j]='O'; const val=mm(b,0,false); b[j]=''; if(val>bst){bst=val; mv=j;} } }
-    b[mv]='O'; drw(); run=true; msg("Your Turn (X)", 'var(--primary)');
-    if(chkW(b,'O')){run=false; msg("AI Wins!", 'var(--danger)');} else if(!b.includes('')){run=false; msg("It's a Draw!", '#64748b');}
-  }, 100);
+    let mvs=[]; for(let j=0;j<8;j++) for(let i=0;i<8;i++) if(isValid(i,j,2)) mvs.push([i,j]);
+    if(mvs.length>0){ const mv=mvs[Math.floor(Math.random()*mvs.length)]; flip(mv[0],mv[1],2); }
+    turn=1; drw(); msg(hasMoves(1)?"Your Turn":"No moves! AI Turn again.");
+    if(!hasMoves(1) && hasMoves(2)) { turn=2; setTimeout(()=>clk(-1,-1), 1000); }
+  }, 800);
 } st();
 </script>
   </div>

@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Unbeatable Tic-Tac-Toe"
+title: "Push The Box Puzzle"
 category: "Games"
-description: "Play against an AI programmed using the Minimax algorithm. It is mathematically impossible to beat it."
-permalink: /tools/game-unbeatable-tic-tac-toe.html
+description: "Use the arrow keys to push the yellow box onto the green target spot. You cannot pull, only push!"
+permalink: /tools/game-push-box-sokoban.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Play against an AI programmed using the Minimax algorithm. It is mathematically impossible to beat it.">
-  <meta property="og:title" content="Unbeatable Tic-Tac-Toe">
-  <meta property="og:description" content="Play against an AI programmed using the Minimax algorithm. It is mathematically impossible to beat it.">
+  <meta name="description" content="Use the arrow keys to push the yellow box onto the green target spot. You cannot pull, only push!">
+  <meta property="og:title" content="Push The Box Puzzle">
+  <meta property="og:description" content="Use the arrow keys to push the yellow box onto the green target spot. You cannot pull, only push!">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Unbeatable Tic-Tac-Toe">
-  <meta name="twitter:description" content="Play against an AI programmed using the Minimax algorithm. It is mathematically impossible to beat it.">
+  <meta name="twitter:title" content="Push The Box Puzzle">
+  <meta name="twitter:description" content="Use the arrow keys to push the yellow box onto the green target spot. You cannot pull, only push!">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Unbeatable Tic-Tac-Toe</title>
+  <title>Push The Box Puzzle</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,37 +39,37 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Unbeatable Tic-Tac-Toe</h1>
-<div id="msg" style="text-align:center;font-size:2rem;font-weight:bold;color:var(--primary);margin-bottom:20px;">Your Turn (X)</div>
-<div id="grid" style="display:grid;grid-template-columns:repeat(3,1fr); width:300px; height:300px; gap:5px; background:var(--border); padding:5px; border-radius:12px; margin:0 auto 20px;"></div>
-<button onclick="st()">Restart Game</button>
+    <h1>Push The Box</h1>
+<div class="card" style="padding:10px;background:#1e293b;display:flex;justify-content:center;margin-bottom:20px;">
+  <div id="brd" style="display:grid;grid-template-columns:repeat(5, 50px);gap:2px;"></div>
+</div>
+<button onclick="st()">Restart Level</button>
+<p style="text-align:center;color:#64748b;font-weight:bold;">Use Arrow Keys to push the Yellow box to the Green target.</p>
 <script>
-let b, run=true; const win=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
-function st(){ b=['','','','','','','','','']; run=true; msg("Your Turn (X)", 'var(--primary)'); drw(); }
-function msg(t,c){ const m=document.getElementById('msg'); m.innerText=t; m.style.color=c; }
-function chkW(brd, p){ return win.some(w=>brd[w[0]]===p&&brd[w[1]]===p&&brd[w[2]]===p); }
-function mm(brd, d, isMax){
-  if(chkW(brd,'O'))return 10-d; if(chkW(brd,'X'))return d-10; if(!brd.includes(''))return 0;
-  let bst = isMax?-999:999;
-  for(let i=0;i<9;i++){
-    if(brd[i]===''){ brd[i]=isMax?'O':'X'; const val=mm(brd, d+1, !isMax); brd[i]=''; bst=isMax?Math.max(bst,val):Math.min(bst,val); }
-  } return bst;
-}
+// 0=empty, 1=wall, 2=target, 3=box, 4=player
+const map=[1,1,1,1,1, 1,0,2,1,1, 1,0,3,0,1, 1,0,4,0,1, 1,1,1,1,1]; let b=[], px, py;
+function st(){ b=[...map]; px=2; py=3; drw(); }
 function drw(){
-  const g=document.getElementById('grid'); g.innerHTML='';
-  b.forEach((v,i)=>g.innerHTML+=`<div style="background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:4rem;font-weight:bold;cursor:pointer;color:${v==='X'?'var(--primary)':'var(--danger)'};" onclick="clk(${i})">${v}</div>`);
+  const g=document.getElementById('brd'); g.innerHTML='';
+  b.forEach(v=>{
+    const bg=v===1?'#64748b':v===2?'#10b981':v===3?'#facc15':v===4?'#3b82f6':'#334155';
+    g.innerHTML+=`<div style="width:50px;height:50px;background:${bg};border-radius:4px;"></div>`;
+  });
+  if(b[7]===3) setTimeout(()=>alert("Level Complete!"), 100);
 }
-function clk(i){
-  if(!run||b[i]!=='')return; b[i]='X'; drw();
-  if(chkW(b,'X')){run=false;return msg("You Win? (Bug)!", 'var(--success)');} if(!b.includes('')){run=false;return msg("It's a Draw!", '#64748b');}
-  msg("AI is thinking...", 'var(--danger)'); run=false;
-  setTimeout(()=>{
-    let bst=-999, mv=-1;
-    for(let j=0;j<9;j++){ if(b[j]===''){ b[j]='O'; const val=mm(b,0,false); b[j]=''; if(val>bst){bst=val; mv=j;} } }
-    b[mv]='O'; drw(); run=true; msg("Your Turn (X)", 'var(--primary)');
-    if(chkW(b,'O')){run=false; msg("AI Wins!", 'var(--danger)');} else if(!b.includes('')){run=false; msg("It's a Draw!", '#64748b');}
-  }, 100);
-} st();
+window.onkeydown=e=>{
+  let dx=0, dy=0; if(e.key==='ArrowUp')dy=-1; if(e.key==='ArrowDown')dy=1; if(e.key==='ArrowLeft')dx=-1; if(e.key==='ArrowRight')dx=1;
+  if(dx===0&&dy===0)return; e.preventDefault();
+  const nx=px+dx, ny=py+dy, ni=ny*5+nx, nni=(ny+dy)*5+(nx+dx);
+  if(b[ni]===1)return; // Wall
+  if(b[ni]===3){ // Push box
+    if(b[nni]===1 || b[nni]===3)return; // Blocked
+    b[nni]=3; b[ni]=0;
+  }
+  b[py*5+px]=0; px=nx; py=ny; b[py*5+px]=4; // Replace target if needed is ignored for simple logic here, assuming only 1 target
+  if(b[7]===0) b[7]=2; // Redraw target if uncovered
+  b[py*5+px]=4; drw();
+}; st();
 </script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">

@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Unbeatable Tic-Tac-Toe"
+title: "Interactive Physics Cloth"
 category: "Games"
-description: "Play against an AI programmed using the Minimax algorithm. It is mathematically impossible to beat it."
-permalink: /tools/game-unbeatable-tic-tac-toe.html
+description: "Drag the nodes with your mouse to rip and pull an interactive, realistic gravity physics cloth!"
+permalink: /tools/toy-physics-cloth-simulator.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Play against an AI programmed using the Minimax algorithm. It is mathematically impossible to beat it.">
-  <meta property="og:title" content="Unbeatable Tic-Tac-Toe">
-  <meta property="og:description" content="Play against an AI programmed using the Minimax algorithm. It is mathematically impossible to beat it.">
+  <meta name="description" content="Drag the nodes with your mouse to rip and pull an interactive, realistic gravity physics cloth!">
+  <meta property="og:title" content="Interactive Physics Cloth">
+  <meta property="og:description" content="Drag the nodes with your mouse to rip and pull an interactive, realistic gravity physics cloth!">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Unbeatable Tic-Tac-Toe">
-  <meta name="twitter:description" content="Play against an AI programmed using the Minimax algorithm. It is mathematically impossible to beat it.">
+  <meta name="twitter:title" content="Interactive Physics Cloth">
+  <meta name="twitter:description" content="Drag the nodes with your mouse to rip and pull an interactive, realistic gravity physics cloth!">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Unbeatable Tic-Tac-Toe</title>
+  <title>Interactive Physics Cloth</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,37 +39,43 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Unbeatable Tic-Tac-Toe</h1>
-<div id="msg" style="text-align:center;font-size:2rem;font-weight:bold;color:var(--primary);margin-bottom:20px;">Your Turn (X)</div>
-<div id="grid" style="display:grid;grid-template-columns:repeat(3,1fr); width:300px; height:300px; gap:5px; background:var(--border); padding:5px; border-radius:12px; margin:0 auto 20px;"></div>
-<button onclick="st()">Restart Game</button>
+    <h1>Physics Cloth Simulator</h1>
+<div class="card" style="padding:0;overflow:hidden;background:#0f172a;cursor:crosshair;height:400px;border:4px solid var(--border);" onmousedown="md(event)" onmousemove="mm(event)" onmouseup="mu()" onmouseleave="mu()">
+  <canvas id="cvs" width="600" height="400" style="width:100%;height:100%;display:block;"></canvas>
+</div>
+<button onclick="st()">Reset Cloth</button>
 <script>
-let b, run=true; const win=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
-function st(){ b=['','','','','','','','','']; run=true; msg("Your Turn (X)", 'var(--primary)'); drw(); }
-function msg(t,c){ const m=document.getElementById('msg'); m.innerText=t; m.style.color=c; }
-function chkW(brd, p){ return win.some(w=>brd[w[0]]===p&&brd[w[1]]===p&&brd[w[2]]===p); }
-function mm(brd, d, isMax){
-  if(chkW(brd,'O'))return 10-d; if(chkW(brd,'X'))return d-10; if(!brd.includes(''))return 0;
-  let bst = isMax?-999:999;
-  for(let i=0;i<9;i++){
-    if(brd[i]===''){ brd[i]=isMax?'O':'X'; const val=mm(brd, d+1, !isMax); brd[i]=''; bst=isMax?Math.max(bst,val):Math.min(bst,val); }
-  } return bst;
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+let pts=[], lnks=[], drg=null, mx=0, my=0;
+function st(){
+  pts=[]; lnks=[]; const w=15, h=10, sp=25;
+  for(let y=0;y<h;y++){ for(let x=0;x<w;x++){
+    const p={x:100+x*sp, y:20+y*sp, ox:100+x*sp, oy:20+y*sp, pinned:y===0}; pts.push(p);
+    if(x>0) lnks.push({p1:p, p2:pts[pts.length-2], d:sp});
+    if(y>0) lnks.push({p1:p, p2:pts[pts.length-w-1], d:sp});
+  }}
 }
-function drw(){
-  const g=document.getElementById('grid'); g.innerHTML='';
-  b.forEach((v,i)=>g.innerHTML+=`<div style="background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:4rem;font-weight:bold;cursor:pointer;color:${v==='X'?'var(--primary)':'var(--danger)'};" onclick="clk(${i})">${v}</div>`);
-}
-function clk(i){
-  if(!run||b[i]!=='')return; b[i]='X'; drw();
-  if(chkW(b,'X')){run=false;return msg("You Win? (Bug)!", 'var(--success)');} if(!b.includes('')){run=false;return msg("It's a Draw!", '#64748b');}
-  msg("AI is thinking...", 'var(--danger)'); run=false;
-  setTimeout(()=>{
-    let bst=-999, mv=-1;
-    for(let j=0;j<9;j++){ if(b[j]===''){ b[j]='O'; const val=mm(b,0,false); b[j]=''; if(val>bst){bst=val; mv=j;} } }
-    b[mv]='O'; drw(); run=true; msg("Your Turn (X)", 'var(--primary)');
-    if(chkW(b,'O')){run=false; msg("AI Wins!", 'var(--danger)');} else if(!b.includes('')){run=false; msg("It's a Draw!", '#64748b');}
-  }, 100);
-} st();
+function md(e){ const r=cvs.getBoundingClientRect(); mx=(e.clientX-r.left)*(600/r.width); my=(e.clientY-r.top)*(400/r.height); let min=999; pts.forEach(p=>{ const d=Math.hypot(p.x-mx, p.y-my); if(d<20 && d<min){min=d; drg=p;} }); }
+function mm(e){ const r=cvs.getBoundingClientRect(); mx=(e.clientX-r.left)*(600/r.width); my=(e.clientY-r.top)*(400/r.height); }
+function mu(){ drg=null; }
+function loop(){
+  ctx.clearRect(0,0,600,400);
+  pts.forEach(p=>{
+    if(!p.pinned){ const vx=p.x-p.ox, vy=p.y-p.oy; p.ox=p.x; p.oy=p.y; p.x+=vx; p.y+=vy+0.2; }
+    if(drg===p){p.x=mx; p.y=my;}
+  });
+  for(let i=0;i<3;i++){
+    for(let j=lnks.length-1;j>=0;j--){
+      const l=lnks[j], dx=l.p1.x-l.p2.x, dy=l.p1.y-l.p2.y, dist=Math.hypot(dx,dy), diff=(l.d-dist)/dist;
+      if(dist>l.d*3){ lnks.splice(j,1); continue; } // Rip
+      const ox=dx*0.5*diff, oy=dy*0.5*diff;
+      if(!l.p1.pinned){l.p1.x+=ox; l.p1.y+=oy;} if(!l.p2.pinned){l.p2.x-=ox; l.p2.y-=oy;}
+    }
+  }
+  ctx.beginPath(); ctx.strokeStyle='#3b82f6'; ctx.lineWidth=1.5;
+  lnks.forEach(l=>{ ctx.moveTo(l.p1.x, l.p1.y); ctx.lineTo(l.p2.x, l.p2.y); }); ctx.stroke();
+  requestAnimationFrame(loop);
+} st(); loop();
 </script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">

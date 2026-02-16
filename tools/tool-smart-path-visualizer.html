@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Unbeatable Tic-Tac-Toe"
-category: "Games"
-description: "Play against an AI programmed using the Minimax algorithm. It is mathematically impossible to beat it."
-permalink: /tools/game-unbeatable-tic-tac-toe.html
+title: "Smart Path Finder"
+category: "Developer"
+description: "Click and drag to draw walls. Then watch the algorithm instantly flood the maze to find the absolute shortest path!"
+permalink: /tools/tool-smart-path-visualizer.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Play against an AI programmed using the Minimax algorithm. It is mathematically impossible to beat it.">
-  <meta property="og:title" content="Unbeatable Tic-Tac-Toe">
-  <meta property="og:description" content="Play against an AI programmed using the Minimax algorithm. It is mathematically impossible to beat it.">
+  <meta name="description" content="Click and drag to draw walls. Then watch the algorithm instantly flood the maze to find the absolute shortest path!">
+  <meta property="og:title" content="Smart Path Finder">
+  <meta property="og:description" content="Click and drag to draw walls. Then watch the algorithm instantly flood the maze to find the absolute shortest path!">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Unbeatable Tic-Tac-Toe">
-  <meta name="twitter:description" content="Play against an AI programmed using the Minimax algorithm. It is mathematically impossible to beat it.">
+  <meta name="twitter:title" content="Smart Path Finder">
+  <meta name="twitter:description" content="Click and drag to draw walls. Then watch the algorithm instantly flood the maze to find the absolute shortest path!">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Unbeatable Tic-Tac-Toe</title>
+  <title>Smart Path Finder</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,36 +39,38 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Unbeatable Tic-Tac-Toe</h1>
-<div id="msg" style="text-align:center;font-size:2rem;font-weight:bold;color:var(--primary);margin-bottom:20px;">Your Turn (X)</div>
-<div id="grid" style="display:grid;grid-template-columns:repeat(3,1fr); width:300px; height:300px; gap:5px; background:var(--border); padding:5px; border-radius:12px; margin:0 auto 20px;"></div>
-<button onclick="st()">Restart Game</button>
+    <h1>Smart Path Finder</h1>
+<div class="card" style="padding:10px;background:#f8fafc;width:fit-content;margin:0 auto 20px;border:4px solid var(--border);cursor:crosshair;" onmousedown="md(event)" onmousemove="mm(event)" onmouseup="dr=false" onmouseleave="dr=false">
+  <canvas id="cvs" width="300" height="300" style="display:block;"></canvas>
+</div>
+<div class="row">
+  <button onclick="find()" style="background:var(--success);">Find Shortest Path</button>
+  <button onclick="st()" style="background:var(--danger);">Clear Map</button>
+</div>
 <script>
-let b, run=true; const win=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
-function st(){ b=['','','','','','','','','']; run=true; msg("Your Turn (X)", 'var(--primary)'); drw(); }
-function msg(t,c){ const m=document.getElementById('msg'); m.innerText=t; m.style.color=c; }
-function chkW(brd, p){ return win.some(w=>brd[w[0]]===p&&brd[w[1]]===p&&brd[w[2]]===p); }
-function mm(brd, d, isMax){
-  if(chkW(brd,'O'))return 10-d; if(chkW(brd,'X'))return d-10; if(!brd.includes(''))return 0;
-  let bst = isMax?-999:999;
-  for(let i=0;i<9;i++){
-    if(brd[i]===''){ brd[i]=isMax?'O':'X'; const val=mm(brd, d+1, !isMax); brd[i]=''; bst=isMax?Math.max(bst,val):Math.min(bst,val); }
-  } return bst;
-}
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+let grid, dr=false, run=false; const s=15, w=20, h=20;
+function st(){ grid=Array(w).fill().map(()=>Array(h).fill(0)); run=false; drw(); }
+function md(e){ dr=true; mm(e); }
+function mm(e){ if(!dr||run)return; const r=cvs.getBoundingClientRect(); const x=Math.floor((e.clientX-r.left)/s), y=Math.floor((e.clientY-r.top)/s); if(x>0&&x<w-1&&y>=0&&y<h) grid[x][y]=1; drw(); }
 function drw(){
-  const g=document.getElementById('grid'); g.innerHTML='';
-  b.forEach((v,i)=>g.innerHTML+=`<div style="background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:4rem;font-weight:bold;cursor:pointer;color:${v==='X'?'var(--primary)':'var(--danger)'};" onclick="clk(${i})">${v}</div>`);
+  ctx.clearRect(0,0,300,300);
+  for(let x=0;x<w;x++) for(let y=0;y<h;y++){
+    ctx.fillStyle = (x===0&&y===0)?'#3b82f6':(x===w-1&&y===h-1)?'#10b981':grid[x][y]===1?'#334155':grid[x][y]===2?'#bae6fd':grid[x][y]===3?'#fde047':'#fff';
+    ctx.fillRect(x*s, y*s, s-1, s-1);
+  }
 }
-function clk(i){
-  if(!run||b[i]!=='')return; b[i]='X'; drw();
-  if(chkW(b,'X')){run=false;return msg("You Win? (Bug)!", 'var(--success)');} if(!b.includes('')){run=false;return msg("It's a Draw!", '#64748b');}
-  msg("AI is thinking...", 'var(--danger)'); run=false;
-  setTimeout(()=>{
-    let bst=-999, mv=-1;
-    for(let j=0;j<9;j++){ if(b[j]===''){ b[j]='O'; const val=mm(b,0,false); b[j]=''; if(val>bst){bst=val; mv=j;} } }
-    b[mv]='O'; drw(); run=true; msg("Your Turn (X)", 'var(--primary)');
-    if(chkW(b,'O')){run=false; msg("AI Wins!", 'var(--danger)');} else if(!b.includes('')){run=false; msg("It's a Draw!", '#64748b');}
-  }, 100);
+async function find(){
+  if(run)return; run=true; let q=[{x:0,y:0,p:[]}], vis=Array(w).fill().map(()=>Array(h).fill(false)); vis[0][0]=true;
+  while(q.length>0){
+    const c=q.shift();
+    if(c.x===w-1 && c.y===h-1){ c.p.forEach(p=>{if(grid[p.x][p.y]!==3)grid[p.x][p.y]=3;}); drw(); return; }
+    if(c.x!==0||c.y!==0) grid[c.x][c.y]=2; drw(); await new Promise(r=>setTimeout(r,5));
+    [[0,1],[1,0],[0,-1],[-1,0]].forEach(d=>{
+      const nx=c.x+d[0], ny=c.y+d[1];
+      if(nx>=0&&nx<w&&ny>=0&&ny<h && !vis[nx][ny] && grid[nx][ny]!==1){ vis[nx][ny]=true; q.push({x:nx,y:ny,p:[...c.p, {x:nx,y:ny}]}); }
+    });
+  } alert("No path exists!");
 } st();
 </script>
   </div>
