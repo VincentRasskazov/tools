@@ -1,0 +1,81 @@
+---
+layout: null
+title: "Bridge Builder Physics Test"
+category: "Games"
+description: "Draw physical lines across the gap. Press play to drop a heavy red box and see if your bridge design can hold the weight!"
+permalink: /tools/toy-physics-bridge-builder.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Draw physical lines across the gap. Press play to drop a heavy red box and see if your bridge design can hold the weight!">
+  <meta property="og:title" content="Bridge Builder Physics Test">
+  <meta property="og:description" content="Draw physical lines across the gap. Press play to drop a heavy red box and see if your bridge design can hold the weight!">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bridge Builder Physics Test">
+  <meta name="twitter:description" content="Draw physical lines across the gap. Press play to drop a heavy red box and see if your bridge design can hold the weight!">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Bridge Builder Physics Test</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Bridge Builder Physics</h1>
+<div class="card" style="padding:0;overflow:hidden;background:#f1f5f9;border:4px solid var(--border);cursor:crosshair;height:300px;" onmousedown="md(event)" onmousemove="mm(event)" onmouseup="mu()">
+  <canvas id="cvs" width="600" height="300" style="display:block;width:100%;"></canvas>
+</div>
+<div class="row">
+  <button onclick="test()" style="background:var(--success);">Drop Weight</button>
+  <button onclick="lns=[];run=false;drw();" style="background:var(--danger);">Clear Bridge</button>
+</div>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+let lns=[], box, dr=false, sx, sy, mx, my, run=false;
+function drw(){
+  ctx.clearRect(0,0,600,300); ctx.fillStyle='#334155'; ctx.fillRect(0,150,150,150); ctx.fillRect(450,150,150,150); // Cliffs
+  ctx.strokeStyle='#3b82f6'; ctx.lineWidth=4; ctx.lineCap='round';
+  lns.forEach(l=>{ctx.beginPath();ctx.moveTo(l.x1,l.y1);ctx.lineTo(l.x2,l.y2);ctx.stroke();});
+  if(dr){ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(mx,my);ctx.stroke();}
+  if(run){ ctx.fillStyle='#ef4444'; ctx.fillRect(box.x, box.y, box.s, box.s); }
+}
+function md(e){ if(run)return; dr=true; const r=cvs.getBoundingClientRect(); sx=(e.clientX-r.left)*(600/r.width); sy=(e.clientY-r.top)*(300/r.height); }
+function mm(e){ if(!dr)return; const r=cvs.getBoundingClientRect(); mx=(e.clientX-r.left)*(600/r.width); my=(e.clientY-r.top)*(300/r.height); drw(); }
+function mu(){ if(dr){ lns.push({x1:sx,y1:sy,x2:mx,y2:my}); dr=false; drw(); } }
+function test(){ box={x:280, y:0, vy:0, s:40}; run=true; loop(); }
+function loop(){
+  if(!run)return; box.vy+=0.3; box.y+=box.vy; // Gravity
+  // Simple AABB vs Line intersection check
+  lns.forEach(l=>{
+    if(box.x<Math.max(l.x1,l.x2) && box.x+box.s>Math.min(l.x1,l.x2) && box.y+box.s>Math.min(l.y1,l.y2) && box.y+box.s-box.vy<=Math.max(l.y1,l.y2)+5){
+      box.y=Math.min(l.y1,l.y2)-box.s; box.vy=0; // Stop on line
+    }
+  }); drw();
+  if(box.y>300){ run=false; alert("Bridge Collapsed!"); drw(); }
+  else requestAnimationFrame(loop);
+} drw();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

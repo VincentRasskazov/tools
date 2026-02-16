@@ -1,0 +1,82 @@
+---
+layout: null
+title: "Laser Mirror Reflection Puzzle"
+category: "Games"
+description: "Click to rotate the blue mirrors. Guide the red laser beam from the start point to hit the green target!"
+permalink: /tools/game-laser-mirror-bounce.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Click to rotate the blue mirrors. Guide the red laser beam from the start point to hit the green target!">
+  <meta property="og:title" content="Laser Mirror Reflection Puzzle">
+  <meta property="og:description" content="Click to rotate the blue mirrors. Guide the red laser beam from the start point to hit the green target!">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Laser Mirror Reflection Puzzle">
+  <meta name="twitter:description" content="Click to rotate the blue mirrors. Guide the red laser beam from the start point to hit the green target!">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Laser Mirror Reflection Puzzle</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Laser Mirror Puzzle</h1>
+<div class="card" style="padding:10px;background:#000;display:flex;justify-content:center;">
+  <div id="brd" style="display:grid;grid-template-columns:repeat(5, 50px);gap:2px;position:relative;">
+    <canvas id="cvs" width="258" height="258" style="position:absolute;top:0;left:0;pointer-events:none;"></canvas>
+  </div>
+</div>
+<button onclick="st()">Restart Level</button>
+<p style="text-align:center;color:#64748b;font-weight:bold;">Click blue tiles to rotate mirrors.</p>
+<script>
+const map=[0,1,0,0,0, 0,0,0,1,0, 2,0,1,0,3, 0,1,0,0,0, 0,0,0,1,0]; // 1=mirror(/), 4=mirror(\), 2=start, 3=end
+let b=[]; const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+function st(){ b=[...map]; drw(); }
+function drw(){
+  const g=document.getElementById('brd'); g.innerHTML='<canvas id="cvs" width="258" height="258" style="position:absolute;top:0;left:0;pointer-events:none;"></canvas>';
+  const ctx=document.getElementById('cvs').getContext('2d'); ctx.clearRect(0,0,258,258);
+  
+  b.forEach((v,i)=>{
+    let bg='#1e293b', txt='';
+    if(v===2)bg='#ef4444'; else if(v===3)bg='#10b981'; else if(v===1)txt='╱'; else if(v===4)txt='╲';
+    g.innerHTML+=`<div style="width:50px;height:50px;background:${bg};color:#3b82f6;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:bold;cursor:${(v===1||v===4)?'pointer':'default'};" onclick="clk(${i})">${txt}</div>`;
+  });
+  
+  // Trace Laser
+  let x=0, y=2, dx=1, dy=0; ctx.strokeStyle='#ef4444'; ctx.lineWidth=4; ctx.beginPath(); ctx.moveTo(25, 129);
+  for(let step=0;step<20;step++){
+    x+=dx; y+=dy; if(x<0||x>4||y<0||y>4)break;
+    ctx.lineTo(x*52+25, y*52+25);
+    const cell=b[y*5+x];
+    if(cell===1){ const tx=dx; dx=-dy; dy=-tx; } // '/' mirror
+    if(cell===4){ const tx=dx; dx=dy; dy=tx; } // '\' mirror
+    if(cell===3){ setTimeout(()=>alert("Target Hit!"),50); break; }
+  } ctx.stroke();
+}
+function clk(i){ if(b[i]===1)b[i]=4; else if(b[i]===4)b[i]=1; drw(); } st();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
