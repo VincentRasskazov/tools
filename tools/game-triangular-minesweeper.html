@@ -1,0 +1,100 @@
+---
+layout: null
+title: "Triangle Grid Minesweeper"
+category: "Games"
+description: "Minesweeper is way harder on a triangle grid! Each triangle touches up to 12 neighbors. Click to reveal, Shift-Click to flag."
+permalink: /tools/game-triangular-minesweeper.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Minesweeper is way harder on a triangle grid! Each triangle touches up to 12 neighbors. Click to reveal, Shift-Click to flag.">
+  <meta property="og:title" content="Triangle Grid Minesweeper">
+  <meta property="og:description" content="Minesweeper is way harder on a triangle grid! Each triangle touches up to 12 neighbors. Click to reveal, Shift-Click to flag.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Triangle Grid Minesweeper">
+  <meta name="twitter:description" content="Minesweeper is way harder on a triangle grid! Each triangle touches up to 12 neighbors. Click to reveal, Shift-Click to flag.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Triangle Grid Minesweeper</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+canvas { touch-action: none; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Triangle Minesweeper</h1>
+<div class="row" style="margin-bottom:10px;text-align:center;"><div style="font-size:1.5rem;font-weight:bold;color:var(--danger);">Bombs: <span id="bmb">20</span></div></div>
+<div class="card" style="padding:0;background:#0f172a;display:flex;justify-content:center;height:300px;overflow:hidden;" oncontextmenu="event.preventDefault()">
+  <canvas id="cvs" width="600" height="300" style="display:block;cursor:pointer;" onmousedown="clk(event)"></canvas>
+</div>
+<button onclick="st()">Restart Map</button>
+<p style="text-align:center;color:#64748b;font-weight:bold;">Shift-Click to Flag.</p>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+const W=40, H=34.64, ROWS=8, COLS=28; let grid=[], run=false;
+function getPts(c,r){ const px=c*(W/2), py=r*H, up=(c+r)%2!==0; return up?[{x:px,y:py+H},{x:px+W,y:py+H},{x:px+W/2,y:py}]:[{x:px,y:py},{x:px+W,y:py},{x:px+W/2,y:py+H}]; }
+function st(){
+  grid=[]; for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++)grid.push({c,r,v:0,rev:false,flg:false,pts:getPts(c,r)});
+  let p=0; while(p<20){const i=Math.floor(Math.random()*grid.length); if(grid[i].v!==9){grid[i].v=9; p++;}}
+  grid.forEach(t=>{
+    if(t.v===9)return; let cnt=0;
+    grid.forEach(n=>{ if(n.v===9 && n!==t && Math.hypot((t.pts[0].x+t.pts[1].x+t.pts[2].x)/3 - (n.pts[0].x+n.pts[1].x+n.pts[2].x)/3, (t.pts[0].y+t.pts[1].y+t.pts[2].y)/3 - (n.pts[0].y+n.pts[1].y+n.pts[2].y)/3)<W+5) cnt++; });
+    t.v=cnt;
+  }); run=true; drw();
+}
+function drw(){
+  ctx.clearRect(0,0,600,300); let flgs=0;
+  grid.forEach(t=>{
+    if(t.flg)flgs++;
+    ctx.beginPath(); ctx.moveTo(t.pts[0].x,t.pts[0].y); ctx.lineTo(t.pts[1].x,t.pts[1].y); ctx.lineTo(t.pts[2].x,t.pts[2].y); ctx.closePath();
+    ctx.fillStyle=t.rev?(t.v===9?'#ef4444':'#e2e8f0'):'#64748b'; ctx.fill(); ctx.strokeStyle='#334155'; ctx.stroke();
+    const cx=(t.pts[0].x+t.pts[1].x+t.pts[2].x)/3, cy=(t.pts[0].y+t.pts[1].y+t.pts[2].y)/3;
+    if(t.flg){ ctx.fillStyle='#ef4444'; ctx.beginPath(); ctx.arc(cx,cy,5,0,Math.PI*2); ctx.fill(); }
+    else if(t.rev&&t.v>0&&t.v!==9){ ctx.fillStyle='#0f172a'; ctx.font='14px bold sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(t.v, cx, cy); }
+  }); document.getElementById('bmb').innerText=20-flgs;
+}
+function ptInTri(p, p0, p1, p2) {
+  var A = 0.5 * (-p1.y * p2.x + p0.y * (-p1.x + p2.x) + p0.x * (p1.y - p2.y) + p1.x * p2.y);
+  var sign = A < 0 ? -1 : 1;
+  var s = (p0.y * p2.x - p0.x * p2.y + (p2.y - p0.y) * p.x + (p0.x - p2.x) * p.y) * sign;
+  var t = (p0.x * p1.y - p0.y * p1.x + (p0.y - p1.y) * p.x + (p1.x - p0.x) * p.y) * sign;
+  return s > 0 && t > 0 && (s + t) < 2 * A * sign;
+}
+function clk(e){
+  if(!run)return; const r=cvs.getBoundingClientRect(), mx=(e.clientX-r.left)*(600/r.width), my=(e.clientY-r.top)*(300/r.height);
+  let trg=null; grid.forEach(t=>{if(ptInTri({x:mx,y:my}, t.pts[0], t.pts[1], t.pts[2])) trg=t;}); if(!trg)return;
+  if(e.button===2||e.shiftKey){ trg.flg=!trg.flg; drw(); return; }
+  if(trg.flg||trg.rev)return; trg.rev=true;
+  if(trg.v===9){ run=false; grid.forEach(t=>{if(t.v===9)t.rev=true;}); drw(); alert("BOOM!"); return; }
+  if(trg.v===0){
+    const q=[trg]; while(q.length>0){
+      const curr=q.pop();
+      grid.forEach(n=>{ if(!n.rev&&!n.flg && Math.hypot((curr.pts[0].x+curr.pts[1].x+curr.pts[2].x)/3 - (n.pts[0].x+n.pts[1].x+n.pts[2].x)/3, (curr.pts[0].y+curr.pts[1].y+curr.pts[2].y)/3 - (n.pts[0].y+n.pts[1].y+n.pts[2].y)/3)<W+5){ n.rev=true; if(n.v===0)q.push(n); } });
+    }
+  } drw();
+} st();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

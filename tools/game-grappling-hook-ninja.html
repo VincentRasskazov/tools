@@ -1,0 +1,88 @@
+---
+layout: null
+title: "Grappling Hook Physics Ninja"
+category: "Games"
+description: "Click anywhere on the ceiling to shoot your grappling hook. Swing using momentum physics to cross the endless treacherous chasm!"
+permalink: /tools/game-grappling-hook-ninja.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Click anywhere on the ceiling to shoot your grappling hook. Swing using momentum physics to cross the endless treacherous chasm!">
+  <meta property="og:title" content="Grappling Hook Physics Ninja">
+  <meta property="og:description" content="Click anywhere on the ceiling to shoot your grappling hook. Swing using momentum physics to cross the endless treacherous chasm!">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Grappling Hook Physics Ninja">
+  <meta name="twitter:description" content="Click anywhere on the ceiling to shoot your grappling hook. Swing using momentum physics to cross the endless treacherous chasm!">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Grappling Hook Physics Ninja</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+canvas { touch-action: none; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Grappling Ninja</h1>
+<div class="row" style="margin-bottom:10px;text-align:center;"><div style="font-size:1.5rem;font-weight:bold;color:var(--text);">Distance: <span id="sc">0</span></div></div>
+<div class="card" style="padding:0;background:#0f172a;border:4px solid var(--border);cursor:crosshair;" onmousedown="md(event)" onmouseup="dr=null">
+  <canvas id="cvs" width="600" height="300" style="display:block;width:100%;"></canvas>
+</div>
+<button onclick="st()">Start Swinging</button>
+<p style="text-align:center;color:#64748b;font-weight:bold;">Click and Hold ceiling to grapple.</p>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+let p, dr=null, camX=0, sc=0, run=false, plats=[];
+function st(){ p={x:100,y:200,vx:5,vy:-5}; dr=null; camX=0; sc=0; run=true; plats=[]; for(let i=0;i<10;i++)plats.push({x:i*200,y:250+Math.random()*50,w:100,h:50}); loop(); }
+function md(e){ if(!run)return; const r=cvs.getBoundingClientRect(); dr={x:(e.clientX-r.left)*(600/r.width)+camX, y:(e.clientY-r.top)*(300/r.height)}; if(dr.y>100)dr=null; } // Only grab ceiling
+function loop(){
+  if(!run)return; ctx.clearRect(0,0,600,300);
+  p.vy+=0.3; p.x+=p.vx; p.y+=p.vy; p.vx*=0.99; p.vy*=0.99; // Grav & drag
+  
+  if(dr){
+    const dx=p.x-dr.x, dy=p.y-dr.y, dist=Math.hypot(dx,dy);
+    if(dist>150){ const diff=(150-dist)/dist; p.vx-=dx*diff*0.1; p.vy-=dy*diff*0.1; } // Elastic rope
+    ctx.strokeStyle='#fff'; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(p.x-camX, p.y); ctx.lineTo(dr.x-camX, dr.y); ctx.stroke();
+  }
+  
+  if(p.x-camX > 300) camX = p.x-300; // Scroll
+  sc = Math.max(sc, Math.floor(p.x/10)); document.getElementById('sc').innerText=sc;
+  
+  ctx.fillStyle='#334155'; ctx.fillRect(0,0,600,100); // Ceiling
+  
+  let onPlat=false;
+  plats.forEach(pl=>{
+    if(pl.x-camX<-100){ pl.x+=2000; pl.y=250+Math.random()*50; } // Recycle
+    ctx.fillStyle='#10b981'; ctx.fillRect(pl.x-camX, pl.y, pl.w, pl.h);
+    if(p.x>pl.x && p.x<pl.x+pl.w && p.y+10>pl.y && p.y-p.vy<=pl.y){ p.y=pl.y-10; p.vy=0; p.vx*=0.9; onPlat=true; }
+  });
+  
+  ctx.fillStyle='#ef4444'; ctx.fillRect(p.x-camX-10, p.y-10, 20, 20);
+  
+  if(p.y>350){ run=false; alert("Fell into the abyss! Distance: "+sc); }
+  else requestAnimationFrame(loop);
+}
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
