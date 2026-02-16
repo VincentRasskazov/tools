@@ -1,0 +1,72 @@
+---
+layout: null
+title: "Bouncing Jelly Cube Physics"
+category: "Physics"
+description: "Click anywhere on the screen to toss the cube. It is built out of spring-connected particles, giving it a realistic jello bounce."
+permalink: /tools/toy-bouncing-jelly-cube.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Click anywhere on the screen to toss the cube. It is built out of spring-connected particles, giving it a realistic jello bounce.">
+  <meta property="og:title" content="Bouncing Jelly Cube Physics">
+  <meta property="og:description" content="Click anywhere on the screen to toss the cube. It is built out of spring-connected particles, giving it a realistic jello bounce.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bouncing Jelly Cube Physics">
+  <meta name="twitter:description" content="Click anywhere on the screen to toss the cube. It is built out of spring-connected particles, giving it a realistic jello bounce.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Bouncing Jelly Cube Physics</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Bouncing Jelly Cube</h1>
+<div class="card" style="padding:0;overflow:hidden;background:#f8fafc;border:4px solid var(--border);height:400px;" onmousedown="toss(event)">
+  <canvas id="cvs" width="600" height="400" style="width:100%;height:100%;display:block;"></canvas>
+</div>
+<p style="text-align:center;color:#64748b;font-weight:bold;">Click above to throw the jelly!</p>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+let pts=[{x:250,y:50},{x:350,y:50},{x:350,y:150},{x:250,y:150}]; pts.forEach(p=>{p.vx=0;p.vy=0});
+const sp=[[0,1,100],[1,2,100],[2,3,100],[3,0,100],[0,2,141.4],[1,3,141.4]]; // Perimeter + diagonals
+function toss(e){ const r=cvs.getBoundingClientRect(); const mx=(e.clientX-r.left)*(600/r.width), my=(e.clientY-r.top)*(400/r.height); pts.forEach(p=>{p.x=mx+(p.x-300); p.y=my+(p.y-100); p.vy=-5;}); }
+function loop(){
+  ctx.clearRect(0,0,600,400);
+  pts.forEach(p=>{
+    p.vy+=0.5; p.x+=p.vx; p.y+=p.vy; p.vx*=0.99; p.vy*=0.99;
+    if(p.y>390){p.y=390; p.vy*=-0.8; p.vx*=0.9;} if(p.x<10){p.x=10; p.vx*=-0.8;} if(p.x>590){p.x=590; p.vx*=-0.8;}
+  });
+  for(let i=0;i<3;i++) sp.forEach(s=>{
+    const p1=pts[s[0]], p2=pts[s[1]], dx=p2.x-p1.x, dy=p2.y-p1.y, d=Math.hypot(dx,dy), diff=(s[2]-d)/d*0.1;
+    const ox=dx*diff, oy=dy*diff; p1.x-=ox; p1.y-=oy; p2.x+=ox; p2.y+=oy;
+  });
+  ctx.beginPath(); ctx.moveTo(pts[0].x, pts[0].y); ctx.lineTo(pts[1].x, pts[1].y); ctx.lineTo(pts[2].x, pts[2].y); ctx.lineTo(pts[3].x, pts[3].y); ctx.closePath();
+  ctx.fillStyle='rgba(236,72,153,0.8)'; ctx.fill(); ctx.strokeStyle='#be185d'; ctx.lineWidth=4; ctx.stroke();
+  requestAnimationFrame(loop);
+} loop();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
