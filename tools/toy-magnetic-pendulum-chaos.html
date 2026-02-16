@@ -1,0 +1,71 @@
+---
+layout: null
+title: "Magnetic Pendulum Simulator"
+category: "Physics"
+description: "Release a metallic pendulum over three powerful magnets. Watch it swing wildly until friction forces it to settle on one."
+permalink: /tools/toy-magnetic-pendulum-chaos.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Release a metallic pendulum over three powerful magnets. Watch it swing wildly until friction forces it to settle on one.">
+  <meta property="og:title" content="Magnetic Pendulum Simulator">
+  <meta property="og:description" content="Release a metallic pendulum over three powerful magnets. Watch it swing wildly until friction forces it to settle on one.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Magnetic Pendulum Simulator">
+  <meta name="twitter:description" content="Release a metallic pendulum over three powerful magnets. Watch it swing wildly until friction forces it to settle on one.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Magnetic Pendulum Simulator</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Magnetic Pendulum</h1>
+<div class="card" style="padding:0;overflow:hidden;background:#000;cursor:crosshair;height:400px;" id="box" onmousedown="md(event)">
+  <canvas id="cvs" width="400" height="400" style="display:block;margin:0 auto;"></canvas>
+</div>
+<p style="text-align:center;color:#64748b;font-weight:bold;">Click anywhere to drop the pendulum.</p>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+const mags=[{x:200,y:100,c:'#ef4444'}, {x:113,y:250,c:'#3b82f6'}, {x:287,y:250,c:'#10b981'}];
+let px=200, py=200, vx=0, vy=0;
+function md(e){ const r=cvs.getBoundingClientRect(); px=(e.clientX-r.left)*(400/r.width); py=(e.clientY-r.top)*(400/r.height); vx=0; vy=0; }
+function loop(){
+  ctx.fillStyle='rgba(0,0,0,0.1)'; ctx.fillRect(0,0,400,400);
+  mags.forEach(m=>{ ctx.fillStyle=m.c; ctx.beginPath(); ctx.arc(m.x,m.y,10,0,Math.PI*2); ctx.fill(); });
+  let fx=0, fy=0;
+  mags.forEach(m=>{
+    const dx=m.x-px, dy=m.y-py, dsq=dx*dx+dy*dy+100; // soft factor
+    const d=Math.sqrt(dsq); fx+=(dx/d)*(500/dsq); fy+=(dy/d)*(500/dsq);
+  });
+  fx += (200-px)*0.01; fy += (200-py)*0.01; // Gravity to center
+  vx+=fx; vy+=fy; vx*=0.98; vy*=0.98; px+=vx; py+=vy; // Friction & move
+  ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(px,py,4,0,Math.PI*2); ctx.fill();
+  requestAnimationFrame(loop);
+} loop();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
