@@ -1,0 +1,81 @@
+---
+layout: null
+title: "Gravity Slingshot Golf"
+category: "Games"
+description: "Drag back to putt! Navigate the ball to the green hole. Black holes exert mathematically accurate `1/r^2` gravitational pulls that curve your trajectory."
+permalink: /tools/game-gravity-golf-slingshot.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Drag back to putt! Navigate the ball to the green hole. Black holes exert mathematically accurate `1/r^2` gravitational pulls that curve your trajectory.">
+  <meta property="og:title" content="Gravity Slingshot Golf">
+  <meta property="og:description" content="Drag back to putt! Navigate the ball to the green hole. Black holes exert mathematically accurate `1/r^2` gravitational pulls that curve your trajectory.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Gravity Slingshot Golf">
+  <meta name="twitter:description" content="Drag back to putt! Navigate the ball to the green hole. Black holes exert mathematically accurate `1/r^2` gravitational pulls that curve your trajectory.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Gravity Slingshot Golf</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); font-family: inherit; }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+canvas { touch-action: none; user-select: none; max-width: 100%; display: block; margin: 0 auto; border-radius: 12px; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Gravity Golf</h1>
+<div class="card" style="padding:0;background:#1e293b;border:4px solid #0f172a;cursor:crosshair;" onmousedown="md(event)" onmousemove="mm(event)" onmouseup="mu()">
+  <canvas id="cvs" width="600" height="400" style="display:block;width:100%;"></canvas>
+</div>
+<button onclick="st()">Restart Hole</button>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+let b, h, bh=[], dr=false, mx, my;
+function st(){ b={x:50,y:200,vx:0,vy:0}; h={x:550,y:200}; bh=[{x:300,y:100,m:1500},{x:300,y:300,m:1500}]; dr=false; }
+function md(e){ if(Math.hypot(b.vx,b.vy)<0.1){dr=true;mm(e);} }
+function mm(e){ if(dr){const r=cvs.getBoundingClientRect(); mx=(e.clientX-r.left)*(600/r.width); my=(e.clientY-r.top)*(400/r.height);} }
+function mu(){ if(dr){b.vx=(b.x-mx)*0.1; b.vy=(b.y-my)*0.1; dr=false;} }
+function loop(){
+  ctx.clearRect(0,0,600,400);
+  ctx.fillStyle='#10b981'; ctx.beginPath(); ctx.arc(h.x,h.y,20,0,Math.PI*2); ctx.fill(); ctx.fillStyle='#000'; ctx.beginPath(); ctx.arc(h.x,h.y,12,0,Math.PI*2); ctx.fill();
+  
+  bh.forEach(blk=>{ ctx.fillStyle='#000'; ctx.beginPath(); ctx.arc(blk.x,blk.y,25,0,Math.PI*2); ctx.fill(); ctx.shadowBlur=20; ctx.shadowColor='#ec4899'; ctx.stroke(); ctx.shadowBlur=0; });
+  
+  if(dr){ ctx.strokeStyle='rgba(255,255,255,0.5)'; ctx.lineWidth=3; ctx.beginPath(); ctx.moveTo(b.x,b.y); ctx.lineTo(b.x+(b.x-mx),b.y+(b.y-my)); ctx.stroke(); }
+  
+  if(Math.hypot(b.vx,b.vy)>0.01){
+    bh.forEach(blk=>{
+      const dx=blk.x-b.x, dy=blk.y-b.y, dsq=dx*dx+dy*dy, d=Math.sqrt(dsq);
+      if(d>10){ b.vx+=(blk.m/dsq)*(dx/d); b.vy+=(blk.m/dsq)*(dy/d); }
+    });
+    b.x+=b.vx; b.y+=b.vy; b.vx*=0.99; b.vy*=0.99;
+    if(b.x<10){b.x=10;b.vx*=-0.8;} if(b.x>590){b.x=590;b.vx*=-0.8;} if(b.y<10){b.y=10;b.vy*=-0.8;} if(b.y>390){b.y=390;b.vy*=-0.8;}
+    
+    if(Math.hypot(b.x-h.x, b.y-h.y)<15){ b.vx=0; b.vy=0; b.x=h.x; b.y=h.y; setTimeout(()=>alert("Hole in one!"), 50); }
+  }
+  
+  ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(b.x,b.y,8,0,Math.PI*2); ctx.fill();
+  requestAnimationFrame(loop);
+} st(); loop();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

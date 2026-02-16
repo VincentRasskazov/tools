@@ -1,0 +1,78 @@
+---
+layout: null
+title: "Squishy Soft-Body Block Drop"
+category: "Games"
+description: "Like Tetris, but the physics engine is drunk. Click to drop soft-body jello blocks into the container. Watch Hooke's law spring mechanics deform them into a messy pile."
+permalink: /tools/game-soft-body-tetris-drop.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Like Tetris, but the physics engine is drunk. Click to drop soft-body jello blocks into the container. Watch Hooke's law spring mechanics deform them into a messy pile.">
+  <meta property="og:title" content="Squishy Soft-Body Block Drop">
+  <meta property="og:description" content="Like Tetris, but the physics engine is drunk. Click to drop soft-body jello blocks into the container. Watch Hooke's law spring mechanics deform them into a messy pile.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Squishy Soft-Body Block Drop">
+  <meta name="twitter:description" content="Like Tetris, but the physics engine is drunk. Click to drop soft-body jello blocks into the container. Watch Hooke's law spring mechanics deform them into a messy pile.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>Squishy Soft-Body Block Drop</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); font-family: inherit; }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+canvas { touch-action: none; user-select: none; max-width: 100%; display: block; margin: 0 auto; border-radius: 12px; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Squishy Block Drop</h1>
+<div class="card" style="padding:0;background:#1e293b;border:4px solid #0f172a;border-top:none;height:400px;cursor:crosshair;" onmousedown="drp(event)">
+  <canvas id="cvs" width="400" height="400" style="display:block;width:100%;height:100%;"></canvas>
+</div>
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+let bxs=[];
+function drp(e){
+  const r=cvs.getBoundingClientRect(), mx=(e.clientX-r.left)*(400/r.width);
+  const p=[{x:mx-15,y:0,vx:0,vy:0}, {x:mx+15,y:0,vx:0,vy:0}, {x:mx+15,y:30,vx:0,vy:0}, {x:mx-15,y:30,vx:0,vy:0}];
+  const l=[{a:p[0],b:p[1],d:30},{a:p[1],b:p[2],d:30},{a:p[2],b:p[3],d:30},{a:p[3],b:p[0],d:30},{a:p[0],b:p[2],d:42.4},{a:p[1],b:p[3],d:42.4}];
+  bxs.push({p,l,c:`hsl(${Math.random()*360},80%,50%)`});
+}
+function loop(){
+  ctx.clearRect(0,0,400,400);
+  bxs.forEach(bx=>{
+    bx.p.forEach(p=>{ p.vy+=0.5; p.x+=p.vx; p.y+=p.vy; p.vx*=0.9; p.vy*=0.9; if(p.y>390){p.y=390; p.vy*=-0.5; p.vx*=0.8;} if(p.x<10){p.x=10; p.vx*=-0.5;} if(p.x>390){p.x=390; p.vx*=-0.5;} });
+    
+    // Spring constraints
+    for(let i=0;i<3;i++) bx.l.forEach(lk=>{
+      const dx=lk.b.x-lk.a.x, dy=lk.b.y-lk.a.y, d=Math.hypot(dx,dy), diff=(d-lk.d)*0.1;
+      const fx=(dx/d)*diff, fy=(dy/d)*diff;
+      lk.a.vx+=fx; lk.a.vy+=fy; lk.b.vx-=fx; lk.b.vy-=fy;
+    });
+    
+    // Very simplified inter-box collision (repel vertices)
+    bxs.forEach(ob=>{ if(bx!==ob){ bx.p.forEach(p1=>{ ob.p.forEach(p2=>{ const dx=p2.x-p1.x, dy=p2.y-p1.y, d=Math.hypot(dx,dy); if(d<15){ const f=15-d; p1.vx-=dx*f*0.01; p1.vy-=dy*f*0.01; p2.vx+=dx*f*0.01; p2.vy+=dy*f*0.01; } }); }); } });
+    
+    ctx.fillStyle=bx.c; ctx.beginPath(); ctx.moveTo(bx.p[0].x,bx.p[0].y); ctx.lineTo(bx.p[1].x,bx.p[1].y); ctx.lineTo(bx.p[2].x,bx.p[2].y); ctx.lineTo(bx.p[3].x,bx.p[3].y); ctx.closePath(); ctx.fill(); ctx.stroke();
+  }); requestAnimationFrame(loop);
+} loop();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
