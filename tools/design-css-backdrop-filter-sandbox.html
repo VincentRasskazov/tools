@@ -1,0 +1,61 @@
+---
+layout: null
+title: "CSS backdrop-filter Sandbox"
+category: "Design"
+description: "Drag the glass pane over the background image to visually test combinations of `blur()`, `grayscale()`, and `invert()` backdrop filters in real-time."
+permalink: /tools/design-css-backdrop-filter-sandbox.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Drag the glass pane over the background image to visually test combinations of `blur()`, `grayscale()`, and `invert()` backdrop filters in real-time.">
+  <meta property="og:title" content="CSS backdrop-filter Sandbox">
+  <meta property="og:description" content="Drag the glass pane over the background image to visually test combinations of `blur()`, `grayscale()`, and `invert()` backdrop filters in real-time.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CSS backdrop-filter Sandbox">
+  <meta name="twitter:description" content="Drag the glass pane over the background image to visually test combinations of `blur()`, `grayscale()`, and `invert()` backdrop filters in real-time.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>CSS backdrop-filter Sandbox</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); font-family: inherit; }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+pre { margin: 0; font-family: monospace; white-space: pre-wrap; word-break: break-all; }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Backdrop Filter Sandbox</h1>
+<div class="card" style="padding:0;overflow:hidden;background:url('https://placehold.co/600x300/3b82f6/facc15?text=Background+Pattern') center/cover;height:300px;position:relative;" onmousemove="mm(event)">
+  <div id="pane" style="position:absolute;top:50px;left:150px;width:200px;height:200px;background:rgba(255,255,255,0.2);backdrop-filter:blur(5px) grayscale(50%);border:2px solid rgba(255,255,255,0.5);border-radius:12px;pointer-events:none;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:bold;text-shadow:0 1px 3px rgba(0,0,0,0.5);">DRAG MOUSE</div>
+</div>
+<div class="row" style="flex-wrap:wrap;gap:10px;">
+  <div class="card" style="flex:1;min-width:150px;padding:15px;"><label>Blur (px)</label><input type="range" id="b" min="0" max="20" value="5" oninput="u()"></div>
+  <div class="card" style="flex:1;min-width:150px;padding:15px;"><label>Grayscale (%)</label><input type="range" id="g" min="0" max="100" value="50" oninput="u()"></div>
+  <div class="card" style="flex:1;min-width:150px;padding:15px;"><label>Invert (%)</label><input type="range" id="i" min="0" max="100" value="0" oninput="u()"></div>
+</div>
+<script>
+function mm(e){ const r=e.target.getBoundingClientRect(), p=document.getElementById('pane'); p.style.left=(e.clientX-r.left-100)+'px'; p.style.top=(e.clientY-r.top-100)+'px'; }
+function u(){ const b=document.getElementById('b').value, g=document.getElementById('g').value, i=document.getElementById('i').value; document.getElementById('pane').style.backdropFilter=`blur(${b}px) grayscale(${g}%) invert(${i}%)`; }
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
