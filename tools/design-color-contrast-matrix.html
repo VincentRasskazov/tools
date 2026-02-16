@@ -1,0 +1,77 @@
+---
+layout: null
+title: "N x N Color Contrast Matrix"
+category: "Design"
+description: "Building a design system? Enter a comma-separated list of Hex colors. The tool generates an N x N matrix evaluating the WCAG contrast ratio of every single color combination."
+permalink: /tools/design-color-contrast-matrix.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Building a design system? Enter a comma-separated list of Hex colors. The tool generates an N x N matrix evaluating the WCAG contrast ratio of every single color combination.">
+  <meta property="og:title" content="N x N Color Contrast Matrix">
+  <meta property="og:description" content="Building a design system? Enter a comma-separated list of Hex colors. The tool generates an N x N matrix evaluating the WCAG contrast ratio of every single color combination.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="N x N Color Contrast Matrix">
+  <meta name="twitter:description" content="Building a design system? Enter a comma-separated list of Hex colors. The tool generates an N x N matrix evaluating the WCAG contrast ratio of every single color combination.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>N x N Color Contrast Matrix</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); font-family: inherit; }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+th, td { padding: 12px; border: 1px solid var(--border); text-align: left; }
+th { background: var(--bg); font-weight: bold; color: var(--primary); }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Color Contrast Matrix</h1>
+<div class="card"><input type="text" id="in" value="#ffffff, #000000, #3b82f6, #ef4444, #e2e8f0" placeholder="#fff, #000, #3b82f6" oninput="g()" style="font-family:monospace;font-size:1.2rem;"></div>
+<div class="card" style="padding:0;overflow-x:auto;">
+  <table id="tbl" style="text-align:center;font-family:monospace;margin:0;"></table>
+</div>
+<script>
+function lum(hex){
+  let rgb=hex.replace(/^#/,'').match(/.{2}/g); if(!rgb||rgb.length!==3)return 0;
+  rgb=rgb.map(x=>parseInt(x,16)/255);
+  rgb=rgb.map(x=>x<=0.03928 ? x/12.92 : Math.pow((x+0.055)/1.055, 2.4));
+  return 0.2126*rgb[0] + 0.7152*rgb[1] + 0.0722*rgb[2];
+}
+function g(){
+  const raw=document.getElementById('in').value.split(',').map(x=>x.trim()).filter(x=>/^#[0-9A-Fa-f]{6}$/.test(x));
+  const tbl=document.getElementById('tbl'); tbl.innerHTML=''; if(raw.length<2)return;
+  
+  let h=`<tr><th></th>`; raw.forEach(c=>h+=`<th style="background:${c};width:60px;"></th>`); h+=`</tr>`;
+  raw.forEach(r=>{
+    h+=`<tr><td style="background:${r};font-weight:bold;color:${lum(r)>0.5?'#000':'#fff'}">${r}</td>`;
+    raw.forEach(c=>{
+      const l1=lum(r), l2=lum(c); const ratio=(Math.max(l1,l2)+0.05)/(Math.min(l1,l2)+0.05);
+      const bg = ratio>=4.5 ? 'var(--success)' : ratio>=3.0 ? 'var(--warning)' : 'var(--danger)';
+      h+=`<td style="background:${r};"><div style="background:${bg};color:#fff;padding:5px;border-radius:4px;font-weight:bold;">${ratio.toFixed(2)}</div></td>`;
+    }); h+=`</tr>`;
+  }); tbl.innerHTML=h;
+} g();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
