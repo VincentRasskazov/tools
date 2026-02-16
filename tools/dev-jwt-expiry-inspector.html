@@ -1,0 +1,74 @@
+---
+layout: null
+title: "JWT Expiry Timestamp Inspector"
+category: "Developer"
+description: "Debugging auth tokens? Enter a JWT's `exp` or `iat` Unix timestamp to instantly see the exact local time, UTC time, and a live countdown to expiration."
+permalink: /tools/dev-jwt-expiry-inspector.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="description" content="Debugging auth tokens? Enter a JWT's `exp` or `iat` Unix timestamp to instantly see the exact local time, UTC time, and a live countdown to expiration.">
+  <meta property="og:title" content="JWT Expiry Timestamp Inspector">
+  <meta property="og:description" content="Debugging auth tokens? Enter a JWT's `exp` or `iat` Unix timestamp to instantly see the exact local time, UTC time, and a live countdown to expiration.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="JWT Expiry Timestamp Inspector">
+  <meta name="twitter:description" content="Debugging auth tokens? Enter a JWT's `exp` or `iat` Unix timestamp to instantly see the exact local time, UTC time, and a live countdown to expiration.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta charset="UTF-8">
+  <title>JWT Expiry Timestamp Inspector</title>
+  
+  <style>
+:root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+.tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); font-family: inherit; }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
+button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
+button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
+button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
+button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.row { display: flex; gap: 20px; } .row > div { flex: 1; }
+.card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
+.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+pre { margin: 0; font-family: monospace; white-space: pre-wrap; word-break: break-all; }
+table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+th, td { padding: 12px; border: 1px solid var(--border); text-align: left; font-family: monospace; }
+th { background: var(--bg); font-weight: bold; color: var(--primary); }
+</style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>JWT Expiry Inspector</h1>
+<div class="row" style="align-items:center;">
+  <div class="card" style="margin:0;flex:2;"><label>Unix Timestamp (Seconds)</label><input type="number" id="ts" value="1735689600" oninput="u()" style="margin:0;font-size:1.5rem;font-family:monospace;text-align:center;"></div>
+  <button onclick="document.getElementById('ts').value=Math.floor(Date.now()/1000);u()" style="margin:0;flex:1;background:#64748b;">Set to Now</button>
+</div>
+<div class="card" style="margin-top:20px;text-align:center;font-family:monospace;font-size:1.2rem;line-height:2;">
+  <div><strong>Local Time:</strong> <span id="loc" style="color:var(--primary);"></span></div>
+  <div><strong>UTC Time:</strong> <span id="utc" style="color:var(--success);"></span></div>
+  <hr style="border-color:var(--border);">
+  <div id="stat" style="font-size:2rem;font-weight:900;"></div>
+</div>
+<script>
+function u(){
+  const v=parseInt(document.getElementById('ts').value); if(isNaN(v))return;
+  const d=new Date(v*1000), now=new Date();
+  document.getElementById('loc').innerText=d.toLocaleString();
+  document.getElementById('utc').innerText=d.toUTCString();
+  const diff=d.getTime()-now.getTime(), sec=Math.floor(Math.abs(diff)/1000);
+  const st=document.getElementById('stat');
+  if(diff>0){ st.innerText=`Expires in ${sec} seconds`; st.style.color='var(--warning)'; }
+  else { st.innerText=`Expired ${sec} seconds ago`; st.style.color='var(--danger)'; }
+} u(); setInterval(u, 1000);
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
