@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Lunar Lander Vector Physics"
+title: "Grappling Hook Asteroids"
 category: "Games"
-description: "A deeply mathematical physics game. Use Left/Right arrows to rotate the ship, and Up arrow to thrust. Counteract gravity and momentum to land softly on the pad."
-permalink: /tools/game-lunar-lander-pro.html
+description: "Press Spacebar to fire a grappling hook at the nearest asteroid. Use the simulated spring physics to swing your ship across the perilous void."
+permalink: /tools/game-grappling-hook-physics.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="A deeply mathematical physics game. Use Left/Right arrows to rotate the ship, and Up arrow to thrust. Counteract gravity and momentum to land softly on the pad.">
-  <meta property="og:title" content="Lunar Lander Vector Physics">
-  <meta property="og:description" content="A deeply mathematical physics game. Use Left/Right arrows to rotate the ship, and Up arrow to thrust. Counteract gravity and momentum to land softly on the pad.">
+  <meta name="description" content="Press Spacebar to fire a grappling hook at the nearest asteroid. Use the simulated spring physics to swing your ship across the perilous void.">
+  <meta property="og:title" content="Grappling Hook Asteroids">
+  <meta property="og:description" content="Press Spacebar to fire a grappling hook at the nearest asteroid. Use the simulated spring physics to swing your ship across the perilous void.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Lunar Lander Vector Physics">
-  <meta name="twitter:description" content="A deeply mathematical physics game. Use Left/Right arrows to rotate the ship, and Up arrow to thrust. Counteract gravity and momentum to land softly on the pad.">
+  <meta name="twitter:title" content="Grappling Hook Asteroids">
+  <meta name="twitter:description" content="Press Spacebar to fire a grappling hook at the nearest asteroid. Use the simulated spring physics to swing your ship across the perilous void.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Lunar Lander Vector Physics</title>
+  <title>Grappling Hook Asteroids</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -38,44 +38,34 @@ canvas { touch-action: none; user-select: none; max-width: 100%; display: block;
 </head>
 <body>
   <div class="tool-container">
-    <h1>Lunar Lander Pro</h1>
-<div class="row" style="margin-bottom:10px;text-align:center;">
-  <div style="font-weight:bold;color:var(--primary);">Fuel: <span id="f">100</span></div>
-  <div style="font-weight:bold;color:var(--danger);">Velocity: <span id="v">0</span></div>
+    <h1>Grappling Hook Swing</h1>
+<div class="card" style="padding:0;background:#000;border:4px solid var(--border);height:400px;overflow:hidden;">
+  <canvas id="cvs" width="600" height="400" style="display:block;width:100%;height:100%;"></canvas>
 </div>
-<div class="card" style="padding:0;background:#000;border:4px solid var(--border);">
-  <canvas id="cvs" width="400" height="300" style="display:block;width:100%;"></canvas>
-</div>
-<button onclick="st()">Restart Mission</button>
+<p style="text-align:center;color:#64748b;font-weight:bold;">Press SPACE to Grapple/Release.</p>
 <script>
 const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
-let s, k={l:false,r:false,u:false}, run=true;
-window.onkeydown=e=>{if(e.key==='ArrowLeft')k.l=true; if(e.key==='ArrowRight')k.r=true; if(e.key==='ArrowUp'){k.u=true;e.preventDefault();} if(e.key.includes('Arrow'))e.preventDefault();};
-window.onkeyup=e=>{if(e.key==='ArrowLeft')k.l=false; if(e.key==='ArrowRight')k.r=false; if(e.key==='ArrowUp')k.u=false;};
-function st(){ s={x:200,y:20,vx:(Math.random()-0.5)*2,vy:0,a:-Math.PI/2,f:100}; run=true; loop(); }
+let p={x:50,y:200,vx:3,vy:0}, ast=[{x:200,y:100},{x:400,y:100},{x:300,y:300}], gr=null, k=false;
+window.onkeydown=e=>{if(e.key===' ')k=true; if(e.key===' '&&e.target===document.body)e.preventDefault();}; window.onkeyup=e=>{if(e.key===' ')k=false;};
 function loop(){
-  if(!run)return; ctx.clearRect(0,0,400,300);
-  ctx.fillStyle='#334155'; ctx.fillRect(0,280,400,20); // Moon surface
-  ctx.fillStyle='#10b981'; ctx.fillRect(170,275,60,5); // Pad
+  ctx.clearRect(0,0,600,400); ctx.fillStyle='#facc15'; ast.forEach(a=>{ctx.beginPath();ctx.arc(a.x,a.y,15,0,Math.PI*2);ctx.fill();});
   
-  if(k.l) s.a-=0.05; if(k.r) s.a+=0.05;
-  if(k.u && s.f>0){ s.vx+=Math.cos(s.a)*0.1; s.vy+=Math.sin(s.a)*0.1; s.f-=0.5; ctx.fillStyle='#facc15'; ctx.beginPath(); ctx.arc(s.x-Math.cos(s.a)*15, s.y-Math.sin(s.a)*15, 5, 0, Math.PI*2); ctx.fill(); }
+  p.vy+=0.1; // gravity
+  if(k && !gr){ let mD=999, mI=null; ast.forEach(a=>{const d=Math.hypot(p.x-a.x,p.y-a.y); if(d<mD){mD=d;mI=a;}}); gr=mI; }
+  else if(!k) gr=null;
   
-  s.vy+=0.02; s.x+=s.vx; s.y+=s.vy; // Gravity
+  if(gr){
+    ctx.strokeStyle='#fff'; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(gr.x,gr.y); ctx.stroke();
+    // Spring physics
+    const dx=gr.x-p.x, dy=gr.y-p.y, d=Math.hypot(dx,dy), f=(d-100)*0.005;
+    p.vx+=dx*f; p.vy+=dy*f;
+  }
+  p.x+=p.vx; p.y+=p.vy; p.vx*=0.99; p.vy*=0.99;
+  if(p.y>400||p.x>600){ p.x=50; p.y=200; p.vx=3; p.vy=0; }
   
-  document.getElementById('f').innerText = Math.max(0, s.f).toFixed(0);
-  const vel = Math.hypot(s.vx, s.vy); document.getElementById('v').innerText = vel.toFixed(1);
-  
-  ctx.save(); ctx.translate(s.x,s.y); ctx.rotate(s.a);
-  ctx.fillStyle='#fff'; ctx.beginPath(); ctx.moveTo(10,0); ctx.lineTo(-10,-10); ctx.lineTo(-10,10); ctx.fill(); // Ship
-  ctx.restore();
-  
-  if(s.y>275){
-    run=false;
-    if(s.x>170 && s.x<230 && vel<1.5 && Math.abs(s.a - (-Math.PI/2))<0.3) alert("Perfect Landing!");
-    else alert("CRASHED! Too fast, off pad, or bad angle.");
-  } else requestAnimationFrame(loop);
-} st();
+  ctx.fillStyle='#3b82f6'; ctx.beginPath(); ctx.arc(p.x,p.y,10,0,Math.PI*2); ctx.fill();
+  requestAnimationFrame(loop);
+} loop();
 </script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">

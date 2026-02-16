@@ -2,19 +2,19 @@
 layout: null
 title: "Hexagonal Minesweeper"
 category: "Games"
-description: "Minesweeper, but on a honeycomb grid! Every tile has exactly 6 neighbors instead of 8. Click to reveal, shift-click to flag."
+description: "Standard Minesweeper relies on 8 square neighbors. This version uses a mathematically plotted flat-topped Hex Grid, meaning every cell only has 6 neighbors."
 permalink: /tools/game-hexagonal-minesweeper.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Minesweeper, but on a honeycomb grid! Every tile has exactly 6 neighbors instead of 8. Click to reveal, shift-click to flag.">
+  <meta name="description" content="Standard Minesweeper relies on 8 square neighbors. This version uses a mathematically plotted flat-topped Hex Grid, meaning every cell only has 6 neighbors.">
   <meta property="og:title" content="Hexagonal Minesweeper">
-  <meta property="og:description" content="Minesweeper, but on a honeycomb grid! Every tile has exactly 6 neighbors instead of 8. Click to reveal, shift-click to flag.">
+  <meta property="og:description" content="Standard Minesweeper relies on 8 square neighbors. This version uses a mathematically plotted flat-topped Hex Grid, meaning every cell only has 6 neighbors.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Hexagonal Minesweeper">
-  <meta name="twitter:description" content="Minesweeper, but on a honeycomb grid! Every tile has exactly 6 neighbors instead of 8. Click to reveal, shift-click to flag.">
+  <meta name="twitter:description" content="Standard Minesweeper relies on 8 square neighbors. This version uses a mathematically plotted flat-topped Hex Grid, meaning every cell only has 6 neighbors.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
   <title>Hexagonal Minesweeper</title>
@@ -22,67 +22,62 @@ permalink: /tools/game-hexagonal-minesweeper.html
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
-.tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
+.tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
 h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
 label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
-input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+input[type="text"], input[type="number"], input[type="url"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); font-family: inherit; }
 input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
 button { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3); margin-bottom: 10px; letter-spacing: 0.5px; }
 button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4); }
 button:active { transform: translateY(0); box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3); }
 button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
-.res { margin-top: 25px; padding: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; font-size: 1.5rem; font-weight: 800; border: 2px dashed #cbd5e1; color: var(--primary); word-break: break-word; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
 .row { display: flex; gap: 20px; } .row > div { flex: 1; }
 .card { background: #fff; padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; transition: 0.2s; }
-.card:hover { border-color: #cbd5e1; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
-canvas { touch-action: none; }
+canvas { touch-action: none; user-select: none; max-width: 100%; display: block; margin: 0 auto; border-radius: 12px; }
 </style>
 </head>
 <body>
   <div class="tool-container">
     <h1>Hex Minesweeper</h1>
-<div class="row" style="margin-bottom:10px;text-align:center;"><div style="font-size:1.5rem;font-weight:bold;color:var(--danger);">Bombs: <span id="bmb">15</span></div></div>
-<div class="card" style="padding:0;background:#0f172a;display:flex;justify-content:center;position:relative;height:350px;overflow:hidden;" id="cvswrap" oncontextmenu="event.preventDefault()">
-  <canvas id="cvs" width="500" height="350" style="display:block;cursor:pointer;" onmousedown="clk(event)"></canvas>
+<div class="row" style="margin-bottom:10px;text-align:center;"><div style="font-size:1.5rem;font-weight:bold;color:var(--danger);">Mines: <span id="mc">10</span></div></div>
+<div class="card" style="padding:0;background:#1e293b;width:fit-content;margin:0 auto;" onclick="clk(event)" oncontextmenu="flg(event)">
+  <canvas id="cvs" width="400" height="300"></canvas>
 </div>
-<button onclick="st()">Restart Map</button>
-<p style="text-align:center;color:#64748b;font-weight:bold;">Click to Reveal. Right-Click (or Shift-Click) to Flag.</p>
+<button onclick="st()">Restart Hex Grid</button>
+<p style="text-align:center;color:#64748b;font-weight:bold;">Left Click: Reveal. Right Click: Flag.</p>
 <script>
 const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
-const R=18, W=Math.sqrt(3)*R, H=2*R, COLS=15, ROWS=12;
-let grid=[], run=true;
+const R=18, W=Math.sqrt(3)*R, H=2*R, COLS=10, ROWS=10; let b=[], run=true;
+// Hex neighbor offsets (even-q layout)
+const dirs = [[[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[0,1]], [[1,1],[1,0],[0,-1],[-1,0],[-1,1],[0,1]]];
 function st(){
-  grid=[]; for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){ grid.push({r,c,x:50+c*W+(r%2===1?W/2:0),y:40+r*H*0.75,v:0,rev:false,flg:false}); }
-  let p=0; while(p<15){const i=Math.floor(Math.random()*grid.length); if(grid[i].v!==9){grid[i].v=9; p++;}}
-  grid.forEach(h=>{
-    if(h.v===9)return; let cnt=0;
-    const dirs=h.r%2===0?[[+1,0],[0,-1],[-1,-1],[-1,0],[-1,+1],[0,+1]]:[[+1,0],[+1,-1],[0,-1],[-1,0],[0,+1],[+1,+1]];
-    dirs.forEach(d=>{ const n=grid.find(n=>n.c===h.c+d[0]&&n.r===h.r+d[1]); if(n&&n.v===9)cnt++; }); h.v=cnt;
-  }); run=true; drw();
+  b=Array(COLS*ROWS).fill().map(()=>({v:0,r:false,f:false})); run=true;
+  let p=0; while(p<10){ const i=Math.floor(Math.random()*b.length); if(b[i].v!==9){b[i].v=9;p++;} }
+  for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){
+    if(b[r*COLS+c].v===9)continue; let cnt=0;
+    dirs[c%2].forEach(d=>{ const nc=c+d[0], nr=r+d[1]; if(nc>=0&&nc<COLS&&nr>=0&&nr<ROWS&&b[nr*COLS+nc].v===9)cnt++; });
+    b[r*COLS+c].v=cnt;
+  } drw();
 }
 function drw(){
-  ctx.clearRect(0,0,500,350); let flgs=0;
-  grid.forEach(h=>{
-    if(h.flg)flgs++;
-    ctx.beginPath(); for(let i=0;i<6;i++) ctx.lineTo(h.x+R*Math.cos(Math.PI/180*(60*i-30)), h.y+R*Math.sin(Math.PI/180*(60*i-30))); ctx.closePath();
-    ctx.fillStyle=h.rev?(h.v===9?'#ef4444':'#e2e8f0'):'#64748b'; ctx.fill(); ctx.strokeStyle='#334155'; ctx.stroke();
-    if(h.flg){ ctx.fillStyle='#ef4444'; ctx.beginPath(); ctx.arc(h.x,h.y,5,0,Math.PI*2); ctx.fill(); }
-    else if(h.rev&&h.v>0&&h.v!==9){ ctx.fillStyle='#0f172a'; ctx.font='14px bold sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(h.v, h.x, h.y); }
-  }); document.getElementById('bmb').innerText=15-flgs;
+  ctx.clearRect(0,0,400,300); let flags=0;
+  for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){
+    const cell=b[r*COLS+c]; if(cell.f)flags++;
+    const x=30+c*W, y=30+r*H*0.75 + (c%2===1?H*0.375:0);
+    ctx.beginPath(); for(let i=0;i<6;i++) ctx.lineTo(x+R*Math.cos(Math.PI/180*(60*i)), y+R*Math.sin(Math.PI/180*(60*i))); ctx.closePath();
+    ctx.fillStyle=cell.r?(cell.v===9?'#ef4444':'#e2e8f0'):'#64748b'; ctx.fill(); ctx.strokeStyle='#0f172a'; ctx.stroke();
+    if(cell.f){ ctx.fillStyle='#facc15'; ctx.font='16px Arial'; ctx.fillText('🚩',x-8,y+6); }
+    else if(cell.r && cell.v>0){ ctx.fillStyle=cell.v===9?'#fff':'#000'; ctx.font='bold 16px Arial'; ctx.fillText(cell.v===9?'💣':cell.v, x-5, y+6); }
+  } document.getElementById('mc').innerText=10-flags;
 }
-function clk(e){
-  if(!run)return; const r=cvs.getBoundingClientRect(), mx=(e.clientX-r.left)*(500/r.width), my=(e.clientY-r.top)*(350/r.height);
-  let trg=null; grid.forEach(h=>{if(Math.hypot(h.x-mx,h.y-my)<R*0.8) trg=h;}); if(!trg)return;
-  if(e.button===2||e.shiftKey){ trg.flg=!trg.flg; drw(); return; }
-  if(trg.flg||trg.rev)return; trg.rev=true;
-  if(trg.v===9){ run=false; grid.forEach(h=>{if(h.v===9)h.rev=true;}); drw(); alert("BOOM!"); return; }
-  if(trg.v===0){
-    const q=[trg]; while(q.length>0){
-      const curr=q.pop();
-      const dirs=curr.r%2===0?[[+1,0],[0,-1],[-1,-1],[-1,0],[-1,+1],[0,+1]]:[[+1,0],[+1,-1],[0,-1],[-1,0],[0,+1],[+1,+1]];
-      dirs.forEach(d=>{ const n=grid.find(n=>n.c===curr.c+d[0]&&n.r===curr.r+d[1]); if(n&&!n.rev&&!n.flg){ n.rev=true; if(n.v===0)q.push(n); } });
-    }
-  } drw();
+function getI(e){ const rect=cvs.getBoundingClientRect(), mx=e.clientX-rect.left, my=e.clientY-rect.top; let mD=999, mI=-1; for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){ const x=30+c*W, y=30+r*H*0.75 + (c%2===1?H*0.375:0), d=Math.hypot(x-mx,y-my); if(d<mD){mD=d;mI=r*COLS+c;} } return mD<R?mI:-1; }
+function clk(e){ if(!run)return; const i=getI(e); if(i>-1 && !b[i].f){ b[i].r=true; if(b[i].v===9){run=false;b.forEach(c=>{if(c.v===9)c.r=true;}); alert("BOOM!");} else if(b[i].v===0) flood(i); drw(); } }
+function flg(e){ e.preventDefault(); if(!run)return; const i=getI(e); if(i>-1 && !b[i].r){ b[i].f=!b[i].f; drw(); } }
+function flood(idx){
+  const q=[idx]; while(q.length>0){
+    const curr=q.pop(), c=curr%COLS, r=Math.floor(curr/COLS);
+    dirs[c%2].forEach(d=>{ const nc=c+d[0], nr=r+d[1], ni=nr*COLS+nc; if(nc>=0&&nc<COLS&&nr>=0&&nr<ROWS&&!b[ni].r&&!b[ni].f){ b[ni].r=true; if(b[ni].v===0)q.push(ni); } });
+  }
 } st();
 </script>
   </div>

@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Lunar Lander Vector Physics"
+title: "Orbital Artillery Cannon"
 category: "Games"
-description: "A deeply mathematical physics game. Use Left/Right arrows to rotate the ship, and Up arrow to thrust. Counteract gravity and momentum to land softly on the pad."
-permalink: /tools/game-lunar-lander-pro.html
+description: "Aim and fire! But beware: your projectile is affected by the gravity well of the central planet. Calculate your parabolic orbits to hit the red target."
+permalink: /tools/game-orbital-artillery-cannon.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="A deeply mathematical physics game. Use Left/Right arrows to rotate the ship, and Up arrow to thrust. Counteract gravity and momentum to land softly on the pad.">
-  <meta property="og:title" content="Lunar Lander Vector Physics">
-  <meta property="og:description" content="A deeply mathematical physics game. Use Left/Right arrows to rotate the ship, and Up arrow to thrust. Counteract gravity and momentum to land softly on the pad.">
+  <meta name="description" content="Aim and fire! But beware: your projectile is affected by the gravity well of the central planet. Calculate your parabolic orbits to hit the red target.">
+  <meta property="og:title" content="Orbital Artillery Cannon">
+  <meta property="og:description" content="Aim and fire! But beware: your projectile is affected by the gravity well of the central planet. Calculate your parabolic orbits to hit the red target.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Lunar Lander Vector Physics">
-  <meta name="twitter:description" content="A deeply mathematical physics game. Use Left/Right arrows to rotate the ship, and Up arrow to thrust. Counteract gravity and momentum to land softly on the pad.">
+  <meta name="twitter:title" content="Orbital Artillery Cannon">
+  <meta name="twitter:description" content="Aim and fire! But beware: your projectile is affected by the gravity well of the central planet. Calculate your parabolic orbits to hit the red target.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Lunar Lander Vector Physics</title>
+  <title>Orbital Artillery Cannon</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -38,44 +38,41 @@ canvas { touch-action: none; user-select: none; max-width: 100%; display: block;
 </head>
 <body>
   <div class="tool-container">
-    <h1>Lunar Lander Pro</h1>
-<div class="row" style="margin-bottom:10px;text-align:center;">
-  <div style="font-weight:bold;color:var(--primary);">Fuel: <span id="f">100</span></div>
-  <div style="font-weight:bold;color:var(--danger);">Velocity: <span id="v">0</span></div>
+    <h1>Orbital Artillery</h1>
+<div class="row" style="margin-bottom:10px;">
+  <div class="card" style="margin:0;"><label>Power</label><input type="range" id="p" min="1" max="10" value="5"></div>
+  <button onclick="fire()" style="margin:0;background:var(--danger);">FIRE</button>
 </div>
-<div class="card" style="padding:0;background:#000;border:4px solid var(--border);">
-  <canvas id="cvs" width="400" height="300" style="display:block;width:100%;"></canvas>
+<div class="card" style="padding:0;background:#0f172a;cursor:crosshair;" onmousemove="mm(event)">
+  <canvas id="cvs" width="600" height="400"></canvas>
 </div>
-<button onclick="st()">Restart Mission</button>
 <script>
 const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
-let s, k={l:false,r:false,u:false}, run=true;
-window.onkeydown=e=>{if(e.key==='ArrowLeft')k.l=true; if(e.key==='ArrowRight')k.r=true; if(e.key==='ArrowUp'){k.u=true;e.preventDefault();} if(e.key.includes('Arrow'))e.preventDefault();};
-window.onkeyup=e=>{if(e.key==='ArrowLeft')k.l=false; if(e.key==='ArrowRight')k.r=false; if(e.key==='ArrowUp')k.u=false;};
-function st(){ s={x:200,y:20,vx:(Math.random()-0.5)*2,vy:0,a:-Math.PI/2,f:100}; run=true; loop(); }
+const pl={x:300,y:200,r:40,m:1500}; let tr={x:300,y:160,a:0}, tgt={x:300,y:300}, bl=[], mx=0, my=0;
+function st(){ tgt.a=Math.random()*Math.PI*2; tgt.x=300+Math.cos(tgt.a)*(Math.random()*100+60); tgt.y=200+Math.sin(tgt.a)*(Math.random()*100+60); } st();
+function mm(e){ const r=cvs.getBoundingClientRect(); mx=(e.clientX-r.left)*(600/r.width); my=(e.clientY-r.top)*(400/r.height); tr.a=Math.atan2(my-tr.y, mx-tr.x); }
+function fire(){ const p=document.getElementById('p').value; bl.push({x:tr.x+Math.cos(tr.a)*20,y:tr.y+Math.sin(tr.a)*20,vx:Math.cos(tr.a)*p,vy:Math.sin(tr.a)*p,t:[]}); }
 function loop(){
-  if(!run)return; ctx.clearRect(0,0,400,300);
-  ctx.fillStyle='#334155'; ctx.fillRect(0,280,400,20); // Moon surface
-  ctx.fillStyle='#10b981'; ctx.fillRect(170,275,60,5); // Pad
+  ctx.fillStyle='rgba(15,23,42,0.3)'; ctx.fillRect(0,0,600,400);
+  ctx.fillStyle='#3b82f6'; ctx.beginPath(); ctx.arc(pl.x,pl.y,pl.r,0,Math.PI*2); ctx.fill(); // Planet
+  ctx.fillStyle='#ef4444'; ctx.beginPath(); ctx.arc(tgt.x,tgt.y,15,0,Math.PI*2); ctx.fill(); // Target
   
-  if(k.l) s.a-=0.05; if(k.r) s.a+=0.05;
-  if(k.u && s.f>0){ s.vx+=Math.cos(s.a)*0.1; s.vy+=Math.sin(s.a)*0.1; s.f-=0.5; ctx.fillStyle='#facc15'; ctx.beginPath(); ctx.arc(s.x-Math.cos(s.a)*15, s.y-Math.sin(s.a)*15, 5, 0, Math.PI*2); ctx.fill(); }
+  // Turret
+  ctx.save(); ctx.translate(tr.x,tr.y); ctx.rotate(tr.a); ctx.fillStyle='#cbd5e1'; ctx.fillRect(0,-5,20,10); ctx.restore();
   
-  s.vy+=0.02; s.x+=s.vx; s.y+=s.vy; // Gravity
-  
-  document.getElementById('f').innerText = Math.max(0, s.f).toFixed(0);
-  const vel = Math.hypot(s.vx, s.vy); document.getElementById('v').innerText = vel.toFixed(1);
-  
-  ctx.save(); ctx.translate(s.x,s.y); ctx.rotate(s.a);
-  ctx.fillStyle='#fff'; ctx.beginPath(); ctx.moveTo(10,0); ctx.lineTo(-10,-10); ctx.lineTo(-10,10); ctx.fill(); // Ship
-  ctx.restore();
-  
-  if(s.y>275){
-    run=false;
-    if(s.x>170 && s.x<230 && vel<1.5 && Math.abs(s.a - (-Math.PI/2))<0.3) alert("Perfect Landing!");
-    else alert("CRASHED! Too fast, off pad, or bad angle.");
-  } else requestAnimationFrame(loop);
-} st();
+  for(let i=bl.length-1;i>=0;i--){
+    let b=bl[i];
+    const dx=pl.x-b.x, dy=pl.y-b.y, dsq=dx*dx+dy*dy, d=Math.sqrt(dsq);
+    b.vx += (pl.m/dsq)*(dx/d); b.vy += (pl.m/dsq)*(dy/d);
+    b.x+=b.vx; b.y+=b.vy;
+    b.t.push({x:b.x,y:b.y}); if(b.t.length>50)b.t.shift();
+    ctx.strokeStyle='#facc15'; ctx.beginPath(); b.t.forEach((pt,idx)=>{if(idx===0)ctx.moveTo(pt.x,pt.y); else ctx.lineTo(pt.x,pt.y);}); ctx.stroke();
+    ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(b.x,b.y,3,0,Math.PI*2); ctx.fill();
+    
+    if(d<pl.r || b.x<0||b.x>600||b.y<0||b.y>400) bl.splice(i,1); // Hit planet or OOB
+    else if(Math.hypot(b.x-tgt.x, b.y-tgt.y)<15){ bl.splice(i,1); alert("Target Destroyed!"); st(); }
+  } requestAnimationFrame(loop);
+} loop();
 </script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">

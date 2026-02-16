@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Lunar Lander Vector Physics"
+title: "Stealth Line-of-Sight Grid"
 category: "Games"
-description: "A deeply mathematical physics game. Use Left/Right arrows to rotate the ship, and Up arrow to thrust. Counteract gravity and momentum to land softly on the pad."
-permalink: /tools/game-lunar-lander-pro.html
+description: "Sneak the blue player to the green exit! Avoid the sweeping red vision cones of the security cameras. The math relies on 2D polygon intersection algorithms."
+permalink: /tools/game-stealth-vision-cones.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="A deeply mathematical physics game. Use Left/Right arrows to rotate the ship, and Up arrow to thrust. Counteract gravity and momentum to land softly on the pad.">
-  <meta property="og:title" content="Lunar Lander Vector Physics">
-  <meta property="og:description" content="A deeply mathematical physics game. Use Left/Right arrows to rotate the ship, and Up arrow to thrust. Counteract gravity and momentum to land softly on the pad.">
+  <meta name="description" content="Sneak the blue player to the green exit! Avoid the sweeping red vision cones of the security cameras. The math relies on 2D polygon intersection algorithms.">
+  <meta property="og:title" content="Stealth Line-of-Sight Grid">
+  <meta property="og:description" content="Sneak the blue player to the green exit! Avoid the sweeping red vision cones of the security cameras. The math relies on 2D polygon intersection algorithms.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Lunar Lander Vector Physics">
-  <meta name="twitter:description" content="A deeply mathematical physics game. Use Left/Right arrows to rotate the ship, and Up arrow to thrust. Counteract gravity and momentum to land softly on the pad.">
+  <meta name="twitter:title" content="Stealth Line-of-Sight Grid">
+  <meta name="twitter:description" content="Sneak the blue player to the green exit! Avoid the sweeping red vision cones of the security cameras. The math relies on 2D polygon intersection algorithms.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Lunar Lander Vector Physics</title>
+  <title>Stealth Line-of-Sight Grid</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -38,44 +38,40 @@ canvas { touch-action: none; user-select: none; max-width: 100%; display: block;
 </head>
 <body>
   <div class="tool-container">
-    <h1>Lunar Lander Pro</h1>
-<div class="row" style="margin-bottom:10px;text-align:center;">
-  <div style="font-weight:bold;color:var(--primary);">Fuel: <span id="f">100</span></div>
-  <div style="font-weight:bold;color:var(--danger);">Velocity: <span id="v">0</span></div>
-</div>
-<div class="card" style="padding:0;background:#000;border:4px solid var(--border);">
+    <h1>Stealth Ops Sandbox</h1>
+<div class="card" style="padding:0;background:#1e293b;border:4px solid #0f172a;cursor:pointer;">
   <canvas id="cvs" width="400" height="300" style="display:block;width:100%;"></canvas>
 </div>
-<button onclick="st()">Restart Mission</button>
+<p style="text-align:center;color:#64748b;font-weight:bold;">WASD to move. Don't get caught in the red lights!</p>
 <script>
 const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
-let s, k={l:false,r:false,u:false}, run=true;
-window.onkeydown=e=>{if(e.key==='ArrowLeft')k.l=true; if(e.key==='ArrowRight')k.r=true; if(e.key==='ArrowUp'){k.u=true;e.preventDefault();} if(e.key.includes('Arrow'))e.preventDefault();};
-window.onkeyup=e=>{if(e.key==='ArrowLeft')k.l=false; if(e.key==='ArrowRight')k.r=false; if(e.key==='ArrowUp')k.u=false;};
-function st(){ s={x:200,y:20,vx:(Math.random()-0.5)*2,vy:0,a:-Math.PI/2,f:100}; run=true; loop(); }
+let p={x:30,y:270}, g=[{x:200,y:150,a:0,s:0.02},{x:100,y:50,a:Math.PI,s:0.03}], run=true;
+window.onkeydown=e=>{ if(!run)return; if(e.key==='w')p.y-=5; if(e.key==='s')p.y+=5; if(e.key==='a')p.x-=5; if(e.key==='d')p.x+=5; if(p.x<10)p.x=10; if(p.x>390)p.x=390; if(p.y<10)p.y=10; if(p.y>290)p.y=290; if(p.x>350&&p.y<50){run=false;alert("Mission Accomplished!");} };
+function ptInTri(p, p0, p1, p2) {
+  const A = 0.5 * (-p1.y * p2.x + p0.y * (-p1.x + p2.x) + p0.x * (p1.y - p2.y) + p1.x * p2.y);
+  const sign = A < 0 ? -1 : 1;
+  const s = (p0.y * p2.x - p0.x * p2.y + (p2.y - p0.y) * p.x + (p0.x - p2.x) * p.y) * sign;
+  const t = (p0.x * p1.y - p0.y * p1.x + (p0.y - p1.y) * p.x + (p1.x - p0.x) * p.y) * sign;
+  return s > 0 && t > 0 && (s + t) < 2 * A * sign;
+}
 function loop(){
   if(!run)return; ctx.clearRect(0,0,400,300);
-  ctx.fillStyle='#334155'; ctx.fillRect(0,280,400,20); // Moon surface
-  ctx.fillStyle='#10b981'; ctx.fillRect(170,275,60,5); // Pad
+  ctx.fillStyle='#10b981'; ctx.fillRect(350,0,50,50); // Exit
   
-  if(k.l) s.a-=0.05; if(k.r) s.a+=0.05;
-  if(k.u && s.f>0){ s.vx+=Math.cos(s.a)*0.1; s.vy+=Math.sin(s.a)*0.1; s.f-=0.5; ctx.fillStyle='#facc15'; ctx.beginPath(); ctx.arc(s.x-Math.cos(s.a)*15, s.y-Math.sin(s.a)*15, 5, 0, Math.PI*2); ctx.fill(); }
+  g.forEach(grd=>{
+    grd.a+=grd.s;
+    const p1={x:grd.x+Math.cos(grd.a-0.5)*150, y:grd.y+Math.sin(grd.a-0.5)*150};
+    const p2={x:grd.x+Math.cos(grd.a+0.5)*150, y:grd.y+Math.sin(grd.a+0.5)*150};
+    
+    ctx.fillStyle='rgba(239,68,68,0.3)'; ctx.beginPath(); ctx.moveTo(grd.x,grd.y); ctx.lineTo(p1.x,p1.y); ctx.lineTo(p2.x,p2.y); ctx.closePath(); ctx.fill();
+    ctx.fillStyle='#ef4444'; ctx.beginPath(); ctx.arc(grd.x,grd.y,10,0,Math.PI*2); ctx.fill();
+    
+    if(ptInTri(p, grd, p1, p2)){ run=false; setTimeout(()=>alert("Spotted! Game Over."),50); }
+  });
   
-  s.vy+=0.02; s.x+=s.vx; s.y+=s.vy; // Gravity
-  
-  document.getElementById('f').innerText = Math.max(0, s.f).toFixed(0);
-  const vel = Math.hypot(s.vx, s.vy); document.getElementById('v').innerText = vel.toFixed(1);
-  
-  ctx.save(); ctx.translate(s.x,s.y); ctx.rotate(s.a);
-  ctx.fillStyle='#fff'; ctx.beginPath(); ctx.moveTo(10,0); ctx.lineTo(-10,-10); ctx.lineTo(-10,10); ctx.fill(); // Ship
-  ctx.restore();
-  
-  if(s.y>275){
-    run=false;
-    if(s.x>170 && s.x<230 && vel<1.5 && Math.abs(s.a - (-Math.PI/2))<0.3) alert("Perfect Landing!");
-    else alert("CRASHED! Too fast, off pad, or bad angle.");
-  } else requestAnimationFrame(loop);
-} st();
+  ctx.fillStyle='#3b82f6'; ctx.beginPath(); ctx.arc(p.x,p.y,10,0,Math.PI*2); ctx.fill();
+  requestAnimationFrame(loop);
+} loop();
 </script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">

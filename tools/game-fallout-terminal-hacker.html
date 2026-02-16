@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Lunar Lander Vector Physics"
+title: "Terminal Hacking Minigame"
 category: "Games"
-description: "A deeply mathematical physics game. Use Left/Right arrows to rotate the ship, and Up arrow to thrust. Counteract gravity and momentum to land softly on the pad."
-permalink: /tools/game-lunar-lander-pro.html
+description: "Find the correct password! Guessing a wrong word tells you exactly how many letters match the secret word in the exact same position (Mastermind logic)."
+permalink: /tools/game-fallout-terminal-hacker.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="A deeply mathematical physics game. Use Left/Right arrows to rotate the ship, and Up arrow to thrust. Counteract gravity and momentum to land softly on the pad.">
-  <meta property="og:title" content="Lunar Lander Vector Physics">
-  <meta property="og:description" content="A deeply mathematical physics game. Use Left/Right arrows to rotate the ship, and Up arrow to thrust. Counteract gravity and momentum to land softly on the pad.">
+  <meta name="description" content="Find the correct password! Guessing a wrong word tells you exactly how many letters match the secret word in the exact same position (Mastermind logic).">
+  <meta property="og:title" content="Terminal Hacking Minigame">
+  <meta property="og:description" content="Find the correct password! Guessing a wrong word tells you exactly how many letters match the secret word in the exact same position (Mastermind logic).">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Lunar Lander Vector Physics">
-  <meta name="twitter:description" content="A deeply mathematical physics game. Use Left/Right arrows to rotate the ship, and Up arrow to thrust. Counteract gravity and momentum to land softly on the pad.">
+  <meta name="twitter:title" content="Terminal Hacking Minigame">
+  <meta name="twitter:description" content="Find the correct password! Guessing a wrong word tells you exactly how many letters match the secret word in the exact same position (Mastermind logic).">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Lunar Lander Vector Physics</title>
+  <title>Terminal Hacking Minigame</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -38,43 +38,27 @@ canvas { touch-action: none; user-select: none; max-width: 100%; display: block;
 </head>
 <body>
   <div class="tool-container">
-    <h1>Lunar Lander Pro</h1>
-<div class="row" style="margin-bottom:10px;text-align:center;">
-  <div style="font-weight:bold;color:var(--primary);">Fuel: <span id="f">100</span></div>
-  <div style="font-weight:bold;color:var(--danger);">Velocity: <span id="v">0</span></div>
+    <h1>Terminal Hacker</h1>
+<div class="row" style="margin-bottom:10px;text-align:center;"><div style="font-size:1.5rem;font-weight:bold;color:var(--success);">Attempts Left: <span id="atm">4</span></div></div>
+<div class="row" style="align-items:flex-start;">
+  <div class="card" style="flex:1;background:#0f172a;color:var(--success);font-family:monospace;font-size:1.2rem;line-height:2;" id="words"></div>
+  <div class="card" style="flex:1;background:#1e293b;color:#e2e8f0;font-family:monospace;font-size:1rem;height:300px;overflow-y:auto;" id="log">INITIATING HACK...<br></div>
 </div>
-<div class="card" style="padding:0;background:#000;border:4px solid var(--border);">
-  <canvas id="cvs" width="400" height="300" style="display:block;width:100%;"></canvas>
-</div>
-<button onclick="st()">Restart Mission</button>
 <script>
-const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
-let s, k={l:false,r:false,u:false}, run=true;
-window.onkeydown=e=>{if(e.key==='ArrowLeft')k.l=true; if(e.key==='ArrowRight')k.r=true; if(e.key==='ArrowUp'){k.u=true;e.preventDefault();} if(e.key.includes('Arrow'))e.preventDefault();};
-window.onkeyup=e=>{if(e.key==='ArrowLeft')k.l=false; if(e.key==='ArrowRight')k.r=false; if(e.key==='ArrowUp')k.u=false;};
-function st(){ s={x:200,y:20,vx:(Math.random()-0.5)*2,vy:0,a:-Math.PI/2,f:100}; run=true; loop(); }
-function loop(){
-  if(!run)return; ctx.clearRect(0,0,400,300);
-  ctx.fillStyle='#334155'; ctx.fillRect(0,280,400,20); // Moon surface
-  ctx.fillStyle='#10b981'; ctx.fillRect(170,275,60,5); // Pad
-  
-  if(k.l) s.a-=0.05; if(k.r) s.a+=0.05;
-  if(k.u && s.f>0){ s.vx+=Math.cos(s.a)*0.1; s.vy+=Math.sin(s.a)*0.1; s.f-=0.5; ctx.fillStyle='#facc15'; ctx.beginPath(); ctx.arc(s.x-Math.cos(s.a)*15, s.y-Math.sin(s.a)*15, 5, 0, Math.PI*2); ctx.fill(); }
-  
-  s.vy+=0.02; s.x+=s.vx; s.y+=s.vy; // Gravity
-  
-  document.getElementById('f').innerText = Math.max(0, s.f).toFixed(0);
-  const vel = Math.hypot(s.vx, s.vy); document.getElementById('v').innerText = vel.toFixed(1);
-  
-  ctx.save(); ctx.translate(s.x,s.y); ctx.rotate(s.a);
-  ctx.fillStyle='#fff'; ctx.beginPath(); ctx.moveTo(10,0); ctx.lineTo(-10,-10); ctx.lineTo(-10,10); ctx.fill(); // Ship
-  ctx.restore();
-  
-  if(s.y>275){
-    run=false;
-    if(s.x>170 && s.x<230 && vel<1.5 && Math.abs(s.a - (-Math.PI/2))<0.3) alert("Perfect Landing!");
-    else alert("CRASHED! Too fast, off pad, or bad angle.");
-  } else requestAnimationFrame(loop);
+const dict=["SYSTEM","SERVER","SECRET","SECURE","SOURCE","STREAM","SPRING","STREET","SCREEN","SCRIPT"];
+let words=[], pwd="", atm=4, run=true;
+function st(){ words=[...dict].sort(()=>0.5-Math.random()).slice(0,7); pwd=words[Math.floor(Math.random()*words.length)]; atm=4; run=true; document.getElementById('atm').innerText=atm; document.getElementById('log').innerHTML='INITIATING HACK...<br>'; drw(); }
+function drw(){
+  const wEl=document.getElementById('words'); wEl.innerHTML='';
+  words.forEach(w=>{ wEl.innerHTML+=`<div style="cursor:pointer;transition:0.2s;" onmouseover="this.style.background='var(--success)';this.style.color='#000'" onmouseout="this.style.background='transparent';this.style.color='var(--success)'" onclick="clk('${w}')">> ${w}</div>`; });
+}
+function clk(w){
+  if(!run)return; const l=document.getElementById('log');
+  if(w===pwd){ l.innerHTML+=`> ${w}<br><span style="color:var(--primary);">EXACT MATCH! ACCESS GRANTED.</span><br>`; run=false; return; }
+  let m=0; for(let i=0;i<6;i++) if(w[i]===pwd[i])m++;
+  l.innerHTML+=`> ${w}<br>Entry Denied. Likeness=${m}/6.<br>`;
+  atm--; document.getElementById('atm').innerText=atm;
+  if(atm<=0){ l.innerHTML+=`<span style="color:var(--danger);">LOCKOUT INITIATED.</span><br>`; run=false; }
 } st();
 </script>
   </div>

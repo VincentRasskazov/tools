@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Lunar Lander Vector Physics"
+title: "Elemental Sand Automata Sandbox"
 category: "Games"
-description: "A deeply mathematical physics game. Use Left/Right arrows to rotate the ship, and Up arrow to thrust. Counteract gravity and momentum to land softly on the pad."
-permalink: /tools/game-lunar-lander-pro.html
+description: "A complex 2D grid cellular automata engine. Sand falls. Water flows sideways. Lava burns wood and turns water into solid stone. Draw elements and watch them react!"
+permalink: /tools/game-elemental-sand-automata.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="A deeply mathematical physics game. Use Left/Right arrows to rotate the ship, and Up arrow to thrust. Counteract gravity and momentum to land softly on the pad.">
-  <meta property="og:title" content="Lunar Lander Vector Physics">
-  <meta property="og:description" content="A deeply mathematical physics game. Use Left/Right arrows to rotate the ship, and Up arrow to thrust. Counteract gravity and momentum to land softly on the pad.">
+  <meta name="description" content="A complex 2D grid cellular automata engine. Sand falls. Water flows sideways. Lava burns wood and turns water into solid stone. Draw elements and watch them react!">
+  <meta property="og:title" content="Elemental Sand Automata Sandbox">
+  <meta property="og:description" content="A complex 2D grid cellular automata engine. Sand falls. Water flows sideways. Lava burns wood and turns water into solid stone. Draw elements and watch them react!">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Lunar Lander Vector Physics">
-  <meta name="twitter:description" content="A deeply mathematical physics game. Use Left/Right arrows to rotate the ship, and Up arrow to thrust. Counteract gravity and momentum to land softly on the pad.">
+  <meta name="twitter:title" content="Elemental Sand Automata Sandbox">
+  <meta name="twitter:description" content="A complex 2D grid cellular automata engine. Sand falls. Water flows sideways. Lava burns wood and turns water into solid stone. Draw elements and watch them react!">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Lunar Lander Vector Physics</title>
+  <title>Elemental Sand Automata Sandbox</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -38,44 +38,57 @@ canvas { touch-action: none; user-select: none; max-width: 100%; display: block;
 </head>
 <body>
   <div class="tool-container">
-    <h1>Lunar Lander Pro</h1>
-<div class="row" style="margin-bottom:10px;text-align:center;">
-  <div style="font-weight:bold;color:var(--primary);">Fuel: <span id="f">100</span></div>
-  <div style="font-weight:bold;color:var(--danger);">Velocity: <span id="v">0</span></div>
+    <h1>Elemental Sand Sandbox</h1>
+<div class="row" style="margin-bottom:10px;">
+  <button onclick="m=1" style="background:#facc15;color:#000;">Sand</button>
+  <button onclick="m=2" style="background:#3b82f6;">Water</button>
+  <button onclick="m=3" style="background:#ef4444;">Lava</button>
+  <button onclick="m=4" style="background:#8B4513;">Wood</button>
+  <button onclick="m=0" style="background:#e2e8f0;color:#000;">Eraser</button>
 </div>
-<div class="card" style="padding:0;background:#000;border:4px solid var(--border);">
-  <canvas id="cvs" width="400" height="300" style="display:block;width:100%;"></canvas>
+<div class="card" style="padding:0;background:#000;cursor:crosshair;display:flex;justify-content:center;" onmousedown="dr=true;mm(event)" onmousemove="mm(event)" onmouseup="dr=false" onmouseleave="dr=false">
+  <canvas id="cvs" width="400" height="300" style="display:block;"></canvas>
 </div>
-<button onclick="st()">Restart Mission</button>
 <script>
-const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
-let s, k={l:false,r:false,u:false}, run=true;
-window.onkeydown=e=>{if(e.key==='ArrowLeft')k.l=true; if(e.key==='ArrowRight')k.r=true; if(e.key==='ArrowUp'){k.u=true;e.preventDefault();} if(e.key.includes('Arrow'))e.preventDefault();};
-window.onkeyup=e=>{if(e.key==='ArrowLeft')k.l=false; if(e.key==='ArrowRight')k.r=false; if(e.key==='ArrowUp')k.u=false;};
-function st(){ s={x:200,y:20,vx:(Math.random()-0.5)*2,vy:0,a:-Math.PI/2,f:100}; run=true; loop(); }
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d'), W=80, H=60;
+let g=Array(W).fill().map(()=>Array(H).fill(0)), dr=false, m=1;
+// 0=empty, 1=sand, 2=water, 3=lava, 4=wood, 5=stone
+const cols=['#000','#facc15','#3b82f6','#ef4444','#8B4513','#64748b'];
+function mm(e){ if(!dr)return; const r=cvs.getBoundingClientRect(), cx=Math.floor((e.clientX-r.left)*(W/r.width)), cy=Math.floor((e.clientY-r.top)*(H/r.height)); for(let x=-1;x<=1;x++)for(let y=-1;y<=1;y++){if(cx+x>=0&&cx+x<W&&cy+y>=0&&cy+y<H)g[cx+x][cy+y]=m;} }
 function loop(){
-  if(!run)return; ctx.clearRect(0,0,400,300);
-  ctx.fillStyle='#334155'; ctx.fillRect(0,280,400,20); // Moon surface
-  ctx.fillStyle='#10b981'; ctx.fillRect(170,275,60,5); // Pad
-  
-  if(k.l) s.a-=0.05; if(k.r) s.a+=0.05;
-  if(k.u && s.f>0){ s.vx+=Math.cos(s.a)*0.1; s.vy+=Math.sin(s.a)*0.1; s.f-=0.5; ctx.fillStyle='#facc15'; ctx.beginPath(); ctx.arc(s.x-Math.cos(s.a)*15, s.y-Math.sin(s.a)*15, 5, 0, Math.PI*2); ctx.fill(); }
-  
-  s.vy+=0.02; s.x+=s.vx; s.y+=s.vy; // Gravity
-  
-  document.getElementById('f').innerText = Math.max(0, s.f).toFixed(0);
-  const vel = Math.hypot(s.vx, s.vy); document.getElementById('v').innerText = vel.toFixed(1);
-  
-  ctx.save(); ctx.translate(s.x,s.y); ctx.rotate(s.a);
-  ctx.fillStyle='#fff'; ctx.beginPath(); ctx.moveTo(10,0); ctx.lineTo(-10,-10); ctx.lineTo(-10,10); ctx.fill(); // Ship
-  ctx.restore();
-  
-  if(s.y>275){
-    run=false;
-    if(s.x>170 && s.x<230 && vel<1.5 && Math.abs(s.a - (-Math.PI/2))<0.3) alert("Perfect Landing!");
-    else alert("CRASHED! Too fast, off pad, or bad angle.");
-  } else requestAnimationFrame(loop);
-} st();
+  ctx.clearRect(0,0,400,300);
+  for(let y=H-1;y>=0;y--)for(let x=0;x<W;x++){
+    const v=g[x][y]; if(v===0)continue;
+    ctx.fillStyle=cols[v]; ctx.fillRect(x*5,y*5,5,5);
+    if(v===4||v===5)continue; // Solids don't move
+    
+    // Interactions
+    if(v===3){ // Lava
+      for(let nx=-1;nx<=1;nx++)for(let ny=-1;ny<=1;ny++){
+        if(x+nx>=0&&x+nx<W&&y+ny>=0&&y+ny<H){
+          if(g[x+nx][y+ny]===2){ g[x][y]=5; g[x+nx][y+ny]=0; } // Lava + Water = Stone
+          else if(g[x+nx][y+ny]===4 && Math.random()<0.1) g[x+nx][y+ny]=0; // Lava burns Wood
+        }
+      }
+    }
+    
+    // Movement
+    if(y<H-1){
+      if(g[x][y+1]===0){ g[x][y+1]=v; g[x][y]=0; } // Fall down
+      else if(v===2||v===3){ // Liquids flow sideways
+        const d=Math.random()>0.5?1:-1;
+        if(x+d>=0&&x+d<W&&g[x+d][y]===0){ g[x+d][y]=v; g[x][y]=0; }
+        else if(x-d>=0&&x-d<W&&g[x-d][y]===0){ g[x-d][y]=v; g[x][y]=0; }
+      }
+      else if(v===1){ // Sand diagonals
+        const d=Math.random()>0.5?1:-1;
+        if(x+d>=0&&x+d<W&&g[x+d][y+1]===0){ g[x+d][y+1]=v; g[x][y]=0; }
+        else if(x-d>=0&&x-d<W&&g[x-d][y+1]===0){ g[x-d][y+1]=v; g[x][y]=0; }
+        else if(g[x][y+1]===2){ g[x][y+1]=v; g[x][y]=2; } // Sand sinks in water
+      }
+    }
+  } requestAnimationFrame(loop);
+} loop();
 </script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
