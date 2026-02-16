@@ -1,23 +1,23 @@
 ---
 layout: null
-title: "Flappy Box Game"
-category: "Games"
-description: "Click to jump! Navigate your box through the randomly generated pipes in this addictive physics game."
-permalink: /tools/flappy-box-game.html
+title: "Supervillain Name Generator"
+category: "Utility"
+description: "Writing a comic or story? Generate a totally evil, random supervillain name instantly."
+permalink: /tools/random-supervillain-name.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="Click to jump! Navigate your box through the randomly generated pipes in this addictive physics game.">
-  <meta property="og:title" content="Flappy Box Game">
-  <meta property="og:description" content="Click to jump! Navigate your box through the randomly generated pipes in this addictive physics game.">
+  <meta name="description" content="Writing a comic or story? Generate a totally evil, random supervillain name instantly.">
+  <meta property="og:title" content="Supervillain Name Generator">
+  <meta property="og:description" content="Writing a comic or story? Generate a totally evil, random supervillain name instantly.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Flappy Box Game">
-  <meta name="twitter:description" content="Click to jump! Navigate your box through the randomly generated pipes in this addictive physics game.">
+  <meta name="twitter:title" content="Supervillain Name Generator">
+  <meta name="twitter:description" content="Writing a comic or story? Generate a totally evil, random supervillain name instantly.">
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
   <meta charset="UTF-8">
-  <title>Flappy Box Game</title>
+  <title>Supervillain Name Generator</title>
   
   <style>
 :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
@@ -39,41 +39,16 @@ button:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; tr
 </head>
 <body>
   <div class="tool-container">
-    <h1>Flappy Box</h1>
-<div class="card" style="display:flex;justify-content:center;padding:20px;background:var(--bg);">
-  <canvas id="canvas" width="400" height="400" style="background:#87CEEB;border-radius:12px;box-shadow:0 10px 20px rgba(0,0,0,0.2);cursor:pointer;"></canvas>
+    <h1>Supervillain Name Generator</h1>
+<div class="card" style="text-align:center;padding:50px;background:#000;">
+  <div style="font-size:4rem;margin-bottom:10px;">🦹‍♂️</div>
+  <div id="res" style="font-size:3rem;font-weight:900;color:#ef4444;text-transform:uppercase;">Doctor Havoc</div>
 </div>
-<p style="text-align:center;color:#64748b;font-weight:bold;">Click the game screen to Jump.</p>
+<button onclick="c()" style="font-size:1.5rem;padding:20px;background:#ef4444;">Summon Villain</button>
 <script>
-const cvs = document.getElementById('canvas'); const ctx = cvs.getContext('2d');
-let frames=0, score=0, state=0; // 0=ready, 1=play, 2=over
-let box={y:200, v:0, g:0.3, j:5.5}; let pipes=[];
-function draw() {
-  ctx.clearRect(0,0,400,400);
-  ctx.fillStyle = '#ef4444'; ctx.fillRect(50, box.y, 20, 20); // Box
-  ctx.fillStyle = '#10b981'; pipes.forEach(p => { ctx.fillRect(p.x, 0, 40, p.t); ctx.fillRect(p.x, p.t+110, 40, 400); }); // Pipes
-  ctx.fillStyle = '#fff'; ctx.font = '24px sans-serif'; ctx.fillText('Score: '+score, 10, 30);
-  if(state===0){ ctx.fillStyle='rgba(0,0,0,0.5)'; ctx.fillRect(0,0,400,400); ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.fillText('Click to Start', 200, 200); ctx.textAlign='left';}
-  if(state===2){ ctx.fillStyle='rgba(0,0,0,0.5)'; ctx.fillRect(0,0,400,400); ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.fillText('Game Over! Click to Restart', 200, 200); ctx.textAlign='left';}
-}
-function update() {
-  if(state!==1) return;
-  frames++; box.v+=box.g; box.y+=box.v;
-  if(box.y<0 || box.y>380) state=2;
-  if(frames%100===0) pipes.push({x:400, t:Math.random()*190+50});
-  pipes.forEach(p => {
-    p.x-=2.5; if(p.x===45) score++;
-    if(50<p.x+40 && 70>p.x && (box.y<p.t || box.y+20>p.t+110)) state=2; // Hit pipe
-  });
-  pipes = pipes.filter(p => p.x > -40);
-}
-function loop() { update(); draw(); requestAnimationFrame(loop); }
-cvs.addEventListener('mousedown', () => {
-  if(state===0){state=1; box.y=200; box.v=0; pipes=[]; score=0; frames=0;}
-  else if(state===1){box.v=-box.j;}
-  else if(state===2){state=0;}
-});
-loop();
+const t=["Doctor","Professor","Lord","Baron","Count","Captain","General","Master","King"];
+const n=["Havoc","Doom","Chaos","Malice","Venom","Terror","Shadow","Void","Ruin","Blight","Carnage","Frost","Bane","Onyx","Wraith"];
+function c(){ document.getElementById('res').innerText=`${t[Math.floor(Math.random()*t.length)]} ${n[Math.floor(Math.random()*n.length)]}`; } c();
 </script>
   </div>
   <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
