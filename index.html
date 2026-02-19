@@ -159,12 +159,25 @@ description: A massive collection of fast, beautiful, and free online converters
       display: flex;
       flex-direction: column;
       position: relative;
+      cursor: pointer;
     }
 
     .tool-card:hover {
       transform: translateY(-8px);
       border-color: var(--primary);
       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+
+    .tool-card a {
+      position: relative;
+      z-index: 2;
+    }
+
+    .tool-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
     }
 
     .category-tag {
@@ -246,11 +259,21 @@ description: A massive collection of fast, beautiful, and free online converters
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
+  // Dark Mode Toggle
   const toggle = document.getElementById('theme-toggle');
   toggle.addEventListener('click', () => {
     const isDark = document.body.getAttribute('data-theme') === 'dark';
     document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
     toggle.innerHTML = isDark ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+  });
+
+  // Make entire tool-card clickable
+  document.addEventListener("click", (e) => {
+    const card = e.target.closest(".tool-card");
+    if (card) {
+      const link = card.querySelector("a");
+      if (link) window.location.href = link.href;
+    }
   });
 </script>
 
