@@ -273,12 +273,19 @@ description: A massive collection of fast, beautiful, and free online converters
   });
 
   // Watch for the tools to load to update the counter
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById('tools-container');
+
   const observer = new MutationObserver(() => {
     const total = document.querySelectorAll('.tool-card').length;
     if (total > 0) {
       document.getElementById('live-counter').textContent = total.toLocaleString();
     }
   });
+
+  observer.observe(container, { childList: true });
+});
+
   observer.observe(document.getElementById('tools-container'), { childList: true });
 </script>
   <script>
