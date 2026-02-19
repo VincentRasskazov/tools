@@ -12,7 +12,7 @@ description: A massive collection of fast, beautiful, and free online converters
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
+
   <style>
     :root {
       --primary: #2563eb;
@@ -25,7 +25,6 @@ description: A massive collection of fast, beautiful, and free online converters
       --ring: rgba(37, 99, 235, 0.1);
     }
 
-    /* Simple Dark Mode Logic */
     [data-theme="dark"] {
       --bg: #0f172a;
       --card-bg: #1e293b;
@@ -49,7 +48,6 @@ description: A massive collection of fast, beautiful, and free online converters
       padding: 60px 20px;
     }
 
-    /* Header & Branding */
     header {
       text-align: center;
       margin-bottom: 60px;
@@ -86,7 +84,6 @@ description: A massive collection of fast, beautiful, and free online converters
       margin: 0 auto 40px auto;
     }
 
-    /* Search Bar */
     .search-wrapper {
       position: relative;
       max-width: 600px;
@@ -120,7 +117,6 @@ description: A massive collection of fast, beautiful, and free online converters
       box-shadow: 0 0 0 4px var(--ring);
     }
 
-    /* Filters */
     .category-tabs {
       display: flex;
       justify-content: center;
@@ -148,7 +144,6 @@ description: A massive collection of fast, beautiful, and free online converters
       transform: translateY(-2px);
     }
 
-    /* Grid & Cards */
     .tools-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -185,22 +180,6 @@ description: A massive collection of fast, beautiful, and free online converters
       width: fit-content;
     }
 
-    .tool-card h3 {
-      margin: 0 0 12px 0;
-      font-size: 1.4rem;
-      font-weight: 700;
-    }
-
-    .tool-card a { color: var(--text-main); text-decoration: none; }
-    .tool-card a::after { content: ''; position: absolute; inset: 0; }
-
-    .tool-desc {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      line-height: 1.5;
-    }
-
-    /* Footer */
     footer {
       margin-top: 100px;
       padding: 40px 20px;
@@ -225,6 +204,7 @@ description: A massive collection of fast, beautiful, and free online converters
     }
   </style>
 </head>
+
 <body>
 
 <button id="theme-toggle" title="Toggle Dark Mode">
@@ -239,7 +219,7 @@ description: A massive collection of fast, beautiful, and free online converters
     </div>
     <h1>Ultimate Tools Hub</h1>
     <p class="subtitle">Fast, beautiful, and privacy-focused tools for developers and creators.</p>
-    
+
     <div class="search-wrapper">
       <i class="fas fa-search search-icon"></i>
       <input type="text" id="search-tools" placeholder="What tool do you need today?">
@@ -255,7 +235,9 @@ description: A massive collection of fast, beautiful, and free online converters
   <div id="tools-container" class="tools-grid"></div>
 
   <footer>
-    <p>&copy; <span id="year"></span> Ultimate Tools Hub • <a href="https://github.com/vincentrasskazov/tools" style="color: inherit; font-weight: 600;">GitHub</a></p>
+    <p>&copy; <span id="year"></span> Ultimate Tools Hub • 
+      <a href="https://github.com/vincentrasskazov/tools" style="color: inherit; font-weight: 600;">GitHub</a>
+    </p>
   </footer>
 </div>
 
@@ -264,35 +246,20 @@ description: A massive collection of fast, beautiful, and free online converters
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Dark Mode Toggle
   const toggle = document.getElementById('theme-toggle');
   toggle.addEventListener('click', () => {
     const isDark = document.body.getAttribute('data-theme') === 'dark';
     document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
     toggle.innerHTML = isDark ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
   });
-
-  // Watch for the tools to load to update the counter
-document.addEventListener("DOMContentLoaded", () => {
-  const container = document.getElementById('tools-container');
-
-  const observer = new MutationObserver(() => {
-    const total = document.querySelectorAll('.tool-card').length;
-    if (total > 0) {
-      document.getElementById('live-counter').textContent = total.toLocaleString();
-    }
-  });
-
-  observer.observe(container, { childList: true });
-});
-
-  observer.observe(document.getElementById('tools-container'), { childList: true });
 </script>
-  <script>
+
+<script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/tools/sw.js');
   }
 </script>
+
 <link rel="manifest" href="/tools/manifest.json">
 
 </body>
