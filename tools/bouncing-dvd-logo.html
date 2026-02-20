@@ -1,207 +1,207 @@
 ---
 layout: null
-title: "DVD Logo Universe"
+title: "DVD Logo Universe: Optimized"
 category: "Games"
-description: "From a single bounce to a multi-threaded empire. Unlock layers of upgrades as you harvest the void."
-permalink: /tools/bouncing-dvd-logo.html
+description: "A high-performance idle tycoon. Harvest data packets, unlock satellites, and prestige for eternal growth."
+permalink: /tools/bouncing-dvd-logo-extreme.html
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta charset="UTF-8">
-  <title>DVD Logo Universe</title>
-  <style>
-    :root { --primary: #8b5cf6; --bg: #020617; --surface: #0f172a; --text: #f8fafc; --border: #334155; --accent: #22c55e; --locked: #1e293b; }
-    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; display: flex; justify-content: center; overflow-y: scroll; }
-    .tool-container { max-width: 900px; width: 100%; background: var(--surface); padding: 30px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 0 40px rgba(0,0,0,0.8); }
-    
-    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-    .stats-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px; }
-    .stat { background: rgba(0,0,0,0.4); padding: 15px; border-radius: 8px; border: 1px solid var(--border); text-align: center; }
-    .stat-val { display: block; font-size: 1.8rem; font-weight: 900; color: var(--accent); font-family: 'JetBrains Mono', monospace; }
-    .stat-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8; }
+    <meta charset="UTF-8">
+    <title>DVD Universe: Ultra</title>
+    <style>
+        :root { --primary: #a855f7; --bg: #030712; --surface: #111827; --text: #f9fafb; --border: #374151; --accent: #10b981; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; display: flex; justify-content: center; overflow-y: scroll; }
+        .tool-container { max-width: 950px; width: 100%; background: var(--surface); padding: 25px; border-radius: 20px; border: 1px solid var(--border); box-shadow: 0 0 60px rgba(0,0,0,0.5); }
+        
+        .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px; }
+        .stat { background: #000; padding: 12px; border-radius: 12px; border: 1px solid var(--border); text-align: center; }
+        .stat-val { display: block; font-size: 1.4rem; font-weight: 900; color: var(--accent); }
+        .stat-label { font-size: 0.6rem; text-transform: uppercase; color: #9ca3af; letter-spacing: 1px; }
 
-    canvas { background: #000; display: block; width: 100%; border-radius: 4px; border: 4px solid #1e293b; box-shadow: inset 0 0 20px #000; }
+        canvas { background: #000; display: block; width: 100%; border-radius: 12px; border: 2px solid #1f2937; cursor: crosshair; }
 
-    .upgrades-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-top: 20px; }
-    .upgrade-card { background: #1e293b; padding: 15px; border-radius: 8px; border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden; }
-    .upgrade-card:hover:not(.disabled) { border-color: var(--primary); background: #2d3748; transform: translateY(-2px); }
-    .upgrade-card.disabled { opacity: 0.4; cursor: not-allowed; filter: grayscale(1); }
-    .upgrade-card.hidden { display: none; }
-    
-    .up-lvl { position: absolute; top: 5px; right: 8px; font-size: 0.6rem; font-weight: bold; color: var(--primary); }
-    .up-title { font-weight: 700; display: block; font-size: 0.9rem; margin-bottom: 4px; }
-    .up-cost { color: #facc15; font-weight: 800; font-size: 0.85rem; display: block; }
-    .up-desc { font-size: 0.7rem; color: #94a3b8; line-height: 1.3; margin-top: 6px; display: block; }
-  </style>
+        .upgrades-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin-top: 20px; }
+        .upgrade-card { background: #1f2937; padding: 14px; border-radius: 12px; border: 1px solid var(--border); cursor: pointer; transition: 0.15s cubic-bezier(0.4, 0, 0.2, 1); position: relative; }
+        .upgrade-card:hover:not(.disabled) { border-color: var(--primary); transform: scale(1.02); background: #374151; }
+        .upgrade-card.disabled { opacity: 0.4; cursor: not-allowed; }
+        
+        .up-lvl { position: absolute; top: 10px; right: 10px; font-size: 0.65rem; background: var(--primary); padding: 2px 6px; border-radius: 4px; }
+        .up-title { font-weight: 700; display: block; font-size: 0.85rem; margin-bottom: 2px; }
+        .up-cost { color: #fbbf24; font-weight: 800; font-size: 0.8rem; }
+        .up-desc { font-size: 0.7rem; color: #9ca3af; margin-top: 4px; display: block; }
+        
+        .prestige-btn { grid-column: 1 / -1; background: linear-gradient(90deg, #4f46e5, #9333ea); color: white; padding: 15px; border-radius: 12px; text-align: center; font-weight: 900; cursor: pointer; border: none; margin-top: 10px; display: none; }
+    </style>
 </head>
 <body>
-  <div class="tool-container">
-    <div class="header">
-      <h1 style="margin:0; font-size: 1.5rem; color: var(--primary);">DVD UNIVERSE <small style="font-size: 0.5rem; color: #64748b;">v2.0</small></h1>
-      <div id="unlock-msg" style="font-size: 0.7rem; color: var(--primary); font-weight: bold;"></div>
-    </div>
-    
-    <div class="stats-bar">
-      <div class="stat"><span class="stat-label">Data Packets</span><span id="currency" class="stat-val">0</span></div>
-      <div class="stat"><span class="stat-label">Corner Perfection</span><span id="corners" class="stat-val">0</span></div>
-      <div class="stat"><span class="stat-label">Multipliers</span><span id="multi" class="stat-val">1.0x</span></div>
-    </div>
+    <div class="tool-container">
+        <div class="stats-bar">
+            <div class="stat"><span class="stat-label">Packets</span><span id="currency" class="stat-val">0</span></div>
+            <div class="stat"><span class="stat-label">Satellites</span><span id="sats" class="stat-val">0</span></div>
+            <div class="stat"><span class="stat-label">Multi</span><span id="multi" class="stat-val">1.0x</span></div>
+            <div class="stat"><span class="stat-label">Prestige</span><span id="prestige" class="stat-val">0</span></div>
+        </div>
 
-    <canvas id="c" width="800" height="400"></canvas>
+        <canvas id="c" width="800" height="400"></canvas>
 
-    <div class="upgrades-container" id="upgrades-grid">
-      </div>
-  </div>
+        <div class="upgrades-container" id="upgrades-grid"></div>
+        <button id="prestige-btn" class="prestige-btn" onclick="prestige()">ASCEND FOR PERMANENT 2X MULTIPLIER (Cost: 1M Packets)</button>
+    </div>
 
 <script>
 const cvs=document.getElementById('c'), ctx=cvs.getContext('2d');
 const grid = document.getElementById('upgrades-grid');
 
 let game = {
-  packets: 0,
-  totalCorners: 0,
-  totalBounces: 0,
-  upgrades: {
-    speed: { lvl: 1, base: 15, growth: 1.4, title: "⚡ Overclock Clock", desc: "Increases logo velocity.", unlock: 0 },
-    value: { lvl: 1, base: 10, growth: 1.5, title: "💎 High-Bit Polish", desc: "Gain more packets per bounce.", unlock: 0 },
-    size:  { lvl: 0, base: 100, growth: 1.8, title: "📏 Frame Expansion", desc: "Bigger logo, wider reach.", unlock: 50 },
-    magnet:{ lvl: 0, base: 500, growth: 2.5, title: "🎯 Gravity Well", desc: "Pull logo toward corners.", unlock: 250 },
-    multi: { lvl: 0, base: 2000, growth: 3,   title: "🧬 Multi-Thread", desc: "Doubles all packet gains.", unlock: 1000 },
-    trail: { lvl: 0, base: 5000, growth: 5,   title: "🌈 Neon Afterglow", desc: "Bounces leave data trails (Passive Revenue).", unlock: 3000 },
-    quantum:{lvl: 0, base: 25000, growth: 10,  title: "⚛️ Quantum Tunnel", desc: "Chance to trigger double bounce.", unlock: 15000 }
-  }
+    packets: 0,
+    totalBounces: 0,
+    prestigeLevel: 0,
+    satellites: [],
+    upgrades: {
+        speed: { lvl: 1, base: 15, growth: 1.3, title: "⚡ Engine Clock", desc: "Boosts logo velocity.", unlock: 0 },
+        value: { lvl: 1, base: 10, growth: 1.4, title: "💎 Data Density", desc: "More packets per bounce.", unlock: 0 },
+        size:  { lvl: 0, base: 100, growth: 1.6, title: "📏 Scale Factor", desc: "Increases hit surface area.", unlock: 10 },
+        sat:   { lvl: 0, base: 500, growth: 2.1, title: "🛰️ Data Satellite", desc: "Adds a smaller, faster logo.", unlock: 50 },
+        magnet:{ lvl: 0, base: 1000, growth: 2.5, title: "🎯 Corner Aim", desc: "Subtly guides toward corners.", unlock: 100 },
+        quantum:{lvl: 0, base: 10000, growth: 1.8, title: "⚛️ Quantum Luck", desc: "Increases critical hit chance.", unlock: 500 },
+        auto:  { lvl: 0, base: 50000, growth: 3, title: "🤖 Autopilot", desc: "Generates packets every second.", unlock: 1000 }
+    }
 };
 
-let x=100, y=100, dx=3, dy=3, w=80, h=40, col='#8b5cf6';
+let mainLogo = { x:100, y:100, dx:3, dy:3, w:80, h:40, col:'#a855f7' };
 
-function rCol(){ return `hsl(${Math.random()*360}, 70%, 60%)`; }
-
-function getCost(id) {
-  let up = game.upgrades[id];
-  return Math.floor(up.base * Math.pow(up.growth, up.lvl));
-}
+function rCol(){ return `hsl(${Math.random()*360}, 80%, 60%)`; }
 
 function buy(id) {
-  let up = game.upgrades[id];
-  let cost = getCost(id);
+    let up = game.upgrades[id];
+    let cost = Math.floor(up.base * Math.pow(up.growth, up.lvl));
 
-  if (game.packets >= cost) {
-    game.packets -= cost;
-    up.lvl++;
-    
-    // Immediate Effects
-    if(id === 'speed') {
-      let speed = 2 + (up.lvl * 0.5);
-      dx = (dx > 0 ? 1 : -1) * speed;
-      dy = (dy > 0 ? 1 : -1) * speed;
+    if (game.packets >= cost) {
+        game.packets -= cost;
+        up.lvl++;
+        if(id === 'sat') {
+            game.satellites.push({ x: 400, y: 200, dx: 5, dy: 5, w: 40, h: 20, col: rCol() });
+        }
+        if(id === 'size') { mainLogo.w += 8; mainLogo.h += 4; }
+        renderUpgrades();
+        updateUI();
     }
-    if(id === 'size') { w += 6; h += 3; }
+}
+
+function prestige() {
+    if(game.packets >= 1000000) {
+        game.packets = 0;
+        game.prestigeLevel++;
+        // Reset non-permanent upgrades
+        for(let id in game.upgrades) {
+            if(id !== 'prestige') game.upgrades[id].lvl = (id === 'speed' || id === 'value') ? 1 : 0;
+        }
+        game.satellites = [];
+        mainLogo = { x:100, y:100, dx:3, dy:3, w:80, h:40, col:'#a855f7' };
+        renderUpgrades();
+        updateUI();
+    }
+}
+
+function updatePhysics(obj, isMain) {
+    let speedMult = 1 + (game.upgrades.speed.lvl * 0.1);
     
-    renderUpgrades();
-    updateUI();
-  }
+    // Magnetism Logic (Reduced force to prevent corner-locking)
+    if(game.upgrades.magnet.lvl > 0) {
+        let pull = game.upgrades.magnet.lvl * 0.005;
+        obj.dx += (obj.x < cvs.width/2) ? -pull : pull;
+        obj.dy += (obj.y < cvs.height/2) ? -pull : pull;
+    }
+
+    // Clamp speed
+    let maxS = 10 * speedMult;
+    obj.dx = Math.max(-maxS, Math.min(maxS, obj.dx));
+    obj.dy = Math.max(-maxS, Math.min(maxS, obj.dy));
+
+    obj.x += obj.dx;
+    obj.y += obj.dy;
+
+    let hit = false;
+    let hitX = false;
+    let hitY = false;
+
+    if(obj.x <= 0) { obj.x = 0; obj.dx *= -1; hit = hitX = true; }
+    else if(obj.x + obj.w >= cvs.width) { obj.x = cvs.width - obj.w; obj.dx *= -1; hit = hitX = true; }
+    
+    if(obj.y <= 0) { obj.y = 0; obj.dy *= -1; hit = hitY = true; }
+    else if(obj.y + obj.h >= cvs.height) { obj.y = cvs.height - obj.h; obj.dy *= -1; hit = hitY = true; }
+
+    if(hit) {
+        obj.col = rCol();
+        if(isMain) game.totalBounces++;
+        
+        let pBase = game.upgrades.value.lvl * Math.pow(2, game.prestigeLevel);
+        if(Math.random() < game.upgrades.quantum.lvl * 0.02) pBase *= 10;
+        
+        game.packets += (hitX && hitY) ? pBase * 50 : pBase;
+        updateUI();
+    }
 }
 
 function renderUpgrades() {
-  grid.innerHTML = '';
-  for (let id in game.upgrades) {
-    let up = game.upgrades[id];
-    if (game.totalBounces < up.unlock && up.lvl === 0) continue;
-
-    let cost = getCost(id);
-    let canAfford = game.packets >= cost;
-    
-    const card = document.createElement('div');
-    card.className = `upgrade-card ${canAfford ? '' : 'disabled'}`;
-    card.onclick = () => buy(id);
-    card.innerHTML = `
-      <span class="up-lvl">LVL ${up.lvl}</span>
-      <span class="up-title">${up.title}</span>
-      <span class="up-cost">Cost: ${cost.toLocaleString()}</span>
-      <span class="up-desc">${up.desc}</span>
-    `;
-    grid.appendChild(card);
-  }
+    let html = '';
+    for (let id in game.upgrades) {
+        let up = game.upgrades[id];
+        if (game.totalBounces < up.unlock && up.lvl === 0) continue;
+        let cost = Math.floor(up.base * Math.pow(up.growth, up.lvl));
+        let disabled = game.packets < cost ? 'disabled' : '';
+        html += `
+            <div class="upgrade-card ${disabled}" onclick="buy('${id}')">
+                <span class="up-lvl">Lvl ${up.lvl}</span>
+                <span class="up-title">${up.title}</span>
+                <span class="up-cost">Cost: ${cost.toLocaleString()}</span>
+                <span class="up-desc">${up.desc}</span>
+            </div>`;
+    }
+    grid.innerHTML = html;
 }
 
 function updateUI() {
-  document.getElementById('currency').innerText = Math.floor(game.packets).toLocaleString();
-  document.getElementById('corners').innerText = game.totalCorners;
-  let m = Math.pow(2, game.upgrades.multi.lvl);
-  document.getElementById('multi').innerText = m.toFixed(1) + 'x';
+    document.getElementById('currency').innerText = Math.floor(game.packets).toLocaleString();
+    document.getElementById('sats').innerText = game.satellites.length;
+    document.getElementById('multi').innerText = Math.pow(2, game.prestigeLevel).toFixed(1) + 'x';
+    document.getElementById('prestige').innerText = game.prestigeLevel;
+    document.getElementById('prestige-btn').style.display = game.packets >= 1000000 ? 'block' : 'none';
 }
 
-function anim(){
-  // Motion Blur
-  ctx.fillStyle = 'rgba(2, 6, 23, 0.2)';
-  ctx.fillRect(0,0,cvs.width,cvs.height);
+function loop() {
+    ctx.fillStyle = 'rgba(3, 7, 18, 0.25)';
+    ctx.fillRect(0, 0, cvs.width, cvs.height);
 
-  // Magnetism
-  if(game.upgrades.magnet.lvl > 0) {
-    let pull = game.upgrades.magnet.lvl * 0.02;
-    dx += (x < cvs.width/2) ? -pull : pull;
-    dy += (y < cvs.height/2) ? -pull : pull;
-    let max = 3 + (game.upgrades.speed.lvl * 0.5);
-    dx = Math.max(-max, Math.min(max, dx));
-    dy = Math.max(-max, Math.min(max, dy));
-  }
+    // Draw Main
+    updatePhysics(mainLogo, true);
+    ctx.fillStyle = mainLogo.col;
+    ctx.fillRect(mainLogo.x, mainLogo.y, mainLogo.w, mainLogo.h);
+    ctx.fillStyle = 'white';
+    ctx.font = `bold ${mainLogo.h * 0.5}px Arial`;
+    ctx.textAlign = 'center';
+    ctx.fillText('DVD', mainLogo.x + mainLogo.w/2, mainLogo.y + mainLogo.h * 0.65);
 
-  // Draw Logo
-  ctx.fillStyle=col; 
-  ctx.fillRect(x,y,w,h);
-  ctx.fillStyle='white'; 
-  ctx.font='900 ' + (h*0.5) + 'px sans-serif'; 
-  ctx.textAlign='center'; 
-  ctx.fillText('DVD', x+w/2, y+h*0.65);
+    // Draw Satellites
+    game.satellites.forEach(s => {
+        updatePhysics(s, false);
+        ctx.fillStyle = s.col;
+        ctx.fillRect(s.x, s.y, s.w, s.h);
+    });
 
-  x+=dx; y+=dy;
-  let hitX=false, hitY=false;
-
-  // FIXED COLLISION LOGIC (The "Anti-Glitch" Clamping)
-  if(x <= 0) { 
-    x = 0; dx *= -1; hitX = true; 
-  } else if(x + w >= cvs.width) { 
-    x = cvs.width - w; dx *= -1; hitX = true; 
-  }
-
-  if(y <= 0) { 
-    y = 0; dy *= -1; hitY = true; 
-  } else if(y + h >= cvs.height) { 
-    y = cvs.height - h; dy *= -1; hitY = true; 
-  }
-
-  if(hitX || hitY) {
-    col=rCol();
-    game.totalBounces++;
-    
-    let gain = game.upgrades.value.lvl * Math.pow(2, game.upgrades.multi.lvl);
-    
-    // Quantum Chance
-    if(Math.random() < (game.upgrades.quantum.lvl * 0.05)) gain *= 5;
-    
-    game.packets += gain;
-    
-    // Passive Trail Revenue
-    if(game.upgrades.trail.lvl > 0) {
-      game.packets += (game.upgrades.trail.lvl * 2);
+    // Auto-Packets
+    if(game.upgrades.auto.lvl > 0) {
+        game.packets += (game.upgrades.auto.lvl * 0.1);
     }
 
-    if(hitX && hitY){ 
-      game.totalCorners++; 
-      game.packets += (gain * 100);
-    }
-    
-    updateUI();
-    renderUpgrades(); // Check for new unlocks
-  }
-  
-  requestAnimationFrame(anim);
+    requestAnimationFrame(loop);
 }
 
-// Start
-renderUpgrades();
+// Initial UI check every 500ms to keep costs updated without lag
+setInterval(renderUpgrades, 500);
 updateUI();
-anim();
+loop();
 </script>
 </body>
 </html>
