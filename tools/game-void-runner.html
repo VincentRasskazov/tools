@@ -1,0 +1,152 @@
+---
+layout: null
+title: "Void-Runner: Zero-G Terminal"
+category: "Games"
+description: "A Newtonian nightmare. Zero rotational damping, lethal gravity, and a microscopic landing profile."
+permalink: /tools/game-void-runner.html
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <title>Void-Runner: Zero-G Terminal</title>
+  <style>
+    :root { --primary: #f43f5e; --bg: #020617; --surface: #0f172a; --text: #f1f5f9; --border: #1e293b; --danger: #ff0000; }
+    body { font-family: 'JetBrains Mono', monospace; background: var(--bg); color: var(--text); margin: 0; padding: 20px; display: flex; justify-content: center; }
+    .tool-container { max-width: 600px; width: 100%; background: var(--surface); padding: 30px; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 0 50px rgba(244, 63, 94, 0.1); }
+    h1 { text-align: center; color: var(--primary); margin-bottom: 20px; font-size: 1.5rem; letter-spacing: 2px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 15px; text-align: center; font-size: 0.8rem; }
+    .stat-box { background: rgba(0,0,0,0.5); padding: 10px; border: 1px solid var(--border); }
+    .label { display: block; font-size: 0.6rem; text-transform: uppercase; color: #64748b; margin-bottom: 4px; }
+    canvas { background: #000; display: block; width: 100%; border: 1px solid #f43f5e; }
+    button { width: 100%; padding: 15px; background: transparent; color: var(--primary); border: 1px solid var(--primary); font-weight: 800; cursor: pointer; margin-top: 20px; transition: 0.3s; }
+    button:hover { background: var(--primary); color: white; box-shadow: 0 0 20px rgba(244, 63, 94, 0.4); }
+    .controls-hint { margin-top: 15px; font-size: 0.7rem; color: #64748b; text-align: center; line-height: 1.6; }
+    .warning { color: var(--primary); font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>VOID-RUNNER // MK.IV</h1>
+    
+    <div class="stats-grid">
+      <div class="stat-box"><span class="label">Fuel-Cell</span><span id="f" style="color:var(--primary)">100</span>%</div>
+      <div class="stat-box"><span class="label">Lat-Vel</span><span id="vx">0.00</span></div>
+      <div class="stat-box"><span class="label">Vert-Vel</span><span id="vy">0.00</span></div>
+    </div>
+
+    <canvas id="cvs" width="400" height="400"></canvas>
+
+    <div class="controls-hint">
+      [UP] MAIN THRUST | [L/R] TORQUE STABILIZERS<br>
+      <span class="warning">DANGER:</span> VACUUM PHYSICS ENABLED. ROTATION IS PERPETUAL.
+    </div>
+
+    <button onclick="st()">ENGAGE DESCENT SEQUENCE</button>
+  </div>
+
+<script>
+const cvs=document.getElementById('cvs'), ctx=cvs.getContext('2d');
+let s, k={l:false,r:false,u:false}, run=false;
+
+window.onkeydown=e=>{ 
+    if(e.key==='ArrowLeft') k.l=true; 
+    if(e.key==='ArrowRight') k.r=true; 
+    if(e.key==='ArrowUp') { k.u=true; e.preventDefault(); }
+};
+window.onkeyup=e=>{ 
+    if(e.key==='ArrowLeft') k.l=false; 
+    if(e.key==='ArrowRight') k.r=false; 
+    if(e.key==='ArrowUp') k.u=false; 
+};
+
+function st(){
+  s = {
+    x: 40 + Math.random()*320, y: 20,
+    vx: (Math.random()-0.5)*3.0, vy: 0.5,
+    a: Math.random() * Math.PI * 2, av: (Math.random()-0.5)*0.05, 
+    f: 100,
+    landed: false
+  };
+  run = true;
+  loop();
+}
+
+function loop(){
+  if(!run) return;
+  
+  // Hardened Physics Constants
+  const GRAVITY = 0.035; // +40% gravity
+  const THRUST = 0.08;
+  const TORQUE = 0.005;
+  const PAD_X = 192, PAD_W = 15; // 50% smaller pad
+
+  ctx.clearRect(0,0,400,400);
+
+  // Terrain
+  ctx.fillStyle='#1e293b';
+  ctx.fillRect(0, 390, 400, 10);
+  ctx.fillStyle='#f43f5e';
+  ctx.fillRect(PAD_X, 388, PAD_W, 4); 
+
+  // Hard Rotation: Zero damping (1.0)
+  if(k.l) s.av -= TORQUE;
+  if(k.r) s.av += TORQUE;
+  s.a += s.av;
+  // s.av *= 1.0; // No friction in the void
+
+  // Thrust & Heavy Fuel Consumption
+  if(k.u && s.f > 0){
+    s.vx += Math.cos(s.a) * THRUST;
+    s.vy += Math.sin(s.a) * THRUST;
+    s.f -= 0.6; // Faster burn
+    
+    ctx.fillStyle = '#f43f5e';
+    ctx.beginPath();
+    ctx.arc(s.x - Math.cos(s.a)*10, s.y - Math.sin(s.a)*10, 3, 0, Math.PI*2);
+    ctx.fill();
+  }
+
+  s.vy += GRAVITY;
+  s.x += s.vx;
+  s.y += s.vy;
+
+  if(s.x < 0) s.x = 400; if(s.x > 400) s.x = 0;
+
+  document.getElementById('f').innerText = Math.max(0, s.f).toFixed(0);
+  document.getElementById('vx').innerText = s.vx.toFixed(2);
+  document.getElementById('vy').innerText = s.vy.toFixed(2);
+
+  ctx.save();
+  ctx.translate(s.x, s.y);
+  ctx.rotate(s.a);
+  ctx.strokeStyle = '#fff';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(8, 0);
+  ctx.lineTo(-6, -5);
+  ctx.lineTo(-4, 0);
+  ctx.lineTo(-6, 5);
+  ctx.closePath();
+  ctx.stroke();
+  ctx.restore();
+
+  // Lethal Collision Logic
+  if(s.y > 385){
+    run = false;
+    const hitPad = (s.x > PAD_X && s.x < (PAD_X + PAD_W));
+    const safeV = (Math.abs(s.vx) < 0.25 && s.vy < 0.5); // Tightened thresholds
+    const safeA = (Math.abs(s.a - (-Math.PI/2)) < 0.1); // Must be almost perfectly vertical
+
+    if(hitPad && safeV && safeA){
+      alert("TERMINAL STABILIZED. MISSION CRITICAL SUCCESS.");
+    } else {
+      let reason = !hitPad ? "MISSED TARGET" : (!safeV ? "KINETIC IMPACT OVERLOAD" : "INCORRECT ATTITUDE");
+      alert("HULL BREACHED: " + reason);
+    }
+  } else {
+    requestAnimationFrame(loop);
+  }
+}
+</script>
+</body>
+</html>
