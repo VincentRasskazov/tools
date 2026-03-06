@@ -1,6 +1,6 @@
 # 🛠️ Vincent's Tools Hub
 
-![Tools Count](https://img.shields.io/badge/Tools-650%2B-blue?style=for-the-badge)
+![Tools Count](https://img.shields.io/badge/Tools-2500+%2B-blue?style=for-the-badge)
 ![Tech Stack](https://img.shields.io/badge/Tech-HTML%20%7C%20CSS%20%7C%20JS-success?style=for-the-badge)
 ![Open Source](https://img.shields.io/badge/Open_Source-Yes-brightgreen?style=for-the-badge)
 
