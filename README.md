@@ -1,102 +1,71 @@
-# 🛠️ Vincent’s Ultimate Tools Hub  
-**2,650+ browser‑based tools • Zero backend • Instant load times**
+# Vincent’s Ultimate Tools Hub
 
-Welcome to **Vincent’s Tools Hub** — a massive, ever‑growing collection of free, privacy‑first, ultra‑fast web tools.  
-Everything runs **100% client‑side**, meaning no servers, no tracking, and no data ever leaves your device.
+This project was built with heavy AI assistance and is not actively maintained. Some parts may be messy, inconsistent, or experimental.
 
-> **Note:** This project was built with heavy AI assistance and is not actively maintained.  
-> Some parts may be messy, inconsistent, or experimental.
+**2,650+ browser-based tools. Zero backend. Instant load times.**
 
----
-
-## ✨ Features
-
-- ⚡ **Instant Performance**  
-  All tools run locally in your browser. No API calls, no loading delays.
-
-- 🔒 **Privacy‑First**  
-  Your text, files, and data never leave your device.
-
-- 🎨 **Unified UI System**  
-  Modern, responsive design powered by a shared CSS variable system.
-
-- 🌐 **SEO‑Optimized**  
-  Automated OpenGraph tags, Twitter cards, sitemaps, and metadata injection.
-
-- 📦 **Huge Scale**  
-  Over **2,650 tools**, all searchable and consistently styled.
-
-- 📱 **PWA Support**  
-  Installable as an app with offline caching via service workers.
+Vincent’s Tools Hub is a collection of free, privacy-first web tools. Everything runs 100% client-side; no data ever leaves your device.
 
 ---
 
-## 🗂️ Categories
+## Features
 
-### 💻 Developer Tools  
-JSON/YAML converters, Base64 encoders, Regex testers, hash generators, Unix permissions, encoders/decoders.
-
-### 🎨 Design & UI Tools  
-CSS generators (Glassmorphism, Neumorphism, Flexbox, Grid), color utilities, gradients, shadows.
-
-### 📈 Finance & Business  
-ROI, CAGR, margin/markup, loan calculators, investment math, Rule of 72.
-
-### 🧮 Math & Science  
-Quadratic solvers, fraction simplifiers, geometry tools, statistics calculators.
-
-### 📝 Text & Formatting  
-Markdown converters, case changers, word counters, obfuscators, text effects.
-
-### 🔐 Security  
-SHA‑256, SHA‑512, PBKDF2, MD5, password generators, entropy tools.
-
-### ⏱️ Time & Health  
-Timezone converters, epoch clocks, Pomodoro timers, BMI calculators.
-
-### 🎮 Games & Mini‑Apps  
-Snake, Connect Four, aim trainers, reaction tests, flashcards, puzzles.
+* **Instant Performance:** Tools run locally in the browser with no API delays.
+* **Privacy-First:** Files and text are processed on your device only.
+* **Unified UI:** Responsive design using a shared CSS variable system.
+* **SEO-Optimized:** Automated metadata, OpenGraph tags, and sitemaps.
+* **PWA Support:** Installable as an app with offline caching.
 
 ---
 
-## 🏗️ Architecture
+## Tool Categories
 
-Each tool is a lightweight **single‑page application (SPA)**.
-
-- **Logic:** Vanilla JavaScript (no frameworks for maximum speed)  
-- **Styling:** Centralized CSS variable system  
-- **Metadata:** Jekyll frontmatter + automated SEO injection  
-- **Deployment:** GitHub Pages with continuous updates
+* **Developer:** JSON/YAML converters, Base64, Regex, Unix permissions.
+* **Design:** CSS generators (Glassmorphism, Grid), color utilities.
+* **Finance:** ROI, CAGR, loan calculators, margin/markup.
+* **Math & Science:** Geometry tools, statistics, quadratic solvers.
+* **Security:** SHA-256/512, password generators, entropy tests.
+* **Utilities:** Timezone converters, Pomodoro timers, BMI calculators.
+* **Games:** Simple browser games and reaction trainers.
 
 ---
 
-## 🚀 Local Development
+## Architecture
+
+* **Logic:** Vanilla JavaScript for maximum execution speed.
+* **Styling:** Centralized CSS variable system.
+* **Metadata:** Jekyll frontmatter with automated SEO injection scripts.
+* **Deployment:** Hosted on GitHub Pages via GitHub Actions.
+
+---
+
+## Local Development
 
 Run the project locally using any simple HTTP server.
 
-### Python (quickest)
+**Python**
 ```bash
 python3 -m http.server 8000
 ```
 
-### Node.js
+**Node.js**
 ```bash
 npx http-server
 ```
 
-### Jekyll
+**Jekyll**
 ```bash
 bundle exec jekyll serve
 ```
 
 ---
 
-## 📄 License
-MIT License — free to use, modify, and share.
+## License
+
+MIT License. Free to use, modify, and share.
 
 ---
 
-## ⚠️ Maintenance Status
-This project is **not actively maintained**.  
-It was built using **AI‑assisted generation**, and some tools may be experimental or unpolished.
+## Maintenance Status
 
+This project is not actively maintained. It was generated primarily via AI and some tools may be unpolished or experimental.
