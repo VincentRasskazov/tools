@@ -54,7 +54,6 @@ category: Developer
 </div>
 
 <script>
-    // Grab prompt from URL if user used the main index.html search bar
     document.addEventListener("DOMContentLoaded", () => {
         const urlParams = new URLSearchParams(window.location.search);
         const passedPrompt = urlParams.get('prompt');
@@ -65,9 +64,8 @@ category: Developer
 
     let conversationHistory = "System: You are an expert web developer. Output ONLY complete, valid HTML code containing embedded CSS and JS for a single-file web tool based on the user's request. Do not include markdown formatting like ```html. Do not include any conversational text. Just return the raw code.\n\n";
     
-    // Rate Limiting Config
     let lastRequestTime = 0;
-    const COOLDOWN_MS = 10000; // 10 seconds
+    const COOLDOWN_MS = 10000;
 
     async function generateTool() {
         const promptInput = document.getElementById('ai-prompt').value;
@@ -78,24 +76,22 @@ category: Developer
 
         if (!promptInput.trim()) {
             statusText.innerText = "Please enter a description first.";
-            statusText.style.color = "#dc2626"; // red
+            statusText.style.color = "#dc2626";
             return;
         }
 
-        // Client-side Rate Limit
         const now = Date.now();
         if (now - lastRequestTime < COOLDOWN_MS) {
             const timeLeft = Math.ceil((COOLDOWN_MS - (now - lastRequestTime)) / 1000);
             statusText.innerText = `Rate limit active. Please wait ${timeLeft} seconds before generating again.`;
-            statusText.style.color = "#ea580c"; // orange
+            statusText.style.color = "#ea580c";
             return;
         }
 
-        // UI Loading State
         btn.disabled = true;
         btn.innerText = "Working...";
         btn.style.opacity = "0.7";
-        statusText.style.color = "#2563eb"; // blue
+        statusText.style.color = "#2563eb";
         statusText.innerText = `Model is writing your code... (This may take a moment)`;
         codeOutput.value = "";
 
@@ -107,7 +103,6 @@ category: Developer
             model: selectedModel
         };
 
-        // Absolute URL to prevent Service Worker 405 errors
         const apiUrl = '[https://backendai-ablv.onrender.com/chat](https://backendai-ablv.onrender.com/chat)';
 
         try {
@@ -115,11 +110,14 @@ category: Developer
             
             const response = await fetch(apiUrl, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                mode: 'cors', // Crucial fix for 405 error
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'text/plain'
+                },
                 body: JSON.stringify(payload)
             });
 
-            // Handle Server-Side Rate Limit (429)
             if (response.status === 429) {
                 throw new Error("Rate limit exceeded on the server. Please wait a bit.");
             }
@@ -129,19 +127,18 @@ category: Developer
 
             let rawText = await response.text();
             
-            // Strip markdown block formatting if the AI disobeys the system prompt
             rawText = rawText.replace(/^```html\s*/i, '').replace(/```\s*$/i, '').trim();
 
             conversationHistory += ` ${rawText}\n`;
             codeOutput.value = rawText;
             updatePreview();
             
-            statusText.style.color = "#16a34a"; // green
+            statusText.style.color = "#16a34a";
             statusText.innerText = "Success! Tweak the code below or submit it.";
 
         } catch (error) {
             console.error("API Error:", error);
-            statusText.style.color = "#dc2626"; // red
+            statusText.style.color = "#dc2626";
             statusText.innerText = `Error: ${error.message || "Failed to connect to AI backend."}`;
         } finally {
             btn.disabled = false;
