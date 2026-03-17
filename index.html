@@ -297,36 +297,51 @@ description: A massive collection of fast, beautiful, and free online converters
     </div>
   </header>
 
-  <div class="feedback-banner">
-    <h2 style="margin-top: 0; font-size: 1.8rem; color: var(--text-main);">Have an idea for a new tool?</h2>
-    <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 1.1rem;">Tell us what to build next, or use our AI to code it yourself instantly.</p>
-    
-    <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
-      <input type="text" id="feedback-input" placeholder="e.g., A JSON formatter with a dark theme..." style="padding: 14px 20px; width: 100%; max-width: 450px; border-radius: 12px; border: 2px solid var(--border); background: var(--bg); color: var(--text-main); font-size: 1rem; outline: none; transition: border-color 0.2s;">
-      
-      <button onclick="submitFeedback()" style="padding: 14px 24px; border-radius: 12px; border: none; background: var(--text-muted); color: white; font-weight: 700; cursor: pointer; transition: background 0.2s; font-family: inherit;">
-        Send Idea
-      </button>
-      
-      <button onclick="goToToolMaker()" style="padding: 14px 24px; border-radius: 12px; border: none; background: var(--primary); color: white; font-weight: 700; cursor: pointer; transition: background 0.2s; font-family: inherit;">
-        Code it with AI
-      </button>
-    </div>
-  </div>
-
   <script>
-    function submitFeedback() {
-      const idea = document.getElementById('feedback-input').value;
-      if (!idea.trim()) return alert('Please type an idea first!');
-      window.location.href = `mailto:vincentr111222@Gmail.com?subject=New Tool Request&body=Here is my tool idea: ${encodeURIComponent(idea)}`;
-    }
+  async function submitFeedback() {
+    const ideaInput = document.getElementById('feedback-input');
+    const idea = ideaInput.value;
+    const btn = event.currentTarget; // Grabs the button that was clicked
+    
+    if (!idea.trim()) return alert('Please type an idea first!');
+    
+    // UI Feedback
+    const originalText = btn.innerText;
+    btn.innerText = "Sending...";
+    btn.disabled = true;
 
-    function goToToolMaker() {
-      const idea = document.getElementById('feedback-input').value;
-      if (!idea.trim()) return alert('Please type an idea first!');
-      window.location.href = `/tools/tools/ai-tool-generator.html?prompt=${encodeURIComponent(idea)}`;
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({
+          access_key: "YOUR_WEB3FORMS_KEY_HERE", // <-- PASTE YOUR KEY HERE
+          subject: "New Tool Request from Ultimate Tools Hub",
+          from_name: "Tool Hub User",
+          message: `A user has requested a new tool:\n\n${idea}`
+        })
+      });
+
+      if (response.ok) {
+        alert("Idea sent to Vincent successfully! Thanks for the feedback.");
+        ideaInput.value = ""; // Clear the input
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      alert("Network error. Could not send feedback.");
+    } finally {
+      btn.innerText = originalText;
+      btn.disabled = false;
     }
-  </script>
+  }
+
+  function goToToolMaker() {
+    const idea = document.getElementById('feedback-input').value;
+    if (!idea.trim()) return alert('Please type an idea first!');
+    window.location.href = `/tools/tools/ai-tool-generator.html?prompt=${encodeURIComponent(idea)}`;
+  }
+</script>
 
   <div class="controls-wrapper">
     <div id="category-filters" class="category-tabs"></div>
