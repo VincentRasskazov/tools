@@ -5,15 +5,15 @@ description: Select an AI model, describe your tool, and generate the code insta
 category: Developer
 ---
 
-<div class="tool-container" style="max-width: 1200px; margin: auto; padding: 20px;">
+<div class="tool-container" style="max-width: 1200px; margin: auto; padding: 20px; font-family: 'Plus Jakarta Sans', sans-serif;">
     
-    <div style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;">
-        <select id="ai-model" style="padding: 12px; border-radius: 6px; border: 1px solid #ccc; font-size: 14px; background: white;">
-            <optgroup label="🌟 Recommended (Stable)">
+    <div style="display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;">
+        <select id="ai-model" style="padding: 14px; border-radius: 12px; border: 2px solid #e2e8f0; font-size: 15px; background: #ffffff; color: #0f172a; outline: none;">
+            <optgroup label="Recommended (Stable)">
                 <option value="copilot">Microsoft Copilot</option>
                 <option value="deepai-deepseek">DeepAI - DeepSeek V3.2</option>
             </optgroup>
-            <optgroup label="🧪 Experimental (May fail or timeout)">
+            <optgroup label="Experimental (May fail or timeout)">
                 <option value="venice">Venice AI (GLM 4.6)</option>
                 <option value="overchat">Overchat (GPT-5 Nano)</option>
                 <option value="talkai">Talk AI (GPT-4.1)</option>
@@ -31,29 +31,30 @@ category: Developer
             </optgroup>
         </select>
 
-        <input type="text" id="ai-prompt" placeholder="Describe the tool you want to build..." style="flex-grow: 1; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px;">
-        <button onclick="generateTool()" id="generate-btn" style="padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">Generate</button>
+        <input type="text" id="ai-prompt" placeholder="Describe the tool you want to build..." style="flex-grow: 1; padding: 14px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 15px; outline: none;">
+        <button onclick="generateTool()" id="generate-btn" style="padding: 14px 28px; background: #2563eb; color: white; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.2s;">Generate</button>
     </div>
     
-    <p id="status-msg" style="color: #666; font-weight: bold; min-height: 24px; margin-top: 0;"></p>
+    <p id="status-msg" style="color: #64748b; font-weight: 600; min-height: 24px; margin-top: 0;"></p>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px;">
         <div style="display: flex; flex-direction: column;">
-            <h3 style="margin-top: 0;">Code Output</h3>
-            <textarea id="ai-code" oninput="updatePreview()" style="width: 100%; height: 400px; font-family: monospace; padding: 10px; border: 1px solid #ccc; border-radius: 6px; background: #f8f9fa;"></textarea>
-            <button onclick="submitToEmail()" style="margin-top: 15px; padding: 12px; background: #16a34a; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">
-                ✉️ Submit code to Vincent for approval
+            <h3 style="margin-top: 0; color: #0f172a;">Code Output</h3>
+            <textarea id="ai-code" oninput="updatePreview()" style="width: 100%; height: 500px; font-family: monospace; padding: 16px; border: 2px solid #e2e8f0; border-radius: 12px; background: #f8fafc; color: #0f172a; resize: vertical; box-sizing: border-box;"></textarea>
+            
+            <button onclick="submitToEmail()" style="margin-top: 16px; padding: 14px; background: #0f172a; color: white; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.2s;">
+                Submit for Approval
             </button>
         </div>
         <div style="display: flex; flex-direction: column;">
-            <h3 style="margin-top: 0;">Live Preview</h3>
-            <iframe id="ai-preview" style="width: 100%; height: 400px; border: 1px solid #ccc; border-radius: 6px; background: white;"></iframe>
+            <h3 style="margin-top: 0; color: #0f172a;">Live Preview</h3>
+            <iframe id="ai-preview" style="width: 100%; height: 500px; border: 2px solid #e2e8f0; border-radius: 12px; background: white; box-sizing: border-box;"></iframe>
         </div>
     </div>
 </div>
 
 <script>
-    // Auto-fill prompt if coming from index.html
+    // Grab prompt from URL if user used the main index.html search bar
     document.addEventListener("DOMContentLoaded", () => {
         const urlParams = new URLSearchParams(window.location.search);
         const passedPrompt = urlParams.get('prompt');
@@ -64,9 +65,9 @@ category: Developer
 
     let conversationHistory = "System: You are an expert web developer. Output ONLY complete, valid HTML code containing embedded CSS and JS for a single-file web tool based on the user's request. Do not include markdown formatting like ```html. Do not include any conversational text. Just return the raw code.\n\n";
     
-    // Rate Limiting Setup
+    // Rate Limiting Config
     let lastRequestTime = 0;
-    const COOLDOWN_MS = 10000; // 10 second cooldown between requests
+    const COOLDOWN_MS = 10000; // 10 seconds
 
     async function generateTool() {
         const promptInput = document.getElementById('ai-prompt').value;
@@ -76,25 +77,26 @@ category: Developer
         const btn = document.getElementById('generate-btn');
 
         if (!promptInput.trim()) {
-            statusText.innerText = "⚠️ Please enter a description first.";
-            statusText.style.color = "#dc2626";
+            statusText.innerText = "Please enter a description first.";
+            statusText.style.color = "#dc2626"; // red
             return;
         }
 
-        // Client-side Rate Limit Check
+        // Client-side Rate Limit
         const now = Date.now();
         if (now - lastRequestTime < COOLDOWN_MS) {
             const timeLeft = Math.ceil((COOLDOWN_MS - (now - lastRequestTime)) / 1000);
-            statusText.innerText = `⏳ Please wait ${timeLeft} seconds before generating again.`;
-            statusText.style.color = "#ea580c";
+            statusText.innerText = `Rate limit active. Please wait ${timeLeft} seconds before generating again.`;
+            statusText.style.color = "#ea580c"; // orange
             return;
         }
 
         // UI Loading State
         btn.disabled = true;
         btn.innerText = "Working...";
-        statusText.style.color = "#2563eb";
-        statusText.innerText = `🤖 ${selectedModel} is writing your code... (This may take a moment)`;
+        btn.style.opacity = "0.7";
+        statusText.style.color = "#2563eb"; // blue
+        statusText.innerText = `Model is writing your code... (This may take a moment)`;
         codeOutput.value = "";
 
         conversationHistory += `User: ${promptInput}\nAI:`;
@@ -105,18 +107,21 @@ category: Developer
             model: selectedModel
         };
 
+        // Absolute URL to prevent Service Worker 405 errors
+        const apiUrl = '[https://backendai-ablv.onrender.com/chat](https://backendai-ablv.onrender.com/chat)';
+
         try {
-            lastRequestTime = Date.now(); // Record request time
+            lastRequestTime = Date.now();
             
-            const response = await fetch('[https://backendai-ablv.onrender.com/chat](https://backendai-ablv.onrender.com/chat)', {
+            const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
 
-            // Handle Server-Side Rate Limit
+            // Handle Server-Side Rate Limit (429)
             if (response.status === 429) {
-                throw new Error("429: Rate limit exceeded on the server. Please wait a bit.");
+                throw new Error("Rate limit exceeded on the server. Please wait a bit.");
             }
             if (!response.ok) {
                 throw new Error(`Server Error: ${response.status}`);
@@ -131,16 +136,17 @@ category: Developer
             codeOutput.value = rawText;
             updatePreview();
             
-            statusText.style.color = "#16a34a";
-            statusText.innerText = "✨ Success! Tweak the code or submit it.";
+            statusText.style.color = "#16a34a"; // green
+            statusText.innerText = "Success! Tweak the code below or submit it.";
 
         } catch (error) {
             console.error("API Error:", error);
-            statusText.style.color = "#dc2626";
-            statusText.innerText = `❌ ${error.message || "Failed to connect to AI backend."}`;
+            statusText.style.color = "#dc2626"; // red
+            statusText.innerText = `Error: ${error.message || "Failed to connect to AI backend."}`;
         } finally {
             btn.disabled = false;
             btn.innerText = "Generate";
+            btn.style.opacity = "1";
         }
     }
 
@@ -157,7 +163,10 @@ category: Developer
         const code = document.getElementById('ai-code').value;
         const prompt = document.getElementById('ai-prompt').value || "Custom Tool";
         
-        if (!code.trim()) return alert("Generate a tool first before submitting!");
+        if (!code.trim()) {
+            alert("Generate a tool first before submitting!");
+            return;
+        }
 
         const subject = encodeURIComponent(`New Tool Submission: ${prompt}`);
         const body = encodeURIComponent(`Idea: ${prompt}\n\nHere is the generated code:\n\n${code}`);
