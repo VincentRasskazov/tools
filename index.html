@@ -118,7 +118,6 @@ description: A massive collection of fast, beautiful, and free online converters
       box-shadow: 0 0 0 4px var(--ring);
     }
 
-    /* Controls layout for Tabs & Sort Dropdown */
     .controls-wrapper {
       display: flex;
       flex-direction: column;
@@ -168,7 +167,6 @@ description: A massive collection of fast, beautiful, and free online converters
       transform: translateY(-2px);
     }
 
-    /* Sort Dropdown Styles */
     .sort-select {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -183,7 +181,7 @@ description: A massive collection of fast, beautiful, and free online converters
       transition: all 0.2s;
       min-width: 170px;
       appearance: none;
-      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22242.04%22%20height%3D%22242.04%22%20viewBox%3D%220%200%20242.04%20242.04%22%3E%3Cpath%20fill%3D%22%2364748b%22%20d%3D%22M24.78%2064.67l96.24%2096.24%2096.24-96.24c6.83-6.83%2017.9-6.83%2024.74%200s6.83%2017.9%200%2024.74L133.39%20197.02c-6.83%206.83-17.9%206.83-24.74%200L1.93%2089.41c-6.83-6.83-6.83-17.9%200-24.74s17.9-6.83%2024.74%200z%22%2F%3E%3C%2Fsvg%3E");
+      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22242.04%22%20height%3D%22242.04%22%20viewBox%3D%220%200%20242.04%20242.04%22%3E%3Cpath%20fill%3D%22%2364748b%22%20d%3D%22M24.78%2064.67l96.24%2096.24%2096.24-96.24c6.83-6.83%2017.9-6.83%2024.74%200s6.83%2017.9%200%2024.74L133.39%20197.02c-6.83-6.83-17.9%206.83-24.74%200L1.93%2089.41c-6.83-6.83-6.83-17.9%200-24.74s17.9-6.83%2024.74%200z%22%2F%3E%3C%2Fsvg%3E");
       background-repeat: no-repeat;
       background-position: right 15px top 55%;
       background-size: 12px auto;
@@ -265,6 +263,16 @@ description: A massive collection of fast, beautiful, and free online converters
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
       z-index: 100;
     }
+
+    .feedback-banner {
+      background: var(--card-bg);
+      padding: 40px;
+      border-radius: 24px;
+      text-align: center;
+      margin-bottom: 40px;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+    }
   </style>
 </head>
 
@@ -289,53 +297,36 @@ description: A massive collection of fast, beautiful, and free online converters
     </div>
   </header>
 
-  <div style="background: #1e293b; padding: 30px; border-radius: 12px; text-align: center; color: white; margin-bottom: 30px; border: 1px solid #334155;">
-  <h2 style="margin-top: 0; color: white;">💡 Have an idea for a new tool?</h2>
-  <p style="color: #cbd5e1;">Tell us what to build next, or use our AI to code it yourself instantly.</p>
-  
-  <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px; flex-wrap: wrap;">
-    <input type="text" id="feedback-input" placeholder="e.g., A JSON formatter with a dark theme..." style="padding: 12px; width: 100%; max-width: 400px; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: white; font-size: 16px;">
+  <div class="feedback-banner">
+    <h2 style="margin-top: 0; font-size: 1.8rem; color: var(--text-main);">Have an idea for a new tool?</h2>
+    <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 1.1rem;">Tell us what to build next, or use our AI to code it yourself instantly.</p>
     
-    <button onclick="submitFeedback()" style="padding: 12px 20px; border-radius: 6px; border: none; background: #475569; color: white; font-weight: bold; cursor: pointer; transition: 0.2s;">
-      ✉️ Send Idea
-    </button>
-    
-    <button onclick="goToToolMaker()" style="padding: 12px 20px; border-radius: 6px; border: none; background: #8b5cf6; color: white; font-weight: bold; cursor: pointer; transition: 0.2s;">
-      ✨ Code it with AI
-    </button>
+    <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+      <input type="text" id="feedback-input" placeholder="e.g., A JSON formatter with a dark theme..." style="padding: 14px 20px; width: 100%; max-width: 450px; border-radius: 12px; border: 2px solid var(--border); background: var(--bg); color: var(--text-main); font-size: 1rem; outline: none; transition: border-color 0.2s;">
+      
+      <button onclick="submitFeedback()" style="padding: 14px 24px; border-radius: 12px; border: none; background: var(--text-muted); color: white; font-weight: 700; cursor: pointer; transition: background 0.2s; font-family: inherit;">
+        Send Idea
+      </button>
+      
+      <button onclick="goToToolMaker()" style="padding: 14px 24px; border-radius: 12px; border: none; background: var(--primary); color: white; font-weight: 700; cursor: pointer; transition: background 0.2s; font-family: inherit;">
+        Code it with AI
+      </button>
+    </div>
   </div>
-</div>
 
-<div class="feedback-banner" style="background: var(--card-bg); padding: 40px; border-radius: 24px; text-align: center; margin-bottom: 40px; border: 1px solid var(--border); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);">
-  <h2 style="margin-top: 0; font-size: 1.8rem; color: var(--text-main);">Have an idea for a new tool?</h2>
-  <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 1.1rem;">Tell us what to build next, or use our AI to code it yourself instantly.</p>
-  
-  <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
-    <input type="text" id="feedback-input" placeholder="e.g., A JSON formatter with a dark theme..." style="padding: 14px 20px; width: 100%; max-width: 450px; border-radius: 12px; border: 2px solid var(--border); background: var(--bg); color: var(--text-main); font-size: 1rem; outline: none; transition: border-color 0.2s;">
-    
-    <button onclick="submitFeedback()" style="padding: 14px 24px; border-radius: 12px; border: none; background: var(--text-muted); color: white; font-weight: 700; cursor: pointer; transition: background 0.2s; font-family: inherit;">
-      Send Idea
-    </button>
-    
-    <button onclick="goToToolMaker()" style="padding: 14px 24px; border-radius: 12px; border: none; background: var(--primary); color: white; font-weight: 700; cursor: pointer; transition: background 0.2s; font-family: inherit;">
-      Code it with AI
-    </button>
-  </div>
-</div>
+  <script>
+    function submitFeedback() {
+      const idea = document.getElementById('feedback-input').value;
+      if (!idea.trim()) return alert('Please type an idea first!');
+      window.location.href = `mailto:vincentr111222@Gmail.com?subject=New Tool Request&body=Here is my tool idea: ${encodeURIComponent(idea)}`;
+    }
 
-<script>
-  function submitFeedback() {
-    const idea = document.getElementById('feedback-input').value;
-    if (!idea.trim()) return alert('Please type an idea first!');
-    window.location.href = `mailto:vincentr111222@Gmail.com?subject=New Tool Request&body=Here is my tool idea: ${encodeURIComponent(idea)}`;
-  }
-
-  function goToToolMaker() {
-    const idea = document.getElementById('feedback-input').value;
-    if (!idea.trim()) return alert('Please type an idea first!');
-    window.location.href = `/tools/tools/ai-tool-generator.html?prompt=${encodeURIComponent(idea)}`;
-  }
-</script>
+    function goToToolMaker() {
+      const idea = document.getElementById('feedback-input').value;
+      if (!idea.trim()) return alert('Please type an idea first!');
+      window.location.href = `/tools/tools/ai-tool-generator.html?prompt=${encodeURIComponent(idea)}`;
+    }
+  </script>
 
   <div class="controls-wrapper">
     <div id="category-filters" class="category-tabs"></div>
@@ -364,7 +355,6 @@ description: A massive collection of fast, beautiful, and free online converters
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Dark Mode Toggle
   const toggle = document.getElementById('theme-toggle');
   toggle.addEventListener('click', () => {
     const isDark = document.body.getAttribute('data-theme') === 'dark';
@@ -372,7 +362,6 @@ description: A massive collection of fast, beautiful, and free online converters
     toggle.innerHTML = isDark ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
   });
 
-  // Make entire tool-card clickable
   document.addEventListener("click", (e) => {
     const card = e.target.closest(".tool-card");
     if (card) {
@@ -381,51 +370,35 @@ description: A massive collection of fast, beautiful, and free online converters
     }
   });
 
-  // --- Sorting Logic ---
   document.addEventListener("DOMContentLoaded", () => {
     const sortSelect = document.getElementById('sort-order');
     const container = document.getElementById('tools-container');
     let initialized = false;
 
-    // Use a MutationObserver to detect when loadTools.js finishes injecting tools
     const observer = new MutationObserver(() => {
       if (!initialized && container.children.length > 0) {
-        // Assign the original layout index to preserve state 
         Array.from(container.children).forEach((child, index) => {
           child.setAttribute('data-orig-index', index);
         });
-        
-        // Hide loading message once populated
         const loadingMsg = document.getElementById('loading-msg');
         if (loadingMsg) loadingMsg.style.display = 'none';
-
         initialized = true;
       }
     });
 
     observer.observe(container, { childList: true });
 
-    // Sort listener
     sortSelect.addEventListener('change', (e) => {
       if (!initialized) return;
-      
       const order = e.target.value;
       const cards = Array.from(container.children);
       
-      // Sort DOM elements physically by their original index
       cards.sort((a, b) => {
         const indexA = parseInt(a.getAttribute('data-orig-index'));
         const indexB = parseInt(b.getAttribute('data-orig-index'));
-        
-        // If 'newest' maps to how they were originally loaded (index 0, 1, 2...)
-        if (order === 'newest') {
-          return indexA - indexB; 
-        } else {
-          return indexB - indexA; // Reverses the DOM order physically
-        }
+        return order === 'newest' ? indexA - indexB : indexB - indexA;
       });
       
-      // Re-append to container (this visually updates order without breaking display/hide filters)
       container.innerHTML = '';
       cards.forEach(card => container.appendChild(card));
     });
