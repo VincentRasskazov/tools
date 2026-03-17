@@ -289,6 +289,39 @@ description: A massive collection of fast, beautiful, and free online converters
     </div>
   </header>
 
+  <div style="background: #1e293b; padding: 30px; border-radius: 12px; text-align: center; color: white; margin-bottom: 30px; border: 1px solid #334155;">
+  <h2 style="margin-top: 0; color: white;">💡 Have an idea for a new tool?</h2>
+  <p style="color: #cbd5e1;">Tell us what to build next, or use our AI to code it yourself instantly.</p>
+  
+  <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px; flex-wrap: wrap;">
+    <input type="text" id="feedback-input" placeholder="e.g., A JSON formatter with a dark theme..." style="padding: 12px; width: 100%; max-width: 400px; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: white; font-size: 16px;">
+    
+    <button onclick="submitFeedback()" style="padding: 12px 20px; border-radius: 6px; border: none; background: #475569; color: white; font-weight: bold; cursor: pointer; transition: 0.2s;">
+      ✉️ Send Idea
+    </button>
+    
+    <button onclick="goToToolMaker()" style="padding: 12px 20px; border-radius: 6px; border: none; background: #8b5cf6; color: white; font-weight: bold; cursor: pointer; transition: 0.2s;">
+      ✨ Code it with AI
+    </button>
+  </div>
+</div>
+
+<script>
+  function submitFeedback() {
+    const idea = document.getElementById('feedback-input').value;
+    if (!idea.trim()) return alert('Please type an idea first!');
+    // Redirects to email
+    window.location.href = `mailto:vincentr111222@Gmail.com?subject=New Tool Request&body=Here is my tool idea: ${encodeURIComponent(idea)}`;
+  }
+
+  function goToToolMaker() {
+    const idea = document.getElementById('feedback-input').value;
+    if (!idea.trim()) return alert('Please type an idea first!');
+    // Redirects to your AI generator
+    window.location.href = `/tools/ai-tool-generator.html?prompt=${encodeURIComponent(idea)}`;
+  }
+</script>
+
   <div class="controls-wrapper">
     <div id="category-filters" class="category-tabs"></div>
     
