@@ -306,19 +306,34 @@ description: A massive collection of fast, beautiful, and free online converters
   </div>
 </div>
 
+<div class="feedback-banner" style="background: var(--card-bg); padding: 40px; border-radius: 24px; text-align: center; margin-bottom: 40px; border: 1px solid var(--border); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);">
+  <h2 style="margin-top: 0; font-size: 1.8rem; color: var(--text-main);">Have an idea for a new tool?</h2>
+  <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 1.1rem;">Tell us what to build next, or use our AI to code it yourself instantly.</p>
+  
+  <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+    <input type="text" id="feedback-input" placeholder="e.g., A JSON formatter with a dark theme..." style="padding: 14px 20px; width: 100%; max-width: 450px; border-radius: 12px; border: 2px solid var(--border); background: var(--bg); color: var(--text-main); font-size: 1rem; outline: none; transition: border-color 0.2s;">
+    
+    <button onclick="submitFeedback()" style="padding: 14px 24px; border-radius: 12px; border: none; background: var(--text-muted); color: white; font-weight: 700; cursor: pointer; transition: background 0.2s; font-family: inherit;">
+      Send Idea
+    </button>
+    
+    <button onclick="goToToolMaker()" style="padding: 14px 24px; border-radius: 12px; border: none; background: var(--primary); color: white; font-weight: 700; cursor: pointer; transition: background 0.2s; font-family: inherit;">
+      Code it with AI
+    </button>
+  </div>
+</div>
+
 <script>
   function submitFeedback() {
     const idea = document.getElementById('feedback-input').value;
     if (!idea.trim()) return alert('Please type an idea first!');
-    // Redirects to email
     window.location.href = `mailto:vincentr111222@Gmail.com?subject=New Tool Request&body=Here is my tool idea: ${encodeURIComponent(idea)}`;
   }
 
   function goToToolMaker() {
     const idea = document.getElementById('feedback-input').value;
     if (!idea.trim()) return alert('Please type an idea first!');
-    // Redirects to your AI generator
-    window.location.href = `/tools/ai-tool-generator.html?prompt=${encodeURIComponent(idea)}`;
+    window.location.href = `/tools/tools/ai-tool-generator.html?prompt=${encodeURIComponent(idea)}`;
   }
 </script>
 
