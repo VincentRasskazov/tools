@@ -35,14 +35,17 @@ category: Developer
         <button onclick="generateTool()" id="generate-btn" style="padding: 14px 28px; background: #2563eb; color: white; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.2s;">Generate</button>
     </div>
     
-    <p id="status-msg" style="color: #64748b; font-weight: 600; min-height: 24px; margin-top: 0;"></p>
+    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
+        <p id="status-msg" style="color: #64748b; font-weight: 600; min-height: 24px; margin: 0;"></p>
+        <span id="char-counter" style="color: #94a3b8; font-size: 0.85rem; font-weight: 600;">0 / 10,250 Limits</span>
+    </div>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
         <div style="display: flex; flex-direction: column;">
             <h3 style="margin-top: 0; color: #0f172a;">Code Output</h3>
             <textarea id="ai-code" oninput="updatePreview()" style="width: 100%; height: 500px; font-family: monospace; padding: 16px; border: 2px solid #e2e8f0; border-radius: 12px; background: #f8fafc; color: #0f172a; resize: vertical; box-sizing: border-box;"></textarea>
             
-            <button onclick="submitToEmail()" style="margin-top: 16px; padding: 14px; background: #0f172a; color: white; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.2s;">
+            <button onclick="submitToEmail(event)" style="margin-top: 16px; padding: 14px; background: #0f172a; color: white; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.2s;">
                 Submit for Approval
             </button>
         </div>
@@ -60,20 +63,48 @@ category: Developer
         if (passedPrompt) {
             document.getElementById('ai-prompt').value = passedPrompt;
         }
+        updateCharCount();
     });
 
-    // THE STRICT PROMPT: Forces assumptions, bans conversational text.
-    let conversationHistory = `System: You are an expert web developer building single-file web tools. 
-CRITICAL RULES:
+    // THE IRONCLAD PROMPT: Built specifically to break Copilot's annoying habits
+    const SYSTEM_PROMPT = `System: You are an expert web developer building single-file web tools. 
+CRITICAL RULES YOU MUST OBEY:
 1. Output ONLY complete, valid, ready-to-use HTML code with embedded CSS and JS.
-2. NEVER ask follow-up questions or ask for clarification.
-3. If details are vague, MAKE ASSUMPTIONS and decide the design, colors, and layout yourself.
+2. NEVER ask follow-up questions. NEVER ask for clarification.
+3. If details are vague, YOU MUST MAKE ASSUMPTIONS and decide the design, colors, and layout yourself.
 4. Do NOT output markdown formatting like \`\`\`html.
-5. Do NOT output any conversational text, greetings, or explanations. 
-6. Your entire response must start with <!DOCTYPE html> and end with </html>.\n\n`;
+5. Do NOT output any conversational text, greetings, apologies, or explanations. 
+6. Do NOT include ANY copyrighted assets, branding, or proprietary APIs. Use only generic placeholders and open-source logic.
+7. Your entire response must start exactly with <!DOCTYPE html> and end with </html>.\n\n`;
+
+    let conversationHistory = SYSTEM_PROMPT;
     
     let lastRequestTime = 0;
     const COOLDOWN_MS = 10000;
+    const MAX_CHARS = 9500; // Buffer before Copilot's 10,250 limit
+
+    function updateCharCount() {
+        const counter = document.getElementById('char-counter');
+        const currentLen = conversationHistory.length;
+        counter.innerText = `${currentLen.toLocaleString()} / 10,250 Chars`;
+        
+        if (currentLen > 8000) {
+            counter.style.color = "#ea580c"; // Orange warning
+        } else {
+            counter.style.color = "#94a3b8"; // Default gray
+        }
+    }
+
+    // Auto-truncates history so it never crashes Copilot
+    function manageContextLimit() {
+        if (conversationHistory.length > MAX_CHARS) {
+            console.log("Memory limit approaching. Truncating old context...");
+            // Keep the system prompt, snip the middle, keep the last 4000 characters
+            const recentHistory = conversationHistory.slice(-4000);
+            conversationHistory = SYSTEM_PROMPT + "\n...[Old History Removed]...\n" + recentHistory;
+            updateCharCount();
+        }
+    }
 
     async function generateTool() {
         const promptInput = document.getElementById('ai-prompt').value;
@@ -103,7 +134,10 @@ CRITICAL RULES:
         statusText.innerText = `Model is writing your code... (This may take a moment)`;
         codeOutput.value = "";
 
+        // Add to history and enforce limits before sending
         conversationHistory += `User: ${promptInput}\nAI:`;
+        manageContextLimit();
+        updateCharCount();
 
         const payload = {
             id: crypto.randomUUID(),
@@ -131,10 +165,12 @@ CRITICAL RULES:
 
             let rawText = await response.text();
             
-            // Aggressive cleanup: Strips accidental markdown blocks the AI might still try to add
             rawText = rawText.replace(/^```html\s*/i, '').replace(/^```\s*/i, '').replace(/```\s*$/i, '').trim();
 
             conversationHistory += ` ${rawText}\n`;
+            manageContextLimit(); // Manage again after AI reply
+            updateCharCount();
+
             codeOutput.value = rawText;
             updatePreview();
             
@@ -161,8 +197,8 @@ CRITICAL RULES:
         doc.close();
     }
 
-    // SILENT API SUBMISSION (No mailto:)
-    async function submitToEmail() {
+    // SILENT API SUBMISSION
+    async function submitToEmail(event) {
         const code = document.getElementById('ai-code').value;
         const prompt = document.getElementById('ai-prompt').value || "Custom Tool";
         const btn = event.currentTarget;
@@ -170,11 +206,13 @@ CRITICAL RULES:
         if (!code.trim()) return alert("Generate a tool first before submitting!");
 
         const originalText = btn.innerText;
-        btn.innerText = "Sending to Vincent...";
+        btn.innerText = "Sending...";
         btn.disabled = true;
 
+        const web3FormsUrl = "https://api.web3forms.com/submit";
+
         try {
-            const response = await fetch("https://api.web3forms.com/submit", {
+            const response = await fetch(web3FormsUrl, {
                 method: "POST",
                 headers: { "Content-Type": "application/json", "Accept": "application/json" },
                 body: JSON.stringify({
@@ -186,7 +224,7 @@ CRITICAL RULES:
             });
 
             if (response.ok) {
-                alert("Code submitted successfully! Vincent will review it shortly.");
+                alert("Code submitted successfully! Our team will review it shortly.");
             } else {
                 alert("Failed to submit. Please try again.");
             }
