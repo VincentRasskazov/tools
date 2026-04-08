@@ -16,21 +16,20 @@ concurrency:
 jobs:
   add-tools:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10 # Lowered timeout because it will be fast now
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-          clean: false # 🚀 CRITICAL: Stops the "Post-Job Cleanup" from freezing on thousands of files
+          fetch-depth: 1 # 🚀 SPEED BOOST: No longer downloads entire repo history
+          clean: false
           sparse-checkout: |
             .github
             tools
 
       - name: Optimize Git Performance
         run: |
-          # 🚀 Speeds up git operations on massive repos to prevent timeouts
           git config --global core.preloadIndex true
           git config --global core.fscache true
           git config --global gc.auto 0
@@ -38,28 +37,21 @@ jobs:
       - name: Verify Node.js runtime
         run: |
           set -e
-          node --version
-          npm --version
-
           node_major="$(node -p "process.versions.node.split('.')[0]")"
-          if [[ "$node_major" -lt 20 ]]; then
-            echo "Node.js 20+ is required, found $(node --version)"
-            exit 1
-          fi
+          if [[ "$node_major" -lt 20 ]]; then exit 1; fi
 
       - name: Install GitHub Copilot CLI
         run: bash ./.github/scripts/install-copilot-cli.sh
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # 🔑 AUTH FIX: Use your personal token so the CLI can read your billing
+          GH_TOKEN: ${{ secrets.COPILOT_PAT }} 
 
       - name: Select model from premium usage
         id: model
         run: node ./.github/scripts/select-copilot-model.js
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          COPILOT_PREMIUM_PERCENT_LEFT: ${{ vars.COPILOT_PREMIUM_PERCENT_LEFT }}
-          COPILOT_PREMIUM_REMAINING: ${{ vars.COPILOT_PREMIUM_REMAINING }}
-          COPILOT_PREMIUM_LIMIT: ${{ vars.COPILOT_PREMIUM_LIMIT }}
+          # 🔑 AUTH FIX: Use your personal token here too
+          GH_TOKEN: ${{ secrets.COPILOT_PAT }}
           COPILOT_PREMIUM_THRESHOLD: "50"
           COPILOT_HIGH_MODEL: "gpt-5.3-codex"
           COPILOT_HIGH_REASONING: "high"
@@ -89,10 +81,8 @@ jobs:
         id: commit
         run: |
           created_files="${{ steps.add_tools.outputs.created_files }}"
-
           if [[ -z "$created_files" ]]; then
             echo "has_changes=false" >> "$GITHUB_OUTPUT"
-            echo "No generated files reported by add-tools step."
             exit 0
           fi
 
@@ -108,7 +98,6 @@ jobs:
 
           if git diff --cached --quiet; then
             echo "has_changes=false" >> "$GITHUB_OUTPUT"
-            echo "No new files to commit."
             exit 0
           fi
 
@@ -117,44 +106,18 @@ jobs:
 
       - name: Push changes
         if: steps.commit.outputs.has_changes == 'true'
-        timeout-minutes: 3
+        timeout-minutes: 2 # 🚀 Will fail fast if it hangs
         env:
           GIT_TERMINAL_PROMPT: "0"
         run: |
           set -euo pipefail
-
           git config --global http.version HTTP/1.1
-
-          retry_git() {
-            local attempt=1
-            local max_attempts=3
-            while true; do
-              if "$@"; then
-                return 0
-              fi
-
-              if [[ "$attempt" -ge "$max_attempts" ]]; then
-                return 1
-              fi
-
-              attempt=$((attempt + 1))
-              echo "Retrying (${attempt}/${max_attempts}): $*"
-            done
-          }
-
-          if retry_git git push origin HEAD:main; then
-            exit 0
-          fi
-
-          echo "Initial push failed, fetching latest main and retrying with rebase..."
-          retry_git git fetch --no-tags origin main
-          git rebase --autostash origin/main
-          retry_git git push origin HEAD:main
+          
+          # We use a direct push. Without fetch-depth 0, rebase is dangerous here anyway.
+          git push origin HEAD:main || (git pull --rebase origin main && git push origin HEAD:main)
 
       - name: Manual Workspace Cleanup
-        if: always() # 🚀 Runs even if previous steps fail to ensure the runner doesn't hang
+        if: always()
         run: |
-          echo "Nuking temporary files to prevent Post-Job timeout..."
           rm -rf tools/
           rm -rf .github/
-          echo "Cleanup complete."
