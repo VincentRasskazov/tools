@@ -16,7 +16,7 @@ concurrency:
 jobs:
   add-tools:
     runs-on: ubuntu-latest
-    timeout-minutes: 5 # We can safely lower this now!
+    timeout-minutes: 5 
 
     steps:
       - name: Checkout
@@ -24,7 +24,6 @@ jobs:
         with:
           fetch-depth: 1
           persist-credentials: true
-          # 🚀 ENTERPRISE ARCHITECTURE: Only checkout the metadata! Ignore all the HTML files!
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             .github/
@@ -72,11 +71,9 @@ jobs:
             --reasoning "${{ steps.model.outputs.selected_reasoning }}"
 
       - name: Build category manifests
-        # 🚀 Pass only the 25 NEW files to the script
         run: node ./.github/scripts/build-category-manifests.js --files "${{ steps.add_tools.outputs.created_files }}"
 
       - name: Build Copilot timeline
-        # 🚀 Pass only the 25 NEW files to the script
         run: node ./.github/scripts/build-copilot-timeline.js --files "${{ steps.add_tools.outputs.created_files }}"
 
       - name: Configure Git user
@@ -95,13 +92,14 @@ jobs:
 
           IFS=',' read -r -a files <<< "$created_files"
           for file in "${files[@]}"; do
-            git add "tools/$file"
+            # 🚀 THE FIX: Use --sparse so Git allows us to append files to folders we didn't checkout!
+            git add --sparse "tools/$file"
           done
 
-          git add tools/category-manifests
-          git add tools/copilot-timeline.json
-          git add tools/copilot-timeline-days
-          git add README.md
+          git add --sparse tools/category-manifests
+          git add --sparse tools/copilot-timeline.json
+          git add --sparse tools/copilot-timeline-days
+          git add --sparse README.md
 
           if git diff --cached --quiet; then
             echo "has_changes=false" >> "$GITHUB_OUTPUT"
