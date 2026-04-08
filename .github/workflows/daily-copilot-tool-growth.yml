@@ -16,18 +16,22 @@ concurrency:
 jobs:
   add-tools:
     runs-on: ubuntu-latest
-    timeout-minutes: 6
+    timeout-minutes: 5 # We can safely lower this now!
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
-          # 🚀 PERFECT PUSH: We let GitHub manage the default token securely so 'git push' never hangs.
           persist-credentials: true
+          # 🚀 ENTERPRISE ARCHITECTURE: Only checkout the metadata! Ignore all the HTML files!
+          sparse-checkout-cone-mode: false
           sparse-checkout: |
-            .github
-            tools
+            .github/
+            tools/category-manifests/
+            tools/copilot-timeline-days/
+            tools/copilot-timeline.json
+            README.md
 
       - name: Optimize Git Performance
         run: |
@@ -68,10 +72,12 @@ jobs:
             --reasoning "${{ steps.model.outputs.selected_reasoning }}"
 
       - name: Build category manifests
-        run: node ./.github/scripts/build-category-manifests.js
+        # 🚀 Pass only the 25 NEW files to the script
+        run: node ./.github/scripts/build-category-manifests.js --files "${{ steps.add_tools.outputs.created_files }}"
 
       - name: Build Copilot timeline
-        run: node ./.github/scripts/build-copilot-timeline.js
+        # 🚀 Pass only the 25 NEW files to the script
+        run: node ./.github/scripts/build-copilot-timeline.js --files "${{ steps.add_tools.outputs.created_files }}"
 
       - name: Configure Git user
         run: |
@@ -113,12 +119,4 @@ jobs:
         run: |
           set -euo pipefail
           git config --global http.version HTTP/1.1
-          
-          # 🚀 DEFAULT TOKEN PUSH: Because persist-credentials is true, this simple command works perfectly.
           git push --force origin HEAD:main
-
-      - name: Neutralize Post-Job Scanner
-        if: always()
-        run: |
-          # 🚀 PERFECT CLEANUP: Nuke the .git folder so the scanner has nothing to scrub.
-          rm -rf .git
