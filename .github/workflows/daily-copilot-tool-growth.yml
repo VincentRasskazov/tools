@@ -16,13 +16,13 @@ concurrency:
 jobs:
   add-tools:
     runs-on: ubuntu-latest
-    timeout-minutes: 6 # 🚀 Locked in as requested
+    timeout-minutes: 6
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1 # 🚀 SPEED BOOST: No longer downloads entire repo history
+          fetch-depth: 1
           clean: false
           sparse-checkout: |
             .github
@@ -43,8 +43,6 @@ jobs:
       - name: Install & Auth GitHub Copilot CLI
         run: |
           bash ./.github/scripts/install-copilot-cli.sh
-          # 🔑 AUTH FIX: Force the CLI to login so it can read your billing
-          echo "${{ secrets.COPILOT_PAT }}" | gh auth login --with-token
           gh copilot status || echo "Status check failed, but continuing..."
         env:
           GH_TOKEN: ${{ secrets.COPILOT_PAT }} 
@@ -53,7 +51,6 @@ jobs:
         id: model
         run: node ./.github/scripts/select-copilot-model.js
         env:
-          # 🔑 AUTH FIX: Use your personal token here too
           GH_TOKEN: ${{ secrets.COPILOT_PAT }}
           COPILOT_PREMIUM_THRESHOLD: "50"
           COPILOT_HIGH_MODEL: "gpt-5.3-codex"
@@ -116,17 +113,14 @@ jobs:
           set -euo pipefail
           git config --global http.version HTTP/1.1
           
-          # 1. Try the fast, happy-path push first
           if git push origin HEAD:main; then
             echo "Push successful!"
             exit 0
           fi
 
-          # 2. If it fails (non-fast-forward), deepen clone to get history for rebase
           echo "Push rejected. Fetching history to rebase..."
           git fetch --deepen=50 origin main
           
-          # 3. Safely rebase and push
           git rebase --autostash origin/main
           git push origin HEAD:main
 
