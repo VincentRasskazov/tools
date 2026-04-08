@@ -1,8 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
     let activeCategoryTools = [];
     let filteredTools = [];
+    let allTools = [];
+    let allToolsLoaded = false;
+    let allToolsManifestFile = "all-tools.json";
     let itemsShown = 0;
     let activeCategorySlug = null;
+    let activeCategoryName = "";
+    let searchDebounceId = null;
     const loadAmount = 60;
     const categoryCache = new Map();
 
@@ -13,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const counter = document.getElementById("live-counter");
 
     searchInput.disabled = true;
-    searchInput.placeholder = "Choose a category to load tools";
+    searchInput.placeholder = "Loading tool index...";
 
     fetch("./tools/category-manifests/index.json")
         .then((response) => {
@@ -26,12 +31,17 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             counter.textContent = Number(indexData.totalTools || 0).toLocaleString();
+            allToolsManifestFile = indexData.allToolsManifest || "all-tools.json";
             renderCategoryButtons(indexData.categories);
-            loadingMsg.innerHTML = "Choose a category above to load tools.";
+            searchInput.disabled = false;
+            searchInput.placeholder = "Search all tools or choose a category";
+            loadingMsg.innerHTML = "Search all tools or choose a category above.";
         })
         .catch((error) => {
             console.error("Category index fetch failed:", error);
             loadingMsg.textContent = "Failed to load categories. Please refresh.";
+            searchInput.disabled = true;
+            searchInput.placeholder = "Tool index failed to load";
         });
 
     function renderCategoryButtons(categories) {
@@ -51,21 +61,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 btn.classList.add("active");
 
                 searchInput.value = "";
-                searchInput.disabled = true;
-                searchInput.placeholder = `Loading ${category.name}...`;
+                searchInput.placeholder = `Search all tools or filter ${category.name}`;
                 loadingMsg.innerHTML = `<i class=\"fas fa-spinner fa-spin\"></i> Loading ${category.name} tools...`;
 
                 try {
                     await loadCategory(category);
                     loadingMsg.textContent = `Loaded ${activeCategoryTools.length.toLocaleString()} tools in ${category.name}.`;
-                    searchInput.disabled = false;
-                    searchInput.placeholder = `Search in ${category.name}`;
                     searchInput.focus();
                 } catch (err) {
                     console.error("Category load failed:", err);
                     loadingMsg.textContent = `Failed to load ${category.name}. Try another category.`;
-                    searchInput.disabled = true;
-                    searchInput.placeholder = "Choose a category to load tools";
                 }
             });
 
@@ -76,6 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
     async function loadCategory(category) {
         const slug = category.slug;
         activeCategorySlug = slug;
+        activeCategoryName = category.name;
 
         let tools = categoryCache.get(slug);
         if (!tools) {
@@ -102,13 +108,79 @@ document.addEventListener("DOMContentLoaded", function () {
         displayTools(true);
     }
 
+    async function ensureAllToolsLoaded() {
+        if (allToolsLoaded) return;
+
+        const response = await fetch(`./tools/category-manifests/${allToolsManifestFile}`);
+        if (!response.ok) {
+            throw new Error("HTTP error " + response.status);
+        }
+
+        const payload = await response.json();
+        if (!Array.isArray(payload)) {
+            throw new Error("Global tool manifest is not an array");
+        }
+
+        allTools = payload;
+        allToolsLoaded = true;
+    }
+
+    async function runSearch(query) {
+        const normalizedQuery = query.trim().toLowerCase();
+
+        if (!normalizedQuery) {
+            if (activeCategorySlug) {
+                filteredTools = activeCategoryTools;
+                itemsShown = loadAmount;
+                displayTools(true);
+                loadingMsg.textContent = `Loaded ${activeCategoryTools.length.toLocaleString()} tools in ${activeCategoryName}.`;
+                return;
+            }
+
+            filteredTools = [];
+            itemsShown = 0;
+            displayTools(true);
+            loadingMsg.textContent = "Search all tools or choose a category above.";
+            return;
+        }
+
+        loadingMsg.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching all tools...';
+
+        try {
+            await ensureAllToolsLoaded();
+            filteredTools = allTools.filter((tool) => {
+                const name = (tool.name || "").toLowerCase();
+                const description = (tool.description || "").toLowerCase();
+                const category = (tool.category || "").toLowerCase();
+
+                return name.includes(normalizedQuery)
+                    || description.includes(normalizedQuery)
+                    || category.includes(normalizedQuery);
+            });
+
+            itemsShown = loadAmount;
+            displayTools(true);
+            loadingMsg.textContent = `Found ${filteredTools.length.toLocaleString()} tools for "${query}" across all categories.`;
+        } catch (err) {
+            console.error("Global search failed:", err);
+            loadingMsg.textContent = "Search failed to load. Please refresh and try again.";
+        }
+    }
+
     function displayTools(reset = false) {
         if (reset) {
             container.innerHTML = "";
         }
 
         if (filteredTools.length === 0) {
-            container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #666;">No tools found in this category for your query.</p>';
+            let emptyMessage = "Search all tools or choose a category above.";
+            if (searchInput.value.trim()) {
+                emptyMessage = "No tools found for your search query.";
+            } else if (activeCategorySlug) {
+                emptyMessage = "No tools found in this category.";
+            }
+
+            container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #666;">${emptyMessage}</p>`;
             return;
         }
 
@@ -131,7 +203,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     window.addEventListener("scroll", () => {
-        if (searchInput.disabled) return;
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 500) {
             if (itemsShown < filteredTools.length) {
                 itemsShown += loadAmount;
@@ -143,14 +214,10 @@ document.addEventListener("DOMContentLoaded", function () {
     searchInput.addEventListener("input", (event) => {
         if (searchInput.disabled) return;
 
-        const query = event.target.value.trim().toLowerCase();
-        filteredTools = activeCategoryTools.filter((tool) => {
-            const name = (tool.name || "").toLowerCase();
-            const description = (tool.description || "").toLowerCase();
-            return name.includes(query) || description.includes(query);
-        });
-
-        itemsShown = loadAmount;
-        displayTools(true);
+        const query = event.target.value;
+        clearTimeout(searchDebounceId);
+        searchDebounceId = setTimeout(() => {
+            runSearch(query);
+        }, 180);
     });
 });

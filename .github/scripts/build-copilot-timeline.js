@@ -39,9 +39,22 @@ function ensureLeadingSlash(value) {
   return value.startsWith("/") ? value : `/${value}`;
 }
 
+function toProjectRelativeToolUrl(rawPath) {
+  if (!rawPath) return "";
+
+  const normalized = String(rawPath).trim().replace(/^\/+/, "");
+  if (!normalized) return "";
+
+  if (normalized.startsWith("tools/")) {
+    return normalized;
+  }
+
+  return `tools/${normalized}`;
+}
+
 function inferUrlFromPath(filePath) {
   const relative = normalizePath(path.relative(toolsRoot, filePath));
-  return `/tools/${relative}`;
+  return `tools/${relative}`;
 }
 
 function walkToolFiles(dirPath) {
@@ -103,7 +116,7 @@ function buildTimeline() {
     const title = extractField(frontmatter, "title") || path.basename(baseName, ".html");
     const category = extractField(frontmatter, "category") || "Utility";
     const permalink = ensureLeadingSlash(extractField(frontmatter, "permalink"));
-    const url = permalink || inferUrlFromPath(filePath);
+    const url = toProjectRelativeToolUrl(permalink) || inferUrlFromPath(filePath);
 
     generatedTools.push({
       date,

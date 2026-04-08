@@ -72,9 +72,22 @@ function ensureLeadingSlash(value) {
   return value.startsWith("/") ? value : `/${value}`;
 }
 
+function toProjectRelativeToolUrl(rawPath) {
+  if (!rawPath) return "";
+
+  const normalized = String(rawPath).trim().replace(/^\/+/, "");
+  if (!normalized) return "";
+
+  if (normalized.startsWith("tools/")) {
+    return normalized;
+  }
+
+  return `tools/${normalized}`;
+}
+
 function inferUrlFromPath(filePath) {
   const relative = normalizePath(path.relative(toolsRoot, filePath));
-  return `/tools/${relative}`;
+  return `tools/${relative}`;
 }
 
 function buildIndex() {
@@ -93,7 +106,7 @@ function buildIndex() {
     const category = extractField(frontmatter, "category") || "Utility";
     const description = extractField(frontmatter, "description") || "Free online tool for daily tasks.";
     const permalink = ensureLeadingSlash(extractField(frontmatter, "permalink"));
-    const url = permalink || inferUrlFromPath(filePath);
+    const url = toProjectRelativeToolUrl(permalink) || inferUrlFromPath(filePath);
 
     const slug = slugify(category);
     if (!categories.has(slug)) {
@@ -114,7 +127,7 @@ function buildIndex() {
 
   fs.mkdirSync(manifestsRoot, { recursive: true });
 
-  const existing = fs.readdirSync(manifestsRoot).filter((name) => name.endsWith(".json") && name !== "index.json");
+  const existing = fs.readdirSync(manifestsRoot).filter((name) => name.endsWith(".json") && name !== "index.json" && name !== "all-tools.json");
   const activeFileNames = new Set();
 
   const sortedCategories = [...categories.values()].sort((a, b) => a.name.localeCompare(b.name));
@@ -128,6 +141,9 @@ function buildIndex() {
     activeFileNames.add(fileName);
   }
 
+  const allTools = sortedCategories.flatMap((category) => category.tools).sort((a, b) => a.name.localeCompare(b.name));
+  fs.writeFileSync(path.join(manifestsRoot, "all-tools.json"), JSON.stringify(allTools, null, 2), "utf8");
+
   for (const fileName of existing) {
     if (activeFileNames.has(fileName)) continue;
     fs.unlinkSync(path.join(manifestsRoot, fileName));
@@ -136,6 +152,7 @@ function buildIndex() {
   const indexPayload = {
     generatedAt: new Date().toISOString(),
     totalTools: toolFiles.length,
+    allToolsManifest: "all-tools.json",
     categories: sortedCategories.map((category) => ({
       name: category.name,
       slug: category.slug,
