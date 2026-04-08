@@ -1,210 +1,136 @@
-#!/usr/bin/env node
+name: Daily Copilot Tool Growth
 
-const fs = require("fs");
-const fsPromises = require("fs/promises");
-const path = require("path");
+on:
+  schedule:
+    - cron: "21 2 * * *"
+  workflow_dispatch:
 
-const repoRoot = process.cwd();
-const toolsRoot = path.join(repoRoot, "tools");
-const manifestsRoot = path.join(toolsRoot, "category-manifests");
-const readmePath = path.join(repoRoot, "README.md");
+permissions:
+  contents: write
+  actions: write
 
-function slugify(input) {
-  return String(input)
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "") || "utility";
-}
+concurrency:
+  group: daily-copilot-tool-growth-v2
+  cancel-in-progress: true
 
-function normalizePath(input) {
-  return input.split(path.sep).join("/");
-}
+jobs:
+  add-tools:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6 # 🚀 Locked in as requested
 
-function stripQuotes(value) {
-  const trimmed = value.trim();
-  if (trimmed.length >= 2) {
-    if ((trimmed.startsWith("\"") && trimmed.endsWith("\"")) || (trimmed.startsWith("'") && trimmed.endsWith("'"))) {
-      return trimmed.slice(1, -1);
-    }
-  }
-  return trimmed;
-}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1 # 🚀 SPEED BOOST: No longer downloads entire repo history
+          clean: false
+          sparse-checkout: |
+            .github
+            tools
 
-// 🚀 ANTI-HANG FIX: No Regex. Native string searching only.
-function extractFrontmatter(content) {
-  const trimmed = content.trimStart();
-  if (!trimmed.startsWith("---")) return "";
-  
-  const endIndex = trimmed.indexOf("---", 3);
-  if (endIndex === -1) return ""; 
-  
-  return trimmed.slice(3, endIndex);
-}
+      - name: Optimize Git Performance
+        run: |
+          git config --global core.preloadIndex true
+          git config --global core.fscache true
+          git config --global gc.auto 0
 
-// 🚀 ANTI-HANG FIX: Simple line-by-line parsing.
-function extractField(frontmatter, field) {
-  if (!frontmatter) return "";
-  const lines = frontmatter.split('\n');
-  const prefix = `${field}:`;
-  
-  for (const line of lines) {
-    if (line.trim().startsWith(prefix)) {
-      const value = line.substring(line.indexOf(':') + 1).trim();
-      return stripQuotes(value);
-    }
-  }
-  return "";
-}
+      - name: Verify Node.js runtime
+        run: |
+          set -e
+          node_major="$(node -p "process.versions.node.split('.')[0]")"
+          if [[ "$node_major" -lt 20 ]]; then exit 1; fi
 
-function extractTitleFromHtml(content) {
-  const match = content.match(/<title>([^<]+)<\/title>/i);
-  return match ? match[1].trim() : "";
-}
+      - name: Install & Auth GitHub Copilot CLI
+        run: |
+          bash ./.github/scripts/install-copilot-cli.sh
+          # Authentication is handled automatically by the GH_TOKEN below!
+          gh copilot status || echo "Status check failed, but continuing..."
+        env:
+          GH_TOKEN: ${{ secrets.COPILOT_PAT }} 
 
-// 🚀 SPEED FIX: Async directory walking
-async function walkToolFilesAsync(dirPath) {
-  const files = [];
-  const entries = await fsPromises.readdir(dirPath, { withFileTypes: true });
+      - name: Select model from premium usage
+        id: model
+        run: node ./.github/scripts/select-copilot-model.js
+        env:
+          # 🔑 AUTH FIX: Use your personal token here too
+          GH_TOKEN: ${{ secrets.COPILOT_PAT }}
+          COPILOT_PREMIUM_THRESHOLD: "50"
+          COPILOT_HIGH_MODEL: "gpt-5.3-codex"
+          COPILOT_HIGH_REASONING: "high"
+          COPILOT_LOW_MODEL: "gpt-4.1"
+          COPILOT_LOW_REASONING: "standard"
 
-  for (const entry of entries) {
-    const absolutePath = path.join(dirPath, entry.name);
-    
-    if (entry.isDirectory()) {
-      if (entry.name === "category-manifests") continue;
-      files.push(...(await walkToolFilesAsync(absolutePath)));
-      continue;
-    }
+      - name: Add 25 tools
+        id: add_tools
+        run: |
+          node ./.github/scripts/add-daily-tools.js \
+            --count 25 \
+            --model "${{ steps.model.outputs.selected_model }}" \
+            --reasoning "${{ steps.model.outputs.selected_reasoning }}"
 
-    if (!entry.isFile()) continue;
-    if (!entry.name.endsWith(".html")) continue;
-    files.push(absolutePath);
-  }
+      - name: Build category manifests
+        run: node ./.github/scripts/build-category-manifests.js
 
-  return files;
-}
+      - name: Build Copilot timeline
+        run: node ./.github/scripts/build-copilot-timeline.js
 
-function ensureLeadingSlash(value) {
-  if (!value) return "";
-  return value.startsWith("/") ? value : `/${value}`;
-}
+      - name: Configure Git user
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-function toProjectRelativeToolUrl(rawPath) {
-  if (!rawPath) return "";
-  const normalized = String(rawPath).trim().replace(/^\/+/, "");
-  if (!normalized) return "";
-  if (normalized.startsWith("tools/")) return normalized;
-  return `tools/${normalized}`;
-}
+      - name: Commit changes
+        id: commit
+        run: |
+          created_files="${{ steps.add_tools.outputs.created_files }}"
+          if [[ -z "$created_files" ]]; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
 
-function inferUrlFromPath(filePath) {
-  const relative = normalizePath(path.relative(toolsRoot, filePath));
-  return `tools/${relative}`;
-}
+          IFS=',' read -r -a files <<< "$created_files"
+          for file in "${files[@]}"; do
+            git add "tools/$file"
+          done
 
-// 🚀 SPEED FIX: Async Readme writing
-async function updateReadmeToolCountAsync(totalTools) {
-  if (!fs.existsSync(readmePath)) return;
+          git add tools/category-manifests
+          git add tools/copilot-timeline.json
+          git add tools/copilot-timeline-days
+          git add README.md
 
-  const readme = await fsPromises.readFile(readmePath, "utf8");
-  const exactLine = `A collection of ${Number(totalTools || 0).toLocaleString("en-US")} browser-based tools for developers, creators, and everyday tasks.`;
-  const pattern = /^A collection of .* browser-based tools for developers, creators, and everyday tasks\.$/m;
+          if git diff --cached --quiet; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
 
-  if (!pattern.test(readme)) return;
+          git commit -m "chore: add 25 tools (${{ steps.model.outputs.selected_model }})"
+          echo "has_changes=true" >> "$GITHUB_OUTPUT"
 
-  const updated = readme.replace(pattern, exactLine);
-  if (updated !== readme) {
-    await fsPromises.writeFile(readmePath, updated, "utf8");
-  }
-}
+      - name: Push changes
+        if: steps.commit.outputs.has_changes == 'true'
+        timeout-minutes: 2
+        env:
+          GIT_TERMINAL_PROMPT: "0"
+        run: |
+          set -euo pipefail
+          git config --global http.version HTTP/1.1
+          
+          # 1. Try the fast, happy-path push first
+          if git push origin HEAD:main; then
+            echo "Push successful!"
+            exit 0
+          fi
 
-async function buildIndex() {
-  if (!fs.existsSync(toolsRoot)) {
-    throw new Error(`Tools directory not found: ${toolsRoot}`);
-  }
+          # 2. If it fails (non-fast-forward), deepen clone to get history for rebase
+          echo "Push rejected. Fetching history to rebase..."
+          git fetch --deepen=50 origin main
+          
+          # 3. Safely rebase and push
+          git rebase --autostash origin/main
+          git push origin HEAD:main
 
-  console.log("Gathering files...");
-  const toolFiles = await walkToolFilesAsync(toolsRoot);
-  const categories = new Map();
-
-  console.log(`Processing ${toolFiles.length} files in batches...`);
-
-  // 🚀 SPEED FIX: Process 100 files at a time without blocking the CPU
-  const BATCH_SIZE = 100;
-  for (let i = 0; i < toolFiles.length; i += BATCH_SIZE) {
-    const batch = toolFiles.slice(i, i + BATCH_SIZE);
-    
-    await Promise.all(batch.map(async (filePath) => {
-      try {
-        const content = await fsPromises.readFile(filePath, "utf8");
-        const frontmatter = extractFrontmatter(content);
-
-        const title = extractField(frontmatter, "title") || extractTitleFromHtml(content) || path.basename(filePath, ".html");
-        const category = extractField(frontmatter, "category") || "Utility";
-        const description = extractField(frontmatter, "description") || "Free online tool for daily tasks.";
-        const permalink = ensureLeadingSlash(extractField(frontmatter, "permalink"));
-        const url = toProjectRelativeToolUrl(permalink) || inferUrlFromPath(filePath);
-
-        const slug = slugify(category);
-        
-        if (!categories.has(slug)) {
-          categories.set(slug, {
-            name: category,
-            slug,
-            tools: [],
-          });
-        }
-
-        categories.get(slug).tools.push({
-          name: title,
-          url,
-          category,
-          description,
-        });
-      } catch (err) {
-        console.error(`Failed to process ${filePath}:`, err.message);
-      }
-    }));
-  }
-
-  fs.mkdirSync(manifestsRoot, { recursive: true });
-
-  const existing = fs.readdirSync(manifestsRoot).filter((name) => name.endsWith(".json") && name !== "index.json" && name !== "all-tools.json");
-  const activeFileNames = new Set();
-
-  const sortedCategories = [...categories.values()].sort((a, b) => a.name.localeCompare(b.name));
-
-  for (const category of sortedCategories) {
-    category.tools.sort((a, b) => a.name.localeCompare(b.name));
-    const fileName = `${category.slug}.json`;
-    const absolute = path.join(manifestsRoot, fileName);
-    await fsPromises.writeFile(absolute, JSON.stringify(category.tools, null, 2), "utf8");
-    activeFileNames.add(fileName);
-  }
-
-  const allTools = sortedCategories.flatMap((category) => category.tools).sort((a, b) => a.name.localeCompare(b.name));
-  await fsPromises.writeFile(path.join(manifestsRoot, "all-tools.json"), JSON.stringify(allTools, null, 2), "utf8");
-
-  for (const fileName of existing) {
-    if (activeFileNames.has(fileName)) continue;
-    await fsPromises.unlink(path.join(manifestsRoot, fileName));
-  }
-
-  const indexPayload = {
-    generatedAt: new Date().toISOString(),
-    totalTools: toolFiles.length,
-    allToolsManifest: "all-tools.json",
-    categories: sortedCategories.map((category) => ({
-      name: category.name,
-      slug: category.slug,
-      count: category.tools.length,
-      manifest: `${category.slug}.json`,
-    })),
-  };
-
-  await fsPromises.writeFile(path.join(manifestsRoot, "index.json"), JSON.stringify(indexPayload, null, 2), "utf8");
-  await updateReadmeToolCountAsync(toolFiles.length);
-
-  console.log(`Built ${sortedCategories.length} category manifests for ${toolFiles.length} tools.`);
-}
-
-buildIndex().catch(console.error);
+      - name: Manual Workspace Cleanup
+        if: always()
+        run: |
+          rm -rf tools/
+          rm -rf .github/
