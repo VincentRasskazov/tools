@@ -1,74 +1,128 @@
-document.addEventListener("DOMContentLoaded", function() {
-    let allTools = [];
+document.addEventListener("DOMContentLoaded", function () {
+    let activeCategoryTools = [];
     let filteredTools = [];
-    let itemsShown = 50; // Initial number of tools to show
-    const loadAmount = 50; // How many to load on scroll
+    let itemsShown = 0;
+    let activeCategorySlug = null;
+    const loadAmount = 60;
+    const categoryCache = new Map();
 
-    const container = document.getElementById('tools-container');
-    const searchInput = document.getElementById('search-tools');
-    const categoryContainer = document.getElementById('category-filters');
-    const loadingMsg = document.getElementById('loading-msg');
-    const counter = document.getElementById('live-counter');
+    const container = document.getElementById("tools-container");
+    const searchInput = document.getElementById("search-tools");
+    const categoryContainer = document.getElementById("category-filters");
+    const loadingMsg = document.getElementById("loading-msg");
+    const counter = document.getElementById("live-counter");
 
-    // 1. Fetch Data
-    fetch('./tools.json?v=' + Date.now()) // Bypass cache
-        .then(response => {
+    searchInput.disabled = true;
+    searchInput.placeholder = "Choose a category to load tools";
+
+    fetch("./tools/category-manifests/index.json")
+        .then((response) => {
             if (!response.ok) throw new Error("HTTP error " + response.status);
-            return response.text(); 
+            return response.json();
         })
-        .then(rawText => {
-            try {
-                // Clean up potential trailing commas before parsing
-                const cleanText = rawText.replace(/,\s*([\]}])/g, '$1');
-                allTools = JSON.parse(cleanText);
-
-                if (!Array.isArray(allTools)) throw new Error("JSON is not an array");
-
-                filteredTools = allTools;
-
-                // ⭐ Update counter with TRUE total number of tools
-                counter.textContent = allTools.length.toLocaleString();
-
-                loadingMsg.style.display = 'none';
-                generateCategories(allTools);
-                displayTools(true);
-
-            } catch (e) {
-                console.error('Parsing Error:', e);
-                loadingMsg.innerHTML = `Error: JSON Syntax issue. <button onclick="location.reload()">Retry</button>`;
+        .then((indexData) => {
+            if (!indexData || !Array.isArray(indexData.categories)) {
+                throw new Error("Invalid category index format");
             }
+
+            counter.textContent = Number(indexData.totalTools || 0).toLocaleString();
+            renderCategoryButtons(indexData.categories);
+            loadingMsg.innerHTML = "Choose a category above to load tools.";
         })
-        .catch(error => {
-            console.error('Fetch Error:', error);
-            loadingMsg.textContent = 'Connection error or file too large. Please refresh.';
+        .catch((error) => {
+            console.error("Category index fetch failed:", error);
+            loadingMsg.textContent = "Failed to load categories. Please refresh.";
         });
 
-    // 2. Display Tools Function (With Lazy Loading Logic)
+    function renderCategoryButtons(categories) {
+        categoryContainer.innerHTML = "";
+
+        categories.forEach((category) => {
+            const btn = document.createElement("button");
+            btn.className = "tab-btn";
+            btn.dataset.slug = category.slug;
+            btn.textContent = `${category.name} (${category.count})`;
+
+            btn.addEventListener("click", async () => {
+                const slug = category.slug;
+                if (!slug) return;
+
+                document.querySelectorAll(".tab-btn").forEach((item) => item.classList.remove("active"));
+                btn.classList.add("active");
+
+                searchInput.value = "";
+                searchInput.disabled = true;
+                searchInput.placeholder = `Loading ${category.name}...`;
+                loadingMsg.innerHTML = `<i class=\"fas fa-spinner fa-spin\"></i> Loading ${category.name} tools...`;
+
+                try {
+                    await loadCategory(category);
+                    loadingMsg.textContent = `Loaded ${activeCategoryTools.length.toLocaleString()} tools in ${category.name}.`;
+                    searchInput.disabled = false;
+                    searchInput.placeholder = `Search in ${category.name}`;
+                    searchInput.focus();
+                } catch (err) {
+                    console.error("Category load failed:", err);
+                    loadingMsg.textContent = `Failed to load ${category.name}. Try another category.`;
+                    searchInput.disabled = true;
+                    searchInput.placeholder = "Choose a category to load tools";
+                }
+            });
+
+            categoryContainer.appendChild(btn);
+        });
+    }
+
+    async function loadCategory(category) {
+        const slug = category.slug;
+        activeCategorySlug = slug;
+
+        let tools = categoryCache.get(slug);
+        if (!tools) {
+            const manifestFile = category.manifest || `${slug}.json`;
+            const response = await fetch(`./tools/category-manifests/${manifestFile}`);
+            if (!response.ok) {
+                throw new Error("HTTP error " + response.status);
+            }
+
+            tools = await response.json();
+            if (!Array.isArray(tools)) {
+                throw new Error("Category manifest is not an array");
+            }
+
+            categoryCache.set(slug, tools);
+        }
+
+        // Ignore stale responses if user switched categories quickly.
+        if (activeCategorySlug !== slug) return;
+
+        activeCategoryTools = tools;
+        filteredTools = tools;
+        itemsShown = loadAmount;
+        displayTools(true);
+    }
+
     function displayTools(reset = false) {
         if (reset) {
-            container.innerHTML = '';
-            itemsShown = 50;
+            container.innerHTML = "";
         }
-        
+
         if (filteredTools.length === 0) {
-            container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #666;">No tools found matching your search.</p>';
+            container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #666;">No tools found in this category for your query.</p>';
             return;
         }
 
-        const toolsToRender = filteredTools.slice(
-            container.children.length,
-            itemsShown
-        );
-
+        const rendered = container.children.length;
+        const toolsToRender = filteredTools.slice(rendered, itemsShown);
         const fragment = document.createDocumentFragment();
-        toolsToRender.forEach(tool => {
-            const cat = tool.category || 'Utility';
-            const card = document.createElement('div');
-            card.className = 'tool-card';
+
+        toolsToRender.forEach((tool) => {
+            const card = document.createElement("div");
+            card.className = "tool-card";
             card.innerHTML = `
-                <span class="category-tag">${cat}</span>
+                <span class="category-tag">${tool.category || "Utility"}</span>
                 <h3><a href="${tool.url}">${tool.name}</a></h3>
-                <p class="tool-desc">${tool.description || 'Free online tool for daily tasks.'}</p>
+                <p class="tool-desc">${tool.description || "Free online tool for daily tasks."}</p>
             `;
             fragment.appendChild(card);
         });
@@ -76,8 +130,8 @@ document.addEventListener("DOMContentLoaded", function() {
         container.appendChild(fragment);
     }
 
-    // 3. Infinite Scroll Logic
-    window.addEventListener('scroll', () => {
+    window.addEventListener("scroll", () => {
+        if (searchInput.disabled) return;
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 500) {
             if (itemsShown < filteredTools.length) {
                 itemsShown += loadAmount;
@@ -86,44 +140,17 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // 4. Search Logic
-    searchInput.addEventListener('input', (e) => {
-        const term = e.target.value.toLowerCase();
-        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-        
-        filteredTools = allTools.filter(tool => 
-            tool.name.toLowerCase().includes(term) ||
-            (tool.description && tool.description.toLowerCase().includes(term)) ||
-            (tool.category && tool.category.toLowerCase().includes(term))
-        );
+    searchInput.addEventListener("input", (event) => {
+        if (searchInput.disabled) return;
 
+        const query = event.target.value.trim().toLowerCase();
+        filteredTools = activeCategoryTools.filter((tool) => {
+            const name = (tool.name || "").toLowerCase();
+            const description = (tool.description || "").toLowerCase();
+            return name.includes(query) || description.includes(query);
+        });
+
+        itemsShown = loadAmount;
         displayTools(true);
     });
-
-    // 5. Generate Category Buttons
-    function generateCategories(tools) {
-        const categories = ['All', ...new Set(tools.map(t => t.category || 'Utility'))].sort();
-        categoryContainer.innerHTML = '';
-        
-        categories.forEach(cat => {
-            const btn = document.createElement('button');
-            btn.className = 'tab-btn';
-            if (cat === 'All') btn.classList.add('active');
-            btn.textContent = cat;
-            
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                searchInput.value = '';
-                
-                filteredTools = (cat === 'All')
-                    ? allTools
-                    : allTools.filter(t => (t.category || 'Utility') === cat);
-
-                displayTools(true);
-            });
-
-            categoryContainer.appendChild(btn);
-        });
-    }
 });

@@ -5,7 +5,7 @@ desc_re = re.compile(r'description:\s*"([^"]+)"')
 head_re = re.compile(r"(<head>)", re.IGNORECASE)
 img_url = "https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub"
 
-for filepath in glob.glob("tools/*.html"):
+for filepath in glob.glob("tools/**/*.html", recursive=True):
     with open(filepath, 'r', encoding='utf-8') as f: content = f.read()
     if 'og:image' in content: continue # skip if already fully patched
     

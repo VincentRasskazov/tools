@@ -8,7 +8,7 @@ title_re = re.compile(r'title:\s*"([^"]+)"')
 desc_re = re.compile(r'description:\s*"([^"]+)"')
 head_re = re.compile(r"(<head>)", re.IGNORECASE)
 
-files = glob.glob("tools/*.html")
+files = glob.glob("tools/**/*.html", recursive=True)
 updated_count = 0
 
 print("🔍 Scanning tools for SEO upgrades...")

@@ -1,0 +1,106 @@
+name: Daily Copilot Tool Growth
+
+on:
+  schedule:
+    - cron: "21 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-copilot-tool-growth
+  cancel-in-progress: false
+
+jobs:
+  add-tools:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            .github
+            tools
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Cache GitHub CLI extensions
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/share/gh/extensions
+          key: ${{ runner.os }}-gh-extensions-gh-copilot-v1
+          restore-keys: |
+            ${{ runner.os }}-gh-extensions-
+
+      - name: Install GitHub Copilot CLI
+        run: bash ./.github/scripts/install-copilot-cli.sh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Select model from premium usage
+        id: model
+        run: node ./.github/scripts/select-copilot-model.js
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COPILOT_PREMIUM_PERCENT_LEFT: ${{ vars.COPILOT_PREMIUM_PERCENT_LEFT }}
+          COPILOT_PREMIUM_REMAINING: ${{ vars.COPILOT_PREMIUM_REMAINING }}
+          COPILOT_PREMIUM_LIMIT: ${{ vars.COPILOT_PREMIUM_LIMIT }}
+          COPILOT_PREMIUM_THRESHOLD: "50"
+          COPILOT_HIGH_MODEL: "gpt-5.3-codex"
+          COPILOT_HIGH_REASONING: "high"
+          COPILOT_LOW_MODEL: "gpt-4.1"
+          COPILOT_LOW_REASONING: "standard"
+
+      - name: Add 25 tools
+        id: add_tools
+        run: |
+          node ./.github/scripts/add-daily-tools.js \
+            --count 25 \
+            --model "${{ steps.model.outputs.selected_model }}" \
+            --reasoning "${{ steps.model.outputs.selected_reasoning }}"
+
+      - name: Build category manifests
+        run: node ./.github/scripts/build-category-manifests.js
+
+      - name: Configure Git user
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit changes
+        id: commit
+        run: |
+          created_files="${{ steps.add_tools.outputs.created_files }}"
+
+          if [[ -z "$created_files" ]]; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+            echo "No generated files reported by add-tools step."
+            exit 0
+          fi
+
+          IFS=',' read -r -a files <<< "$created_files"
+          for file in "${files[@]}"; do
+            git add "tools/$file"
+          done
+
+          git add tools/category-manifests
+
+          if git diff --cached --quiet; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+            echo "No new files to commit."
+            exit 0
+          fi
+
+          git commit -m "chore: add 25 tools (${{ steps.model.outputs.selected_model }})"
+          echo "has_changes=true" >> "$GITHUB_OUTPUT"
+
+      - name: Push changes
+        if: steps.commit.outputs.has_changes == 'true'
+        run: git push

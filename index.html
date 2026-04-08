@@ -280,7 +280,7 @@ description: A massive collection of fast, beautiful, and free online converters
 
     <div class="search-wrapper">
       <i class="fas fa-search search-icon"></i>
-      <input type="text" id="search-tools" placeholder="What tool do you need today?">
+      <input type="text" id="search-tools" placeholder="Choose a category first">
     </div>
   </header>
 
@@ -351,15 +351,10 @@ description: A massive collection of fast, beautiful, and free online converters
 
   <div class="controls-wrapper">
     <div id="category-filters" class="category-tabs"></div>
-    
-    <select id="sort-order" class="sort-select">
-      <option value="newest">Newest to Oldest</option>
-      <option value="oldest">Oldest to Newest</option>
-    </select>
   </div>
 
   <div id="loading-msg" style="text-align: center; color: var(--text-muted);">
-    <i class="fas fa-spinner fa-spin"></i> Initializing tools...
+    <i class="fas fa-spinner fa-spin"></i> Loading categories...
   </div>
 
   <div id="tools-container" class="tools-grid"></div>
@@ -389,40 +384,6 @@ description: A massive collection of fast, beautiful, and free online converters
       const link = card.querySelector("a");
       if (link) window.location.href = link.href;
     }
-  });
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const sortSelect = document.getElementById('sort-order');
-    const container = document.getElementById('tools-container');
-    let initialized = false;
-
-    const observer = new MutationObserver(() => {
-      if (!initialized && container.children.length > 0) {
-        Array.from(container.children).forEach((child, index) => {
-          child.setAttribute('data-orig-index', index);
-        });
-        const loadingMsg = document.getElementById('loading-msg');
-        if (loadingMsg) loadingMsg.style.display = 'none';
-        initialized = true;
-      }
-    });
-
-    observer.observe(container, { childList: true });
-
-    sortSelect.addEventListener('change', (e) => {
-      if (!initialized) return;
-      const order = e.target.value;
-      const cards = Array.from(container.children);
-      
-      cards.sort((a, b) => {
-        const indexA = parseInt(a.getAttribute('data-orig-index'));
-        const indexB = parseInt(b.getAttribute('data-orig-index'));
-        return order === 'newest' ? indexA - indexB : indexB - indexA;
-      });
-      
-      container.innerHTML = '';
-      cards.forEach(card => container.appendChild(card));
-    });
   });
 </script>
 

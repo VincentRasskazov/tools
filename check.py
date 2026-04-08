@@ -1,7 +1,7 @@
 import glob
 
 starters = []
-for f in glob.glob("tools/*.html"):
+for f in glob.glob("tools/**/*.html", recursive=True):
     with open(f, 'r', encoding='utf-8') as file:
         if 'starter tool' in file.read().lower():
             starters.append(f)

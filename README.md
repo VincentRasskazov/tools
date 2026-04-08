@@ -1,40 +1,70 @@
-# Vincent’s Tools Hub
+# Vincent's Tools Hub
 
-A collection of 2,650+ browser‑based tools. Everything runs fully client‑side for speed and privacy.
+A collection of 2,650+ browser-based tools for developers, creators, and everyday tasks.
 
-## Features
-- Instant performance (no backend)
-- Privacy‑first: all processing happens locally
-- Unified responsive UI system
-- Automated metadata and SEO
-- Installable PWA with offline caching
+## Highlights
 
-## Categories
-- Developer tools (JSON, Base64, Regex, hashing)
-- Design utilities (CSS generators, color tools)
-- Finance calculators (ROI, CAGR, loans)
-- Math & science tools (geometry, statistics)
-- Security utilities (SHA‑256/512, entropy)
-- General utilities (timers, converters)
-- Mini‑games and reaction tests
+- Category-first homepage loading for faster first paint
+- Privacy-first browser execution (no backend required)
+- Unified responsive UI and tool-page template style
+- Jekyll frontmatter + SEO metadata on every tool page
+- Daily automation to generate new tools and refresh manifests
 
-## Architecture
-- Vanilla JavaScript for logic
-- Centralized CSS variable system
-- Jekyll frontmatter + SEO injection
-- Hosted on GitHub Pages
+## Tool Organization
+
+Tool pages are stored by category:
+
+- `tools/<category-slug>/<tool-file>.html`
+
+Homepage browsing uses generated manifests:
+
+- `tools/category-manifests/index.json`
+- `tools/category-manifests/<category>.json`
 
 ## Local Development
+
+Serve quickly with Python:
+
 ```bash
 python3 -m http.server 8000
-# or
+```
+
+Or use Node/Jekyll:
+
+```bash
 npx http-server
 # or
 bundle exec jekyll serve
 ```
 
-## Notes
-Built quickly using AI‑assisted workflows.
+If you need permalink behavior identical to production, use Jekyll.
+
+## Automation
+
+Daily generation is handled by:
+
+- `.github/workflows/daily-copilot-tool-growth.yml`
+
+Key behavior:
+
+- Installs GitHub Copilot CLI in CI
+- Selects model by premium threshold (default 50%)
+- Generates 25 tools per run
+- Rebuilds category manifests
+- Commits and pushes generated changes
+
+## Maintenance Scripts
+
+Run from repo root:
+
+```bash
+# one-time migration from flat tools/ to category folders
+node .github/scripts/reorganize-tools-by-category.js
+
+# rebuild homepage category manifests
+node .github/scripts/build-category-manifests.js
+```
 
 ## License
+
 MIT

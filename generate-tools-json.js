@@ -4,6 +4,26 @@ const path = require('path');
 const toolsDir = path.join(__dirname, 'tools');
 const outFile = path.join(__dirname, 'tools.json');
 
+function walkHtmlFiles(dirPath) {
+  const entries = fs.readdirSync(dirPath, { withFileTypes: true });
+  const files = [];
+
+  for (const entry of entries) {
+    const absolute = path.join(dirPath, entry.name);
+
+    if (entry.isDirectory()) {
+      files.push(...walkHtmlFiles(absolute));
+      continue;
+    }
+
+    if (entry.isFile() && entry.name.endsWith('.html')) {
+      files.push(absolute);
+    }
+  }
+
+  return files;
+}
+
 function extractMeta(html, name) {
   const meta = new RegExp(`<meta[^>]+name=["']${name}["'][^>]+content=["']([^"']+)["']`, 'i').exec(html);
   return meta ? meta[1] : '';
@@ -14,9 +34,10 @@ function extractTitle(html) {
   return match ? match[1].trim() : '';
 }
 
-const files = fs.readdirSync(toolsDir).filter(f => f.endsWith('.html'));
-const tools = files.map(file => {
-  const html = fs.readFileSync(path.join(toolsDir, file), 'utf8');
+const files = walkHtmlFiles(toolsDir);
+const tools = files.map(filePath => {
+  const html = fs.readFileSync(filePath, 'utf8');
+  const file = path.relative(toolsDir, filePath).split(path.sep).join('/');
   return {
     file,
     name: extractTitle(html),

@@ -1,6 +1,6 @@
 import glob
 
-files = glob.glob("tools/*.html")
+files = glob.glob("tools/**/*.html", recursive=True)
 updated_count = 0
 
 # A dynamically generated placeholder image that matches your site's blue theme
