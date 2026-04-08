@@ -27,10 +27,17 @@ jobs:
             .github
             tools
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
+      - name: Verify Node.js runtime
+        run: |
+          set -e
+          node --version
+          npm --version
+
+          node_major="$(node -p "process.versions.node.split('.')[0]")"
+          if [[ "$node_major" -lt 20 ]]; then
+            echo "Node.js 20+ is required, found $(node --version)"
+            exit 1
+          fi
 
       - name: Install GitHub Copilot CLI
         run: bash ./.github/scripts/install-copilot-cli.sh

@@ -2,7 +2,7 @@ name: Cancel Stuck Daily Runs
 
 on:
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "*/5 * * * *"
   workflow_dispatch:
   push:
     branches:
@@ -27,7 +27,7 @@ jobs:
         uses: actions/github-script@v7
         env:
           TARGET_WORKFLOW_NAME: Daily Copilot Tool Growth
-          STALE_MINUTES: "8"
+          STALE_MINUTES: "5"
         with:
           script: |
             const workflowName = process.env.TARGET_WORKFLOW_NAME;
