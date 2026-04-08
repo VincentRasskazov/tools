@@ -6,6 +6,7 @@ const path = require("path");
 const repoRoot = process.cwd();
 const toolsRoot = path.join(repoRoot, "tools");
 const outputFile = path.join(toolsRoot, "copilot-timeline.json");
+const timelineDaysDir = path.join(toolsRoot, "copilot-timeline-days");
 const generatedPattern = /^daily-(\d{8})-(\d{2})-[a-z0-9-]+\.html$/i;
 
 function normalizePath(input) {
@@ -145,12 +146,44 @@ function buildTimeline() {
     tools,
   }));
 
+  fs.mkdirSync(timelineDaysDir, { recursive: true });
+
+  const activeDayFiles = new Set();
+  const timelineIndex = timeline.map((day) => {
+    const dayFileName = `${day.date}.json`;
+    const dayFilePath = path.join(timelineDaysDir, dayFileName);
+    const dayRelativePath = normalizePath(path.relative(toolsRoot, dayFilePath));
+    activeDayFiles.add(dayFileName);
+
+    const dayPayload = {
+      date: day.date,
+      count: day.count,
+      tools: day.tools,
+    };
+
+    fs.writeFileSync(dayFilePath, JSON.stringify(dayPayload, null, 2), "utf8");
+
+    return {
+      date: day.date,
+      count: day.count,
+      file: `tools/${dayRelativePath}`,
+    };
+  });
+
+  const existingDayFiles = fs.readdirSync(timelineDaysDir)
+    .filter((name) => name.endsWith(".json"));
+
+  for (const name of existingDayFiles) {
+    if (activeDayFiles.has(name)) continue;
+    fs.unlinkSync(path.join(timelineDaysDir, name));
+  }
+
   const payload = {
     generatedAt: new Date().toISOString(),
     source: "copilot-daily-generator",
     totalTools: generatedTools.length,
-    totalDays: timeline.length,
-    timeline,
+    totalDays: timelineIndex.length,
+    timeline: timelineIndex,
   };
 
   fs.writeFileSync(outputFile, JSON.stringify(payload, null, 2), "utf8");
