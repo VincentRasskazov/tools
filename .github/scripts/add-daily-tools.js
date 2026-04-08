@@ -450,7 +450,13 @@ function selectDiverseSpecs(allSpecs, requestedCount, seed, existingIdentities) 
 
 function renderTool(spec, model, reasoning, stamp) {
   const title = escapeHtml(spec.title);
+  // 🚀 SEO FIX 1: Create a highly specific, keyword-rich title for search engines
+  const seoTitle = `${title} | Free Online Calculator & Tool`;
+  
   const description = escapeHtml(spec.description);
+  // 🚀 SEO FIX 2: Expand the description so search engines know it's interactive and useful
+  const seoDescription = `${description} Use this free online utility to calculate your results instantly in the browser. No signup required.`;
+  
   const category = escapeHtml(spec.category);
   const inputLabel = escapeHtml(spec.inputLabel);
   const outputLabel = escapeHtml(spec.outputLabel);
@@ -471,23 +477,27 @@ generated_reasoning: ${toYamlString(reasoning)}
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta name="description" content="${description}">
-  <meta property="og:title" content="${title}">
-  <meta property="og:description" content="${description}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>${seoTitle}</title>
+  <meta name="description" content="${seoDescription}">
+  
+  <meta property="og:title" content="${seoTitle}">
+  <meta property="og:description" content="${seoDescription}">
   <meta property="og:type" content="website">
   <meta property="og:image" content="${ogImage}">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="${title}">
-  <meta name="twitter:description" content="${description}">
+  <meta name="twitter:title" content="${seoTitle}">
+  <meta name="twitter:description" content="${seoDescription}">
   <meta name="twitter:image" content="${ogImage}">
-  <meta charset="UTF-8">
-  <title>${title}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
   <style>
     :root { --primary: #3b82f6; --primary-hover: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; }
     body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
     .tool-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); }
-    h1 { text-align: center; color: var(--primary); margin: 0 0 30px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(59,130,246,0.1); }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
     label { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 0.95rem; }
     input[type="number"] { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 20px; font-size: 1rem; transition: all 0.2s ease; box-sizing: border-box; background: #fcfcfc; color: var(--text); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
     input[type="number"]:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59,130,246,0.15), inset 0 2px 4px rgba(0,0,0,0.02); background: #fff; }
@@ -502,10 +512,12 @@ generated_reasoning: ${toYamlString(reasoning)}
 <body>
   <div class="tool-container">
     <h1>${title}</h1>
+    <p class="seo-subtitle">${description}</p>
+    
     <div class="card">
       <label for="valueInput">${inputLabel}</label>
       <input id="valueInput" type="number" step="any" placeholder="Enter a value">
-      <button id="convertButton" type="button">Convert</button>
+      <button id="convertButton" type="button">Calculate Now</button>
     </div>
     <div class="res" id="resultValue">${outputLabel}: -</div>
   </div>
