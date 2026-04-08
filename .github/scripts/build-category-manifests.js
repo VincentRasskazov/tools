@@ -30,16 +30,30 @@ function stripQuotes(value) {
   return trimmed;
 }
 
+// 🚀 ANTI-HANG FIX: No Regex. Native string searching only.
 function extractFrontmatter(content) {
-  const match = content.match(/^---\s*\n([\s\S]*?)\n---\s*\n?/);
-  return match ? match[1] : "";
+  const trimmed = content.trimStart();
+  if (!trimmed.startsWith("---")) return "";
+  
+  const endIndex = trimmed.indexOf("---", 3);
+  if (endIndex === -1) return ""; 
+  
+  return trimmed.slice(3, endIndex);
 }
 
+// 🚀 ANTI-HANG FIX: Simple line-by-line parsing.
 function extractField(frontmatter, field) {
   if (!frontmatter) return "";
-  const pattern = new RegExp(`^${field}:\\s*(.+)$`, "m");
-  const match = frontmatter.match(pattern);
-  return match ? stripQuotes(match[1]) : "";
+  const lines = frontmatter.split('\n');
+  const prefix = `${field}:`;
+  
+  for (const line of lines) {
+    if (line.trim().startsWith(prefix)) {
+      const value = line.substring(line.indexOf(':') + 1).trim();
+      return stripQuotes(value);
+    }
+  }
+  return "";
 }
 
 function extractTitleFromHtml(content) {
@@ -47,7 +61,7 @@ function extractTitleFromHtml(content) {
   return match ? match[1].trim() : "";
 }
 
-// 🚀 UPGRADE: Async Directory Walking
+// 🚀 SPEED FIX: Async directory walking
 async function walkToolFilesAsync(dirPath) {
   const files = [];
   const entries = await fsPromises.readdir(dirPath, { withFileTypes: true });
@@ -87,7 +101,7 @@ function inferUrlFromPath(filePath) {
   return `tools/${relative}`;
 }
 
-// 🚀 UPGRADE: Async Readme Updater
+// 🚀 SPEED FIX: Async Readme writing
 async function updateReadmeToolCountAsync(totalTools) {
   if (!fs.existsSync(readmePath)) return;
 
@@ -112,9 +126,9 @@ async function buildIndex() {
   const toolFiles = await walkToolFilesAsync(toolsRoot);
   const categories = new Map();
 
-  console.log(`Processing ${toolFiles.length} files...`);
+  console.log(`Processing ${toolFiles.length} files in batches...`);
 
-  // 🚀 UPGRADE: Batch Processing to prevent Memory/CPU locks
+  // 🚀 SPEED FIX: Process 100 files at a time without blocking the CPU
   const BATCH_SIZE = 100;
   for (let i = 0; i < toolFiles.length; i += BATCH_SIZE) {
     const batch = toolFiles.slice(i, i + BATCH_SIZE);
@@ -132,7 +146,6 @@ async function buildIndex() {
 
         const slug = slugify(category);
         
-        // Ensure category array exists
         if (!categories.has(slug)) {
           categories.set(slug, {
             name: category,
@@ -160,7 +173,6 @@ async function buildIndex() {
 
   const sortedCategories = [...categories.values()].sort((a, b) => a.name.localeCompare(b.name));
 
-  // 🚀 UPGRADE: Async file writing
   for (const category of sortedCategories) {
     category.tools.sort((a, b) => a.name.localeCompare(b.name));
     const fileName = `${category.slug}.json`;
