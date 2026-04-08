@@ -16,15 +16,14 @@ concurrency:
 jobs:
   add-tools:
     runs-on: ubuntu-latest
-    timeout-minutes: 6
+    timeout-minutes: 8 # Bumped slightly so GitHub's native cleanup doesn't trigger a false "fail"
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
-          # 🚀 PUSH FIX: Turn this back to true! It makes `git push` 100% fast and reliable.
-          persist-credentials: true
+          persist-credentials: false # Keeps the Git config light
           sparse-checkout: |
             .github
             tools
@@ -113,11 +112,8 @@ jobs:
         run: |
           set -euo pipefail
           git config --global http.version HTTP/1.1
-          # 🚀 Because we used persist-credentials: true, we can just push normally! No URL hacks.
+          
+          # 🚀 DEFAULT TOKEN: Uses the built-in github.token to authenticate. No PAT required!
+          git remote set-url origin "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
+          
           git push --force origin HEAD:main
-
-      - name: Neutralize Post-Job Scanner
-        if: always()
-        run: |
-          # 🚀 CLEANUP FIX: Nuke the .git folder so the scanner has nothing to scrub, preventing the hang.
-          rm -rf .git
