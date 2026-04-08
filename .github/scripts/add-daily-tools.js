@@ -79,7 +79,74 @@ const specs = [
   { slug: "hours-to-seconds", title: "Hours to Seconds Converter", description: "Convert hours directly to seconds.", category: "Time", inputLabel: "Hours", outputLabel: "Seconds", expression: "x * 3600", outputUnit: "seconds" },
   { slug: "months-to-days", title: "Months to Days Converter", description: "Convert months to days using a 30-day month.", category: "Time", inputLabel: "Months", outputLabel: "Days", expression: "x * 30", outputUnit: "days" },
   { slug: "years-to-months", title: "Years to Months Converter", description: "Convert years to months.", category: "Time", inputLabel: "Years", outputLabel: "Months", expression: "x * 12", outputUnit: "months" },
+  { slug: "xp-level-progress", title: "XP to Level Progress Estimator", description: "Estimate level progression from XP using a simple scaling model.", category: "Games", inputLabel: "XP", outputLabel: "Estimated level", expression: "x / 100", outputUnit: "levels" },
+  { slug: "critical-hit-chance", title: "Critical Hit Chance Estimator", description: "Estimate final critical chance after buffs and cap it at 100%.", category: "Games", inputLabel: "Base critical chance (%)", outputLabel: "Final critical chance", expression: "Math.max(0, Math.min(100, x * 1.15))", outputUnit: "%" },
+  { slug: "speedrun-pace", title: "Speedrun Pace Estimator", description: "Estimate projected finish time based on your current split pace.", category: "Games", inputLabel: "Current pace (minutes)", outputLabel: "Projected finish", expression: "x * 0.96", outputUnit: "minutes" },
+  { slug: "password-entropy-score", title: "Password Entropy Score Estimator", description: "Estimate password entropy from character length using a baseline charset model.", category: "Security", inputLabel: "Password length", outputLabel: "Estimated entropy", expression: "x * 6.5", outputUnit: "bits" },
+  { slug: "brute-force-window", title: "Brute Force Window Estimator", description: "Estimate brute-force time in hours from password entropy bits.", category: "Security", inputLabel: "Entropy bits", outputLabel: "Estimated crack time", expression: "Math.pow(2, Math.min(52, x)) / (1e9 * 3600)", outputUnit: "hours" },
+  { slug: "phishing-risk-index", title: "Phishing Risk Index Calculator", description: "Turn suspicious-signal count into a quick phishing risk score.", category: "Security", inputLabel: "Suspicious signal count", outputLabel: "Phishing risk index", expression: "Math.max(0, Math.min(100, x * 12))", outputUnit: "%" },
+  { slug: "token-expiry-buffer", title: "Token Expiry Buffer Calculator", description: "Calculate a safe refresh buffer window before token expiration.", category: "Security", inputLabel: "Token lifetime (minutes)", outputLabel: "Recommended refresh buffer", expression: "Math.max(1, x * 0.15)", outputUnit: "minutes" },
 ];
+
+function rotateArray(values, offset) {
+  if (!Array.isArray(values) || values.length === 0) return [];
+  const normalizedOffset = ((offset % values.length) + values.length) % values.length;
+  return [...values.slice(normalizedOffset), ...values.slice(0, normalizedOffset)];
+}
+
+function selectDiverseSpecs(allSpecs, requestedCount, seed) {
+  if (!Array.isArray(allSpecs) || allSpecs.length === 0 || requestedCount <= 0) {
+    return [];
+  }
+
+  const byCategory = new Map();
+  for (const spec of allSpecs) {
+    const category = String(spec.category || "Utility");
+    if (!byCategory.has(category)) {
+      byCategory.set(category, []);
+    }
+    byCategory.get(category).push(spec);
+  }
+
+  const categoryNames = [...byCategory.keys()].sort((a, b) => a.localeCompare(b));
+  const orderedCategories = rotateArray(categoryNames, seed % categoryNames.length);
+
+  const categoryQueues = orderedCategories.map((categoryName, index) => {
+    const categorySpecs = byCategory.get(categoryName) || [];
+    const categoryOffset = categorySpecs.length === 0 ? 0 : (seed + index) % categorySpecs.length;
+    return {
+      categoryName,
+      specs: rotateArray(categorySpecs, categoryOffset),
+    };
+  });
+
+  const picked = [];
+  while (picked.length < requestedCount) {
+    let progressed = false;
+
+    for (const queue of categoryQueues) {
+      if (queue.specs.length === 0) continue;
+
+      picked.push(queue.specs.shift());
+      progressed = true;
+
+      if (picked.length >= requestedCount) break;
+    }
+
+    if (!progressed) break;
+  }
+
+  if (picked.length < requestedCount) {
+    const fallbackPool = rotateArray(allSpecs, seed % allSpecs.length);
+    let index = 0;
+    while (picked.length < requestedCount && fallbackPool.length > 0) {
+      picked.push(fallbackPool[index % fallbackPool.length]);
+      index += 1;
+    }
+  }
+
+  return picked;
+}
 
 function renderTool(spec, model, reasoning, stamp) {
   const title = escapeHtml(spec.title);
@@ -222,13 +289,7 @@ void model;
 void reasoning;
 
 const numericStamp = Number(stamp.replace(/[^0-9]/g, "")) || 0;
-const offset = numericStamp % specs.length;
-
-const selected = [];
-for (let i = 0; i < requestedCount; i += 1) {
-  const spec = specs[(offset + i) % specs.length];
-  selected.push(spec);
-}
+const selected = selectDiverseSpecs(specs, requestedCount, numericStamp);
 
 const createdFiles = [];
 

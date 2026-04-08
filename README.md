@@ -51,6 +51,7 @@ Key behavior:
 - Installs GitHub Copilot CLI in CI
 - Selects model by premium threshold (default 50%)
 - Generates 25 tools per run
+- Spreads generated tools across categories (for example: Games, Security, Finance, Time, Math)
 - Rebuilds category manifests
 - Commits and pushes generated changes
 
