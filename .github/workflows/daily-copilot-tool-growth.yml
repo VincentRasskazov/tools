@@ -16,14 +16,13 @@ concurrency:
 jobs:
   add-tools:
     runs-on: ubuntu-latest
-    timeout-minutes: 6 # 🚀 Locked in
+    timeout-minutes: 6
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
-          # 🚀 POST-JOB FIX: Persist credentials to stop GitHub from scanning every folder for headers at the end
           persist-credentials: true
           sparse-checkout: |
             .github
@@ -34,7 +33,6 @@ jobs:
           git config --global core.preloadIndex true
           git config --global core.fscache true
           git config --global gc.auto 0
-          # Disable detached head advice to keep logs clean and fast
           git config --global advice.detachedHead false
 
       - name: Verify Node.js runtime
@@ -47,7 +45,6 @@ jobs:
         run: bash ./.github/scripts/install-copilot-cli.sh
         env:
           GH_TOKEN: ${{ secrets.COPILOT_PAT }} 
-          # 🚀 ANTI-HANG: Prevents CLI from asking interactive Yes/No questions
           GH_PROMPT_DISABLED: 1 
 
       - name: Select model from premium usage
@@ -108,13 +105,17 @@ jobs:
           git commit -m "chore: add 25 tools (${{ steps.model.outputs.selected_model }})"
           echo "has_changes=true" >> "$GITHUB_OUTPUT"
 
-      - name: Push changes (YOLO Mode)
+      - name: Push changes (Sledgehammer YOLO Mode)
         if: steps.commit.outputs.has_changes == 'true'
-        timeout-minutes: 1
+        timeout-minutes: 2
         env:
           GIT_TERMINAL_PROMPT: "0"
         run: |
           set -euo pipefail
-          git config --global http.version HTTP/1.1
-          # YOLO: Force push to main
+          # 🚀 SLEDGEHAMMER 1: Increase HTTP buffer so large pushes don't stall
+          git config --global http.postBuffer 524288000
+          
+          # 🚀 SLEDGEHAMMER 2: Bypass credential manager entirely. Inject token into URL.
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          
           git push --force origin HEAD:main
