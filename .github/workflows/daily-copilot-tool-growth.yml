@@ -23,7 +23,9 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
-          persist-credentials: true
+          # 🚀 THE REAL POST-JOB FIX: Set this to FALSE.
+          # This stops GitHub from searching every single folder at the end of the job to scrub credentials.
+          persist-credentials: false
           sparse-checkout: |
             .github
             tools
@@ -31,7 +33,6 @@ jobs:
       - name: Optimize Git Performance
         run: |
           git config --global core.preloadIndex true
-          git config --global core.fscache true
           git config --global gc.auto 0
           git config --global advice.detachedHead false
 
@@ -105,17 +106,16 @@ jobs:
           git commit -m "chore: add 25 tools (${{ steps.model.outputs.selected_model }})"
           echo "has_changes=true" >> "$GITHUB_OUTPUT"
 
-      - name: Push changes (Sledgehammer YOLO Mode)
+      - name: Push changes
         if: steps.commit.outputs.has_changes == 'true'
-        timeout-minutes: 2
+        timeout-minutes: 1
         env:
           GIT_TERMINAL_PROMPT: "0"
         run: |
           set -euo pipefail
-          # 🚀 SLEDGEHAMMER 1: Increase HTTP buffer so large pushes don't stall
-          git config --global http.postBuffer 524288000
+          git config --global http.version HTTP/1.1
           
-          # 🚀 SLEDGEHAMMER 2: Bypass credential manager entirely. Inject token into URL.
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          # 🚀 AUTH FIX: Because we disabled persist-credentials above, we authenticate the push right here.
+          git remote set-url origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
           
           git push --force origin HEAD:main
