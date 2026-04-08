@@ -31,14 +31,6 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Cache GitHub CLI extensions
-        uses: actions/cache@v4
-        with:
-          path: ~/.local/share/gh/extensions
-          key: ${{ runner.os }}-gh-extensions-gh-copilot-v1
-          restore-keys: |
-            ${{ runner.os }}-gh-extensions-
-
       - name: Install GitHub Copilot CLI
         run: bash ./.github/scripts/install-copilot-cli.sh
         env:
