@@ -1,6 +1,6 @@
 # Vincent's Tools Hub
 
-A collection of 2,650+ browser-based tools for developers, creators, and everyday tasks.
+A collection of 2,708 browser-based tools for developers, creators, and everyday tasks.
 
 ## Highlights
 
@@ -51,7 +51,8 @@ Key behavior:
 - Installs GitHub Copilot CLI in CI
 - Selects model by premium threshold (default 50%)
 - Generates 25 tools per run
-- Spreads generated tools across categories (for example: Games, Security, Finance, Time, Math)
+- Enforces unique Copilot-generated ideas and avoids repeating prior daily concepts
+- Spreads generated tools across many categories (for example: Games, Security, Finance, Developer, Data, Health, Writing, and more)
 - Rebuilds category manifests
 - Commits and pushes generated changes
 

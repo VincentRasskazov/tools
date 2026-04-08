@@ -6,6 +6,7 @@ const path = require("path");
 const repoRoot = process.cwd();
 const toolsRoot = path.join(repoRoot, "tools");
 const manifestsRoot = path.join(toolsRoot, "category-manifests");
+const readmePath = path.join(repoRoot, "README.md");
 
 function slugify(input) {
   return String(input)
@@ -90,6 +91,21 @@ function inferUrlFromPath(filePath) {
   return `tools/${relative}`;
 }
 
+function updateReadmeToolCount(totalTools) {
+  if (!fs.existsSync(readmePath)) return;
+
+  const readme = fs.readFileSync(readmePath, "utf8");
+  const exactLine = `A collection of ${Number(totalTools || 0).toLocaleString("en-US")} browser-based tools for developers, creators, and everyday tasks.`;
+  const pattern = /^A collection of .* browser-based tools for developers, creators, and everyday tasks\.$/m;
+
+  if (!pattern.test(readme)) return;
+
+  const updated = readme.replace(pattern, exactLine);
+  if (updated !== readme) {
+    fs.writeFileSync(readmePath, updated, "utf8");
+  }
+}
+
 function buildIndex() {
   if (!fs.existsSync(toolsRoot)) {
     throw new Error(`Tools directory not found: ${toolsRoot}`);
@@ -162,6 +178,7 @@ function buildIndex() {
   };
 
   fs.writeFileSync(path.join(manifestsRoot, "index.json"), JSON.stringify(indexPayload, null, 2), "utf8");
+  updateReadmeToolCount(toolFiles.length);
 
   console.log(`Built ${sortedCategories.length} category manifests for ${toolFiles.length} tools.`);
 }
