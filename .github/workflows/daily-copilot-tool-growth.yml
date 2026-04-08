@@ -16,7 +16,7 @@ concurrency:
 jobs:
   add-tools:
     runs-on: ubuntu-latest
-    timeout-minutes: 6 # Lowered timeout because it will be fast now
+    timeout-minutes: 6 # 🚀 Locked in as requested
 
     steps:
       - name: Checkout
@@ -40,10 +40,13 @@ jobs:
           node_major="$(node -p "process.versions.node.split('.')[0]")"
           if [[ "$node_major" -lt 20 ]]; then exit 1; fi
 
-      - name: Install GitHub Copilot CLI
-        run: bash ./.github/scripts/install-copilot-cli.sh
+      - name: Install & Auth GitHub Copilot CLI
+        run: |
+          bash ./.github/scripts/install-copilot-cli.sh
+          # 🔑 AUTH FIX: Force the CLI to login so it can read your billing
+          echo "${{ secrets.COPILOT_PAT }}" | gh auth login --with-token
+          gh copilot status || echo "Status check failed, but continuing..."
         env:
-          # 🔑 AUTH FIX: Use your personal token so the CLI can read your billing
           GH_TOKEN: ${{ secrets.COPILOT_PAT }} 
 
       - name: Select model from premium usage
@@ -106,15 +109,26 @@ jobs:
 
       - name: Push changes
         if: steps.commit.outputs.has_changes == 'true'
-        timeout-minutes: 2 # 🚀 Will fail fast if it hangs
+        timeout-minutes: 2
         env:
           GIT_TERMINAL_PROMPT: "0"
         run: |
           set -euo pipefail
           git config --global http.version HTTP/1.1
           
-          # We use a direct push. Without fetch-depth 0, rebase is dangerous here anyway.
-          git push origin HEAD:main || (git pull --rebase origin main && git push origin HEAD:main)
+          # 1. Try the fast, happy-path push first
+          if git push origin HEAD:main; then
+            echo "Push successful!"
+            exit 0
+          fi
+
+          # 2. If it fails (non-fast-forward), deepen clone to get history for rebase
+          echo "Push rejected. Fetching history to rebase..."
+          git fetch --deepen=50 origin main
+          
+          # 3. Safely rebase and push
+          git rebase --autostash origin/main
+          git push origin HEAD:main
 
       - name: Manual Workspace Cleanup
         if: always()
