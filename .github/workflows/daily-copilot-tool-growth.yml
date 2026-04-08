@@ -69,6 +69,9 @@ jobs:
       - name: Build category manifests
         run: node ./.github/scripts/build-category-manifests.js
 
+      - name: Build Copilot timeline
+        run: node ./.github/scripts/build-copilot-timeline.js
+
       - name: Configure Git user
         run: |
           git config user.name "github-actions[bot]"
@@ -91,6 +94,7 @@ jobs:
           done
 
           git add tools/category-manifests
+          git add tools/copilot-timeline.json
 
           if git diff --cached --quiet; then
             echo "has_changes=false" >> "$GITHUB_OUTPUT"

@@ -9,6 +9,7 @@ A collection of 2,650+ browser-based tools for developers, creators, and everyda
 - Unified responsive UI and tool-page template style
 - Jekyll frontmatter + SEO metadata on every tool page
 - Daily automation to generate new tools and refresh manifests
+- Copilot generation timeline at `/tools/copilot-timeline.html`
 
 ## Tool Organization
 
@@ -63,6 +64,9 @@ node .github/scripts/reorganize-tools-by-category.js
 
 # rebuild homepage category manifests
 node .github/scripts/build-category-manifests.js
+
+# rebuild Copilot generation timeline JSON
+node .github/scripts/build-copilot-timeline.js
 ```
 
 ## License

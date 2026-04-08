@@ -97,6 +97,10 @@ title: ${toYamlString(spec.title)}
 category: ${toYamlString(spec.category)}
 description: ${toYamlString(spec.description)}
 permalink: ${toYamlString(`/tools/${spec.fileName}`)}
+generated_by: ${toYamlString("copilot")}
+generated_date: ${toYamlString(stamp)}
+generated_model: ${toYamlString(model)}
+generated_reasoning: ${toYamlString(reasoning)}
 ---
 <!DOCTYPE html>
 <html lang="en"><head>
