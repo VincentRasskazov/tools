@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
-          clean: false
+          # We removed 'clean: false' to let GitHub handle the workspace correctly
           sparse-checkout: |
             .github
             tools
@@ -59,6 +59,7 @@ jobs:
 
       - name: Add 25 tools
         id: add_tools
+        timeout-minutes: 3
         run: |
           node ./.github/scripts/add-daily-tools.js \
             --count 25 \
@@ -105,17 +106,14 @@ jobs:
 
       - name: Push changes (YOLO Mode)
         if: steps.commit.outputs.has_changes == 'true'
-        timeout-minutes: 2
+        timeout-minutes: 1
         env:
           GIT_TERMINAL_PROMPT: "0"
         run: |
           set -euo pipefail
           git config --global http.version HTTP/1.1
-          # YOLO: Force push to main, ignoring history conflicts
+          # YOLO: Force push to main
           git push --force origin HEAD:main
 
-      - name: Manual Workspace Cleanup
-        if: always()
-        run: |
-          rm -rf tools/
-          rm -rf .github/
+      # NO MANUAL CLEANUP STEP HERE. 
+      # Letting the runner die naturally prevents the Post-Job hang.
