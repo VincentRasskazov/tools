@@ -41,11 +41,10 @@ jobs:
           if [[ "$node_major" -lt 20 ]]; then exit 1; fi
 
       - name: Install & Auth GitHub Copilot CLI
-        run: |
-          bash ./.github/scripts/install-copilot-cli.sh
-          gh copilot status || echo "Status check failed, but continuing..."
+        run: bash ./.github/scripts/install-copilot-cli.sh
         env:
           GH_TOKEN: ${{ secrets.COPILOT_PAT }} 
+          GH_PROMPT_DISABLED: 1
 
       - name: Select model from premium usage
         id: model
@@ -104,7 +103,7 @@ jobs:
           git commit -m "chore: add 25 tools (${{ steps.model.outputs.selected_model }})"
           echo "has_changes=true" >> "$GITHUB_OUTPUT"
 
-      - name: Push changes
+      - name: Push changes (YOLO Mode)
         if: steps.commit.outputs.has_changes == 'true'
         timeout-minutes: 2
         env:
@@ -112,17 +111,8 @@ jobs:
         run: |
           set -euo pipefail
           git config --global http.version HTTP/1.1
-          
-          if git push origin HEAD:main; then
-            echo "Push successful!"
-            exit 0
-          fi
-
-          echo "Push rejected. Fetching history to rebase..."
-          git fetch --deepen=50 origin main
-          
-          git rebase --autostash origin/main
-          git push origin HEAD:main
+          # YOLO: Force push to main, ignoring history conflicts
+          git push --force origin HEAD:main
 
       - name: Manual Workspace Cleanup
         if: always()
