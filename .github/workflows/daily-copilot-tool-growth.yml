@@ -22,7 +22,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          fetch-depth: 0
           sparse-checkout: |
             .github
             tools
@@ -113,12 +113,32 @@ jobs:
         env:
           GIT_TERMINAL_PROMPT: "0"
         run: |
-          set -e
+          set -euo pipefail
 
-          if git push origin HEAD:main; then
+          git config --global http.version HTTP/1.1
+
+          retry_git() {
+            local attempt=1
+            local max_attempts=3
+            while true; do
+              if "$@"; then
+                return 0
+              fi
+
+              if [[ "$attempt" -ge "$max_attempts" ]]; then
+                return 1
+              fi
+
+              attempt=$((attempt + 1))
+              echo "Retrying (${attempt}/${max_attempts}): $*"
+            done
+          }
+
+          if retry_git git push origin HEAD:main; then
             exit 0
           fi
 
-          echo "Initial push failed, rebasing latest main and retrying once..."
-          git pull --rebase --autostash origin main
-          git push origin HEAD:main
+          echo "Initial push failed, fetching latest main and retrying with rebase..."
+          retry_git git fetch --no-tags origin main
+          git rebase --autostash origin/main
+          retry_git git push origin HEAD:main

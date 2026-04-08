@@ -85,6 +85,12 @@ function normalizeIdentity(input) {
     .replace(/^-+|-+$/g, "");
 }
 
+function deriveFamilyKey(rawValue) {
+  const normalized = normalizeIdentity(rawValue);
+  if (!normalized) return "";
+  return normalized.replace(/-(index|score|efficiency|buffer|projection)(?:-[0-9]+)?$/i, "");
+}
+
 function dateStampUtc(dateObj) {
   const year = dateObj.getUTCFullYear();
   const month = String(dateObj.getUTCMonth() + 1).padStart(2, "0");
@@ -95,6 +101,7 @@ function dateStampUtc(dateObj) {
 function collectGeneratedIdentitySets() {
   const generatedTitleKeys = new Set();
   const generatedConceptSlugs = new Set();
+  const generatedFamilyKeys = new Set();
   const htmlFiles = walkHtmlFiles(toolsDir);
 
   for (const filePath of htmlFiles) {
@@ -119,13 +126,17 @@ function collectGeneratedIdentitySets() {
 
     const match = baseName.match(/^daily-\d{8}-\d{2}-(.+?)(?:-\d+)?$/i);
     if (match) {
-      generatedConceptSlugs.add(normalizeIdentity(match[1]));
+      const conceptSlug = normalizeIdentity(match[1]);
+      const familyKey = deriveFamilyKey(conceptSlug);
+      if (conceptSlug) generatedConceptSlugs.add(conceptSlug);
+      if (familyKey) generatedFamilyKeys.add(familyKey);
     }
   }
 
   return {
     generatedTitleKeys,
     generatedConceptSlugs,
+    generatedFamilyKeys,
   };
 }
 
@@ -254,6 +265,7 @@ function buildAdaptiveIdeaPool() {
 
         generated.push({
           slug: `adaptive-${categorySlug}-${topicSlug}-${formula.slug}`,
+          familyKey: `adaptive-${categorySlug}-${topicSlug}`,
           title: `${topic} ${formula.titleSuffix}`,
           description: `${formula.descriptionLead} ${topic.toLowerCase()} with a lightweight model.`,
           category,
@@ -277,7 +289,7 @@ function rotateArray(values, offset) {
   return [...values.slice(normalizedOffset), ...values.slice(0, normalizedOffset)];
 }
 
-function buildFallbackSpecFromSeed(seed, index, usedTitleKeys, usedConceptSlugs) {
+function buildFallbackSpecFromSeed(seed, index, usedTitleKeys, usedConceptSlugs, usedFamilyKeys) {
   const categories = Object.keys(adaptiveTopicMap).sort((a, b) => a.localeCompare(b));
   if (categories.length === 0) {
     throw new Error("No fallback categories are available.");
@@ -294,10 +306,11 @@ function buildFallbackSpecFromSeed(seed, index, usedTitleKeys, usedConceptSlugs)
     const baseTitle = `${topic} ${formula.titleSuffix}`;
     const title = variant === 1 ? baseTitle : `${baseTitle} ${variant}`;
     const slug = slugify(`fallback-${category}-${topic}-${formula.slug}-${variant}`);
+    const familyKey = slugify(`fallback-${category}-${topic}-${variant}`);
 
     const titleKey = normalizeIdentity(title);
     const slugKey = normalizeIdentity(slug);
-    if (usedTitleKeys.has(titleKey) || usedConceptSlugs.has(slugKey)) {
+    if (usedTitleKeys.has(titleKey) || usedConceptSlugs.has(slugKey) || usedFamilyKeys.has(familyKey)) {
       attempt += 1;
       continue;
     }
@@ -307,6 +320,7 @@ function buildFallbackSpecFromSeed(seed, index, usedTitleKeys, usedConceptSlugs)
       title,
       description: `${formula.descriptionLead} ${topic.toLowerCase()} with an adaptive fallback idea model.`,
       category,
+      familyKey,
       inputLabel: adaptiveInputLabels[category] || "Current value",
       outputLabel: formula.outputLabel,
       expression: formula.expression,
@@ -324,23 +338,29 @@ function selectDiverseSpecs(allSpecs, requestedCount, seed, existingIdentities) 
 
   const usedTitleKeys = new Set(existingIdentities?.generatedTitleKeys || []);
   const usedConceptSlugs = new Set(existingIdentities?.generatedConceptSlugs || []);
+  const usedFamilyKeys = new Set(existingIdentities?.generatedFamilyKeys || []);
   const localTitleKeys = new Set();
   const localSlugKeys = new Set();
+  const localFamilyKeys = new Set();
   const uniqueSpecs = [];
 
   for (const spec of allSpecs) {
     const titleKey = normalizeIdentity(spec.title);
     const conceptSlug = normalizeIdentity(spec.slug || spec.title);
-    if (!titleKey || !conceptSlug) continue;
+    const familyKey = normalizeIdentity(spec.familyKey || deriveFamilyKey(spec.slug || spec.title));
+    if (!titleKey || !conceptSlug || !familyKey) continue;
 
     if (usedTitleKeys.has(titleKey) || usedConceptSlugs.has(conceptSlug)) continue;
-    if (localTitleKeys.has(titleKey) || localSlugKeys.has(conceptSlug)) continue;
+    if (usedFamilyKeys.has(familyKey)) continue;
+    if (localTitleKeys.has(titleKey) || localSlugKeys.has(conceptSlug) || localFamilyKeys.has(familyKey)) continue;
 
     localTitleKeys.add(titleKey);
     localSlugKeys.add(conceptSlug);
+    localFamilyKeys.add(familyKey);
     uniqueSpecs.push({
       ...spec,
       slug: conceptSlug,
+      familyKey,
     });
   }
 
@@ -357,12 +377,14 @@ function selectDiverseSpecs(allSpecs, requestedCount, seed, existingIdentities) 
   if (categoryNames.length === 0) {
     const fallbackOnly = [];
     while (fallbackOnly.length < requestedCount) {
-      const fallbackSpec = buildFallbackSpecFromSeed(seed, fallbackOnly.length, usedTitleKeys, usedConceptSlugs);
+      const fallbackSpec = buildFallbackSpecFromSeed(seed, fallbackOnly.length, usedTitleKeys, usedConceptSlugs, usedFamilyKeys);
       const titleKey = normalizeIdentity(fallbackSpec.title);
       const conceptSlug = normalizeIdentity(fallbackSpec.slug);
+      const familyKey = normalizeIdentity(fallbackSpec.familyKey || deriveFamilyKey(fallbackSpec.slug || fallbackSpec.title));
       fallbackOnly.push(fallbackSpec);
       usedTitleKeys.add(titleKey);
       usedConceptSlugs.add(conceptSlug);
+      usedFamilyKeys.add(familyKey);
     }
 
     return fallbackOnly;
@@ -389,14 +411,19 @@ function selectDiverseSpecs(allSpecs, requestedCount, seed, existingIdentities) 
       const nextSpec = queue.specs.shift();
       const titleKey = normalizeIdentity(nextSpec.title);
       const conceptSlug = normalizeIdentity(nextSpec.slug);
+      const familyKey = normalizeIdentity(nextSpec.familyKey || deriveFamilyKey(nextSpec.slug || nextSpec.title));
 
       if (usedTitleKeys.has(titleKey) || usedConceptSlugs.has(conceptSlug)) {
+        continue;
+      }
+      if (usedFamilyKeys.has(familyKey)) {
         continue;
       }
 
       picked.push(nextSpec);
       usedTitleKeys.add(titleKey);
       usedConceptSlugs.add(conceptSlug);
+      usedFamilyKeys.add(familyKey);
       progressed = true;
 
       if (picked.length >= requestedCount) break;
@@ -407,12 +434,14 @@ function selectDiverseSpecs(allSpecs, requestedCount, seed, existingIdentities) 
 
   if (picked.length < requestedCount) {
     while (picked.length < requestedCount) {
-      const fallbackSpec = buildFallbackSpecFromSeed(seed, picked.length, usedTitleKeys, usedConceptSlugs);
+      const fallbackSpec = buildFallbackSpecFromSeed(seed, picked.length, usedTitleKeys, usedConceptSlugs, usedFamilyKeys);
       const titleKey = normalizeIdentity(fallbackSpec.title);
       const conceptSlug = normalizeIdentity(fallbackSpec.slug);
+      const familyKey = normalizeIdentity(fallbackSpec.familyKey || deriveFamilyKey(fallbackSpec.slug || fallbackSpec.title));
       picked.push(fallbackSpec);
       usedTitleKeys.add(titleKey);
       usedConceptSlugs.add(conceptSlug);
+      usedFamilyKeys.add(familyKey);
     }
   }
 
