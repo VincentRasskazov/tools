@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require("fs");
+const fsPromises = require("fs/promises");
 const path = require("path");
 
 const repoRoot = process.cwd();
@@ -46,17 +47,17 @@ function extractTitleFromHtml(content) {
   return match ? match[1].trim() : "";
 }
 
-function walkToolFiles(dirPath) {
+// 🚀 UPGRADE: Async Directory Walking
+async function walkToolFilesAsync(dirPath) {
   const files = [];
-  const entries = fs.readdirSync(dirPath, { withFileTypes: true });
+  const entries = await fsPromises.readdir(dirPath, { withFileTypes: true });
 
   for (const entry of entries) {
     const absolutePath = path.join(dirPath, entry.name);
-    const relativePath = normalizePath(path.relative(toolsRoot, absolutePath));
-
+    
     if (entry.isDirectory()) {
       if (entry.name === "category-manifests") continue;
-      files.push(...walkToolFiles(absolutePath));
+      files.push(...(await walkToolFilesAsync(absolutePath)));
       continue;
     }
 
@@ -75,14 +76,9 @@ function ensureLeadingSlash(value) {
 
 function toProjectRelativeToolUrl(rawPath) {
   if (!rawPath) return "";
-
   const normalized = String(rawPath).trim().replace(/^\/+/, "");
   if (!normalized) return "";
-
-  if (normalized.startsWith("tools/")) {
-    return normalized;
-  }
-
+  if (normalized.startsWith("tools/")) return normalized;
   return `tools/${normalized}`;
 }
 
@@ -91,10 +87,11 @@ function inferUrlFromPath(filePath) {
   return `tools/${relative}`;
 }
 
-function updateReadmeToolCount(totalTools) {
+// 🚀 UPGRADE: Async Readme Updater
+async function updateReadmeToolCountAsync(totalTools) {
   if (!fs.existsSync(readmePath)) return;
 
-  const readme = fs.readFileSync(readmePath, "utf8");
+  const readme = await fsPromises.readFile(readmePath, "utf8");
   const exactLine = `A collection of ${Number(totalTools || 0).toLocaleString("en-US")} browser-based tools for developers, creators, and everyday tasks.`;
   const pattern = /^A collection of .* browser-based tools for developers, creators, and everyday tasks\.$/m;
 
@@ -102,43 +99,58 @@ function updateReadmeToolCount(totalTools) {
 
   const updated = readme.replace(pattern, exactLine);
   if (updated !== readme) {
-    fs.writeFileSync(readmePath, updated, "utf8");
+    await fsPromises.writeFile(readmePath, updated, "utf8");
   }
 }
 
-function buildIndex() {
+async function buildIndex() {
   if (!fs.existsSync(toolsRoot)) {
     throw new Error(`Tools directory not found: ${toolsRoot}`);
   }
 
-  const toolFiles = walkToolFiles(toolsRoot);
+  console.log("Gathering files...");
+  const toolFiles = await walkToolFilesAsync(toolsRoot);
   const categories = new Map();
 
-  for (const filePath of toolFiles) {
-    const content = fs.readFileSync(filePath, "utf8");
-    const frontmatter = extractFrontmatter(content);
+  console.log(`Processing ${toolFiles.length} files...`);
 
-    const title = extractField(frontmatter, "title") || extractTitleFromHtml(content) || path.basename(filePath, ".html");
-    const category = extractField(frontmatter, "category") || "Utility";
-    const description = extractField(frontmatter, "description") || "Free online tool for daily tasks.";
-    const permalink = ensureLeadingSlash(extractField(frontmatter, "permalink"));
-    const url = toProjectRelativeToolUrl(permalink) || inferUrlFromPath(filePath);
+  // 🚀 UPGRADE: Batch Processing to prevent Memory/CPU locks
+  const BATCH_SIZE = 100;
+  for (let i = 0; i < toolFiles.length; i += BATCH_SIZE) {
+    const batch = toolFiles.slice(i, i + BATCH_SIZE);
+    
+    await Promise.all(batch.map(async (filePath) => {
+      try {
+        const content = await fsPromises.readFile(filePath, "utf8");
+        const frontmatter = extractFrontmatter(content);
 
-    const slug = slugify(category);
-    if (!categories.has(slug)) {
-      categories.set(slug, {
-        name: category,
-        slug,
-        tools: [],
-      });
-    }
+        const title = extractField(frontmatter, "title") || extractTitleFromHtml(content) || path.basename(filePath, ".html");
+        const category = extractField(frontmatter, "category") || "Utility";
+        const description = extractField(frontmatter, "description") || "Free online tool for daily tasks.";
+        const permalink = ensureLeadingSlash(extractField(frontmatter, "permalink"));
+        const url = toProjectRelativeToolUrl(permalink) || inferUrlFromPath(filePath);
 
-    categories.get(slug).tools.push({
-      name: title,
-      url,
-      category,
-      description,
-    });
+        const slug = slugify(category);
+        
+        // Ensure category array exists
+        if (!categories.has(slug)) {
+          categories.set(slug, {
+            name: category,
+            slug,
+            tools: [],
+          });
+        }
+
+        categories.get(slug).tools.push({
+          name: title,
+          url,
+          category,
+          description,
+        });
+      } catch (err) {
+        console.error(`Failed to process ${filePath}:`, err.message);
+      }
+    }));
   }
 
   fs.mkdirSync(manifestsRoot, { recursive: true });
@@ -148,21 +160,21 @@ function buildIndex() {
 
   const sortedCategories = [...categories.values()].sort((a, b) => a.name.localeCompare(b.name));
 
+  // 🚀 UPGRADE: Async file writing
   for (const category of sortedCategories) {
     category.tools.sort((a, b) => a.name.localeCompare(b.name));
-
     const fileName = `${category.slug}.json`;
     const absolute = path.join(manifestsRoot, fileName);
-    fs.writeFileSync(absolute, JSON.stringify(category.tools, null, 2), "utf8");
+    await fsPromises.writeFile(absolute, JSON.stringify(category.tools, null, 2), "utf8");
     activeFileNames.add(fileName);
   }
 
   const allTools = sortedCategories.flatMap((category) => category.tools).sort((a, b) => a.name.localeCompare(b.name));
-  fs.writeFileSync(path.join(manifestsRoot, "all-tools.json"), JSON.stringify(allTools, null, 2), "utf8");
+  await fsPromises.writeFile(path.join(manifestsRoot, "all-tools.json"), JSON.stringify(allTools, null, 2), "utf8");
 
   for (const fileName of existing) {
     if (activeFileNames.has(fileName)) continue;
-    fs.unlinkSync(path.join(manifestsRoot, fileName));
+    await fsPromises.unlink(path.join(manifestsRoot, fileName));
   }
 
   const indexPayload = {
@@ -177,10 +189,10 @@ function buildIndex() {
     })),
   };
 
-  fs.writeFileSync(path.join(manifestsRoot, "index.json"), JSON.stringify(indexPayload, null, 2), "utf8");
-  updateReadmeToolCount(toolFiles.length);
+  await fsPromises.writeFile(path.join(manifestsRoot, "index.json"), JSON.stringify(indexPayload, null, 2), "utf8");
+  await updateReadmeToolCountAsync(toolFiles.length);
 
   console.log(`Built ${sortedCategories.length} category manifests for ${toolFiles.length} tools.`);
 }
 
-buildIndex();
+buildIndex().catch(console.error);
