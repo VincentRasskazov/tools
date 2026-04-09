@@ -2,7 +2,6 @@
 
 const fs = require("fs");
 const path = require("path");
-const { execSync } = require("child_process");
 
 const repoRoot = process.cwd();
 const toolsDir = path.join(repoRoot, "tools");
@@ -58,8 +57,8 @@ function cleanAiOutput(rawText) {
   return cleaned.trim();
 }
 
-// 🚀 LIMITLESS AI PROMPT: Allow games, analyzers, simulators, etc.
-function askCopilotForLimitlessTool(attempt, existingTools) {
+// 🚀 REAL API CALL: No more CLI hangs!
+async function askCopilotForLimitlessTool(attempt, existingTools, token) {
   const categories = ["Games", "Cybersecurity", "Productivity", "Developer", "Finance", "Data", "Health", "Writing", "Education", "Marketing"];
   const category = categories[Math.floor(Math.random() * categories.length)];
   
@@ -82,10 +81,33 @@ DESCRIPTION: [One sentence describing what it does]
 // Interactive JavaScript logic here
 </script>`;
 
-  console.log(`[Copilot CLI] Asking AI to invent a complex ${category} tool... (Attempt ${attempt})`);
+  console.log(`[API] Asking AI to invent a complex ${category} tool... (Attempt ${attempt})`);
   
   try {
-    const rawOutput = execSync(`gh copilot suggest -t general "${prompt}"`, { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] });
+    const response = await fetch("https://models.inference.ai.azure.com/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        model: "gpt-4o", // Uses the flagship model
+        messages: [
+          { role: "system", content: "You are a senior frontend developer." },
+          { role: "user", content: prompt }
+        ],
+        temperature: 0.8,
+        max_tokens: 3000
+      })
+    });
+
+    if (!response.ok) {
+        console.log(`[API Error] Status: ${response.status} - ${response.statusText}`);
+        return null;
+    }
+
+    const data = await response.json();
+    const rawOutput = data.choices[0].message.content;
     
     const cleanedOutput = cleanAiOutput(rawOutput);
     const parts = cleanedOutput.split("---");
@@ -93,7 +115,7 @@ DESCRIPTION: [One sentence describing what it does]
     if (parts.length < 2) return null; // AI didn't follow the format
 
     const meta = parts[0];
-    const toolBody = parts.slice(1).join("---").trim(); // Rejoin in case the AI used --- in its code
+    const toolBody = parts.slice(1).join("---").trim();
 
     const titleMatch = meta.match(/TITLE:\s*(.+)/i);
     const descMatch = meta.match(/DESCRIPTION:\s*(.+)/i);
@@ -108,7 +130,7 @@ DESCRIPTION: [One sentence describing what it does]
       toolBody: toolBody
     };
   } catch (error) {
-    console.log(`[Copilot CLI] AI generation failed.`);
+    console.log(`[API] Generation failed: ${error.message}`);
     return null;
   }
 }
@@ -130,7 +152,7 @@ title: ${toYamlString(title)}
 category: ${toYamlString(category)}
 description: ${toYamlString(description)}
 permalink: ${toYamlString(`/tools/${spec.fileName}`)}
-generated_by: ${toYamlString("copilot-cli-true-ai")}
+generated_by: ${toYamlString("api-true-ai")}
 generated_date: ${toYamlString(stamp)}
 generated_model: ${toYamlString(model)}
 ---
@@ -192,50 +214,60 @@ function writeOutput(name, value) {
   fs.appendFileSync(process.env.GITHUB_OUTPUT, `${name}=${String(value)}\n`, "utf8");
 }
 
-if (!fs.existsSync(toolsDir)) fs.mkdirSync(toolsDir, { recursive: true });
+// 🚀 Core execution wrapped in an async function to use fetch() natively
+async function main() {
+  if (!fs.existsSync(toolsDir)) fs.mkdirSync(toolsDir, { recursive: true });
 
-// 🚀 Kept at 5 by default so the AI doesn't time out the runner!
-const count = Number(parseArgValue("--count", "5")); 
-const requestedCount = Number.isFinite(count) && count > 0 ? Math.floor(count) : 5;
-const stamp = parseArgValue("--date", dateStampUtc(new Date()));
-const model = String(parseArgValue("--model", "gpt-4.1")); // This gets printed in the frontmatter
-const reasoning = String(parseArgValue("--reasoning", "standard"));
+  const count = Number(parseArgValue("--count", "5")); 
+  const requestedCount = Number.isFinite(count) && count > 0 ? Math.floor(count) : 5;
+  const stamp = parseArgValue("--date", dateStampUtc(new Date()));
+  const model = String(parseArgValue("--model", "gpt-4.1")); 
+  const reasoning = String(parseArgValue("--reasoning", "standard"));
 
-const existingToolNames = getExistingToolNames();
-const createdFiles = [];
-let consecutiveFailures = 0;
-
-console.log(`Starting Limitless AI Generation. Requested: ${requestedCount} complex tools.`);
-
-while (createdFiles.length < requestedCount && consecutiveFailures < 5) {
-  const spec = askCopilotForLimitlessTool(createdFiles.length + 1, existingToolNames);
-  
-  if (!spec) {
-    consecutiveFailures++;
-    continue;
+  const ghToken = process.env.GH_TOKEN;
+  if (!ghToken) {
+    console.error("FATAL: GH_TOKEN environment variable is missing.");
+    process.exit(1);
   }
-  
-  consecutiveFailures = 0; // Reset on success
-  
-  const ordinal = String(createdFiles.length + 1).padStart(2, "0");
-  const baseSlug = slugify(`daily-${stamp}-${ordinal}-${spec.slug}`);
-  const categorySlug = slugify(spec.category);
-  const categoryDir = path.join(toolsDir, categorySlug);
-  
-  spec.fileName = findUniqueFileInCategory(categorySlug, baseSlug);
-  const relativePath = `${categorySlug}/${spec.fileName}`;
 
-  fs.mkdirSync(categoryDir, { recursive: true });
-  
-  const content = renderLimitlessTool(spec, model, reasoning, stamp);
-  fs.writeFileSync(path.join(categoryDir, spec.fileName), content, "utf8");
+  const existingToolNames = getExistingToolNames();
+  const createdFiles = [];
+  let consecutiveFailures = 0;
 
-  existingToolNames.push(spec.title);
-  createdFiles.push(relativePath);
-  
-  console.log(`✅ Invented: ${spec.title} (${spec.category})`);
+  console.log(`Starting Limitless AI Generation via REST API. Requested: ${requestedCount} complex tools.`);
+
+  while (createdFiles.length < requestedCount && consecutiveFailures < 5) {
+    const spec = await askCopilotForLimitlessTool(createdFiles.length + 1, existingToolNames, ghToken);
+    
+    if (!spec) {
+      consecutiveFailures++;
+      continue;
+    }
+    
+    consecutiveFailures = 0; // Reset on success
+    
+    const ordinal = String(createdFiles.length + 1).padStart(2, "0");
+    const baseSlug = slugify(`daily-${stamp}-${ordinal}-${spec.slug}`);
+    const categorySlug = slugify(spec.category);
+    const categoryDir = path.join(toolsDir, categorySlug);
+    
+    spec.fileName = findUniqueFileInCategory(categorySlug, baseSlug);
+    const relativePath = `${categorySlug}/${spec.fileName}`;
+
+    fs.mkdirSync(categoryDir, { recursive: true });
+    
+    const content = renderLimitlessTool(spec, model, reasoning, stamp);
+    fs.writeFileSync(path.join(categoryDir, spec.fileName), content, "utf8");
+
+    existingToolNames.push(spec.title);
+    createdFiles.push(relativePath);
+    
+    console.log(`✅ Invented: ${spec.title} (${spec.category})`);
+  }
+
+  console.log(`\nCreated ${createdFiles.length} LIMITLESS AI tools.`);
+  writeOutput("created_count", createdFiles.length);
+  writeOutput("created_files", createdFiles.join(","));
 }
 
-console.log(`\nCreated ${createdFiles.length} LIMITLESS AI tools.`);
-writeOutput("created_count", createdFiles.length);
-writeOutput("created_files", createdFiles.join(","));
+main().catch(console.error);
