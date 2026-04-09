@@ -1,0 +1,195 @@
+---
+layout: null
+title: "CipherMaze Explorer"
+category: "Data"
+description: "Decode hidden messages while navigating a dynamic maze that generates puzzles based on cryptographic strings."
+permalink: "/tools/daily-20260409-08-ciphermaze-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260409"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CipherMaze Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Decode hidden messages while navigating a dynamic maze that generates puzzles based on cryptographic strings. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CipherMaze Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Decode hidden messages while navigating a dynamic maze that generates puzzles based on cryptographic strings. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CipherMaze Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Decode hidden messages while navigating a dynamic maze that generates puzzles based on cryptographic strings. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CipherMaze Explorer</h1>
+    <p class="seo-subtitle">Decode hidden messages while navigating a dynamic maze that generates puzzles based on cryptographic strings.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to bottom, #1a1a2e, #16213e);  
+  color: #fff;  
+  text-align: center;  
+  margin: 0;  
+  padding: 20px;  
+}  
+#tool-app {  
+  width: 80%;  
+  margin: 0 auto;  
+}  
+#maze-container {  
+  display: grid;  
+  grid-template-columns: repeat(10, 40px);  
+  gap: 5px;  
+  margin: 20px auto;  
+}  
+.cell {  
+  width: 40px;  
+  height: 40px;  
+  background-color: #0f3460;  
+  border: 1px solid #16213e;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  font-size: 12px;  
+  color: white;  
+  cursor: pointer;  
+}  
+.cell.start {  
+  background-color: #e94560;  
+}  
+.cell.end {  
+  background-color: #0f62fe;  
+}  
+.cell.path {  
+  background-color: #1a73e8;  
+}  
+#info {  
+  margin-top: 20px;  
+}  
+button {  
+  background-color: #e94560;  
+  border: none;  
+  color: white;  
+  padding: 10px 20px;  
+  font-size: 16px;  
+  cursor: pointer;  
+  border-radius: 5px;  
+}  
+button:hover {  
+  background-color: #d63550;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>CipherMaze Explorer</h1>  
+  <p>Navigate the maze and solve cryptographic puzzles to unlock paths. Reach the goal to win!</p>  
+  <div id="maze-container"></div>  
+  <div id="info"></div>  
+  <button id="restart-btn">Restart Game</button>  
+</div>  
+<script>  
+const mazeSize = 10;  
+const mazeContainer = document.getElementById("maze-container");  
+const infoDisplay = document.getElementById("info");  
+const restartBtn = document.getElementById("restart-btn");  
+let maze = [];  
+let playerPosition = { x: 0, y: 0 };  
+
+// Generate the maze with start and end points  
+const generateMaze = () => {  
+  maze = Array.from({ length: mazeSize }, () => Array(mazeSize).fill(0));  
+  maze[0][0] = "start";  
+  maze[mazeSize - 1][mazeSize - 1] = "end";  
+};  
+
+// Render the maze on the page  
+const renderMaze = () => {  
+  mazeContainer.innerHTML = "";  
+  maze.forEach((row, rowIndex) => {  
+    row.forEach((cell, colIndex) => {  
+      const div = document.createElement("div");  
+      div.classList.add("cell");  
+      if (cell === "start") div.classList.add("start");  
+      if (cell === "end") div.classList.add("end");  
+      if (cell === "path") div.classList.add("path");  
+      div.dataset.row = rowIndex;  
+      div.dataset.col = colIndex;  
+      div.innerText = cell === "path" || cell === "end" ? "" : "";  
+      div.onclick = () => handleCellClick(rowIndex, colIndex);  
+      mazeContainer.appendChild(div);  
+    });  
+  });  
+};  
+
+// Handle cell clicks and verify moves  
+const handleCellClick = (row, col) => {  
+  const distance = Math.abs(playerPosition.x - row) + Math.abs(playerPosition.y - col);  
+  if (distance === 1) {  
+    if (maze[row][col] === "end") {  
+      infoDisplay.innerHTML = "<strong>Congratulations! You solved the maze!</strong>";  
+    } else if (maze[row][col] === 0) {  
+      maze[playerPosition.x][playerPosition.y] = "path";  
+      playerPosition = { x: row, y: col };  
+      renderMaze();  
+      displayPuzzle(row, col);  
+    }  
+  }  
+};  
+
+// Display puzzle for the current cell  
+const displayPuzzle = (row, col) => {  
+  const cipherText = generateCipherText();  
+  infoDisplay.innerHTML = `Decode this string to proceed: <strong>${cipherText}</strong>`;  
+  const userAnswer = prompt("Enter decoded string: ");  
+  const decodedAnswer = decodeCipherText(cipherText);  
+  if (userAnswer === decodedAnswer) {  
+    infoDisplay.innerHTML = "<strong>Correct! Move forward!</strong>";  
+  } else {  
+    infoDisplay.innerHTML = "<strong>Incorrect! Try again.</strong>";  
+    maze[playerPosition.x][playerPosition.y] = 0;  
+    renderMaze();  
+  }  
+};  
+
+// Generate a random cipher text for puzzles  
+const generateCipherText = () => {  
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";  
+  return Array.from({ length: 5 }, () => chars[Math.floor(Math.random() * chars.length)]).join("");  
+};  
+
+// Decode cipher text (simple Caesar cipher, shift by 1)  
+const decodeCipherText = (cipherText) => {  
+  return cipherText  
+    .split("")  
+    .map((char) => String.fromCharCode(char.charCodeAt(0) - 1))  
+    .join("");  
+};  
+
+// Restart the game  
+restartBtn.onclick = () => {  
+  playerPosition = { x: 0, y: 0 };  
+  infoDisplay.innerHTML = "Navigate the maze by solving puzzles.";  
+  generateMaze();  
+  renderMaze();  
+};  
+
+// Initialize the game  
+generateMaze();  
+renderMaze();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

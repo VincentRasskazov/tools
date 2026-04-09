@@ -1,0 +1,168 @@
+---
+layout: null
+title: "Portfolio Galaxy Explorer"
+category: "Finance"
+description: "Navigate an interactive galaxy where each star represents an investment, allowing users to visualize portfolio diversification, risk levels, and sector relationships in a dynamic 3D space."
+permalink: "/tools/daily-20260409-04-portfolio-galaxy-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260409"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Galaxy Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate an interactive galaxy where each star represents an investment, allowing users to visualize portfolio diversification, risk levels, and sector relationships in a dynamic 3D space. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Portfolio Galaxy Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate an interactive galaxy where each star represents an investment, allowing users to visualize portfolio diversification, risk levels, and sector relationships in a dynamic 3D space. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Portfolio Galaxy Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate an interactive galaxy where each star represents an investment, allowing users to visualize portfolio diversification, risk levels, and sector relationships in a dynamic 3D space. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Portfolio Galaxy Explorer</h1>
+    <p class="seo-subtitle">Navigate an interactive galaxy where each star represents an investment, allowing users to visualize portfolio diversification, risk levels, and sector relationships in a dynamic 3D space.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  overflow: hidden;  
+  background: radial-gradient(circle, #000428, #004e92);  
+  color: #fff;  
+}  
+#tool-app {  
+  width: 100vw;  
+  height: 100vh;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  position: relative;  
+}  
+canvas {  
+  display: block;  
+}  
+#tooltip {  
+  position: absolute;  
+  background: rgba(0, 0, 0, 0.8);  
+  color: #fff;  
+  padding: 10px;  
+  border-radius: 5px;  
+  display: none;  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  
+}  
+</style>  
+<div id="tool-app">  
+  <canvas id="galaxyCanvas"></canvas>  
+  <div id="tooltip"></div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+
+const canvas = document.getElementById('galaxyCanvas');  
+const ctx = canvas.getContext('2d');  
+const tooltip = document.getElementById('tooltip');  
+
+canvas.width = window.innerWidth;  
+canvas.height = window.innerHeight;  
+
+// Mock investment data  
+const investments = [  
+  { name: 'Tech Inc.', value: 50000, risk: 'High', sector: 'Technology' },  
+  { name: 'Green Energy Co.', value: 30000, risk: 'Medium', sector: 'Energy' },  
+  { name: 'Safe Bonds Ltd.', value: 20000, risk: 'Low', sector: 'Finance' },  
+  { name: 'Retail Giant', value: 40000, risk: 'Medium', sector: 'Retail' },  
+  { name: 'Biotech Innovators', value: 25000, risk: 'High', sector: 'Health' },  
+];  
+
+const stars = [];  
+
+function createStars() {  
+  investments.forEach((investment, index) => {  
+    const star = {  
+      x: Math.random() * canvas.width,  
+      y: Math.random() * canvas.height,  
+      size: investment.value / 10000,  
+      color:  
+        investment.risk === 'High'  
+          ? 'rgba(255, 99, 71, 0.8)'  
+          : investment.risk === 'Medium'  
+          ? 'rgba(255, 215, 0, 0.8)'  
+          : 'rgba(144, 238, 144, 0.8)',  
+      data: investment,  
+    };  
+    stars.push(star);  
+  });  
+}  
+
+function drawStars() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  stars.forEach((star) => {  
+    ctx.beginPath();  
+    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);  
+    ctx.fillStyle = star.color;  
+    ctx.fill();  
+    ctx.closePath();  
+  });  
+}  
+
+function handleMouseMove(event) {  
+  const mouseX = event.clientX;  
+  const mouseY = event.clientY;  
+
+  let hoveredStar = null;  
+
+  stars.forEach((star) => {  
+    const distance = Math.sqrt(  
+      (mouseX - star.x) ** 2 + (mouseY - star.y) ** 2  
+    );  
+    if (distance < star.size) {  
+      hoveredStar = star;  
+    }  
+  });  
+
+  if (hoveredStar) {  
+    tooltip.style.display = 'block';  
+    tooltip.style.left = `${mouseX + 15}px`;  
+    tooltip.style.top = `${mouseY + 15}px`;  
+    tooltip.innerHTML = `  
+      <strong>${hoveredStar.data.name}</strong><br>  
+      Value: $${hoveredStar.data.value}<br>  
+      Risk: ${hoveredStar.data.risk}<br>  
+      Sector: ${hoveredStar.data.sector}  
+    `;  
+  } else {  
+    tooltip.style.display = 'none';  
+  }  
+}  
+
+createStars();  
+drawStars();  
+canvas.addEventListener('mousemove', handleMouseMove);  
+
+window.addEventListener('resize', () => {  
+  canvas.width = window.innerWidth;  
+  canvas.height = window.innerHeight;  
+  stars.length = 0;  
+  createStars();  
+  drawStars();  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

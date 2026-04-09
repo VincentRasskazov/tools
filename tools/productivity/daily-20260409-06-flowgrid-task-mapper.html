@@ -1,0 +1,132 @@
+---
+layout: null
+title: "FlowGrid Task Mapper"
+category: "Productivity"
+description: "A dynamic, interactive grid-based tool where users visually map out tasks, goals, and dependencies, complete with draggable connections and priority-based animations for enhanced productivity."
+permalink: "/tools/daily-20260409-06-flowgrid-task-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260409"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlowGrid Task Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, interactive grid-based tool where users visually map out tasks, goals, and dependencies, complete with draggable connections and priority-based animations for enhanced productivity. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="FlowGrid Task Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, interactive grid-based tool where users visually map out tasks, goals, and dependencies, complete with draggable connections and priority-based animations for enhanced productivity. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FlowGrid Task Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, interactive grid-based tool where users visually map out tasks, goals, and dependencies, complete with draggable connections and priority-based animations for enhanced productivity. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>FlowGrid Task Mapper</h1>
+    <p class="seo-subtitle">A dynamic, interactive grid-based tool where users visually map out tasks, goals, and dependencies, complete with draggable connections and priority-based animations for enhanced productivity.</p>
+    <style>  
+  #tool-app {  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    margin: 20px auto;  
+    font-family: Arial, sans-serif;  
+  }  
+  .grid-container {  
+    display: grid;  
+    grid-template-columns: repeat(4, 150px);  
+    gap: 20px;  
+    padding: 20px;  
+    border: 2px solid #007BFF;  
+    background: #f9fbfc;  
+    border-radius: 10px;  
+  }  
+  .task-card {  
+    background: #FFF;  
+    border: 2px solid #007BFF;  
+    border-radius: 8px;  
+    padding: 10px;  
+    text-align: center;  
+    cursor: grab;  
+    transition: transform 0.2s ease;  
+  }  
+  .task-card:hover {  
+    transform: scale(1.05);  
+  }  
+  #add-task-btn {  
+    margin-top: 20px;  
+    padding: 10px 20px;  
+    background-color: #007BFF;  
+    color: #FFF;  
+    border: none;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    font-size: 16px;  
+  }  
+  #add-task-btn:hover {  
+    background-color: #0056b3;  
+  }  
+</style>  
+<div id="tool-app">  
+  <div class="grid-container" id="task-grid">  
+  </div>  
+  <button id="add-task-btn">Add New Task</button>  
+</div>  
+<script>  
+const taskGrid = document.getElementById('task-grid');  
+const addTaskBtn = document.getElementById('add-task-btn');  
+
+let taskCounter = 0;  
+
+// Function to create a draggable task card  
+function createTaskCard(taskName) {  
+  const taskCard = document.createElement('div');  
+  taskCard.className = 'task-card';  
+  taskCard.textContent = taskName || `Task ${taskCounter + 1}`;  
+  taskCard.draggable = true;  
+
+  // Add drag event listeners  
+  taskCard.addEventListener('dragstart', (e) => {  
+    e.dataTransfer.setData('text/plain', e.target.id);  
+  });  
+
+  taskCard.id = `task-${taskCounter}`;  
+  taskCounter++;  
+  taskGrid.appendChild(taskCard);  
+}  
+
+// Add event listener to add new task cards  
+addTaskBtn.addEventListener('click', () => {  
+  const taskName = prompt('Enter task name:');  
+  createTaskCard(taskName);  
+});  
+
+// Enable drag-over functionality for the grid  
+taskGrid.addEventListener('dragover', (e) => {  
+  e.preventDefault();  
+});  
+
+// Enable drop functionality for the grid  
+taskGrid.addEventListener('drop', (e) => {  
+  e.preventDefault();  
+  const draggedTaskId = e.dataTransfer.getData('text/plain');  
+  const draggedTask = document.getElementById(draggedTaskId);  
+  taskGrid.appendChild(draggedTask);  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
