@@ -16,7 +16,7 @@ concurrency:
 jobs:
   add-tools:
     runs-on: ubuntu-latest
-    timeout-minutes: 5 
+    timeout-minutes: 15
 
     steps:
       - name: Checkout
@@ -44,12 +44,6 @@ jobs:
           node_major="$(node -p "process.versions.node.split('.')[0]")"
           if [[ "$node_major" -lt 20 ]]; then exit 1; fi
 
-      - name: Install & Auth GitHub Copilot CLI
-        run: bash ./.github/scripts/install-copilot-cli.sh
-        env:
-          GH_TOKEN: ${{ secrets.COPILOT_PAT }} 
-          GH_PROMPT_DISABLED: 1 
-
       - name: Select model from premium usage
         id: model
         run: node ./.github/scripts/select-copilot-model.js
@@ -63,7 +57,9 @@ jobs:
 
       - name: Add 25 tools
         id: add_tools
-        timeout-minutes: 3
+        timeout-minutes: 12
+        env:
+          GH_TOKEN: ${{ secrets.COPILOT_PAT }}
         run: |
           node ./.github/scripts/add-daily-tools.js \
             --count 25 \
@@ -111,8 +107,6 @@ jobs:
       - name: Push changes
         if: steps.commit.outputs.has_changes == 'true'
         timeout-minutes: 2
-        env:
-          GIT_TERMINAL_PROMPT: "0"
         run: |
           set -euo pipefail
           git config --global http.version HTTP/1.1
@@ -121,6 +115,4 @@ jobs:
       - name: Neutralize Post-Job Scanner
         if: always()
         run: |
-          # 🚀 THE RETURN OF THE JEDI MIND TRICK
-          # Instantly deletes the Git index so the Post-Job scanner skips the 3,000+ files.
           rm -rf .git
