@@ -1,0 +1,97 @@
+---
+layout: null
+title: "Data Web: Interactive Relationship Mapper"
+category: "Data"
+description: "Visualize and interactively explore complex relationships between data points in a dynamic, graph-based environment."
+permalink: "/tools/daily-20260409-19-data-web-interactive-relationship-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260409"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Web: Interactive Relationship Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize and interactively explore complex relationships between data points in a dynamic, graph-based environment. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Web: Interactive Relationship Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize and interactively explore complex relationships between data points in a dynamic, graph-based environment. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Web: Interactive Relationship Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize and interactively explore complex relationships between data points in a dynamic, graph-based environment. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Web: Interactive Relationship Mapper</h1>
+    <p class="seo-subtitle">Visualize and interactively explore complex relationships between data points in a dynamic, graph-based environment.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: #f6f8fa; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }  
+  #tool-app { width: 80%; height: 80%; border: 2px solid #ccc; border-radius: 10px; background: #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.1); position: relative; overflow: hidden; }  
+  .node { position: absolute; width: 100px; height: 100px; background: #007bff; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.2s; }  
+  .node:hover { transform: scale(1.1); box-shadow: 0 2px 6px rgba(0,0,0,0.3); }  
+  .connection { position: absolute; background: #ddd; height: 2px; transform-origin: 0 50%; pointer-events: none; }  
+</style>  
+<div id="tool-app"></div>  
+<script>  
+const app = document.getElementById('tool-app');  
+const nodes = [];  
+
+// Helper to create a node  
+const createNode = (id, x, y, label) => {  
+  const node = document.createElement('div');  
+  node.className = 'node';  
+  node.style.left = `${x}px`;  
+  node.style.top = `${y}px`;  
+  node.innerHTML = `<span>${label}</span>`;  
+  node.dataset.id = id;  
+  app.appendChild(node);  
+  return node;  
+};  
+
+// Helper to create a connection  
+const createConnection = (x1, y1, x2, y2) => {  
+  const connection = document.createElement('div');  
+  connection.className = 'connection';  
+  const distance = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);  
+  connection.style.width = `${distance}px`;  
+  const angle = Math.atan2(y2 - y1, x2 - x1) * (180 / Math.PI);  
+  connection.style.transform = `translate(${x1}px, ${y1}px) rotate(${angle}deg)`;  
+  app.appendChild(connection);  
+};  
+
+// Generate initial nodes and connections  
+nodes.push(createNode(1, 100, 100, 'A'));  
+nodes.push(createNode(2, 300, 150, 'B'));  
+nodes.push(createNode(3, 200, 300, 'C'));  
+createConnection(100 + 50, 100 + 50, 300 + 50, 150 + 50);  
+createConnection(300 + 50, 150 + 50, 200 + 50, 300 + 50);  
+createConnection(200 + 50, 300 + 50, 100 + 50, 100 + 50);  
+
+// Click to add new node  
+app.addEventListener('click', (e) => {  
+  if (e.target === app) {  
+    const id = nodes.length + 1;  
+    const node = createNode(id, e.clientX - 50, e.clientY - 50, String.fromCharCode(64 + id));  
+    nodes.push(node);  
+    // Randomly connect to an existing node  
+    const randomNode = nodes[Math.floor(Math.random() * nodes.length)];  
+    createConnection(e.clientX, e.clientY, parseInt(randomNode.style.left) + 50, parseInt(randomNode.style.top) + 50);  
+  }  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

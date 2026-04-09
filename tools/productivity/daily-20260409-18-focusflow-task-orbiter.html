@@ -1,0 +1,165 @@
+---
+layout: null
+title: "FocusFlow Task Orbiter"
+category: "Productivity"
+description: "A mesmerizing tool that helps you visualize and manage tasks as orbiting celestial bodies, where their speed and proximity to the center reflect priority and urgency."
+permalink: "/tools/daily-20260409-18-focusflow-task-orbiter.html"
+generated_by: "api-true-ai"
+generated_date: "20260409"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusFlow Task Orbiter | Free Online Interactive Tool</title>
+  <meta name="description" content="A mesmerizing tool that helps you visualize and manage tasks as orbiting celestial bodies, where their speed and proximity to the center reflect priority and urgency. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="FocusFlow Task Orbiter | Free Online Interactive Tool">
+  <meta property="og:description" content="A mesmerizing tool that helps you visualize and manage tasks as orbiting celestial bodies, where their speed and proximity to the center reflect priority and urgency. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FocusFlow Task Orbiter | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A mesmerizing tool that helps you visualize and manage tasks as orbiting celestial bodies, where their speed and proximity to the center reflect priority and urgency. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>FocusFlow Task Orbiter</h1>
+    <p class="seo-subtitle">A mesmerizing tool that helps you visualize and manage tasks as orbiting celestial bodies, where their speed and proximity to the center reflect priority and urgency.</p>
+    <style>  
+body {  
+  font-family: 'Arial', sans-serif;  
+  background: radial-gradient(circle, #1e1e2f, #121216);  
+  margin: 0;  
+  overflow: hidden;  
+  color: #fff;  
+}  
+#tool-app {  
+  width: 100vw;  
+  height: 100vh;  
+  position: relative;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+}  
+canvas {  
+  display: block;  
+}  
+#task-form {  
+  position: absolute;  
+  top: 10px;  
+  left: 10px;  
+  background: rgba(0, 0, 0, 0.8);  
+  padding: 15px;  
+  border-radius: 8px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);  
+}  
+#task-form input, #task-form select {  
+  margin-bottom: 10px;  
+  padding: 8px;  
+  border: none;  
+  border-radius: 5px;  
+  background: #2a2a3b;  
+  color: #fff;  
+}  
+#task-form button {  
+  padding: 10px;  
+  background: #5a5adb;  
+  border: none;  
+  border-radius: 5px;  
+  color: #fff;  
+  cursor: pointer;  
+}  
+#task-form button:hover {  
+  background: #7878ff;  
+}  
+</style>  
+<div id="tool-app">  
+  <canvas id="orbitCanvas"></canvas>  
+  <div id="task-form">  
+    <input id="task-name" type="text" placeholder="Task Name">  
+    <input id="task-priority" type="number" max="10" min="1" placeholder="Priority (1-10)">  
+    <input id="task-urgency" type="number" max="10" min="1" placeholder="Urgency (1-10)">  
+    <button id="add-task">Add Task</button>  
+  </div>  
+</div>  
+<script>  
+const canvas = document.getElementById('orbitCanvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = window.innerWidth;  
+canvas.height = window.innerHeight;  
+
+const centerX = canvas.width / 2;  
+const centerY = canvas.height / 2;  
+
+let tasks = [];  
+
+function addTask(name, priority, urgency) {  
+  tasks.push({  
+    name,  
+    priority: parseInt(priority, 10),  
+    urgency: parseInt(urgency, 10),  
+    angle: Math.random() * Math.PI * 2  
+  });  
+}  
+
+document.getElementById('add-task').addEventListener('click', () => {  
+  const name = document.getElementById('task-name').value;  
+  const priority = document.getElementById('task-priority').value;  
+  const urgency = document.getElementById('task-urgency').value;  
+  if (name && priority && urgency) {  
+    addTask(name, priority, urgency);  
+    document.getElementById('task-name').value = '';  
+    document.getElementById('task-priority').value = '';  
+    document.getElementById('task-urgency').value = '';  
+  }  
+});  
+
+function drawTask(task, index) {  
+  const distance = 100 + (10 - task.priority) * 30;  
+  const speed = task.urgency * 0.01;  
+  task.angle += speed;  
+
+  const x = centerX + Math.cos(task.angle) * distance;  
+  const y = centerY + Math.sin(task.angle) * distance;  
+
+  // Draw orbit  
+  ctx.beginPath();  
+  ctx.arc(centerX, centerY, distance, 0, Math.PI * 2);  
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';  
+  ctx.stroke();  
+
+  // Draw task  
+  ctx.beginPath();  
+  ctx.arc(x, y, 10, 0, Math.PI * 2);  
+  ctx.fillStyle = '#5a5adb';  
+  ctx.fill();  
+
+  // Draw task name  
+  ctx.font = '12px Arial';  
+  ctx.fillStyle = '#fff';  
+  ctx.fillText(task.name, x + 15, y + 5);  
+}  
+
+function loop() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  tasks.forEach(drawTask);  
+  requestAnimationFrame(loop);  
+}  
+
+loop();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
