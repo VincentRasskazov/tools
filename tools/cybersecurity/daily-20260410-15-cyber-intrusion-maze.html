@@ -1,0 +1,184 @@
+---
+layout: null
+title: "Cyber Intrusion Maze"
+category: "Cybersecurity"
+description: "A gamified single-page tool where users navigate a 3D maze to identify and block simulated cyber threats while learning about cybersecurity concepts interactively."
+permalink: "/tools/daily-20260410-15-cyber-intrusion-maze.html"
+generated_by: "api-true-ai"
+generated_date: "20260410"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyber Intrusion Maze | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified single-page tool where users navigate a 3D maze to identify and block simulated cyber threats while learning about cybersecurity concepts interactively. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Cyber Intrusion Maze | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified single-page tool where users navigate a 3D maze to identify and block simulated cyber threats while learning about cybersecurity concepts interactively. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cyber Intrusion Maze | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified single-page tool where users navigate a 3D maze to identify and block simulated cyber threats while learning about cybersecurity concepts interactively. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Cyber Intrusion Maze</h1>
+    <p class="seo-subtitle">A gamified single-page tool where users navigate a 3D maze to identify and block simulated cyber threats while learning about cybersecurity concepts interactively.</p>
+    ```html  
+<style>  
+  body {  
+    font-family: Arial, sans-serif;  
+    margin: 0;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+    background: linear-gradient(135deg, #1e1e2e, #3b3b5b);  
+    color: white;  
+  }  
+  #tool-app {  
+    width: 80%;  
+    height: 80%;  
+    position: relative;  
+    border: 2px solid #444;  
+    background: #21212e;  
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);  
+    overflow: hidden;  
+  }  
+  .maze-grid {  
+    display: grid;  
+    grid-template-columns: repeat(10, 1fr);  
+    grid-gap: 2px;  
+    height: 100%;  
+  }  
+  .cell {  
+    background: #2b2b3a;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    font-size: 14px;  
+    border-radius: 4px;  
+  }  
+  .cell.player {  
+    background: #4caf50;  
+  }  
+  .cell.threat {  
+    background: #f44336;  
+  }  
+  .cell.safe {  
+    background: #2196f3;  
+  }  
+  #instructions {  
+    position: absolute;  
+    bottom: 10px;  
+    left: 50%;  
+    transform: translateX(-50%);  
+    background: rgba(0, 0, 0, 0.7);  
+    padding: 10px 20px;  
+    border-radius: 5px;  
+    font-size: 14px;  
+  }  
+</style>  
+<div id="tool-app">  
+  <div class="maze-grid" id="maze"></div>  
+  <div id="instructions">  
+    Use arrow keys to move your agent (green) through the maze. Reach the blue safe point while avoiding red threats!  
+  </div>  
+</div>  
+<script>  
+const gridSize = 10;  
+const maze = document.getElementById('maze');  
+const playerPosition = { x: 0, y: 0 };  
+const safePosition = { x: gridSize - 1, y: gridSize - 1 };  
+const threats = generateRandomThreats(10);  
+
+function generateRandomThreats(count) {  
+  const threatList = [];  
+  while (threatList.length < count) {  
+    const x = Math.floor(Math.random() * gridSize);  
+    const y = Math.floor(Math.random() * gridSize);  
+    if ((x !== 0 || y !== 0) && (x !== safePosition.x || y !== safePosition.y) && !threatList.some(t => t.x === x && t.y === y)) {  
+      threatList.push({ x, y });  
+    }  
+  }  
+  return threatList;  
+}  
+
+function drawMaze() {  
+  maze.innerHTML = '';  
+  for (let y = 0; y < gridSize; y++) {  
+    for (let x = 0; x < gridSize; x++) {  
+      const cell = document.createElement('div');  
+      cell.classList.add('cell');  
+      if (x === playerPosition.x && y === playerPosition.y) {  
+        cell.classList.add('player');  
+      } else if (x === safePosition.x && y === safePosition.y) {  
+        cell.classList.add('safe');  
+      } else if (threats.some(t => t.x === x && t.y === y)) {  
+        cell.classList.add('threat');  
+      }  
+      maze.appendChild(cell);  
+    }  
+  }  
+}  
+
+function movePlayer(dx, dy) {  
+  const newX = playerPosition.x + dx;  
+  const newY = playerPosition.y + dy;  
+  if (newX >= 0 && newX < gridSize && newY >= 0 && newY < gridSize) {  
+    playerPosition.x = newX;  
+    playerPosition.y = newY;  
+    if (threats.some(t => t.x === playerPosition.x && t.y === playerPosition.y)) {  
+      alert('Game Over! You hit a threat!');  
+      resetGame();  
+    } else if (playerPosition.x === safePosition.x && playerPosition.y === safePosition.y) {  
+      alert('Congratulations! You reached the safe point!');  
+      resetGame();  
+    } else {  
+      drawMaze();  
+    }  
+  }  
+}  
+
+function resetGame() {  
+  playerPosition.x = 0;  
+  playerPosition.y = 0;  
+  threats.splice(0, threats.length, ...generateRandomThreats(10));  
+  drawMaze();  
+}  
+
+document.addEventListener('keydown', (e) => {  
+  switch (e.key) {  
+    case 'ArrowUp':  
+      movePlayer(0, -1);  
+      break;  
+    case 'ArrowDown':  
+      movePlayer(0, 1);  
+      break;  
+    case 'ArrowLeft':  
+      movePlayer(-1, 0);  
+      break;  
+    case 'ArrowRight':  
+      movePlayer(1, 0);  
+      break;  
+  }  
+});  
+
+drawMaze();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,149 @@
+---
+layout: null
+title: "Regex Adventure: The Pattern Quest"
+category: "Developer"
+description: "A gamified tool where developers solve regex challenges to defeat monsters, unlocking levels and learning patterns along the way."
+permalink: "/tools/daily-20260410-10-regex-adventure-the-pattern-quest.html"
+generated_by: "api-true-ai"
+generated_date: "20260410"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Adventure: The Pattern Quest | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool where developers solve regex challenges to defeat monsters, unlocking levels and learning patterns along the way. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Regex Adventure: The Pattern Quest | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool where developers solve regex challenges to defeat monsters, unlocking levels and learning patterns along the way. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Regex Adventure: The Pattern Quest | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool where developers solve regex challenges to defeat monsters, unlocking levels and learning patterns along the way. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Regex Adventure: The Pattern Quest</h1>
+    <p class="seo-subtitle">A gamified tool where developers solve regex challenges to defeat monsters, unlocking levels and learning patterns along the way.</p>
+    <style>  
+body {  
+  margin: 0;  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(120deg, #1a1a2e, #16213e);  
+  color: #e4e4e4;  
+}  
+#tool-app {  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  height: 100vh;  
+  text-align: center;  
+}  
+#game-header {  
+  margin-bottom: 20px;  
+  font-size: 24px;  
+  font-weight: bold;  
+}  
+.monster {  
+  margin-top: 20px;  
+  width: 300px;  
+  height: 300px;  
+  background: radial-gradient(circle at center, #dd2222, #8b0000);  
+  border-radius: 50%;  
+  animation: pulse 1.5s infinite;  
+}  
+@keyframes pulse {  
+  0%, 100% {  
+    transform: scale(1);  
+  }  
+  50% {  
+    transform: scale(1.1);  
+  }  
+}  
+#challenge {  
+  margin: 20px 0;  
+}  
+input {  
+  padding: 10px;  
+  border-radius: 5px;  
+  border: none;  
+  margin-bottom: 10px;  
+}  
+button {  
+  padding: 10px 20px;  
+  border: none;  
+  border-radius: 5px;  
+  background-color: #4caf50;  
+  color: white;  
+  cursor: pointer;  
+}  
+button:hover {  
+  background-color: #45a049;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="game-header">Regex Adventure: The Pattern Quest</div>  
+  <div class="monster"></div>  
+  <div id="challenge"><strong>Challenge:</strong> Match all words containing "cat"</div>  
+  <input id="regex-input" type="text" placeholder="Enter your regex pattern here"></input>  
+  <button onclick="testRegex()">Defeat Monster</button>  
+  <div id="result"></div>  
+</div>  
+<script>  
+const challenges = [  
+  { text: 'Match all words containing "cat"', stringToTest: 'The cat sat on a cathedral.', expected: ['cat', 'cathedral'] },  
+  { text: 'Match all digits', stringToTest: 'Phone 123-456-7890 and zip 90210.', expected: ['123', '456', '7890', '90210'] },  
+  { text: 'Match all words starting with "pre"', stringToTest: 'Prepare the preview presentation.', expected: ['Prepare', 'preview', 'presentation'] },  
+];  
+let currentChallengeIndex = 0;  
+
+function testRegex() {  
+  const input = document.getElementById('regex-input').value;  
+  const resultDiv = document.getElementById('result');  
+  const challenge = challenges[currentChallengeIndex];  
+
+  try {  
+    const regex = new RegExp(input, 'g');  
+    const matches = challenge.stringToTest.match(regex);  
+    if (JSON.stringify(matches) === JSON.stringify(challenge.expected)) {  
+      resultDiv.innerText = 'Correct! You defeated the monster!';  
+      currentChallengeIndex++;  
+      if (currentChallengeIndex < challenges.length) {  
+        loadNextChallenge();  
+      } else {  
+        resultDiv.innerText += ' You conquered the Regex Quest!';  
+      }  
+    } else {  
+      resultDiv.innerText = `Incorrect. Try again! Hint: You need ${challenge.expected.length} matches.`;  
+    }  
+  } catch (e) {  
+    resultDiv.innerText = 'Invalid Regex Pattern!';  
+  }  
+}  
+
+function loadNextChallenge() {  
+  const challengeDiv = document.getElementById('challenge');  
+  const monsterDiv = document.querySelector('.monster');  
+
+  challengeDiv.innerHTML = `<strong>Challenge:</strong> ${challenges[currentChallengeIndex].text}`;  
+  monsterDiv.style.background = `radial-gradient(circle at center, #${Math.floor(Math.random()*16777215).toString(16)}, #8b0000)`;  
+}  
+
+loadNextChallenge();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
