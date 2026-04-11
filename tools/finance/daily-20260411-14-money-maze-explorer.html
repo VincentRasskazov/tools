@@ -1,0 +1,233 @@
+---
+layout: null
+title: "Money Maze Explorer"
+category: "Finance"
+description: "Navigate through a gamified maze where each turn represents a financial decision, showcasing the impact of your choices on long-term financial health."
+permalink: "/tools/daily-20260411-14-money-maze-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260411"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Money Maze Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate through a gamified maze where each turn represents a financial decision, showcasing the impact of your choices on long-term financial health. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Money Maze Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate through a gamified maze where each turn represents a financial decision, showcasing the impact of your choices on long-term financial health. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Money Maze Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate through a gamified maze where each turn represents a financial decision, showcasing the impact of your choices on long-term financial health. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Money Maze Explorer</h1>
+    <p class="seo-subtitle">Navigate through a gamified maze where each turn represents a financial decision, showcasing the impact of your choices on long-term financial health.</p>
+    <style>  
+  body {  
+    font-family: Arial, sans-serif;  
+    margin: 0;  
+    padding: 0;  
+    background: #f0f4f8;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+  }  
+  #tool-app {  
+    width: 80vw;  
+    height: 80vh;  
+    background: white;  
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  
+    border-radius: 12px;  
+    display: flex;  
+    flex-direction: column;  
+    overflow: hidden;  
+  }  
+  #maze {  
+    flex: 1;  
+    display: grid;  
+    grid-template-columns: repeat(10, 1fr);  
+    grid-template-rows: repeat(10, 1fr);  
+    gap: 2px;  
+    background: #e4e7eb;  
+  }  
+  .cell {  
+    background: #ffffff;  
+    border: 1px solid #ccc;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    font-size: 14px;  
+    font-weight: bold;  
+    transition: background 0.3s;  
+  }  
+  .cell.path {  
+    background: #c6f6d5;  
+  }  
+  .cell.start {  
+    background: #63b3ed;  
+    color: white;  
+  }  
+  .cell.end {  
+    background: #f56565;  
+    color: white;  
+  }  
+  #info-panel {  
+    padding: 10px;  
+    background: #edf2f7;  
+    border-top: 1px solid #cbd5e0;  
+    display: flex;  
+    justify-content: space-between;  
+    align-items: center;  
+  }  
+  .button {  
+    background: #5a67d8;  
+    color: white;  
+    padding: 8px 16px;  
+    border: none;  
+    border-radius: 4px;  
+    cursor: pointer;  
+    font-size: 16px;  
+  }  
+  .button:disabled {  
+    background: #a0aec0;  
+  }  
+</style>  
+<div id="tool-app">  
+  <div id="maze"></div>  
+  <div id="info-panel">  
+    <div>Balance: <span id="balance">$1000</span></div>  
+    <button id="reset" class="button">Reset</button>  
+  </div>  
+</div>  
+<script>  
+// Configurations  
+const gridSize = 10;  
+const startBalance = 1000;  
+const financialEvents = [  
+  { text: "Stock gain +$200", value: 200 },  
+  { text: "Impulse buy -$150", value: -150 },  
+  { text: "Groceries -$50", value: -50 },  
+  { text: "Tax Refund +$300", value: 300 },  
+  { text: "Car Repair -$250", value: -250 },  
+  { text: "Interest Earned +$50", value: 50 },  
+  { text: "Vacation -$500", value: -500 },  
+  { text: "Unexpected Bonus +$400", value: 400 },  
+  { text: "Medical Expense -$300", value: -300 },  
+  { text: "Charity Donation -$100", value: -100 },  
+];  
+
+// State  
+let maze = [];  
+let balance = startBalance;  
+let playerPosition = { x: 0, y: 0 };  
+
+// Initialize Maze  
+function initMaze() {  
+  maze = Array.from({ length: gridSize }, () =>  
+    Array.from({ length: gridSize }, () => null)  
+  );  
+  maze[0][0] = "start";  
+  maze[gridSize - 1][gridSize - 1] = "end";  
+
+  for (let i = 0; i < gridSize; i++) {  
+    for (let j = 0; j < gridSize; j++) {  
+      if (!maze[i][j]) {  
+        maze[i][j] = financialEvents[Math.floor(Math.random() * financialEvents.length)];  
+      }  
+    }  
+  }  
+}  
+
+// Render Maze  
+function renderMaze() {  
+  const mazeContainer = document.getElementById("maze");  
+  mazeContainer.innerHTML = "";  
+  maze.forEach((row, rowIndex) => {  
+    row.forEach((cell, colIndex) => {  
+      const cellDiv = document.createElement("div");  
+      cellDiv.classList.add("cell");  
+
+      if (rowIndex === playerPosition.x && colIndex === playerPosition.y) {  
+        cellDiv.classList.add("path");  
+        if (cell.value) {  
+          cellDiv.textContent = cell.text;  
+        }  
+      } else if (cell === "start") {  
+        cellDiv.classList.add("start");  
+        cellDiv.textContent = "Start";  
+      } else if (cell === "end") {  
+        cellDiv.classList.add("end");  
+        cellDiv.textContent = "Goal";  
+      }  
+      mazeContainer.appendChild(cellDiv);  
+    });  
+  });  
+}  
+
+// Handle Movement  
+function movePlayer(dx, dy) {  
+  const newX = playerPosition.x + dx;  
+  const newY = playerPosition.y + dy;  
+
+  if (newX >= 0 && newX < gridSize && newY >= 0 && newY < gridSize) {  
+    playerPosition.x = newX;  
+    playerPosition.y = newY;  
+    const cell = maze[newX][newY];  
+
+    if (cell.value) {  
+      balance += cell.value;  
+      document.getElementById("balance").textContent = `$${balance}`;  
+    }  
+
+    if (cell === "end") {  
+      alert("Congratulations! You've reached the goal with a balance of $" + balance);  
+      document.getElementById("reset").disabled = false;  
+    }  
+
+    renderMaze();  
+  }  
+}  
+
+// Reset Game  
+function resetGame() {  
+  balance = startBalance;  
+  playerPosition = { x: 0, y: 0 };  
+  document.getElementById("balance").textContent = `$${balance}`;  
+  initMaze();  
+  renderMaze();  
+  document.getElementById("reset").disabled = true;  
+}  
+
+// Event Listeners  
+document.addEventListener("keydown", (e) => {  
+  if (e.key === "ArrowUp") movePlayer(-1, 0);  
+  if (e.key === "ArrowDown") movePlayer(1, 0);  
+  if (e.key === "ArrowLeft") movePlayer(0, -1);  
+  if (e.key === "ArrowRight") movePlayer(0, 1);  
+});  
+
+document.getElementById("reset").addEventListener("click", resetGame);  
+
+// Initialize App  
+initMaze();  
+renderMaze();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

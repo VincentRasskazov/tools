@@ -1,0 +1,103 @@
+---
+layout: null
+title: "Data Fractal Explorer"
+category: "Data"
+description: "Generate and interact with mesmerizing fractal visualizations of datasets, revealing hidden patterns and relationships through dynamic zoom and manipulation."
+permalink: "/tools/daily-20260411-25-data-fractal-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260411"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Fractal Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Generate and interact with mesmerizing fractal visualizations of datasets, revealing hidden patterns and relationships through dynamic zoom and manipulation. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Fractal Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Generate and interact with mesmerizing fractal visualizations of datasets, revealing hidden patterns and relationships through dynamic zoom and manipulation. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Fractal Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Generate and interact with mesmerizing fractal visualizations of datasets, revealing hidden patterns and relationships through dynamic zoom and manipulation. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Fractal Explorer</h1>
+    <p class="seo-subtitle">Generate and interact with mesmerizing fractal visualizations of datasets, revealing hidden patterns and relationships through dynamic zoom and manipulation.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #1e1e2e; color: #ffffff; }  
+  #tool-app { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }  
+  canvas { border: 1px solid #ffffff; }  
+  #controls { margin-top: 20px; display: flex; gap: 10px; }  
+  button, input { padding: 8px; border: none; border-radius: 5px; font-size: 14px; }  
+  button { background: #4caf50; color: white; cursor: pointer; }  
+  button:hover { background: #388e3c; }  
+  input { background: #2e2e3e; color: white; }  
+</style>  
+<div id="tool-app">  
+  <canvas id="fractalCanvas" width="800" height="600"></canvas>  
+  <div id="controls">  
+    <button id="generate">Generate Fractal</button>  
+    <label>Zoom Level: <input type="number" id="zoom" min="1" max="10" value="1" step="0.1"></label>  
+  </div>  
+</div>  
+<script>  
+const canvas = document.getElementById("fractalCanvas");  
+const ctx = canvas.getContext("2d");  
+const zoomInput = document.getElementById("zoom");  
+const generateButton = document.getElementById("generate");  
+
+function generateFractal(zoom = 1) {  
+  const width = canvas.width;  
+  const height = canvas.height;  
+  const imageData = ctx.createImageData(width, height);  
+  const data = imageData.data;  
+
+  for (let x = 0; x < width; x++) {  
+    for (let y = 0; y < height; y++) {  
+      let nx = (x - width / 2) / (width / zoom);  
+      let ny = (y - height / 2) / (height / zoom);  
+      let a = nx, b = ny, iteration = 0, max_iteration = 100;  
+
+      while (a * a + b * b <= 4 && iteration < max_iteration) {  
+        let temp = a * a - b * b + nx;  
+        b = 2 * a * b + ny;  
+        a = temp;  
+        iteration++;  
+      }  
+
+      const color = iteration === max_iteration ? 0 : (iteration / max_iteration) * 255;  
+      const pixelIndex = (y * width + x) * 4;  
+      data[pixelIndex] = color; // Red  
+      data[pixelIndex + 1] = color * 0.7; // Green  
+      data[pixelIndex + 2] = color * 0.5; // Blue  
+      data[pixelIndex + 3] = 255; // Alpha  
+    }  
+  }  
+
+  ctx.putImageData(imageData, 0, 0);  
+}  
+
+generateButton.addEventListener("click", () => {  
+  const zoom = parseFloat(zoomInput.value);  
+  generateFractal(zoom);  
+});  
+
+generateFractal();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

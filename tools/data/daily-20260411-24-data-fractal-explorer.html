@@ -1,0 +1,164 @@
+---
+layout: null
+title: "Data Fractal Explorer"
+category: "Data"
+description: "Generate, analyze, and interact with fractal-based visualizations of your own datasets to uncover hidden patterns."
+permalink: "/tools/daily-20260411-24-data-fractal-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260411"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Fractal Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Generate, analyze, and interact with fractal-based visualizations of your own datasets to uncover hidden patterns. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Fractal Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Generate, analyze, and interact with fractal-based visualizations of your own datasets to uncover hidden patterns. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Fractal Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Generate, analyze, and interact with fractal-based visualizations of your own datasets to uncover hidden patterns. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Fractal Explorer</h1>
+    <p class="seo-subtitle">Generate, analyze, and interact with fractal-based visualizations of your own datasets to uncover hidden patterns.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background: linear-gradient(135deg, #1e3c72, #2a5298);  
+  color: white;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  text-align: center;  
+  max-width: 800px;  
+  width: 90%;  
+  background: rgba(255, 255, 255, 0.1);  
+  padding: 20px;  
+  border-radius: 15px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);  
+}  
+button {  
+  background-color: #4caf50;  
+  color: white;  
+  border: none;  
+  padding: 10px 20px;  
+  font-size: 16px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  margin-top: 10px;  
+}  
+button:hover {  
+  background-color: #45a049;  
+}  
+canvas {  
+  margin-top: 20px;  
+  border: 1px solid #fff;  
+  border-radius: 10px;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Data Fractal Explorer</h1>  
+  <p>Upload your dataset (CSV or JSON), and watch as it transforms into a mesmerizing fractal. Adjust parameters to explore correlations and patterns visually!</p>  
+  <input type="file" id="fileInput" accept=".csv, .json" />  
+  <button id="generateButton">Generate Fractal</button>  
+  <canvas id="fractalCanvas" width="600" height="600"></canvas>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById('fractalCanvas');  
+const ctx = canvas.getContext('2d');  
+const fileInput = document.getElementById('fileInput');  
+const generateButton = document.getElementById('generateButton');  
+
+let dataset = [];  
+
+fileInput.addEventListener('change', (event) => {  
+  const file = event.target.files[0];  
+  if (file) {  
+    const reader = new FileReader();  
+    reader.onload = (e) => {  
+      try {  
+        const content = e.target.result;  
+        if (file.type === 'application/json') {  
+          dataset = JSON.parse(content);  
+        } else if (file.type === 'text/csv') {  
+          dataset = content.split('\n').map(row => row.split(','));  
+        }  
+        alert('File loaded successfully! Click Generate Fractal to start.');  
+      } catch (err) {  
+        alert('Error parsing file. Please use a valid CSV or JSON file.');  
+      }  
+    };  
+    reader.readAsText(file);  
+  }  
+});  
+
+generateButton.addEventListener('click', () => {  
+  if (!dataset.length) {  
+    alert('Please upload a dataset first.');  
+    return;  
+  }  
+  renderFractal();  
+});  
+
+function renderFractal() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+
+  const width = canvas.width;  
+  const height = canvas.height;  
+  const maxIterations = 100;  
+
+  const normalizeData = (value, min, max) => (value - min) / (max - min);  
+
+  const flatData = dataset.flat().map(Number).filter(val => !isNaN(val));  
+  const minValue = Math.min(...flatData);  
+  const maxValue = Math.max(...flatData);  
+
+  for (let x = 0; x < width; x++) {  
+    for (let y = 0; y < height; y++) {  
+      let mappedX = normalizeData(x, 0, width) * (maxValue - minValue) + minValue;  
+      let mappedY = normalizeData(y, 0, height) * (maxValue - minValue) + minValue;  
+
+      let zx = mappedX;  
+      let zy = mappedY;  
+      let iteration = 0;  
+
+      while (zx * zx + zy * zy < 4 && iteration < maxIterations) {  
+        let xtemp = zx * zx - zy * zy + mappedX;  
+        zy = 2 * zx * zy + mappedY;  
+        zx = xtemp;  
+        iteration++;  
+      }  
+
+      const color = iteration === maxIterations ? 'black' : `hsl(${iteration * 10}, 100%, 50%)`;  
+      ctx.fillStyle = color;  
+      ctx.fillRect(x, y, 1, 1);  
+    }  
+  }  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

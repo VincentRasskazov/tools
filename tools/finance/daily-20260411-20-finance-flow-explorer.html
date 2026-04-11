@@ -1,0 +1,166 @@
+---
+layout: null
+title: "Finance Flow Explorer"
+category: "Finance"
+description: "A dynamic, interactive visualization game where users construct hypothetical cash flow scenarios using draggable income and expense blocks to simulate outcomes and learn budgeting strategies."
+permalink: "/tools/daily-20260411-20-finance-flow-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260411"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finance Flow Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, interactive visualization game where users construct hypothetical cash flow scenarios using draggable income and expense blocks to simulate outcomes and learn budgeting strategies. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Finance Flow Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, interactive visualization game where users construct hypothetical cash flow scenarios using draggable income and expense blocks to simulate outcomes and learn budgeting strategies. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Finance Flow Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, interactive visualization game where users construct hypothetical cash flow scenarios using draggable income and expense blocks to simulate outcomes and learn budgeting strategies. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Finance Flow Explorer</h1>
+    <p class="seo-subtitle">A dynamic, interactive visualization game where users construct hypothetical cash flow scenarios using draggable income and expense blocks to simulate outcomes and learn budgeting strategies.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(135deg, #2b5876, #4e4376);  
+  margin: 0;  
+  color: white;  
+}  
+#tool-app {  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  padding: 20px;  
+}  
+#canvas {  
+  width: 90%;  
+  height: 400px;  
+  background: white;  
+  border-radius: 10px;  
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);  
+  margin-top: 20px;  
+  position: relative;  
+}  
+.draggable {  
+  background: #4caf50;  
+  color: white;  
+  padding: 10px;  
+  border-radius: 5px;  
+  text-align: center;  
+  cursor: grab;  
+  position: absolute;  
+}  
+.expense {  
+  background: #f44336;  
+}  
+.budget-summary {  
+  margin-top: 20px;  
+  padding: 10px;  
+  background: #ffffff;  
+  color: black;  
+  border-radius: 5px;  
+  width: 80%;  
+  text-align: center;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Finance Flow Explorer</h1>  
+  <p>Drag and drop income and expense blocks onto the canvas to see how your cash flow evolves!</p>  
+  <div id="canvas"></div>  
+  <div class="budget-summary" id="summary">Balance: $0</div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById('canvas');  
+const summary = document.getElementById('summary');  
+let totalIncome = 0;  
+let totalExpense = 0;  
+
+function createBlock(type, amount) {  
+  const block = document.createElement('div');  
+  block.className = type === 'income' ? 'draggable income' : 'draggable expense';  
+  block.innerText = `${type.charAt(0).toUpperCase() + type.slice(1)}: $${amount}`;  
+  block.style.left = Math.random() * (canvas.offsetWidth - 100) + 'px';  
+  block.style.top = Math.random() * (canvas.offsetHeight - 50) + 'px';  
+  block.dataset.amount = amount;  
+  block.dataset.type = type;  
+
+  block.addEventListener('mousedown', (e) => {  
+    let shiftX = e.clientX - block.getBoundingClientRect().left;  
+    let shiftY = e.clientY - block.getBoundingClientRect().top;  
+
+    function moveAt(pageX, pageY) {  
+      block.style.left = pageX - shiftX + 'px';  
+      block.style.top = pageY - shiftY + 'px';  
+    }  
+
+    function onMouseMove(event) {  
+      moveAt(event.pageX, event.pageY);  
+    }  
+
+    document.addEventListener('mousemove', onMouseMove);  
+
+    block.onmouseup = () => {  
+      document.removeEventListener('mousemove', onMouseMove);  
+      block.onmouseup = null;  
+    };  
+  });  
+
+  block.ondragstart = () => false; // Prevent default drag behavior  
+
+  block.addEventListener('dblclick', () => {  
+    const amount = parseInt(block.dataset.amount);  
+    if (block.dataset.type === 'income') {  
+      totalIncome -= amount;  
+    } else {  
+      totalExpense -= amount;  
+    }  
+    updateSummary();  
+    block.remove();  
+  });  
+
+  canvas.appendChild(block);  
+}  
+
+function updateSummary() {  
+  const balance = totalIncome - totalExpense;  
+  summary.innerText = `Balance: $${balance}`;  
+  summary.style.background = balance >= 0 ? '#4caf50' : '#f44336';  
+}  
+
+// Generate initial blocks  
+setInterval(() => {  
+  const type = Math.random() > 0.5 ? 'income' : 'expense';  
+  const amount = Math.floor(Math.random() * 500) + 50;  
+  createBlock(type, amount);  
+
+  if (type === 'income') {  
+    totalIncome += amount;  
+  } else {  
+    totalExpense += amount;  
+  }  
+  updateSummary();  
+}, 5000);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

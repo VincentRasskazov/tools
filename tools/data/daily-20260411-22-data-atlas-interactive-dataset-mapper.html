@@ -1,0 +1,156 @@
+---
+layout: null
+title: "Data Atlas: Interactive Dataset Mapper"
+category: "Data"
+description: "Visualize and interact with customizable datasets as if exploring a geographic map, revealing hidden patterns, relationships, and insights."
+permalink: "/tools/daily-20260411-22-data-atlas-interactive-dataset-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260411"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Atlas: Interactive Dataset Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize and interact with customizable datasets as if exploring a geographic map, revealing hidden patterns, relationships, and insights. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Atlas: Interactive Dataset Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize and interact with customizable datasets as if exploring a geographic map, revealing hidden patterns, relationships, and insights. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Atlas: Interactive Dataset Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize and interact with customizable datasets as if exploring a geographic map, revealing hidden patterns, relationships, and insights. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Atlas: Interactive Dataset Mapper</h1>
+    <p class="seo-subtitle">Visualize and interact with customizable datasets as if exploring a geographic map, revealing hidden patterns, relationships, and insights.</p>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  #tool-app {
+    width: 80%;
+    height: 80%;
+    background: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  #controls {
+    background: #34495e;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  #controls select, #controls button {
+    background: #ffffff;
+    color: #34495e;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+  }
+  #map {
+    flex: 1;
+    background: #e9ecef;
+    position: relative;
+    overflow: hidden;
+  }
+  .data-node {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(52, 152, 219, 0.8);
+    color: white;
+    text-align: center;
+    line-height: 1.5;
+    font-size: 12px;
+    cursor: pointer;
+  }
+</style>
+<div id="tool-app">
+  <div id="controls">
+    <select id="dataset-select">
+      <option value="cities">World Cities</option>
+      <option value="sales">Sales Data</option>
+      <option value="network">Network Traffic</option>
+    </select>
+    <button id="reset-map">Reset Map</button>
+  </div>
+  <div id="map"></div>
+</div>
+<script>
+  const datasets = {
+    "cities": [
+      { label: "New York", x: 200, y: 100 },
+      { label: "London", x: 500, y: 200 },
+      { label: "Tokyo", x: 800, y: 300 }
+    ],
+    "sales": [
+      { label: "Product A", x: 150, y: 190 },
+      { label: "Product B", x: 450, y: 300 },
+      { label: "Product C", x: 750, y: 120 }
+    ],
+    "network": [
+      { label: "Node A", x: 300, y: 250 },
+      { label: "Node B", x: 600, y: 200 },
+      { label: "Node C", x: 400, y: 450 }
+    ]
+  };
+
+  const map = document.getElementById("map");
+  const datasetSelect = document.getElementById("dataset-select");
+  const resetMap = document.getElementById("reset-map");
+
+  function renderMap(data) {
+    map.innerHTML = "";
+    data.forEach(node => {
+      const div = document.createElement("div");
+      div.className = "data-node";
+      div.style.top = `${node.y}px`;
+      div.style.left = `${node.x}px`;
+      div.style.width = "100px";
+      div.style.height = "100px";
+      div.innerText = node.label;
+      div.addEventListener("click", () => alert(`You clicked on: ${node.label}`));
+      map.appendChild(div);
+    });
+  }
+
+  datasetSelect.addEventListener("change", () => {
+    const selectedDataset = datasetSelect.value;
+    renderMap(datasets[selectedDataset]);
+  });
+
+  resetMap.addEventListener("click", () => {
+    const selectedDataset = datasetSelect.value;
+    renderMap(datasets[selectedDataset]);
+  });
+
+  // Initialize with default dataset
+  renderMap(datasets[datasetSelect.value]);
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,169 @@
+---
+layout: null
+title: "PhishDetect Maze"
+category: "Cybersecurity"
+description: "Navigate a maze while identifying phishing attempts hidden in fake emails and URLs to improve your cybersecurity awareness."
+permalink: "/tools/daily-20260411-23-phishdetect-maze.html"
+generated_by: "api-true-ai"
+generated_date: "20260411"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhishDetect Maze | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate a maze while identifying phishing attempts hidden in fake emails and URLs to improve your cybersecurity awareness. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PhishDetect Maze | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate a maze while identifying phishing attempts hidden in fake emails and URLs to improve your cybersecurity awareness. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PhishDetect Maze | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate a maze while identifying phishing attempts hidden in fake emails and URLs to improve your cybersecurity awareness. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PhishDetect Maze</h1>
+    <p class="seo-subtitle">Navigate a maze while identifying phishing attempts hidden in fake emails and URLs to improve your cybersecurity awareness.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  background: linear-gradient(135deg, #1a1a2e, #16213e);  
+  font-family: 'Arial', sans-serif;  
+  color: #e8e8e8;  
+  margin: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  width: 80%;  
+  height: 80%;  
+  border: 2px solid #6a6a8f;  
+  border-radius: 8px;  
+  background: #0f0f1a;  
+  display: flex;  
+  flex-direction: column;  
+  justify-content: space-between;  
+  padding: 20px;  
+}  
+#maze {  
+  display: grid;  
+  grid-template-columns: repeat(10, 1fr);  
+  gap: 5px;  
+  flex-grow: 1;  
+}  
+.cell {  
+  width: 100%;  
+  padding-top: 100%;  
+  position: relative;  
+  background: #1e1e38;  
+  border-radius: 4px;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+}  
+.cell.player {  
+  background: #6a1b9a;  
+}  
+.cell.phish {  
+  background: #ba1d1d;  
+}  
+.cell.safe {  
+  background: #2c6e49;  
+}  
+#status-bar {  
+  padding: 10px;  
+  background: #2e2e4e;  
+  border-radius: 4px;  
+  text-align: center;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="status-bar">Score: <span id="score">0</span> | Warnings: <span id="warnings">0</span></div>  
+  <div id="maze"></div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const mazeSize = 10;  
+let playerPosition = { x: 0, y: 0 };  
+let score = 0;  
+let warnings = 0;  
+
+// Generate maze grid dynamically  
+function generateMaze() {  
+  const maze = document.getElementById('maze');  
+  maze.innerHTML = '';  
+  for (let y = 0; y < mazeSize; y++) {  
+    for (let x = 0; x < mazeSize; x++) {  
+      const cell = document.createElement('div');  
+      cell.classList.add('cell');  
+      cell.dataset.x = x;  
+      cell.dataset.y = y;  
+      
+      // Randomly add phishing traps and safe zones  
+      if (Math.random() < 0.1) cell.classList.add('phish');  
+      else if (Math.random() < 0.1) cell.classList.add('safe');  
+      
+      maze.appendChild(cell);  
+    }  
+  }  
+  updatePlayerPosition();  
+}  
+
+// Update player position in the maze  
+function updatePlayerPosition() {  
+  const cells = document.querySelectorAll('.cell');  
+  cells.forEach(cell => {  
+    cell.classList.remove('player');  
+    if (parseInt(cell.dataset.x) === playerPosition.x && parseInt(cell.dataset.y) === playerPosition.y) {  
+      cell.classList.add('player');  
+    }  
+  });  
+}  
+
+// Handle player movement  
+document.addEventListener('keydown', (e) => {  
+  switch (e.key) {  
+    case 'ArrowUp': if (playerPosition.y > 0) playerPosition.y--; break;  
+    case 'ArrowDown': if (playerPosition.y < mazeSize - 1) playerPosition.y++; break;  
+    case 'ArrowLeft': if (playerPosition.x > 0) playerPosition.x--; break;  
+    case 'ArrowRight': if (playerPosition.x < mazeSize - 1) playerPosition.x++; break;  
+  }  
+
+  const currentCell = document.querySelector(`.cell[data-x="${playerPosition.x}"][data-y="${playerPosition.y}"]`);  
+  if (currentCell.classList.contains('phish')) {  
+    warnings++;  
+    alert("Phishing attempt detected! Stay cautious.");  
+  } else if (currentCell.classList.contains('safe')) {  
+    score += 10;  
+  }  
+  updatePlayerPosition();  
+  updateStatusBar();  
+});  
+
+// Update the status bar  
+function updateStatusBar() {  
+  document.getElementById('score').textContent = score;  
+  document.getElementById('warnings').textContent = warnings;  
+}  
+
+// Initialize the game  
+generateMaze();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

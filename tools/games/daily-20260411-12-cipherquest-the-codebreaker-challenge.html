@@ -1,0 +1,181 @@
+---
+layout: null
+title: "CipherQuest: The Codebreaker Challenge"
+category: "Games"
+description: "A highly interactive single-page game where players decode encrypted strings using classic ciphers like Caesar, Vigenère, and Substitution within a time limit to earn points."
+permalink: "/tools/daily-20260411-12-cipherquest-the-codebreaker-challenge.html"
+generated_by: "api-true-ai"
+generated_date: "20260411"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CipherQuest: The Codebreaker Challenge | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive single-page game where players decode encrypted strings using classic ciphers like Caesar, Vigenère, and Substitution within a time limit to earn points. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CipherQuest: The Codebreaker Challenge | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive single-page game where players decode encrypted strings using classic ciphers like Caesar, Vigenère, and Substitution within a time limit to earn points. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CipherQuest: The Codebreaker Challenge | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive single-page game where players decode encrypted strings using classic ciphers like Caesar, Vigenère, and Substitution within a time limit to earn points. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CipherQuest: The Codebreaker Challenge</h1>
+    <p class="seo-subtitle">A highly interactive single-page game where players decode encrypted strings using classic ciphers like Caesar, Vigenère, and Substitution within a time limit to earn points.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(135deg, #1e3c72, #2a5298);  
+  color: #fff;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  height: 100vh;  
+}  
+
+#tool-app {  
+  background: rgba(0, 0, 0, 0.8);  
+  padding: 20px;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);  
+  width: 80%;  
+  max-width: 600px;  
+  text-align: center;  
+}  
+
+button {  
+  background: #ff6f61;  
+  color: #fff;  
+  border: none;  
+  padding: 10px 20px;  
+  margin: 10px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  font-size: 16px;  
+  transition: background 0.3s ease;  
+}  
+
+button:hover {  
+  background: #ff3b2f;  
+}  
+
+input[type="text"] {  
+  padding: 10px;  
+  border: none;  
+  border-radius: 5px;  
+  margin: 10px 0;  
+  width: 80%;  
+  font-size: 16px;  
+}  
+
+.timer {  
+  font-size: 24px;  
+  margin-bottom: 20px;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>CipherQuest: The Codebreaker Challenge</h1>  
+  <p class="timer">Time Left: <span id="time">60</span>s</p>  
+  <div id="challenge">  
+    <p>Your encrypted string is:</p>  
+    <p id="encrypted-string" style="font-weight: bold;">???</p>  
+    <p>Hint: <span id="cipher-type">???</span></p>  
+  </div>  
+  <input type="text" id="answer" placeholder="Your answer here" />  
+  <button id="submit-btn">Submit</button>  
+  <p id="feedback"></p>  
+  <p>Score: <span id="score">0</span></p>  
+</div>  
+<script>  
+const ciphers = [  
+  {  
+    type: "Caesar Cipher (Shift 3)",  
+    encrypt: (str) => str.replace(/[a-zA-Z]/g, (c) =>  
+      String.fromCharCode((c.charCodeAt(0) - (c <= "Z" ? 65 : 97) + 3) % 26 + (c <= "Z" ? 65 : 97)))  
+  },  
+  {  
+    type: "Vigenère Cipher (Key: 'KEY')",  
+    encrypt: (str) => {  
+      const key = "KEY";  
+      return str.replace(/[a-zA-Z]/g, (c, i) =>  
+        String.fromCharCode((c.charCodeAt(0) - (c <= "Z" ? 65 : 97) +  
+          (key[i % key.length].toUpperCase().charCodeAt(0) - 65)) % 26 + (c <= "Z" ? 65 : 97)));  
+    }  
+  },  
+  {  
+    type: "Atbash Cipher",  
+    encrypt: (str) => str.replace(/[a-zA-Z]/g, (c) =>  
+      String.fromCharCode((c <= "Z" ? 90 : 122) - (c.charCodeAt(0) - (c <= "Z" ? 65 : 97))))  
+  }  
+];  
+
+let timeLeft = 60;  
+let score = 0;  
+let timerInterval;  
+let currentCipher;  
+let currentString;  
+
+function startTimer() {  
+  document.getElementById("time").innerText = timeLeft;  
+  timerInterval = setInterval(() => {  
+    timeLeft--;  
+    document.getElementById("time").innerText = timeLeft;  
+    if (timeLeft <= 0) {  
+      clearInterval(timerInterval);  
+      endGame();  
+    }  
+  }, 1000);  
+}  
+
+function generateChallenge() {  
+  currentCipher = ciphers[Math.floor(Math.random() * ciphers.length)];  
+  currentString = "HELLO";  
+  const encrypted = currentCipher.encrypt(currentString);  
+  document.getElementById("encrypted-string").innerText = encrypted;  
+  document.getElementById("cipher-type").innerText = currentCipher.type;  
+}  
+
+function checkAnswer() {  
+  const userAnswer = document.getElementById("answer").value.toUpperCase();  
+  if (userAnswer === currentString) {  
+    score += 10;  
+    document.getElementById("score").innerText = score;  
+    document.getElementById("feedback").innerText = "Correct!";  
+    generateChallenge();  
+  } else {  
+    document.getElementById("feedback").innerText = "Wrong, try again.";  
+  }  
+  document.getElementById("answer").value = "";  
+}  
+
+function endGame() {  
+  document.getElementById("feedback").innerText = `Game over! Final score: ${score}`;  
+  document.getElementById("submit-btn").disabled = true;  
+  document.getElementById("answer").disabled = true;  
+}  
+
+document.getElementById("submit-btn").addEventListener("click", checkAnswer);  
+startTimer();  
+generateChallenge();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

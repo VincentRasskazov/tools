@@ -1,0 +1,188 @@
+---
+layout: null
+title: "Regex Galaxy Explorer"
+category: "Developer"
+description: "An interactive mini-game where users traverse a galaxy by solving regex challenges to match patterns and unlock planets."
+permalink: "/tools/daily-20260411-05-regex-galaxy-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260411"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Galaxy Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive mini-game where users traverse a galaxy by solving regex challenges to match patterns and unlock planets. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Regex Galaxy Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive mini-game where users traverse a galaxy by solving regex challenges to match patterns and unlock planets. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Regex Galaxy Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive mini-game where users traverse a galaxy by solving regex challenges to match patterns and unlock planets. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Regex Galaxy Explorer</h1>
+    <p class="seo-subtitle">An interactive mini-game where users traverse a galaxy by solving regex challenges to match patterns and unlock planets.</p>
+    <style>  
+body {  
+  font-family: 'Arial', sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background: linear-gradient(to bottom, #020024, #090979, #00d4ff);  
+  color: white;  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  text-align: center;  
+  max-width: 600px;  
+}  
+#galaxy-map {  
+  display: grid;  
+  grid-template-columns: repeat(5, 1fr);  
+  gap: 10px;  
+  margin: 20px auto;  
+}  
+.planet {  
+  width: 60px;  
+  height: 60px;  
+  border-radius: 50%;  
+  background: radial-gradient(circle, #fff, #000);  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  cursor: pointer;  
+  animation: pulse 2s infinite;  
+}  
+.planet.unlocked {  
+  background: radial-gradient(circle, #ff8c00, #ff4500);  
+}  
+#challenge-box {  
+  background: white;  
+  color: black;  
+  padding: 20px;  
+  border-radius: 10px;  
+  text-align: center;  
+  display: none;  
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);  
+}  
+input {  
+  padding: 10px;  
+  width: 100%;  
+  margin: 10px 0;  
+  border: 1px solid #ccc;  
+  border-radius: 5px;  
+  font-size: 16px;  
+}  
+button {  
+  padding: 10px 20px;  
+  background: #007bff;  
+  border: none;  
+  border-radius: 5px;  
+  color: white;  
+  font-size: 16px;  
+  cursor: pointer;  
+}  
+button:hover {  
+  background: #0056b3;  
+}  
+@keyframes pulse {  
+  0% {  
+    transform: scale(1);  
+  }  
+  50% {  
+    transform: scale(1.1);  
+  }  
+  100% {  
+    transform: scale(1);  
+  }  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Regex Galaxy Explorer</h1>  
+  <p>Click on a planet and solve regex challenges to unlock the universe!</p>  
+  <div id="galaxy-map"></div>  
+  <div id="challenge-box">  
+    <p id="challenge-question"></p>  
+    <input type="text" id="regex-input" placeholder="Enter regex pattern" />  
+    <button id="submit-answer">Submit</button>  
+    <p id="feedback"></p>  
+  </div>  
+</div>  
+<script>  
+const challenges = [  
+  {  
+    question: "Match all words that start with 'a'",  
+    testStrings: ["apple", "banana", "avocado", "grape"],  
+    solution: /^a/  
+  },  
+  {  
+    question: "Match all numbers",  
+    testStrings: ["42", "hello", "123", "world"],  
+    solution: /^\d+$/  
+  },  
+  // Add more challenges here  
+];  
+
+const galaxyMap = document.getElementById("galaxy-map");  
+const challengeBox = document.getElementById("challenge-box");  
+const challengeQuestion = document.getElementById("challenge-question");  
+const regexInput = document.getElementById("regex-input");  
+const feedback = document.getElementById("feedback");  
+const submitAnswer = document.getElementById("submit-answer");  
+
+let currentChallenge = null;  
+
+function createGalaxy() {  
+  challenges.forEach((challenge, index) => {  
+    const planet = document.createElement("div");  
+    planet.className = "planet";  
+    planet.id = `planet-${index}`;  
+    planet.addEventListener("click", () => startChallenge(index));  
+    galaxyMap.appendChild(planet);  
+  });  
+}  
+
+function startChallenge(index) {  
+  currentChallenge = challenges[index];  
+  challengeQuestion.textContent = currentChallenge.question;  
+  regexInput.value = "";  
+  feedback.textContent = "";  
+  challengeBox.style.display = "block";  
+}  
+
+submitAnswer.addEventListener("click", () => {  
+  const userRegex = new RegExp(regexInput.value);  
+  const isCorrect = currentChallenge.testStrings.every(str => userRegex.test(str) === currentChallenge.solution.test(str));  
+  if (isCorrect) {  
+    feedback.textContent = "Correct! Planet unlocked!";  
+    document.getElementById(`planet-${challenges.indexOf(currentChallenge)}`).classList.add("unlocked");  
+    challengeBox.style.display = "none";  
+  } else {  
+    feedback.textContent = "Try again!";  
+  }  
+});  
+
+createGalaxy();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
