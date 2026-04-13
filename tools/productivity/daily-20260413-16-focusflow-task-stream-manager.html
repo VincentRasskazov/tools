@@ -1,0 +1,119 @@
+---
+layout: null
+title: "FocusFlow: Task Stream Manager"
+category: "Productivity"
+description: "A dynamic task prioritization and flow visualization tool that lets users interactively \"stream\" and rank their tasks by urgency and importance in real-time."
+permalink: "/tools/daily-20260413-16-focusflow-task-stream-manager.html"
+generated_by: "api-true-ai"
+generated_date: "20260413"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusFlow: Task Stream Manager | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic task prioritization and flow visualization tool that lets users interactively &quot;stream&quot; and rank their tasks by urgency and importance in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="FocusFlow: Task Stream Manager | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic task prioritization and flow visualization tool that lets users interactively &quot;stream&quot; and rank their tasks by urgency and importance in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FocusFlow: Task Stream Manager | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic task prioritization and flow visualization tool that lets users interactively &quot;stream&quot; and rank their tasks by urgency and importance in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>FocusFlow: Task Stream Manager</h1>
+    <p class="seo-subtitle">A dynamic task prioritization and flow visualization tool that lets users interactively &quot;stream&quot; and rank their tasks by urgency and importance in real-time.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; color: #333; }  
+  #tool-app { display: flex; flex-direction: column; align-items: center; padding: 20px; }  
+  h1 { color: #4CAF50; }  
+  .task-container { display: flex; flex-wrap: wrap; gap: 10px; max-width: 600px; margin-top: 20px; }  
+  .task { padding: 10px; background: #fff; border: 1px solid #ddd; border-radius: 5px; cursor: grab; }  
+  .task.dragging { opacity: 0.5; }  
+  .drop-zone { display: flex; flex-direction: column; align-items: center; justify-content: space-around;  
+    width: 100%; max-width: 700px; height: 300px; background: #e8f5e9; border: 2px dashed #4CAF50; border-radius: 10px; margin: 20px 0; }  
+  .drop-zone h2 { margin: 0; }  
+  .drop-zone .placeholder { color: #999; font-style: italic; }  
+</style>  
+<div id="tool-app">  
+  <h1>FocusFlow</h1>  
+  <input type="text" id="taskInput" placeholder="Enter a task..." style="padding: 10px; width: 90%; max-width: 400px; margin-bottom: 10px;" />  
+  <button id="addTaskButton" style="padding: 10px 20px; background: #4CAF50; color: white; border: none; border-radius: 5px;">Add Task</button>  
+  <div class="task-container" id="taskContainer"></div>  
+  <div class="drop-zone" id="dropZone">  
+    <h2>Prioritize Your Tasks</h2>  
+    <p class="placeholder">Drag tasks here to sort by priority</p>  
+  </div>  
+</div>  
+<script>  
+  const taskInput = document.getElementById("taskInput");  
+  const addTaskButton = document.getElementById("addTaskButton");  
+  const taskContainer = document.getElementById("taskContainer");  
+  const dropZone = document.getElementById("dropZone");  
+  
+  // Task adding logic  
+  addTaskButton.addEventListener("click", () => {  
+    const taskText = taskInput.value.trim();  
+    if (taskText) {  
+      createTaskElement(taskText);  
+      taskInput.value = "";  
+    }  
+  });  
+  
+  function createTaskElement(taskText) {  
+    const task = document.createElement("div");  
+    task.textContent = taskText;  
+    task.className = "task";  
+    task.draggable = true;  
+  
+    // Drag event handlers  
+    task.addEventListener("dragstart", () => task.classList.add("dragging"));  
+    task.addEventListener("dragend", () => task.classList.remove("dragging"));  
+  
+    taskContainer.appendChild(task);  
+  }  
+  
+  // Drag and drop logic  
+  dropZone.addEventListener("dragover", (e) => {  
+    e.preventDefault();  
+    dropZone.classList.add("hovered");  
+    const draggingTask = document.querySelector(".dragging");  
+    const taskElements = Array.from(dropZone.querySelectorAll(".task"));  
+    const nextTask = taskElements.find((task) => {  
+      const rect = task.getBoundingClientRect();  
+      return e.clientY < rect.top + rect.height / 2;  
+    });  
+  
+    if (nextTask) {  
+      dropZone.insertBefore(draggingTask, nextTask);  
+    } else {  
+      dropZone.appendChild(draggingTask);  
+    }  
+  });  
+  
+  dropZone.addEventListener("dragleave", () => dropZone.classList.remove("hovered"));  
+  dropZone.addEventListener("drop", (e) => {  
+    e.preventDefault();  
+    dropZone.classList.remove("hovered");  
+    dropZone.querySelector(".placeholder")?.remove();  
+    const draggingTask = document.querySelector(".dragging");  
+    dropZone.appendChild(draggingTask);  
+  });  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

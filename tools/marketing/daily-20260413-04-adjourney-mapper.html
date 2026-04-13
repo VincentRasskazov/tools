@@ -1,0 +1,143 @@
+---
+layout: null
+title: "AdJourney Mapper"
+category: "Marketing"
+description: "Create and interact with branching customer journey maps for ad campaigns, complete with adaptive feedback based on user decisions."
+permalink: "/tools/daily-20260413-04-adjourney-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260413"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdJourney Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="Create and interact with branching customer journey maps for ad campaigns, complete with adaptive feedback based on user decisions. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="AdJourney Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="Create and interact with branching customer journey maps for ad campaigns, complete with adaptive feedback based on user decisions. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AdJourney Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Create and interact with branching customer journey maps for ad campaigns, complete with adaptive feedback based on user decisions. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>AdJourney Mapper</h1>
+    <p class="seo-subtitle">Create and interact with branching customer journey maps for ad campaigns, complete with adaptive feedback based on user decisions.</p>
+    <style>  
+  #tool-app {  
+    font-family: Arial, sans-serif;  
+    padding: 20px;  
+    max-width: 800px;  
+    margin: 0 auto;  
+    background: #f9f9f9;  
+    border-radius: 10px;  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+  }  
+  .node {  
+    display: inline-block;  
+    padding: 10px;  
+    margin: 10px;  
+    background: #4caf50;  
+    color: white;  
+    border-radius: 8px;  
+    cursor: pointer;  
+    text-align: center;  
+    transition: transform 0.2s;  
+  }  
+  .node:hover {  
+    transform: scale(1.1);  
+  }  
+  .connector {  
+    width: 2px;  
+    background: #ccc;  
+    position: absolute;  
+    transform-origin: top;  
+  }  
+  #feedback {  
+    margin-top: 20px;  
+    font-size: 1.2em;  
+    color: #333;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h2>AdJourney Mapper</h2>  
+  <p>Click on nodes to explore different customer decisions and visualize your campaign flow!</p>  
+  <div id="map-area" style="position: relative; height: 400px;">  
+    <!-- Nodes and connections will generate here -->  
+  </div>  
+  <div id="feedback">Feedback: Select a path to learn how your audience reacts!</div>  
+</div>  
+<script>  
+  const app = document.getElementById('map-area');  
+  const feedback = document.getElementById('feedback');  
+
+  const nodes = [  
+    { id: 1, x: 50, y: 50, text: "Click Ad" },  
+    { id: 2, x: 250, y: 50, text: "Visit Landing Page" },  
+    { id: 3, x: 450, y: 50, text: "Sign Up Form" },  
+    { id: 4, x: 250, y: 200, text: "Exit Site" },  
+    { id: 5, x: 450, y: 200, text: "Complete Purchase" }  
+  ];  
+
+  const connections = [  
+    { from: 1, to: 2 },  
+    { from: 2, to: 3 },  
+    { from: 2, to: 4 },  
+    { from: 3, to: 5 }  
+  ];  
+
+  function drawMap() {  
+    nodes.forEach(node => {  
+      const nodeEl = document.createElement('div');  
+      nodeEl.className = 'node';  
+      nodeEl.style.position = 'absolute';  
+      nodeEl.style.left = node.x + 'px';  
+      nodeEl.style.top = node.y + 'px';  
+      nodeEl.innerText = node.text;  
+      nodeEl.dataset.id = node.id;  
+      nodeEl.addEventListener('click', () => handleNodeClick(node.id));  
+      app.appendChild(nodeEl);  
+    });  
+
+    connections.forEach(conn => {  
+      const fromNode = nodes.find(n => n.id === conn.from);  
+      const toNode = nodes.find(n => n.id === conn.to);  
+
+      const line = document.createElement('div');  
+      line.className = 'connector';  
+      const dx = toNode.x - fromNode.x;  
+      const dy = toNode.y - fromNode.y;  
+      const length = Math.sqrt(dx * dx + dy * dy);  
+      line.style.width = length + 'px';  
+      line.style.left = fromNode.x + 50 + 'px';  
+      line.style.top = fromNode.y + 30 + 'px';  
+      const angle = Math.atan2(dy, dx) * (180 / Math.PI);  
+      line.style.transform = `rotate(${angle}deg)`;  
+      app.appendChild(line);  
+    });  
+  }  
+
+  function handleNodeClick(nodeId) {  
+    const node = nodes.find(n => n.id === nodeId);  
+    feedback.innerText = `Feedback: You selected "${node.text}". Consider how this step impacts your campaign.`;  
+  }  
+
+  drawMap();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

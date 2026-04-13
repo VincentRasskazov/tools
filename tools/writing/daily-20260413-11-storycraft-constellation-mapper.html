@@ -1,0 +1,178 @@
+---
+layout: null
+title: "StoryCraft Constellation Mapper"
+category: "Writing"
+description: "Create and visually connect story elements like characters, events, and locations into an interactive constellation-like map to enhance narrative planning."
+permalink: "/tools/daily-20260413-11-storycraft-constellation-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260413"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StoryCraft Constellation Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="Create and visually connect story elements like characters, events, and locations into an interactive constellation-like map to enhance narrative planning. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="StoryCraft Constellation Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="Create and visually connect story elements like characters, events, and locations into an interactive constellation-like map to enhance narrative planning. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StoryCraft Constellation Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Create and visually connect story elements like characters, events, and locations into an interactive constellation-like map to enhance narrative planning. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>StoryCraft Constellation Mapper</h1>
+    <p class="seo-subtitle">Create and visually connect story elements like characters, events, and locations into an interactive constellation-like map to enhance narrative planning.</p>
+    <style>  
+  #tool-app {  
+    font-family: Arial, sans-serif;  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    justify-content: center;  
+    height: 100vh;  
+    background-color: #121212;  
+    color: #FFFFFF;  
+  }  
+  canvas {  
+    border: 1px solid #444;  
+    background: radial-gradient(circle, #1e1e1e, #121212);  
+  }  
+  #controls {  
+    margin-top: 10px;  
+    display: flex;  
+    gap: 10px;  
+  }  
+  button, input {  
+    padding: 10px;  
+    border: none;  
+    border-radius: 5px;  
+    font-size: 16px;  
+  }  
+  button {  
+    background-color: #3a86ff;  
+    color: #fff;  
+    cursor: pointer;  
+  }  
+  button:hover {  
+    background-color: #0056b3;  
+  }  
+  input {  
+    background-color: #1e1e1e;  
+    color: #fff;  
+    border: 1px solid #444;  
+  }  
+</style>  
+<div id="tool-app">  
+  <canvas id="constellationCanvas" width="800" height="600"></canvas>  
+  <div id="controls">  
+    <input type="text" id="elementName" placeholder="Element name" />  
+    <select id="elementType">  
+      <option value="character">Character</option>  
+      <option value="event">Event</option>  
+      <option value="location">Location</option>  
+    </select>  
+    <button id="addElement">Add Element</button>  
+    <button id="clearCanvas">Clear</button>  
+  </div>  
+</div>  
+<script>  
+const canvas = document.getElementById('constellationCanvas');  
+const ctx = canvas.getContext('2d');  
+const elements = [];  
+const connections = [];  
+
+// Utility to draw elements on the canvas  
+function drawElement(x, y, name, type) {  
+  ctx.beginPath();  
+  ctx.arc(x, y, 8, 0, 2 * Math.PI);  
+  ctx.fillStyle = type === 'character' ? '#FF6B6B' : type === 'event' ? '#FFD93D' : '#6BCB77';  
+  ctx.fill();  
+  ctx.strokeStyle = '#FFFFFF';  
+  ctx.stroke();  
+  ctx.closePath();  
+  ctx.fillStyle = '#FFFFFF';  
+  ctx.font = '12px Arial';  
+  ctx.fillText(name, x + 10, y - 10);  
+}  
+
+// Utility to connect elements  
+function drawConnection(x1, y1, x2, y2) {  
+  ctx.beginPath();  
+  ctx.moveTo(x1, y1);  
+  ctx.lineTo(x2, y2);  
+  ctx.strokeStyle = '#888';  
+  ctx.stroke();  
+  ctx.closePath();  
+}  
+
+canvas.addEventListener('click', (e) => {  
+  const rect = canvas.getBoundingClientRect();  
+  const x = e.clientX - rect.left;  
+  const y = e.clientY - rect.top;  
+
+  if (elements.length > 0) {  
+    const nearest = elements.reduce((prev, curr) => {  
+      const prevDist = Math.hypot(prev.x - x, prev.y - y);  
+      const currDist = Math.hypot(curr.x - x, curr.y - y);  
+      return currDist < prevDist ? curr : prev;  
+    });  
+
+    if (Math.hypot(nearest.x - x, nearest.y - y) < 50) {  
+      connections.push({ x1: nearest.x, y1: nearest.y, x2: x, y2: y });  
+    }  
+  }  
+
+  const name = document.getElementById('elementName').value || 'Unnamed';  
+  const type = document.getElementById('elementType').value;  
+
+  elements.push({ x, y, name, type });  
+
+  redraw();  
+});  
+
+function redraw() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+
+  connections.forEach(conn => {  
+    drawConnection(conn.x1, conn.y1, conn.x2, conn.y2);  
+  });  
+
+  elements.forEach(elem => {  
+    drawElement(elem.x, elem.y, elem.name, elem.type);  
+  });  
+}  
+
+document.getElementById('addElement').addEventListener('click', () => {  
+  const name = document.getElementById('elementName').value;  
+  const type = document.getElementById('elementType').value;  
+
+  if (!name) return;  
+
+  elements.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, name, type });  
+  redraw();  
+});  
+
+document.getElementById('clearCanvas').addEventListener('click', () => {  
+  elements.length = 0;  
+  connections.length = 0;  
+  redraw();  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

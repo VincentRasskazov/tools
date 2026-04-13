@@ -1,0 +1,148 @@
+---
+layout: null
+title: "Focus Flow Architect"
+category: "Productivity"
+description: "A dynamic flowchart builder for planning and optimizing your work or study sessions with gamified productivity rewards."
+permalink: "/tools/daily-20260413-20-focus-flow-architect.html"
+generated_by: "api-true-ai"
+generated_date: "20260413"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Focus Flow Architect | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic flowchart builder for planning and optimizing your work or study sessions with gamified productivity rewards. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Focus Flow Architect | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic flowchart builder for planning and optimizing your work or study sessions with gamified productivity rewards. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Focus Flow Architect | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic flowchart builder for planning and optimizing your work or study sessions with gamified productivity rewards. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Focus Flow Architect</h1>
+    <p class="seo-subtitle">A dynamic flowchart builder for planning and optimizing your work or study sessions with gamified productivity rewards.</p>
+    <style>  
+body {  
+  font-family: 'Arial', sans-serif;  
+  background: linear-gradient(135deg, #f0f8ff, #e0e4ff);  
+  color: #333;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+}  
+#tool-app {  
+  width: 80%;  
+  max-width: 900px;  
+  background: #fff;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  
+  border-radius: 10px;  
+  overflow: hidden;  
+  display: flex;  
+  flex-direction: column;  
+  padding: 20px;  
+}  
+#flow-area {  
+  flex-grow: 1;  
+  border: 1px dashed #ccc;  
+  border-radius: 8px;  
+  background: #f9f9f9;  
+  position: relative;  
+}  
+.node {  
+  position: absolute;  
+  background: #4caf50;  
+  color: #fff;  
+  padding: 10px;  
+  border-radius: 8px;  
+  cursor: pointer;  
+  user-select: none;  
+  transition: transform 0.2s;  
+}  
+.node:hover {  
+  transform: scale(1.05);  
+}  
+.control-panel {  
+  display: flex;  
+  justify-content: space-between;  
+  margin-top: 15px;  
+}  
+.button {  
+  padding: 10px 15px;  
+  color: #fff;  
+  background: #007bff;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+.button:hover {  
+  background: #0056b3;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="flow-area"></div>  
+  <div class="control-panel">  
+    <button class="button" onclick="addNode()">Add Task</button>  
+    <button class="button" onclick="exportFlow()">Export Flow</button>  
+  </div>  
+</div>  
+<script>  
+const flowArea = document.getElementById('flow-area');  
+let nodeId = 0;  
+
+// Add a new draggable task node  
+function addNode() {  
+  const node = document.createElement('div');  
+  node.className = 'node';  
+  node.innerText = `Task ${++nodeId}`;  
+  node.style.top = `${Math.random() * 80}%`;  
+  node.style.left = `${Math.random() * 80}%`;  
+  node.setAttribute('draggable', true);  
+
+  // Drag-and-drop functionality  
+  node.addEventListener('dragstart', (e) => {  
+    e.dataTransfer.setData('text/plain', e.target.id);  
+    node.setAttribute('id', `node-${nodeId}`);  
+  });  
+
+  node.addEventListener('dragend', (e) => {  
+    const rect = flowArea.getBoundingClientRect();  
+    node.style.top = `${e.clientY - rect.top - 20}px`;  
+    node.style.left = `${e.clientX - rect.left - 50}px`;  
+  });  
+
+  flowArea.appendChild(node);  
+}  
+
+// Export the flowchart as a JSON structure  
+function exportFlow() {  
+  const nodes = Array.from(document.getElementsByClassName('node'));  
+  const flowData = nodes.map((node) => ({  
+    id: node.id,  
+    text: node.innerText,  
+    position: { x: node.offsetLeft, y: node.offsetTop },  
+  }));  
+  alert(JSON.stringify(flowData, null, 2));  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,137 @@
+---
+layout: null
+title: "ChronoCraft: Historical Timeline Builder"
+category: "Education"
+description: "Build, visualize, and interact with custom historical timelines by dragging and dropping events while uncovering hidden connections between key moments in history."
+permalink: "/tools/daily-20260413-24-chronocraft-historical-timeline-builder.html"
+generated_by: "api-true-ai"
+generated_date: "20260413"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChronoCraft: Historical Timeline Builder | Free Online Interactive Tool</title>
+  <meta name="description" content="Build, visualize, and interact with custom historical timelines by dragging and dropping events while uncovering hidden connections between key moments in history. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="ChronoCraft: Historical Timeline Builder | Free Online Interactive Tool">
+  <meta property="og:description" content="Build, visualize, and interact with custom historical timelines by dragging and dropping events while uncovering hidden connections between key moments in history. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ChronoCraft: Historical Timeline Builder | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Build, visualize, and interact with custom historical timelines by dragging and dropping events while uncovering hidden connections between key moments in history. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>ChronoCraft: Historical Timeline Builder</h1>
+    <p class="seo-subtitle">Build, visualize, and interact with custom historical timelines by dragging and dropping events while uncovering hidden connections between key moments in history.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f9; color: #333; }  
+  #tool-app { max-width: 960px; margin: 20px auto; padding: 20px; background: #fff; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); border-radius: 8px; }  
+  .timeline { display: flex; align-items: center; position: relative; height: 200px; margin: 40px 0; border-top: 2px dashed #bbb; }  
+  .event { background: #6c63ff; color: #fff; padding: 10px 15px; border-radius: 6px; position: absolute; cursor: grab; }  
+  .event.dragging { opacity: 0.8; cursor: grabbing; }  
+  .connection { position: absolute; height: 3px; background: #ff6b6b; }  
+  .event:hover { transform: scale(1.1); }  
+  .button { display: inline-block; padding: 10px 15px; margin-top: 15px; background: #4caf50; color: #fff; text-decoration: none; border-radius: 4px; cursor: pointer; }  
+</style>  
+<div id="tool-app">  
+  <h1>ChronoCraft: Historical Timeline Builder</h1>  
+  <p>Drag and drop events onto the timeline to create your own history. Connect events to see emerging patterns and explore relationships!</p>  
+  <div class="timeline" id="timeline"></div>  
+  <div id="event-pool">  
+    <h3>Event Pool</h3>  
+    <div class="event" draggable="true" data-year="1776">American Independence</div>  
+    <div class="event" draggable="true" data-year="1969">Moon Landing</div>  
+    <div class="event" draggable="true" data-year="1989">Fall of Berlin Wall</div>  
+    <div class="event" draggable="true" data-year="2008">Global Financial Crisis</div>  
+    <div class="event" draggable="true" data-year="2020">COVID-19 Pandemic</div>  
+  </div>  
+  <button id="analyze-button" class="button">Analyze Timeline</button>  
+  <div id="analysis-output"></div>  
+</div>  
+<script>  
+  const timeline = document.getElementById('timeline');  
+  const eventPool = document.getElementById('event-pool');  
+  const analyzeButton = document.getElementById('analyze-button');  
+  const analysisOutput = document.getElementById('analysis-output');  
+  
+  let draggingEvent = null;  
+  let eventsOnTimeline = [];  
+  let connections = [];  
+  
+  eventPool.addEventListener('dragstart', (e) => {  
+    draggingEvent = e.target.cloneNode(true);  
+    draggingEvent.classList.add('dragging');  
+  });  
+  
+  timeline.addEventListener('dragover', (e) => {  
+    e.preventDefault();  
+  });  
+  
+  timeline.addEventListener('drop', (e) => {  
+    e.preventDefault();  
+    const offset = e.clientX - timeline.getBoundingClientRect().left;  
+    const year = draggingEvent.getAttribute('data-year');  
+    draggingEvent.style.left = `${offset}px`;  
+    draggingEvent.style.top = '50%';  
+    draggingEvent.dataset.offset = offset;  
+    draggingEvent.classList.remove('dragging');  
+    eventsOnTimeline.push({ el: draggingEvent, year: parseInt(year), offset });  
+    timeline.appendChild(draggingEvent);  
+    updateConnections();  
+  });  
+  
+  const updateConnections = () => {  
+    connections.forEach((line) => line.remove());  
+    connections = [];  
+
+    eventsOnTimeline.sort((a, b) => a.offset - b.offset);  
+    for (let i = 0; i < eventsOnTimeline.length - 1; i++) {  
+      const start = eventsOnTimeline[i];  
+      const end = eventsOnTimeline[i + 1];  
+      const line = document.createElement('div');  
+      line.classList.add('connection');  
+      const startX = start.offset;  
+      const endX = end.offset;  
+      line.style.left = `${startX}px`;  
+      line.style.width = `${endX - startX}px`;  
+      line.style.top = '99px';  
+      timeline.appendChild(line);  
+      connections.push(line);  
+    }  
+  };  
+  
+  analyzeButton.addEventListener('click', () => {  
+    analysisOutput.innerHTML = '';  
+    if (eventsOnTimeline.length === 0) {  
+      analysisOutput.innerHTML = '<p>Please add events to the timeline!</p>';  
+      return;  
+    }  
+    const sortedEvents = eventsOnTimeline.sort((a, b) => a.offset - b.offset);  
+    const analysis = sortedEvents.map((evt, index) => {  
+      const next = sortedEvents[index + 1];  
+      if (next) {  
+        const gap = next.year - evt.year;  
+        return `<li>Gap between "${evt.el.textContent}" and "${next.el.textContent}" is ${gap} years.</li>`;  
+      }  
+      return null;  
+    }).filter(Boolean).join('');  
+    analysisOutput.innerHTML = `<ul>${analysis}</ul>`;  
+  });  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

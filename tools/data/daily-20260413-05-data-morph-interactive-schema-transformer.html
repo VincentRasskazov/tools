@@ -1,0 +1,137 @@
+---
+layout: null
+title: "Data Morph: Interactive Schema Transformer"
+category: "Data"
+description: "Playfully reshape and visualize JSON data structures into new formats using drag-and-drop mechanics and dynamic previews."
+permalink: "/tools/daily-20260413-05-data-morph-interactive-schema-transformer.html"
+generated_by: "api-true-ai"
+generated_date: "20260413"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Morph: Interactive Schema Transformer | Free Online Interactive Tool</title>
+  <meta name="description" content="Playfully reshape and visualize JSON data structures into new formats using drag-and-drop mechanics and dynamic previews. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Morph: Interactive Schema Transformer | Free Online Interactive Tool">
+  <meta property="og:description" content="Playfully reshape and visualize JSON data structures into new formats using drag-and-drop mechanics and dynamic previews. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Morph: Interactive Schema Transformer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Playfully reshape and visualize JSON data structures into new formats using drag-and-drop mechanics and dynamic previews. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Morph: Interactive Schema Transformer</h1>
+    <p class="seo-subtitle">Playfully reshape and visualize JSON data structures into new formats using drag-and-drop mechanics and dynamic previews.</p>
+    <style>  
+  #tool-app {  
+    font-family: Arial, sans-serif;  
+    margin: 20px auto;  
+    max-width: 800px;  
+    text-align: center;  
+  }  
+  .node {  
+    display: inline-block;  
+    padding: 10px 15px;  
+    margin: 5px;  
+    border: 1px solid #ccc;  
+    border-radius: 5px;  
+    background: #f9f9f9;  
+    cursor: grab;  
+  }  
+  .container {  
+    border: 2px dashed #ccc;  
+    padding: 20px;  
+    min-height: 200px;  
+    margin: 10px 0;  
+    border-radius: 10px;  
+  }  
+  .container.highlight {  
+    border-color: #6c63ff;  
+    background: #eef;  
+  }  
+  #preview {  
+    margin-top: 20px;  
+    background: #f4f4f4;  
+    border-radius: 5px;  
+    padding: 15px;  
+    text-align: left;  
+    font-family: monospace;  
+    white-space: pre-wrap;  
+    overflow: auto;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h1>Data Morph</h1>  
+  <p>Transform JSON data using drag-and-drop nodes into containers for dynamic schema creation!</p>  
+  <div id="data-source" class="container">  
+    <div class="node" draggable="true" data-type="string">Name</div>  
+    <div class="node" draggable="true" data-type="number">Age</div>  
+    <div class="node" draggable="true" data-type="boolean">Active</div>  
+  </div>  
+  <div id="schema-builder" class="container">  
+    <p>Drag here to build your schema...</p>  
+  </div>  
+  <h2>Preview</h2>  
+  <div id="preview">{}</div>  
+</div>  
+<script>  
+  const dataSource = document.getElementById('data-source');  
+  const schemaBuilder = document.getElementById('schema-builder');  
+  const preview = document.getElementById('preview');  
+
+  dataSource.addEventListener('dragstart', (e) => {  
+    e.dataTransfer.setData('text/plain', e.target.dataset.type);  
+    e.dataTransfer.setData('text/name', e.target.innerText);  
+  });  
+
+  schemaBuilder.addEventListener('dragover', (e) => {  
+    e.preventDefault();  
+    schemaBuilder.classList.add('highlight');  
+  });  
+
+  schemaBuilder.addEventListener('dragleave', () => {  
+    schemaBuilder.classList.remove('highlight');  
+  });  
+
+  schemaBuilder.addEventListener('drop', (e) => {  
+    e.preventDefault();  
+    schemaBuilder.classList.remove('highlight');  
+
+    const type = e.dataTransfer.getData('text/plain');  
+    const name = e.dataTransfer.getData('text/name');  
+    const newNode = document.createElement('div');  
+    newNode.className = 'node';  
+    newNode.innerText = `${name}: ${type}`;  
+    schemaBuilder.appendChild(newNode);  
+
+    updatePreview();  
+  });  
+
+  function updatePreview() {  
+    const nodes = schemaBuilder.querySelectorAll('.node');  
+    const schema = {};  
+    nodes.forEach(node => {  
+      const [key, type] = node.innerText.split(': ');  
+      schema[key.trim()] = type.trim();  
+    });  
+    preview.innerText = JSON.stringify(schema, null, 2);  
+  }  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
