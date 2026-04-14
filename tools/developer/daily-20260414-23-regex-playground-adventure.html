@@ -1,0 +1,146 @@
+---
+layout: null
+title: "Regex Playground Adventure"
+category: "Developer"
+description: "A gamified tool where developers solve puzzles by crafting regular expressions to match hidden patterns in progressively challenging levels."
+permalink: "/tools/daily-20260414-23-regex-playground-adventure.html"
+generated_by: "api-true-ai"
+generated_date: "20260414"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Playground Adventure | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool where developers solve puzzles by crafting regular expressions to match hidden patterns in progressively challenging levels. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Regex Playground Adventure | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool where developers solve puzzles by crafting regular expressions to match hidden patterns in progressively challenging levels. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Regex Playground Adventure | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool where developers solve puzzles by crafting regular expressions to match hidden patterns in progressively challenging levels. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Regex Playground Adventure</h1>
+    <p class="seo-subtitle">A gamified tool where developers solve puzzles by crafting regular expressions to match hidden patterns in progressively challenging levels.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background: #1f1f1f;  
+  color: #f0f0f0;  
+}  
+#tool-app {  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  height: 100vh;  
+}  
+#game-container {  
+  width: 70%;  
+  padding: 20px;  
+  background: #2a2a2a;  
+  border-radius: 10px;  
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);  
+  text-align: center;  
+}  
+input {  
+  width: 100%;  
+  padding: 10px;  
+  border: 1px solid #444;  
+  border-radius: 5px;  
+  margin-top: 15px;  
+  background: #333;  
+  color: #fff;  
+}  
+button {  
+  padding: 10px 20px;  
+  margin-top: 10px;  
+  border: none;  
+  border-radius: 5px;  
+  background: #4caf50;  
+  color: #fff;  
+  cursor: pointer;  
+}  
+button:hover {  
+  background: #45a049;  
+}  
+#output {  
+  margin-top: 25px;  
+  padding: 10px;  
+  background: #444;  
+  border-radius: 5px;  
+  color: #d0d0d0;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="game-container">  
+    <h1>Regex Playground Adventure</h1>  
+    <p>Level: <span id="level">1</span></p>  
+    <p id="pattern-description">Match all words that start with "a".</p>  
+    <p><strong>Test String:</strong> <span id="test-string">apple art ball ant axe</span></p>  
+    <input id="regex-input" type="text" placeholder="Enter your regex..." />  
+    <button onclick="checkRegex()">Submit Regex</button>  
+    <div id="output"></div>  
+  </div>  
+</div>  
+<script>  
+let level = 1;  
+const levels = [  
+  { description: 'Match all words that start with "a".', testString: 'apple art ball ant axe', solution: /\ba\w*/g },  
+  { description: 'Match all numbers.', testString: '123 cat 456 78 dog', solution: /\d+/g },  
+  { description: 'Match email addresses.', testString: 'email@example.com test@domain.net user_123@service.org', solution: /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g },  
+  { description: 'Match hashtags.', testString: 'I love #coding and #webdev.', solution: /#\w+/g },  
+];  
+
+function checkRegex() {  
+  const userRegex = new RegExp(document.getElementById('regex-input').value);  
+  const testString = levels[level - 1].testString;  
+  const correctSolution = levels[level - 1].solution;  
+  const userMatches = testString.match(userRegex);  
+  const solutionMatches = testString.match(correctSolution);  
+
+  if (JSON.stringify(userMatches) === JSON.stringify(solutionMatches)) {  
+    document.getElementById('output').innerHTML = `<p style="color:lightgreen">Correct! Moving to next level...</p>`;  
+    level++;  
+    if (level > levels.length) {  
+      document.getElementById('output').innerHTML = `<p style="color:gold">Congratulations! You've completed the Regex Playground Adventure!</p>`;  
+      document.getElementById('game-container').style.display = 'none';  
+    } else {  
+      loadLevel();  
+    }  
+  } else {  
+    document.getElementById('output').innerHTML = `<p style="color:red">Incorrect! Try again.</p>`;  
+  }  
+}  
+
+function loadLevel() {  
+  document.getElementById('level').innerText = level;  
+  document.getElementById('pattern-description').innerText = levels[level - 1].description;  
+  document.getElementById('test-string').innerText = levels[level - 1].testString;  
+  document.getElementById('regex-input').value = '';  
+  document.getElementById('output').innerText = '';  
+}  
+
+loadLevel();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

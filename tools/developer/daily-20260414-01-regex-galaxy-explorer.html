@@ -1,0 +1,153 @@
+---
+layout: null
+title: "Regex Galaxy Explorer"
+category: "Developer"
+description: "An interactive mini-game where developers create and test regular expressions to explore and unlock planets in a procedurally generated galaxy."
+permalink: "/tools/daily-20260414-01-regex-galaxy-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260414"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Galaxy Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive mini-game where developers create and test regular expressions to explore and unlock planets in a procedurally generated galaxy. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Regex Galaxy Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive mini-game where developers create and test regular expressions to explore and unlock planets in a procedurally generated galaxy. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Regex Galaxy Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive mini-game where developers create and test regular expressions to explore and unlock planets in a procedurally generated galaxy. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Regex Galaxy Explorer</h1>
+    <p class="seo-subtitle">An interactive mini-game where developers create and test regular expressions to explore and unlock planets in a procedurally generated galaxy.</p>
+    <style>  
+  body {  
+    font-family: 'Arial', sans-serif;  
+    background: radial-gradient(circle, #0d1e40, #000);  
+    color: #fff;  
+    margin: 0;  
+    padding: 0;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+    overflow: hidden;  
+  }  
+  #tool-app {  
+    text-align: center;  
+    width: 90%;  
+    max-width: 800px;  
+  }  
+  .planet {  
+    display: inline-block;  
+    margin: 10px;  
+    width: 80px;  
+    height: 80px;  
+    background: linear-gradient(145deg, #4e89ff, #123456);  
+    border-radius: 50%;  
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);  
+    animation: spin 10s linear infinite;  
+  }  
+  @keyframes spin {  
+    from { transform: rotate(0deg); }  
+    to { transform: rotate(360deg); }  
+  }  
+  .unlocked {  
+    border: 2px dashed #ffd700;  
+  }  
+  input, button {  
+    padding: 10px 15px;  
+    font-size: 1em;  
+    margin: 10px 5px;  
+    border: none;  
+    border-radius: 5px;  
+  }  
+  input {  
+    width: 70%;  
+  }  
+  button {  
+    background-color: #28a745;  
+    color: white;  
+    cursor: pointer;  
+  }  
+  button:hover {  
+    background-color: #218838;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h1>Regex Galaxy Explorer</h1>  
+  <p>Enter a regular expression to unlock planets by matching their names!</p>  
+  <div id="galaxy"></div>  
+  <input type="text" id="regex-input" placeholder="Enter regex (e.g., ^[A-Z])">  
+  <button id="submit-regex">Test Regex</button>  
+  <p id="feedback"></p>  
+</div>  
+<script>  
+  // Planets data  
+  const planets = [  
+    { name: 'Mercurial', unlocked: false },  
+    { name: 'Venusian', unlocked: false },  
+    { name: 'Terran', unlocked: false },  
+    { name: 'Martian', unlocked: false },  
+    { name: 'Jovian', unlocked: false },  
+    { name: 'Saturnian', unlocked: false },  
+    { name: 'Uranian', unlocked: false },  
+    { name: 'Neptunian', unlocked: false }  
+  ];  
+
+  const galaxyDiv = document.getElementById('galaxy');  
+  const feedback = document.getElementById('feedback');  
+
+  // Render planets  
+  function renderGalaxy() {  
+    galaxyDiv.innerHTML = '';  
+    planets.forEach((planet, index) => {  
+      const planetDiv = document.createElement('div');  
+      planetDiv.className = `planet ${planet.unlocked ? 'unlocked' : ''}`;  
+      planetDiv.title = planet.name;  
+      planetDiv.innerHTML = planet.unlocked ? planet.name[0] : '?';  
+      galaxyDiv.appendChild(planetDiv);  
+    });  
+  }  
+
+  renderGalaxy();  
+
+  // Test regex  
+  document.getElementById('submit-regex').addEventListener('click', () => {  
+    const regexInput = document.getElementById('regex-input').value;  
+    feedback.innerText = '';  
+
+    try {  
+      const regex = new RegExp(regexInput);  
+      planets.forEach(planet => {  
+        if (regex.test(planet.name)) {  
+          planet.unlocked = true;  
+        }  
+      });  
+      renderGalaxy();  
+      feedback.innerText = 'Regex executed successfully! Check the unlocked planets!';  
+    } catch (e) {  
+      feedback.innerText = 'Invalid regex: ' + e.message;  
+    }  
+  });  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

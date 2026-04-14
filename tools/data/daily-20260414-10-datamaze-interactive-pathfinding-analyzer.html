@@ -1,0 +1,189 @@
+---
+layout: null
+title: "DataMaze: Interactive Pathfinding Analyzer"
+category: "Data"
+description: "Explore and solve data traversal puzzles while visualizing how algorithms like BFS, DFS, and Dijkstra process data in real-time."
+permalink: "/tools/daily-20260414-10-datamaze-interactive-pathfinding-analyzer.html"
+generated_by: "api-true-ai"
+generated_date: "20260414"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataMaze: Interactive Pathfinding Analyzer | Free Online Interactive Tool</title>
+  <meta name="description" content="Explore and solve data traversal puzzles while visualizing how algorithms like BFS, DFS, and Dijkstra process data in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataMaze: Interactive Pathfinding Analyzer | Free Online Interactive Tool">
+  <meta property="og:description" content="Explore and solve data traversal puzzles while visualizing how algorithms like BFS, DFS, and Dijkstra process data in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataMaze: Interactive Pathfinding Analyzer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Explore and solve data traversal puzzles while visualizing how algorithms like BFS, DFS, and Dijkstra process data in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataMaze: Interactive Pathfinding Analyzer</h1>
+    <p class="seo-subtitle">Explore and solve data traversal puzzles while visualizing how algorithms like BFS, DFS, and Dijkstra process data in real-time.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: #252525; color: #f4f4f4; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }  
+  #tool-app { width: 80vw; height: 80vh; background: #1e1e1e; border: 2px solid #444; border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); display: grid; grid-template-columns: 1fr 3fr; overflow: hidden; }  
+  .controls { padding: 10px; border-right: 2px solid #444; }  
+  .visualizer { position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(25px, 1fr)); gap: 2px; background: #333; margin: 10px; }  
+  .cell { width: 25px; height: 25px; border-radius: 3px; background: #555; display: flex; justify-content: center; align-items: center; color: #ccc; font-size: 0.8em; }  
+  .cell.start { background: #4caf50; color: #fff; }  
+  .cell.end { background: #f44336; color: #fff; }  
+  .cell.path { background: #2196f3; }  
+  .cell.visited { background: #ffc107; }  
+  button { margin: 5px; padding: 10px; border: none; border-radius: 5px; background: #2196f3; color: #fff; cursor: pointer; }  
+  button:hover { background: #1976d2; }  
+</style>  
+<div id="tool-app">  
+  <div class="controls">  
+    <h2>DataMaze Controls</h2>  
+    <p>Choose the algorithm:</p>  
+    <button onclick="startAlgorithm('bfs')">Breadth-First Search (BFS)</button>  
+    <button onclick="startAlgorithm('dfs')">Depth-First Search (DFS)</button>  
+    <button onclick="startAlgorithm('dijkstra')">Dijkstra's Pathfinding</button>  
+    <p>Reset the maze:</p>  
+    <button onclick="resetMaze()">Reset</button>  
+  </div>  
+  <div class="visualizer" id="visualizer"></div>  
+</div>  
+<script>  
+  const rows = 20, cols = 20;  
+  let maze = [];  
+  let start = { row: 0, col: 0 }, end = { row: rows - 1, col: cols - 1 };  
+  const visualizer = document.getElementById('visualizer');  
+
+  function resetMaze() {  
+    maze = Array.from({ length: rows }, (_, row) =>  
+      Array.from({ length: cols }, (_, col) =>  
+        ({ row, col, visited: false, isPath: false })  
+      )  
+    );  
+    renderMaze();  
+  }  
+
+  function renderMaze() {  
+    visualizer.innerHTML = '';  
+    maze.forEach(row => row.forEach(cell => {  
+      const div = document.createElement('div');  
+      div.className = 'cell';  
+      if (cell.row === start.row && cell.col === start.col) div.classList.add('start');  
+      if (cell.row === end.row && cell.col === end.col) div.classList.add('end');  
+      if (cell.visited) div.classList.add('visited');  
+      if (cell.isPath) div.classList.add('path');  
+      visualizer.appendChild(div);  
+    }));  
+  }  
+
+  async function startAlgorithm(type) {  
+    resetMaze();  
+    if (type === 'bfs') await bfs();  
+    else if (type === 'dfs') await dfs(start.row, start.col);  
+    else if (type === 'dijkstra') await dijkstra();  
+    renderMaze();  
+  }  
+
+  async function bfs() {  
+    let queue = [start];  
+    while (queue.length) {  
+      const current = queue.shift();  
+      if (current.row === end.row && current.col === end.col) return tracePath(current);  
+      maze[current.row][current.col].visited = true;  
+      renderMaze();  
+      await sleep(100);  
+      getNeighbors(current).forEach(neighbor => {  
+        if (!maze[neighbor.row][neighbor.col].visited) {  
+          maze[neighbor.row][neighbor.col].visited = true;  
+          neighbor.prev = current;  
+          queue.push(neighbor);  
+        }  
+      });  
+    }  
+  }  
+
+  async function dfs(row, col, prev = null) {  
+    if (row < 0 || col < 0 || row >= rows || col >= cols || maze[row][col].visited) return;  
+    maze[row][col].visited = true;  
+    maze[row][col].prev = prev;  
+    renderMaze();  
+    await sleep(100);  
+    if (row === end.row && col === end.col) return tracePath(maze[row][col]);  
+    for (const neighbor of getNeighbors(maze[row][col])) {  
+      await dfs(neighbor.row, neighbor.col, maze[row][col]);  
+    }  
+  }  
+
+  async function dijkstra() {  
+    const dist = Array.from({ length: rows }, () => Array(cols).fill(Infinity));  
+    const visited = Array.from({ length: rows }, () => Array(cols).fill(false));  
+    dist[start.row][start.col] = 0;  
+    let current = start;  
+
+    while (!visited[end.row][end.col]) {  
+      let minDist = Infinity;  
+      maze.forEach(row => row.forEach(cell => {  
+        if (!visited[cell.row][cell.col] && dist[cell.row][cell.col] < minDist) {  
+          current = cell;  
+          minDist = dist[cell.row][cell.col];  
+        }  
+      }));  
+
+      visited[current.row][current.col] = true;  
+      renderMaze();  
+      await sleep(100);  
+
+      getNeighbors(current).forEach(neighbor => {  
+        if (!visited[neighbor.row][neighbor.col]) {  
+          const newDist = dist[current.row][current.col] + 1;  
+          if (newDist < dist[neighbor.row][neighbor.col]) {  
+            dist[neighbor.row][neighbor.col] = newDist;  
+            neighbor.prev = current;  
+          }  
+        }  
+      });  
+    }  
+
+    tracePath(maze[end.row][end.col]);  
+  }  
+
+  function getNeighbors(cell) {  
+    const { row, col } = cell;  
+    return [  
+      { row: row - 1, col },  
+      { row, col: col + 1 },  
+      { row: row + 1, col },  
+      { row, col: col - 1 }  
+    ].filter(  
+      neighbor => neighbor.row >= 0 && neighbor.col >= 0 && neighbor.row < rows && neighbor.col < cols  
+    ).map(neighbor => maze[neighbor.row][neighbor.col]);  
+  }  
+
+  function tracePath(cell) {  
+    while (cell) {  
+      maze[cell.row][cell.col].isPath = true;  
+      cell = cell.prev;  
+    }  
+  }  
+
+  function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }  
+
+  resetMaze();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

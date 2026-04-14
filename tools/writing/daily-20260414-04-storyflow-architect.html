@@ -1,0 +1,166 @@
+---
+layout: null
+title: "StoryFlow Architect"
+category: "Writing"
+description: "A dynamic interactive web tool that helps writers visualize and build nonlinear storylines with branching paths, timelines, and character arcs."
+permalink: "/tools/daily-20260414-04-storyflow-architect.html"
+generated_by: "api-true-ai"
+generated_date: "20260414"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StoryFlow Architect | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic interactive web tool that helps writers visualize and build nonlinear storylines with branching paths, timelines, and character arcs. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="StoryFlow Architect | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic interactive web tool that helps writers visualize and build nonlinear storylines with branching paths, timelines, and character arcs. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StoryFlow Architect | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic interactive web tool that helps writers visualize and build nonlinear storylines with branching paths, timelines, and character arcs. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>StoryFlow Architect</h1>
+    <p class="seo-subtitle">A dynamic interactive web tool that helps writers visualize and build nonlinear storylines with branching paths, timelines, and character arcs.</p>
+    <style>  
+  body {  
+    font-family: 'Arial', sans-serif;  
+    color: #333;  
+    background: linear-gradient(to right, #f7f7f7, #e2e2e2);  
+    margin: 0;  
+    padding: 20px;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+  }  
+  #tool-app {  
+    width: 90%;  
+    max-width: 1200px;  
+    background: #fff;  
+    padding: 20px;  
+    border-radius: 10px;  
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
+  }  
+  .node {  
+    margin: 10px;  
+    padding: 10px 15px;  
+    border: 1px solid #ccc;  
+    border-radius: 5px;  
+    background: #f9f9f9;  
+    cursor: pointer;  
+  }  
+  .node:hover {  
+    background: #eef;  
+    border-color: #88f;  
+  }  
+  #canvas {  
+    width: 100%;  
+    height: 500px;  
+    border: 1px solid #ddd;  
+    position: relative;  
+    overflow: auto;  
+  }  
+  #controls {  
+    margin-bottom: 10px;  
+  }  
+  .btn {  
+    padding: 10px 15px;  
+    margin-right: 10px;  
+    background: #007BFF;  
+    color: white;  
+    border: none;  
+    border-radius: 5px;  
+    cursor: pointer;  
+  }  
+  .btn:hover {  
+    background: #0056b3;  
+  }  
+</style>  
+<div id="tool-app">  
+  <div id="controls">  
+    <button class="btn" id="add-node">Add Story Node</button>  
+    <button class="btn" id="export-story">Export Story</button>  
+  </div>  
+  <div id="canvas"></div>  
+</div>  
+<script>  
+const canvas = document.getElementById('canvas');  
+const addNodeButton = document.getElementById('add-node');  
+const exportStoryButton = document.getElementById('export-story');  
+let nodeIdCounter = 0;  
+const nodes = [];  
+
+// Function to create a new story node  
+function createNode(x, y, text = "New Node") {  
+  const node = document.createElement('div');  
+  node.classList.add('node');  
+  node.textContent = text;  
+  node.style.position = 'absolute';  
+  node.style.left = `${x}px`;  
+  node.style.top = `${y}px`;  
+  node.draggable = true;  
+  node.dataset.id = nodeIdCounter++;  
+
+  node.addEventListener('dragstart', (e) => {  
+    e.dataTransfer.setData('text/plain', node.dataset.id);  
+  });  
+
+  node.addEventListener('dblclick', () => {  
+    const newText = prompt('Edit node text:', node.textContent);  
+    if (newText !== null) node.textContent = newText;  
+  });  
+
+  canvas.appendChild(node);  
+  nodes.push({ id: node.dataset.id, x, y, text });  
+}  
+
+// Add event listener to create new node  
+addNodeButton.addEventListener('click', () => {  
+  createNode(50, 50);  
+});  
+
+// Export the story as JSON  
+exportStoryButton.addEventListener('click', () => {  
+  const exportedStory = nodes.map(node => ({  
+    id: node.id,  
+    x: node.x,  
+    y: node.y,  
+    text: node.text || '',  
+  }));  
+  alert(JSON.stringify(exportedStory, null, 2));  
+});  
+
+// Allow dragging nodes around the canvas  
+canvas.addEventListener('dragover', (e) => e.preventDefault());  
+canvas.addEventListener('drop', (e) => {  
+  e.preventDefault();  
+  const nodeId = e.dataTransfer.getData('text/plain');  
+  const node = document.querySelector(`.node[data-id="${nodeId}"]`);  
+  const rect = canvas.getBoundingClientRect();  
+  node.style.left = `${e.clientX - rect.left}px`;  
+  node.style.top = `${e.clientY - rect.top}px`;  
+
+  const nodeData = nodes.find(n => n.id === nodeId);  
+  nodeData.x = e.clientX - rect.left;  
+  nodeData.y = e.clientY - rect.top;  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

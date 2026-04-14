@@ -1,0 +1,201 @@
+---
+layout: null
+title: "Data Weave: Interactive Relationship Mapper"
+category: "Data"
+description: "A highly visual tool that lets users drag and drop data nodes to dynamically create, connect, and analyze relationships in datasets."
+permalink: "/tools/daily-20260414-09-data-weave-interactive-relationship-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260414"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Weave: Interactive Relationship Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly visual tool that lets users drag and drop data nodes to dynamically create, connect, and analyze relationships in datasets. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Weave: Interactive Relationship Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly visual tool that lets users drag and drop data nodes to dynamically create, connect, and analyze relationships in datasets. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Weave: Interactive Relationship Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly visual tool that lets users drag and drop data nodes to dynamically create, connect, and analyze relationships in datasets. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Weave: Interactive Relationship Mapper</h1>
+    <p class="seo-subtitle">A highly visual tool that lets users drag and drop data nodes to dynamically create, connect, and analyze relationships in datasets.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(135deg, #1e3c72, #2a5298);  
+  margin: 0;  
+  height: 100vh;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 90%;  
+  height: 80%;  
+  background: #ffffff;  
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);  
+  border-radius: 12px;  
+  position: relative;  
+  overflow: hidden;  
+}  
+canvas {  
+  width: 100%;  
+  height: 100%;  
+  display: block;  
+}  
+#toolbar {  
+  position: absolute;  
+  top: 0;  
+  left: 0;  
+  width: 100%;  
+  background: rgba(0, 0, 0, 0.8);  
+  color: white;  
+  padding: 10px;  
+  display: flex;  
+  justify-content: space-between;  
+  box-sizing: border-box;  
+}  
+button {  
+  background: #0078d4;  
+  border: none;  
+  border-radius: 4px;  
+  padding: 8px 12px;  
+  color: white;  
+  cursor: pointer;  
+  font-size: 14px;  
+  margin-left: 10px;  
+  transition: 0.3s;  
+}  
+button:hover {  
+  background: #005fa3;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="toolbar">  
+    <div>Data Weave</div>  
+    <div>  
+      <button id="addNode">Add Node</button>  
+      <button id="clearNodes">Clear All</button>  
+    </div>  
+  </div>  
+  <canvas id="canvas"></canvas>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById('canvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = canvas.offsetWidth;  
+canvas.height = canvas.offsetHeight;  
+
+let nodes = [];  
+let connections = [];  
+let draggingNode = null;  
+
+class Node {  
+  constructor(x, y, id) {  
+    this.x = x;  
+    this.y = y;  
+    this.id = id;  
+    this.radius = 20;  
+    this.color = '#3b82f6';  
+    this.isDragging = false;  
+  }  
+
+  draw() {  
+    ctx.beginPath();  
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);  
+    ctx.fillStyle = this.color;  
+    ctx.fill();  
+    ctx.closePath();  
+    ctx.fillStyle = 'white';  
+    ctx.font = '12px Arial';  
+    ctx.textAlign = 'center';  
+    ctx.fillText(this.id, this.x, this.y + 4);  
+  }  
+
+  isHovered(mouseX, mouseY) {  
+    const dist = Math.sqrt((this.x - mouseX) ** 2 + (this.y - mouseY) ** 2);  
+    return dist < this.radius;  
+  }  
+}  
+
+function drawConnections() {  
+  ctx.strokeStyle = '#94a3b8';  
+  ctx.lineWidth = 2;  
+  connections.forEach(([nodeA, nodeB]) => {  
+    ctx.beginPath();  
+    ctx.moveTo(nodeA.x, nodeA.y);  
+    ctx.lineTo(nodeB.x, nodeB.y);  
+    ctx.stroke();  
+    ctx.closePath();  
+  });  
+}  
+
+function render() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  drawConnections();  
+  nodes.forEach(node => node.draw());  
+  requestAnimationFrame(render);  
+}  
+
+canvas.addEventListener('mousedown', (e) => {  
+  const mouseX = e.offsetX;  
+  const mouseY = e.offsetY;  
+  draggingNode = nodes.find(node => node.isHovered(mouseX, mouseY));  
+  if (!draggingNode && nodes.length > 0) {  
+    // Connect nodes  
+    const hoverNode = nodes.find(node => node.isHovered(mouseX, mouseY));  
+    if (hoverNode) {  
+      if (!connections.some(([a, b]) => (a === draggingNode && b === hoverNode) || (a === hoverNode && b === draggingNode))) {  
+        connections.push([draggingNode, hoverNode]);  
+      }  
+    }  
+  }  
+});  
+
+canvas.addEventListener('mousemove', (e) => {  
+  if (draggingNode) {  
+    draggingNode.x = e.offsetX;  
+    draggingNode.y = e.offsetY;  
+  }  
+});  
+
+canvas.addEventListener('mouseup', () => {  
+  draggingNode = null;  
+});  
+
+document.getElementById('addNode').addEventListener('click', () => {  
+  const newNode = new Node(Math.random() * canvas.width, Math.random() * canvas.height, nodes.length + 1);  
+  nodes.push(newNode);  
+});  
+
+document.getElementById('clearNodes').addEventListener('click', () => {  
+  nodes = [];  
+  connections = [];  
+});  
+
+render();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

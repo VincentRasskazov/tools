@@ -1,0 +1,233 @@
+---
+layout: null
+title: "\"Code Dependency Explorer 3000\""
+category: "Developer"
+description: "Visualize, interact with, and untangle your project's JavaScript module dependencies in a dynamic, 3D force-directed graph."
+permalink: "/tools/daily-20260414-07-code-dependency-explorer-3000.html"
+generated_by: "api-true-ai"
+generated_date: "20260414"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>&quot;Code Dependency Explorer 3000&quot; | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize, interact with, and untangle your project's JavaScript module dependencies in a dynamic, 3D force-directed graph. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="&quot;Code Dependency Explorer 3000&quot; | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize, interact with, and untangle your project's JavaScript module dependencies in a dynamic, 3D force-directed graph. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="&quot;Code Dependency Explorer 3000&quot; | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize, interact with, and untangle your project's JavaScript module dependencies in a dynamic, 3D force-directed graph. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>&quot;Code Dependency Explorer 3000&quot;</h1>
+    <p class="seo-subtitle">Visualize, interact with, and untangle your project's JavaScript module dependencies in a dynamic, 3D force-directed graph.</p>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #1e1e2f;
+    color: #ffffff;
+    overflow: hidden;
+  }
+
+  #tool-app {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .tooltip {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    pointer-events: none;
+    white-space: nowrap;
+    display: none;
+  }
+</style>
+<div id="tool-app">
+  <canvas id="graphCanvas"></canvas>
+  <div id="tooltip" class="tooltip"></div>
+</div>
+<script>
+  const canvas = document.getElementById('graphCanvas');
+  const tooltip = document.getElementById('tooltip');
+  const ctx = canvas.getContext('2d');
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+
+  canvas.width = width;
+  canvas.height = height;
+
+  // Sample data: Fake JS module dependencies
+  const modules = [
+    { id: 'app.js', dependencies: ['utils.js', 'api.js'] },
+    { id: 'utils.js', dependencies: ['helpers.js'] },
+    { id: 'api.js', dependencies: [] },
+    { id: 'helpers.js', dependencies: [] },
+    { id: 'config.js', dependencies: ['api.js', 'helpers.js'] },
+  ];
+
+  // Convert to node-link data
+  const nodes = [];
+  const links = [];
+  const nodeMap = new Map();
+
+  modules.forEach((mod, index) => {
+    const node = { id: mod.id, x: Math.random() * width, y: Math.random() * height, vx: 0, vy: 0 };
+    nodes.push(node);
+    nodeMap.set(mod.id, node);
+
+    mod.dependencies.forEach(dep => {
+      links.push({ source: mod.id, target: dep });
+    });
+  });
+
+  // Physics simulation
+  function updateSimulation() {
+    const repulsionStrength = 1000;
+    const linkStrength = 0.05;
+
+    // Apply forces
+    nodes.forEach((node) => {
+      node.vx *= 0.9;
+      node.vy *= 0.9;
+
+      nodes.forEach((other) => {
+        if (node !== other) {
+          const dx = node.x - other.x;
+          const dy = node.y - other.y;
+          const distance = Math.sqrt(dx * dx + dy * dy) || 1;
+
+          const force = repulsionStrength / Math.pow(distance, 2);
+
+          node.vx += (dx / distance) * force;
+          node.vy += (dy / distance) * force;
+        }
+      });
+    });
+
+    links.forEach((link) => {
+      const source = nodeMap.get(link.source);
+      const target = nodeMap.get(link.target);
+
+      const dx = target.x - source.x;
+      const dy = target.y - source.y;
+      const distance = Math.sqrt(dx * dx + dy * dy) || 1;
+
+      const force = (distance - 100) * linkStrength;
+
+      const fx = (dx / distance) * force;
+      const fy = (dy / distance) * force;
+
+      source.vx += fx;
+      source.vy += fy;
+
+      target.vx -= fx;
+      target.vy -= fy;
+    });
+
+    // Update positions
+    nodes.forEach((node) => {
+      node.x += node.vx;
+      node.y += node.vy;
+
+      node.x = Math.max(50, Math.min(width - 50, node.x));
+      node.y = Math.max(50, Math.min(height - 50, node.y));
+    });
+  }
+
+  // Render graph
+  function drawGraph() {
+    ctx.clearRect(0, 0, width, height);
+
+    // Draw links
+    ctx.strokeStyle = '#888';
+    ctx.lineWidth = 1;
+    links.forEach((link) => {
+      const source = nodeMap.get(link.source);
+      const target = nodeMap.get(link.target);
+
+      ctx.beginPath();
+      ctx.moveTo(source.x, source.y);
+      ctx.lineTo(target.x, target.y);
+      ctx.stroke();
+    });
+
+    // Draw nodes
+    nodes.forEach((node) => {
+      ctx.fillStyle = '#1f78b4';
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, 8, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = '#ffffff';
+      ctx.stroke();
+
+      ctx.fillStyle = '#fff';
+      ctx.font = '12px Arial';
+      ctx.fillText(node.id, node.x + 12, node.y + 4);
+    });
+  }
+
+  // Tooltip for nodes
+  canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+
+    let foundNode = null;
+    nodes.forEach((node) => {
+      const dx = mouseX - node.x;
+      const dy = mouseY - node.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      if (distance < 10) {
+        foundNode = node;
+      }
+    });
+
+    if (foundNode) {
+      tooltip.style.display = 'block';
+      tooltip.style.left = `${e.clientX + 10}px`;
+      tooltip.style.top = `${e.clientY + 10}px`;
+      tooltip.textContent = `Module: ${foundNode.id}`;
+    } else {
+      tooltip.style.display = 'none';
+    }
+  });
+
+  function render() {
+    updateSimulation();
+    drawGraph();
+    requestAnimationFrame(render);
+  }
+
+  render();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

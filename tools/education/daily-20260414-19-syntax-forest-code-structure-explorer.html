@@ -1,0 +1,188 @@
+---
+layout: null
+title: "Syntax Forest: Code Structure Explorer"
+category: "Education"
+description: "Visualize and interact with a dynamic forest where each tree represents the syntactic structure of your input code, helping you learn programming concepts like loops, conditions, and more."
+permalink: "/tools/daily-20260414-19-syntax-forest-code-structure-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260414"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Syntax Forest: Code Structure Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize and interact with a dynamic forest where each tree represents the syntactic structure of your input code, helping you learn programming concepts like loops, conditions, and more. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Syntax Forest: Code Structure Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize and interact with a dynamic forest where each tree represents the syntactic structure of your input code, helping you learn programming concepts like loops, conditions, and more. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Syntax Forest: Code Structure Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize and interact with a dynamic forest where each tree represents the syntactic structure of your input code, helping you learn programming concepts like loops, conditions, and more. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Syntax Forest: Code Structure Explorer</h1>
+    <p class="seo-subtitle">Visualize and interact with a dynamic forest where each tree represents the syntactic structure of your input code, helping you learn programming concepts like loops, conditions, and more.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to bottom, #e0f7fa, #006064);  
+  color: #004d40;  
+  margin: 0;  
+  padding: 20px;  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+}  
+#tool-app {  
+  width: 80%;  
+  height: 80vh;  
+  background: #ffffff;  
+  border: 3px solid #004d40;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
+  overflow: hidden;  
+  display: flex;  
+  flex-direction: column;  
+  padding: 10px;  
+}  
+textarea {  
+  width: 100%;  
+  height: 100px;  
+  border: 2px solid #004d40;  
+  border-radius: 5px;  
+  padding: 10px;  
+  font-family: Consolas, monospace;  
+  font-size: 16px;  
+  resize: none;  
+}  
+#forest-view {  
+  flex: 1;  
+  background: #e0f2f1;  
+  border: 2px dashed #004d40;  
+  margin-top: 10px;  
+  border-radius: 5px;  
+  overflow-y: auto;  
+  position: relative;  
+}  
+.tree-node {  
+  position: absolute;  
+  text-align: center;  
+  color: #ffffff;  
+  background: #004d40;  
+  border-radius: 50%;  
+  padding: 10px;  
+  font-size: 12px;  
+  transform: translate(-50%, -50%);  
+}  
+.tree-connection {  
+  width: 2px;  
+  background: #00695c;  
+  position: absolute;  
+  transform-origin: top left;  
+}  
+button {  
+  background: #004d40;  
+  color: #ffffff;  
+  border: none;  
+  padding: 10px 20px;  
+  border-radius: 5px;  
+  font-size: 16px;  
+  margin-top: 10px;  
+  cursor: pointer;  
+  transition: background 0.3s ease;  
+}  
+button:hover {  
+  background: #00796b;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Syntax Forest: Code Structure Explorer</h1>  
+  <textarea id="code-input" placeholder="Type your code here..."></textarea>  
+  <button id="generate-forest">Generate Forest</button>  
+  <div id="forest-view"></div>  
+</div>  
+<script>  
+document.getElementById('generate-forest').addEventListener('click', () => {  
+  const code = document.getElementById('code-input').value;  
+  const forestView = document.getElementById('forest-view');  
+  forestView.innerHTML = ''; // Clear previous forest  
+
+  // Simple parser for demonstration purposes  
+  const parseCode = (code) => {  
+    const lines = code.split('\\n');  
+    const root = { name: 'Program', children: [] };  
+
+    lines.forEach((line, index) => {  
+      const depth = line.match(/^\\s*/)[0].length / 2;  
+      let currentNode = root;  
+
+      for (let i = 0; i < depth; i++) {  
+        if (!currentNode.children.length) {  
+          const placeholder = { name: '...', children: [] };  
+          currentNode.children.push(placeholder);  
+        }  
+        currentNode = currentNode.children[currentNode.children.length - 1];  
+      }  
+
+      currentNode.children.push({ name: line.trim(), children: [] });  
+    });  
+
+    return root;  
+  };  
+
+  const drawTree = (node, x, y, level = 0, parent = null) => {  
+    const nodeEl = document.createElement('div');  
+    nodeEl.className = 'tree-node';  
+    nodeEl.textContent = node.name;  
+    nodeEl.style.left = `${x}px`;  
+    nodeEl.style.top = `${y}px`;  
+    forestView.appendChild(nodeEl);  
+
+    if (parent) {  
+      const connection = document.createElement('div');  
+      connection.className = 'tree-connection';  
+      const length = Math.sqrt((x - parent.x) ** 2 + (y - parent.y) ** 2);  
+      const angle = Math.atan2(y - parent.y, x - parent.x) * (180 / Math.PI);  
+      connection.style.height = `${length}px`;  
+      connection.style.transform = `rotate(${angle}deg)`;  
+      connection.style.left = `${parent.x}px`;  
+      connection.style.top = `${parent.y}px`;  
+      forestView.appendChild(connection);  
+    }  
+
+    const childYOffset = 100;  
+    const childXOffset = 200 / (level + 1);  
+
+    node.children.forEach((child, i) => {  
+      drawTree(  
+        child,  
+        x + (i - (node.children.length - 1) / 2) * childXOffset,  
+        y + childYOffset,  
+        level + 1,  
+        { x, y }  
+      );  
+    });  
+  };  
+
+  const syntaxTree = parseCode(code);  
+  drawTree(syntaxTree, forestView.clientWidth / 2, 50);  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
