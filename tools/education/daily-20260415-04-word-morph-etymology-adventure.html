@@ -1,0 +1,120 @@
+---
+layout: null
+title: "Word Morph: Etymology Adventure"
+category: "Education"
+description: "Explore the origins and transformations of words by morphing between languages and root words in an interactive, gamified tree structure."
+permalink: "/tools/daily-20260415-04-word-morph-etymology-adventure.html"
+generated_by: "api-true-ai"
+generated_date: "20260415"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word Morph: Etymology Adventure | Free Online Interactive Tool</title>
+  <meta name="description" content="Explore the origins and transformations of words by morphing between languages and root words in an interactive, gamified tree structure. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Word Morph: Etymology Adventure | Free Online Interactive Tool">
+  <meta property="og:description" content="Explore the origins and transformations of words by morphing between languages and root words in an interactive, gamified tree structure. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Word Morph: Etymology Adventure | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Explore the origins and transformations of words by morphing between languages and root words in an interactive, gamified tree structure. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Word Morph: Etymology Adventure</h1>
+    <p class="seo-subtitle">Explore the origins and transformations of words by morphing between languages and root words in an interactive, gamified tree structure.</p>
+    <style>  
+body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%); display: flex; align-items: center; justify-content: center; height: 100vh; }  
+#tool-app { background: #fff; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px; padding: 20px; width: 80%; max-width: 800px; text-align: center; }  
+.node { padding: 10px 15px; margin: 10px; background: #007BFF; color: #fff; border-radius: 5px; display: inline-block; cursor: pointer; }  
+.node:hover { background: #0056b3; }  
+.connection { stroke: #007BFF; stroke-width: 2; }  
+svg { width: 100%; height: 400px; }  
+</style>  
+<div id="tool-app">  
+  <h1>Word Morph: Etymology Adventure</h1>  
+  <p>Click on a word to explore its roots and related words, tracing its transformation through history.</p>  
+  <svg id="word-tree"></svg>  
+</div>  
+<script>  
+const words = {  
+  "education": { origin: "Latin", meaning: "to lead out", related: ["educe", "educator"] },  
+  "educe": { origin: "Latin", meaning: "to draw out", related: ["induce", "educate"] },  
+  "educator": { origin: "Latin", meaning: "one who educates", related: ["education", "teach"] },  
+  "induce": { origin: "Latin", meaning: "to lead in", related: ["deduce"] },  
+  "teach": { origin: "Old English", meaning: "to show or point out", related: ["teacher"] },  
+};  
+
+const svg = document.getElementById("word-tree");  
+let positions = {};  
+let counter = 0;  
+
+function createNode(word, x, y) {  
+  const node = document.createElementNS("http://www.w3.org/2000/svg", "circle");  
+  node.setAttribute("cx", x);  
+  node.setAttribute("cy", y);  
+  node.setAttribute("r", "30");  
+  node.setAttribute("fill", "#007BFF");  
+  node.setAttribute("class", "node");  
+
+  const text = document.createElementNS("http://www.w3.org/2000/svg", "text");  
+  text.setAttribute("x", x);  
+  text.setAttribute("y", y + 5);  
+  text.setAttribute("text-anchor", "middle");  
+  text.setAttribute("fill", "white");  
+  text.setAttribute("font-size", "12px");  
+  text.textContent = word;  
+
+  svg.appendChild(node);  
+  svg.appendChild(text);  
+
+  node.addEventListener("click", () => expandWord(word, x, y));  
+  positions[word] = { x, y };  
+}  
+
+function createConnection(word1, word2) {  
+  const line = document.createElementNS("http://www.w3.org/2000/svg", "line");  
+  line.setAttribute("x1", positions[word1].x);  
+  line.setAttribute("y1", positions[word1].y);  
+  line.setAttribute("x2", positions[word2].x);  
+  line.setAttribute("y2", positions[word2].y);  
+  line.setAttribute("class", "connection");  
+  svg.appendChild(line);  
+}  
+
+function expandWord(word, x, y) {  
+  if (!words[word] || words[word].expanded) return;  
+  words[word].expanded = true;  
+
+  const relatedWords = words[word].related;  
+  const angleStep = (Math.PI * 2) / relatedWords.length;  
+  let angle = 0;  
+
+  relatedWords.forEach((relatedWord, i) => {  
+    const newX = x + Math.cos(angle) * 100;  
+    const newY = y + Math.sin(angle) * 100;  
+    createNode(relatedWord, newX, newY);  
+    createConnection(word, relatedWord);  
+    angle += angleStep;  
+  });  
+}  
+
+createNode("education", 400, 200);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

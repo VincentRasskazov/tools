@@ -1,0 +1,200 @@
+---
+layout: null
+title: "Cipher Clash"
+category: "Games"
+description: "A competitive mini-game where you and an AI race to decode randomly generated encrypted strings using clues and visual hints."
+permalink: "/tools/daily-20260415-16-cipher-clash.html"
+generated_by: "api-true-ai"
+generated_date: "20260415"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cipher Clash | Free Online Interactive Tool</title>
+  <meta name="description" content="A competitive mini-game where you and an AI race to decode randomly generated encrypted strings using clues and visual hints. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Cipher Clash | Free Online Interactive Tool">
+  <meta property="og:description" content="A competitive mini-game where you and an AI race to decode randomly generated encrypted strings using clues and visual hints. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cipher Clash | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A competitive mini-game where you and an AI race to decode randomly generated encrypted strings using clues and visual hints. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Cipher Clash</h1>
+    <p class="seo-subtitle">A competitive mini-game where you and an AI race to decode randomly generated encrypted strings using clues and visual hints.</p>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #141e30, #243b55);
+    color: #f8f8f8;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  #tool-app {
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
+    background: #1e293b;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    padding: 20px;
+  }
+  .clue-box {
+    background: #334e68;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px 0;
+    font-size: 16px;
+  }
+  .input-container {
+    display: flex;
+    justify-content: center;
+  }
+  input[type="text"] {
+    width: 70%;
+    padding: 10px;
+    margin: 10px;
+    font-size: 16px;
+    border: 1px solid #7ea1c4;
+    border-radius: 8px;
+    background: #1e293b;
+    color: #f8f8f8;
+  }
+  button {
+    font-size: 16px;
+    padding: 10px 20px;
+    background: #007acc;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  button:hover {
+    background: #005ea6;
+  }
+  .scoreboard {
+    margin-top: 20px;
+    font-size: 18px;
+  }
+  .ai-status {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #85c1e9;
+  }
+</style>
+<div id="tool-app">
+  <h1>Cipher Clash</h1>
+  <p>Race against the AI to decode this string!</p>
+  <div class="clue-box" id="clue">Clue: ?</div>
+  <div class="input-container">
+    <input type="text" id="player-input" placeholder="Your guess..." />
+    <button onclick="processGuess()">Decode</button>
+  </div>
+  <div class="scoreboard">
+    <div>Player Score: <span id="player-score">0</span></div>
+    <div>AI Score: <span id="ai-score">0</span></div>
+  </div>
+  <div class="ai-status" id="ai-status">The AI is thinking...</div>
+</div>
+<script>
+  const encodedStrings = [
+    { encoded: "Uifsf jt b tfdsfu dpef", clue: "Shift each letter by one back" },
+    { encoded: "Khoor Zruog", clue: "Classic Caesar cipher, +3 shift" },
+    { encoded: ".... . .-.. .-.. --- / .-- --- .-. .-.. -..", clue: "Morse code" },
+    { encoded: "SGVsbG8gd29ybGQ=", clue: "Base64 encoding" },
+    { encoded: "48656c6c6f20576f726c64", clue: "Hexadecimal ASCII" },
+  ];
+  let currentIndex = Math.floor(Math.random() * encodedStrings.length);
+  let playerScore = 0;
+  let aiScore = 0;
+
+  function displayClue() {
+    document.getElementById("clue").innerText =
+      "Clue: " + encodedStrings[currentIndex].clue;
+  }
+
+  function processGuess() {
+    const playerInput = document.getElementById("player-input").value.trim();
+    const correctAnswer = decode(encodedStrings[currentIndex].encoded);
+    if (playerInput.toLowerCase() === correctAnswer.toLowerCase()) {
+      playerScore++;
+      alert("Correct! Well done!");
+      nextRound();
+    } else {
+      alert("Incorrect, try again!");
+    }
+  }
+
+  function decode(encoded) {
+    // Quick decoding logic based on encoded type
+    if (encoded.includes("..") || encoded.includes("/")) {
+      // Morse Code
+      return encoded
+        .replace(/\./g, "E")
+        .replace(/-/g, "T")
+        .replace(/\//g, " ");
+    } else if (encoded.startsWith("SG")) {
+      // Base64
+      return atob(encoded);
+    } else if (encoded.match(/^[0-9a-fA-F]+$/)) {
+      // Hexadecimal ASCII
+      return encoded
+        .match(/.{1,2}/g)
+        .map((byte) => String.fromCharCode(parseInt(byte, 16)))
+        .join("");
+    } else {
+      // Simple Caesar shift
+      return encoded
+        .split("")
+        .map((char) =>
+          char === " " ? " " : String.fromCharCode(char.charCodeAt(0) - 1)
+        )
+        .join("");
+    }
+  }
+
+  function aiTurn() {
+    setTimeout(() => {
+      const correctAnswer = decode(encodedStrings[currentIndex].encoded);
+      aiScore++;
+      document.getElementById("ai-status").innerText =
+        "The AI decoded it! Answer: " + correctAnswer;
+      nextRound();
+    }, Math.random() * 4000 + 2000); // Random AI thinking time
+  }
+
+  function nextRound() {
+    document.getElementById("player-score").innerText = playerScore;
+    document.getElementById("ai-score").innerText = aiScore;
+    currentIndex = Math.floor(Math.random() * encodedStrings.length);
+    displayClue();
+    document.getElementById("player-input").value = "";
+    aiTurn();
+  }
+
+  // Start the game
+  displayClue();
+  aiTurn();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

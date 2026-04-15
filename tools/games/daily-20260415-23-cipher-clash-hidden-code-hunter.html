@@ -1,0 +1,196 @@
+---
+layout: null
+title: "Cipher Clash: Hidden Code Hunter"
+category: "Games"
+description: "A real-time interactive mini-game where players decode encrypted messages under time pressure while avoiding traps and false leads."
+permalink: "/tools/daily-20260415-23-cipher-clash-hidden-code-hunter.html"
+generated_by: "api-true-ai"
+generated_date: "20260415"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cipher Clash: Hidden Code Hunter | Free Online Interactive Tool</title>
+  <meta name="description" content="A real-time interactive mini-game where players decode encrypted messages under time pressure while avoiding traps and false leads. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Cipher Clash: Hidden Code Hunter | Free Online Interactive Tool">
+  <meta property="og:description" content="A real-time interactive mini-game where players decode encrypted messages under time pressure while avoiding traps and false leads. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cipher Clash: Hidden Code Hunter | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A real-time interactive mini-game where players decode encrypted messages under time pressure while avoiding traps and false leads. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Cipher Clash: Hidden Code Hunter</h1>
+    <p class="seo-subtitle">A real-time interactive mini-game where players decode encrypted messages under time pressure while avoiding traps and false leads.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: 'Arial', sans-serif;  
+  background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);  
+  color: white;  
+  text-align: center;  
+  margin: 0;  
+  padding: 0;  
+}  
+#tool-app {  
+  margin: 50px auto;  
+  width: 90%;  
+  max-width: 600px;  
+  background: rgba(0, 0, 0, 0.8);  
+  border-radius: 15px;  
+  padding: 20px;  
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);  
+}  
+h1 {  
+  font-size: 2em;  
+}  
+#clue-box {  
+  background: #222;  
+  padding: 15px;  
+  border-radius: 10px;  
+  margin: 20px 0;  
+}  
+#clue-box code {  
+  color: #4caf50;  
+  font-weight: bold;  
+}  
+#input-field {  
+  width: 100%;  
+  padding: 10px;  
+  font-size: 16px;  
+  margin: 10px 0;  
+  border-radius: 5px;  
+  border: none;  
+  outline: none;  
+}  
+#timer, #score {  
+  font-size: 1.2em;  
+  margin: 10px 0;  
+}  
+#feedback {  
+  color: #f44336;  
+  font-size: 1em;  
+  font-weight: bold;  
+}  
+button {  
+  background: #4caf50;  
+  color: white;  
+  border: none;  
+  padding: 10px 20px;  
+  font-size: 1em;  
+  border-radius: 5px;  
+  cursor: pointer;  
+}  
+button:hover {  
+  background: #45a049;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Cipher Clash</h1>  
+  <div id="timer">Time Left: <span>60</span> seconds</div>  
+  <div id="score">Score: <span>0</span></div>  
+  <div id="clue-box">Decode this: <code id="cipher-text"></code></div>  
+  <input id="input-field" type="text" placeholder="Type your answer here..." />  
+  <div id="feedback"></div>  
+  <button id="start-btn">Start Game</button>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const app = document.getElementById('tool-app');  
+const startBtn = document.getElementById('start-btn');  
+const timerDisplay = document.getElementById('timer').querySelector('span');  
+const scoreDisplay = document.getElementById('score').querySelector('span');  
+const cipherText = document.getElementById('cipher-text');  
+const inputField = document.getElementById('input-field');  
+const feedback = document.getElementById('feedback');  
+
+let timer = null;  
+let timeLeft = 60;  
+let score = 0;  
+let currentCipher = '';  
+const ciphers = [  
+  { message: 'HELLO', encoded: 'URYYB' }, // ROT13 example  
+  { message: 'WORLD', encoded: 'DLROW' }, // Reverse example  
+  { message: 'WELCOME', encoded: 'VYVGL QBYBT' }, // ROT13 + Fake Trap  
+  { message: 'CODE', encoded: '==== C0D3 ====' }, // Trap string  
+];  
+
+// Shuffle and pick a cipher  
+function getNewCipher() {  
+  const randomIndex = Math.floor(Math.random() * ciphers.length);  
+  return ciphers[randomIndex];  
+}  
+
+// Start Game  
+function startGame() {  
+  score = 0;  
+  timeLeft = 60;  
+  scoreDisplay.textContent = score;  
+  feedback.textContent = '';  
+  inputField.value = '';  
+  startBtn.disabled = true;  
+  loadNextCipher();  
+
+  timer = setInterval(() => {  
+    timeLeft--;  
+    timerDisplay.textContent = timeLeft;  
+    if (timeLeft <= 0) {  
+      clearInterval(timer);  
+      endGame();  
+    }  
+  }, 1000);  
+}  
+
+// Load next cipher  
+function loadNextCipher() {  
+  const cipher = getNewCipher();  
+  currentCipher = cipher.message;  
+  cipherText.textContent = cipher.encoded;  
+  inputField.value = '';  
+}  
+
+// Check Answer  
+function checkAnswer() {  
+  const userAnswer = inputField.value.toUpperCase();  
+  if (userAnswer === currentCipher) {  
+    score += 10;  
+    scoreDisplay.textContent = score;  
+    feedback.textContent = 'Correct!';  
+    feedback.style.color = '#4caf50';  
+    loadNextCipher();  
+  } else if (userAnswer.trim().length > 0) {  
+    feedback.textContent = 'Incorrect! Try again.';  
+    feedback.style.color = '#f44336';  
+  }  
+}  
+
+// End Game  
+function endGame() {  
+  feedback.textContent = `Game Over! Your score: ${score}`;  
+  feedback.style.color = '#f44336';  
+  startBtn.disabled = false;  
+  cipherText.textContent = '';  
+}  
+
+// Event Listeners  
+startBtn.addEventListener('click', startGame);  
+inputField.addEventListener('input', checkAnswer);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
