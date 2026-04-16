@@ -1,0 +1,208 @@
+---
+layout: null
+title: "TaskFlow Architect"
+category: "Productivity"
+description: "A dynamic, interactive flowchart builder that visually maps out your daily tasks, priorities, and dependencies while integrating productivity-enhancing gamification elements to keep you focused."
+permalink: "/tools/daily-20260416-04-taskflow-architect.html"
+generated_by: "api-true-ai"
+generated_date: "20260416"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskFlow Architect | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, interactive flowchart builder that visually maps out your daily tasks, priorities, and dependencies while integrating productivity-enhancing gamification elements to keep you focused. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="TaskFlow Architect | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, interactive flowchart builder that visually maps out your daily tasks, priorities, and dependencies while integrating productivity-enhancing gamification elements to keep you focused. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TaskFlow Architect | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, interactive flowchart builder that visually maps out your daily tasks, priorities, and dependencies while integrating productivity-enhancing gamification elements to keep you focused. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>TaskFlow Architect</h1>
+    <p class="seo-subtitle">A dynamic, interactive flowchart builder that visually maps out your daily tasks, priorities, and dependencies while integrating productivity-enhancing gamification elements to keep you focused.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background: linear-gradient(120deg, #f6d365, #fda085);  
+  height: 100vh;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+}  
+#tool-app {  
+  width: 90vw;  
+  height: 90vh;  
+  background: #fff;  
+  border-radius: 15px;  
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);  
+  overflow: hidden;  
+  display: flex;  
+  flex-direction: column;  
+}  
+#header {  
+  background: #ff9a8b;  
+  color: white;  
+  padding: 15px;  
+  font-size: 1.5rem;  
+  font-weight: bold;  
+  text-align: center;  
+}  
+#canvas-container {  
+  flex: 1;  
+  overflow: auto;  
+  position: relative;  
+}  
+.task-node {  
+  position: absolute;  
+  padding: 10px 15px;  
+  background: #87cefa;  
+  border: 2px solid #007acc;  
+  border-radius: 8px;  
+  cursor: grab;  
+  user-select: none;  
+  color: #333;  
+  font-size: 0.9rem;  
+  font-weight: bold;  
+  text-align: center;  
+}  
+.task-node.selected {  
+  border-color: #ff4500;  
+  background: #ffdab9;  
+}  
+#footer {  
+  background: #ff9a8b;  
+  color: white;  
+  padding: 10px;  
+  text-align: center;  
+}  
+.button {  
+  background: #f76c6c;  
+  color: white;  
+  padding: 10px 20px;  
+  border: none;  
+  border-radius: 5px;  
+  font-size: 1rem;  
+  cursor: pointer;  
+  margin: 0 5px;  
+}  
+.button:hover {  
+  background: #ff5349;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="header">TaskFlow Architect</div>  
+  <div id="canvas-container"></div>  
+  <div id="footer">  
+    <button class="button" id="add-task">+ Add Task</button>  
+    <button class="button" id="connect-tasks">Connect Tasks</button>  
+    <button class="button" id="clear-all">Clear All</button>  
+  </div>  
+</div>  
+<script>  
+const canvasContainer = document.getElementById("canvas-container");  
+const addTaskButton = document.getElementById("add-task");  
+const connectTasksButton = document.getElementById("connect-tasks");  
+const clearAllButton = document.getElementById("clear-all");  
+
+let tasks = [];  
+let connections = [];  
+let selectedTask = null;  
+let isConnecting = false;  
+
+function createTask(x, y) {  
+  const task = document.createElement("div");  
+  task.className = "task-node";  
+  task.contentEditable = true;  
+  task.innerText = "New Task";  
+  task.style.left = `${x}px`;  
+  task.style.top = `${y}px`;  
+
+  task.addEventListener("mousedown", (event) => selectTask(event, task));  
+  task.addEventListener("dblclick", () => (task.contentEditable = true));  
+
+  canvasContainer.appendChild(task);  
+  tasks.push(task);  
+}  
+
+function selectTask(event, task) {  
+  event.preventDefault();  
+  if (isConnecting && selectedTask && selectedTask !== task) {  
+    createConnection(selectedTask, task);  
+    selectedTask.classList.remove("selected");  
+    selectedTask = null;  
+    isConnecting = false;  
+  } else {  
+    if (selectedTask) selectedTask.classList.remove("selected");  
+    selectedTask = task;  
+    task.classList.add("selected");  
+  }  
+}  
+
+function createConnection(fromTask, toTask) {  
+  const connection = document.createElement("canvas");  
+  connection.width = canvasContainer.offsetWidth;  
+  connection.height = canvasContainer.offsetHeight;  
+  connection.style.position = "absolute";  
+  connection.style.top = 0;  
+  connection.style.left = 0;  
+
+  const ctx = connection.getContext("2d");  
+  ctx.strokeStyle = "#007acc";  
+  ctx.lineWidth = 2;  
+
+  const fromRect = fromTask.getBoundingClientRect();  
+  const toRect = toTask.getBoundingClientRect();  
+
+  const fromX = fromRect.left + fromRect.width / 2 - canvasContainer.getBoundingClientRect().left;  
+  const fromY = fromRect.top + fromRect.height / 2 - canvasContainer.getBoundingClientRect().top;  
+
+  const toX = toRect.left + toRect.width / 2 - canvasContainer.getBoundingClientRect().left;  
+  const toY = toRect.top + toRect.height / 2 - canvasContainer.getBoundingClientRect().top;  
+
+  ctx.beginPath();  
+  ctx.moveTo(fromX, fromY);  
+  ctx.lineTo(toX, toY);  
+  ctx.stroke();  
+
+  canvasContainer.appendChild(connection);  
+  connections.push(connection);  
+}  
+
+addTaskButton.addEventListener("click", () => {  
+  createTask(50, 50);  
+});  
+
+connectTasksButton.addEventListener("click", () => {  
+  isConnecting = !isConnecting;  
+});  
+
+clearAllButton.addEventListener("click", () => {  
+  tasks.forEach((task) => task.remove());  
+  connections.forEach((connection) => connection.remove());  
+  tasks = [];  
+  connections = [];  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
