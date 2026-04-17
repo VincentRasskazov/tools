@@ -1,0 +1,210 @@
+---
+layout: null
+title: "Regex Quest: Pattern Explorer"
+category: "Developer"
+description: "An interactive mini-game where developers solve progressively harder regex puzzles by matching dynamic strings on a colorful, gamified grid."
+permalink: "/tools/daily-20260417-03-regex-quest-pattern-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260417"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Quest: Pattern Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive mini-game where developers solve progressively harder regex puzzles by matching dynamic strings on a colorful, gamified grid. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Regex Quest: Pattern Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive mini-game where developers solve progressively harder regex puzzles by matching dynamic strings on a colorful, gamified grid. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Regex Quest: Pattern Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive mini-game where developers solve progressively harder regex puzzles by matching dynamic strings on a colorful, gamified grid. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Regex Quest: Pattern Explorer</h1>
+    <p class="seo-subtitle">An interactive mini-game where developers solve progressively harder regex puzzles by matching dynamic strings on a colorful, gamified grid.</p>
+    <style>  
+body {  
+  font-family: 'Arial', sans-serif;  
+  background: #1e1e2f;  
+  color: #ffffff;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+}  
+#tool-app {  
+  width: 90%;  
+  max-width: 600px;  
+  text-align: center;  
+}  
+h1 {  
+  color: #ff6f61;  
+}  
+.game-grid {  
+  display: grid;  
+  grid-template-columns: repeat(5, 1fr);  
+  gap: 5px;  
+  margin: 20px 0;  
+}  
+.grid-cell {  
+  padding: 20px;  
+  background: #2c2c3e;  
+  border-radius: 5px;  
+  text-align: center;  
+  font-size: 14px;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+.grid-cell.match {  
+  background: #4caf50;  
+}  
+.grid-cell.non-match {  
+  background: #f44336;  
+}  
+input {  
+  padding: 10px;  
+  border: none;  
+  border-radius: 5px;  
+  width: 80%;  
+  margin-bottom: 10px;  
+}  
+button {  
+  padding: 10px 20px;  
+  border: none;  
+  border-radius: 5px;  
+  background: #ff6f61;  
+  color: white;  
+  font-size: 16px;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+button:hover {  
+  background: #e35850;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Regex Quest: Pattern Explorer</h1>  
+  <p>Write a regex pattern to match highlighted grid items!</p>  
+  <input type="text" id="regex-input" placeholder="Enter your regex here..." />  
+  <button id="check-regex">Check Regex</button>  
+  <div class="game-grid" id="game-grid"></div>  
+  <p id="feedback"></p>  
+</div>  
+<script>  
+const app = document.getElementById('tool-app');  
+const gameGrid = document.getElementById('game-grid');  
+const regexInput = document.getElementById('regex-input');  
+const checkButton = document.getElementById('check-regex');  
+const feedback = document.getElementById('feedback');  
+
+let level = 1;  
+let strings = [];  
+let targetPattern = '';  
+
+const generateStrings = () => {  
+  strings = [];  
+  const length = 10 + level * 2;  
+  const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';  
+  for (let i = 0; i < length; i++) {  
+    let str = '';  
+    for (let j = 0; j < Math.ceil(Math.random() * 5) + 1; j++) {  
+      str += chars[Math.floor(Math.random() * chars.length)];  
+    }  
+    strings.push(str);  
+  }  
+};  
+
+const generateTargetPattern = () => {  
+  const patterns = [  
+    '[a-z]{3}', // Match any 3 lowercase letters  
+    '\\d+', // Match one or more digits  
+    '^a.*z$', // Match strings that start with 'a' and end with 'z'  
+    '[aeiou]{2}', // Match two consecutive vowels  
+    '[^aeiou]\\d', // Match a non-vowel followed by a digit  
+  ];  
+  targetPattern = patterns[Math.floor(Math.random() * patterns.length)];  
+};  
+
+const renderGrid = () => {  
+  gameGrid.innerHTML = '';  
+  strings.forEach(str => {  
+    const cell = document.createElement('div');  
+    cell.className = 'grid-cell';  
+    cell.innerText = str;  
+    gameGrid.appendChild(cell);  
+  });  
+};  
+
+const checkRegex = () => {  
+  const userPattern = regexInput.value;  
+  if (!userPattern) {  
+    feedback.innerText = 'Please enter a regex pattern to check!';  
+    feedback.style.color = '#f44336';  
+    return;  
+  }  
+  let regex;  
+  try {  
+    regex = new RegExp(userPattern);  
+  } catch (e) {  
+    feedback.innerText = 'Invalid regex pattern!';  
+    feedback.style.color = '#f44336';  
+    return;  
+  }  
+
+  let allCorrect = true;  
+  strings.forEach((str, index) => {  
+    const cell = gameGrid.children[index];  
+    if (regex.test(str)) {  
+      cell.classList.add('match');  
+      cell.classList.remove('non-match');  
+    } else {  
+      cell.classList.add('non-match');  
+      cell.classList.remove('match');  
+      if (new RegExp(targetPattern).test(str)) {  
+        allCorrect = false;  
+      }  
+    }  
+  });  
+
+  if (allCorrect) {  
+    feedback.innerText = 'Congrats! You have matched the pattern correctly!';  
+    feedback.style.color = '#4caf50';  
+    level++;  
+    startNewLevel();  
+  } else {  
+    feedback.innerText = 'Not quite, try again!';  
+    feedback.style.color = '#f44336';  
+  }  
+};  
+
+const startNewLevel = () => {  
+  generateStrings();  
+  generateTargetPattern();  
+  renderGrid();  
+  regexInput.value = '';  
+  feedback.innerText = `Match this pattern: ${targetPattern}`;  
+  feedback.style.color = '#ffffff';  
+};  
+
+checkButton.addEventListener('click', checkRegex);  
+startNewLevel();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

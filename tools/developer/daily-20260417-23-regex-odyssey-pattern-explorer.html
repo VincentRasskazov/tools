@@ -1,0 +1,154 @@
+---
+layout: null
+title: "Regex Odyssey: Pattern Explorer"
+category: "Developer"
+description: "An interactive mini-game where developers solve puzzles by crafting regex patterns to navigate through a series of progressively challenging string mazes."
+permalink: "/tools/daily-20260417-23-regex-odyssey-pattern-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260417"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Odyssey: Pattern Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive mini-game where developers solve puzzles by crafting regex patterns to navigate through a series of progressively challenging string mazes. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Regex Odyssey: Pattern Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive mini-game where developers solve puzzles by crafting regex patterns to navigate through a series of progressively challenging string mazes. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Regex Odyssey: Pattern Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive mini-game where developers solve puzzles by crafting regex patterns to navigate through a series of progressively challenging string mazes. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Regex Odyssey: Pattern Explorer</h1>
+    <p class="seo-subtitle">An interactive mini-game where developers solve puzzles by crafting regex patterns to navigate through a series of progressively challenging string mazes.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(135deg, #1e3c72, #2a5298);  
+  color: #fff;  
+  padding: 0;  
+  margin: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  background: rgba(255, 255, 255, 0.1);  
+  padding: 20px;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);  
+  width: 600px;  
+  text-align: center;  
+}  
+input, button {  
+  margin: 10px 0;  
+  padding: 10px;  
+  font-size: 16px;  
+  border: none;  
+  border-radius: 5px;  
+}  
+input {  
+  width: calc(100% - 24px);  
+}  
+button {  
+  background: #4caf50;  
+  color: white;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+button:hover {  
+  background: #45a049;  
+}  
+#output {  
+  text-align: left;  
+  margin-top: 20px;  
+}  
+.highlight {  
+  color: yellow;  
+  background: rgba(255, 255, 0, 0.2);  
+  font-weight: bold;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Regex Odyssey: Pattern Explorer</h1>  
+  <div id="level-info">  
+    <strong>Level:</strong> <span id="level">1</span>  
+    <br>  
+    <strong>Target:</strong> <span id="target-string">apple banana cherry</span>  
+  </div>  
+  <input id="regex-input" type="text" placeholder="Enter your regex pattern..." />  
+  <button id="submit-pattern">Try Pattern</button>  
+  <div id="output"></div>  
+</div>  
+<script>  
+let currentLevel = 1;  
+const levels = [  
+  { target: "apple banana cherry", goal: /banana/ },  
+  { target: "cat dog bird fish", goal: /(dog|bird)/ },  
+  { target: "123-456-7890 987-654-3210", goal: /\d{3}-\d{3}-\d{4}/ },  
+  { target: "x=12 y=34 z=56", goal: /\w=\d{2}/ },  
+  { target: "Hello123 World456", goal: /\w+\d{3}/ }  
+];  
+  
+function loadLevel() {  
+  const levelData = levels[currentLevel - 1];  
+  document.getElementById("level").innerText = currentLevel;  
+  document.getElementById("target-string").innerText = levelData.target;  
+  document.getElementById("regex-input").value = "";  
+  document.getElementById("output").innerHTML = "";  
+}  
+  
+function checkPattern() {  
+  const inputPattern = document.getElementById("regex-input").value;  
+  const levelData = levels[currentLevel - 1];  
+  const regex = new RegExp(inputPattern);  
+  const matches = levelData.target.match(regex);  
+  
+  if (regex.toString() === levelData.goal.toString()) {  
+    currentLevel++;  
+    if (currentLevel > levels.length) {  
+      document.getElementById("output").innerHTML =  
+        "<strong>Congratulations! You've completed all levels!</strong>";  
+    } else {  
+      document.getElementById("output").innerHTML =  
+        "<strong>Correct!</strong> Moving to next level...";  
+      setTimeout(loadLevel, 2000);  
+    }  
+  } else {  
+    const highlighted = levelData.target.replace(  
+      regex,  
+      (match) => `<span class="highlight">${match}</span>`  
+    );  
+    document.getElementById("output").innerHTML = `Incorrect pattern. <br> Matches: ${  
+      matches ? matches.join(", ") : "none"  
+    }<br>${highlighted}`;  
+  }  
+}  
+  
+document  
+  .getElementById("submit-pattern")  
+  .addEventListener("click", checkPattern);  
+  
+loadLevel();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

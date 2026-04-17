@@ -1,0 +1,216 @@
+---
+layout: null
+title: "TaskFlow Tetris"
+category: "Productivity"
+description: "A gamified task prioritization tool where users sort and stack tasks as Tetris blocks, optimizing their to-do list for maximum efficiency."
+permalink: "/tools/daily-20260417-10-taskflow-tetris.html"
+generated_by: "api-true-ai"
+generated_date: "20260417"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskFlow Tetris | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified task prioritization tool where users sort and stack tasks as Tetris blocks, optimizing their to-do list for maximum efficiency. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="TaskFlow Tetris | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified task prioritization tool where users sort and stack tasks as Tetris blocks, optimizing their to-do list for maximum efficiency. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TaskFlow Tetris | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified task prioritization tool where users sort and stack tasks as Tetris blocks, optimizing their to-do list for maximum efficiency. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>TaskFlow Tetris</h1>
+    <p class="seo-subtitle">A gamified task prioritization tool where users sort and stack tasks as Tetris blocks, optimizing their to-do list for maximum efficiency.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);  
+  color: #333;  
+  margin: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  text-align: center;  
+  background: #fff;  
+  border-radius: 12px;  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  
+  width: 480px;  
+  padding: 20px;  
+}  
+canvas {  
+  border-radius: 6px;  
+  margin-top: 20px;  
+  background: #eff6ff;  
+  display: block;  
+  margin: 0 auto;  
+}  
+button {  
+  background: #4caf50;  
+  color: white;  
+  border: none;  
+  padding: 10px 20px;  
+  font-size: 16px;  
+  cursor: pointer;  
+  border-radius: 6px;  
+  margin-top: 10px;  
+}  
+button:hover {  
+  background: #45a049;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>TaskFlow Tetris</h1>  
+  <p>Drag and drop your tasks as Tetris blocks. Arrange them to fit your day!</p>  
+  <canvas id="tetrisCanvas" width="300" height="400"></canvas>  
+  <br>  
+  <button id="startButton">Start Game</button>  
+</div>  
+<script>  
+// Variables for canvas and game logic  
+const canvas = document.getElementById('tetrisCanvas');  
+const ctx = canvas.getContext('2d');  
+const startButton = document.getElementById('startButton');  
+const grid = [];  
+const rows = 20;  
+const cols = 10;  
+const blockSize = 20;  
+let gameInterval;  
+let activePiece;  
+let paused = true;  
+
+const colors = ['#FF5733', '#FFBD33', '#75FF33', '#33FF57', '#33FFBD'];  
+const shapes = [  
+  [[1, 1, 1],  
+   [0, 1, 0]],  
+  [[1, 1],  
+   [1, 1]],  
+  [[0, 1, 0],  
+   [1, 1, 1]],  
+  [[1, 1, 0],  
+   [0, 1, 1]],  
+  [[0, 1, 1],  
+   [1, 1, 0]]  
+];  
+
+// Initialize grid  
+for (let r = 0; r < rows; r++) {  
+  grid[r] = Array(cols).fill(0);  
+}  
+
+// Draw grid  
+function drawGrid() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  for (let r = 0; r < rows; r++) {  
+    for (let c = 0; c < cols; c++) {  
+      if (grid[r][c]) {  
+        ctx.fillStyle = grid[r][c];  
+        ctx.fillRect(c * blockSize, r * blockSize, blockSize, blockSize);  
+        ctx.strokeStyle = '#fff';  
+        ctx.strokeRect(c * blockSize, r * blockSize, blockSize, blockSize);  
+      }  
+    }  
+  }  
+}  
+
+// Generate new piece  
+function newPiece() {  
+  const shapeIndex = Math.floor(Math.random() * shapes.length);  
+  return {  
+    shape: shapes[shapeIndex],  
+    color: colors[shapeIndex],  
+    x: Math.floor(cols / 2) - 1,  
+    y: 0  
+  };  
+}  
+
+// Draw piece  
+function drawPiece(piece) {  
+  piece.shape.forEach((row, rIdx) => {  
+    row.forEach((cell, cIdx) => {  
+      if (cell) {  
+        ctx.fillStyle = piece.color;  
+        ctx.fillRect((piece.x + cIdx) * blockSize, (piece.y + rIdx) * blockSize, blockSize, blockSize);  
+        ctx.strokeStyle = '#fff';  
+        ctx.strokeRect((piece.x + cIdx) * blockSize, (piece.y + rIdx) * blockSize, blockSize, blockSize);  
+      }  
+    });  
+  });  
+}  
+
+function mergePiece(piece) {  
+  piece.shape.forEach((row, rIdx) => {  
+    row.forEach((cell, cIdx) => {  
+      if (cell) {  
+        grid[piece.y + rIdx][piece.x + cIdx] = piece.color;  
+      }  
+    });  
+  });  
+}  
+
+function canMove(piece, dx, dy) {  
+  return piece.shape.every((row, rIdx) => {  
+    return row.every((cell, cIdx) => {  
+      if (!cell) return true;  
+      const newX = piece.x + dx + cIdx;  
+      const newY = piece.y + dy + rIdx;  
+      return newX >= 0 && newX < cols && newY >= 0 && newY < rows && !grid[newY][newX];  
+    });  
+  });  
+}  
+
+function clearLines() {  
+  for (let r = rows - 1; r >= 0; r--) {  
+    if (grid[r].every(cell => cell !== 0)) {  
+      grid.splice(r, 1);  
+      grid.unshift(Array(cols).fill(0));  
+      r++;  
+    }  
+  }  
+}  
+
+function dropPiece() {  
+  if (canMove(activePiece, 0, 1)) {  
+    activePiece.y++;  
+  } else {  
+    mergePiece(activePiece);  
+    clearLines();  
+    activePiece = newPiece();  
+    if (!canMove(activePiece, 0, 0)) {  
+      clearInterval(gameInterval);  
+      alert('Game Over! Refresh to play again.');  
+    }  
+  }  
+  drawGrid();  
+  drawPiece(activePiece);  
+}  
+
+startButton.addEventListener('click', () => {  
+  if (paused) {  
+    paused = false;  
+    activePiece = newPiece();  
+    gameInterval = setInterval(dropPiece, 500);  
+  }  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

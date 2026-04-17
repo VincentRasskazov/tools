@@ -1,0 +1,126 @@
+---
+layout: null
+title: "Ad Journey Architect"
+category: "Marketing"
+description: "Design and simulate an interactive customer journey map for your marketing campaigns with dynamic feedback loops and engagement metrics."
+permalink: "/tools/daily-20260417-12-ad-journey-architect.html"
+generated_by: "api-true-ai"
+generated_date: "20260417"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ad Journey Architect | Free Online Interactive Tool</title>
+  <meta name="description" content="Design and simulate an interactive customer journey map for your marketing campaigns with dynamic feedback loops and engagement metrics. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Ad Journey Architect | Free Online Interactive Tool">
+  <meta property="og:description" content="Design and simulate an interactive customer journey map for your marketing campaigns with dynamic feedback loops and engagement metrics. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ad Journey Architect | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Design and simulate an interactive customer journey map for your marketing campaigns with dynamic feedback loops and engagement metrics. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Ad Journey Architect</h1>
+    <p class="seo-subtitle">Design and simulate an interactive customer journey map for your marketing campaigns with dynamic feedback loops and engagement metrics.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f7fc; color: #333; }  
+  #tool-app { margin: 20px auto; max-width: 1200px; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); }  
+  .node { display: inline-block; padding: 10px 15px; background: #4caf50; color: #fff; border-radius: 20px; cursor: grab; margin: 10px; position: absolute; }  
+  .node:hover { background: #45a049; }  
+  .canvas { position: relative; width: 100%; height: 600px; border: 2px dashed #d3d3d3; border-radius: 8px; margin-top: 20px; }  
+  .stats { margin-top: 20px; }  
+  .connection { position: absolute; stroke: #2196f3; stroke-width: 2; }  
+</style>  
+<div id="tool-app">  
+  <h1>Ad Journey Architect</h1>  
+  <p>Drag and drop nodes to build your customer journey. Connect them with pathways to simulate and refine your marketing campaign.</p>  
+  <div class="canvas" id="canvas"></div>  
+  <div class="stats" id="stats">  
+    <strong>Stats:</strong>  
+    <p>Total Nodes: <span id="total-nodes">0</span></p>  
+    <p>Total Connections: <span id="total-connections">0</span></p>  
+  </div>  
+</div>  
+<script>  
+  const canvas = document.getElementById('canvas');  
+  const statsNodes = document.getElementById('total-nodes');  
+  const statsConnections = document.getElementById('total-connections');  
+  let nodes = [];  
+  let connections = [];  
+
+  canvas.addEventListener('click', (e) => {  
+    if (e.target === canvas) {  
+      addNode(e.offsetX, e.offsetY);  
+    }  
+  });  
+
+  function addNode(x, y) {  
+    const node = document.createElement('div');  
+    node.className = 'node';  
+    node.style.left = `${x - 25}px`;  
+    node.style.top = `${y - 15}px`;  
+    node.draggable = true;  
+    node.textContent = `Node ${nodes.length + 1}`;  
+    nodes.push(node);  
+    canvas.appendChild(node);  
+
+    node.addEventListener('dragstart', (e) => {  
+      e.dataTransfer.setData('text', nodes.indexOf(node));  
+    });  
+
+    node.addEventListener('dragover', (e) => e.preventDefault());  
+
+    node.addEventListener('drop', (e) => {  
+      e.preventDefault();  
+      const fromIndex = parseInt(e.dataTransfer.getData('text'));  
+      const toIndex = nodes.indexOf(node);  
+      
+      if (fromIndex !== toIndex) {  
+        createConnection(nodes[fromIndex], node);  
+      }  
+    });  
+
+    updateStats();  
+  }  
+
+  function createConnection(fromNode, toNode) {  
+    const fromRect = fromNode.getBoundingClientRect();  
+    const toRect = toNode.getBoundingClientRect();  
+    const svgNS = 'http://www.w3.org/2000/svg';  
+
+    const line = document.createElementNS(svgNS, 'line');  
+    line.setAttribute('x1', fromRect.left + fromRect.width / 2);  
+    line.setAttribute('y1', fromRect.top + fromRect.height / 2);  
+    line.setAttribute('x2', toRect.left + toRect.width / 2);  
+    line.setAttribute('y2', toRect.top + toRect.height / 2);  
+    line.classList.add('connection');  
+
+    connections.push(line);  
+    canvas.appendChild(line);  
+
+    updateStats();  
+  }  
+
+  function updateStats() {  
+    statsNodes.textContent = nodes.length;  
+    statsConnections.textContent = connections.length;  
+  }  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

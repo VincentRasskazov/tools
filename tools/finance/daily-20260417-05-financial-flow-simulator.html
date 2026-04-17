@@ -1,0 +1,177 @@
+---
+layout: null
+title: "Financial Flow Simulator"
+category: "Finance"
+description: "A dynamic, interactive mini-game where users balance income, expenses, and investments to optimize their \"financial river\" and avoid crashes over time."
+permalink: "/tools/daily-20260417-05-financial-flow-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260417"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Flow Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, interactive mini-game where users balance income, expenses, and investments to optimize their &quot;financial river&quot; and avoid crashes over time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Financial Flow Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, interactive mini-game where users balance income, expenses, and investments to optimize their &quot;financial river&quot; and avoid crashes over time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Financial Flow Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, interactive mini-game where users balance income, expenses, and investments to optimize their &quot;financial river&quot; and avoid crashes over time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Financial Flow Simulator</h1>
+    <p class="seo-subtitle">A dynamic, interactive mini-game where users balance income, expenses, and investments to optimize their &quot;financial river&quot; and avoid crashes over time.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to bottom, #e0f7fa, #00695c);  
+  color: #ffffff;  
+  text-align: center;  
+  padding: 20px;  
+}  
+#tool-app {  
+  margin: auto;  
+  max-width: 600px;  
+  background: #004d40;  
+  padding: 20px;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  
+}  
+button {  
+  background: #26a69a;  
+  color: white;  
+  border: none;  
+  padding: 10px 20px;  
+  font-size: 16px;  
+  cursor: pointer;  
+  border-radius: 5px;  
+  margin: 5px;  
+}  
+button:hover {  
+  background: #00796b;  
+}  
+#river {  
+  margin: 20px auto;  
+  height: 300px;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  background: #004d40;  
+  border: 2px solid #26a69a;  
+  border-radius: 15px;  
+  position: relative;  
+  overflow: hidden;  
+}  
+#river div {  
+  position: absolute;  
+  bottom: 0;  
+  width: 50px;  
+  height: 50px;  
+  background: #ffcc80;  
+  border-radius: 50%;  
+  transition: transform 0.5s linear;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Financial Flow Simulator</h1>  
+  <p>Can you keep your finances afloat by balancing your spending and investing decisions?</p>  
+  <div id="river"></div>  
+  <button onclick="addIncome()">Add Income</button>  
+  <button onclick="addExpense()">Add Expense</button>  
+  <button onclick="invest()">Invest</button>  
+  <button onclick="pause()">Pause Game</button>  
+  <div id="score">Net Worth: $0</div>  
+</div>  
+<script>  
+const river = document.getElementById('river');  
+const scoreDisplay = document.getElementById('score');  
+let netWorth = 0;  
+let riverItems = [];  
+let playing = true;  
+
+function createRiverItem(type) {  
+  const item = document.createElement('div');  
+  item.classList.add(type);  
+  item.style.left = `${Math.random() * 90}%`;  
+  item.dataset.type = type;  
+  river.appendChild(item);  
+  riverItems.push(item);  
+}  
+
+function addIncome() {  
+  netWorth += 100;  
+  updateScore();  
+  createRiverItem('income');  
+}  
+
+function addExpense() {  
+  netWorth -= 50;  
+  updateScore();  
+  createRiverItem('expense');  
+}  
+
+function invest() {  
+  if (netWorth >= 200) {  
+    netWorth += 300;  
+    updateScore();  
+    createRiverItem('investment');  
+  } else {  
+    alert('Not enough funds to invest!');  
+  }  
+}  
+
+function updateScore() {  
+  scoreDisplay.textContent = `Net Worth: $${netWorth}`;  
+}  
+
+function moveRiverItems() {  
+  riverItems.forEach((item, index) => {  
+    const currentTop = parseInt(item.style.bottom || 0);  
+    item.style.bottom = currentTop + 5 + 'px';  
+    if (currentTop > 300) {  
+      river.removeChild(item);  
+      riverItems.splice(index, 1);  
+    }  
+  });  
+}  
+
+function gameLoop() {  
+  if (playing) {  
+    moveRiverItems();  
+    if (netWorth < 0) {  
+      alert('Game Over! You went bankrupt.');  
+      playing = false;  
+      return;  
+    }  
+  }  
+  requestAnimationFrame(gameLoop);  
+}  
+
+function pause() {  
+  playing = !playing;  
+  if (playing) {  
+    gameLoop();  
+  }  
+}  
+
+gameLoop();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

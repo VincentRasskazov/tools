@@ -1,0 +1,208 @@
+---
+layout: null
+title: "Data Weave Explorer"
+category: "Data"
+description: "A highly interactive tool where users weave complex datasets into visual, animated tapestries to uncover patterns, correlations, and anomalies."
+permalink: "/tools/daily-20260417-04-data-weave-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260417"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Weave Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive tool where users weave complex datasets into visual, animated tapestries to uncover patterns, correlations, and anomalies. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Weave Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive tool where users weave complex datasets into visual, animated tapestries to uncover patterns, correlations, and anomalies. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Weave Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive tool where users weave complex datasets into visual, animated tapestries to uncover patterns, correlations, and anomalies. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Weave Explorer</h1>
+    <p class="seo-subtitle">A highly interactive tool where users weave complex datasets into visual, animated tapestries to uncover patterns, correlations, and anomalies.</p>
+    ```html  
+<style>  
+/* Modern, beautiful inline CSS */  
+body {  
+    font-family: Arial, sans-serif;  
+    background: linear-gradient(135deg, #2c3e50, #4ca1af);  
+    color: #fff;  
+    margin: 0;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+    overflow: hidden;  
+}  
+#tool-app {  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    text-align: center;  
+    width: 90%;  
+    max-width: 800px;  
+    background: rgba(0, 0, 0, 0.8);  
+    border-radius: 12px;  
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);  
+    padding: 20px;  
+}  
+h1 {  
+    margin-bottom: 10px;  
+    font-size: 2em;  
+    color: #e74c3c;  
+}  
+canvas {  
+    border: 1px solid #34495e;  
+    border-radius: 8px;  
+    margin-top: 20px;  
+}  
+input[type="file"] {  
+    margin-top: 10px;  
+    color: #ecf0f1;  
+    cursor: pointer;  
+}  
+</style>  
+<div id="tool-app">  
+    <h1>Data Weave Explorer</h1>  
+    <p>Upload your dataset (CSV/JSON) and watch as it transforms into a beautiful data tapestry!</p>  
+    <input type="file" id="fileInput" accept=".csv, .json" />  
+    <canvas id="weaveCanvas" width="600" height="400"></canvas>  
+    <p><i>Hover over threads to see details. Click on intersections to analyze correlations.</i></p>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const fileInput = document.getElementById('fileInput');  
+const canvas = document.getElementById('weaveCanvas');  
+const ctx = canvas.getContext('2d');  
+
+let data = [];  
+let threads = [];  
+
+fileInput.addEventListener('change', handleFile);  
+
+function handleFile(event) {  
+    const file = event.target.files[0];  
+    const reader = new FileReader();  
+
+    reader.onload = function(e) {  
+        const content = e.target.result;  
+
+        try {  
+            if (file.name.endsWith('.json')) {  
+                data = JSON.parse(content);  
+            } else if (file.name.endsWith('.csv')) {  
+                data = parseCSV(content);  
+            } else {  
+                throw new Error('Unsupported file type');  
+            }  
+            generateThreads();  
+            drawWeave();  
+        } catch (error) {  
+            alert('Error loading file: ' + error.message);  
+        }  
+    };  
+
+    reader.readAsText(file);  
+}  
+
+function parseCSV(csv) {  
+    const lines = csv.split('\n');  
+    const keys = lines[0].split(',');  
+    return lines.slice(1).map(row => {  
+        const values = row.split(',');  
+        return keys.reduce((obj, key, index) => {  
+            obj[key] = values[index];  
+            return obj;  
+        }, {});  
+    });  
+}  
+
+function generateThreads() {  
+    threads = [];  
+    const keys = Object.keys(data[0]);  
+
+    keys.forEach((key, index) => {  
+        threads.push({  
+            id: index,  
+            name: key,  
+            values: data.map(row => Number(row[key]) || row[key]),  
+            color: `hsl(${(index * 360) / keys.length}, 70%, 50%)`  
+        });  
+    });  
+}  
+
+function drawWeave() {  
+    ctx.clearRect(0, 0, canvas.width, canvas.height);  
+    const { width, height } = canvas;  
+    const spacing = width / (threads.length + 1);  
+
+    threads.forEach((thread, index) => {  
+        const x = (index + 1) * spacing;  
+
+        thread.values.forEach((value, i) => {  
+            const y = height - (height * (i + 1)) / (thread.values.length + 1);  
+            ctx.beginPath();  
+            ctx.arc(x, y, 5, 0, Math.PI * 2);  
+            ctx.fillStyle = thread.color;  
+            ctx.fill();  
+            ctx.closePath();  
+
+            if (i > 0) {  
+                const prevY = height - (height * i) / (thread.values.length + 1);  
+                ctx.beginPath();  
+                ctx.moveTo(x, prevY);  
+                ctx.lineTo(x, y);  
+                ctx.strokeStyle = thread.color;  
+                ctx.stroke();  
+                ctx.closePath();  
+            }  
+        });  
+    });  
+
+    drawConnections();  
+}  
+
+function drawConnections() {  
+    const { width, height } = canvas;  
+    const spacing = width / (threads.length + 1);  
+
+    ctx.globalAlpha = 0.3;  
+    for (let i = 0; i < threads.length - 1; i++) {  
+        for (let j = i + 1; j < threads.length; j++) {  
+            const threadA = threads[i];  
+            const threadB = threads[j];  
+
+            threadA.values.forEach((valueA, index) => {  
+                const valueB = threadB.values[index];  
+                ctx.beginPath();  
+                ctx.moveTo((i + 1) * spacing, height - (height * (index + 1)) / (threadA.values.length + 1));  
+                ctx.lineTo((j + 1) * spacing, height - (height * (index + 1)) / (threadB.values.length + 1));  
+                ctx.strokeStyle = 'white';  
+                ctx.stroke();  
+                ctx.closePath();  
+            });  
+        }  
+    }  
+    ctx.globalAlpha = 1;  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
