@@ -1,0 +1,180 @@
+---
+layout: null
+title: "Data Fractal Forge"
+category: "Data"
+description: "A mesmerizing tool that transforms any dataset into interactive, evolving fractal visualizations to uncover hidden patterns and relationships."
+permalink: "/tools/daily-20260418-20-data-fractal-forge.html"
+generated_by: "api-true-ai"
+generated_date: "20260418"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Fractal Forge | Free Online Interactive Tool</title>
+  <meta name="description" content="A mesmerizing tool that transforms any dataset into interactive, evolving fractal visualizations to uncover hidden patterns and relationships. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Fractal Forge | Free Online Interactive Tool">
+  <meta property="og:description" content="A mesmerizing tool that transforms any dataset into interactive, evolving fractal visualizations to uncover hidden patterns and relationships. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Fractal Forge | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A mesmerizing tool that transforms any dataset into interactive, evolving fractal visualizations to uncover hidden patterns and relationships. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Fractal Forge</h1>
+    <p class="seo-subtitle">A mesmerizing tool that transforms any dataset into interactive, evolving fractal visualizations to uncover hidden patterns and relationships.</p>
+    <style>  
+body {  
+  font-family: 'Arial', sans-serif;  
+  background-color: #121212;  
+  color: #f0f0f0;  
+  margin: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 80%;  
+  height: 80%;  
+  background-color: #1e1e2f;  
+  border: 2px solid #3f3f5a;  
+  border-radius: 12px;  
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);  
+  display: flex;  
+  flex-direction: column;  
+  position: relative;  
+  overflow: hidden;  
+}  
+#menu {  
+  padding: 10px;  
+  background-color: #28293e;  
+  display: flex;  
+  justify-content: space-between;  
+  align-items: center;  
+}  
+#menu button {  
+  background-color: #3f3f5a;  
+  border: none;  
+  padding: 10px 15px;  
+  color: #f0f0f0;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  margin-left: 8px;  
+  transition: transform 0.2s ease;  
+}  
+#menu button:hover {  
+  transform: scale(1.1);  
+}  
+#canvas-container {  
+  flex-grow: 1;  
+  position: relative;  
+}  
+canvas {  
+  width: 100%;  
+  height: 100%;  
+  display: block;  
+}  
+#upload {  
+  display: none;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="menu">  
+    <div>  
+      <label for="upload">  
+        <button>Upload Dataset</button>  
+      </label>  
+      <input id="upload" type="file" accept=".csv, .json" />  
+    </div>  
+    <button id="generate">Generate Fractal</button>  
+    <button id="reset">Reset</button>  
+  </div>  
+  <div id="canvas-container">  
+    <canvas id="fractal-canvas"></canvas>  
+  </div>  
+</div>  
+<script>  
+const canvas = document.getElementById('fractal-canvas');  
+const ctx = canvas.getContext('2d');  
+const uploadInput = document.getElementById('upload');  
+const generateButton = document.getElementById('generate');  
+const resetButton = document.getElementById('reset');  
+canvas.width = canvas.parentElement.clientWidth;  
+canvas.height = canvas.parentElement.clientHeight;  
+
+let dataset = [];  
+
+uploadInput.addEventListener('change', (e) => {  
+  const file = e.target.files[0];  
+  const reader = new FileReader();  
+  reader.onload = (event) => {  
+    try {  
+      if (file.type === 'application/json') {  
+        dataset = JSON.parse(event.target.result);  
+      } else if (file.type === 'text/csv') {  
+        dataset = event.target.result.split('\n').map(row => row.split(','));  
+      }  
+      alert('Dataset uploaded successfully!');  
+    } catch (err) {  
+      alert('Error parsing dataset. Please upload a valid .json or .csv file.');  
+    }  
+  };  
+  reader.readAsText(file);  
+});  
+
+generateButton.addEventListener('click', () => {  
+  if (dataset.length === 0) {  
+    alert('Please upload a dataset first!');  
+    return;  
+  }  
+  drawFractal(dataset);  
+});  
+
+resetButton.addEventListener('click', () => {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  dataset = [];  
+  alert('Reset successful. Upload a new dataset to begin.');  
+});  
+
+function drawFractal(data) {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  const colors = ['#ff5733', '#33ff57', '#3357ff', '#ff33a8', '#ff9f33'];  
+  const scaleX = canvas.width / data.length;  
+  const scaleY = canvas.height / Math.max(...data.map(row => parseInt(row[0], 10) || 1));  
+  let offsetX = canvas.width / 2;  
+  let offsetY = canvas.height / 2;  
+
+  for (let i = 0; i < data.length; i++) {  
+    const x = offsetX + Math.sin(i) * data[i][0] * scaleX;  
+    const y = offsetY + Math.cos(i) * data[i][0] * scaleY;  
+    const radius = Math.abs(data[i][1] || 1);  
+    
+    ctx.beginPath();  
+    ctx.arc(x, y, radius, 0, 2 * Math.PI);  
+    ctx.fillStyle = colors[i % colors.length];  
+    ctx.fill();  
+
+    offsetX = x;  
+    offsetY = y;  
+  }  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

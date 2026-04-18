@@ -1,0 +1,137 @@
+---
+layout: null
+title: "StoryCraft Constellation"
+category: "Writing"
+description: "An interactive tool that helps writers visualize plotlines as constellations, where each star represents a story event and connections represent character arcs, allowing for dynamic rearrangement and real-time feedback on narrative flow."
+permalink: "/tools/daily-20260418-06-storycraft-constellation.html"
+generated_by: "api-true-ai"
+generated_date: "20260418"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StoryCraft Constellation | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool that helps writers visualize plotlines as constellations, where each star represents a story event and connections represent character arcs, allowing for dynamic rearrangement and real-time feedback on narrative flow. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="StoryCraft Constellation | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool that helps writers visualize plotlines as constellations, where each star represents a story event and connections represent character arcs, allowing for dynamic rearrangement and real-time feedback on narrative flow. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StoryCraft Constellation | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool that helps writers visualize plotlines as constellations, where each star represents a story event and connections represent character arcs, allowing for dynamic rearrangement and real-time feedback on narrative flow. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>StoryCraft Constellation</h1>
+    <p class="seo-subtitle">An interactive tool that helps writers visualize plotlines as constellations, where each star represents a story event and connections represent character arcs, allowing for dynamic rearrangement and real-time feedback on narrative flow.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: linear-gradient(120deg, #1e3c72, #2a5298); color: white; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }  
+  #tool-app { width: 80%; height: 80%; background: rgba(0, 0, 0, 0.5); border-radius: 15px; padding: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }  
+  canvas { width: 100%; height: 100%; display: block; }  
+  #controls { position: absolute; top: 20px; left: 20px; display: flex; gap: 10px; }  
+  button { padding: 10px 20px; font-size: 14px; font-weight: bold; color: white; background-color: #5568e5; border: none; border-radius: 5px; cursor: pointer; }  
+  button:hover { background-color: #778afe; }  
+</style>  
+<div id="tool-app">  
+  <canvas id="constellationCanvas"></canvas>  
+  <div id="controls">  
+    <button id="addStar">Add Event</button>  
+    <button id="connectStars">Connect Events</button>  
+    <button id="analyze">Analyze Story</button>  
+  </div>  
+</div>  
+<script>  
+  const canvas = document.getElementById('constellationCanvas');  
+  const ctx = canvas.getContext('2d');  
+  canvas.width = canvas.offsetWidth;  
+  canvas.height = canvas.offsetHeight;  
+
+  let stars = [];  
+  let connections = [];  
+
+  class Star {  
+    constructor(x, y, label) {  
+      this.x = x;  
+      this.y = y;  
+      this.label = label;  
+      this.connections = [];  
+    }  
+    
+    draw() {  
+      ctx.beginPath();  
+      ctx.arc(this.x, this.y, 10, 0, Math.PI * 2);  
+      ctx.fillStyle = '#FFD700';  
+      ctx.fill();  
+      ctx.strokeStyle = 'white';  
+      ctx.stroke();  
+      ctx.closePath();  
+      ctx.font = '12px Arial';  
+      ctx.fillText(this.label, this.x + 15, this.y - 10);  
+    }  
+  }  
+
+  function drawConnections() {  
+    connections.forEach(([start, end]) => {  
+      ctx.beginPath();  
+      ctx.moveTo(start.x, start.y);  
+      ctx.lineTo(end.x, end.y);  
+      ctx.strokeStyle = '#87CEEB';  
+      ctx.stroke();  
+      ctx.closePath();  
+    });  
+  }  
+
+  function redraw() {  
+    ctx.clearRect(0, 0, canvas.width, canvas.height);  
+    drawConnections();  
+    stars.forEach(star => star.draw());  
+  }  
+
+  document.getElementById('addStar').addEventListener('click', () => {  
+    const label = prompt('Enter a label for this event:');  
+    if (label) {  
+      const x = Math.random() * canvas.width;  
+      const y = Math.random() * canvas.height;  
+      const star = new Star(x, y, label);  
+      stars.push(star);  
+      redraw();  
+    }  
+  });  
+
+  document.getElementById('connectStars').addEventListener('click', () => {  
+    if (stars.length < 2) {  
+      alert('You need at least two events to create a connection!');  
+      return;  
+    }  
+    const from = prompt('Enter the label of the first event:');  
+    const to = prompt('Enter the label of the second event:');  
+    const start = stars.find(star => star.label === from);  
+    const end = stars.find(star => star.label === to);  
+    if (start && end) {  
+      connections.push([start, end]);  
+      redraw();  
+    } else {  
+      alert('Invalid labels. Please try again.');  
+    }  
+  });  
+
+  document.getElementById('analyze').addEventListener('click', () => {  
+    alert(`You have created ${stars.length} events and ${connections.length} connections. Keep crafting!`);  
+  });  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,164 @@
+---
+layout: null
+title: "BreatheFlow Harmony"
+category: "Health"
+description: "A responsive, interactive breathing rhythm visualizer and coaching game that helps users improve mindfulness and lung capacity through dynamic challenges."
+permalink: "/tools/daily-20260418-09-breatheflow-harmony.html"
+generated_by: "api-true-ai"
+generated_date: "20260418"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BreatheFlow Harmony | Free Online Interactive Tool</title>
+  <meta name="description" content="A responsive, interactive breathing rhythm visualizer and coaching game that helps users improve mindfulness and lung capacity through dynamic challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="BreatheFlow Harmony | Free Online Interactive Tool">
+  <meta property="og:description" content="A responsive, interactive breathing rhythm visualizer and coaching game that helps users improve mindfulness and lung capacity through dynamic challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BreatheFlow Harmony | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A responsive, interactive breathing rhythm visualizer and coaching game that helps users improve mindfulness and lung capacity through dynamic challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>BreatheFlow Harmony</h1>
+    <p class="seo-subtitle">A responsive, interactive breathing rhythm visualizer and coaching game that helps users improve mindfulness and lung capacity through dynamic challenges.</p>
+    <style>  
+body {  
+  font-family: 'Arial', sans-serif;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);  
+  color: #333;  
+}  
+#tool-app {  
+  text-align: center;  
+  background: #fff;  
+  border-radius: 12px;  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  
+  padding: 20px;  
+  max-width: 400px;  
+  width: 90%;  
+}  
+#tool-app h1 {  
+  font-size: 24px;  
+  margin-bottom: 10px;  
+}  
+#circle {  
+  margin: 20px auto 0;  
+  width: 200px;  
+  height: 200px;  
+  border-radius: 50%;  
+  background-color: #74b9ff;  
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  font-size: 18px;  
+  color: #fff;  
+}  
+#instructions {  
+  margin-top: 15px;  
+  font-size: 14px;  
+  color: #555;  
+}  
+.button {  
+  margin-top: 20px;  
+  padding: 10px 20px;  
+  background-color: #55efc4;  
+  color: #fff;  
+  border: none;  
+  border-radius: 6px;  
+  cursor: pointer;  
+  font-size: 16px;  
+  transition: 0.3s all;  
+}  
+.button:hover {  
+  background-color: #00cec9;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>BreatheFlow Harmony</h1>  
+  <div id="circle">Start</div>  
+  <div id="instructions">Click the circle and follow the breathing instructions. Time your inhales and exhales to match the animation!</div>  
+  <button class="button" id="reset-button" style="display: none;">Try Again</button>  
+</div>  
+<script>  
+const circle = document.getElementById('circle');  
+const resetButton = document.getElementById('reset-button');  
+const instructions = document.getElementById('instructions');  
+
+let gameInterval;  
+let state = 'start';  
+let breathCount = 0;  
+
+function startBreathingGame() {  
+  let size = 200;  
+  breathCount = 0;  
+  instructions.textContent = 'Breathe in as the circle expands...';  
+
+  gameInterval = setInterval(() => {  
+    if (state === 'inhaling') {  
+      size += 10;  
+      if (size >= 300) {  
+        state = 'exhaling';  
+        instructions.textContent = 'Now breathe out as the circle contracts...';  
+      }  
+    } else if (state === 'exhaling') {  
+      size -= 10;  
+      if (size <= 200) {  
+        breathCount++;  
+        if (breathCount === 3) {  
+          clearInterval(gameInterval);  
+          instructions.textContent = 'Great job! You completed 3 breathing cycles!';  
+          resetButton.style.display = 'block';  
+        } else {  
+          state = 'inhaling';  
+          instructions.textContent = 'Breathe in as the circle expands...';  
+        }  
+      }  
+    }  
+    circle.style.width = `${size}px`;  
+    circle.style.height = `${size}px`;  
+  }, 100);  
+}  
+
+circle.addEventListener('click', () => {  
+  if (state === 'start') {  
+    state = 'inhaling';  
+    circle.textContent = '';  
+    startBreathingGame();  
+  }  
+});  
+
+resetButton.addEventListener('click', () => {  
+  clearInterval(gameInterval);  
+  state = 'start';  
+  breathCount = 0;  
+  circle.textContent = 'Start';  
+  circle.style.width = '200px';  
+  circle.style.height = '200px';  
+  instructions.textContent = 'Click the circle and follow the breathing instructions. Time your inhales and exhales to match the animation!';  
+  resetButton.style.display = 'none';  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

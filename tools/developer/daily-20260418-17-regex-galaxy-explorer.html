@@ -1,0 +1,179 @@
+---
+layout: null
+title: "Regex Galaxy Explorer"
+category: "Developer"
+description: "Navigate a galaxy of randomly generated \"planets,\" each representing a string, and use regular expressions to capture specific patterns to advance through levels."
+permalink: "/tools/daily-20260418-17-regex-galaxy-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260418"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Galaxy Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate a galaxy of randomly generated &quot;planets,&quot; each representing a string, and use regular expressions to capture specific patterns to advance through levels. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Regex Galaxy Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate a galaxy of randomly generated &quot;planets,&quot; each representing a string, and use regular expressions to capture specific patterns to advance through levels. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Regex Galaxy Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate a galaxy of randomly generated &quot;planets,&quot; each representing a string, and use regular expressions to capture specific patterns to advance through levels. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Regex Galaxy Explorer</h1>
+    <p class="seo-subtitle">Navigate a galaxy of randomly generated &quot;planets,&quot; each representing a string, and use regular expressions to capture specific patterns to advance through levels.</p>
+    <style>  
+  body {  
+    font-family: 'Arial', sans-serif;  
+    background: radial-gradient(circle, #001f3f, #011827);  
+    color: #ffffff;  
+    margin: 0;  
+    overflow: hidden;  
+  }  
+  #tool-app {  
+    display: flex;  
+    flex-direction: column;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+  }  
+  .galaxy-canvas {  
+    position: relative;  
+    width: 80%;  
+    height: 60%;  
+    background: rgba(255, 255, 255, 0.1);  
+    border: 2px dashed #ffffff;  
+    border-radius: 12px;  
+    overflow: hidden;  
+  }  
+  .planet {  
+    position: absolute;  
+    background: radial-gradient(circle, #72d6ff, #0070f3);  
+    width: 40px;  
+    height: 40px;  
+    border-radius: 50%;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    font-size: 10px;  
+    color: black;  
+    font-weight: bold;  
+  }  
+  #input-controls {  
+    margin-top: 20px;  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    gap: 10px;  
+  }  
+  #regex-input {  
+    padding: 10px;  
+    font-size: 16px;  
+    width: 300px;  
+    border: 1px solid #fff;  
+    border-radius: 5px;  
+    background: #011827;  
+    color: white;  
+  }  
+  #test-output {  
+    font-size: 14px;  
+    text-align: center;  
+  }  
+  #submit-btn {  
+    padding: 10px 20px;  
+    background-color: #0070f3;  
+    color: white;  
+    border: none;  
+    border-radius: 5px;  
+    cursor: pointer;  
+  }  
+  #submit-btn:hover {  
+    background-color: #005bb5;  
+  }  
+</style>  
+<div id="tool-app">  
+  <div class="galaxy-canvas" id="galaxy"></div>  
+  <div id="input-controls">  
+    <input type="text" id="regex-input" placeholder="Enter regex pattern (e.g., \\d+)" />  
+    <button id="submit-btn">Test Pattern</button>  
+    <div id="test-output"></div>  
+  </div>  
+</div>  
+<script>  
+const galaxy = document.getElementById('galaxy');  
+const regexInput = document.getElementById('regex-input');  
+const testOutput = document.getElementById('test-output');  
+const submitBtn = document.getElementById('submit-btn');  
+
+// Random string generator for "planets"  
+function generateRandomString() {  
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';  
+  return Array.from({ length: Math.floor(Math.random() * 6) + 3 })  
+    .map(() => chars.charAt(Math.floor(Math.random() * chars.length)))  
+    .join('');  
+}  
+
+// Generate galaxy with random "planet" strings  
+function populateGalaxy(level = 1) {  
+  const numPlanets = level * 5;  
+  galaxy.innerHTML = '';  
+  for (let i = 0; i < numPlanets; i++) {  
+    const span = document.createElement('div');  
+    span.className = 'planet';  
+    span.style.top = Math.random() * 90 + '%';  
+    span.style.left = Math.random() * 90 + '%';  
+    span.textContent = generateRandomString();  
+    galaxy.appendChild(span);  
+  }  
+}  
+
+let currentLevel = 1;  
+populateGalaxy(currentLevel);  
+
+submitBtn.addEventListener('click', () => {  
+  const pattern = new RegExp(regexInput.value);  
+  const planets = document.querySelectorAll('.planet');  
+  let matched = 0;  
+
+  planets.forEach((planet) => {  
+    if (pattern.test(planet.textContent)) {  
+      planet.style.background = 'radial-gradient(circle, #5aff7d, #28a745)';  
+      matched++;  
+    } else {  
+      planet.style.background = 'rgba(255, 0, 0, 0.6)';  
+    }  
+  });  
+
+  if (matched === planets.length) {  
+    testOutput.textContent = `Level ${currentLevel} completed! Loading next level...`;  
+    testOutput.style.color = '#28a745';  
+    currentLevel++;  
+    setTimeout(() => {  
+      populateGalaxy(currentLevel);  
+      regexInput.value = '';  
+      testOutput.textContent = '';  
+    }, 2000);  
+  } else {  
+    testOutput.textContent = `Matched ${matched}/${planets.length} planets. Try again!`;  
+    testOutput.style.color = '#f00';  
+  }  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

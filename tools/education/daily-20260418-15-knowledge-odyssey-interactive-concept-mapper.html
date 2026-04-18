@@ -1,0 +1,177 @@
+---
+layout: null
+title: "Knowledge Odyssey: Interactive Concept Mapper"
+category: "Education"
+description: "A gamified tool where users visually explore and connect knowledge nodes to create dynamic concept maps and unlock hidden insights."
+permalink: "/tools/daily-20260418-15-knowledge-odyssey-interactive-concept-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260418"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Knowledge Odyssey: Interactive Concept Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool where users visually explore and connect knowledge nodes to create dynamic concept maps and unlock hidden insights. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Knowledge Odyssey: Interactive Concept Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool where users visually explore and connect knowledge nodes to create dynamic concept maps and unlock hidden insights. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Knowledge Odyssey: Interactive Concept Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool where users visually explore and connect knowledge nodes to create dynamic concept maps and unlock hidden insights. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Knowledge Odyssey: Interactive Concept Mapper</h1>
+    <p class="seo-subtitle">A gamified tool where users visually explore and connect knowledge nodes to create dynamic concept maps and unlock hidden insights.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  color: #333;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  background: linear-gradient(135deg, #89cff0, #ffd700);  
+}  
+#tool-app {  
+  width: 80vw;  
+  height: 80vh;  
+  background: #fff;  
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);  
+  border-radius: 10px;  
+  position: relative;  
+  overflow: hidden;  
+}  
+.node {  
+  width: 100px;  
+  height: 100px;  
+  background: #f0a500;  
+  border-radius: 50%;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  position: absolute;  
+  cursor: grab;  
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);  
+  color: white;  
+  font-weight: bold;  
+}  
+.connection {  
+  position: absolute;  
+  width: 2px;  
+  background: #333;  
+  transform-origin: top left;  
+}  
+</style>  
+<div id="tool-app">  
+</div>  
+<script>  
+const app = document.getElementById('tool-app');  
+const nodes = [];  
+const connections = [];  
+
+const addNode = (id, x, y, label) => {  
+  const node = document.createElement('div');  
+  node.className = 'node';  
+  node.style.left = `${x}px`;  
+  node.style.top = `${y}px`;  
+  node.textContent = label;  
+  node.draggable = true;  
+  node.dataset.id = id;  
+
+  node.ondragstart = (e) => {  
+    e.dataTransfer.setData('nodeId', id);  
+  };  
+
+  node.ondblclick = () => {  
+    const newId = nodes.length;  
+    const xOffset = Math.random() * 100 - 50;  
+    const yOffset = Math.random() * 100 - 50;  
+    addNode(newId, x + xOffset, y + yOffset, `Node ${newId}`);  
+    addConnection(id, newId);  
+  };  
+
+  app.appendChild(node);  
+  nodes.push({ id, x, y, element: node });  
+};  
+
+const addConnection = (fromId, toId) => {  
+  const fromNode = nodes.find((node) => node.id === fromId);  
+  const toNode = nodes.find((node) => node.id === toId);  
+
+  const connection = document.createElement('div');  
+  connection.className = 'connection';  
+
+  const x1 = fromNode.x + 50;  
+  const y1 = fromNode.y + 50;  
+  const x2 = toNode.x + 50;  
+  const y2 = toNode.y + 50;  
+
+  const width = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);  
+  const angle = Math.atan2(y2 - y1, x2 - x1) * (180 / Math.PI);  
+
+  connection.style.left = `${x1}px`;  
+  connection.style.top = `${y1}px`;  
+  connection.style.width = `${width}px`;  
+  connection.style.transform = `rotate(${angle}deg)`;  
+
+  app.appendChild(connection);  
+  connections.push(connection);  
+};  
+
+const updateNodePosition = (nodeId, x, y) => {  
+  const node = nodes.find((n) => n.id === nodeId);  
+  if (node) {  
+    node.x = x;  
+    node.y = y;  
+    node.element.style.left = `${x}px`;  
+    node.element.style.top = `${y}px`;  
+    updateConnections();  
+  }  
+};  
+
+const updateConnections = () => {  
+  connections.forEach((connection) => {  
+    app.removeChild(connection);  
+  });  
+  connections.length = 0;  
+
+  nodes.forEach((fromNode) => {  
+    nodes.forEach((toNode) => {  
+      if (fromNode !== toNode && Math.random() > 0.5) {  
+        addConnection(fromNode.id, toNode.id);  
+      }  
+    });  
+  });  
+};  
+
+app.ondragover = (e) => e.preventDefault();  
+
+app.ondrop = (e) => {  
+  const nodeId = e.dataTransfer.getData('nodeId');  
+  const x = e.clientX - app.offsetLeft - 50;  
+  const y = e.clientY - app.offsetTop - 50;  
+  updateNodePosition(parseInt(nodeId, 10), x, y);  
+};  
+
+addNode(0, 300, 300, 'Start');  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
