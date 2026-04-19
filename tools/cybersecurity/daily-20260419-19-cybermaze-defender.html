@@ -1,0 +1,149 @@
+---
+layout: null
+title: "CyberMaze Defender"
+category: "Cybersecurity"
+description: "A dynamic mini-game where users must navigate a 3D maze by solving progressively harder cybersecurity challenges, like decoding encrypted messages and identifying phishing attempts, to \"patch vulnerabilities\" before the clock runs out."
+permalink: "/tools/daily-20260419-19-cybermaze-defender.html"
+generated_by: "api-true-ai"
+generated_date: "20260419"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberMaze Defender | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic mini-game where users must navigate a 3D maze by solving progressively harder cybersecurity challenges, like decoding encrypted messages and identifying phishing attempts, to &quot;patch vulnerabilities&quot; before the clock runs out. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CyberMaze Defender | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic mini-game where users must navigate a 3D maze by solving progressively harder cybersecurity challenges, like decoding encrypted messages and identifying phishing attempts, to &quot;patch vulnerabilities&quot; before the clock runs out. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CyberMaze Defender | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic mini-game where users must navigate a 3D maze by solving progressively harder cybersecurity challenges, like decoding encrypted messages and identifying phishing attempts, to &quot;patch vulnerabilities&quot; before the clock runs out. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CyberMaze Defender</h1>
+    <p class="seo-subtitle">A dynamic mini-game where users must navigate a 3D maze by solving progressively harder cybersecurity challenges, like decoding encrypted messages and identifying phishing attempts, to &quot;patch vulnerabilities&quot; before the clock runs out.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: #0e1a2b; color: #fff; margin: 0; overflow: hidden; }  
+  #tool-app { width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; }  
+  canvas { display: block; }  
+  .hud { position: absolute; top: 20px; left: 20px; background: rgba(0, 0, 0, 0.5); padding: 10px; border-radius: 8px; }  
+  .hud h1 { margin: 0; font-size: 1.5rem; }  
+  .prompt { margin-top: 10px; font-size: 1rem; }  
+  .answer-input { margin-top: 10px; padding: 5px; font-size: 1rem; border-radius: 4px; border: none; }  
+  .submit-btn { margin-top: 10px; padding: 5px 10px; font-size: 1rem; border: none; background: #4caf50; color: #fff; border-radius: 4px; cursor: pointer; }  
+</style>  
+<div id="tool-app">  
+  <canvas id="mazeCanvas"></canvas>  
+  <div class="hud">  
+    <h1>CyberMaze Defender</h1>  
+    <div class="prompt" id="prompt">Decrypt this: @@@@====</div>  
+    <input class="answer-input" id="answerInput" type="text" placeholder="Your answer..." />  
+    <button class="submit-btn" id="submitBtn">Submit</button>  
+  </div>  
+</div>  
+<script>  
+const canvas = document.getElementById('mazeCanvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = window.innerWidth;  
+canvas.height = window.innerHeight;  
+let startTime = Date.now();  
+let isGameOver = false;  
+let player = { x: 100, y: 100, size: 20 };  
+let exit = { x: canvas.width - 100, y: canvas.height - 100, size: 30 };  
+let obstacleList = [];  
+let securityChallenges = [  
+  { prompt: 'Decrypt this: Hfnos!', answer: 'Hello' },  
+  { prompt: 'Identify phishing: [Click here to claim your prize!]', answer: 'phishing' },  
+  { prompt: 'Decode base64: SGVsbG8=', answer: 'Hello' },  
+];  
+let currentChallenge = Math.floor(Math.random() * securityChallenges.length);  
+
+function drawMaze() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  ctx.fillStyle = '#fff';  
+  ctx.fillRect(player.x, player.y, player.size, player.size);  
+  ctx.fillStyle = '#4caf50';  
+  ctx.fillRect(exit.x, exit.y, exit.size, exit.size);  
+  obstacleList.forEach(obstacle => {  
+    ctx.fillStyle = '#f44336';  
+    ctx.fillRect(obstacle.x, obstacle.y, obstacle.size, obstacle.size);  
+  });  
+}  
+
+function movePlayer(dx, dy) {  
+  if (!isGameOver) {  
+    player.x += dx;  
+    player.y += dy;  
+    checkCollision();  
+    drawMaze();  
+  }  
+}  
+
+function checkCollision() {  
+  if (player.x < exit.x + exit.size &&  
+      player.x + player.size > exit.x &&  
+      player.y < exit.y + exit.size &&  
+      player.y + player.size > exit.y) {  
+    isGameOver = true;  
+    alert('You escaped the maze!');  
+  }  
+  obstacleList.forEach(obstacle => {  
+    if (player.x < obstacle.x + obstacle.size &&  
+        player.x + player.size > obstacle.x &&  
+        player.y < obstacle.y + obstacle.size &&  
+        player.y + player.size > obstacle.y) {  
+      isGameOver = true;  
+      alert('You hit an obstacle! Game Over!');  
+    }  
+  });  
+}  
+
+document.addEventListener('keydown', (event) => {  
+  if (event.key === 'ArrowUp') movePlayer(0, -10);  
+  if (event.key === 'ArrowDown') movePlayer(0, 10);  
+  if (event.key === 'ArrowLeft') movePlayer(-10, 0);  
+  if (event.key === 'ArrowRight') movePlayer(10, 0);  
+});  
+
+document.getElementById('submitBtn').addEventListener('click', () => {  
+  const answer = document.getElementById('answerInput').value;  
+  if (answer === securityChallenges[currentChallenge].answer) {  
+    alert('Correct! Keep going!');  
+    currentChallenge = Math.floor(Math.random() * securityChallenges.length);  
+    document.getElementById('prompt').textContent = securityChallenges[currentChallenge].prompt;  
+  } else {  
+    alert('Incorrect. Try again!');  
+  }  
+});  
+
+function createObstacles() {  
+  for (let i = 0; i < 10; i++) {  
+    obstacleList.push({  
+      x: Math.random() * canvas.width,  
+      y: Math.random() * canvas.height,  
+      size: 40,  
+    });  
+  }  
+}  
+
+createObstacles();  
+drawMaze();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

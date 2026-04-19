@@ -1,0 +1,223 @@
+---
+layout: null
+title: "CodeCipher Quest"
+category: "Education"
+description: "A gamified browser tool where users decode encrypted messages using various ciphers (Caesar cipher, Vigenère cipher, etc.) while learning about cryptography."
+permalink: "/tools/daily-20260419-22-codecipher-quest.html"
+generated_by: "api-true-ai"
+generated_date: "20260419"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeCipher Quest | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified browser tool where users decode encrypted messages using various ciphers (Caesar cipher, Vigenère cipher, etc.) while learning about cryptography. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CodeCipher Quest | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified browser tool where users decode encrypted messages using various ciphers (Caesar cipher, Vigenère cipher, etc.) while learning about cryptography. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CodeCipher Quest | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified browser tool where users decode encrypted messages using various ciphers (Caesar cipher, Vigenère cipher, etc.) while learning about cryptography. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CodeCipher Quest</h1>
+    <p class="seo-subtitle">A gamified browser tool where users decode encrypted messages using various ciphers (Caesar cipher, Vigenère cipher, etc.) while learning about cryptography.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(90deg, #1a2b5c, #3a8cc1);  
+  color: #fff;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+
+#tool-app {  
+  background: #293B5F;  
+  padding: 20px;  
+  border-radius: 8px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);  
+  max-width: 700px;  
+  width: 90%;  
+  text-align: center;  
+}  
+
+button {  
+  background: #4CAF50;  
+  color: white;  
+  border: none;  
+  padding: 10px 20px;  
+  margin: 10px;  
+  font-size: 16px;  
+  border-radius: 4px;  
+  cursor: pointer;  
+}  
+
+button:hover {  
+  background: #45a049;  
+}  
+
+#output {  
+  margin-top: 20px;  
+  padding: 15px;  
+  background: #1e2d4d;  
+  border-radius: 5px;  
+  font-size: 18px;  
+  word-wrap: break-word;  
+}  
+
+input, select {  
+  margin: 10px 0;  
+  padding: 10px;  
+  width: calc(100% - 22px);  
+  box-sizing: border-box;  
+  border-radius: 4px;  
+  border: 1px solid #ccc;  
+}  
+</style>  
+
+<div id="tool-app">  
+  <h1>CodeCipher Quest</h1>  
+  <p>Decode the encrypted message! Learn how ciphers work as you progress through levels of difficulty.</p>  
+
+  <div>  
+    <label for="cipher-select">Choose a Cipher:</label>  
+    <select id="cipher-select">  
+      <option value="caesar">Caesar Cipher</option>  
+      <option value="vigenere">Vigenère Cipher</option>  
+    </select>  
+  </div>  
+
+  <div id="caesar-options" style="display: none;">  
+    <label for="caesar-shift">Shift (1-25):</label>  
+    <input type="number" id="caesar-shift" min="1" max="25" value="3">  
+  </div>  
+
+  <div id="vigenere-options" style="display: none;">  
+    <label for="vigenere-key">Key (letters only):</label>  
+    <input type="text" id="vigenere-key">  
+  </div>  
+
+  <button id="start-game">Start Game</button>  
+
+  <div id="output"></div>  
+</div>  
+
+<script>  
+// Interactive JavaScript logic here  
+document.addEventListener("DOMContentLoaded", () => {  
+  const cipherSelect = document.getElementById("cipher-select");  
+  const caesarOptions = document.getElementById("caesar-options");  
+  const vigenereOptions = document.getElementById("vigenere-options");  
+  const output = document.getElementById("output");  
+  const startGame = document.getElementById("start-game");  
+
+  const messages = [  
+    "HELLO",  
+    "WORLD",  
+    "JAVASCRIPT",  
+    "ENCRYPTION",  
+    "WEBSECURITY"  
+  ];  
+
+  let currentMessage = "";  
+
+  cipherSelect.addEventListener("change", () => {  
+    if (cipherSelect.value === "caesar") {  
+      caesarOptions.style.display = "block";  
+      vigenereOptions.style.display = "none";  
+    } else if (cipherSelect.value === "vigenere") {  
+      caesarOptions.style.display = "none";  
+      vigenereOptions.style.display = "block";  
+    }  
+  });  
+
+  startGame.addEventListener("click", () => {  
+    currentMessage = messages[Math.floor(Math.random() * messages.length)];  
+    const cipher = cipherSelect.value;  
+    let encryptedMessage = "";  
+
+    if (cipher === "caesar") {  
+      const shift = parseInt(document.getElementById("caesar-shift").value) || 3;  
+      encryptedMessage = caesarEncrypt(currentMessage, shift);  
+    } else if (cipher === "vigenere") {  
+      const key = document.getElementById("vigenere-key").value.toUpperCase();  
+      if (!/^[A-Z]+$/.test(key)) {  
+        output.textContent = "Invalid key! Use only letters for Vigenère Cipher.";  
+        return;  
+      }  
+      encryptedMessage = vigenereEncrypt(currentMessage, key);  
+    }  
+
+    output.innerHTML = `  
+      <p><strong>Encrypted Message:</strong> ${encryptedMessage}</p>  
+      <p>Decode it and type your answer below:</p>  
+      <input type="text" id="user-decode" placeholder="Enter decoded message">  
+      <button id="check-answer">Check Answer</button>  
+    `;  
+
+    document.getElementById("check-answer").addEventListener("click", () => {  
+      const userDecode = document.getElementById("user-decode").value.toUpperCase();  
+      if (userDecode === currentMessage) {  
+        output.innerHTML = "<p>🎉 Correct! Well done!</p>";  
+      } else {  
+        output.innerHTML += "<p>❌ Try again!</p>";  
+      }  
+    });  
+  });  
+
+  function caesarEncrypt(text, shift) {  
+    return text  
+      .split("")  
+      .map(char => {  
+        if (char.match(/[A-Z]/)) {  
+          const charCode = ((char.charCodeAt(0) - 65 + shift) % 26) + 65;  
+          return String.fromCharCode(charCode);  
+        }  
+        return char;  
+      })  
+      .join("");  
+  }  
+
+  function vigenereEncrypt(text, key) {  
+    let keyIndex = 0;  
+    return text  
+      .split("")  
+      .map(char => {  
+        if (char.match(/[A-Z]/)) {  
+          const charCode =  
+            ((  
+              char.charCodeAt(0) - 65 +  
+              (key.charCodeAt(keyIndex++ % key.length) - 65)  
+            ) % 26) +  
+            65;  
+          return String.fromCharCode(charCode);  
+        }  
+        return char;  
+      })  
+      .join("");  
+  }  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

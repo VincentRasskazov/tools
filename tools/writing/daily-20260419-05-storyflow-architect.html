@@ -1,0 +1,150 @@
+---
+layout: null
+title: "StoryFlow Architect"
+category: "Writing"
+description: "A dynamic writing mini-game where users create storylines by connecting visual story nodes, with branching paths, character interactions, and live feedback on narrative flow."
+permalink: "/tools/daily-20260419-05-storyflow-architect.html"
+generated_by: "api-true-ai"
+generated_date: "20260419"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StoryFlow Architect | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic writing mini-game where users create storylines by connecting visual story nodes, with branching paths, character interactions, and live feedback on narrative flow. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="StoryFlow Architect | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic writing mini-game where users create storylines by connecting visual story nodes, with branching paths, character interactions, and live feedback on narrative flow. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StoryFlow Architect | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic writing mini-game where users create storylines by connecting visual story nodes, with branching paths, character interactions, and live feedback on narrative flow. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>StoryFlow Architect</h1>
+    <p class="seo-subtitle">A dynamic writing mini-game where users create storylines by connecting visual story nodes, with branching paths, character interactions, and live feedback on narrative flow.</p>
+    <style>  
+body { font-family: Arial, sans-serif; background-color: #f9f9f9; color: #333; margin: 0; padding: 0; }  
+#tool-app { width: 100%; height: 100vh; display: flex; justify-content: center; align-items: center; }  
+#story-builder { width: 80%; height: 80%; background: #fff; border: 2px solid #ccc; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); display: grid; grid-template-columns: 1fr 3fr; overflow: hidden; }  
+#tool-sidebar { background: #f0f0f0; padding: 20px; border-right: 2px solid #ddd; display: flex; flex-direction: column; gap: 15px; }  
+#tool-sidebar button { padding: 10px 15px; font-size: 16px; border: none; background: #007BFF; color: #fff; border-radius: 5px; cursor: pointer; transition: 0.3s; }  
+#tool-sidebar button:hover { background: #0056b3; }  
+#tool-canvas { position: relative; overflow: auto; background: #fff; }  
+.story-node { position: absolute; width: 150px; padding: 10px; border: 2px solid #007BFF; border-radius: 8px; background: #e7f0ff; cursor: grab; }  
+.story-node.dragging { cursor: grabbing; opacity: 0.8; }  
+.connection-line { position: absolute; background: #007BFF; height: 4px; transform-origin: 0 0; }  
+</style>  
+<div id="tool-app">  
+  <div id="story-builder">  
+    <div id="tool-sidebar">  
+      <button id="add-node">Add New Node</button>  
+      <button id="clear-canvas">Clear Canvas</button>  
+    </div>  
+    <div id="tool-canvas"></div>  
+  </div>  
+</div>  
+<script>  
+const canvas = document.getElementById('tool-canvas');  
+const addNodeButton = document.getElementById('add-node');  
+const clearCanvasButton = document.getElementById('clear-canvas');  
+
+let nodes = [];  
+let connections = [];  
+let currentDraggingNode = null;  
+
+// Helper to create a draggable story node  
+function createNode(x, y) {  
+  const node = document.createElement('div');  
+  node.classList.add('story-node');  
+  node.style.left = `${x}px`;  
+  node.style.top = `${y}px`;  
+  node.textContent = 'Node ' + (nodes.length + 1);  
+  node.draggable = true;  
+
+  node.addEventListener('dragstart', (e) => {  
+    currentDraggingNode = node;  
+    node.classList.add('dragging');  
+  });  
+
+  node.addEventListener('dragend', (e) => {  
+    currentDraggingNode = null;  
+    node.classList.remove('dragging');  
+  });  
+
+  node.addEventListener('drag', (e) => {  
+    if (e.pageX && e.pageY) {  
+      node.style.left = `${e.pageX - canvas.offsetLeft - 75}px`;  
+      node.style.top = `${e.pageY - canvas.offsetTop - 20}px`;  
+      updateConnections();  
+    }  
+  });  
+
+  nodes.push(node);  
+  canvas.appendChild(node);  
+}  
+
+// Helper to connect two nodes visually  
+function connectNodes(nodeA, nodeB) {  
+  const line = document.createElement('div');  
+  line.classList.add('connection-line');  
+
+  connections.push({ line, nodeA, nodeB });  
+  canvas.appendChild(line);  
+  updateConnections();  
+}  
+
+// Update visual positions of connection lines  
+function updateConnections() {  
+  connections.forEach(({ line, nodeA, nodeB }) => {  
+    const rectA = nodeA.getBoundingClientRect();  
+    const rectB = nodeB.getBoundingClientRect();  
+
+    const startX = rectA.left + rectA.width / 2 - canvas.offsetLeft;  
+    const startY = rectA.top + rectA.height / 2 - canvas.offsetTop;  
+    const endX = rectB.left + rectB.width / 2 - canvas.offsetLeft;  
+    const endY = rectB.top + rectB.height / 2 - canvas.offsetTop;  
+
+    const angle = Math.atan2(endY - startY, endX - startX);  
+    const length = Math.sqrt((endX - startX) ** 2 + (endY - startY) ** 2);  
+
+    line.style.width = `${length}px`;  
+    line.style.transform = `translate(${startX}px, ${startY}px) rotate(${angle}rad)`;  
+  });  
+}  
+
+// Add new node on button click  
+addNodeButton.addEventListener('click', () => {  
+  createNode(50, 50);  
+});  
+
+// Clear the canvas  
+clearCanvasButton.addEventListener('click', () => {  
+  nodes.forEach(node => canvas.removeChild(node));  
+  connections.forEach(conn => canvas.removeChild(conn.line));  
+  nodes = [];  
+  connections = [];  
+});  
+
+// Initialize example nodes and connections  
+createNode(100, 100);  
+createNode(300, 200);  
+connectNodes(nodes[0], nodes[1]);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

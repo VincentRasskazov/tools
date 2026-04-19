@@ -1,0 +1,178 @@
+---
+layout: null
+title: "StoryWeaver: Interactive Plot Map Maker"
+category: "Writing"
+description: "Build, visualize, and dynamically adjust interconnected story arcs, character relationships, and plotlines in real-time using a draggable, node-based interface."
+permalink: "/tools/daily-20260419-24-storyweaver-interactive-plot-map-maker.html"
+generated_by: "api-true-ai"
+generated_date: "20260419"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StoryWeaver: Interactive Plot Map Maker | Free Online Interactive Tool</title>
+  <meta name="description" content="Build, visualize, and dynamically adjust interconnected story arcs, character relationships, and plotlines in real-time using a draggable, node-based interface. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="StoryWeaver: Interactive Plot Map Maker | Free Online Interactive Tool">
+  <meta property="og:description" content="Build, visualize, and dynamically adjust interconnected story arcs, character relationships, and plotlines in real-time using a draggable, node-based interface. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StoryWeaver: Interactive Plot Map Maker | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Build, visualize, and dynamically adjust interconnected story arcs, character relationships, and plotlines in real-time using a draggable, node-based interface. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>StoryWeaver: Interactive Plot Map Maker</h1>
+    <p class="seo-subtitle">Build, visualize, and dynamically adjust interconnected story arcs, character relationships, and plotlines in real-time using a draggable, node-based interface.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to right, #ff7e5f, #feb47b);  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  color: #222;  
+}  
+#tool-app {  
+  width: 80%;  
+  height: 80%;  
+  background: #ffffff;  
+  border-radius: 10px;  
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25);  
+  overflow: hidden;  
+  display: flex;  
+  flex-direction: column;  
+}  
+header {  
+  background: #333;  
+  color: #fff;  
+  padding: 10px;  
+  text-align: center;  
+  font-size: 1.5em;  
+}  
+#canvas {  
+  flex: 1;  
+  background: #f0f0f0;  
+  position: relative;  
+  overflow: hidden;  
+  cursor: grab;  
+}  
+.node {  
+  position: absolute;  
+  padding: 10px;  
+  background: #fffae3;  
+  border: 2px solid #ff9f43;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);  
+}  
+.node:active {  
+  cursor: grabbing;  
+}  
+.connection {  
+  position: absolute;  
+  background: #ff6f61;  
+  height: 2px;  
+  transform-origin: 0 0;  
+}  
+</style>  
+<div id="tool-app">  
+  <header>StoryWeaver: Interactive Plot Map Maker</header>  
+  <div id="canvas"></div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.querySelector('#canvas');  
+const nodes = [];  
+const connections = [];  
+
+let selectedNode = null;  
+let offsetX = 0;  
+let offsetY = 0;  
+
+canvas.addEventListener('dblclick', (e) => {  
+  const newNode = document.createElement('div');  
+  newNode.className = 'node';  
+  newNode.style.left = `${e.clientX}px`;  
+  newNode.style.top = `${e.clientY}px`;  
+  newNode.textContent = `Node ${nodes.length + 1}`;  
+  canvas.appendChild(newNode);  
+  nodes.push(newNode);  
+
+  newNode.addEventListener('mousedown', (e) => {  
+    selectedNode = newNode;  
+    offsetX = e.offsetX;  
+    offsetY = e.offsetY;  
+  });  
+
+  newNode.addEventListener('mouseup', () => {  
+    if (selectedNode) {  
+      selectedNode = null;  
+    }  
+  });  
+});  
+
+canvas.addEventListener('mousemove', (e) => {  
+  if (selectedNode) {  
+    const x = e.clientX - offsetX;  
+    const y = e.clientY - offsetY;  
+    selectedNode.style.left = `${x}px`;  
+    selectedNode.style.top = `${y}px`;  
+    updateConnections();  
+  }  
+});  
+
+canvas.addEventListener('contextmenu', (e) => {  
+  e.preventDefault();  
+  const targetNode = e.target;  
+  if (targetNode.classList.contains('node')) {  
+    if (selectedNode && selectedNode !== targetNode) {  
+      const conn = document.createElement('div');  
+      conn.className = 'connection';  
+      canvas.appendChild(conn);  
+      connections.push({ from: selectedNode, to: targetNode, element: conn });  
+      updateConnections();  
+    }  
+  }  
+});  
+
+function updateConnections() {  
+  connections.forEach(({ from, to, element }) => {  
+    const fromRect = from.getBoundingClientRect();  
+    const toRect = to.getBoundingClientRect();  
+
+    const x1 = fromRect.left + fromRect.width / 2;  
+    const y1 = fromRect.top + fromRect.height / 2;  
+    const x2 = toRect.left + toRect.width / 2;  
+    const y2 = toRect.top + toRect.height / 2;  
+
+    const angle = Math.atan2(y2 - y1, x2 - x1);  
+    const length = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);  
+
+    element.style.width = `${length}px`;  
+    element.style.transform = `rotate(${angle}rad)`;  
+    element.style.left = `${x1}px`;  
+    element.style.top = `${y1}px`;  
+  });  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

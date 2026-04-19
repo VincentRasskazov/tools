@@ -1,0 +1,162 @@
+---
+layout: null
+title: "SynTax Explorer"
+category: "Education"
+description: "A gamified tool where users solve grammar puzzles by visually rearranging sentences to explore syntax, improve language skills, and uncover hidden facts."
+permalink: "/tools/daily-20260419-08-syntax-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260419"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SynTax Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool where users solve grammar puzzles by visually rearranging sentences to explore syntax, improve language skills, and uncover hidden facts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="SynTax Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool where users solve grammar puzzles by visually rearranging sentences to explore syntax, improve language skills, and uncover hidden facts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SynTax Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool where users solve grammar puzzles by visually rearranging sentences to explore syntax, improve language skills, and uncover hidden facts. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>SynTax Explorer</h1>
+    <p class="seo-subtitle">A gamified tool where users solve grammar puzzles by visually rearranging sentences to explore syntax, improve language skills, and uncover hidden facts.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+    font-family: 'Arial', sans-serif;  
+    margin: 0;  
+    padding: 0;  
+    background: linear-gradient(to right, #6dd5ed, #2193b0);  
+    color: #fff;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+    overflow: hidden;  
+}  
+#tool-app {  
+    background: #ffffff10;  
+    border-radius: 12px;  
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);  
+    padding: 20px;  
+    max-width: 700px;  
+    width: 90%;  
+    text-align: center;  
+}  
+.sentence-block {  
+    display: inline-block;  
+    padding: 10px 15px;  
+    margin: 5px;  
+    background-color: #ffffff30;  
+    border: 1px solid #ffffff50;  
+    border-radius: 5px;  
+    cursor: grab;  
+    transition: all 0.2s;  
+}  
+.sentence-block:hover {  
+    background-color: #ffffff60;  
+}  
+.drop-zone {  
+    min-height: 50px;  
+    margin-top: 20px;  
+    border: 2px dashed #ffffff50;  
+    padding: 10px;  
+    border-radius: 8px;  
+    display: flex;  
+    flex-wrap: wrap;  
+    justify-content: center;  
+    align-items: center;  
+    gap: 10px;  
+}  
+#feedback {  
+    margin-top: 20px;  
+    font-size: 18px;  
+}  
+</style>  
+<div id="tool-app">  
+    <h1>SynTax Explorer</h1>  
+    <p>Drag and drop the sentence blocks to form a grammatically correct sentence:</p>  
+    <div id="blocks-container">  
+        <!-- Dynamically populated blocks -->  
+    </div>  
+    <div class="drop-zone" id="drop-zone"></div>  
+    <button id="check-btn" style="margin-top: 20px; padding: 10px 20px; font-size: 16px; background: #ffffff30; border: none; border-radius: 5px; color: white; cursor: pointer;">Check Answer</button>  
+    <div id="feedback"></div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const sentences = [  
+    { words: ["cat", "The", "on", "sat", "mat"], correct: ["The", "cat", "sat", "on", "the", "mat"] },  
+    { words: ["eats", "she", "quickly", "dinner"], correct: ["She", "eats", "dinner", "quickly"] },  
+    { words: ["beautiful", "a", "day", "What"], correct: ["What", "a", "beautiful", "day"] }  
+];  
+  
+const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);  
+  
+const blocksContainer = document.getElementById("blocks-container");  
+const dropZone = document.getElementById("drop-zone");  
+const feedback = document.getElementById("feedback");  
+let currentSentence;  
+  
+const loadSentence = () => {  
+    feedback.textContent = "";  
+    dropZone.innerHTML = "";  
+    blocksContainer.innerHTML = "";  
+    currentSentence = sentences[Math.floor(Math.random() * sentences.length)];  
+    const shuffledWords = shuffleArray([...currentSentence.words]);  
+    shuffledWords.forEach(word => {  
+        const block = document.createElement("div");  
+        block.classList.add("sentence-block");  
+        block.textContent = word;  
+        block.draggable = true;  
+        block.addEventListener("dragstart", (e) => {  
+            e.dataTransfer.setData("text", e.target.textContent);  
+        });  
+        blocksContainer.appendChild(block);  
+    });  
+};  
+  
+dropZone.addEventListener("dragover", (e) => e.preventDefault());  
+dropZone.addEventListener("drop", (e) => {  
+    e.preventDefault();  
+    const word = e.dataTransfer.getData("text");  
+    const block = document.createElement("div");  
+    block.classList.add("sentence-block");  
+    block.textContent = word;  
+    dropZone.appendChild(block);  
+});  
+  
+document.getElementById("check-btn").addEventListener("click", () => {  
+    const userAnswer = Array.from(dropZone.children).map(block => block.textContent);  
+    if (JSON.stringify(userAnswer) === JSON.stringify(currentSentence.correct)) {  
+        feedback.textContent = "Correct! 🎉";  
+        feedback.style.color = "#27ae60";  
+        setTimeout(loadSentence, 2000);  
+    } else {  
+        feedback.textContent = "Try Again! ❌";  
+        feedback.style.color = "#c0392b";  
+    }  
+});  
+  
+loadSentence();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
