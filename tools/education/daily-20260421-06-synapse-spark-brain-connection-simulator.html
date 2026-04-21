@@ -1,0 +1,144 @@
+---
+layout: null
+title: "Synapse Spark: Brain Connection Simulator"
+category: "Education"
+description: "A visually engaging game that lets users create neural pathways and simulate brain activity to learn about neuroscience and cognitive processes."
+permalink: "/tools/daily-20260421-06-synapse-spark-brain-connection-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260421"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Synapse Spark: Brain Connection Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="A visually engaging game that lets users create neural pathways and simulate brain activity to learn about neuroscience and cognitive processes. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Synapse Spark: Brain Connection Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="A visually engaging game that lets users create neural pathways and simulate brain activity to learn about neuroscience and cognitive processes. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Synapse Spark: Brain Connection Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A visually engaging game that lets users create neural pathways and simulate brain activity to learn about neuroscience and cognitive processes. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Synapse Spark: Brain Connection Simulator</h1>
+    <p class="seo-subtitle">A visually engaging game that lets users create neural pathways and simulate brain activity to learn about neuroscience and cognitive processes.</p>
+    <style>  
+  body {  
+    font-family: Arial, sans-serif;  
+    background: linear-gradient(to right, #3a6186, #89253e);  
+    color: white;  
+    margin: 0;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+  }  
+  #tool-app {  
+    width: 80%;  
+    height: 80%;  
+    border: 2px solid white;  
+    border-radius: 10px;  
+    background: #2c3e50;  
+    display: flex;  
+    flex-wrap: wrap;  
+    justify-content: center;  
+    align-items: center;  
+    position: relative;  
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);  
+  }  
+  .neuron {  
+    width: 50px;  
+    height: 50px;  
+    border-radius: 50%;  
+    background: #f39c12;  
+    position: absolute;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    color: black;  
+    font-weight: bold;  
+    cursor: pointer;  
+  }  
+  .connection {  
+    position: absolute;  
+    width: 2px;  
+    background: #ecf0f1;  
+    transform-origin: left center;  
+  }  
+</style>  
+<div id="tool-app">  
+</div>  
+<script>  
+const app = document.getElementById('tool-app');  
+const neurons = [];  
+const connections = [];  
+const neuronCount = 10;  
+
+function getRandomPosition() {  
+  return {  
+    x: Math.random() * (app.offsetWidth - 50),  
+    y: Math.random() * (app.offsetHeight - 50)  
+  };  
+}  
+
+function createNeuron(id) {  
+  const neuron = document.createElement('div');  
+  neuron.className = 'neuron';  
+  const { x, y } = getRandomPosition();  
+  neuron.style.left = `${x}px`;  
+  neuron.style.top = `${y}px`;  
+  neuron.innerHTML = id;  
+  neuron.dataset.id = id;  
+  neurons.push(neuron);  
+  neuron.addEventListener('click', () => connectNeuron(neuron));  
+  app.appendChild(neuron);  
+}  
+
+function connectNeuron(neuron) {  
+  if (!connections.length || connections.length % 2 === 0) {  
+    connections.push(neuron);  
+  } else {  
+    const start = connections.pop();  
+    const end = neuron;  
+    const line = document.createElement('div');  
+    line.className = 'connection';  
+
+    const x1 = start.offsetLeft + 25;  
+    const y1 = start.offsetTop + 25;  
+    const x2 = end.offsetLeft + 25;  
+    const y2 = end.offsetTop + 25;  
+
+    const length = Math.hypot(x2 - x1, y2 - y1);  
+    const angle = Math.atan2(y2 - y1, x2 - x1) * (180 / Math.PI);  
+
+    line.style.width = `${length}px`;  
+    line.style.transform = `rotate(${angle}deg)`;  
+    line.style.left = `${x1}px`;  
+    line.style.top = `${y1}px`;  
+
+    app.appendChild(line);  
+  }  
+}  
+
+for (let i = 1; i <= neuronCount; i++) {  
+  createNeuron(i);  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

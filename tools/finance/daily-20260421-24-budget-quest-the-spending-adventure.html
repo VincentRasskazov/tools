@@ -1,0 +1,182 @@
+---
+layout: null
+title: "Budget Quest: The Spending Adventure"
+category: "Finance"
+description: "An interactive mini-game where users navigate a fantasy world by making financial decisions, learning budgeting skills, and managing resources to complete quests."
+permalink: "/tools/daily-20260421-24-budget-quest-the-spending-adventure.html"
+generated_by: "api-true-ai"
+generated_date: "20260421"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Budget Quest: The Spending Adventure | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive mini-game where users navigate a fantasy world by making financial decisions, learning budgeting skills, and managing resources to complete quests. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Budget Quest: The Spending Adventure | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive mini-game where users navigate a fantasy world by making financial decisions, learning budgeting skills, and managing resources to complete quests. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Budget Quest: The Spending Adventure | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive mini-game where users navigate a fantasy world by making financial decisions, learning budgeting skills, and managing resources to complete quests. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Budget Quest: The Spending Adventure</h1>
+    <p class="seo-subtitle">An interactive mini-game where users navigate a fantasy world by making financial decisions, learning budgeting skills, and managing resources to complete quests.</p>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #4facfe, #00f2fe);
+    color: #333;
+    margin: 0;
+    padding: 20px;
+  }
+  #tool-app {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+  }
+  .quest-card {
+    border: 2px solid #4facfe;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+  .quest-title {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #0074d9;
+  }
+  .quest-description {
+    margin: 10px 0;
+  }
+  .action-button {
+    background: #0074d9;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  .action-button:hover {
+    background: #005fa3;
+  }
+  .stats-bar {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .progress-bar {
+    background: #eaeaea;
+    border-radius: 4px;
+    height: 12px;
+    width: 100%;
+    overflow: hidden;
+  }
+  .progress-fill {
+    background: #00cc99;
+    height: 100%;
+    width: 0;
+    transition: width 0.5s ease;
+  }
+</style>
+<div id="tool-app">
+  <div class="stats-bar">
+    <div>
+      <strong>Budget:</strong> <span id="budget">$1000</span>
+    </div>
+    <div>
+      <strong>Happiness:</strong> <span id="happiness">50%</span>
+    </div>
+  </div>
+  <div class="progress-bar">
+    <div id="happiness-bar" class="progress-fill"></div>
+  </div>
+  <h2>Current Quest</h2>
+  <div id="quest" class="quest-card">
+    <p class="quest-title">Set Out on Your Adventure</p>
+    <p class="quest-description">You encounter a shop selling magical gear. Do you spend $300 on a magic sword or save your money?</p>
+    <button class="action-button" onclick="handleDecision(-300, 20)">Buy the Sword (-$300, +20% Happiness)</button>
+    <button class="action-button" onclick="handleDecision(0, -10)">Save Money (+$0, -10% Happiness)</button>
+  </div>
+</div>
+<script>
+  let budget = 1000;
+  let happiness = 50;
+
+  function updateUI() {
+    document.getElementById('budget').textContent = `$${budget}`;
+    document.getElementById('happiness').textContent = `${happiness}%`;
+    document.getElementById('happiness-bar').style.width = `${happiness}%`;
+  }
+
+  function handleDecision(cost, happinessChange) {
+    if (budget + cost < 0) {
+      alert("Not enough budget for this decision!");
+      return;
+    }
+    budget += cost;
+    happiness += happinessChange;
+    happiness = Math.max(0, Math.min(100, happiness)); // Clamp happiness between 0 and 100
+    updateUI();
+
+    // Generate new quest
+    const quests = [
+      {
+        title: "Help a Villager",
+        description: "A villager needs $200 to fix their roof. Will you help?",
+        options: [
+          { label: "Help (-$200, +15% Happiness)", cost: -200, happiness: 15 },
+          { label: "Decline (+$0, -5% Happiness)", cost: 0, happiness: -5 }
+        ]
+      },
+      {
+        title: "Treasure Hunt",
+        description: "You find a map to a treasure that costs $500 to retrieve. Do you take the risk?",
+        options: [
+          { label: "Go for it! (-$500, +30% Happiness)", cost: -500, happiness: 30 },
+          { label: "Play it safe (+$0, -10% Happiness)", cost: 0, happiness: -10 }
+        ]
+      }
+    ];
+
+    const randomQuest = quests[Math.floor(Math.random() * quests.length)];
+    const questContainer = document.getElementById("quest");
+    questContainer.innerHTML = `
+      <p class="quest-title">${randomQuest.title}</p>
+      <p class="quest-description">${randomQuest.description}</p>
+      ${randomQuest.options
+        .map(
+          option => `
+        <button class="action-button" onclick="handleDecision(${option.cost}, ${option.happiness})">
+          ${option.label}
+        </button>
+      `
+        )
+        .join("")}
+    `;
+  }
+
+  updateUI();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

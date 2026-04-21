@@ -1,0 +1,182 @@
+---
+layout: null
+title: "TaskFlow Tetris"
+category: "Productivity"
+description: "A gamified productivity tool where users organize falling \"task blocks\" into a timeline to plan their day, balancing priorities and time limits to maximize efficiency."
+permalink: "/tools/daily-20260421-11-taskflow-tetris.html"
+generated_by: "api-true-ai"
+generated_date: "20260421"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskFlow Tetris | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified productivity tool where users organize falling &quot;task blocks&quot; into a timeline to plan their day, balancing priorities and time limits to maximize efficiency. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="TaskFlow Tetris | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified productivity tool where users organize falling &quot;task blocks&quot; into a timeline to plan their day, balancing priorities and time limits to maximize efficiency. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TaskFlow Tetris | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified productivity tool where users organize falling &quot;task blocks&quot; into a timeline to plan their day, balancing priorities and time limits to maximize efficiency. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>TaskFlow Tetris</h1>
+    <p class="seo-subtitle">A gamified productivity tool where users organize falling &quot;task blocks&quot; into a timeline to plan their day, balancing priorities and time limits to maximize efficiency.</p>
+    <style>  
+  body {  
+    font-family: Arial, sans-serif;  
+    margin: 0;  
+    padding: 0;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+    background: linear-gradient(135deg, #1e90ff, #ff7f50);  
+    color: #fff;  
+  }  
+  #tool-app {  
+    text-align: center;  
+  }  
+  canvas {  
+    border: 2px solid white;  
+    background: #222;  
+    display: block;  
+    margin: 0 auto;  
+  }  
+  #instructions {  
+    margin-top: 20px;  
+    font-size: 1.2em;  
+  }  
+</style>  
+<div id="tool-app">  
+  <canvas id="gameCanvas" width="300" height="600"></canvas>  
+  <div id="instructions">  
+    Use Left/Right arrow keys to position tasks and Down to drop. Plan your day wisely!  
+  </div>  
+</div>  
+<script>  
+const canvas = document.getElementById('gameCanvas');  
+const ctx = canvas.getContext('2d');  
+const grid = 30;  
+const cols = 10;  
+const rows = 20;  
+const colors = ['#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#A133FF'];  
+const taskNames = ['Email', 'Meeting', 'Workout', 'Break', 'Coding'];  
+
+let currentBlock = null;  
+let board = Array.from({ length: rows }, () => Array(cols).fill(0));  
+
+function newBlock() {  
+  const type = Math.floor(Math.random() * 5);  
+  return {  
+    x: Math.floor(cols / 2) - 1,  
+    y: 0,  
+    color: colors[type],  
+    task: taskNames[type],  
+    cells: [  
+      [1, 1],  
+      [1, 1],  
+    ],  
+  };  
+}  
+
+function drawBlock(block) {  
+  ctx.fillStyle = block.color;  
+  block.cells.forEach((row, y) => {  
+    row.forEach((cell, x) => {  
+      if (cell) {  
+        ctx.fillRect((block.x + x) * grid, (block.y + y) * grid, grid, grid);  
+      }  
+    });  
+  });  
+}  
+
+function drawBoard() {  
+  board.forEach((row, y) => {  
+    row.forEach((cell, x) => {  
+      if (cell) {  
+        ctx.fillStyle = cell.color;  
+        ctx.fillRect(x * grid, y * grid, grid, grid);  
+      }  
+    });  
+  });  
+}  
+
+function mergeBlock() {  
+  currentBlock.cells.forEach((row, y) => {  
+    row.forEach((cell, x) => {  
+      if (cell) {  
+        board[currentBlock.y + y][currentBlock.x + x] = {  
+          color: currentBlock.color,  
+          task: currentBlock.task,  
+        };  
+      }  
+    });  
+  });  
+}  
+
+function canMove(dx, dy) {  
+  return currentBlock.cells.every((row, y) =>  
+    row.every((cell, x) => {  
+      if (!cell) return true;  
+      const nx = currentBlock.x + x + dx;  
+      const ny = currentBlock.y + y + dy;  
+      return nx >= 0 && nx < cols && ny >= 0 && ny < rows && !board[ny][nx];  
+    })  
+  );  
+}  
+
+function clearLines() {  
+  let newBoard = board.filter(row => row.some(cell => !cell));  
+  const cleared = rows - newBoard.length;  
+  while (newBoard.length < rows) newBoard.unshift(Array(cols).fill(0));  
+  board = newBoard;  
+  return cleared;  
+}  
+
+function update() {  
+  if (canMove(0, 1)) {  
+    currentBlock.y++;  
+  } else {  
+    mergeBlock();  
+    clearLines();  
+    currentBlock = newBlock();  
+    if (!canMove(0, 0)) {  
+      alert('Day Over! Refresh to start again.');  
+      return;  
+    }  
+  }  
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  drawBoard();  
+  drawBlock(currentBlock);  
+}  
+
+document.addEventListener('keydown', (e) => {  
+  if (e.key === 'ArrowLeft' && canMove(-1, 0)) currentBlock.x--;  
+  if (e.key === 'ArrowRight' && canMove(1, 0)) currentBlock.x++;  
+  if (e.key === 'ArrowDown' && canMove(0, 1)) currentBlock.y++;  
+  update();  
+});  
+
+currentBlock = newBlock();  
+setInterval(update, 500);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

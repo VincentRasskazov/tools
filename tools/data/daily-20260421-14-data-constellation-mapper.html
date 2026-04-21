@@ -1,0 +1,134 @@
+---
+layout: null
+title: "Data Constellation Mapper"
+category: "Data"
+description: "Visualize and interact with datasets as dynamic constellations, uncovering hidden patterns and relationships through real-time exploration."
+permalink: "/tools/daily-20260421-14-data-constellation-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260421"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Constellation Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize and interact with datasets as dynamic constellations, uncovering hidden patterns and relationships through real-time exploration. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Constellation Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize and interact with datasets as dynamic constellations, uncovering hidden patterns and relationships through real-time exploration. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Constellation Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize and interact with datasets as dynamic constellations, uncovering hidden patterns and relationships through real-time exploration. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Constellation Mapper</h1>
+    <p class="seo-subtitle">Visualize and interact with datasets as dynamic constellations, uncovering hidden patterns and relationships through real-time exploration.</p>
+    <style>  
+  #tool-app {  
+    width: 100vw;  
+    height: 100vh;  
+    background: radial-gradient(circle, #0d1b2a, #030506);  
+    overflow: hidden;  
+    position: relative;  
+    font-family: Arial, sans-serif;  
+    color: #ffffff;  
+  }  
+  .star {  
+    position: absolute;  
+    border-radius: 50%;  
+    background: #ffffff;  
+    cursor: pointer;  
+    transition: transform 0.3s ease, box-shadow 0.3s ease;  
+  }  
+  .star:hover {  
+    transform: scale(1.5);  
+    box-shadow: 0 0 10px 5px #ffcc00;  
+  }  
+  #tooltip {  
+    position: absolute;  
+    background: rgba(0, 0, 0, 0.7);  
+    color: #ffffff;  
+    padding: 5px 10px;  
+    border-radius: 4px;  
+    font-size: 14px;  
+    display: none;  
+    pointer-events: none;  
+  }  
+</style>  
+<div id="tooltip"></div>  
+<div id="tool-app"></div>  
+<script>  
+const toolApp = document.getElementById('tool-app');  
+const tooltip = document.getElementById('tooltip');  
+
+// Generate random dataset  
+const dataset = Array.from({ length: 50 }, (_, i) => ({  
+  id: i,  
+  x: Math.random() * window.innerWidth,  
+  y: Math.random() * window.innerHeight,  
+  value: Math.round(Math.random() * 100),  
+}));  
+
+// Create stars for each data point  
+dataset.forEach(data => {  
+  const star = document.createElement('div');  
+  star.classList.add('star');  
+  star.style.width = `${5 + data.value / 10}px`;  
+  star.style.height = star.style.width;  
+  star.style.left = `${data.x}px`;  
+  star.style.top = `${data.y}px`;  
+  toolApp.appendChild(star);  
+
+  // Tooltip interaction  
+  star.addEventListener('mouseenter', () => {  
+    tooltip.style.display = 'block';  
+    tooltip.textContent = `ID: ${data.id} | Value: ${data.value}`;  
+  });  
+  star.addEventListener('mousemove', e => {  
+    tooltip.style.left = `${e.pageX + 10}px`;  
+    tooltip.style.top = `${e.pageY + 10}px`;  
+  });  
+  star.addEventListener('mouseleave', () => {  
+    tooltip.style.display = 'none';  
+  });  
+});  
+
+// Draw lines to connect related data  
+const canvas = document.createElement('canvas');  
+canvas.width = window.innerWidth;  
+canvas.height = window.innerHeight;  
+canvas.style.position = 'absolute';  
+canvas.style.top = 0;  
+canvas.style.left = 0;  
+toolApp.appendChild(canvas);  
+const ctx = canvas.getContext('2d');  
+
+dataset.forEach(data1 => {  
+  dataset.forEach(data2 => {  
+    if (data1 !== data2 && Math.abs(data1.value - data2.value) < 20) {  
+      ctx.beginPath();  
+      ctx.moveTo(data1.x, data1.y);  
+      ctx.lineTo(data2.x, data2.y);  
+      ctx.strokeStyle = `rgba(255, 255, 255, ${1 - Math.abs(data1.value - data2.value) / 20})`;  
+      ctx.stroke();  
+    }  
+  });  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

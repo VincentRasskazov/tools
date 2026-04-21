@@ -1,0 +1,188 @@
+---
+layout: null
+title: "CipherCraft: Interactive Cryptographic Puzzle Game"
+category: "Games"
+description: "Solve procedurally generated cryptographic puzzles using classic ciphers (like Caesar, Vigenère, and monoalphabetic substitution) in an engaging and visually rich single-page app."
+permalink: "/tools/daily-20260421-07-ciphercraft-interactive-cryptographic-puzzle-game.html"
+generated_by: "api-true-ai"
+generated_date: "20260421"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CipherCraft: Interactive Cryptographic Puzzle Game | Free Online Interactive Tool</title>
+  <meta name="description" content="Solve procedurally generated cryptographic puzzles using classic ciphers (like Caesar, Vigenère, and monoalphabetic substitution) in an engaging and visually rich single-page app. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CipherCraft: Interactive Cryptographic Puzzle Game | Free Online Interactive Tool">
+  <meta property="og:description" content="Solve procedurally generated cryptographic puzzles using classic ciphers (like Caesar, Vigenère, and monoalphabetic substitution) in an engaging and visually rich single-page app. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CipherCraft: Interactive Cryptographic Puzzle Game | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Solve procedurally generated cryptographic puzzles using classic ciphers (like Caesar, Vigenère, and monoalphabetic substitution) in an engaging and visually rich single-page app. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CipherCraft: Interactive Cryptographic Puzzle Game</h1>
+    <p class="seo-subtitle">Solve procedurally generated cryptographic puzzles using classic ciphers (like Caesar, Vigenère, and monoalphabetic substitution) in an engaging and visually rich single-page app.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(135deg, #1a1a2e, #16213e);  
+  color: #e1e1e6;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+}  
+#ciphercraft {  
+  background: #0f3460;  
+  border-radius: 15px;  
+  padding: 20px;  
+  max-width: 600px;  
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);  
+}  
+h1 {  
+  font-size: 2em;  
+  text-align: center;  
+  margin-bottom: 1em;  
+  color: #00d4ff;  
+}  
+button {  
+  background: #00d4ff;  
+  color: #0f3460;  
+  border: none;  
+  border-radius: 5px;  
+  padding: 10px 15px;  
+  cursor: pointer;  
+  font-size: 1em;  
+  margin-top: 10px;  
+}  
+button:hover {  
+  background: #00a8cc;  
+}  
+textarea, input {  
+  width: 100%;  
+  padding: 10px;  
+  margin: 10px 0;  
+  border: 1px solid #ccc;  
+  border-radius: 5px;  
+  font-size: 1em;  
+}  
+p {  
+  font-size: 1em;  
+  margin-top: 1em;  
+}  
+#output {  
+  background: #1a1a2e;  
+  border-radius: 5px;  
+  padding: 10px;  
+  color: #00d4ff;  
+  font-weight: bold;  
+}  
+</style>  
+<div id="ciphercraft">  
+  <h1>CipherCraft</h1>  
+  <p>Decrypt the encoded message below! Hints will guide you through common ciphers.</p>  
+  <textarea id="encryptedMessage" rows="3" readonly></textarea>  
+  <input type="text" id="playerInput" placeholder="Type your answer here..." />  
+  <button id="submitAnswer">Submit Answer</button>  
+  <p id="hint"></p>  
+  <p id="output"></p>  
+</div>  
+<script>  
+const messages = [  
+  { text: "KWVIV QV I ZMILMVI", cipher: "Caesar", shift: 4 },  
+  { text: "LXFOPVEFRNHR", cipher: "Vigenère", keyword: "LEMON" },  
+  { text: "ZPV IBWF DSBDLFE UIF DPEF", cipher: "Monoalphabetic", map: { A: "B", B: "C", Z: "A" } }  
+];  
+
+let currentMessage = null;  
+const encryptedMessageEl = document.getElementById("encryptedMessage");  
+const playerInputEl = document.getElementById("playerInput");  
+const hintEl = document.getElementById("hint");  
+const outputEl = document.getElementById("output");  
+
+function loadGame() {  
+  currentMessage = messages[Math.floor(Math.random() * messages.length)];  
+  encryptedMessageEl.value = currentMessage.text;  
+  hintEl.textContent = `Hint: This is a ${currentMessage.cipher} cipher.`;  
+  outputEl.textContent = "";  
+}  
+
+function checkAnswer() {  
+  const answer = playerInputEl.value.trim().toUpperCase();  
+  let correct = false;  
+
+  if (currentMessage.cipher === "Caesar") {  
+    correct = decodeCaesar(currentMessage.text, currentMessage.shift) === answer;  
+  } else if (currentMessage.cipher === "Vigenère") {  
+    correct = decodeVigenere(currentMessage.text, currentMessage.keyword) === answer;  
+  } else if (currentMessage.cipher === "Monoalphabetic") {  
+    correct = decodeMonoalphabetic(currentMessage.text, currentMessage.map) === answer;  
+  }  
+
+  outputEl.textContent = correct  
+    ? "Correct! 🎉 Well done!"  
+    : "Incorrect. Try again! 😥";  
+}  
+
+function decodeCaesar(text, shift) {  
+  return text  
+    .split("")  
+    .map((char) => {  
+      if (char >= "A" && char <= "Z") {  
+        return String.fromCharCode(((char.charCodeAt(0) - 65 - shift + 26) % 26) + 65);  
+      }  
+      return char;  
+    })  
+    .join("");  
+}  
+
+function decodeVigenere(text, keyword) {  
+  let keywordIndex = 0;  
+  return text  
+    .split("")  
+    .map((char) => {  
+      if (char >= "A" && char <= "Z") {  
+        const shift = keyword.charCodeAt(keywordIndex % keyword.length) - 65;  
+        keywordIndex++;  
+        return String.fromCharCode(((char.charCodeAt(0) - 65 - shift + 26) % 26) + 65);  
+      }  
+      return char;  
+    })  
+    .join("");  
+}  
+
+function decodeMonoalphabetic(text, map) {  
+  const reverseMap = Object.fromEntries(  
+    Object.entries(map).map(([key, value]) => [value, key])  
+  );  
+  return text  
+    .split("")  
+    .map((char) => reverseMap[char] || char)  
+    .join("");  
+}  
+
+document  
+  .getElementById("submitAnswer")  
+  .addEventListener("click", checkAnswer);  
+
+loadGame();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

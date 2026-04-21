@@ -1,0 +1,157 @@
+---
+layout: null
+title: "CodeMatrix: Dependency Web Explorer"
+category: "Developer"
+description: "Visually map and interact with the dependencies of your JavaScript/TypeScript projects in a 3D matrix to identify bottlenecks and optimize your codebase."
+permalink: "/tools/daily-20260421-19-codematrix-dependency-web-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260421"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeMatrix: Dependency Web Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Visually map and interact with the dependencies of your JavaScript/TypeScript projects in a 3D matrix to identify bottlenecks and optimize your codebase. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CodeMatrix: Dependency Web Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Visually map and interact with the dependencies of your JavaScript/TypeScript projects in a 3D matrix to identify bottlenecks and optimize your codebase. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CodeMatrix: Dependency Web Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visually map and interact with the dependencies of your JavaScript/TypeScript projects in a 3D matrix to identify bottlenecks and optimize your codebase. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CodeMatrix: Dependency Web Explorer</h1>
+    <p class="seo-subtitle">Visually map and interact with the dependencies of your JavaScript/TypeScript projects in a 3D matrix to identify bottlenecks and optimize your codebase.</p>
+    <style>  
+  #tool-app {  
+    width: 100vw;  
+    height: 100vh;  
+    background-color: #1e1e2f;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    overflow: hidden;  
+  }  
+  canvas {  
+    display: block;  
+  }  
+  .tooltip {  
+    position: absolute;  
+    background: rgba(0, 0, 0, 0.8);  
+    color: #fff;  
+    padding: 5px 10px;  
+    border-radius: 5px;  
+    font-size: 0.9em;  
+    pointer-events: none;  
+    display: none;  
+  }  
+</style>  
+<div id="tool-app">  
+  <canvas id="dependency-canvas"></canvas>  
+  <div class="tooltip" id="tooltip"></div>  
+</div>  
+<script>  
+// Initialize Three.js Environment  
+const canvas = document.getElementById('dependency-canvas');  
+const tooltip = document.getElementById('tooltip');  
+const scene = new THREE.Scene();  
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);  
+const renderer = new THREE.WebGLRenderer({ canvas });  
+renderer.setSize(window.innerWidth, window.innerHeight);  
+document.body.appendChild(renderer.domElement);  
+
+// Mock Dependency Data  
+const mockDependencies = {  
+  "App": ["Utils", "API", "Router"],  
+  "Utils": ["Validation", "Logger"],  
+  "API": ["Auth"],  
+  "Router": ["Auth", "Logger"],  
+  "Auth": [],  
+  "Logger": [],  
+  "Validation": []  
+};  
+
+// Create 3D Nodes and Links  
+const nodes = {};  
+const lines = [];  
+const colorMap = new THREE.Color();  
+const group = new THREE.Group();  
+
+Object.keys(mockDependencies).forEach((key, index) => {  
+  const geometry = new THREE.SphereGeometry(0.5, 32, 32);  
+  const material = new THREE.MeshStandardMaterial({ color: colorMap.setHSL(index / Object.keys(mockDependencies).length, 0.8, 0.5) });  
+  const sphere = new THREE.Mesh(geometry, material);  
+  sphere.position.set(Math.random() * 10 - 5, Math.random() * 10 - 5, Math.random() * 10 - 5);  
+  sphere.name = key;  
+  nodes[key] = sphere;  
+  group.add(sphere);  
+
+  mockDependencies[key].forEach(dep => {  
+    if (nodes[dep]) {  
+      const lineMaterial = new THREE.LineBasicMaterial({ color: 0xffffff });  
+      const points = [sphere.position, nodes[dep].position];  
+      const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);  
+      const line = new THREE.Line(lineGeometry, lineMaterial);  
+      lines.push(line);  
+      group.add(line);  
+    }  
+  });  
+});  
+
+scene.add(group);  
+
+// Lighting  
+const ambientLight = new THREE.AmbientLight(0x404040, 2);  
+scene.add(ambientLight);  
+
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1);  
+directionalLight.position.set(5, 5, 5).normalize();  
+scene.add(directionalLight);  
+
+camera.position.z = 15;  
+
+// Animation Loop  
+function animate() {  
+  requestAnimationFrame(animate);  
+  group.rotation.y += 0.005;  
+  renderer.render(scene, camera);  
+}  
+animate();  
+
+canvas.addEventListener('mousemove', (event) => {  
+  const mouse = new THREE.Vector2();  
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;  
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;  
+
+  const raycaster = new THREE.Raycaster();  
+  raycaster.setFromCamera(mouse, camera);  
+
+  const intersects = raycaster.intersectObjects(Object.values(nodes));  
+  if (intersects.length > 0) {  
+    tooltip.style.left = event.clientX + 'px';  
+    tooltip.style.top = event.clientY + 'px';  
+    tooltip.style.display = 'block';  
+    tooltip.innerText = intersects[0].object.name;  
+  } else {  
+    tooltip.style.display = 'none';  
+  }  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

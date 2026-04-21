@@ -1,0 +1,156 @@
+---
+layout: null
+title: "StoryWeaver: Interactive Plot Crafter"
+category: "Writing"
+description: "A dynamic mini-game where users weave intricate storylines by connecting plot points, character arcs, and twists through a visual, interactive flowchart."
+permalink: "/tools/daily-20260421-05-storyweaver-interactive-plot-crafter.html"
+generated_by: "api-true-ai"
+generated_date: "20260421"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StoryWeaver: Interactive Plot Crafter | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic mini-game where users weave intricate storylines by connecting plot points, character arcs, and twists through a visual, interactive flowchart. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="StoryWeaver: Interactive Plot Crafter | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic mini-game where users weave intricate storylines by connecting plot points, character arcs, and twists through a visual, interactive flowchart. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StoryWeaver: Interactive Plot Crafter | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic mini-game where users weave intricate storylines by connecting plot points, character arcs, and twists through a visual, interactive flowchart. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>StoryWeaver: Interactive Plot Crafter</h1>
+    <p class="seo-subtitle">A dynamic mini-game where users weave intricate storylines by connecting plot points, character arcs, and twists through a visual, interactive flowchart.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to right, #ffecd2, #fcb69f);  
+  color: #333;  
+  margin: 0;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  height: 100vh;  
+}  
+#story-board {  
+  width: 80%;  
+  height: 70%;  
+  background: #fff;  
+  border-radius: 10px;  
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.25);  
+  position: relative;  
+  overflow: hidden;  
+}  
+.plot-point {  
+  width: 150px;  
+  height: 50px;  
+  background: #6eb5ff;  
+  color: white;  
+  border-radius: 5px;  
+  position: absolute;  
+  text-align: center;  
+  line-height: 50px;  
+  cursor: pointer;  
+  transition: transform 0.3s, background 0.2s;  
+}  
+.plot-point:hover {  
+  background: #4a90e2;  
+  transform: scale(1.1);  
+}  
+.connector {  
+  position: absolute;  
+  width: 2px;  
+  background: #333;  
+}  
+button {  
+  background: #ff6f61;  
+  color: white;  
+  border: none;  
+  padding: 10px 20px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  margin-top: 15px;  
+  box-shadow: 0px 3px 8px rgba(0,0,0,0.15);  
+}  
+button:hover {  
+  background: #e65a50;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>StoryWeaver: Interactive Plot Crafter</h1>  
+  <div id="story-board"></div>  
+  <button onclick="addPlotPoint()">Add Plot Point</button>  
+</div>  
+<script>  
+const board = document.getElementById('story-board');  
+const plotPoints = [];  
+
+function randomPosition() {  
+  return {  
+    x: Math.random() * (board.offsetWidth - 150),  
+    y: Math.random() * (board.offsetHeight - 50)  
+  };  
+}  
+
+function addPlotPoint() {  
+  const id = `plot-${plotPoints.length}`;  
+  const pos = randomPosition();  
+
+  const plotPoint = document.createElement('div');  
+  plotPoint.className = 'plot-point';  
+  plotPoint.id = id;  
+  plotPoint.style.left = `${pos.x}px`;  
+  plotPoint.style.top = `${pos.y}px`;  
+  plotPoint.textContent = `Plot ${plotPoints.length + 1}`;  
+  plotPoint.onclick = () => connectPlotPoint(id);  
+
+  board.appendChild(plotPoint);  
+  plotPoints.push({ id, x: pos.x + 75, y: pos.y + 25 });  
+}  
+
+function connectPlotPoint(id) {  
+  if (plotPoints.length < 2) return;  
+
+  const start = plotPoints.find(p => p.id === id);  
+  const end = plotPoints[plotPoints.length - 1];  
+
+  const connector = document.createElement('div');  
+  connector.className = 'connector';  
+
+  const deltaX = end.x - start.x;  
+  const deltaY = end.y - start.y;  
+  const length = Math.sqrt(deltaX ** 2 + deltaY ** 2);  
+  const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);  
+
+  connector.style.left = `${start.x}px`;  
+  connector.style.top = `${start.y}px`;  
+  connector.style.height = `${length}px`;  
+  connector.style.transform = `rotate(${angle}deg)`;  
+
+  board.appendChild(connector);  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

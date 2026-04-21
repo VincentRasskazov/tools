@@ -1,0 +1,178 @@
+---
+layout: null
+title: "CodeQuarium: Interactive Dependency Ecosystem Explorer"
+category: "Developer"
+description: "Visualize, interact with, and untangle complicated dependency trees of your JavaScript projects in a fun, aquarium-themed 3D interactive environment."
+permalink: "/tools/daily-20260421-21-codequarium-interactive-dependency-ecosystem-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260421"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeQuarium: Interactive Dependency Ecosystem Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize, interact with, and untangle complicated dependency trees of your JavaScript projects in a fun, aquarium-themed 3D interactive environment. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CodeQuarium: Interactive Dependency Ecosystem Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize, interact with, and untangle complicated dependency trees of your JavaScript projects in a fun, aquarium-themed 3D interactive environment. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CodeQuarium: Interactive Dependency Ecosystem Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize, interact with, and untangle complicated dependency trees of your JavaScript projects in a fun, aquarium-themed 3D interactive environment. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CodeQuarium: Interactive Dependency Ecosystem Explorer</h1>
+    <p class="seo-subtitle">Visualize, interact with, and untangle complicated dependency trees of your JavaScript projects in a fun, aquarium-themed 3D interactive environment.</p>
+    <style>
+  /* Modern, beautiful inline CSS */
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #1e3c72, #2a5298);
+    color: #fff;
+    overflow: hidden;
+  }
+  #tool-app {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+  .tooltip {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    display: none;
+  }
+</style>
+<div id="tool-app"></div>
+<div class="tooltip" id="tooltip"></div>
+<script>
+  // Interactive JavaScript logic here
+  const app = document.getElementById('tool-app');
+  const tooltip = document.getElementById('tooltip');
+  
+  // Settings
+  const NODES = 30;
+  const LINKS = 50;
+
+  // Create a canvas
+  const canvas = document.createElement('canvas');
+  app.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let nodes = [];
+  let links = [];
+
+  function createNodes() {
+    nodes = Array.from({ length: NODES }, (_, i) => ({
+      id: `Node ${i + 1}`,
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 2,
+      vy: (Math.random() - 0.5) * 2,
+      radius: Math.random() * 10 + 5,
+    }));
+  }
+
+  function createLinks() {
+    links = Array.from({ length: LINKS }, () => {
+      const source = nodes[Math.floor(Math.random() * nodes.length)];
+      const target = nodes[Math.floor(Math.random() * nodes.length)];
+      return { source, target };
+    });
+  }
+
+  function drawNodes() {
+    for (const node of nodes) {
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+      ctx.fillStyle = '#4CAF50';
+      ctx.fill();
+      ctx.closePath();
+    }
+  }
+
+  function drawLinks() {
+    for (const link of links) {
+      ctx.beginPath();
+      ctx.moveTo(link.source.x, link.source.y);
+      ctx.lineTo(link.target.x, link.target.y);
+      ctx.strokeStyle = '#81C784';
+      ctx.stroke();
+      ctx.closePath();
+    }
+  }
+
+  function updateNodes() {
+    for (const node of nodes) {
+      node.x += node.vx;
+      node.y += node.vy;
+
+      if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
+      if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
+    }
+  }
+
+  function detectMouseHover(mouseX, mouseY) {
+    for (const node of nodes) {
+      const dist = Math.hypot(node.x - mouseX, node.y - mouseY);
+      if (dist < node.radius) {
+        tooltip.style.left = `${mouseX + 10}px`;
+        tooltip.style.top = `${mouseY + 10}px`;
+        tooltip.style.display = 'block';
+        tooltip.textContent = node.id;
+        return;
+      }
+    }
+    tooltip.style.display = 'none';
+  }
+
+  let mouseX = 0;
+  let mouseY = 0;
+
+  canvas.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    detectMouseHover(mouseX, mouseY);
+  });
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawLinks();
+    drawNodes();
+    updateNodes();
+    requestAnimationFrame(animate);
+  }
+
+  function init() {
+    createNodes();
+    createLinks();
+    animate();
+  }
+
+  init();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
