@@ -1,0 +1,159 @@
+---
+layout: null
+title: "TaskFlow Architect"
+category: "Productivity"
+description: "A dynamic flowchart builder that gamifies task prioritization by letting users visually connect, rank, and optimize tasks in a drag-and-drop interactive workspace."
+permalink: "/tools/daily-20260422-01-taskflow-architect.html"
+generated_by: "api-true-ai"
+generated_date: "20260422"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskFlow Architect | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic flowchart builder that gamifies task prioritization by letting users visually connect, rank, and optimize tasks in a drag-and-drop interactive workspace. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="TaskFlow Architect | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic flowchart builder that gamifies task prioritization by letting users visually connect, rank, and optimize tasks in a drag-and-drop interactive workspace. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TaskFlow Architect | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic flowchart builder that gamifies task prioritization by letting users visually connect, rank, and optimize tasks in a drag-and-drop interactive workspace. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>TaskFlow Architect</h1>
+    <p class="seo-subtitle">A dynamic flowchart builder that gamifies task prioritization by letting users visually connect, rank, and optimize tasks in a drag-and-drop interactive workspace.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background-color: #f4f7fc;  
+  color: #333;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  width: 90%;  
+  max-width: 1200px;  
+  background: #ffffff;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
+  border-radius: 10px;  
+  padding: 20px;  
+}  
+.header {  
+  text-align: center;  
+  font-size: 24px;  
+  font-weight: bold;  
+  margin-bottom: 20px;  
+}  
+#canvas {  
+  width: 100%;  
+  height: 600px;  
+  border: 2px dashed #ccc;  
+  border-radius: 5px;  
+  position: relative;  
+  overflow: hidden;  
+}  
+.task {  
+  position: absolute;  
+  padding: 10px 15px;  
+  background-color: #007bff;  
+  color: #ffffff;  
+  border-radius: 5px;  
+  cursor: move;  
+  user-select: none;  
+  font-size: 14px;  
+  text-align: center;  
+}  
+.task:active {  
+  background-color: #0056b3;  
+}  
+.task .delete {  
+  position: absolute;  
+  top: -5px;  
+  right: -5px;  
+  width: 20px;  
+  height: 20px;  
+  background-color: #ff4d4d;  
+  color: white;  
+  font-size: 12px;  
+  border-radius: 50%;  
+  text-align: center;  
+  line-height: 20px;  
+  cursor: pointer;  
+}  
+</style>  
+<div id="tool-app">  
+  <div class="header">TaskFlow Architect</div>  
+  <button id="add-task">+ Add Task</button>  
+  <div id="canvas"></div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById('canvas');  
+const addTaskBtn = document.getElementById('add-task');  
+let taskCounter = 0;  
+
+const createTask = (id, x, y) => {  
+  const task = document.createElement('div');  
+  task.className = 'task';  
+  task.style.left = `${x}px`;  
+  task.style.top = `${y}px`;  
+  task.draggable = true;  
+  task.textContent = `Task ${id}`;  
+
+  const deleteBtn = document.createElement('div');  
+  deleteBtn.className = 'delete';  
+  deleteBtn.textContent = '×';  
+  deleteBtn.addEventListener('click', () => {  
+    canvas.removeChild(task);  
+  });  
+
+  task.appendChild(deleteBtn);  
+
+  task.addEventListener('dragstart', (e) => {  
+    e.dataTransfer.setData('text/plain', id);  
+  });  
+
+  canvas.appendChild(task);  
+};  
+
+canvas.addEventListener('dragover', (e) => {  
+  e.preventDefault();  
+});  
+
+canvas.addEventListener('drop', (e) => {  
+  e.preventDefault();  
+  const id = e.dataTransfer.getData('text/plain');  
+  const task = document.querySelector(`.task:nth-child(${id})`);  
+  const rect = canvas.getBoundingClientRect();  
+  task.style.left = `${e.clientX - rect.left - 50}px`;  
+  task.style.top = `${e.clientY - rect.top - 15}px`;  
+});  
+
+addTaskBtn.addEventListener('click', () => {  
+  taskCounter++;  
+  createTask(taskCounter, 20, 20);  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

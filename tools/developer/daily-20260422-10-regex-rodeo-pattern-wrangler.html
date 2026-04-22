@@ -1,0 +1,173 @@
+---
+layout: null
+title: "Regex Rodeo: Pattern Wrangler"
+category: "Developer"
+description: "A gamified tool to test and improve your Regular Expression (Regex) skills by solving interactive pattern-matching challenges."
+permalink: "/tools/daily-20260422-10-regex-rodeo-pattern-wrangler.html"
+generated_by: "api-true-ai"
+generated_date: "20260422"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Rodeo: Pattern Wrangler | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool to test and improve your Regular Expression (Regex) skills by solving interactive pattern-matching challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Regex Rodeo: Pattern Wrangler | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool to test and improve your Regular Expression (Regex) skills by solving interactive pattern-matching challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Regex Rodeo: Pattern Wrangler | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool to test and improve your Regular Expression (Regex) skills by solving interactive pattern-matching challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Regex Rodeo: Pattern Wrangler</h1>
+    <p class="seo-subtitle">A gamified tool to test and improve your Regular Expression (Regex) skills by solving interactive pattern-matching challenges.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(45deg, #2c3e50, #34495e);  
+  color: #ecf0f1;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  background: #34495e;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);  
+  padding: 20px;  
+  width: 80%;  
+  max-width: 600px;  
+  text-align: center;  
+}  
+h1 {  
+  font-size: 24px;  
+  margin-bottom: 15px;  
+  color: #f39c12;  
+}  
+#regex-input {  
+  width: 90%;  
+  padding: 10px;  
+  margin: 10px 0;  
+  border: none;  
+  border-radius: 5px;  
+  font-size: 16px;  
+}  
+#challenge-text {  
+  background: #2c3e50;  
+  padding: 15px;  
+  border-radius: 5px;  
+  margin-bottom: 15px;  
+  font-style: italic;  
+  word-wrap: break-word;  
+}  
+#results {  
+  margin-top: 20px;  
+  padding: 10px;  
+  background: rgba(39, 174, 96, 0.2);  
+  border: 1px solid #27ae60;  
+  border-radius: 5px;  
+  display: none;  
+}  
+button {  
+  padding: 10px 20px;  
+  background: #e67e22;  
+  border: none;  
+  border-radius: 5px;  
+  color: #ecf0f1;  
+  cursor: pointer;  
+  font-size: 16px;  
+  transition: all 0.3s;  
+}  
+button:hover {  
+  background: #d35400;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Regex Rodeo: Pattern Wrangler</h1>  
+  <div id="challenge-text">  
+    Match this pattern: <span id="pattern">Words starting with "a" and ending with "e"</span>  
+  </div>  
+  <input id="regex-input" type="text" placeholder="Enter your regex here..." />  
+  <button id="submit-btn">Submit</button>  
+  <div id="results">  
+    <p id="feedback"></p>  
+  </div>  
+</div>  
+<script>  
+const challenges = [  
+  {  
+    text: "Words starting with 'a' and ending with 'e'",  
+    sample: ["apple", "axe", "awesome", "ape"],  
+    solution: /^a[a-z]*e$/i  
+  },  
+  {  
+    text: "Words with exactly 3 letters",  
+    sample: ["cat", "dog", "bat", "apple"],  
+    solution: /^[a-z]{3}$/i  
+  },  
+  {  
+    text: "Words containing 'cat' anywhere",  
+    sample: ["category", "concatenate", "truncated", "dog"],  
+    solution: /cat/  
+  }  
+];  
+
+let currentChallengeIndex = 0;  
+
+function displayChallenge() {  
+  const challenge = challenges[currentChallengeIndex];  
+  document.getElementById("pattern").innerText = challenge.text;  
+}  
+
+function evaluateRegex(input) {  
+  const challenge = challenges[currentChallengeIndex];  
+  const userRegex = new RegExp(input);  
+  const results = challenge.sample.map(word => ({  
+    word,  
+    match: userRegex.test(word) === challenge.solution.test(word)  
+  }));  
+
+  const allCorrect = results.every(r => r.match);  
+  const feedback = document.getElementById("feedback");  
+  if (allCorrect) {  
+    feedback.innerHTML = `✅ Correct! You matched all the words successfully!`;  
+    document.getElementById("results").style.display = "block";  
+  } else {  
+    feedback.innerHTML = `❌ Some matches are incorrect. Double-check your regex!`;  
+    document.getElementById("results").style.display = "block";  
+  }  
+}  
+
+document.getElementById("submit-btn").addEventListener("click", () => {  
+  const userRegex = document.getElementById("regex-input").value;  
+  if (userRegex.trim()) {  
+    evaluateRegex(userRegex);  
+  } else {  
+    alert("Please enter a regex pattern!");  
+  }  
+});  
+
+displayChallenge();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

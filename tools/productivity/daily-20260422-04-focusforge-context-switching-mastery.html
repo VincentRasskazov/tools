@@ -1,0 +1,152 @@
+---
+layout: null
+title: "FocusForge: Context-Switching Mastery"
+category: "Productivity"
+description: "A highly interactive mini-game that helps you sharpen your ability to switch focus effectively and prioritize tasks under time pressure."
+permalink: "/tools/daily-20260422-04-focusforge-context-switching-mastery.html"
+generated_by: "api-true-ai"
+generated_date: "20260422"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusForge: Context-Switching Mastery | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive mini-game that helps you sharpen your ability to switch focus effectively and prioritize tasks under time pressure. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="FocusForge: Context-Switching Mastery | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive mini-game that helps you sharpen your ability to switch focus effectively and prioritize tasks under time pressure. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FocusForge: Context-Switching Mastery | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive mini-game that helps you sharpen your ability to switch focus effectively and prioritize tasks under time pressure. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>FocusForge: Context-Switching Mastery</h1>
+    <p class="seo-subtitle">A highly interactive mini-game that helps you sharpen your ability to switch focus effectively and prioritize tasks under time pressure.</p>
+    <style>  
+#tool-app {  
+  font-family: Arial, sans-serif;  
+  text-align: center;  
+  padding: 20px;  
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);  
+}  
+#game-board {  
+  display: grid;  
+  grid-template-columns: repeat(4, 1fr);  
+  gap: 10px;  
+  margin: 20px auto;  
+  width: 400px;  
+}  
+.tile {  
+  padding: 20px;  
+  background-color: #fff;  
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
+  border-radius: 8px;  
+  cursor: pointer;  
+  transition: transform 0.2s;  
+}  
+.tile.active {  
+  background-color: #ffcc00;  
+  transform: scale(1.1);  
+}  
+#timer {  
+  font-size: 24px;  
+  font-weight: bold;  
+  margin: 20px 0;  
+}  
+#score {  
+  font-size: 20px;  
+  margin: 10px 0;  
+  color: #333;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>FocusForge: Context-Switching Mastery</h1>  
+  <div id="timer">Time Left: 60s</div>  
+  <div id="score">Score: 0</div>  
+  <div id="game-board"></div>  
+</div>  
+<script>  
+const app = document.querySelector('#tool-app');  
+const timerElement = document.querySelector('#timer');  
+const scoreElement = document.querySelector('#score');  
+const gameBoard = document.querySelector('#game-board');  
+  
+let score = 0;  
+let timeLeft = 60;  
+let activeTileIndex = null;  
+const tiles = Array.from({ length: 16 }, (_, i) => i);  
+  
+function renderGameBoard() {  
+  gameBoard.innerHTML = '';  
+  tiles.forEach((tileIndex) => {  
+    const tile = document.createElement('div');  
+    tile.classList.add('tile');  
+    tile.textContent = tileIndex + 1;  
+    tile.dataset.index = tileIndex;  
+    tile.addEventListener('click', handleTileClick);  
+    gameBoard.appendChild(tile);  
+  });  
+}  
+  
+function randomizeActiveTile() {  
+  const allTiles = document.querySelectorAll('.tile');  
+  allTiles.forEach(tile => tile.classList.remove('active'));  
+  
+  activeTileIndex = Math.floor(Math.random() * tiles.length);  
+  allTiles[activeTileIndex].classList.add('active');  
+}  
+  
+function handleTileClick(event) {  
+  const clickedIndex = Number(event.target.dataset.index);  
+  if (clickedIndex === activeTileIndex) {  
+    score += 10;  
+    scoreElement.textContent = `Score: ${score}`;  
+    randomizeActiveTile();  
+  } else {  
+    score -= 5;  
+    scoreElement.textContent = `Score: ${score}`;  
+  }  
+}  
+  
+function startTimer() {  
+  const timerInterval = setInterval(() => {  
+    timeLeft--;  
+    timerElement.textContent = `Time Left: ${timeLeft}s`;  
+    if (timeLeft <= 0) {  
+      clearInterval(timerInterval);  
+      alert(`Time's up! Final Score: ${score}`);  
+      resetGame();  
+    }  
+  }, 1000);  
+}  
+  
+function resetGame() {  
+  score = 0;  
+  timeLeft = 60;  
+  scoreElement.textContent = `Score: ${score}`;  
+  timerElement.textContent = `Time Left: ${timeLeft}s`;  
+  randomizeActiveTile();  
+}  
+  
+renderGameBoard();  
+randomizeActiveTile();  
+startTimer();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

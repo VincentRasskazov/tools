@@ -1,0 +1,112 @@
+---
+layout: null
+title: "Data Fractal Explorer"
+category: "Data"
+description: "An interactive tool that visualizes data sets as growing fractals where users can explore patterns, outliers, and relationships through dynamic interactions."
+permalink: "/tools/daily-20260422-22-data-fractal-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260422"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Fractal Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool that visualizes data sets as growing fractals where users can explore patterns, outliers, and relationships through dynamic interactions. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Fractal Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool that visualizes data sets as growing fractals where users can explore patterns, outliers, and relationships through dynamic interactions. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Fractal Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool that visualizes data sets as growing fractals where users can explore patterns, outliers, and relationships through dynamic interactions. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Fractal Explorer</h1>
+    <p class="seo-subtitle">An interactive tool that visualizes data sets as growing fractals where users can explore patterns, outliers, and relationships through dynamic interactions.</p>
+    <style>  
+body { font-family: 'Arial', sans-serif; background-color: #1e1e2f; color: white; margin: 0; padding: 0; }  
+#tool-app { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }  
+#control-panel { background: #282a36; padding: 20px; border-radius: 8px; }  
+button { background: #6272a4; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin: 5px; }  
+button:hover { background: #7081b9; }  
+canvas { border: 1px solid white; margin-top: 20px; }  
+</style>  
+<div id="tool-app">  
+  <div id="control-panel">  
+    <label for="data-input">Enter Data (comma separated):</label>  
+    <input type="text" id="data-input" placeholder="e.g., 12, 45, 78, 23, 56" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc;">  
+    <button id="generate-fractal">Generate Fractal</button>  
+    <button id="reset">Reset</button>  
+    <p id="error-message" style="color: #ff5555; display: none;">Invalid data. Please enter numbers separated by commas.</p>  
+  </div>  
+  <canvas id="fractal-canvas" width="800" height="600"></canvas>  
+</div>  
+<script>  
+const canvas = document.getElementById('fractal-canvas');  
+const ctx = canvas.getContext('2d');  
+const generateButton = document.getElementById('generate-fractal');  
+const resetButton = document.getElementById('reset');  
+const dataInput = document.getElementById('data-input');  
+const errorMessage = document.getElementById('error-message');  
+
+function drawBranch(x, y, length, angle, depth, scaleFactor) {  
+  if (depth === 0) return;  
+  const radians = (Math.PI / 180) * angle;  
+  const xEnd = x + length * Math.cos(radians);  
+  const yEnd = y + length * Math.sin(radians);  
+
+  ctx.beginPath();  
+  ctx.moveTo(x, y);  
+  ctx.lineTo(xEnd, yEnd);  
+  ctx.strokeStyle = `hsl(${depth * 30}, 70%, 50%)`;  
+  ctx.lineWidth = depth;  
+  ctx.stroke();  
+
+  drawBranch(xEnd, yEnd, length * scaleFactor, angle - 20, depth - 1, scaleFactor);  
+  drawBranch(xEnd, yEnd, length * scaleFactor, angle + 20, depth - 1, scaleFactor);  
+}  
+
+function generateFractal(data) {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  let maxDepth = Math.min(10, data.length);  
+  let scaleFactor = 0.7;  
+
+  for (let i = 0; i < data.length; i++) {  
+    let normalizedValue = data[i] / Math.max(...data);  
+    drawBranch(canvas.width / 2, canvas.height, 100 * normalizedValue, -90, maxDepth, scaleFactor);  
+  }  
+}  
+
+generateButton.addEventListener('click', () => {  
+  let inputData = dataInput.value.split(',').map(num => parseFloat(num.trim()));  
+  if (inputData.some(isNaN)) {  
+    errorMessage.style.display = 'block';  
+  } else {  
+    errorMessage.style.display = 'none';  
+    generateFractal(inputData);  
+  }  
+});  
+
+resetButton.addEventListener('click', () => {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  dataInput.value = '';  
+  errorMessage.style.display = 'none';  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

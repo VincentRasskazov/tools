@@ -1,0 +1,193 @@
+---
+layout: null
+title: "\"Cipher Sleuth\""
+category: "Education"
+description: "An interactive gamified tool that teaches users how to crack and create various cryptographic ciphers while improving their cybersecurity knowledge."
+permalink: "/tools/daily-20260422-11-cipher-sleuth.html"
+generated_by: "api-true-ai"
+generated_date: "20260422"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>&quot;Cipher Sleuth&quot; | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive gamified tool that teaches users how to crack and create various cryptographic ciphers while improving their cybersecurity knowledge. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="&quot;Cipher Sleuth&quot; | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive gamified tool that teaches users how to crack and create various cryptographic ciphers while improving their cybersecurity knowledge. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="&quot;Cipher Sleuth&quot; | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive gamified tool that teaches users how to crack and create various cryptographic ciphers while improving their cybersecurity knowledge. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>&quot;Cipher Sleuth&quot;</h1>
+    <p class="seo-subtitle">An interactive gamified tool that teaches users how to crack and create various cryptographic ciphers while improving their cybersecurity knowledge.</p>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #1e1e2f;
+    color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  #tool-app {
+    text-align: center;
+    max-width: 600px;
+    background: #27284e;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  #cipher-text {
+    font-size: 1.2rem;
+    margin: 10px 0;
+  }
+  .input-section {
+    margin: 20px 0;
+  }
+  .input-section input, .input-section select {
+    padding: 10px;
+    margin: 5px 0;
+    width: 100%;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background: #1e1e2f;
+    color: #f4f4f9;
+  }
+  button {
+    background: #3e92cc;
+    color: #f4f4f9;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background: #347ba8;
+  }
+  .result {
+    margin-top: 20px;
+    padding: 10px;
+    background: #333356;
+    border-radius: 5px;
+    font-size: 1.1rem;
+  }
+</style>
+<div id="tool-app">
+  <h1>Cipher Sleuth</h1>
+  <p id="cipher-text">Encrypted Text: <strong id="encrypted-message"></strong></p>
+  
+  <div class="input-section">
+    <label for="cipher-type">Choose a cipher type:</label>
+    <select id="cipher-type">
+      <option value="caesar">Caesar Cipher</option>
+      <option value="reverse">Reverse Cipher</option>
+      <option value="vigenere">Vigenère Cipher</option>
+    </select>
+  </div>
+  
+  <div class="input-section">
+    <label id="key-label" for="key">Enter Key (e.g., Number for Caesar):</label>
+    <input type="text" id="key" placeholder="Key (e.g., 3)">
+  </div>
+  
+  <div class="input-section">
+    <label for="guess">Your Guess:</label>
+    <input type="text" id="guess" placeholder="Decrypted text">
+  </div>
+  
+  <button onclick="checkDecryption()">Submit</button>
+  
+  <div class="result" id="result"></div>
+</div>
+<script>
+  const messages = [
+    { text: "HELLO WORLD", cipher: "caesar", key: 3 },
+    { text: "JAVASCRIPT IS FUN", cipher: "reverse", key: null },
+    { text: "CRYPTOGRAPHY", cipher: "vigenere", key: "KEY" },
+  ];
+
+  let currentMessage = {};
+  const encryptedMessageElem = document.getElementById('encrypted-message');
+  const cipherTypeElem = document.getElementById('cipher-type');
+  const keyElem = document.getElementById('key');
+  const guessElem = document.getElementById('guess');
+  const resultElem = document.getElementById('result');
+
+  function encryptMessage(message, cipher, key) {
+    if (cipher === "caesar") {
+      return message.replace(/[A-Z]/g, char => 
+        String.fromCharCode(((char.charCodeAt(0) - 65 + parseInt(key)) % 26) + 65)
+      );
+    }
+    if (cipher === "reverse") {
+      return message.split('').reverse().join('');
+    }
+    if (cipher === "vigenere") {
+      let keyIndex = 0;
+      return message.replace(/[A-Z]/g, char => {
+        const shift = key[keyIndex % key.length].toUpperCase().charCodeAt(0) - 65;
+        const encryptedChar = String.fromCharCode(((char.charCodeAt(0) - 65 + shift) % 26) + 65);
+        keyIndex++;
+        return encryptedChar;
+      });
+    }
+    return message;
+  }
+
+  function generateMessage() {
+    const randomIndex = Math.floor(Math.random() * messages.length);
+    currentMessage = messages[randomIndex];
+    const encryptedMessage = encryptMessage(currentMessage.text, currentMessage.cipher, currentMessage.key);
+    encryptedMessageElem.textContent = encryptedMessage;
+    keyElem.placeholder = currentMessage.cipher === "reverse" ? "No key needed" : "Enter the key";
+    keyElem.disabled = currentMessage.cipher === "reverse";
+  }
+
+  function checkDecryption() {
+    const userGuess = guessElem.value.toUpperCase();
+    const userKey = keyElem.value.toUpperCase();
+    let correctDecryption = false;
+
+    if (currentMessage.cipher === "caesar" && !isNaN(userKey)) {
+      correctDecryption = encryptMessage(currentMessage.text, "caesar", -parseInt(userKey)) === userGuess;
+    } else if (currentMessage.cipher === "reverse") {
+      correctDecryption = currentMessage.text === userGuess;
+    } else if (currentMessage.cipher === "vigenere" && userKey) {
+      correctDecryption = encryptMessage(currentMessage.text, "vigenere", userKey) === userGuess;
+    }
+
+    resultElem.textContent = correctDecryption ? "🎉 Correct! Great job!" : "❌ Incorrect. Try again!";
+  }
+
+  cipherTypeElem.addEventListener('change', generateMessage);
+  generateMessage();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

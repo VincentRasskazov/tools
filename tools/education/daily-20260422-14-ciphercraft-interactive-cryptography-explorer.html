@@ -1,0 +1,104 @@
+---
+layout: null
+title: "CipherCraft: Interactive Cryptography Explorer"
+category: "Education"
+description: "A mini-game where users learn about and break classic ciphers, progressing through levels of increasing difficulty to master cryptographic techniques."
+permalink: "/tools/daily-20260422-14-ciphercraft-interactive-cryptography-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260422"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CipherCraft: Interactive Cryptography Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="A mini-game where users learn about and break classic ciphers, progressing through levels of increasing difficulty to master cryptographic techniques. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CipherCraft: Interactive Cryptography Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="A mini-game where users learn about and break classic ciphers, progressing through levels of increasing difficulty to master cryptographic techniques. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CipherCraft: Interactive Cryptography Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A mini-game where users learn about and break classic ciphers, progressing through levels of increasing difficulty to master cryptographic techniques. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CipherCraft: Interactive Cryptography Explorer</h1>
+    <p class="seo-subtitle">A mini-game where users learn about and break classic ciphers, progressing through levels of increasing difficulty to master cryptographic techniques.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; background-color: #1e1e2c; color: #fff; }  
+  #tool-app { padding: 20px; max-width: 800px; margin: 50px auto; background: #282c34; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); }  
+  h1 { text-align: center; color: #61dafb; }  
+  .level { margin-bottom: 20px; }  
+  .cipher-input, .user-input { width: 100%; padding: 10px; margin-top: 10px; border-radius: 5px; border: 1px solid #61dafb; background: #333; color: #fff; }  
+  .btn { display: inline-block; padding: 10px 20px; margin-top: 10px; background: #61dafb; color: #000; border-radius: 5px; text-align: center; cursor: pointer; }  
+  .btn:hover { background: #4fc1e9; }  
+  .feedback { font-size: 1.2em; margin-top: 10px; }  
+</style>  
+<div id="tool-app">  
+  <h1>CipherCraft</h1>  
+  <div id="game-container">  
+    <div class="level">  
+      <h2>Level <span id="level">1</span>: Caesar Cipher</h2>  
+      <p id="cipher-description">Decrypt the cipher text below using a Caesar Cipher with a shift of 3.</p>  
+      <textarea id="cipher-text" class="cipher-input" readonly></textarea>  
+      <textarea id="user-input" class="user-input" placeholder="Enter your answer here"></textarea>  
+      <div class="btn" id="check-answer">Check Answer</div>  
+      <p id="feedback" class="feedback"></p>  
+    </div>  
+  </div>  
+</div>  
+<script>  
+// CipherCraft Game Logic
+const levels = [  
+  { type: 'Caesar', shift: 3, text: 'KHOOR ZRUOG', description: 'Decrypt the cipher text below using a Caesar Cipher with a shift of 3.', solution: 'HELLO WORLD' },  
+  { type: 'Atbash', text: 'ZOOZOO', description: 'Decrypt the cipher text below using the Atbash Cipher.', solution: 'ALLALL' },  
+  { type: 'Reverse', text: 'DLROW OLLEH', description: 'Reverse the cipher text to get the message.', solution: 'HELLO WORLD' }  
+];  
+let currentLevel = 0;  
+
+function loadLevel(levelIndex) {  
+  const level = levels[levelIndex];  
+  document.getElementById('level').innerText = levelIndex + 1;  
+  document.getElementById('cipher-description').innerText = level.description;  
+  document.getElementById('cipher-text').value = level.text;  
+  document.getElementById('user-input').value = '';  
+  document.getElementById('feedback').innerText = '';  
+}  
+
+document.getElementById('check-answer').addEventListener('click', () => {  
+  const userAnswer = document.getElementById('user-input').value.trim().toUpperCase();  
+  const currentSolution = levels[currentLevel].solution;  
+
+  if (userAnswer === currentSolution) {  
+    document.getElementById('feedback').innerText = 'Correct! Moving to the next level...';  
+    currentLevel++;  
+    if (currentLevel < levels.length) {  
+      setTimeout(() => loadLevel(currentLevel), 2000);  
+    } else {  
+      document.getElementById('feedback').innerText = 'Congratulations! You have completed all levels.';  
+      document.getElementById('check-answer').style.display = 'none';  
+    }  
+  } else {  
+    document.getElementById('feedback').innerText = 'Incorrect. Try again.';  
+  }  
+});  
+
+// Initialize the first level  
+loadLevel(currentLevel);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

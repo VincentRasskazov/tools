@@ -1,0 +1,123 @@
+---
+layout: null
+title: "Budget Breaker: Expense Tetris"
+category: "Finance"
+description: "A gamified budgeting tool where users \"stack\" their expenses into categories in a Tetris-style game to visualize and optimize their monthly spending."
+permalink: "/tools/daily-20260422-06-budget-breaker-expense-tetris.html"
+generated_by: "api-true-ai"
+generated_date: "20260422"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Budget Breaker: Expense Tetris | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified budgeting tool where users &quot;stack&quot; their expenses into categories in a Tetris-style game to visualize and optimize their monthly spending. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Budget Breaker: Expense Tetris | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified budgeting tool where users &quot;stack&quot; their expenses into categories in a Tetris-style game to visualize and optimize their monthly spending. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Budget Breaker: Expense Tetris | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified budgeting tool where users &quot;stack&quot; their expenses into categories in a Tetris-style game to visualize and optimize their monthly spending. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Budget Breaker: Expense Tetris</h1>
+    <p class="seo-subtitle">A gamified budgeting tool where users &quot;stack&quot; their expenses into categories in a Tetris-style game to visualize and optimize their monthly spending.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f4f4f9; }  
+  #tool-app { text-align: center; }  
+  #gameCanvas { background: #e0e0e0; display: block; margin: 10px auto; border: 2px solid #000; }  
+  #score { font-size: 1.2rem; margin-top: 20px; text-align: center; }  
+</style>  
+<div id="tool-app">  
+  <canvas id="gameCanvas" width="300" height="600"></canvas>  
+  <div id="score">Total Savings: $<span id="savings">0</span></div>  
+</div>  
+<script>  
+const canvas = document.getElementById("gameCanvas");  
+const ctx = canvas.getContext("2d");  
+const grid = 30;  
+const rows = canvas.height / grid;  
+const cols = canvas.width / grid;  
+let gameMatrix = Array.from({ length: rows }, () => Array(cols).fill(0));  
+let currentBlock = { shape: [], x: 0, y: 0 };  
+let score = 0;  
+
+function drawMatrix(matrix, offsetX, offsetY) {  
+  matrix.forEach((row, y) => {  
+    row.forEach((cell, x) => {  
+      if (cell !== 0) {  
+        ctx.fillStyle = "rgba(" + (cell * 80) + ", 150, 200, 0.8)";  
+        ctx.fillRect((x + offsetX) * grid, (y + offsetY) * grid, grid - 1, grid - 1);  
+      }  
+    });  
+  });  
+}  
+
+function generateBlock() {  
+  const blocks = [  
+    [[1, 1, 1], [0, 1, 0]],  
+    [[1, 1], [1, 1]],  
+    [[1, 1, 1, 1]],  
+  ];  
+  const randomBlock = blocks[Math.floor(Math.random() * blocks.length)];  
+  return { shape: randomBlock, x: Math.floor(cols / 2 - randomBlock[0].length / 2), y: 0 };  
+}  
+
+function mergeMatrix(matrix, block) {  
+  block.shape.forEach((row, y) => {  
+    row.forEach((cell, x) => {  
+      if (cell !== 0) {  
+        matrix[block.y + y][block.x + x] = cell;  
+      }  
+    });  
+  });  
+}  
+
+function checkFullRows() {  
+  for (let y = rows - 1; y >= 0; y--) {  
+    if (gameMatrix[y].every(cell => cell !== 0)) {  
+      gameMatrix.splice(y, 1);  
+      gameMatrix.unshift(Array(cols).fill(0));  
+      score += 100;  
+    }  
+  }  
+}  
+
+function update() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  drawMatrix(gameMatrix, 0, 0);  
+  drawMatrix(currentBlock.shape, currentBlock.x, currentBlock.y);  
+}  
+
+currentBlock = generateBlock();  
+setInterval(() => {  
+  currentBlock.y++;  
+  if (currentBlock.y + currentBlock.shape.length > rows ||  
+    currentBlock.shape.some((row, y) => row.some((cell, x) => cell && gameMatrix[currentBlock.y + y]?.[currentBlock.x + x]))) {  
+    currentBlock.y--;  
+    mergeMatrix(gameMatrix, currentBlock);  
+    checkFullRows();  
+    currentBlock = generateBlock();  
+  }  
+  document.getElementById("savings").innerText = score;  
+  update();  
+}, 500);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
