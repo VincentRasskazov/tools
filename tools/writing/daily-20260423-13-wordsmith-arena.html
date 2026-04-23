@@ -1,0 +1,182 @@
+---
+layout: null
+title: "WordSmith Arena"
+category: "Writing"
+description: "Engage in a fast-paced, interactive word-building mini-game where players craft words from a dynamic matrix of shifting letters while racing against a timer and unlocking special effects for creative combinations."
+permalink: "/tools/daily-20260423-13-wordsmith-arena.html"
+generated_by: "api-true-ai"
+generated_date: "20260423"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordSmith Arena | Free Online Interactive Tool</title>
+  <meta name="description" content="Engage in a fast-paced, interactive word-building mini-game where players craft words from a dynamic matrix of shifting letters while racing against a timer and unlocking special effects for creative combinations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="WordSmith Arena | Free Online Interactive Tool">
+  <meta property="og:description" content="Engage in a fast-paced, interactive word-building mini-game where players craft words from a dynamic matrix of shifting letters while racing against a timer and unlocking special effects for creative combinations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WordSmith Arena | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Engage in a fast-paced, interactive word-building mini-game where players craft words from a dynamic matrix of shifting letters while racing against a timer and unlocking special effects for creative combinations. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>WordSmith Arena</h1>
+    <p class="seo-subtitle">Engage in a fast-paced, interactive word-building mini-game where players craft words from a dynamic matrix of shifting letters while racing against a timer and unlocking special effects for creative combinations.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+  background: linear-gradient(135deg, #4facfe, #00f2fe);  
+  color: #fff;  
+}  
+#tool-app {  
+  text-align: center;  
+  width: 80%;  
+  max-width: 600px;  
+  padding: 20px;  
+  background: rgba(0, 0, 0, 0.7);  
+  border-radius: 12px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);  
+}  
+#letter-grid {  
+  display: grid;  
+  grid-template-columns: repeat(5, 50px);  
+  gap: 10px;  
+  justify-content: center;  
+  margin-top: 20px;  
+}  
+.letter {  
+  width: 50px;  
+  height: 50px;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  font-size: 18px;  
+  font-weight: bold;  
+  background: #1e90ff;  
+  border-radius: 8px;  
+  cursor: pointer;  
+  user-select: none;  
+  transition: transform 0.1s;  
+}  
+.letter:hover {  
+  transform: scale(1.1);  
+  background: #ffa726;  
+}  
+#word-display {  
+  margin-top: 20px;  
+  font-size: 20px;  
+  font-weight: bold;  
+}  
+#timer, #score {  
+  margin: 10px 0;  
+  font-size: 18px;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>WordSmith Arena</h1>  
+  <p>Form words by clicking on the letters below. Earn points for longer and creative words. Hurry up before the timer runs out!</p>  
+  <div id="timer">Time: 60</div>  
+  <div id="score">Score: 0</div>  
+  <div id="letter-grid"></div>  
+  <div id="word-display">Your Word: <span id="current-word"></span></div>  
+  <button id="submit-word">Submit Word</button>  
+</div>  
+<script>  
+const app = document.getElementById('tool-app');  
+const letterGrid = document.getElementById('letter-grid');  
+const timerDisplay = document.getElementById('timer');  
+const scoreDisplay = document.getElementById('score');  
+const currentWordDisplay = document.getElementById('current-word');  
+const submitWordButton = document.getElementById('submit-word');  
+
+const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';  
+const gridSize = 5;  
+const timeLimit = 60;  
+let currentWord = '';  
+let score = 0;  
+let timer = timeLimit;  
+let timerInterval = null;  
+
+function generateLetter() {  
+  return letters[Math.floor(Math.random() * letters.length)];  
+}  
+
+function createGrid() {  
+  letterGrid.innerHTML = '';  
+  for (let i = 0; i < gridSize * gridSize; i++) {  
+    const letter = document.createElement('div');  
+    letter.classList.add('letter');  
+    letter.textContent = generateLetter();  
+    letter.addEventListener('click', () => handleLetterClick(letter.textContent));  
+    letterGrid.appendChild(letter);  
+  }  
+}  
+
+function handleLetterClick(letter) {  
+  currentWord += letter;  
+  currentWordDisplay.textContent = currentWord;  
+}  
+
+function submitWord() {  
+  if (currentWord.length > 2) {  
+    score += currentWord.length * 10;  
+    scoreDisplay.textContent = `Score: ${score}`;  
+  }  
+  currentWord = '';  
+  currentWordDisplay.textContent = '';  
+  createGrid();  
+}  
+
+function startTimer() {  
+  timerInterval = setInterval(() => {  
+    timer--;  
+    timerDisplay.textContent = `Time: ${timer}`;  
+    if (timer <= 0) {  
+      clearInterval(timerInterval);  
+      alert(`Time's up! Your final score is ${score}.`);  
+      resetGame();  
+    }  
+  }, 1000);  
+}  
+
+function resetGame() {  
+  timer = timeLimit;  
+  score = 0;  
+  currentWord = '';  
+  scoreDisplay.textContent = `Score: ${score}`;  
+  currentWordDisplay.textContent = '';  
+  timerDisplay.textContent = `Time: ${timer}`;  
+  createGrid();  
+  clearInterval(timerInterval);  
+  startTimer();  
+}  
+
+submitWordButton.addEventListener('click', submitWord);  
+
+// Initialize game  
+createGrid();  
+startTimer();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

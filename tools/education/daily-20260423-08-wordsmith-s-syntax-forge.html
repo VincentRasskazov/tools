@@ -1,0 +1,124 @@
+---
+layout: null
+title: "\"Wordsmith's Syntax Forge\""
+category: "Education"
+description: "An interactive mini-game where users craft grammatically correct sentences by dragging and dropping dynamic word blocks while learning syntax rules."
+permalink: "/tools/daily-20260423-08-wordsmith-s-syntax-forge.html"
+generated_by: "api-true-ai"
+generated_date: "20260423"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>&quot;Wordsmith's Syntax Forge&quot; | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive mini-game where users craft grammatically correct sentences by dragging and dropping dynamic word blocks while learning syntax rules. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="&quot;Wordsmith's Syntax Forge&quot; | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive mini-game where users craft grammatically correct sentences by dragging and dropping dynamic word blocks while learning syntax rules. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="&quot;Wordsmith's Syntax Forge&quot; | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive mini-game where users craft grammatically correct sentences by dragging and dropping dynamic word blocks while learning syntax rules. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>&quot;Wordsmith's Syntax Forge&quot;</h1>
+    <p class="seo-subtitle">An interactive mini-game where users craft grammatically correct sentences by dragging and dropping dynamic word blocks while learning syntax rules.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: #f4f4f9; color: #333; margin: 0; padding: 0; }  
+  #tool-app { max-width: 800px; margin: 50px auto; background: #fff; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); padding: 20px; }  
+  .word-bank, .sentence-area { display: flex; flex-wrap: wrap; margin-bottom: 20px; border: 2px dashed #ccc; padding: 10px; min-height: 70px; background: #fefefe; border-radius: 5px; }  
+  .word { background: #4CAF50; color: white; padding: 10px 15px; margin: 5px; border-radius: 3px; cursor: grab; user-select: none; }  
+  .word.correct { background: #2196F3; }  
+  .word.wrong { background: #F44336; }  
+  .button { background: #007BFF; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 1rem; }  
+  .button:hover { background: #0056b3; }  
+  .feedback { margin-top: 10px; font-size: 1rem; }  
+</style>  
+<div id="tool-app">  
+  <h2>Wordsmith's Syntax Forge</h2>  
+  <p>Drag the words from the bank into the sentence area to form a grammatically correct sentence!</p>  
+  <div class="word-bank" id="word-bank"></div>  
+  <div class="sentence-area" id="sentence-area"></div>  
+  <button class="button" id="check-sentence">Check Sentence</button>  
+  <div class="feedback" id="feedback"></div>  
+</div>  
+<script>  
+const words = [  
+  { text: "cat", type: "noun" },  
+  { text: "jumps", type: "verb" },  
+  { text: "quickly", type: "adverb" },  
+  { text: "the", type: "article" },  
+  { text: "over", type: "preposition" },  
+  { text: "lazy", type: "adjective" },  
+  { text: "dog", type: "noun" }  
+];  
+const correctOrder = ["article", "adjective", "noun", "verb", "adverb", "preposition", "article", "noun"];  
+
+const wordBank = document.getElementById("word-bank");  
+const sentenceArea = document.getElementById("sentence-area");  
+const feedback = document.getElementById("feedback");  
+const checkBtn = document.getElementById("check-sentence");  
+
+// Populate word bank  
+words.forEach(word => {  
+  const wordElem = document.createElement("div");  
+  wordElem.className = "word";  
+  wordElem.textContent = word.text;  
+  wordElem.draggable = true;  
+  wordElem.dataset.type = word.type;  
+  wordElem.addEventListener("dragstart", (e) => {  
+    e.dataTransfer.setData("text", JSON.stringify(word));  
+  });  
+  wordBank.appendChild(wordElem);  
+});  
+
+// Drag-and-drop functionality  
+sentenceArea.addEventListener("dragover", (e) => e.preventDefault());  
+sentenceArea.addEventListener("drop", (e) => {  
+  e.preventDefault();  
+  const word = JSON.parse(e.dataTransfer.getData("text"));  
+  const wordElem = document.createElement("div");  
+  wordElem.className = "word";  
+  wordElem.textContent = word.text;  
+  wordElem.dataset.type = word.type;  
+  sentenceArea.appendChild(wordElem);  
+});  
+
+// Check sentence logic  
+checkBtn.addEventListener("click", () => {  
+  const sentenceWords = Array.from(sentenceArea.children);  
+  if (sentenceWords.length !== correctOrder.length) {  
+    feedback.textContent = "Incomplete sentence!";  
+    feedback.style.color = "red";  
+    return;  
+  }  
+  let allCorrect = true;  
+  sentenceWords.forEach((wordElem, i) => {  
+    if (wordElem.dataset.type === correctOrder[i]) {  
+      wordElem.classList.add("correct");  
+    } else {  
+      wordElem.classList.add("wrong");  
+      allCorrect = false;  
+    }  
+  });  
+  feedback.textContent = allCorrect ? "Correct Sentence! 🎉" : "Incorrect Sentence. Try Again!";  
+  feedback.style.color = allCorrect ? "green" : "red";  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

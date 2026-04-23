@@ -1,0 +1,165 @@
+---
+layout: null
+title: "Cipher Quest"
+category: "Games"
+description: "Embark on an interactive mini-game adventure to crack layered ciphers, solve puzzles, and uncover hidden secrets in a race against time."
+permalink: "/tools/daily-20260423-07-cipher-quest.html"
+generated_by: "api-true-ai"
+generated_date: "20260423"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cipher Quest | Free Online Interactive Tool</title>
+  <meta name="description" content="Embark on an interactive mini-game adventure to crack layered ciphers, solve puzzles, and uncover hidden secrets in a race against time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Cipher Quest | Free Online Interactive Tool">
+  <meta property="og:description" content="Embark on an interactive mini-game adventure to crack layered ciphers, solve puzzles, and uncover hidden secrets in a race against time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cipher Quest | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Embark on an interactive mini-game adventure to crack layered ciphers, solve puzzles, and uncover hidden secrets in a race against time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Cipher Quest</h1>
+    <p class="seo-subtitle">Embark on an interactive mini-game adventure to crack layered ciphers, solve puzzles, and uncover hidden secrets in a race against time.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);  
+  color: #ffffff;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  text-align: center;  
+  width: 90%;  
+  max-width: 800px;  
+  background: rgba(255, 255, 255, 0.1);  
+  border: 2px solid #ffffff;  
+  border-radius: 10px;  
+  padding: 20px;  
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);  
+}  
+button {  
+  background: #6c63ff;  
+  border: none;  
+  color: white;  
+  padding: 10px 20px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  font-size: 16px;  
+  margin-top: 20px;  
+  transition: background 0.3s ease;  
+}  
+button:hover {  
+  background: #5548c8;  
+}  
+input {  
+  padding: 10px;  
+  margin-top: 10px;  
+  border: 1px solid #ffffff;  
+  border-radius: 5px;  
+  background: rgba(255, 255, 255, 0.2);  
+  color: white;  
+  font-size: 14px;  
+  width: calc(100% - 22px);  
+}  
+p {  
+  font-size: 18px;  
+  margin-top: 20px;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Cipher Quest</h1>  
+  <p id="game-description">Decode this cipher: <span id="cipher-text">***</span></p>  
+  <input type="text" id="user-input" placeholder="Enter your guess here..." />  
+  <button onclick="submitAnswer()">Submit Answer</button>  
+  <p id="feedback"></p>  
+  <p id="timer">Time Remaining: <span id="time-left">60</span>s</p>  
+</div>  
+<script>  
+const cipherOptions = ["Vigenere", "Reverse", "Caesar(Shift)", "Base64", "Hexadecimal"];  
+let currentCipher = "";  
+let originalText = "";  
+let encryptedText = "";  
+let timeLeft = 60;  
+let timerInterval;  
+
+function initGame() {  
+  originalText = "CodeChallenge";  
+  currentCipher = cipherOptions[Math.floor(Math.random() * cipherOptions.length)];  
+  encryptedText = encrypt(originalText, currentCipher);  
+  document.getElementById("cipher-text").textContent = encryptedText;  
+  timeLeft = 60;  
+  document.getElementById("time-left").textContent = timeLeft;  
+  document.getElementById("feedback").textContent = "";  
+  clearInterval(timerInterval);  
+  timerInterval = setInterval(() => {  
+    timeLeft--;  
+    document.getElementById("time-left").textContent = timeLeft;  
+    if (timeLeft <= 0) {  
+      clearInterval(timerInterval);  
+      document.getElementById("feedback").textContent = "Time's up! You lost! The text was: " + originalText;  
+    }  
+  }, 1000);  
+}  
+
+function encrypt(text, cipher) {  
+  switch (cipher) {  
+    case "Vigenere":  
+      return text  
+        .split("")  
+        .map((char, i) => String.fromCharCode(char.charCodeAt(0) + (i % 3)))  
+        .join("");  
+    case "Reverse":  
+      return text.split("").reverse().join("");  
+    case "Caesar(Shift)":  
+      return text  
+        .split("")  
+        .map((char) => String.fromCharCode(char.charCodeAt(0) + 3))  
+        .join("");  
+    case "Base64":  
+      return btoa(text);  
+    case "Hexadecimal":  
+      return text  
+        .split("")  
+        .map((char) => char.charCodeAt(0).toString(16))  
+        .join(" ");  
+  }  
+}  
+
+function submitAnswer() {  
+  const userAnswer = document.getElementById("user-input").value;  
+  if (userAnswer === originalText) {  
+    document.getElementById("feedback").textContent = "Congratulations! You cracked the cipher.";  
+    clearInterval(timerInterval);  
+  } else {  
+    document.getElementById("feedback").textContent = "Incorrect! Keep trying.";  
+  }  
+}  
+
+initGame();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

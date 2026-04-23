@@ -1,0 +1,155 @@
+---
+layout: null
+title: "PhishDetect: Email Threat Identifier"
+category: "Cybersecurity"
+description: "A highly interactive tool that gamifies the identification of phishing emails by presenting users with simulated emails and challenging them to spot red flags in real-time."
+permalink: "/tools/daily-20260423-04-phishdetect-email-threat-identifier.html"
+generated_by: "api-true-ai"
+generated_date: "20260423"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhishDetect: Email Threat Identifier | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive tool that gamifies the identification of phishing emails by presenting users with simulated emails and challenging them to spot red flags in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PhishDetect: Email Threat Identifier | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive tool that gamifies the identification of phishing emails by presenting users with simulated emails and challenging them to spot red flags in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PhishDetect: Email Threat Identifier | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive tool that gamifies the identification of phishing emails by presenting users with simulated emails and challenging them to spot red flags in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PhishDetect: Email Threat Identifier</h1>
+    <p class="seo-subtitle">A highly interactive tool that gamifies the identification of phishing emails by presenting users with simulated emails and challenging them to spot red flags in real-time.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background-color: #1d1f27;  
+  color: #f5f5f5;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  background: #2c2f3e;  
+  padding: 2rem;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);  
+  width: 90%;  
+  max-width: 800px;  
+}  
+.email {  
+  background: #3a3e50;  
+  border-radius: 8px;  
+  padding: 1rem;  
+  margin: 1rem 0;  
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);  
+  cursor: pointer;  
+  transition: transform 0.2s;  
+}  
+.email:hover {  
+  transform: scale(1.02);  
+  background: #444a64;  
+}  
+.correct {  
+  background: #28a745 !important;  
+}  
+.incorrect {  
+  background: #dc3545 !important;  
+}  
+#score {  
+  font-size: 1.5rem;  
+  margin-bottom: 1rem;  
+}  
+#restart-button {  
+  background: #007bff;  
+  color: #fff;  
+  border: none;  
+  padding: 0.5rem 1rem;  
+  border-radius: 5px;  
+  font-size: 1rem;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+#restart-button:hover {  
+  background: #0056b3;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="score">Score: 0</div>  
+  <div id="emails"></div>  
+  <button id="restart-button">Restart</button>  
+</div>  
+<script>  
+const emails = [  
+  { id: 1, subject: "Your account has been compromised!", sender: "security@amazon-fakesite.com", body: "Click this link to reset your password: http://fakeurl.com", isPhishing: true },  
+  { id: 2, subject: "Meeting Reminder", sender: "manager@company.com", body: "Don't forget about tomorrow's meeting at 10 AM.", isPhishing: false },  
+  { id: 3, subject: "Unusual Login Attempt", sender: "no-reply@paypal.com", body: "We noticed an unusual login attempt. Please confirm your identity here: http://secure-login-paypal.com", isPhishing: true },  
+  { id: 4, subject: "Monthly Newsletter", sender: "newsletter@techupdates.com", body: "Check out our latest articles and news!", isPhishing: false },  
+  { id: 5, subject: "Win a Free iPhone!", sender: "promo@givemefreegift.com", body: "Click here to claim your free iPhone now! Offer valid for a limited time.", isPhishing: true }  
+];  
+
+let score = 0;  
+
+function renderEmails() {  
+  const emailContainer = document.getElementById("emails");  
+  emailContainer.innerHTML = "";  
+
+  emails.forEach(email => {  
+    const emailDiv = document.createElement("div");  
+    emailDiv.classList.add("email");  
+    emailDiv.innerHTML = `  
+      <strong>Subject:</strong> ${email.subject}<br>  
+      <strong>Sender:</strong> ${email.sender}<br>  
+      <strong>Body:</strong> ${email.body}  
+    `;  
+    emailDiv.addEventListener("click", () => handleEmailClick(email, emailDiv));  
+    emailContainer.appendChild(emailDiv);  
+  });  
+}  
+
+function handleEmailClick(email, emailDiv) {  
+  if (email.isPhishing) {  
+    emailDiv.classList.add("correct");  
+    score++;  
+  } else {  
+    emailDiv.classList.add("incorrect");  
+  }  
+  updateScore();  
+  emailDiv.style.pointerEvents = "none";  
+}  
+
+function updateScore() {  
+  document.getElementById("score").textContent = `Score: ${score}`;  
+}  
+
+document.getElementById("restart-button").addEventListener("click", () => {  
+  score = 0;  
+  updateScore();  
+  renderEmails();  
+});  
+
+renderEmails();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

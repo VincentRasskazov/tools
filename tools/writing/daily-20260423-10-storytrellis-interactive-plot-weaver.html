@@ -1,0 +1,182 @@
+---
+layout: null
+title: "StoryTrellis: Interactive Plot Weaver"
+category: "Writing"
+description: "A dynamic tool that helps writers visually weave complex storylines, character arcs, and timelines in an interactive, branching web."
+permalink: "/tools/daily-20260423-10-storytrellis-interactive-plot-weaver.html"
+generated_by: "api-true-ai"
+generated_date: "20260423"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StoryTrellis: Interactive Plot Weaver | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic tool that helps writers visually weave complex storylines, character arcs, and timelines in an interactive, branching web. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="StoryTrellis: Interactive Plot Weaver | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic tool that helps writers visually weave complex storylines, character arcs, and timelines in an interactive, branching web. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StoryTrellis: Interactive Plot Weaver | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic tool that helps writers visually weave complex storylines, character arcs, and timelines in an interactive, branching web. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>StoryTrellis: Interactive Plot Weaver</h1>
+    <p class="seo-subtitle">A dynamic tool that helps writers visually weave complex storylines, character arcs, and timelines in an interactive, branching web.</p>
+    <style>  
+/* Beautiful, modern inline CSS for StoryTrellis */  
+body {  
+  font-family: 'Arial', sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background: linear-gradient(to bottom, #f4f4f4, #eaeaea);  
+}  
+#tool-app {  
+  display: flex;  
+  flex-direction: column;  
+  height: 100vh;  
+  justify-content: center;  
+  align-items: center;  
+}  
+canvas {  
+  border: 1px solid #ccc;  
+  background-color: #ffffff;  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+  cursor: pointer;  
+}  
+button {  
+  margin: 10px;  
+  padding: 10px 20px;  
+  font-size: 16px;  
+  border: none;  
+  background-color: #0078d7;  
+  color: white;  
+  border-radius: 5px;  
+  cursor: pointer;  
+}  
+button:hover {  
+  background-color: #005bb5;  
+}  
+</style>  
+<div id="tool-app">  
+  <canvas id="storyCanvas" width="800" height="600"></canvas>  
+  <button id="addNode">Add Story Point</button>  
+  <button id="clearCanvas">Clear Plot</button>  
+</div>  
+<script>  
+// Interactive JavaScript logic for StoryTrellis
+const canvas = document.getElementById('storyCanvas');  
+const ctx = canvas.getContext('2d');  
+const nodes = [];  
+const edges = [];  
+
+function drawCanvas() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  edges.forEach((edge) => {  
+    const { start, end } = edge;  
+    ctx.beginPath();  
+    ctx.moveTo(start.x, start.y);  
+    ctx.lineTo(end.x, end.y);  
+    ctx.strokeStyle = '#888';  
+    ctx.stroke();  
+  });  
+  nodes.forEach((node) => {  
+    ctx.beginPath();  
+    ctx.arc(node.x, node.y, 20, 0, 2 * Math.PI);  
+    ctx.fillStyle = '#0078d7';  
+    ctx.fill();  
+    ctx.strokeStyle = '#005bb5';  
+    ctx.stroke();  
+    ctx.fillStyle = 'white';  
+    ctx.font = '14px Arial';  
+    ctx.textAlign = 'center';  
+    ctx.textBaseline = 'middle';  
+    ctx.fillText(node.text, node.x, node.y);  
+  });  
+}  
+
+canvas.addEventListener('click', (e) => {  
+  const rect = canvas.getBoundingClientRect();  
+  const x = e.clientX - rect.left;  
+  const y = e.clientY - rect.top;  
+  let selectedNode = null;  
+
+  nodes.forEach((node) => {  
+    const dx = node.x - x;  
+    const dy = node.y - y;  
+    if (Math.sqrt(dx * dx + dy * dy) < 20) {  
+      selectedNode = node;  
+    }  
+  });  
+
+  if (selectedNode) {  
+    const text = prompt('Edit this story point:', selectedNode.text);  
+    if (text !== null) selectedNode.text = text;  
+  } else {  
+    const text = prompt('Add a description for this story point:', 'New Story Point');  
+    if (text) nodes.push({ x, y, text });  
+  }  
+  drawCanvas();  
+});  
+
+document.getElementById('addNode').addEventListener('click', () => {  
+  const text = prompt('Enter a description for the new story point:');  
+  if (text) {  
+    const x = Math.random() * (canvas.width - 40) + 20;  
+    const y = Math.random() * (canvas.height - 40) + 20;  
+    nodes.push({ x, y, text });  
+    drawCanvas();  
+  }  
+});  
+
+document.getElementById('clearCanvas').addEventListener('click', () => {  
+  nodes.length = 0;  
+  edges.length = 0;  
+  drawCanvas();  
+});  
+
+canvas.addEventListener('contextmenu', (e) => {  
+  e.preventDefault();  
+  const rect = canvas.getBoundingClientRect();  
+  const x = e.clientX - rect.left;  
+  const y = e.clientY - rect.top;  
+  let selectedNode = null;  
+
+  nodes.forEach((node) => {  
+    const dx = node.x - x;  
+    const dy = node.y - y;  
+    if (Math.sqrt(dx * dx + dy * dy) < 20) {  
+      selectedNode = node;  
+    }  
+  });  
+
+  if (selectedNode) {  
+    const targetNodeIndex = nodes.findIndex(  
+      (node) => node !== selectedNode  
+    );  
+    if (targetNodeIndex !== -1) {  
+      edges.push({ start: selectedNode, end: nodes[targetNodeIndex] });  
+      drawCanvas();  
+    }  
+  }  
+});  
+
+drawCanvas();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
