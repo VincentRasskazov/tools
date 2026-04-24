@@ -1,0 +1,139 @@
+---
+layout: null
+title: "Task Terrain Explorer"
+category: "Productivity"
+description: "Navigate a 3D topographical map where each task you add generates a peak, and completing tasks flattens them, visualizing your productivity progress dynamically."
+permalink: "/tools/daily-20260424-20-task-terrain-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260424"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Terrain Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate a 3D topographical map where each task you add generates a peak, and completing tasks flattens them, visualizing your productivity progress dynamically. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Task Terrain Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate a 3D topographical map where each task you add generates a peak, and completing tasks flattens them, visualizing your productivity progress dynamically. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Task Terrain Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate a 3D topographical map where each task you add generates a peak, and completing tasks flattens them, visualizing your productivity progress dynamically. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Task Terrain Explorer</h1>
+    <p class="seo-subtitle">Navigate a 3D topographical map where each task you add generates a peak, and completing tasks flattens them, visualizing your productivity progress dynamically.</p>
+    <style>  
+body { font-family: Arial, sans-serif; background: linear-gradient(to bottom, #74ebd5, #ACB6E5); margin: 0; padding: 0; overflow: hidden; }  
+#tool-app { width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; color: #333; }  
+canvas { display: block; }  
+.task-list { position: absolute; top: 20px; left: 20px; background: rgba(255, 255, 255, 0.9); padding: 15px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }  
+.task-list h2 { margin: 0 0 10px; font-size: 1.2em; }  
+.task-list input, .task-list button { margin-bottom: 10px; width: 100%; padding: 8px; }  
+.task-list button { background: #74ebd5; border: none; color: white; border-radius: 4px; cursor: pointer; }  
+.task-list button:hover { background: #68d3c8; }  
+</style>  
+<div id="tool-app">  
+    <div class="task-list">  
+        <h2>Your Tasks</h2>  
+        <input type="text" id="task-input" placeholder="Enter a task...">  
+        <button id="add-task">Add Task</button>  
+        <ul id="task-ul"></ul>  
+    </div>  
+    <canvas id="mapCanvas"></canvas>  
+</div>  
+<script>  
+// JavaScript logic for Task Terrain Explorer  
+const canvas = document.getElementById('mapCanvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = window.innerWidth;  
+canvas.height = window.innerHeight;  
+
+let tasks = [];  
+let terrain = [];  
+const cols = 50;  
+const rows = 50;  
+const cellSize = Math.min(canvas.width, canvas.height) / cols;  
+
+// Initialize terrain  
+for (let x = 0; x < cols; x++) {  
+    terrain[x] = [];  
+    for (let y = 0; y < rows; y++) {  
+        terrain[x][y] = 0;  
+    }  
+}  
+
+// Function to draw the terrain  
+function drawTerrain() {  
+    ctx.clearRect(0, 0, canvas.width, canvas.height);  
+    for (let x = 0; x < cols; x++) {  
+        for (let y = 0; y < rows; y++) {  
+            const height = terrain[x][y];  
+            const color = `rgb(${255 - height * 20},${255 - height * 10},${255 - height * 5})`;  
+            ctx.fillStyle = color;  
+            ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);  
+        }  
+    }  
+}  
+
+// Function to add a task  
+function addTask(taskName) {  
+    if (!taskName) return;  
+    tasks.push(taskName);  
+    const peakX = Math.floor(Math.random() * cols);  
+    const peakY = Math.floor(Math.random() * rows);  
+    terrain[peakX][peakY] += 5; // Create a peak  
+    drawTerrain();  
+    updateTaskList();  
+}  
+
+// Function to complete a task  
+function completeTask(index) {  
+    tasks.splice(index, 1);  
+    const peakX = Math.floor(Math.random() * cols);  
+    const peakY = Math.floor(Math.random() * rows);  
+    if (terrain[peakX][peakY] > 0) terrain[peakX][peakY] -= 5; // Flatten the peak  
+    drawTerrain();  
+    updateTaskList();  
+}  
+
+// Function to update task list UI  
+function updateTaskList() {  
+    const taskUl = document.getElementById('task-ul');  
+    taskUl.innerHTML = '';  
+    tasks.forEach((task, index) => {  
+        const li = document.createElement('li');  
+        li.textContent = task;  
+        li.style.cursor = 'pointer';  
+        li.addEventListener('click', () => completeTask(index));  
+        taskUl.appendChild(li);  
+    });  
+}  
+
+// Event listeners  
+document.getElementById('add-task').addEventListener('click', () => {  
+    const taskInput = document.getElementById('task-input');  
+    addTask(taskInput.value);  
+    taskInput.value = '';  
+});  
+
+// Initial render  
+drawTerrain();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

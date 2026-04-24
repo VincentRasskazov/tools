@@ -1,0 +1,193 @@
+---
+layout: null
+title: "Wealth Web: Interactive Portfolio Network Builder"
+category: "Finance"
+description: "Visualize and strategize your financial portfolio by building a dynamic, interconnected web of investments that respond to live market data and hypothetical scenarios."
+permalink: "/tools/daily-20260424-03-wealth-web-interactive-portfolio-network-builder.html"
+generated_by: "api-true-ai"
+generated_date: "20260424"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wealth Web: Interactive Portfolio Network Builder | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize and strategize your financial portfolio by building a dynamic, interconnected web of investments that respond to live market data and hypothetical scenarios. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Wealth Web: Interactive Portfolio Network Builder | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize and strategize your financial portfolio by building a dynamic, interconnected web of investments that respond to live market data and hypothetical scenarios. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Wealth Web: Interactive Portfolio Network Builder | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize and strategize your financial portfolio by building a dynamic, interconnected web of investments that respond to live market data and hypothetical scenarios. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Wealth Web: Interactive Portfolio Network Builder</h1>
+    <p class="seo-subtitle">Visualize and strategize your financial portfolio by building a dynamic, interconnected web of investments that respond to live market data and hypothetical scenarios.</p>
+    ```html
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: #fff;
+    margin: 0;
+    overflow: hidden;
+  }
+  #tool-app {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  canvas {
+    border: 2px solid #fff;
+    border-radius: 10px;
+  }
+  #controls {
+    margin-top: 20px;
+  }
+  button {
+    background: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-size: 14px;
+  }
+  button:hover {
+    background: #45a049;
+  }
+</style>
+<div id="tool-app">
+  <canvas id="portfolioCanvas" width="800" height="600"></canvas>
+  <div id="controls">
+    <button id="addAsset">Add Asset</button>
+    <button id="simulateMarket">Simulate Market</button>
+    <button id="reset">Reset</button>
+  </div>
+</div>
+<script>
+  const canvas = document.getElementById('portfolioCanvas');
+  const ctx = canvas.getContext('2d');
+  const width = canvas.width;
+  const height = canvas.height;
+  const nodes = [];
+  const links = [];
+
+  class Node {
+    constructor(x, y, type) {
+      this.x = x;
+      this.y = y;
+      this.radius = 20;
+      this.type = type;
+      this.color = type === 'stock' ? '#FF6347' : '#1E90FF';
+      this.value = Math.random() * 1000 + 100;
+      this.velocity = { x: (Math.random() - 0.5) * 2, y: (Math.random() - 0.5) * 2};
+    }
+
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+      ctx.strokeStyle = '#fff';
+      ctx.stroke();
+      ctx.closePath();
+
+      ctx.fillStyle = '#fff';
+      ctx.textAlign = 'center';
+      ctx.fillText(this.type.toUpperCase(), this.x, this.y - 30);
+      ctx.fillText(`$${this.value.toFixed(2)}`, this.x, this.y + 5);
+    }
+
+    update() {
+      this.x += this.velocity.x;
+      this.y += this.velocity.y;
+
+      if(this.x < this.radius || this.x > width - this.radius) this.velocity.x *= -1;
+      if(this.y < this.radius || this.y > height - this.radius) this.velocity.y *= -1;
+
+      this.value += Math.random() * 10 - 5;
+    }
+  }
+
+  class Link {
+    constructor(nodeA, nodeB) {
+      this.nodeA = nodeA;
+      this.nodeB = nodeB;
+    }
+
+    draw() {
+      ctx.beginPath();
+      ctx.moveTo(this.nodeA.x, this.nodeA.y);
+      ctx.lineTo(this.nodeB.x, this.nodeB.y);
+      ctx.strokeStyle = '#aaa';
+      ctx.stroke();
+      ctx.closePath();
+    }
+  }
+
+  function addNode(type) {
+    const x = Math.random() * (width - 40) + 20;
+    const y = Math.random() * (height - 40) + 20;
+    nodes.push(new Node(x, y, type));
+    if(nodes.length > 1) {
+      const randomNode = nodes[Math.floor(Math.random() * nodes.length)];
+      links.push(new Link(randomNode, nodes[nodes.length - 1]));
+    }
+  }
+
+  function simulateMarket() {
+    nodes.forEach(node => {
+      node.value += Math.random() * 100 - 50;
+      if(node.value < 0) node.value = 0;
+    });
+  }
+
+  function reset() {
+    nodes.length = 0;
+    links.length = 0;
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+
+    links.forEach(link => link.draw());
+    nodes.forEach(node => {
+      node.update();
+      node.draw();
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  document.getElementById('addAsset').addEventListener('click', () => {
+    const types = ['stock', 'bond'];
+    const randomType = types[Math.floor(Math.random() * types.length)];
+    addNode(randomType);
+  });
+
+  document.getElementById('simulateMarket').addEventListener('click', simulateMarket);
+  document.getElementById('reset').addEventListener('click', reset);
+
+  animate();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

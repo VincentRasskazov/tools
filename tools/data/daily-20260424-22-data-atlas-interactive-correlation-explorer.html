@@ -1,0 +1,200 @@
+---
+layout: null
+title: "Data Atlas: Interactive Correlation Explorer"
+category: "Data"
+description: "Discover hidden patterns and relationships in datasets by visually linking variables in an interactive, gamified environment."
+permalink: "/tools/daily-20260424-22-data-atlas-interactive-correlation-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260424"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Atlas: Interactive Correlation Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Discover hidden patterns and relationships in datasets by visually linking variables in an interactive, gamified environment. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Atlas: Interactive Correlation Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Discover hidden patterns and relationships in datasets by visually linking variables in an interactive, gamified environment. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Atlas: Interactive Correlation Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Discover hidden patterns and relationships in datasets by visually linking variables in an interactive, gamified environment. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Atlas: Interactive Correlation Explorer</h1>
+    <p class="seo-subtitle">Discover hidden patterns and relationships in datasets by visually linking variables in an interactive, gamified environment.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(120deg, #1e3c72, #2a5298);  
+  color: white;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+}  
+#tool-app {  
+  width: 80%;  
+  height: 80%;  
+  background: rgba(255, 255, 255, 0.1);  
+  border-radius: 12px;  
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);  
+  padding: 16px;  
+  display: flex;  
+  flex-direction: column;  
+  gap: 16px;  
+  overflow: hidden;  
+}  
+#header {  
+  font-size: 1.5rem;  
+  font-weight: bold;  
+  text-align: center;  
+}  
+#canvas-container {  
+  flex: 1;  
+  position: relative;  
+  background: rgba(0, 0, 0, 0.05);  
+  border: 2px solid rgba(255, 255, 255, 0.2);  
+  border-radius: 8px;  
+  overflow: hidden;  
+}  
+.node {  
+  position: absolute;  
+  width: 80px;  
+  height: 80px;  
+  background: linear-gradient(45deg, #6a11cb, #2575fc);  
+  border-radius: 50%;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  color: white;  
+  font-size: 0.9rem;  
+  text-align: center;  
+  cursor: grab;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);  
+  user-select: none;  
+}  
+.connection {  
+  position: absolute;  
+  background: rgba(255, 255, 255, 0.6);  
+  height: 4px;  
+  transform-origin: left center;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="header">Data Atlas: Interactive Correlation Explorer</div>  
+  <div id="canvas-container"></div>  
+</div>  
+<script>  
+const container = document.querySelector('#canvas-container');  
+const nodes = [  
+  { id: 'A', x: 100, y: 150, label: 'Sales' },  
+  { id: 'B', x: 300, y: 250, label: 'Marketing Spend' },  
+  { id: 'C', x: 500, y: 100, label: 'Web Traffic' },  
+  { id: 'D', x: 700, y: 300, label: 'Customer Retention' },  
+];  
+
+const connections = [];  
+
+function createNode(node) {  
+  const div = document.createElement('div');  
+  div.classList.add('node');  
+  div.style.left = node.x + 'px';  
+  div.style.top = node.y + 'px';  
+  div.textContent = node.label;  
+  div.dataset.id = node.id;  
+
+  div.addEventListener('mousedown', (e) => startDrag(e, div));  
+  container.appendChild(div);  
+}  
+
+function createConnection(fromNode, toNode) {  
+  const connection = document.createElement('div');  
+  connection.classList.add('connection');  
+
+  const x1 = fromNode.offsetLeft + fromNode.offsetWidth / 2;  
+  const y1 = fromNode.offsetTop + fromNode.offsetHeight / 2;  
+  const x2 = toNode.offsetLeft + toNode.offsetWidth / 2;  
+  const y2 = toNode.offsetTop + toNode.offsetHeight / 2;  
+
+  const dx = x2 - x1;  
+  const dy = y2 - y1;  
+  const length = Math.sqrt(dx * dx + dy * dy);  
+  const angle = Math.atan2(dy, dx) * (180 / Math.PI);  
+
+  connection.style.width = length + 'px';  
+  connection.style.left = x1 + 'px';  
+  connection.style.top = y1 + 'px';  
+  connection.style.transform = `rotate(${angle}deg)`;  
+
+  container.appendChild(connection);  
+  connections.push({ from: fromNode, to: toNode, element: connection });  
+}  
+
+function startDrag(event, node) {  
+  const offsetX = event.clientX - node.offsetLeft;  
+  const offsetY = event.clientY - node.offsetTop;  
+
+  function moveAt(e) {  
+    node.style.left = e.clientX - offsetX + 'px';  
+    node.style.top = e.clientY - offsetY + 'px';  
+    updateConnections(node);  
+  }  
+
+  function stopDrag() {  
+    document.removeEventListener('mousemove', moveAt);  
+    document.removeEventListener('mouseup', stopDrag);  
+  }  
+
+  document.addEventListener('mousemove', moveAt);  
+  document.addEventListener('mouseup', stopDrag);  
+}  
+
+function updateConnections(node) {  
+  connections.forEach((conn) => {  
+    if (conn.from === node || conn.to === node) {  
+      const x1 = conn.from.offsetLeft + conn.from.offsetWidth / 2;  
+      const y1 = conn.from.offsetTop + conn.from.offsetHeight / 2;  
+      const x2 = conn.to.offsetLeft + conn.to.offsetWidth / 2;  
+      const y2 = conn.to.offsetTop + conn.to.offsetHeight / 2;  
+
+      const dx = x2 - x1;  
+      const dy = y2 - y1;  
+      const length = Math.sqrt(dx * dx + dy * dy);  
+      const angle = Math.atan2(dy, dx) * (180 / Math.PI);  
+
+      conn.element.style.width = length + 'px';  
+      conn.element.style.left = x1 + 'px';  
+      conn.element.style.top = y1 + 'px';  
+      conn.element.style.transform = `rotate(${angle}deg)`;  
+    }  
+  });  
+}  
+
+// Initialize nodes  
+nodes.forEach(createNode);  
+
+// Default connections  
+createConnection(document.querySelector('.node[data-id="A"]'), document.querySelector('.node[data-id="B"]'));  
+createConnection(document.querySelector('.node[data-id="B"]'), document.querySelector('.node[data-id="C"]'));  
+createConnection(document.querySelector('.node[data-id="C"]'), document.querySelector('.node[data-id="D"]'));  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

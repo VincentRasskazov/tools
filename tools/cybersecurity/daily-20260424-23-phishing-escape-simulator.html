@@ -1,0 +1,168 @@
+---
+layout: null
+title: "Phishing Escape Simulator"
+category: "Cybersecurity"
+description: "An interactive mini-game where players identify phishing attempts in emails to escape from a simulated cyberattack scenario."
+permalink: "/tools/daily-20260424-23-phishing-escape-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260424"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phishing Escape Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive mini-game where players identify phishing attempts in emails to escape from a simulated cyberattack scenario. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Phishing Escape Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive mini-game where players identify phishing attempts in emails to escape from a simulated cyberattack scenario. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Phishing Escape Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive mini-game where players identify phishing attempts in emails to escape from a simulated cyberattack scenario. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Phishing Escape Simulator</h1>
+    <p class="seo-subtitle">An interactive mini-game where players identify phishing attempts in emails to escape from a simulated cyberattack scenario.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background-color: #1e1e2f;  
+  color: #eee;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+}  
+#tool-app {  
+  width: 80%;  
+  max-width: 800px;  
+  background: #2a2a3d;  
+  border-radius: 10px;  
+  padding: 20px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);  
+}  
+.email {  
+  border: 1px solid #444;  
+  border-radius: 5px;  
+  padding: 10px;  
+  margin: 10px 0;  
+  background: #333;  
+}  
+.email-title {  
+  font-size: 18px;  
+  color: #c9c9d9;  
+}  
+.email-content {  
+  font-size: 16px;  
+  color: #aaa;  
+}  
+button {  
+  margin-top: 10px;  
+  padding: 8px 14px;  
+  border: none;  
+  border-radius: 5px;  
+  background: #5c7cfa;  
+  color: #fff;  
+  cursor: pointer;  
+}  
+button:hover {  
+  background: #4866eb;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Phishing Escape Simulator</h1>  
+  <p>Identify the phishing emails to protect your virtual company and escape the attack!</p>  
+  <div id="game-area">  
+    <!-- Game Emails will populate here dynamically -->  
+  </div>  
+  <div id="game-controls">  
+    <button id="start-game">Start Game</button>  
+    <p id="score-display">Score: 0</p>  
+    <p id="result-message"></p>  
+  </div>  
+</div>  
+<script>  
+const phishingEmails = [  
+  { title: "Urgent: Verify Your Account", content: "Your account has been compromised. Click here to restore access: bit.ly/fake-link" },  
+  { title: "Congratulations! You've won!", content: "You are the lucky winner of $1,000,000! Provide us your bank details to claim your prize." },  
+];  
+
+const legitimateEmails = [  
+  { title: "Meeting Reminder", content: "Don't forget about the team meeting at 3 PM today in Conference Room A." },  
+  { title: "Project Update", content: "Here's the latest project update. Let us know if you have any questions." },  
+];  
+
+let score = 0;  
+
+function shuffleEmails() {  
+  const allEmails = [...phishingEmails, ...legitimateEmails];  
+  for (let i = allEmails.length - 1; i > 0; i--) {  
+    const j = Math.floor(Math.random() * (i + 1));  
+    [allEmails[i], allEmails[j]] = [allEmails[j], allEmails[i]];  
+  }  
+  return allEmails;  
+}  
+
+function startGame() {  
+  const gameArea = document.getElementById("game-area");  
+  const resultMessage = document.getElementById("result-message");  
+  resultMessage.textContent = "";  
+
+  score = 0;  
+  document.getElementById("score-display").textContent = `Score: ${score}`;  
+
+  gameArea.innerHTML = "";  
+  const emails = shuffleEmails();  
+
+  emails.forEach((email, index) => {  
+    const emailDiv = document.createElement("div");  
+    emailDiv.className = "email";  
+    emailDiv.innerHTML = `<div class="email-title">${email.title}</div><div class="email-content">${email.content}</div>`;  
+    const phishingButton = document.createElement("button");  
+    phishingButton.textContent = "Mark as Phishing";  
+    phishingButton.onclick = () => handleChoice(index, true);  
+    const legitimateButton = document.createElement("button");  
+    legitimateButton.textContent = "Mark as Legitimate";  
+    legitimateButton.onclick = () => handleChoice(index, false);  
+    emailDiv.appendChild(phishingButton);  
+    emailDiv.appendChild(legitimateButton);  
+    gameArea.appendChild(emailDiv);  
+  });  
+}  
+
+function handleChoice(index, isPhishing) {  
+  let isCorrect = false;  
+  if (isPhishing && phishingEmails.some((email) => email.title === shuffleEmails()[index].title)) {  
+    isCorrect = true;  
+  } else if (!isPhishing && legitimateEmails.some((email) => email.title === shuffleEmails()[index].title)) {  
+    isCorrect = true;  
+  }  
+
+  if (isCorrect) {  
+    score += 1;  
+    document.getElementById("score-display").textContent = `Score: ${score}`;  
+  } else {  
+    document.getElementById("result-message").textContent = "Oops! You made a mistake.";  
+  }  
+}  
+
+document.getElementById("start-game").onclick = startGame;  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
