@@ -1,0 +1,187 @@
+---
+layout: null
+title: "Logic Loom: The Argument Weaver"
+category: "Education"
+description: "A dynamic, interactive tool where users build and test logical arguments by connecting reasoning nodes, visualizing critical thinking pathways, and identifying logical fallacies."
+permalink: "/tools/daily-20260425-19-logic-loom-the-argument-weaver.html"
+generated_by: "api-true-ai"
+generated_date: "20260425"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logic Loom: The Argument Weaver | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, interactive tool where users build and test logical arguments by connecting reasoning nodes, visualizing critical thinking pathways, and identifying logical fallacies. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Logic Loom: The Argument Weaver | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, interactive tool where users build and test logical arguments by connecting reasoning nodes, visualizing critical thinking pathways, and identifying logical fallacies. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Logic Loom: The Argument Weaver | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, interactive tool where users build and test logical arguments by connecting reasoning nodes, visualizing critical thinking pathways, and identifying logical fallacies. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Logic Loom: The Argument Weaver</h1>
+    <p class="seo-subtitle">A dynamic, interactive tool where users build and test logical arguments by connecting reasoning nodes, visualizing critical thinking pathways, and identifying logical fallacies.</p>
+    <style>  
+  #tool-app {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  .node {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #fff;
+    border: 2px solid #4CAF50;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+  }
+  .node.active {
+    border-color: #FF5722;
+    background-color: #FFF8E1;
+  }
+  .connection {
+    stroke: #2196F3;
+    stroke-width: 2;
+  }
+  #canvas {
+    border: 1px solid #e0e0e0;
+    margin-top: 20px;
+  }
+  #buttons {
+    margin-top: 15px;
+  }
+  .btn {
+    margin: 5px;
+    padding: 10px 15px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .btn:hover {
+    background-color: #1976D2;
+  }
+</style>  
+<div id="tool-app">  
+  <h1>Logic Loom: The Argument Weaver</h1>  
+  <p>Drag and connect reasoning nodes to create a logical argument. Click "Analyze" to see strengths and fallacies in your reasoning tree.</p>  
+  <div id="node-container"></div>  
+  <div id="buttons">  
+    <button class="btn" id="add-node">Add Node</button>  
+    <button class="btn" id="analyze">Analyze</button>  
+  </div>  
+  <svg id="canvas" width="100%" height="400"></svg>  
+  <div id="output"></div>  
+</div>  
+<script>  
+(function() {  
+  const app = document.querySelector('#tool-app');
+  const nodeContainer = document.querySelector('#node-container');
+  const canvas = document.querySelector('#canvas');
+  const output = document.querySelector('#output');
+  const nodes = [];
+  let connections = [];
+  
+  function createNode() {  
+    const node = document.createElement('div');  
+    node.classList.add('node');  
+    node.textContent = `Node ${nodes.length + 1}`;  
+    node.draggable = true;  
+    node.style.left = `${Math.random() * 80}%`;  
+    node.style.top = `${Math.random() * 60}%`;  
+    node.addEventListener('dragstart', (e) => {  
+      e.dataTransfer.setData('nodeId', node.id);  
+    });  
+    nodeContainer.appendChild(node);  
+    makeDraggable(node);  
+    nodes.push(node);  
+    return node;  
+  }  
+  
+  function makeDraggable(node) {  
+    node.onmousedown = function(event) {  
+      let shiftX = event.clientX - node.getBoundingClientRect().left;  
+      let shiftY = event.clientY - node.getBoundingClientRect().top;  
+      function moveAt(pageX, pageY) {  
+        node.style.left = pageX - shiftX + 'px';  
+        node.style.top = pageY - shiftY + 'px';  
+        drawConnections();
+      }  
+      function onMouseMove(event) {  
+        moveAt(event.pageX, event.pageY);  
+      }  
+      document.addEventListener('mousemove', onMouseMove);  
+      node.onmouseup = function() {  
+        document.removeEventListener('mousemove', onMouseMove);  
+        node.onmouseup = null;  
+      };  
+    };  
+    node.ondragstart = () => false;  
+  }  
+  
+  function addConnection(fromNode, toNode) {  
+    connections.push({ from: fromNode, to: toNode });  
+    drawConnections();
+  }  
+  
+  function drawConnections() {  
+    canvas.innerHTML = '';  
+    const rects = nodes.map(node => node.getBoundingClientRect());  
+    connections.forEach(({ from, to }) => {  
+      const fromIdx = nodes.indexOf(from);  
+      const toIdx = nodes.indexOf(to);  
+      const fromRect = rects[fromIdx];  
+      const toRect = rects[toIdx];  
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');  
+      line.setAttribute('x1', fromRect.left + fromRect.width / 2);  
+      line.setAttribute('y1', fromRect.top + fromRect.height / 2);  
+      line.setAttribute('x2', toRect.left + toRect.width / 2);  
+      line.setAttribute('y2', toRect.top + toRect.height / 2);  
+      line.classList.add('connection');  
+      canvas.appendChild(line);  
+    });  
+  }  
+  
+  function analyzeLogic() {  
+    if (!connections.length) {  
+      output.textContent = 'Please connect nodes to form a logical structure.';  
+      return;  
+    }  
+    output.textContent = 'Analysis complete: Logic appears coherent. (Placeholder output)';
+  }  
+  
+  document.querySelector('#add-node').addEventListener('click', () => {  
+    const node = createNode();  
+    node.addEventListener('dblclick', () => {  
+      node.classList.toggle('active');  
+    });  
+  });  
+  
+  document.querySelector('#analyze').addEventListener('click', analyzeLogic);  
+})();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,127 @@
+---
+layout: null
+title: "Data Pulse: Interactive Stream Mapper"
+category: "Data"
+description: "A real-time, gamified tool that lets users visualize, map, and optimize simulated data streams in a dynamic network grid while avoiding bottlenecks and data loss."
+permalink: "/tools/daily-20260425-16-data-pulse-interactive-stream-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260425"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Pulse: Interactive Stream Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="A real-time, gamified tool that lets users visualize, map, and optimize simulated data streams in a dynamic network grid while avoiding bottlenecks and data loss. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Pulse: Interactive Stream Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="A real-time, gamified tool that lets users visualize, map, and optimize simulated data streams in a dynamic network grid while avoiding bottlenecks and data loss. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Pulse: Interactive Stream Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A real-time, gamified tool that lets users visualize, map, and optimize simulated data streams in a dynamic network grid while avoiding bottlenecks and data loss. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Pulse: Interactive Stream Mapper</h1>
+    <p class="seo-subtitle">A real-time, gamified tool that lets users visualize, map, and optimize simulated data streams in a dynamic network grid while avoiding bottlenecks and data loss.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #1e1e2f; color: #f4f4f4; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }  
+  #tool-app { width: 80%; height: 80%; background: #29293d; border-radius: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); display: flex; flex-direction: column; padding: 20px; }  
+  #grid { flex-grow: 1; display: grid; grid-template-columns: repeat(10, 1fr); grid-gap: 10px; }  
+  .node { width: 100%; height: 100%; background: #44445e; border-radius: 6px; position: relative; transition: background 0.3s; display: flex; justify-content: center; align-items: center; cursor: pointer; }  
+  .node.active { background: #68d391; }  
+  .node.overload { background: #e53e3e; animation: pulse 1s infinite; }  
+  @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }  
+  #controls { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }  
+  button { padding: 10px 20px; background: #4c4c7a; color: #fff; border: none; border-radius: 6px; cursor: pointer; }  
+  button:hover { background: #6363ab; }  
+  #score { font-size: 1.2rem; }  
+</style>  
+<div id="tool-app">  
+  <div id="controls">  
+    <div id="score">Score: 0</div>  
+    <button id="restart">Restart</button>  
+  </div>  
+  <div id="grid"></div>  
+</div>  
+<script>  
+const grid = document.getElementById('grid');  
+const scoreDisplay = document.getElementById('score');  
+const restartBtn = document.getElementById('restart');  
+let score = 0;  
+let activeNodes = [];  
+let interval;  
+
+function generateGrid() {  
+  for (let i = 0; i < 100; i++) {  
+    const node = document.createElement('div');  
+    node.classList.add('node');  
+    node.dataset.index = i;  
+    grid.appendChild(node);  
+  }  
+}  
+
+function activateNodes() {  
+  const nodes = document.querySelectorAll('.node');  
+  nodes.forEach(node => node.classList.remove('active', 'overload'));  
+
+  activeNodes = [];  
+  for (let i = 0; i < 5; i++) {  
+    const index = Math.floor(Math.random() * 100);  
+    if (!activeNodes.includes(index)) {  
+      activeNodes.push(index);  
+      nodes[index].classList.add('active');  
+    }  
+  }  
+}  
+
+function handleNodeClick(e) {  
+  const node = e.target;  
+  if (node.classList.contains('active')) {  
+    score += 10;  
+    node.classList.remove('active');  
+    node.classList.add('overload');  
+    setTimeout(() => node.classList.remove('overload'), 1000);  
+    scoreDisplay.textContent = `Score: ${score}`;  
+  } else {  
+    score -= 5;  
+    scoreDisplay.textContent = `Score: ${score}`;  
+  }  
+}  
+
+function startGame() {  
+  score = 0;  
+  scoreDisplay.textContent = `Score: ${score}`;  
+  clearInterval(interval);  
+  activateNodes();  
+  interval = setInterval(() => {  
+    activateNodes();  
+    if (score < 0) {  
+      alert('Game Over!');  
+      clearInterval(interval);  
+    }  
+  }, 2000);  
+}  
+
+grid.addEventListener('click', handleNodeClick);  
+restartBtn.addEventListener('click', startGame);  
+
+generateGrid();  
+startGame();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
