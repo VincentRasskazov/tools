@@ -1,0 +1,179 @@
+---
+layout: null
+title: "DevChord: Code Dependency Harmonizer"
+category: "Developer"
+description: "Visualize and interact with the relationships between your project's code modules as if they were musical chords in a dynamic, explorable graph."
+permalink: "/tools/daily-20260426-14-devchord-code-dependency-harmonizer.html"
+generated_by: "api-true-ai"
+generated_date: "20260426"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevChord: Code Dependency Harmonizer | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize and interact with the relationships between your project's code modules as if they were musical chords in a dynamic, explorable graph. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DevChord: Code Dependency Harmonizer | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize and interact with the relationships between your project's code modules as if they were musical chords in a dynamic, explorable graph. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DevChord: Code Dependency Harmonizer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize and interact with the relationships between your project's code modules as if they were musical chords in a dynamic, explorable graph. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DevChord: Code Dependency Harmonizer</h1>
+    <p class="seo-subtitle">Visualize and interact with the relationships between your project's code modules as if they were musical chords in a dynamic, explorable graph.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  background-color: #1e1e2f;  
+  color: #ffffff;  
+}  
+#tool-app {  
+  width: 90%;  
+  height: 90%;  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  background-color: #282c34;  
+  border-radius: 12px;  
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5);  
+  overflow: hidden;  
+  position: relative;  
+}  
+#graph-container {  
+  width: 100%;  
+  height: 80%;  
+  background: #20232a;  
+  border-radius: 10px;  
+  overflow: hidden;  
+  position: relative;  
+}  
+#controls {  
+  margin-top: 1rem;  
+  display: flex;  
+  justify-content: center;  
+  gap: 1rem;  
+}  
+button {  
+  padding: 0.5rem 1rem;  
+  font-size: 1rem;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  transition: background-color 0.3s;  
+}  
+button:hover {  
+  background-color: #61dafb;  
+  color: #000;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="graph-container"></div>  
+  <div id="controls">  
+    <button id="add-module">Add Module</button>  
+    <button id="clear-graph">Clear Graph</button>  
+  </div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const app = document.querySelector("#tool-app");  
+const graphContainer = document.querySelector("#graph-container");  
+const addModuleBtn = document.querySelector("#add-module");  
+const clearGraphBtn = document.querySelector("#clear-graph");  
+
+let nodes = [];  
+let edges = [];  
+
+function createNode(name) {  
+  return {  
+    id: `${Date.now()}-${Math.random()}`,  
+    label: name,  
+    x: Math.random() * graphContainer.offsetWidth,  
+    y: Math.random() * graphContainer.offsetHeight,  
+  };  
+}  
+
+function drawGraph() {  
+  graphContainer.innerHTML = "";  
+  const svgNS = "http://www.w3.org/2000/svg";  
+  const svg = document.createElementNS(svgNS, "svg");  
+  svg.setAttribute("width", "100%");  
+  svg.setAttribute("height", "100%");  
+
+  edges.forEach(({ from, to }) => {  
+    const line = document.createElementNS(svgNS, "line");  
+    line.setAttribute("x1", from.x);  
+    line.setAttribute("y1", from.y);  
+    line.setAttribute("x2", to.x);  
+    line.setAttribute("y2", to.y);  
+    line.setAttribute("stroke", "#61dafb");  
+    line.setAttribute("stroke-width", 2);  
+    svg.appendChild(line);  
+  });  
+
+  nodes.forEach((node) => {  
+    const circle = document.createElementNS(svgNS, "circle");  
+    circle.setAttribute("cx", node.x);  
+    circle.setAttribute("cy", node.y);  
+    circle.setAttribute("r", 20);  
+    circle.setAttribute("fill", "#61dafb");  
+    svg.appendChild(circle);  
+
+    const text = document.createElementNS(svgNS, "text");  
+    text.setAttribute("x", node.x);  
+    text.setAttribute("y", node.y + 5);  
+    text.setAttribute("text-anchor", "middle");  
+    text.setAttribute("fill", "#282c34");  
+    text.setAttribute("font-size", "12");  
+    text.textContent = node.label;  
+    svg.appendChild(text);  
+  });  
+
+  graphContainer.appendChild(svg);  
+}  
+
+addModuleBtn.addEventListener("click", () => {  
+  const moduleName = prompt("Enter module name:");  
+  if (moduleName) {  
+    const newNode = createNode(moduleName);  
+    if (nodes.length > 0) {  
+      const randomNode = nodes[Math.floor(Math.random() * nodes.length)];  
+      edges.push({ from: randomNode, to: newNode });  
+    }  
+    nodes.push(newNode);  
+    drawGraph();  
+  }  
+});  
+
+clearGraphBtn.addEventListener("click", () => {  
+  nodes = [];  
+  edges = [];  
+  drawGraph();  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

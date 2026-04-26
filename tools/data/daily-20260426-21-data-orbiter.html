@@ -1,0 +1,144 @@
+---
+layout: null
+title: "Data Orbiter"
+category: "Data"
+description: "A visually stunning tool that allows users to explore interconnected datasets as planets in a solar system, dynamically clustering and orbiting based on relationships."
+permalink: "/tools/daily-20260426-21-data-orbiter.html"
+generated_by: "api-true-ai"
+generated_date: "20260426"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Orbiter | Free Online Interactive Tool</title>
+  <meta name="description" content="A visually stunning tool that allows users to explore interconnected datasets as planets in a solar system, dynamically clustering and orbiting based on relationships. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Orbiter | Free Online Interactive Tool">
+  <meta property="og:description" content="A visually stunning tool that allows users to explore interconnected datasets as planets in a solar system, dynamically clustering and orbiting based on relationships. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Orbiter | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A visually stunning tool that allows users to explore interconnected datasets as planets in a solar system, dynamically clustering and orbiting based on relationships. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Orbiter</h1>
+    <p class="seo-subtitle">A visually stunning tool that allows users to explore interconnected datasets as planets in a solar system, dynamically clustering and orbiting based on relationships.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: radial-gradient(circle, #1e1e2f, #121215);  
+  color: white;  
+  margin: 0;  
+  overflow: hidden;  
+}  
+
+#tool-app {  
+  height: 100vh;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  position: relative;  
+}  
+
+.orbit {  
+  position: absolute;  
+  border-radius: 50%;  
+  border: 1px dashed rgba(255, 255, 255, 0.2);  
+  animation: spin infinite linear;  
+}  
+
+.planet {  
+  position: absolute;  
+  width: 20px;  
+  height: 20px;  
+  background-color: #4caf50;  
+  border-radius: 50%;  
+}  
+
+@keyframes spin {  
+  from { transform: rotate(0deg); }  
+  to { transform: rotate(360deg); }  
+}  
+
+.tooltip {  
+  position: absolute;  
+  background: rgba(0, 0, 0, 0.7);  
+  color: white;  
+  padding: 5px 10px;  
+  border-radius: 5px;  
+  font-size: 0.9em;  
+  pointer-events: none;  
+}  
+</style>  
+
+<div id="tool-app"></div>  
+
+<script>  
+const toolApp = document.getElementById("tool-app");  
+
+const createOrbit = (size, speed, offsetX, offsetY, planets) => {  
+  const orbit = document.createElement("div");  
+  orbit.className = "orbit";  
+  orbit.style.width = `${size}px`;  
+  orbit.style.height = `${size}px`;  
+  orbit.style.marginLeft = `${-size / 2 + offsetX}px`;  
+  orbit.style.marginTop = `${-size / 2 + offsetY}px`;  
+  orbit.style.animationDuration = `${speed}s`;  
+
+  planets.forEach((planet, index) => {  
+    const angle = (index / planets.length) * 360;  
+    const rad = (angle * Math.PI) / 180;  
+    const planetDiv = document.createElement("div");  
+    planetDiv.className = "planet";  
+    planetDiv.style.top = `${Math.sin(rad) * size / 2 + size / 2}px`;  
+    planetDiv.style.left = `${Math.cos(rad) * size / 2 + size / 2}px`;  
+    planetDiv.dataset.tooltip = `Planet: ${planet}`;  
+
+    planetDiv.addEventListener("mouseenter", (e) => {  
+      const tooltip = document.createElement("div");  
+      tooltip.className = "tooltip";  
+      tooltip.innerText = e.target.dataset.tooltip;  
+      tooltip.style.left = `${e.pageX + 10}px`;  
+      tooltip.style.top = `${e.pageY - 30}px`;  
+      tooltip.id = "tooltip";  
+      document.body.appendChild(tooltip);  
+    });  
+
+    planetDiv.addEventListener("mouseleave", () => {  
+      const tooltip = document.getElementById("tooltip");  
+      if (tooltip) tooltip.remove();  
+    });  
+    orbit.appendChild(planetDiv);  
+  });  
+
+  return orbit;  
+};  
+
+// Example dataset  
+const dataSets = [  
+  { size: 150, speed: 5, offsetX: -200, offsetY: 0, planets: ["A1", "B1", "C1", "D1"] },  
+  { size: 300, speed: 10, offsetX: 200, offsetY: 100, planets: ["E2", "F2", "G2", "H2", "I2"] },  
+  { size: 450, speed: 15, offsetX: 0, offsetY: -150, planets: ["X3", "Y3", "Z3"] },  
+];  
+
+dataSets.forEach((dataSet) => {  
+  toolApp.appendChild(createOrbit(dataSet.size, dataSet.speed, dataSet.offsetX, dataSet.offsetY, dataSet.planets));  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

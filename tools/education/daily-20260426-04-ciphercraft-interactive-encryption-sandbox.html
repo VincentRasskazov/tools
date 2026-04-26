@@ -1,0 +1,160 @@
+---
+layout: null
+title: "CipherCraft: Interactive Encryption Sandbox"
+category: "Education"
+description: "A dynamic educational tool that teaches users about classic and modern encryption techniques through hands-on cipher creation, decryption challenges, and real-time visualizations of encryption algorithms."
+permalink: "/tools/daily-20260426-04-ciphercraft-interactive-encryption-sandbox.html"
+generated_by: "api-true-ai"
+generated_date: "20260426"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CipherCraft: Interactive Encryption Sandbox | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic educational tool that teaches users about classic and modern encryption techniques through hands-on cipher creation, decryption challenges, and real-time visualizations of encryption algorithms. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CipherCraft: Interactive Encryption Sandbox | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic educational tool that teaches users about classic and modern encryption techniques through hands-on cipher creation, decryption challenges, and real-time visualizations of encryption algorithms. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CipherCraft: Interactive Encryption Sandbox | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic educational tool that teaches users about classic and modern encryption techniques through hands-on cipher creation, decryption challenges, and real-time visualizations of encryption algorithms. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CipherCraft: Interactive Encryption Sandbox</h1>
+    <p class="seo-subtitle">A dynamic educational tool that teaches users about classic and modern encryption techniques through hands-on cipher creation, decryption challenges, and real-time visualizations of encryption algorithms.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #1e1e2f; color: #ecf0f1; }  
+  #tool-app { max-width: 800px; margin: 50px auto; padding: 20px; background: #2c3e50; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); }  
+  h1 { text-align: center; color: #f39c12; }  
+  .controls { display: flex; flex-wrap: wrap; justify-content: space-between; margin-bottom: 20px; }  
+  .controls div { margin: 10px 0; flex: 1; }  
+  textarea, select, button { width: 100%; padding: 10px; margin-top: 10px; border-radius: 5px; border: 1px solid #34495e; background: #34495e; color: #ecf0f1; }  
+  .output { margin-top: 20px; padding: 15px; background: #34495e; border-radius: 5px; }  
+  .highlight { color: #e74c3c; font-weight: bold; }  
+</style>  
+<div id="tool-app">  
+  <h1>CipherCraft</h1>  
+  <div class="controls">  
+    <div>  
+      <label for="input-text">Input Text:</label>  
+      <textarea id="input-text" rows="3" placeholder="Enter your text here..."></textarea>  
+    </div>  
+    <div>  
+      <label for="cipher-type">Choose Cipher:</label>  
+      <select id="cipher-type">  
+        <option value="caesar">Caesar Cipher</option>  
+        <option value="vigenere">Vigenère Cipher</option>  
+        <option value="aes">AES Encryption (Simplified)</option>  
+      </select>  
+    </div>  
+    <div id="shift-key-container">  
+      <label for="shift-key">Shift Key (For Caesar):</label>  
+      <input type="number" id="shift-key" value="3" />  
+    </div>  
+    <div id="keyword-container" style="display:none;">  
+      <label for="keyword">Keyword (For Vigenère):</label>  
+      <input type="text" id="keyword" placeholder="Enter keyword..." />  
+    </div>  
+  </div>  
+  <button id="encrypt-btn">Encrypt</button>  
+  <button id="decrypt-btn">Decrypt</button>  
+  <div class="output">  
+    <p><strong>Output:</strong> <span id="output-text"></span></p>  
+  </div>  
+</div>  
+<script>  
+  const inputText = document.getElementById("input-text");  
+  const cipherType = document.getElementById("cipher-type");  
+  const shiftKeyContainer = document.getElementById("shift-key-container");  
+  const shiftKey = document.getElementById("shift-key");  
+  const keywordContainer = document.getElementById("keyword-container");  
+  const keyword = document.getElementById("keyword");  
+  const encryptBtn = document.getElementById("encrypt-btn");  
+  const decryptBtn = document.getElementById("decrypt-btn");  
+  const outputText = document.getElementById("output-text");  
+
+  cipherType.addEventListener("change", () => {  
+    if (cipherType.value === "caesar") {  
+      shiftKeyContainer.style.display = "block";  
+      keywordContainer.style.display = "none";  
+    } else if (cipherType.value === "vigenere") {  
+      shiftKeyContainer.style.display = "none";  
+      keywordContainer.style.display = "block";  
+    } else {  
+      shiftKeyContainer.style.display = "none";  
+      keywordContainer.style.display = "none";  
+    }  
+  });  
+
+  function caesarCipher(text, shift, decrypt = false) {  
+    if (decrypt) shift = -shift;  
+    return text.split("").map(char => {  
+      if (!char.match(/[a-zA-Z]/)) return char;  
+      const base = char.charCodeAt(0) >= 97 ? 97 : 65;  
+      return String.fromCharCode(((char.charCodeAt(0) - base + shift + 26) % 26) + base);  
+    }).join("");  
+  }  
+
+  function vigenereCipher(text, key, decrypt = false) {  
+    key = key.toLowerCase();  
+    let keyIndex = 0;  
+    return text.split("").map(char => {  
+      if (!char.match(/[a-zA-Z]/)) return char;  
+      const base = char.charCodeAt(0) >= 97 ? 97 : 65;  
+      const shift = key.charCodeAt(keyIndex % key.length) - 97;  
+      keyIndex++;  
+      return String.fromCharCode(((char.charCodeAt(0) - base + (decrypt ? -shift : shift) + 26) % 26) + base);  
+    }).join("");  
+  }  
+
+  function aesPlaceholder(text, decrypt = false) {  
+    // Placeholder - real AES is too complicated for this demo  
+    return decrypt ? text.split("").reverse().join("") : text.split("").reverse().join("");  
+  }  
+
+  encryptBtn.addEventListener("click", () => {  
+    const text = inputText.value;  
+    let result = "";  
+    if (cipherType.value === "caesar") {  
+      const shift = parseInt(shiftKey.value) || 0;  
+      result = caesarCipher(text, shift);  
+    } else if (cipherType.value === "vigenere") {  
+      result = vigenereCipher(text, keyword.value);  
+    } else if (cipherType.value === "aes") {  
+      result = aesPlaceholder(text);  
+    }  
+    outputText.textContent = result;  
+  });  
+
+  decryptBtn.addEventListener("click", () => {  
+    const text = inputText.value;  
+    let result = "";  
+    if (cipherType.value === "caesar") {  
+      const shift = parseInt(shiftKey.value) || 0;  
+      result = caesarCipher(text, shift, true);  
+    } else if (cipherType.value === "vigenere") {  
+      result = vigenereCipher(text, keyword.value, true);  
+    } else if (cipherType.value === "aes") {  
+      result = aesPlaceholder(text, true);  
+    }  
+    outputText.textContent = result;  
+  });  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

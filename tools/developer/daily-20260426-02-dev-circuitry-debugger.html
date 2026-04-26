@@ -1,0 +1,206 @@
+---
+layout: null
+title: "Dev Circuitry Debugger"
+category: "Developer"
+description: "A dynamic, interactive game where developers debug a virtual circuit board by connecting nodes, fixing syntax errors, and optimizing logic gates under a time constraint."
+permalink: "/tools/daily-20260426-02-dev-circuitry-debugger.html"
+generated_by: "api-true-ai"
+generated_date: "20260426"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dev Circuitry Debugger | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, interactive game where developers debug a virtual circuit board by connecting nodes, fixing syntax errors, and optimizing logic gates under a time constraint. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Dev Circuitry Debugger | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, interactive game where developers debug a virtual circuit board by connecting nodes, fixing syntax errors, and optimizing logic gates under a time constraint. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dev Circuitry Debugger | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, interactive game where developers debug a virtual circuit board by connecting nodes, fixing syntax errors, and optimizing logic gates under a time constraint. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Dev Circuitry Debugger</h1>
+    <p class="seo-subtitle">A dynamic, interactive game where developers debug a virtual circuit board by connecting nodes, fixing syntax errors, and optimizing logic gates under a time constraint.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+    font-family: 'Arial', sans-serif;  
+    background: #1e1e1e;  
+    color: #f0f0f0;  
+    margin: 0;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+    overflow: hidden;  
+}  
+#tool-app {  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    justify-content: center;  
+    width: 80%;  
+    height: 80%;  
+    background: #282c34;  
+    padding: 20px;  
+    border-radius: 8px;  
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);  
+}  
+#game-board {  
+    display: grid;  
+    grid-template-columns: repeat(6, 1fr);  
+    grid-gap: 10px;  
+    width: 100%;  
+    height: 60%;  
+}  
+.node {  
+    width: 100%;  
+    height: 100%;  
+    background: #37474f;  
+    border-radius: 4px;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    cursor: pointer;  
+    transition: transform 0.2s;  
+}  
+.node.active {  
+    background: #4caf50;  
+    transform: scale(1.1);  
+    box-shadow: 0 0 10px #4caf50;  
+}  
+.node.error {  
+    background: #f44336;  
+    transform: scale(1.1);  
+    box-shadow: 0 0 10px #f44336;  
+}  
+#game-info {  
+    display: flex;  
+    justify-content: space-between;  
+    align-items: center;  
+    width: 100%;  
+    margin-top: 20px;  
+}  
+button {  
+    padding: 10px 20px;  
+    background: #4caf50;  
+    color: white;  
+    border: none;  
+    border-radius: 4px;  
+    cursor: pointer;  
+    transition: background 0.3s;  
+}  
+button:hover {  
+    background: #388e3c;  
+}  
+</style>  
+<div id="tool-app">  
+    <div id="game-board"></div>  
+    <div id="game-info">  
+        <span id="timer">Time Remaining: <strong>60</strong>s</span>  
+        <button id="reset-game">Reset Game</button>  
+    </div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const app = document.getElementById('tool-app');  
+const gameBoard = document.getElementById('game-board');  
+const timerElement = document.getElementById('timer').querySelector('strong');  
+const resetButton = document.getElementById('reset-game');  
+let timeRemaining = 60;  
+let activeNodes = [];  
+let errorNodes = [];  
+
+// Generate the game board dynamically  
+function createGameBoard() {  
+    gameBoard.innerHTML = '';  
+    for (let i = 0; i < 36; i++) {  
+        const node = document.createElement('div');  
+        node.className = 'node';  
+        node.dataset.index = i;  
+        node.addEventListener('click', () => handleNodeClick(node));  
+        gameBoard.appendChild(node);  
+    }  
+    randomlyActivateNodes();  
+}  
+
+// Randomly activate nodes to simulate "errors" that need to be debugged  
+function randomlyActivateNodes() {  
+    activeNodes = Array.from({ length: 5 }, () => Math.floor(Math.random() * 36));  
+    activeNodes.forEach(index => {  
+        const node = gameBoard.children[index];  
+        node.classList.add('active');  
+    });  
+}  
+
+// Handle node clicks  
+function handleNodeClick(node) {  
+    const nodeIndex = parseInt(node.dataset.index, 10);  
+    if (activeNodes.includes(nodeIndex)) {  
+        node.classList.remove('active');  
+        node.classList.add('error');  
+        errorNodes.push(nodeIndex);  
+        checkGameStatus();  
+    } else {  
+        node.classList.add('error');  
+    }  
+}  
+
+// Check game status  
+function checkGameStatus() {  
+    if (errorNodes.length === activeNodes.length) {  
+        alert('Debugging complete!');  
+        stopTimer();  
+    }  
+}  
+
+// Timer logic  
+function startTimer() {  
+    timeRemaining = 60;  
+    timerElement.textContent = timeRemaining;  
+    const interval = setInterval(() => {  
+        timeRemaining--;  
+        timerElement.textContent = timeRemaining;  
+        if (timeRemaining === 0) {  
+            clearInterval(interval);  
+            alert('Time is up! Debugging failed.');  
+            resetGame();  
+        }  
+    }, 1000);  
+}  
+
+function stopTimer() {  
+    clearInterval(startTimer.timer);  
+}  
+
+// Reset game  
+function resetGame() {  
+    stopTimer();  
+    createGameBoard();  
+    startTimer();  
+}  
+
+// Initialize the game  
+createGameBoard();  
+startTimer();  
+resetButton.addEventListener('click', resetGame);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
