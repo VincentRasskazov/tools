@@ -1,0 +1,116 @@
+---
+layout: null
+title: "Stock Market Sentiment Simulator"
+category: "Finance"
+description: "A dynamic mini-game where users influence virtual stock prices by analyzing and reacting to simulated news headlines, sentiment scores, and social media trends in real-time."
+permalink: "/tools/daily-20260427-01-stock-market-sentiment-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260427"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Market Sentiment Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic mini-game where users influence virtual stock prices by analyzing and reacting to simulated news headlines, sentiment scores, and social media trends in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Stock Market Sentiment Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic mini-game where users influence virtual stock prices by analyzing and reacting to simulated news headlines, sentiment scores, and social media trends in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Stock Market Sentiment Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic mini-game where users influence virtual stock prices by analyzing and reacting to simulated news headlines, sentiment scores, and social media trends in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Stock Market Sentiment Simulator</h1>
+    <p class="seo-subtitle">A dynamic mini-game where users influence virtual stock prices by analyzing and reacting to simulated news headlines, sentiment scores, and social media trends in real-time.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: linear-gradient(to bottom, #1b2735, #090a0f); color: #ffffff; }  
+  #tool-app { width: 80%; max-width: 800px; padding: 20px; background: #2a2f45; border-radius: 8px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5); }  
+  h1 { font-size: 24px; text-align: center; margin-bottom: 20px; }  
+  .news-item { padding: 10px; margin: 10px 0; border: 1px solid #444; border-radius: 5px; background: #333; font-size: 16px; cursor: pointer; transition: 0.3s; }  
+  .news-item:hover { background: #444; }  
+  .dashboard { display: flex; justify-content: space-between; margin-top: 20px; }  
+  .scoreboard { font-size: 18px; }  
+  .sentiment-display { font-size: 20px; padding: 5px 10px; border-radius: 5px; }  
+  .positive { background: #4caf50; color: #fff; }  
+  .negative { background: #f44336; color: #fff; }  
+  .neutral { background: #ffc107; color: #000; }  
+</style>  
+<div id="tool-app">  
+  <h1>Stock Market Sentiment Simulator</h1>  
+  <div id="news-feed"></div>  
+  <div class="dashboard">  
+    <div class="scoreboard">Score: <span id="score">0</span></div>  
+    <div class="sentiment-display neutral" id="sentiment">Neutral</div>  
+  </div>  
+</div>  
+<script>  
+  const app = document.getElementById('tool-app');  
+  const newsFeed = document.getElementById('news-feed');  
+  const sentimentDisplay = document.getElementById('sentiment');  
+  const scoreDisplay = document.getElementById('score');  
+  let score = 0;  
+  const sentiments = ['positive', 'negative', 'neutral'];  
+  const newsData = [  
+    { content: 'Tech giant announces groundbreaking innovation!', sentiment: 'positive' },  
+    { content: 'Retail giant faces backlash over controversial policy.', sentiment: 'negative' },  
+    { content: 'Stock prices remain stable amidst global uncertainty.', sentiment: 'neutral' },  
+    { content: 'Energy sector booms due to rising demand.', sentiment: 'positive' },  
+    { content: 'Major bank reports losses in the last quarter.', sentiment: 'negative' },  
+    { content: 'Renewable energy sees steady growth over the year.', sentiment: 'positive' },  
+    { content: 'Market shows mixed reactions to political developments.', sentiment: 'neutral' },  
+    { content: 'Automotive company recalls thousands of vehicles.', sentiment: 'negative' }  
+  ];  
+    
+  function generateNewsItem(news) {  
+    const div = document.createElement('div');  
+    div.className = 'news-item';  
+    div.innerText = news.content;  
+    div.addEventListener('click', () => handleNewsClick(news));  
+    return div;  
+  }  
+    
+  function handleNewsClick(news) {  
+    const currentSentiment = sentimentDisplay.innerText.toLowerCase();  
+    if (news.sentiment === currentSentiment) {  
+      score += 10;  
+      scoreDisplay.innerText = score;  
+    } else {  
+      score -= 5;  
+      scoreDisplay.innerText = score;  
+    }  
+    updateSentiment();  
+  }  
+    
+  function updateSentiment() {  
+    const randomSentiment = sentiments[Math.floor(Math.random() * sentiments.length)];  
+    sentimentDisplay.className = `sentiment-display ${randomSentiment}`;  
+    sentimentDisplay.innerText = randomSentiment.charAt(0).toUpperCase() + randomSentiment.slice(1);  
+  }  
+    
+  function populateNewsFeed() {  
+    newsFeed.innerHTML = '';  
+    const shuffledNews = newsData.sort(() => Math.random() - 0.5);  
+    shuffledNews.forEach(news => newsFeed.appendChild(generateNewsItem(news)));  
+  }  
+    
+  populateNewsFeed();  
+  updateSentiment();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

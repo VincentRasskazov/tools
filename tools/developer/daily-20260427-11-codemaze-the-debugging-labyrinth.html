@@ -1,0 +1,176 @@
+---
+layout: null
+title: "CodeMaze: The Debugging Labyrinth"
+category: "Developer"
+description: "A mini-game where developers navigate through a maze of bugs and code challenges to debug and optimize their way to the exit."
+permalink: "/tools/daily-20260427-11-codemaze-the-debugging-labyrinth.html"
+generated_by: "api-true-ai"
+generated_date: "20260427"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeMaze: The Debugging Labyrinth | Free Online Interactive Tool</title>
+  <meta name="description" content="A mini-game where developers navigate through a maze of bugs and code challenges to debug and optimize their way to the exit. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CodeMaze: The Debugging Labyrinth | Free Online Interactive Tool">
+  <meta property="og:description" content="A mini-game where developers navigate through a maze of bugs and code challenges to debug and optimize their way to the exit. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CodeMaze: The Debugging Labyrinth | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A mini-game where developers navigate through a maze of bugs and code challenges to debug and optimize their way to the exit. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CodeMaze: The Debugging Labyrinth</h1>
+    <p class="seo-subtitle">A mini-game where developers navigate through a maze of bugs and code challenges to debug and optimize their way to the exit.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(135deg, #1e293b, #4f46e5);  
+  color: #ffffff;  
+  overflow: hidden;  
+  margin: 0;  
+}  
+#tool-app {  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  height: 100vh;  
+  text-align: center;  
+}  
+#maze {  
+  display: grid;  
+  grid-template-columns: repeat(10, 40px);  
+  gap: 2px;  
+  margin-bottom: 20px;  
+}  
+.tile {  
+  width: 40px;  
+  height: 40px;  
+  background-color: #334155;  
+  border-radius: 5px;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  font-size: 12px;  
+  color: #94a3b8;  
+  cursor: pointer;  
+}  
+.tile.player {  
+  background-color: #22d3ee;  
+  color: #1e293b;  
+  font-weight: bold;  
+}  
+.tile.bug {  
+  background-color: #ef4444;  
+  font-size: 16px;  
+}  
+.tile.solution {  
+  background-color: #10b981;  
+  color: #ffffff;  
+}  
+#status {  
+  font-size: 18px;  
+  margin-top: 10px;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="maze"></div>  
+  <div id="status">Navigate through the maze to debug your code!</div>  
+</div>  
+<script>  
+const rows = 10;  
+const cols = 10;  
+const mazeElement = document.getElementById('maze');  
+const statusElement = document.getElementById('status');  
+let playerPosition = { row: 0, col: 0 };  
+
+// Generate the maze  
+const maze = Array.from({ length: rows }, () =>  
+  Array.from({ length: cols }, () => ({ type: 'empty' }))  
+);  
+
+// Place bugs and solutions randomly  
+for (let i = 0; i < 15; i++) {  
+  const row = Math.floor(Math.random() * rows);  
+  const col = Math.floor(Math.random() * cols);  
+  if (row === 0 && col === 0) continue;  
+  maze[row][col].type = 'bug';  
+}  
+
+maze[rows - 1][cols - 1].type = 'solution';  
+
+// Render the maze  
+function renderMaze() {  
+  mazeElement.innerHTML = '';  
+  maze.forEach((row, rowIndex) => {  
+    row.forEach((tile, colIndex) => {  
+      const tileElement = document.createElement('div');  
+      tileElement.classList.add('tile');  
+      if (rowIndex === playerPosition.row && colIndex === playerPosition.col) {  
+        tileElement.classList.add('player');  
+        tileElement.textContent = '👾';  
+      } else if (tile.type === 'bug') {  
+        tileElement.classList.add('bug');  
+        tileElement.textContent = '🐛';  
+      } else if (tile.type === 'solution') {  
+        tileElement.classList.add('solution');  
+        tileElement.textContent = '✅';  
+      }  
+      mazeElement.appendChild(tileElement);  
+    });  
+  });  
+}  
+
+// Handle player movement  
+function movePlayer(deltaRow, deltaCol) {  
+  const newRow = playerPosition.row + deltaRow;  
+  const newCol = playerPosition.col + deltaCol;  
+  if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols) {  
+    playerPosition = { row: newRow, col: newCol };  
+    const currentTile = maze[newRow][newCol];  
+    if (currentTile.type === 'bug') {  
+      statusElement.textContent = 'You hit a bug! Fix it to proceed.';  
+      setTimeout(() => {  
+        currentTile.type = 'empty';  
+        renderMaze();  
+        statusElement.textContent = 'Bug fixed! Keep going.';  
+      }, 1000);  
+    } else if (currentTile.type === 'solution') {  
+      statusElement.textContent = 'You solved the maze! Congratulations! 🎉';  
+    } else {  
+      statusElement.textContent = 'Keep going!';  
+    }  
+    renderMaze();  
+  }  
+}  
+
+// Key controls  
+document.addEventListener('keydown', (e) => {  
+  if (e.key === 'ArrowUp') movePlayer(-1, 0);  
+  if (e.key === 'ArrowDown') movePlayer(1, 0);  
+  if (e.key === 'ArrowLeft') movePlayer(0, -1);  
+  if (e.key === 'ArrowRight') movePlayer(0, 1);  
+});  
+
+renderMaze();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
