@@ -1,0 +1,112 @@
+---
+layout: null
+title: "AdVision Quest"
+category: "Marketing"
+description: "A gamified interactive tool that helps marketers craft and test ad creatives by navigating a virtual maze of audience preferences, copy styles, and design choices."
+permalink: "/tools/daily-20260428-05-advision-quest.html"
+generated_by: "api-true-ai"
+generated_date: "20260428"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdVision Quest | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified interactive tool that helps marketers craft and test ad creatives by navigating a virtual maze of audience preferences, copy styles, and design choices. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="AdVision Quest | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified interactive tool that helps marketers craft and test ad creatives by navigating a virtual maze of audience preferences, copy styles, and design choices. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AdVision Quest | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified interactive tool that helps marketers craft and test ad creatives by navigating a virtual maze of audience preferences, copy styles, and design choices. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>AdVision Quest</h1>
+    <p class="seo-subtitle">A gamified interactive tool that helps marketers craft and test ad creatives by navigating a virtual maze of audience preferences, copy styles, and design choices.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: linear-gradient(90deg, #ff7eb3, #feb692); color: #333; }  
+  #tool-app { text-align: center; padding: 20px; }  
+  .maze-container { display: grid; grid-template-columns: repeat(5, 1fr); grid-gap: 5px; margin: 20px auto; width: 300px; height: 300px; }  
+  .maze-cell { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; border: 1px solid #fff; font-size: 14px; cursor: pointer; transition: background 0.3s; }  
+  .maze-cell:hover { background: rgba(255, 255, 255, 0.2); }  
+  .active { background: #fff; color: #ff7eb3; font-weight: bold; }  
+  #feedback { margin-top: 20px; font-size: 16px; color: #fff; }  
+  button { padding: 10px 20px; background: #fff; border: none; border-radius: 5px; color: #ff7eb3; font-size: 16px; cursor: pointer; transition: background 0.3s; }  
+  button:hover { background: #ff7eb3; color: #fff; }  
+</style>  
+<div id="tool-app">  
+  <h1>AdVision Quest</h1>  
+  <p>Embark on a journey to design the perfect ad creative for your audience!</p>  
+  <div class="maze-container" id="maze"></div>  
+  <div id="feedback"></div>  
+  <button id="restart">Restart Game</button>  
+</div>  
+<script>  
+  const maze = document.getElementById("maze");  
+  const feedback = document.getElementById("feedback");  
+  const restartBtn = document.getElementById("restart");  
+  const gridSize = 5;  
+  let playerPosition = { x: 0, y: 0 };  
+  let objectivePosition = { x: 4, y: 4 };  
+  let steps = 0;  
+
+  function createMaze() {  
+    maze.innerHTML = "";  
+    for (let y = 0; y < gridSize; y++) {  
+      for (let x = 0; x < gridSize; x++) {  
+        const cell = document.createElement("div");  
+        cell.classList.add("maze-cell");  
+        cell.dataset.x = x;  
+        cell.dataset.y = y;  
+        if (x === playerPosition.x && y === playerPosition.y) cell.classList.add("active");  
+        if (x === objectivePosition.x && y === objectivePosition.y) cell.textContent = "🎯";  
+        cell.addEventListener("click", () => handleMove(x, y));  
+        maze.appendChild(cell);  
+      }  
+    }  
+  }  
+
+  function handleMove(x, y) {  
+    const dx = Math.abs(x - playerPosition.x);  
+    const dy = Math.abs(y - playerPosition.y);  
+    if (dx + dy === 1) {  
+      playerPosition = { x, y };  
+      steps++;  
+      if (x === objectivePosition.x && y === objectivePosition.y) {  
+        feedback.textContent = `Congrats! You created the ideal ad creative in ${steps} steps!`;  
+        document.querySelectorAll(".maze-cell").forEach(cell => { cell.style.pointerEvents = "none"; });  
+        return;  
+      }  
+      feedback.textContent = `You're on the right track! Steps: ${steps}`;  
+      createMaze();  
+    } else {  
+      feedback.textContent = "Invalid move. Try moving closer to the target.";  
+    }  
+  }  
+
+  restartBtn.addEventListener("click", () => {  
+    playerPosition = { x: 0, y: 0 };  
+    steps = 0;  
+    feedback.textContent = "";  
+    createMaze();  
+  });  
+
+  createMaze();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

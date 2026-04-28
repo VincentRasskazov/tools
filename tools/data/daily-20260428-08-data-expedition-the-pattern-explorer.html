@@ -1,0 +1,158 @@
+---
+layout: null
+title: "Data Expedition: The Pattern Explorer"
+category: "Data"
+description: "An interactive mini-game where users uncover hidden data patterns in randomized datasets by applying filters, sorting, and visualizations."
+permalink: "/tools/daily-20260428-08-data-expedition-the-pattern-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260428"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Expedition: The Pattern Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive mini-game where users uncover hidden data patterns in randomized datasets by applying filters, sorting, and visualizations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Expedition: The Pattern Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive mini-game where users uncover hidden data patterns in randomized datasets by applying filters, sorting, and visualizations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Expedition: The Pattern Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive mini-game where users uncover hidden data patterns in randomized datasets by applying filters, sorting, and visualizations. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Expedition: The Pattern Explorer</h1>
+    <p class="seo-subtitle">An interactive mini-game where users uncover hidden data patterns in randomized datasets by applying filters, sorting, and visualizations.</p>
+    <style>  
+body {  
+  font-family: 'Arial', sans-serif;  
+  background: #1e1e2f;  
+  color: #f5f5fa;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+}  
+
+#tool-app {  
+  width: 80%;  
+  max-width: 900px;  
+  text-align: center;  
+  background: #29293d;  
+  padding: 20px;  
+  border-radius: 12px;  
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);  
+}  
+
+button {  
+  background: #5c67f2;  
+  color: white;  
+  border: none;  
+  padding: 10px 20px;  
+  font-size: 16px;  
+  border-radius: 6px;  
+  cursor: pointer;  
+  margin: 10px;  
+  transition: background 0.3s;  
+}  
+
+button:hover {  
+  background: #4a54d1;  
+}  
+
+canvas {  
+  margin-top: 20px;  
+  border: 1px solid #444;  
+  background: white;  
+}  
+
+.stats {  
+  display: flex;  
+  justify-content: space-between;  
+  margin-top: 10px;  
+}  
+
+h2 {  
+  color: #ffffff;  
+}  
+</style>  
+<div id="tool-app">  
+  <h2>Data Expedition: The Pattern Explorer</h2>  
+  <p>Your mission: Uncover the hidden data pattern by applying filters and visualizations.</p>  
+  <button id="generate-data">Generate New Data Set</button>  
+  <button id="apply-filter">Apply Filter</button>  
+  <button id="visualize-data">Visualize Data</button>  
+  <div class="stats">  
+    <span id="dataset-size">Dataset Size: 0</span>  
+    <span id="steps-taken">Steps Taken: 0</span>  
+  </div>  
+  <canvas id="data-canvas" width="800" height="400"></canvas>  
+</div>  
+<script>  
+const app = document.getElementById('tool-app');  
+const canvas = document.getElementById('data-canvas');  
+const ctx = canvas.getContext('2d');  
+let dataset = [];  
+let steps = 0;  
+
+function generateRandomDataset() {  
+  dataset = Array.from({ length: Math.floor(Math.random() * 50) + 50 }, () => Math.floor(Math.random() * 100));  
+  updateStats();  
+  drawData();  
+}  
+
+function applyFilter() {  
+  if (dataset.length === 0) return alert('Generate a dataset first!');  
+  dataset = dataset.filter(value => value % 2 === 0);  
+  steps++;  
+  updateStats();  
+  drawData();  
+}  
+
+function visualizeData() {  
+  if (dataset.length === 0) return alert('Generate a dataset first!');  
+  const barWidth = canvas.width / dataset.length;  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  dataset.forEach((value, index) => {  
+    const barHeight = (value / 100) * canvas.height;  
+    ctx.fillStyle = `hsl(${value * 3.6}, 70%, 50%)`;  
+    ctx.fillRect(index * barWidth, canvas.height - barHeight, barWidth, barHeight);  
+  });  
+  steps++;  
+  updateStats();  
+}  
+
+function updateStats() {  
+  document.getElementById('dataset-size').textContent = `Dataset Size: ${dataset.length}`;  
+  document.getElementById('steps-taken').textContent = `Steps Taken: ${steps}`;  
+}  
+
+function drawData() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  ctx.fillStyle = '#ccc';  
+  ctx.font = '16px Arial';  
+  ctx.fillText('Data: [' + dataset.join(', ') + ']', 10, 20);  
+}  
+
+document.getElementById('generate-data').addEventListener('click', generateRandomDataset);  
+document.getElementById('apply-filter').addEventListener('click', applyFilter);  
+document.getElementById('visualize-data').addEventListener('click', visualizeData);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

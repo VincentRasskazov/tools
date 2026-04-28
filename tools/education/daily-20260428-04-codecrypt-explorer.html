@@ -1,0 +1,139 @@
+---
+layout: null
+title: "\"CodeCrypt Explorer\""
+category: "Education"
+description: "An interactive tool where users learn encryption basics by solving puzzles that require encoding and decoding secret messages using classic ciphers."
+permalink: "/tools/daily-20260428-04-codecrypt-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260428"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>&quot;CodeCrypt Explorer&quot; | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool where users learn encryption basics by solving puzzles that require encoding and decoding secret messages using classic ciphers. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="&quot;CodeCrypt Explorer&quot; | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool where users learn encryption basics by solving puzzles that require encoding and decoding secret messages using classic ciphers. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="&quot;CodeCrypt Explorer&quot; | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool where users learn encryption basics by solving puzzles that require encoding and decoding secret messages using classic ciphers. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>&quot;CodeCrypt Explorer&quot;</h1>
+    <p class="seo-subtitle">An interactive tool where users learn encryption basics by solving puzzles that require encoding and decoding secret messages using classic ciphers.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(135deg, #2c3e50, #4ca1af);  
+  color: #fff;  
+  text-align: center;  
+  padding: 20px;  
+}  
+#tool-app {  
+  max-width: 800px;  
+  margin: 0 auto;  
+  background: #34495e;  
+  border-radius: 12px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);  
+  padding: 20px;  
+}  
+button {  
+  background: #e74c3c;  
+  color: #fff;  
+  border: none;  
+  padding: 10px 20px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  font-size: 16px;  
+  margin: 5px;  
+  transition: background 0.3s ease;  
+}  
+button:hover {  
+  background: #c0392b;  
+}  
+input[type="text"] {  
+  padding: 10px;  
+  border: 2px solid #3498db;  
+  border-radius: 5px;  
+  font-size: 16px;  
+  width: 80%;  
+  margin-bottom: 10px;  
+}  
+#output {  
+  background: #2ecc71;  
+  color: #fff;  
+  padding: 10px;  
+  border-radius: 5px;  
+  margin-top: 10px;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>CodeCrypt Explorer</h1>  
+  <p>Decode this encrypted message using the Caesar cipher:</p>  
+  <p id="encrypted-message"></p>  
+  <input type="text" id="user-input" placeholder="Your answer here..." />  
+  <button id="submit-answer">Submit</button>  
+  <div id="output"></div>  
+</div>  
+<script>  
+const messages = [  
+  { text: "HELLO", shift: 3 },  
+  { text: "WORLD", shift: 5 },  
+  { text: "JAVASCRIPT", shift: 7 },  
+];  
+
+function caesarCipher(str, shift) {  
+  return str  
+    .split("")  
+    .map((char) => {  
+      if (char.match(/[A-Z]/)) {  
+        return String.fromCharCode(((char.charCodeAt(0) - 65 + shift) % 26) + 65);  
+      }  
+      return char;  
+    })  
+    .join("");  
+}  
+
+function startGame() {  
+  const randomMessage =  
+    messages[Math.floor(Math.random() * messages.length)];  
+  const encrypted = caesarCipher(randomMessage.text, randomMessage.shift);  
+  document.getElementById("encrypted-message").textContent = encrypted;  
+  return randomMessage;  
+}  
+
+let currentMessage = startGame();  
+
+document.getElementById("submit-answer").addEventListener("click", () => {  
+  const userInput = document.getElementById("user-input").value.toUpperCase();  
+  const output = document.getElementById("output");  
+  if (userInput === currentMessage.text) {  
+    output.textContent = "Correct! 🎉";  
+    output.style.background = "#2ecc71";  
+    currentMessage = startGame();  
+    document.getElementById("user-input").value = "";  
+  } else {  
+    output.textContent = "Try again! ❌";  
+    output.style.background = "#e74c3c";  
+  }  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
