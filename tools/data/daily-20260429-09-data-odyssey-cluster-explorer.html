@@ -1,0 +1,149 @@
+---
+layout: null
+title: "Data Odyssey: Cluster Explorer"
+category: "Data"
+description: "Embark on a visual journey to explore and interact with dynamic data clusters, uncovering hidden patterns in real-time."
+permalink: "/tools/daily-20260429-09-data-odyssey-cluster-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260429"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Odyssey: Cluster Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Embark on a visual journey to explore and interact with dynamic data clusters, uncovering hidden patterns in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Odyssey: Cluster Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Embark on a visual journey to explore and interact with dynamic data clusters, uncovering hidden patterns in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Odyssey: Cluster Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Embark on a visual journey to explore and interact with dynamic data clusters, uncovering hidden patterns in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Odyssey: Cluster Explorer</h1>
+    <p class="seo-subtitle">Embark on a visual journey to explore and interact with dynamic data clusters, uncovering hidden patterns in real-time.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background-color: #121212;  
+  color: #ffffff;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 100vw;  
+  height: 100vh;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+}  
+.canvas-container {  
+  position: relative;  
+  width: 95%;  
+  height: 90%;  
+  background: radial-gradient(circle, #1e1e1e, #000000);  
+  border-radius: 15px;  
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);  
+  overflow: hidden;  
+}  
+.controls {  
+  position: absolute;  
+  top: 10px;  
+  left: 10px;  
+  z-index: 10;  
+}  
+button {  
+  margin: 0 5px;  
+  padding: 8px 15px;  
+  border: none;  
+  border-radius: 5px;  
+  font-size: 14px;  
+  cursor: pointer;  
+  background-color: #0078FF;  
+  color: white;  
+  transition: background-color 0.3s ease;  
+}  
+button:hover {  
+  background-color: #005FCC;  
+}  
+</style>  
+<div id="tool-app">  
+  <div class="canvas-container">  
+    <div class="controls">  
+      <button id="add-cluster">Add Cluster</button>  
+      <button id="clear-clusters">Clear</button>  
+    </div>  
+    <canvas id="clusterCanvas"></canvas>  
+  </div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById('clusterCanvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = document.querySelector('.canvas-container').offsetWidth;  
+canvas.height = document.querySelector('.canvas-container').offsetHeight;  
+
+let clusters = [];  
+
+function generateCluster() {  
+  const cluster = {  
+    x: Math.random() * canvas.width,  
+    y: Math.random() * canvas.height,  
+    size: Math.random() * 50 + 20,  
+    dataPoints: Math.floor(Math.random() * 100 + 50),  
+    color: `hsl(${Math.random() * 360}, 70%, 50%)`  
+  };  
+  clusters.push(cluster);  
+}  
+
+function drawClusters() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  clusters.forEach(cluster => {  
+    ctx.beginPath();  
+    ctx.arc(cluster.x, cluster.y, cluster.size, 0, Math.PI * 2);  
+    ctx.fillStyle = cluster.color;  
+    ctx.fill();  
+    ctx.closePath();  
+
+    ctx.fillStyle = '#ffffff';  
+    ctx.font = '12px Arial';  
+    ctx.fillText(`${cluster.dataPoints} pts`, cluster.x - cluster.size / 2, cluster.y + 5);  
+  });  
+}  
+
+document.getElementById('add-cluster').addEventListener('click', () => {  
+  generateCluster();  
+  drawClusters();  
+});  
+
+document.getElementById('clear-clusters').addEventListener('click', () => {  
+  clusters = [];  
+  drawClusters();  
+});  
+
+window.addEventListener('resize', () => {  
+  canvas.width = document.querySelector('.canvas-container').offsetWidth;  
+  canvas.height = document.querySelector('.canvas-container').offsetHeight;  
+  drawClusters();  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

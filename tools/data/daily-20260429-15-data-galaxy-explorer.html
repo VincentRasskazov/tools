@@ -1,0 +1,179 @@
+---
+layout: null
+title: "Data Galaxy Explorer"
+category: "Data"
+description: "Navigate an interactive galaxy of interconnected data points, clustering and analyzing relationships between datasets visually like constellations."
+permalink: "/tools/daily-20260429-15-data-galaxy-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260429"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Galaxy Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate an interactive galaxy of interconnected data points, clustering and analyzing relationships between datasets visually like constellations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Galaxy Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate an interactive galaxy of interconnected data points, clustering and analyzing relationships between datasets visually like constellations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Galaxy Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate an interactive galaxy of interconnected data points, clustering and analyzing relationships between datasets visually like constellations. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Galaxy Explorer</h1>
+    <p class="seo-subtitle">Navigate an interactive galaxy of interconnected data points, clustering and analyzing relationships between datasets visually like constellations.</p>
+    <style>  
+body {  
+  margin: 0;  
+  padding: 0;  
+  font-family: Arial, sans-serif;  
+  background: radial-gradient(circle at center, #0d1b2a, #1b263b);  
+  color: #e0e1dd;  
+  overflow: hidden;  
+}  
+
+#tool-app {  
+  width: 100vw;  
+  height: 100vh;  
+  position: relative;  
+}  
+
+canvas {  
+  display: block;  
+}  
+
+.tooltip {  
+  position: absolute;  
+  background-color: #e0e1dd;  
+  color: #1b263b;  
+  padding: 8px;  
+  border-radius: 4px;  
+  font-size: 14px;  
+  pointer-events: none;  
+}  
+</style>  
+<div id="tool-app">  
+  <canvas id="galaxyCanvas"></canvas>  
+  <div id="tooltip" class="tooltip" style="display:none;"></div>  
+</div>  
+<script>  
+const canvas = document.getElementById('galaxyCanvas');  
+const tooltip = document.getElementById('tooltip');  
+const ctx = canvas.getContext('2d');  
+
+canvas.width = window.innerWidth;  
+canvas.height = window.innerHeight;  
+
+const stars = [];  
+const connections = [];  
+
+function random(min, max) {  
+  return Math.random() * (max - min) + min;  
+}  
+
+function createStar(x, y, dataLabel) {  
+  return { x, y, radius: random(3, 6), data: dataLabel };  
+}  
+
+function drawStar(star) {  
+  ctx.beginPath();  
+  ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);  
+  ctx.fillStyle = '#e0e1dd';  
+  ctx.fill();  
+}  
+
+function drawLine(star1, star2) {  
+  ctx.beginPath();  
+  ctx.moveTo(star1.x, star1.y);  
+  ctx.lineTo(star2.x, star2.y);  
+  ctx.strokeStyle = 'rgba(224, 225, 221, 0.5)';  
+  ctx.stroke();  
+}  
+
+function updateTooltip(x, y, dataLabel) {  
+  tooltip.style.left = x + 'px';  
+  tooltip.style.top = y + 'px';  
+  tooltip.textContent = dataLabel;  
+  tooltip.style.display = 'block';  
+}  
+
+function hideTooltip() {  
+  tooltip.style.display = 'none';  
+}  
+
+// Initialize stars and connections  
+for (let i = 0; i < 50; i++) {  
+  let x = random(0, canvas.width);  
+  let y = random(0, canvas.height);  
+  stars.push(createStar(x, y, `Data Point ${i + 1}`));  
+}  
+
+stars.forEach((star1, index) => {  
+  stars.forEach((star2) => {  
+    if (star1 !== star2 && random(0, 1) > 0.7) {  
+      connections.push({ star1, star2 });  
+    }  
+  });  
+});  
+
+// Handle mouse events  
+canvas.addEventListener('mousemove', (e) => {  
+  const mouseX = e.clientX;  
+  const mouseY = e.clientY;  
+
+  let hoverStar = null;  
+
+  stars.forEach((star) => {  
+    const dx = mouseX - star.x;  
+    const dy = mouseY - star.y;  
+    const distance = Math.sqrt(dx * dx + dy * dy);  
+
+    if (distance < star.radius + 5) {  
+      hoverStar = star;  
+    }  
+  });  
+
+  if (hoverStar) {  
+    updateTooltip(mouseX, mouseY, hoverStar.data);  
+  } else {  
+    hideTooltip();  
+  }  
+});  
+
+function render() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+
+  connections.forEach((connection) => {  
+    drawLine(connection.star1, connection.star2);  
+  });  
+
+  stars.forEach((star) => {  
+    drawStar(star);  
+  });  
+}  
+
+function animate() {  
+  render();  
+  requestAnimationFrame(animate);  
+}  
+
+animate();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

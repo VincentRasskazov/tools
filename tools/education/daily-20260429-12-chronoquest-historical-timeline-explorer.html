@@ -1,0 +1,167 @@
+---
+layout: null
+title: "ChronoQuest: Historical Timeline Explorer"
+category: "Education"
+description: "A dynamic, interactive mini-game where users assemble historical events into the correct chronological order, unlocking fun facts and achievements."
+permalink: "/tools/daily-20260429-12-chronoquest-historical-timeline-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260429"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChronoQuest: Historical Timeline Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, interactive mini-game where users assemble historical events into the correct chronological order, unlocking fun facts and achievements. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="ChronoQuest: Historical Timeline Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, interactive mini-game where users assemble historical events into the correct chronological order, unlocking fun facts and achievements. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ChronoQuest: Historical Timeline Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, interactive mini-game where users assemble historical events into the correct chronological order, unlocking fun facts and achievements. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>ChronoQuest: Historical Timeline Explorer</h1>
+    <p class="seo-subtitle">A dynamic, interactive mini-game where users assemble historical events into the correct chronological order, unlocking fun facts and achievements.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to right, #f5f7fa, #c3cfe2);  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+}  
+#tool-app {  
+  background: white;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
+  width: 90%;  
+  max-width: 800px;  
+  padding: 20px;  
+}  
+.timeline {  
+  display: flex;  
+  justify-content: space-evenly;  
+  flex-wrap: wrap;  
+}  
+.event-card {  
+  border: 1px solid #ddd;  
+  background: #fafafa;  
+  border-radius: 5px;  
+  padding: 10px;  
+  margin: 10px;  
+  cursor: move;  
+  user-select: none;  
+  font-size: 14px;  
+}  
+.event-card.dragging {  
+  opacity: 0.5;  
+}  
+#checkOrder {  
+  margin-top: 20px;  
+  padding: 10px 15px;  
+  background: #4CAF50;  
+  color: white;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer;  
+}  
+#checkOrder:hover {  
+  background: #45A049;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>ChronoQuest: Historical Timeline Explorer</h1>  
+  <p>Drag and drop the historical events to arrange them in the correct chronological order. Click "Check Order" to verify your arrangement!</p>  
+  <div id="timeline-container" class="timeline">  
+    <!-- Event cards will be dynamically injected here -->  
+  </div>  
+  <button id="checkOrder">Check Order</button>  
+  <p id="result"></p>  
+</div>  
+<script>  
+// Historical events with their dates  
+const events = [  
+  { name: "Moon Landing (1969)", year: 1969 },  
+  { name: "World War II Ends (1945)", year: 1945 },  
+  { name: "Fall of the Berlin Wall (1989)", year: 1989 },  
+  { name: "American Independence (1776)", year: 1776 },  
+  { name: "First Industrial Revolution (1760)", year: 1760 }  
+];  
+  
+const timelineContainer = document.getElementById("timeline-container");  
+const resultDisplay = document.getElementById("result");  
+  
+// Shuffle the events  
+const shuffledEvents = [...events].sort(() => Math.random() - 0.5);  
+  
+// Create and append event cards  
+shuffledEvents.forEach(event => {  
+  const card = document.createElement("div");  
+  card.className = "event-card";  
+  card.textContent = event.name;  
+  card.dataset.year = event.year;  
+  timelineContainer.appendChild(card);  
+});  
+  
+// Drag and Drop Logic  
+let draggedItem = null;  
+  
+document.querySelectorAll(".event-card").forEach(card => {  
+  card.addEventListener("dragstart", () => {  
+    draggedItem = card;  
+    card.classList.add("dragging");  
+  });  
+  
+  card.addEventListener("dragend", () => {  
+    card.classList.remove("dragging");  
+    draggedItem = null;  
+  });  
+});  
+  
+timelineContainer.addEventListener("dragover", e => {  
+  e.preventDefault();  
+  const dragging = document.querySelector(".event-card.dragging");  
+  const closestCard = Array.from(timelineContainer.children).reduce((closest, child) => {  
+    const box = child.getBoundingClientRect();  
+    const offset = e.clientY - box.top - box.height / 2;  
+    if (offset < 0 && offset > closest.offset) {  
+      return { offset, element: child };  
+    } else {  
+      return closest;  
+    }  
+  }, { offset: Number.NEGATIVE_INFINITY }).element;  
+  
+  if (closestCard) {  
+    timelineContainer.insertBefore(dragging, closestCard);  
+  } else {  
+    timelineContainer.appendChild(dragging);  
+  }  
+});  
+  
+// Check order  
+document.getElementById("checkOrder").addEventListener("click", () => {  
+  const orderedYears = Array.from(timelineContainer.children).map(child => +child.dataset.year);  
+  const isCorrect = orderedYears.every((year, i, arr) => !i || year >= arr[i - 1]);  
+  resultDisplay.textContent = isCorrect ? "Correct! 🎉" : "Incorrect! Try again.";  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

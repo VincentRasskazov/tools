@@ -1,0 +1,170 @@
+---
+layout: null
+title: "Regex Rumble Arena"
+category: "Developer"
+description: "A gamified tool where developers battle against increasingly complex regex challenges to unlock achievements and improve their pattern-matching skills."
+permalink: "/tools/daily-20260429-17-regex-rumble-arena.html"
+generated_by: "api-true-ai"
+generated_date: "20260429"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Rumble Arena | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool where developers battle against increasingly complex regex challenges to unlock achievements and improve their pattern-matching skills. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Regex Rumble Arena | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool where developers battle against increasingly complex regex challenges to unlock achievements and improve their pattern-matching skills. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Regex Rumble Arena | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool where developers battle against increasingly complex regex challenges to unlock achievements and improve their pattern-matching skills. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Regex Rumble Arena</h1>
+    <p class="seo-subtitle">A gamified tool where developers battle against increasingly complex regex challenges to unlock achievements and improve their pattern-matching skills.</p>
+    <style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(120deg, #ff7eb3, #ff758c);
+    color: #fff;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  #tool-app {
+    width: 80%;
+    max-width: 800px;
+    background: #2a2a2a;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  }
+  .arena-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .regex-challenge {
+    font-size: 1.2em;
+    text-align: center;
+    margin: 15px 0;
+  }
+  .input-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+  }
+  input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    width: 60%;
+  }
+  button {
+    padding: 10px 15px;
+    font-size: 1em;
+    margin-left: 10px;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    background: #ff758c;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #ff4a70;
+  }
+  .feedback {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  .score {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.2em;
+  }
+</style>
+<div id="tool-app">
+  <div class="arena-header">
+    <h1>Regex Rumble Arena</h1>
+    <p>Battle through regex challenges to become a Pattern Master!</p>
+  </div>
+  <div class="regex-challenge" id="challenge-text">
+    Current Challenge: Match an email address
+  </div>
+  <div class="input-wrapper">
+    <input type="text" id="regex-input" placeholder="Enter your regex here">
+    <button onclick="checkRegex()">Submit</button>
+  </div>
+  <div class="feedback" id="feedback"></div>
+  <div class="score" id="score">Score: 0</div>
+</div>
+<script>
+  const challenges = [
+    { id: 1, text: "Match an email address", testCases: ["test@example.com", "wrong@com", "user_123@mail.com"], solution: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ },
+    { id: 2, text: "Match a US phone number", testCases: ["123-456-7890", "1234567890", "(123) 456-7890"], solution: /^\(?\d{3}\)?[-. ]?\d{3}[-. ]?\d{4}$/ },
+    { id: 3, text: "Match a hexadecimal color code", testCases: ["#123456", "#abc", "123456"], solution: /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/ }
+  ];
+  
+  let currentChallengeIndex = 0;
+  let score = 0;
+
+  function checkRegex() {
+    const regexInput = document.getElementById("regex-input").value;
+    const feedback = document.getElementById("feedback");
+    const currentChallenge = challenges[currentChallengeIndex];
+    
+    try {
+      const userRegex = new RegExp(regexInput);
+      const allMatch = currentChallenge.testCases.every(test => userRegex.test(test) === currentChallenge.solution.test(test));
+      
+      if (allMatch) {
+        score += 10;
+        feedback.textContent = "Correct! You advanced to the next level.";
+        feedback.style.color = "#4caf50";
+        nextChallenge();
+      } else {
+        feedback.textContent = "Incorrect! Try again.";
+        feedback.style.color = "#ff4a70";
+      }
+    } catch (e) {
+      feedback.textContent = "Invalid regex! Please check your syntax.";
+      feedback.style.color = "#ff4a70";
+    }
+    
+    document.getElementById("score").textContent = `Score: ${score}`;
+  }
+
+  function nextChallenge() {
+    currentChallengeIndex++;
+    if (currentChallengeIndex < challenges.length) {
+      document.getElementById("challenge-text").textContent = `Current Challenge: ${challenges[currentChallengeIndex].text}`;
+      document.getElementById("regex-input").value = "";
+      document.getElementById("feedback").textContent = "";
+    } else {
+      document.getElementById("challenge-text").textContent = "Congratulations! You completed all challenges.";
+      document.getElementById("feedback").textContent = "";
+    }
+  }
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

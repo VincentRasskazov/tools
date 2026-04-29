@@ -1,0 +1,148 @@
+---
+layout: null
+title: "DataPulse: Interactive Dataset Debugger"
+category: "Data"
+description: "A gamified tool where users analyze and debug corrupt datasets in real-time to uncover hidden insights and anomalies."
+permalink: "/tools/daily-20260429-14-datapulse-interactive-dataset-debugger.html"
+generated_by: "api-true-ai"
+generated_date: "20260429"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataPulse: Interactive Dataset Debugger | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool where users analyze and debug corrupt datasets in real-time to uncover hidden insights and anomalies. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataPulse: Interactive Dataset Debugger | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool where users analyze and debug corrupt datasets in real-time to uncover hidden insights and anomalies. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataPulse: Interactive Dataset Debugger | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool where users analyze and debug corrupt datasets in real-time to uncover hidden insights and anomalies. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataPulse: Interactive Dataset Debugger</h1>
+    <p class="seo-subtitle">A gamified tool where users analyze and debug corrupt datasets in real-time to uncover hidden insights and anomalies.</p>
+    <style>  
+body { font-family: Arial, sans-serif; color: #333; background: #1e1e2f; margin: 0; padding: 0; }  
+#tool-app { max-width: 800px; margin: 50px auto; padding: 20px; background: #2c2c3e; color: #fff; border-radius: 12px; }  
+h1 { text-align: center; color: #fe6b64; }  
+button, .cell { cursor: pointer; }  
+button { font-size: 16px; padding: 10px 20px; color: #fff; background: #fe6b64; border: none; border-radius: 5px; margin-top: 15px; }  
+button:hover { background: #ff8979; }  
+.table-container { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 20px; }  
+.cell { padding: 10px; background: #404056; color: #fff; text-align: center; border: 1px solid #50506a; border-radius: 5px; font-size: 14px; }  
+.cell[data-status="corrupt"] { background: #fe6b64; color: #fff; }  
+.cell[data-status="fixed"] { background: #4caf50; color: #fff; }  
+.popup { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #2c2c3e; color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); }  
+.popup.active { display: block; }  
+.popup button { background: #fe6b64; }  
+</style>  
+
+<div id="tool-app">  
+  <h1>DataPulse: Debug the Dataset!</h1>  
+  <p><strong>Goal:</strong> Find and fix all the corrupt data cells in the dataset below. You have 3 minutes!</p>  
+  <div id="timer">Time Left: <span id="time-count">180</span>s</div>  
+  <div class="table-container" id="data-grid"></div>  
+  <button id="start-game">Start Game</button>  
+  <div class="popup" id="popup">  
+    <p id="popup-message"></p>  
+    <button id="close-popup">Close</button>  
+  </div>  
+</div>  
+
+<script>  
+const app = document.getElementById('tool-app');  
+const dataGrid = document.getElementById('data-grid');  
+const timerDisplay = document.getElementById('time-count');  
+const popup = document.getElementById('popup');  
+const popupMessage = document.getElementById('popup-message');  
+const closePopup = document.getElementById('close-popup');  
+let timer = null;  
+let timeLeft = 180;  
+let data = [];  
+let corruptCells = 0;  
+
+function generateDataset() {  
+    const dataset = [];  
+    const maxRows = 5;  
+    const maxCols = 5;  
+    const corruptPercentage = 0.2; // 20% of data is corrupt  
+    for (let i = 0; i < maxRows * maxCols; i++) {  
+        const isCorrupt = Math.random() < corruptPercentage;  
+        dataset.push({ value: isCorrupt ? "???" : Math.floor(Math.random() * 100), status: isCorrupt ? "corrupt" : "normal" });  
+    }  
+    return dataset;  
+}  
+
+function renderDataset() {  
+    dataGrid.innerHTML = '';  
+    data.forEach((cell, index) => {  
+        const cellElement = document.createElement('div');  
+        cellElement.classList.add('cell');  
+        cellElement.setAttribute('data-status', cell.status);  
+        cellElement.textContent = cell.value;  
+        if (cell.status === 'corrupt') {  
+            cellElement.addEventListener('click', () => fixCell(index, cellElement));  
+        }  
+        dataGrid.appendChild(cellElement);  
+    });  
+}  
+
+function fixCell(index, cellElement) {  
+    if (data[index].status === 'corrupt') {  
+        data[index].status = 'fixed';  
+        data[index].value = Math.floor(Math.random() * 100);  
+        cellElement.setAttribute('data-status', 'fixed');  
+        cellElement.textContent = data[index].value;  
+        corruptCells--;  
+        checkWinCondition();  
+    }  
+}  
+
+function startGame() {  
+    data = generateDataset();  
+    corruptCells = data.filter(cell => cell.status === 'corrupt').length;  
+    renderDataset();  
+    timeLeft = 180;  
+    timerDisplay.textContent = timeLeft;  
+    if (timer) clearInterval(timer);  
+    timer = setInterval(() => {  
+        timeLeft--;  
+        timerDisplay.textContent = timeLeft;  
+        if (timeLeft <= 0) endGame(false);  
+    }, 1000);  
+}  
+
+function checkWinCondition() {  
+    if (corruptCells === 0) {  
+        endGame(true);  
+    }  
+}  
+
+function endGame(didWin) {  
+    clearInterval(timer);  
+    popupMessage.textContent = didWin ? 'Congratulations! You fixed the dataset!' : 'Time is up! Try again!';  
+    popup.classList.add('active');  
+}  
+
+document.getElementById('start-game').addEventListener('click', startGame);  
+closePopup.addEventListener('click', () => popup.classList.remove('active'));  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
