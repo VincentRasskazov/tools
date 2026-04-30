@@ -1,0 +1,176 @@
+---
+layout: null
+title: "DataPulse: Real-Time Dataset Visual Composer"
+category: "Data"
+description: "Dynamically build and manipulate datasets with interactive visual tools, generating instant graphical insights and exportable data structures."
+permalink: "/tools/daily-20260430-07-datapulse-real-time-dataset-visual-composer.html"
+generated_by: "api-true-ai"
+generated_date: "20260430"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataPulse: Real-Time Dataset Visual Composer | Free Online Interactive Tool</title>
+  <meta name="description" content="Dynamically build and manipulate datasets with interactive visual tools, generating instant graphical insights and exportable data structures. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataPulse: Real-Time Dataset Visual Composer | Free Online Interactive Tool">
+  <meta property="og:description" content="Dynamically build and manipulate datasets with interactive visual tools, generating instant graphical insights and exportable data structures. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataPulse: Real-Time Dataset Visual Composer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Dynamically build and manipulate datasets with interactive visual tools, generating instant graphical insights and exportable data structures. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataPulse: Real-Time Dataset Visual Composer</h1>
+    <p class="seo-subtitle">Dynamically build and manipulate datasets with interactive visual tools, generating instant graphical insights and exportable data structures.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  background: #f4f4f9;  
+  color: #333;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  background: #fff;  
+  border-radius: 12px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  
+  width: 90%;  
+  max-width: 1200px;  
+  height: 80%;  
+  padding: 20px;  
+  display: flex;  
+  flex-direction: column;  
+  gap: 20px;  
+}  
+#control-panel {  
+  display: flex;  
+  justify-content: space-between;  
+  align-items: center;  
+  padding: 10px;  
+}  
+button {  
+  background: #007bff;  
+  color: #fff;  
+  padding: 10px 15px;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  font-size: 14px;  
+}  
+button:hover {  
+  background: #0056b3;  
+}  
+canvas {  
+  border: 1px solid #ddd;  
+  border-radius: 8px;  
+  width: 100%;  
+  height: calc(100% - 90px);  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="control-panel">  
+    <button id="add-point">Add Data Point</button>  
+    <button id="clear-data">Clear Dataset</button>  
+    <button id="export-data">Export Dataset</button>  
+  </div>  
+  <canvas id="data-visualizer"></canvas>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById('data-visualizer');  
+const ctx = canvas.getContext('2d');  
+const addPointBtn = document.getElementById('add-point');  
+const clearDataBtn = document.getElementById('clear-data');  
+const exportDataBtn = document.getElementById('export-data');  
+
+canvas.width = canvas.parentElement.clientWidth;  
+canvas.height = canvas.parentElement.clientHeight;  
+
+let dataset = [];  
+
+function drawGraph() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+
+  // Draw axes  
+  ctx.beginPath();  
+  ctx.moveTo(50, canvas.height - 50);  
+  ctx.lineTo(canvas.width - 20, canvas.height - 50);  
+  ctx.moveTo(50, canvas.height - 50);  
+  ctx.lineTo(50, 20);  
+  ctx.strokeStyle = '#bbb';  
+  ctx.lineWidth = 2;  
+  ctx.stroke();  
+
+  // Plot data points  
+  dataset.forEach((point, index) => {  
+    ctx.beginPath();  
+    ctx.arc(50 + point.x, canvas.height - 50 - point.y, 5, 0, 2 * Math.PI);  
+    ctx.fillStyle = point.color;  
+    ctx.fill();  
+
+    if (index > 0) {  
+      const prevPoint = dataset[index - 1];  
+      ctx.beginPath();  
+      ctx.moveTo(50 + prevPoint.x, canvas.height - 50 - prevPoint.y);  
+      ctx.lineTo(50 + point.x, canvas.height - 50 - point.y);  
+      ctx.strokeStyle = '#007bff';  
+      ctx.lineWidth = 2;  
+      ctx.stroke();  
+    }  
+  });  
+}  
+
+function addDataPoint() {  
+  const x = Math.floor(Math.random() * (canvas.width - 100));  
+  const y = Math.floor(Math.random() * (canvas.height - 100));  
+  const color = `hsl(${Math.random() * 360}, 100%, 50%)`;  
+  dataset.push({ x, y, color });  
+  drawGraph();  
+}  
+
+function clearDataset() {  
+  dataset = [];  
+  drawGraph();  
+}  
+
+function exportDataset() {  
+  const dataStr = JSON.stringify(dataset, null, 2);  
+  const blob = new Blob([dataStr], { type: 'application/json' });  
+  const url = URL.createObjectURL(blob);  
+  const a = document.createElement('a');  
+  a.href = url;  
+  a.download = 'dataset.json';  
+  a.click();  
+  URL.revokeObjectURL(url);  
+}  
+
+addPointBtn.addEventListener('click', addDataPoint);  
+clearDataBtn.addEventListener('click', clearDataset);  
+exportDataBtn.addEventListener('click', exportDataset);  
+
+// Initial rendering  
+drawGraph();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

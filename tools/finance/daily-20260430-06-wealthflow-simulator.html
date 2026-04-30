@@ -1,0 +1,129 @@
+---
+layout: null
+title: "WealthFlow Simulator"
+category: "Finance"
+description: "A dynamic, gamified tool where users build and manage fictional financial portfolios across different industries, adapting to random economic events in real-time to maximize their \"wealth flow\" score."
+permalink: "/tools/daily-20260430-06-wealthflow-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260430"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WealthFlow Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, gamified tool where users build and manage fictional financial portfolios across different industries, adapting to random economic events in real-time to maximize their &quot;wealth flow&quot; score. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="WealthFlow Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, gamified tool where users build and manage fictional financial portfolios across different industries, adapting to random economic events in real-time to maximize their &quot;wealth flow&quot; score. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WealthFlow Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, gamified tool where users build and manage fictional financial portfolios across different industries, adapting to random economic events in real-time to maximize their &quot;wealth flow&quot; score. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>WealthFlow Simulator</h1>
+    <p class="seo-subtitle">A dynamic, gamified tool where users build and manage fictional financial portfolios across different industries, adapting to random economic events in real-time to maximize their &quot;wealth flow&quot; score.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f7f9fc; }  
+  #tool-app { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }  
+  .header { font-size: 24px; font-weight: bold; margin-bottom: 20px; color: #2c3e50; }  
+  .portfolio { display: flex; flex-wrap: wrap; justify-content: center; margin-bottom: 20px; }  
+  .portfolio-item { width: 150px; height: 150px; margin: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #ecf0f1; border: 2px solid #bdc3c7; border-radius: 10px; transition: 0.3s ease; }  
+  .portfolio-item:hover { background: #dff9fb; border: 2px solid #6ab04c; cursor: pointer; }  
+  .event-log { max-width: 600px; margin: 20px; padding: 20px; background: #ffffff; border: 1px solid #dcdde1; border-radius: 5px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }  
+  .event-log p { margin: 5px 0; font-size: 14px; color: #34495e; }  
+  .score { font-size: 20px; font-weight: bold; color: #27ae60; margin-top: 10px; }  
+</style>  
+<div id="tool-app">  
+  <div class="header">WealthFlow Simulator</div>  
+  <div id="portfolio" class="portfolio"></div>  
+  <div class="event-log" id="event-log"></div>  
+  <div class="score" id="score">Wealth Flow Score: 0</div>  
+</div>  
+<script>  
+// Initialize data  
+const industries = ["Tech", "Healthcare", "Real Estate", "Energy", "Finance"];  
+const eventTypes = ["Boom", "Crash", "Regulation", "Innovation", "Scandal"];  
+const portfolio = {};  
+let score = 0;  
+
+// Utility to randomize events  
+function getRandomEvent() {  
+  const industry = industries[Math.floor(Math.random() * industries.length)];  
+  const event = eventTypes[Math.floor(Math.random() * eventTypes.length)];  
+  return { industry, event };  
+}  
+
+// Handle portfolio click  
+function handlePortfolioClick(industry) {  
+  portfolio[industry] = (portfolio[industry] || 0) + 1;  
+  logEvent(`You invested in ${industry}. (Total: ${portfolio[industry]})`);  
+  calculateScore();  
+}  
+
+// Calculate score based on portfolio  
+function calculateScore() {  
+  let total = 0;  
+  for (const industry in portfolio) {  
+    total += portfolio[industry];  
+  }  
+  score = total * 10;  
+  document.getElementById("score").textContent = `Wealth Flow Score: ${score}`;  
+}  
+
+// Log events  
+function logEvent(message) {  
+  const log = document.getElementById("event-log");  
+  const logEntry = document.createElement("p");  
+  logEntry.textContent = message;  
+  log.appendChild(logEntry);  
+  log.scrollTop = log.scrollHeight;  
+}  
+
+// Render portfolio  
+function renderPortfolio() {  
+  const portfolioDiv = document.getElementById("portfolio");  
+  industries.forEach((industry) => {  
+    const item = document.createElement("div");  
+    item.className = "portfolio-item";  
+    item.textContent = industry;  
+    item.onclick = () => handlePortfolioClick(industry);  
+    portfolioDiv.appendChild(item);  
+  });  
+}  
+
+// Periodically trigger random events  
+setInterval(() => {  
+  const { industry, event } = getRandomEvent();  
+  if (portfolio[industry]) {  
+    if (event === "Boom" || event === "Innovation") {  
+      portfolio[industry]++;  
+      logEvent(`Positive event in ${industry}: ${event}! (Bonus Investment)`);  
+    } else {  
+      portfolio[industry] = Math.max(0, portfolio[industry] - 1);  
+      logEvent(`Negative event in ${industry}: ${event}. (Loss)`);  
+    }  
+    calculateScore();  
+  }  
+}, 5000);  
+
+// Initialize app  
+renderPortfolio();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

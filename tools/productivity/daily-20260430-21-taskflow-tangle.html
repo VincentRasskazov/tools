@@ -1,0 +1,174 @@
+---
+layout: null
+title: "TaskFlow Tangle"
+category: "Productivity"
+description: "A dynamic web of interconnected tasks where users visually organize, prioritize, and gamify their to-do lists by untangling dependencies and completing tasks."
+permalink: "/tools/daily-20260430-21-taskflow-tangle.html"
+generated_by: "api-true-ai"
+generated_date: "20260430"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskFlow Tangle | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic web of interconnected tasks where users visually organize, prioritize, and gamify their to-do lists by untangling dependencies and completing tasks. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="TaskFlow Tangle | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic web of interconnected tasks where users visually organize, prioritize, and gamify their to-do lists by untangling dependencies and completing tasks. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TaskFlow Tangle | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic web of interconnected tasks where users visually organize, prioritize, and gamify their to-do lists by untangling dependencies and completing tasks. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>TaskFlow Tangle</h1>
+    <p class="seo-subtitle">A dynamic web of interconnected tasks where users visually organize, prioritize, and gamify their to-do lists by untangling dependencies and completing tasks.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+  background: linear-gradient(to bottom right, #fdfbfb, #ebedee);  
+}  
+#tool-app {  
+  width: 80vw;  
+  height: 80vh;  
+  background: white;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  
+  overflow: hidden;  
+  position: relative;  
+}  
+canvas {  
+  width: 100%;  
+  height: 100%;  
+}  
+#task-input {  
+  position: absolute;  
+  bottom: 10px;  
+  left: 10px;  
+  width: calc(100% - 20px);  
+  display: flex;  
+  gap: 10px;  
+}  
+#task-input input {  
+  flex-grow: 1;  
+  padding: 10px;  
+  border: 1px solid #ddd;  
+  border-radius: 5px;  
+  font-size: 16px;  
+}  
+#task-input button {  
+  padding: 10px 15px;  
+  border: none;  
+  background: #007bff;  
+  color: white;  
+  font-size: 16px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+}  
+#task-input button:hover {  
+  background: #0056b3;  
+}  
+</style>  
+<div id="tool-app">  
+  <canvas id="taskCanvas"></canvas>  
+  <div id="task-input">  
+    <input type="text" id="taskText" placeholder="Enter a task...">  
+    <button id="addTask">Add Task</button>  
+  </div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById('taskCanvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = canvas.offsetWidth;  
+canvas.height = canvas.offsetHeight;  
+
+let tasks = [];  
+let connections = [];  
+
+function drawTasks() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  connections.forEach(({ from, to }) => {  
+    ctx.beginPath();  
+    ctx.moveTo(tasks[from].x, tasks[from].y);  
+    ctx.lineTo(tasks[to].x, tasks[to].y);  
+    ctx.strokeStyle = '#ccc';  
+    ctx.lineWidth = 2;  
+    ctx.stroke();  
+  });  
+  tasks.forEach((task, index) => {  
+    ctx.beginPath();  
+    ctx.arc(task.x, task.y, 20, 0, Math.PI * 2);  
+    ctx.fillStyle = task.completed ? '#28a745' : '#007bff';  
+    ctx.fill();  
+    ctx.strokeStyle = '#fff';  
+    ctx.lineWidth = 2;  
+    ctx.stroke();  
+    ctx.fillStyle = '#fff';  
+    ctx.textAlign = 'center';  
+    ctx.textBaseline = 'middle';  
+    ctx.font = '14px Arial';  
+    ctx.fillText(task.text, task.x, task.y);  
+  });  
+}  
+
+function addTask(text) {  
+  const x = Math.random() * canvas.width;  
+  const y = Math.random() * canvas.height;  
+  tasks.push({ text, x, y, completed: false });  
+  if (tasks.length > 1) {  
+    connections.push({ from: tasks.length - 2, to: tasks.length - 1 });  
+  }  
+  drawTasks();  
+}  
+
+function toggleTaskCompletion(x, y) {  
+  tasks.forEach(task => {  
+    const distance = Math.sqrt((task.x - x) ** 2 + (task.y - y) ** 2);  
+    if (distance <= 20) {  
+      task.completed = !task.completed;  
+    }  
+  });  
+  drawTasks();  
+}  
+
+canvas.addEventListener('click', (e) => {  
+  const rect = canvas.getBoundingClientRect();  
+  const x = e.clientX - rect.left;  
+  const y = e.clientY - rect.top;  
+  toggleTaskCompletion(x, y);  
+});  
+
+document.getElementById('addTask').addEventListener('click', () => {  
+  const taskText = document.getElementById('taskText').value;  
+  if (taskText.trim() !== '') {  
+    addTask(taskText);  
+    document.getElementById('taskText').value = '';  
+  }  
+});  
+
+drawTasks();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
