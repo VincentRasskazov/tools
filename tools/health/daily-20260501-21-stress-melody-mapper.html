@@ -1,0 +1,102 @@
+---
+layout: null
+title: "Stress Melody Mapper"
+category: "Health"
+description: "An interactive tool that visualizes your stress levels as unique musical compositions by analyzing your input on daily activities and emotions."
+permalink: "/tools/daily-20260501-21-stress-melody-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260501"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stress Melody Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool that visualizes your stress levels as unique musical compositions by analyzing your input on daily activities and emotions. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Stress Melody Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool that visualizes your stress levels as unique musical compositions by analyzing your input on daily activities and emotions. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Stress Melody Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool that visualizes your stress levels as unique musical compositions by analyzing your input on daily activities and emotions. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Stress Melody Mapper</h1>
+    <p class="seo-subtitle">An interactive tool that visualizes your stress levels as unique musical compositions by analyzing your input on daily activities and emotions.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: linear-gradient(to bottom, #d9f7fa, #a6e1e9); margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }  
+  #tool-app { background: #fff; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); border-radius: 12px; padding: 20px; width: 80%; max-width: 600px; text-align: center; }  
+  h1 { color: #007b8b; }  
+  input[type="range"] { width: 100%; }  
+  .question { margin: 20px 0; }  
+  .btn { background: #007b8b; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; }  
+  .btn:hover { background: #005f66; }  
+  #melody-output { margin-top: 20px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9; }  
+</style>  
+<div id="tool-app">  
+  <h1>Stress Melody Mapper</h1>  
+  <div id="questions">  
+    <div class="question">  
+      <label>How would you rate your stress level today? (1 = Calm, 10 = Very Stressed)</label>  
+      <input type="range" id="stressLevel" min="1" max="10" value="5">  
+    </div>  
+    <div class="question">  
+      <label>How many hours of sleep did you get last night?</label>  
+      <input type="range" id="sleepHours" min="0" max="12" value="6">  
+    </div>  
+    <div class="question">  
+      <label>How active were you today? (1 = Sedentary, 10 = Very Active)</label>  
+      <input type="range" id="activityLevel" min="1" max="10" value="5">  
+    </div>  
+    <button class="btn" onclick="generateMelody()">Create Your Stress Melody</button>  
+  </div>  
+  <div id="melody-output"></div>  
+</div>  
+<script>  
+  function generateMelody() {  
+    const stress = parseInt(document.getElementById('stressLevel').value);  
+    const sleep = parseInt(document.getElementById('sleepHours').value);  
+    const activity = parseInt(document.getElementById('activityLevel').value);  
+    
+    const melodyOutput = document.getElementById('melody-output');  
+    melodyOutput.innerHTML = '';  
+
+    const notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];  
+    const stressNote = notes[(stress - 1) % 7];  
+    const sleepNote = notes[(Math.max(0, sleep - 1)) % 7];  
+    const activityNote = notes[(activity - 1) % 7];  
+    
+    const melody = [stressNote, sleepNote, activityNote];  
+    
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();  
+    
+    melody.forEach((note, index) => {  
+      const oscillator = audioContext.createOscillator();  
+      const noteFrequencies = { 'C': 261.63, 'D': 293.66, 'E': 329.63, 'F': 349.23, 'G': 392.00, 'A': 440.00, 'B': 493.88 };  
+      oscillator.type = 'sine';  
+      oscillator.frequency.setValueAtTime(noteFrequencies[note], audioContext.currentTime);  
+      oscillator.connect(audioContext.destination);  
+      setTimeout(() => { oscillator.start(); }, index * 500);  
+      setTimeout(() => { oscillator.stop(); }, (index + 1) * 500);  
+    });  
+    
+    melodyOutput.innerHTML = `<strong>Your Stress Melody:</strong> ${melody.join(' - ')}`;  
+  }  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

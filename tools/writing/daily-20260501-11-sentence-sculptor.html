@@ -1,0 +1,183 @@
+---
+layout: null
+title: "Sentence Sculptor"
+category: "Writing"
+description: "A dynamic game where users sculpt sentences by rearranging and modifying a cascade of incoming words under a timer, while adhering to evolving stylistic or grammatical challenges."
+permalink: "/tools/daily-20260501-11-sentence-sculptor.html"
+generated_by: "api-true-ai"
+generated_date: "20260501"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sentence Sculptor | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic game where users sculpt sentences by rearranging and modifying a cascade of incoming words under a timer, while adhering to evolving stylistic or grammatical challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Sentence Sculptor | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic game where users sculpt sentences by rearranging and modifying a cascade of incoming words under a timer, while adhering to evolving stylistic or grammatical challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sentence Sculptor | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic game where users sculpt sentences by rearranging and modifying a cascade of incoming words under a timer, while adhering to evolving stylistic or grammatical challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Sentence Sculptor</h1>
+    <p class="seo-subtitle">A dynamic game where users sculpt sentences by rearranging and modifying a cascade of incoming words under a timer, while adhering to evolving stylistic or grammatical challenges.</p>
+    <style>  
+  body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(120deg, #FFDEE9, #B5FFFC);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  #tool-app {
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    width: 600px;
+    text-align: center;
+  }
+  .word {
+    display: inline-block;
+    background: #FFC107;
+    color: black;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: grab;
+  }
+  .sentence-area {
+    margin: 20px 0;
+    padding: 10px;
+    border: 2px dashed #009688;
+    min-height: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-radius: 5px;
+  }
+  .instructions, .timer {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+  }
+  .button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #03A9F4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .button:hover {
+    background-color: #0288D1;
+  }
+</style>  
+<div id="tool-app">
+  <div class="instructions">Rearrange the words to form a sentence matching the challenge: <span id="challenge"></span></div>
+  <div class="timer">Time left: <span id="timeLeft">30</span>s</div>
+  <div id="word-pool">
+    <!-- Words will dynamically populate here -->
+  </div>
+  <div class="sentence-area" id="sentence-area">
+    <!-- Drop area for sentence -->
+  </div>
+  <button class="button" id="submit-button">Submit Sentence</button>
+</div>  
+<script>  
+const challenges = [
+  "Create a question.",
+  "Form a sentence with exactly 5 words.",
+  "Include at least two adjectives.",
+  "Use only nouns and verbs.",
+  "Form a sentence with no 'e'.",
+];
+const wordBank = ["cat", "quick", "brown", "jumps", "over", "lazy", "dog", "is", "beautiful", "how", "why", "run", "play"];
+let selectedChallenge = challenges[Math.floor(Math.random() * challenges.length)];
+let timeLeft = 30;
+let timer;
+let userSentence = [];
+
+// Initialize game
+function initializeGame() {
+  document.getElementById("challenge").textContent = selectedChallenge;
+  const wordPool = document.getElementById("word-pool");
+  wordPool.innerHTML = "";
+  userSentence = [];
+  for (let word of wordBank.sort(() => 0.5 - Math.random()).slice(0, 7)) {
+    const wordElem = document.createElement("div");
+    wordElem.classList.add("word");
+    wordElem.textContent = word;
+    wordElem.draggable = true;
+    wordElem.addEventListener("dragstart", dragStart);
+    wordPool.appendChild(wordElem);
+  }
+  document.getElementById("sentence-area").innerHTML = "";
+  clearInterval(timer);
+  timer = setInterval(countdown, 1000);
+}
+
+// Drag and drop logic
+function dragStart(e) {
+  e.dataTransfer.setData("text/plain", e.target.textContent);
+}
+
+document.getElementById("sentence-area").addEventListener("dragover", (e) => {
+  e.preventDefault();
+});
+
+document.getElementById("sentence-area").addEventListener("drop", (e) => {
+  e.preventDefault();
+  const word = e.dataTransfer.getData("text/plain");
+  userSentence.push(word);
+  const wordElem = document.createElement("div");
+  wordElem.classList.add("word");
+  wordElem.textContent = word;
+  wordElem.draggable = true;
+  wordElem.addEventListener("dragstart", dragStart);
+  e.target.appendChild(wordElem);
+});
+
+// Countdown timer
+function countdown() {
+  if (timeLeft > 0) {
+    timeLeft--;
+    document.getElementById("timeLeft").textContent = timeLeft;
+  } else {
+    clearInterval(timer);
+    alert("Time's up! Final sentence: " + userSentence.join(" "));
+    initializeGame();
+  }
+}
+
+// Submit button logic
+document.getElementById("submit-button").addEventListener("click", () => {
+  clearInterval(timer);
+  alert("Your sentence: " + userSentence.join(" "));
+  initializeGame();
+});
+
+// Start the game
+initializeGame();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

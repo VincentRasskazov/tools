@@ -1,0 +1,141 @@
+---
+layout: null
+title: "Investment Pathways Simulator"
+category: "Finance"
+description: "Explore and compare different investment strategies in a visually dynamic and interactive branching tree game to see how your decisions could grow or shrink your hypothetical portfolio over time."
+permalink: "/tools/daily-20260501-23-investment-pathways-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260501"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Investment Pathways Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="Explore and compare different investment strategies in a visually dynamic and interactive branching tree game to see how your decisions could grow or shrink your hypothetical portfolio over time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Investment Pathways Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="Explore and compare different investment strategies in a visually dynamic and interactive branching tree game to see how your decisions could grow or shrink your hypothetical portfolio over time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Investment Pathways Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Explore and compare different investment strategies in a visually dynamic and interactive branching tree game to see how your decisions could grow or shrink your hypothetical portfolio over time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Investment Pathways Simulator</h1>
+    <p class="seo-subtitle">Explore and compare different investment strategies in a visually dynamic and interactive branching tree game to see how your decisions could grow or shrink your hypothetical portfolio over time.</p>
+    <style>  
+  body {  
+    font-family: Arial, sans-serif;  
+    background-color: #f4f4f9;  
+    color: #333;  
+    margin: 0;  
+    padding: 0;  
+  }  
+  #tool-app {  
+    margin: 50px auto;  
+    max-width: 800px;  
+    text-align: center;  
+  }  
+  .tree-path {  
+    display: inline-block;  
+    margin: 10px;  
+    padding: 10px;  
+    border: 2px solid #4CAF50;  
+    border-radius: 10px;  
+    background-color: #fff;  
+    cursor: pointer;  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+    transition: transform 0.2s, background-color 0.2s;  
+  }  
+  .tree-path:hover {  
+    transform: scale(1.05);  
+    background-color: #e8f5e9;  
+  }  
+  #investment-summary {  
+    margin-top: 20px;  
+    padding: 15px;  
+    background-color: #fffae6;  
+    border: 2px dashed #ff9800;  
+    border-radius: 10px;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h1>Investment Pathways Simulator</h1>  
+  <p>Start with an initial portfolio and make decisions at each step to grow your investment. Choose wisely, as the future is unpredictable!</p>  
+  <div id="investment-tree"></div>  
+  <div id="investment-summary"></div>  
+</div>  
+<script>  
+  const investmentTree = [  
+    {  
+      decision: "Invest in Index Funds",  
+      gain: 10,  
+      risk: -5,  
+      next: [  
+        { decision: "Reinvest Dividends", gain: 15, risk: -10 },  
+        { decision: "Switch to Bonds", gain: 5, risk: -2 }  
+      ]  
+    },  
+    {  
+      decision: "Invest in Real Estate",  
+      gain: 20,  
+      risk: -15,  
+      next: [  
+        { decision: "Expand Portfolio", gain: 30, risk: -20 },  
+        { decision: "Sell Property", gain: 10, risk: -5 }  
+      ]  
+    }  
+  ];  
+  
+  let totalGain = 0;  
+  let totalRisk = 0;  
+  
+  function renderTree(tree, container) {  
+    container.innerHTML = "";  
+    tree.forEach(node => {  
+      const nodeDiv = document.createElement("div");  
+      nodeDiv.className = "tree-path";  
+      nodeDiv.textContent = node.decision;  
+      nodeDiv.onclick = () => {  
+        totalGain += node.gain;  
+        totalRisk += node.risk;  
+        if (node.next) {  
+          renderTree(node.next, container);  
+        } else {  
+          container.innerHTML = "<p>You've reached the end of your investment journey!</p>";  
+        }  
+        updateSummary();  
+      };  
+      container.appendChild(nodeDiv);  
+    });  
+  }  
+  
+  function updateSummary() {  
+    const summary = `  
+      <h3>Investment Summary</h3>  
+      <p>Total Gain: ${totalGain}%</p>  
+      <p>Total Risk: ${totalRisk}%</p>  
+    `;  
+    document.getElementById("investment-summary").innerHTML = summary;  
+  }  
+  
+  renderTree(investmentTree, document.getElementById("investment-tree"));  
+  updateSummary();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

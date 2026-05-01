@@ -1,0 +1,106 @@
+---
+layout: null
+title: "Data Reef Explorer"
+category: "Data"
+description: "Dive into an interactive underwater reef to explore and organize your datasets visually as schools of fish, each species representing a unique data category."
+permalink: "/tools/daily-20260501-22-data-reef-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260501"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Reef Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Dive into an interactive underwater reef to explore and organize your datasets visually as schools of fish, each species representing a unique data category. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Reef Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Dive into an interactive underwater reef to explore and organize your datasets visually as schools of fish, each species representing a unique data category. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Reef Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Dive into an interactive underwater reef to explore and organize your datasets visually as schools of fish, each species representing a unique data category. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Reef Explorer</h1>
+    <p class="seo-subtitle">Dive into an interactive underwater reef to explore and organize your datasets visually as schools of fish, each species representing a unique data category.</p>
+    <style>  
+  body { margin: 0; font-family: Arial, sans-serif; background: #003554; color: #ffffff; overflow: hidden; }  
+  #tool-app { position: relative; width: 100vw; height: 100vh; }  
+  canvas { display: block; }  
+  #data-input { position: absolute; top: 10px; left: 10px; background: rgba(0, 0, 0, 0.7); padding: 10px; border-radius: 5px; }  
+  #data-input textarea { width: 300px; height: 100px; }  
+  #data-input button { margin-top: 10px; padding: 5px 10px; background: #1db7dd; border: none; color: #fff; cursor: pointer; border-radius: 3px; }  
+  #data-input button:hover { background: #17a1c7; }  
+</style>  
+<div id="tool-app">  
+  <div id="data-input">  
+    <textarea id="dataset" placeholder="Paste your CSV data here"></textarea>  
+    <button onclick="generateReef()">Generate Reef</button>  
+  </div>  
+  <canvas id="reefCanvas"></canvas>  
+</div>  
+<script>  
+const canvas = document.getElementById('reefCanvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = window.innerWidth;  
+canvas.height = window.innerHeight;  
+
+let fishSchools = [];  
+
+function generateReef() {  
+  const dataInput = document.getElementById('dataset').value;  
+  const rows = dataInput.split('\\n').map(row => row.split(','));  
+  fishSchools = rows.map((row, i) => {  
+    const color = `hsl(${(i * 50) % 360}, 70%, 60%)`;  
+    return {  
+      name: row[0],  
+      values: row.slice(1).map(v => parseFloat(v)),  
+      x: Math.random() * canvas.width,  
+      y: Math.random() * canvas.height,  
+      color,  
+    };  
+  });  
+  drawReef();  
+}  
+
+function drawReef() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  fishSchools.forEach(school => {  
+    ctx.beginPath();  
+    ctx.arc(school.x, school.y, 30, 0, 2 * Math.PI);  
+    ctx.fillStyle = school.color;  
+    ctx.fill();  
+    ctx.font = '12px Arial';  
+    ctx.fillStyle = '#fff';  
+    ctx.fillText(school.name, school.x - 15, school.y + 5);  
+    moveSchool(school);  
+  });  
+  requestAnimationFrame(drawReef);  
+}  
+
+function moveSchool(school) {  
+  school.x += (Math.random() - 0.5) * 2;  
+  school.y += (Math.random() - 0.5) * 2;  
+  if (school.x < 0) school.x = canvas.width;  
+  if (school.y < 0) school.y = canvas.height;  
+  if (school.x > canvas.width) school.x = 0;  
+  if (school.y > canvas.height) school.y = 0;  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
