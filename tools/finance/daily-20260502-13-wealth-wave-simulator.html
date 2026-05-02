@@ -1,0 +1,122 @@
+---
+layout: null
+title: "Wealth Wave Simulator"
+category: "Finance"
+description: "A dynamic, interactive game where users balance investments, savings, and expenses to ride financial \"waves\" and avoid wiping out."
+permalink: "/tools/daily-20260502-13-wealth-wave-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260502"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wealth Wave Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, interactive game where users balance investments, savings, and expenses to ride financial &quot;waves&quot; and avoid wiping out. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Wealth Wave Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, interactive game where users balance investments, savings, and expenses to ride financial &quot;waves&quot; and avoid wiping out. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Wealth Wave Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, interactive game where users balance investments, savings, and expenses to ride financial &quot;waves&quot; and avoid wiping out. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Wealth Wave Simulator</h1>
+    <p class="seo-subtitle">A dynamic, interactive game where users balance investments, savings, and expenses to ride financial &quot;waves&quot; and avoid wiping out.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: linear-gradient(to bottom, #2e3b4e, #89c5cc); color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; }  
+  #tool-app { width: 80%; max-width: 800px; text-align: center; background: rgba(0, 0, 0, 0.6); padding: 20px; border-radius: 10px; }  
+  .wave { width: 100%; height: 20px; background: #1ed760; margin: 10px 0; position: relative; overflow: hidden; border-radius: 10px; }  
+  .surfer { width: 30px; height: 30px; background: #ffab00; border-radius: 50%; position: absolute; top: -5px; left: 0; }  
+  .action-btn { padding: 10px 20px; margin: 10px; font-size: 16px; color: #fff; background: #0074d9; border: none; border-radius: 5px; cursor: pointer; }  
+  .action-btn:hover { background: #005bb5; }  
+  .stats { margin: 10px 0; font-size: 18px; }  
+</style>  
+<div id="tool-app">  
+  <h1>Wealth Wave Simulator 🌊</h1>  
+  <p>Ride the waves of financial decisions to grow your wealth and stay afloat!</p>  
+  <div class="wave">  
+    <div class="surfer" id="surfer"></div>  
+  </div>  
+  <div class="stats">  
+    <div>Wealth: <span id="wealth">1000</span> 💰</div>  
+    <div>Happiness: <span id="happiness">50</span> 😊</div>  
+  </div>  
+  <button class="action-btn" onclick="invest()">Invest</button>  
+  <button class="action-btn" onclick="save()">Save</button>  
+  <button class="action-btn" onclick="spend()">Spend</button>  
+</div>  
+<script>  
+  let wealth = 1000;  
+  let happiness = 50;  
+  const surfer = document.getElementById('surfer');  
+  const wealthEl = document.getElementById('wealth');  
+  const happinessEl = document.getElementById('happiness');  
+  let position = 0;  
+  let waveDirection = 1;  
+  
+  function updateStats() {  
+    wealthEl.textContent = wealth;  
+    happinessEl.textContent = happiness;  
+  }  
+  
+  function moveSurfer() {  
+    position += waveDirection * (wealth / 1000);  
+    if (position <= 0 || position >= 100) {  
+      waveDirection *= -1;  
+    }  
+    surfer.style.left = position + '%';  
+  }  
+  
+  function invest() {  
+    if (wealth >= 100) {  
+      wealth -= 100;  
+      const gain = Math.random() > 0.5 ? 200 : -50;  
+      wealth += gain;  
+      happiness -= 5;  
+      updateStats();  
+    }  
+  }  
+  
+  function save() {  
+    happiness -= 2;  
+    updateStats();  
+  }  
+  
+  function spend() {  
+    if (wealth >= 50) {  
+      wealth -= 50;  
+      happiness += 10;  
+      updateStats();  
+    }  
+  }  
+  
+  setInterval(() => {  
+    moveSurfer();  
+    if (happiness <= 0 || wealth <= 0) {  
+      alert('Game Over! You wiped out!');  
+      wealth = 1000;  
+      happiness = 50;  
+      position = 0;  
+      waveDirection = 1;  
+      updateStats();  
+    }  
+  }, 100);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,135 @@
+---
+layout: null
+title: "Stock Sentiment Galaxy"
+category: "Finance"
+description: "A mesmerizing interactive visualization that maps the emotional sentiment of global stock market news into a galaxy of stars, where each star represents a stock's sentiment trend."
+permalink: "/tools/daily-20260502-14-stock-sentiment-galaxy.html"
+generated_by: "api-true-ai"
+generated_date: "20260502"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Sentiment Galaxy | Free Online Interactive Tool</title>
+  <meta name="description" content="A mesmerizing interactive visualization that maps the emotional sentiment of global stock market news into a galaxy of stars, where each star represents a stock's sentiment trend. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Stock Sentiment Galaxy | Free Online Interactive Tool">
+  <meta property="og:description" content="A mesmerizing interactive visualization that maps the emotional sentiment of global stock market news into a galaxy of stars, where each star represents a stock's sentiment trend. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Stock Sentiment Galaxy | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A mesmerizing interactive visualization that maps the emotional sentiment of global stock market news into a galaxy of stars, where each star represents a stock's sentiment trend. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Stock Sentiment Galaxy</h1>
+    <p class="seo-subtitle">A mesmerizing interactive visualization that maps the emotional sentiment of global stock market news into a galaxy of stars, where each star represents a stock's sentiment trend.</p>
+    <style>  
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #0e0e2e;
+    overflow: hidden;
+    color: white;
+  }
+  #tool-app {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+  }
+  .tooltip {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.9);
+    color: #000;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 14px;
+    display: none;
+    pointer-events: none;
+    z-index: 10;
+  }
+</style>  
+<div id="tool-app">  
+  <canvas id="galaxy-canvas"></canvas>  
+  <div class="tooltip" id="tooltip"></div>  
+</div>  
+<script>  
+  const canvas = document.getElementById('galaxy-canvas');  
+  const tooltip = document.getElementById('tooltip');  
+  const ctx = canvas.getContext('2d');  
+
+  canvas.width = window.innerWidth;  
+  canvas.height = window.innerHeight;  
+
+  const stars = [];  
+  const colors = ['#ff6f61', '#ffcd3c', '#49beb7', '#6289f2', '#e35d9b'];  
+  const sentimentTypes = ['Very Negative', 'Negative', 'Neutral', 'Positive', 'Very Positive'];  
+
+  const generateRandomStars = () => {  
+    for (let i = 0; i < 200; i++) {  
+      const x = Math.random() * canvas.width;  
+      const y = Math.random() * canvas.height;  
+      const radius = Math.random() * 3 + 1;  
+      const sentimentIndex = Math.floor(Math.random() * colors.length);  
+      const companyName = `Stock ${String.fromCharCode(65 + i % 26)}`;  
+      const sentiment = sentimentTypes[sentimentIndex];  
+      stars.push({ x, y, radius, color: colors[sentimentIndex], sentiment, companyName });  
+    }  
+  };  
+
+  const drawStars = () => {  
+    ctx.clearRect(0, 0, canvas.width, canvas.height);  
+    stars.forEach(star => {  
+      ctx.beginPath();  
+      ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);  
+      ctx.fillStyle = star.color;  
+      ctx.fill();  
+    });  
+  };  
+
+  const handleMouseMove = (e) => {  
+    const { offsetX, offsetY } = e;  
+    let found = false;  
+
+    stars.forEach(star => {  
+      const dist = Math.sqrt((star.x - offsetX)**2 + (star.y - offsetY)**2);  
+      if (dist < star.radius + 5) {  
+        tooltip.style.left = `${offsetX + 10}px`;  
+        tooltip.style.top = `${offsetY + 10}px`;  
+        tooltip.innerHTML = `<strong>${star.companyName}</strong><br>Sentiment: ${star.sentiment}`;  
+        tooltip.style.display = 'block';  
+        found = true;  
+      }  
+    });  
+
+    if (!found) {  
+      tooltip.style.display = 'none';  
+    }  
+  };  
+
+  canvas.addEventListener('mousemove', handleMouseMove);  
+
+  const animate = () => {  
+    drawStars();  
+    requestAnimationFrame(animate);  
+  };  
+
+  generateRandomStars();  
+  animate();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

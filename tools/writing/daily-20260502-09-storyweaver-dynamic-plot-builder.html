@@ -1,0 +1,200 @@
+---
+layout: null
+title: "StoryWeaver: Dynamic Plot Builder"
+category: "Writing"
+description: "A highly interactive tool that lets writers visually weave together dynamic storylines by creating branching plot paths, interconnected character arcs, and timeline events in real-time."
+permalink: "/tools/daily-20260502-09-storyweaver-dynamic-plot-builder.html"
+generated_by: "api-true-ai"
+generated_date: "20260502"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StoryWeaver: Dynamic Plot Builder | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive tool that lets writers visually weave together dynamic storylines by creating branching plot paths, interconnected character arcs, and timeline events in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="StoryWeaver: Dynamic Plot Builder | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive tool that lets writers visually weave together dynamic storylines by creating branching plot paths, interconnected character arcs, and timeline events in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StoryWeaver: Dynamic Plot Builder | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive tool that lets writers visually weave together dynamic storylines by creating branching plot paths, interconnected character arcs, and timeline events in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>StoryWeaver: Dynamic Plot Builder</h1>
+    <p class="seo-subtitle">A highly interactive tool that lets writers visually weave together dynamic storylines by creating branching plot paths, interconnected character arcs, and timeline events in real-time.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+  background: linear-gradient(to bottom, #2c3e50, #3498db);  
+  color: white;  
+}  
+#tool-app {  
+  width: 90%;  
+  max-width: 1200px;  
+  background: #ecf0f1;  
+  border-radius: 10px;  
+  padding: 20px;  
+  color: #2c3e50;  
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);  
+}  
+button {  
+  padding: 10px 20px;  
+  background: #3498db;  
+  border: none;  
+  border-radius: 5px;  
+  color: #fff;  
+  cursor: pointer;  
+  font-size: 14px;  
+  margin-right: 10px;  
+}  
+button:hover {  
+  background: #2980b9;  
+}  
+.node {  
+  padding: 20px;  
+  border: 2px solid #3498db;  
+  border-radius: 10px;  
+  background: #fff;  
+  color: #2c3e50;  
+  position: absolute;  
+  text-align: center;  
+  cursor: grab;  
+  width: 150px;  
+}  
+.node:active {  
+  cursor: grabbing;  
+}  
+#canvas {  
+  border: 2px dashed #bdc3c7;  
+  height: 600px;  
+  position: relative;  
+  overflow: hidden;  
+  border-radius: 5px;  
+}  
+.connection {  
+  stroke: #3498db;  
+  stroke-width: 2;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>StoryWeaver: Dynamic Plot Builder</h1>  
+  <p>Create and connect your story elements to craft intricate plots and character journeys in a visual, drag-and-drop canvas.</p>  
+  <button id="add-node">Add Story Node</button>  
+  <button id="save">Save Story</button>  
+  <div id="canvas"></div>  
+</div>  
+<script>  
+const canvas = document.getElementById('canvas');  
+const addNodeButton = document.getElementById('add-node');  
+const saveButton = document.getElementById('save');  
+  
+let nodes = [];  
+let connections = [];  
+  
+// Helper function to create a line connection  
+function createConnection(from, to) {  
+  const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');  
+  line.classList.add('connection');  
+  line.setAttribute('x1', from.offsetLeft + from.offsetWidth / 2);  
+  line.setAttribute('y1', from.offsetTop + from.offsetHeight / 2);  
+  line.setAttribute('x2', to.offsetLeft + to.offsetWidth / 2);  
+  line.setAttribute('y2', to.offsetTop + to.offsetHeight / 2);  
+  return line;  
+}  
+  
+// Add a new node  
+addNodeButton.addEventListener('click', () => {  
+  const node = document.createElement('div');  
+  node.classList.add('node');  
+  node.innerText = `Node ${nodes.length + 1}`;  
+  node.style.top = `${Math.random() * 400 + 50}px`;  
+  node.style.left = `${Math.random() * 600 + 50}px`;  
+  canvas.appendChild(node);  
+  nodes.push(node);  
+  
+  // Enable dragging  
+  let isDragging = false;  
+  let offsetX, offsetY;  
+  
+  node.addEventListener('mousedown', (e) => {  
+    isDragging = true;  
+    offsetX = e.offsetX;  
+    offsetY = e.offsetY;  
+    node.style.cursor = 'grabbing';  
+  });  
+  
+  window.addEventListener('mousemove', (e) => {  
+    if (isDragging) {  
+      node.style.left = `${e.clientX - offsetX}px`;  
+      node.style.top = `${e.clientY - offsetY}px`;  
+      updateConnections();  
+    }  
+  });  
+  
+  window.addEventListener('mouseup', () => {  
+    isDragging = false;  
+    node.style.cursor = 'grab';  
+  });  
+  
+  node.addEventListener('dblclick', () => {  
+    if (nodes.length > 1) {  
+      const toNode = nodes.find(n => n !== node);  
+      connections.push({ from: node, to: toNode });  
+      updateConnections();  
+    }  
+  });  
+});  
+  
+// Update connection lines  
+function updateConnections() {  
+  canvas.querySelectorAll('.connection').forEach(line => line.remove());  
+  connections.forEach(({ from, to }) => {  
+    const line = createConnection(from, to);  
+    canvas.appendChild(line);  
+  });  
+}  
+  
+// Save the story structure  
+saveButton.addEventListener('click', () => {  
+  const storyData = {  
+    nodes: nodes.map((node, index) => ({ id: index, text: node.innerText })),  
+    connections: connections.map(({ from, to }) => ({  
+      from: nodes.indexOf(from),  
+      to: nodes.indexOf(to)  
+    }))  
+  };  
+  alert('Story saved: ' + JSON.stringify(storyData, null, 2));  
+});  
+  
+// Prepare SVG canvas area  
+const svgCanvas = document.createElementNS('http://www.w3.org/2000/svg', 'svg');  
+svgCanvas.style.position = 'absolute';  
+svgCanvas.style.top = 0;  
+svgCanvas.style.left = 0;  
+svgCanvas.style.width = '100%';  
+svgCanvas.style.height = '100%';  
+canvas.appendChild(svgCanvas);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

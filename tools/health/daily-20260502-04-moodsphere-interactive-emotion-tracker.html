@@ -1,0 +1,145 @@
+---
+layout: null
+title: "MoodSphere: Interactive Emotion Tracker"
+category: "Health"
+description: "A dynamic tool where users reflect their daily mood by growing and customizing an interactive 3D sphere that changes in size, texture, and color based on their inputs."
+permalink: "/tools/daily-20260502-04-moodsphere-interactive-emotion-tracker.html"
+generated_by: "api-true-ai"
+generated_date: "20260502"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MoodSphere: Interactive Emotion Tracker | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic tool where users reflect their daily mood by growing and customizing an interactive 3D sphere that changes in size, texture, and color based on their inputs. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="MoodSphere: Interactive Emotion Tracker | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic tool where users reflect their daily mood by growing and customizing an interactive 3D sphere that changes in size, texture, and color based on their inputs. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MoodSphere: Interactive Emotion Tracker | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic tool where users reflect their daily mood by growing and customizing an interactive 3D sphere that changes in size, texture, and color based on their inputs. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>MoodSphere: Interactive Emotion Tracker</h1>
+    <p class="seo-subtitle">A dynamic tool where users reflect their daily mood by growing and customizing an interactive 3D sphere that changes in size, texture, and color based on their inputs.</p>
+    <style>  
+  #tool-app {  
+    display: flex;  
+    align-items: center;  
+    justify-content: center;  
+    height: 100vh;  
+    background: linear-gradient(to bottom, #89CFF0, #F0E68C);  
+    font-family: Arial, sans-serif;  
+  }  
+
+  canvas {  
+    border-radius: 50%;  
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);  
+  }  
+
+  .controls {  
+    position: absolute;  
+    bottom: 10%;  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    gap: 1em;  
+  }  
+
+  .slider {  
+    width: 300px;  
+  }  
+
+  .label {  
+    font-size: 1.2em;  
+    color: #333;  
+  }  
+</style>  
+<div id="tool-app">  
+  <canvas id="mood-sphere" width="300" height="300"></canvas>  
+  <div class="controls">  
+    <label class="label">Mood Intensity: <span id="intensity-value">50</span>%</label>  
+    <input type="range" id="mood-intensity" class="slider" min="1" max="100" value="50">  
+
+    <label class="label">Energy Level: <span id="energy-value">50</span>%</label>  
+    <input type="range" id="energy-level" class="slider" min="1" max="100" value="50">  
+
+    <label class="label">Mood Type: </label>  
+    <select id="mood-type" class="dropdown">  
+      <option value="calm">Calm</option>  
+      <option value="joyful">Joyful</option>  
+      <option value="focused">Focused</option>  
+      <option value="anxious">Anxious</option>  
+      <option value="excited">Excited</option>  
+    </select>  
+  </div>  
+</div>  
+<script>  
+const canvas = document.getElementById('mood-sphere');  
+const ctx = canvas.getContext('2d');  
+const intensitySlider = document.getElementById('mood-intensity');  
+const energySlider = document.getElementById('energy-level');  
+const moodTypeSelect = document.getElementById('mood-type');  
+const intensityLabel = document.getElementById('intensity-value');  
+const energyLabel = document.getElementById('energy-value');  
+
+let options = {  
+  intensity: 50,  
+  energy: 50,  
+  moodType: "calm"  
+};  
+
+function drawSphere() {  
+  const { intensity, energy, moodType } = options;  
+  const radius = 50 + (intensity / 2);  
+  const color =  
+    moodType === "calm" ? `rgb(${100 - intensity},${180},${255})` :  
+    moodType === "joyful" ? `rgb(${255},${200},${energy})` :  
+    moodType === "focused" ? `rgb(${energy},${energy},${255 - intensity})` :  
+    moodType === "anxious" ? `rgb(${255 - energy},${intensity},${intensity})` :  
+    `rgb(${255},${intensity + energy},${0})`;  
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  ctx.beginPath();  
+  ctx.arc(canvas.width / 2, canvas.height / 2, radius, 0, 2 * Math.PI);  
+  ctx.fillStyle = color;  
+  ctx.fill();  
+}  
+
+intensitySlider.addEventListener('input', (e) => {  
+  options.intensity = parseInt(e.target.value);  
+  intensityLabel.textContent = e.target.value;  
+  drawSphere();  
+});  
+
+energySlider.addEventListener('input', (e) => {  
+  options.energy = parseInt(e.target.value);  
+  energyLabel.textContent = e.target.value;  
+  drawSphere();  
+});  
+
+moodTypeSelect.addEventListener('change', (e) => {  
+  options.moodType = e.target.value;  
+  drawSphere();  
+});  
+
+drawSphere();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
