@@ -1,0 +1,187 @@
+---
+layout: null
+title: "FocusFlow: Task Priority Tetris"
+category: "Productivity"
+description: "A gamified productivity tool where users organize falling task blocks by priority and urgency to optimize their workflow."
+permalink: "/tools/daily-20260503-03-focusflow-task-priority-tetris.html"
+generated_by: "api-true-ai"
+generated_date: "20260503"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusFlow: Task Priority Tetris | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified productivity tool where users organize falling task blocks by priority and urgency to optimize their workflow. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="FocusFlow: Task Priority Tetris | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified productivity tool where users organize falling task blocks by priority and urgency to optimize their workflow. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FocusFlow: Task Priority Tetris | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified productivity tool where users organize falling task blocks by priority and urgency to optimize their workflow. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>FocusFlow: Task Priority Tetris</h1>
+    <p class="seo-subtitle">A gamified productivity tool where users organize falling task blocks by priority and urgency to optimize their workflow.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to bottom right, #74ebd5, #acb6e5);  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  color: #333;  
+}  
+#tool-app {  
+  text-align: center;  
+}  
+#game-board {  
+  width: 300px;  
+  height: 500px;  
+  background: #ffffff;  
+  border: 2px solid #333;  
+  display: grid;  
+  grid-template-rows: repeat(20, 25px);  
+  grid-template-columns: repeat(10, 25px);  
+  margin: 20px auto;  
+}  
+.cell {  
+  width: 25px;  
+  height: 25px;  
+  border: 1px solid #ddd;  
+}  
+.task-block {  
+  background-color: #ff6f61;  
+  border: 1px solid #ff3b2e;  
+}  
+#controls {  
+  margin-top: 10px;  
+}  
+button {  
+  background-color: #4caf50;  
+  color: white;  
+  padding: 10px 15px;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  font-size: 16px;  
+}  
+button:hover {  
+  background-color: #45a049;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>FocusFlow: Task Priority Tetris</h1>  
+  <p>Organize tasks by priority and urgency to keep your workflow optimized!</p>  
+  <div id="game-board"></div>  
+  <div id="controls">  
+    <button onclick="startGame()">Start Game</button>  
+    <button onclick="resetGame()">Reset</button>  
+  </div>  
+</div>  
+<script>  
+const boardRows = 20;  
+const boardCols = 10;  
+let board = [];  
+let currentBlock = null;  
+let gameInterval;  
+
+function createBoard() {  
+  const gameBoard = document.getElementById('game-board');  
+  gameBoard.innerHTML = '';  
+  board = [];  
+  for (let i = 0; i < boardRows; i++) {  
+    const row = [];  
+    for (let j = 0; j < boardCols; j++) {  
+      const cell = document.createElement('div');  
+      cell.classList.add('cell');  
+      gameBoard.appendChild(cell);  
+      row.push(null);  
+    }  
+    board.push(row);  
+  }  
+}  
+
+function spawnBlock() {  
+  const priorityLevels = ['Low', 'Medium', 'High', 'Critical'];  
+  currentBlock = {  
+    row: 0,  
+    col: Math.floor(boardCols / 2),  
+    priority: priorityLevels[Math.floor(Math.random() * priorityLevels.length)]  
+  };  
+  updateBoard();  
+}  
+
+function updateBoard() {  
+  const cells = document.querySelectorAll('.cell');  
+  cells.forEach((cell) => cell.classList.remove('task-block'));  
+
+  board.forEach((row, rowIndex) => {  
+    row.forEach((cell, colIndex) => {  
+      if (cell) {  
+        const cellIndex = rowIndex * boardCols + colIndex;  
+        cells[cellIndex].classList.add('task-block');  
+      }  
+    });  
+  });  
+
+  if (currentBlock) {  
+    const blockIndex = currentBlock.row * boardCols + currentBlock.col;  
+    cells[blockIndex].classList.add('task-block');  
+  }  
+}  
+
+function moveBlockDown() {  
+  if (currentBlock.row < boardRows - 1 && !board[currentBlock.row + 1][currentBlock.col]) {  
+    currentBlock.row++;  
+  } else {  
+    board[currentBlock.row][currentBlock.col] = currentBlock.priority;  
+    checkForFullRows();  
+    spawnBlock();  
+  }  
+  updateBoard();  
+}  
+
+function checkForFullRows() {  
+  for (let i = 0; i < boardRows; i++) {  
+    if (board[i].every((cell) => cell)) {  
+      board.splice(i, 1);  
+      board.unshift(new Array(boardCols).fill(null));  
+    }  
+  }  
+}  
+
+function startGame() {  
+  resetGame();  
+  spawnBlock();  
+  gameInterval = setInterval(moveBlockDown, 500);  
+}  
+
+function resetGame() {  
+  clearInterval(gameInterval);  
+  createBoard();  
+  currentBlock = null;  
+}  
+
+createBoard();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

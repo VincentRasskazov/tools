@@ -1,0 +1,233 @@
+---
+layout: null
+title: "HealthQuest: Immune System Defender"
+category: "Health"
+description: "A highly interactive mini-game where players defend a virtual human body from invading pathogens by strategically deploying \"immune cells,\" learning about the immune system in real time."
+permalink: "/tools/daily-20260503-11-healthquest-immune-system-defender.html"
+generated_by: "api-true-ai"
+generated_date: "20260503"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HealthQuest: Immune System Defender | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive mini-game where players defend a virtual human body from invading pathogens by strategically deploying &quot;immune cells,&quot; learning about the immune system in real time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="HealthQuest: Immune System Defender | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive mini-game where players defend a virtual human body from invading pathogens by strategically deploying &quot;immune cells,&quot; learning about the immune system in real time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HealthQuest: Immune System Defender | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive mini-game where players defend a virtual human body from invading pathogens by strategically deploying &quot;immune cells,&quot; learning about the immune system in real time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>HealthQuest: Immune System Defender</h1>
+    <p class="seo-subtitle">A highly interactive mini-game where players defend a virtual human body from invading pathogens by strategically deploying &quot;immune cells,&quot; learning about the immune system in real time.</p>
+    <style>  
+  #tool-app {  
+    font-family: Arial, sans-serif;  
+    text-align: center;  
+    margin: 20px;  
+  }  
+  #game-board {  
+    margin: 0 auto;  
+    width: 400px;  
+    height: 400px;  
+    display: grid;  
+    grid-template-columns: repeat(10, 1fr);  
+    grid-template-rows: repeat(10, 1fr);  
+    gap: 2px;  
+    background-color: #f3f3f3;  
+    border: 2px solid #4caf50;  
+    position: relative;  
+  }  
+  .cell {  
+    width: 100%;  
+    height: 100%;  
+    background-color: #e8ffe8;  
+    border: 1px solid #a5d6a7;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    font-size: 0.8em;  
+  }  
+  .pathogen {  
+    background-color: #ff4d4d;  
+    border-radius: 50%;  
+    animation: pulse 1.5s infinite alternate;  
+  }  
+  .immune-cell {  
+    background-color: #4caf50;  
+    border-radius: 50%;  
+  }  
+  @keyframes pulse {  
+    0% { transform: scale(1); }  
+    100% { transform: scale(1.2); }  
+  }  
+  #controls {  
+    margin-top: 20px;  
+  }  
+  button {  
+    padding: 10px 20px;  
+    background-color: #4caf50;  
+    color: white;  
+    border: none;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    font-size: 1em;  
+  }  
+  button:disabled {  
+    background-color: #9e9e9e;  
+  }  
+  #score {  
+    font-size: 1.2em;  
+    margin-top: 10px;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h1>HealthQuest: Immune System Defender</h1>  
+  <p>Protect the body by placing immune cells strategically on the grid to destroy invading pathogens!</p>  
+  <div id="game-board"></div>  
+  <div id="controls">  
+    <button id="place-immune-cell">Place Immune Cell</button>  
+    <button id="start-game">Start Game</button>  
+  </div>  
+  <div id="score">Score: 0</div>  
+</div>  
+<script>  
+const app = document.getElementById("tool-app");  
+const board = document.getElementById("game-board");  
+const placeImmuneCellBtn = document.getElementById("place-immune-cell");  
+const startGameBtn = document.getElementById("start-game");  
+const scoreDisplay = document.getElementById("score");  
+
+const gridSize = 10;  
+let isPlacingImmuneCell = false;  
+let immuneCells = [];  
+let pathogens = [];  
+let score = 0;  
+let gameInterval;  
+
+// Create grid  
+for (let i = 0; i < gridSize * gridSize; i++) {  
+  const cell = document.createElement("div");  
+  cell.className = "cell";  
+  cell.dataset.index = i;  
+  board.appendChild(cell);  
+  cell.addEventListener("click", () => {  
+    if (isPlacingImmuneCell && !cell.querySelector(".immune-cell")) {  
+      const immuneCell = document.createElement("div");  
+      immuneCell.className = "immune-cell";  
+      cell.appendChild(immuneCell);  
+      immuneCells.push(parseInt(cell.dataset.index));  
+    }  
+  });  
+}  
+
+// Place immune cells  
+placeImmuneCellBtn.addEventListener("click", () => {  
+  isPlacingImmuneCell = true;  
+  placeImmuneCellBtn.disabled = true;  
+});  
+
+// Start the game  
+startGameBtn.addEventListener("click", () => {  
+  if (immuneCells.length === 0) {  
+    alert("Place at least one immune cell before starting the game!");  
+    return;  
+  }  
+  startGameBtn.disabled = true;  
+  placeImmuneCellBtn.disabled = true;  
+  startGame();  
+});  
+
+function startGame() {  
+  gameInterval = setInterval(() => {  
+    spawnPathogen();  
+    movePathogens();  
+    checkCollisions();  
+    updateScore();  
+  }, 1000);  
+}  
+
+function spawnPathogen() {  
+  const emptyCells = Array.from(board.children).filter(  
+    (cell) => !cell.querySelector(".pathogen") && !cell.querySelector(".immune-cell")  
+  );  
+  if (emptyCells.length > 0) {  
+    const randomCell =  
+      emptyCells[Math.floor(Math.random() * emptyCells.length)];  
+    const pathogen = document.createElement("div");  
+    pathogen.className = "pathogen";  
+    randomCell.appendChild(pathogen);  
+    pathogens.push(parseInt(randomCell.dataset.index));  
+  }  
+}  
+
+function movePathogens() {  
+  pathogens = pathogens.map((index) => {  
+    const cell = board.children[index];  
+    if (cell) cell.innerHTML = "";  
+    const nextIndex = index + gridSize < gridSize * gridSize ? index + gridSize : index;  
+    const nextCell = board.children[nextIndex];  
+    if (nextCell && !nextCell.querySelector(".immune-cell")) {  
+      const pathogen = document.createElement("div");  
+      pathogen.className = "pathogen";  
+      nextCell.appendChild(pathogen);  
+      return nextIndex;  
+    } else {  
+      return index;  
+    }  
+  });  
+}  
+
+function checkCollisions() {  
+  immuneCells.forEach((immuneIndex) => {  
+    if (pathogens.includes(immuneIndex)) {  
+      const cell = board.children[immuneIndex];  
+      cell.innerHTML = "";  
+      score += 10;  
+      pathogens = pathogens.filter((index) => index !== immuneIndex);  
+    }  
+  });  
+}  
+
+function updateScore() {  
+  scoreDisplay.textContent = `Score: ${score}`;  
+  if (pathogens.some((index) => index >= gridSize * (gridSize - 1))) {  
+    clearInterval(gameInterval);  
+    alert("Game Over! Your final score is: " + score);  
+    resetGame();  
+  }  
+}  
+
+function resetGame() {  
+  pathogens = [];  
+  immuneCells = [];  
+  score = 0;  
+  scoreDisplay.textContent = `Score: ${score}`;  
+  Array.from(board.children).forEach((cell) => {  
+    cell.innerHTML = "";  
+  });  
+  placeImmuneCellBtn.disabled = false;  
+  startGameBtn.disabled = false;  
+  isPlacingImmuneCell = false;  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

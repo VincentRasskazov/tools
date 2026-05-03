@@ -1,0 +1,196 @@
+---
+layout: null
+title: "ColorFlow Grid Debugger"
+category: "Developer"
+description: "An interactive mini-game that teaches developers CSS grid layout concepts by solving dynamic puzzles where colors flow through grid cells."
+permalink: "/tools/daily-20260503-08-colorflow-grid-debugger.html"
+generated_by: "api-true-ai"
+generated_date: "20260503"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ColorFlow Grid Debugger | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive mini-game that teaches developers CSS grid layout concepts by solving dynamic puzzles where colors flow through grid cells. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="ColorFlow Grid Debugger | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive mini-game that teaches developers CSS grid layout concepts by solving dynamic puzzles where colors flow through grid cells. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ColorFlow Grid Debugger | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive mini-game that teaches developers CSS grid layout concepts by solving dynamic puzzles where colors flow through grid cells. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>ColorFlow Grid Debugger</h1>
+    <p class="seo-subtitle">An interactive mini-game that teaches developers CSS grid layout concepts by solving dynamic puzzles where colors flow through grid cells.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+    font-family: Arial, sans-serif;  
+    background: linear-gradient(to bottom, #2b2b2b, #101010);  
+    color: #fff;  
+    text-align: center;  
+    margin: 0;  
+    padding: 0;  
+}  
+
+#tool-app {  
+    margin: 50px auto;  
+    max-width: 800px;  
+}  
+
+.grid-container {  
+    display: grid;  
+    width: 500px;  
+    height: 500px;  
+    margin: 20px auto;  
+    background-color: #333;  
+    border: 5px solid #555;  
+    grid-gap: 5px;  
+}  
+
+.grid-cell {  
+    background-color: #444;  
+    color: #fff;  
+    font-size: 16px;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    cursor: pointer;  
+    transition: all 0.3s ease;  
+}  
+
+.grid-cell.selected {  
+    background-color: #0077ff;  
+}  
+
+#controls {  
+    margin-top: 20px;  
+}  
+
+button {  
+    padding: 10px 20px;  
+    background-color: #0077ff;  
+    color: #fff;  
+    border: none;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    transition: background-color 0.3s;  
+}  
+
+button:hover {  
+    background-color: #005bb5;  
+}  
+</style>  
+<div id="tool-app">  
+    <h1>ColorFlow Grid Debugger</h1>  
+    <p>Align the grid cells to guide the color flow through the correct path!</p>  
+    <div id="grid-message"></div>  
+    <div id="game-container" class="grid-container"></div>  
+    <div id="controls">  
+        <button id="reset">Reset Grid</button>  
+    </div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+
+const app = document.getElementById('tool-app');  
+const gameContainer = document.getElementById('game-container');  
+const resetButton = document.getElementById('reset');  
+const gridMessage = document.getElementById('grid-message');  
+
+const gridSize = 5;  
+let gridCells = [];  
+let pathCells = [];  
+let startCell = { x: 0, y: 0 };  
+let endCell = { x: gridSize - 1, y: gridSize - 1 };  
+
+function createGrid() {  
+    gameContainer.innerHTML = '';  
+    gameContainer.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;  
+    gameContainer.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;  
+
+    gridCells = [];  
+    pathCells = [];  
+
+    for (let i = 0; i < gridSize; i++) {  
+        gridCells[i] = [];  
+        for (let j = 0; j < gridSize; j++) {  
+            const cell = document.createElement('div');  
+            cell.className = 'grid-cell';  
+            cell.dataset.x = i;  
+            cell.dataset.y = j;  
+            cell.addEventListener('click', () => toggleCell(cell));  
+            gridCells[i][j] = cell;  
+            gameContainer.appendChild(cell);  
+        }  
+    }  
+
+    gridCells[startCell.x][startCell.y].classList.add('selected');  
+    gridCells[endCell.x][endCell.y].classList.add('selected');  
+    gridMessage.innerText = '';  
+}  
+
+function toggleCell(cell) {  
+    const x = parseInt(cell.dataset.x);  
+    const y = parseInt(cell.dataset.y);  
+
+    if ((x === startCell.x && y === startCell.y) || (x === endCell.x && y === endCell.y)) {  
+        return;  
+    }  
+
+    if (cell.classList.contains('selected')) {  
+        cell.classList.remove('selected');  
+        pathCells = pathCells.filter(c => c !== cell);  
+    } else {  
+        cell.classList.add('selected');  
+        pathCells.push(cell);  
+    }  
+
+    checkPath();  
+}  
+
+function checkPath() {  
+    let validPath = true;  
+    let prev = startCell;  
+
+    for (const cell of pathCells) {  
+        const x = parseInt(cell.dataset.x);  
+        const y = parseInt(cell.dataset.y);  
+
+        if (Math.abs(x - prev.x) + Math.abs(y - prev.y) !== 1) {  
+            validPath = false;  
+            break;  
+        }  
+
+        prev = { x, y };  
+    }  
+
+    if (validPath && prev.x === endCell.x && prev.y === endCell.y) {  
+        gridMessage.innerText = "Congratulations! You've guided the color flow to the endpoint.";  
+    } else {  
+        gridMessage.innerText = "";  
+    }  
+}  
+
+resetButton.addEventListener('click', createGrid);  
+
+createGrid();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,182 @@
+---
+layout: null
+title: "Dependency Dynamo"
+category: "Developer"
+description: "A highly interactive tool that visualizes and analyzes relationships between your project's dependencies and their potential vulnerabilities in a dynamic, draggable 3D network graph."
+permalink: "/tools/daily-20260503-20-dependency-dynamo.html"
+generated_by: "api-true-ai"
+generated_date: "20260503"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dependency Dynamo | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive tool that visualizes and analyzes relationships between your project's dependencies and their potential vulnerabilities in a dynamic, draggable 3D network graph. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Dependency Dynamo | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive tool that visualizes and analyzes relationships between your project's dependencies and their potential vulnerabilities in a dynamic, draggable 3D network graph. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dependency Dynamo | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive tool that visualizes and analyzes relationships between your project's dependencies and their potential vulnerabilities in a dynamic, draggable 3D network graph. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Dependency Dynamo</h1>
+    <p class="seo-subtitle">A highly interactive tool that visualizes and analyzes relationships between your project's dependencies and their potential vulnerabilities in a dynamic, draggable 3D network graph.</p>
+    <style>  
+  #tool-app {  
+    width: 100vw;  
+    height: 100vh;  
+    overflow: hidden;  
+    background: linear-gradient(135deg, #1e293b, #0f172a);  
+    color: #e2e8f0;  
+    font-family: 'Roboto', sans-serif;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+  }  
+  .tooltip {  
+    position: absolute;  
+    background: #334155;  
+    color: #e2e8f0;  
+    border-radius: 6px;  
+    padding: 10px;  
+    font-size: 12px;  
+    display: none;  
+    pointer-events: none;  
+    z-index: 10;  
+  }  
+  canvas {  
+    display: block;  
+  }  
+</style>  
+<div id="tool-app">  
+  <canvas id="dependencyCanvas"></canvas>  
+  <div class="tooltip" id="tooltip"></div>  
+</div>  
+<script>  
+// General setup  
+const canvas = document.getElementById("dependencyCanvas");  
+const ctx = canvas.getContext("2d");  
+canvas.width = window.innerWidth;  
+canvas.height = window.innerHeight;  
+const tooltip = document.getElementById("tooltip");  
+
+// Mock dependency data  
+const dependencies = [  
+  { name: "React", version: "17.0.2", vulnerabilities: 1 },  
+  { name: "Webpack", version: "5.5.1", vulnerabilities: 2 },  
+  { name: "Lodash", version: "4.17.21", vulnerabilities: 0 },  
+  { name: "Axios", version: "0.24.0", vulnerabilities: 1 },  
+  { name: "TailwindCSS", version: "3.2.1", vulnerabilities: 0 },  
+];  
+
+const nodes = dependencies.map((dep, idx) => ({  
+  x: Math.random() * canvas.width,  
+  y: Math.random() * canvas.height,  
+  vx: (Math.random() - 0.5) * 2,  
+  vy: (Math.random() - 0.5) * 2,  
+  size: 20 + dep.vulnerabilities * 10,  
+  color: dep.vulnerabilities > 0 ? "#ef4444" : "#10b981",  
+  name: dep.name,  
+  version: dep.version,  
+  vulnerabilities: dep.vulnerabilities,  
+}));  
+
+const connections = [  
+  [0, 1],  
+  [1, 2],  
+  [2, 3],  
+  [3, 4],  
+  [4, 0],  
+];  
+
+// Draw the graph  
+function draw() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+
+  // Draw connections  
+  ctx.strokeStyle = "#64748b";  
+  connections.forEach(([a, b]) => {  
+    ctx.beginPath();  
+    ctx.moveTo(nodes[a].x, nodes[a].y);  
+    ctx.lineTo(nodes[b].x, nodes[b].y);  
+    ctx.stroke();  
+  });  
+
+  // Draw nodes  
+  nodes.forEach((node) => {  
+    ctx.beginPath();  
+    ctx.arc(node.x, node.y, node.size, 0, Math.PI * 2);  
+    ctx.fillStyle = node.color;  
+    ctx.fill();  
+    ctx.closePath();  
+  });  
+}  
+
+// Physics simulation  
+function update() {  
+  nodes.forEach((node) => {  
+    node.x += node.vx;  
+    node.y += node.vy;  
+
+    // Bounce off edges  
+    if (node.x <= 0 || node.x >= canvas.width) node.vx *= -1;  
+    if (node.y <= 0 || node.y >= canvas.height) node.vy *= -1;  
+  });  
+}  
+
+// Tooltip logic  
+canvas.addEventListener("mousemove", (e) => {  
+  const mouseX = e.clientX;  
+  const mouseY = e.clientY;  
+  let hoveredNode = null;  
+
+  nodes.forEach((node) => {  
+    const dx = node.x - mouseX;  
+    const dy = node.y - mouseY;  
+    if (Math.sqrt(dx * dx + dy * dy) < node.size) {  
+      hoveredNode = node;  
+    }  
+  });  
+
+  if (hoveredNode) {  
+    tooltip.style.left = `${mouseX + 10}px`;  
+    tooltip.style.top = `${mouseY + 10}px`;  
+    tooltip.style.display = "block";  
+    tooltip.innerHTML = `  
+      <strong>${hoveredNode.name}</strong><br>  
+      Version: ${hoveredNode.version}<br>  
+      Vulnerabilities: ${hoveredNode.vulnerabilities}  
+    `;  
+  } else {  
+    tooltip.style.display = "none";  
+  }  
+});  
+
+// Animation loop  
+function animate() {  
+  update();  
+  draw();  
+  requestAnimationFrame(animate);  
+}  
+
+animate();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

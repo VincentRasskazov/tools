@@ -1,0 +1,156 @@
+---
+layout: null
+title: "PhishCatcher: Email Phishing Detector"
+category: "Cybersecurity"
+description: "An interactive tool where users analyze sample emails to identify phishing attempts by examining clues, headers, and links."
+permalink: "/tools/daily-20260503-24-phishcatcher-email-phishing-detector.html"
+generated_by: "api-true-ai"
+generated_date: "20260503"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhishCatcher: Email Phishing Detector | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool where users analyze sample emails to identify phishing attempts by examining clues, headers, and links. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PhishCatcher: Email Phishing Detector | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool where users analyze sample emails to identify phishing attempts by examining clues, headers, and links. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PhishCatcher: Email Phishing Detector | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool where users analyze sample emails to identify phishing attempts by examining clues, headers, and links. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PhishCatcher: Email Phishing Detector</h1>
+    <p class="seo-subtitle">An interactive tool where users analyze sample emails to identify phishing attempts by examining clues, headers, and links.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: 'Arial', sans-serif;  
+  background: #1e1e2f;  
+  color: #e5e5e5;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  background: #292945;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);  
+  border-radius: 12px;  
+  padding: 20px;  
+  width: 90%;  
+  max-width: 600px;  
+  text-align: center;  
+}  
+#email-preview {  
+  background: #1e1e2f;  
+  border: 1px solid #484878;  
+  border-radius: 8px;  
+  padding: 10px;  
+  margin-top: 10px;  
+  text-align: left;  
+  font-size: 16px;  
+  color: #c5c5e3;  
+  overflow-y: auto;  
+  height: 200px;  
+}  
+button {  
+  background: #4caf50;  
+  color: white;  
+  border: none;  
+  padding: 10px 20px;  
+  border-radius: 6px;  
+  cursor: pointer;  
+  margin: 10px;  
+  font-size: 16px;  
+}  
+button:hover {  
+  background: #3c8e40;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>PhishCatcher</h1>  
+  <p>Analyze the email below and decide if it's a phishing attempt or legitimate!</p>  
+  <div id="email-preview"></div>  
+  <div>  
+    <button id="phishing-button">Phishing</button>  
+    <button id="legitimate-button">Legitimate</button>  
+  </div>  
+  <p id="feedback"></p>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const emails = [  
+  {  
+    content: `Dear User,  
+    Your account has been compromised.  
+    Please click <a href='http://fakebank.com/login'>here</a> to reset your password immediately.  
+    Failure to do so will result in account suspension.`,  
+    isPhishing: true  
+  },  
+  {  
+    content: `Hi John,  
+    Thanks for your recent purchase! Your order #12345 has shipped and is on its way.  
+    You can track your delivery <a href='http://shop.com/track/12345'>here</a>. Thanks for shopping with us!`,  
+    isPhishing: false  
+  },  
+  {  
+    content: `Dear Customer,  
+    We noticed unusual login attempts on your account.  
+    Please verify your identity by visiting <a href="http://secure-login-safe.com">this link</a>.`,  
+    isPhishing: true  
+  }  
+];  
+  
+let currentEmailIndex = 0;  
+  
+function loadEmail(index) {  
+  const emailPreview = document.getElementById('email-preview');  
+  emailPreview.innerHTML = emails[index].content;  
+}  
+  
+function handleResponse(isPhishing) {  
+  const feedback = document.getElementById('feedback');  
+  const currentEmail = emails[currentEmailIndex];  
+  
+  if (isPhishing === currentEmail.isPhishing) {  
+    feedback.textContent = 'Correct! You identified this email correctly.';  
+    feedback.style.color = '#4caf50';  
+  } else {  
+    feedback.textContent = 'Oops! That was incorrect. Try to spot the clues next time.';  
+    feedback.style.color = '#f44336';  
+  }  
+  
+  currentEmailIndex = (currentEmailIndex + 1) % emails.length;  
+  setTimeout(() => {  
+    feedback.textContent = '';  
+    loadEmail(currentEmailIndex);  
+  }, 2000);  
+}  
+  
+document.getElementById('phishing-button').addEventListener('click', () => handleResponse(true));  
+document.getElementById('legitimate-button').addEventListener('click', () => handleResponse(false));  
+  
+// Initialize the first email  
+loadEmail(currentEmailIndex);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
