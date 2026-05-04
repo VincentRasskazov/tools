@@ -1,0 +1,102 @@
+---
+layout: null
+title: "PhishNet: Interactive Email Threat Hunter"
+category: "Cybersecurity"
+description: "A gamified platform where users analyze simulated emails to identify phishing attempts, helping sharpen their cybersecurity awareness."
+permalink: "/tools/daily-20260504-01-phishnet-interactive-email-threat-hunter.html"
+generated_by: "api-true-ai"
+generated_date: "20260504"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhishNet: Interactive Email Threat Hunter | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified platform where users analyze simulated emails to identify phishing attempts, helping sharpen their cybersecurity awareness. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PhishNet: Interactive Email Threat Hunter | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified platform where users analyze simulated emails to identify phishing attempts, helping sharpen their cybersecurity awareness. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PhishNet: Interactive Email Threat Hunter | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified platform where users analyze simulated emails to identify phishing attempts, helping sharpen their cybersecurity awareness. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PhishNet: Interactive Email Threat Hunter</h1>
+    <p class="seo-subtitle">A gamified platform where users analyze simulated emails to identify phishing attempts, helping sharpen their cybersecurity awareness.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: #1e1e2f; color: #f5f5f5; margin: 0; padding: 0; text-align: center; }  
+  #tool-app { padding: 20px; max-width: 800px; margin: 0 auto; }  
+  .email-sim { background: #2e2e3e; padding: 15px; margin: 15px 0; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); }  
+  .email-header { font-weight: bold; margin-bottom: 10px; }  
+  .btn { padding: 10px 20px; background: #4caf50; color: white; border: none; border-radius: 5px; cursor: pointer; margin: 10px; }  
+  .btn:hover { background: #45a049; }  
+  .result { display: none; padding: 15px; margin-top: 15px; border-radius: 8px; }  
+  .result.correct { background: #4caf50; }  
+  .result.incorrect { background: #f44336; }  
+</style>  
+<div id="tool-app">  
+  <h1>PhishNet: Interactive Email Threat Hunter 🕵️‍♂️</h1>  
+  <p>Analyze the email below and decide if it's legitimate or a phishing attempt. Click a button to reveal the truth!</p>  
+  <div class="email-sim" id="current-email">  
+    <div class="email-header">From: <span id="email-from">support@securepay.co</span></div>  
+    <div class="email-body">  
+      Your account has been suspended due to suspicious activity. Please click <a href="#" style="color: #2196f3;">here</a> to verify your information immediately.  
+    </div>  
+  </div>  
+  <button class="btn" id="btn-legit">Legitimate</button>  
+  <button class="btn" id="btn-phishing">Phishing</button>  
+  <div class="result" id="result"></div>  
+</div>  
+<script>  
+const emails = [  
+  { from: "support@securepay.co", body: "Your account has been suspended due to suspicious activity. Please click <a href='#'>here</a> to verify your information immediately.", isPhishing: true },  
+  { from: "no-reply@bank.com", body: "We noticed login attempts from an unrecognized device. If this wasn't you, please update your password at <a href='#'>our secure page</a>.", isPhishing: true },  
+  { from: "newsletter@trustedsite.org", body: "Thank you for joining TrustedSite! Here's your welcome discount code: TRUSTED2023.", isPhishing: false },  
+  { from: "admin@university.edu", body: "Your account settings have been updated as per your request. If this wasn't you, please contact our IT support team.", isPhishing: false }  
+];  
+let currentIndex = 0;  
+
+function displayEmail(index) {  
+  const email = emails[index];  
+  document.getElementById("email-from").innerText = email.from;  
+  document.querySelector(".email-body").innerHTML = email.body;  
+  document.getElementById("result").style.display = "none";  
+}  
+
+function handleResponse(isPhishing) {  
+  const email = emails[currentIndex];  
+  const resultDiv = document.getElementById("result");  
+  if (isPhishing === email.isPhishing) {  
+    resultDiv.innerText = "Correct! This email is " + (isPhishing ? "a phishing attempt!" : "legitimate!");  
+    resultDiv.className = "result correct";  
+  } else {  
+    resultDiv.innerText = "Incorrect. This email is " + (email.isPhishing ? "a phishing attempt!" : "legitimate.");  
+    resultDiv.className = "result incorrect";  
+  }  
+  resultDiv.style.display = "block";  
+  currentIndex = (currentIndex + 1) % emails.length;  
+  setTimeout(() => displayEmail(currentIndex), 3000);  
+}  
+
+document.getElementById("btn-legit").addEventListener("click", () => handleResponse(false));  
+document.getElementById("btn-phishing").addEventListener("click", () => handleResponse(true));  
+
+displayEmail(currentIndex);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

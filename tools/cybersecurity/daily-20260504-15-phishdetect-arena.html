@@ -1,0 +1,180 @@
+---
+layout: null
+title: "PhishDetect Arena"
+category: "Cybersecurity"
+description: "A gamified phishing email detection simulator where users analyze and identify fake emails in a race against time to improve their cybersecurity instincts."
+permalink: "/tools/daily-20260504-15-phishdetect-arena.html"
+generated_by: "api-true-ai"
+generated_date: "20260504"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhishDetect Arena | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified phishing email detection simulator where users analyze and identify fake emails in a race against time to improve their cybersecurity instincts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PhishDetect Arena | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified phishing email detection simulator where users analyze and identify fake emails in a race against time to improve their cybersecurity instincts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PhishDetect Arena | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified phishing email detection simulator where users analyze and identify fake emails in a race against time to improve their cybersecurity instincts. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PhishDetect Arena</h1>
+    <p class="seo-subtitle">A gamified phishing email detection simulator where users analyze and identify fake emails in a race against time to improve their cybersecurity instincts.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: 'Arial', sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background: linear-gradient(120deg, #2b5876, #4e4376);  
+  color: #fff;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 90%;  
+  max-width: 800px;  
+  background: #1c1c1c;  
+  padding: 20px;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);  
+}  
+.email-box {  
+  border: 1px solid #444;  
+  background: #222;  
+  padding: 15px;  
+  margin-bottom: 15px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  transition: transform 0.3s ease;  
+}  
+.email-box:hover {  
+  transform: scale(1.02);  
+  border-color: #00d1b2;  
+}  
+button {  
+  background: #00d1b2;  
+  color: #fff;  
+  border: none;  
+  padding: 10px 20px;  
+  border-radius: 5px;  
+  font-size: 16px;  
+  cursor: pointer;  
+  transition: background 0.3s ease;  
+}  
+button:hover {  
+  background: #00b08d;  
+}  
+.score-panel {  
+  display: flex;  
+  justify-content: space-between;  
+  margin-bottom: 20px;  
+  font-size: 18px;  
+}  
+</style>  
+<div id="tool-app">  
+  <div class="score-panel">  
+    <div>Score: <span id="score">0</span></div>  
+    <div>Time Left: <span id="timer">60</span>s</div>  
+  </div>  
+  <div id="email-list">  
+    <!-- Emails will be dynamically generated here -->  
+  </div>  
+  <button id="start-game">Start Game</button>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const emails = [  
+  { subject: "Your account has been compromised!", sender: "security@bankalert.com", body: "Click this link to change your password immediately.", isPhishing: true },  
+  { subject: "Meeting tomorrow", sender: "colleague@company.com", body: "Don't forget about the meeting at 10 AM!", isPhishing: false },  
+  { subject: "You've won a prize!", sender: "lotto@fakeprizes.com", body: "Claim your reward by clicking here.", isPhishing: true },  
+  { subject: "Invoice #12345", sender: "billing@vendor.com", body: "Please find the attached invoice for your payment.", isPhishing: false }  
+];  
+
+let score = 0;  
+let timeLeft = 60;  
+let timerInterval;  
+
+const startGame = () => {  
+  document.getElementById('start-game').style.display = 'none';  
+  generateEmails();  
+  score = 0;  
+  timeLeft = 60;  
+  updateScore();  
+  startTimer();  
+};  
+
+const generateEmails = () => {  
+  const emailList = document.getElementById('email-list');  
+  emailList.innerHTML = '';  
+  emails.forEach((email, index) => {  
+    const emailBox = document.createElement('div');  
+    emailBox.className = 'email-box';  
+    emailBox.innerHTML = `  
+      <strong>${email.subject}</strong><br>  
+      <em>From: ${email.sender}</em><br>  
+      <p>${email.body}</p>  
+    `;  
+    emailBox.onclick = () => analyzeEmail(index, email, emailBox);  
+    emailList.appendChild(emailBox);  
+  });  
+};  
+
+const analyzeEmail = (index, email, emailBox) => {  
+  if (email.isPhishing) {  
+    emailBox.style.background = 'rgba(255, 0, 0, 0.7)';  
+    score += 10;  
+  } else {  
+    emailBox.style.background = 'rgba(0, 255, 0, 0.4)';  
+    score -= 5;  
+  }  
+  emailBox.style.pointerEvents = 'none';  
+  updateScore();  
+};  
+
+const updateScore = () => {  
+  document.getElementById('score').textContent = score;  
+};  
+
+const startTimer = () => {  
+  const timerEl = document.getElementById('timer');  
+  timerInterval = setInterval(() => {  
+    timeLeft--;  
+    timerEl.textContent = timeLeft;  
+    if (timeLeft <= 0) {  
+      clearInterval(timerInterval);  
+      endGame();  
+    }  
+  }, 1000);  
+};  
+
+const endGame = () => {  
+  alert(`Game Over! Your score is: ${score}`);  
+  document.getElementById('start-game').style.display = 'block';  
+};  
+
+document.getElementById('start-game').addEventListener('click', startGame);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

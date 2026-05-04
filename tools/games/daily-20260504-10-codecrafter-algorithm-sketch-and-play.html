@@ -1,0 +1,171 @@
+---
+layout: null
+title: "CodeCrafter: Algorithm Sketch and Play"
+category: "Games"
+description: "A dynamic mini-game where users visually build and optimize algorithms using draggable blocks to solve interactive programming puzzles."
+permalink: "/tools/daily-20260504-10-codecrafter-algorithm-sketch-and-play.html"
+generated_by: "api-true-ai"
+generated_date: "20260504"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeCrafter: Algorithm Sketch and Play | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic mini-game where users visually build and optimize algorithms using draggable blocks to solve interactive programming puzzles. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CodeCrafter: Algorithm Sketch and Play | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic mini-game where users visually build and optimize algorithms using draggable blocks to solve interactive programming puzzles. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CodeCrafter: Algorithm Sketch and Play | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic mini-game where users visually build and optimize algorithms using draggable blocks to solve interactive programming puzzles. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CodeCrafter: Algorithm Sketch and Play</h1>
+    <p class="seo-subtitle">A dynamic mini-game where users visually build and optimize algorithms using draggable blocks to solve interactive programming puzzles.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: 'Arial', sans-serif;  
+  background: linear-gradient(to right, #4facfe, #00f2fe);  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  width: 80%;  
+  max-width: 900px;  
+  background: white;  
+  border-radius: 10px;  
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.2);  
+  padding: 20px;  
+}  
+.board {  
+  display: grid;  
+  grid-template-columns: repeat(4, 1fr);  
+  grid-gap: 10px;  
+}  
+.block {  
+  padding: 10px;  
+  text-align: center;  
+  background: #f1f1f1;  
+  border: 2px solid transparent;  
+  border-radius: 5px;  
+  cursor: grab;  
+}  
+.block.dragging {  
+  background: #4facfe;  
+  color: white;  
+  border: 2px dashed #00f2fe;  
+}  
+.result {  
+  margin-top: 20px;  
+  padding: 10px;  
+  background: #e0f7fa;  
+  border-radius: 5px;  
+  font-weight: bold;  
+  text-align: center;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>CodeCrafter: Algorithm Sketch and Play</h1>  
+  <p>Drag and arrange these blocks to build an algorithm that sorts the numbers in ascending order:</p>  
+  <div class="board" id="blocks-board">  
+    <div class="block" draggable="true" data-action="compare">Compare</div>  
+    <div class="block" draggable="true" data-action="swap">Swap</div>  
+    <div class="block" draggable="true" data-action="repeat-start">Repeat Start</div>  
+    <div class="block" draggable="true" data-action="repeat-end">Repeat End</div>  
+  </div>  
+  <button id="run-button" style="margin-top: 20px;">Run Algorithm</button>  
+  <div class="result" id="result-display">Your result will appear here...</div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const draggableBlocks = document.querySelectorAll('.block');  
+const blocksBoard = document.getElementById('blocks-board');  
+const runButton = document.getElementById('run-button');  
+const resultDisplay = document.getElementById('result-display');  
+
+let algorithmSequence = [];  
+
+draggableBlocks.forEach(block => {  
+  block.addEventListener('dragstart', () => {  
+    block.classList.add('dragging');  
+  });  
+
+  block.addEventListener('dragend', () => {  
+    block.classList.remove('dragging');  
+  });  
+});  
+
+blocksBoard.addEventListener('dragover', e => {  
+  e.preventDefault();  
+  const draggingBlock = document.querySelector('.dragging');  
+  const afterElement = getDragAfterElement(blocksBoard, e.clientY);  
+  if (afterElement == null) {  
+    blocksBoard.appendChild(draggingBlock);  
+  } else {  
+    blocksBoard.insertBefore(draggingBlock, afterElement);  
+  }  
+});  
+
+function getDragAfterElement(container, y) {  
+  const draggableElements = [...container.querySelectorAll('.block:not(.dragging)')];  
+
+  return draggableElements.reduce((closest, child) => {  
+    const box = child.getBoundingClientRect();  
+    const offset = y - box.top - box.height / 2;  
+    if (offset < 0 && offset > closest.offset) {  
+      return { offset: offset, element: child };  
+    } else {  
+      return closest;  
+    }  
+  }, { offset: Number.NEGATIVE_INFINITY }).element;  
+}  
+
+runButton.addEventListener('click', () => {  
+  algorithmSequence = [...blocksBoard.querySelectorAll('.block')].map(block => block.dataset.action);  
+  const numbers = [5, 2, 9, 1, 3];  
+  let sortedNumbers = [...numbers];  
+
+  try {  
+    let i = 0;  
+    while (i < algorithmSequence.length) {  
+      const action = algorithmSequence[i];  
+
+      if (action === 'compare') {  
+        if (sortedNumbers[i] > sortedNumbers[i + 1]) {  
+          // Just for the logic representation  
+        }  
+      } else if (action === 'swap') {  
+        [sortedNumbers[i], sortedNumbers[i + 1]] =  
+          [sortedNumbers[i + 1], sortedNumbers[i]];  
+      } else if (action === 'repeat-start') {  
+        sortedNumbers.sort();  
+      }  
+      i++;  
+    }  
+    resultDisplay.innerText = `Sorted: ${sortedNumbers.join(',')}`;  
+  } catch {  
+    resultDisplay.innerText= 'Failure test likely Above!-'  
+}}
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
