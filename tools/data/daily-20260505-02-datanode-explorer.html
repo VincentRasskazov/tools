@@ -1,0 +1,168 @@
+---
+layout: null
+title: "DataNode Explorer"
+category: "Data"
+description: "A visually interactive tree-like graph tool to analyze, manipulate, and traverse hierarchical data structures in real-time."
+permalink: "/tools/daily-20260505-02-datanode-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260505"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataNode Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="A visually interactive tree-like graph tool to analyze, manipulate, and traverse hierarchical data structures in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataNode Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="A visually interactive tree-like graph tool to analyze, manipulate, and traverse hierarchical data structures in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataNode Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A visually interactive tree-like graph tool to analyze, manipulate, and traverse hierarchical data structures in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataNode Explorer</h1>
+    <p class="seo-subtitle">A visually interactive tree-like graph tool to analyze, manipulate, and traverse hierarchical data structures in real-time.</p>
+    <style>  
+body {  
+    font-family: Arial, sans-serif;  
+    background-color: #f4f4f9;  
+    margin: 0;  
+    padding: 0;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+}  
+
+#tool-app {  
+    width: 80%;  
+    height: 80%;  
+    background: white;  
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);  
+    border-radius: 12px;  
+    display: flex;  
+    flex-direction: column;  
+    overflow: hidden;  
+}  
+
+header {  
+    background-color: #0077ff;  
+    color: white;  
+    padding: 16px;  
+    font-size: 18px;  
+    text-align: center;  
+    font-weight: bold;  
+}  
+
+#graph-container {  
+    flex: 1;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    position: relative;  
+}  
+
+.node {  
+    position: absolute;  
+    background: #0077ff;  
+    color: white;  
+    border-radius: 50%;  
+    padding: 12px;  
+    cursor: pointer;  
+    font-size: 12px;  
+    text-align: center;  
+    transition: transform 0.2s, box-shadow 0.2s;  
+}  
+
+.node:hover {  
+    transform: scale(1.1);  
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);  
+}  
+
+.edge {  
+    position: absolute;  
+    height: 2px;  
+    background: #555;  
+    transform-origin: top left;  
+}  
+</style>  
+<div id="tool-app">  
+    <header>DataNode Explorer</header>  
+    <div id="graph-container"></div>  
+</div>  
+<script>  
+const graphContainer = document.getElementById("graph-container");  
+
+// Mock hierarchical data  
+const data = {  
+    name: "Root",  
+    children: [  
+        {  
+            name: "Child A",  
+            children: [  
+                { name: "Grandchild A1", children: [] },  
+                { name: "Grandchild A2", children: [] }  
+            ]  
+        },  
+        {  
+            name: "Child B",  
+            children: [  
+                { name: "Grandchild B1", children: [] },  
+                { name: "Grandchild B2", children: [] }  
+            ]  
+        }  
+    ]  
+};  
+
+function renderNode(node, x, y, parentPos = null) {  
+    const nodeElem = document.createElement("div");  
+    nodeElem.className = "node";  
+    nodeElem.style.left = `${x}px`;  
+    nodeElem.style.top = `${y}px`;  
+    nodeElem.innerText = node.name;  
+
+    graphContainer.appendChild(nodeElem);  
+
+    if (parentPos) {  
+        const edgeElem = document.createElement("div");  
+        edgeElem.className = "edge";  
+        const dx = x - parentPos.x;  
+        const dy = y - parentPos.y;  
+        const length = Math.sqrt(dx * dx + dy * dy);  
+        edgeElem.style.width = `${length}px`;  
+        edgeElem.style.transform = `rotate(${Math.atan2(dy, dx) * (180 / Math.PI)}deg)`;  
+        edgeElem.style.left = `${parentPos.x}px`;  
+        edgeElem.style.top = `${parentPos.y}px`;  
+
+        graphContainer.appendChild(edgeElem);  
+    }  
+
+    const childSpacing = 120;  
+    const childYOffset = 80;  
+    node.children.forEach((child, index) => {  
+        const childX = x + index * childSpacing - (node.children.length - 1) * (childSpacing / 2);  
+        const childY = y + childYOffset;  
+        renderNode(child, childX, childY, { x, y });  
+    });  
+}  
+
+renderNode(data, graphContainer.offsetWidth / 2, 50);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

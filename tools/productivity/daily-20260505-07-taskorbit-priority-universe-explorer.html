@@ -1,0 +1,114 @@
+---
+layout: null
+title: "TaskOrbit: Priority Universe Explorer"
+category: "Productivity"
+description: "A 3D interactive visualization tool for organizing, prioritizing, and managing tasks as celestial bodies in a dynamic orbital system."
+permalink: "/tools/daily-20260505-07-taskorbit-priority-universe-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260505"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskOrbit: Priority Universe Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="A 3D interactive visualization tool for organizing, prioritizing, and managing tasks as celestial bodies in a dynamic orbital system. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="TaskOrbit: Priority Universe Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="A 3D interactive visualization tool for organizing, prioritizing, and managing tasks as celestial bodies in a dynamic orbital system. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TaskOrbit: Priority Universe Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A 3D interactive visualization tool for organizing, prioritizing, and managing tasks as celestial bodies in a dynamic orbital system. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>TaskOrbit: Priority Universe Explorer</h1>
+    <p class="seo-subtitle">A 3D interactive visualization tool for organizing, prioritizing, and managing tasks as celestial bodies in a dynamic orbital system.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background-color: #1a1a2e;  
+  color: #ffffff;  
+  margin: 0;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 100vw;  
+  height: 100vh;  
+}  
+</style>  
+<div id="tool-app"></div>  
+<script>  
+// Tool logic: TaskOrbit  
+const canvas = document.createElement("canvas");  
+document.getElementById("tool-app").appendChild(canvas);  
+const ctx = canvas.getContext("2d");  
+canvas.width = window.innerWidth;  
+canvas.height = window.innerHeight;  
+
+const tasks = [];  
+const orbitCenter = { x: canvas.width / 2, y: canvas.height / 2 };  
+let selectedTask = null;  
+
+// Event Listener for Adding Tasks  
+window.addEventListener("keydown", (e) => {  
+  if (e.key === "Enter") {  
+    const taskName = prompt("Enter Task Name:");  
+    if (taskName) {  
+      const priority = Math.random() * 3;  
+      tasks.push({ name: taskName, priority, angle: Math.random() * Math.PI * 2 });  
+    }  
+  }  
+});  
+
+// Drawing Orbit Universe  
+function drawOrbitUniverse() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+
+  // Render orbits  
+  [100, 200, 300].forEach((radius, idx) => {  
+    ctx.beginPath();  
+    ctx.arc(orbitCenter.x, orbitCenter.y, radius, 0, Math.PI * 2);  
+    ctx.strokeStyle = idx === 0 ? "#ef476f" : idx === 1 ? "#ffd166" : "#06d6a0";  
+    ctx.lineWidth = 2;  
+    ctx.stroke();  
+  });  
+
+  // Render tasks as "planets"  
+  tasks.forEach((task) => {  
+    const radius = 100 + task.priority * 100;  
+    const x = orbitCenter.x + Math.cos(task.angle) * radius;  
+    const y = orbitCenter.y + Math.sin(task.angle) * radius;  
+    ctx.beginPath();  
+    ctx.arc(x, y, 20, 0, Math.PI * 2);  
+    ctx.fillStyle = "#118ab2";  
+    ctx.fill();  
+
+    // Render task name  
+    ctx.fillStyle = "#ffffff";  
+    ctx.font = "16px Arial";  
+    ctx.fillText(task.name, x - 10, y - 30);  
+    task.angle += 0.01;  
+  });  
+
+  requestAnimationFrame(drawOrbitUniverse);  
+}  
+
+drawOrbitUniverse();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,149 @@
+---
+layout: null
+title: "CyberTrace: Real-Time Threat Path Visualizer"
+category: "Cybersecurity"
+description: "A highly interactive tool that simulates the propagation paths of cybersecurity threats, allowing users to explore and mitigate vulnerabilities in a visualized network map."
+permalink: "/tools/daily-20260505-01-cybertrace-real-time-threat-path-visualizer.html"
+generated_by: "api-true-ai"
+generated_date: "20260505"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberTrace: Real-Time Threat Path Visualizer | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive tool that simulates the propagation paths of cybersecurity threats, allowing users to explore and mitigate vulnerabilities in a visualized network map. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CyberTrace: Real-Time Threat Path Visualizer | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive tool that simulates the propagation paths of cybersecurity threats, allowing users to explore and mitigate vulnerabilities in a visualized network map. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CyberTrace: Real-Time Threat Path Visualizer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive tool that simulates the propagation paths of cybersecurity threats, allowing users to explore and mitigate vulnerabilities in a visualized network map. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CyberTrace: Real-Time Threat Path Visualizer</h1>
+    <p class="seo-subtitle">A highly interactive tool that simulates the propagation paths of cybersecurity threats, allowing users to explore and mitigate vulnerabilities in a visualized network map.</p>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #1e1e2f;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+  #tool-app {
+    width: 90vw;
+    height: 90vh;
+    border: 2px solid #4caf50;
+    border-radius: 10px;
+    background: #282842;
+    position: relative;
+    overflow: hidden;
+  }
+  .node {
+    position: absolute;
+    background: #4caf50;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+  }
+  .node:hover {
+    transform: scale(1.2);
+  }
+  .line {
+    position: absolute;
+    background: #f44336;
+    height: 2px;
+    transform-origin: top left;
+    pointer-events: none;
+  }
+</style>
+<div id="tool-app"></div>
+<script>
+  const app = document.getElementById('tool-app');
+
+  const nodes = [];
+  const connections = [];
+
+  function randomPosition(max) {
+    return Math.random() * max;
+  }
+
+  function createNode(id) {
+    const node = document.createElement('div');
+    node.classList.add('node');
+    node.style.left = `${randomPosition(app.offsetWidth - 40)}px`;
+    node.style.top = `${randomPosition(app.offsetHeight - 40)}px`;
+    node.innerText = id;
+    node.addEventListener('click', () => {
+      simulateThreatPath(id);
+    });
+    app.appendChild(node);
+    return { id, element: node, x: parseFloat(node.style.left), y: parseFloat(node.style.top) };
+  }
+
+  function createConnection(fromNode, toNode) {
+    const line = document.createElement('div');
+    line.classList.add('line');
+    const deltaX = toNode.x - fromNode.x;
+    const deltaY = toNode.y - fromNode.y;
+    const length = Math.sqrt(deltaX ** 2 + deltaY ** 2);
+    const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
+    line.style.width = `${length}px`;
+    line.style.left = `${fromNode.x + 15}px`;
+    line.style.top = `${fromNode.y + 15}px`;
+    line.style.transform = `rotate(${angle}deg)`;
+    app.appendChild(line);
+    connections.push({ from: fromNode, to: toNode, element: line });
+  }
+
+  function simulateThreatPath(startNodeId) {
+    connections.forEach((conn) => {
+      if (conn.from.id === startNodeId) {
+        conn.element.style.background = '#ff9800';
+        setTimeout(() => simulateThreatPath(conn.to.id), 500);
+      }
+    });
+  }
+
+  for (let i = 0; i < 10; i++) {
+    nodes.push(createNode(i));
+  }
+
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      if (Math.random() > 0.5) {
+        createConnection(nodes[i], nodes[j]);
+      }
+    }
+  }
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

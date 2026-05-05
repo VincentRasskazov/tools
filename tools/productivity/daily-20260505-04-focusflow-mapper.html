@@ -1,0 +1,173 @@
+---
+layout: null
+title: "FocusFlow Mapper"
+category: "Productivity"
+description: "A dynamic visual workflow builder that lets users design, refine, and gamify their daily task flows with interactive nodes and progress animations."
+permalink: "/tools/daily-20260505-04-focusflow-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260505"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusFlow Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic visual workflow builder that lets users design, refine, and gamify their daily task flows with interactive nodes and progress animations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="FocusFlow Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic visual workflow builder that lets users design, refine, and gamify their daily task flows with interactive nodes and progress animations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FocusFlow Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic visual workflow builder that lets users design, refine, and gamify their daily task flows with interactive nodes and progress animations. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>FocusFlow Mapper</h1>
+    <p class="seo-subtitle">A dynamic visual workflow builder that lets users design, refine, and gamify their daily task flows with interactive nodes and progress animations.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: 'Arial', sans-serif;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+  background: linear-gradient(135deg, #74ebd5, #9face6);  
+  color: #444;  
+}  
+#tool-app {  
+  width: 80%;  
+  max-width: 900px;  
+  background: #fff;  
+  padding: 20px;  
+  border-radius: 8px;  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  
+}  
+h1 {  
+  text-align: center;  
+  margin-bottom: 20px;  
+  font-size: 1.8em;  
+  color: #333;  
+}  
+#canvas-container {  
+  border: 2px dashed #ccc;  
+  border-radius: 8px;  
+  height: 500px;  
+  position: relative;  
+  overflow: hidden;  
+  cursor: crosshair;  
+}  
+.node {  
+  position: absolute;  
+  background: #74c69d;  
+  color: white;  
+  padding: 10px;  
+  border-radius: 50%;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  cursor: pointer;  
+  user-select: none;  
+}  
+.node.active {  
+  background: #52b788;  
+}  
+.connector {  
+  position: absolute;  
+  pointer-events: none;  
+  stroke: #74c69d;  
+  stroke-width: 2;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>FocusFlow Mapper</h1>  
+  <div id="canvas-container"></div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const app = document.getElementById('tool-app');  
+const canvasContainer = document.getElementById('canvas-container');  
+
+let nodes = [];  
+let connections = [];  
+let isConnecting = false;  
+let startNode = null;  
+
+canvasContainer.addEventListener('click', (e) => {  
+  if (!isConnecting) {  
+    createNode(e.offsetX, e.offsetY);  
+  }  
+});  
+
+function createNode(x, y) {  
+  const node = document.createElement('div');  
+  node.className = 'node';  
+  node.style.left = `${x - 25}px`;  
+  node.style.top = `${y - 25}px`;  
+  node.textContent = nodes.length + 1;  
+  node.onclick = (e) => handleNodeClick(e, node);  
+  canvasContainer.appendChild(node);  
+  nodes.push({ id: nodes.length + 1, element: node });  
+}  
+
+function handleNodeClick(e, node) {  
+  e.stopPropagation();  
+  if (isConnecting) {  
+    createConnection(startNode, node);  
+    startNode.classList.remove('active');  
+    isConnecting = false;  
+    startNode = null;  
+  } else {  
+    isConnecting = true;  
+    startNode = node;  
+    node.classList.add('active');  
+  }  
+}  
+
+function createConnection(node1, node2) {  
+  const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');  
+  line.classList.add('connector');  
+  const svgNS = 'http://www.w3.org/2000/svg';  
+  const svg = document.createElementNS(svgNS, 'svg');  
+  svg.style.position = 'absolute';  
+  svg.style.zIndex = '-1';  
+  svg.style.pointerEvents = 'none';  
+  svg.style.left = 0;  
+  svg.style.top = 0;  
+  svg.setAttribute('width', canvasContainer.clientWidth);  
+  svg.setAttribute('height', canvasContainer.clientHeight);  
+  line.setAttribute('x1', getNodeCenter(node1).x);  
+  line.setAttribute('y1', getNodeCenter(node1).y);  
+  line.setAttribute('x2', getNodeCenter(node2).x);  
+  line.setAttribute('y2', getNodeCenter(node2).y);  
+  svg.appendChild(line);  
+  canvasContainer.appendChild(svg);  
+  connections.push({ from: node1, to: node2, line });  
+}  
+
+function getNodeCenter(node) {  
+  const rect = node.getBoundingClientRect();  
+  const containerRect = canvasContainer.getBoundingClientRect();  
+  return {  
+    x: rect.left + rect.width / 2 - containerRect.left,  
+    y: rect.top + rect.height / 2 - containerRect.top,  
+  };  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
