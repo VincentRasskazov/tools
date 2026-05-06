@@ -1,0 +1,116 @@
+---
+layout: null
+title: "ConceptForge: Dynamic Idea Mapper"
+category: "Education"
+description: "A highly interactive tool that helps users visually brainstorm and organize ideas using draggable nodes, customizable connections, and instant AI-powered suggestions for expanding concepts."
+permalink: "/tools/daily-20260506-07-conceptforge-dynamic-idea-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260506"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ConceptForge: Dynamic Idea Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive tool that helps users visually brainstorm and organize ideas using draggable nodes, customizable connections, and instant AI-powered suggestions for expanding concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="ConceptForge: Dynamic Idea Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive tool that helps users visually brainstorm and organize ideas using draggable nodes, customizable connections, and instant AI-powered suggestions for expanding concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ConceptForge: Dynamic Idea Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive tool that helps users visually brainstorm and organize ideas using draggable nodes, customizable connections, and instant AI-powered suggestions for expanding concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>ConceptForge: Dynamic Idea Mapper</h1>
+    <p class="seo-subtitle">A highly interactive tool that helps users visually brainstorm and organize ideas using draggable nodes, customizable connections, and instant AI-powered suggestions for expanding concepts.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f9f9f9; color: #333; }  
+  #tool-app { display: flex; flex-direction: column; align-items: center; margin: 20px auto; max-width: 1000px; }  
+  .node { padding: 10px 15px; background-color: #007BFF; color: white; border-radius: 8px; cursor: grab; position: absolute; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }  
+  .node:hover { background-color: #0056b3; }  
+  .connection { stroke: #007BFF; stroke-width: 2; }  
+  #add-node { margin: 20px; padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; }  
+  #add-node:hover { background-color: #218838; }  
+  #tool-app svg { width: 100%; height: 600px; border: 1px solid #ddd; background-color: #ffffff; border-radius: 8px; }  
+</style>  
+<div id="tool-app">  
+  <button id="add-node">Add Idea Node</button>  
+  <svg id="canvas"></svg>  
+</div>  
+<script>  
+  const app = document.getElementById('tool-app');  
+  const canvas = document.getElementById('canvas');  
+  let nodes = [];  
+  let connections = [];  
+
+  function createNode(x, y, text = "New Idea") {  
+    const node = document.createElement('div');  
+    node.className = 'node';  
+    node.contentEditable = true;  
+    node.style.left = `${x}px`;  
+    node.style.top = `${y}px`;  
+    node.innerText = text;  
+    node.draggable = true;  
+
+    let selected = null;  
+    node.ondragstart = (e) => {  
+      selected = node;  
+      e.dataTransfer.setDragImage(new Image(), 0, 0); // Hide ghost image
+    };  
+
+    node.ondrag = (e) => {  
+      if (selected) {  
+        selected.style.left = `${e.pageX}px`;  
+        selected.style.top = `${e.pageY}px`;  
+        updateConnections();  
+      }  
+    };  
+
+    nodes.push(node);  
+    app.appendChild(node);  
+  }  
+
+  function drawConnection(node1, node2) {  
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');  
+    line.classList.add('connection');  
+    line.setAttribute('x1', node1.offsetLeft + node1.offsetWidth / 2);  
+    line.setAttribute('y1', node1.offsetTop + node1.offsetHeight / 2);  
+    line.setAttribute('x2', node2.offsetLeft + node2.offsetWidth / 2);  
+    line.setAttribute('y2', node2.offsetTop + node2.offsetHeight / 2);  
+    canvas.appendChild(line);  
+    connections.push({ line, node1, node2 });  
+  }  
+
+  function updateConnections() {  
+    connections.forEach(({ line, node1, node2 }) => {  
+      line.setAttribute('x1', node1.offsetLeft + node1.offsetWidth / 2);  
+      line.setAttribute('y1', node1.offsetTop + node1.offsetHeight / 2);  
+      line.setAttribute('x2', node2.offsetLeft + node2.offsetWidth / 2);  
+      line.setAttribute('y2', node2.offsetTop + node2.offsetHeight / 2);  
+    });  
+  }  
+
+  document.getElementById('add-node').addEventListener('click', () => {  
+    createNode(100, 100);  
+  });  
+
+  // Initial node to start  
+  createNode(200, 200, "Start Here");  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,145 @@
+---
+layout: null
+title: "Nutrient Symphony"
+category: "Health"
+description: "An interactive tool that lets users build a personalized virtual meal, where each food item generates musical notes based on its nutrient profile, creating a symphony of their dietary choices."
+permalink: "/tools/daily-20260506-11-nutrient-symphony.html"
+generated_by: "api-true-ai"
+generated_date: "20260506"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nutrient Symphony | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool that lets users build a personalized virtual meal, where each food item generates musical notes based on its nutrient profile, creating a symphony of their dietary choices. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Nutrient Symphony | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool that lets users build a personalized virtual meal, where each food item generates musical notes based on its nutrient profile, creating a symphony of their dietary choices. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nutrient Symphony | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool that lets users build a personalized virtual meal, where each food item generates musical notes based on its nutrient profile, creating a symphony of their dietary choices. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Nutrient Symphony</h1>
+    <p class="seo-subtitle">An interactive tool that lets users build a personalized virtual meal, where each food item generates musical notes based on its nutrient profile, creating a symphony of their dietary choices.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(120deg, #f9f9f9, #d0f0c0);  
+  margin: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  text-align: center;  
+  padding: 20px;  
+  border-radius: 10px;  
+  background: white;  
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);  
+  width: 80%;  
+  max-width: 600px;  
+}  
+#food-selection {  
+  display: flex;  
+  flex-wrap: wrap;  
+  justify-content: center;  
+  gap: 10px;  
+  margin: 20px 0;  
+}  
+.food-item {  
+  padding: 10px;  
+  border: 1px solid #ccc;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  transition: background-color 0.3s;  
+}  
+.food-item:hover {  
+  background-color: #daf5d7;  
+}  
+#symphony {  
+  margin-top: 20px;  
+  font-size: 1.2em;  
+  font-weight: bold;  
+  color: #333;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Nutrient Symphony</h1>  
+  <p>Select food items to create your nutrient-powered melody:</p>  
+  <div id="food-selection"></div>  
+  <div id="symphony"></div>  
+</div>  
+<script>  
+const foods = [  
+  { name: "Apple", nutrients: { carbs: 14, fiber: 2, protein: 0 }, note: "C" },  
+  { name: "Banana", nutrients: { carbs: 27, fiber: 3, protein: 1 }, note: "D" },  
+  { name: "Carrot", nutrients: { carbs: 10, fiber: 3, protein: 0.9 }, note: "E" },  
+  { name: "Chicken", nutrients: { carbs: 0, fiber: 0, protein: 27 }, note: "F" },  
+  { name: "Rice", nutrients: { carbs: 45, fiber: 1, protein: 4 }, note: "G" },  
+  { name: "Spinach", nutrients: { carbs: 1, fiber: 0.7, protein: 0.8 }, note: "A" },  
+  { name: "Egg", nutrients: { carbs: 0.6, fiber: 0, protein: 6 }, note: "B" }  
+];  
+
+const foodSelection = document.getElementById("food-selection");  
+const symphony = document.getElementById("symphony");  
+
+let selectedNotes = [];  
+let melody = "";  
+
+foods.forEach(food => {  
+  const foodItem = document.createElement("div");  
+  foodItem.className = "food-item";  
+  foodItem.innerText = food.name;  
+  foodItem.onclick = () => {  
+    selectedNotes.push(food.note);  
+    melody = selectedNotes.join(" - ");  
+    symphony.innerText = `Your Symphony: ${melody}`;  
+    playNoteSequence(selectedNotes);  
+  };  
+  foodSelection.appendChild(foodItem);  
+});  
+
+function playNoteSequence(notes) {  
+  const noteFrequencies = {  
+    "C": 261.63,  
+    "D": 293.66,  
+    "E": 329.63,  
+    "F": 349.23,  
+    "G": 392.00,  
+    "A": 440.00,  
+    "B": 493.88  
+  };  
+
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();  
+  let startTime = audioCtx.currentTime;  
+
+  notes.forEach((note, index) => {  
+    const oscillator = audioCtx.createOscillator();  
+    oscillator.frequency.setValueAtTime(noteFrequencies[note], startTime + index * 0.5);  
+    oscillator.type = "sine";  
+    oscillator.connect(audioCtx.destination);  
+    oscillator.start(startTime + index * 0.5);  
+    oscillator.stop(startTime + (index + 1) * 0.5);  
+  });  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

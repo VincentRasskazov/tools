@@ -1,0 +1,212 @@
+---
+layout: null
+title: "FocusFlow: Task Dependency Mapper"
+category: "Productivity"
+description: "A dynamic, interactive tool that helps users visually map out task dependencies, rearrange priorities, and simulate how changes affect overall workflow."
+permalink: "/tools/daily-20260506-09-focusflow-task-dependency-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260506"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusFlow: Task Dependency Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, interactive tool that helps users visually map out task dependencies, rearrange priorities, and simulate how changes affect overall workflow. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="FocusFlow: Task Dependency Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, interactive tool that helps users visually map out task dependencies, rearrange priorities, and simulate how changes affect overall workflow. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FocusFlow: Task Dependency Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, interactive tool that helps users visually map out task dependencies, rearrange priorities, and simulate how changes affect overall workflow. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>FocusFlow: Task Dependency Mapper</h1>
+    <p class="seo-subtitle">A dynamic, interactive tool that helps users visually map out task dependencies, rearrange priorities, and simulate how changes affect overall workflow.</p>
+    ```html
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f7f9fc;
+  }
+  #tool-app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  #canvas-container {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #ffffff;
+    width: 90%;
+    height: 70vh;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .task-node {
+    position: absolute;
+    padding: 10px;
+    background: #4CAF50;
+    color: #fff;
+    border-radius: 5px;
+    cursor: grab;
+    user-select: none;
+  }
+  .connection {
+    stroke: #2aa198;
+    stroke-width: 2px;
+  }
+  #controls {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+  }
+  button {
+    padding: 10px 20px;
+    background: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #45a049;
+  }
+</style>
+
+<div id="tool-app">
+  <div id="canvas-container"></div>
+  <div id="controls">
+    <button id="add-task">Add Task</button>
+    <button id="clear-all">Clear All</button>
+  </div>
+</div>
+
+<script>
+  const canvas = document.getElementById('canvas-container');
+  const addTaskButton = document.getElementById('add-task');
+  const clearAllButton = document.getElementById('clear-all');
+
+  let tasks = [];
+  let connections = [];
+  let dragTask = null;
+
+  addTaskButton.addEventListener('click', () => {
+    const id = `task-${tasks.length}`;
+    const taskElement = document.createElement('div');
+    taskElement.className = 'task-node';
+    taskElement.innerText = `Task ${tasks.length + 1}`;
+    taskElement.style.top = `${Math.random() * 60 + 10}%`;
+    taskElement.style.left = `${Math.random() * 60 + 10}%`;
+    taskElement.draggable = false;
+    taskElement.dataset.id = id;
+
+    taskElement.addEventListener('mousedown', (event) => {
+      dragTask = { element: taskElement, offsetX: event.offsetX, offsetY: event.offsetY };
+    });
+
+    taskElement.addEventListener('mouseup', () => {
+      dragTask = null;
+    });
+
+    taskElement.addEventListener('dblclick', () => {
+      createConnection(taskElement);
+    });
+
+    canvas.appendChild(taskElement);
+    tasks.push({ id, element: taskElement });
+  });
+
+  clearAllButton.addEventListener('click', () => {
+    canvas.innerHTML = '';
+    tasks = [];
+    connections = [];
+  });
+
+  canvas.addEventListener('mousemove', (event) => {
+    if (dragTask) {
+      const { element, offsetX, offsetY } = dragTask;
+      const rect = canvas.getBoundingClientRect();
+      element.style.left = `${event.clientX - rect.left - offsetX}px`;
+      element.style.top = `${event.clientY - rect.top - offsetY}px`;
+
+      updateConnections();
+    }
+  });
+
+  canvas.addEventListener('mouseup', () => {
+    dragTask = null;
+  });
+
+  function createConnection(taskElement) {
+    if (connections.length > 0 && connections[connections.length - 1].to === null) {
+      const lastConnection = connections[connections.length - 1];
+      if (lastConnection.from !== taskElement) {
+        lastConnection.to = taskElement;
+        drawConnections();
+      }
+    } else {
+      connections.push({ from: taskElement, to: null });
+    }
+  }
+
+  function updateConnections() {
+    const svg = document.getElementById('connection-lines');
+    if (svg) svg.remove();
+    drawConnections();
+  }
+
+  function drawConnections() {
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.id = 'connection-lines';
+    svg.style.position = 'absolute';
+    svg.style.width = '100%';
+    svg.style.height = '100%';
+    svg.style.top = '0';
+    svg.style.left = '0';
+
+    connections.forEach(({ from, to }) => {
+      if (from && to) {
+        const fromRect = from.getBoundingClientRect();
+        const toRect = to.getBoundingClientRect();
+        const canvasRect = canvas.getBoundingClientRect();
+
+        const x1 = fromRect.left + fromRect.width / 2 - canvasRect.left;
+        const y1 = fromRect.top + fromRect.height / 2 - canvasRect.top;
+        const x2 = toRect.left + toRect.width / 2 - canvasRect.left;
+        const y2 = toRect.top + toRect.height / 2 - canvasRect.top;
+
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', x1);
+        line.setAttribute('y1', y1);
+        line.setAttribute('x2', x2);
+        line.setAttribute('y2', y2);
+        line.classList.add('connection');
+        svg.appendChild(line);
+      }
+    });
+
+    canvas.appendChild(svg);
+  }
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

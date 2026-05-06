@@ -1,0 +1,184 @@
+---
+layout: null
+title: "Particle Pedagogy: Physics Simulator"
+category: "Education"
+description: "An interactive browser tool where students can create and manipulate physical simulations of particles, experimenting with forces, collisions, and energy to visually learn physics concepts."
+permalink: "/tools/daily-20260506-23-particle-pedagogy-physics-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260506"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Particle Pedagogy: Physics Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive browser tool where students can create and manipulate physical simulations of particles, experimenting with forces, collisions, and energy to visually learn physics concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Particle Pedagogy: Physics Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive browser tool where students can create and manipulate physical simulations of particles, experimenting with forces, collisions, and energy to visually learn physics concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Particle Pedagogy: Physics Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive browser tool where students can create and manipulate physical simulations of particles, experimenting with forces, collisions, and energy to visually learn physics concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Particle Pedagogy: Physics Simulator</h1>
+    <p class="seo-subtitle">An interactive browser tool where students can create and manipulate physical simulations of particles, experimenting with forces, collisions, and energy to visually learn physics concepts.</p>
+    <style>  
+  body {  
+    font-family: Arial, sans-serif;  
+    margin: 0;  
+    padding: 0;  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    justify-content: center;  
+    height: 100vh;  
+    background: linear-gradient(145deg, #4facfe, #00f2fe);  
+  }  
+  #tool-app {  
+    width: 80%;  
+    height: 80%;  
+    background: white;  
+    border-radius: 10px;  
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
+    position: relative;  
+    overflow: hidden;  
+  }  
+  canvas {  
+    display: block;  
+    width: 100%;  
+    height: 100%;  
+  }  
+  .controls {  
+    position: absolute;  
+    top: 10px;  
+    left: 10px;  
+    z-index: 10;  
+    display: flex;  
+    flex-direction: column;  
+    background: rgba(255, 255, 255, 0.8);  
+    border: 1px solid #ddd;  
+    padding: 10px;  
+    border-radius: 8px;  
+  }  
+  .controls input, .controls button {  
+    margin: 5px 0;  
+    padding: 5px;  
+    border: 1px solid #ccc;  
+    border-radius: 4px;  
+    font-size: 14px;  
+    cursor: pointer;  
+  }  
+</style>  
+<div id="tool-app">  
+  <div class="controls">  
+    <label>Particle Count: <input id="particle-count" type="number" value="50" min="1" max="500"></label>  
+    <label>Gravity: <input id="gravity" type="range" min="0" max="10" step="0.1" value="1"></label>  
+    <label>Friction: <input id="friction" type="range" min="0" max="1" step="0.01" value="0.01"></label>  
+    <button id="reset-btn">Reset</button>  
+  </div>  
+  <canvas id="particle-canvas"></canvas>  
+</div>  
+<script>  
+const canvas = document.getElementById("particle-canvas");  
+const ctx = canvas.getContext("2d");  
+const particleCountInput = document.getElementById("particle-count");  
+const gravityInput = document.getElementById("gravity");  
+const frictionInput = document.getElementById("friction");  
+const resetBtn = document.getElementById("reset-btn");  
+
+canvas.width = document.getElementById("tool-app").clientWidth;  
+canvas.height = document.getElementById("tool-app").clientHeight;  
+
+class Particle {  
+  constructor(x, y, radius, color) {  
+    this.x = x;  
+    this.y = y;  
+    this.radius = radius;  
+    this.color = color;  
+    this.vx = (Math.random() - 0.5) * 4;  
+    this.vy = (Math.random() - 0.5) * 4;  
+  }  
+
+  update(gravity, friction) {  
+    if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {  
+      this.vy = -this.vy * friction;  
+    } else {  
+      this.vy += gravity;  
+    }  
+
+    if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {  
+      this.vx = -this.vx * friction;  
+    }  
+
+    this.x += this.vx;  
+    this.y += this.vy;  
+  }  
+
+  draw() {  
+    ctx.beginPath();  
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);  
+    ctx.fillStyle = this.color;  
+    ctx.fill();  
+    ctx.closePath();  
+  }  
+}  
+
+let particles = [];  
+
+function initParticles(count) {  
+  particles = [];  
+  for (let i = 0; i < count; i++) {  
+    const radius = Math.random() * 10 + 5;  
+    const x = Math.random() * (canvas.width - 2 * radius) + radius;  
+    const y = Math.random() * (canvas.height - 2 * radius) + radius;  
+    const color = `hsl(${Math.random() * 360}, 50%, 60%)`;  
+    particles.push(new Particle(x, y, radius, color));  
+  }  
+}  
+
+function animate() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  const gravity = parseFloat(gravityInput.value) * 0.1;  
+  const friction = parseFloat(frictionInput.value);  
+  particles.forEach(particle => {  
+    particle.update(gravity, friction);  
+    particle.draw();  
+  });  
+  requestAnimationFrame(animate);  
+}  
+
+particleCountInput.addEventListener("change", () => {  
+  initParticles(parseInt(particleCountInput.value));  
+});  
+
+resetBtn.addEventListener("click", () => {  
+  initParticles(parseInt(particleCountInput.value));  
+});  
+
+window.addEventListener("resize", () => {  
+  canvas.width = document.getElementById("tool-app").clientWidth;  
+  canvas.height = document.getElementById("tool-app").clientHeight;  
+  initParticles(parseInt(particleCountInput.value));  
+});  
+
+initParticles(parseInt(particleCountInput.value));  
+animate();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

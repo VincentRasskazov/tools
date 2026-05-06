@@ -1,0 +1,171 @@
+---
+layout: null
+title: "Enigmatrix: The Cyber Codebreaker"
+category: "Games"
+description: "Solve dynamically generated matrix puzzles to decrypt hidden messages in a race against the clock."
+permalink: "/tools/daily-20260506-17-enigmatrix-the-cyber-codebreaker.html"
+generated_by: "api-true-ai"
+generated_date: "20260506"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enigmatrix: The Cyber Codebreaker | Free Online Interactive Tool</title>
+  <meta name="description" content="Solve dynamically generated matrix puzzles to decrypt hidden messages in a race against the clock. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Enigmatrix: The Cyber Codebreaker | Free Online Interactive Tool">
+  <meta property="og:description" content="Solve dynamically generated matrix puzzles to decrypt hidden messages in a race against the clock. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Enigmatrix: The Cyber Codebreaker | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Solve dynamically generated matrix puzzles to decrypt hidden messages in a race against the clock. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Enigmatrix: The Cyber Codebreaker</h1>
+    <p class="seo-subtitle">Solve dynamically generated matrix puzzles to decrypt hidden messages in a race against the clock.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(120deg, #1a1a2e, #16213e);  
+  color: #ffffff;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+}  
+#tool-app {  
+  text-align: center;  
+}  
+button {  
+  background-color: #0f3460;  
+  color: white;  
+  border: none;  
+  padding: 10px 20px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  margin-top: 20px;  
+}  
+button:hover {  
+  background-color: #533483;  
+}  
+table {  
+  margin: 20px auto;  
+  border-collapse: collapse;  
+}  
+td {  
+  width: 50px;  
+  height: 50px;  
+  text-align: center;  
+  font-size: 18px;  
+  border: 2px solid #ffffff;  
+  cursor: pointer;  
+}  
+td.active {  
+  background-color: #0f3460;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Enigmatrix: The Cyber Codebreaker</h1>  
+  <p>Click the cells to discover code fragments, and piece together the decrypted message before time runs out!</p>  
+  <div id="game"></div>  
+  <button id="start-game">Start Game</button>  
+  <p id="status"></p>  
+</div>  
+<script>  
+const app = document.getElementById('tool-app');  
+const gameDiv = document.getElementById('game');  
+const statusDiv = document.getElementById('status');  
+const startButton = document.getElementById('start-game');  
+let matrix = [];  
+let message = '';  
+let decrypted = '';  
+let timer = null;  
+
+function generateMatrix(size) {  
+  matrix = [];  
+  for (let i = 0; i < size; i++) {  
+    const row = [];  
+    for (let j = 0; j < size; j++) {  
+      const charCode = Math.floor(Math.random() * 26) + 65;  
+      row.push(String.fromCharCode(charCode));  
+    }  
+    matrix.push(row);  
+  }  
+}  
+
+function createTable(size) {  
+  gameDiv.innerHTML = '';  
+  const table = document.createElement('table');  
+  matrix.forEach((row, i) => {  
+    const tr = document.createElement('tr');  
+    row.forEach((cell, j) => {  
+      const td = document.createElement('td');  
+      td.textContent = '?';  
+      td.dataset.row = i;  
+      td.dataset.col = j;  
+      td.addEventListener('click', revealCell);  
+      tr.appendChild(td);  
+    });  
+    table.appendChild(tr);  
+  });  
+  gameDiv.appendChild(table);  
+}  
+
+function revealCell(event) {  
+  const row = event.target.dataset.row;  
+  const col = event.target.dataset.col;  
+  if (!event.target.classList.contains('active')) {  
+    event.target.textContent = matrix[row][col];  
+    event.target.classList.add('active');  
+    decrypted += matrix[row][col];  
+    checkCompletion();  
+  }  
+}  
+
+function checkCompletion() {  
+  if (decrypted === message) {  
+    clearInterval(timer);  
+    statusDiv.textContent = 'Congratulations! You cracked the code!';  
+    gameDiv.innerHTML = '';  
+    startButton.style.display = 'block';  
+  }  
+}  
+
+function startGame() {  
+  const size = 5;  
+  message = '';  
+  decrypted = '';  
+  for (let i = 0; i < size; i++) {  
+    message += String.fromCharCode(Math.floor(Math.random() * 26) + 65);  
+  }  
+  generateMatrix(size);  
+  createTable(size);  
+  statusDiv.textContent = 'Decrypt the message: ' + message;  
+  startButton.style.display = 'none';  
+  timer = setTimeout(() => {  
+    statusDiv.textContent = 'Time\'s up! The code remains encrypted.';  
+    gameDiv.innerHTML = '';  
+    startButton.style.display = 'block';  
+  }, 30000);  
+}  
+
+startButton.addEventListener('click', startGame);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

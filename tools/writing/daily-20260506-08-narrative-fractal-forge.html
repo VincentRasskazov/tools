@@ -1,0 +1,158 @@
+---
+layout: null
+title: "Narrative Fractal Forge"
+category: "Writing"
+description: "A visual, branching story structure generator that helps writers create and evolve intricate plotlines by dynamically linking characters, events, and themes."
+permalink: "/tools/daily-20260506-08-narrative-fractal-forge.html"
+generated_by: "api-true-ai"
+generated_date: "20260506"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Narrative Fractal Forge | Free Online Interactive Tool</title>
+  <meta name="description" content="A visual, branching story structure generator that helps writers create and evolve intricate plotlines by dynamically linking characters, events, and themes. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Narrative Fractal Forge | Free Online Interactive Tool">
+  <meta property="og:description" content="A visual, branching story structure generator that helps writers create and evolve intricate plotlines by dynamically linking characters, events, and themes. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Narrative Fractal Forge | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A visual, branching story structure generator that helps writers create and evolve intricate plotlines by dynamically linking characters, events, and themes. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Narrative Fractal Forge</h1>
+    <p class="seo-subtitle">A visual, branching story structure generator that helps writers create and evolve intricate plotlines by dynamically linking characters, events, and themes.</p>
+    <style>  
+body {  
+    font-family: Arial, sans-serif;  
+    margin: 0;  
+    padding: 0;  
+    background: radial-gradient(circle, #1b1b2f, #162447);  
+    color: #eeeeee;  
+}  
+#tool-app {  
+    padding: 2rem;  
+    max-width: 1000px;  
+    margin: 0 auto;  
+    text-align: center;  
+}  
+h1 {  
+    font-size: 2.5rem;  
+    margin-bottom: 1rem;  
+}  
+#node-container {  
+    display: flex;  
+    justify-content: center;  
+    flex-wrap: wrap;  
+    gap: 1rem;  
+    margin-top: 2rem;  
+}  
+.node {  
+    background: #1f4068;  
+    color: #ffffff;  
+    padding: 1rem;  
+    border-radius: 8px;  
+    cursor: pointer;  
+    transition: transform 0.2s;  
+    display: inline-block;  
+    width: 200px;  
+    text-align: left;  
+}  
+.node:hover {  
+    transform: scale(1.1);  
+}  
+#add-node, #export-button {  
+    background: #e43f5a;  
+    color: #ffffff;  
+    border: none;  
+    padding: 0.5rem 1rem;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    transition: background 0.2s;  
+    margin-top: 1rem;  
+}  
+#add-node:hover, #export-button:hover {  
+    background: #ff5f7e;  
+}  
+textarea {  
+    margin: 1rem 0;  
+    width: 100%;  
+    height: 100px;  
+    border-radius: 8px;  
+    border: none;  
+    padding: 1rem;  
+}  
+</style>  
+<div id="tool-app">  
+    <h1>Narrative Fractal Forge</h1>  
+    <button id="add-node">Add New Plot Node</button>  
+    <button id="export-button">Export Story Structure</button>  
+    <div id="node-container"></div>  
+    <textarea id="export-output" placeholder="Your story structure will appear here when exported..."></textarea>  
+</div>  
+<script>  
+let nodeId = 0;  
+const nodes = [];  
+
+function createNode() {  
+    nodeId++;  
+    const node = {  
+        id: nodeId,  
+        title: `Node ${nodeId}`,  
+        description: '',  
+        connections: []  
+    };  
+    nodes.push(node);  
+    renderNodes();  
+}  
+
+function renderNodes() {  
+    const container = document.getElementById('node-container');  
+    container.innerHTML = '';  
+
+    nodes.forEach(node => {  
+        const nodeElement = document.createElement('div');  
+        nodeElement.className = 'node';  
+        nodeElement.innerHTML = `  
+            <strong>${node.title}</strong>  
+            <p>${node.description || 'Click to edit...'}</p>  
+        `;  
+        nodeElement.onclick = () => editNode(node);  
+        container.appendChild(nodeElement);  
+    });  
+}  
+
+function editNode(node) {  
+    const newTitle = prompt('Enter the title of this plot node:', node.title);  
+    const newDescription = prompt('Enter the description of this plot node:', node.description);  
+    if (newTitle) node.title = newTitle;  
+    if (newDescription) node.description = newDescription;  
+    renderNodes();  
+}  
+
+function exportStory() {  
+    const output = document.getElementById('export-output');  
+    output.value = JSON.stringify(nodes, null, 2);  
+}  
+
+document.getElementById('add-node').addEventListener('click', createNode);  
+document.getElementById('export-button').addEventListener('click', exportStory);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
