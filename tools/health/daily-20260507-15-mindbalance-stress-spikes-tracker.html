@@ -1,0 +1,166 @@
+---
+layout: null
+title: "MindBalance: Stress Spikes Tracker"
+category: "Health"
+description: "A visual interactive tool that lets users guide a calming orb through a maze of stress triggers, simulating real-life decision-making and promoting mindfulness."
+permalink: "/tools/daily-20260507-15-mindbalance-stress-spikes-tracker.html"
+generated_by: "api-true-ai"
+generated_date: "20260507"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindBalance: Stress Spikes Tracker | Free Online Interactive Tool</title>
+  <meta name="description" content="A visual interactive tool that lets users guide a calming orb through a maze of stress triggers, simulating real-life decision-making and promoting mindfulness. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="MindBalance: Stress Spikes Tracker | Free Online Interactive Tool">
+  <meta property="og:description" content="A visual interactive tool that lets users guide a calming orb through a maze of stress triggers, simulating real-life decision-making and promoting mindfulness. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MindBalance: Stress Spikes Tracker | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A visual interactive tool that lets users guide a calming orb through a maze of stress triggers, simulating real-life decision-making and promoting mindfulness. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>MindBalance: Stress Spikes Tracker</h1>
+    <p class="seo-subtitle">A visual interactive tool that lets users guide a calming orb through a maze of stress triggers, simulating real-life decision-making and promoting mindfulness.</p>
+    ```html
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(120deg, #a8edea, #fed6e3);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+  #tool-app {
+    width: 500px;
+    height: 500px;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+  }
+  canvas {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+  }
+  #tooltip {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 14px;
+    border-radius: 5px;
+    display: none;
+  }
+</style>
+<div id="tool-app">
+  <canvas id="gameCanvas"></canvas>
+  <div id="tooltip">Navigate the orb safely!</div>
+</div>
+<script>
+  const canvas = document.getElementById('gameCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = 500;
+  canvas.height = 500;
+
+  let orb = { x: 250, y: 250, radius: 15, dx: 0, dy: 0 };
+  const stressZones = [];
+  let score = 100;
+  const tooltip = document.getElementById('tooltip');
+
+  // Generate stress zones
+  for (let i = 0; i < 10; i++) {
+    stressZones.push({
+      x: Math.random() * 450,
+      y: Math.random() * 450,
+      radius: 30 + Math.random() * 30,
+    });
+  }
+
+  // Draw orb
+  function drawOrb() {
+    ctx.beginPath();
+    ctx.arc(orb.x, orb.y, orb.radius, 0, Math.PI * 2);
+    ctx.fillStyle = 'blue';
+    ctx.fill();
+    ctx.closePath();
+  }
+
+  // Draw stress zones
+  function drawStressZones() {
+    stressZones.forEach(zone => {
+      ctx.beginPath();
+      ctx.arc(zone.x, zone.y, zone.radius, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255, 0, 0, 0.2)';
+      ctx.fill();
+      ctx.closePath();
+    });
+  }
+
+  // Check collisions
+  function checkCollisions() {
+    stressZones.forEach(zone => {
+      const dist = Math.hypot(orb.x - zone.x, orb.y - zone.y);
+      if (dist < zone.radius + orb.radius) {
+        score -= 1;
+        tooltip.style.display = 'block';
+        tooltip.innerText = `Stress spike! Score: ${score}`;
+      }
+    });
+  }
+
+  // Update position
+  function update() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    orb.x += orb.dx;
+    orb.y += orb.dy;
+
+    if (orb.x - orb.radius < 0 || orb.x + orb.radius > 500) orb.dx = 0;
+    if (orb.y - orb.radius < 0 || orb.y + orb.radius > 500) orb.dy = 0;
+
+    drawStressZones();
+    drawOrb();
+    checkCollisions();
+    if (score > 0) requestAnimationFrame(update);
+  }
+
+  // Keyboard controls
+  window.addEventListener('keydown', e => {
+    if (e.key === 'ArrowUp') orb.dy = -2;
+    if (e.key === 'ArrowDown') orb.dy = 2;
+    if (e.key === 'ArrowLeft') orb.dx = -2;
+    if (e.key === 'ArrowRight') orb.dx = 2;
+  });
+
+  window.addEventListener('keyup', () => {
+    orb.dx = 0;
+    orb.dy = 0;
+  });
+
+  update();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

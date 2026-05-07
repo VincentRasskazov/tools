@@ -1,0 +1,214 @@
+---
+layout: null
+title: "TaskWeb: Interactive Network of Focus"
+category: "Productivity"
+description: "A dynamic, gamified web tool where users create, organize, and optimize productivity tasks as interconnected nodes in a visually stunning, interactive web."
+permalink: "/tools/daily-20260507-13-taskweb-interactive-network-of-focus.html"
+generated_by: "api-true-ai"
+generated_date: "20260507"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskWeb: Interactive Network of Focus | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, gamified web tool where users create, organize, and optimize productivity tasks as interconnected nodes in a visually stunning, interactive web. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="TaskWeb: Interactive Network of Focus | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, gamified web tool where users create, organize, and optimize productivity tasks as interconnected nodes in a visually stunning, interactive web. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TaskWeb: Interactive Network of Focus | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, gamified web tool where users create, organize, and optimize productivity tasks as interconnected nodes in a visually stunning, interactive web. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>TaskWeb: Interactive Network of Focus</h1>
+    <p class="seo-subtitle">A dynamic, gamified web tool where users create, organize, and optimize productivity tasks as interconnected nodes in a visually stunning, interactive web.</p>
+    <style>
+/* Modern, beautiful inline CSS */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+  color: #fff;
+  overflow: hidden;
+}
+#tool-app {
+  width: 80%;
+  height: 80%;
+  position: relative;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+.node {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-align: center;
+  font-size: 14px;
+  transition: transform 0.2s;
+}
+.node:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 1);
+}
+.link {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.5);
+  height: 2px;
+  transform-origin: left center;
+}
+#add-node {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background: #fff;
+  color: #333;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+#add-node:hover {
+  background: #f0f0f0;
+}
+</style>
+<div id="tool-app">
+  <button id="add-node">+ Add Node</button>
+</div>
+<script>
+// Interactive JavaScript logic here
+const container = document.getElementById("tool-app");
+let nodes = [];
+let links = [];
+
+function createNode(x, y, text = "New Task") {
+  const node = document.createElement("div");
+  node.className = "node";
+  node.style.left = `${x}px`;
+  node.style.top = `${y}px`;
+  node.contentEditable = true;
+  node.innerText = text;
+
+  node.addEventListener("mousedown", (event) => {
+    let shiftX = event.clientX - node.getBoundingClientRect().left;
+    let shiftY = event.clientY - node.getBoundingClientRect().top;
+
+    function moveAt(pageX, pageY) {
+      node.style.left = pageX - shiftX + "px";
+      node.style.top = pageY - shiftY + "px";
+      updateLinks(node);
+    }
+
+    function onMouseMove(event) {
+      moveAt(event.pageX, event.pageY);
+    }
+
+    document.addEventListener("mousemove", onMouseMove);
+
+    node.onmouseup = function () {
+      document.removeEventListener("mousemove", onMouseMove);
+      node.onmouseup = null;
+    };
+  });
+
+  node.ondragstart = () => false;
+
+  container.appendChild(node);
+  nodes.push(node);
+
+  return node;
+}
+
+function updateLinks(node) {
+  links.forEach((link) => {
+    if (link.start === node || link.end === node) {
+      const rectStart = link.start.getBoundingClientRect();
+      const rectEnd = link.end.getBoundingClientRect();
+      const x1 = rectStart.left + rectStart.width / 2;
+      const y1 = rectStart.top + rectStart.height / 2;
+      const x2 = rectEnd.left + rectEnd.width / 2;
+      const y2 = rectEnd.top + rectEnd.height / 2;
+      const angle = Math.atan2(y2 - y1, x2 - x1);
+      const length = Math.hypot(x2 - x1, y2 - y1);
+
+      link.element.style.width = `${length}px`;
+      link.element.style.transform = `rotate(${angle}rad)`;
+      link.element.style.left = `${x1}px`;
+      link.element.style.top = `${y1}px`;
+    }
+  });
+}
+
+function createLink(start, end) {
+  const link = document.createElement("div");
+  link.className = "link";
+
+  const rectStart = start.getBoundingClientRect();
+  const rectEnd = end.getBoundingClientRect();
+  const x1 = rectStart.left + rectStart.width / 2;
+  const y1 = rectStart.top + rectStart.height / 2;
+  const x2 = rectEnd.left + rectEnd.width / 2;
+  const y2 = rectEnd.top + rectEnd.height / 2;
+  const angle = Math.atan2(y2 - y1, x2 - x1);
+  const length = Math.hypot(x2 - x1, y2 - y1);
+
+  link.style.width = `${length}px`;
+  link.style.transform = `rotate(${angle}rad)`;
+  link.style.left = `${x1}px`;
+  link.style.top = `${y1}px`;
+
+  container.appendChild(link);
+
+  links.push({
+    start,
+    end,
+    element: link,
+  });
+}
+
+document.getElementById("add-node").addEventListener("click", () => {
+  const x = Math.random() * (container.clientWidth - 100);
+  const y = Math.random() * (container.clientHeight - 100);
+  const node = createNode(x, y);
+
+  if (nodes.length > 1) {
+    createLink(nodes[nodes.length - 2], node);
+  }
+});
+
+// Initial node
+createNode(200, 200, "Start Here");
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

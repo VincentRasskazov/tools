@@ -1,0 +1,168 @@
+---
+layout: null
+title: "CodeCipher: Interactive Encryption Explorer"
+category: "Education"
+description: "A dynamic tool that teaches users cryptographic concepts by letting them encrypt, decrypt, and analyze text using classic and modern ciphers in an interactive mini-game format."
+permalink: "/tools/daily-20260507-12-codecipher-interactive-encryption-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260507"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeCipher: Interactive Encryption Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic tool that teaches users cryptographic concepts by letting them encrypt, decrypt, and analyze text using classic and modern ciphers in an interactive mini-game format. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CodeCipher: Interactive Encryption Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic tool that teaches users cryptographic concepts by letting them encrypt, decrypt, and analyze text using classic and modern ciphers in an interactive mini-game format. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CodeCipher: Interactive Encryption Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic tool that teaches users cryptographic concepts by letting them encrypt, decrypt, and analyze text using classic and modern ciphers in an interactive mini-game format. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CodeCipher: Interactive Encryption Explorer</h1>
+    <p class="seo-subtitle">A dynamic tool that teaches users cryptographic concepts by letting them encrypt, decrypt, and analyze text using classic and modern ciphers in an interactive mini-game format.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(120deg, #1e3c72, #2a5298);  
+  color: #ffffff;  
+  text-align: center;  
+  padding: 2rem;  
+}  
+#tool-app {  
+  max-width: 800px;  
+  margin: 0 auto;  
+  background-color: #ffffff;  
+  color: #333;  
+  padding: 20px;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
+}  
+button {  
+  margin: 10px;  
+  padding: 10px 20px;  
+  border: none;  
+  border-radius: 5px;  
+  background-color: #2a5298;  
+  color: #ffffff;  
+  font-size: 16px;  
+  cursor: pointer;  
+  transition: background-color 0.3s ease;  
+}  
+button:hover {  
+  background-color: #1e3c72;  
+}  
+textarea, select {  
+  width: 100%;  
+  padding: 10px;  
+  margin: 10px 0;  
+  border: 1px solid #ccc;  
+  border-radius: 5px;  
+  font-size: 16px;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>CodeCipher: Interactive Encryption Explorer</h1>  
+  <p>Select a cipher, input text, and watch as it transforms through encryption.</p>  
+  <label for="cipher-type">Choose a Cipher:</label>  
+  <select id="cipher-type">  
+    <option value="caesar">Caesar Cipher</option>  
+    <option value="vigenere">Vigenère Cipher</option>  
+    <option value="reverse">Reverse Cipher</option>  
+  </select>  
+  <textarea id="input-text" placeholder="Enter your text here..."></textarea>  
+  <button id="encrypt-btn">Encrypt</button>  
+  <button id="decrypt-btn">Decrypt</button>  
+  <h3>Result:</h3>  
+  <textarea id="result-text" readonly></textarea>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const cipherType = document.getElementById('cipher-type');  
+const inputText = document.getElementById('input-text');  
+const resultText = document.getElementById('result-text');  
+
+document.getElementById('encrypt-btn').addEventListener('click', () => {  
+  const text = inputText.value;  
+  const cipher = cipherType.value;  
+  resultText.value = applyCipher(text, cipher, 'encrypt');  
+});  
+
+document.getElementById('decrypt-btn').addEventListener('click', () => {  
+  const text = inputText.value;  
+  const cipher = cipherType.value;  
+  resultText.value = applyCipher(text, cipher, 'decrypt');  
+});  
+
+function applyCipher(text, cipher, action) {  
+  if (cipher === 'caesar') {  
+    return caesarCipher(text, action === 'encrypt' ? 3 : -3);  
+  } else if (cipher === 'vigenere') {  
+    const key = 'KEY';  
+    return vigenereCipher(text, key, action);  
+  } else if (cipher === 'reverse') {  
+    return text.split('').reverse().join('');  
+  }  
+  return text;  
+}  
+
+function caesarCipher(text, shift) {  
+  return text  
+    .split('')  
+    .map(char => {  
+      if (/[a-z]/.test(char)) {  
+        const code = char.charCodeAt(0);  
+        return String.fromCharCode(((code - 97 + shift + 26) % 26) + 97);  
+      } else if (/[A-Z]/.test(char)) {  
+        const code = char.charCodeAt(0);  
+        return String.fromCharCode(((code - 65 + shift + 26) % 26) + 65);  
+      }  
+      return char;  
+    })  
+    .join('');  
+}  
+
+function vigenereCipher(text, key, action) {  
+  const isEncrypt = action === 'encrypt';  
+  const keyRepeater = key.repeat(Math.ceil(text.length / key.length)).slice(0, text.length);  
+  return text  
+    .split('')  
+    .map((char, i) => {  
+      if (/[a-zA-Z]/.test(char)) {  
+        const charCode = char.charCodeAt(0);  
+        const keyCode = keyRepeater[i].toUpperCase().charCodeAt(0) - 65;  
+        if (char === char.toUpperCase()) {  
+          return String.fromCharCode(  
+            ((charCode - 65 + (isEncrypt ? keyCode : -keyCode) + 26) % 26) + 65  
+          );  
+        } else {  
+          return String.fromCharCode(  
+            ((charCode - 97 + (isEncrypt ? keyCode : -keyCode) + 26) % 26) + 97  
+          );  
+        }  
+      }  
+      return char;  
+    })  
+    .join('');  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,160 @@
+---
+layout: null
+title: "DataPulse: Interactive Dataset Debugger"
+category: "Data"
+description: "A dynamic browser tool that gamifies identifying errors, anomalies, and inconsistencies in large, randomized datasets using pattern recognition and logic challenges."
+permalink: "/tools/daily-20260507-08-datapulse-interactive-dataset-debugger.html"
+generated_by: "api-true-ai"
+generated_date: "20260507"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataPulse: Interactive Dataset Debugger | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic browser tool that gamifies identifying errors, anomalies, and inconsistencies in large, randomized datasets using pattern recognition and logic challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataPulse: Interactive Dataset Debugger | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic browser tool that gamifies identifying errors, anomalies, and inconsistencies in large, randomized datasets using pattern recognition and logic challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataPulse: Interactive Dataset Debugger | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic browser tool that gamifies identifying errors, anomalies, and inconsistencies in large, randomized datasets using pattern recognition and logic challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataPulse: Interactive Dataset Debugger</h1>
+    <p class="seo-subtitle">A dynamic browser tool that gamifies identifying errors, anomalies, and inconsistencies in large, randomized datasets using pattern recognition and logic challenges.</p>
+    <style>  
+  #tool-app {  
+    font-family: 'Arial', sans-serif;  
+    margin: 2rem auto;  
+    max-width: 800px;  
+    text-align: center;  
+  }  
+  .grid {  
+    display: grid;  
+    grid-template-columns: repeat(5, 1fr);  
+    gap: 10px;  
+    margin-top: 20px;  
+  }  
+  .cell {  
+    padding: 10px;  
+    background: #f7f9fc;  
+    border: 1px solid #ccc;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    transition: background 0.3s, transform 0.2s;  
+  }  
+  .cell:hover {  
+    background: #d4edda;  
+    transform: scale(1.05);  
+  }  
+  .cell.error {  
+    background: #f8d7da;  
+    color: #721c24;  
+  }  
+  .score {  
+    font-size: 1.5rem;  
+    margin-top: 20px;  
+    color: #555;  
+  }  
+  #restart-button {  
+    padding: 10px 20px;  
+    background: #007bff;  
+    border: none;  
+    color: white;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    transition: background 0.3s;  
+  }  
+  #restart-button:hover {  
+    background: #0056b3;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h1>DataPulse: Spot the Errors!</h1>  
+  <p>Analyze the dataset below and click on the cells with errors or anomalies quickly before time runs out!</p>  
+  <div class="grid" id="data-grid"></div>  
+  <div class="score" id="score-board">Score: 0</div>  
+  <button id="restart-button">Restart Game</button>  
+</div>  
+<script>  
+  const app = document.getElementById("tool-app");  
+  const grid = document.getElementById("data-grid");  
+  const scoreBoard = document.getElementById("score-board");  
+  const restartButton = document.getElementById("restart-button");  
+  
+  const ROWS = 5;  
+  const COLS = 5;  
+  let score = 0;  
+  let errors = [];  
+  let timer;  
+  
+  function generateRandomData() {  
+    const data = [];  
+    for (let i = 0; i < ROWS * COLS; i++) {  
+      const value = Math.random() > 0.85 ? "ERR" : Math.floor(Math.random() * 100);  
+      data.push(value);  
+    }  
+    return data;  
+  }  
+  
+  function renderGrid(data) {  
+    grid.innerHTML = "";  
+    data.forEach((value, index) => {  
+      const cell = document.createElement("div");  
+      cell.className = "cell";  
+      cell.textContent = value;  
+      if (value === "ERR") {  
+        cell.classList.add("error");  
+        errors.push(index);  
+      }  
+      cell.addEventListener("click", () => {  
+        if (value === "ERR") {  
+          score++;  
+          scoreBoard.textContent = "Score: " + score;  
+          cell.classList.remove("error");  
+          cell.style.pointerEvents = "none";  
+          cell.style.background = "#c3e6cb";  
+        } else {  
+          score--;  
+          scoreBoard.textContent = "Score: " + score;  
+          cell.style.background = "#f5c6cb";  
+          setTimeout(() => (cell.style.background = "#f7f9fc"), 500);  
+        }  
+      });  
+      grid.appendChild(cell);  
+    });  
+  }  
+  
+  function startGame() {  
+    score = 0;  
+    errors = [];  
+    const data = generateRandomData();  
+    renderGrid(data);  
+    scoreBoard.textContent = "Score: 0";  
+    clearTimeout(timer);  
+    timer = setTimeout(() => {  
+      alert("Game Over! Your final score is: " + score);  
+    }, 60000); // 60 seconds  
+  }  
+  
+  restartButton.addEventListener("click", startGame);  
+  startGame();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
