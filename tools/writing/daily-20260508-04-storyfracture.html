@@ -1,0 +1,137 @@
+---
+layout: null
+title: "StoryFracture"
+category: "Writing"
+description: "Break your story into dynamic, interactive narrative threads to visualize pacing, character involvement, and plot twists in real-time."
+permalink: "/tools/daily-20260508-04-storyfracture.html"
+generated_by: "api-true-ai"
+generated_date: "20260508"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StoryFracture | Free Online Interactive Tool</title>
+  <meta name="description" content="Break your story into dynamic, interactive narrative threads to visualize pacing, character involvement, and plot twists in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="StoryFracture | Free Online Interactive Tool">
+  <meta property="og:description" content="Break your story into dynamic, interactive narrative threads to visualize pacing, character involvement, and plot twists in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StoryFracture | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Break your story into dynamic, interactive narrative threads to visualize pacing, character involvement, and plot twists in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>StoryFracture</h1>
+    <p class="seo-subtitle">Break your story into dynamic, interactive narrative threads to visualize pacing, character involvement, and plot twists in real-time.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: #fefefe; color: #333; margin: 0; padding: 20px; }  
+  #tool-app { max-width: 800px; margin: 0 auto; }  
+  .node { display: inline-block; padding: 10px; margin: 5px; border: 2px solid #333; border-radius: 5px; background: #f0f8ff; cursor: move; }  
+  .node.active { background: #add8e6; border-color: #0073e6; }  
+  #canvas { width: 100%; height: 500px; border: 1px dashed #aaa; overflow: hidden; position: relative; }  
+  .line { stroke: #333; stroke-width: 2; }  
+  .menu { margin-bottom: 10px; }  
+</style>  
+<div id="tool-app">  
+  <div class="menu">  
+    <button id="add-node">Add Narrative Node</button>  
+    <button id="clear-canvas">Clear Canvas</button>  
+  </div>  
+  <div id="canvas"></div>  
+</div>  
+<script>  
+// JavaScript to create interactive narrative threads  
+const canvas = document.getElementById("canvas");  
+const addNodeBtn = document.getElementById("add-node");  
+const clearCanvasBtn = document.getElementById("clear-canvas");  
+
+let nodes = [];  
+let isDragging = false;  
+let currentElement = null;  
+
+function createNode() {  
+  const node = document.createElement("div");  
+  node.className = "node";  
+  node.contentEditable = true;  
+  node.textContent = "New Node";  
+  node.style.position = "absolute";  
+  node.style.left = `${Math.random() * (canvas.offsetWidth - 100)}px`;  
+  node.style.top = `${Math.random() * (canvas.offsetHeight - 50)}px`;  
+
+  node.addEventListener("mousedown", (e) => {  
+    isDragging = true;  
+    currentElement = node;  
+    node.classList.add("active");  
+  });  
+
+  node.addEventListener("mouseup", () => {  
+    isDragging = false;  
+    currentElement = null;  
+    node.classList.remove("active");  
+    drawLines();  
+  });  
+
+  canvas.appendChild(node);  
+  nodes.push(node);  
+}  
+
+function clearCanvas() {  
+  canvas.innerHTML = "";  
+  nodes = [];  
+}  
+
+function drawLines() {  
+  const svg = document.querySelector("svg");  
+  if (svg) svg.remove();  
+
+  const svgNS = "http://www.w3.org/2000/svg";  
+  const lineContainer = document.createElementNS(svgNS, "svg");  
+  lineContainer.style.position = "absolute";  
+  lineContainer.style.width = "100%";  
+  lineContainer.style.height = "100%";  
+  canvas.prepend(lineContainer);  
+
+  nodes.forEach((node, index) => {  
+    if (index < nodes.length - 1) {  
+      const nextNode = nodes[index + 1];  
+      const line = document.createElementNS(svgNS, "line");  
+      const rect1 = node.getBoundingClientRect();  
+      const rect2 = nextNode.getBoundingClientRect();  
+      line.setAttribute("x1", rect1.left + rect1.width / 2);  
+      line.setAttribute("y1", rect1.top + rect1.height / 2);  
+      line.setAttribute("x2", rect2.left + rect2.width / 2);  
+      line.setAttribute("y2", rect2.top + rect2.height / 2);  
+      line.classList.add("line");  
+      lineContainer.appendChild(line);  
+    }  
+  });  
+}  
+
+addNodeBtn.addEventListener("click", createNode);  
+clearCanvasBtn.addEventListener("click", clearCanvas);  
+
+canvas.addEventListener("mousemove", (e) => {  
+  if (isDragging && currentElement) {  
+    currentElement.style.left = `${e.clientX - canvas.offsetLeft - currentElement.offsetWidth / 2}px`;  
+    currentElement.style.top = `${e.clientY - canvas.offsetTop - currentElement.offsetHeight / 2}px`;  
+    drawLines();  
+  }  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

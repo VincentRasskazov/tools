@@ -1,0 +1,144 @@
+---
+layout: null
+title: "WordWeaver: Dynamic Story Map"
+category: "Writing"
+description: "A highly interactive tool that lets users visually craft and weave branching storylines with customizable nodes, dynamic connections, and live word count tracking."
+permalink: "/tools/daily-20260508-01-wordweaver-dynamic-story-map.html"
+generated_by: "api-true-ai"
+generated_date: "20260508"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordWeaver: Dynamic Story Map | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive tool that lets users visually craft and weave branching storylines with customizable nodes, dynamic connections, and live word count tracking. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="WordWeaver: Dynamic Story Map | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive tool that lets users visually craft and weave branching storylines with customizable nodes, dynamic connections, and live word count tracking. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WordWeaver: Dynamic Story Map | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive tool that lets users visually craft and weave branching storylines with customizable nodes, dynamic connections, and live word count tracking. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>WordWeaver: Dynamic Story Map</h1>
+    <p class="seo-subtitle">A highly interactive tool that lets users visually craft and weave branching storylines with customizable nodes, dynamic connections, and live word count tracking.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: 'Arial', sans-serif;  
+  background: linear-gradient(120deg, #fdfbfb, #ebedee);  
+  margin: 0;  
+  padding: 20px;  
+}  
+#tool-app {  
+  max-width: 800px;  
+  margin: auto;  
+  background: #fff;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
+  padding: 20px;  
+}  
+.node {  
+  background: #0078D4;  
+  color: #fff;  
+  padding: 15px;  
+  border-radius: 5px;  
+  cursor: grab;  
+  position: absolute;  
+  box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.2);  
+}  
+.connection {  
+  position: absolute;  
+  background-color: #00A2FF;  
+  height: 2px;  
+}  
+</style>  
+<div id="tool-app">  
+  <h2>WordWeaver: Dynamic Story Map</h2>  
+  <button id="add-node">Add Node</button>  
+  <button id="clear-map">Clear Map</button>  
+  <div id="story-map" style="position: relative; width: 100%; height: 500px; border: 2px dashed #ccc; margin-top: 20px;"></div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+(function () {  
+  const storyMap = document.getElementById('story-map');  
+  const addNodeBtn = document.getElementById('add-node');  
+  const clearMapBtn = document.getElementById('clear-map');  
+  let nodeIdCounter = 0;  
+
+  function createNode(x = 50, y = 50, text = 'Story Node') {  
+    const node = document.createElement('div');  
+    node.classList.add('node');  
+    node.textContent = text;  
+    node.style.left = `${x}px`;  
+    node.style.top = `${y}px`;  
+    node.setAttribute('draggable', true);  
+    node.dataset.id = `node-${nodeIdCounter++}`;  
+
+    node.addEventListener('dragstart', (e) => {  
+      e.dataTransfer.setData('text/plain', JSON.stringify({ id: node.dataset.id, x: e.offsetX, y: e.offsetY }));  
+    });  
+
+    node.addEventListener('dblclick', () => {  
+      const newText = prompt('Edit node text:', node.textContent);  
+      if (newText) node.textContent = newText;  
+    });  
+
+    storyMap.appendChild(node);  
+    return node;  
+  }  
+
+  function createConnection(fromNode, toNode) {  
+    const connection = document.createElement('div');  
+    connection.classList.add('connection');  
+    storyMap.appendChild(connection);  
+    updateConnectionPosition(connection, fromNode, toNode);  
+    return connection;  
+  }  
+
+  function updateConnectionPosition(connection, fromNode, toNode) {  
+    const fromRect = fromNode.getBoundingClientRect();  
+    const toRect = toNode.getBoundingClientRect();  
+
+    const startX = fromRect.left + fromRect.width / 2;  
+    const startY = fromRect.top + fromRect.height / 2;  
+    const endX = toRect.left + toRect.width / 2;  
+    const endY = toRect.top + toRect.height / 2;  
+
+    const angle = Math.atan2(endY - startY, endX - startX);  
+    const length = Math.hypot(endX - startX, endY - startY);  
+
+    connection.style.transform = `rotate(${angle}rad)`;  
+    connection.style.width = `${length}px`;  
+    connection.style.left = `${startX}px`;  
+    connection.style.top = `${startY}px`;  
+  }  
+
+  addNodeBtn.addEventListener('click', () => {  
+    createNode();  
+  });  
+
+  clearMapBtn.addEventListener('click', () => {  
+    storyMap.innerHTML = '';  
+  });  
+})();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
