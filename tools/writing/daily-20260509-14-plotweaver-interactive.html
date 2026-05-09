@@ -1,0 +1,158 @@
+---
+layout: null
+title: "PlotWeaver Interactive"
+category: "Writing"
+description: "A dynamic storytelling tool where users craft branching storylines through draggable nodes and visual connections, with real-time feedback on narrative flow and plot consistency."
+permalink: "/tools/daily-20260509-14-plotweaver-interactive.html"
+generated_by: "api-true-ai"
+generated_date: "20260509"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PlotWeaver Interactive | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic storytelling tool where users craft branching storylines through draggable nodes and visual connections, with real-time feedback on narrative flow and plot consistency. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PlotWeaver Interactive | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic storytelling tool where users craft branching storylines through draggable nodes and visual connections, with real-time feedback on narrative flow and plot consistency. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PlotWeaver Interactive | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic storytelling tool where users craft branching storylines through draggable nodes and visual connections, with real-time feedback on narrative flow and plot consistency. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PlotWeaver Interactive</h1>
+    <p class="seo-subtitle">A dynamic storytelling tool where users craft branching storylines through draggable nodes and visual connections, with real-time feedback on narrative flow and plot consistency.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f5f5f5; color: #333; }  
+  #tool-app { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }  
+  #story-map { width: 90vw; height: 70vh; background: white; border: 2px solid #ddd; border-radius: 10px; position: relative; overflow: hidden; }  
+  .node { position: absolute; padding: 10px; background: #4CAF50; color: white; border-radius: 5px; cursor: grab; user-select: none; }  
+  .connection { position: absolute; stroke: #888; stroke-width: 2px; }  
+  #feedback { margin-top: 20px; padding: 10px; background: #efefef; border: 1px solid #ccc; border-radius: 5px; }  
+</style>  
+<div id="tool-app">  
+  <div id="story-map"></div>  
+  <div id="feedback">Drag and connect nodes to create your story!</div>  
+</div>  
+<script>  
+  const app = document.getElementById("tool-app");  
+  const storyMap = document.getElementById("story-map");  
+  const feedback = document.getElementById("feedback");  
+
+  let nodes = [];  
+  let connections = [];  
+
+  function createNode(x, y, text = "New Event") {  
+    const node = document.createElement("div");  
+    node.className = "node";  
+    node.contentEditable = true;  
+    node.innerText = text;  
+    node.style.left = x + "px";  
+    node.style.top = y + "px";  
+    storyMap.appendChild(node);  
+    nodes.push(node);  
+    makeDraggable(node);  
+  }  
+
+  function makeDraggable(node) {  
+    let isDragging = false;  
+    node.addEventListener("mousedown", (e) => {  
+      isDragging = true;  
+      node.style.cursor = "grabbing";  
+      const offsetX = e.offsetX;  
+      const offsetY = e.offsetY;  
+      function onMouseMove(e) {  
+        if (isDragging) {  
+          node.style.left = e.pageX - storyMap.offsetLeft - offsetX + "px";  
+          node.style.top = e.pageY - storyMap.offsetTop - offsetY + "px";  
+          updateConnections();  
+        }  
+      }  
+      document.addEventListener("mousemove", onMouseMove);  
+      document.addEventListener("mouseup", () => {  
+        isDragging = false;  
+        node.style.cursor = "grab";  
+        document.removeEventListener("mousemove", onMouseMove);  
+      }, { once: true });  
+    });  
+
+    node.addEventListener("dblclick", () => {  
+      if (connections.length < nodes.length - 1) {  
+        feedback.textContent = "Click on another node to connect.";  
+        selectNodeForConnection(node);  
+      } else {  
+        feedback.textContent = "Maximum connections reached.";  
+      }  
+    });  
+  }  
+
+  let selectedNode = null;  
+  function selectNodeForConnection(node) {  
+    selectedNode = node;  
+    storyMap.addEventListener("click", onConnectClick, { once: true });  
+  }  
+
+  function onConnectClick(e) {  
+    const targetNode = e.target;  
+    if (targetNode !== selectedNode && targetNode.classList.contains("node")) {  
+      addConnection(selectedNode, targetNode);  
+    } else {  
+      feedback.textContent = "Invalid connection.";  
+    }  
+    selectedNode = null;  
+  }  
+
+  function addConnection(nodeA, nodeB) {  
+    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");  
+    line.classList.add("connection");  
+    storyMap.appendChild(line);  
+    connections.push({ line, nodeA, nodeB });  
+    updateConnections();  
+    feedback.textContent = "Connection created!";  
+  }  
+
+  function updateConnections() {  
+    connections.forEach(({ line, nodeA, nodeB }) => {  
+      const rectA = nodeA.getBoundingClientRect();  
+      const rectB = nodeB.getBoundingClientRect();  
+      const x1 = rectA.left + rectA.width / 2 - storyMap.offsetLeft;  
+      const y1 = rectA.top + rectA.height / 2 - storyMap.offsetTop;  
+      const x2 = rectB.left + rectB.width / 2 - storyMap.offsetLeft;  
+      const y2 = rectB.top + rectB.height / 2 - storyMap.offsetTop;  
+      line.setAttribute("x1", x1);  
+      line.setAttribute("y1", y1);  
+      line.setAttribute("x2", x2);  
+      line.setAttribute("y2", y2);  
+    });  
+  }  
+
+  storyMap.addEventListener("dblclick", (e) => {  
+    if (e.target === storyMap) {  
+      createNode(e.offsetX, e.offsetY);  
+      feedback.textContent = "New node added.";  
+    }  
+  });  
+
+  // Initial setup  
+  createNode(100, 100, "Start");  
+  createNode(300, 200, "Middle");  
+  createNode(500, 100, "End");  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

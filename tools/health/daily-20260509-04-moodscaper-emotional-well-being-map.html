@@ -1,0 +1,143 @@
+---
+layout: null
+title: "MoodScaper: Emotional Well-being Map"
+category: "Health"
+description: "Explore your daily emotions and stress triggers by creating an interactive, dynamic \"mood landscape\" that evolves based on your input and self-assessment."
+permalink: "/tools/daily-20260509-04-moodscaper-emotional-well-being-map.html"
+generated_by: "api-true-ai"
+generated_date: "20260509"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MoodScaper: Emotional Well-being Map | Free Online Interactive Tool</title>
+  <meta name="description" content="Explore your daily emotions and stress triggers by creating an interactive, dynamic &quot;mood landscape&quot; that evolves based on your input and self-assessment. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="MoodScaper: Emotional Well-being Map | Free Online Interactive Tool">
+  <meta property="og:description" content="Explore your daily emotions and stress triggers by creating an interactive, dynamic &quot;mood landscape&quot; that evolves based on your input and self-assessment. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MoodScaper: Emotional Well-being Map | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Explore your daily emotions and stress triggers by creating an interactive, dynamic &quot;mood landscape&quot; that evolves based on your input and self-assessment. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>MoodScaper: Emotional Well-being Map</h1>
+    <p class="seo-subtitle">Explore your daily emotions and stress triggers by creating an interactive, dynamic &quot;mood landscape&quot; that evolves based on your input and self-assessment.</p>
+    <style>  
+  body {  
+    font-family: 'Arial', sans-serif;  
+    margin: 0;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+    background: linear-gradient(to bottom, #8EC5FC, #E0C3FC);  
+    color: #333;  
+  }  
+  #tool-app {  
+    width: 90%;  
+    max-width: 600px;  
+    background: white;  
+    border-radius: 12px;  
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);  
+    padding: 20px;  
+    text-align: center;  
+  }  
+  h1 {  
+    font-size: 24px;  
+    margin-bottom: 10px;  
+  }  
+  .mood-option {  
+    display: inline-block;  
+    margin: 10px;  
+    padding: 10px 15px;  
+    border: 2px solid #333;  
+    border-radius: 8px;  
+    cursor: pointer;  
+    transition: all 0.3s;  
+  }  
+  .mood-option:hover {  
+    background: #B5F1CC;  
+    color: #333;  
+  }  
+  canvas {  
+    margin-top: 20px;  
+    width: 100%;  
+    height: 300px;  
+    border: 1px solid #ccc;  
+    border-radius: 12px;  
+  }  
+  .mood-log {  
+    margin-top: 15px;  
+    font-size: 14px;  
+    color: #555;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h1>MoodScaper: Emotional Well-being Map</h1>  
+  <p>Select your mood to build your personal landscape:</p>  
+  <div>  
+    <div class="mood-option" data-mood="Happy">😊 Happy</div>  
+    <div class="mood-option" data-mood="Calm">😌 Calm</div>  
+    <div class="mood-option" data-mood="Anxious">😰 Anxious</div>  
+    <div class="mood-option" data-mood="Sad">😢 Sad</div>  
+    <div class="mood-option" data-mood="Energetic">⚡ Energetic</div>  
+  </div>  
+  <canvas id="moodCanvas"></canvas>  
+  <div class="mood-log"></div>  
+</div>  
+<script>  
+const canvas = document.getElementById('moodCanvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = canvas.offsetWidth;  
+canvas.height = canvas.offsetHeight;  
+const moodLog = document.querySelector('.mood-log');  
+const moodColors = {  
+  Happy: '#FFDD67',  
+  Calm: '#A9D3FF',  
+  Anxious: '#FF6F61',  
+  Sad: '#A6A6A6',  
+  Energetic: '#FFE156'  
+};  
+
+let landscape = [];  
+
+document.querySelectorAll('.mood-option').forEach(option => {  
+  option.addEventListener('click', () => {  
+    const mood = option.dataset.mood;  
+    if (landscape.length >= canvas.width / 20) landscape.shift();  
+    landscape.push(mood);  
+    moodLog.innerText = `Mood history: ${landscape.join(', ')}`;  
+    drawLandscape();  
+  });  
+});  
+
+function drawLandscape() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  landscape.forEach((mood, index) => {  
+    const x = index * 20;  
+    const y = canvas.height / 2 + Math.sin(index) * 30;  
+    ctx.fillStyle = moodColors[mood];  
+    ctx.beginPath();  
+    ctx.arc(x, y, 10, 0, Math.PI * 2);  
+    ctx.fill();  
+  });  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

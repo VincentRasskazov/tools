@@ -1,0 +1,190 @@
+---
+layout: null
+title: "Task Galaxy Navigator"
+category: "Productivity"
+description: "A gamified productivity tool where users explore a galaxy of tasks, completing planets (tasks) to unlock new constellations while tracking progress visually."
+permalink: "/tools/daily-20260509-12-task-galaxy-navigator.html"
+generated_by: "api-true-ai"
+generated_date: "20260509"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Galaxy Navigator | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified productivity tool where users explore a galaxy of tasks, completing planets (tasks) to unlock new constellations while tracking progress visually. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Task Galaxy Navigator | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified productivity tool where users explore a galaxy of tasks, completing planets (tasks) to unlock new constellations while tracking progress visually. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Task Galaxy Navigator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified productivity tool where users explore a galaxy of tasks, completing planets (tasks) to unlock new constellations while tracking progress visually. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Task Galaxy Navigator</h1>
+    <p class="seo-subtitle">A gamified productivity tool where users explore a galaxy of tasks, completing planets (tasks) to unlock new constellations while tracking progress visually.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  background: radial-gradient(circle, #111d5e, #050a30);  
+  color: white;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 100vw;  
+  height: 100vh;  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  position: relative;  
+}  
+canvas {  
+  display: block;  
+}  
+#task-input-container {  
+  position: absolute;  
+  bottom: 20px;  
+  left: 50%;  
+  transform: translateX(-50%);  
+  display: flex;  
+  gap: 10px;  
+}  
+input {  
+  padding: 10px;  
+  border: none;  
+  border-radius: 5px;  
+  font-size: 14px;  
+}  
+button {  
+  padding: 10px 15px;  
+  background: #4caf50;  
+  color: white;  
+  border: none;  
+  border-radius: 5px;  
+  font-size: 14px;  
+  cursor: pointer;  
+  transition: background 0.2s ease;  
+}  
+button:hover {  
+  background: #45a049;  
+}  
+</style>  
+<div id="tool-app">  
+  <canvas id="galaxyCanvas"></canvas>  
+  <div id="task-input-container">  
+    <input type="text" id="taskInput" placeholder="Enter a task...">  
+    <button id="addTaskBtn">Add Task</button>  
+  </div>  
+</div>  
+<script>  
+const canvas = document.getElementById("galaxyCanvas");  
+const ctx = canvas.getContext("2d");  
+let tasks = [];  
+let stars = [];  
+canvas.width = window.innerWidth;  
+canvas.height = window.innerHeight;  
+
+function createStar(x, y, radius, color) {  
+  return { x, y, radius, color, completed: false };  
+}  
+
+function randomBetween(min, max) {  
+  return Math.random() * (max - min) + min;  
+}  
+
+function generateStars() {  
+  for (let i = 0; i < 50; i++) {  
+    stars.push(  
+      createStar(  
+        randomBetween(0, canvas.width),  
+        randomBetween(0, canvas.height),  
+        randomBetween(2, 5),  
+        `rgba(${randomBetween(100, 255)}, ${randomBetween(100, 255)}, ${randomBetween(100, 255)}, 0.8)`  
+      )  
+    );  
+  }  
+}  
+
+function drawStars() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  stars.forEach((star, index) => {  
+    ctx.beginPath();  
+    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);  
+    ctx.fillStyle = star.completed ? "gold" : star.color;  
+    ctx.fill();  
+    ctx.closePath();  
+
+    if (tasks[index]) {  
+      ctx.font = "14px Arial";  
+      ctx.fillStyle = "white";  
+      ctx.fillText(  
+        tasks[index],  
+        star.x - ctx.measureText(tasks[index]).width / 2,  
+        star.y - star.radius - 10  
+      );  
+    }  
+  });  
+}  
+
+function addTask(taskText) {  
+  if (taskText && stars.length > tasks.length) {  
+    tasks.push(taskText);  
+  }  
+}  
+
+function handleTaskCompletion(index) {  
+  if (!stars[index].completed) {  
+    stars[index].completed = true;  
+    drawStars();  
+  }  
+}  
+
+generateStars();  
+drawStars();  
+
+const addTaskBtn = document.getElementById("addTaskBtn");  
+const taskInput = document.getElementById("taskInput");  
+
+addTaskBtn.addEventListener("click", () => {  
+  if (taskInput.value.trim()) {  
+    addTask(taskInput.value.trim());  
+    taskInput.value = "";  
+    drawStars();  
+  }  
+});  
+
+canvas.addEventListener("click", (event) => {  
+  const rect = canvas.getBoundingClientRect();  
+  const mouseX = event.clientX - rect.left;  
+  const mouseY = event.clientY - rect.top;  
+
+  stars.forEach((star, index) => {  
+    const dist = Math.sqrt(  
+      (mouseX - star.x) ** 2 + (mouseY - star.y) ** 2  
+    );  
+    if (dist < star.radius + 5 && tasks[index]) {  
+      handleTaskCompletion(index);  
+    }  
+  });  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
