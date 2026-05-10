@@ -1,0 +1,156 @@
+---
+layout: null
+title: "Investment Journey Simulator"
+category: "Finance"
+description: "A gamified, dynamic simulation where users make financial decisions over a virtual 30-year timeline, encountering random events, market trends, and personal goals while trying to grow their wealth."
+permalink: "/tools/daily-20260510-03-investment-journey-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260510"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Investment Journey Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified, dynamic simulation where users make financial decisions over a virtual 30-year timeline, encountering random events, market trends, and personal goals while trying to grow their wealth. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Investment Journey Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified, dynamic simulation where users make financial decisions over a virtual 30-year timeline, encountering random events, market trends, and personal goals while trying to grow their wealth. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Investment Journey Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified, dynamic simulation where users make financial decisions over a virtual 30-year timeline, encountering random events, market trends, and personal goals while trying to grow their wealth. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Investment Journey Simulator</h1>
+    <p class="seo-subtitle">A gamified, dynamic simulation where users make financial decisions over a virtual 30-year timeline, encountering random events, market trends, and personal goals while trying to grow their wealth.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background: linear-gradient(to bottom, #1e3c72, #2a5298);  
+  color: #fff;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  background: #ffffff10;  
+  padding: 20px;  
+  border-radius: 10px;  
+  width: 80%;  
+  max-width: 800px;  
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);  
+}  
+h1 {  
+  text-align: center;  
+  font-size: 2rem;  
+  margin-bottom: 10px;  
+}  
+#event-log {  
+  max-height: 300px;  
+  overflow-y: scroll;  
+  background: #ffffff15;  
+  padding: 10px;  
+  border-radius: 5px;  
+  margin-top: 10px;  
+}  
+button {  
+  background: #2a9d8f;  
+  color: white;  
+  border: none;  
+  padding: 10px 20px;  
+  margin: 5px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  font-size: 1rem;  
+}  
+button:hover {  
+  background: #21867a;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Investment Journey Simulator</h1>  
+  <p><strong>Year:</strong> <span id="year">1</span> | <strong>Wealth:</strong> $<span id="wealth">5000</span></p>  
+  <p>Choose your next move:</p>  
+  <button id="invest-btn">Invest in Stocks</button>  
+  <button id="save-btn">Save in Bank</button>  
+  <button id="spend-btn">Spend on Lifestyle</button>  
+  <div id="event-log"><strong>Event Log:</strong></div>  
+</div>  
+<script>  
+(() => {  
+  const STARTING_WEALTH = 5000;  
+  const DECISION_EVENTS = [  
+    { message: "The market boomed! Your stocks grew by 20%.", effect: (wealth) => wealth * 1.2 },  
+    { message: "A recession hit. You lost 15% of your stock investments.", effect: (wealth) => wealth * 0.85 },  
+    { message: "You received a bonus at work! Gained $2000.", effect: (wealth) => wealth + 2000 },  
+    { message: "You had to pay for unexpected medical expenses. Lost $3000.", effect: (wealth) => wealth - 3000 },  
+    { message: "Your savings earned 5% interest.", effect: (wealth) => wealth * 1.05 },  
+    { message: "You overspent on a vacation! Lost $1000.", effect: (wealth) => wealth - 1000 },  
+  ];  
+  let year = 1;  
+  let wealth = STARTING_WEALTH;  
+
+  const yearEl = document.getElementById("year");  
+  const wealthEl = document.getElementById("wealth");  
+  const eventLogEl = document.getElementById("event-log");  
+
+  function updateDisplay() {  
+    yearEl.innerText = year;  
+    wealthEl.innerText = Math.max(0, wealth).toFixed(2);  
+  }  
+
+  function logEvent(message) {  
+    const eventMessage = document.createElement("p");  
+    eventMessage.innerText = `Year ${year}: ${message}`;  
+    eventLogEl.appendChild(eventMessage);  
+    eventLogEl.scrollTop = eventLogEl.scrollHeight;  
+  }  
+
+  function handleDecision(decision) {  
+    const randomEvent = DECISION_EVENTS[Math.floor(Math.random() * DECISION_EVENTS.length)];  
+    switch (decision) {  
+      case "invest":  
+        wealth = randomEvent.effect(wealth);  
+        logEvent(`You chose to invest. ${randomEvent.message}`);  
+        break;  
+      case "save":  
+        wealth = Math.max(wealth, 0) * 1.02;  
+        logEvent("You chose to save. Your savings grew by 2%.");  
+        break;  
+      case "spend":  
+        wealth -= 1000;  
+        logEvent("You chose to spend on lifestyle. Lost $1000.");  
+        break;  
+    }  
+    year += 1;  
+    updateDisplay();  
+  }  
+
+  document.getElementById("invest-btn").addEventListener("click", () => handleDecision("invest"));  
+  document.getElementById("save-btn").addEventListener("click", () => handleDecision("save"));  
+  document.getElementById("spend-btn").addEventListener("click", () => handleDecision("spend"));  
+
+  updateDisplay();  
+})();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

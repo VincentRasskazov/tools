@@ -1,0 +1,132 @@
+---
+layout: null
+title: "Dependency Spider: Visual Code Package Mapper"
+category: "Developer"
+description: "An interactive tool that lets developers upload their `package.json` file to visualize and explore their project's dependency tree as a dynamic, zoomable web graph."
+permalink: "/tools/daily-20260510-02-dependency-spider-visual-code-package-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260510"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dependency Spider: Visual Code Package Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool that lets developers upload their `package.json` file to visualize and explore their project's dependency tree as a dynamic, zoomable web graph. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Dependency Spider: Visual Code Package Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool that lets developers upload their `package.json` file to visualize and explore their project's dependency tree as a dynamic, zoomable web graph. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dependency Spider: Visual Code Package Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool that lets developers upload their `package.json` file to visualize and explore their project's dependency tree as a dynamic, zoomable web graph. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Dependency Spider: Visual Code Package Mapper</h1>
+    <p class="seo-subtitle">An interactive tool that lets developers upload their `package.json` file to visualize and explore their project's dependency tree as a dynamic, zoomable web graph.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; background: #1e1e2e; color: #f8f8f2; }  
+  #tool-app { height: 100vh; display: flex; justify-content: center; align-items: center; }  
+  canvas { border: 2px solid #6272a4; border-radius: 8px; }  
+  .tooltip { position: absolute; background: #282a36; color: #f8f8f2; padding: 8px; border-radius: 5px; font-size: 0.9em; display: none; }  
+</style>  
+<div id="tool-app">  
+  <input type="file" id="fileInput" accept=".json" style="position:absolute; z-index:10;"/>  
+  <canvas id="dependencyCanvas"></canvas>  
+  <div class="tooltip" id="tooltip"></div>  
+</div>  
+<script>  
+const canvas = document.getElementById("dependencyCanvas");  
+const ctx = canvas.getContext("2d");  
+const tooltip = document.getElementById("tooltip");  
+canvas.width = window.innerWidth;  
+canvas.height = window.innerHeight;  
+let nodes = [];  
+let links = [];  
+
+function drawGraph() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  links.forEach(link => {  
+    ctx.beginPath();  
+    ctx.strokeStyle = "#bd93f9";  
+    ctx.lineWidth = 2;  
+    ctx.moveTo(link.source.x, link.source.y);  
+    ctx.lineTo(link.target.x, link.target.y);  
+    ctx.stroke();  
+  });  
+  nodes.forEach(node => {  
+    ctx.beginPath();  
+    ctx.fillStyle = node.type === "root" ? "#50fa7b" : "#ff79c6";  
+    ctx.arc(node.x, node.y, 10, 0, 2 * Math.PI);  
+    ctx.fill();  
+    ctx.font = "12px Arial";  
+    ctx.fillStyle = "#fff";  
+    ctx.fillText(node.name, node.x + 12, node.y + 4);  
+  });  
+}  
+
+function createGraph(data) {  
+  nodes = [];  
+  links = [];  
+  const root = { name: data.name, type: "root", x: canvas.width / 2, y: canvas.height / 2 };  
+  nodes.push(root);  
+  const recurseDeps = (parent, dependencies, angleOffset = 0) => {  
+    const keys = Object.keys(dependencies || {});  
+    keys.forEach((key, index) => {  
+      const angle = (2 * Math.PI / keys.length) * index + angleOffset;  
+      const x = parent.x + 200 * Math.cos(angle);  
+      const y = parent.y + 200 * Math.sin(angle);  
+      const child = { name: key, type: "dep", x, y };  
+      nodes.push(child);  
+      links.push({ source: parent, target: child });  
+      recurseDeps(child, dependencies[key].dependencies, angle);  
+    });  
+  };  
+  recurseDeps(root, data.dependencies);  
+  drawGraph();  
+}  
+
+canvas.addEventListener("mousemove", (event) => {  
+  const { offsetX, offsetY } = event;  
+  let found = false;  
+  nodes.forEach(node => {  
+    const dist = Math.sqrt((node.x - offsetX) ** 2 + (node.y - offsetY) ** 2);  
+    if (dist < 15) {  
+      tooltip.style.display = "block";  
+      tooltip.style.left = `${event.pageX + 10}px`;  
+      tooltip.style.top = `${event.pageY + 10}px`;  
+      tooltip.innerText = node.name;  
+      found = true;  
+    }  
+  });  
+  if (!found) tooltip.style.display = "none";  
+});  
+
+document.getElementById("fileInput").addEventListener("change", (event) => {  
+  const file = event.target.files[0];  
+  if (file) {  
+    const reader = new FileReader();  
+    reader.onload = (e) => {  
+      const data = JSON.parse(e.target.result);  
+      createGraph(data);  
+    };  
+    reader.readAsText(file);  
+  }  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

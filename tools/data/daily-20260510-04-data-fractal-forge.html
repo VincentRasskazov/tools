@@ -1,0 +1,145 @@
+---
+layout: null
+title: "Data Fractal Forge"
+category: "Data"
+description: "A mesmerizing interactive tool that visualizes any dataset as dynamic, evolving fractals, allowing users to explore patterns and correlations in real time."
+permalink: "/tools/daily-20260510-04-data-fractal-forge.html"
+generated_by: "api-true-ai"
+generated_date: "20260510"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Fractal Forge | Free Online Interactive Tool</title>
+  <meta name="description" content="A mesmerizing interactive tool that visualizes any dataset as dynamic, evolving fractals, allowing users to explore patterns and correlations in real time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Fractal Forge | Free Online Interactive Tool">
+  <meta property="og:description" content="A mesmerizing interactive tool that visualizes any dataset as dynamic, evolving fractals, allowing users to explore patterns and correlations in real time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Fractal Forge | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A mesmerizing interactive tool that visualizes any dataset as dynamic, evolving fractals, allowing users to explore patterns and correlations in real time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Fractal Forge</h1>
+    <p class="seo-subtitle">A mesmerizing interactive tool that visualizes any dataset as dynamic, evolving fractals, allowing users to explore patterns and correlations in real time.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: 'Arial', sans-serif;  
+  text-align: center;  
+  margin: 0;  
+  padding: 0;  
+  background: linear-gradient(135deg, #4b6cb7, #182848);  
+  color: white;  
+}  
+#tool-app {  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  height: 100vh;  
+}  
+canvas {  
+  border: 2px solid white;  
+  border-radius: 8px;  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  
+}  
+input, button {  
+  margin: 10px;  
+  padding: 10px;  
+  border: none;  
+  border-radius: 5px;  
+  font-size: 16px;  
+}  
+button {  
+  background-color: #ff725e;  
+  color: white;  
+  cursor: pointer;  
+  transition: background-color 0.3s ease;  
+}  
+button:hover {  
+  background-color: #ff4a3d;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Data Fractal Forge</h1>  
+  <p>Upload your dataset (CSV/JSON) and watch it come to life as fractals!</p>  
+  <input type="file" id="file-input" accept=".csv, .json" />  
+  <canvas id="fractal-canvas" width="800" height="600"></canvas>  
+  <button id="regenerate-btn">Regenerate Fractal</button>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById('fractal-canvas');  
+const ctx = canvas.getContext('2d');  
+const fileInput = document.getElementById('file-input');  
+const regenerateButton = document.getElementById('regenerate-btn');  
+
+let dataset = [];  
+
+function generateFractal(data) {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  const centerX = canvas.width / 2;  
+  const centerY = canvas.height / 2;  
+  const maxRadius = Math.min(canvas.width, canvas.height) / 2 - 20;  
+
+  data.forEach((entry, index) => {  
+    const angle = (index / data.length) * Math.PI * 2;  
+    const radius = maxRadius * (entry.normalizedValue || 0.5);  
+    const x = centerX + Math.cos(angle) * radius;  
+    const y = centerY + Math.sin(angle) * radius;  
+
+    ctx.beginPath();  
+    ctx.arc(x, y, 5, 0, Math.PI * 2);  
+    ctx.fillStyle = `hsl(${360 * Math.random()}, 80%, 60%)`;  
+    ctx.fill();  
+  });  
+}  
+
+fileInput.addEventListener('change', (e) => {  
+  const file = e.target.files[0];  
+  if (file) {  
+    const reader = new FileReader();  
+    reader.onload = function (event) {  
+      try {  
+        const rawData = JSON.parse(event.target.result);  
+        dataset = Array.isArray(rawData) ? rawData : Object.values(rawData);  
+        dataset = dataset.map((value, i) => ({  
+          value,  
+          normalizedValue: i / dataset.length,  
+        }));  
+        generateFractal(dataset);  
+      } catch (err) {  
+        alert('Invalid file format. Please upload a JSON or CSV file.');  
+      }  
+    };  
+    reader.readAsText(file);  
+  }  
+});  
+
+regenerateButton.addEventListener('click', () => {  
+  if (dataset.length > 0) {  
+    generateFractal(dataset);  
+  } else {  
+    alert('Please upload a dataset first!');  
+  }  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
