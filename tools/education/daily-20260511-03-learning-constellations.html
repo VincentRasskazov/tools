@@ -1,0 +1,201 @@
+---
+layout: null
+title: "Learning Constellations"
+category: "Education"
+description: "An interactive educational mini-game where users connect stars to form constellations while learning astronomy facts."
+permalink: "/tools/daily-20260511-03-learning-constellations.html"
+generated_by: "api-true-ai"
+generated_date: "20260511"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning Constellations | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive educational mini-game where users connect stars to form constellations while learning astronomy facts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Learning Constellations | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive educational mini-game where users connect stars to form constellations while learning astronomy facts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Learning Constellations | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive educational mini-game where users connect stars to form constellations while learning astronomy facts. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Learning Constellations</h1>
+    <p class="seo-subtitle">An interactive educational mini-game where users connect stars to form constellations while learning astronomy facts.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background-color: #0d1b2a;  
+  color: #e0e1dd;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  position: relative;  
+  width: 800px;  
+  height: 600px;  
+  background: radial-gradient(circle, #1b263b, #0d1b2a);  
+  border: 2px solid #415a77;  
+  border-radius: 15px;  
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);  
+}  
+#canvas {  
+  width: 100%;  
+  height: 100%;  
+}  
+#info-box {  
+  position: absolute;  
+  bottom: 10px;  
+  left: 10px;  
+  background: rgba(65, 90, 119, 0.8);  
+  padding: 10px;  
+  border-radius: 8px;  
+  color: #e0e1dd;  
+  font-size: 14px;  
+}  
+button {  
+  position: absolute;  
+  top: 10px;  
+  right: 10px;  
+  padding: 10px 20px;  
+  background-color: #1b263b;  
+  color: #e0e1dd;  
+  border: 2px solid #415a77;  
+  border-radius: 8px;  
+  cursor: pointer;  
+  font-size: 14px;  
+}  
+button:hover {  
+  background-color: #415a77;  
+}  
+</style>  
+<div id="tool-app">  
+  <canvas id="canvas"></canvas>  
+  <div id="info-box">Connect the stars to create the <strong>"Big Dipper"</strong> constellation! (Click and drag)</div>  
+  <button id="reset-btn">Reset</button>  
+</div>  
+<script>  
+const canvas = document.getElementById('canvas');  
+const resetBtn = document.getElementById('reset-btn');  
+const infoBox = document.getElementById('info-box');  
+const ctx = canvas.getContext('2d');  
+
+canvas.width = canvas.offsetWidth;  
+canvas.height = canvas.offsetHeight;  
+
+const stars = [  
+  { x: 100, y: 300, connected: false },  
+  { x: 200, y: 250, connected: false },  
+  { x: 300, y: 200, connected: false },  
+  { x: 400, y: 180, connected: false },  
+  { x: 500, y: 220, connected: false },  
+  { x: 600, y: 280, connected: false },  
+  { x: 700, y: 320, connected: false },  
+];  
+
+const lines = [  
+  [0, 1],  
+  [1, 2],  
+  [2, 3],  
+  [3, 4],  
+  [4, 5],  
+  [5, 6],  
+];  
+
+let draggingStar = null;  
+let completedConnections = 0;  
+
+function drawStars() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  stars.forEach((star) => {  
+    ctx.beginPath();  
+    ctx.arc(star.x, star.y, 8, 0, Math.PI * 2);  
+    ctx.fillStyle = star.connected ? '#a7c4e0' : '#f5b7b1';  
+    ctx.fill();  
+  });  
+
+  lines.forEach(([startIdx, endIdx], i) => {  
+    const start = stars[startIdx];  
+    const end = stars[endIdx];  
+    if (start.connected && end.connected) {  
+      ctx.beginPath();  
+      ctx.moveTo(start.x, start.y);  
+      ctx.lineTo(end.x, end.y);  
+      ctx.strokeStyle = '#a7c4e0';  
+      ctx.lineWidth = 2;  
+      ctx.stroke();  
+    }  
+  });  
+}  
+
+function onMouseDown(e) {  
+  const mouseX = e.offsetX;  
+  const mouseY = e.offsetY;  
+
+  stars.forEach((star, i) => {  
+    const dx = mouseX - star.x;  
+    const dy = mouseY - star.y;  
+    if (Math.sqrt(dx * dx + dy * dy) < 10) {  
+      draggingStar = i;  
+      star.connected = true;  
+    }  
+  });  
+
+  drawStars();  
+}  
+
+function onMouseMove(e) {  
+  if (draggingStar !== null) {  
+    stars[draggingStar].x = e.offsetX;  
+    stars[draggingStar].y = e.offsetY;  
+    drawStars();  
+  }  
+}  
+
+function onMouseUp() {  
+  if (draggingStar !== null) {  
+    draggingStar = null;  
+    completedConnections = stars.filter((star) => star.connected).length;  
+    if (completedConnections === stars.length) {  
+      infoBox.innerHTML = '<strong>Congratulations!</strong> You completed the Big Dipper!';  
+    }  
+  }  
+}  
+
+function resetGame() {  
+  stars.forEach((star) => { star.connected = false; });  
+  infoBox.innerHTML = 'Connect the stars to create the <strong>"Big Dipper"</strong> constellation! (Click and drag)';  
+  drawStars();  
+}  
+
+canvas.addEventListener('mousedown', onMouseDown);  
+canvas.addEventListener('mousemove', onMouseMove);  
+canvas.addEventListener('mouseup', onMouseUp);  
+
+resetBtn.addEventListener('click', resetGame);  
+
+drawStars();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

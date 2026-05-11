@@ -1,0 +1,172 @@
+---
+layout: null
+title: "StockFlow: Interactive Trading Network Simulator"
+category: "Finance"
+description: "Simulate and strategize the flow of financial trades in a dynamic and visually engaging network to understand market impact."
+permalink: "/tools/daily-20260511-01-stockflow-interactive-trading-network-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260511"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StockFlow: Interactive Trading Network Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="Simulate and strategize the flow of financial trades in a dynamic and visually engaging network to understand market impact. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="StockFlow: Interactive Trading Network Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="Simulate and strategize the flow of financial trades in a dynamic and visually engaging network to understand market impact. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StockFlow: Interactive Trading Network Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Simulate and strategize the flow of financial trades in a dynamic and visually engaging network to understand market impact. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>StockFlow: Interactive Trading Network Simulator</h1>
+    <p class="seo-subtitle">Simulate and strategize the flow of financial trades in a dynamic and visually engaging network to understand market impact.</p>
+    <style>  
+#tool-app {  
+  font-family: Arial, sans-serif;  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  height: 100vh;  
+  background: linear-gradient(120deg, #1e90ff, #4b0082);  
+  color: white;  
+}  
+#network-canvas {  
+  background: rgba(255, 255, 255, 0.2);  
+  border-radius: 8px;  
+  width: 80%;  
+  height: 60%;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
+}  
+#controls {  
+  display: flex;  
+  gap: 10px;  
+  margin-top: 20px;  
+}  
+button {  
+  background: #ff6347;  
+  border: none;  
+  color: white;  
+  padding: 10px 20px;  
+  border-radius: 4px;  
+  cursor: pointer;  
+  transition: background-color 0.3s ease;  
+}  
+button:hover {  
+  background: #ff4500;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>StockFlow Simulator</h1>  
+  <canvas id="network-canvas"></canvas>  
+  <div id="controls">  
+    <button id="start-simulation">Start Simulation</button>  
+    <button id="reset-simulation">Reset</button>  
+  </div>  
+</div>  
+<script>  
+const canvas = document.getElementById('network-canvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = window.innerWidth * 0.8;  
+canvas.height = window.innerHeight * 0.6;  
+
+let traders = [];  
+let trades = [];  
+let simulationRunning = false;  
+
+function generateNetwork() {  
+  traders = [];  
+  for (let i = 0; i < 10; i++) {  
+    traders.push({  
+      x: Math.random() * canvas.width,  
+      y: Math.random() * canvas.height,  
+      balance: Math.round(Math.random() * 10000) + 1000,  
+    });  
+  }  
+  trades = [];  
+  for (let i = 0; i < 20; i++) {  
+    const buyer = traders[Math.floor(Math.random() * traders.length)];  
+    const seller = traders[Math.floor(Math.random() * traders.length)];  
+    if (buyer !== seller) {  
+      trades.push({ buyer, seller, amount: Math.round(Math.random() * 500) + 100 });  
+    }  
+  }  
+}  
+
+function drawNetwork() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  traders.forEach((trader, index) => {  
+    ctx.beginPath();  
+    ctx.arc(trader.x, trader.y, 10, 0, Math.PI * 2);  
+    ctx.fillStyle = 'white';  
+    ctx.fill();  
+    ctx.strokeStyle = 'black';  
+    ctx.stroke();  
+    ctx.font = '12px Arial';  
+    ctx.fillStyle = 'white';  
+    ctx.fillText(`T${index + 1}`, trader.x + 15, trader.y);  
+    ctx.fillText(`$${trader.balance}`, trader.x + 15, trader.y + 15);  
+  });  
+
+  trades.forEach(trade => {  
+    ctx.beginPath();  
+    ctx.moveTo(trade.buyer.x, trade.buyer.y);  
+    ctx.lineTo(trade.seller.x, trade.seller.y);  
+    ctx.strokeStyle = '#ff6347';  
+    ctx.stroke();  
+  });  
+}  
+
+function updateNetwork() {  
+  trades.forEach(trade => {  
+    if (trade.buyer.balance >= trade.amount) {  
+      trade.buyer.balance -= trade.amount;  
+      trade.seller.balance += trade.amount;  
+    }  
+  });  
+  drawNetwork();  
+}  
+
+document.getElementById('start-simulation').addEventListener('click', () => {  
+  if (!simulationRunning) {  
+    simulationRunning = true;  
+    generateNetwork();  
+    drawNetwork();  
+    const interval = setInterval(() => {  
+      updateNetwork();  
+      if (!simulationRunning) {  
+        clearInterval(interval);  
+      }  
+    }, 1000);  
+  }  
+});  
+
+document.getElementById('reset-simulation').addEventListener('click', () => {  
+  simulationRunning = false;  
+  generateNetwork();  
+  drawNetwork();  
+});  
+
+generateNetwork();  
+drawNetwork();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

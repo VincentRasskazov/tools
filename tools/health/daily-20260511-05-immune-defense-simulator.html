@@ -1,0 +1,123 @@
+---
+layout: null
+title: "Immune Defense Simulator"
+category: "Health"
+description: "A highly interactive mini-game where users defend the human body by deploying immune cells to combat incoming waves of viruses and bacteria while learning about the immune system."
+permalink: "/tools/daily-20260511-05-immune-defense-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260511"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Immune Defense Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive mini-game where users defend the human body by deploying immune cells to combat incoming waves of viruses and bacteria while learning about the immune system. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Immune Defense Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive mini-game where users defend the human body by deploying immune cells to combat incoming waves of viruses and bacteria while learning about the immune system. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Immune Defense Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive mini-game where users defend the human body by deploying immune cells to combat incoming waves of viruses and bacteria while learning about the immune system. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Immune Defense Simulator</h1>
+    <p class="seo-subtitle">A highly interactive mini-game where users defend the human body by deploying immune cells to combat incoming waves of viruses and bacteria while learning about the immune system.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: linear-gradient(to bottom, #74ebd5, #acb6e5); }  
+  #tool-app { width: 80%; height: 80%; background: #ffffff; border-radius: 12px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); overflow: hidden; position: relative; }  
+  .game-header { background: #4caf50; color: white; padding: 10px; text-align: center; font-size: 1.5rem; }  
+  .game-area { position: relative; width: 100%; height: calc(100% - 50px); background: #f4f4f4; overflow: hidden; }  
+  .virus, .bacteria { position: absolute; width: 30px; height: 30px; background: red; border-radius: 50%; animation: floatDown 6s linear infinite; }  
+  .bacteria { background: green; }  
+  .immune-cell { position: absolute; width: 40px; height: 40px; background: blue; border-radius: 50%; cursor: pointer; }  
+  @keyframes floatDown { from { transform: translateY(-50px); } to { transform: translateY(100vh); } }  
+</style>  
+<div id="tool-app">  
+  <div class="game-header">Immune Defense Simulator</div>  
+  <div class="game-area" id="game-area"></div>  
+</div>  
+<script>  
+const gameArea = document.getElementById("game-area");  
+let score = 0;  
+let immuneCells = [];  
+
+function spawnEnemy(type) {  
+  const enemy = document.createElement("div");  
+  enemy.classList.add(type);  
+  enemy.style.left = Math.random() * (gameArea.offsetWidth - 30) + "px";  
+  gameArea.appendChild(enemy);  
+
+  enemy.addEventListener("animationend", () => {  
+    if (gameArea.contains(enemy)) {  
+      gameArea.removeChild(enemy);  
+    }  
+  });  
+}  
+
+function spawnImmuneCell(x, y) {  
+  const cell = document.createElement("div");  
+  cell.classList.add("immune-cell");  
+  cell.style.left = x + "px";  
+  cell.style.top = y + "px";  
+  gameArea.appendChild(cell);  
+
+  cell.addEventListener("click", () => {  
+    immuneCells.push(cell);  
+  });  
+
+  setTimeout(() => {  
+    if (gameArea.contains(cell)) gameArea.removeChild(cell);  
+  }, 5000);  
+}  
+
+gameArea.addEventListener("click", (e) => {  
+  spawnImmuneCell(e.clientX - gameArea.offsetLeft - 20, e.clientY - gameArea.offsetTop - 20);  
+});  
+
+function checkCollisions() {  
+  const enemies = Array.from(document.querySelectorAll(".virus, .bacteria"));  
+
+  enemies.forEach((enemy) => {  
+    immuneCells.forEach((cell) => {  
+      const enemyRect = enemy.getBoundingClientRect();  
+      const cellRect = cell.getBoundingClientRect();  
+
+      if (  
+        enemyRect.left < cellRect.right &&  
+        enemyRect.right > cellRect.left &&  
+        enemyRect.top < cellRect.bottom &&  
+        enemyRect.bottom > cellRect.top  
+      ) {  
+        gameArea.removeChild(enemy);  
+        const index = immuneCells.indexOf(cell);  
+        if (index > -1) immuneCells.splice(index, 1);  
+        score++;  
+      }  
+    });  
+  });  
+}  
+
+setInterval(() => {  
+  spawnEnemy(Math.random() > 0.5 ? "virus" : "bacteria");  
+}, 1000);  
+
+setInterval(checkCollisions, 50);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

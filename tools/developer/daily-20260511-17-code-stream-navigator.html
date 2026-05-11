@@ -1,0 +1,218 @@
+---
+layout: null
+title: "Code Stream Navigator"
+category: "Developer"
+description: "A dynamic tool that visualizes the real-time execution flow of your JavaScript code, showcasing variables, functions, and data changes through an interactive graph."
+permalink: "/tools/daily-20260511-17-code-stream-navigator.html"
+generated_by: "api-true-ai"
+generated_date: "20260511"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Stream Navigator | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic tool that visualizes the real-time execution flow of your JavaScript code, showcasing variables, functions, and data changes through an interactive graph. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Code Stream Navigator | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic tool that visualizes the real-time execution flow of your JavaScript code, showcasing variables, functions, and data changes through an interactive graph. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Code Stream Navigator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic tool that visualizes the real-time execution flow of your JavaScript code, showcasing variables, functions, and data changes through an interactive graph. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Code Stream Navigator</h1>
+    <p class="seo-subtitle">A dynamic tool that visualizes the real-time execution flow of your JavaScript code, showcasing variables, functions, and data changes through an interactive graph.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  background: linear-gradient(135deg, #1e293b, #334155);  
+  color: #f1f5f9;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 80%;  
+  height: 80%;  
+  background: #0f172a;  
+  border-radius: 12px;  
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);  
+  margin-top: 2rem;  
+  overflow: hidden;  
+  display: flex;  
+  flex-direction: column;  
+}  
+#toolbar {  
+  background: #1e40af;  
+  padding: 1rem;  
+  color: #f1f5f9;  
+  display: flex;  
+  justify-content: space-between;  
+  align-items: center;  
+}  
+#code-input {  
+  width: 50%;  
+  margin-right: 1rem;  
+  padding: 0.5rem;  
+  border: 1px solid #64748b;  
+  border-radius: 8px;  
+  background: #1e293b;  
+  color: #f1f5f9;  
+  font-size: 14px;  
+  resize: none;  
+}  
+#run-btn {  
+  background: #3b82f6;  
+  border: none;  
+  padding: 0.5rem 1rem;  
+  color: #f1f5f9;  
+  font-weight: bold;  
+  border-radius: 8px;  
+  cursor: pointer;  
+  transition: background 0.3s ease;  
+}  
+#run-btn:hover {  
+  background: #2563eb;  
+}  
+#visualizer {  
+  flex: 1;  
+  padding: 1rem;  
+  overflow: auto;  
+  background: #1e293b;  
+  color: #f1f5f9;  
+  font-size: 14px;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+}  
+.node {  
+  display: inline-block;  
+  padding: 0.5rem 1rem;  
+  background: #2563eb;  
+  border-radius: 50%;  
+  margin: 0.5rem;  
+  color: #f1f5f9;  
+  font-weight: bold;  
+  text-align: center;  
+}  
+.connection {  
+  stroke: #3b82f6;  
+  stroke-width: 2;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="toolbar">  
+    <textarea id="code-input" rows="4" placeholder="Write JavaScript code here..."></textarea>  
+    <button id="run-btn">Run Code</button>  
+  </div>  
+  <div id="visualizer"></div>  
+</div>  
+<script>  
+const toolApp = document.getElementById("tool-app");  
+const codeInput = document.getElementById("code-input");  
+const runBtn = document.getElementById("run-btn");  
+const visualizer = document.getElementById("visualizer");  
+
+runBtn.addEventListener("click", () => {  
+  const code = codeInput.value;  
+  visualizer.innerHTML = "";  
+  try {  
+    const ast = parseCodeToAST(code);  
+    renderAST(ast);  
+  } catch (error) {  
+    visualizer.innerHTML = `<p style="color: #f87171;">Error: ${error.message}</p>`;  
+  }  
+});  
+
+function parseCodeToAST(code) {  
+  const ast = [];  
+  const proxyHandler = {  
+    get: (target, prop) => {  
+      const value = target[prop];  
+      ast.push({ type: "access", name: prop, value });  
+      return value;  
+    },  
+    set: (target, prop, value) => {  
+      ast.push({ type: "update", name: prop, value });  
+      target[prop] = value;  
+      return true;  
+    },  
+  };  
+
+  const context = new Proxy({}, proxyHandler);  
+  const wrappedCode = `(function(context) { with (context) { ${code} } })(context)`;  
+  eval(wrappedCode);  
+  return ast;  
+}  
+
+function renderAST(ast) {  
+  const svgNS = "http://www.w3.org/2000/svg";  
+  const svg = document.createElementNS(svgNS, "svg");  
+  svg.setAttribute("width", "100%");  
+  svg.setAttribute("height", "100%");  
+
+  let x = 50, y = 50;  
+  const nodes = {};  
+
+  ast.forEach((node, index) => {  
+    const circle = document.createElementNS(svgNS, "circle");  
+    circle.setAttribute("cx", x);  
+    circle.setAttribute("cy", y);  
+    circle.setAttribute("r", 20);  
+    circle.setAttribute("fill", "#3b82f6");  
+    svg.appendChild(circle);  
+
+    const text = document.createElementNS(svgNS, "text");  
+    text.setAttribute("x", x);  
+    text.setAttribute("y", y + 4);  
+    text.setAttribute("font-size", "12");  
+    text.setAttribute("fill", "#f1f5f9");  
+    text.setAttribute("text-anchor", "middle");  
+    text.textContent = node.name;  
+    svg.appendChild(text);  
+
+    nodes[node.name] = { x, y };  
+    x += 100;  
+
+    if (node.type === "update") {  
+      for (const key in nodes) {  
+        if (key !== node.name) {  
+          const line = document.createElementNS(svgNS, "line");  
+          line.setAttribute("x1", nodes[key].x);  
+          line.setAttribute("y1", nodes[key].y);  
+          line.setAttribute("x2", nodes[node.name].x);  
+          line.setAttribute("y2", nodes[node.name].y);  
+          line.setAttribute("stroke", "#f87171");  
+          line.setAttribute("stroke-width", "2");  
+          svg.appendChild(line);  
+        }  
+      }  
+    }  
+  });  
+
+  visualizer.appendChild(svg);  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

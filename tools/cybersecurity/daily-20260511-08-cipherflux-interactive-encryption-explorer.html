@@ -1,0 +1,178 @@
+---
+layout: null
+title: "CipherFlux: Interactive Encryption Explorer"
+category: "Cybersecurity"
+description: "A highly visual and interactive tool for exploring real-time encryption and decryption processes, showcasing how various ciphers transform data step by step."
+permalink: "/tools/daily-20260511-08-cipherflux-interactive-encryption-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260511"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CipherFlux: Interactive Encryption Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly visual and interactive tool for exploring real-time encryption and decryption processes, showcasing how various ciphers transform data step by step. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CipherFlux: Interactive Encryption Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly visual and interactive tool for exploring real-time encryption and decryption processes, showcasing how various ciphers transform data step by step. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CipherFlux: Interactive Encryption Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly visual and interactive tool for exploring real-time encryption and decryption processes, showcasing how various ciphers transform data step by step. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CipherFlux: Interactive Encryption Explorer</h1>
+    <p class="seo-subtitle">A highly visual and interactive tool for exploring real-time encryption and decryption processes, showcasing how various ciphers transform data step by step.</p>
+    <style>  
+  body {  
+    font-family: Arial, sans-serif;  
+    background-color: #1e1e2f;  
+    color: #f0f0f0;  
+    margin: 0;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+  }  
+  #tool-app {  
+    background-color: #292942;  
+    padding: 20px;  
+    border-radius: 10px;  
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);  
+    width: 80%;  
+    max-width: 600px;  
+    text-align: center;  
+  }  
+  input, select, button {  
+    margin: 10px 0;  
+    padding: 10px;  
+    border: none;  
+    border-radius: 5px;  
+    width: calc(100% - 20px);  
+    font-size: 14px;  
+  }  
+  button {  
+    background-color: #4CAF50;  
+    color: white;  
+    cursor: pointer;  
+  }  
+  button:hover {  
+    background-color: #45a049;  
+  }  
+  .output {  
+    margin-top: 20px;  
+    padding: 10px;  
+    border: 1px solid #4CAF50;  
+    border-radius: 5px;  
+    background: #38385b;  
+    color: #aaffaa;  
+    font-family: monospace;  
+    white-space: pre-wrap;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h1>CipherFlux: Interactive Encryption Explorer</h1>  
+  <p>Type a message below, choose a cipher, and watch the encryption process unfold!</p>  
+  <input type="text" id="input-text" placeholder="Enter your text here" />  
+  <select id="cipher-type">  
+    <option value="caesar">Caesar Cipher</option>  
+    <option value="vigenere">Vigenère Cipher</option>  
+    <option value="reverse">Reverse Cipher</option>  
+  </select>  
+  <input type="text" id="key" placeholder="Enter key (if applicable)" />  
+  <button id="encrypt-button">Encrypt</button>  
+  <button id="decrypt-button">Decrypt</button>  
+  <div id="output" class="output"></div>  
+</div>  
+<script>  
+  const inputText = document.getElementById('input-text');  
+  const cipherType = document.getElementById('cipher-type');  
+  const keyInput = document.getElementById('key');  
+  const encryptButton = document.getElementById('encrypt-button');  
+  const decryptButton = document.getElementById('decrypt-button');  
+  const output = document.getElementById('output');  
+
+  function caesarCipher(text, shift, decrypt = false) {  
+    if (decrypt) shift = -shift;  
+    return text  
+      .split('')  
+      .map(char => {  
+        if (char.match(/[a-z]/i)) {  
+          const isUpper = char === char.toUpperCase();  
+          const baseCode = isUpper ? 65 : 97;  
+          const code = ((char.charCodeAt(0) - baseCode + shift + 26) % 26) + baseCode;  
+          return String.fromCharCode(code);  
+        }  
+        return char;  
+      })  
+      .join('');  
+  }  
+
+  function vigenereCipher(text, key, decrypt = false) {  
+    key = key.toLowerCase();  
+    let keyIndex = 0;  
+    return text  
+      .split('')  
+      .map(char => {  
+        if (char.match(/[a-z]/i)) {  
+          const isUpper = char === char.toUpperCase();  
+          const baseCode = isUpper ? 65 : 97;  
+          const keyShift = key.charCodeAt(keyIndex % key.length) - 97;  
+          const shift = decrypt ? -keyShift : keyShift;  
+          const code = ((char.charCodeAt(0) - baseCode + shift + 26) % 26) + baseCode;  
+          keyIndex++;  
+          return String.fromCharCode(code);  
+        }  
+        return char;  
+      })  
+      .join('');  
+  }  
+
+  function reverseCipher(text) {  
+    return text.split('').reverse().join('');  
+  }  
+
+  function processCipher(action) {  
+    const text = inputText.value;  
+    const cipher = cipherType.value;  
+    const key = keyInput.value;  
+    let result = '';  
+
+    switch (cipher) {  
+      case 'caesar':  
+        const shift = parseInt(key) || 0;  
+        result = caesarCipher(text, shift, action === 'decrypt');  
+        break;  
+      case 'vigenere':  
+        result = vigenereCipher(text, key, action === 'decrypt');  
+        break;  
+      case 'reverse':  
+        result = reverseCipher(text);  
+        break;  
+      default:  
+        result = 'Invalid cipher type';  
+    }  
+
+    output.textContent = result;  
+  }  
+
+  encryptButton.addEventListener('click', () => processCipher('encrypt'));  
+  decryptButton.addEventListener('click', () => processCipher('decrypt'));  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
