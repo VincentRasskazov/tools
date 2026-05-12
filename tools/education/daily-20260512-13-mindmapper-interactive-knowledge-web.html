@@ -1,0 +1,119 @@
+---
+layout: null
+title: "MindMapper: Interactive Knowledge Web"
+category: "Education"
+description: "A tool that lets users visually create, explore, and connect concepts in a dynamic, interactive web of knowledge."
+permalink: "/tools/daily-20260512-13-mindmapper-interactive-knowledge-web.html"
+generated_by: "api-true-ai"
+generated_date: "20260512"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindMapper: Interactive Knowledge Web | Free Online Interactive Tool</title>
+  <meta name="description" content="A tool that lets users visually create, explore, and connect concepts in a dynamic, interactive web of knowledge. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="MindMapper: Interactive Knowledge Web | Free Online Interactive Tool">
+  <meta property="og:description" content="A tool that lets users visually create, explore, and connect concepts in a dynamic, interactive web of knowledge. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MindMapper: Interactive Knowledge Web | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A tool that lets users visually create, explore, and connect concepts in a dynamic, interactive web of knowledge. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>MindMapper: Interactive Knowledge Web</h1>
+    <p class="seo-subtitle">A tool that lets users visually create, explore, and connect concepts in a dynamic, interactive web of knowledge.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f9; display: flex; justify-content: center; align-items: center; height: 100vh; }  
+  #tool-app { width: 90vw; height: 90vh; background: white; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); overflow: hidden; }  
+  .map-container { position: relative; width: 100%; height: 100%; cursor: grab; }  
+  .node { position: absolute; padding: 10px 15px; border-radius: 20px; background: #007bff; color: white; font-size: 14px; text-align: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); user-select: none; cursor: pointer; }  
+  .node:hover { background: #0056b3; }  
+  .line { position: absolute; pointer-events: none; }  
+</style>  
+<div id="tool-app">  
+  <div class="map-container" id="map-container"></div>  
+</div>  
+<script>  
+  const container = document.getElementById('map-container');  
+
+  let nodes = [];  
+  let connections = [];  
+  let movingNode = null;  
+
+  container.addEventListener('dblclick', (e) => {  
+    const node = createNode(e.offsetX, e.offsetY, nodes.length + 1);  
+    nodes.push(node);  
+    container.appendChild(node);  
+  });  
+
+  function createNode(x, y, id) {  
+    const div = document.createElement('div');  
+    div.className = 'node';  
+    div.style.left = `${x}px`;  
+    div.style.top = `${y}px`;  
+    div.innerText = `Concept ${id}`;  
+    div.draggable = true;  
+    div.addEventListener('dragstart', () => movingNode = div);  
+    div.addEventListener('dragend', (e) => {  
+      movingNode.style.left = `${e.clientX - container.offsetLeft}px`;  
+      movingNode.style.top = `${e.clientY - container.offsetTop}px`;  
+      movingNode = null;  
+      updateLines();  
+    });  
+    div.addEventListener('click', () => {  
+      const selected = nodes.filter(n => n.classList.contains('selected'));  
+      if (!selected.length) {  
+        div.classList.add('selected');  
+      } else if (selected[0] !== div) {  
+        createConnection(selected[0], div);  
+        selected[0].classList.remove('selected');  
+      }  
+    });  
+    return div;  
+  }  
+
+  function createConnection(nodeA, nodeB) {  
+    const line = document.createElement('div');  
+    line.className = 'line';  
+    container.appendChild(line);  
+    connections.push({ line, nodeA, nodeB });  
+    updateLines();  
+  }  
+
+  function updateLines() {  
+    connections.forEach(({ line, nodeA, nodeB }) => {  
+      const rectA = nodeA.getBoundingClientRect();  
+      const rectB = nodeB.getBoundingClientRect();  
+      const x1 = rectA.left + rectA.width / 2 - container.offsetLeft;  
+      const y1 = rectA.top + rectA.height / 2 - container.offsetTop;  
+      const x2 = rectB.left + rectB.width / 2 - container.offsetLeft;  
+      const y2 = rectB.top + rectB.height / 2 - container.offsetTop;  
+
+      line.style.width = `${Math.hypot(x2 - x1, y2 - y1)}px`;  
+      line.style.transform = `rotate(${Math.atan2(y2 - y1, x2 - x1) * (180 / Math.PI)}deg)`;  
+      line.style.left = `${x1}px`;  
+      line.style.top = `${y1}px`;  
+      line.style.background = 'black';  
+      line.style.height = '2px';  
+      line.style.position = 'absolute';  
+    });  
+  }  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

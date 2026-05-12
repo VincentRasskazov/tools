@@ -1,0 +1,157 @@
+---
+layout: null
+title: "Cipher Clash: Code Cracker Battle"
+category: "Games"
+description: "A highly interactive mini-game where players compete against a timer to decode encrypted strings using various ciphers while earning points for speed and accuracy."
+permalink: "/tools/daily-20260512-18-cipher-clash-code-cracker-battle.html"
+generated_by: "api-true-ai"
+generated_date: "20260512"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cipher Clash: Code Cracker Battle | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive mini-game where players compete against a timer to decode encrypted strings using various ciphers while earning points for speed and accuracy. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Cipher Clash: Code Cracker Battle | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive mini-game where players compete against a timer to decode encrypted strings using various ciphers while earning points for speed and accuracy. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cipher Clash: Code Cracker Battle | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive mini-game where players compete against a timer to decode encrypted strings using various ciphers while earning points for speed and accuracy. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Cipher Clash: Code Cracker Battle</h1>
+    <p class="seo-subtitle">A highly interactive mini-game where players compete against a timer to decode encrypted strings using various ciphers while earning points for speed and accuracy.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(135deg, #1f1c2c, #928dab);  
+  color: #fdfdfd;  
+  margin: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  border-radius: 10px;  
+  padding: 20px;  
+  background: #24243e;  
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);  
+  width: 90%;  
+  max-width: 600px;  
+  text-align: center;  
+}  
+button {  
+  padding: 10px 20px;  
+  border: none;  
+  border-radius: 5px;  
+  background: #ff7e5f;  
+  color: white;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+button:hover {  
+  background: #feb47b;  
+}  
+#cipher-output {  
+  font-size: 1.2em;  
+  padding: 20px;  
+  background: #1f1c2c;  
+  border-radius: 5px;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Cipher Clash: Code Cracker Battle</h1>  
+  <p>Decode the string before the timer runs out!</p>  
+  <div>  
+    <strong>Encrypted String:</strong> <span id="cipher-string">----</span>  
+  </div>  
+  <input type="text" id="user-input" placeholder="Your decoded answer" style="margin-top: 10px;">  
+  <div style="margin-top: 10px;">  
+    <button id="submit-answer">Submit</button>  
+    <button id="new-game">New Game</button>  
+  </div>  
+  <div id="cipher-output" style="display:none;">  
+    <p id="result"></p>  
+    <p>Points: <span id="points">0</span></p>  
+    <p>Time Remaining: <span id="time-left">0</span> seconds</p>  
+  </div>  
+</div>  
+<script>  
+const cipherAlgorithms = [  
+  { name: "Caesar Cipher", encrypt: (str, shift) => str.split('').map(ch => String.fromCharCode(((ch.charCodeAt(0) - 97 + shift) % 26) + 97)).join('') },  
+  { name: "Reverse Cipher", encrypt: (str) => str.split('').reverse().join('') }  
+];  
+let points = 0;  
+let timeLeft = 30;  
+let currentCipher = {};  
+
+function startGame() {  
+  const randomIndex = Math.floor(Math.random() * cipherAlgorithms.length);  
+  currentCipher = cipherAlgorithms[randomIndex];  
+  const original = "solve";  
+  const shift = Math.floor(Math.random() * 10) + 1;  
+  const encrypted = currentCipher.name === "Caesar Cipher" ? currentCipher.encrypt(original, shift) : currentCipher.encrypt(original);  
+  document.getElementById("cipher-string").innerText = encrypted;  
+  document.getElementById("cipher-output").style.display = "block";  
+  startTimer();  
+}  
+
+function startTimer() {  
+  timeLeft = 30;  
+  const timer = setInterval(() => {  
+    timeLeft--;  
+    document.getElementById("time-left").innerText = timeLeft;  
+    if (timeLeft <= 0) {  
+      clearInterval(timer);  
+      alert("Time's up! You lost!");  
+      resetGame();  
+    }  
+  }, 1000);  
+}  
+
+function resetGame() {  
+  points = 0;  
+  document.getElementById("points").innerText = points;  
+  document.getElementById("cipher-string").innerText = "----";  
+  document.getElementById("cipher-output").style.display = "none";  
+}  
+
+document.getElementById("submit-answer").addEventListener("click", () => {  
+  const userInput = document.getElementById("user-input").value.trim();  
+  const original = "solve";  
+  if (userInput === original) {  
+    points += 10;  
+    document.getElementById("points").innerText = points;  
+    alert("Correct! You scored 10 points!");  
+    startGame();  
+  } else {  
+    alert("Incorrect! Try again.");  
+  }  
+});  
+
+document.getElementById("new-game").addEventListener("click", () => {  
+  resetGame();  
+  startGame();  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

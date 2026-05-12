@@ -1,0 +1,160 @@
+---
+layout: null
+title: "CipherQuest: The Codebreaker Challenge"
+category: "Games"
+description: "An interactive mini-game where players decode progressively harder encrypted messages using various ciphers to outwit a virtual hacker."
+permalink: "/tools/daily-20260512-17-cipherquest-the-codebreaker-challenge.html"
+generated_by: "api-true-ai"
+generated_date: "20260512"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CipherQuest: The Codebreaker Challenge | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive mini-game where players decode progressively harder encrypted messages using various ciphers to outwit a virtual hacker. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CipherQuest: The Codebreaker Challenge | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive mini-game where players decode progressively harder encrypted messages using various ciphers to outwit a virtual hacker. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CipherQuest: The Codebreaker Challenge | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive mini-game where players decode progressively harder encrypted messages using various ciphers to outwit a virtual hacker. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CipherQuest: The Codebreaker Challenge</h1>
+    <p class="seo-subtitle">An interactive mini-game where players decode progressively harder encrypted messages using various ciphers to outwit a virtual hacker.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(135deg, #1e3c72, #2a5298);  
+  color: #fff;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  background: rgba(255, 255, 255, 0.1);  
+  padding: 20px;  
+  border-radius: 8px;  
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);  
+  text-align: center;  
+  width: 90%;  
+  max-width: 600px;  
+}  
+button {  
+  background: #4caf50;  
+  color: white;  
+  border: none;  
+  padding: 10px 20px;  
+  font-size: 16px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+button:hover {  
+  background: #45a049;  
+}  
+input {  
+  padding: 10px;  
+  margin: 10px 0;  
+  border: none;  
+  border-radius: 4px;  
+  width: 100%;  
+  box-sizing: border-box;  
+}  
+#message, #hint {  
+  margin: 10px 0;  
+  font-size: 16px;  
+  line-height: 1.5;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>CipherQuest: The Codebreaker Challenge</h1>  
+  <p id="message">Decode the message: <span id="encrypted-message"></span></p>  
+  <input type="text" id="user-input" placeholder="Enter your answer here">  
+  <p id="hint"></p>  
+  <button id="submit-btn">Submit</button>  
+  <p id="feedback"></p>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const app = document.getElementById('tool-app');  
+const encryptedMessageEl = document.getElementById('encrypted-message');  
+const userInput = document.getElementById('user-input');  
+const feedback = document.getElementById('feedback');  
+const hint = document.getElementById('hint');  
+
+const levels = [  
+  { message: 'HELLO', cipher: 'Caesar', shift: 3, hint: 'Caesar Cipher with shift 3' },  
+  { message: 'WORLD', cipher: 'Reverse', hint: 'The text is reversed' },  
+  { message: 'JAVASCRIPT', cipher: 'Atbash', hint: 'Atbash Cipher' },  
+];  
+
+let currentLevel = 0;  
+
+function encryptMessage(level) {  
+  const { message, cipher, shift } = level;  
+  if (cipher === 'Caesar') {  
+    return message  
+      .split('')  
+      .map(char => String.fromCharCode(((char.charCodeAt(0) - 65 + shift) % 26) + 65))  
+      .join('');  
+  } else if (cipher === 'Reverse') {  
+    return message.split('').reverse().join('');  
+  } else if (cipher === 'Atbash') {  
+    return message  
+      .split('')  
+      .map(char => String.fromCharCode(90 - (char.charCodeAt(0) - 65)))  
+      .join('');  
+  }  
+}  
+
+function loadLevel(levelIndex) {  
+  const level = levels[levelIndex];  
+  encryptedMessageEl.textContent = encryptMessage(level);  
+  hint.textContent = level.hint;  
+  feedback.textContent = '';  
+  userInput.value = '';  
+}  
+
+function checkAnswer() {  
+  const level = levels[currentLevel];  
+  if (userInput.value.toUpperCase() === level.message) {  
+    feedback.textContent = 'Correct! Moving to the next level...';  
+    currentLevel++;  
+    if (currentLevel < levels.length) {  
+      setTimeout(() => loadLevel(currentLevel), 1000);  
+    } else {  
+      feedback.textContent = 'Congratulations! You completed all levels!';  
+    }  
+  } else {  
+    feedback.textContent = 'Incorrect. Try again!';  
+  }  
+}  
+
+document.getElementById('submit-btn').addEventListener('click', checkAnswer);  
+
+// Start the game  
+loadLevel(currentLevel);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

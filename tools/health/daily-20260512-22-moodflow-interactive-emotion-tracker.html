@@ -1,0 +1,110 @@
+---
+layout: null
+title: "MoodFlow: Interactive Emotion Tracker"
+category: "Health"
+description: "An interactive tool where users navigate a colorful flow of animated shapes to identify and track their current mood, offering tailored self-care suggestions."
+permalink: "/tools/daily-20260512-22-moodflow-interactive-emotion-tracker.html"
+generated_by: "api-true-ai"
+generated_date: "20260512"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MoodFlow: Interactive Emotion Tracker | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool where users navigate a colorful flow of animated shapes to identify and track their current mood, offering tailored self-care suggestions. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="MoodFlow: Interactive Emotion Tracker | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool where users navigate a colorful flow of animated shapes to identify and track their current mood, offering tailored self-care suggestions. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MoodFlow: Interactive Emotion Tracker | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool where users navigate a colorful flow of animated shapes to identify and track their current mood, offering tailored self-care suggestions. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>MoodFlow: Interactive Emotion Tracker</h1>
+    <p class="seo-subtitle">An interactive tool where users navigate a colorful flow of animated shapes to identify and track their current mood, offering tailored self-care suggestions.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: linear-gradient(to bottom, #f0f9ff, #cbebff); margin: 0; padding: 0; }  
+  #tool-app { width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; }  
+  .shape { position: absolute; width: 60px; height: 60px; border-radius: 50%; opacity: 0.8; animation: moveShape 10s infinite; }  
+  @keyframes moveShape {  
+    0% { transform: translate(0, 0); }  
+    100% { transform: translate(calc(100vw - 60px), calc(100vh - 60px)); }  
+  }  
+  #mood-picker { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); text-align: center; }  
+  #mood-picker button { margin: 5px; padding: 10px 20px; border: none; border-radius: 5px; background: #0078D7; color: #fff; font-size: 16px; cursor: pointer; }  
+  #result { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); font-size: 20px; color: #333; display: none; }  
+</style>  
+<div id="tool-app">  
+  <div id="result"></div>  
+  <div id="mood-picker">  
+    <button data-mood="Happy">Happy</button>  
+    <button data-mood="Sad">Sad</button>  
+    <button data-mood="Anxious">Anxious</button>  
+    <button data-mood="Calm">Calm</button>  
+  </div>  
+</div>  
+<script>  
+const app = document.getElementById("tool-app");  
+const moodPicker = document.getElementById("mood-picker");  
+const result = document.getElementById("result");  
+
+const colors = ["#FFC107", "#2196F3", "#4CAF50", "#FF5722", "#9C27B0"];  
+const shapes = [];  
+
+for (let i = 0; i < 50; i++) {  
+  const shape = document.createElement("div");  
+  shape.className = "shape";  
+  shape.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];  
+  shape.style.left = `${Math.random() * window.innerWidth}px`;  
+  shape.style.top = `${Math.random() * window.innerHeight}px`;  
+  app.appendChild(shape);  
+  shapes.push(shape);  
+}  
+
+moodPicker.addEventListener("click", (e) => {  
+  const mood = e.target.dataset.mood;  
+  if (mood) {  
+    result.style.display = "block";  
+    result.textContent = `You feel ${mood}. Try these tips: ${getSuggestions(mood)}`;  
+    shapes.forEach(shape => shape.style.backgroundColor = getMoodColor(mood));  
+  }  
+});  
+
+function getSuggestions(mood) {  
+  const suggestions = {  
+    "Happy": "Celebrate your mood with a fun activity or share your joy!",  
+    "Sad": "Take a walk, talk to a friend, or write down your feelings.",  
+    "Anxious": "Try deep breathing, meditation, or a comforting activity.",  
+    "Calm": "Enjoy the moment, practice gratitude, or read a book."  
+  };  
+  return suggestions[mood] || "Take care of yourself in the best way you know.";  
+}  
+
+function getMoodColor(mood) {  
+  const moodColors = {  
+    "Happy": "#FFC107",  
+    "Sad": "#2196F3",  
+    "Anxious": "#FF5722",  
+    "Calm": "#4CAF50"  
+  };  
+  return moodColors[mood] || "#9C27B0";  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

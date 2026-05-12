@@ -1,0 +1,131 @@
+---
+layout: null
+title: "CyberMaze: The Interactive Phishing Simulator"
+category: "Cybersecurity"
+description: "A gamified tool where users navigate a dynamic maze of email scenarios, identifying and avoiding phishing attempts while learning key security practices."
+permalink: "/tools/daily-20260512-09-cybermaze-the-interactive-phishing-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260512"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberMaze: The Interactive Phishing Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool where users navigate a dynamic maze of email scenarios, identifying and avoiding phishing attempts while learning key security practices. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CyberMaze: The Interactive Phishing Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool where users navigate a dynamic maze of email scenarios, identifying and avoiding phishing attempts while learning key security practices. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CyberMaze: The Interactive Phishing Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool where users navigate a dynamic maze of email scenarios, identifying and avoiding phishing attempts while learning key security practices. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CyberMaze: The Interactive Phishing Simulator</h1>
+    <p class="seo-subtitle">A gamified tool where users navigate a dynamic maze of email scenarios, identifying and avoiding phishing attempts while learning key security practices.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #1e1e2f; color: #ffffff; }  
+  #tool-app { padding: 20px; }  
+  .maze { display: grid; grid-template-columns: repeat(5, 100px); gap: 10px; justify-content: center; margin: 50px auto; }  
+  .tile { border: 2px solid #555; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; border-radius: 5px; transition: background-color 0.2s; }  
+  .tile.safe { background-color: #2ecc71; }  
+  .tile.phishing { background-color: #e74c3c; }  
+  .tile.unknown { background-color: #34495e; }  
+  #info { text-align: center; margin-top: 20px; }  
+  #info p { margin: 5px 0; }  
+</style>  
+<div id="tool-app">  
+  <div id="info">  
+    <h1>CyberMaze: Don't Get Phished!</h1>  
+    <p><strong>Objective:</strong> Navigate the maze by only stepping on safe tiles. Avoid phishing traps!</p>  
+    <p id="status">Click on a tile to begin navigating the maze.</p>  
+  </div>  
+  <div class="maze" id="maze"></div>  
+</div>  
+<script>  
+  const mazeData = generateMaze(5, 5);  
+  const mazeContainer = document.getElementById('maze');  
+  const statusEl = document.getElementById('status');  
+  const mazeSize = 5;  
+  let playerPosition = { row: 0, col: 0 };  
+    
+  function generateMaze(rows, cols) {  
+    const maze = [];  
+    for (let i = 0; i < rows; i++) {  
+      const row = [];  
+      for (let j = 0; j < cols; j++) {  
+        const type = Math.random() > 0.7 ? 'phishing' : 'safe';  
+        row.push(type);  
+      }  
+      maze.push(row);  
+    }  
+    maze[0][0] = 'safe'; // Start is always safe  
+    maze[rows - 1][cols - 1] = 'safe'; // End is always safe  
+    return maze;  
+  }  
+    
+  function renderMaze() {  
+    mazeContainer.innerHTML = '';  
+    for (let i = 0; i < mazeSize; i++) {  
+      for (let j = 0; j < mazeSize; j++) {  
+        const tile = document.createElement('div');  
+        tile.className = `tile unknown`;  
+        tile.dataset.row = i;  
+        tile.dataset.col = j;  
+        tile.addEventListener('click', handleTileClick);  
+        if (i === playerPosition.row && j === playerPosition.col) {  
+          tile.textContent = '🧑';  
+        }  
+        mazeContainer.appendChild(tile);  
+      }  
+    }  
+  }  
+    
+  function handleTileClick(event) {  
+    const row = parseInt(event.target.dataset.row);  
+    const col = parseInt(event.target.dataset.col);  
+    
+    if (Math.abs(playerPosition.row - row) + Math.abs(playerPosition.col - col) > 1) {  
+      statusEl.textContent = 'You can only move to adjacent tiles!';  
+      return;  
+    }  
+    
+    const tileType = mazeData[row][col];  
+    
+    if (tileType === 'phishing') {  
+      event.target.className = 'tile phishing';  
+      statusEl.textContent = `Oh no! You stepped on a phishing trap. Game over.`;  
+      return;  
+    }  
+    
+    if (tileType === 'safe') {  
+      event.target.className = 'tile safe';  
+      playerPosition = { row, col };  
+      statusEl.textContent = `Good move! Now, where to next?`;  
+      renderMaze();  
+    
+      if (row === mazeSize - 1 && col === mazeSize - 1) {  
+        statusEl.textContent = `Congratulations! You've safely navigated the maze.`;  
+      }  
+    }  
+  }  
+    
+  renderMaze();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,167 @@
+---
+layout: null
+title: "MoodFlow: Interactive Emotional Wellness Tracker"
+category: "Health"
+description: "A dynamic visualization tool where users interactively map their daily moods and activities on a flowing timeline to uncover patterns affecting their mental health."
+permalink: "/tools/daily-20260512-05-moodflow-interactive-emotional-wellness-tracker.html"
+generated_by: "api-true-ai"
+generated_date: "20260512"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MoodFlow: Interactive Emotional Wellness Tracker | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic visualization tool where users interactively map their daily moods and activities on a flowing timeline to uncover patterns affecting their mental health. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="MoodFlow: Interactive Emotional Wellness Tracker | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic visualization tool where users interactively map their daily moods and activities on a flowing timeline to uncover patterns affecting their mental health. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MoodFlow: Interactive Emotional Wellness Tracker | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic visualization tool where users interactively map their daily moods and activities on a flowing timeline to uncover patterns affecting their mental health. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>MoodFlow: Interactive Emotional Wellness Tracker</h1>
+    <p class="seo-subtitle">A dynamic visualization tool where users interactively map their daily moods and activities on a flowing timeline to uncover patterns affecting their mental health.</p>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #f5f7fa, #c3cfe2);
+  }
+  #tool-app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+  }
+  h1 {
+    color: #2c3e50;
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  .timeline {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    border: 2px solid #3498db;
+    border-radius: 10px;
+    margin: 20px 0;
+    overflow: hidden;
+    background: #ecf0f1;
+  }
+  .activity-point {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .activity-point:hover {
+    transform: scale(1.2);
+  }
+  .info-panel {
+    padding: 10px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin-top: 10px;
+    display: none;
+  }
+  .btn-add {
+    padding: 10px 20px;
+    background: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s;
+  }
+  .btn-add:hover {
+    background: #2980b9;
+  }
+</style>
+<div id="tool-app">
+  <h1>MoodFlow: Emotional Wellness Timeline</h1>
+  <div class="timeline" id="timeline"></div>
+  <button class="btn-add" id="addBtn">Add Mood/Activity Point</button>
+  <div class="info-panel" id="infoPanel">
+    <h3>Activity Details</h3>
+    <p id="details"></p>
+  </div>
+</div>
+<script>
+  const timeline = document.getElementById("timeline");
+  const addBtn = document.getElementById("addBtn");
+  const infoPanel = document.getElementById("infoPanel");
+  const details = document.getElementById("details");
+
+  let points = [];
+
+  function addPoint() {
+    const point = document.createElement("div");
+    point.classList.add("activity-point");
+    const x = Math.random() * (timeline.offsetWidth - 20);
+    const y = Math.random() * (timeline.offsetHeight - 20);
+    point.style.left = x + "px";
+    point.style.top = y + "px";
+    point.style.background = getRandomMoodColor();
+
+    point.dataset.details = `Mood: ${getRandomMood()} | Activity: ${getRandomActivity()} | Location: (${Math.round(x)}, ${Math.round(y)})`;
+
+    point.addEventListener("click", () => {
+      details.textContent = point.dataset.details;
+      infoPanel.style.display = "block";
+    });
+
+    timeline.appendChild(point);
+    points.push(point);
+  }
+
+  function getRandomMood() {
+    const moods = ["Happy", "Sad", "Relaxed", "Stressed", "Energized", "Anxious"];
+    return moods[Math.floor(Math.random() * moods.length)];
+  }
+
+  function getRandomActivity() {
+    const activities = [
+      "Exercise",
+      "Meditation",
+      "Work",
+      "Socializing",
+      "Relaxing",
+      "Learning",
+    ];
+    return activities[Math.floor(Math.random() * activities.length)];
+  }
+
+  function getRandomMoodColor() {
+    const colors = ["#f39c12", "#e74c3c", "#2ecc71", "#3498db", "#9b59b6", "#34495e"];
+    return colors[Math.floor(Math.random() * colors.length)];
+  }
+
+  addBtn.addEventListener("click", addPoint);
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
