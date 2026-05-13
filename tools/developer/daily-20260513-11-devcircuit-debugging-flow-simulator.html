@@ -1,0 +1,103 @@
+---
+layout: null
+title: "DevCircuit: Debugging Flow Simulator"
+category: "Developer"
+description: "A highly interactive mini-game where developers trace and fix errors in a virtual debugging circuit by connecting code \"wires\" to restore functionality."
+permalink: "/tools/daily-20260513-11-devcircuit-debugging-flow-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260513"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevCircuit: Debugging Flow Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive mini-game where developers trace and fix errors in a virtual debugging circuit by connecting code &quot;wires&quot; to restore functionality. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DevCircuit: Debugging Flow Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive mini-game where developers trace and fix errors in a virtual debugging circuit by connecting code &quot;wires&quot; to restore functionality. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DevCircuit: Debugging Flow Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive mini-game where developers trace and fix errors in a virtual debugging circuit by connecting code &quot;wires&quot; to restore functionality. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DevCircuit: Debugging Flow Simulator</h1>
+    <p class="seo-subtitle">A highly interactive mini-game where developers trace and fix errors in a virtual debugging circuit by connecting code &quot;wires&quot; to restore functionality.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: #1e1e2f; color: #e0e0e0; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }  
+  #tool-app { display: grid; grid-template-columns: repeat(5, 100px); grid-gap: 15px; padding: 20px; background: #29293d; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); }  
+  .node { width: 100px; height: 100px; display: flex; justify-content: center; align-items: center; background: #3e3e5c; border: 2px solid #555; border-radius: 8px; font-size: 1.2em; cursor: pointer; transition: background 0.3s, transform 0.2s; }  
+  .node.active { background: #76c7c0; border-color: #4ca89a; transform: scale(1.1); }  
+  .node.error { background: #e57373; border-color: #ff8a65; }  
+  .connector { position: absolute; width: 3px; background: #fff; transform-origin: 0 0; }  
+</style>  
+<div id="tool-app">  
+  <!-- Nodes dynamically populated here -->  
+</div>  
+<script>  
+const app = document.getElementById("tool-app");  
+const gridSize = 5;  
+const nodes = [];  
+const connections = [];  
+const errors = [2, 8, 14];  
+
+for (let i = 0; i < gridSize * gridSize; i++) {  
+  const node = document.createElement("div");  
+  node.className = "node";  
+  node.dataset.index = i;  
+  if (errors.includes(i)) node.classList.add("error");  
+  node.addEventListener("click", () => toggleNode(i));  
+  app.appendChild(node);  
+  nodes.push(node);  
+}  
+
+function toggleNode(index) {  
+  const node = nodes[index];  
+  if (node.classList.contains("active")) {  
+    node.classList.remove("active");  
+    removeConnection(index);  
+  } else {  
+    node.classList.add("active");  
+    addConnection(index);  
+  }  
+  checkWinCondition();  
+}  
+
+function addConnection(index) {  
+  const connector = document.createElement("div");  
+  connector.className = "connector";  
+  connector.style.height = `${Math.random() * 50 + 50}px`;  
+  connector.style.backgroundColor = "cyan";  
+  app.appendChild(connector);  
+  connections.push(connector);  
+}  
+
+function removeConnection(index) {  
+  const conn = connections.pop();  
+  if (conn) app.removeChild(conn);  
+}  
+
+function checkWinCondition() {  
+  const activeNodes = nodes.filter(node => node.classList.contains("active")).length;  
+  if (activeNodes === nodes.length - errors.length) {  
+    alert("Congratulations! All circuits functioning perfectly!");  
+  }  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
