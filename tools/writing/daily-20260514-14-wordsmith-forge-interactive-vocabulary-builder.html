@@ -1,0 +1,142 @@
+---
+layout: null
+title: "WordSmith Forge: Interactive Vocabulary Builder"
+category: "Writing"
+description: "A gamified tool where users craft sentences by combining dynamically generated words into coherent and creative expressions, earning points based on originality and linguistic complexity."
+permalink: "/tools/daily-20260514-14-wordsmith-forge-interactive-vocabulary-builder.html"
+generated_by: "api-true-ai"
+generated_date: "20260514"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordSmith Forge: Interactive Vocabulary Builder | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool where users craft sentences by combining dynamically generated words into coherent and creative expressions, earning points based on originality and linguistic complexity. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="WordSmith Forge: Interactive Vocabulary Builder | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool where users craft sentences by combining dynamically generated words into coherent and creative expressions, earning points based on originality and linguistic complexity. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WordSmith Forge: Interactive Vocabulary Builder | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool where users craft sentences by combining dynamically generated words into coherent and creative expressions, earning points based on originality and linguistic complexity. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>WordSmith Forge: Interactive Vocabulary Builder</h1>
+    <p class="seo-subtitle">A gamified tool where users craft sentences by combining dynamically generated words into coherent and creative expressions, earning points based on originality and linguistic complexity.</p>
+    <style>  
+#tool-app {  
+  font-family: Arial, sans-serif;  
+  text-align: center;  
+  padding: 20px;  
+  background: linear-gradient(to right, #f7f2f2, #eaeaea);  
+}  
+.word-container {  
+  margin: 20px auto;  
+  padding: 20px;  
+  border: 2px solid #cccccc;  
+  border-radius: 10px;  
+  background-color: #ffffff;  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+  width: 80%;  
+}  
+.word {  
+  display: inline-block;  
+  margin: 5px;  
+  padding: 10px;  
+  cursor: pointer;  
+  border: 1px solid #5c90ff;  
+  border-radius: 5px;  
+  background-color: #f0f8ff;  
+  transition: transform 0.2s;  
+}  
+.word:hover {  
+  transform: scale(1.1);  
+  background-color: #d0e8ff;  
+}  
+#sentence {  
+  margin-top: 20px;  
+  font-size: 1.2rem;  
+  font-style: italic;  
+  color: #555;  
+}  
+#submit {  
+  margin-top: 20px;  
+  padding: 10px 20px;  
+  font-size: 1rem;  
+  color: white;  
+  background-color: #5c90ff;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  transition: background-color 0.3s;  
+}  
+#submit:hover {  
+  background-color: #3b70e0;  
+}  
+#score {  
+  margin-top: 20px;  
+  font-weight: bold;  
+  font-size: 1.5rem;  
+  color: #333;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>WordSmith Forge</h1>  
+  <p>Click on words below to build a creative sentence. Submit to earn points!</p>  
+  <div class="word-container" id="word-container">  
+  </div>  
+  <div id="sentence"></div>  
+  <button id="submit">Submit Sentence</button>  
+  <div id="score">Score: 0</div>  
+</div>  
+<script>  
+const words = ["innovate", "unicorn", "synergy", "adventure", "forge", "velocity", "transcend", "simulate", "galaxy", "optimize"];  
+let selectedWords = [];  
+let score = 0;  
+
+function renderWords() {  
+  const wordContainer = document.getElementById("word-container");  
+  wordContainer.innerHTML = "";  
+  words.forEach((word, index) => {  
+    const wordEl = document.createElement("div");  
+    wordEl.className = "word";  
+    wordEl.textContent = word;  
+    wordEl.onclick = () => {  
+      selectedWords.push(word);  
+      document.getElementById("sentence").textContent = selectedWords.join(" ");  
+    };  
+    wordContainer.appendChild(wordEl);  
+  });  
+}  
+
+document.getElementById("submit").onclick = () => {  
+  if (selectedWords.length > 0) {  
+    const sentence = selectedWords.join(" ");  
+    score += sentence.length + selectedWords.length * 2; // Custom scoring logic  
+    document.getElementById("score").textContent = `Score: ${score}`;  
+    selectedWords = [];  
+    document.getElementById("sentence").textContent = "";  
+  } else {  
+    alert("Please select words to form a sentence!");  
+  }  
+};  
+
+renderWords();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

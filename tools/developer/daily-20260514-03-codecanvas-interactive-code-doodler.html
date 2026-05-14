@@ -1,0 +1,158 @@
+---
+layout: null
+title: "CodeCanvas: Interactive Code Doodler"
+category: "Developer"
+description: "A creative mini-game where developers can visually \"draw\" code snippets on a canvas and watch them come to life as interactive UI components."
+permalink: "/tools/daily-20260514-03-codecanvas-interactive-code-doodler.html"
+generated_by: "api-true-ai"
+generated_date: "20260514"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeCanvas: Interactive Code Doodler | Free Online Interactive Tool</title>
+  <meta name="description" content="A creative mini-game where developers can visually &quot;draw&quot; code snippets on a canvas and watch them come to life as interactive UI components. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CodeCanvas: Interactive Code Doodler | Free Online Interactive Tool">
+  <meta property="og:description" content="A creative mini-game where developers can visually &quot;draw&quot; code snippets on a canvas and watch them come to life as interactive UI components. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CodeCanvas: Interactive Code Doodler | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A creative mini-game where developers can visually &quot;draw&quot; code snippets on a canvas and watch them come to life as interactive UI components. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CodeCanvas: Interactive Code Doodler</h1>
+    <p class="seo-subtitle">A creative mini-game where developers can visually &quot;draw&quot; code snippets on a canvas and watch them come to life as interactive UI components.</p>
+    <style>  
+  #tool-app {  
+    width: 100%;  
+    height: 100vh;  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    justify-content: center;  
+    font-family: Arial, sans-serif;  
+    background: linear-gradient(135deg, #1e293b, #0f172a);  
+    color: #fff;  
+  }  
+  #canvas {  
+    border: 2px solid #38bdf8;  
+    background: #1e293b;  
+    width: 80%;  
+    height: 60%;  
+    margin: auto;  
+    display: flex;  
+    align-items: center;  
+    justify-content: center;  
+    cursor: crosshair;  
+  }  
+  #controls {  
+    margin-top: 20px;  
+    display: flex;  
+    gap: 10px;  
+  }  
+  .button {  
+    padding: 10px 20px;  
+    background-color: #38bdf8;  
+    border: none;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    color: white;  
+    transition: background-color 0.3s;  
+  }  
+  .button:hover {  
+    background-color: #0ea5e9;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h1>CodeCanvas</h1>  
+  <div id="canvas"></div>  
+  <div id="controls">  
+    <button id="draw-rect" class="button">Draw Rectangle</button>  
+    <button id="draw-circle" class="button">Draw Circle</button>  
+    <button id="generate-code" class="button">Generate Code</button>  
+  </div>  
+</div>  
+<script>  
+const canvas = document.getElementById("canvas");  
+let components = [];  
+
+canvas.addEventListener("click", (e) => {  
+  const rect = canvas.getBoundingClientRect();  
+  const x = e.clientX - rect.left;  
+  const y = e.clientY - rect.top;  
+
+  if (currentTool === "rectangle") {  
+    drawRectangle(x, y);  
+  } else if (currentTool === "circle") {  
+    drawCircle(x, y);  
+  }  
+});  
+
+let currentTool = null;  
+
+document.getElementById("draw-rect").addEventListener("click", () => {  
+  currentTool = "rectangle";  
+});  
+
+document.getElementById("draw-circle").addEventListener("click", () => {  
+  currentTool = "circle";  
+});  
+
+document.getElementById("generate-code").addEventListener("click", () => {  
+  const code = components.map(({ type, x, y, width, height }) => {  
+    if (type === "rectangle") {  
+      return `<div style="position: absolute; top: ${y}px; left: ${x}px; width: ${width}px; height: ${height}px; background: #38bdf8;"></div>`;  
+    } else if (type === "circle") {  
+      return `<div style="position: absolute; top: ${y}px; left: ${x}px; width: ${width}px; height: ${width}px; border-radius: 50%; background: #0ea5e9;"></div>`;  
+    }  
+  }).join("\n");  
+
+  console.log("Generated Code:\n" + code);  
+  alert("Code generated! Check the console.");  
+});  
+
+function drawRectangle(x, y) {  
+  const rect = document.createElement("div");  
+  rect.style.position = "absolute";  
+  rect.style.top = `${y}px`;  
+  rect.style.left = `${x}px`;  
+  rect.style.width = "100px";  
+  rect.style.height = "50px";  
+  rect.style.background = "#38bdf8";  
+  canvas.appendChild(rect);  
+
+  components.push({ type: "rectangle", x, y, width: 100, height: 50 });  
+}  
+
+function drawCircle(x, y) {  
+  const circle = document.createElement("div");  
+  circle.style.position = "absolute";  
+  circle.style.top = `${y}px`;  
+  circle.style.left = `${x}px`;  
+  circle.style.width = "50px";  
+  circle.style.height = "50px";  
+  circle.style.borderRadius = "50%";  
+  circle.style.background = "#0ea5e9";  
+  canvas.appendChild(circle);  
+
+  components.push({ type: "circle", x, y, width: 50, height: 50 });  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

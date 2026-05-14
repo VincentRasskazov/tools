@@ -1,0 +1,200 @@
+---
+layout: null
+title: "CipherCraft: Encryption Maze"
+category: "Cybersecurity"
+description: "A gamified interactive maze where players solve encryption challenges to guide a character through levels while learning real-world cryptography concepts."
+permalink: "/tools/daily-20260514-18-ciphercraft-encryption-maze.html"
+generated_by: "api-true-ai"
+generated_date: "20260514"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CipherCraft: Encryption Maze | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified interactive maze where players solve encryption challenges to guide a character through levels while learning real-world cryptography concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CipherCraft: Encryption Maze | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified interactive maze where players solve encryption challenges to guide a character through levels while learning real-world cryptography concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CipherCraft: Encryption Maze | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified interactive maze where players solve encryption challenges to guide a character through levels while learning real-world cryptography concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CipherCraft: Encryption Maze</h1>
+    <p class="seo-subtitle">A gamified interactive maze where players solve encryption challenges to guide a character through levels while learning real-world cryptography concepts.</p>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #0e0e10;
+    color: #f4f4f5;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  #tool-app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  .maze-container {
+    display: grid;
+    grid-template-columns: repeat(10, 40px);
+    grid-template-rows: repeat(10, 40px);
+    gap: 2px;
+  }
+  .maze-cell {
+    width: 40px;
+    height: 40px;
+    background-color: #2e2e38;
+    border: 1px solid #444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .maze-cell.start {
+    background-color: #4caf50;
+  }
+  .maze-cell.end {
+    background-color: #f44336;
+  }
+  .maze-cell.active {
+    background-color: #2196f3;
+  }
+  .controls {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+  }
+  button {
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    background-color: #444;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+  }
+  button:disabled {
+    background-color: #888;
+    cursor: not-allowed;
+  }
+</style>
+<div id="tool-app">
+  <div class="maze-container" id="maze"></div>
+  <div class="controls">
+    <button id="start-btn">Start</button>
+    <button id="hint-btn" disabled>Hint</button>
+    <button id="reset-btn" disabled>Reset</button>
+  </div>
+</div>
+<script>
+  const mazeSize = 10;
+  const encryptionChallenges = [
+    { question: "Decode 'Uryyb' using ROT13.", answer: "Hello" },
+    { question: "What is the MD5 hash of 'Cybersecurity'?", answer: "ce5db4bc8c4c45db1bfb64a50ad948f8" },
+    { question: "Decrypt '101010' from binary to text.", answer: "42" },
+    { question: "What does 'AES' stand for?", answer: "Advanced Encryption Standard" },
+    { question: "Solve: Caesar cipher with shift 3, 'Dwhv duh ixq!'", answer: "Cats are fun!" },
+  ];
+  let maze = [];
+  let playerPosition = { x: 0, y: 0 };
+  let isGameActive = false;
+
+  const mazeElement = document.getElementById("maze");
+  const startButton = document.getElementById("start-btn");
+  const hintButton = document.getElementById("hint-btn");
+  const resetButton = document.getElementById("reset-btn");
+
+  function generateMaze() {
+    maze = Array(mazeSize).fill().map(() => Array(mazeSize).fill("empty"));
+    maze[0][0] = "start";
+    maze[mazeSize - 1][mazeSize - 1] = "end";
+  }
+
+  function renderMaze() {
+    mazeElement.innerHTML = "";
+    for (let y = 0; y < mazeSize; y++) {
+      for (let x = 0; x < mazeSize; x++) {
+        const cell = document.createElement("div");
+        cell.classList.add("maze-cell");
+        if (maze[y][x] === "start") cell.classList.add("start");
+        if (maze[y][x] === "end") cell.classList.add("end");
+        if (playerPosition.x === x && playerPosition.y === y) cell.classList.add("active");
+        cell.addEventListener("click", () => handleCellClick(x, y));
+        mazeElement.appendChild(cell);
+      }
+    }
+  }
+
+  function handleCellClick(x, y) {
+    if (!isGameActive) return;
+    if (Math.abs(x - playerPosition.x) + Math.abs(y - playerPosition.y) === 1) {
+      // Trigger a challenge
+      const challenge = encryptionChallenges[Math.floor(Math.random() * encryptionChallenges.length)];
+      const userAnswer = prompt(challenge.question);
+      if (userAnswer === challenge.answer) {
+        playerPosition = { x, y };
+        if (maze[y][x] === "end") {
+          alert("Congratulations! You've completed the maze!");
+          isGameActive = false;
+          hintButton.disabled = true;
+          resetButton.disabled = false;
+        }
+        renderMaze();
+      } else {
+        alert("Incorrect answer. Try again!");
+      }
+    }
+  }
+
+  function startGame() {
+    isGameActive = true;
+    playerPosition = { x: 0, y: 0 };
+    hintButton.disabled = false;
+    resetButton.disabled = false;
+    renderMaze();
+  }
+
+  function resetGame() {
+    generateMaze();
+    playerPosition = { x: 0, y: 0 };
+    isGameActive = false;
+    hintButton.disabled = true;
+    resetButton.disabled = true;
+    renderMaze();
+  }
+
+  function showHint() {
+    alert("Hint: Pay attention to common encryption methods.");
+  }
+
+  startButton.addEventListener("click", startGame);
+  resetButton.addEventListener("click", resetGame);
+  hintButton.addEventListener("click", showHint);
+
+  // Initialize the tool
+  generateMaze();
+  renderMaze();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
