@@ -1,0 +1,138 @@
+---
+layout: null
+title: "Investment Galaxy: Portfolio Orbit Simulator"
+category: "Finance"
+description: "A visually interactive tool where users create and manage a \"solar system\" of investments, visualizing asset allocation as planets orbiting a financial \"sun,\" with real-time feedback on portfolio balance and risk."
+permalink: "/tools/daily-20260515-07-investment-galaxy-portfolio-orbit-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260515"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Investment Galaxy: Portfolio Orbit Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="A visually interactive tool where users create and manage a &quot;solar system&quot; of investments, visualizing asset allocation as planets orbiting a financial &quot;sun,&quot; with real-time feedback on portfolio balance and risk. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Investment Galaxy: Portfolio Orbit Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="A visually interactive tool where users create and manage a &quot;solar system&quot; of investments, visualizing asset allocation as planets orbiting a financial &quot;sun,&quot; with real-time feedback on portfolio balance and risk. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Investment Galaxy: Portfolio Orbit Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A visually interactive tool where users create and manage a &quot;solar system&quot; of investments, visualizing asset allocation as planets orbiting a financial &quot;sun,&quot; with real-time feedback on portfolio balance and risk. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Investment Galaxy: Portfolio Orbit Simulator</h1>
+    <p class="seo-subtitle">A visually interactive tool where users create and manage a &quot;solar system&quot; of investments, visualizing asset allocation as planets orbiting a financial &quot;sun,&quot; with real-time feedback on portfolio balance and risk.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: #121212; color: #ffffff; margin: 0; overflow: hidden; }  
+  #tool-app { width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; position: relative; }  
+  canvas { display: block; }  
+  #info-panel { position: absolute; top: 20px; right: 20px; background: rgba(20, 20, 20, 0.9); padding: 15px; border-radius: 8px; }  
+  #info-panel h2 { margin: 0 0 10px 0; }  
+  #slider-container { margin-top: 10px; }  
+  input[type=range] { width: 100%; }  
+</style>  
+<div id="tool-app">  
+  <canvas id="galaxyCanvas"></canvas>  
+  <div id="info-panel">  
+    <h2>Portfolio Overview</h2>  
+    <div><strong>Risk Level:</strong> <span id="risk-level">Medium</span></div>  
+    <div><strong>Diversity:</strong> <span id="diversity-score">Balanced</span></div>  
+    <div id="slider-container">  
+      <label for="risk-slider">Adjust Risk</label>  
+      <input type="range" id="risk-slider" min="1" max="100" value="50">  
+    </div>  
+  </div>  
+</div>  
+<script>  
+// Get canvas and context  
+const canvas = document.getElementById('galaxyCanvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = window.innerWidth;  
+canvas.height = window.innerHeight;  
+
+// Tool state  
+const portfolio = {  
+  sun: { x: canvas.width / 2, y: canvas.height / 2, radius: 50, color: '#FFD700' },  
+  planets: [],  
+  riskLevel: 50  
+};  
+
+// Utility functions  
+function random(min, max) { return Math.random() * (max - min) + min; }  
+function addPlanet() {  
+  const distance = random(100, 400);  
+  const size = random(10, 30);  
+  const speed = random(0.01, 0.03);  
+  const color = `hsl(${random(0, 360)}, 70%, 50%)`;  
+  const angle = random(0, Math.PI * 2);  
+  portfolio.planets.push({ distance, size, speed, color, angle });  
+}  
+
+// Add initial planets  
+for (let i = 0; i < 5; i++) { addPlanet(); }  
+
+// Draw functions  
+function drawSun() {  
+  ctx.beginPath();  
+  ctx.arc(portfolio.sun.x, portfolio.sun.y, portfolio.sun.radius, 0, Math.PI * 2);  
+  ctx.fillStyle = portfolio.sun.color;  
+  ctx.fill();  
+}  
+function drawPlanets() {  
+  portfolio.planets.forEach(planet => {  
+    planet.angle += planet.speed * (portfolio.riskLevel / 50);  
+    const x = portfolio.sun.x + planet.distance * Math.cos(planet.angle);  
+    const y = portfolio.sun.y + planet.distance * Math.sin(planet.angle);  
+    ctx.beginPath();  
+    ctx.arc(x, y, planet.size, 0, Math.PI * 2);  
+    ctx.fillStyle = planet.color;  
+    ctx.fill();  
+  });  
+}  
+
+// Risk slider logic  
+const riskSlider = document.getElementById('risk-slider');  
+const riskLevelDisplay = document.getElementById('risk-level');  
+const diversityScoreDisplay = document.getElementById('diversity-score');  
+riskSlider.addEventListener('input', e => {  
+  portfolio.riskLevel = e.target.value;  
+  updateInfoPanel();  
+});  
+
+// Update info panel  
+function updateInfoPanel() {  
+  const risk = portfolio.riskLevel;  
+  riskLevelDisplay.textContent = risk < 35 ? 'Low' : risk < 70 ? 'Medium' : 'High';  
+  diversityScoreDisplay.textContent = portfolio.planets.length > 7 ? 'Very High' : portfolio.planets.length > 3 ? 'Balanced' : 'Low';  
+}  
+
+// Animation loop  
+function animate() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  drawSun();  
+  drawPlanets();  
+  requestAnimationFrame(animate);  
+}  
+
+// Initialize tool  
+updateInfoPanel();  
+animate();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
