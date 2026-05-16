@@ -1,0 +1,197 @@
+---
+layout: null
+title: "DataStrand Weaver"
+category: "Data"
+description: "Discover correlations and patterns in datasets by weaving interactive \"data strands\" together in a visually dynamic and gamified browser tool."
+permalink: "/tools/daily-20260516-12-datastrand-weaver.html"
+generated_by: "api-true-ai"
+generated_date: "20260516"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataStrand Weaver | Free Online Interactive Tool</title>
+  <meta name="description" content="Discover correlations and patterns in datasets by weaving interactive &quot;data strands&quot; together in a visually dynamic and gamified browser tool. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataStrand Weaver | Free Online Interactive Tool">
+  <meta property="og:description" content="Discover correlations and patterns in datasets by weaving interactive &quot;data strands&quot; together in a visually dynamic and gamified browser tool. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataStrand Weaver | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Discover correlations and patterns in datasets by weaving interactive &quot;data strands&quot; together in a visually dynamic and gamified browser tool. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataStrand Weaver</h1>
+    <p class="seo-subtitle">Discover correlations and patterns in datasets by weaving interactive &quot;data strands&quot; together in a visually dynamic and gamified browser tool.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background-color: #1e1e2f;  
+  color: #ffffff;  
+  margin: 0;  
+  display: flex;  
+  flex-direction: column;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  width: 80%;  
+  height: 80%;  
+  display: flex;  
+  flex-direction: column;  
+  justify-content: flex-start;  
+  align-items: center;  
+  background: linear-gradient(145deg, #2a2a40, #1a1a2b);  
+  border-radius: 15px;  
+  box-shadow: 5px 5px 15px #141424, -5px -5px 15px #2e2e42;  
+  overflow: hidden;  
+  padding: 20px;  
+}  
+#canvas {  
+  width: 100%;  
+  height: 80%;  
+  background-color: #282844;  
+  border-radius: 10px;  
+  box-shadow: inset 2px 2px 8px #191929, inset -2px -2px 8px #313159;  
+  position: relative;  
+  cursor: crosshair;  
+}  
+#controls {  
+  margin-top: 20px;  
+  width: 100%;  
+  display: flex;  
+  flex-direction: row;  
+  justify-content: space-between;  
+}  
+button {  
+  padding: 10px 20px;  
+  font-size: 16px;  
+  color: #ffffff;  
+  background-color: #44446a;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  transition: background-color 0.3s;  
+}  
+button:hover {  
+  background-color: #56568a;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="canvas"></div>  
+  <div id="controls">  
+    <button id="add-strand">Add Strand</button>  
+    <button id="analyze">Analyze Connections</button>  
+    <button id="reset">Reset</button>  
+  </div>  
+</div>  
+<script>  
+const canvas = document.getElementById("canvas");  
+const addStrandButton = document.getElementById("add-strand");  
+const analyzeButton = document.getElementById("analyze");  
+const resetButton = document.getElementById("reset");  
+
+let strands = []; // Store data nodes  
+let connections = []; // Store relationships  
+
+// Utility to generate random colors  
+function getRandomColor() {  
+  return `hsl(${Math.floor(Math.random() * 360)}, 70%, 60%)`;  
+}  
+
+// Create a new data strand  
+function createStrand(x, y) {  
+  const strand = document.createElement("div");  
+  strand.className = "strand";  
+  strand.style.position = "absolute";  
+  strand.style.left = `${x - 10}px`;  
+  strand.style.top = `${y - 10}px`;  
+  strand.style.width = "20px";  
+  strand.style.height = "20px";  
+  strand.style.backgroundColor = getRandomColor();  
+  strand.style.borderRadius = "50%";  
+  strand.style.boxShadow = "0px 0px 10px rgba(0, 0, 0, 0.5)";  
+  strand.dataset.id = strands.length;  
+  canvas.appendChild(strand);  
+  strands.push({ id: strands.length, x, y, element: strand, connections: [] });  
+  strand.addEventListener("click", () => selectConnection(strand.dataset.id));  
+}  
+
+// Add strands on click  
+canvas.addEventListener("click", (e) => {  
+  if (e.target === canvas) {  
+    createStrand(e.offsetX, e.offsetY);  
+  }  
+});  
+
+let selectedStrand = null;  
+function selectConnection(id) {  
+  const strand = strands.find((s) => s.id === parseInt(id));  
+  if (selectedStrand === null) {  
+    selectedStrand = strand;  
+    strand.element.style.border = "2px solid #ffffff";  
+  } else {  
+    if (selectedStrand.id !== strand.id) {  
+      connections.push([selectedStrand.id, strand.id]);  
+      drawConnection(selectedStrand, strand);  
+    }  
+    selectedStrand.element.style.border = "none";  
+    selectedStrand = null;  
+  }  
+}  
+
+// Draw connection between two strands  
+function drawConnection(strandA, strandB) {  
+  const line = document.createElement("div");  
+  line.className = "connection";  
+
+  const x1 = strandA.x;  
+  const y1 = strandA.y;  
+  const x2 = strandB.x;  
+  const y2 = strandB.y;  
+
+  const length = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);  
+  const angle = Math.atan2(y2 - y1, x2 - x1) * (180 / Math.PI);  
+
+  line.style.position = "absolute";  
+  line.style.transformOrigin = "0 50%";  
+  line.style.transform = `rotate(${angle}deg)`;  
+  line.style.height = "2px";  
+  line.style.width = `${length}px`;  
+  line.style.backgroundColor = "#ffffff";  
+  line.style.left = `${x1}px`;  
+  line.style.top = `${y1}px`;  
+
+  canvas.appendChild(line);  
+}  
+
+// Analyze connections  
+analyzeButton.addEventListener("click", () => {  
+  alert(`Total Strands: ${strands.length}\nConnections: ${connections.length}`);  
+});  
+
+// Reset canvas  
+resetButton.addEventListener("click", () => {  
+  strands = [];  
+  connections = [];  
+  canvas.innerHTML = "";  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
