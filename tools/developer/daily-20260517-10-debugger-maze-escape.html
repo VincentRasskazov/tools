@@ -1,0 +1,174 @@
+---
+layout: null
+title: "Debugger Maze Escape"
+category: "Developer"
+description: "Navigate a maze where every path represents debugging a specific type of code error, with hints and traps to test your problem-solving skills."
+permalink: "/tools/daily-20260517-10-debugger-maze-escape.html"
+generated_by: "api-true-ai"
+generated_date: "20260517"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debugger Maze Escape | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate a maze where every path represents debugging a specific type of code error, with hints and traps to test your problem-solving skills. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Debugger Maze Escape | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate a maze where every path represents debugging a specific type of code error, with hints and traps to test your problem-solving skills. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Debugger Maze Escape | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate a maze where every path represents debugging a specific type of code error, with hints and traps to test your problem-solving skills. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Debugger Maze Escape</h1>
+    <p class="seo-subtitle">Navigate a maze where every path represents debugging a specific type of code error, with hints and traps to test your problem-solving skills.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background: #1e1e2f;  
+  color: #fff;  
+}  
+
+#tool-app {  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  height: 100vh;  
+}  
+
+#maze {  
+  display: grid;  
+  grid-template-columns: repeat(10, 50px);  
+  grid-template-rows: repeat(10, 50px);  
+  gap: 2px;  
+  background: #2a2a3d;  
+  padding: 10px;  
+  border-radius: 8px;  
+}  
+
+.cell {  
+  width: 48px;  
+  height: 48px;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  background: #35354f;  
+  color: #fff;  
+  font-size: 14px;  
+  border: 1px solid #4a4a6a;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+
+.cell.start {  
+  background: #3d85c6;  
+}  
+
+.cell.end {  
+  background: #6aa84f;  
+}  
+
+.cell.hint {  
+  background: #f1c232;  
+}  
+
+.cell.trap {  
+  background: #cc0000;  
+}  
+
+.cell.visited {  
+  background: #6d6a92;  
+}  
+
+#status {  
+  margin-top: 20px;  
+  font-size: 18px;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="maze"></div>  
+  <div id="status">Get ready to debug your way to freedom!</div>  
+</div>  
+<script>  
+const mazeSize = 10;  
+const maze = document.getElementById('maze');  
+const statusDiv = document.getElementById('status');  
+let playerPosition = { x: 0, y: 0 };  
+
+function generateMaze() {  
+  maze.innerHTML = '';  
+  for (let y = 0; y < mazeSize; y++) {  
+    for (let x = 0; x < mazeSize; x++) {  
+      const cell = document.createElement('div');  
+      cell.classList.add('cell');  
+      cell.dataset.x = x;  
+      cell.dataset.y = y;  
+
+      if (x === 0 && y === 0) {  
+        cell.classList.add('start');  
+        cell.innerText = 'S';  
+      } else if (x === mazeSize - 1 && y === mazeSize - 1) {  
+        cell.classList.add('end');  
+        cell.innerText = 'E';  
+      } else if (Math.random() > 0.8) {  
+        cell.classList.add('trap');  
+        cell.innerText = 'X';  
+      } else if (Math.random() > 0.6) {  
+        cell.classList.add('hint');  
+        cell.innerText = '?';  
+      }  
+
+      cell.addEventListener('click', () => handleClick(cell));  
+      maze.appendChild(cell);  
+    }  
+  }  
+}  
+
+function handleClick(cell) {  
+  const x = parseInt(cell.dataset.x);  
+  const y = parseInt(cell.dataset.y);  
+
+  if (Math.abs(x - playerPosition.x) + Math.abs(y - playerPosition.y) === 1) {  
+    if (cell.classList.contains('trap')) {  
+      statusDiv.innerText = 'Trap! You lost. Try again!';  
+      generateMaze();  
+      playerPosition = { x: 0, y: 0 };  
+    } else if (cell.classList.contains('hint')) {  
+      statusDiv.innerText = 'Hint: Check your console for a debugging tip!';  
+      console.log('Debugging Tip: Don’t forget to check for off-by-one errors!');  
+      cell.classList.remove('hint');  
+    } else if (cell.classList.contains('end')) {  
+      statusDiv.innerText = 'Congratulations! You escaped the Debugger Maze!';  
+    } else {  
+      playerPosition = { x, y };  
+      cell.classList.add('visited');  
+      statusDiv.innerText = 'Keep going!';  
+    }  
+  } else {  
+    statusDiv.innerText = 'You can only move to adjacent cells!';  
+  }  
+}  
+
+generateMaze();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

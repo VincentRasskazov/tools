@@ -1,0 +1,167 @@
+---
+layout: null
+title: "Task Tapestry Planner"
+category: "Productivity"
+description: "A dynamic, interactive canvas where users weave and connect tasks visually like threads in a tapestry, creating a unique productivity map."
+permalink: "/tools/daily-20260517-03-task-tapestry-planner.html"
+generated_by: "api-true-ai"
+generated_date: "20260517"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Tapestry Planner | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, interactive canvas where users weave and connect tasks visually like threads in a tapestry, creating a unique productivity map. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Task Tapestry Planner | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, interactive canvas where users weave and connect tasks visually like threads in a tapestry, creating a unique productivity map. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Task Tapestry Planner | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, interactive canvas where users weave and connect tasks visually like threads in a tapestry, creating a unique productivity map. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Task Tapestry Planner</h1>
+    <p class="seo-subtitle">A dynamic, interactive canvas where users weave and connect tasks visually like threads in a tapestry, creating a unique productivity map.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(45deg, #ff9a9e, #fad0c4);  
+  height: 100vh;  
+  margin: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+}  
+#tool-app {  
+  width: 90%;  
+  height: 80%;  
+  border-radius: 12px;  
+  background-color: white;  
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);  
+  padding: 20px;  
+  overflow: hidden;  
+}  
+canvas {  
+  width: 100%;  
+  height: 100%;  
+  cursor: crosshair;  
+}  
+</style>  
+<div id="tool-app">  
+  <canvas id="taskCanvas"></canvas>  
+</div>  
+<script>  
+const canvas = document.getElementById("taskCanvas");  
+const ctx = canvas.getContext("2d");  
+canvas.width = canvas.offsetWidth;  
+canvas.height = canvas.offsetHeight;  
+
+let tasks = [];  
+let selectedTask = null;  
+let isDragging = false;  
+
+function addTask(x, y, text) {  
+  tasks.push({  
+    x,  
+    y,  
+    text,  
+    links: [],  
+  });  
+  drawTasks();  
+}  
+
+function drawTasks() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  ctx.font = "16px Arial";  
+  tasks.forEach((task) => {  
+    ctx.fillStyle = "blue";  
+    ctx.beginPath();  
+    ctx.arc(task.x, task.y, 10, 0, Math.PI * 2);  
+    ctx.fill();  
+    ctx.fillStyle = "black";  
+    ctx.fillText(task.text, task.x + 15, task.y + 5);  
+    task.links.forEach((link) => {  
+      ctx.strokeStyle = "gray";  
+      ctx.beginPath();  
+      ctx.moveTo(task.x, task.y);  
+      ctx.lineTo(link.x, link.y);  
+      ctx.stroke();  
+    });  
+  });  
+}  
+
+canvas.addEventListener("mousedown", (e) => {  
+  const rect = canvas.getBoundingClientRect();  
+  const mouseX = e.clientX - rect.left;  
+  const mouseY = e.clientY - rect.top;  
+
+  for (let task of tasks) {  
+    const dist = Math.sqrt((task.x - mouseX) ** 2 + (task.y - mouseY) ** 2);  
+    if (dist < 10) {  
+      selectedTask = task;  
+      isDragging = true;  
+      return;  
+    }  
+  }  
+});  
+
+canvas.addEventListener("mousemove", (e) => {  
+  if (!isDragging || !selectedTask) return;  
+  const rect = canvas.getBoundingClientRect();  
+  selectedTask.x = e.clientX - rect.left;  
+  selectedTask.y = e.clientY - rect.top;  
+  drawTasks();  
+});  
+
+canvas.addEventListener("mouseup", () => {  
+  isDragging = false;  
+  selectedTask = null;  
+});  
+
+canvas.addEventListener("dblclick", (e) => {  
+  const rect = canvas.getBoundingClientRect();  
+  const x = e.clientX - rect.left;  
+  const y = e.clientY - rect.top;  
+  const text = prompt("Enter task name:");  
+  if (text) addTask(x, y, text);  
+});  
+
+canvas.addEventListener("contextmenu", (e) => {  
+  e.preventDefault();  
+  const rect = canvas.getBoundingClientRect();  
+  const mouseX = e.clientX - rect.left;  
+  const mouseY = e.clientY - rect.top;  
+
+  for (let task of tasks) {  
+    const dist = Math.sqrt((task.x - mouseX) ** 2 + (task.y - mouseY) ** 2);  
+    if (dist < 10) {  
+      const targetTask = prompt("Enter task name to link:");  
+      const linkTask = tasks.find((t) => t.text === targetTask);  
+      if (linkTask && linkTask !== task) {  
+        task.links.push(linkTask);  
+        drawTasks();  
+      }  
+      return;  
+    }  
+  }  
+});  
+drawTasks();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,132 @@
+---
+layout: null
+title: "DevFlow Mapper: Code Dependency Explorer"
+category: "Developer"
+description: "An interactive tool that visualizes and maps out code dependencies and flow between functions, modules, and files in real-time using graph-based interactivity and animations."
+permalink: "/tools/daily-20260517-14-devflow-mapper-code-dependency-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260517"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevFlow Mapper: Code Dependency Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool that visualizes and maps out code dependencies and flow between functions, modules, and files in real-time using graph-based interactivity and animations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DevFlow Mapper: Code Dependency Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool that visualizes and maps out code dependencies and flow between functions, modules, and files in real-time using graph-based interactivity and animations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DevFlow Mapper: Code Dependency Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool that visualizes and maps out code dependencies and flow between functions, modules, and files in real-time using graph-based interactivity and animations. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DevFlow Mapper: Code Dependency Explorer</h1>
+    <p class="seo-subtitle">An interactive tool that visualizes and maps out code dependencies and flow between functions, modules, and files in real-time using graph-based interactivity and animations.</p>
+    <style>  
+  #tool-app {  
+    height: 100vh;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    background: #1e1f26;  
+    color: #ffffff;  
+    font-family: Arial, sans-serif;  
+    overflow: hidden;  
+  }  
+  .node {  
+    border-radius: 50%;  
+    height: 80px;  
+    width: 80px;  
+    text-align: center;  
+    line-height: 80px;  
+    background: #4caf50;  
+    color: #fff;  
+    position: absolute;  
+    cursor: pointer;  
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);  
+    transition: transform 0.2s;  
+  }  
+  .node:hover {  
+    transform: scale(1.2);  
+    background: #66bb6a;  
+  }  
+  .link {  
+    stroke: #d32f2f;  
+    stroke-width: 2px;  
+  }  
+</style>  
+<div id="tool-app">  
+  <svg id="graph" width="100%" height="100%"></svg>  
+</div>  
+<script>  
+const svg = document.querySelector('#graph');  
+const width = svg.clientWidth;  
+const height = svg.clientHeight;  
+
+const data = {  
+  nodes: [  
+    { id: 1, name: 'Main.js', x: 200, y: 400 },  
+    { id: 2, name: 'Utils.js', x: 400, y: 300 },  
+    { id: 3, name: 'APIHandler.js', x: 600, y: 500 },  
+    { id: 4, name: 'UI.js', x: 500, y: 700 },  
+    { id: 5, name: 'Data.js', x: 800, y: 400 },  
+  ],  
+  links: [  
+    { source: 1, target: 2 },  
+    { source: 1, target: 3 },  
+    { source: 3, target: 4 },  
+    { source: 3, target: 5 },  
+    { source: 2, target: 5 },  
+  ]  
+};  
+
+function drawGraph(data) {  
+  // Draw links  
+  data.links.forEach(link => {  
+    const source = data.nodes.find(node => node.id === link.source);  
+    const target = data.nodes.find(node => node.id === link.target);  
+
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');  
+    line.setAttribute('x1', source.x);  
+    line.setAttribute('y1', source.y);  
+    line.setAttribute('x2', target.x);  
+    line.setAttribute('y2', target.y);  
+    line.setAttribute('class', 'link');  
+    svg.appendChild(line);  
+  });  
+
+  // Draw nodes  
+  data.nodes.forEach(node => {  
+    const circle = document.createElement('div');  
+    circle.className = 'node';  
+    circle.style.left = `${node.x - 40}px`;  
+    circle.style.top = `${node.y - 40}px`;  
+    circle.textContent = node.name;  
+    document.querySelector('#tool-app').appendChild(circle);  
+
+    circle.addEventListener('click', () => {  
+      alert(`Inspecting "${node.name}"\nConnections: ${data.links.filter(link => link.source === node.id || link.target === node.id).length}`);  
+    });  
+  });  
+}  
+
+drawGraph(data);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

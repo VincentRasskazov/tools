@@ -1,0 +1,160 @@
+---
+layout: null
+title: "FocusFlow Matrix"
+category: "Productivity"
+description: "A dynamic drag-and-drop priority matrix where tasks are color-coded and evolve based on real-time deadlines, status, and your work habits."
+permalink: "/tools/daily-20260517-17-focusflow-matrix.html"
+generated_by: "api-true-ai"
+generated_date: "20260517"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusFlow Matrix | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic drag-and-drop priority matrix where tasks are color-coded and evolve based on real-time deadlines, status, and your work habits. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="FocusFlow Matrix | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic drag-and-drop priority matrix where tasks are color-coded and evolve based on real-time deadlines, status, and your work habits. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FocusFlow Matrix | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic drag-and-drop priority matrix where tasks are color-coded and evolve based on real-time deadlines, status, and your work habits. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>FocusFlow Matrix</h1>
+    <p class="seo-subtitle">A dynamic drag-and-drop priority matrix where tasks are color-coded and evolve based on real-time deadlines, status, and your work habits.</p>
+    <style>  
+  #tool-app {  
+    font-family: Arial, sans-serif;  
+    max-width: 800px;  
+    margin: 50px auto;  
+    display: grid;  
+    grid-template-columns: repeat(2, 1fr);  
+    gap: 10px;  
+    border: 2px solid #ccc;  
+    border-radius: 10px;  
+    padding: 20px;  
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  
+  }  
+  .quadrant {  
+    border: 2px solid #ddd;  
+    border-radius: 8px;  
+    background: #f9f9f9;  
+    padding: 20px;  
+    position: relative;  
+  }  
+  .quadrant h3 {  
+    margin: 0 0 20px;  
+    font-size: 16px;  
+  }  
+  .task {  
+    padding: 10px;  
+    margin: 5px 0;  
+    border: 1px solid #ccc;  
+    border-radius: 5px;  
+    background: #fff;  
+    cursor: grab;  
+    font-size: 14px;  
+    color: #333;  
+  }  
+  .task.overdue { background: #f8d7da; }  
+  .task.urgent { background: #fff3cd; }  
+  .task.completed { background: #d4edda; text-decoration: line-through; }  
+</style>  
+<div id="tool-app">  
+  <div class="quadrant" data-priority="urgent-important">  
+    <h3>🔥 Urgent & Important</h3>  
+    <div class="drop-zone"></div>  
+  </div>  
+  <div class="quadrant" data-priority="important-not-urgent">  
+    <h3>✅ Important but Not Urgent</h3>  
+    <div class="drop-zone"></div>  
+  </div>  
+  <div class="quadrant" data-priority="urgent-not-important">  
+    <h3>⏳ Urgent but Not Important</h3>  
+    <div class="drop-zone"></div>  
+  </div>  
+  <div class="quadrant" data-priority="not-urgent-not-important">  
+    <h3>🛌 Not Urgent & Not Important</h3>  
+    <div class="drop-zone"></div>  
+  </div>  
+</div>  
+<script>  
+document.addEventListener("DOMContentLoaded", () => {  
+  const tasks = [  
+    { id: 1, text: "Complete project report", urgency: "urgent-important", status: "pending" },  
+    { id: 2, text: "Plan weekend trip", urgency: "important-not-urgent", status: "pending" },  
+    { id: 3, text: "Reply to emails", urgency: "urgent-not-important", status: "pending" },  
+    { id: 4, text: "Watch new movie", urgency: "not-urgent-not-important", status: "pending" },  
+  ];  
+
+  const toolApp = document.getElementById("tool-app");  
+
+  const createTaskElement = (task) => {  
+    const taskEl = document.createElement("div");  
+    taskEl.classList.add("task");  
+    taskEl.classList.add(task.status);  
+    taskEl.textContent = task.text;  
+    taskEl.draggable = true;  
+    taskEl.dataset.id = task.id;  
+
+    taskEl.addEventListener("dragstart", (e) => {  
+      e.dataTransfer.setData("task-id", task.id);  
+    });  
+
+    return taskEl;  
+  };  
+
+  const loadTasks = () => {  
+    tasks.forEach((task) => {  
+      const quadrant = toolApp.querySelector(`.quadrant[data-priority="${task.urgency}"] .drop-zone`);  
+      quadrant.appendChild(createTaskElement(task));  
+    });  
+  };  
+
+  const dropZones = document.querySelectorAll(".drop-zone");  
+
+  dropZones.forEach((zone) => {  
+    zone.addEventListener("dragover", (e) => {  
+      e.preventDefault();  
+      zone.style.background = "#e3f2fd";  
+    });  
+
+    zone.addEventListener("dragleave", () => {  
+      zone.style.background = "";  
+    });  
+
+    zone.addEventListener("drop", (e) => {  
+      e.preventDefault();  
+      zone.style.background = "";  
+      const taskId = e.dataTransfer.getData("task-id");  
+      const task = tasks.find((t) => t.id == taskId);  
+      const newPriority = zone.parentElement.dataset.priority;  
+
+      if (task) {  
+        task.urgency = newPriority;  
+        zone.appendChild(document.querySelector(`.task[data-id="${taskId}"]`));  
+      }  
+    });  
+  });  
+
+  loadTasks();  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

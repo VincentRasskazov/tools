@@ -1,0 +1,155 @@
+---
+layout: null
+title: "DataSyphon: Interactive Data Stream Visualizer"
+category: "Data"
+description: "A dynamic, gamified tool where users can manipulate, filter, and analyze virtual data streams in real-time to uncover hidden patterns and anomalies."
+permalink: "/tools/daily-20260517-12-datasyphon-interactive-data-stream-visualizer.html"
+generated_by: "api-true-ai"
+generated_date: "20260517"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataSyphon: Interactive Data Stream Visualizer | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, gamified tool where users can manipulate, filter, and analyze virtual data streams in real-time to uncover hidden patterns and anomalies. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataSyphon: Interactive Data Stream Visualizer | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, gamified tool where users can manipulate, filter, and analyze virtual data streams in real-time to uncover hidden patterns and anomalies. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataSyphon: Interactive Data Stream Visualizer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, gamified tool where users can manipulate, filter, and analyze virtual data streams in real-time to uncover hidden patterns and anomalies. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataSyphon: Interactive Data Stream Visualizer</h1>
+    <p class="seo-subtitle">A dynamic, gamified tool where users can manipulate, filter, and analyze virtual data streams in real-time to uncover hidden patterns and anomalies.</p>
+    <style>  
+  #tool-app {  
+    font-family: 'Arial', sans-serif;  
+    max-width: 800px;  
+    margin: 50px auto;  
+    text-align: center;  
+    background: #121212;  
+    color: #ffffff;  
+    padding: 20px;  
+    border-radius: 10px;  
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);  
+  }  
+  .data-stream {  
+    display: flex;  
+    margin: 10px 0;  
+    justify-content: center;  
+    gap: 5px;  
+  }  
+  .data-point {  
+    width: 20px;  
+    height: 20px;  
+    background-color: #3498db;  
+    display: inline-block;  
+    border-radius: 5px;  
+    animation: pulse 1.5s infinite;  
+    cursor: pointer;  
+  }  
+  .data-point.active {  
+    background-color: #e74c3c;  
+  }  
+  #filters {  
+    margin-top: 20px;  
+  }  
+  button {  
+    background: #e67e22;  
+    border: none;  
+    padding: 10px 15px;  
+    color: #ffffff;  
+    font-size: 14px;  
+    border-radius: 5px;  
+    cursor: pointer;  
+  }  
+  button:hover {  
+    background: #e74c3c;  
+  }  
+  @keyframes pulse {  
+    0%, 100% {  
+      transform: scale(1);  
+    }  
+    50% {  
+      transform: scale(1.2);  
+    }  
+  }  
+</style>  
+<div id="tool-app">  
+  <h1>DataSyphon</h1>  
+  <p>Click on data points to activate them and start filtering the data stream.</p>  
+  <div id="data-streams"></div>  
+  <div id="filters">  
+    <button onclick="applyFilter('highlight')">Highlight Anomalies</button>  
+    <button onclick="applyFilter('group')">Group Similar Points</button>  
+    <button onclick="applyFilter('reset')">Reset</button>  
+  </div>  
+</div>  
+
+<script>  
+  const dataStreams = document.getElementById('data-streams');  
+  const NUM_STREAMS = 5;  
+  const NUM_POINTS = 20;  
+
+  // Generate random data streams  
+  function generateDataStreams() {  
+    for (let i = 0; i < NUM_STREAMS; i++) {  
+      const stream = document.createElement('div');  
+      stream.className = 'data-stream';  
+      for (let j = 0; j < NUM_POINTS; j++) {  
+        const point = document.createElement('div');  
+        point.className = 'data-point';  
+        point.dataset.value = Math.floor(Math.random() * 100);  
+        point.title = `Value: ${point.dataset.value}`;  
+        point.addEventListener('click', () => {  
+          point.classList.toggle('active');  
+        });  
+        stream.appendChild(point);  
+      }  
+      dataStreams.appendChild(stream);  
+    }  
+  }  
+
+  // Apply filters to data streams  
+  function applyFilter(type) {  
+    document.querySelectorAll('.data-point').forEach(point => {  
+      const value = parseInt(point.dataset.value, 10);  
+      point.classList.remove('highlight', 'group');  
+
+      if (type === 'highlight' && value > 70) {  
+        point.classList.add('active');  
+      } else if (type === 'group') {  
+        if (value % 2 === 0) {  
+          point.style.backgroundColor = '#2ecc71';  
+        } else {  
+          point.style.backgroundColor = '#9b59b6';  
+        }  
+      } else if (type === 'reset') {  
+        point.className = 'data-point';  
+        point.style.backgroundColor = '#3498db';  
+      }  
+    });  
+  }  
+
+  // Initialize tool  
+  generateDataStreams();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,167 @@
+---
+layout: null
+title: "FocusFlow: Task River Simulator"
+category: "Productivity"
+description: "An interactive, gamified task prioritization tool where users manage a river of tasks flowing toward a deadline by categorizing, prioritizing, and solving them in real-time."
+permalink: "/tools/daily-20260517-09-focusflow-task-river-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260517"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusFlow: Task River Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive, gamified task prioritization tool where users manage a river of tasks flowing toward a deadline by categorizing, prioritizing, and solving them in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="FocusFlow: Task River Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive, gamified task prioritization tool where users manage a river of tasks flowing toward a deadline by categorizing, prioritizing, and solving them in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FocusFlow: Task River Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive, gamified task prioritization tool where users manage a river of tasks flowing toward a deadline by categorizing, prioritizing, and solving them in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>FocusFlow: Task River Simulator</h1>
+    <p class="seo-subtitle">An interactive, gamified task prioritization tool where users manage a river of tasks flowing toward a deadline by categorizing, prioritizing, and solving them in real-time.</p>
+    <style>  
+  body {  
+    font-family: Arial, sans-serif;  
+    background: linear-gradient(to bottom, #8ec5fc, #e0c3fc);  
+    margin: 0;  
+    padding: 0;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+    overflow: hidden;  
+  }  
+  #tool-app {  
+    width: 80%;  
+    height: 80%;  
+    background: #ffffff;  
+    border-radius: 20px;  
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);  
+    display: flex;  
+    flex-direction: column;  
+    position: relative;  
+    overflow: hidden;  
+  }  
+  .river {  
+    height: 100%;  
+    display: flex;  
+    justify-content: space-between;  
+    align-items: flex-end;  
+    position: relative;  
+    background: #88dbf8;  
+    overflow: hidden;  
+  }  
+  .task {  
+    position: absolute;  
+    padding: 10px 15px;  
+    font-size: 14px;  
+    font-weight: bold;  
+    background: #ffef85;  
+    border-radius: 10px;  
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
+    cursor: grab;  
+    animation: float 5s linear infinite;  
+  }  
+  @keyframes float {  
+    0% { transform: translateY(0); }  
+    50% { transform: translateY(-10px); }  
+    100% { transform: translateY(0); }  
+  }  
+  .bucket {  
+    width: 20%;  
+    height: 30%;  
+    background: #ff6f6f;  
+    border-radius: 15px;  
+    position: relative;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    color: white;  
+    font-size: 14px;  
+    font-weight: bold;  
+  }  
+  .bucket.prioritize { background: #6fa3ff; }  
+  .bucket.ignore { background: #aaa; }  
+</style>  
+<div id="tool-app">  
+  <div class="river" id="river">  
+    <div class="bucket complete" id="complete">Complete</div>  
+    <div class="bucket prioritize" id="prioritize">Prioritize</div>  
+    <div class="bucket ignore" id="ignore">Ignore</div>  
+  </div>  
+</div>  
+<script>  
+const river = document.getElementById('river');  
+const buckets = {  
+  complete: document.getElementById('complete'),  
+  prioritize: document.getElementById('prioritize'),  
+  ignore: document.getElementById('ignore')  
+};  
+
+const tasks = [  
+  { id: 1, text: 'Write report', type: 'work' },  
+  { id: 2, text: 'Make coffee', type: 'break' },  
+  { id: 3, text: 'Fix bug in code', type: 'work' },  
+  { id: 4, text: 'Reply to emails', type: 'work' },  
+  { id: 5, text: 'Read an article', type: 'learn' }  
+];  
+
+function createTask(task) {  
+  const taskDiv = document.createElement('div');  
+  taskDiv.className = 'task';  
+  taskDiv.innerText = task.text;  
+  taskDiv.style.top = '10px';  
+  taskDiv.style.left = Math.random() * (river.offsetWidth - 100) + 'px';  
+  taskDiv.draggable = true;  
+  taskDiv.dataset.id = task.id;  
+
+  taskDiv.addEventListener('dragstart', (e) => {  
+    e.dataTransfer.setData('text/plain', task.id);  
+  });  
+
+  river.appendChild(taskDiv);  
+}  
+
+function allowDrop(e) {  
+  e.preventDefault();  
+}  
+
+function drop(e, action) {  
+  e.preventDefault();  
+  const taskId = e.dataTransfer.getData('text/plain');  
+  const taskElement = document.querySelector(`.task[data-id="${taskId}"]`);  
+  if (taskElement) {  
+    taskElement.remove();  
+    alert(`Task "${taskElement.innerText}" moved to ${action}!`);  
+  }  
+}  
+
+Object.keys(buckets).forEach((action) => {  
+  const bucket = buckets[action];  
+  bucket.addEventListener('dragover', allowDrop);  
+  bucket.addEventListener('drop', (e) => drop(e, action));  
+});  
+
+tasks.forEach(createTask);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
