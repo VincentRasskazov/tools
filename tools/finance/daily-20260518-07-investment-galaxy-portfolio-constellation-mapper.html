@@ -1,0 +1,124 @@
+---
+layout: null
+title: "Investment Galaxy: Portfolio Constellation Mapper"
+category: "Finance"
+description: "An interactive tool that visualizes your investment portfolio as a dynamic, explorable galaxy, where each star represents an asset and its size, color, and orbit reflect performance, risk, and allocation."
+permalink: "/tools/daily-20260518-07-investment-galaxy-portfolio-constellation-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260518"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Investment Galaxy: Portfolio Constellation Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool that visualizes your investment portfolio as a dynamic, explorable galaxy, where each star represents an asset and its size, color, and orbit reflect performance, risk, and allocation. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Investment Galaxy: Portfolio Constellation Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool that visualizes your investment portfolio as a dynamic, explorable galaxy, where each star represents an asset and its size, color, and orbit reflect performance, risk, and allocation. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Investment Galaxy: Portfolio Constellation Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool that visualizes your investment portfolio as a dynamic, explorable galaxy, where each star represents an asset and its size, color, and orbit reflect performance, risk, and allocation. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Investment Galaxy: Portfolio Constellation Mapper</h1>
+    <p class="seo-subtitle">An interactive tool that visualizes your investment portfolio as a dynamic, explorable galaxy, where each star represents an asset and its size, color, and orbit reflect performance, risk, and allocation.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: radial-gradient(circle, #000428, #004e92); color: #fff; overflow: hidden; }  
+  #tool-app { width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; position: relative; }  
+  canvas { display: block; }  
+  .tooltip { position: absolute; background: rgba(0, 0, 0, 0.7); border-radius: 5px; padding: 10px; font-size: 12px; display: none; }  
+</style>  
+<div id="tool-app">  
+  <canvas id="galaxyCanvas"></canvas>  
+  <div id="tooltip" class="tooltip"></div>  
+</div>  
+<script>  
+const canvas = document.getElementById('galaxyCanvas');  
+const tooltip = document.getElementById('tooltip');  
+const ctx = canvas.getContext('2d');  
+canvas.width = window.innerWidth;  
+canvas.height = window.innerHeight;  
+const centerX = canvas.width / 2;  
+const centerY = canvas.height / 2;  
+
+const portfolio = [  
+  { name: 'Stocks', allocation: 40, risk: 3, performance: 8 },  
+  { name: 'Bonds', allocation: 30, risk: 1, performance: 4 },  
+  { name: 'Crypto', allocation: 10, risk: 5, performance: 10 },  
+  { name: 'Real Estate', allocation: 20, risk: 2, performance: 7 },  
+];  
+
+function drawGalaxy() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  portfolio.forEach((asset, index) => {  
+    const orbitRadius = 100 + index * 70;  
+    const size = asset.allocation;  
+    const angle = Date.now() / 1000 + index;  
+    const x = centerX + Math.cos(angle) * orbitRadius;  
+    const y = centerY + Math.sin(angle) * orbitRadius;  
+    const color = `hsl(${asset.performance * 36}, 70%, 50%)`;  
+
+    ctx.beginPath();  
+    ctx.arc(x, y, size, 0, Math.PI * 2);  
+    ctx.fillStyle = color;  
+    ctx.fill();  
+    ctx.closePath();  
+
+    asset.position = { x, y, size, name: asset.name, allocation: asset.allocation, risk: asset.risk, performance: asset.performance };  
+  });  
+}  
+
+canvas.addEventListener('mousemove', (e) => {  
+  const rect = canvas.getBoundingClientRect();  
+  const mouseX = e.clientX - rect.left;  
+  const mouseY = e.clientY - rect.top;  
+
+  let hoverAsset = null;  
+  portfolio.forEach((asset) => {  
+    const dx = mouseX - asset.position.x;  
+    const dy = mouseY - asset.position.y;  
+    if (Math.sqrt(dx * dx + dy * dy) < asset.position.size) {  
+      hoverAsset = asset;  
+    }  
+  });  
+
+  if (hoverAsset) {  
+    tooltip.style.display = 'block';  
+    tooltip.style.left = `${e.clientX + 10}px`;  
+    tooltip.style.top = `${e.clientY + 10}px`;  
+    tooltip.innerHTML = `  
+      <strong>${hoverAsset.name}</strong><br>  
+      Allocation: ${hoverAsset.allocation}%<br>  
+      Risk: ${hoverAsset.risk}/5<br>  
+      Performance: ${hoverAsset.performance}/10  
+    `;  
+  } else {  
+    tooltip.style.display = 'none';  
+  }  
+});  
+
+function animate() {  
+  drawGalaxy();  
+  requestAnimationFrame(animate);  
+}  
+
+animate();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

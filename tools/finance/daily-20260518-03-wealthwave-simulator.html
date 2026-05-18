@@ -1,0 +1,114 @@
+---
+layout: null
+title: "WealthWave Simulator"
+category: "Finance"
+description: "An interactive mini-game where users balance investments, expenses, and savings to navigate financial obstacles and grow their virtual wealth."
+permalink: "/tools/daily-20260518-03-wealthwave-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260518"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WealthWave Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive mini-game where users balance investments, expenses, and savings to navigate financial obstacles and grow their virtual wealth. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="WealthWave Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive mini-game where users balance investments, expenses, and savings to navigate financial obstacles and grow their virtual wealth. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WealthWave Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive mini-game where users balance investments, expenses, and savings to navigate financial obstacles and grow their virtual wealth. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>WealthWave Simulator</h1>
+    <p class="seo-subtitle">An interactive mini-game where users balance investments, expenses, and savings to navigate financial obstacles and grow their virtual wealth.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background-color: #f4f4f9; margin: 0; padding: 0; }  
+  #tool-app { padding: 20px; max-width: 800px; margin: 0 auto; text-align: center; background: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); }  
+  .game-board { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }  
+  .cell { padding: 20px; background: #e0e4f1; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: bold; cursor: pointer; }  
+  .cell.investment { background: #9be564; }  
+  .cell.expense { background: #f56262; }  
+  .score { font-size: 20px; font-weight: bold; margin: 20px 0; }  
+  .controls { margin-top: 20px; }  
+  .button { padding: 10px 20px; background: #007bff; color: #fff; border: none; border-radius: 4px; cursor: pointer; }  
+  .button:hover { background: #0056b3; }  
+</style>  
+<div id="tool-app">  
+  <h1>WealthWave Simulator</h1>  
+  <p>Navigate the financial landscape by making smart investment and spending decisions. Can you grow your wealth?</p>  
+  <div class="score">Balance: <span id="balance">$1000</span></div>  
+  <div class="game-board" id="game-board"></div>  
+  <div class="controls">  
+    <button class="button" onclick="resetGame()">Restart Game</button>  
+  </div>  
+</div>  
+<script>  
+  const grid = document.getElementById('game-board');  
+  const balanceEl = document.getElementById('balance');  
+  const gridSize = 25;  
+  let balance = 1000;  
+
+  function generateGrid() {  
+    grid.innerHTML = '';  
+    for (let i = 0; i < gridSize; i++) {  
+      const cell = document.createElement('div');  
+      cell.className = 'cell';  
+      const randomType = Math.random() > 0.6 ? 'expense' : 'investment';  
+      cell.classList.add(randomType);  
+      cell.textContent = randomType === 'investment' ? '+$' + generateRandomAmount() : '-$' + generateRandomAmount();  
+      cell.onclick = () => handleCellClick(cell, randomType);  
+      grid.appendChild(cell);  
+    }  
+  }  
+
+  function generateRandomAmount() {  
+    return Math.floor(Math.random() * 200) + 50;  
+  }  
+
+  function handleCellClick(cell, type) {  
+    const amount = parseInt(cell.textContent.replace('$', ''));  
+    if (type === 'investment') {  
+      balance += amount;  
+    } else {  
+      balance -= amount;  
+    }  
+    balanceEl.textContent = `$${balance}`;  
+    cell.onclick = null;  
+    cell.style.opacity = 0.5;  
+    checkGameOver();  
+  }  
+
+  function resetGame() {  
+    balance = 1000;  
+    balanceEl.textContent = `$${balance}`;  
+    generateGrid();  
+  }  
+
+  function checkGameOver() {  
+    if (balance <= 0) {  
+      alert('Game Over! Your balance hit zero.');  
+      resetGame();  
+    }  
+  }  
+
+  generateGrid();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

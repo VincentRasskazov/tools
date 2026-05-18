@@ -1,0 +1,166 @@
+---
+layout: null
+title: "CipherQuest: The Codebreaker Challenge"
+category: "Games"
+description: "A highly interactive mini-game where players decode encrypted messages using various classic ciphers while racing against a timer."
+permalink: "/tools/daily-20260518-02-cipherquest-the-codebreaker-challenge.html"
+generated_by: "api-true-ai"
+generated_date: "20260518"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CipherQuest: The Codebreaker Challenge | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive mini-game where players decode encrypted messages using various classic ciphers while racing against a timer. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CipherQuest: The Codebreaker Challenge | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive mini-game where players decode encrypted messages using various classic ciphers while racing against a timer. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CipherQuest: The Codebreaker Challenge | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive mini-game where players decode encrypted messages using various classic ciphers while racing against a timer. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CipherQuest: The Codebreaker Challenge</h1>
+    <p class="seo-subtitle">A highly interactive mini-game where players decode encrypted messages using various classic ciphers while racing against a timer.</p>
+    <style>  
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+  }
+  #tool-app {
+    width: 90%;
+    max-width: 600px;
+    background: #1c1c1c;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    text-align: center;
+  }
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+  .cipher-area {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #444;
+    border-radius: 8px;
+    background: #333;
+  }
+  button {
+    background: #28a745;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 10px;
+    transition: all 0.3s;
+  }
+  button:hover {
+    background: #218838;
+  }
+  input {
+    border: 1px solid #444;
+    background: #222;
+    color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    width: calc(100% - 20px);
+    margin-bottom: 10px;
+  }
+  #timer {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+  }
+  #result {
+    margin-top: 20px;
+    font-size: 1.2rem;
+  }
+</style>  
+<div id="tool-app">  
+  <h1>🌟 CipherQuest: The Codebreaker Challenge 🌟</h1>  
+  <div id="timer">Time Left: <span id="time-left">60</span>s</div>  
+  <div class="cipher-area">  
+    <p id="cipher-text">Decode this text: <strong>VJKUBKUBC</strong></p>  
+  </div>  
+  <input type="text" id="user-input" placeholder="Enter your decoded message here" />  
+  <button id="submit-btn">Submit Answer</button>  
+  <button id="hint-btn">Hint</button>  
+  <div id="result"></div>  
+</div>  
+<script>  
+const ciphers = [  
+  { cipherText: 'VJKUBKUBC', hint: 'Caesar cipher, shift by +2', answer: 'THISTESTS' },  
+  { cipherText: 'DLROW OLLEH', hint: 'Reverse the text', answer: 'HELLO WORLD' },  
+  { cipherText: 'SGVsbG8gV29ybGQh', hint: 'Base64 Encoding', answer: 'HELLO WORLD!' },  
+  { cipherText: '.... . .-.. .-.. ---', hint: 'Morse Code', answer: 'HELLO' }  
+];  
+  
+let currentIndex = 0;  
+let timer = 60;  
+let interval = null;  
+  
+function startGame() {  
+  document.getElementById('cipher-text').innerHTML = 'Decode this text: <strong>' + ciphers[currentIndex].cipherText + '</strong>';  
+  interval = setInterval(() => {  
+    if (timer > 0) {  
+      timer--;  
+      document.getElementById('time-left').textContent = timer;  
+    } else {  
+      clearInterval(interval);  
+      document.getElementById('result').innerHTML = '<span style="color:red;">Time is up! Game over!</span>';  
+    }  
+  }, 1000);  
+}  
+  
+document.getElementById('submit-btn').addEventListener('click', () => {  
+  const userInput = document.getElementById('user-input').value.toUpperCase();  
+  if (userInput === ciphers[currentIndex].answer) {  
+    document.getElementById('result').innerHTML = '<span style="color:lime;">Correct! Moving to next challenge...</span>';  
+    currentIndex++;  
+    if (currentIndex < ciphers.length) {  
+      document.getElementById('user-input').value = '';  
+      document.getElementById('cipher-text').innerHTML = 'Decode this text: <strong>' + ciphers[currentIndex].cipherText + '</strong>';  
+    } else {  
+      clearInterval(interval);  
+      document.getElementById('result').innerHTML = '<span style="color:gold;">🎉 You won! Great job! 🎉</span>';  
+    }  
+  } else {  
+    document.getElementById('result').innerHTML = '<span style="color:orange;">Incorrect! Try again.</span>';  
+  }  
+});  
+  
+document.getElementById('hint-btn').addEventListener('click', () => {  
+  document.getElementById('result').innerHTML = '<span style="color:cyan;">Hint: ' + ciphers[currentIndex].hint + '</span>';  
+});  
+  
+startGame();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

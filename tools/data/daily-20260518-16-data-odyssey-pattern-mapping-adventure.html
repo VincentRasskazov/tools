@@ -1,0 +1,174 @@
+---
+layout: null
+title: "Data Odyssey: Pattern Mapping Adventure"
+category: "Data"
+description: "Navigate a maze of interconnected data nodes by identifying patterns and relationships in real-time, unlocking deeper insights with each level."
+permalink: "/tools/daily-20260518-16-data-odyssey-pattern-mapping-adventure.html"
+generated_by: "api-true-ai"
+generated_date: "20260518"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Odyssey: Pattern Mapping Adventure | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate a maze of interconnected data nodes by identifying patterns and relationships in real-time, unlocking deeper insights with each level. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Odyssey: Pattern Mapping Adventure | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate a maze of interconnected data nodes by identifying patterns and relationships in real-time, unlocking deeper insights with each level. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Odyssey: Pattern Mapping Adventure | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate a maze of interconnected data nodes by identifying patterns and relationships in real-time, unlocking deeper insights with each level. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Odyssey: Pattern Mapping Adventure</h1>
+    <p class="seo-subtitle">Navigate a maze of interconnected data nodes by identifying patterns and relationships in real-time, unlocking deeper insights with each level.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(135deg, #1e3c72, #2a5298);  
+  color: white;  
+  margin: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  width: 80%;  
+  height: 80%;  
+  background: white;  
+  border-radius: 20px;  
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);  
+  overflow: hidden;  
+  display: flex;  
+  flex-direction: column;  
+  color: #333;  
+}  
+#canvas {  
+  flex: 1;  
+  background: #f5f5f5;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+}  
+#controls {  
+  padding: 10px;  
+  background: #ddd;  
+  display: flex;  
+  justify-content: space-between;  
+}  
+button {  
+  background: #1e88e5;  
+  color: white;  
+  border: none;  
+  padding: 10px 20px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+button:hover {  
+  background: #1565c0;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="canvas">  
+    <p id="message">Click "Start" to enter the maze!</p>  
+  </div>  
+  <div id="controls">  
+    <button id="start-btn">Start</button>  
+    <button id="reset-btn" disabled>Reset</button>  
+  </div>  
+</div>  
+<script>  
+const canvas = document.getElementById('canvas');  
+const message = document.getElementById('message');  
+const startBtn = document.getElementById('start-btn');  
+const resetBtn = document.getElementById('reset-btn');  
+
+let maze = [];  
+let currentNode = null;  
+let score = 0;  
+
+function createMaze() {  
+  maze = Array.from({ length: 5 }, () =>  
+    Array.from({ length: 5 }, () => ({ id: Math.random(), isVisited: false }))  
+  );  
+}  
+
+function renderMaze() {  
+  canvas.innerHTML = '';  
+  const mazeContainer = document.createElement('div');  
+  mazeContainer.style.display = 'grid';  
+  mazeContainer.style.gridTemplateRows = `repeat(${maze.length}, 1fr)`;  
+  mazeContainer.style.gridTemplateColumns = `repeat(${maze[0].length}, 1fr)`;  
+  mazeContainer.style.gap = '5px';  
+  maze.forEach((row, rowIndex) => {  
+    row.forEach((node, columnIndex) => {  
+      const nodeElement = document.createElement('div');  
+      nodeElement.style.width = '50px';  
+      nodeElement.style.height = '50px';  
+      nodeElement.style.border = '1px solid #ccc';  
+      nodeElement.style.display = 'flex';  
+      nodeElement.style.justifyContent = 'center';  
+      nodeElement.style.alignItems = 'center';  
+      nodeElement.style.background = node.isVisited ? '#1e88e5' : '#f5f5f5';  
+      nodeElement.textContent = node.isVisited ? '✔️' : '';  
+      nodeElement.addEventListener('click', () => handleNodeClick(rowIndex, columnIndex));  
+      mazeContainer.appendChild(nodeElement);  
+    });  
+  });  
+  canvas.appendChild(mazeContainer);  
+}  
+
+function handleNodeClick(row, column) {  
+  const node = maze[row][column];  
+  if (node.isVisited) return;  
+  node.isVisited = true;  
+  score++;  
+  currentNode = node;  
+  updateMessage();  
+  renderMaze();  
+}  
+
+function updateMessage() {  
+  message.textContent = `Score: ${score}`;  
+}  
+
+function startGame() {  
+  createMaze();  
+  currentNode = maze[0][0];  
+  renderMaze();  
+  updateMessage();  
+  startBtn.disabled = true;  
+  resetBtn.disabled = false;  
+}  
+
+function resetGame() {  
+  score = 0;  
+  startBtn.disabled = false;  
+  resetBtn.disabled = true;  
+  message.textContent = 'Click "Start" to enter the maze!';  
+  canvas.innerHTML = '<p>Click "Start" to enter the maze!</p>';  
+}  
+
+startBtn.addEventListener('click', startGame);  
+resetBtn.addEventListener('click', resetGame);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

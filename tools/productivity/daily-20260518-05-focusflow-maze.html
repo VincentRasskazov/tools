@@ -1,0 +1,191 @@
+---
+layout: null
+title: "FocusFlow Maze"
+category: "Productivity"
+description: "A dynamic mini-game that helps you prioritize tasks by navigating a customizable maze of productivity objectives."
+permalink: "/tools/daily-20260518-05-focusflow-maze.html"
+generated_by: "api-true-ai"
+generated_date: "20260518"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusFlow Maze | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic mini-game that helps you prioritize tasks by navigating a customizable maze of productivity objectives. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="FocusFlow Maze | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic mini-game that helps you prioritize tasks by navigating a customizable maze of productivity objectives. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FocusFlow Maze | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic mini-game that helps you prioritize tasks by navigating a customizable maze of productivity objectives. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>FocusFlow Maze</h1>
+    <p class="seo-subtitle">A dynamic mini-game that helps you prioritize tasks by navigating a customizable maze of productivity objectives.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+  background: linear-gradient(135deg, #4facfe, #00f2fe);  
+}  
+#tool-app {  
+  width: 90%;  
+  max-width: 800px;  
+  background: white;  
+  border-radius: 10px;  
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);  
+  overflow: hidden;  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  padding: 20px;  
+}  
+#maze-container {  
+  display: grid;  
+  grid-template-columns: repeat(10, 40px);  
+  grid-template-rows: repeat(10, 40px);  
+  gap: 2px;  
+}  
+.cell {  
+  width: 40px;  
+  height: 40px;  
+  background-color: #e0e0e0;  
+  border-radius: 5px;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  font-size: 12px;  
+  font-weight: bold;  
+  cursor: pointer;  
+}  
+.cell.goal {  
+  background-color: #76c7c0;  
+}  
+.cell.task {  
+  background-color: #f4a261;  
+}  
+.cell.active {  
+  background-color: #2a9d8f;  
+}  
+#instructions {  
+  margin-top: 20px;  
+  font-size: 16px;  
+  text-align: center;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>FocusFlow Maze</h1>  
+  <div id="maze-container"></div>  
+  <div id="instructions">  
+    Use arrow keys to navigate the maze. Collect tasks and reach the goal to complete your productivity journey!  
+  </div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const mazeContainer = document.getElementById('maze-container');  
+const size = 10;  
+let playerPosition = { x: 0, y: 0 };  
+let goalPosition = { x: 9, y: 9 };  
+let taskPositions = [];  
+
+// Generate random tasks in the maze  
+for (let i = 0; i < 10; i++) {  
+  taskPositions.push({  
+    x: Math.floor(Math.random() * size),  
+    y: Math.floor(Math.random() * size),  
+  });  
+}  
+
+function createMaze() {  
+  mazeContainer.innerHTML = '';  
+  for (let y = 0; y < size; y++) {  
+    for (let x = 0; x < size; x++) {  
+      const cell = document.createElement('div');  
+      cell.classList.add('cell');  
+
+      if (x === playerPosition.x && y === playerPosition.y) {  
+        cell.classList.add('active');  
+      }  
+
+      if (x === goalPosition.x && y === goalPosition.y) {  
+        cell.classList.add('goal');  
+      }  
+
+      taskPositions.forEach(task => {  
+        if (x === task.x && y === task.y) {  
+          cell.classList.add('task');  
+          cell.textContent = '✔';  
+        }  
+      });  
+
+      mazeContainer.appendChild(cell);  
+    }  
+  }  
+}  
+
+function movePlayer(dx, dy) {  
+  const newX = playerPosition.x + dx;  
+  const newY = playerPosition.y + dy;  
+
+  if (newX >= 0 && newX < size && newY >= 0 && newY < size) {  
+    playerPosition = { x: newX, y: newY };  
+
+    taskPositions = taskPositions.filter(task => !(task.x === newX && task.y === newY));  
+
+    if (newX === goalPosition.x && newY === goalPosition.y) {  
+      alert('Congratulations! You completed your productivity maze!');  
+      playerPosition = { x: 0, y: 0 };  
+      taskPositions = [];  
+      for (let i = 0; i < 10; i++) {  
+        taskPositions.push({  
+          x: Math.floor(Math.random() * size),  
+          y: Math.floor(Math.random() * size),  
+        });  
+      }  
+    }  
+  }  
+  createMaze();  
+}  
+
+document.addEventListener('keydown', e => {  
+  switch (e.key) {  
+    case 'ArrowUp':  
+      movePlayer(0, -1);  
+      break;  
+    case 'ArrowDown':  
+      movePlayer(0, 1);  
+      break;  
+    case 'ArrowLeft':  
+      movePlayer(-1, 0);  
+      break;  
+    case 'ArrowRight':  
+      movePlayer(1, 0);  
+      break;  
+  }  
+});  
+
+createMaze();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

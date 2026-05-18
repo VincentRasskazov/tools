@@ -1,0 +1,172 @@
+---
+layout: null
+title: "WordWeaver: Story Map Explorer"
+category: "Writing"
+description: "A dynamic, interactive tool that helps writers visually weave, connect, and analyze character arcs, plot twists, and timelines in their stories."
+permalink: "/tools/daily-20260518-01-wordweaver-story-map-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260518"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordWeaver: Story Map Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, interactive tool that helps writers visually weave, connect, and analyze character arcs, plot twists, and timelines in their stories. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="WordWeaver: Story Map Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, interactive tool that helps writers visually weave, connect, and analyze character arcs, plot twists, and timelines in their stories. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WordWeaver: Story Map Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, interactive tool that helps writers visually weave, connect, and analyze character arcs, plot twists, and timelines in their stories. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>WordWeaver: Story Map Explorer</h1>
+    <p class="seo-subtitle">A dynamic, interactive tool that helps writers visually weave, connect, and analyze character arcs, plot twists, and timelines in their stories.</p>
+    <style>  
+  #tool-app {  
+    font-family: Arial, sans-serif;  
+    max-width: 900px;  
+    margin: 20px auto;  
+    padding: 20px;  
+    border: 2px solid #ccc;  
+    border-radius: 10px;  
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  
+    background: #f9f9f9;  
+  }  
+  .node {  
+    background: #e3f7ff;  
+    border: 1px solid #007acc;  
+    border-radius: 5px;  
+    padding: 10px 15px;  
+    margin: 10px;  
+    cursor: pointer;  
+    display: inline-block;  
+    position: relative;  
+  }  
+  .node:hover {  
+    background: #007acc;  
+    color: #fff;  
+  }  
+  .line {  
+    position: absolute;  
+    background: #007acc;  
+    height: 2px;  
+    transform-origin: 0 0;  
+  }  
+  #control-panel {  
+    margin-bottom: 15px;  
+  }  
+</style>  
+<div id="tool-app">  
+  <div id="control-panel">  
+    <input id="node-name" type="text" placeholder="Enter node name" />  
+    <button id="add-node">Add Node</button>  
+    <button id="clear-all">Clear All</button>  
+  </div>  
+  <div id="map-space" style="position: relative; height: 500px; border: 1px dashed #ccc;">  
+    <!-- Nodes and connections will be rendered here -->  
+  </div>  
+</div>  
+<script>  
+const mapSpace = document.getElementById("map-space");  
+const addNodeButton = document.getElementById("add-node");  
+const clearAllButton = document.getElementById("clear-all");  
+const nodeNameInput = document.getElementById("node-name");  
+
+let nodes = [];  
+
+addNodeButton.addEventListener("click", () => {  
+  const nodeName = nodeNameInput.value.trim();  
+  if (!nodeName) return alert("Please enter a valid name.");  
+
+  const newNode = document.createElement("div");  
+  newNode.className = "node";  
+  newNode.textContent = nodeName;  
+  newNode.style.left = `${Math.random() * (mapSpace.offsetWidth - 100)}px`;  
+  newNode.style.top = `${Math.random() * (mapSpace.offsetHeight - 40)}px`;  
+  newNode.draggable = true;  
+
+  // Drag and drop functionality  
+  newNode.addEventListener("dragstart", (e) => {  
+    e.dataTransfer.setData("text/plain", nodes.indexOf(newNode));  
+  });  
+
+  newNode.addEventListener("dragend", () => {  
+    drawConnections();  
+  });  
+
+  // Node connections  
+  newNode.addEventListener("click", () => {  
+    if (newNode.classList.contains("selected")) {  
+      newNode.classList.remove("selected");  
+    } else {  
+      newNode.classList.add("selected");  
+      if (document.querySelectorAll(".selected").length === 2) {  
+        const selectedNodes = document.querySelectorAll(".selected");  
+        connectNodes(selectedNodes[0], selectedNodes[1]);  
+        selectedNodes.forEach((node) => node.classList.remove("selected"));  
+      }  
+    }  
+  });  
+
+  // Append and store node  
+  mapSpace.appendChild(newNode);  
+  nodes.push(newNode);  
+  nodeNameInput.value = "";  
+});  
+
+clearAllButton.addEventListener("click", () => {  
+  mapSpace.innerHTML = "";  
+  nodes = [];  
+});  
+
+function connectNodes(node1, node2) {  
+  const line = document.createElement("div");  
+  line.className = "line";  
+
+  const x1 = node1.offsetLeft + node1.offsetWidth / 2;  
+  const y1 = node1.offsetTop + node1.offsetHeight / 2;  
+  const x2 = node2.offsetLeft + node2.offsetWidth / 2;  
+  const y2 = node2.offsetTop + node2.offsetHeight / 2;  
+
+  const length = Math.hypot(x2 - x1, y2 - y1);  
+  const angle = Math.atan2(y2 - y1, x2 - x1) * (180 / Math.PI);  
+
+  line.style.width = `${length}px`;  
+  line.style.left = `${x1}px`;  
+  line.style.top = `${y1}px`;  
+  line.style.transform = `rotate(${angle}deg)`;  
+
+  mapSpace.appendChild(line);  
+}  
+
+function drawConnections() {  
+  document.querySelectorAll(".line").forEach((line) => line.remove());  
+  const allNodes = Array.from(mapSpace.querySelectorAll(".node"));  
+  allNodes.forEach((node1, i) => {  
+    allNodes.slice(i + 1).forEach((node2) => {  
+      if (Math.random() > 0.7) { // Randomly connect nodes for simplicity  
+        connectNodes(node1, node2);  
+      }  
+    });  
+  });  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

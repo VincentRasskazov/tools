@@ -1,0 +1,141 @@
+---
+layout: null
+title: "PhishCatch: Email Threat Simulator"
+category: "Cybersecurity"
+description: "A fully interactive mini-game that simulates identifying phishing emails in a dynamic inbox, testing your ability to spot security threats."
+permalink: "/tools/daily-20260518-19-phishcatch-email-threat-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260518"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhishCatch: Email Threat Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="A fully interactive mini-game that simulates identifying phishing emails in a dynamic inbox, testing your ability to spot security threats. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PhishCatch: Email Threat Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="A fully interactive mini-game that simulates identifying phishing emails in a dynamic inbox, testing your ability to spot security threats. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PhishCatch: Email Threat Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A fully interactive mini-game that simulates identifying phishing emails in a dynamic inbox, testing your ability to spot security threats. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PhishCatch: Email Threat Simulator</h1>
+    <p class="seo-subtitle">A fully interactive mini-game that simulates identifying phishing emails in a dynamic inbox, testing your ability to spot security threats.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background-color: #1e1e2f;  
+  color: #f5f5f7;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  min-height: 100vh;  
+}  
+#tool-app {  
+  width: 90%;  
+  max-width: 800px;  
+  background: #2a2a3f;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);  
+  padding: 20px;  
+}  
+.inbox {  
+  display: flex;  
+  flex-direction: column;  
+  gap: 10px;  
+}  
+.email {  
+  padding: 10px;  
+  border-radius: 5px;  
+  background: #3a3a5f;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+.email:hover {  
+  background: #4a4a7f;  
+}  
+.email.safe {  
+  background: #2a7f2a;  
+  color: #ffffff;  
+}  
+.email.phish {  
+  background: #7f2a2a;  
+  color: #ffffff;  
+}  
+#score {  
+  margin-top: 20px;  
+  font-size: 1.2em;  
+  text-align: center;  
+}  
+</style>  
+<div id="tool-app">  
+  <h2>PhishCatch: Email Threat Simulator</h2>  
+  <p>Can you identify dangerous emails and spot phishing attempts? Click on the emails below to mark them as "Safe" or "Phish."</p>  
+  <div class="inbox" id="inbox"></div>  
+  <div id="score">Score: 0</div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const emails = [  
+  { id: 1, subject: "Your Bank Account is Locked!", content: "Click here to unlock it now.", type: "phish" },  
+  { id: 2, subject: "Weekly Team Meeting", content: "Join us for the weekly team sync-up.", type: "safe" },  
+  { id: 3, subject: "You've won a $1000 gift card!", content: "Claim your prize now by providing your personal details.", type: "phish" },  
+  { id: 4, subject: "Invoice Due Tomorrow", content: "Reminder: Your invoice is due tomorrow. Please review.", type: "safe" },  
+  { id: 5, subject: "Urgent: Account Verification Needed", content: "Confirm your account information to avoid suspension.", type: "phish" },  
+];  
+  
+let score = 0;  
+  
+function renderEmails() {  
+  const inbox = document.getElementById("inbox");  
+  inbox.innerHTML = "";  
+  emails.forEach((email) => {  
+    const emailDiv = document.createElement("div");  
+    emailDiv.classList.add("email");  
+    emailDiv.innerHTML = `<strong>${email.subject}</strong><br><small>${email.content}</small>`;  
+    emailDiv.addEventListener("click", () => handleEmailClick(email, emailDiv));  
+    inbox.appendChild(emailDiv);  
+  });  
+}  
+  
+function handleEmailClick(email, emailDiv) {  
+  if (email.type === "phish") {  
+    emailDiv.classList.add("phish");  
+    score -= 1;  
+  } else {  
+    emailDiv.classList.add("safe");  
+    score += 1;  
+  }  
+  emailDiv.style.pointerEvents = "none"; // Disable further clicks  
+  updateScore();  
+}  
+  
+function updateScore() {  
+  document.getElementById("score").innerText = `Score: ${score}`;  
+}  
+  
+renderEmails();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

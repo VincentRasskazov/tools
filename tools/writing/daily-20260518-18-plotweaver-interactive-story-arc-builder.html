@@ -1,0 +1,243 @@
+---
+layout: null
+title: "PlotWeaver: Interactive Story Arc Builder"
+category: "Writing"
+description: "A dynamic tool that helps writers visually craft, tweak, and analyze intricate story arcs with branching paths, timelines, and emotional beats."
+permalink: "/tools/daily-20260518-18-plotweaver-interactive-story-arc-builder.html"
+generated_by: "api-true-ai"
+generated_date: "20260518"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PlotWeaver: Interactive Story Arc Builder | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic tool that helps writers visually craft, tweak, and analyze intricate story arcs with branching paths, timelines, and emotional beats. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PlotWeaver: Interactive Story Arc Builder | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic tool that helps writers visually craft, tweak, and analyze intricate story arcs with branching paths, timelines, and emotional beats. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PlotWeaver: Interactive Story Arc Builder | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic tool that helps writers visually craft, tweak, and analyze intricate story arcs with branching paths, timelines, and emotional beats. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PlotWeaver: Interactive Story Arc Builder</h1>
+    <p class="seo-subtitle">A dynamic tool that helps writers visually craft, tweak, and analyze intricate story arcs with branching paths, timelines, and emotional beats.</p>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #ffecd2, #fcb69f);
+    color: #333;
+  }
+  #tool-app {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  h1 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  #canvas {
+    width: 100%;
+    height: 500px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: crosshair;
+    background: #fafafa;
+    position: relative;
+  }
+  .node {
+    position: absolute;
+    padding: 10px;
+    background: #ff6f61;
+    color: #fff;
+    border-radius: 5px;
+    cursor: move;
+    font-size: 14px;
+    user-select: none;
+  }
+  .node:hover {
+    background: #e55b57;
+  }
+  .node .handle {
+    border: 1px solid #fff;
+    background: #fff;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    cursor: pointer;
+  }
+  .arc {
+    position: absolute;
+    stroke: #ff6f61;
+    stroke-width: 2px;
+  }
+  #controls {
+    margin-top: 15px;
+    text-align: center;
+  }
+  #controls button {
+    padding: 10px 20px;
+    margin: 0 5px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  #controls button:hover {
+    background: #0056b3;
+  }
+</style>
+<div id="tool-app">
+  <h1>PlotWeaver: Interactive Story Arc Builder</h1>
+  <div id="canvas"></div>
+  <div id="controls">
+    <button id="add-node">Add Node</button>
+    <button id="clear">Clear All</button>
+  </div>
+</div>
+<script>
+  const canvas = document.getElementById('canvas');
+  const addNodeButton = document.getElementById('add-node');
+  const clearButton = document.getElementById('clear');
+  let nodes = [];
+  let arcs = [];
+
+  class Node {
+    constructor(x, y, text = "New Event") {
+      this.x = x;
+      this.y = y;
+      this.text = text;
+      this.element = this.createElement();
+      this.connections = [];
+      canvas.appendChild(this.element);
+      this.makeDraggable();
+    }
+
+    createElement() {
+      const el = document.createElement('div');
+      el.classList.add('node');
+      el.style.left = `${this.x}px`;
+      el.style.top = `${this.y}px`;
+      el.innerHTML = `
+        ${this.text}
+        <div class="handle"></div>
+      `;
+      el.querySelector('.handle').addEventListener('mousedown', (e) => this.startConnecting(e));
+      return el;
+    }
+
+    makeDraggable() {
+      let offsetX, offsetY;
+      const onMouseMove = (e) => {
+        this.x = e.pageX - offsetX;
+        this.y = e.pageY - offsetY;
+        this.element.style.left = `${this.x}px`;
+        this.element.style.top = `${this.y}px`;
+        this.updateConnections();
+      };
+
+      this.element.addEventListener('mousedown', (e) => {
+        if (e.target.classList.contains('handle')) return;
+        offsetX = e.offsetX;
+        offsetY = e.offsetY;
+        document.addEventListener('mousemove', onMouseMove);
+      });
+
+      document.addEventListener('mouseup', () => {
+        document.removeEventListener('mousemove', onMouseMove);
+      });
+    }
+
+    startConnecting(e) {
+      e.stopPropagation();
+      const arc = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      arc.classList.add('arc');
+      arc.setAttribute('x1', this.x + 50);
+      arc.setAttribute('y1', this.y + 20);
+      canvas.appendChild(arc);
+
+      const onMouseMove = (e) => {
+        arc.setAttribute('x2', e.pageX);
+        arc.setAttribute('y2', e.pageY);
+      };
+
+      const onMouseUp = (e) => {
+        document.removeEventListener('mousemove', onMouseMove);
+        const target = document.elementFromPoint(e.clientX, e.clientY);
+        if (target && target.classList.contains('node') && target !== this.element) {
+          const targetNode = nodes.find((node) => node.element === target);
+          if (targetNode) {
+            arc.setAttribute('x2', targetNode.x + 50);
+            arc.setAttribute('y2', targetNode.y + 20);
+            this.connections.push(targetNode);
+            arcs.push(arc);
+          } else {
+            arc.remove();
+          }
+        } else {
+          arc.remove();
+        }
+        document.removeEventListener('mouseup', onMouseUp);
+      };
+
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', onMouseUp);
+    }
+
+    updateConnections() {
+      this.connections.forEach((target, index) => {
+        const arc = arcs.find((arc) => arc.getAttribute('x1') == this.x + 50 && arc.getAttribute('y1') == this.y + 20);
+        if (arc) {
+          arc.setAttribute('x1', this.x + 50);
+          arc.setAttribute('y1', this.y + 20);
+          arc.setAttribute('x2', target.x + 50);
+          arc.setAttribute('y2', target.y + 20);
+        }
+      });
+    }
+  }
+
+  const addNode = () => {
+    const node = new Node(100, 100);
+    nodes.push(node);
+  };
+
+  const clearAll = () => {
+    canvas.innerHTML = '';
+    nodes = [];
+    arcs = [];
+  };
+
+  addNodeButton.addEventListener('click', addNode);
+  clearButton.addEventListener('click', clearAll);
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

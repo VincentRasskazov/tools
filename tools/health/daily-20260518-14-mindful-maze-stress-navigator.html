@@ -1,0 +1,172 @@
+---
+layout: null
+title: "Mindful Maze: Stress Navigator"
+category: "Health"
+description: "Navigate a dynamic, interactive maze while identifying and defusing stress triggers using guided breathing and mindfulness prompts."
+permalink: "/tools/daily-20260518-14-mindful-maze-stress-navigator.html"
+generated_by: "api-true-ai"
+generated_date: "20260518"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mindful Maze: Stress Navigator | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate a dynamic, interactive maze while identifying and defusing stress triggers using guided breathing and mindfulness prompts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Mindful Maze: Stress Navigator | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate a dynamic, interactive maze while identifying and defusing stress triggers using guided breathing and mindfulness prompts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mindful Maze: Stress Navigator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate a dynamic, interactive maze while identifying and defusing stress triggers using guided breathing and mindfulness prompts. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Mindful Maze: Stress Navigator</h1>
+    <p class="seo-subtitle">Navigate a dynamic, interactive maze while identifying and defusing stress triggers using guided breathing and mindfulness prompts.</p>
+    <style>  
+body {  
+  font-family: 'Arial', sans-serif;  
+  background: linear-gradient(135deg, #a8edea, #fed6e3);  
+  margin: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 80%;  
+  height: 80%;  
+  background: white;  
+  border-radius: 15px;  
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);  
+  display: flex;  
+  flex-direction: column;  
+  padding: 20px;  
+}  
+#maze {  
+  flex: 1;  
+  display: grid;  
+  grid-template-columns: repeat(10, 1fr);  
+  grid-gap: 3px;  
+  margin-top: 10px;  
+}  
+.cell {  
+  width: 100%;  
+  height: 100%;  
+  background: #f0f0f0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  font-size: 14px;  
+  font-weight: bold;  
+  cursor: pointer;  
+  border-radius: 3px;  
+  transition: background 0.3s ease;  
+}  
+.cell.active {  
+  background: #ffb74d;  
+}  
+.cell.trigger {  
+  background: #e57373;  
+}  
+.cell.defused {  
+  background: #81c784;  
+}  
+#instructions {  
+  font-size: 16px;  
+  text-align: center;  
+  margin-bottom: 10px;  
+  color: #555;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="instructions">Navigate the maze and click on stress triggers to defuse them with mindfulness steps!</div>  
+  <div id="maze"></div>  
+</div>  
+<script>  
+const mazeSize = 10;  
+const maze = document.getElementById('maze');  
+const triggerCount = 10;  
+let activeCell = [0, 0];  
+let defusedCount = 0;  
+
+function createMaze() {  
+  maze.innerHTML = '';  
+  for (let i = 0; i < mazeSize * mazeSize; i++) {  
+    const cell = document.createElement('div');  
+    cell.classList.add('cell');  
+    maze.appendChild(cell);  
+  }  
+
+  const cells = document.querySelectorAll('.cell');  
+  cells[0].classList.add('active');  
+
+  for (let i = 0; i < triggerCount; i++) {  
+    let triggerIndex;  
+    do {  
+      triggerIndex = Math.floor(Math.random() * cells.length);  
+    } while (cells[triggerIndex].classList.contains('trigger') || triggerIndex === 0);  
+    cells[triggerIndex].classList.add('trigger');  
+  }  
+}  
+
+function moveActive(dx, dy) {  
+  const newX = activeCell[0] + dx;  
+  const newY = activeCell[1] + dy;  
+  if (newX >= 0 && newX < mazeSize && newY >= 0 && newY < mazeSize) {  
+    const cells = document.querySelectorAll('.cell');  
+    cells[activeCell[1] * mazeSize + activeCell[0]].classList.remove('active');  
+    activeCell = [newX, newY];  
+    const newActiveCell = cells[activeCell[1] * mazeSize + activeCell[0]];  
+    newActiveCell.classList.add('active');  
+
+    if (newActiveCell.classList.contains('trigger')) {  
+      newActiveCell.classList.remove('trigger');  
+      newActiveCell.classList.add('defused');  
+      alert('Mindfulness Step: Take a deep breath for 3 seconds. Focus on your inhale and exhale.');  
+      defusedCount++;  
+      if (defusedCount === triggerCount) {  
+        alert('Congratulations! You’ve defused all stress triggers!');  
+        createMaze();  
+      }  
+    }  
+  }  
+}  
+
+document.addEventListener('keydown', (e) => {  
+  switch (e.key) {  
+    case 'ArrowUp':  
+      moveActive(0, -1);  
+      break;  
+    case 'ArrowDown':  
+      moveActive(0, 1);  
+      break;  
+    case 'ArrowLeft':  
+      moveActive(-1, 0);  
+      break;  
+    case 'ArrowRight':  
+      moveActive(1, 0);  
+      break;  
+  }  
+});  
+
+createMaze();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
