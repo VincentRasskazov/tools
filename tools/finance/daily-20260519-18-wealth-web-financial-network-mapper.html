@@ -1,0 +1,136 @@
+---
+layout: null
+title: "Wealth Web: Financial Network Mapper"
+category: "Finance"
+description: "A dynamic tool that lets users visually create, connect, and analyze their personal financial ecosystem, simulating the flow and interdependence of assets, expenses, and investments."
+permalink: "/tools/daily-20260519-18-wealth-web-financial-network-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260519"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wealth Web: Financial Network Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic tool that lets users visually create, connect, and analyze their personal financial ecosystem, simulating the flow and interdependence of assets, expenses, and investments. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Wealth Web: Financial Network Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic tool that lets users visually create, connect, and analyze their personal financial ecosystem, simulating the flow and interdependence of assets, expenses, and investments. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Wealth Web: Financial Network Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic tool that lets users visually create, connect, and analyze their personal financial ecosystem, simulating the flow and interdependence of assets, expenses, and investments. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Wealth Web: Financial Network Mapper</h1>
+    <p class="seo-subtitle">A dynamic tool that lets users visually create, connect, and analyze their personal financial ecosystem, simulating the flow and interdependence of assets, expenses, and investments.</p>
+    <style>  
+  #tool-app {  
+    font-family: Arial, sans-serif;  
+    max-width: 1200px;  
+    margin: 20px auto;  
+    padding: 20px;  
+    border: 1px solid #ccc;  
+    border-radius: 10px;  
+    background-color: #f9f9f9;  
+  }  
+  .node {  
+    display: inline-block;  
+    margin: 10px;  
+    padding: 15px;  
+    border: 2px solid #007BFF;  
+    border-radius: 50%;  
+    background-color: #fff;  
+    cursor: pointer;  
+    text-align: center;  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+  }  
+  .link {  
+    stroke: #007BFF;  
+    stroke-width: 2px;  
+  }  
+  .tooltip {  
+    position: absolute;  
+    background: #333;  
+    color: #fff;  
+    padding: 5px 10px;  
+    border-radius: 5px;  
+    font-size: 12px;  
+    pointer-events: none;  
+  }  
+</style>  
+<div id="tool-app">  
+  <svg width="100%" height="500" id="financial-network"></svg>  
+  <div class="tooltip" id="tooltip" style="display: none;"></div>  
+</div>  
+<script>  
+  const svg = document.getElementById("financial-network");  
+  const tooltip = document.getElementById("tooltip");  
+  const data = [  
+    { id: "Income", x: 100, y: 250, connections: ["Savings", "Expenses"] },  
+    { id: "Savings", x: 300, y: 150, connections: ["Investments"] },  
+    { id: "Expenses", x: 300, y: 350, connections: ["Debt"] },  
+    { id: "Investments", x: 500, y: 150, connections: [] },  
+    { id: "Debt", x: 500, y: 350, connections: [] },  
+  ];  
+
+  const drawNode = (node) => {  
+    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");  
+    circle.setAttribute("cx", node.x);  
+    circle.setAttribute("cy", node.y);  
+    circle.setAttribute("r", 40);  
+    circle.setAttribute("class", "node");  
+    circle.addEventListener("mouseover", () => {  
+      tooltip.style.display = "block";  
+      tooltip.innerHTML = `${node.id}`;  
+      tooltip.style.top = `${node.y - 60}px`;  
+      tooltip.style.left = `${node.x + 20}px`;  
+    });  
+    circle.addEventListener("mouseout", () => {  
+      tooltip.style.display = "none";  
+    });  
+    svg.appendChild(circle);  
+
+    const text = document.createElementNS("http://www.w3.org/2000/svg", "text");  
+    text.setAttribute("x", node.x);  
+    text.setAttribute("y", node.y + 5);  
+    text.setAttribute("text-anchor", "middle");  
+    text.setAttribute("font-size", "12px");  
+    text.textContent = node.id;  
+    svg.appendChild(text);  
+  };  
+
+  const drawLink = (source, target) => {  
+    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");  
+    line.setAttribute("x1", source.x);  
+    line.setAttribute("y1", source.y);  
+    line.setAttribute("x2", target.x);  
+    line.setAttribute("y2", target.y);  
+    line.setAttribute("class", "link");  
+    svg.appendChild(line);  
+  };  
+
+  data.forEach((node) => {  
+    drawNode(node);  
+    node.connections.forEach((connection) => {  
+      const target = data.find((n) => n.id === connection);  
+      if (target) drawLink(node, target);  
+    });  
+  });  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

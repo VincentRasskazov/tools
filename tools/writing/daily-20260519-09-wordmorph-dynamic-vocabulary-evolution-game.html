@@ -1,0 +1,144 @@
+---
+layout: null
+title: "WordMorph: Dynamic Vocabulary Evolution Game"
+category: "Writing"
+description: "A gamified tool where users transform words into new ones by swapping letters, aiming to evolve a sentence while balancing creativity and meaning."
+permalink: "/tools/daily-20260519-09-wordmorph-dynamic-vocabulary-evolution-game.html"
+generated_by: "api-true-ai"
+generated_date: "20260519"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordMorph: Dynamic Vocabulary Evolution Game | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool where users transform words into new ones by swapping letters, aiming to evolve a sentence while balancing creativity and meaning. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="WordMorph: Dynamic Vocabulary Evolution Game | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool where users transform words into new ones by swapping letters, aiming to evolve a sentence while balancing creativity and meaning. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WordMorph: Dynamic Vocabulary Evolution Game | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool where users transform words into new ones by swapping letters, aiming to evolve a sentence while balancing creativity and meaning. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>WordMorph: Dynamic Vocabulary Evolution Game</h1>
+    <p class="seo-subtitle">A gamified tool where users transform words into new ones by swapping letters, aiming to evolve a sentence while balancing creativity and meaning.</p>
+    <style>  
+  #tool-app {  
+    font-family: Arial, sans-serif;  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    margin: 20px;  
+  }  
+  .word-container {  
+    display: flex;  
+    gap: 10px;  
+    margin-top: 20px;  
+  }  
+  .word {  
+    font-size: 20px;  
+    padding: 10px;  
+    border: 2px solid #007BFF;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    background: #F0F8FF;  
+    transition: background 0.3s;  
+  }  
+  .word:hover {  
+    background: #D7EFF8;  
+  }  
+  #input-section {  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    margin-top: 20px;  
+  }  
+  #input-section input {  
+    padding: 10px;  
+    width: 300px;  
+    border: 2px solid #007BFF;  
+    border-radius: 5px;  
+  }  
+  #input-section button {  
+    padding: 10px 20px;  
+    margin-top: 10px;  
+    background: #007BFF;  
+    color: white;  
+    border: none;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    transition: background 0.3s;  
+  }  
+  #input-section button:hover {  
+    background: #0056b3;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h1>WordMorph</h1>  
+  <p>Transform words and evolve your sentence. Click a word to replace a letter!</p>  
+  <div id="sentence-display" class="word-container">  
+    <!-- Words will be dynamically inserted here -->  
+  </div>  
+  <div id="input-section">  
+    <input id="input-field" placeholder="Enter your initial sentence" />  
+    <button id="start-btn">Start Game</button>  
+  </div>  
+</div>  
+<script>  
+// JavaScript logic for WordMorph  
+const toolApp = document.getElementById("tool-app");  
+const sentenceDisplay = document.getElementById("sentence-display");  
+const inputField = document.getElementById("input-field");  
+const startBtn = document.getElementById("start-btn");  
+
+let sentence = [];  
+
+startBtn.onclick = function () {  
+  const inputText = inputField.value.trim();  
+  if (inputText) {  
+    sentence = inputText.split(" ");  
+    renderSentence();  
+  }  
+};  
+
+function renderSentence() {  
+  sentenceDisplay.innerHTML = "";  
+  sentence.forEach((word, index) => {  
+    const wordElement = document.createElement("span");  
+    wordElement.innerText = word;  
+    wordElement.className = "word";  
+    wordElement.onclick = () => transformWord(index);  
+    sentenceDisplay.appendChild(wordElement);  
+  });  
+}  
+
+function transformWord(wordIndex) {  
+  const originalWord = sentence[wordIndex];  
+  const randomIndex = Math.floor(Math.random() * originalWord.length);  
+  const randomLetter = String.fromCharCode(97 + Math.floor(Math.random() * 26)); // Random letter a-z  
+  const newWord =  
+    originalWord.slice(0, randomIndex) +  
+    randomLetter +  
+    originalWord.slice(randomIndex + 1);  
+  sentence[wordIndex] = newWord;  
+  renderSentence();  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

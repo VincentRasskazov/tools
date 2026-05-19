@@ -1,0 +1,127 @@
+---
+layout: null
+title: "ChronoSynth: Interactive Timeline Composer"
+category: "Education"
+description: "Build, personalize, and interact with historical timelines by dragging events, exploring connections, and visualizing the flow of time dynamically."
+permalink: "/tools/daily-20260519-01-chronosynth-interactive-timeline-composer.html"
+generated_by: "api-true-ai"
+generated_date: "20260519"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChronoSynth: Interactive Timeline Composer | Free Online Interactive Tool</title>
+  <meta name="description" content="Build, personalize, and interact with historical timelines by dragging events, exploring connections, and visualizing the flow of time dynamically. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="ChronoSynth: Interactive Timeline Composer | Free Online Interactive Tool">
+  <meta property="og:description" content="Build, personalize, and interact with historical timelines by dragging events, exploring connections, and visualizing the flow of time dynamically. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ChronoSynth: Interactive Timeline Composer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Build, personalize, and interact with historical timelines by dragging events, exploring connections, and visualizing the flow of time dynamically. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>ChronoSynth: Interactive Timeline Composer</h1>
+    <p class="seo-subtitle">Build, personalize, and interact with historical timelines by dragging events, exploring connections, and visualizing the flow of time dynamically.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f0f4f8; color: #333; }  
+  #tool-app { max-width: 960px; margin: 30px auto; padding: 20px; background: #fff; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); border-radius: 8px; }  
+  .timeline { display: flex; align-items: center; overflow-x: auto; padding: 10px; border-top: 2px solid #0078d4; border-bottom: 2px solid #0078d4; margin: 20px 0; }  
+  .event { margin: 0 15px; padding: 10px; background: #0078d4; color: #fff; border-radius: 8px; cursor: grab; }  
+  .event:hover { background: #005ba1; }  
+  .editor { margin-top: 20px; }  
+  .input-field { display: flex; margin-bottom: 10px; }  
+  .input-field label { flex: 0 0 120px; font-weight: bold; }  
+  .input-field input, .input-field textarea { flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }  
+  button { background: #0078d4; color: #fff; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; }  
+  button:hover { background: #005ba1; }  
+</style>  
+<div id="tool-app">  
+  <h1>ChronoSynth: Interactive Timeline Composer</h1>  
+  <div class="timeline" id="timeline"></div>  
+  <div class="editor">  
+    <h2>Add Event</h2>  
+    <div class="input-field">  
+      <label for="event-name">Event Name:</label>  
+      <input type="text" id="event-name" placeholder="e.g., Moon Landing">  
+    </div>  
+    <div class="input-field">  
+      <label for="event-date">Event Date:</label>  
+      <input type="date" id="event-date">  
+    </div>  
+    <div class="input-field">  
+      <label for="event-desc">Description:</label>  
+      <textarea id="event-desc" rows="3" placeholder="e.g., The first human landing on the Moon."></textarea>  
+    </div>  
+    <button id="add-event-btn">Add to Timeline</button>  
+  </div>  
+</div>  
+<script>  
+const timeline = document.getElementById('timeline');  
+const addEventBtn = document.getElementById('add-event-btn');  
+const eventNameInput = document.getElementById('event-name');  
+const eventDateInput = document.getElementById('event-date');  
+const eventDescInput = document.getElementById('event-desc');  
+
+addEventBtn.addEventListener('click', () => {  
+    const name = eventNameInput.value.trim();  
+    const date = eventDateInput.value;  
+    const desc = eventDescInput.value.trim();  
+
+    if (!name || !date) {  
+        alert('Event Name and Date are required.');  
+        return;  
+    }  
+
+    const eventEl = document.createElement('div');  
+    eventEl.className = 'event';  
+    eventEl.draggable = true;  
+    eventEl.innerHTML = `<strong>${name}</strong><br><small>${date}</small>`;  
+    eventEl.title = desc || 'No description provided.';  
+
+    eventEl.addEventListener('dragstart', (e) => e.dataTransfer.setData('text', eventEl.outerHTML));  
+    eventEl.addEventListener('dblclick', () => {  
+        if (confirm('Do you want to delete this event?')) eventEl.remove();  
+    });  
+
+    timeline.appendChild(eventEl);  
+
+    // Clear inputs  
+    eventNameInput.value = '';  
+    eventDateInput.value = '';  
+    eventDescInput.value = '';  
+});  
+
+timeline.addEventListener('dragover', (e) => e.preventDefault());  
+timeline.addEventListener('drop', (e) => {  
+    e.preventDefault();  
+    const data = e.dataTransfer.getData('text');  
+    const tempDiv = document.createElement('div');  
+    tempDiv.innerHTML = data;  
+    const droppedElement = tempDiv.firstChild;  
+    timeline.appendChild(droppedElement);  
+
+    // Reattach drag events  
+    droppedElement.addEventListener('dragstart', (e) => e.dataTransfer.setData('text', droppedElement.outerHTML));  
+    droppedElement.addEventListener('dblclick', () => {  
+        if (confirm('Do you want to delete this event?')) droppedElement.remove();  
+    });  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

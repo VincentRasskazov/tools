@@ -1,0 +1,130 @@
+---
+layout: null
+title: "MoodGlyph: Emotional State Visualizer"
+category: "Health"
+description: "Transform your current emotional state into a mesmerizing, evolving abstract animation by interacting with sliders, colors, and sound elements."
+permalink: "/tools/daily-20260519-03-moodglyph-emotional-state-visualizer.html"
+generated_by: "api-true-ai"
+generated_date: "20260519"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MoodGlyph: Emotional State Visualizer | Free Online Interactive Tool</title>
+  <meta name="description" content="Transform your current emotional state into a mesmerizing, evolving abstract animation by interacting with sliders, colors, and sound elements. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="MoodGlyph: Emotional State Visualizer | Free Online Interactive Tool">
+  <meta property="og:description" content="Transform your current emotional state into a mesmerizing, evolving abstract animation by interacting with sliders, colors, and sound elements. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MoodGlyph: Emotional State Visualizer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Transform your current emotional state into a mesmerizing, evolving abstract animation by interacting with sliders, colors, and sound elements. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>MoodGlyph: Emotional State Visualizer</h1>
+    <p class="seo-subtitle">Transform your current emotional state into a mesmerizing, evolving abstract animation by interacting with sliders, colors, and sound elements.</p>
+    <style>  
+#tool-app {  
+  font-family: Arial, sans-serif;  
+  text-align: center;  
+  margin: 50px auto;  
+  width: 80%;  
+}  
+.controls {  
+  margin-bottom: 20px;  
+}  
+.slider-container {  
+  margin: 10px 0;  
+}  
+label {  
+  display: block;  
+  font-weight: bold;  
+  margin-bottom: 5px;  
+}  
+input[type="range"] {  
+  width: 100%;  
+}  
+canvas {  
+  border: 1px solid #ccc;  
+  border-radius: 8px;  
+  display: block;  
+  margin: 20px auto;  
+}  
+</style>  
+<div id="tool-app">  
+  <div class="controls">  
+    <div class="slider-container">  
+      <label for="energy-slider">Energy Level</label>  
+      <input id="energy-slider" type="range" min="0" max="100" value="50">  
+    </div>  
+    <div class="slider-container">  
+      <label for="calmness-slider">Calmness Level</label>  
+      <input id="calmness-slider" type="range" min="0" max="100" value="50">  
+    </div>  
+    <div class="slider-container">  
+      <label for="happiness-slider">Happiness Level</label>  
+      <input id="happiness-slider" type="range" min="0" max="100" value="50">  
+    </div>  
+  </div>  
+  <canvas id="moodCanvas" width="600" height="400"></canvas>  
+</div>  
+<script>  
+const canvas = document.getElementById('moodCanvas');  
+const ctx = canvas.getContext('2d');  
+
+const energySlider = document.getElementById('energy-slider');  
+const calmnessSlider = document.getElementById('calmness-slider');  
+const happinessSlider = document.getElementById('happiness-slider');  
+
+function drawMoodGlyph() {  
+  const energy = parseInt(energySlider.value);  
+  const calmness = parseInt(calmnessSlider.value);  
+  const happiness = parseInt(happinessSlider.value);  
+
+  const color = `rgb(${energy * 2.55}, ${happiness * 2.55}, ${calmness * 2.55})`;  
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+
+  // Draw central circle  
+  ctx.fillStyle = color;  
+  ctx.beginPath();  
+  ctx.arc(canvas.width / 2, canvas.height / 2, calmness, 0, Math.PI * 2);  
+  ctx.fill();  
+
+  // Draw dynamic lines  
+  ctx.strokeStyle = color;  
+  ctx.lineWidth = happiness / 25;  
+  for (let i = 0; i < energy / 4; i++) {  
+    const angle = (Math.PI * 2 / energy) * i;  
+    const x = canvas.width / 2 + Math.cos(angle) * calmness;  
+    const y = canvas.height / 2 + Math.sin(angle) * calmness;  
+    ctx.beginPath();  
+    ctx.moveTo(canvas.width / 2, canvas.height / 2);  
+    ctx.lineTo(x, y);  
+    ctx.stroke();  
+  }  
+}  
+
+energySlider.addEventListener('input', drawMoodGlyph);  
+calmnessSlider.addEventListener('input', drawMoodGlyph);  
+happinessSlider.addEventListener('input', drawMoodGlyph);  
+
+drawMoodGlyph();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

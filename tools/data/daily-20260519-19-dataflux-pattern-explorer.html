@@ -1,0 +1,151 @@
+---
+layout: null
+title: "DataFlux Pattern Explorer"
+category: "Data"
+description: "Dive into a dynamic mini-game where complex data streams morph into vibrant animations, challenging you to identify hidden patterns and anomalies in real-time."
+permalink: "/tools/daily-20260519-19-dataflux-pattern-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260519"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataFlux Pattern Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Dive into a dynamic mini-game where complex data streams morph into vibrant animations, challenging you to identify hidden patterns and anomalies in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataFlux Pattern Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Dive into a dynamic mini-game where complex data streams morph into vibrant animations, challenging you to identify hidden patterns and anomalies in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataFlux Pattern Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Dive into a dynamic mini-game where complex data streams morph into vibrant animations, challenging you to identify hidden patterns and anomalies in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataFlux Pattern Explorer</h1>
+    <p class="seo-subtitle">Dive into a dynamic mini-game where complex data streams morph into vibrant animations, challenging you to identify hidden patterns and anomalies in real-time.</p>
+    <style>  
+body {  
+  font-family: 'Arial', sans-serif;  
+  margin: 0;  
+  overflow: hidden;  
+  background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);  
+  color: white;  
+}  
+#tool-app {  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  position: relative;  
+}  
+canvas {  
+  border: 5px solid #fff;  
+  border-radius: 10px;  
+}  
+#score-display {  
+  position: absolute;  
+  top: 10px;  
+  right: 10px;  
+  background: rgba(255, 255, 255, 0.2);  
+  padding: 10px 20px;  
+  border-radius: 5px;  
+  font-size: 18px;  
+}  
+</style>  
+<div id="tool-app">  
+  <canvas id="gameCanvas" width="800" height="600"></canvas>  
+  <div id="score-display">Score: <span id="score">0</span></div>  
+</div>  
+<script>  
+const canvas = document.getElementById('gameCanvas');  
+const ctx = canvas.getContext('2d');  
+let score = 0;  
+let dataStreams = [];  
+
+class DataStream {  
+  constructor(x, y, speed, pattern) {  
+    this.x = x;  
+    this.y = y;  
+    this.speed = speed;  
+    this.pattern = pattern;  
+    this.color = this.generateColor();  
+  }  
+
+  generateColor() {  
+    const colors = ['#ff6f61', '#6a67ce', '#2ec4b6', '#ffbf69', '#00d2d3'];  
+    return colors[Math.floor(Math.random() * colors.length)];  
+  }  
+
+  update() {  
+    this.y += this.speed;  
+    if (this.y > canvas.height) {  
+      this.y = 0;  
+      this.x = Math.random() * canvas.width;  
+    }  
+  }  
+
+  draw() {  
+    ctx.fillStyle = this.color;  
+    ctx.beginPath();  
+    ctx.arc(this.x, this.y, 20, 0, Math.PI * 2);  
+    ctx.fill();  
+  }  
+}  
+
+function spawnStreams() {  
+  for (let i = 0; i < 10; i++) {  
+    const x = Math.random() * canvas.width;  
+    const y = Math.random() * canvas.height;  
+    const speed = Math.random() * 2 + 1;  
+    const pattern = Math.random() > 0.5 ? 'A' : 'B';  
+    dataStreams.push(new DataStream(x, y, speed, pattern));  
+  }  
+}  
+
+function detectPattern(mouseX, mouseY) {  
+  dataStreams.forEach((stream, index) => {  
+    const dist = Math.sqrt((stream.x - mouseX) ** 2 + (stream.y - mouseY) ** 2);  
+    if (dist < 20 && stream.pattern === 'A') {  
+      score += 10;  
+      document.getElementById('score').innerText = score;  
+      dataStreams.splice(index, 1);  
+    }  
+  });  
+}  
+
+canvas.addEventListener('click', (e) => {  
+  const rect = canvas.getBoundingClientRect();  
+  const mouseX = e.clientX - rect.left;  
+  const mouseY = e.clientY - rect.top;  
+  detectPattern(mouseX, mouseY);  
+});  
+
+function gameLoop() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  dataStreams.forEach(stream => {  
+    stream.update();  
+    stream.draw();  
+  });  
+  requestAnimationFrame(gameLoop);  
+}  
+
+spawnStreams();  
+gameLoop();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

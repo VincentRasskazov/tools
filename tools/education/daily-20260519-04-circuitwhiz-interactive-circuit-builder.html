@@ -1,0 +1,170 @@
+---
+layout: null
+title: "CircuitWhiz: Interactive Circuit Builder"
+category: "Education"
+description: "A visual mini-game where users learn electrical circuit concepts by building and testing virtual circuits to solve challenges."
+permalink: "/tools/daily-20260519-04-circuitwhiz-interactive-circuit-builder.html"
+generated_by: "api-true-ai"
+generated_date: "20260519"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CircuitWhiz: Interactive Circuit Builder | Free Online Interactive Tool</title>
+  <meta name="description" content="A visual mini-game where users learn electrical circuit concepts by building and testing virtual circuits to solve challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CircuitWhiz: Interactive Circuit Builder | Free Online Interactive Tool">
+  <meta property="og:description" content="A visual mini-game where users learn electrical circuit concepts by building and testing virtual circuits to solve challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CircuitWhiz: Interactive Circuit Builder | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A visual mini-game where users learn electrical circuit concepts by building and testing virtual circuits to solve challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CircuitWhiz: Interactive Circuit Builder</h1>
+    <p class="seo-subtitle">A visual mini-game where users learn electrical circuit concepts by building and testing virtual circuits to solve challenges.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background-color: #f4f4f9;  
+  color: #333;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+}  
+#tool-app {  
+  width: 80%;  
+  max-width: 900px;  
+  background: #fff;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  
+  padding: 20px;  
+}  
+h1 {  
+  text-align: center;  
+  color: #0078d4;  
+}  
+.circuit-board {  
+  display: grid;  
+  grid-template-columns: repeat(8, 1fr);  
+  gap: 10px;  
+  margin-top: 20px;  
+}  
+.cell {  
+  width: 50px;  
+  height: 50px;  
+  border: 2px solid #aaa;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  background: #f9f9f9;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+.cell.active {  
+  background: #d4eeff;  
+}  
+.controls {  
+  display: flex;  
+  justify-content: space-between;  
+  margin-top: 20px;  
+}  
+.button {  
+  background: #0078d4;  
+  color: #fff;  
+  border: none;  
+  padding: 10px 20px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+.button:hover {  
+  background: #005bb5;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>CircuitWhiz: Interactive Circuit Builder</h1>  
+  <div class="circuit-board" id="circuit-board"></div>  
+  <div class="controls">  
+    <button class="button" id="reset-btn">Reset</button>  
+    <button class="button" id="test-circuit-btn">Test Circuit</button>  
+  </div>  
+  <p id="message"></p>  
+</div>  
+<script>  
+const board = document.getElementById("circuit-board");  
+const message = document.getElementById("message");  
+const resetBtn = document.getElementById("reset-btn");  
+const testCircuitBtn = document.getElementById("test-circuit-btn");  
+const gridSize = 8;  
+
+// Sample target circuit (1: active, 0: inactive)  
+const targetCircuit = [  
+  0, 1, 0, 0, 0, 1, 0, 0,  
+  1, 1, 1, 0, 0, 0, 0, 0,  
+  0, 0, 1, 0, 0, 0, 0, 0,  
+  0, 0, 1, 1, 1, 1, 0, 0,  
+  0, 0, 0, 0, 0, 1, 0, 0,  
+  0, 0, 0, 0, 0, 1, 0, 0,  
+  0, 0, 0, 0, 0, 1, 1, 1,  
+  0, 0, 0, 0, 0, 0, 0, 0  
+];  
+
+let userCircuit = Array(64).fill(0);  
+
+// Initialize circuit board  
+function createBoard() {  
+  board.innerHTML = "";  
+  for (let i = 0; i < gridSize * gridSize; i++) {  
+    const cell = document.createElement("div");  
+    cell.className = "cell";  
+    cell.dataset.index = i;  
+    cell.addEventListener("click", toggleCell);  
+    board.appendChild(cell);  
+  }  
+}  
+
+// Toggle cells on and off  
+function toggleCell(e) {  
+  const cell = e.target;  
+  const index = parseInt(cell.dataset.index);  
+  userCircuit[index] = userCircuit[index] === 0 ? 1 : 0;  
+  cell.classList.toggle("active");  
+}  
+
+// Reset the circuit board  
+resetBtn.addEventListener("click", () => {  
+  userCircuit.fill(0);  
+  createBoard();  
+  message.textContent = "";  
+});  
+
+// Test the created circuit  
+testCircuitBtn.addEventListener("click", () => {  
+  const isCorrect = userCircuit.every((val, idx) => val === targetCircuit[idx]);  
+  message.textContent = isCorrect  
+    ? "🎉 Circuit completed successfully!"  
+    : "❌ Circuit is incorrect. Try again!";  
+});  
+
+createBoard();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
