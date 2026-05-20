@@ -1,0 +1,205 @@
+---
+layout: null
+title: "MindCanvas: Interactive Thought Organizer"
+category: "Productivity"
+description: "A dynamic brainstorming tool where users visually map ideas and connect thoughts to form a creative web of concepts."
+permalink: "/tools/daily-20260520-17-mindcanvas-interactive-thought-organizer.html"
+generated_by: "api-true-ai"
+generated_date: "20260520"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindCanvas: Interactive Thought Organizer | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic brainstorming tool where users visually map ideas and connect thoughts to form a creative web of concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="MindCanvas: Interactive Thought Organizer | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic brainstorming tool where users visually map ideas and connect thoughts to form a creative web of concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MindCanvas: Interactive Thought Organizer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic brainstorming tool where users visually map ideas and connect thoughts to form a creative web of concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>MindCanvas: Interactive Thought Organizer</h1>
+    <p class="seo-subtitle">A dynamic brainstorming tool where users visually map ideas and connect thoughts to form a creative web of concepts.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  background: linear-gradient(to right, #8e44ad, #3498db);  
+  color: #fff;  
+}  
+#tool-app {  
+  width: 90vw;  
+  height: 90vh;  
+  background: #fff;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);  
+  overflow: hidden;  
+  position: relative;  
+}  
+#canvas-container {  
+  width: 100%;  
+  height: 100%;  
+  position: relative;  
+}  
+.node {  
+  position: absolute;  
+  background: #3498db;  
+  color: #fff;  
+  padding: 10px;  
+  border-radius: 5px;  
+  cursor: grab;  
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);  
+}  
+.node:active {  
+  cursor: grabbing;  
+}  
+.connection {  
+  position: absolute;  
+  background: #8e44ad;  
+  height: 3px;  
+  transform-origin: top left;  
+}  
+.controls {  
+  position: absolute;  
+  bottom: 10px;  
+  left: 10px;  
+}  
+button {  
+  background: #3498db;  
+  color: #fff;  
+  border: none;  
+  padding: 10px 20px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+}  
+button:hover {  
+  background: #2980b9;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="canvas-container"></div>  
+  <div class="controls">  
+    <button id="add-node">Add Node</button>  
+    <button id="clear-canvas">Clear Canvas</button>  
+  </div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById('canvas-container');  
+const addNodeButton = document.getElementById('add-node');  
+const clearCanvasButton = document.getElementById('clear-canvas');  
+
+let nodes = [];  
+let connections = [];  
+
+function createNode(x, y) {  
+  const node = document.createElement('div');  
+  node.className = 'node';  
+  node.contentEditable = true;  
+  node.style.left = `${x}px`;  
+  node.style.top = `${y}px`;  
+  node.draggable = true;  
+
+  node.addEventListener('mousedown', (e) => {  
+    e.target.style.cursor = 'grabbing';  
+    const rect = e.target.getBoundingClientRect();  
+    const offsetX = e.clientX - rect.left;  
+    const offsetY = e.clientY - rect.top;  
+
+    const onMouseMove = (moveEvent) => {  
+      const newX = moveEvent.clientX - offsetX;  
+      const newY = moveEvent.clientY - offsetY;  
+      node.style.left = `${newX}px`;  
+      node.style.top = `${newY}px`;  
+      updateConnections(node);  
+    };  
+
+    document.addEventListener('mousemove', onMouseMove);  
+    document.addEventListener('mouseup', () => {  
+      document.removeEventListener('mousemove', onMouseMove);  
+      e.target.style.cursor = 'grab';  
+    }, { once: true });  
+  });  
+
+  canvas.appendChild(node);  
+  nodes.push(node);  
+}  
+
+function createConnection(node1, node2) {  
+  const connection = document.createElement('div');  
+  connection.className = 'connection';  
+  canvas.appendChild(connection);  
+  connections.push({ connection, node1, node2 });  
+  updateConnections(node1);  
+  updateConnections(node2);  
+}  
+
+function updateConnections(node) {  
+  connections.forEach(({ connection, node1, node2 }) => {  
+    if (node === node1 || node === node2) {  
+      const rect1 = node1.getBoundingClientRect();  
+      const rect2 = node2.getBoundingClientRect();  
+
+      const x1 = rect1.left + rect1.width / 2;  
+      const y1 = rect1.top + rect1.height / 2;  
+      const x2 = rect2.left + rect2.width / 2;  
+      const y2 = rect2.top + rect2.height / 2;  
+
+      const length = Math.hypot(x2 - x1, y2 - y1);  
+      const angle = Math.atan2(y2 - y1, x2 - x1) * (180 / Math.PI);  
+
+      connection.style.width = `${length}px`;  
+      connection.style.transform = `translate(${x1}px, ${y1}px) rotate(${angle}deg)`;  
+    }  
+  });  
+}  
+
+addNodeButton.addEventListener('click', () => {  
+  createNode(200, 200);  
+});  
+
+canvas.addEventListener('click', (e) => {  
+  if (e.target.className === 'node') {  
+    const selectedNodes = nodes.filter(node => node.classList.contains('selected'));  
+    if (selectedNodes.length === 1 && selectedNodes[0] !== e.target) {  
+      createConnection(selectedNodes[0], e.target);  
+      selectedNodes[0].classList.remove('selected');  
+    } else {  
+      nodes.forEach(node => node.classList.remove('selected'));  
+      e.target.classList.add('selected');  
+    }  
+  }  
+});  
+
+clearCanvasButton.addEventListener('click', () => {  
+  canvas.innerHTML = '';  
+  nodes = [];  
+  connections = [];  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
