@@ -1,0 +1,158 @@
+---
+layout: null
+title: "Wealth Weave: Financial Network Builder"
+category: "Finance"
+description: "Create and visualize a dynamic web of financial relationships, dependencies, and flows to better understand your personal or business finances."
+permalink: "/tools/daily-20260521-25-wealth-weave-financial-network-builder.html"
+generated_by: "api-true-ai"
+generated_date: "20260521"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wealth Weave: Financial Network Builder | Free Online Interactive Tool</title>
+  <meta name="description" content="Create and visualize a dynamic web of financial relationships, dependencies, and flows to better understand your personal or business finances. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Wealth Weave: Financial Network Builder | Free Online Interactive Tool">
+  <meta property="og:description" content="Create and visualize a dynamic web of financial relationships, dependencies, and flows to better understand your personal or business finances. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Wealth Weave: Financial Network Builder | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Create and visualize a dynamic web of financial relationships, dependencies, and flows to better understand your personal or business finances. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Wealth Weave: Financial Network Builder</h1>
+    <p class="seo-subtitle">Create and visualize a dynamic web of financial relationships, dependencies, and flows to better understand your personal or business finances.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f7f9; color: #333; }  
+  #tool-app { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }  
+  .node { padding: 10px; border-radius: 50%; background: #4caf50; color: white; display: inline-block; text-align: center; cursor: pointer; }  
+  .connection { position: absolute; stroke: #78909c; stroke-width: 2px; }  
+  .control-panel { margin-top: 20px; }  
+  .control-panel button { margin: 0 5px; padding: 10px 15px; border: none; background: #2196f3; color: white; border-radius: 3px; cursor: pointer; }  
+  .control-panel button:hover { background: #1976d2; }  
+  #canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }  
+</style>  
+<div id="tool-app">  
+  <canvas id="canvas"></canvas>  
+  <div class="control-panel">  
+    <button onclick="addNode()">Add Node</button>  
+    <button onclick="toggleConnectionMode()">Connect Nodes</button>  
+    <button onclick="clearCanvas()">Clear</button>  
+  </div>  
+</div>  
+<script>  
+const canvas = document.getElementById("canvas");  
+const ctx = canvas.getContext("2d");  
+canvas.width = window.innerWidth;  
+canvas.height = window.innerHeight;  
+
+let nodes = [];  
+let connections = [];  
+let isConnecting = false;  
+let selectedNode = null;  
+
+class Node {  
+  constructor(x, y) {  
+    this.x = x;  
+    this.y = y;  
+    this.radius = 20;  
+    this.id = `node-${nodes.length + 1}`;  
+  }  
+
+  draw() {  
+    ctx.beginPath();  
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);  
+    ctx.fillStyle = "#4caf50";  
+    ctx.fill();  
+    ctx.strokeStyle = "#ffffff";  
+    ctx.stroke();  
+    ctx.closePath();  
+    ctx.fillStyle = "#ffffff";  
+    ctx.font = "12px Arial";  
+    ctx.textAlign = "center";  
+    ctx.fillText(this.id, this.x, this.y + 4);  
+  }  
+}  
+
+function addNode() {  
+  const x = Math.random() * canvas.width;  
+  const y = Math.random() * canvas.height;  
+  const node = new Node(x, y);  
+  nodes.push(node);  
+  draw();  
+}  
+
+function draw() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  connections.forEach((connection) => {  
+    ctx.beginPath();  
+    ctx.moveTo(connection.start.x, connection.start.y);  
+    ctx.lineTo(connection.end.x, connection.end.y);  
+    ctx.strokeStyle = "#78909c";  
+    ctx.lineWidth = 2;  
+    ctx.stroke();  
+    ctx.closePath();  
+  });  
+
+  nodes.forEach((node) => node.draw());  
+}  
+
+canvas.addEventListener("click", (event) => {  
+  if (!isConnecting) return;  
+  const { offsetX, offsetY } = event;  
+  const clickedNode = nodes.find(  
+    (node) =>  
+      Math.sqrt((node.x - offsetX) ** 2 + (node.y - offsetY) ** 2) <=  
+      node.radius  
+  );  
+
+  if (clickedNode) {  
+    if (selectedNode) {  
+      connections.push({ start: selectedNode, end: clickedNode });  
+      selectedNode = null;  
+    } else {  
+      selectedNode = clickedNode;  
+    }  
+    draw();  
+  }  
+});  
+
+function toggleConnectionMode() {  
+  isConnecting = !isConnecting;  
+  if (isConnecting) {  
+    alert("Click on two nodes to connect them!");  
+  } else {  
+    selectedNode = null;  
+  }  
+}  
+
+function clearCanvas() {  
+  nodes = [];  
+  connections = [];  
+  draw();  
+}  
+
+window.addEventListener("resize", () => {  
+  canvas.width = window.innerWidth;  
+  canvas.height = window.innerHeight;  
+  draw();  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,140 @@
+---
+layout: null
+title: "Synesthesia Spectrum Composer"
+category: "Education"
+description: "An interactive tool that transforms text into dynamic audio-visual compositions, teaching the relationship between linguistic structure and sensory representation."
+permalink: "/tools/daily-20260521-17-synesthesia-spectrum-composer.html"
+generated_by: "api-true-ai"
+generated_date: "20260521"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Synesthesia Spectrum Composer | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool that transforms text into dynamic audio-visual compositions, teaching the relationship between linguistic structure and sensory representation. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Synesthesia Spectrum Composer | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool that transforms text into dynamic audio-visual compositions, teaching the relationship between linguistic structure and sensory representation. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Synesthesia Spectrum Composer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool that transforms text into dynamic audio-visual compositions, teaching the relationship between linguistic structure and sensory representation. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Synesthesia Spectrum Composer</h1>
+    <p class="seo-subtitle">An interactive tool that transforms text into dynamic audio-visual compositions, teaching the relationship between linguistic structure and sensory representation.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(120deg, #ff9a9e, #fad0c4);  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+}  
+#tool-app {  
+  text-align: center;  
+  background: white;  
+  padding: 20px;  
+  border-radius: 12px;  
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);  
+  width: 80%;  
+  max-width: 600px;  
+}  
+#text-input {  
+  width: 100%;  
+  padding: 10px;  
+  margin-bottom: 20px;  
+  border: 1px solid #ccc;  
+  border-radius: 8px;  
+}  
+#visualizer {  
+  height: 200px;  
+  margin: 20px auto;  
+  border: 2px solid #ccc;  
+  border-radius: 8px;  
+  background: #eef3f8;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  color: #333;  
+  font-size: 1.5em;  
+}  
+button {  
+  background: #4CAF50;  
+  color: white;  
+  border: none;  
+  padding: 10px 20px;  
+  border-radius: 8px;  
+  cursor: pointer;  
+  font-weight: bold;  
+}  
+button:hover {  
+  background: #45a049;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Synesthesia Spectrum Composer</h1>  
+  <p>Type a sentence to create audio-visual magic from your text:</p>  
+  <input id="text-input" type="text" placeholder="Enter your text here..." />  
+  <button id="generate-button">Generate Composition</button>  
+  <div id="visualizer">Your visualization will appear here</div>  
+</div>  
+<script>  
+function createWaveform(text) {  
+  const visualizer = document.getElementById('visualizer');  
+  while (visualizer.firstChild) {  
+    visualizer.removeChild(visualizer.firstChild);  
+  }  
+
+  const colors = ['#ff9a9e', '#fad0c4', '#fbc2eb', '#a1c4fd', '#c2e9fb', '#ffe7e7'];  
+  const textLength = text.length;  
+  let soundPitch = Math.min(text.length * 10, 2000);  
+
+  for (let i = 0; i < textLength; i++) {  
+    const div = document.createElement('div');  
+    div.style.width = `${10 + Math.random() * 20}px`;  
+    div.style.height = `${20 + text.charCodeAt(i) * 0.5}px`;  
+    div.style.background = colors[i % colors.length];  
+    div.style.margin = '3px';  
+    div.style.display = 'inline-block';  
+    div.style.transition = '0.3s ease';  
+    visualizer.appendChild(div);  
+  }  
+
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();  
+  const oscillator = audioCtx.createOscillator();  
+  oscillator.type = 'sine';  
+  oscillator.frequency.setValueAtTime(soundPitch, audioCtx.currentTime);  
+  oscillator.connect(audioCtx.destination);  
+  oscillator.start();  
+  setTimeout(() => oscillator.stop(), 300);  
+}  
+
+document.getElementById('generate-button').addEventListener('click', () => {  
+  const userText = document.getElementById('text-input').value;  
+  if (userText.trim()) {  
+    createWaveform(userText);  
+  } else {  
+    alert('Please enter some text to generate a composition!');  
+  }  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

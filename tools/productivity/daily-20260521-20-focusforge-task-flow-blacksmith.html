@@ -1,0 +1,167 @@
+---
+layout: null
+title: "FocusForge: Task Flow Blacksmith"
+category: "Productivity"
+description: "A dynamic visual tool where users forge and connect tasks into a virtual productivity chain, complete with dependencies, animations, and live progress tracking."
+permalink: "/tools/daily-20260521-20-focusforge-task-flow-blacksmith.html"
+generated_by: "api-true-ai"
+generated_date: "20260521"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusForge: Task Flow Blacksmith | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic visual tool where users forge and connect tasks into a virtual productivity chain, complete with dependencies, animations, and live progress tracking. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="FocusForge: Task Flow Blacksmith | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic visual tool where users forge and connect tasks into a virtual productivity chain, complete with dependencies, animations, and live progress tracking. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FocusForge: Task Flow Blacksmith | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic visual tool where users forge and connect tasks into a virtual productivity chain, complete with dependencies, animations, and live progress tracking. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>FocusForge: Task Flow Blacksmith</h1>
+    <p class="seo-subtitle">A dynamic visual tool where users forge and connect tasks into a virtual productivity chain, complete with dependencies, animations, and live progress tracking.</p>
+    <style>  
+body {  
+  font-family: 'Arial', sans-serif;  
+  background: linear-gradient(135deg, #2c3e50, #bdc3c7);  
+  color: #fff;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+}  
+#tool-app {  
+  width: 80%;  
+  max-width: 900px;  
+  background: #34495e;  
+  border-radius: 10px;  
+  padding: 20px;  
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);  
+}  
+.task {  
+  margin: 10px;  
+  padding: 15px;  
+  background: #1abc9c;  
+  color: #fff;  
+  border-radius: 5px;  
+  cursor: grab;  
+  text-align: center;  
+}  
+.connector {  
+  height: 4px;  
+  background: #e67e22;  
+  border-radius: 2px;  
+  position: absolute;  
+}  
+.task.active {  
+  background: #e74c3c;  
+}  
+#taskBoard {  
+  position: relative;  
+  height: 400px;  
+  border: 2px dashed #ecf0f1;  
+  margin-top: 20px;  
+  border-radius: 10px;  
+  overflow: hidden;  
+}  
+</style>  
+<div id="tool-app">  
+  <h2>FocusForge: Task Flow Blacksmith</h2>  
+  <button id="createTask">Add Task</button>  
+  <button id="resetBoard">Reset Board</button>  
+  <div id="taskBoard"></div>  
+</div>  
+<script>  
+const app = document.getElementById("tool-app");  
+const taskBoard = document.getElementById("taskBoard");  
+
+let tasks = [];  
+let connectors = [];  
+let activeTask = null;  
+
+function createTask() {  
+  const task = document.createElement("div");  
+  task.className = "task";  
+  task.innerText = `Task ${tasks.length + 1}`;  
+  task.style.left = `${Math.random() * (taskBoard.clientWidth - 100)}px`;  
+  task.style.top = `${Math.random() * (taskBoard.clientHeight - 50)}px`;  
+  task.draggable = true;  
+
+  task.addEventListener("dragstart", (e) => {  
+    activeTask = task;  
+    e.dataTransfer.setData("text/plain", "");  
+  });  
+
+  task.addEventListener("dragend", (e) => {  
+    activeTask = null;  
+    task.style.left = `${e.clientX - taskBoard.offsetLeft - task.clientWidth / 2}px`;  
+    task.style.top = `${e.clientY - taskBoard.offsetTop - task.clientHeight / 2}px`;  
+    updateConnectors();  
+  });  
+
+  tasks.push(task);  
+  taskBoard.appendChild(task);  
+}  
+
+function connectTasks(task1, task2) {  
+  const connector = document.createElement("div");  
+  connector.className = "connector";  
+  taskBoard.appendChild(connector);  
+  connectors.push({ connector, task1, task2 });  
+  updateConnectors();  
+}  
+
+function updateConnectors() {  
+  connectors.forEach(({ connector, task1, task2 }) => {  
+    const startX = task1.offsetLeft + task1.offsetWidth / 2;  
+    const startY = task1.offsetTop + task1.offsetHeight / 2;  
+    const endX = task2.offsetLeft + task2.offsetWidth / 2;  
+    const endY = task2.offsetTop + task2.offsetHeight / 2;  
+
+    const length = Math.sqrt((endX - startX) ** 2 + (endY - startY) ** 2);  
+    const angle = Math.atan2(endY - startY, endX - startX) * (180 / Math.PI);  
+
+    connector.style.width = `${length}px`;  
+    connector.style.transform = `rotate(${angle}deg)`;  
+    connector.style.left = `${startX}px`;  
+    connector.style.top = `${startY}px`;  
+  });  
+}  
+
+taskBoard.addEventListener("click", (e) => {  
+  if (!activeTask) return;  
+
+  const targetTask = e.target.closest(".task");  
+  if (targetTask && targetTask !== activeTask) {  
+    connectTasks(activeTask, targetTask);  
+  }  
+});  
+
+document.getElementById("createTask").addEventListener("click", createTask);  
+document.getElementById("resetBoard").addEventListener("click", () => {  
+  taskBoard.innerHTML = "";  
+  tasks = [];  
+  connectors = [];  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

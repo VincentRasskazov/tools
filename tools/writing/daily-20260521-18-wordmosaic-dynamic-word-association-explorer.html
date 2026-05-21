@@ -1,0 +1,119 @@
+---
+layout: null
+title: "WordMosaic: Dynamic Word Association Explorer"
+category: "Writing"
+description: "An interactive tool where users create and connect words in a dynamic and colorful mosaic, revealing hidden relationships and enhancing creativity."
+permalink: "/tools/daily-20260521-18-wordmosaic-dynamic-word-association-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260521"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordMosaic: Dynamic Word Association Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool where users create and connect words in a dynamic and colorful mosaic, revealing hidden relationships and enhancing creativity. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="WordMosaic: Dynamic Word Association Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool where users create and connect words in a dynamic and colorful mosaic, revealing hidden relationships and enhancing creativity. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WordMosaic: Dynamic Word Association Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool where users create and connect words in a dynamic and colorful mosaic, revealing hidden relationships and enhancing creativity. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>WordMosaic: Dynamic Word Association Explorer</h1>
+    <p class="seo-subtitle">An interactive tool where users create and connect words in a dynamic and colorful mosaic, revealing hidden relationships and enhancing creativity.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f9; }  
+  #tool-app { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }  
+  #mosaic { width: 80%; height: 60%; border: 2px solid #ccc; border-radius: 10px; background: #fff; position: relative; overflow: hidden; cursor: pointer; }  
+  .word { position: absolute; font-size: 16px; font-weight: bold; padding: 5px 10px; border-radius: 5px; background: #f0f8ff; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); }  
+  .connection { position: absolute; background: #ccc; z-index: 0; transform-origin: 0 0; }  
+  button { margin: 10px; padding: 10px 20px; border: none; border-radius: 5px; background: #4CAF50; color: white; font-size: 16px; cursor: pointer; }  
+  button:hover { background: #45a049; }  
+</style>  
+<div id="tool-app">  
+  <button id="add-word">Add Word</button>  
+  <button id="clear-mosaic">Clear Mosaic</button>  
+  <div id="mosaic"></div>  
+</div>  
+<script>  
+const mosaic = document.getElementById('mosaic');  
+let words = [];  
+let connections = [];  
+
+function addWord() {  
+  const word = prompt('Enter a word:');  
+  if (!word) return;  
+
+  const wordDiv = document.createElement('div');  
+  wordDiv.className = 'word';  
+  wordDiv.textContent = word;  
+  wordDiv.style.left = Math.random() * (mosaic.clientWidth - 100) + 'px';  
+  wordDiv.style.top = Math.random() * (mosaic.clientHeight - 30) + 'px';  
+  mosaic.appendChild(wordDiv);  
+  words.push(wordDiv);  
+
+  wordDiv.addEventListener('click', () => createConnection(wordDiv));  
+}  
+
+function createConnection(fromWordDiv) {  
+  const toWord = prompt('Connect to which word? (Enter exact text)');  
+  if (!toWord) return;  
+
+  const toWordDiv = words.find((w) => w.textContent === toWord);  
+  if (!toWordDiv) {  
+    alert('Word not found!');  
+    return;  
+  }  
+
+  const connection = document.createElement('div');  
+  connection.className = 'connection';  
+
+  const fromRect = fromWordDiv.getBoundingClientRect();  
+  const toRect = toWordDiv.getBoundingClientRect();  
+
+  const x1 = fromRect.left + fromRect.width / 2 - mosaic.offsetLeft;  
+  const y1 = fromRect.top + fromRect.height / 2 - mosaic.offsetTop;  
+  const x2 = toRect.left + toRect.width / 2 - mosaic.offsetLeft;  
+  const y2 = toRect.top + toRect.height / 2 - mosaic.offsetTop;  
+
+  const dx = x2 - x1;  
+  const dy = y2 - y1;  
+  const length = Math.sqrt(dx * dx + dy * dy);  
+
+  connection.style.width = length + 'px';  
+  connection.style.height = '2px';  
+  connection.style.left = x1 + 'px';  
+  connection.style.top = y1 + 'px';  
+  connection.style.transform = `rotate(${Math.atan2(dy, dx)}rad)`;  
+
+  mosaic.appendChild(connection);  
+  connections.push(connection);  
+}  
+
+document.getElementById('add-word').addEventListener('click', addWord);  
+document.getElementById('clear-mosaic').addEventListener('click', () => {  
+  words.forEach((word) => word.remove());  
+  connections.forEach((c) => c.remove());  
+  words = [];  
+  connections = [];  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
