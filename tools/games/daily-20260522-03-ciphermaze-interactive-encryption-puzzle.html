@@ -1,0 +1,185 @@
+---
+layout: null
+title: "CipherMaze: Interactive Encryption Puzzle"
+category: "Games"
+description: "Solve progressively challenging mazes by decoding hidden encryption keys scattered throughout."
+permalink: "/tools/daily-20260522-03-ciphermaze-interactive-encryption-puzzle.html"
+generated_by: "api-true-ai"
+generated_date: "20260522"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CipherMaze: Interactive Encryption Puzzle | Free Online Interactive Tool</title>
+  <meta name="description" content="Solve progressively challenging mazes by decoding hidden encryption keys scattered throughout. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CipherMaze: Interactive Encryption Puzzle | Free Online Interactive Tool">
+  <meta property="og:description" content="Solve progressively challenging mazes by decoding hidden encryption keys scattered throughout. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CipherMaze: Interactive Encryption Puzzle | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Solve progressively challenging mazes by decoding hidden encryption keys scattered throughout. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CipherMaze: Interactive Encryption Puzzle</h1>
+    <p class="seo-subtitle">Solve progressively challenging mazes by decoding hidden encryption keys scattered throughout.</p>
+    <style>
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #1d3557, #457b9d);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+#tool-app {
+  width: 80%;
+  max-width: 600px;
+  height: 600px;
+  background: #f1faee;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 24px;
+  color: #1d3557;
+}
+
+#maze-container {
+  width: 100%;
+  height: 400px;
+  margin: 20px 0;
+  position: relative;
+  background: #a8dadc;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+}
+
+.cell {
+  border: 1px solid #457b9d;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cell.key {
+  background: #e63946;
+  color: white;
+  font-weight: bold;
+}
+
+.cell.player {
+  background: #2a9d8f;
+  color: white;
+}
+
+#controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+button {
+  padding: 10px 15px;
+  background: #457b9d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1d3557;
+}
+</style>
+<div id="tool-app">
+  <h1>CipherMaze</h1>
+  <div id="maze-container"></div>
+  <div id="controls">
+    <button onclick="movePlayer('up')">Up</button>
+    <button onclick="movePlayer('down')">Down</button>
+    <button onclick="movePlayer('left')">Left</button>
+    <button onclick="movePlayer('right')">Right</button>
+  </div>
+</div>
+<script>
+const mazeSize = 10;
+const playerPosition = { x: 0, y: 0 };
+let keysCollected = 0;
+let maze = [];
+
+function generateMaze() {
+  maze = Array.from({ length: mazeSize }, () => Array.from({ length: mazeSize }, () => 0));
+  for (let i = 0; i < 5; i++) {
+    const keyX = Math.floor(Math.random() * mazeSize);
+    const keyY = Math.floor(Math.random() * mazeSize);
+    maze[keyX][keyY] = 2; // 2 represents a key
+  }
+}
+
+function drawMaze() {
+  const mazeContainer = document.getElementById('maze-container');
+  mazeContainer.innerHTML = '';
+  for (let y = 0; y < mazeSize; y++) {
+    for (let x = 0; x < mazeSize; x++) {
+      const cell = document.createElement('div');
+      cell.classList.add('cell');
+      if (playerPosition.x === x && playerPosition.y === y) {
+        cell.classList.add('player');
+        cell.innerText = 'P';
+      } else if (maze[x][y] === 2) {
+        cell.classList.add('key');
+        cell.innerText = 'K';
+      }
+      mazeContainer.appendChild(cell);
+    }
+  }
+}
+
+function movePlayer(direction) {
+  if (direction === 'up' && playerPosition.y > 0) playerPosition.y--;
+  if (direction === 'down' && playerPosition.y < mazeSize - 1) playerPosition.y++;
+  if (direction === 'left' && playerPosition.x > 0) playerPosition.x--;
+  if (direction === 'right' && playerPosition.x < mazeSize - 1) playerPosition.x++;
+  checkForKey();
+  drawMaze();
+}
+
+function checkForKey() {
+  if (maze[playerPosition.x][playerPosition.y] === 2) {
+    maze[playerPosition.x][playerPosition.y] = 0;
+    keysCollected++;
+    if (keysCollected === 5) {
+      alert('Congratulations! You have solved the CipherMaze!');
+    }
+  }
+}
+
+generateMaze();
+drawMaze();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
