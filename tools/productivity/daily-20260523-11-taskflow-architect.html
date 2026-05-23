@@ -1,0 +1,167 @@
+---
+layout: null
+title: "TaskFlow Architect"
+category: "Productivity"
+description: "Design and visually simulate task dependencies and workflows with drag-and-drop interactions to optimize productivity."
+permalink: "/tools/daily-20260523-11-taskflow-architect.html"
+generated_by: "api-true-ai"
+generated_date: "20260523"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskFlow Architect | Free Online Interactive Tool</title>
+  <meta name="description" content="Design and visually simulate task dependencies and workflows with drag-and-drop interactions to optimize productivity. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="TaskFlow Architect | Free Online Interactive Tool">
+  <meta property="og:description" content="Design and visually simulate task dependencies and workflows with drag-and-drop interactions to optimize productivity. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TaskFlow Architect | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Design and visually simulate task dependencies and workflows with drag-and-drop interactions to optimize productivity. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>TaskFlow Architect</h1>
+    <p class="seo-subtitle">Design and visually simulate task dependencies and workflows with drag-and-drop interactions to optimize productivity.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  background: linear-gradient(to right, #3b82f6, #9333ea);  
+  color: #fff;  
+}  
+#tool-app {  
+  width: 90%;  
+  height: 85vh;  
+  background: #fff;  
+  color: #000;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);  
+  padding: 20px;  
+  overflow: hidden;  
+  display: flex;  
+  flex-direction: column;  
+}  
+#task-board {  
+  display: flex;  
+  gap: 15px;  
+  flex-wrap: wrap;  
+  overflow-y: auto;  
+  flex: 1;  
+}  
+.task {  
+  padding: 15px;  
+  background: #3b82f6;  
+  color: #fff;  
+  border-radius: 8px;  
+  cursor: grab;  
+  margin-bottom: 10px;  
+  transition: transform 0.2s ease;  
+}  
+.task:active {  
+  cursor: grabbing;  
+  transform: scale(1.05);  
+}  
+#add-task-btn {  
+  background: #9333ea;  
+  color: #fff;  
+  padding: 10px 20px;  
+  border: none;  
+  border-radius: 5px;  
+  font-size: 16px;  
+  cursor: pointer;  
+  margin-top: 10px;  
+  align-self: flex-start;  
+}  
+#add-task-btn:hover {  
+  background: #7e22ce;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>TaskFlow Architect</h1>  
+  <button id="add-task-btn">+ Add Task</button>  
+  <div id="task-board"></div>  
+</div>  
+<script>  
+const taskBoard = document.getElementById("task-board");  
+const addTaskBtn = document.getElementById("add-task-btn");  
+let taskId = 0;  
+let connections = {};  
+
+addTaskBtn.addEventListener("click", () => {  
+  const taskElement = document.createElement("div");  
+  taskElement.className = "task";  
+  taskElement.textContent = `Task ${++taskId}`;  
+  taskElement.draggable = true;  
+  taskElement.dataset.id = taskId;  
+
+  taskElement.addEventListener("dragstart", (e) => {  
+    e.dataTransfer.setData("id", taskElement.dataset.id);  
+  });  
+
+  taskElement.addEventListener("dragover", (e) => {  
+    e.preventDefault(); // Allow drop  
+  });  
+
+  taskElement.addEventListener("drop", (e) => {  
+    const sourceId = e.dataTransfer.getData("id");  
+    const targetId = taskElement.dataset.id;  
+    if (sourceId && sourceId !== targetId) {  
+      if (!connections[sourceId]) connections[sourceId] = [];  
+      if (!connections[sourceId].includes(targetId)) {  
+        connections[sourceId].push(targetId);  
+        drawConnections();  
+      }  
+    }  
+  });  
+  taskBoard.appendChild(taskElement);  
+});  
+
+function drawConnections() {  
+  const existingLines = document.querySelectorAll(".connection-line");  
+  existingLines.forEach(line => line.remove());  
+
+  for (const [sourceId, targets] of Object.entries(connections)) {  
+    const sourceElement = document.querySelector(`.task[data-id="${sourceId}"]`);  
+    const sourceRect = sourceElement.getBoundingClientRect();  
+
+    targets.forEach(targetId => {  
+      const targetElement = document.querySelector(`.task[data-id="${targetId}"]`);  
+      const targetRect = targetElement.getBoundingClientRect();  
+
+      const line = document.createElement("div");  
+      line.className = "connection-line";  
+      line.style.position = "absolute";  
+      line.style.width = "2px";  
+      line.style.background = "black";  
+      line.style.zIndex = "-1";  
+      line.style.top = `${(sourceRect.top + sourceRect.bottom) / 2}px`;  
+      line.style.left = `${(sourceRect.left + sourceRect.right) / 2}px`;  
+      line.style.height = `${Math.abs((targetRect.top + targetRect.bottom) / 2 - (sourceRect.top + sourceRect.bottom) / 2)}px`;  
+      taskBoard.appendChild(line);  
+    });  
+  }  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

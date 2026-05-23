@@ -1,0 +1,102 @@
+---
+layout: null
+title: "Syntax Surfer: Code Syntax Adventure"
+category: "Education"
+description: "A gamified journey where users correct syntax errors in code snippets to progress through levels while learning programming concepts."
+permalink: "/tools/daily-20260523-05-syntax-surfer-code-syntax-adventure.html"
+generated_by: "api-true-ai"
+generated_date: "20260523"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Syntax Surfer: Code Syntax Adventure | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified journey where users correct syntax errors in code snippets to progress through levels while learning programming concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Syntax Surfer: Code Syntax Adventure | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified journey where users correct syntax errors in code snippets to progress through levels while learning programming concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Syntax Surfer: Code Syntax Adventure | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified journey where users correct syntax errors in code snippets to progress through levels while learning programming concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Syntax Surfer: Code Syntax Adventure</h1>
+    <p class="seo-subtitle">A gamified journey where users correct syntax errors in code snippets to progress through levels while learning programming concepts.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: #f0f4f8; color: #333; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; height: 100vh; }  
+  #tool-app { width: 100%; max-width: 800px; background: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 8px; padding: 20px; }  
+  h1 { font-size: 24px; color: #3366cc; text-align: center; }  
+  .code-box { background: #f7f9fc; border: 1px solid #dce4ed; border-radius: 5px; padding: 10px; margin: 15px 0; font-family: 'Courier New', Courier, monospace; white-space: pre-wrap; }  
+  .input-box { width: 100%; padding: 10px; border: 1px solid #dce4ed; border-radius: 5px; margin-bottom: 10px; font-family: 'Courier New', Courier, monospace; }  
+  .button { background: #3366cc; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }  
+  .button:hover { background: #1d4e8d; }  
+  .feedback { margin-top: 10px; font-weight: bold; }  
+</style>  
+<div id="tool-app">  
+  <h1>Syntax Surfer</h1>  
+  <div id="game-status">Level: <span id="level">1</span></div>  
+  <div class="code-box" id="code-snippet">  
+    let a = 5  
+    console.log(a)  
+  </div>  
+  <textarea class="input-box" id="code-input" placeholder="Fix the code here..."></textarea>  
+  <button class="button" id="submit-button">Submit</button>  
+  <div class="feedback" id="feedback"></div>  
+</div>  
+<script>  
+  const levels = [  
+    { snippet: `let a = 5\nconsole.log(a)`, solution: `let a = 5;\nconsole.log(a);` },  
+    { snippet: `if(name === John) {\n  console.log('Hello ' + name);\n`, solution: `if(name === "John") {\n  console.log('Hello ' + name);\n}` },  
+    { snippet: `function add(a, b) {\n  return a + b`, solution: `function add(a, b) {\n  return a + b;\n}` }  
+  ];  
+  let currentLevel = 0;  
+
+  const codeSnippetEl = document.getElementById('code-snippet');  
+  const codeInputEl = document.getElementById('code-input');  
+  const feedbackEl = document.getElementById('feedback');  
+  const levelEl = document.getElementById('level');  
+
+  function loadLevel() {  
+    codeSnippetEl.textContent = levels[currentLevel].snippet;  
+    codeInputEl.value = '';  
+    feedbackEl.textContent = '';  
+    levelEl.textContent = currentLevel + 1;  
+  }  
+
+  document.getElementById('submit-button').addEventListener('click', () => {  
+    const userSolution = codeInputEl.value.trim();  
+    if (userSolution === levels[currentLevel].solution) {  
+      feedbackEl.textContent = 'Correct! Moving to the next level...';  
+      feedbackEl.style.color = 'green';  
+      currentLevel++;  
+      if (currentLevel < levels.length) {  
+        setTimeout(loadLevel, 1000);  
+      } else {  
+        feedbackEl.textContent = 'Congratulations! You completed all levels!';  
+      }  
+    } else {  
+      feedbackEl.textContent = 'Incorrect! Try again.';  
+      feedbackEl.style.color = 'red';  
+    }  
+  });  
+
+  loadLevel();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

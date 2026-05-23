@@ -1,0 +1,158 @@
+---
+layout: null
+title: "TaskTetris: Priority Puzzle Planner"
+category: "Productivity"
+description: "A dynamic mini-game where tasks fall like Tetris blocks, and you organize them by priority and deadlines to maximize productivity."
+permalink: "/tools/daily-20260523-02-tasktetris-priority-puzzle-planner.html"
+generated_by: "api-true-ai"
+generated_date: "20260523"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskTetris: Priority Puzzle Planner | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic mini-game where tasks fall like Tetris blocks, and you organize them by priority and deadlines to maximize productivity. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="TaskTetris: Priority Puzzle Planner | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic mini-game where tasks fall like Tetris blocks, and you organize them by priority and deadlines to maximize productivity. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TaskTetris: Priority Puzzle Planner | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic mini-game where tasks fall like Tetris blocks, and you organize them by priority and deadlines to maximize productivity. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>TaskTetris: Priority Puzzle Planner</h1>
+    <p class="seo-subtitle">A dynamic mini-game where tasks fall like Tetris blocks, and you organize them by priority and deadlines to maximize productivity.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(120deg, #fdfbfb, #ebedee);  
+  margin: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  width: 400px;  
+  height: 600px;  
+  background: #333;  
+  display: flex;  
+  flex-direction: column;  
+  border-radius: 10px;  
+  overflow: hidden;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);  
+}  
+#gameCanvas {  
+  flex: 1;  
+  background: #222;  
+}  
+#taskPanel {  
+  background: #444;  
+  padding: 10px;  
+  color: #fff;  
+  font-size: 14px;  
+  display: flex;  
+  justify-content: space-between;  
+  align-items: center;  
+}  
+.task-button {  
+  background: #00bcd4;  
+  border: none;  
+  color: #fff;  
+  padding: 5px 10px;  
+  margin: 0 5px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  font-size: 12px;  
+}  
+.task-button:hover {  
+  background: #0097a7;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="taskPanel">  
+    <span id="taskInfo">Score: 0</span>  
+    <button class="task-button" id="addTaskButton">Add Task</button>  
+  </div>  
+  <canvas id="gameCanvas"></canvas>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById('gameCanvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = 400;  
+canvas.height = 500;  
+
+// Game variables  
+const gridWidth = 10;  
+const gridHeight = 20;  
+const blockSize = 20;  
+let grid = Array.from({ length: gridHeight }, () => Array(gridWidth).fill(0));  
+let tasks = [];  
+let score = 0;  
+
+document.getElementById('addTaskButton').addEventListener('click', () => {  
+  const newTask = {  
+    id: tasks.length + 1,  
+    priority: Math.floor(Math.random() * 3) + 1,  
+    color: ['#f44336', '#ff9800', '#4caf50'][Math.floor(Math.random() * 3)],  
+  };  
+  tasks.push(newTask);  
+  alert(`Task added: Priority ${newTask.priority}`);  
+});  
+
+function drawGrid() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  for (let y = 0; y < gridHeight; y++) {  
+    for (let x = 0; x < gridWidth; x++) {  
+      if (grid[y][x] !== 0) {  
+        ctx.fillStyle = grid[y][x];  
+        ctx.fillRect(x * blockSize, y * blockSize, blockSize, blockSize);  
+        ctx.strokeStyle = '#000';  
+        ctx.strokeRect(x * blockSize, y * blockSize, blockSize, blockSize);  
+      }  
+    }  
+  }  
+}  
+
+function updateGame() {  
+  // Simulate falling blocks  
+  if (tasks.length > 0) {  
+    const task = tasks.shift();  
+    let x = Math.floor(Math.random() * (gridWidth - 2));  
+    let y = 0;  
+
+    while (y + 1 < gridHeight && grid[y + 1][x] === 0) {  
+      y++;  
+    }  
+
+    grid[y][x] = task.color;  
+    score += task.priority;  
+    document.getElementById('taskInfo').textContent = `Score: ${score}`;  
+  }  
+
+  drawGrid();  
+}  
+
+// Game Loop  
+setInterval(updateGame, 1000);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

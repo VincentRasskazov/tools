@@ -1,0 +1,149 @@
+---
+layout: null
+title: "StoryWeaver's Mind Map"
+category: "Writing"
+description: "An interactive tool that dynamically visualizes story connections, character relationships, and plot threads as an evolving, animated mind map."
+permalink: "/tools/daily-20260523-06-storyweaver-s-mind-map.html"
+generated_by: "api-true-ai"
+generated_date: "20260523"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StoryWeaver's Mind Map | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool that dynamically visualizes story connections, character relationships, and plot threads as an evolving, animated mind map. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="StoryWeaver's Mind Map | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool that dynamically visualizes story connections, character relationships, and plot threads as an evolving, animated mind map. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StoryWeaver's Mind Map | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool that dynamically visualizes story connections, character relationships, and plot threads as an evolving, animated mind map. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>StoryWeaver's Mind Map</h1>
+    <p class="seo-subtitle">An interactive tool that dynamically visualizes story connections, character relationships, and plot threads as an evolving, animated mind map.</p>
+    <style>  
+  #tool-app {  
+    font-family: Arial, sans-serif;  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    justify-content: center;  
+    height: 100vh;  
+    background: linear-gradient(135deg, #1e3c72, #2a5298);  
+    color: white;  
+  }  
+  #map-container {  
+    width: 80%;  
+    height: 80%;  
+    background: rgba(255, 255, 255, 0.1);  
+    border-radius: 10px;  
+    overflow: hidden;  
+    position: relative;  
+  }  
+  #controls {  
+    margin-top: 20px;  
+    display: flex;  
+    gap: 10px;  
+  }  
+  button {  
+    padding: 10px 20px;  
+    border: none;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    background: #4caf50;  
+    color: white;  
+  }  
+  button:hover {  
+    background: #45a049;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h1>StoryWeaver's Mind Map</h1>  
+  <div id="map-container"></div>  
+  <div id="controls">  
+    <button id="add-node">Add Node</button>  
+    <button id="clear-map">Clear Map</button>  
+  </div>  
+</div>  
+<script>  
+  const mapContainer = document.getElementById('map-container');  
+  const addNodeButton = document.getElementById('add-node');  
+  const clearMapButton = document.getElementById('clear-map');  
+
+  const nodes = [];  
+  const links = [];  
+
+  function createNode(x, y, text) {  
+    const node = document.createElement('div');  
+    node.className = 'node';  
+    node.style.position = 'absolute';  
+    node.style.left = `${x}px`;  
+    node.style.top = `${y}px`;  
+    node.style.backgroundColor = 'rgba(255,255,255,0.8)';  
+    node.style.padding = '10px';  
+    node.style.borderRadius = '5px';  
+    node.style.boxShadow = '0 2px 5px rgba(0,0,0,0.3)';  
+    node.style.cursor = 'pointer';  
+    node.innerText = text;  
+    mapContainer.appendChild(node);  
+    return node;  
+  }  
+
+  function connectNodes(node1, node2) {  
+    const line = document.createElement('div');  
+    line.className = 'line';  
+    const x1 = parseInt(node1.style.left, 10) + node1.offsetWidth / 2;  
+    const y1 = parseInt(node1.style.top, 10) + node1.offsetHeight / 2;  
+    const x2 = parseInt(node2.style.left, 10) + node2.offsetWidth / 2;  
+    const y2 = parseInt(node2.style.top, 10) + node2.offsetHeight / 2;  
+    const length = Math.hypot(x2 - x1, y2 - y1);  
+    const angle = Math.atan2(y2 - y1, x2 - x1) * (180 / Math.PI);  
+    line.style.position = 'absolute';  
+    line.style.width = `${length}px`;  
+    line.style.height = '2px';  
+    line.style.backgroundColor = 'white';  
+    line.style.transformOrigin = '0 0';  
+    line.style.transform = `translate(${x1}px, ${y1}px) rotate(${angle}deg)`;  
+    mapContainer.appendChild(line);  
+    links.push(line);  
+  }  
+
+  addNodeButton.addEventListener('click', () => {  
+    const x = Math.random() * (mapContainer.offsetWidth - 100);  
+    const y = Math.random() * (mapContainer.offsetHeight - 30);  
+    const text = prompt('Enter node description:');  
+    if (text) {  
+      const newNode = createNode(x, y, text);  
+      nodes.push(newNode);  
+      if (nodes.length > 1) {  
+        connectNodes(nodes[nodes.length - 2], newNode);  
+      }  
+    }  
+  });  
+
+  clearMapButton.addEventListener('click', () => {  
+    nodes.forEach(node => node.remove());  
+    links.forEach(link => link.remove());  
+    nodes.length = 0;  
+    links.length = 0;  
+  });  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

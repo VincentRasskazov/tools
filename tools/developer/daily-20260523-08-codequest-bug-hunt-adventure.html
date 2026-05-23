@@ -1,0 +1,155 @@
+---
+layout: null
+title: "CodeQuest: Bug Hunt Adventure"
+category: "Developer"
+description: "A gamified debugging challenge where developers explore a virtual world to find and fix hidden bugs in progressively complex code scenarios."
+permalink: "/tools/daily-20260523-08-codequest-bug-hunt-adventure.html"
+generated_by: "api-true-ai"
+generated_date: "20260523"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeQuest: Bug Hunt Adventure | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified debugging challenge where developers explore a virtual world to find and fix hidden bugs in progressively complex code scenarios. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CodeQuest: Bug Hunt Adventure | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified debugging challenge where developers explore a virtual world to find and fix hidden bugs in progressively complex code scenarios. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CodeQuest: Bug Hunt Adventure | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified debugging challenge where developers explore a virtual world to find and fix hidden bugs in progressively complex code scenarios. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CodeQuest: Bug Hunt Adventure</h1>
+    <p class="seo-subtitle">A gamified debugging challenge where developers explore a virtual world to find and fix hidden bugs in progressively complex code scenarios.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to bottom, #2a2a72, #009ffd);  
+  color: #fff;  
+  margin: 0;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  width: 80%;  
+  max-width: 800px;  
+  padding: 20px;  
+  background-color: #1e1e2f;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);  
+}  
+button {  
+  background-color: #009ffd;  
+  border: none;  
+  padding: 10px 20px;  
+  color: #fff;  
+  font-size: 16px;  
+  cursor: pointer;  
+  margin: 10px 0;  
+  border-radius: 5px;  
+}  
+button:hover {  
+  background-color: #006bb3;  
+}  
+#gameBoard, #feedback {  
+  margin-top: 20px;  
+  font-size: 14px;  
+}  
+.code-snippet {  
+  background: #333;  
+  color: #0f0;  
+  padding: 15px;  
+  font-family: monospace;  
+  border-radius: 5px;  
+  overflow-x: auto;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>CodeQuest: Bug Hunt Adventure</h1>  
+  <p>Find and fix bugs in the code snippets below as you progress through levels!</p>  
+  <div id="gameBoard"></div>  
+  <div id="feedback"></div>  
+  <button id="startButton">Start Game</button>  
+</div>  
+<script>  
+const levels = [  
+  {  
+    code: `function addNumbers(a, b) {
+  return a - b; // Find the bug here
+}`,  
+    hint: "Check the operation. Should it be subtraction?",  
+    solution: `function addNumbers(a, b) {
+  return a + b; 
+}`  
+  },  
+  {  
+    code: `const numbers = [1, 2, 3];
+console.log(numbers[3]); // Find the bug here`,  
+    hint: "Are arrays zero-indexed?",  
+    solution: `const numbers = [1, 2, 3];
+console.log(numbers[2]);`  
+  },  
+  {  
+    code: `const username = "John";
+if (username = "Jane") { // Find the bug here
+  console.log("Hello, Jane!");
+}`,  
+    hint: "Focus on the conditional operator.",  
+    solution: `const username = "John";
+if (username === "Jane") { 
+  console.log("Hello, Jane!");
+}`  
+  }  
+];  
+
+let currentLevel = 0;  
+
+function renderLevel() {  
+  const level = levels[currentLevel];  
+  const gameBoard = document.getElementById('gameBoard');  
+  const feedback = document.getElementById('feedback');  
+  gameBoard.innerHTML = `<pre class="code-snippet">${level.code}</pre>`;  
+  feedback.innerHTML = `<p>Hint: ${level.hint}</p>`;  
+}  
+
+function startGame() {  
+  currentLevel = 0;  
+  document.getElementById('startButton').innerText = "Next Level";  
+  renderLevel();  
+}  
+
+document.getElementById('startButton').addEventListener('click', () => {  
+  if (currentLevel < levels.length) {  
+    renderLevel();  
+    currentLevel++;  
+  } else {  
+    const gameBoard = document.getElementById('gameBoard');  
+    const feedback = document.getElementById('feedback');  
+    gameBoard.innerHTML = "<p>Congratulations! You've completed CodeQuest!</p>";  
+    feedback.innerHTML = "";  
+    document.getElementById('startButton').innerText = "Play Again";  
+    currentLevel = 0;  
+  }  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,162 @@
+---
+layout: null
+title: "DataMorph: Interactive Dataset Shape Shifter"
+category: "Data"
+description: "Transform and visualize datasets by reshaping, aggregating, and clustering them in real-time with dynamic animations."
+permalink: "/tools/daily-20260523-09-datamorph-interactive-dataset-shape-shifter.html"
+generated_by: "api-true-ai"
+generated_date: "20260523"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataMorph: Interactive Dataset Shape Shifter | Free Online Interactive Tool</title>
+  <meta name="description" content="Transform and visualize datasets by reshaping, aggregating, and clustering them in real-time with dynamic animations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataMorph: Interactive Dataset Shape Shifter | Free Online Interactive Tool">
+  <meta property="og:description" content="Transform and visualize datasets by reshaping, aggregating, and clustering them in real-time with dynamic animations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataMorph: Interactive Dataset Shape Shifter | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Transform and visualize datasets by reshaping, aggregating, and clustering them in real-time with dynamic animations. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataMorph: Interactive Dataset Shape Shifter</h1>
+    <p class="seo-subtitle">Transform and visualize datasets by reshaping, aggregating, and clustering them in real-time with dynamic animations.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(135deg, #2b5876, #4e4376);  
+  color: #fff;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  width: 80%;  
+  max-width: 1200px;  
+  background: rgba(255, 255, 255, 0.1);  
+  padding: 20px;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);  
+}  
+#controls {  
+  display: flex;  
+  justify-content: space-between;  
+  margin-bottom: 20px;  
+}  
+button {  
+  background: #6a11cb;  
+  color: #fff;  
+  border: none;  
+  padding: 10px 20px;  
+  font-size: 16px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+button:hover {  
+  background: #2575fc;  
+}  
+canvas {  
+  border: 1px solid #fff;  
+  border-radius: 10px;  
+  width: 100%;  
+  height: 500px;  
+  display: block;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>DataMorph: Interactive Dataset Shape Shifter</h1>  
+  <div id="controls">  
+    <button id="load-data">Load Dataset</button>  
+    <button id="aggregate">Aggregate</button>  
+    <button id="cluster">Cluster</button>  
+    <button id="reshape">Reshape</button>  
+    <button id="reset">Reset</button>  
+  </div>  
+  <canvas id="visualizer"></canvas>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById('visualizer');  
+const ctx = canvas.getContext('2d');  
+canvas.width = canvas.clientWidth;  
+canvas.height = canvas.clientHeight;  
+
+let data = [];  
+let action = null;  
+
+function drawDataset() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  data.forEach(([x, y], index) => {  
+    ctx.beginPath();  
+    ctx.arc(x, y, 5, 0, Math.PI * 2);  
+    ctx.fillStyle = `hsl(${(index / data.length) * 360}, 70%, 60%)`;  
+    ctx.fill();  
+    ctx.closePath();  
+  });  
+}  
+
+function generateData() {  
+  data = Array.from({ length: 50 }, () => [  
+    Math.random() * canvas.width,  
+    Math.random() * canvas.height,  
+  ]);  
+  drawDataset();  
+}  
+
+function aggregateData() {  
+  data = data.map(([x, y]) => [(x + canvas.width / 2) / 2, (y + canvas.height / 2) / 2]);  
+  drawDataset();  
+}  
+
+function clusterData() {  
+  const clusters = [[], [], []];  
+  data.forEach(([x, y]) => {  
+    const clusterIndex = Math.floor((x / canvas.width) * clusters.length);  
+    clusters[clusterIndex].push([x, y]);  
+  });  
+  let clusterCenters = clusters.map(cluster => {  
+    const avgX = cluster.reduce((sum, [x]) => sum + x, 0) / cluster.length;  
+    const avgY = cluster.reduce((sum, [, y]) => sum + y, 0) / cluster.length;  
+    return [avgX, avgY];  
+  });  
+  data = clusterCenters;  
+  drawDataset();  
+}  
+
+function reshapeData() {  
+  data = data.map(([x, y]) => [y, canvas.height - x]);  
+  drawDataset();  
+}  
+
+document.getElementById('load-data').addEventListener('click', generateData);  
+document.getElementById('aggregate').addEventListener('click', aggregateData);  
+document.getElementById('cluster').addEventListener('click', clusterData);  
+document.getElementById('reshape').addEventListener('click', reshapeData);  
+document.getElementById('reset').addEventListener('click', generateData);  
+
+generateData();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
