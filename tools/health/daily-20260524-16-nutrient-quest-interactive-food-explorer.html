@@ -1,0 +1,129 @@
+---
+layout: null
+title: "Nutrient Quest: Interactive Food Explorer"
+category: "Health"
+description: "Embark on a gamified journey to balance a day's meal plan while learning about nutritional values and food categories."
+permalink: "/tools/daily-20260524-16-nutrient-quest-interactive-food-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260524"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nutrient Quest: Interactive Food Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Embark on a gamified journey to balance a day's meal plan while learning about nutritional values and food categories. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Nutrient Quest: Interactive Food Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Embark on a gamified journey to balance a day's meal plan while learning about nutritional values and food categories. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nutrient Quest: Interactive Food Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Embark on a gamified journey to balance a day's meal plan while learning about nutritional values and food categories. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Nutrient Quest: Interactive Food Explorer</h1>
+    <p class="seo-subtitle">Embark on a gamified journey to balance a day's meal plan while learning about nutritional values and food categories.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f9f9f9; }  
+  #tool-app { max-width: 960px; margin: 30px auto; padding: 20px; background: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 10px; }  
+  .food-category { display: inline-block; margin: 10px; padding: 10px; background: #e3f2fd; border: 2px solid #90caf9; border-radius: 8px; cursor: pointer; }  
+  .food-category:hover { background: #bbdefb; }  
+  #meal-plan { margin-top: 20px; }  
+  .meal-item { padding: 5px; margin: 5px; background: #c8e6c9; border-radius: 5px; }  
+  #nutrient-info { margin-top: 20px; font-size: 16px; }  
+</style>  
+<div id="tool-app">  
+  <h1>Nutrient Quest: Interactive Food Explorer</h1>  
+  <p>Build your balanced meal plan for the day! Select food items from the categories below:</p>  
+  <div id="food-categories"></div>  
+  <h2>Your Meal Plan:</h2>  
+  <div id="meal-plan"></div>  
+  <h2>Nutrition Summary:</h2>  
+  <div id="nutrient-info"></div>  
+</div>  
+<script>  
+const foodDatabase = [  
+  { name: 'Apple', category: 'Fruits', calories: 95, protein: 0.5, carbs: 25, fat: 0.3 },  
+  { name: 'Chicken Breast', category: 'Proteins', calories: 165, protein: 31, carbs: 0, fat: 3.6 },  
+  { name: 'Rice', category: 'Grains', calories: 206, protein: 4.3, carbs: 45, fat: 0.4 },  
+  { name: 'Broccoli', category: 'Vegetables', calories: 55, protein: 4.5, carbs: 11.2, fat: 0.3 },  
+  { name: 'Avocado', category: 'Fats', calories: 240, protein: 3, carbs: 12, fat: 22 },  
+];
+
+const mealPlan = [];
+const nutrientSummary = { calories: 0, protein: 0, carbs: 0, fat: 0 };
+
+function renderFoodCategories() {  
+  const foodCategories = document.querySelector('#food-categories');  
+  const categories = [...new Set(foodDatabase.map(food => food.category))];  
+  categories.forEach(category => {  
+    const categoryDiv = document.createElement('div');  
+    categoryDiv.className = 'food-category';  
+    categoryDiv.innerText = category;  
+    categoryDiv.onclick = () => showFoods(category);  
+    foodCategories.appendChild(categoryDiv);  
+  });  
+}  
+
+function showFoods(category) {  
+  const selectedFoods = foodDatabase.filter(food => food.category === category);  
+  const foodCategories = document.querySelector('#food-categories');  
+  foodCategories.innerHTML = '';  
+  selectedFoods.forEach(food => {  
+    const foodDiv = document.createElement('div');  
+    foodDiv.className = 'food-category';  
+    foodDiv.innerText = food.name;  
+    foodDiv.onclick = () => addToMealPlan(food);  
+    foodCategories.appendChild(foodDiv);  
+  });  
+}  
+
+function addToMealPlan(food) {  
+  mealPlan.push(food);  
+  updateMealPlan();  
+  updateNutrientSummary();  
+}  
+
+function updateMealPlan() {  
+  const mealPlanDiv = document.querySelector('#meal-plan');  
+  mealPlanDiv.innerHTML = '';  
+  mealPlan.forEach(food => {  
+    const mealItemDiv = document.createElement('div');  
+    mealItemDiv.className = 'meal-item';  
+    mealItemDiv.innerText = `${food.name} (${food.category})`;  
+    mealPlanDiv.appendChild(mealItemDiv);  
+  });  
+}  
+
+function updateNutrientSummary() {  
+  nutrientSummary.calories = mealPlan.reduce((sum, food) => sum + food.calories, 0);  
+  nutrientSummary.protein = mealPlan.reduce((sum, food) => sum + food.protein, 0);  
+  nutrientSummary.carbs = mealPlan.reduce((sum, food) => sum + food.carbs, 0);  
+  nutrientSummary.fat = mealPlan.reduce((sum, food) => sum + food.fat, 0);  
+
+  const nutrientInfoDiv = document.querySelector('#nutrient-info');  
+  nutrientInfoDiv.innerHTML = `Calories: ${nutrientSummary.calories} kcal<br>    
+                               Protein: ${nutrientSummary.protein} g<br>    
+                               Carbs: ${nutrientSummary.carbs} g<br>    
+                               Fat: ${nutrientSummary.fat} g`;  
+}  
+
+renderFoodCategories();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,186 @@
+---
+layout: null
+title: "Data Fractal Explorer"
+category: "Data"
+description: "Generate, manipulate, and explore dynamic fractal visualizations based on real-world datasets to uncover hidden patterns."
+permalink: "/tools/daily-20260524-08-data-fractal-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260524"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Fractal Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Generate, manipulate, and explore dynamic fractal visualizations based on real-world datasets to uncover hidden patterns. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Fractal Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Generate, manipulate, and explore dynamic fractal visualizations based on real-world datasets to uncover hidden patterns. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Fractal Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Generate, manipulate, and explore dynamic fractal visualizations based on real-world datasets to uncover hidden patterns. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Fractal Explorer</h1>
+    <p class="seo-subtitle">Generate, manipulate, and explore dynamic fractal visualizations based on real-world datasets to uncover hidden patterns.</p>
+    <style>  
+#tool-app {  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  height: 100vh;  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);  
+  color: white;  
+}  
+#fractal-canvas {  
+  border: 2px solid white;  
+  margin-top: 20px;  
+}  
+.controls {  
+  display: flex;  
+  gap: 10px;  
+  margin-top: 10px;  
+}  
+button {  
+  background: #26a69a;  
+  color: white;  
+  border: none;  
+  padding: 10px 20px;  
+  cursor: pointer;  
+  border-radius: 5px;  
+  transition: background 0.3s ease;  
+}  
+button:hover {  
+  background: #00796b;  
+}  
+input[type="file"] {  
+  display: none;  
+}  
+.label-button {  
+  background: #ff8c42;  
+  padding: 10px 20px;  
+  color: white;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  transition: background 0.3s ease;  
+}  
+.label-button:hover {  
+  background: #e97b3d;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Data Fractal Explorer</h1>  
+  <label for="file-input" class="label-button">Upload Dataset</label>  
+  <input id="file-input" type="file" accept=".csv,.json" />  
+  <canvas id="fractal-canvas" width="600" height="600"></canvas>  
+  <div class="controls">  
+    <button id="reset-btn">Reset</button>  
+    <button id="randomize-btn">Randomize Colors</button>  
+    <button id="download-btn">Download Image</button>  
+  </div>  
+</div>  
+<script>  
+// Utility functions  
+function generateFractal(ctx, data, colors) {  
+  const width = ctx.canvas.width;  
+  const height = ctx.canvas.height;  
+  ctx.clearRect(0, 0, width, height);  
+  
+  const maxDepth = 8;  
+  function drawFractal(x, y, size, depth) {  
+    if (depth > maxDepth) return;  
+  
+    // Pick a color based on depth or data  
+    ctx.fillStyle = colors[depth % colors.length];  
+    ctx.fillRect(x, y, size, size);  
+  
+    const newSize = size / 2;  
+    const offset = data[depth % data.length] || 1;  
+  
+    drawFractal(x - newSize * offset, y - newSize * offset, newSize, depth + 1);  
+    drawFractal(x + newSize * offset, y - newSize * offset, newSize, depth + 1);  
+    drawFractal(x - newSize * offset, y + newSize * offset, newSize, depth + 1);  
+    drawFractal(x + newSize * offset, y + newSize * offset, newSize, depth + 1);  
+  }  
+  
+  drawFractal(width / 2, height / 2, width / 4, 0);  
+}  
+  
+function parseData(file, callback) {  
+  const reader = new FileReader();  
+  reader.onload = function (event) {  
+    const content = event.target.result;  
+    try {  
+      const parsed = file.name.endsWith('.json')  
+        ? JSON.parse(content)  
+        : content  
+            .split('\n')  
+            .map(line => line.split(',').map(Number))  
+            .flat();  
+      callback(parsed);  
+    } catch (error) {  
+      alert('Invalid file format. Please upload a valid JSON or CSV data file.');  
+    }  
+  };  
+  reader.readAsText(file);  
+}  
+  
+// App logic  
+const canvas = document.getElementById('fractal-canvas');  
+const ctx = canvas.getContext('2d');  
+const defaultColors = ['#FF5733', '#33FF57', '#3357FF', '#FF33A6'];  
+let currentData = [1, 2, 3, 4];  
+let currentColors = [...defaultColors];  
+  
+document.getElementById('file-input').addEventListener('change', event => {  
+  const file = event.target.files[0];  
+  if (file) {  
+    parseData(file, data => {  
+      currentData = data;  
+      generateFractal(ctx, currentData, currentColors);  
+    });  
+  }  
+});  
+  
+document.getElementById('reset-btn').addEventListener('click', () => {  
+  currentData = [1, 2, 3, 4];  
+  currentColors = [...defaultColors];  
+  generateFractal(ctx, currentData, currentColors);  
+});  
+  
+document.getElementById('randomize-btn').addEventListener('click', () => {  
+  currentColors = Array.from({ length: 8 }, () =>  
+    `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`  
+  );  
+  generateFractal(ctx, currentData, currentColors);  
+});  
+  
+document.getElementById('download-btn').addEventListener('click', () => {  
+  const link = document.createElement('a');  
+  link.download = 'fractal.png';  
+  link.href = canvas.toDataURL();  
+  link.click();  
+});  
+  
+// Initial render  
+generateFractal(ctx, currentData, currentColors);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

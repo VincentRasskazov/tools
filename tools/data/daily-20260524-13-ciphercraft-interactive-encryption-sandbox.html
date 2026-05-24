@@ -1,0 +1,141 @@
+---
+layout: null
+title: "CipherCraft: Interactive Encryption Sandbox"
+category: "Data"
+description: "A gamified tool that lets users create, analyze, and break custom ciphers while learning about encryption techniques."
+permalink: "/tools/daily-20260524-13-ciphercraft-interactive-encryption-sandbox.html"
+generated_by: "api-true-ai"
+generated_date: "20260524"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CipherCraft: Interactive Encryption Sandbox | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool that lets users create, analyze, and break custom ciphers while learning about encryption techniques. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CipherCraft: Interactive Encryption Sandbox | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool that lets users create, analyze, and break custom ciphers while learning about encryption techniques. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CipherCraft: Interactive Encryption Sandbox | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool that lets users create, analyze, and break custom ciphers while learning about encryption techniques. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CipherCraft: Interactive Encryption Sandbox</h1>
+    <p class="seo-subtitle">A gamified tool that lets users create, analyze, and break custom ciphers while learning about encryption techniques.</p>
+    <style>  
+  body {  
+    font-family: Arial, sans-serif;  
+    background: linear-gradient(135deg, #1e3c72, #2a5298);  
+    color: #fff;  
+    text-align: center;  
+    margin: 0;  
+    padding: 0;  
+  }  
+  #tool-app {  
+    padding: 20px;  
+    max-width: 800px;  
+    margin: 50px auto;  
+    background: rgba(0, 0, 0, 0.4);  
+    border-radius: 10px;  
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);  
+  }  
+  h1 {  
+    font-size: 2.5rem;  
+    margin-bottom: 20px;  
+  }  
+  .cipher-section {  
+    margin-top: 20px;  
+  }  
+  textarea {  
+    width: 90%;  
+    height: 80px;  
+    margin: 10px auto;  
+    border: none;  
+    border-radius: 5px;  
+    padding: 10px;  
+    font-family: 'Courier New', Courier, monospace;  
+    font-size: 1rem;  
+    background: #333;  
+    color: #fff;  
+    outline: none;  
+  }  
+  button {  
+    background: #007bff;  
+    color: #fff;  
+    border: none;  
+    border-radius: 5px;  
+    padding: 10px 20px;  
+    cursor: pointer;  
+    margin-top: 10px;  
+    font-size: 1rem;  
+  }  
+  button:hover {  
+    background: #0056b3;  
+  }  
+  .output {  
+    margin-top: 20px;  
+    font-size: 1.2rem;  
+    background: #222;  
+    padding: 10px;  
+    border-radius: 5px;  
+    color: #0f0;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h1>CipherCraft: Interactive Encryption Sandbox</h1>  
+  <div class="cipher-section">  
+    <h2>Step 1: Enter Text to Encrypt</h2>  
+    <textarea id="input-text" placeholder="Type your message here..."></textarea>  
+    <h2>Step 2: Choose an Encryption Method</h2>  
+    <button onclick="applyCipher('caesar')">Caesar Cipher</button>  
+    <button onclick="applyCipher('reverse')">Reverse Cipher</button>  
+    <button onclick="applyCipher('custom')">Custom Shift Cipher</button>  
+  </div>  
+  <div class="output" id="result">  
+    Your encrypted/decrypted text will appear here.  
+  </div>  
+</div>  
+<script>  
+  function applyCipher(method) {  
+    const input = document.getElementById('input-text').value;  
+    let result = '';  
+    if (method === 'caesar') {  
+      result = caesarCipher(input, 3);  
+    } else if (method === 'reverse') {  
+      result = reverseCipher(input);  
+    } else if (method === 'custom') {  
+      const shift = prompt('Enter a shift value (1-25):');  
+      result = caesarCipher(input, parseInt(shift));  
+    }  
+    document.getElementById('result').innerText = result || 'Invalid input!';  
+  }  
+
+  function caesarCipher(str, shift) {  
+    return str.replace(/[a-z]/gi, (char) => {  
+      const start = char.charCodeAt(0) < 97 ? 65 : 97;  
+      return String.fromCharCode(((char.charCodeAt(0) - start + shift) % 26) + start);  
+    });  
+  }  
+
+  function reverseCipher(str) {  
+    return str.split('').reverse().join('');  
+  }  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
