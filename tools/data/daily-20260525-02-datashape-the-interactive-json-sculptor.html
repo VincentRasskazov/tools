@@ -1,0 +1,163 @@
+---
+layout: null
+title: "DataShape: The Interactive JSON Sculptor"
+category: "Data"
+description: "Transform and visualize JSON data into dynamic 3D geometric shapes, interactively tweaking values to see real-time changes in structure and relations."
+permalink: "/tools/daily-20260525-02-datashape-the-interactive-json-sculptor.html"
+generated_by: "api-true-ai"
+generated_date: "20260525"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataShape: The Interactive JSON Sculptor | Free Online Interactive Tool</title>
+  <meta name="description" content="Transform and visualize JSON data into dynamic 3D geometric shapes, interactively tweaking values to see real-time changes in structure and relations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataShape: The Interactive JSON Sculptor | Free Online Interactive Tool">
+  <meta property="og:description" content="Transform and visualize JSON data into dynamic 3D geometric shapes, interactively tweaking values to see real-time changes in structure and relations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataShape: The Interactive JSON Sculptor | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Transform and visualize JSON data into dynamic 3D geometric shapes, interactively tweaking values to see real-time changes in structure and relations. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataShape: The Interactive JSON Sculptor</h1>
+    <p class="seo-subtitle">Transform and visualize JSON data into dynamic 3D geometric shapes, interactively tweaking values to see real-time changes in structure and relations.</p>
+    <style>  
+  body {  
+    font-family: Arial, sans-serif;  
+    margin: 0;  
+    padding: 0;  
+    background: linear-gradient(to bottom, #1e3c72, #2a5298);  
+    color: white;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+    overflow: hidden;  
+  }  
+  #tool-app {  
+    width: 80%;  
+    height: 80%;  
+    background: rgba(0, 0, 0, 0.7);  
+    border-radius: 8px;  
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);  
+    display: flex;  
+    flex-direction: column;  
+    padding: 20px;  
+    position: relative;  
+  }  
+  #json-input {  
+    width: 100%;  
+    height: 20%;  
+    background: #f0f0f0;  
+    color: #333;  
+    padding: 10px;  
+    border: none;  
+    border-radius: 4px;  
+    font-family: monospace;  
+    resize: none;  
+  }  
+  canvas {  
+    flex-grow: 1;  
+    border: 1px solid #444;  
+    border-radius: 8px;  
+  }  
+  #instructions {  
+    font-size: 0.9rem;  
+    margin-top: 10px;  
+  }  
+</style>  
+<div id="tool-app">  
+  <textarea id="json-input" placeholder="Paste or edit JSON data here..."></textarea>  
+  <canvas id="visualizer"></canvas>  
+  <div id="instructions">Type or paste JSON data above to see it visualized as 3D shapes! Use your mouse to rotate.</div>  
+</div>  
+<script>  
+const canvas = document.getElementById('visualizer');  
+const ctx = canvas.getContext('2d');  
+canvas.width = canvas.offsetWidth;  
+canvas.height = canvas.offsetHeight;  
+
+const jsonInput = document.getElementById('json-input');  
+let jsonData = {};  
+
+function parseJSON(input) {  
+  try {  
+    return JSON.parse(input);  
+  } catch (e) {  
+    return null;  
+  }  
+}  
+
+function calculateNodePosition(index, total, radius, centerX, centerY) {  
+  const angle = (index / total) * 2 * Math.PI;  
+  return {  
+    x: centerX + radius * Math.cos(angle),  
+    y: centerY + radius * Math.sin(angle)  
+  };  
+}  
+
+function drawShape(data) {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+
+  const keys = Object.keys(data);  
+  const centerX = canvas.width / 2;  
+  const centerY = canvas.height / 2;  
+  const radius = Math.min(canvas.width, canvas.height) / 3;  
+
+  keys.forEach((key, index) => {  
+    const { x, y } = calculateNodePosition(index, keys.length, radius, centerX, centerY);  
+
+    ctx.beginPath();  
+    ctx.arc(x, y, 20, 0, Math.PI * 2);  
+    ctx.fillStyle = '#4caf50';  
+    ctx.fill();  
+    ctx.strokeStyle = '#ffffff';  
+    ctx.stroke();  
+
+    ctx.fillStyle = '#ffffff';  
+    ctx.font = '12px Arial';  
+    ctx.textAlign = 'center';  
+    ctx.fillText(key, x, y + 4);  
+  });  
+
+  if (Array.isArray(data)) {  
+    ctx.beginPath();  
+    keys.forEach((key, index) => {  
+      const { x, y } = calculateNodePosition(index, keys.length, radius, centerX, centerY);  
+      ctx.lineTo(x, y);  
+    });  
+    ctx.closePath();  
+    ctx.strokeStyle = '#ff9800';  
+    ctx.stroke();  
+  }  
+}  
+
+jsonInput.addEventListener('input', () => {  
+  const input = jsonInput.value;  
+  const parsed = parseJSON(input);  
+
+  if (parsed) {  
+    jsonData = parsed;  
+    drawShape(jsonData);  
+  }  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

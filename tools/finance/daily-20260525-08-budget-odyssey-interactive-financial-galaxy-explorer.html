@@ -1,0 +1,113 @@
+---
+layout: null
+title: "\"Budget Odyssey: Interactive Financial Galaxy Explorer\""
+category: "Finance"
+description: "Navigate a galaxy of financial goals, investments, and expenses by piloting a customizable spaceship that visualizes your financial habits and progress in a 3D interactive universe."
+permalink: "/tools/daily-20260525-08-budget-odyssey-interactive-financial-galaxy-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260525"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>&quot;Budget Odyssey: Interactive Financial Galaxy Explorer&quot; | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate a galaxy of financial goals, investments, and expenses by piloting a customizable spaceship that visualizes your financial habits and progress in a 3D interactive universe. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="&quot;Budget Odyssey: Interactive Financial Galaxy Explorer&quot; | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate a galaxy of financial goals, investments, and expenses by piloting a customizable spaceship that visualizes your financial habits and progress in a 3D interactive universe. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="&quot;Budget Odyssey: Interactive Financial Galaxy Explorer&quot; | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate a galaxy of financial goals, investments, and expenses by piloting a customizable spaceship that visualizes your financial habits and progress in a 3D interactive universe. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>&quot;Budget Odyssey: Interactive Financial Galaxy Explorer&quot;</h1>
+    <p class="seo-subtitle">Navigate a galaxy of financial goals, investments, and expenses by piloting a customizable spaceship that visualizes your financial habits and progress in a 3D interactive universe.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; overflow: hidden; background: #000; color: #fff; }  
+  #tool-app { width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; }  
+  canvas { display: block; }  
+</style>  
+<div id="tool-app">  
+  <canvas id="galaxyCanvas"></canvas>  
+</div>  
+<script>  
+const canvas = document.getElementById('galaxyCanvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = window.innerWidth;  
+canvas.height = window.innerHeight;  
+
+const galaxy = [];  
+let spaceship = { x: canvas.width / 2, y: canvas.height / 2, budget: 1000 };  
+let goals = [{ name: "Savings", x: 200, y: 300, cost: 300 }, { name: "Vacation", x: 600, y: 450, cost: 700 }];  
+
+function drawSpaceship() {  
+  ctx.fillStyle = 'cyan';  
+  ctx.beginPath();  
+  ctx.arc(spaceship.x, spaceship.y, 10, 0, Math.PI * 2);  
+  ctx.fill();  
+}  
+
+function drawGoals() {  
+  goals.forEach(goal => {  
+    ctx.fillStyle = spaceship.budget >= goal.cost ? 'lime' : 'red';  
+    ctx.beginPath();  
+    ctx.arc(goal.x, goal.y, 15, 0, Math.PI * 2);  
+    ctx.fill();  
+    ctx.fillStyle = '#fff';  
+    ctx.fillText(goal.name + ` $${goal.cost}`, goal.x + 20, goal.y);  
+  });  
+}  
+
+function updateSpaceship(direction) {  
+  const speed = 5;  
+  if (direction === 'up') spaceship.y -= speed;  
+  if (direction === 'down') spaceship.y += speed;  
+  if (direction === 'left') spaceship.x -= speed;  
+  if (direction === 'right') spaceship.x += speed;  
+}  
+
+function checkCollisions() {  
+  goals.forEach((goal, index) => {  
+    const dist = Math.sqrt((spaceship.x - goal.x) ** 2 + (spaceship.y - goal.y) ** 2);  
+    if (dist < 20 && spaceship.budget >= goal.cost) {  
+      spaceship.budget -= goal.cost;  
+      goals.splice(index, 1);  
+    }  
+  });  
+}  
+
+function gameLoop() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  drawSpaceship();  
+  drawGoals();  
+  checkCollisions();  
+  requestAnimationFrame(gameLoop);  
+}  
+
+window.addEventListener('keydown', (e) => {  
+  if (e.key === 'ArrowUp') updateSpaceship('up');  
+  if (e.key === 'ArrowDown') updateSpaceship('down');  
+  if (e.key === 'ArrowLeft') updateSpaceship('left');  
+  if (e.key === 'ArrowRight') updateSpaceship('right');  
+});  
+
+gameLoop();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

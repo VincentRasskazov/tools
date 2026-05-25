@@ -1,0 +1,117 @@
+---
+layout: null
+title: "Regex Relay: The Pattern Race"
+category: "Developer"
+description: "A gamified tool where users race to build and test regular expressions by solving progressively harder pattern-matching challenges."
+permalink: "/tools/daily-20260525-05-regex-relay-the-pattern-race.html"
+generated_by: "api-true-ai"
+generated_date: "20260525"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Relay: The Pattern Race | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool where users race to build and test regular expressions by solving progressively harder pattern-matching challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Regex Relay: The Pattern Race | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool where users race to build and test regular expressions by solving progressively harder pattern-matching challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Regex Relay: The Pattern Race | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool where users race to build and test regular expressions by solving progressively harder pattern-matching challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Regex Relay: The Pattern Race</h1>
+    <p class="seo-subtitle">A gamified tool where users race to build and test regular expressions by solving progressively harder pattern-matching challenges.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #1e1e2f; color: #ffffff; }  
+  #tool-app { display: flex; flex-direction: column; align-items: center; padding: 20px; }  
+  h1 { font-size: 2rem; margin-bottom: 10px; }  
+  #challenge-container { margin-top: 20px; background: #2e2e3f; padding: 20px; border-radius: 8px; width: 80%; max-width: 600px; }  
+  #target-string { font-size: 1.2rem; margin-bottom: 10px; }  
+  #regex-input { width: 100%; padding: 10px; font-size: 1rem; margin-bottom: 10px; border: 1px solid #444; border-radius: 4px; background: #1f1f2f; color: #fff; }  
+  #output { color: #ffcc00; margin-top: 10px; }  
+  #controls { display: flex; justify-content: space-between; }  
+  button { padding: 10px 20px; font-size: 1rem; border: none; border-radius: 4px; cursor: pointer; background: #5b5bf7; color: #fff; }  
+  button:hover { background: #4545d6; }  
+</style>  
+<div id="tool-app">  
+  <h1>Regex Relay: The Pattern Race</h1>  
+  <div id="challenge-container">  
+    <div id="target-string">Match this: <span id="challenge-text"></span></div>  
+    <input type="text" id="regex-input" placeholder="Enter your regex here..."/>  
+    <div id="output"></div>  
+    <div id="controls">  
+      <button id="test-btn">Test Regex</button>  
+      <button id="next-btn" disabled>Next Challenge</button>  
+    </div>  
+  </div>  
+</div>  
+<script>  
+const challenges = [  
+  { text: 'abc123', hint: 'Match the whole string.', regex: /^abc123$/ },  
+  { text: 'hello world', hint: 'Match any word.', regex: /\w+/ },  
+  { text: '123-456-7890', hint: 'Match a phone number format.', regex: /^\d{3}-\d{3}-\d{4}$/ },  
+  { text: 'a1b2c3', hint: 'Match a pattern of letter followed by a digit.', regex: /[a-z]\d/g },  
+  { text: 'cat bat mat', hint: 'Match words ending with "at".', regex: /\b\w*at\b/g }  
+];  
+let currentChallenge = 0;  
+
+const challengeTextEl = document.getElementById('challenge-text');  
+const regexInputEl = document.getElementById('regex-input');  
+const outputEl = document.getElementById('output');  
+const testBtnEl = document.getElementById('test-btn');  
+const nextBtnEl = document.getElementById('next-btn');  
+
+function loadChallenge() {  
+  const challenge = challenges[currentChallenge];  
+  challengeTextEl.textContent = challenge.text;  
+  regexInputEl.value = '';  
+  outputEl.textContent = '';  
+  nextBtnEl.disabled = true;  
+}  
+
+testBtnEl.addEventListener('click', () => {  
+  const userRegex = new RegExp(regexInputEl.value);  
+  const challenge = challenges[currentChallenge];  
+  if (challenge.text.match(userRegex)) {  
+    if (challenge.text.match(challenge.regex).join('') === challenge.text.match(userRegex).join('')) {  
+      outputEl.textContent = 'Correct! Move to the next challenge.';  
+      nextBtnEl.disabled = false;  
+    } else {  
+      outputEl.textContent = 'Close, but not quite! Check your pattern again.';  
+    }  
+  } else {  
+    outputEl.textContent = 'No match. Try again!';  
+  }  
+});  
+
+nextBtnEl.addEventListener('click', () => {  
+  if (currentChallenge < challenges.length - 1) {  
+    currentChallenge++;  
+    loadChallenge();  
+  } else {  
+    alert('Congratulations! You completed all the challenges!');  
+    location.reload();  
+  }  
+});  
+
+loadChallenge();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
