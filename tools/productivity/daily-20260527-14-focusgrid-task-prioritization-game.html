@@ -1,0 +1,133 @@
+---
+layout: null
+title: "FocusGrid: Task Prioritization Game"
+category: "Productivity"
+description: "A gamified tool where users arrange dynamic task cards on a priority-impact grid to hone their decision-making and time management skills."
+permalink: "/tools/daily-20260527-14-focusgrid-task-prioritization-game.html"
+generated_by: "api-true-ai"
+generated_date: "20260527"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusGrid: Task Prioritization Game | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool where users arrange dynamic task cards on a priority-impact grid to hone their decision-making and time management skills. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="FocusGrid: Task Prioritization Game | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool where users arrange dynamic task cards on a priority-impact grid to hone their decision-making and time management skills. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FocusGrid: Task Prioritization Game | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool where users arrange dynamic task cards on a priority-impact grid to hone their decision-making and time management skills. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>FocusGrid: Task Prioritization Game</h1>
+    <p class="seo-subtitle">A gamified tool where users arrange dynamic task cards on a priority-impact grid to hone their decision-making and time management skills.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: #f4f4f9; color: #333; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }  
+  #tool-app { width: 80%; max-width: 900px; height: 600px; background: #fff; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); padding: 20px; position: relative; }  
+  .task-card { width: 120px; height: 70px; background: #ffb74d; color: #fff; display: flex; justify-content: center; align-items: center; font-size: 14px; border-radius: 5px; cursor: grab; position: absolute; }  
+  .grid { width: 100%; height: 100%; display: grid; grid-template-columns: repeat(10, 1fr); grid-template-rows: repeat(10, 1fr); position: relative; }  
+  .quadrant-label { font-size: 12px; color: #555; position: absolute; }  
+  #scoreboard { position: absolute; bottom: 20px; left: 20px; background: #fff; padding: 10px 15px; border-radius: 5px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }  
+</style>  
+<div id="tool-app">  
+  <div id="scoreboard">Score: <span id="score">0</span></div>  
+  <div class="grid" id="grid">  
+    <span class="quadrant-label" style="top: 0; left: 0;">Low Priority, Low Impact</span>  
+    <span class="quadrant-label" style="top: 0; right: 0;">High Priority, Low Impact</span>  
+    <span class="quadrant-label" style="bottom: 0; left: 0;">Low Priority, High Impact</span>  
+    <span class="quadrant-label" style="bottom: 0; right: 0;">High Priority, High Impact</span>  
+  </div>  
+</div>  
+<script>  
+const tasks = [  
+  "Write Report",  
+  "Respond to Emails",  
+  "Team Meeting",  
+  "Code Review",  
+  "Plan Presentation",  
+  "Organize Files",  
+  "Schedule Follow-up",  
+  "Debug Issue",  
+  "Call Client",  
+  "Update Documentation"  
+];  
+
+let score = 0;  
+
+function createTaskCard(task) {  
+  const card = document.createElement("div");  
+  card.className = "task-card";  
+  card.innerText = task;  
+  card.style.top = `${Math.random() * 500}px`;  
+  card.style.left = `${Math.random() * 700}px`;  
+  card.draggable = true;  
+
+  card.addEventListener("dragstart", (e) => {  
+    e.dataTransfer.setData("text", e.target.id);  
+  });  
+
+  return card;  
+}  
+
+function dropHandler(e) {  
+  e.preventDefault();  
+  const cardId = e.dataTransfer.getData("text");  
+  const card = document.getElementById(cardId);  
+
+  const rect = e.target.getBoundingClientRect();  
+  const x = ((e.clientX - rect.left) / rect.width) * 10;  
+  const y = ((e.clientY - rect.top) / rect.height) * 10;  
+
+  if (x > 7 && y > 7) {  
+    score += 10; // High Priority, High Impact  
+  } else if (x > 7 && y <= 7) {  
+    score += 5; // High Priority, Low Impact  
+  } else if (x <= 7 && y > 7) {  
+    score += 3; // Low Priority, High Impact  
+  } else {  
+    score -= 5; // Low Priority, Low Impact  
+  }  
+
+  document.getElementById("score").innerText = score;  
+  card.remove();  
+
+  if (!document.querySelectorAll(".task-card").length) populateTasks();  
+}  
+
+function allowDrop(e) {  
+  e.preventDefault();  
+}  
+
+function populateTasks() {  
+  const grid = document.getElementById("grid");  
+  tasks.forEach((task, idx) => {  
+    const card = createTaskCard(task);  
+    card.id = `task-${idx}`;  
+    grid.appendChild(card);  
+  });  
+}  
+
+document.getElementById("grid").addEventListener("dragover", allowDrop);  
+document.getElementById("grid").addEventListener("drop", dropHandler);  
+
+populateTasks();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,156 @@
+---
+layout: null
+title: "DataOrbit: Interactive Relationship Mapper"
+category: "Data"
+description: "Visualize and explore dynamic relationships among data points as orbiting celestial bodies that react to user input and external data sources."
+permalink: "/tools/daily-20260527-21-dataorbit-interactive-relationship-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260527"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataOrbit: Interactive Relationship Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize and explore dynamic relationships among data points as orbiting celestial bodies that react to user input and external data sources. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataOrbit: Interactive Relationship Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize and explore dynamic relationships among data points as orbiting celestial bodies that react to user input and external data sources. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataOrbit: Interactive Relationship Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize and explore dynamic relationships among data points as orbiting celestial bodies that react to user input and external data sources. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataOrbit: Interactive Relationship Mapper</h1>
+    <p class="seo-subtitle">Visualize and explore dynamic relationships among data points as orbiting celestial bodies that react to user input and external data sources.</p>
+    <style>  
+  body {  
+    font-family: Arial, sans-serif;  
+    background-color: #0e0e10;  
+    color: #f5f5f5;  
+    margin: 0;  
+    overflow: hidden;  
+  }  
+  #tool-app {  
+    position: absolute;  
+    top: 0;  
+    left: 0;  
+    width: 100vw;  
+    height: 100vh;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+  }  
+  canvas {  
+    display: block;  
+  }  
+</style>  
+<div id="tool-app">  
+  <canvas id="data-canvas"></canvas>  
+</div>  
+<script>  
+  const canvas = document.getElementById('data-canvas');  
+  const ctx = canvas.getContext('2d');  
+  canvas.width = window.innerWidth;  
+  canvas.height = window.innerHeight;  
+
+  const dataPoints = [];  
+  const relationships = [];  
+
+  function randomColor() {  
+    return `hsl(${Math.floor(Math.random() * 360)}, 80%, 60%)`;  
+  }  
+
+  class DataPoint {  
+    constructor(x, y, value) {  
+      this.x = x;  
+      this.y = y;  
+      this.value = value;  
+      this.radius = 10;  
+      this.color = randomColor();  
+      this.orbitRadius = Math.random() * 50 + 30;  
+      this.angle = Math.random() * Math.PI * 2;  
+      this.speed = Math.random() * 0.02 + 0.01;  
+    }  
+
+    update() {  
+      this.angle += this.speed;  
+      this.x += Math.cos(this.angle) * this.orbitRadius;  
+      this.y += Math.sin(this.angle) * this.orbitRadius;  
+    }  
+
+    draw() {  
+      ctx.beginPath();  
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);  
+      ctx.fillStyle = this.color;  
+      ctx.fill();  
+    }  
+  }  
+
+  function addDataPoint(value) {  
+    const x = Math.random() * canvas.width;  
+    const y = Math.random() * canvas.height;  
+    const point = new DataPoint(x, y, value);  
+    dataPoints.push(point);  
+  }  
+
+  function connectPoints() {  
+    relationships.length = 0;  
+    for (let i = 0; i < dataPoints.length; i++) {  
+      for (let j = i + 1; j < dataPoints.length; j++) {  
+        const dx = dataPoints[i].x - dataPoints[j].x;  
+        const dy = dataPoints[i].y - dataPoints[j].y;  
+        const distance = Math.sqrt(dx * dx + dy * dy);  
+        if (distance < 200) {  
+          relationships.push([dataPoints[i], dataPoints[j]]);  
+        }  
+      }  
+    }  
+  }  
+
+  function drawConnections() {  
+    relationships.forEach(([p1, p2]) => {  
+      ctx.beginPath();  
+      ctx.moveTo(p1.x, p1.y);  
+      ctx.lineTo(p2.x, p2.y);  
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';  
+      ctx.stroke();  
+    });  
+  }  
+
+  function animate() {  
+    ctx.clearRect(0, 0, canvas.width, canvas.height);  
+    dataPoints.forEach(point => {  
+      point.update();  
+      point.draw();  
+    });  
+    connectPoints();  
+    drawConnections();  
+    requestAnimationFrame(animate);  
+  }  
+
+  window.addEventListener('click', () => {  
+    const value = Math.random().toString(36).substring(2, 5);  
+    addDataPoint(value);  
+    connectPoints();  
+  });  
+
+  animate();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

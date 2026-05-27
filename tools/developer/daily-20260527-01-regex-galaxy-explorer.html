@@ -1,0 +1,151 @@
+---
+layout: null
+title: "Regex Galaxy Explorer"
+category: "Developer"
+description: "An interactive mini-game where developers navigate a galaxy of star systems, each representing regex patterns, to match strings and unlock new constellations."
+permalink: "/tools/daily-20260527-01-regex-galaxy-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260527"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Galaxy Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive mini-game where developers navigate a galaxy of star systems, each representing regex patterns, to match strings and unlock new constellations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Regex Galaxy Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive mini-game where developers navigate a galaxy of star systems, each representing regex patterns, to match strings and unlock new constellations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Regex Galaxy Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive mini-game where developers navigate a galaxy of star systems, each representing regex patterns, to match strings and unlock new constellations. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Regex Galaxy Explorer</h1>
+    <p class="seo-subtitle">An interactive mini-game where developers navigate a galaxy of star systems, each representing regex patterns, to match strings and unlock new constellations.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: linear-gradient(to bottom, #0d0d3f, #000); color: white; margin: 0; padding: 0; overflow: hidden; }  
+  #tool-app { position: relative; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; }  
+  canvas { display: block; }  
+  #console { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); color: #0ff; font-size: 14px; }  
+</style>  
+<div id="tool-app">  
+  <canvas id="galaxy"></canvas>  
+  <div id="console"></div>  
+</div>  
+<script>  
+const canvas = document.getElementById('galaxy');  
+const context = canvas.getContext('2d');  
+canvas.width = window.innerWidth;  
+canvas.height = window.innerHeight;  
+const consoleDiv = document.getElementById('console');  
+
+const stars = [];  
+const patterns = [  
+  { regex: /^[a-z]{5}$/, hint: '5 lowercase letters' },  
+  { regex: /^\d{3}-\d{2}-\d{4}$/, hint: 'Social Security Number format' },  
+  { regex: /^[A-Z][a-z]+$/, hint: 'Capitalized word' },  
+  { regex: /^[^aeiou]*$/, hint: 'No vowels' }  
+];  
+
+let currentLevel = 0;  
+let userString = '';  
+let userTyping = false;  
+
+function createStars(count) {  
+  for (let i = 0; i < count; i++) {  
+    stars.push({  
+      x: Math.random() * canvas.width,  
+      y: Math.random() * canvas.height,  
+      radius: Math.random() * 1.5,  
+      dx: (Math.random() - 0.5) * 0.5,  
+      dy: (Math.random() - 0.5) * 0.5  
+    });  
+  }  
+}  
+
+function updateStars() {  
+  context.clearRect(0, 0, canvas.width, canvas.height);  
+  for (const star of stars) {  
+    star.x += star.dx;  
+    star.y += star.dy;  
+    if (star.x < 0 || star.x > canvas.width) star.dx *= -1;  
+    if (star.y < 0 || star.y > canvas.height) star.dy *= -1;  
+
+    context.beginPath();  
+    context.arc(star.x, star.y, star.radius, 0, Math.PI * 2);  
+    context.fillStyle = '#fff';  
+    context.fill();  
+  }  
+}  
+
+function drawHint() {  
+  const { hint } = patterns[currentLevel];  
+  context.font = '24px Arial';  
+  context.fillStyle = '#fff';  
+  context.textAlign = 'center';  
+  context.fillText(`Level ${currentLevel + 1}: ${hint}`, canvas.width / 2, 50);  
+}  
+
+function drawInput() {  
+  context.font = '20px Arial';  
+  context.fillStyle = '#0ff';  
+  context.textAlign = 'center';  
+  context.fillText(`Your Input: ${userString}`, canvas.width / 2, canvas.height - 50);  
+}  
+
+function animate() {  
+  updateStars();  
+  drawHint();  
+  drawInput();  
+  requestAnimationFrame(animate);  
+}  
+
+function handleInput(e) {  
+  if (userTyping) {  
+    if (e.key === 'Backspace') {  
+      userString = userString.slice(0, -1);  
+    } else if (e.key === 'Enter') {  
+      const { regex } = patterns[currentLevel];  
+      if (regex.test(userString)) {  
+        currentLevel++;  
+        userString = '';  
+        if (currentLevel === patterns.length) {  
+          alert('Congratulations! You have unlocked all constellations!');  
+          currentLevel = 0;  
+        }  
+      } else {  
+        alert('Incorrect format. Try again!');  
+      }  
+    } else if (e.key.length === 1) {  
+      userString += e.key;  
+    }  
+  }  
+}  
+
+canvas.addEventListener('click', () => {  
+  userTyping = true;  
+  consoleDiv.innerHTML = 'Type your input...';  
+});  
+
+window.addEventListener('keydown', handleInput);  
+createStars(100);  
+animate();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
