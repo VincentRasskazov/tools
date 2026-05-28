@@ -1,0 +1,141 @@
+---
+layout: null
+title: "Code Dependency Spider"
+category: "Developer"
+description: "Visualize and interact with the web of dependencies within your JavaScript codebase, exploring how modules connect and uncovering hidden relationships."
+permalink: "/tools/daily-20260528-01-code-dependency-spider.html"
+generated_by: "api-true-ai"
+generated_date: "20260528"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Dependency Spider | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize and interact with the web of dependencies within your JavaScript codebase, exploring how modules connect and uncovering hidden relationships. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Code Dependency Spider | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize and interact with the web of dependencies within your JavaScript codebase, exploring how modules connect and uncovering hidden relationships. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Code Dependency Spider | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize and interact with the web of dependencies within your JavaScript codebase, exploring how modules connect and uncovering hidden relationships. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Code Dependency Spider</h1>
+    <p class="seo-subtitle">Visualize and interact with the web of dependencies within your JavaScript codebase, exploring how modules connect and uncovering hidden relationships.</p>
+    <style>  
+  #tool-app {  
+    font-family: Arial, sans-serif;  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    justify-content: center;  
+    height: 100vh;  
+    background: linear-gradient(120deg, #6b6bff, #ff6b6b);  
+  }  
+  #dependencies-container {  
+    width: 80%;  
+    height: 70%;  
+    border: 1px solid #fff;  
+    border-radius: 10px;  
+    background-color: rgba(255, 255, 255, 0.8);  
+    overflow: hidden;  
+    position: relative;  
+  }  
+  .node {  
+    position: absolute;  
+    width: 100px;  
+    height: 100px;  
+    background-color: #6b6bff;  
+    color: #fff;  
+    border-radius: 50%;  
+    text-align: center;  
+    line-height: 100px;  
+    cursor: pointer;  
+    transition: transform 0.3s, box-shadow 0.3s;  
+  }  
+  .node:hover {  
+    transform: scale(1.2);  
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);  
+  }  
+  .connection-line {  
+    position: absolute;  
+    width: 2px;  
+    background-color: #ff6b6b;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h1>Code Dependency Spider</h1>  
+  <div id="dependencies-container"></div>  
+</div>  
+<script>  
+const container = document.getElementById('dependencies-container');  
+
+// Sample nodes and connections for demonstration  
+const nodes = [  
+  { id: 'Module-A', x: 200, y: 150 },  
+  { id: 'Module-B', x: 400, y: 300 },  
+  { id: 'Module-C', x: 150, y: 400 },  
+  { id: 'Module-D', x: 600, y: 100 }  
+];  
+const connections = [  
+  { from: 'Module-A', to: 'Module-B' },  
+  { from: 'Module-B', to: 'Module-C' },  
+  { from: 'Module-C', to: 'Module-D' }  
+];  
+
+// Draw nodes  
+nodes.forEach(node => {  
+  const div = document.createElement('div');  
+  div.className = 'node';  
+  div.id = node.id;  
+  div.innerHTML = node.id;  
+  div.style.left = node.x + 'px';  
+  div.style.top = node.y + 'px';  
+  container.appendChild(div);  
+});  
+
+// Draw connections  
+connections.forEach(conn => {  
+  const fromNode = document.getElementById(conn.from);  
+  const toNode = document.getElementById(conn.to);  
+
+  if (fromNode && toNode) {  
+    const line = document.createElement('div');  
+    line.className = 'connection-line';  
+
+    // Calculate line positioning  
+    const startX = fromNode.offsetLeft + fromNode.offsetWidth / 2;  
+    const startY = fromNode.offsetTop + fromNode.offsetHeight / 2;  
+    const endX = toNode.offsetLeft + toNode.offsetWidth / 2;  
+    const endY = toNode.offsetTop + toNode.offsetHeight / 2;  
+    const length = Math.sqrt((endX - startX) ** 2 + (endY - startY) ** 2);  
+    const angle = Math.atan2(endY - startY, endX - startX) * 180 / Math.PI;  
+
+    line.style.width = length + 'px';  
+    line.style.transformOrigin = '0 0';  
+    line.style.transform = `rotate(${angle}deg)`;  
+    line.style.left = startX + 'px';  
+    line.style.top = startY + 'px';  
+
+    container.appendChild(line);  
+  }  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

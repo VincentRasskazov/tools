@@ -1,0 +1,193 @@
+---
+layout: null
+title: "Idea Nexus"
+category: "Productivity"
+description: "A dynamic web of interconnected nodes where users can visually map, cluster, and gamify their ideas for maximum productivity and creative flow."
+permalink: "/tools/daily-20260528-13-idea-nexus.html"
+generated_by: "api-true-ai"
+generated_date: "20260528"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Idea Nexus | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic web of interconnected nodes where users can visually map, cluster, and gamify their ideas for maximum productivity and creative flow. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Idea Nexus | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic web of interconnected nodes where users can visually map, cluster, and gamify their ideas for maximum productivity and creative flow. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Idea Nexus | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic web of interconnected nodes where users can visually map, cluster, and gamify their ideas for maximum productivity and creative flow. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Idea Nexus</h1>
+    <p class="seo-subtitle">A dynamic web of interconnected nodes where users can visually map, cluster, and gamify their ideas for maximum productivity and creative flow.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(135deg, #1e3c72, #2a5298);  
+  color: #fff;  
+  margin: 0;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 100vw;  
+  height: 100vh;  
+  position: relative;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+}  
+canvas {  
+  display: block;  
+}  
+button {  
+  position: absolute;  
+  top: 20px;  
+  right: 20px;  
+  padding: 10px 20px;  
+  background: #ff8c42;  
+  border: none;  
+  border-radius: 5px;  
+  color: #fff;  
+  font-size: 16px;  
+  cursor: pointer;  
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);  
+}  
+button:hover {  
+  background: #e67a33;  
+}  
+</style>  
+<div id="tool-app">  
+  <canvas id="nexusCanvas"></canvas>  
+  <button id="newNodeButton">Add New Node</button>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById('nexusCanvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = window.innerWidth;  
+canvas.height = window.innerHeight;  
+let nodes = [];  
+
+class Node {  
+  constructor(x, y, text) {  
+    this.x = x;  
+    this.y = y;  
+    this.text = text || prompt("Enter idea text:", "");  
+    this.radius = 30;  
+    this.hover = false;  
+    this.dragging = false;  
+  }  
+
+  draw() {  
+    ctx.beginPath();  
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);  
+    ctx.fillStyle = this.hover ? "#ff8c42" : "#3cb371";  
+    ctx.fill();  
+    ctx.closePath();  
+    ctx.fillStyle = "#fff";  
+    ctx.font = "14px Arial";  
+    ctx.textAlign = "center";  
+    ctx.fillText(this.text, this.x, this.y + 4);  
+  }  
+
+  isMouseOver(mx, my) {  
+    return (Math.sqrt((mx - this.x) ** 2 + (my - this.y) ** 2) < this.radius);  
+  }  
+}  
+
+function drawConnections() {  
+  for (let i = 0; i < nodes.length; i++) {  
+    for (let j = i + 1; j < nodes.length; j++) {  
+      ctx.beginPath();  
+      ctx.moveTo(nodes[i].x, nodes[i].y);  
+      ctx.lineTo(nodes[j].x, nodes[j].y);  
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';  
+      ctx.stroke();  
+      ctx.closePath();  
+    }  
+  }  
+}  
+
+function render() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  drawConnections();  
+  nodes.forEach(node => node.draw());  
+}  
+
+canvas.addEventListener('mousemove', (e) => {  
+  const rect = canvas.getBoundingClientRect();  
+  const mouseX = e.clientX - rect.left;  
+  const mouseY = e.clientY - rect.top;  
+
+  nodes.forEach(node => {  
+    node.hover = node.isMouseOver(mouseX, mouseY);  
+  });  
+
+  render();  
+});  
+
+canvas.addEventListener('mousedown', (e) => {  
+  const rect = canvas.getBoundingClientRect();  
+  const mouseX = e.clientX - rect.left;  
+  const mouseY = e.clientY - rect.top;  
+
+  nodes.forEach(node => {  
+    if (node.isMouseOver(mouseX, mouseY)) {  
+      node.dragging = true;  
+    }  
+  });  
+});  
+
+canvas.addEventListener('mouseup', () => {  
+  nodes.forEach(node => node.dragging = false);  
+});  
+
+canvas.addEventListener('mousemove', (e) => {  
+  const rect = canvas.getBoundingClientRect();  
+  const mouseX = e.clientX - rect.left;  
+  const mouseY = e.clientY - rect.top;  
+
+  nodes.forEach(node => {  
+    if (node.dragging) {  
+      node.x = mouseX;  
+      node.y = mouseY;  
+    }  
+  });  
+
+  render();  
+});  
+
+document.getElementById('newNodeButton').addEventListener('click', () => {  
+  const x = Math.random() * (canvas.width - 60) + 30;  
+  const y = Math.random() * (canvas.height - 60) + 30;  
+  const newNode = new Node(x, y);  
+  if (newNode.text) {  
+    nodes.push(newNode);  
+    render();  
+  }  
+});  
+
+// Initial render  
+render();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

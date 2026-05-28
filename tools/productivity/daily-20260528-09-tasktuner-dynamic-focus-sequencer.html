@@ -1,0 +1,200 @@
+---
+layout: null
+title: "TaskTuner: Dynamic Focus Sequencer"
+category: "Productivity"
+description: "A gamified tool that lets you sequence and refine your tasks based on focus and time estimates, with real-time adaptability and progress visualization."
+permalink: "/tools/daily-20260528-09-tasktuner-dynamic-focus-sequencer.html"
+generated_by: "api-true-ai"
+generated_date: "20260528"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskTuner: Dynamic Focus Sequencer | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool that lets you sequence and refine your tasks based on focus and time estimates, with real-time adaptability and progress visualization. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="TaskTuner: Dynamic Focus Sequencer | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool that lets you sequence and refine your tasks based on focus and time estimates, with real-time adaptability and progress visualization. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TaskTuner: Dynamic Focus Sequencer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool that lets you sequence and refine your tasks based on focus and time estimates, with real-time adaptability and progress visualization. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>TaskTuner: Dynamic Focus Sequencer</h1>
+    <p class="seo-subtitle">A gamified tool that lets you sequence and refine your tasks based on focus and time estimates, with real-time adaptability and progress visualization.</p>
+    <style>  
+  body {  
+    font-family: 'Arial', sans-serif;  
+    margin: 0;  
+    padding: 0;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+    background-color: #f4f4f9;  
+  }  
+  #tool-app {  
+    width: 90%;  
+    max-width: 800px;  
+    background: white;  
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);  
+    border-radius: 8px;  
+    padding: 20px;  
+  }  
+  .task {  
+    display: flex;  
+    justify-content: space-between;  
+    align-items: center;  
+    margin-bottom: 10px;  
+    padding: 10px;  
+    border: 1px solid #dcdcdc;  
+    border-radius: 4px;  
+  }  
+  .task input {  
+    margin-right: 10px;  
+  }  
+  .task-buttons {  
+    display: flex;  
+    gap: 5px;  
+  }  
+  button {  
+    background-color: #6200ee;  
+    color: white;  
+    border: none;  
+    border-radius: 4px;  
+    padding: 6px 12px;  
+    cursor: pointer;  
+  }  
+  button:hover {  
+    background-color: #3700b3;  
+  }  
+  button.secondary {  
+    background-color: #03dac5;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h2>TaskTuner: Dynamic Focus Sequencer</h2>  
+  <div id="task-list"></div>  
+  <input id="task-input" type="text" placeholder="New task description" />  
+  <button id="add-task-btn">Add Task</button>  
+  <p style="margin-top:20px;">Drag and drop tasks to reorder and refine your focus plan!</p>  
+</div>  
+<script>  
+  class TaskTuner {  
+    constructor() {  
+      this.tasks = [];  
+      this.taskList = document.getElementById('task-list');  
+      this.taskInput = document.getElementById('task-input');  
+      this.addTaskBtn = document.getElementById('add-task-btn');  
+      this.init();  
+    }  
+
+    init() {  
+      this.addTaskBtn.addEventListener('click', () => this.addTask());  
+      this.renderTasks();  
+    }  
+
+    addTask() {  
+      const taskText = this.taskInput.value.trim();  
+      if (taskText) {  
+        this.tasks.push({ text: taskText, focus: 1 });  
+        this.taskInput.value = '';  
+        this.renderTasks();  
+      }  
+    }  
+
+    increaseFocus(index) {  
+      this.tasks[index].focus += 1;  
+      this.renderTasks();  
+    }  
+
+    decreaseFocus(index) {  
+      if (this.tasks[index].focus > 1) {  
+        this.tasks[index].focus -= 1;  
+        this.renderTasks();  
+      }  
+    }  
+
+    deleteTask(index) {  
+      this.tasks.splice(index, 1);  
+      this.renderTasks();  
+    }  
+
+    renderTasks() {  
+      this.taskList.innerHTML = '';  
+      this.tasks.forEach((task, index) => {  
+        const taskDiv = document.createElement('div');  
+        taskDiv.className = 'task';  
+        taskDiv.draggable = true;  
+
+        const textEl = document.createElement('span');  
+        textEl.textContent = task.text;  
+
+        const focusEl = document.createElement('span');  
+        focusEl.textContent = `Focus: ${task.focus}`;  
+
+        const buttonsDiv = document.createElement('div');  
+        buttonsDiv.className = 'task-buttons';  
+
+        const increaseBtn = document.createElement('button');  
+        increaseBtn.textContent = '+';  
+        increaseBtn.onclick = () => this.increaseFocus(index);  
+
+        const decreaseBtn = document.createElement('button');  
+        decreaseBtn.textContent = '-';  
+        decreaseBtn.onclick = () => this.decreaseFocus(index);  
+
+        const deleteBtn = document.createElement('button');  
+        deleteBtn.className = 'secondary';  
+        deleteBtn.textContent = 'Delete';  
+        deleteBtn.onclick = () => this.deleteTask(index);  
+
+        buttonsDiv.appendChild(increaseBtn);  
+        buttonsDiv.appendChild(decreaseBtn);  
+        buttonsDiv.appendChild(deleteBtn);  
+
+        taskDiv.appendChild(textEl);  
+        taskDiv.appendChild(focusEl);  
+        taskDiv.appendChild(buttonsDiv);  
+
+        this.taskList.appendChild(taskDiv);  
+
+        // Drag & Drop  
+        taskDiv.addEventListener('dragstart', (e) => this.dragStart(e, index));  
+        taskDiv.addEventListener('dragover', (e) => e.preventDefault());  
+        taskDiv.addEventListener('drop', (e) => this.drop(e, index));  
+      });  
+    }  
+
+    dragStart(e, index) {  
+      e.dataTransfer.setData('text/plain', index);  
+    }  
+
+    drop(e, index) {  
+      const draggedIndex = e.dataTransfer.getData('text/plain');  
+      const draggedTask = this.tasks.splice(draggedIndex, 1)[0];  
+      this.tasks.splice(index, 0, draggedTask);  
+      this.renderTasks();  
+    }  
+  }  
+
+  new TaskTuner();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

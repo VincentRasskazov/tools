@@ -1,0 +1,193 @@
+---
+layout: null
+title: "WordCanvas: Dynamic Story Mapper"
+category: "Writing"
+description: "An interactive tool that lets users create and visualize branching storylines by dragging and linking story nodes in a visually dynamic canvas."
+permalink: "/tools/daily-20260528-07-wordcanvas-dynamic-story-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260528"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordCanvas: Dynamic Story Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool that lets users create and visualize branching storylines by dragging and linking story nodes in a visually dynamic canvas. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="WordCanvas: Dynamic Story Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool that lets users create and visualize branching storylines by dragging and linking story nodes in a visually dynamic canvas. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WordCanvas: Dynamic Story Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool that lets users create and visualize branching storylines by dragging and linking story nodes in a visually dynamic canvas. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>WordCanvas: Dynamic Story Mapper</h1>
+    <p class="seo-subtitle">An interactive tool that lets users create and visualize branching storylines by dragging and linking story nodes in a visually dynamic canvas.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background-color: #f4f4f9;  
+  margin: 0;  
+  padding: 0;  
+}  
+#tool-app {  
+  width: 100%;  
+  height: 100vh;  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  position: relative;  
+  background: linear-gradient(135deg, #ece9e6, #ffffff);  
+  overflow: hidden;  
+}  
+#canvas-container {  
+  width: 90%;  
+  height: 80%;  
+  border: 1px solid #ddd;  
+  background-color: #ffffff;  
+  border-radius: 10px;  
+  position: relative;  
+  overflow: hidden;  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+}  
+.node {  
+  position: absolute;  
+  min-width: 100px;  
+  min-height: 50px;  
+  background: #6c5ce7;  
+  color: #fff;  
+  padding: 10px;  
+  border-radius: 5px;  
+  cursor: grab;  
+  text-align: center;  
+  font-size: 14px;  
+  user-select: none;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+}  
+.node:active {  
+  cursor: grabbing;  
+}  
+.line {  
+  stroke: #636e72;  
+  stroke-width: 2;  
+}  
+#toolbar {  
+  display: flex;  
+  margin: 20px 0;  
+}  
+.button {  
+  background: #0984e3;  
+  color: #fff;  
+  padding: 10px 20px;  
+  margin: 0 10px;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  font-size: 14px;  
+}  
+.button:hover {  
+  background: #74b9ff;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="toolbar">  
+    <button class="button" onclick="createNode()">Add Node</button>  
+    <button class="button" onclick="clearCanvas()">Clear Canvas</button>  
+  </div>  
+  <div id="canvas-container"></div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById('canvas-container');  
+let nodes = [];  
+let currentLine = null;  
+
+function createNode() {  
+  const node = document.createElement('div');  
+  node.className = 'node';  
+  node.contentEditable = true;  
+  node.innerText = 'Node';  
+  node.style.left = '50%';  
+  node.style.top = '50%';  
+
+  node.onmousedown = (e) => startDrag(e, node);  
+  node.ondblclick = () => startLink(node);  
+
+  canvas.appendChild(node);  
+  nodes.push(node);  
+}  
+
+function startDrag(e, node) {  
+  const offsetX = e.clientX - node.offsetLeft;  
+  const offsetY = e.clientY - node.offsetTop;  
+  const onMouseMove = (e) => {  
+    node.style.left = `${e.clientX - offsetX}px`;  
+    node.style.top = `${e.clientY - offsetY}px`;  
+    updateLines();  
+  };  
+  document.addEventListener('mousemove', onMouseMove);  
+  document.onmouseup = () => {  
+    document.removeEventListener('mousemove', onMouseMove);  
+    document.onmouseup = null;  
+  };  
+}  
+
+function startLink(node) {  
+  if (currentLine) {  
+    connectNodes(currentLine, node);  
+    currentLine = null;  
+  } else {  
+    currentLine = node;  
+  }  
+}  
+
+function connectNodes(nodeA, nodeB) {  
+  const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');  
+  line.classList.add('line');  
+  line.setAttribute('x1', nodeA.offsetLeft + nodeA.offsetWidth / 2);  
+  line.setAttribute('y1', nodeA.offsetTop + nodeA.offsetHeight / 2);  
+  line.setAttribute('x2', nodeB.offsetLeft + nodeB.offsetWidth / 2);  
+  line.setAttribute('y2', nodeB.offsetTop + nodeB.offsetHeight / 2);  
+  canvas.appendChild(line);  
+  updateLines();  
+}  
+
+function updateLines() {  
+  const lines = canvas.querySelectorAll('.line');  
+  lines.forEach((line) => {  
+    const [nodeA, nodeB] = nodes;  
+    if (nodeA && nodeB) {  
+      line.setAttribute('x1', nodeA.offsetLeft + nodeA.offsetWidth / 2);  
+      line.setAttribute('y1', nodeA.offsetTop + nodeA.offsetHeight / 2);  
+      line.setAttribute('x2', nodeB.offsetLeft + nodeB.offsetWidth / 2);  
+      line.setAttribute('y2', nodeB.offsetTop + nodeB.offsetHeight / 2);  
+    }  
+  });  
+}  
+
+function clearCanvas() {  
+  canvas.innerHTML = '';  
+  nodes = [];  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

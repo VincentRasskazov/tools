@@ -1,0 +1,171 @@
+---
+layout: null
+title: "Regex Circuit Builder"
+category: "Developer"
+description: "Build and visualize dynamic logical circuits that simulate how regular expressions process and match text in real-time."
+permalink: "/tools/daily-20260528-04-regex-circuit-builder.html"
+generated_by: "api-true-ai"
+generated_date: "20260528"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Circuit Builder | Free Online Interactive Tool</title>
+  <meta name="description" content="Build and visualize dynamic logical circuits that simulate how regular expressions process and match text in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Regex Circuit Builder | Free Online Interactive Tool">
+  <meta property="og:description" content="Build and visualize dynamic logical circuits that simulate how regular expressions process and match text in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Regex Circuit Builder | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Build and visualize dynamic logical circuits that simulate how regular expressions process and match text in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Regex Circuit Builder</h1>
+    <p class="seo-subtitle">Build and visualize dynamic logical circuits that simulate how regular expressions process and match text in real-time.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: #222;  
+  color: #fff;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+
+#tool-app {  
+  max-width: 900px;  
+  width: 100%;  
+  background: #333;  
+  border: 2px solid #555;  
+  border-radius: 8px;  
+  padding: 20px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);  
+}  
+
+.node {  
+  display: inline-block;  
+  padding: 8px 12px;  
+  margin: 10px;  
+  background: #444;  
+  border: 2px solid #666;  
+  border-radius: 6px;  
+  color: #0f0;  
+  font-weight: bold;  
+  cursor: pointer;  
+  transition: all 0.2s ease;  
+}  
+
+.node.active {  
+  background: #0f0;  
+  color: #000;  
+}  
+
+.connector {  
+  width: 2px;  
+  height: 30px;  
+  background: #0f0;  
+  display: inline-block;  
+  vertical-align: middle;  
+}  
+
+#regex-view {  
+  margin-top: 20px;  
+  padding: 10px;  
+  background: #222;  
+  border: 2px dashed #999;  
+  color: #fff;  
+  border-radius: 6px;  
+  font-family: monospace;  
+  font-size: 1.1rem;  
+  text-align: center;  
+}  
+
+button {  
+  background: #0f0;  
+  color: #000;  
+  border: none;  
+  padding: 10px 20px;  
+  border-radius: 6px;  
+  cursor: pointer;  
+  font-weight: bold;  
+  margin-top: 15px;  
+  transition: all 0.2s ease;  
+}  
+
+button:hover {  
+  background: #0b0;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="circuit-builder">  
+    <!-- Nodes and Connectors Will Appear Here -->  
+  </div>  
+  <div id="regex-view">/<span id="regex-pattern"></span>/</div>  
+  <button id="generate-regex">Generate Regex</button>  
+</div>  
+<script>  
+const regexContainer = document.getElementById('regex-pattern');  
+const circuitBuilder = document.getElementById('circuit-builder');  
+const generateButton = document.getElementById('generate-regex');  
+
+const components = ['^', '$', '.', '\\d', '\\w', '\\s', '[a-z]', '[A-Z]', '[0-9]', '|', '?', '*', '+', '(', ')'];  
+
+let currentRegex = [];  
+
+const renderCircuit = () => {  
+  circuitBuilder.innerHTML = '';  
+  currentRegex.forEach((component, index) => {  
+    const node = document.createElement('div');  
+    node.classList.add('node');  
+    node.innerText = component;  
+    node.onclick = () => removeNode(index);  
+    circuitBuilder.appendChild(node);  
+
+    if (index < currentRegex.length - 1) {  
+      const connector = document.createElement('div');  
+      connector.classList.add('connector');  
+      circuitBuilder.appendChild(connector);  
+    }  
+  });  
+  regexContainer.textContent = currentRegex.join('');  
+};  
+
+const addNode = (component) => {  
+  currentRegex.push(component);  
+  renderCircuit();  
+};  
+
+const removeNode = (index) => {  
+  currentRegex.splice(index, 1);  
+  renderCircuit();  
+};  
+
+generateButton.onclick = () => {  
+  const randomComponent = components[Math.floor(Math.random() * components.length)];  
+  addNode(randomComponent);  
+};  
+
+// Initial Render  
+renderCircuit();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
