@@ -1,0 +1,159 @@
+---
+layout: null
+title: "DevCircuit: Codeflow Puzzle Builder"
+category: "Developer"
+description: "A dynamic mini-game where developers solve logic flow puzzles by assembling code-like components into functional circuits."
+permalink: "/tools/daily-20260529-17-devcircuit-codeflow-puzzle-builder.html"
+generated_by: "api-true-ai"
+generated_date: "20260529"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevCircuit: Codeflow Puzzle Builder | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic mini-game where developers solve logic flow puzzles by assembling code-like components into functional circuits. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DevCircuit: Codeflow Puzzle Builder | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic mini-game where developers solve logic flow puzzles by assembling code-like components into functional circuits. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DevCircuit: Codeflow Puzzle Builder | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic mini-game where developers solve logic flow puzzles by assembling code-like components into functional circuits. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DevCircuit: Codeflow Puzzle Builder</h1>
+    <p class="seo-subtitle">A dynamic mini-game where developers solve logic flow puzzles by assembling code-like components into functional circuits.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background-color: #1e1e2f;  
+  color: #f8f8f2;  
+}  
+#tool-app {  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  padding: 20px;  
+}  
+#game-board {  
+  display: grid;  
+  grid-template-columns: repeat(5, 100px);  
+  grid-gap: 10px;  
+  margin-top: 20px;  
+}  
+.cell {  
+  width: 100px;  
+  height: 100px;  
+  background-color: #282a36;  
+  border: 2px solid #6272a4;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  cursor: pointer;  
+  position: relative;  
+}  
+.cell.active {  
+  border-color: #50fa7b;  
+}  
+.connector {  
+  width: 60px;  
+  height: 60px;  
+  background-color: #bd93f9;  
+  border-radius: 5px;  
+  box-shadow: 0 0 10px #bd93f9;  
+}  
+#controls {  
+  margin-top: 20px;  
+}  
+button {  
+  background-color: #44475a;  
+  border: none;  
+  color: #f8f8f2;  
+  padding: 10px 20px;  
+  margin: 5px;  
+  cursor: pointer;  
+  border-radius: 5px;  
+}  
+button:hover {  
+  background-color: #6272a4;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>DevCircuit: Codeflow Puzzle Builder</h1>  
+  <p>Connect the pieces to complete the logic circuit!</p>  
+  <div id="game-board"></div>  
+  <div id="controls">  
+    <button id="start-game">Start Game</button>  
+    <button id="reset-game">Reset</button>  
+  </div>  
+</div>  
+<script>  
+const boardSize = 5;  
+const toolApp = document.querySelector("#tool-app");  
+const gameBoard = document.querySelector("#game-board");  
+let gameState = [];  
+
+function initializeGame() {  
+  gameBoard.innerHTML = "";  
+  gameState = Array.from({ length: boardSize * boardSize }, () => ({ active: false }));  
+
+  gameState.forEach((cell, index) => {  
+    const cellDiv = document.createElement("div");  
+    cellDiv.classList.add("cell");  
+    cellDiv.dataset.index = index;  
+
+    if (Math.random() > 0.7) {  
+      const connectorDiv = document.createElement("div");  
+      connectorDiv.classList.add("connector");  
+      cellDiv.appendChild(connectorDiv);  
+      cell.active = true;  
+    }  
+
+    cellDiv.addEventListener("click", () => handleCellClick(index));  
+    gameBoard.appendChild(cellDiv);  
+  });  
+}  
+
+function handleCellClick(index) {  
+  const cellDivs = document.querySelectorAll(".cell");  
+  const cell = gameState[index];  
+  if (cell.active) {  
+    cell.active = false;  
+    cellDivs[index].classList.remove("active");  
+  } else {  
+    cell.active = true;  
+    cellDivs[index].classList.add("active");  
+  }  
+
+  checkWinCondition();  
+}  
+
+function checkWinCondition() {  
+  const isWin = gameState.every(cell => cell.active);  
+  if (isWin) {  
+    alert("Congratulations! You've completed the circuit!");  
+  }  
+}  
+
+document.querySelector("#start-game").addEventListener("click", initializeGame);  
+document.querySelector("#reset-game").addEventListener("click", initializeGame);  
+
+initializeGame();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,149 @@
+---
+layout: null
+title: "Regex Quest: The Pattern Explorer"
+category: "Developer"
+description: "A gamified tool where developers solve increasingly complex puzzles by crafting regular expressions to match hidden patterns in dynamically generated datasets."
+permalink: "/tools/daily-20260529-15-regex-quest-the-pattern-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260529"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Quest: The Pattern Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool where developers solve increasingly complex puzzles by crafting regular expressions to match hidden patterns in dynamically generated datasets. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Regex Quest: The Pattern Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool where developers solve increasingly complex puzzles by crafting regular expressions to match hidden patterns in dynamically generated datasets. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Regex Quest: The Pattern Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool where developers solve increasingly complex puzzles by crafting regular expressions to match hidden patterns in dynamically generated datasets. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Regex Quest: The Pattern Explorer</h1>
+    <p class="seo-subtitle">A gamified tool where developers solve increasingly complex puzzles by crafting regular expressions to match hidden patterns in dynamically generated datasets.</p>
+    <style>  
+body {  
+  font-family: 'Arial', sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background: #1E1E2F;  
+  color: #FFF;  
+  text-align: center;  
+}  
+#tool-app {  
+  padding: 20px;  
+}  
+#level, #score {  
+  font-size: 1.2rem;  
+  margin: 10px 0;  
+}  
+#dataset, #feedback {  
+  margin: 20px auto;  
+  padding: 10px;  
+  width: 90%;  
+  max-width: 600px;  
+  background: #2C2C3F;  
+  border-radius: 8px;  
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);  
+  font-family: 'Courier New', Courier, monospace;  
+  line-height: 1.5;  
+}  
+input[type="text"] {  
+  width: 80%;  
+  padding: 10px;  
+  font-size: 1rem;  
+  border: none;  
+  border-radius: 5px;  
+  margin-bottom: 10px;  
+}  
+button {  
+  padding: 10px 20px;  
+  font-size: 1rem;  
+  border: none;  
+  border-radius: 5px;  
+  background: #4CAF50;  
+  color: #FFF;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+button:hover {  
+  background: #45A049;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="level">Level: 1</div>  
+  <div id="score">Score: 0</div>  
+  <div id="dataset">Dataset: ["apple", "banana", "cherry", "date", "elderberry"]</div>  
+  <input id="regex-input" type="text" placeholder="Enter your regex pattern" />  
+  <button id="test-regex">Test Pattern</button>  
+  <div id="feedback"></div>  
+</div>  
+<script>  
+const datasets = [  
+  { data: ["apple", "banana", "cherry", "date", "elderberry"], target: ["apple", "banana"] },  
+  { data: ["123", "456", "789", "101112", "131415"], target: ["456", "789"] },  
+  { data: ["cat", "dog", "mouse", "bat", "rat"], target: ["cat", "rat"] }  
+];  
+let level = 0;  
+let score = 0;  
+
+const levelEl = document.getElementById('level');  
+const scoreEl = document.getElementById('score');  
+const datasetEl = document.getElementById('dataset');  
+const regexInput = document.getElementById('regex-input');  
+const feedbackEl = document.getElementById('feedback');  
+
+function updateUI() {  
+  levelEl.textContent = `Level: ${level + 1}`;  
+  scoreEl.textContent = `Score: ${score}`;  
+  datasetEl.textContent = `Dataset: ${JSON.stringify(datasets[level].data)}`;  
+}  
+
+function testRegex() {  
+  const pattern = regexInput.value;  
+  if (!pattern) {  
+    feedbackEl.textContent = "Please enter a regex pattern.";  
+    return;  
+  }  
+  try {  
+    const regex = new RegExp(pattern);  
+    const matches = datasets[level].data.filter(item => regex.test(item));  
+    if (JSON.stringify(matches) === JSON.stringify(datasets[level].target)) {  
+      feedbackEl.textContent = "Correct! Moving to the next level.";  
+      score += 10;  
+      level++;  
+      if (level < datasets.length) {  
+        updateUI();  
+      } else {  
+        feedbackEl.textContent = "Congratulations! You've completed all levels!";  
+      }  
+    } else {  
+      feedbackEl.textContent = `Incorrect! Matches: ${JSON.stringify(matches)}`;  
+    }  
+  } catch (e) {  
+    feedbackEl.textContent = "Invalid regex pattern!";  
+  }  
+}  
+
+document.getElementById('test-regex').addEventListener('click', testRegex);  
+updateUI();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

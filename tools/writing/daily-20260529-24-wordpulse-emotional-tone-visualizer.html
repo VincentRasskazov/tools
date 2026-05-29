@@ -1,0 +1,105 @@
+---
+layout: null
+title: "WordPulse: Emotional Tone Visualizer"
+category: "Writing"
+description: "Analyze and visualize the emotional tone of your writing in real time with an interactive mood graph and animated feedback."
+permalink: "/tools/daily-20260529-24-wordpulse-emotional-tone-visualizer.html"
+generated_by: "api-true-ai"
+generated_date: "20260529"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordPulse: Emotional Tone Visualizer | Free Online Interactive Tool</title>
+  <meta name="description" content="Analyze and visualize the emotional tone of your writing in real time with an interactive mood graph and animated feedback. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="WordPulse: Emotional Tone Visualizer | Free Online Interactive Tool">
+  <meta property="og:description" content="Analyze and visualize the emotional tone of your writing in real time with an interactive mood graph and animated feedback. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WordPulse: Emotional Tone Visualizer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Analyze and visualize the emotional tone of your writing in real time with an interactive mood graph and animated feedback. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>WordPulse: Emotional Tone Visualizer</h1>
+    <p class="seo-subtitle">Analyze and visualize the emotional tone of your writing in real time with an interactive mood graph and animated feedback.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: linear-gradient(to right, #f8f9fc, #e3e6f0); color: #333; }  
+  #tool-app { padding: 20px; max-width: 800px; margin: 50px auto; background: #fff; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); border-radius: 10px; }  
+  textarea { width: 100%; height: 150px; border: 1px solid #ccc; border-radius: 5px; padding: 10px; font-size: 1em; box-sizing: border-box; }  
+  #output { margin-top: 20px; padding: 20px; background: #f1f3f6; border-radius: 5px; text-align: center; }  
+  .emoji { font-size: 3em; }  
+  .graph { margin-top: 20px; height: 150px; background: #e3e6f0; border-radius: 10px; position: relative; overflow: hidden; }  
+  .graph-bar { position: absolute; bottom: 0; width: 20px; background: #4caf50; animation: grow 1s ease-in-out; }  
+  @keyframes grow { from { height: 0; } to { height: 100%; } }  
+</style>  
+<div id="tool-app">  
+  <h1>WordPulse: Emotional Tone Visualizer</h1>  
+  <p>Type your text below to discover its emotional impact:</p>  
+  <textarea id="input-text" placeholder="Start typing here..."></textarea>  
+  <div id="output">  
+    <div class="emoji" id="emoji"></div>  
+    <div class="graph" id="graph"></div>  
+  </div>  
+</div>  
+<script>  
+  const emotions = {  
+    positive: ["happy", "joy", "love", "excited", "amazing", "great"],  
+    negative: ["sad", "angry", "hate", "terrible", "bad", "awful"],  
+    neutral: ["okay", "fine", "average", "normal", "mediocre"]  
+  };  
+
+  const inputText = document.getElementById("input-text");  
+  const emojiDisplay = document.getElementById("emoji");  
+  const graphDisplay = document.getElementById("graph");  
+
+  inputText.addEventListener("input", () => {  
+    const words = inputText.value.toLowerCase().split(/\s+/);  
+    let emotionScores = { positive: 0, negative: 0, neutral: 0 };  
+
+    words.forEach(word => {  
+      Object.keys(emotions).forEach(emotion => {  
+        if (emotions[emotion].includes(word)) {  
+          emotionScores[emotion]++;  
+        }  
+      });  
+    });  
+
+    let dominantEmotion = Object.keys(emotionScores).reduce((a, b) => emotionScores[a] > emotionScores[b] ? a : b);  
+
+    let emoji = "";  
+    if (dominantEmotion === "positive") emoji = "😊";  
+    else if (dominantEmotion === "negative") emoji = "😢";  
+    else if (dominantEmotion === "neutral") emoji = "😐";  
+    emojiDisplay.textContent = emoji;  
+
+    graphDisplay.innerHTML = "";  
+    let totalScores = Object.values(emotionScores).reduce((a, b) => a + b, 0);  
+    Object.keys(emotionScores).forEach((emotion, index) => {  
+      let bar = document.createElement("div");  
+      bar.className = "graph-bar";  
+      bar.style.left = `${index * 25}%`;  
+      bar.style.width = "20%";  
+      bar.style.background = emotion === "positive" ? "#4caf50" : emotion === "negative" ? "#e53935" : "#ff9800";  
+      bar.style.height = `${(emotionScores[emotion] / totalScores) * 100 || 0}%`;  
+      graphDisplay.appendChild(bar);  
+    });  
+  });  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,229 @@
+---
+layout: null
+title: "Data Glyph: Pattern Decryption Adventure"
+category: "Data"
+description: "A gamified tool where users uncover hidden patterns in encrypted data streams by interacting with dynamic visualizations and solving logic puzzles."
+permalink: "/tools/daily-20260529-11-data-glyph-pattern-decryption-adventure.html"
+generated_by: "api-true-ai"
+generated_date: "20260529"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Glyph: Pattern Decryption Adventure | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool where users uncover hidden patterns in encrypted data streams by interacting with dynamic visualizations and solving logic puzzles. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Glyph: Pattern Decryption Adventure | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool where users uncover hidden patterns in encrypted data streams by interacting with dynamic visualizations and solving logic puzzles. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Glyph: Pattern Decryption Adventure | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool where users uncover hidden patterns in encrypted data streams by interacting with dynamic visualizations and solving logic puzzles. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Glyph: Pattern Decryption Adventure</h1>
+    <p class="seo-subtitle">A gamified tool where users uncover hidden patterns in encrypted data streams by interacting with dynamic visualizations and solving logic puzzles.</p>
+    ```html
+<style>
+/* Modern, beautiful inline CSS */
+body {
+  font-family: 'Arial', sans-serif;
+  background: #1e1e2f;
+  color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+#tool-app {
+  width: 90%;
+  max-width: 800px;
+  text-align: center;
+}
+h1 {
+  color: #42c1f9;
+  margin-bottom: 10px;
+}
+canvas {
+  margin: 20px auto;
+  border: 1px solid #42c1f9;
+  display: block;
+}
+#instructions {
+  margin: 20px 0;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #fff;
+  background: #42c1f9;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+button:hover {
+  background: #35a3d4;
+}
+</style>
+<div id="tool-app">
+  <h1>Data Glyph: Pattern Decryption Adventure</h1>
+  <canvas id="dataCanvas" width="600" height="400"></canvas>
+  <div id="instructions">
+    <p>Decrypt the data by identifying patterns in the stream. Drag your mouse to connect the dots in the correct sequence. Solve as many patterns as you can within the time limit!</p>
+  </div>
+  <button id="startGame">Start Game</button>
+</div>
+<script>
+const canvas = document.getElementById('dataCanvas');
+const ctx = canvas.getContext('2d');
+const startButton = document.getElementById('startGame');
+const instructions = document.getElementById('instructions');
+
+let gameActive = false;
+let pattern = [];
+let userPattern = [];
+let timeLeft = 30;
+let timerInterval;
+
+// Generate random pattern
+function generatePattern() {
+  pattern = [];
+  for (let i = 0; i < 5; i++) {
+    pattern.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height });
+  }
+}
+
+// Draw the pattern
+function drawPattern(showFull = true) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#42c1f9';
+  ctx.lineWidth = 2;
+
+  pattern.forEach((point, index) => {
+    ctx.beginPath();
+    ctx.arc(point.x, point.y, 5, 0, Math.PI * 2);
+    ctx.fill();
+
+    if (showFull && index > 0) {
+      ctx.beginPath();
+      ctx.moveTo(pattern[index - 1].x, pattern[index - 1].y);
+      ctx.lineTo(point.x, point.y);
+      ctx.strokeStyle = '#42c1f9';
+      ctx.stroke();
+    }
+  });
+}
+
+// Start the game
+function startGame() {
+  if (gameActive) return;
+
+  gameActive = true;
+  userPattern = [];
+  generatePattern();
+  drawPattern();
+
+  setTimeout(() => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }, 2000);
+
+  instructions.innerHTML = `<p>Now it's your turn! Click and drag to replicate the pattern. Time left: <span id="time">${timeLeft}</span>s</p>`;
+  startButton.style.display = 'none';
+
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    document.getElementById('time').textContent = timeLeft;
+
+    if (timeLeft <= 0) {
+      endGame(false);
+    }
+  }, 1000);
+}
+
+// Capture user drawing
+function handleCanvasMouseDown(event) {
+  if (!gameActive) return;
+
+  const rect = canvas.getBoundingClientRect();
+  userPattern.push({
+    x: event.clientX - rect.left,
+    y: event.clientY - rect.top,
+  });
+
+  if (userPattern.length === pattern.length) {
+    endGame(checkPatternMatch());
+  }
+}
+
+function handleCanvasMouseMove(event) {
+  if (!gameActive || userPattern.length === 0) return;
+
+  const rect = canvas.getBoundingClientRect();
+  const currentPoint = {
+    x: event.clientX - rect.left,
+    y: event.clientY - rect.top,
+  };
+
+  const lastPoint = userPattern[userPattern.length - 1];
+  ctx.beginPath();
+  ctx.moveTo(lastPoint.x, lastPoint.y);
+  ctx.lineTo(currentPoint.x, currentPoint.y);
+  ctx.strokeStyle = '#f5f5f5';
+  ctx.stroke();
+
+  userPattern[userPattern.length - 1] = currentPoint;
+}
+
+// Check if user's pattern matches
+function checkPatternMatch() {
+  if (userPattern.length !== pattern.length) return false;
+
+  for (let i = 0; i < pattern.length; i++) {
+    const dx = pattern[i].x - userPattern[i].x;
+    const dy = pattern[i].y - userPattern[i].y;
+
+    if (Math.sqrt(dx * dx + dy * dy) > 10) {
+      return false;
+    }
+  }
+  return true;
+}
+
+// End the game
+function endGame(success) {
+  gameActive = false;
+  clearInterval(timerInterval);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  instructions.innerHTML = success
+    ? '<p>Success! You decrypted the pattern. Try again?</p>'
+    : '<p>Time\'s up! Better luck next time.</p>';
+  startButton.style.display = 'block';
+}
+
+// Attach event listeners
+canvas.addEventListener('mousedown', handleCanvasMouseDown);
+canvas.addEventListener('mousemove', handleCanvasMouseMove);
+startButton.addEventListener('click', startGame);
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

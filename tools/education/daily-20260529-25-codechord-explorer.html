@@ -1,0 +1,183 @@
+---
+layout: null
+title: "CodeChord Explorer"
+category: "Education"
+description: "Dive into a melodic coding adventure where users learn programming concepts by creating and debugging interactive visual music patterns."
+permalink: "/tools/daily-20260529-25-codechord-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260529"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeChord Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Dive into a melodic coding adventure where users learn programming concepts by creating and debugging interactive visual music patterns. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CodeChord Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Dive into a melodic coding adventure where users learn programming concepts by creating and debugging interactive visual music patterns. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CodeChord Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Dive into a melodic coding adventure where users learn programming concepts by creating and debugging interactive visual music patterns. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CodeChord Explorer</h1>
+    <p class="seo-subtitle">Dive into a melodic coding adventure where users learn programming concepts by creating and debugging interactive visual music patterns.</p>
+    <style>  
+body {  
+  font-family: 'Arial', sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background: linear-gradient(135deg, #1e3c72, #2a5298);  
+  color: #ffffff;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  text-align: center;  
+}  
+#music-grid {  
+  display: grid;  
+  grid-template-columns: repeat(8, 50px);  
+  gap: 5px;  
+  margin: 20px auto;  
+}  
+.note-cell {  
+  width: 50px;  
+  height: 50px;  
+  border: 1px solid white;  
+  border-radius: 5px;  
+  background-color: rgba(255, 255, 255, 0.1);  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  cursor: pointer;  
+  transition: background-color 0.3s, transform 0.2s;  
+}  
+.note-cell.active {  
+  background-color: #4caf50;  
+  transform: scale(1.1);  
+}  
+#code-output {  
+  background: rgba(255, 255, 255, 0.1);  
+  padding: 15px;  
+  margin-top: 20px;  
+  border-radius: 5px;  
+  font-family: 'Courier New', monospace;  
+  white-space: pre-wrap;  
+  text-align: left;  
+  overflow-y: auto;  
+  max-height: 200px;  
+}  
+button {  
+  background: #4caf50;  
+  border: none;  
+  padding: 10px 20px;  
+  color: white;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  font-size: 16px;  
+  margin: 10px;  
+  transition: background 0.3s;  
+}  
+button:hover {  
+  background: #45a049;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>CodeChord Explorer</h1>  
+  <p>Create and debug music-based code to learn programming!</p>  
+  <div id="music-grid">  
+    <!-- Music grid cells will be dynamically inserted here -->  
+  </div>  
+  <button id="play-button">Play</button>  
+  <button id="reset-button">Reset</button>  
+  <h3>Generated Code:</h3>  
+  <div id="code-output"></div>  
+</div>  
+<script>  
+const grid = document.getElementById('music-grid');  
+const codeOutput = document.getElementById('code-output');  
+let activeCells = [];  
+const notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];  
+
+// Generate a 8x8 grid of music notes  
+for (let i = 0; i < 64; i++) {  
+  const cell = document.createElement('div');  
+  cell.className = 'note-cell';  
+  const note = notes[i % notes.length];  
+  cell.dataset.note = note;  
+  cell.dataset.index = i;  
+  cell.textContent = note;  
+  cell.addEventListener('click', () => {  
+    if (cell.classList.contains('active')) {  
+      cell.classList.remove('active');  
+      activeCells = activeCells.filter(c => c !== i);  
+    } else {  
+      cell.classList.add('active');  
+      activeCells.push(i);  
+    }  
+    generateCode();  
+  });  
+  grid.appendChild(cell);  
+}  
+
+// Generate code based on active cells  
+function generateCode() {  
+  const code = activeCells  
+    .sort((a, b) => a - b)  
+    .map(i => {  
+      const cell = grid.children[i];  
+      return `play('${cell.dataset.note}', ${Math.floor(i / 8)});`;  
+    })  
+    .join('\n');  
+  codeOutput.textContent = code || '// Click on cells to start coding!';  
+}  
+
+// Play the generated music sequence  
+document.getElementById('play-button').addEventListener('click', () => {  
+  activeCells  
+    .sort((a, b) => a - b)  
+    .forEach((i, idx) => {  
+      const cell = grid.children[i];  
+      const note = cell.dataset.note;  
+      const delay = idx * 500;  
+      setTimeout(() => {  
+        const audio = new Audio(`https://freesound.org/data/previews/337/337049_3248244-lq.mp3`);  
+        audio.play();  
+        cell.classList.add('playing');  
+        setTimeout(() => cell.classList.remove('playing'), 300);  
+      }, delay);  
+    });  
+});  
+
+// Reset the grid and code  
+document.getElementById('reset-button').addEventListener('click', () => {  
+  Array.from(grid.children).forEach(cell => cell.classList.remove('active'));  
+  activeCells = [];  
+  generateCode();  
+});  
+
+// Initialize the code display  
+generateCode();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

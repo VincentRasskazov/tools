@@ -1,0 +1,129 @@
+---
+layout: null
+title: "Data Fractal Forge"
+category: "Data"
+description: "Generate and interactively explore infinite fractal tree visualizations based on your input data patterns."
+permalink: "/tools/daily-20260529-23-data-fractal-forge.html"
+generated_by: "api-true-ai"
+generated_date: "20260529"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Fractal Forge | Free Online Interactive Tool</title>
+  <meta name="description" content="Generate and interactively explore infinite fractal tree visualizations based on your input data patterns. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Fractal Forge | Free Online Interactive Tool">
+  <meta property="og:description" content="Generate and interactively explore infinite fractal tree visualizations based on your input data patterns. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Fractal Forge | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Generate and interactively explore infinite fractal tree visualizations based on your input data patterns. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Fractal Forge</h1>
+    <p class="seo-subtitle">Generate and interactively explore infinite fractal tree visualizations based on your input data patterns.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+  background: linear-gradient(135deg, #2e3a87, #6a89cc);  
+  color: #fff;  
+}  
+#tool-app {  
+  text-align: center;  
+  max-width: 800px;  
+  width: 100%;  
+}  
+canvas {  
+  border: 2px solid #fff;  
+  border-radius: 10px;  
+  background-color: rgba(0, 0, 0, 0.8);  
+}  
+input, button {  
+  padding: 10px 20px;  
+  margin: 10px;  
+  border: none;  
+  border-radius: 5px;  
+  font-size: 16px;  
+}  
+button {  
+  background-color: #4caf50;  
+  color: white;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+button:hover {  
+  background-color: #45a049;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Data Fractal Forge</h1>  
+  <p>Enter a string of data to forge your unique fractal visualization:</p>  
+  <input type="text" id="data-input" placeholder="Enter your data here...">  
+  <button id="generate-btn">Generate Fractal</button>  
+  <canvas id="fractal-canvas" width="800" height="600"></canvas>  
+</div>  
+<script>  
+const canvas = document.getElementById("fractal-canvas");  
+const ctx = canvas.getContext("2d");  
+  
+document.getElementById("generate-btn").addEventListener("click", () => {  
+  const data = document.getElementById("data-input").value;  
+  generateFractal(data);  
+});  
+  
+function generateFractal(data) {  
+  const seed = [...data].reduce((acc, char) => acc + char.charCodeAt(0), 0);  
+  const maxDepth = 8;  
+  const branchLength = 100;  
+  const angleOffset = seed % 40;  
+  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  ctx.translate(canvas.width / 2, canvas.height);  
+  drawBranch(branchLength, 0, maxDepth, angleOffset);  
+  ctx.resetTransform();  
+}  
+  
+function drawBranch(length, depth, maxDepth, angleOffset) {  
+  if (depth === maxDepth) return;  
+
+  ctx.beginPath();  
+  ctx.moveTo(0, 0);  
+  ctx.lineTo(0, -length);  
+  ctx.strokeStyle = `hsl(${(depth * 30) % 360}, 70%, 70%)`;  
+  ctx.lineWidth = maxDepth - depth;  
+  ctx.stroke();  
+
+  ctx.translate(0, -length);  
+  ctx.save();  
+  ctx.rotate((Math.PI / 180) * angleOffset);  
+  drawBranch(length * 0.7, depth + 1, maxDepth, angleOffset);  
+  ctx.restore();  
+  ctx.save();  
+  ctx.rotate((Math.PI / 180) * -angleOffset);  
+  drawBranch(length * 0.7, depth + 1, maxDepth, angleOffset);  
+  ctx.restore();  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
