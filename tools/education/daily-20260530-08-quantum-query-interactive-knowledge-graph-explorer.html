@@ -1,0 +1,147 @@
+---
+layout: null
+title: "Quantum Query: Interactive Knowledge Graph Explorer"
+category: "Education"
+description: "A visually captivating tool that lets users dynamically explore and connect topics across various educational subjects using a web of interactive nodes."
+permalink: "/tools/daily-20260530-08-quantum-query-interactive-knowledge-graph-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260530"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quantum Query: Interactive Knowledge Graph Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="A visually captivating tool that lets users dynamically explore and connect topics across various educational subjects using a web of interactive nodes. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Quantum Query: Interactive Knowledge Graph Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="A visually captivating tool that lets users dynamically explore and connect topics across various educational subjects using a web of interactive nodes. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Quantum Query: Interactive Knowledge Graph Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A visually captivating tool that lets users dynamically explore and connect topics across various educational subjects using a web of interactive nodes. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Quantum Query: Interactive Knowledge Graph Explorer</h1>
+    <p class="seo-subtitle">A visually captivating tool that lets users dynamically explore and connect topics across various educational subjects using a web of interactive nodes.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  background: radial-gradient(circle, #2E3A59, #1B2434);  
+  color: #fff;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 80%;  
+  height: 80%;  
+  position: relative;  
+  border: 1px solid #fff;  
+  border-radius: 12px;  
+  background: #1E2538;  
+  overflow: hidden;  
+}  
+.node {  
+  position: absolute;  
+  width: 100px;  
+  height: 100px;  
+  background: linear-gradient(135deg, #ff7eb3, #ff758c);  
+  color: #fff;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  text-align: center;  
+  font-size: 14px;  
+  border-radius: 50%;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);  
+  cursor: pointer;  
+  user-select: none;  
+  transition: transform 0.3s;  
+}  
+.node:hover {  
+  transform: scale(1.1);  
+  z-index: 1000;  
+}  
+.line {  
+  position: absolute;  
+  background: #ff758c;  
+  transform-origin: top left;  
+}  
+</style>  
+<div id="tool-app"></div>  
+<script>  
+// Interactive JavaScript logic here  
+const app = document.getElementById('tool-app');  
+
+const topics = [  
+  { id: 1, text: 'Physics', x: 300, y: 200, links: [2, 3] },  
+  { id: 2, text: 'Quantum Mechanics', x: 500, y: 100, links: [4] },  
+  { id: 3, text: 'Classical Mechanics', x: 100, y: 300, links: [4] },  
+  { id: 4, text: 'Mathematics', x: 300, y: 400, links: [] },  
+];  
+
+function createNode(topic) {  
+  const node = document.createElement('div');  
+  node.classList.add('node');  
+  node.style.left = topic.x + 'px';  
+  node.style.top = topic.y + 'px';  
+  node.textContent = topic.text;  
+  node.dataset.id = topic.id;  
+  node.addEventListener('click', () => expandNode(topic));  
+  return node;  
+}  
+
+function createLine(x1, y1, x2, y2) {  
+  const line = document.createElement('div');  
+  line.classList.add('line');  
+  const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));  
+  line.style.width = length + 'px';  
+  line.style.height = '2px';  
+  line.style.left = x1 + 'px';  
+  line.style.top = y1 + 'px';  
+  const angle = Math.atan2(y2 - y1, x2 - x1) * (180 / Math.PI);  
+  line.style.transform = `rotate(${angle}deg)`;  
+  return line;  
+}  
+
+function expandNode(topic) {  
+  topic.links.forEach(linkId => {  
+    const linkedTopic = topics.find(t => t.id === linkId);  
+    if (!document.querySelector(`[data-id='${linkedTopic.id}']`)) {  
+      const newNode = createNode(linkedTopic);  
+      app.append(newNode);  
+      const line = createLine(  
+        topic.x + 50, topic.y + 50,  
+        linkedTopic.x + 50, linkedTopic.y + 50  
+      );  
+      app.append(line);  
+    }  
+  });  
+}  
+
+topics.forEach(topic => {  
+  const node = createNode(topic);  
+  app.append(node);  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

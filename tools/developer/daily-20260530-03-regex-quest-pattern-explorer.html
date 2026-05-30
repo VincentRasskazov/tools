@@ -1,0 +1,169 @@
+---
+layout: null
+title: "RegEx Quest: Pattern Explorer"
+category: "Developer"
+description: "An interactive mini-game where users traverse a dungeon by crafting regular expressions to defeat pattern-based enemies and solve string puzzles."
+permalink: "/tools/daily-20260530-03-regex-quest-pattern-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260530"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RegEx Quest: Pattern Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive mini-game where users traverse a dungeon by crafting regular expressions to defeat pattern-based enemies and solve string puzzles. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="RegEx Quest: Pattern Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive mini-game where users traverse a dungeon by crafting regular expressions to defeat pattern-based enemies and solve string puzzles. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="RegEx Quest: Pattern Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive mini-game where users traverse a dungeon by crafting regular expressions to defeat pattern-based enemies and solve string puzzles. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>RegEx Quest: Pattern Explorer</h1>
+    <p class="seo-subtitle">An interactive mini-game where users traverse a dungeon by crafting regular expressions to defeat pattern-based enemies and solve string puzzles.</p>
+    <style>  
+body {  
+  font-family: 'Arial', sans-serif;  
+  background-color: #1e1e2f;  
+  color: #fefefe;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 80%;  
+  max-width: 900px;  
+  padding: 20px;  
+  background: #2b2b3d;  
+  border-radius: 12px;  
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);  
+  text-align: center;  
+}  
+h1 {  
+  color: #ff6f61;  
+}  
+#dungeon {  
+  display: grid;  
+  grid-template-columns: repeat(5, 1fr);  
+  gap: 10px;  
+  margin: 20px 0;  
+}  
+.cell {  
+  width: 60px;  
+  height: 60px;  
+  background: #3b3b4e;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  border-radius: 8px;  
+  font-size: 14px;  
+  color: #fff;  
+  border: 2px solid transparent;  
+}  
+.cell.active {  
+  border: 2px solid #ff6f61;  
+}  
+input {  
+  margin-top: 20px;  
+  padding: 10px;  
+  width: 100%;  
+  border: none;  
+  border-radius: 6px;  
+  font-size: 16px;  
+}  
+button {  
+  margin-top: 10px;  
+  background-color: #ff6f61;  
+  color: #fff;  
+  padding: 10px 20px;  
+  border: none;  
+  border-radius: 6px;  
+  cursor: pointer;  
+  font-size: 16px;  
+}  
+button:hover {  
+  background-color: #ff4f3b;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>RegEx Quest: Pattern Explorer</h1>  
+  <p>Navigate the dungeon by matching and defeating enemies using Regular Expressions!</p>  
+  <div id="dungeon"></div>  
+  <input type="text" id="regex-input" placeholder="Enter your RegEx here" />  
+  <button id="submit-regex">Submit</button>  
+  <p id="feedback"></p>  
+</div>  
+<script>  
+const dungeon = [  
+  ['orc', '123abc', 'treasure', 'goblin', '456def'],  
+  ['gold', 'knight123', 'dragon', '789xyz', 'orc'],  
+  ['sword', 'magic42', 'knight', 'elixir', '999'],  
+  ['treasure', 'elf', 'orc', 'shield', 'magic'],  
+  ['dragon', '123', 'goblin', 'gold', 'elf42']  
+];  
+const rows = 5;  
+const cols = 5;  
+let playerPosition = { x: 0, y: 0 };  
+const dungeonElement = document.getElementById('dungeon');  
+const regexInput = document.getElementById('regex-input');  
+const feedback = document.getElementById('feedback');  
+function renderDungeon() {  
+  dungeonElement.innerHTML = '';  
+  for (let y = 0; y < rows; y++) {  
+    for (let x = 0; x < cols; x++) {  
+      const cell = document.createElement('div');  
+      cell.classList.add('cell');  
+      if (x === playerPosition.x && y === playerPosition.y) {  
+        cell.classList.add('active');  
+        cell.innerText = dungeon[y][x];  
+      }  
+      dungeonElement.appendChild(cell);  
+    }  
+  }  
+}  
+function movePlayer() {  
+  if (playerPosition.x < cols - 1) {  
+    playerPosition.x++;  
+  } else if (playerPosition.y < rows - 1) {  
+    playerPosition.x = 0;  
+    playerPosition.y++;  
+  } else {  
+    feedback.innerText = 'Congratulations! You have completed the dungeon!';  
+  }  
+  renderDungeon();  
+}  
+document.getElementById('submit-regex').addEventListener('click', () => {  
+  const regex = new RegExp(regexInput.value);  
+  const currentCell = dungeon[playerPosition.y][playerPosition.x];  
+  if (regex.test(currentCell)) {  
+    feedback.innerText = `Correct! "${currentCell}" matches your RegEx!`;  
+    movePlayer();  
+  } else {  
+    feedback.innerText = `Incorrect. "${currentCell}" does not match your RegEx.`;  
+  }  
+});  
+renderDungeon();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

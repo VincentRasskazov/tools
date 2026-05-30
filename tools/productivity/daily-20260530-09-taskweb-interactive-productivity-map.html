@@ -1,0 +1,168 @@
+---
+layout: null
+title: "TaskWeb: Interactive Productivity Map"
+category: "Productivity"
+description: "A dynamic, interactive web of tasks and priorities that visually links your to-dos, deadlines, and dependencies for streamlined productivity."
+permalink: "/tools/daily-20260530-09-taskweb-interactive-productivity-map.html"
+generated_by: "api-true-ai"
+generated_date: "20260530"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskWeb: Interactive Productivity Map | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, interactive web of tasks and priorities that visually links your to-dos, deadlines, and dependencies for streamlined productivity. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="TaskWeb: Interactive Productivity Map | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, interactive web of tasks and priorities that visually links your to-dos, deadlines, and dependencies for streamlined productivity. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TaskWeb: Interactive Productivity Map | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, interactive web of tasks and priorities that visually links your to-dos, deadlines, and dependencies for streamlined productivity. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>TaskWeb: Interactive Productivity Map</h1>
+    <p class="seo-subtitle">A dynamic, interactive web of tasks and priorities that visually links your to-dos, deadlines, and dependencies for streamlined productivity.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body { font-family: Arial, sans-serif; background: #f4f7fc; margin: 0; padding: 0; }  
+#tool-app { display: flex; justify-content: center; align-items: center; height: 100vh; }  
+canvas { border: 2px solid #4caf50; background-color: #ffffff; border-radius: 10px; }  
+button { position: absolute; top: 15px; left: 15px; background-color: #4caf50; color: #ffffff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; }  
+button:hover { background-color: #388e3c; }  
+</style>  
+<div id="tool-app">  
+    <canvas id="taskCanvas" width="800" height="600"></canvas>  
+    <button id="addTaskButton">+ Add Task</button>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById('taskCanvas');  
+const ctx = canvas.getContext('2d');  
+const tasks = [];  
+const links = [];  
+let isDragging = false;  
+let draggedTask = null;  
+  
+class Task {  
+    constructor(x, y, text) {  
+        this.x = x;  
+        this.y = y;  
+        this.text = text;  
+        this.width = 100;  
+        this.height = 50;  
+        this.color = '#f0f0f0';  
+    }  
+  
+    draw() {  
+        ctx.fillStyle = this.color;  
+        ctx.fillRect(this.x, this.y, this.width, this.height);  
+        ctx.strokeStyle = '#4caf50';  
+        ctx.strokeRect(this.x, this.y, this.width, this.height);  
+        ctx.fillStyle = '#333';  
+        ctx.font = '14px Arial';  
+        ctx.fillText(this.text, this.x + 5, this.y + 25);  
+    }  
+  
+    isClicked(mouseX, mouseY) {  
+        return mouseX >= this.x && mouseX <= this.x + this.width && mouseY >= this.y && mouseY <= this.y + this.height;  
+    }  
+}  
+  
+function drawLinks() {  
+    links.forEach(link => {  
+        ctx.beginPath();  
+        ctx.moveTo(link.start.x + link.start.width / 2, link.start.y + link.start.height / 2);  
+        ctx.lineTo(link.end.x + link.end.width / 2, link.end.y + link.end.height / 2);  
+        ctx.strokeStyle = '#4caf50';  
+        ctx.lineWidth = 2;  
+        ctx.stroke();  
+    });  
+}  
+  
+function drawTasks() {  
+    ctx.clearRect(0, 0, canvas.width, canvas.height);  
+    drawLinks();  
+    tasks.forEach(task => task.draw());  
+}  
+  
+function addTask() {  
+    const x = Math.random() * (canvas.width - 120);  
+    const y = Math.random() * (canvas.height - 70);  
+    const text = prompt('Enter Task Name:');  
+    if (text) {  
+        const newTask = new Task(x, y, text);  
+        tasks.push(newTask);  
+        drawTasks();  
+    }  
+}  
+  
+function createLink(taskA, taskB) {  
+    if (taskA !== taskB && !links.some(link => link.start === taskA && link.end === taskB)) {  
+        links.push({ start: taskA, end: taskB });  
+    }  
+}  
+  
+canvas.addEventListener('mousedown', event => {  
+    const rect = canvas.getBoundingClientRect();  
+    const mouseX = event.clientX - rect.left;  
+    const mouseY = event.clientY - rect.top;  
+  
+    for (const task of tasks) {  
+        if (task.isClicked(mouseX, mouseY)) {  
+            isDragging = true;  
+            draggedTask = task;  
+            break;  
+        }  
+    }  
+});  
+  
+canvas.addEventListener('mousemove', event => {  
+    if (isDragging && draggedTask) {  
+        const rect = canvas.getBoundingClientRect();  
+        const mouseX = event.clientX - rect.left;  
+        const mouseY = event.clientY - rect.top;  
+  
+        draggedTask.x = mouseX - draggedTask.width / 2;  
+        draggedTask.y = mouseY - draggedTask.height / 2;  
+        drawTasks();  
+    }  
+});  
+  
+canvas.addEventListener('mouseup', event => {  
+    if (isDragging && draggedTask) {  
+        const rect = canvas.getBoundingClientRect();  
+        const mouseX = event.clientX - rect.left;  
+        const mouseY = event.clientY - rect.top;  
+  
+        for (const task of tasks) {  
+            if (task.isClicked(mouseX, mouseY)) {  
+                createLink(draggedTask, task);  
+                break;  
+            }  
+        }  
+        isDragging = false;  
+        draggedTask = null;  
+        drawTasks();  
+    }  
+});  
+  
+document.getElementById('addTaskButton').addEventListener('click', addTask);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

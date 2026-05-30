@@ -1,0 +1,165 @@
+---
+layout: null
+title: "ChronoCraft: Timeline Builder"
+category: "Education"
+description: "A dynamic, interactive tool for students to visually construct, customize, and explore historical timelines or personal project plans."
+permalink: "/tools/daily-20260530-13-chronocraft-timeline-builder.html"
+generated_by: "api-true-ai"
+generated_date: "20260530"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChronoCraft: Timeline Builder | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, interactive tool for students to visually construct, customize, and explore historical timelines or personal project plans. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="ChronoCraft: Timeline Builder | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, interactive tool for students to visually construct, customize, and explore historical timelines or personal project plans. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ChronoCraft: Timeline Builder | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, interactive tool for students to visually construct, customize, and explore historical timelines or personal project plans. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>ChronoCraft: Timeline Builder</h1>
+    <p class="seo-subtitle">A dynamic, interactive tool for students to visually construct, customize, and explore historical timelines or personal project plans.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  background: linear-gradient(135deg, #a8edea, #fed6e3);  
+}  
+#tool-app {  
+  width: 80%;  
+  background: white;  
+  border-radius: 12px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
+  padding: 20px;  
+  display: flex;  
+  flex-direction: column;  
+  gap: 20px;  
+}  
+.timeline {  
+  display: flex;  
+  overflow-x: auto;  
+  border: 2px solid #ddd;  
+  border-radius: 8px;  
+  padding: 10px;  
+  background: #f9f9f9;  
+}  
+.event {  
+  min-width: 150px;  
+  padding: 10px;  
+  margin-right: 10px;  
+  border-radius: 8px;  
+  background: #ffebc6;  
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  
+  cursor: grab;  
+}  
+.event.dragging {  
+  opacity: 0.6;  
+  border: 2px dashed #ff8c42;  
+}  
+.controls {  
+  display: flex;  
+  justify-content: space-between;  
+  align-items: center;  
+}  
+button {  
+  background: #6c7ae0;  
+  color: white;  
+  border: none;  
+  padding: 10px 20px;  
+  border-radius: 8px;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+button:hover {  
+  background: #4853b8;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>ChronoCraft: Timeline Builder</h1>  
+  <div class="controls">  
+    <input id="event-input" type="text" placeholder="Add an event (e.g., Battle of Hastings, 1066)" />  
+    <button onclick="addEvent()">Add Event</button>  
+  </div>  
+  <div class="timeline" id="timeline"></div>  
+</div>  
+<script>  
+const timeline = document.getElementById('timeline');  
+let draggingEvent = null;  
+
+function addEvent() {  
+  const input = document.getElementById('event-input');  
+  const text = input.value.trim();  
+  if (!text) return;  
+
+  const eventDiv = document.createElement('div');  
+  eventDiv.textContent = text;  
+  eventDiv.className = 'event';  
+  eventDiv.draggable = true;  
+
+  eventDiv.addEventListener('dragstart', () => {  
+    draggingEvent = eventDiv;  
+    eventDiv.classList.add('dragging');  
+  });  
+
+  eventDiv.addEventListener('dragend', () => {  
+    draggingEvent = null;  
+    eventDiv.classList.remove('dragging');  
+  });  
+
+  timeline.appendChild(eventDiv);  
+  input.value = '';  
+}  
+
+timeline.addEventListener('dragover', (e) => {  
+  e.preventDefault();  
+  const afterElement = getDragAfterElement(timeline, e.clientX);  
+  if (draggingEvent) {  
+    if (afterElement == null) {  
+      timeline.appendChild(draggingEvent);  
+    } else {  
+      timeline.insertBefore(draggingEvent, afterElement);  
+    }  
+  }  
+});  
+
+function getDragAfterElement(container, x) {  
+  const draggableElements = [...container.querySelectorAll('.event:not(.dragging)')];  
+
+  return draggableElements.reduce((closest, child) => {  
+    const box = child.getBoundingClientRect();  
+    const offset = x - box.left - box.width / 2;  
+    if (offset < 0 && offset > closest.offset) {  
+      return { offset: offset, element: child };  
+    } else {  
+      return closest;  
+    }  
+  }, { offset: Number.NEGATIVE_INFINITY }).element;  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

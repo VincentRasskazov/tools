@@ -1,0 +1,200 @@
+---
+layout: null
+title: "TaskTangle: Priority Web Weaver"
+category: "Productivity"
+description: "Visualize your tasks as an interactive web, connecting priorities and dependencies dynamically to untangle productivity bottlenecks."
+permalink: "/tools/daily-20260530-07-tasktangle-priority-web-weaver.html"
+generated_by: "api-true-ai"
+generated_date: "20260530"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskTangle: Priority Web Weaver | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize your tasks as an interactive web, connecting priorities and dependencies dynamically to untangle productivity bottlenecks. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="TaskTangle: Priority Web Weaver | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize your tasks as an interactive web, connecting priorities and dependencies dynamically to untangle productivity bottlenecks. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TaskTangle: Priority Web Weaver | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize your tasks as an interactive web, connecting priorities and dependencies dynamically to untangle productivity bottlenecks. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>TaskTangle: Priority Web Weaver</h1>
+    <p class="seo-subtitle">Visualize your tasks as an interactive web, connecting priorities and dependencies dynamically to untangle productivity bottlenecks.</p>
+    ```html
+<style>
+  /* Modern, beautiful inline CSS */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+  }
+  #tool-app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 80%;
+    max-width: 800px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  canvas {
+    border: 1px solid white;
+    border-radius: 10px;
+    margin: 20px 0;
+  }
+  .input-group {
+    margin-bottom: 20px;
+  }
+  .input-group input, .input-group button {
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+  }
+  .input-group input {
+    width: 200px;
+  }
+</style>
+<div id="tool-app">
+  <h1>TaskTangle: Priority Web Weaver</h1>
+  <div class="input-group">
+    <input type="text" id="task-name" placeholder="Task Name" />
+    <input type="number" id="task-priority" placeholder="Priority (1-10)" />
+    <button id="add-task">Add Task</button>
+  </div>
+  <canvas id="task-canvas" width="600" height="400"></canvas>
+  <p>Click and drag nodes to rearrange. Priority determines node size. Hover to view details!</p>
+</div>
+<script>
+  // Interactive JavaScript logic here
+  const canvas = document.getElementById('task-canvas');
+  const ctx = canvas.getContext('2d');
+  const tasks = [];
+  const connections = [];
+  let draggingNode = null;
+
+  class TaskNode {
+    constructor(x, y, name, priority) {
+      this.x = x;
+      this.y = y;
+      this.name = name;
+      this.priority = priority;
+      this.radius = priority * 5;
+      this.isDragging = false;
+    }
+
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+      ctx.stroke();
+      ctx.closePath();
+      ctx.fillStyle = 'black';
+      ctx.font = '12px Arial';
+      ctx.fillText(this.name, this.x - this.radius / 2, this.y - this.radius - 5);
+    }
+
+    isMouseOver(mx, my) {
+      return Math.sqrt((this.x - mx) ** 2 + (this.y - my) ** 2) < this.radius;
+    }
+  }
+
+  function drawConnections() {
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+    connections.forEach(([start, end]) => {
+      ctx.beginPath();
+      ctx.moveTo(tasks[start].x, tasks[start].y);
+      ctx.lineTo(tasks[end].x, tasks[end].y);
+      ctx.stroke();
+      ctx.closePath();
+    });
+  }
+
+  function render() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawConnections();
+    tasks.forEach(task => task.draw());
+  }
+
+  canvas.addEventListener('mousedown', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    for (let task of tasks) {
+      if (task.isMouseOver(mouseX, mouseY)) {
+        task.isDragging = true;
+        draggingNode = task;
+        break;
+      }
+    }
+  });
+
+  canvas.addEventListener('mousemove', (e) => {
+    if (draggingNode) {
+      const rect = canvas.getBoundingClientRect();
+      draggingNode.x = e.clientX - rect.left;
+      draggingNode.y = e.clientY - rect.top;
+      render();
+    }
+  });
+
+  canvas.addEventListener('mouseup', () => {
+    if (draggingNode) {
+      draggingNode.isDragging = false;
+      draggingNode = null;
+    }
+  });
+
+  document.getElementById('add-task').addEventListener('click', () => {
+    const name = document.getElementById('task-name').value;
+    const priority = parseInt(document.getElementById('task-priority').value);
+    const x = Math.random() * (canvas.width - 100) + 50;
+    const y = Math.random() * (canvas.height - 100) + 50;
+
+    if (name && priority >= 1 && priority <= 10) {
+      tasks.push(new TaskNode(x, y, name, priority));
+      if (tasks.length > 1) {
+        connections.push([tasks.length - 2, tasks.length - 1]);
+      }
+      render();
+    }
+  });
+
+  render();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
