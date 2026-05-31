@@ -1,0 +1,143 @@
+---
+layout: null
+title: "BudgetCraft: Interactive Expense Builder"
+category: "Finance"
+description: "A drag-and-drop tool where users construct a visual \"city\" representing their finances, balancing income and expenses to maintain a thriving virtual economy."
+permalink: "/tools/daily-20260531-10-budgetcraft-interactive-expense-builder.html"
+generated_by: "api-true-ai"
+generated_date: "20260531"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BudgetCraft: Interactive Expense Builder | Free Online Interactive Tool</title>
+  <meta name="description" content="A drag-and-drop tool where users construct a visual &quot;city&quot; representing their finances, balancing income and expenses to maintain a thriving virtual economy. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="BudgetCraft: Interactive Expense Builder | Free Online Interactive Tool">
+  <meta property="og:description" content="A drag-and-drop tool where users construct a visual &quot;city&quot; representing their finances, balancing income and expenses to maintain a thriving virtual economy. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BudgetCraft: Interactive Expense Builder | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A drag-and-drop tool where users construct a visual &quot;city&quot; representing their finances, balancing income and expenses to maintain a thriving virtual economy. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>BudgetCraft: Interactive Expense Builder</h1>
+    <p class="seo-subtitle">A drag-and-drop tool where users construct a visual &quot;city&quot; representing their finances, balancing income and expenses to maintain a thriving virtual economy.</p>
+    <style>  
+  #tool-app {  
+    font-family: Arial, sans-serif;  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    justify-content: center;  
+    padding: 20px;  
+  }  
+  #city {  
+    display: grid;  
+    grid-template-columns: repeat(5, 1fr);  
+    gap: 10px;  
+    width: 100%;  
+    max-width: 600px;  
+    margin: 20px auto;  
+    border: 2px solid #ccc;  
+    padding: 10px;  
+    background-color: #f9f9f9;  
+  }  
+  .block {  
+    width: 100px;  
+    height: 100px;  
+    display: flex;  
+    align-items: center;  
+    justify-content: center;  
+    font-size: 12px;  
+    text-align: center;  
+    border: 1px solid #aaa;  
+    background-color: #e0e0ff;  
+    cursor: grab;  
+  }  
+  .income { background-color: #c0ffc0; }  
+  .expense { background-color: #ffc0c0; }  
+  #summary {  
+    margin-top: 20px;  
+    font-size: 16px;  
+    font-weight: bold;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h1>BudgetCraft: Build Your Financial City</h1>  
+  <p>Drag and drop income and expense blocks to build your city and balance your budget!</p>  
+  <div id="city"></div>  
+  <div id="summary">Balance: $0</div>  
+</div>  
+<script>  
+  const toolApp = document.getElementById("tool-app");  
+  const city = document.getElementById("city");  
+  const summary = document.getElementById("summary");  
+  let balance = 0;  
+
+  const blocks = [  
+    { type: 'income', label: 'Paycheck $2000', value: 2000 },  
+    { type: 'income', label: 'Freelance $500', value: 500 },  
+    { type: 'expense', label: 'Rent $-1200', value: -1200 },  
+    { type: 'expense', label: 'Groceries $-300', value: -300 },  
+    { type: 'expense', label: 'Utilities $-200', value: -200 }  
+  ];  
+
+  function updateSummary() {  
+    summary.textContent = `Balance: $${balance}`;  
+    summary.style.color = balance >= 0 ? 'green' : 'red';  
+  }  
+
+  function createBlock(block) {  
+    const div = document.createElement('div');  
+    div.className = `block ${block.type}`;  
+    div.textContent = block.label;  
+    div.draggable = true;  
+    div.addEventListener('dragstart', (e) => {  
+      e.dataTransfer.setData('text/plain', JSON.stringify(block));  
+    });  
+    return div;  
+  }  
+
+  function createCityGrid() {  
+    for (let i = 0; i < 25; i++) {  
+      const cell = document.createElement('div');  
+      cell.className = 'block';  
+      cell.addEventListener('dragover', (e) => e.preventDefault());  
+      cell.addEventListener('drop', (e) => {  
+        const blockData = JSON.parse(e.dataTransfer.getData('text/plain'));  
+        if (cell.children.length === 0) {  
+          const newBlock = createBlock(blockData);  
+          cell.appendChild(newBlock);  
+          balance += blockData.value;  
+          updateSummary();  
+        }  
+      });  
+      city.appendChild(cell);  
+    }  
+  }  
+
+  blocks.forEach(block => {  
+    toolApp.appendChild(createBlock(block));  
+  });  
+
+  createCityGrid();  
+  updateSummary();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

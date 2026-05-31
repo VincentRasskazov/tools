@@ -1,0 +1,208 @@
+---
+layout: null
+title: "WordWeave: The Interactive Story Spider"
+category: "Writing"
+description: "Create non-linear stories visually by weaving interconnected plotlines in an interactive web of ideas."
+permalink: "/tools/daily-20260531-15-wordweave-the-interactive-story-spider.html"
+generated_by: "api-true-ai"
+generated_date: "20260531"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordWeave: The Interactive Story Spider | Free Online Interactive Tool</title>
+  <meta name="description" content="Create non-linear stories visually by weaving interconnected plotlines in an interactive web of ideas. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="WordWeave: The Interactive Story Spider | Free Online Interactive Tool">
+  <meta property="og:description" content="Create non-linear stories visually by weaving interconnected plotlines in an interactive web of ideas. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WordWeave: The Interactive Story Spider | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Create non-linear stories visually by weaving interconnected plotlines in an interactive web of ideas. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>WordWeave: The Interactive Story Spider</h1>
+    <p class="seo-subtitle">Create non-linear stories visually by weaving interconnected plotlines in an interactive web of ideas.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: #f4f4f9;  
+  color: #333;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 80%;  
+  height: 80%;  
+  background: white;  
+  border-radius: 10px;  
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);  
+  position: relative;  
+  overflow: hidden;  
+}  
+canvas {  
+  width: 100%;  
+  height: 100%;  
+  display: block;  
+}  
+#info-box {  
+  position: absolute;  
+  bottom: 0;  
+  background: rgba(0, 0, 0, 0.8);  
+  color: white;  
+  padding: 10px;  
+  font-size: 14px;  
+  width: 100%;  
+  box-sizing: border-box;  
+  text-align: center;  
+}  
+.node {  
+  fill: #4CAF50;  
+  stroke: #333;  
+  cursor: pointer;  
+}  
+.node.selected {  
+  fill: #FF5722;  
+}  
+</style>  
+<div id="tool-app">  
+  <canvas id="canvas"></canvas>  
+  <div id="info-box">Click to create story nodes, drag to connect them, and double-click to edit content!</div>  
+</div>  
+<script>  
+const canvas = document.getElementById("canvas");  
+const ctx = canvas.getContext("2d");  
+canvas.width = canvas.offsetWidth;  
+canvas.height = canvas.offsetHeight;  
+
+const nodes = [];  
+const connections = [];  
+let selectedNode = null;  
+let draggingNode = false;  
+let mouse = { x: 0, y: 0 };  
+
+class Node {  
+  constructor(x, y, text = "Double-click to edit") {  
+    this.x = x;  
+    this.y = y;  
+    this.radius = 20;  
+    this.text = text;  
+  }  
+
+  draw() {  
+    ctx.beginPath();  
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);  
+    ctx.fillStyle = this === selectedNode ? "#FF5722" : "#4CAF50";  
+    ctx.fill();  
+    ctx.strokeStyle = "#333";  
+    ctx.stroke();  
+    ctx.closePath();  
+
+    ctx.fillStyle = "white";  
+    ctx.font = "12px Arial";  
+    ctx.textAlign = "center";  
+    ctx.textBaseline = "middle";  
+    ctx.fillText(this.text, this.x, this.y);  
+  }  
+
+  isMouseOver(mx, my) {  
+    return Math.hypot(this.x - mx, this.y - my) < this.radius;  
+  }  
+}  
+
+function drawConnections() {  
+  connections.forEach(([start, end]) => {  
+    ctx.beginPath();  
+    ctx.moveTo(start.x, start.y);  
+    ctx.lineTo(end.x, end.y);  
+    ctx.strokeStyle = "#333";  
+    ctx.lineWidth = 2;  
+    ctx.stroke();  
+    ctx.closePath();  
+  });  
+}  
+
+function drawNodes() {  
+  nodes.forEach((node) => node.draw());  
+}  
+
+function render() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  drawConnections();  
+  drawNodes();  
+}  
+
+canvas.addEventListener("mousedown", (e) => {  
+  mouse.x = e.offsetX;  
+  mouse.y = e.offsetY;  
+
+  selectedNode = nodes.find((node) => node.isMouseOver(mouse.x, mouse.y));  
+
+  if (!selectedNode) {  
+    const newNode = new Node(mouse.x, mouse.y);  
+    nodes.push(newNode);  
+    render();  
+  } else {  
+    draggingNode = true;  
+  }  
+});  
+
+canvas.addEventListener("mousemove", (e) => {  
+  if (!draggingNode || !selectedNode) return;  
+
+  selectedNode.x = e.offsetX;  
+  selectedNode.y = e.offsetY;  
+  render();  
+});  
+
+canvas.addEventListener("mouseup", () => {  
+  draggingNode = false;  
+});  
+
+canvas.addEventListener("dblclick", (e) => {  
+  const clickedNode = nodes.find((node) => node.isMouseOver(e.offsetX, e.offsetY));  
+
+  if (clickedNode) {  
+    const newText = prompt("Edit your story text:", clickedNode.text);  
+    if (newText !== null) {  
+      clickedNode.text = newText;  
+      render();  
+    }  
+  }  
+});  
+
+canvas.addEventListener("contextmenu", (e) => {  
+  e.preventDefault();  
+  const endNode = nodes.find((node) => node.isMouseOver(e.offsetX, e.offsetY));  
+
+  if (selectedNode && endNode && selectedNode !== endNode) {  
+    connections.push([selectedNode, endNode]);  
+    selectedNode = null;  
+    render();  
+  }  
+});  
+
+render();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

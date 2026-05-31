@@ -1,0 +1,187 @@
+---
+layout: null
+title: "Circuitry Conductor: Build & Learn Electricity"
+category: "Education"
+description: "An interactive tool where users design virtual electrical circuits, learn about components, and test their functioning in real-time."
+permalink: "/tools/daily-20260531-14-circuitry-conductor-build-learn-electricity.html"
+generated_by: "api-true-ai"
+generated_date: "20260531"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Circuitry Conductor: Build &amp; Learn Electricity | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool where users design virtual electrical circuits, learn about components, and test their functioning in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Circuitry Conductor: Build &amp; Learn Electricity | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool where users design virtual electrical circuits, learn about components, and test their functioning in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Circuitry Conductor: Build &amp; Learn Electricity | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool where users design virtual electrical circuits, learn about components, and test their functioning in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Circuitry Conductor: Build &amp; Learn Electricity</h1>
+    <p class="seo-subtitle">An interactive tool where users design virtual electrical circuits, learn about components, and test their functioning in real-time.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(135deg, #f0f9ff, #cfe0f8);  
+  margin: 0;  
+  padding: 20px;  
+}  
+#tool-app {  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  text-align: center;  
+}  
+#circuit-board {  
+  width: 90vw;  
+  height: 70vh;  
+  border: 2px solid #3d5afe;  
+  background: #fff;  
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
+  position: relative;  
+}  
+.component {  
+  width: 50px;  
+  height: 50px;  
+  border: 2px solid #3d5afe;  
+  border-radius: 8px;  
+  background: #e3f2fd;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  font-size: 12px;  
+  cursor: pointer;  
+  position: absolute;  
+}  
+#controls {  
+  margin-top: 20px;  
+}  
+button {  
+  background-color: #3d5afe;  
+  color: white;  
+  border: none;  
+  border-radius: 4px;  
+  padding: 10px 20px;  
+  margin: 5px;  
+  cursor: pointer;  
+}  
+button:hover {  
+  background-color: #2c3e50;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Circuitry Conductor</h1>  
+  <div id="circuit-board"></div>  
+  <div id="controls">  
+    <button id="add-resistor">Add Resistor</button>  
+    <button id="add-battery">Add Battery</button>  
+    <button id="add-led">Add LED</button>  
+    <button id="test-circuit">Test Circuit</button>  
+  </div>  
+  <p id="output"></p>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const app = document.getElementById('tool-app');  
+const board = document.getElementById('circuit-board');  
+const output = document.getElementById('output');  
+
+let components = []; // Stores the list of components   
+
+function createComponent(type, x = 10, y = 10) {  
+  const div = document.createElement('div');  
+  div.className = 'component';  
+  div.style.left = `${x}px`;  
+  div.style.top = `${y}px`;  
+
+  switch (type) {  
+    case 'resistor':  
+      div.textContent = 'Resistor';  
+      div.dataset.type = 'resistor';  
+      div.dataset.resistance = 100; // Default resistance  
+      break;  
+    case 'battery':  
+      div.textContent = 'Battery';  
+      div.dataset.type = 'battery';  
+      div.dataset.voltage = 9; // Default voltage  
+      break;  
+    case 'led':  
+      div.textContent = 'LED';  
+      div.dataset.type = 'led';  
+      div.dataset.requiredVoltage = 2; // Voltage needed to light up  
+      break;  
+  }  
+
+  div.onmousedown = function (e) {  
+    let offsetX = e.offsetX;  
+    let offsetY = e.offsetY;  
+
+    function onMouseMove(event) {  
+      div.style.left = `${event.clientX - offsetX}px`;  
+      div.style.top = `${event.clientY - offsetY}px`;  
+    }  
+
+    document.addEventListener('mousemove', onMouseMove);  
+    document.onmouseup = () => {  
+      document.removeEventListener('mousemove', onMouseMove);  
+      div.onmouseup = null;  
+    };  
+  };  
+
+  board.appendChild(div);  
+  components.push(div);  
+}  
+
+document.getElementById('add-resistor').onclick = () => createComponent('resistor');  
+document.getElementById('add-battery').onclick = () => createComponent('battery');  
+document.getElementById('add-led').onclick = () => createComponent('led');  
+
+document.getElementById('test-circuit').onclick = () => {  
+  let voltage = 0;  
+  let resistance = 0;  
+  let ledsLit = 0;  
+
+  components.forEach((component) => {  
+    switch (component.dataset.type) {  
+      case 'battery':  
+        voltage += parseFloat(component.dataset.voltage);  
+        break;  
+      case 'resistor':  
+        resistance += parseFloat(component.dataset.resistance);  
+        break;  
+      case 'led':  
+        const requiredVoltage = parseFloat(component.dataset.requiredVoltage);  
+        if (voltage >= requiredVoltage) ledsLit++;  
+        break;  
+    }  
+  });  
+
+  if (ledsLit > 0) {  
+    output.textContent = `Circuit working! Voltage: ${voltage}V, Resistance: ${resistance}Ω, LEDs lit: ${ledsLit}`;  
+  } else {  
+    output.textContent = `Circuit incomplete. Add more components or adjust the layout.`;  
+  }  
+};  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

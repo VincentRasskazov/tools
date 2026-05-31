@@ -1,0 +1,199 @@
+---
+layout: null
+title: "StoryWeaver: Dynamic Plot Generator"
+category: "Writing"
+description: "An interactive storytelling tool where users weave branching storylines by connecting narrative nodes and visualizing story progression in real-time."
+permalink: "/tools/daily-20260531-05-storyweaver-dynamic-plot-generator.html"
+generated_by: "api-true-ai"
+generated_date: "20260531"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StoryWeaver: Dynamic Plot Generator | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive storytelling tool where users weave branching storylines by connecting narrative nodes and visualizing story progression in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="StoryWeaver: Dynamic Plot Generator | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive storytelling tool where users weave branching storylines by connecting narrative nodes and visualizing story progression in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StoryWeaver: Dynamic Plot Generator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive storytelling tool where users weave branching storylines by connecting narrative nodes and visualizing story progression in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>StoryWeaver: Dynamic Plot Generator</h1>
+    <p class="seo-subtitle">An interactive storytelling tool where users weave branching storylines by connecting narrative nodes and visualizing story progression in real-time.</p>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(120deg, #f6d365, #fda085);
+  }
+  #tool-app {
+    padding: 20px;
+  }
+  .node {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 10px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: grab;
+    user-select: none;
+    position: absolute;
+  }
+  .connector {
+    stroke: #555;
+    stroke-width: 2;
+    fill: none;
+  }
+  #canvas {
+    border: 2px dashed rgba(255, 255, 255, 0.6);
+    height: 80vh;
+    position: relative;
+  }
+  #controls {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+  }
+  button {
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    background: #fff;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background-color: #f6d365;
+  }
+</style>
+<div id="tool-app">
+  <div id="controls">
+    <button id="add-node">Add Node</button>
+    <button id="save-story">Save Story</button>
+  </div>
+  <div id="canvas"></div>
+</div>
+<script>
+  const app = document.getElementById('tool-app');
+  const canvas = document.getElementById('canvas');
+  const addNodeBtn = document.getElementById('add-node');
+  const saveStoryBtn = document.getElementById('save-story');
+  let nodes = [];
+  let connectors = [];
+  let nodeId = 1;
+  let isDragging = false;
+  let selectedNode = null;
+
+  // Add a new node
+  addNodeBtn.addEventListener('click', () => {
+    const node = createNode(`Node ${nodeId++}`);
+    nodes.push(node);
+    canvas.appendChild(node.element);
+    updateCanvas();
+  });
+
+  // Save the story as a JSON-like structure
+  saveStoryBtn.addEventListener('click', () => {
+    const story = nodes.map(node => ({
+      id: node.id,
+      text: node.text,
+      connections: node.connections.map(conn => conn.target.id)
+    }));
+    console.log('Story:', story);
+    alert('Story saved! Open console to view JSON.');
+  });
+
+  // Create a new node
+  function createNode(text) {
+    const nodeElement = document.createElement('div');
+    nodeElement.className = 'node';
+    nodeElement.textContent = text;
+    nodeElement.style.left = `${Math.random() * 300}px`;
+    nodeElement.style.top = `${Math.random() * 300}px`;
+    nodeElement.draggable = true;
+
+    const node = {
+      id: nodeId,
+      text,
+      element: nodeElement,
+      connections: []
+    };
+
+    // Drag events
+    nodeElement.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      selectedNode = node;
+    });
+
+    document.addEventListener('mouseup', () => {
+      isDragging = false;
+      selectedNode = null;
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (isDragging && selectedNode) {
+        const rect = canvas.getBoundingClientRect();
+        selectedNode.element.style.left = `${e.clientX - rect.left}px`;
+        selectedNode.element.style.top = `${e.clientY - rect.top}px`;
+        updateCanvas();
+      }
+    });
+
+    // Connect nodes on double click
+    nodeElement.addEventListener('dblclick', () => {
+      if (selectedNode && selectedNode !== node) {
+        selectedNode.connections.push({ target: node });
+        updateCanvas();
+      }
+    });
+
+    return node;
+  }
+
+  // Update canvas with connectors
+  function updateCanvas() {
+    // Clear previous connectors
+    const existingConnectors = document.querySelectorAll('.connector');
+    existingConnectors.forEach(connector => connector.remove());
+
+    // Draw new connectors
+    nodes.forEach(node => {
+      node.connections.forEach(conn => {
+        const connector = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        const start = node.element.getBoundingClientRect();
+        const end = conn.target.element.getBoundingClientRect();
+        const startX = start.left + start.width / 2;
+        const startY = start.top + start.height / 2;
+        const endX = end.left + end.width / 2;
+        const endY = end.top + end.height / 2;
+        connector.setAttribute('class', 'connector');
+        connector.setAttribute('d', `M${startX},${startY} L${endX},${endY}`);
+        canvas.appendChild(connector);
+      });
+    });
+  }
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
