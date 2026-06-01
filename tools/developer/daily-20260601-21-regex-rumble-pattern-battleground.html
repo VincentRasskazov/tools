@@ -1,0 +1,165 @@
+---
+layout: null
+title: "Regex Rumble: Pattern Battleground"
+category: "Developer"
+description: "A gamified tool where developers create regex patterns to defeat dynamic, AI-generated string \"monsters\" in timed battles."
+permalink: "/tools/daily-20260601-21-regex-rumble-pattern-battleground.html"
+generated_by: "api-true-ai"
+generated_date: "20260601"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Rumble: Pattern Battleground | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool where developers create regex patterns to defeat dynamic, AI-generated string &quot;monsters&quot; in timed battles. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Regex Rumble: Pattern Battleground | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool where developers create regex patterns to defeat dynamic, AI-generated string &quot;monsters&quot; in timed battles. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Regex Rumble: Pattern Battleground | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool where developers create regex patterns to defeat dynamic, AI-generated string &quot;monsters&quot; in timed battles. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Regex Rumble: Pattern Battleground</h1>
+    <p class="seo-subtitle">A gamified tool where developers create regex patterns to defeat dynamic, AI-generated string &quot;monsters&quot; in timed battles.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: "Arial", sans-serif;  
+  background: linear-gradient(135deg, #1d3557, #457b9d);  
+  color: #f1faee;  
+  text-align: center;  
+  margin: 0;  
+  padding: 0;  
+}  
+#tool-app {  
+  max-width: 800px;  
+  margin: 5% auto;  
+  padding: 20px;  
+  background: #a8dadc;  
+  border-radius: 10px;  
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);  
+}  
+button {  
+  background: #457b9d;  
+  color: #f1faee;  
+  border: none;  
+  padding: 10px 20px;  
+  font-size: 16px;  
+  cursor: pointer;  
+  border-radius: 5px;  
+  margin: 5px;  
+}  
+button:hover {  
+  background: #1d3557;  
+}  
+.monster {  
+  font-size: 18px;  
+  padding: 15px;  
+  margin: 10px 0;  
+  background: #f1faee;  
+  color: #1d3557;  
+  border-radius: 5px;  
+}  
+.success {  
+  color: #2a9d8f;  
+  font-weight: bold;  
+}  
+.failure {  
+  color: #e63946;  
+  font-weight: bold;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Regex Rumble: Pattern Battleground</h1>  
+  <p>Create regex patterns to defeat the monsters! Match their patterns before time runs out.</p>  
+  <div id="monster"></div>  
+  <input type="text" id="regex-input" placeholder="Enter your regex (e.g., ^\\d+$)" />  
+  <button id="submit-regex">Attack!</button>  
+  <p id="feedback"></p>  
+  <h3>Score: <span id="score">0</span></h3>  
+  <button id="start-game">Start Game</button>  
+</div>  
+<script>  
+const monsters = [  
+  { text: "12345", hint: "Only digits!", defeated: false },  
+  { text: "abc123", hint: "Letters and numbers", defeated: false },  
+  { text: "hello_world", hint: "Underscores allowed", defeated: false },  
+  { text: "email@example.com", hint: "Looks like an email", defeated: false },  
+  { text: "2023-10-01", hint: "Date format", defeated: false }  
+];  
+
+let currentMonsterIndex = 0;  
+let score = 0;  
+let timer;  
+
+function startGame() {  
+  score = 0;  
+  currentMonsterIndex = 0;  
+  document.getElementById("score").textContent = score;  
+  generateMonster();  
+}  
+
+function generateMonster() {  
+  if (currentMonsterIndex >= monsters.length) {  
+    document.getElementById("feedback").textContent = "You defeated all the monsters! 🎉";  
+    document.getElementById("monster").textContent = "";  
+    document.getElementById("regex-input").value = "";  
+    return;  
+  }  
+
+  const monster = monsters[currentMonsterIndex];  
+  document.getElementById("monster").innerHTML = `<div class="monster">Monster: <strong>${monster.text}</strong> <br> Hint: ${monster.hint}</div>`;  
+  document.getElementById("feedback").textContent = "";  
+
+  if (timer) {  
+    clearTimeout(timer);  
+  }  
+
+  timer = setTimeout(() => {  
+    document.getElementById("feedback").innerHTML = `<span class="failure">Time's up! Monster escaped!</span>`;  
+    currentMonsterIndex++;  
+    generateMonster();  
+  }, 15000); // 15 seconds to answer  
+}  
+
+document.getElementById("submit-regex").addEventListener("click", () => {  
+  const userRegex = document.getElementById("regex-input").value;  
+  try {  
+    const regex = new RegExp(userRegex);  
+    const monster = monsters[currentMonsterIndex];  
+
+    if (regex.test(monster.text)) {  
+      document.getElementById("feedback").innerHTML = `<span class="success">Monster defeated! 🎯</span>`;  
+      score++;  
+      document.getElementById("score").textContent = score;  
+      currentMonsterIndex++;  
+      generateMonster();  
+    } else {  
+      document.getElementById("feedback").innerHTML = `<span class="failure">Missed! Try again.</span>`;  
+    }  
+  } catch (e) {  
+    document.getElementById("feedback").innerHTML = `<span class="failure">Invalid regex! ⚠️</span>`;  
+  }  
+});  
+
+document.getElementById("start-game").addEventListener("click", startGame);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

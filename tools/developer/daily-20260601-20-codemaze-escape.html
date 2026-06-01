@@ -1,0 +1,159 @@
+---
+layout: null
+title: "CodeMaze Escape"
+category: "Developer"
+description: "A mini-game where developers navigate a virtual maze by solving coding challenges and debugging code snippets to unlock paths."
+permalink: "/tools/daily-20260601-20-codemaze-escape.html"
+generated_by: "api-true-ai"
+generated_date: "20260601"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeMaze Escape | Free Online Interactive Tool</title>
+  <meta name="description" content="A mini-game where developers navigate a virtual maze by solving coding challenges and debugging code snippets to unlock paths. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CodeMaze Escape | Free Online Interactive Tool">
+  <meta property="og:description" content="A mini-game where developers navigate a virtual maze by solving coding challenges and debugging code snippets to unlock paths. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CodeMaze Escape | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A mini-game where developers navigate a virtual maze by solving coding challenges and debugging code snippets to unlock paths. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CodeMaze Escape</h1>
+    <p class="seo-subtitle">A mini-game where developers navigate a virtual maze by solving coding challenges and debugging code snippets to unlock paths.</p>
+    <style>  
+  body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; background-color: #1e1e2f; color: #ffffff; }  
+  #tool-app { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }  
+  .maze-grid { display: grid; grid-template-columns: repeat(5, 80px); grid-gap: 10px; margin: 20px auto; }  
+  .maze-cell { width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; border: 1px solid #555; background: #2a2a40; }  
+  .player { background: linear-gradient(135deg, #4caf50, #81c784); border: 2px solid #ffffff; }  
+  .locked { background: linear-gradient(135deg, #f44336, #e57373); }  
+  #challenge-box { margin-top: 20px; padding: 15px; background: #333; border-radius: 8px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); }  
+  #challenge-text { margin-bottom: 10px; }  
+  #challenge-input { padding: 8px; margin-right: 10px; width: 200px; }  
+  #submit-button { padding: 8px 15px; background: #4caf50; color: #ffffff; border: none; cursor: pointer; border-radius: 5px; }  
+</style>  
+<div id="tool-app">  
+  <div class="maze-grid" id="maze-grid">  
+    <!-- Maze will be dynamically rendered -->  
+  </div>  
+  <div id="challenge-box" style="display: none;">  
+    <div id="challenge-text"></div>  
+    <input type="text" id="challenge-input" placeholder="Your answer here" />  
+    <button id="submit-button">Submit</button>  
+  </div>  
+</div>  
+<script>  
+const mazeSize = 5;  
+const maze = [];  
+let playerPosition = { x: 0, y: 0 };  
+
+const challenges = [  
+  { question: "Fix the syntax: console.log('Hello World',", answer: "console.log('Hello World');" },  
+  { question: "What does CSS stand for?", answer: "Cascading Style Sheets" },  
+  { question: "Which HTML tag is used for JavaScript?", answer: "<script>" },  
+  { question: "What is 2 + 2 * 2?", answer: "6" },  
+  { question: "Fix the bug: let x = [1,2 3];", answer: "let x = [1,2,3];" }  
+];  
+
+function generateMaze() {  
+  for (let y = 0; y < mazeSize; y++) {  
+    const row = [];  
+    for (let x = 0; x < mazeSize; x++) {  
+      row.push({ x, y, locked: Math.random() < 0.3 });  
+    }  
+    maze.push(row);  
+  }  
+  maze[0][0].locked = false;  
+  renderMaze();  
+}  
+
+function renderMaze() {  
+  const grid = document.getElementById("maze-grid");  
+  grid.innerHTML = "";  
+  maze.forEach((row) => {  
+    row.forEach((cell) => {  
+      const div = document.createElement("div");  
+      div.className = "maze-cell";  
+      if (playerPosition.x === cell.x && playerPosition.y === cell.y) {  
+        div.classList.add("player");  
+      } else if (cell.locked) {  
+        div.classList.add("locked");  
+      }  
+      grid.appendChild(div);  
+    });  
+  });  
+}  
+
+function movePlayer(dx, dy) {  
+  const newX = playerPosition.x + dx;  
+  const newY = playerPosition.y + dy;  
+
+  if (newX >= 0 && newX < mazeSize && newY >= 0 && newY < mazeSize) {  
+    const cell = maze[newY][newX];  
+
+    if (cell.locked) {  
+      presentChallenge(cell);  
+    } else {  
+      playerPosition = { x: newX, y: newY };  
+      renderMaze();  
+    }  
+  }  
+}  
+
+function presentChallenge(cell) {  
+  const challengeBox = document.getElementById("challenge-box");  
+  const randomChallenge = challenges[Math.floor(Math.random() * challenges.length)];  
+  challengeBox.style.display = "block";  
+  document.getElementById("challenge-text").innerText = randomChallenge.question;  
+  document.getElementById("submit-button").onclick = () => {  
+    const input = document.getElementById("challenge-input").value;  
+    if (input === randomChallenge.answer) {  
+      cell.locked = false;  
+      challengeBox.style.display = "none";  
+      document.getElementById("challenge-input").value = "";  
+      renderMaze();  
+    } else {  
+      alert("Incorrect! Try again.");  
+    }  
+  };  
+}  
+
+document.addEventListener("keydown", (e) => {  
+  switch (e.key) {  
+    case "ArrowUp":  
+      movePlayer(0, -1);  
+      break;  
+    case "ArrowDown":  
+      movePlayer(0, 1);  
+      break;  
+    case "ArrowLeft":  
+      movePlayer(-1, 0);  
+      break;  
+    case "ArrowRight":  
+      movePlayer(1, 0);  
+      break;  
+  }  
+});  
+
+generateMaze();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,164 @@
+---
+layout: null
+title: "Task Tangle: Dependency Weaver"
+category: "Productivity"
+description: "Visually map, untangle, and prioritize interconnected tasks and dependencies with a drag-and-drop productivity web game."
+permalink: "/tools/daily-20260601-13-task-tangle-dependency-weaver.html"
+generated_by: "api-true-ai"
+generated_date: "20260601"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Tangle: Dependency Weaver | Free Online Interactive Tool</title>
+  <meta name="description" content="Visually map, untangle, and prioritize interconnected tasks and dependencies with a drag-and-drop productivity web game. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Task Tangle: Dependency Weaver | Free Online Interactive Tool">
+  <meta property="og:description" content="Visually map, untangle, and prioritize interconnected tasks and dependencies with a drag-and-drop productivity web game. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Task Tangle: Dependency Weaver | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visually map, untangle, and prioritize interconnected tasks and dependencies with a drag-and-drop productivity web game. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Task Tangle: Dependency Weaver</h1>
+    <p class="seo-subtitle">Visually map, untangle, and prioritize interconnected tasks and dependencies with a drag-and-drop productivity web game.</p>
+    <style>  
+#tool-app {  
+  font-family: Arial, sans-serif;  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  height: 100vh;  
+  background: linear-gradient(135deg, #f0f4f8, #d9e4f5);  
+  color: #333;  
+}  
+#canvas-container {  
+  border: 2px solid #bbb;  
+  background: #fff;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  
+  width: 80%;  
+  height: 70%;  
+  position: relative;  
+  overflow: hidden;  
+}  
+.task-node {  
+  position: absolute;  
+  background: #6c5ce7;  
+  color: #fff;  
+  padding: 10px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
+  user-select: none;  
+  transition: transform 0.2s ease;  
+}  
+.task-node:hover {  
+  transform: scale(1.1);  
+  background: #74b9ff;  
+}  
+.connection {  
+  stroke: #74b9ff;  
+  stroke-width: 2;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Task Tangle: Dependency Weaver</h1>  
+  <p>Drag nodes to rearrange tasks and their dependencies!</p>  
+  <div id="canvas-container"></div>  
+</div>  
+<script>  
+const app = document.getElementById('canvas-container');  
+const tasks = [  
+  { id: 1, name: "Task A", x: 100, y: 100 },  
+  { id: 2, name: "Task B", x: 300, y: 150 },  
+  { id: 3, name: "Task C", x: 200, y: 300 },  
+];  
+const dependencies = [  
+  { from: 1, to: 2 },  
+  { from: 2, to: 3 },  
+];  
+const svgNS = "http://www.w3.org/2000/svg";  
+const svg = document.createElementNS(svgNS, "svg");  
+svg.style.width = "100%";  
+svg.style.height = "100%";  
+svg.style.position = "absolute";  
+app.appendChild(svg);  
+
+function createLine(x1, y1, x2, y2) {  
+  const line = document.createElementNS(svgNS, "line");  
+  line.setAttribute("x1", x1);  
+  line.setAttribute("y1", y1);  
+  line.setAttribute("x2", x2);  
+  line.setAttribute("y2", y2);  
+  line.classList.add("connection");  
+  svg.appendChild(line);  
+  return line;  
+}  
+
+function renderConnections() {  
+  svg.innerHTML = "";  
+  dependencies.forEach(dep => {  
+    const fromTask = tasks.find(t => t.id === dep.from);  
+    const toTask = tasks.find(t => t.id === dep.to);  
+    createLine(fromTask.x + 50, fromTask.y + 20, toTask.x + 50, toTask.y + 20);  
+  });  
+}  
+
+function createTaskNode(task) {  
+  const node = document.createElement("div");  
+  node.className = "task-node";  
+  node.textContent = task.name;  
+  node.style.left = task.x + "px";  
+  node.style.top = task.y + "px";  
+
+  let offsetX = 0, offsetY = 0;  
+  let isDragging = false;  
+
+  node.addEventListener("mousedown", (e) => {  
+    isDragging = true;  
+    offsetX = e.clientX - task.x;  
+    offsetY = e.clientY - task.y;  
+  });  
+
+  document.addEventListener("mousemove", (e) => {  
+    if (!isDragging) return;  
+    task.x = e.clientX - offsetX;  
+    task.y = e.clientY - offsetY;  
+    node.style.left = task.x + "px";  
+    node.style.top = task.y + "px";  
+    renderConnections();  
+  });  
+
+  document.addEventListener("mouseup", () => {  
+    isDragging = false;  
+  });  
+
+  return node;  
+}  
+
+tasks.forEach(task => {  
+  const node = createTaskNode(task);  
+  app.appendChild(node);  
+});  
+
+renderConnections();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,168 @@
+---
+layout: null
+title: "WordWeaver: Interactive Story Plot Generator"
+category: "Writing"
+description: "A gamified tool where users weave together story elements by connecting visual nodes, unlocking branching pathways for their narrative ideas."
+permalink: "/tools/daily-20260601-03-wordweaver-interactive-story-plot-generator.html"
+generated_by: "api-true-ai"
+generated_date: "20260601"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordWeaver: Interactive Story Plot Generator | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool where users weave together story elements by connecting visual nodes, unlocking branching pathways for their narrative ideas. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="WordWeaver: Interactive Story Plot Generator | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool where users weave together story elements by connecting visual nodes, unlocking branching pathways for their narrative ideas. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WordWeaver: Interactive Story Plot Generator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool where users weave together story elements by connecting visual nodes, unlocking branching pathways for their narrative ideas. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>WordWeaver: Interactive Story Plot Generator</h1>
+    <p class="seo-subtitle">A gamified tool where users weave together story elements by connecting visual nodes, unlocking branching pathways for their narrative ideas.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(120deg, #f0f8ff, #e6e6fa);  
+  margin: 0;  
+  padding: 20px;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  width: 80%;  
+  height: 80%;  
+  background: white;  
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);  
+  border-radius: 10px;  
+  display: flex;  
+  flex-direction: column;  
+  padding: 20px;  
+  overflow: hidden;  
+}  
+.header {  
+  font-size: 24px;  
+  font-weight: bold;  
+  text-align: center;  
+  margin-bottom: 15px;  
+}  
+#canvas {  
+  flex: 1;  
+  border: 1px solid #ccc;  
+  border-radius: 8px;  
+  position: relative;  
+  overflow: hidden;  
+  background: #f9f9f9;  
+}  
+.node {  
+  position: absolute;  
+  width: 120px;  
+  height: 80px;  
+  background: #fffae6;  
+  border: 2px solid #ffc107;  
+  border-radius: 8px;  
+  text-align: center;  
+  line-height: 1.2;  
+  cursor: pointer;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  font-size: 14px;  
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);  
+}  
+.node:hover {  
+  background: #fff3d1;  
+}  
+.connection {  
+  stroke: #3399ff;  
+  stroke-width: 2;  
+}  
+</style>  
+<div id="tool-app">  
+  <div class="header">WordWeaver: Build Your Story</div>  
+  <div id="canvas"></div>  
+</div>  
+<script>  
+const canvas = document.getElementById('canvas');  
+let nodes = [];  
+let connections = [];  
+
+function createNode(x, y, text) {  
+  const node = document.createElement('div');  
+  node.className = 'node';  
+  node.style.left = `${x}px`;  
+  node.style.top = `${y}px`;  
+  node.textContent = text;  
+  node.draggable = true;  
+
+  node.addEventListener('dragstart', (e) => {  
+    e.dataTransfer.setData('application/node', JSON.stringify({ id: nodes.indexOf(node), x: e.offsetX, y: e.offsetY }));  
+  });  
+
+  canvas.appendChild(node);  
+  nodes.push(node);  
+}  
+
+function createConnection(fromNode, toNode) {  
+  const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');  
+  line.className = 'connection';  
+  line.setAttribute('x1', fromNode.offsetLeft + fromNode.offsetWidth / 2);  
+  line.setAttribute('y1', fromNode.offsetTop + fromNode.offsetHeight / 2);  
+  line.setAttribute('x2', toNode.offsetLeft + toNode.offsetWidth / 2);  
+  line.setAttribute('y2', toNode.offsetTop + toNode.offsetHeight / 2);  
+
+  canvas.insertBefore(line, canvas.firstChild);  
+  connections.push(line);  
+}  
+
+canvas.addEventListener('dblclick', (e) => {  
+  const text = prompt('Enter story element or idea:');  
+  if (text) {  
+    createNode(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop, text);  
+  }  
+});  
+
+canvas.addEventListener('dragover', (e) => {  
+  e.preventDefault();  
+});  
+
+canvas.addEventListener('drop', (e) => {  
+  e.preventDefault();  
+  const data = JSON.parse(e.dataTransfer.getData('application/node'));  
+  const node = nodes[data.id];  
+  node.style.left = `${e.clientX - canvas.offsetLeft - data.x}px`;  
+  node.style.top = `${e.clientY - canvas.offsetTop - data.y}px`;  
+
+  // Redraw connections  
+  connections.forEach((line) => canvas.removeChild(line));  
+  connections = [];  
+  for (let i = 0; i < nodes.length - 1; i++) {  
+    createConnection(nodes[i], nodes[i + 1]);  
+  }  
+});  
+
+// Add a starter node  
+createNode(100, 100, 'Once upon a time...');  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

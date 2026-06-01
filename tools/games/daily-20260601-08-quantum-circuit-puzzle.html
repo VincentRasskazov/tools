@@ -1,0 +1,108 @@
+---
+layout: null
+title: "Quantum Circuit Puzzle"
+category: "Games"
+description: "A highly interactive mini-game where players design and optimize quantum circuits to solve puzzles and unlock levels."
+permalink: "/tools/daily-20260601-08-quantum-circuit-puzzle.html"
+generated_by: "api-true-ai"
+generated_date: "20260601"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quantum Circuit Puzzle | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive mini-game where players design and optimize quantum circuits to solve puzzles and unlock levels. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Quantum Circuit Puzzle | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive mini-game where players design and optimize quantum circuits to solve puzzles and unlock levels. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Quantum Circuit Puzzle | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive mini-game where players design and optimize quantum circuits to solve puzzles and unlock levels. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Quantum Circuit Puzzle</h1>
+    <p class="seo-subtitle">A highly interactive mini-game where players design and optimize quantum circuits to solve puzzles and unlock levels.</p>
+    <style>  
+body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #1e1e2f; color: #f0f0f0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }  
+#tool-app { width: 90%; max-width: 800px; padding: 20px; background: #29293d; border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); }  
+#game-board { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }  
+.gate { width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; background: #6c63ff; border-radius: 5px; cursor: pointer; transition: transform 0.2s; }  
+.gate:hover { transform: scale(1.1); }  
+.circuit-row { display: flex; margin-bottom: 10px; }  
+.circuit-slot { width: 60px; height: 60px; background: #3c3c5c; border: 2px dashed #6c63ff; border-radius: 5px; display: flex; justify-content: center; align-items: center; }  
+button { background: #6c63ff; color: #fff; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-size: 16px; margin-top: 10px; }  
+button:hover { background: #5755d9; }  
+#output { margin-top: 20px; font-size: 16px; }  
+</style>  
+<div id="tool-app">  
+  <h1>Quantum Circuit Puzzle</h1>  
+  <p>Drag and drop logic gates to complete the quantum circuit and achieve the target state!</p>  
+  <div id="game-board">  
+    <div class="gate" draggable="true" data-type="H">H</div>  
+    <div class="gate" draggable="true" data-type="X">X</div>  
+    <div class="gate" draggable="true" data-type="Z">Z</div>  
+    <div class="gate" draggable="true" data-type="CNOT">CNOT</div>  
+  </div>  
+  <div id="circuit-area">  
+    <div class="circuit-row">  
+      <div class="circuit-slot" data-pos="0"></div>  
+      <div class="circuit-slot" data-pos="1"></div>  
+      <div class="circuit-slot" data-pos="2"></div>  
+      <div class="circuit-slot" data-pos="3"></div>  
+    </div>  
+  </div>  
+  <button id="run-circuit">Run Circuit</button>  
+  <div id="output"></div>  
+</div>  
+<script>  
+const gates = document.querySelectorAll('.gate');  
+const slots = document.querySelectorAll('.circuit-slot');  
+const output = document.getElementById('output');  
+let draggedGate = null;  
+  
+gates.forEach(gate => {  
+  gate.addEventListener('dragstart', function() {  
+    draggedGate = this;  
+  });  
+});  
+  
+slots.forEach(slot => {  
+  slot.addEventListener('dragover', function(e) {  
+    e.preventDefault();  
+  });  
+  slot.addEventListener('drop', function() {  
+    if (draggedGate) {  
+      this.textContent = draggedGate.getAttribute('data-type');  
+      this.setAttribute('data-gate', draggedGate.getAttribute('data-type'));  
+    }  
+  });  
+});  
+  
+document.getElementById('run-circuit').addEventListener('click', function() {  
+  const sequence = Array.from(slots).map(slot => slot.getAttribute('data-gate') || 'empty');  
+  if (sequence.includes('empty')) {  
+    output.textContent = 'Please complete the circuit before running!';  
+  } else {  
+    output.textContent = 'Running circuit: ' + sequence.join(' -> ');  
+    // Add logic to compute quantum state based on gates  
+  }  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

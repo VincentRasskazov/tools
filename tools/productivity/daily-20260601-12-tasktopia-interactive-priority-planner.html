@@ -1,0 +1,144 @@
+---
+layout: null
+title: "TaskTopia: Interactive Priority Planner"
+category: "Productivity"
+description: "A gamified, draggable task prioritization tool that uses visual landscapes to help you organize and optimize your to-do list based on urgency and importance."
+permalink: "/tools/daily-20260601-12-tasktopia-interactive-priority-planner.html"
+generated_by: "api-true-ai"
+generated_date: "20260601"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskTopia: Interactive Priority Planner | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified, draggable task prioritization tool that uses visual landscapes to help you organize and optimize your to-do list based on urgency and importance. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="TaskTopia: Interactive Priority Planner | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified, draggable task prioritization tool that uses visual landscapes to help you organize and optimize your to-do list based on urgency and importance. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TaskTopia: Interactive Priority Planner | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified, draggable task prioritization tool that uses visual landscapes to help you organize and optimize your to-do list based on urgency and importance. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>TaskTopia: Interactive Priority Planner</h1>
+    <p class="seo-subtitle">A gamified, draggable task prioritization tool that uses visual landscapes to help you organize and optimize your to-do list based on urgency and importance.</p>
+    <style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #74b9ff, #ffeaa7);
+    margin: 0;
+    padding: 20px;
+  }
+  #tool-app {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  #priority-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 200px);
+    grid-template-rows: repeat(2, 200px);
+    gap: 10px;
+    width: 420px;
+    height: 420px;
+    border: 4px solid #2d3436;
+    border-radius: 12px;
+    background-color: #dfe6e9;
+    position: relative;
+  }
+  .grid-label {
+    position: absolute;
+    font-weight: bold;
+    color: #2d3436;
+  }
+  #urgent-important { top: 10px; left: 10px; }
+  #not-urgent-important { top: 10px; right: 10px; }
+  #urgent-not-important { bottom: 10px; left: 10px; }
+  #not-urgent-not-important { bottom: 10px; right: 10px; }
+  .task-item {
+    background-color: #fab1a0;
+    border: 2px solid #e17055;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-weight: bold;
+    cursor: grab;
+    position: absolute;
+  }
+  .task-item.dragging {
+    opacity: 0.7;
+    cursor: grabbing;
+  }
+</style>  
+<div id="tool-app">  
+  <div id="priority-grid">  
+    <div id="urgent-important" class="grid-label">Urgent + Important</div>  
+    <div id="not-urgent-important" class="grid-label">Not Urgent + Important</div>  
+    <div id="urgent-not-important" class="grid-label">Urgent + Not Important</div>  
+    <div id="not-urgent-not-important" class="grid-label">Not Urgent + Not Important</div>  
+  </div>  
+</div>  
+<script>  
+  const tasks = [
+    { id: 1, text: 'Finish project report', x: 50, y: 50 },
+    { id: 2, text: 'Reply to emails', x: 300, y: 50 },
+    { id: 3, text: 'Buy groceries', x: 50, y: 300 },
+    { id: 4, text: 'Plan weekend trip', x: 300, y: 300 }
+  ];
+
+  const app = document.getElementById('tool-app');
+  const priorityGrid = document.getElementById('priority-grid');
+
+  tasks.forEach(task => {
+    const taskElement = document.createElement('div');
+    taskElement.className = 'task-item';
+    taskElement.innerText = task.text;
+    taskElement.style.left = task.x + 'px';
+    taskElement.style.top = task.y + 'px';
+    taskElement.draggable = true;
+    taskElement.dataset.id = task.id;
+
+    taskElement.addEventListener('dragstart', (e) => {
+      e.dataTransfer.setData('text/plain', JSON.stringify({ id: task.id, startX: e.offsetX, startY: e.offsetY }));
+      taskElement.classList.add('dragging');
+    });
+
+    taskElement.addEventListener('dragend', () => {
+      taskElement.classList.remove('dragging');
+    });
+
+    priorityGrid.appendChild(taskElement);
+  });
+
+  priorityGrid.addEventListener('dragover', (e) => {
+    e.preventDefault();
+  });
+
+  priorityGrid.addEventListener('drop', (e) => {
+    const data = JSON.parse(e.dataTransfer.getData('text/plain'));
+    const taskElement = document.querySelector(`.task-item[data-id='${data.id}']`);
+    const x = e.clientX - priorityGrid.offsetLeft - data.startX;
+    const y = e.clientY - priorityGrid.offsetTop - data.startY;
+
+    taskElement.style.left = Math.max(0, Math.min(400, x)) + 'px';
+    taskElement.style.top = Math.max(0, Math.min(400, y)) + 'px';
+  });
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

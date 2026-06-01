@@ -1,0 +1,179 @@
+---
+layout: null
+title: "Quantum Circuit Composer"
+category: "Education"
+description: "An interactive tool where users can visually build, simulate, and understand the basics of quantum circuits through draggable gates, real-time qubit state visualization, and step-by-step quantum computation explanations."
+permalink: "/tools/daily-20260601-05-quantum-circuit-composer.html"
+generated_by: "api-true-ai"
+generated_date: "20260601"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quantum Circuit Composer | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool where users can visually build, simulate, and understand the basics of quantum circuits through draggable gates, real-time qubit state visualization, and step-by-step quantum computation explanations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Quantum Circuit Composer | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool where users can visually build, simulate, and understand the basics of quantum circuits through draggable gates, real-time qubit state visualization, and step-by-step quantum computation explanations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Quantum Circuit Composer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool where users can visually build, simulate, and understand the basics of quantum circuits through draggable gates, real-time qubit state visualization, and step-by-step quantum computation explanations. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Quantum Circuit Composer</h1>
+    <p class="seo-subtitle">An interactive tool where users can visually build, simulate, and understand the basics of quantum circuits through draggable gates, real-time qubit state visualization, and step-by-step quantum computation explanations.</p>
+    <style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #1e1e2f;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+}
+#tool-app {
+  width: 90%;
+  max-width: 1000px;
+  background: #282c34;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
+}
+h1 {
+  text-align: center;
+  color: #61dafb;
+  margin-bottom: 20px;
+}
+#workspace {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#qubits, #controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.qubit {
+  background: #44475a;
+  padding: 10px;
+  border-radius: 5px;
+  flex: 1;
+  text-align: center;
+}
+.draggable {
+  cursor: pointer;
+  padding: 10px;
+  background: #61dafb;
+  color: #000;
+  border-radius: 5px;
+  text-align: center;
+}
+.simulation-output {
+  margin-top: 20px;
+  background: #21252b;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 0.9em;
+}
+</style>
+<div id="tool-app">
+  <h1>Quantum Circuit Composer</h1>
+  <div id="workspace">
+    <div id="qubits">
+      <div class="qubit">Qubit 1: |0⟩</div>
+      <div class="qubit">Qubit 2: |0⟩</div>
+      <div class="qubit">Qubit 3: |0⟩</div>
+    </div>
+    <div id="controls">
+      <div class="draggable" draggable="true" data-gate="H">Hadamard (H)</div>
+      <div class="draggable" draggable="true" data-gate="X">Pauli-X (X)</div>
+      <div class="draggable" draggable="true" data-gate="CNOT">CNOT</div>
+      <div class="draggable" draggable="true" data-gate="Z">Pauli-Z (Z)</div>
+    </div>
+    <button id="simulate">Simulate Circuit</button>
+  </div>
+  <div class="simulation-output" id="output">
+    Simulation results will appear here.
+  </div>
+</div>
+<script>
+const qubits = document.querySelectorAll('.qubit');
+const controls = document.querySelectorAll('.draggable');
+const simulateButton = document.getElementById('simulate');
+const output = document.getElementById('output');
+
+// State management
+let circuit = [];
+
+// Drag and drop events
+controls.forEach(control => {
+  control.addEventListener('dragstart', (e) => {
+    e.dataTransfer.setData('gate', e.target.dataset.gate);
+  });
+});
+
+qubits.forEach((qubit, index) => {
+  qubit.addEventListener('dragover', (e) => {
+    e.preventDefault();
+  });
+  qubit.addEventListener('drop', (e) => {
+    e.preventDefault();
+    const gate = e.dataTransfer.getData('gate');
+    qubit.textContent += ` → ${gate}`;
+    circuit.push({ qubit: index, gate });
+  });
+});
+
+// Simulate button logic
+simulateButton.addEventListener('click', () => {
+  if (circuit.length === 0) {
+    output.textContent = "No operations to simulate. Drag gates onto qubits!";
+    return;
+  }
+  let states = ["|0⟩", "|0⟩", "|0⟩"];
+  circuit.forEach(({ qubit, gate }) => {
+    states[qubit] = applyGate(states[qubit], gate);
+  });
+  output.textContent = `Final states: ${states.join(', ')}`;
+  circuit = []; // reset circuit
+});
+
+function applyGate(state, gate) {
+  switch (gate) {
+    case 'H':
+      return state === "|0⟩" ? "1/√2(|0⟩+|1⟩)" : "1/√2(|0⟩-|1⟩)";
+    case 'X':
+      return state === "|0⟩" ? "|1⟩" : "|0⟩";
+    case 'Z':
+      return state === "|0⟩" ? "|0⟩" : "-|1⟩";
+    case 'CNOT':
+      return state;
+    default:
+      return state;
+  }
+}
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

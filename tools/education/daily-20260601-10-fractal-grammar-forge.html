@@ -1,0 +1,134 @@
+---
+layout: null
+title: "Fractal Grammar Forge"
+category: "Education"
+description: "An interactive tool that teaches grammar and sentence structure by growing fractal-like sentence trees based on user input."
+permalink: "/tools/daily-20260601-10-fractal-grammar-forge.html"
+generated_by: "api-true-ai"
+generated_date: "20260601"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fractal Grammar Forge | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool that teaches grammar and sentence structure by growing fractal-like sentence trees based on user input. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Fractal Grammar Forge | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool that teaches grammar and sentence structure by growing fractal-like sentence trees based on user input. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Fractal Grammar Forge | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool that teaches grammar and sentence structure by growing fractal-like sentence trees based on user input. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Fractal Grammar Forge</h1>
+    <p class="seo-subtitle">An interactive tool that teaches grammar and sentence structure by growing fractal-like sentence trees based on user input.</p>
+    <style>  
+/* Beautiful inline CSS for a visually engaging educational experience */  
+body {  
+  font-family: 'Arial', sans-serif;  
+  background: linear-gradient(135deg, #f0f8ff, #e6e6fa);  
+  color: #333;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 80%;  
+  height: 80%;  
+  background: white;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
+  border-radius: 12px;  
+  overflow: hidden;  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  padding: 20px;  
+}  
+canvas {  
+  border: 1px solid #ccc;  
+  margin-top: 10px;  
+  border-radius: 8px;  
+}  
+button {  
+  background: #4caf50;  
+  color: white;  
+  border: none;  
+  padding: 10px 20px;  
+  border-radius: 8px;  
+  cursor: pointer;  
+  margin-top: 10px;  
+}  
+button:hover {  
+  background: #45a049;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Fractal Grammar Forge</h1>  
+  <p>Type a sentence fragment below to grow a sentence tree:</p>  
+  <input id="sentence-input" type="text" placeholder="Start with a word or fragment..." style="padding: 8px; width: 80%; border-radius: 8px; border: 1px solid #ccc;">  
+  <button id="grow-btn">Grow Tree</button>  
+  <canvas id="tree-canvas" width="600" height="400"></canvas>  
+</div>  
+<script>  
+const canvas = document.getElementById('tree-canvas');  
+const ctx = canvas.getContext('2d');  
+const growBtn = document.getElementById('grow-btn');  
+const input = document.getElementById('sentence-input');  
+
+let treeData = [];  
+
+function drawTree(tree, x, y, angle, depth, branchLength) {  
+  if (depth === 0) return;  
+  const x2 = x + Math.cos(angle) * branchLength;  
+  const y2 = y + Math.sin(angle) * branchLength;  
+
+  ctx.beginPath();  
+  ctx.moveTo(x, y);  
+  ctx.lineTo(x2, y2);  
+  ctx.strokeStyle = `rgba(34,139,34,${depth / 10})`;  
+  ctx.lineWidth = depth;  
+  ctx.stroke();  
+
+  const nextDepth = depth - 1;  
+  drawTree(tree, x2, y2, angle - 0.5, nextDepth, branchLength * 0.8);  
+  drawTree(tree, x2, y2, angle + 0.5, nextDepth, branchLength * 0.8);  
+}  
+
+function growSentenceTree(sentence) {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  treeData.push(sentence.trim());  
+  let parts = sentence.split(/\s+/);  
+  let depth = Math.min(6, parts.length);  
+  drawTree(treeData, canvas.width / 2, canvas.height - 30, -Math.PI / 2, depth, 60);  
+}  
+
+growBtn.addEventListener('click', () => {  
+  const sentence = input.value;  
+  if (!sentence.trim()) return;  
+
+  growSentenceTree(sentence);  
+  input.value = '';  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

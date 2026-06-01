@@ -1,0 +1,144 @@
+---
+layout: null
+title: "Task Tornado: Priority Stormer"
+category: "Productivity"
+description: "A gamified productivity tool where users sort and prioritize incoming \"task clouds\" in real-time to build focus and clarity."
+permalink: "/tools/daily-20260601-06-task-tornado-priority-stormer.html"
+generated_by: "api-true-ai"
+generated_date: "20260601"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Tornado: Priority Stormer | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified productivity tool where users sort and prioritize incoming &quot;task clouds&quot; in real-time to build focus and clarity. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Task Tornado: Priority Stormer | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified productivity tool where users sort and prioritize incoming &quot;task clouds&quot; in real-time to build focus and clarity. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Task Tornado: Priority Stormer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified productivity tool where users sort and prioritize incoming &quot;task clouds&quot; in real-time to build focus and clarity. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Task Tornado: Priority Stormer</h1>
+    <p class="seo-subtitle">A gamified productivity tool where users sort and prioritize incoming &quot;task clouds&quot; in real-time to build focus and clarity.</p>
+    <style>  
+  #tool-app {  
+    font-family: Arial, sans-serif;  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    justify-content: center;  
+    height: 100vh;  
+    background: linear-gradient(135deg, #74ebd5, #9face6);  
+  }  
+  #task-area {  
+    position: relative;  
+    width: 80%;  
+    height: 70%;  
+    border: 3px solid #fff;  
+    border-radius: 12px;  
+    background: #ffffff60;  
+    overflow: hidden;  
+  }  
+  .task-cloud {  
+    position: absolute;  
+    background: #ff5e57;  
+    color: #fff;  
+    font-weight: bold;  
+    padding: 10px 15px;  
+    border-radius: 20px;  
+    cursor: grab;  
+    animation: floatTask 10s linear infinite;  
+  }  
+  @keyframes floatTask {  
+    0% { transform: translateY(0); }  
+    50% { transform: translateY(20px); }  
+    100% { transform: translateY(0); }  
+  }  
+  #scoreboard {  
+    margin-top: 20px;  
+    font-size: 18px;  
+    color: #fff;  
+  }  
+</style>  
+<div id="tool-app">  
+  <div id="task-area"></div>  
+  <div id="scoreboard">Score: <span id="score">0</span></div>  
+</div>  
+<script>  
+  const taskArea = document.getElementById('task-area');  
+  const scoreBoard = document.getElementById('score');  
+  let score = 0;  
+
+  // Generate a new task cloud  
+  function createTask() {  
+    const task = document.createElement('div');  
+    task.classList.add('task-cloud');  
+    task.textContent = getRandomTask();  
+    task.style.top = `${Math.random() * 80}%`;  
+    task.style.left = `${Math.random() * 80}%`;  
+
+    // Drag and drop functionality  
+    let offsetX = 0, offsetY = 0;  
+    task.addEventListener('mousedown', (e) => {  
+      offsetX = e.offsetX;  
+      offsetY = e.offsetY;  
+      task.style.cursor = "grabbing";  
+
+      const onMouseMove = (e) => {  
+        task.style.top = `${e.clientY - offsetY}px`;  
+        task.style.left = `${e.clientX - offsetX}px`;  
+      };  
+
+      document.addEventListener('mousemove', onMouseMove);  
+
+      task.addEventListener('mouseup', () => {  
+        document.removeEventListener('mousemove', onMouseMove);  
+        task.style.cursor = "grab";  
+
+        // Check if task is in the "priority zone"  
+        const rect = taskArea.getBoundingClientRect();  
+        const taskRect = task.getBoundingClientRect();  
+        if (taskRect.top >= rect.top && taskRect.bottom <= rect.bottom &&  
+            taskRect.left >= rect.left && taskRect.right <= rect.right) {  
+          score += 10;  
+          scoreBoard.textContent = score;  
+          task.remove();  
+        }  
+      }, { once: true });  
+    });  
+
+    taskArea.appendChild(task);  
+  }  
+
+  // Random task generator  
+  function getRandomTask() {  
+    const tasks = [  
+      "Reply to emails", "Fix bug", "Write report", "Design UI",   
+      "Team meeting", "Code review", "Plan sprint", "Test feature"  
+    ];  
+    return tasks[Math.floor(Math.random() * tasks.length)];  
+  }  
+
+  // Generate tasks at intervals  
+  setInterval(createTask, 3000);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
