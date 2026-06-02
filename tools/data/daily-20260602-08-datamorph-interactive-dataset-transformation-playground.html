@@ -1,0 +1,113 @@
+---
+layout: null
+title: "DataMorph: Interactive Dataset Transformation Playground"
+category: "Data"
+description: "A dynamic tool where users manipulate and transform visual datasets in real-time, experimenting with filters, aggregations, and pivoting to uncover meaningful patterns and trends."
+permalink: "/tools/daily-20260602-08-datamorph-interactive-dataset-transformation-playground.html"
+generated_by: "api-true-ai"
+generated_date: "20260602"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataMorph: Interactive Dataset Transformation Playground | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic tool where users manipulate and transform visual datasets in real-time, experimenting with filters, aggregations, and pivoting to uncover meaningful patterns and trends. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataMorph: Interactive Dataset Transformation Playground | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic tool where users manipulate and transform visual datasets in real-time, experimenting with filters, aggregations, and pivoting to uncover meaningful patterns and trends. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataMorph: Interactive Dataset Transformation Playground | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic tool where users manipulate and transform visual datasets in real-time, experimenting with filters, aggregations, and pivoting to uncover meaningful patterns and trends. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataMorph: Interactive Dataset Transformation Playground</h1>
+    <p class="seo-subtitle">A dynamic tool where users manipulate and transform visual datasets in real-time, experimenting with filters, aggregations, and pivoting to uncover meaningful patterns and trends.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f3f3f3; }  
+  #tool-app { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }  
+  .panel { background: #fff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px; padding: 20px; margin: 10px; width: 90%; max-width: 600px; }  
+  .dataset { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; margin-top: 20px; }  
+  .cell { padding: 10px; text-align: center; border: 1px solid #ddd; background: #f9f9f9; border-radius: 4px; }  
+  .actions button { margin: 5px; padding: 8px 12px; border: none; border-radius: 4px; background: #007BFF; color: #fff; cursor: pointer; }  
+  .actions button:hover { background: #0056b3; }  
+  .actions button[disabled] { background: #ccc; cursor: not-allowed; }  
+</style>  
+<div id="tool-app">  
+  <div class="panel">  
+    <h1>DataMorph: Interactive Dataset Transformation Playground</h1>  
+    <p>Transform the dataset below using the control buttons to uncover patterns!</p>  
+    <div class="actions">  
+      <button id="filter-btn">Filter</button>  
+      <button id="sort-btn">Sort</button>  
+      <button id="shuffle-btn">Shuffle</button>  
+      <button id="reset-btn">Reset</button>  
+    </div>  
+    <div class="dataset" id="dataset"></div>  
+  </div>  
+</div>  
+<script>  
+  const app = document.getElementById("dataset");  
+  const originalData = [32, 78, 15, 64, 109, 45, 87, 2, 53, 90, 21, 76, 34, 88, 12, 101, 49];  
+
+  // Generate the initial dataset view  
+  function renderDataset(data) {  
+    app.innerHTML = "";  
+    data.forEach(value => {  
+      const cell = document.createElement("div");  
+      cell.className = "cell";  
+      cell.textContent = value;  
+      app.appendChild(cell);  
+    });  
+  }  
+
+  // Transformation functions  
+  function filterDataset() {  
+    currentData = currentData.filter(value => value > 50);  
+    renderDataset(currentData);  
+  }  
+
+  function sortDataset() {  
+    currentData.sort((a, b) => a - b);  
+    renderDataset(currentData);  
+  }  
+
+  function shuffleDataset() {  
+    for (let i = currentData.length - 1; i > 0; i--) {  
+      const j = Math.floor(Math.random() * (i + 1));  
+      [currentData[i], currentData[j]] = [currentData[j], currentData[i]];  
+    }  
+    renderDataset(currentData);  
+  }  
+
+  function resetDataset() {  
+    currentData = [...originalData];  
+    renderDataset(currentData);  
+  }  
+
+  let currentData = [...originalData];  
+  renderDataset(currentData);  
+
+  // Button event listeners  
+  document.getElementById("filter-btn").addEventListener("click", filterDataset);  
+  document.getElementById("sort-btn").addEventListener("click", sortDataset);  
+  document.getElementById("shuffle-btn").addEventListener("click", shuffleDataset);  
+  document.getElementById("reset-btn").addEventListener("click", resetDataset);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

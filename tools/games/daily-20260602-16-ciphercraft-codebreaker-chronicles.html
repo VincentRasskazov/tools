@@ -1,0 +1,113 @@
+---
+layout: null
+title: "CipherCraft: Codebreaker Chronicles"
+category: "Games"
+description: "An interactive mini-game where players decode dynamically generated secret messages using ciphers while racing against the clock."
+permalink: "/tools/daily-20260602-16-ciphercraft-codebreaker-chronicles.html"
+generated_by: "api-true-ai"
+generated_date: "20260602"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CipherCraft: Codebreaker Chronicles | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive mini-game where players decode dynamically generated secret messages using ciphers while racing against the clock. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CipherCraft: Codebreaker Chronicles | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive mini-game where players decode dynamically generated secret messages using ciphers while racing against the clock. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CipherCraft: Codebreaker Chronicles | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive mini-game where players decode dynamically generated secret messages using ciphers while racing against the clock. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CipherCraft: Codebreaker Chronicles</h1>
+    <p class="seo-subtitle">An interactive mini-game where players decode dynamically generated secret messages using ciphers while racing against the clock.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #1e1e2f; color: #f5f5f5; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }  
+  #tool-app { text-align: center; max-width: 600px; background: #29293d; padding: 20px; border-radius: 10px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); }  
+  h1 { margin: 0 0 20px; font-size: 24px; color: #ff6f61; }  
+  p { margin: 10px 0; }  
+  input, button { font-size: 16px; padding: 10px; margin: 5px 0; border: none; border-radius: 5px; }  
+  input { width: 100%; }  
+  button { background: #ff6f61; color: white; cursor: pointer; transition: transform 0.2s; }  
+  button:hover { transform: scale(1.05); }  
+  .timer { font-size: 18px; margin-bottom: 15px; }  
+  .success { color: #4caf50; }  
+  .failure { color: #f44336; }  
+</style>  
+<div id="tool-app">  
+  <h1>CipherCraft: Codebreaker Chronicles</h1>  
+  <p id="instructions">Solve the cipher before time runs out! A hint is provided below:</p>  
+  <p id="cipher" style="font-weight: bold; font-size: 20px;"></p>  
+  <p><strong>Hint:</strong> <span id="hint"></span></p>  
+  <p class="timer">Time remaining: <span id="timer">60</span> seconds</p>  
+  <input id="guess" type="text" placeholder="Enter your decoded message here">  
+  <button id="submit">Submit Answer</button>  
+  <p id="feedback"></p>  
+</div>  
+<script>  
+const ciphers = [  
+  { cipher: str => str.split('').reverse().join(''), hint: "Reversed text", solution: msg => msg.split('').reverse().join('') },  
+  { cipher: str => str.replace(/[a-z]/gi, c => String.fromCharCode(c.charCodeAt(0) + (c === c.toUpperCase() ? -32 : 32))), hint: "Change case", solution: msg => msg.replace(/[a-z]/gi, c => String.fromCharCode(c.charCodeAt(0) + (c === c.toUpperCase() ? -32 : 32))) },  
+  { cipher: str => str.split('').map(c => c === ' ' ? ' ' : String.fromCharCode(((c.charCodeAt(0) - 97 + 3) % 26) + 97)).join(''), hint: "Caesar cipher (+3)", solution: msg => msg.split('').map(c => c === ' ' ? ' ' : String.fromCharCode(((c.charCodeAt(0) - 97 - 3 + 26) % 26) + 97)).join('') }  
+];  
+
+let timeLeft = 60;  
+let timerInterval;  
+let currentCipher;  
+const cipherTextEl = document.getElementById('cipher');  
+const hintEl = document.getElementById('hint');  
+const timerEl = document.getElementById('timer');  
+const feedbackEl = document.getElementById('feedback');  
+
+function getRandomCipher() { return ciphers[Math.floor(Math.random() * ciphers.length)]; }  
+
+function startGame() {  
+  currentCipher = getRandomCipher();  
+  const message = "decipher this";  
+  cipherTextEl.textContent = currentCipher.cipher(message);  
+  hintEl.textContent = currentCipher.hint;  
+  feedbackEl.textContent = "";  
+  timeLeft = 60;  
+  timerEl.textContent = timeLeft;  
+  timerInterval = setInterval(() => {  
+    timeLeft--;  
+    timerEl.textContent = timeLeft;  
+    if (timeLeft <= 0) {  
+      clearInterval(timerInterval);  
+      feedbackEl.innerHTML = `<span class="failure">Time's up! The correct answer was: "${message}".</span>`;  
+    }  
+  }, 1000);  
+}  
+
+document.getElementById('submit').addEventListener('click', () => {  
+  const guess = document.getElementById('guess').value.trim();  
+  const decoded = currentCipher.solution(cipherTextEl.textContent);  
+  if (guess.toLowerCase() === decoded.toLowerCase()) {  
+    clearInterval(timerInterval);  
+    feedbackEl.innerHTML = `<span class="success">Correct! Well done!</span>`;  
+  } else {  
+    feedbackEl.innerHTML = `<span class="failure">Incorrect! Try again.</span>`;  
+  }  
+});  
+
+startGame();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

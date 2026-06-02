@@ -1,0 +1,167 @@
+---
+layout: null
+title: "DataOrbit: Interactive Relationship Mapper"
+category: "Data"
+description: "Visualize and manipulate connections between datasets as orbiting celestial bodies, where relationships dynamically shift based on user input."
+permalink: "/tools/daily-20260602-24-dataorbit-interactive-relationship-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260602"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataOrbit: Interactive Relationship Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize and manipulate connections between datasets as orbiting celestial bodies, where relationships dynamically shift based on user input. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataOrbit: Interactive Relationship Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize and manipulate connections between datasets as orbiting celestial bodies, where relationships dynamically shift based on user input. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataOrbit: Interactive Relationship Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize and manipulate connections between datasets as orbiting celestial bodies, where relationships dynamically shift based on user input. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataOrbit: Interactive Relationship Mapper</h1>
+    <p class="seo-subtitle">Visualize and manipulate connections between datasets as orbiting celestial bodies, where relationships dynamically shift based on user input.</p>
+    ```html
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: radial-gradient(circle, #000428, #004e92);
+    color: white;
+    overflow: hidden;
+  }
+  #tool-app {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    cursor: grab;
+  }
+  .node {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #ff6f61;
+    box-shadow: 0 0 10px rgba(255, 111, 97, 0.8);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+  .node:hover {
+    background-color: #ff9a8d;
+    transform: scale(1.5);
+    cursor: pointer;
+  }
+  .link {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+</style>
+<div id="tool-app"></div>
+<script>
+const app = document.getElementById('tool-app');
+const nodes = [
+  { id: 1, x: 300, y: 300, label: 'Dataset A' },
+  { id: 2, x: 500, y: 300, label: 'Dataset B' },
+  { id: 3, x: 400, y: 100, label: 'Dataset C' },
+  { id: 4, x: 200, y: 200, label: 'Dataset D' },
+];
+const links = [
+  { source: 1, target: 2 },
+  { source: 2, target: 3 },
+  { source: 3, target: 4 },
+  { source: 4, target: 1 },
+];
+
+const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+svg.setAttribute("width", "100%");
+svg.setAttribute("height", "100%");
+app.appendChild(svg);
+
+function createNode(node) {
+  const el = document.createElement('div');
+  el.classList.add('node');
+  el.style.transform = `translate(${node.x}px, ${node.y}px)`;
+  el.setAttribute('data-id', node.id);
+  el.title = node.label;
+  app.appendChild(el);
+}
+
+function drawLink(source, target) {
+  const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+  line.setAttribute("x1", source.x);
+  line.setAttribute("y1", source.y);
+  line.setAttribute("x2", target.x);
+  line.setAttribute("y2", target.y);
+  line.setAttribute("stroke", "rgba(255, 255, 255, 0.6)");
+  line.setAttribute("stroke-width", "2");
+  svg.appendChild(line);
+}
+
+nodes.forEach(createNode);
+links.forEach(link => {
+  const source = nodes.find(n => n.id === link.source);
+  const target = nodes.find(n => n.id === link.target);
+  drawLink(source, target);
+});
+
+let isDragging = false;
+let dragNode = null;
+let offsetX = 0;
+let offsetY = 0;
+
+app.addEventListener('mousedown', (e) => {
+  if (e.target.classList.contains('node')) {
+    isDragging = true;
+    dragNode = e.target;
+    const rect = dragNode.getBoundingClientRect();
+    offsetX = e.clientX - rect.left;
+    offsetY = e.clientY - rect.top;
+  }
+});
+
+app.addEventListener('mousemove', (e) => {
+  if (isDragging && dragNode) {
+    const id = parseInt(dragNode.getAttribute('data-id'));
+    const node = nodes.find(n => n.id === id);
+    node.x = e.clientX - offsetX;
+    node.y = e.clientY - offsetY;
+    dragNode.style.transform = `translate(${node.x}px, ${node.y}px)`;
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    links.forEach(link => {
+      const source = nodes.find(n => n.id === link.source);
+      const target = nodes.find(n => n.id === link.target);
+      drawLink(source, target);
+    });
+  }
+});
+
+app.addEventListener('mouseup', () => {
+  isDragging = false;
+  dragNode = null;
+});
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,212 @@
+---
+layout: null
+title: "CipherMaze: The Encryption Escape Game"
+category: "Games"
+description: "Navigate a digital maze by solving encryption puzzles and decrypting hidden messages to unlock paths and escape."
+permalink: "/tools/daily-20260602-07-ciphermaze-the-encryption-escape-game.html"
+generated_by: "api-true-ai"
+generated_date: "20260602"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CipherMaze: The Encryption Escape Game | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate a digital maze by solving encryption puzzles and decrypting hidden messages to unlock paths and escape. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CipherMaze: The Encryption Escape Game | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate a digital maze by solving encryption puzzles and decrypting hidden messages to unlock paths and escape. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CipherMaze: The Encryption Escape Game | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate a digital maze by solving encryption puzzles and decrypting hidden messages to unlock paths and escape. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CipherMaze: The Encryption Escape Game</h1>
+    <p class="seo-subtitle">Navigate a digital maze by solving encryption puzzles and decrypting hidden messages to unlock paths and escape.</p>
+    <style>  
+body {  
+  font-family: 'Arial', sans-serif;  
+  background-color: #1e1e2f;  
+  color: #fff;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  max-width: 600px;  
+  text-align: center;  
+}  
+.maze-grid {  
+  display: grid;  
+  grid-template-columns: repeat(5, 60px);  
+  gap: 5px;  
+  justify-content: center;  
+  margin: 20px auto;  
+}  
+.cell {  
+  width: 60px;  
+  height: 60px;  
+  background-color: #444;  
+  border: 1px solid #666;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  font-size: 1.2rem;  
+  cursor: pointer;  
+}  
+.cell.player {  
+  background-color: #4caf50;  
+}  
+.cell.locked {  
+  background-color: #e74c3c;  
+}  
+.cell.path {  
+  background-color: #3498db;  
+}  
+#puzzle {  
+  margin-top: 20px;  
+  padding: 20px;  
+  background: #2e2e3d;  
+  border-radius: 10px;  
+  display: none;  
+}  
+button {  
+  background-color: #3498db;  
+  color: white;  
+  border: none;  
+  padding: 10px 20px;  
+  cursor: pointer;  
+  border-radius: 5px;  
+  margin-top: 10px;  
+}  
+button:hover {  
+  background-color: #2980b9;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>CipherMaze: The Encryption Escape Game</h1>  
+  <div class="maze-grid" id="maze">  
+    <!-- Cells to be generated dynamically -->  
+  </div>  
+  <div id="puzzle">  
+    <p>Decrypt this code to unlock the next cell:</p>  
+    <div id="encrypted-code"></div>  
+    <input type="text" id="user-input" placeholder="Enter decrypted text" />  
+    <button id="submit-answer">Submit</button>  
+  </div>  
+  <p id="status"></p>  
+</div>  
+<script>  
+const gridSize = 5;  
+const maze = [];  
+let playerPosition = { x: 0, y: 0 };  
+let puzzleActive = false;  
+let lockedCells = [  
+  { x: 1, y: 1 },  
+  { x: 2, y: 3 },  
+  { x: 4, y: 4 },  
+];  
+let activeCode = '';  
+
+const encryptedCodes = [  
+  { code: 'Uifsf', solution: 'There' },  
+  { code: 'Xfmdpnf', solution: 'Welcome' },  
+  { code: 'Ipqf', solution: 'Hope' },  
+];  
+
+function generateGrid() {  
+  const mazeContainer = document.getElementById('maze');  
+  mazeContainer.innerHTML = '';  
+  for (let y = 0; y < gridSize; y++) {  
+    for (let x = 0; x < gridSize; x++) {  
+      const cell = document.createElement('div');  
+      cell.classList.add('cell');  
+      if (x === playerPosition.x && y === playerPosition.y) {  
+        cell.classList.add('player');  
+      } else if (lockedCells.some(c => c.x === x && c.y === y)) {  
+        cell.classList.add('locked');  
+      } else {  
+        cell.classList.add('path');  
+      }  
+      cell.dataset.x = x;  
+      cell.dataset.y = y;  
+      cell.addEventListener('click', () => movePlayer(x, y));  
+      mazeContainer.appendChild(cell);  
+    }  
+  }  
+}  
+
+function movePlayer(x, y) {  
+  if (puzzleActive) return;  
+
+  const isAdjacent =  
+    (Math.abs(playerPosition.x - x) === 1 && playerPosition.y === y) ||  
+    (Math.abs(playerPosition.y - y) === 1 && playerPosition.x === x);  
+
+  if (!isAdjacent) return;  
+
+  const isLocked = lockedCells.some(c => c.x === x && c.y === y);  
+  if (isLocked) {  
+    activatePuzzle();  
+    return;  
+  }  
+
+  playerPosition = { x, y };  
+  generateGrid();  
+  checkWin();  
+}  
+
+function activatePuzzle() {  
+  puzzleActive = true;  
+  const puzzle = document.getElementById('puzzle');  
+  puzzle.style.display = 'block';  
+  const randomPuzzle =  
+    encryptedCodes[Math.floor(Math.random() * encryptedCodes.length)];  
+  activeCode = randomPuzzle.solution;  
+  document.getElementById('encrypted-code').innerText = randomPuzzle.code;  
+}  
+
+document.getElementById('submit-answer').addEventListener('click', () => {  
+  const userInput = document.getElementById('user-input').value;  
+  if (userInput === activeCode) {  
+    puzzleActive = false;  
+    document.getElementById('puzzle').style.display = 'none';  
+    document.getElementById('status').innerText = 'Puzzle Solved!';  
+    lockedCells = lockedCells.filter(  
+      c => c.x !== playerPosition.x || c.y !== playerPosition.y  
+    );  
+    generateGrid();  
+  } else {  
+    document.getElementById('status').innerText = 'Incorrect. Try Again.';  
+  }  
+});  
+
+function checkWin() {  
+  if (playerPosition.x === gridSize - 1 && playerPosition.y === gridSize - 1) {  
+    document.getElementById('status').innerText = 'You Escaped the Maze!';  
+    document.getElementById('maze').style.pointerEvents = 'none';  
+  }  
+}  
+
+generateGrid();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

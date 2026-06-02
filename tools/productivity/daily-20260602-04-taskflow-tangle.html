@@ -1,0 +1,152 @@
+---
+layout: null
+title: "TaskFlow Tangle"
+category: "Productivity"
+description: "A dynamic, interactive puzzle where you organize and untangle interconnected task nodes to optimize your workflow visually."
+permalink: "/tools/daily-20260602-04-taskflow-tangle.html"
+generated_by: "api-true-ai"
+generated_date: "20260602"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskFlow Tangle | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, interactive puzzle where you organize and untangle interconnected task nodes to optimize your workflow visually. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="TaskFlow Tangle | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, interactive puzzle where you organize and untangle interconnected task nodes to optimize your workflow visually. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TaskFlow Tangle | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, interactive puzzle where you organize and untangle interconnected task nodes to optimize your workflow visually. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>TaskFlow Tangle</h1>
+    <p class="seo-subtitle">A dynamic, interactive puzzle where you organize and untangle interconnected task nodes to optimize your workflow visually.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to right, #6a11cb, #2575fc);  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  height: 100vh;  
+  margin: 0;  
+}  
+#tool-app {  
+  width: 90%;  
+  height: 80%;  
+  background-color: white;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);  
+  display: flex;  
+  flex-direction: column;  
+  padding: 20px;  
+  overflow: hidden;  
+}  
+canvas {  
+  width: 100%;  
+  height: 100%;  
+  border-radius: 8px;  
+}  
+#instructions {  
+  font-size: 14px;  
+  color: #333;  
+  margin-bottom: 10px;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="instructions">Drag nodes to untangle task connections and create a clearer workflow.</div>  
+  <canvas id="taskCanvas"></canvas>  
+</div>  
+<script>  
+const canvas = document.getElementById('taskCanvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = canvas.offsetWidth;  
+canvas.height = canvas.offsetHeight;  
+let nodes = [];  
+let links = [];  
+let draggingNode = null;  
+
+function createNodesAndLinks() {  
+  nodes = Array.from({ length: 8 }, (_, i) => ({  
+    id: i,  
+    x: Math.random() * canvas.width,  
+    y: Math.random() * canvas.height,  
+    radius: 20,  
+    color: `hsl(${Math.random() * 360}, 70%, 50%)`  
+  }));  
+  links = nodes.map((node, i) => ({  
+    from: node.id,  
+    to: nodes[(i + 1) % nodes.length].id  
+  }));  
+}  
+
+function drawNodesAndLinks() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  links.forEach(link => {  
+    const fromNode = nodes.find(n => n.id === link.from);  
+    const toNode = nodes.find(n => n.id === link.to);  
+    if (fromNode && toNode) {  
+      ctx.beginPath();  
+      ctx.moveTo(fromNode.x, fromNode.y);  
+      ctx.lineTo(toNode.x, toNode.y);  
+      ctx.strokeStyle = '#aaa';  
+      ctx.lineWidth = 2;  
+      ctx.stroke();  
+    }  
+  });  
+  nodes.forEach(node => {  
+    ctx.beginPath();  
+    ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);  
+    ctx.fillStyle = node.color;  
+    ctx.fill();  
+    ctx.strokeStyle = '#333';  
+    ctx.lineWidth = 2;  
+    ctx.stroke();  
+  });  
+}  
+
+canvas.addEventListener('mousedown', (e) => {  
+  const rect = canvas.getBoundingClientRect();  
+  const mouseX = e.clientX - rect.left;  
+  const mouseY = e.clientY - rect.top;  
+  draggingNode = nodes.find(node =>  
+    Math.hypot(node.x - mouseX, node.y - mouseY) < node.radius  
+  );  
+});  
+
+canvas.addEventListener('mousemove', (e) => {  
+  if (draggingNode) {  
+    const rect = canvas.getBoundingClientRect();  
+    draggingNode.x = e.clientX - rect.left;  
+    draggingNode.y = e.clientY - rect.top;  
+    drawNodesAndLinks();  
+  }  
+});  
+
+canvas.addEventListener('mouseup', () => {  
+  draggingNode = null;  
+});  
+
+createNodesAndLinks();  
+drawNodesAndLinks();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

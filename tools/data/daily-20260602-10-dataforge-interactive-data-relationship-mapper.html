@@ -1,0 +1,176 @@
+---
+layout: null
+title: "DataForge: Interactive Data Relationship Mapper"
+category: "Data"
+description: "A dynamic tool to visually construct, connect, and analyze relationships between data entities in a graph-based interface."
+permalink: "/tools/daily-20260602-10-dataforge-interactive-data-relationship-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260602"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataForge: Interactive Data Relationship Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic tool to visually construct, connect, and analyze relationships between data entities in a graph-based interface. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataForge: Interactive Data Relationship Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic tool to visually construct, connect, and analyze relationships between data entities in a graph-based interface. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataForge: Interactive Data Relationship Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic tool to visually construct, connect, and analyze relationships between data entities in a graph-based interface. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataForge: Interactive Data Relationship Mapper</h1>
+    <p class="seo-subtitle">A dynamic tool to visually construct, connect, and analyze relationships between data entities in a graph-based interface.</p>
+    <style>  
+  body {  
+    font-family: Arial, sans-serif;  
+    margin: 0;  
+    background: linear-gradient(135deg, #1e3c72, #2a5298);  
+    color: white;  
+  }  
+  #tool-app {  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    justify-content: center;  
+    height: 100vh;  
+    overflow: hidden;  
+  }  
+  .node {  
+    background: #f8b400;  
+    color: #333;  
+    border-radius: 50%;  
+    padding: 15px;  
+    text-align: center;  
+    cursor: pointer;  
+    position: absolute;  
+    user-select: none;  
+  }  
+  .line {  
+    position: absolute;  
+    background: white;  
+    height: 2px;  
+    transform-origin: 0 0;  
+  }  
+  #toolbar {  
+    position: fixed;  
+    top: 10px;  
+    left: 50%;  
+    transform: translateX(-50%);  
+    display: flex;  
+    gap: 10px;  
+  }  
+  button {  
+    padding: 10px 20px;  
+    border: none;  
+    border-radius: 5px;  
+    background: #f8b400;  
+    color: #333;  
+    cursor: pointer;  
+    font-weight: bold;  
+  }  
+  button:hover {  
+    background: #fad773;  
+  }  
+</style>  
+<div id="toolbar">  
+  <button onclick="addNode()">Add Node</button>  
+  <button onclick="reset()">Reset</button>  
+</div>  
+<div id="tool-app"></div>  
+<script>  
+  const app = document.getElementById("tool-app");  
+  const nodes = [];  
+  const connections = [];  
+
+  function addNode() {  
+    const node = document.createElement("div");  
+    node.className = "node";  
+    node.contentEditable = true;  
+    node.innerText = `Node ${nodes.length + 1}`;  
+    node.style.top = `${Math.random() * 80}vh`;  
+    node.style.left = `${Math.random() * 80}vw`;  
+    app.appendChild(node);  
+    nodes.push(node);  
+
+    node.addEventListener("mousedown", (e) => {  
+      const offsetX = e.offsetX;  
+      const offsetY = e.offsetY;  
+
+      function moveAt(ev) {  
+        node.style.left = `${ev.pageX - offsetX}px`;  
+        node.style.top = `${ev.pageY - offsetY}px`;  
+        updateConnections();  
+      }  
+
+      document.addEventListener("mousemove", moveAt);  
+
+      document.addEventListener("mouseup", () => {  
+        document.removeEventListener("mousemove", moveAt);  
+        document.removeEventListener("mouseup", null);  
+      });  
+    });  
+
+    node.addEventListener("dblclick", () => {  
+      if (nodes.length > 1) {  
+        const connectTo = prompt(  
+          "Enter the number of the node to connect to:",  
+          "1"  
+        );  
+        const targetNode = nodes[parseInt(connectTo) - 1];  
+        if (targetNode && targetNode !== node) {  
+          createConnection(node, targetNode);  
+        }  
+      }  
+    });  
+  }  
+
+  function createConnection(node1, node2) {  
+    const line = document.createElement("div");  
+    line.className = "line";  
+    app.appendChild(line);  
+    connections.push({ line, node1, node2 });  
+    updateConnections();  
+  }  
+
+  function updateConnections() {  
+    connections.forEach(({ line, node1, node2 }) => {  
+      const rect1 = node1.getBoundingClientRect();  
+      const rect2 = node2.getBoundingClientRect();  
+      const x1 = rect1.left + rect1.width / 2;  
+      const y1 = rect1.top + rect1.height / 2;  
+      const x2 = rect2.left + rect2.width / 2;  
+      const y2 = rect2.top + rect2.height / 2;  
+      const length = Math.hypot(x2 - x1, y2 - y1);  
+      line.style.width = `${length}px`;  
+      line.style.left = `${x1}px`;  
+      line.style.top = `${y1}px`;  
+      line.style.transform = `rotate(${Math.atan2(y2 - y1, x2 - x1)}rad)`;  
+    });  
+  }  
+
+  function reset() {  
+    app.innerHTML = "";  
+    nodes.length = 0;  
+    connections.length = 0;  
+  }  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

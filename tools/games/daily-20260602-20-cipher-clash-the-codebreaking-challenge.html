@@ -1,0 +1,177 @@
+---
+layout: null
+title: "Cipher Clash: The Codebreaking Challenge"
+category: "Games"
+description: "A fast-paced mini-game where players decode secret messages using various cipher techniques under a ticking clock."
+permalink: "/tools/daily-20260602-20-cipher-clash-the-codebreaking-challenge.html"
+generated_by: "api-true-ai"
+generated_date: "20260602"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cipher Clash: The Codebreaking Challenge | Free Online Interactive Tool</title>
+  <meta name="description" content="A fast-paced mini-game where players decode secret messages using various cipher techniques under a ticking clock. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Cipher Clash: The Codebreaking Challenge | Free Online Interactive Tool">
+  <meta property="og:description" content="A fast-paced mini-game where players decode secret messages using various cipher techniques under a ticking clock. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cipher Clash: The Codebreaking Challenge | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A fast-paced mini-game where players decode secret messages using various cipher techniques under a ticking clock. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Cipher Clash: The Codebreaking Challenge</h1>
+    <p class="seo-subtitle">A fast-paced mini-game where players decode secret messages using various cipher techniques under a ticking clock.</p>
+    <style>  
+body {  
+  font-family: 'Arial', sans-serif;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  background: linear-gradient(to right, #283048, #859398);  
+  margin: 0;  
+  color: white;  
+  text-align: center;  
+}  
+#tool-app {  
+  background: rgba(0, 0, 0, 0.8);  
+  border-radius: 15px;  
+  padding: 20px;  
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);  
+  max-width: 500px;  
+}  
+button {  
+  background-color: #4CAF50;  
+  color: white;  
+  padding: 10px 20px;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  font-size: 16px;  
+  margin-top: 10px;  
+}  
+button:hover {  
+  background-color: #45a049;  
+}  
+#message, #input-box, #timer, #score {  
+  margin: 10px 0;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Cipher Clash</h1>  
+  <p id="instructions">Decode the secret message before time runs out!</p>  
+  <p id="message">Message: <span id="cipher-text">...</span></p>  
+  <input id="input-box" type="text" placeholder="Enter your decoded message" />  
+  <div id="timer">Time Left: <span id="time-left">30</span>s</div>  
+  <div id="score">Score: <span id="score-value">0</span></div>  
+  <button id="start-button">Start Game</button>  
+</div>  
+<script>  
+const messages = [  
+  { plain: "HELLO", ciphered: "URYYB", type: "ROT13" },  
+  { plain: "WORLD", ciphered: "DLROW", type: "REVERSE" },  
+  { plain: "JAVASCRIPT", ciphered: "Mjyfcsrjpw", type: "CAESAR" },  
+];  
+let currentMessageIndex = 0;  
+let score = 0;  
+let timeLeft = 30;  
+let timerInterval;  
+
+const cipherTextElem = document.getElementById("cipher-text");  
+const inputBox = document.getElementById("input-box");  
+const timeLeftElem = document.getElementById("time-left");  
+const scoreElem = document.getElementById("score-value");  
+const startButton = document.getElementById("start-button");  
+
+function decodeCipher(type, text) {  
+  if (type === "ROT13") {  
+    return text.replace(/[A-Za-z]/g, (char) => {  
+      return String.fromCharCode(  
+        char.charCodeAt(0) + (char.toUpperCase() <= "M" ? 13 : -13)  
+      );  
+    });  
+  } else if (type === "REVERSE") {  
+    return text.split("").reverse().join("");  
+  } else if (type === "CAESAR") {  
+    return text.replace(/[A-Za-z]/g, (char) => {  
+      let code = char.charCodeAt(0) - 5;  
+      if (char >= "a" && char <= "z" && code < 97) code += 26;  
+      if (char >= "A" && char <= "Z" && code < 65) code += 26;  
+      return String.fromCharCode(code);  
+    });  
+  }  
+  return text;  
+}  
+
+function startTimer() {  
+  timeLeft = 30;  
+  timerInterval = setInterval(() => {  
+    timeLeft--;  
+    timeLeftElem.textContent = timeLeft;  
+    if (timeLeft <= 0) {  
+      clearInterval(timerInterval);  
+      alert("Time's up! Final Score: " + score);  
+      resetGame();  
+    }  
+  }, 1000);  
+}  
+
+function loadNextMessage() {  
+  if (currentMessageIndex >= messages.length) {  
+    alert("You decoded all the messages! Final Score: " + score);  
+    resetGame();  
+    return;  
+  }  
+  const { ciphered } = messages[currentMessageIndex];  
+  cipherTextElem.textContent = ciphered;  
+  inputBox.value = "";  
+}  
+
+function checkAnswer() {  
+  const answer = inputBox.value.toUpperCase();  
+  const { plain, type } = messages[currentMessageIndex];  
+  if (answer === plain) {  
+    score += 10;  
+    scoreElem.textContent = score;  
+    currentMessageIndex++;  
+    loadNextMessage();  
+  }  
+}  
+
+function resetGame() {  
+  clearInterval(timerInterval);  
+  currentMessageIndex = 0;  
+  score = 0;  
+  scoreElem.textContent = score;  
+  cipherTextElem.textContent = "...";  
+  inputBox.value = "";  
+  timeLeft = 30;  
+  timeLeftElem.textContent = timeLeft;  
+}  
+
+startButton.addEventListener("click", () => {  
+  startButton.style.display = "none";  
+  startTimer();  
+  loadNextMessage();  
+  inputBox.addEventListener("input", checkAnswer);  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

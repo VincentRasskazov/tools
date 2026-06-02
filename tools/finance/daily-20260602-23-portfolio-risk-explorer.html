@@ -1,0 +1,145 @@
+---
+layout: null
+title: "Portfolio Risk Explorer"
+category: "Finance"
+description: "An interactive visual tool that lets users simulate the impact of market fluctuations on their investment portfolio based on historical data and hypothetical scenarios."
+permalink: "/tools/daily-20260602-23-portfolio-risk-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260602"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Risk Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive visual tool that lets users simulate the impact of market fluctuations on their investment portfolio based on historical data and hypothetical scenarios. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Portfolio Risk Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive visual tool that lets users simulate the impact of market fluctuations on their investment portfolio based on historical data and hypothetical scenarios. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Portfolio Risk Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive visual tool that lets users simulate the impact of market fluctuations on their investment portfolio based on historical data and hypothetical scenarios. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Portfolio Risk Explorer</h1>
+    <p class="seo-subtitle">An interactive visual tool that lets users simulate the impact of market fluctuations on their investment portfolio based on historical data and hypothetical scenarios.</p>
+    <style>  
+  body {  
+    font-family: Arial, sans-serif;  
+    background: linear-gradient(to bottom, #1a1a2e, #16213e);  
+    color: #f2f2f2;  
+    margin: 0;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+  }  
+  #tool-app {  
+    width: 80%;  
+    max-width: 1200px;  
+    background: #0f3460;  
+    padding: 20px;  
+    border-radius: 10px;  
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);  
+  }  
+  h1 {  
+    text-align: center;  
+    color: #e94560;  
+  }  
+  canvas {  
+    display: block;  
+    margin: 20px auto;  
+    border: 1px solid #f2f2f2;  
+  }  
+  .controls {  
+    display: flex;  
+    justify-content: space-between;  
+    margin-top: 20px;  
+  }  
+  .controls select, .controls button {  
+    padding: 10px;  
+    border: none;  
+    border-radius: 5px;  
+    background: #16213e;  
+    color: #f2f2f2;  
+    cursor: pointer;  
+  }  
+  .controls button:hover {  
+    background: #e94560;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h1>Portfolio Risk Explorer</h1>  
+  <div class="controls">  
+    <div>
+      <label for="market-scenario">Market Scenario:</label>  
+      <select id="market-scenario">  
+        <option value="bull">Bull Market</option>  
+        <option value="bear">Bear Market</option>  
+        <option value="volatile">High Volatility</option>  
+      </select>  
+    </div>  
+    <button id="simulate-button">Simulate</button>  
+  </div>  
+  <canvas id="portfolio-chart" width="800" height="400"></canvas>  
+</div>  
+<script>  
+const canvas = document.getElementById('portfolio-chart');  
+const ctx = canvas.getContext('2d');  
+
+function drawChart(data) {  
+  const maxVal = Math.max(...data);  
+  const minVal = Math.min(...data);  
+  const chartHeight = canvas.height;  
+  const chartWidth = canvas.width;  
+  const barWidth = chartWidth / data.length;  
+
+  ctx.clearRect(0, 0, chartWidth, chartHeight);  
+  ctx.fillStyle = '#e94560';  
+
+  data.forEach((value, index) => {  
+    const barHeight = ((value - minVal) / (maxVal - minVal)) * chartHeight;  
+    ctx.fillRect(index * barWidth, chartHeight - barHeight, barWidth - 2, barHeight);  
+  });  
+}  
+
+function simulatePortfolio(scenario) {  
+  let data = [];  
+  switch (scenario) {  
+    case 'bull':  
+      data = Array.from({ length: 20 }, () => Math.random() * 50 + 100);  
+      break;  
+    case 'bear':  
+      data = Array.from({ length: 20 }, () => Math.random() * -50 + 50);  
+      break;  
+    case 'volatile':  
+      data = Array.from({ length: 20 }, () => Math.random() * 100 - 50);  
+      break;  
+  }  
+  drawChart(data);  
+}  
+
+document.getElementById('simulate-button').addEventListener('click', () => {  
+  const scenario = document.getElementById('market-scenario').value;  
+  simulatePortfolio(scenario);  
+});  
+
+simulatePortfolio('bull');  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

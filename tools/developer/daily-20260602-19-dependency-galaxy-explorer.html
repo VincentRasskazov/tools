@@ -1,0 +1,170 @@
+---
+layout: null
+title: "Dependency Galaxy Explorer"
+category: "Developer"
+description: "An interactive 3D visualization tool to explore and analyze the dependency tree of any npm package in a galaxy-like environment."
+permalink: "/tools/daily-20260602-19-dependency-galaxy-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260602"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dependency Galaxy Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive 3D visualization tool to explore and analyze the dependency tree of any npm package in a galaxy-like environment. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Dependency Galaxy Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive 3D visualization tool to explore and analyze the dependency tree of any npm package in a galaxy-like environment. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dependency Galaxy Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive 3D visualization tool to explore and analyze the dependency tree of any npm package in a galaxy-like environment. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Dependency Galaxy Explorer</h1>
+    <p class="seo-subtitle">An interactive 3D visualization tool to explore and analyze the dependency tree of any npm package in a galaxy-like environment.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  margin: 0;  
+  font-family: Arial, sans-serif;  
+  overflow: hidden;  
+  background: radial-gradient(circle, #1a1a2e, #16213e);  
+}  
+#tool-app {  
+  position: absolute;  
+  width: 100vw;  
+  height: 100vh;  
+}  
+#info-box {  
+  position: absolute;  
+  bottom: 20px;  
+  left: 20px;  
+  background: rgba(0, 0, 0, 0.8);  
+  color: white;  
+  padding: 10px;  
+  border-radius: 8px;  
+  font-size: 14px;  
+  max-width: 300px;  
+}  
+</style>  
+<div id="tool-app"></div>  
+<div id="info-box">  
+  <strong>Click on nodes</strong> to explore dependencies. Use your mouse to navigate the galaxy.  
+</div>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>  
+<script>  
+// Interactive JavaScript logic here  
+const app = document.getElementById('tool-app');  
+  
+// Scene and Camera Setup  
+const scene = new THREE.Scene();  
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);  
+const renderer = new THREE.WebGLRenderer();  
+renderer.setSize(window.innerWidth, window.innerHeight);  
+app.appendChild(renderer.domElement);  
+  
+// Create a Star-like Node  
+function createNode(name, size, color) {  
+  const geometry = new THREE.SphereGeometry(size, 16, 16);  
+  const material = new THREE.MeshBasicMaterial({ color });  
+  const sphere = new THREE.Mesh(geometry, material);  
+  sphere.name = name;  
+  return sphere;  
+}  
+  
+// Generate Fake Dependency Tree  
+const dependencies = {  
+  root: {  
+    core: {  
+      lodash: {},  
+      axios: {},  
+    },  
+    ui: {  
+      bootstrap: { jquery: {}, popper: {} },  
+      tailwind: {},  
+    },  
+    util: { dateFns: {} },  
+  },  
+};  
+  
+// Helper to create 3D graph from the dependency tree  
+function generateGraph(node, parent, depth = 0) {  
+  const nodeMesh = createNode(node, 0.3, 0xffffff);  
+  if (parent) {  
+    nodeMesh.position.x = parent.position.x + Math.random() * 4 - 2;  
+    nodeMesh.position.y = parent.position.y + Math.random() * 4 - 2;  
+    nodeMesh.position.z = depth * -4;  
+  
+    // Line to parent  
+    const material = new THREE.LineBasicMaterial({ color: 0xaaaaaa });  
+    const points = [];  
+    points.push(parent.position);  
+    points.push(nodeMesh.position);  
+    const geometry = new THREE.BufferGeometry().setFromPoints(points);  
+    const line = new THREE.Line(geometry, material);  
+    scene.add(line);  
+  }  
+  
+  scene.add(nodeMesh);  
+  
+  if (typeof dependencies[node] === 'object') {  
+    Object.keys(dependencies[node]).forEach((child) =>  
+      generateGraph(child, nodeMesh, depth + 1)  
+    );  
+  }  
+}  
+  
+// Generate the Galaxy  
+generateGraph('root', null);  
+  
+// Animate Scene and Enable Controls  
+camera.position.z = 10;  
+function animate() {  
+  requestAnimationFrame(animate);  
+  renderer.render(scene, camera);  
+}  
+animate();  
+  
+// Interactivity  
+const raycaster = new THREE.Raycaster();  
+const mouse = new THREE.Vector2();  
+function onMouseMove(event) {  
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;  
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;  
+}  
+function onClick() {  
+  raycaster.setFromCamera(mouse, camera);  
+  const intersects = raycaster.intersectObjects(scene.children);  
+  if (intersects.length > 0) {  
+    const selectedNode = intersects[0].object;  
+    alert(`You clicked on: ${selectedNode.name}`);  
+  }  
+}  
+window.addEventListener('mousemove', onMouseMove, false);  
+window.addEventListener('click', onClick, false);  
+  
+// Handle Resize  
+window.addEventListener('resize', () => {  
+  camera.aspect = window.innerWidth / window.innerHeight;  
+  camera.updateProjectionMatrix();  
+  renderer.setSize(window.innerWidth, window.innerHeight);  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
