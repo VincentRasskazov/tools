@@ -1,0 +1,175 @@
+---
+layout: null
+title: "Task Terrain Navigator"
+category: "Productivity"
+description: "A gamified productivity map where users visually plot tasks as \"landmarks\" and unlock progress across a dynamic terrain by completing them."
+permalink: "/tools/daily-20260603-13-task-terrain-navigator.html"
+generated_by: "api-true-ai"
+generated_date: "20260603"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Terrain Navigator | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified productivity map where users visually plot tasks as &quot;landmarks&quot; and unlock progress across a dynamic terrain by completing them. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Task Terrain Navigator | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified productivity map where users visually plot tasks as &quot;landmarks&quot; and unlock progress across a dynamic terrain by completing them. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Task Terrain Navigator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified productivity map where users visually plot tasks as &quot;landmarks&quot; and unlock progress across a dynamic terrain by completing them. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Task Terrain Navigator</h1>
+    <p class="seo-subtitle">A gamified productivity map where users visually plot tasks as &quot;landmarks&quot; and unlock progress across a dynamic terrain by completing them.</p>
+    <style>  
+  body {  
+    font-family: 'Arial', sans-serif;  
+    margin: 0;  
+    padding: 0;  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    background: linear-gradient(to bottom, #a8e0ff, #8ee3f5, #70cad1);  
+    height: 100vh;  
+    color: #2b2b2b;  
+  }  
+  #tool-app {  
+    margin-top: 20px;  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    width: 90%;  
+    max-width: 600px;  
+    background: #ffffff;  
+    border-radius: 12px;  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+    padding: 20px;  
+  }  
+  #map {  
+    display: grid;  
+    grid-template-columns: repeat(5, 1fr);  
+    gap: 5px;  
+    margin-top: 20px;  
+    width: 100%;  
+  }  
+  .tile {  
+    width: 100%;  
+    padding-top: 100%;  
+    position: relative;  
+    background-color: #f0f0f0;  
+    border: 2px solid #ccc;  
+    border-radius: 4px;  
+    cursor: pointer;  
+  }  
+  .tile.completed {  
+    background-color: #77dd77;  
+    border-color: #5cb85c;  
+  }  
+  .tile.unlocked {  
+    background-color: #ffcccb;  
+    border-color: #ff5733;  
+  }  
+  .tile-content {  
+    position: absolute;  
+    inset: 0;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+  }  
+  #task-input {  
+    margin-top: 10px;  
+    margin-bottom: 20px;  
+    display: flex;  
+    width: 100%;  
+  }  
+  #task-input input {  
+    flex: 1;  
+    padding: 10px;  
+    border: 1px solid #ccc;  
+    border-radius: 4px;  
+  }  
+  #task-input button {  
+    padding: 10px 15px;  
+    margin-left: 10px;  
+    border: none;  
+    background-color: #007bff;  
+    color: white;  
+    border-radius: 4px;  
+    cursor: pointer;  
+  }  
+  #task-input button:hover {  
+    background-color: #0056b3;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h1>Task Terrain Navigator</h1>  
+  <p>Visualize your productivity journey and unlock new paths by completing tasks!</p>  
+  <div id="task-input">  
+    <input type="text" id="task-name" placeholder="Enter a new task..." />  
+    <button id="add-task">Add Task</button>  
+  </div>  
+  <div id="map">  
+    <!-- Dynamic tiles will be rendered here -->  
+  </div>  
+</div>  
+<script>  
+const app = document.querySelector("#tool-app");  
+const map = document.querySelector("#map");  
+const taskInput = document.querySelector("#task-name");  
+const addTaskButton = document.querySelector("#add-task");  
+
+const tasks = [];  
+
+function renderMap() {  
+  map.innerHTML = "";  
+  tasks.forEach((task, index) => {  
+    const tile = document.createElement("div");  
+    tile.className = `tile ${task.status}`;  
+    tile.dataset.index = index;  
+
+    const tileContent = document.createElement("div");  
+    tileContent.className = "tile-content";  
+    tileContent.textContent = task.name;  
+
+    if (task.status === "unlocked") {  
+      tile.onclick = () => {  
+        task.status = "completed";  
+        renderMap();  
+      };  
+    }  
+
+    tile.appendChild(tileContent);  
+    map.appendChild(tile);  
+  });  
+}  
+
+addTaskButton.addEventListener("click", () => {  
+  const taskName = taskInput.value.trim();  
+  if (taskName) {  
+    tasks.push({ name: taskName, status: "unlocked" });  
+    taskInput.value = "";  
+    renderMap();  
+  }  
+});  
+
+renderMap();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

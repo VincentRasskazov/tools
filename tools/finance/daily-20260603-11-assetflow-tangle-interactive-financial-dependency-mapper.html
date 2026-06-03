@@ -1,0 +1,142 @@
+---
+layout: null
+title: "AssetFlow Tangle: Interactive Financial Dependency Mapper"
+category: "Finance"
+description: "Visualize and interact with dynamic financial dependencies, where assets, liabilities, and cash flows are represented as a tangled web of nodes and connections."
+permalink: "/tools/daily-20260603-11-assetflow-tangle-interactive-financial-dependency-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260603"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AssetFlow Tangle: Interactive Financial Dependency Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize and interact with dynamic financial dependencies, where assets, liabilities, and cash flows are represented as a tangled web of nodes and connections. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="AssetFlow Tangle: Interactive Financial Dependency Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize and interact with dynamic financial dependencies, where assets, liabilities, and cash flows are represented as a tangled web of nodes and connections. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AssetFlow Tangle: Interactive Financial Dependency Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize and interact with dynamic financial dependencies, where assets, liabilities, and cash flows are represented as a tangled web of nodes and connections. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>AssetFlow Tangle: Interactive Financial Dependency Mapper</h1>
+    <p class="seo-subtitle">Visualize and interact with dynamic financial dependencies, where assets, liabilities, and cash flows are represented as a tangled web of nodes and connections.</p>
+    <style>  
+  #tool-app {  
+    font-family: 'Arial', sans-serif;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+    background: linear-gradient(135deg, #d4fc79, #96e6a1);  
+    overflow: hidden;  
+  }  
+  canvas {  
+    background-color: #fff;  
+    border: 1px solid #ccc;  
+    border-radius: 8px;  
+  }  
+</style>  
+<div id="tool-app">  
+  <canvas id="financial-canvas" width="800" height="600"></canvas>  
+</div>  
+<script>  
+const canvas = document.getElementById('financial-canvas');  
+const ctx = canvas.getContext('2d');  
+const nodes = [];  
+const connections = [];  
+
+// Initialize random financial nodes  
+for (let i = 0; i < 10; i++) {  
+  nodes.push({  
+    id: i,  
+    x: Math.random() * canvas.width,  
+    y: Math.random() * canvas.height,  
+    radius: 20,  
+    type: Math.random() > 0.5 ? 'asset' : 'liability',  
+    value: Math.round(Math.random() * 10000)  
+  });  
+}  
+
+// Generate connections between nodes  
+for (let i = 0; i < nodes.length - 1; i++) {  
+  for (let j = i + 1; j < nodes.length; j++) {  
+    if (Math.random() > 0.7) {  
+      connections.push({  
+        from: nodes[i].id,  
+        to: nodes[j].id,  
+        flow: Math.round(Math.random() * 1000)  
+      });  
+    }  
+  }  
+}  
+
+// Draw function  
+function draw() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+
+  // Draw connections  
+  connections.forEach(conn => {  
+    const fromNode = nodes.find(n => n.id === conn.from);  
+    const toNode = nodes.find(n => n.id === conn.to);  
+    ctx.beginPath();  
+    ctx.moveTo(fromNode.x, fromNode.y);  
+    ctx.lineTo(toNode.x, toNode.y);  
+    ctx.strokeStyle = '#333';  
+    ctx.lineWidth = conn.flow / 100;  
+    ctx.stroke();  
+  });  
+
+  // Draw nodes  
+  nodes.forEach(node => {  
+    ctx.beginPath();  
+    ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);  
+    ctx.fillStyle = node.type === 'asset' ? '#4caf50' : '#f44336';  
+    ctx.fill();  
+
+    // Draw values  
+    ctx.fillStyle = '#000';  
+    ctx.font = '12px Arial';  
+    ctx.textAlign = 'center';  
+    ctx.fillText(`$${node.value}`, node.x, node.y + 4);  
+  });  
+}  
+
+// Add interactivity!  
+canvas.addEventListener('click', (e) => {  
+  const rect = canvas.getBoundingClientRect();  
+  const mouseX = e.clientX - rect.left;  
+  const mouseY = e.clientY - rect.top;  
+
+  nodes.forEach(node => {  
+    const dist = Math.sqrt(  
+      Math.pow(node.x - mouseX, 2) + Math.pow(node.y - mouseY, 2)  
+    );  
+    if (dist < node.radius) {  
+      node.value += 500; // Increase value on click  
+      draw();  
+    }  
+  });  
+});  
+
+draw();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

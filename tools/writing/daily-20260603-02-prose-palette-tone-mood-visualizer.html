@@ -1,0 +1,133 @@
+---
+layout: null
+title: "Prose Palette: Tone & Mood Visualizer"
+category: "Writing"
+description: "An interactive tool that analyzes your writing's tone and mood, then represents it as a dynamic, evolving visual art piece."
+permalink: "/tools/daily-20260603-02-prose-palette-tone-mood-visualizer.html"
+generated_by: "api-true-ai"
+generated_date: "20260603"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prose Palette: Tone &amp; Mood Visualizer | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool that analyzes your writing's tone and mood, then represents it as a dynamic, evolving visual art piece. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Prose Palette: Tone &amp; Mood Visualizer | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool that analyzes your writing's tone and mood, then represents it as a dynamic, evolving visual art piece. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Prose Palette: Tone &amp; Mood Visualizer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool that analyzes your writing's tone and mood, then represents it as a dynamic, evolving visual art piece. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Prose Palette: Tone &amp; Mood Visualizer</h1>
+    <p class="seo-subtitle">An interactive tool that analyzes your writing's tone and mood, then represents it as a dynamic, evolving visual art piece.</p>
+    <style>  
+  #tool-app {  
+    font-family: Arial, sans-serif;  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    justify-content: center;  
+    height: 100vh;  
+    background: linear-gradient(to bottom, #f3f4f6, #e5e7eb);  
+    color: #111827;  
+  }  
+  textarea {  
+    width: 70%;  
+    height: 100px;  
+    padding: 10px;  
+    font-size: 16px;  
+    border: 1px solid #d1d5db;  
+    border-radius: 5px;  
+    margin-bottom: 20px;  
+  }  
+  canvas {  
+    border: 1px solid #d1d5db;  
+    border-radius: 10px;  
+  }  
+  button {  
+    background-color: #3b82f6;  
+    color: white;  
+    border: none;  
+    padding: 10px 20px;  
+    font-size: 16px;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    margin-top: 10px;  
+  }  
+  button:hover {  
+    background-color: #2563eb;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h1>Prose Palette</h1>  
+  <p>Paste your text below to visualize its tone and mood:</p>  
+  <textarea id="text-input" placeholder="Write or paste your text here..."></textarea>  
+  <button onclick="analyzeText()">Visualize</button>  
+  <canvas id="visualizer" width="600" height="400"></canvas>  
+</div>  
+<script>  
+  function analyzeTone(text) {  
+    const tones = {  
+      positive: ["happy", "joy", "delight", "excited", "hopeful"],  
+      negative: ["sad", "angry", "fear", "pain", "dark"],  
+      neutral: ["calm", "peaceful", "quiet", "neutral", "balanced"],  
+    };  
+    let toneScore = { positive: 0, negative: 0, neutral: 0 };  
+
+    for (const tone in tones) {  
+      tones[tone].forEach(word => {  
+        const regex = new RegExp(`\\b${word}\\b`, "gi");  
+        toneScore[tone] += (text.match(regex) || []).length;  
+      });  
+    }  
+
+    return toneScore;  
+  }  
+
+  function mapToneToColor(toneScore) {  
+    const total = toneScore.positive + toneScore.negative + toneScore.neutral;  
+    const r = Math.min((toneScore.negative / total) * 255, 255) || 0;  
+    const g = Math.min((toneScore.neutral / total) * 255, 255) || 0;  
+    const b = Math.min((toneScore.positive / total) * 255, 255) || 0;  
+    return `rgb(${Math.floor(r)}, ${Math.floor(g)}, ${Math.floor(b)})`;  
+  }  
+
+  function drawVisualizer(ctx, text, toneColor) {  
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);  
+    ctx.fillStyle = toneColor;  
+    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);  
+    ctx.font = "20px Arial";  
+    ctx.fillStyle = "#ffffff";  
+    ctx.fillText("Tone and Mood Visualized", 10, 30);  
+    ctx.fillText(text.substring(0, 50) + (text.length > 50 ? "..." : ""), 10, 60);  
+  }  
+
+  function analyzeText() {  
+    const textInput = document.getElementById("text-input").value;  
+    const toneScore = analyzeTone(textInput);  
+    const toneColor = mapToneToColor(toneScore);  
+    const canvas = document.getElementById("visualizer");  
+    const ctx = canvas.getContext("2d");  
+    drawVisualizer(ctx, textInput, toneColor);  
+  }  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
