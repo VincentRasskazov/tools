@@ -1,0 +1,172 @@
+---
+layout: null
+title: "\"Logic Trail: Interactive Deduction Maze\""
+category: "Education"
+description: "A single-page mini-game where users solve puzzles by navigating a dynamically generated maze of logical challenges to sharpen reasoning skills."
+permalink: "/tools/daily-20260604-11-logic-trail-interactive-deduction-maze.html"
+generated_by: "api-true-ai"
+generated_date: "20260604"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>&quot;Logic Trail: Interactive Deduction Maze&quot; | Free Online Interactive Tool</title>
+  <meta name="description" content="A single-page mini-game where users solve puzzles by navigating a dynamically generated maze of logical challenges to sharpen reasoning skills. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="&quot;Logic Trail: Interactive Deduction Maze&quot; | Free Online Interactive Tool">
+  <meta property="og:description" content="A single-page mini-game where users solve puzzles by navigating a dynamically generated maze of logical challenges to sharpen reasoning skills. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="&quot;Logic Trail: Interactive Deduction Maze&quot; | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A single-page mini-game where users solve puzzles by navigating a dynamically generated maze of logical challenges to sharpen reasoning skills. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>&quot;Logic Trail: Interactive Deduction Maze&quot;</h1>
+    <p class="seo-subtitle">A single-page mini-game where users solve puzzles by navigating a dynamically generated maze of logical challenges to sharpen reasoning skills.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to right, #4facfe, #00f2fe);  
+  margin: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  color: #333;  
+}  
+#tool-app {  
+  background: #fff;  
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
+  border-radius: 8px;  
+  padding: 20px;  
+  width: 90%;  
+  max-width: 600px;  
+  text-align: center;  
+}  
+.button {  
+  margin: 10px;  
+  padding: 10px 20px;  
+  background: #4facfe;  
+  border: none;  
+  color: #fff;  
+  font-size: 16px;  
+  border-radius: 4px;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+.button:hover {  
+  background: #00d2fe;  
+}  
+.maze {  
+  display: grid;  
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));  
+  gap: 10px;  
+  margin-top: 20px;  
+}  
+.cell {  
+  padding: 20px;  
+  background: #f3f3f3;  
+  border: 2px solid #ddd;  
+  border-radius: 4px;  
+  font-size: 14px;  
+  cursor: pointer;  
+}  
+.cell.active {  
+  background: #4facfe;  
+  color: #fff;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Logic Trail: Interactive Deduction Maze</h1>  
+  <p>Navigate through a maze by solving logic challenges. Select the next step carefully!</p>  
+  <button id="start-button" class="button">Start Game</button>  
+  <div id="maze-container" class="maze"></div>  
+  <p id="status-message"></p>  
+</div>  
+<script>  
+const app = document.querySelector('#tool-app');  
+const mazeContainer = document.querySelector('#maze-container');  
+const statusMessage = document.querySelector('#status-message');  
+const startButton = document.querySelector('#start-button');  
+
+let mazeData = [];  
+let currentPosition = { row: 0, col: 0 };  
+
+startButton.addEventListener('click', generateMaze);
+
+function generateMaze() {  
+  mazeData = Array.from({ length: 5 }, (_, row) =>  
+    Array.from({ length: 5 }, (_, col) => ({  
+      row,  
+      col,  
+      challenge: generateChallenge(),  
+      visited: false,  
+    }))  
+  );  
+  currentPosition = { row: 0, col: 0 };  
+  renderMaze();  
+  statusMessage.textContent = "Solve the challenge to proceed!";
+}  
+
+function renderMaze() {  
+  mazeContainer.innerHTML = '';  
+  mazeData.forEach(row => {  
+    row.forEach(cell => {  
+      const cellElement = document.createElement('div');  
+      cellElement.classList.add('cell');  
+      if (cell.visited) cellElement.classList.add('active');  
+      cellElement.textContent = cell.row === currentPosition.row && cell.col === currentPosition.col  
+        ? cell.challenge.text  
+        : '';  
+
+      cellElement.addEventListener('click', () => handleCellClick(cell));  
+      mazeContainer.appendChild(cellElement);  
+    });  
+  });  
+}  
+
+function handleCellClick(cell) {  
+  if (cell.row === currentPosition.row + 1 && cell.col === currentPosition.col ||  
+      cell.row === currentPosition.row && cell.col === currentPosition.col + 1) {
+    const answer = prompt(cell.challenge.question);  
+    if (answer === cell.challenge.answer) {  
+      cell.visited = true;  
+      currentPosition = { row: cell.row, col: cell.col };  
+      statusMessage.textContent = "Correct! Move forward.";  
+    } else {  
+      statusMessage.textContent = "Incorrect. Try again.";  
+    }  
+    renderMaze();  
+  } else {  
+    statusMessage.textContent = "Invalid move.";  
+  }  
+}  
+
+function generateChallenge() {  
+  const challenges = [  
+    { text: "Solve: 5 + 3", question: "What is 5 + 3?", answer: "8" },  
+    { text: "Solve: 12 - 7", question: "What is 12 - 7?", answer: "5" },  
+    { text: "Solve: 3 * 4", question: "What is 3 * 4?", answer: "12" },  
+    { text: "Solve: 16 / 4", question: "What is 16 / 4?", answer: "4" },  
+    { text: "Is 7 odd?", question: "Is 7 an odd number? (yes/no)", answer: "yes" },  
+  ];  
+  return challenges[Math.floor(Math.random() * challenges.length)];  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

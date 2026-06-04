@@ -1,0 +1,155 @@
+---
+layout: null
+title: "MindMap Maestro: Interactive Knowledge Weaver"
+category: "Education"
+description: "A dynamic, game-like tool where users visually connect concepts, create knowledge webs, and receive instant feedback on their understanding of complex topics."
+permalink: "/tools/daily-20260604-04-mindmap-maestro-interactive-knowledge-weaver.html"
+generated_by: "api-true-ai"
+generated_date: "20260604"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindMap Maestro: Interactive Knowledge Weaver | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, game-like tool where users visually connect concepts, create knowledge webs, and receive instant feedback on their understanding of complex topics. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="MindMap Maestro: Interactive Knowledge Weaver | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, game-like tool where users visually connect concepts, create knowledge webs, and receive instant feedback on their understanding of complex topics. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MindMap Maestro: Interactive Knowledge Weaver | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, game-like tool where users visually connect concepts, create knowledge webs, and receive instant feedback on their understanding of complex topics. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>MindMap Maestro: Interactive Knowledge Weaver</h1>
+    <p class="seo-subtitle">A dynamic, game-like tool where users visually connect concepts, create knowledge webs, and receive instant feedback on their understanding of complex topics.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: #f4f4f9; margin: 0; padding: 0; }  
+  #tool-app { padding: 20px; max-width: 900px; margin: auto; background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.2); border-radius: 12px; }  
+  .node { display: inline-block; padding: 10px 15px; margin: 5px; background-color: #4caf50; color: white; border-radius: 8px; cursor: pointer; }  
+  .node.selected { background-color: #2196f3; }  
+  .canvas { position: relative; height: 500px; border: 2px dashed #ccc; margin-top: 20px; border-radius: 12px; }  
+  .line { position: absolute; width: 2px; background-color: #333; transform-origin: top left; }  
+  .tooltip { position: absolute; background: #333; color: #fff; padding: 5px 10px; border-radius: 5px; display: none; }  
+</style>  
+<div id="tool-app">  
+  <h1>MindMap Maestro</h1>  
+  <p>Click on the concepts below to connect them visually and build your knowledge map for <strong>your chosen subject</strong>. Receive real-time feedback!</p>  
+
+  <div>  
+    <span class="node" data-id="1">Photosynthesis</span>  
+    <span class="node" data-id="2">Sunlight</span>  
+    <span class="node" data-id="3">Chlorophyll</span>  
+    <span class="node" data-id="4">Oxygen</span>  
+    <span class="node" data-id="5">Carbon Dioxide</span>  
+  </div>  
+
+  <div class="canvas" id="canvas"></div>  
+  <div id="feedback"></div>  
+</div>  
+<script>  
+const nodes = document.querySelectorAll(".node");  
+const canvas = document.getElementById("canvas");  
+const feedback = document.getElementById("feedback");  
+
+let selectedNode = null;  
+let connections = [];  
+
+nodes.forEach(node => {  
+  node.addEventListener("click", () => {  
+    if (selectedNode) {  
+      if (selectedNode === node) {  
+        selectedNode.classList.remove("selected");  
+        selectedNode = null;  
+      } else {  
+        createConnection(selectedNode, node);  
+        selectedNode.classList.remove("selected");  
+        selectedNode = null;  
+      }  
+    } else {  
+      selectedNode = node;  
+      node.classList.add("selected");  
+    }  
+  });  
+});  
+
+function createConnection(node1, node2) {  
+  const id1 = node1.dataset.id;  
+  const id2 = node2.dataset.id;  
+  const alreadyConnected = connections.find(  
+    connection => (connection[0] === id1 && connection[1] === id2) ||  
+                  (connection[0] === id2 && connection[1] === id1)  
+  );  
+
+  if (alreadyConnected) {  
+    feedback.textContent = "These nodes are already connected!";  
+    feedback.style.color = "red";  
+    setTimeout(() => feedback.textContent = "", 2000);  
+    return;  
+  }  
+
+  connections.push([id1, id2]);  
+  drawLineBetween(node1, node2);  
+  giveFeedback(id1, id2);  
+}  
+
+function drawLineBetween(node1, node2) {  
+  const rect1 = node1.getBoundingClientRect();  
+  const rect2 = node2.getBoundingClientRect();  
+
+  const x1 = rect1.left + rect1.width / 2;  
+  const y1 = rect1.top + rect1.height / 2;  
+  const x2 = rect2.left + rect2.width / 2;  
+  const y2 = rect2.top + rect2.height / 2;  
+
+  const length = Math.hypot(x2 - x1, y2 - y1);  
+  const angle = Math.atan2(y2 - y1, x2 - x1) * (180 / Math.PI);  
+
+  const line = document.createElement("div");  
+  line.className = "line";  
+  line.style.width = `${length}px`;  
+  line.style.top = `${y1 - canvas.getBoundingClientRect().top}px`;  
+  line.style.left = `${x1 - canvas.getBoundingClientRect().left}px`;  
+  line.style.transform = `rotate(${angle}deg)`;  
+
+  canvas.appendChild(line);  
+}  
+
+function giveFeedback(id1, id2) {  
+  const correctConnections = [  
+    ["1", "2"], ["1", "3"], ["1", "4"], ["1", "5"]  
+  ];  
+
+  const isCorrect = correctConnections.some(conn =>  
+    (conn[0] === id1 && conn[1] === id2) ||  
+    (conn[0] === id2 && conn[1] === id1)  
+  );  
+
+  if (isCorrect) {  
+    feedback.textContent = "Correct connection! Well done!";  
+    feedback.style.color = "green";  
+  } else {  
+    feedback.textContent = "Incorrect connection. Try again!";  
+    feedback.style.color = "red";  
+  }  
+
+  setTimeout(() => feedback.textContent = "", 2000);  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

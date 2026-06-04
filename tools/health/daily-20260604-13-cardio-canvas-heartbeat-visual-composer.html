@@ -1,0 +1,138 @@
+---
+layout: null
+title: "Cardio Canvas: Heartbeat Visual Composer"
+category: "Health"
+description: "Create art by simulating heart rate patterns and customizing beats, rhythms, and intensities, while learning about cardiovascular health."
+permalink: "/tools/daily-20260604-13-cardio-canvas-heartbeat-visual-composer.html"
+generated_by: "api-true-ai"
+generated_date: "20260604"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cardio Canvas: Heartbeat Visual Composer | Free Online Interactive Tool</title>
+  <meta name="description" content="Create art by simulating heart rate patterns and customizing beats, rhythms, and intensities, while learning about cardiovascular health. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Cardio Canvas: Heartbeat Visual Composer | Free Online Interactive Tool">
+  <meta property="og:description" content="Create art by simulating heart rate patterns and customizing beats, rhythms, and intensities, while learning about cardiovascular health. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cardio Canvas: Heartbeat Visual Composer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Create art by simulating heart rate patterns and customizing beats, rhythms, and intensities, while learning about cardiovascular health. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Cardio Canvas: Heartbeat Visual Composer</h1>
+    <p class="seo-subtitle">Create art by simulating heart rate patterns and customizing beats, rhythms, and intensities, while learning about cardiovascular health.</p>
+    <style>  
+  #tool-app {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    background-color: #f7f8fa;
+  }
+  #canvas {
+    border: 2px solid #4CAF50;
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .controls {
+    margin-top: 20px;
+  }
+  .controls button {
+    margin: 5px;
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  .controls button:hover {
+    background-color: #45a049;
+  }
+  #info {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #333;
+  }
+</style>  
+<div id="tool-app">  
+  <h1>Cardio Canvas</h1>  
+  <canvas id="canvas" width="600" height="300"></canvas>  
+  <div class="controls">  
+    <button onclick="changePattern('normal')">Normal Rhythm</button>  
+    <button onclick="changePattern('fast')">Fast Pace</button>  
+    <button onclick="changePattern('irregular')">Irregular</button>  
+    <button onclick="clearCanvas()">Clear</button>  
+  </div>  
+  <p id="info">Learn about different heart rhythms by simulating beats on the canvas.</p>  
+</div>  
+<script>  
+const canvas = document.getElementById('canvas');  
+const ctx = canvas.getContext('2d');  
+let animationFrame;  
+let currentPattern = 'normal';  
+let x = 0;  
+
+const patterns = {  
+  normal: { amplitude: 20, frequency: 100, speed: 2 },  
+  fast: { amplitude: 10, frequency: 50, speed: 4 },  
+  irregular: { amplitude: 20, frequency: [50, 150, 100], speed: 3 }  
+};  
+
+function drawPattern() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  ctx.beginPath();  
+  ctx.moveTo(0, canvas.height / 2);  
+
+  for (let i = 0; i < canvas.width; i++) {  
+    let y;  
+    if (currentPattern === 'irregular') {  
+      const freq = patterns.irregular.frequency[i % patterns.irregular.frequency.length];  
+      y = canvas.height / 2 - Math.sin((i + x) / freq) * patterns.irregular.amplitude;  
+    } else {  
+      const { amplitude, frequency } = patterns[currentPattern];  
+      y = canvas.height / 2 - Math.sin((i + x) / frequency) * amplitude;  
+    }  
+    ctx.lineTo(i, y);  
+  }  
+
+  ctx.strokeStyle = '#4CAF50';  
+  ctx.stroke();  
+  x += patterns[currentPattern].speed;  
+  animationFrame = requestAnimationFrame(drawPattern);  
+}  
+
+function changePattern(pattern) {  
+  currentPattern = pattern;  
+  cancelAnimationFrame(animationFrame);  
+  drawPattern();  
+}  
+
+function clearCanvas() {  
+  cancelAnimationFrame(animationFrame);  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+}  
+
+drawPattern();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

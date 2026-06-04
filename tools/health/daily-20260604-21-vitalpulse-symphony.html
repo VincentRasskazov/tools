@@ -1,0 +1,146 @@
+---
+layout: null
+title: "VitalPulse Symphony"
+category: "Health"
+description: "A gamified, interactive tool where users sync their mouse movements with a dynamic heartbeat rhythm to learn about heart rate variability and stress management."
+permalink: "/tools/daily-20260604-21-vitalpulse-symphony.html"
+generated_by: "api-true-ai"
+generated_date: "20260604"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VitalPulse Symphony | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified, interactive tool where users sync their mouse movements with a dynamic heartbeat rhythm to learn about heart rate variability and stress management. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="VitalPulse Symphony | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified, interactive tool where users sync their mouse movements with a dynamic heartbeat rhythm to learn about heart rate variability and stress management. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="VitalPulse Symphony | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified, interactive tool where users sync their mouse movements with a dynamic heartbeat rhythm to learn about heart rate variability and stress management. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>VitalPulse Symphony</h1>
+    <p class="seo-subtitle">A gamified, interactive tool where users sync their mouse movements with a dynamic heartbeat rhythm to learn about heart rate variability and stress management.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(120deg, #ff9a9e, #fad0c4);  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+  color: #333;  
+}  
+#tool-app {  
+  text-align: center;  
+  padding: 20px;  
+  background: #fff;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
+}  
+h1 {  
+  font-size: 2rem;  
+  margin-bottom: 10px;  
+}  
+canvas {  
+  margin-top: 20px;  
+  border: 2px solid #333;  
+  border-radius: 10px;  
+}  
+p {  
+  margin-top: 20px;  
+  font-size: 1rem;  
+}  
+button {  
+  margin-top: 20px;  
+  padding: 10px 20px;  
+  font-size: 1rem;  
+  color: white;  
+  background: #ff6f61;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer;  
+}  
+button:hover {  
+  background: #ff4a3a;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>VitalPulse Symphony</h1>  
+  <p>Move your mouse rhythmically to match the heartbeat pace. Improve your score as you regulate your virtual heart rate!</p>  
+  <canvas id="heartCanvas" width="500" height="200"></canvas>  
+  <p>Current Score: <span id="score">0</span></p>  
+  <button id="startGame">Start Game</button>  
+</div>  
+<script>  
+const canvas = document.getElementById('heartCanvas');  
+const ctx = canvas.getContext('2d');  
+const scoreDisplay = document.getElementById('score');  
+const startButton = document.getElementById('startGame');  
+
+let isGameActive = false;  
+let targetPulse = 60;  
+let userPulse = 0;  
+let score = 0;  
+let lastMouseTime = 0;  
+
+function drawHeartLine() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  ctx.beginPath();  
+
+  const heartSpeed = (targetPulse / 60) * canvas.width;  
+  for (let x = 0; x < canvas.width; x++) {  
+    const y = 100 + 50 * Math.sin((x / heartSpeed) * 2 * Math.PI);  
+    ctx.lineTo(x, y);  
+  }  
+  ctx.strokeStyle = 'red';  
+  ctx.lineWidth = 2;  
+  ctx.stroke();  
+}  
+
+function handleMouseMove(event) {  
+  if (!isGameActive) return;  
+
+  const currentTime = Date.now();  
+  const timeDiff = currentTime - lastMouseTime;  
+  userPulse = 60000 / timeDiff;  
+
+  if (Math.abs(userPulse - targetPulse) < 5) {  
+    score += 10;  
+    scoreDisplay.textContent = score;  
+  }  
+
+  lastMouseTime = currentTime;  
+}  
+
+function startGame() {  
+  isGameActive = true;  
+  score = 0;  
+  scoreDisplay.textContent = score;  
+  targetPulse = Math.floor(Math.random() * 40) + 60;  
+  drawHeartLine();  
+}  
+
+canvas.addEventListener('mousemove', handleMouseMove);  
+startButton.addEventListener('click', startGame);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

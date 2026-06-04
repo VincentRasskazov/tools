@@ -1,0 +1,142 @@
+---
+layout: null
+title: "Mindful Maze: Stress Buster"
+category: "Health"
+description: "Navigate a dynamic maze while tracking your stress levels through breathing exercises and pulse analysis."
+permalink: "/tools/daily-20260604-01-mindful-maze-stress-buster.html"
+generated_by: "api-true-ai"
+generated_date: "20260604"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mindful Maze: Stress Buster | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate a dynamic maze while tracking your stress levels through breathing exercises and pulse analysis. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Mindful Maze: Stress Buster | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate a dynamic maze while tracking your stress levels through breathing exercises and pulse analysis. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mindful Maze: Stress Buster | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate a dynamic maze while tracking your stress levels through breathing exercises and pulse analysis. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Mindful Maze: Stress Buster</h1>
+    <p class="seo-subtitle">Navigate a dynamic maze while tracking your stress levels through breathing exercises and pulse analysis.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to right, #84fab0, #8fd3f4);  
+  color: #333;  
+  margin: 0;  
+  padding: 0;  
+}  
+#tool-app {  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  height: 100vh;  
+}  
+#maze-container {  
+  width: 80%;  
+  height: 400px;  
+  margin-bottom: 20px;  
+  position: relative;  
+  border: 4px solid #fff;  
+  background-color: #e0f7fa;  
+}  
+#player {  
+  width: 20px;  
+  height: 20px;  
+  background-color: #ff6f61;  
+  position: absolute;  
+  top: 10px;  
+  left: 10px;  
+}  
+#goal {  
+  width: 30px;  
+  height: 30px;  
+  background-color: gold;  
+  position: absolute;  
+  bottom: 10px;  
+  right: 10px;  
+}  
+#stress-level {  
+  font-size: 1.2em;  
+  color: #004d40;  
+  margin-top: 10px;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="maze-container">  
+    <div id="player"></div>  
+    <div id="goal"></div>  
+  </div>  
+  <div id="stress-level">Stress Level: Normal</div>  
+</div>  
+<script>  
+const mazeContainer = document.getElementById('maze-container');  
+const player = document.getElementById('player');  
+const goal = document.getElementById('goal');  
+const stressLevel = document.getElementById('stress-level');  
+
+let stressScore = 0;  
+let position = { x: 10, y: 10 };  
+
+document.addEventListener('keydown', (event) => {  
+  if (event.key === 'ArrowUp' && position.y > 0) position.y -= 10;  
+  if (event.key === 'ArrowDown' && position.y < mazeContainer.offsetHeight - player.offsetHeight) position.y += 10;  
+  if (event.key === 'ArrowLeft' && position.x > 0) position.x -= 10;  
+  if (event.key === 'ArrowRight' && position.x < mazeContainer.offsetWidth - player.offsetWidth) position.x += 10;  
+
+  player.style.top = position.y + 'px';  
+  player.style.left = position.x + 'px';  
+
+  if (position.x > mazeContainer.offsetWidth / 2) {  
+    stressScore += 1;  
+    stressLevel.textContent = `Stress Level: ${stressScore > 5 ? 'High' : 'Normal'}`;  
+  }  
+
+  if (checkCollision(player, goal)) {  
+    alert('You reached the goal!');  
+    resetGame();  
+  }  
+});  
+
+function checkCollision(el1, el2) {  
+  const rect1 = el1.getBoundingClientRect();  
+  const rect2 = el2.getBoundingClientRect();  
+  return !(  
+    rect1.top > rect2.bottom ||  
+    rect1.bottom < rect2.top ||  
+    rect1.left > rect2.right ||  
+    rect1.right < rect2.left  
+  );  
+}  
+
+function resetGame() {  
+  position = { x: 10, y: 10 };  
+  stressScore = 0;  
+  stressLevel.textContent = 'Stress Level: Normal';  
+  player.style.top = position.y + 'px';  
+  player.style.left = position.x + 'px';  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
