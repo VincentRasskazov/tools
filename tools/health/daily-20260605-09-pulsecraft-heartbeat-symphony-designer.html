@@ -1,0 +1,147 @@
+---
+layout: null
+title: "PulseCraft: Heartbeat Symphony Designer"
+category: "Health"
+description: "Compose a symphony of visual and audio elements by syncing your resting heart rate or manually adjusting a heartbeat simulator to create patterns and soundscapes inspired by your cardiovascular rhythm."
+permalink: "/tools/daily-20260605-09-pulsecraft-heartbeat-symphony-designer.html"
+generated_by: "api-true-ai"
+generated_date: "20260605"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PulseCraft: Heartbeat Symphony Designer | Free Online Interactive Tool</title>
+  <meta name="description" content="Compose a symphony of visual and audio elements by syncing your resting heart rate or manually adjusting a heartbeat simulator to create patterns and soundscapes inspired by your cardiovascular rhythm. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PulseCraft: Heartbeat Symphony Designer | Free Online Interactive Tool">
+  <meta property="og:description" content="Compose a symphony of visual and audio elements by syncing your resting heart rate or manually adjusting a heartbeat simulator to create patterns and soundscapes inspired by your cardiovascular rhythm. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PulseCraft: Heartbeat Symphony Designer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Compose a symphony of visual and audio elements by syncing your resting heart rate or manually adjusting a heartbeat simulator to create patterns and soundscapes inspired by your cardiovascular rhythm. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PulseCraft: Heartbeat Symphony Designer</h1>
+    <p class="seo-subtitle">Compose a symphony of visual and audio elements by syncing your resting heart rate or manually adjusting a heartbeat simulator to create patterns and soundscapes inspired by your cardiovascular rhythm.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);  
+  color: #333;  
+}  
+#tool-app {  
+  text-align: center;  
+  background: #fff;  
+  padding: 20px;  
+  border-radius: 12px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
+  width: 90%;  
+  max-width: 600px;  
+}  
+button, input, select {  
+  margin: 10px;  
+  padding: 10px 15px;  
+  border: none;  
+  border-radius: 8px;  
+  font-size: 16px;  
+  cursor: pointer;  
+}  
+button {  
+  background: #ff6b6b;  
+  color: white;  
+}  
+button:hover {  
+  background: #ff4757;  
+}  
+canvas {  
+  margin-top: 20px;  
+  border: 1px solid #ccc;  
+  border-radius: 8px;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>PulseCraft</h1>  
+  <p>Turn your heartbeat into art! Sync your heart rate or simulate to create stunning visuals and sounds.</p>  
+  <label for="bpm">Set Heart Rate (BPM): </label>  
+  <input type="number" id="bpm" min="40" max="200" value="70">  
+  <button id="start-btn">Start Symphony</button>  
+  <canvas id="heartbeat-canvas" width="500" height="300"></canvas>  
+  <audio id="heartbeat-audio" controls hidden></audio>  
+</div>  
+<script>  
+const canvas = document.getElementById('heartbeat-canvas');  
+const ctx = canvas.getContext('2d');  
+const bpmInput = document.getElementById('bpm');  
+const startButton = document.getElementById('start-btn');  
+const audio = document.getElementById('heartbeat-audio');  
+
+let bpm = 70;  
+let animationFrame;  
+
+function drawHeartbeat() {  
+  const interval = 60000 / bpm; // milliseconds per beat  
+  let lastTime = 0;  
+  let x = 0;  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  ctx.beginPath();  
+  ctx.strokeStyle = '#ff6b6b';  
+  ctx.lineWidth = 2;  
+
+  function animate(time) {  
+    if (time - lastTime > interval) {  
+      lastTime = time;  
+      x += 50;  
+      if (x > canvas.width) x = 0;  
+      ctx.lineTo(x, Math.random() * canvas.height);  
+      ctx.stroke();  
+    }  
+    animationFrame = requestAnimationFrame(animate);  
+  }  
+  animate(0);  
+}  
+
+function playHeartbeatSound() {  
+  const frequency = bpm / 60;  
+  const audioContext = new (window.AudioContext || window.webkitAudioContext)();  
+  const oscillator = audioContext.createOscillator();  
+  const gainNode = audioContext.createGain();  
+
+  oscillator.type = 'sine';  
+  oscillator.frequency.value = frequency * 2;  
+  oscillator.connect(gainNode);  
+  gainNode.connect(audioContext.destination);  
+
+  gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);  
+  oscillator.start();  
+  oscillator.stop(audioContext.currentTime + 2);  
+}  
+
+startButton.addEventListener('click', () => {  
+  bpm = bpmInput.value;  
+  cancelAnimationFrame(animationFrame);  
+  drawHeartbeat();  
+  playHeartbeatSound();  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

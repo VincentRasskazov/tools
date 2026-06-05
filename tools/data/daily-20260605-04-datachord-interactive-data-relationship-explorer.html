@@ -1,0 +1,197 @@
+---
+layout: null
+title: "DataChord: Interactive Data Relationship Explorer"
+category: "Data"
+description: "Visualize, manipulate, and uncover hidden relationships in complex datasets through a dynamic and interactive chord diagram interface."
+permalink: "/tools/daily-20260605-04-datachord-interactive-data-relationship-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260605"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataChord: Interactive Data Relationship Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize, manipulate, and uncover hidden relationships in complex datasets through a dynamic and interactive chord diagram interface. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataChord: Interactive Data Relationship Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize, manipulate, and uncover hidden relationships in complex datasets through a dynamic and interactive chord diagram interface. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataChord: Interactive Data Relationship Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize, manipulate, and uncover hidden relationships in complex datasets through a dynamic and interactive chord diagram interface. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataChord: Interactive Data Relationship Explorer</h1>
+    <p class="seo-subtitle">Visualize, manipulate, and uncover hidden relationships in complex datasets through a dynamic and interactive chord diagram interface.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  background: linear-gradient(135deg, #1d3557, #457b9d);  
+  color: #f1faee;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 80%;  
+  height: 80%;  
+  background: #a8dadc;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  padding: 20px;  
+  position: relative;  
+}  
+#chord-container {  
+  width: 100%;  
+  height: 80%;  
+  position: relative;  
+  overflow: hidden;  
+}  
+svg {  
+  width: 100%;  
+  height: 100%;  
+}  
+#controls {  
+  margin-top: 20px;  
+  display: flex;  
+  gap: 10px;  
+}  
+button {  
+  background: #1d3557;  
+  color: white;  
+  border: none;  
+  padding: 10px 20px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+button:hover {  
+  background: #457b9d;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="chord-container">  
+    <svg></svg>  
+  </div>  
+  <div id="controls">  
+    <button onclick="addNode()">Add Node</button>  
+    <button onclick="addConnection()">Add Connection</button>  
+    <button onclick="resetDiagram()">Reset</button>  
+  </div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const svg = d3.select("svg");  
+const width = svg.node().clientWidth;  
+const height = svg.node().clientHeight;  
+const radius = Math.min(width, height) / 2 - 50;  
+
+let nodes = [];  
+let connections = [];  
+
+function drawDiagram() {  
+  svg.selectAll("*").remove();  
+
+  const color = d3.scaleOrdinal(d3.schemeCategory10);  
+  const chord = d3.chord().padAngle(0.05).sortSubgroups(d3.descending);  
+  const arc = d3.arc().innerRadius(radius - 50).outerRadius(radius);  
+  const ribbon = d3.ribbon().radius(radius - 50);  
+
+  const matrix = buildMatrix(nodes.length, connections);  
+
+  const chords = chord(matrix);  
+
+  const group = svg.append("g")  
+    .attr("transform", `translate(${width / 2}, ${height / 2})`)  
+    .selectAll("g")  
+    .data(chords.groups)  
+    .enter().append("g");  
+
+  group.append("path")  
+    .style("fill", d => color(d.index))  
+    .style("stroke", "#000")  
+    .attr("d", arc);  
+
+  group.append("text")  
+    .each(d => { d.angle = (d.startAngle + d.endAngle) / 2; })  
+    .attr("dy", ".35em")  
+    .attr("transform", d => `rotate(${(d.angle * 180 / Math.PI - 90)})` +  
+      `translate(${radius})` +  
+      (d.angle > Math.PI ? "rotate(180)" : ""))  
+    .text((d, i) => nodes[i]);  
+
+  svg.append("g")  
+    .attr("transform", `translate(${width / 2}, ${height / 2})`)  
+    .selectAll("path")  
+    .data(chords)  
+    .enter().append("path")  
+    .attr("d", ribbon)  
+    .style("fill", d => color(d.target.index))  
+    .style("stroke", "#000");  
+}  
+
+function buildMatrix(size, connections) {  
+  const matrix = Array.from({ length: size }, () => Array(size).fill(0));  
+  connections.forEach(([source, target, value]) => {  
+    matrix[source][target] += value;  
+    matrix[target][source] += value;  
+  });  
+  return matrix;  
+}  
+
+function addNode() {  
+  const name = prompt("Enter node name:");  
+  if (name) {  
+    nodes.push(name);  
+    drawDiagram();  
+  }  
+}  
+
+function addConnection() {  
+  if (nodes.length < 2) {  
+    alert("Add at least two nodes first!");  
+    return;  
+  }  
+  const source = prompt(`Enter source node (0-${nodes.length - 1}):`);  
+  const target = prompt(`Enter target node (0-${nodes.length - 1}):`);  
+  const value = parseInt(prompt("Enter connection strength (number):"), 10);  
+
+  if (!isNaN(source) && !isNaN(target) && !isNaN(value)) {  
+    connections.push([+source, +target, value]);  
+    drawDiagram();  
+  }  
+}  
+
+function resetDiagram() {  
+  nodes = [];  
+  connections = [];  
+  drawDiagram();  
+}  
+
+drawDiagram();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

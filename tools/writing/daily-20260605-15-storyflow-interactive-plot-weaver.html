@@ -1,0 +1,194 @@
+---
+layout: null
+title: "StoryFlow: Interactive Plot Weaver"
+category: "Writing"
+description: "Build and visualize branching storylines with dynamic character interactions and plot twists in real time."
+permalink: "/tools/daily-20260605-15-storyflow-interactive-plot-weaver.html"
+generated_by: "api-true-ai"
+generated_date: "20260605"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StoryFlow: Interactive Plot Weaver | Free Online Interactive Tool</title>
+  <meta name="description" content="Build and visualize branching storylines with dynamic character interactions and plot twists in real time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="StoryFlow: Interactive Plot Weaver | Free Online Interactive Tool">
+  <meta property="og:description" content="Build and visualize branching storylines with dynamic character interactions and plot twists in real time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StoryFlow: Interactive Plot Weaver | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Build and visualize branching storylines with dynamic character interactions and plot twists in real time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>StoryFlow: Interactive Plot Weaver</h1>
+    <p class="seo-subtitle">Build and visualize branching storylines with dynamic character interactions and plot twists in real time.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to right, #ffecd2, #fcb69f);  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 90%;  
+  height: 90%;  
+  background: #ffffff;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
+  display: flex;  
+  flex-direction: column;  
+  padding: 20px;  
+}  
+#control-panel {  
+  display: flex;  
+  justify-content: space-between;  
+  margin-bottom: 20px;  
+}  
+button {  
+  padding: 10px 15px;  
+  font-size: 14px;  
+  background: #5e60ce;  
+  color: white;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+button:hover {  
+  background: #4a4ea6;  
+}  
+#story-canvas {  
+  flex: 1;  
+  border: 2px dashed #ddd;  
+  overflow: hidden;  
+  position: relative;  
+}  
+.node {  
+  position: absolute;  
+  padding: 10px;  
+  background: #f9f9f9;  
+  border: 1px solid #ddd;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  text-align: center;  
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  
+  transition: box-shadow 0.2s;  
+}  
+.node:hover {  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
+}  
+.connector {  
+  position: absolute;  
+  width: 2px;  
+  background: #5e60ce;  
+  transform-origin: top left;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="control-panel">  
+    <button id="add-node">Add Plot Point</button>  
+    <button id="clear-all">Clear All</button>  
+    <button id="export-story">Export Story</button>  
+  </div>  
+  <div id="story-canvas"></div>  
+</div>  
+<script>  
+const canvas = document.getElementById('story-canvas');  
+let nodes = [];  
+let connections = [];  
+
+function createNode(x, y, content = "New Plot Point") {  
+  const node = document.createElement('div');  
+  node.className = 'node';  
+  node.contentEditable = true;  
+  node.textContent = content;  
+  node.style.left = `${x}px`;  
+  node.style.top = `${y}px`;  
+  node.draggable = true;  
+
+  node.addEventListener('dragstart', (e) => {  
+    e.dataTransfer.setData('text/plain', nodes.indexOf(node));  
+  });  
+
+  node.addEventListener('dblclick', () => {  
+    const targetIndex = nodes.indexOf(node);  
+    const startPos = nodes[targetIndex].getBoundingClientRect();  
+    connectNodes(targetIndex, startPos);  
+  });  
+
+  canvas.appendChild(node);  
+  nodes.push(node);  
+}  
+
+function connectNodes(sourceIndex, sourcePos) {  
+  canvas.addEventListener('click', function createLine(e) {  
+    const x1 = sourcePos.left + sourcePos.width / 2 - canvas.offsetLeft;  
+    const y1 = sourcePos.top + sourcePos.height / 2 - canvas.offsetTop;  
+    const x2 = e.clientX - canvas.offsetLeft;  
+    const y2 = e.clientY - canvas.offsetTop;  
+
+    const dx = x2 - x1;  
+    const dy = y2 - y1;  
+    const length = Math.sqrt(dx * dx + dy * dy);  
+    const angle = Math.atan2(dy, dx) * (180 / Math.PI);  
+
+    const connector = document.createElement('div');  
+    connector.className = 'connector';  
+    connector.style.width = `${length}px`;  
+    connector.style.left = `${x1}px`;  
+    connector.style.top = `${y1}px`;  
+    connector.style.transform = `rotate(${angle}deg)`;  
+
+    canvas.appendChild(connector);  
+    connections.push(connector);  
+    canvas.removeEventListener('click', createLine);  
+  });  
+}  
+
+document.getElementById('add-node').addEventListener('click', () => {  
+  const x = Math.random() * (canvas.offsetWidth - 100);  
+  const y = Math.random() * (canvas.offsetHeight - 50);  
+  createNode(x, y);  
+});  
+
+document.getElementById('clear-all').addEventListener('click', () => {  
+  nodes.forEach(node => node.remove());  
+  connections.forEach(connector => connector.remove());  
+  nodes = [];  
+  connections = [];  
+});  
+
+document.getElementById('export-story').addEventListener('click', () => {  
+  const storyData = nodes.map((node, index) => ({  
+    id: index,  
+    text: node.textContent,  
+    x: parseInt(node.style.left, 10),  
+    y: parseInt(node.style.top, 10)  
+  }));  
+
+  alert(JSON.stringify(storyData, null, 2));  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
