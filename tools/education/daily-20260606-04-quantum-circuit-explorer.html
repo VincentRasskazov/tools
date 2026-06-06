@@ -1,0 +1,158 @@
+---
+layout: null
+title: "Quantum Circuit Explorer"
+category: "Education"
+description: "A highly interactive mini-game where users build quantum circuits and explore qubit entanglement, superposition, and real-time state visualization."
+permalink: "/tools/daily-20260606-04-quantum-circuit-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260606"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quantum Circuit Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive mini-game where users build quantum circuits and explore qubit entanglement, superposition, and real-time state visualization. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Quantum Circuit Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive mini-game where users build quantum circuits and explore qubit entanglement, superposition, and real-time state visualization. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Quantum Circuit Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive mini-game where users build quantum circuits and explore qubit entanglement, superposition, and real-time state visualization. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Quantum Circuit Explorer</h1>
+    <p class="seo-subtitle">A highly interactive mini-game where users build quantum circuits and explore qubit entanglement, superposition, and real-time state visualization.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background-color: #0f111a;  
+  color: #ffffff;  
+  margin: 0;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  width: 80%;  
+  max-width: 1200px;  
+  background-color: #1b1e33;  
+  border-radius: 12px;  
+  padding: 20px;  
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);  
+}  
+header {  
+  font-size: 1.8rem;  
+  margin-bottom: 1rem;  
+  text-align: center;  
+}  
+button {  
+  background: linear-gradient(90deg, #6a85b6, #bac8e0);  
+  border: none;  
+  color: #1b1e33;  
+  padding: 10px 15px;  
+  margin: 5px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  font-weight: bold;  
+}  
+button:hover {  
+  background: linear-gradient(90deg, #bac8e0, #6a85b6);  
+}  
+#circuit-board {  
+  display: flex;  
+  flex-wrap: wrap;  
+  gap: 10px;  
+  margin-top: 20px;  
+}  
+.circuit-gate {  
+  background-color: #2c2f4d;  
+  padding: 15px;  
+  border-radius: 8px;  
+  text-align: center;  
+  cursor: pointer;  
+  color: #ffffff;  
+  transition: transform 0.2s;  
+}  
+.circuit-gate:hover {  
+  transform: scale(1.1);  
+  background-color: #41457d;  
+}  
+#visualization {  
+  margin-top: 20px;  
+  padding: 15px;  
+  background-color: #1b1e33;  
+  border-radius: 8px;  
+  text-align: center;  
+}  
+</style>  
+<div id="tool-app">  
+  <header>Quantum Circuit Explorer</header>  
+  <p>Drag and drop quantum gates to design your circuit, then visualize the qubit states!</p>  
+  <button onclick="addGate('Hadamard')">Add Hadamard Gate</button>  
+  <button onclick="addGate('Pauli-X')">Add Pauli-X Gate</button>  
+  <button onclick="addGate('CNOT')">Add CNOT Gate</button>  
+  <div id="circuit-board"></div>  
+  <button onclick="simulateCircuit()">Simulate Circuit</button>  
+  <div id="visualization"></div>  
+</div>  
+<script>  
+const gateColors = {  
+  'Hadamard': '#ff6f61',  
+  'Pauli-X': '#61ff84',  
+  'CNOT': '#61a6ff',  
+};  
+let circuit = [];  
+
+function addGate(gateType) {  
+  const gateElement = document.createElement('div');  
+  gateElement.className = 'circuit-gate';  
+  gateElement.style.backgroundColor = gateColors[gateType];  
+  gateElement.innerText = gateType;  
+  gateElement.onclick = () => removeGate(gateElement);  
+  document.getElementById('circuit-board').appendChild(gateElement);  
+  circuit.push(gateType);  
+}  
+
+function removeGate(gateElement) {  
+  const index = Array.from(gateElement.parentNode.children).indexOf(gateElement);  
+  circuit.splice(index, 1);  
+  gateElement.remove();  
+}  
+
+function simulateCircuit() {  
+  const visualization = document.getElementById('visualization');  
+  visualization.innerHTML = `<b>Simulating...</b><br>Qubit states: `;  
+  let qubitState = [1, 0]; // Start with |0> state  
+
+  circuit.forEach(gate => {  
+    if (gate === 'Hadamard') {  
+      qubitState = [0.707, 0.707]; // Superposition  
+    } else if (gate === 'Pauli-X') {  
+      qubitState = [qubitState[1], qubitState[0]]; // Flip  
+    } else if (gate === 'CNOT') {  
+      qubitState = [qubitState[0], qubitState[1] ? 0 : 1]; // Conditional flip  
+    }  
+  });  
+
+  visualization.innerHTML += `<pre>${JSON.stringify(qubitState, null, 2)}</pre>`;  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

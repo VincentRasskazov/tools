@@ -1,0 +1,166 @@
+---
+layout: null
+title: "Memory Matrix Explorer"
+category: "Education"
+description: "A highly interactive game that helps users improve spatial memory and pattern recognition by recalling and reconstructing complex matrices of shapes and colors."
+permalink: "/tools/daily-20260606-02-memory-matrix-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260606"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Matrix Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive game that helps users improve spatial memory and pattern recognition by recalling and reconstructing complex matrices of shapes and colors. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Memory Matrix Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive game that helps users improve spatial memory and pattern recognition by recalling and reconstructing complex matrices of shapes and colors. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Memory Matrix Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive game that helps users improve spatial memory and pattern recognition by recalling and reconstructing complex matrices of shapes and colors. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Memory Matrix Explorer</h1>
+    <p class="seo-subtitle">A highly interactive game that helps users improve spatial memory and pattern recognition by recalling and reconstructing complex matrices of shapes and colors.</p>
+    <style>  
+body {  
+  font-family: 'Arial', sans-serif;  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  height: 100vh;  
+  margin: 0;  
+  background: linear-gradient(135deg, #6a11cb, #2575fc);  
+  color: #fff;  
+}  
+#tool-app {  
+  text-align: center;  
+}  
+button {  
+  padding: 10px 20px;  
+  border: none;  
+  border-radius: 5px;  
+  background-color: #ff4081;  
+  color: white;  
+  cursor: pointer;  
+  margin: 10px;  
+  font-size: 16px;  
+}  
+button:hover {  
+  background-color: #e91e63;  
+}  
+.grid {  
+  display: grid;  
+  grid-template-columns: repeat(4, 60px);  
+  gap: 10px;  
+  margin: 20px auto;  
+}  
+.grid div {  
+  width: 60px;  
+  height: 60px;  
+  border-radius: 5px;  
+  background-color: #4caf50;  
+  transition: background-color 0.3s ease;  
+  cursor: pointer;  
+}  
+.hidden {  
+  background-color: #616161 !important;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Memory Matrix Explorer</h1>  
+  <p>Memorize the matrix and recreate the pattern!</p>  
+  <button id="start-btn">Start Game</button>  
+  <div id="game-board" class="grid"></div>  
+  <p id="message"></p>  
+</div>  
+<script>  
+const toolApp = document.querySelector("#tool-app");  
+const gridSize = 4;  
+let pattern = [];  
+let playerPattern = [];  
+let gameBoard = document.querySelector("#game-board");  
+let startButton = document.querySelector("#start-btn");  
+let messageDisplay = document.querySelector("#message");  
+
+function generatePattern() {  
+  pattern = [];  
+  for (let i = 0; i < gridSize * gridSize; i++) {  
+    pattern.push(Math.random() > 0.5);  
+  }  
+}  
+
+function renderGrid(masked = false) {  
+  gameBoard.innerHTML = "";  
+  for (let i = 0; i < gridSize * gridSize; i++) {  
+    const cell = document.createElement("div");  
+    cell.classList.add(pattern[i] && !masked ? "active" : "hidden");  
+    cell.dataset.index = i;  
+    gameBoard.appendChild(cell);  
+    cell.addEventListener("click", () => {  
+      if (masked) {  
+        togglePlayerCell(cell);  
+      }  
+    });  
+  }  
+}  
+
+function togglePlayerCell(cell) {  
+  const index = cell.dataset.index;  
+  if (!playerPattern.includes(index)) {  
+    playerPattern.push(index);  
+    cell.style.backgroundColor = "#ff9800";  
+  } else {  
+    playerPattern.splice(playerPattern.indexOf(index), 1);  
+    cell.style.backgroundColor = "#616161";  
+  }  
+}  
+
+function startGame() {  
+  generatePattern();  
+  messageDisplay.textContent = "Memorize the pattern!";  
+  renderGrid(false);  
+  setTimeout(() => {  
+    messageDisplay.textContent = "Recreate the pattern!";  
+    renderGrid(true);  
+    playerPattern = [];  
+  }, 3000);  
+}  
+
+function checkResult() {  
+  const correctCells = pattern.map((value, index) => value ? index.toString() : null).filter(Boolean);  
+  const playerCells = playerPattern.map(String);  
+
+  if (JSON.stringify(correctCells) === JSON.stringify(playerCells)) {  
+    messageDisplay.textContent = "Correct! You have a sharp memory!";  
+  } else {  
+    messageDisplay.textContent = "Try again!";  
+  }  
+}  
+
+startButton.addEventListener("click", () => {  
+  startGame();  
+  startButton.textContent = "Submit";  
+  startButton.removeEventListener("click", startGame);  
+  startButton.addEventListener("click", checkResult);  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,152 @@
+---
+layout: null
+title: "RegEx Rodeo: The Interactive Pattern Duel"
+category: "Developer"
+description: "A gamified tool where developers match complex string patterns against evolving challenges to master Regular Expressions."
+permalink: "/tools/daily-20260606-13-regex-rodeo-the-interactive-pattern-duel.html"
+generated_by: "api-true-ai"
+generated_date: "20260606"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RegEx Rodeo: The Interactive Pattern Duel | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool where developers match complex string patterns against evolving challenges to master Regular Expressions. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="RegEx Rodeo: The Interactive Pattern Duel | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool where developers match complex string patterns against evolving challenges to master Regular Expressions. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="RegEx Rodeo: The Interactive Pattern Duel | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool where developers match complex string patterns against evolving challenges to master Regular Expressions. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>RegEx Rodeo: The Interactive Pattern Duel</h1>
+    <p class="seo-subtitle">A gamified tool where developers match complex string patterns against evolving challenges to master Regular Expressions.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+    font-family: 'Arial', sans-serif;  
+    background: linear-gradient(135deg, #1e3c72, #2a5298);  
+    color: white;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+    margin: 0;  
+}  
+#tool-app {  
+    background: #ffffff22;  
+    padding: 20px;  
+    border-radius: 10px;  
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);  
+    width: 90%;  
+    max-width: 600px;  
+    text-align: center;  
+}  
+button {  
+    background: #ff6f61;  
+    border: none;  
+    color: white;  
+    padding: 10px 20px;  
+    margin-top: 10px;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    font-size: 16px;  
+    transition: all 0.3s ease;  
+}  
+button:hover {  
+    background: #ff4b47;  
+}  
+input {  
+    padding: 10px;  
+    border: 1px solid #ccc;  
+    border-radius: 5px;  
+    width: calc(100% - 22px);  
+    margin-bottom: 10px;  
+    font-size: 14px;  
+}  
+#challenge {  
+    margin-bottom: 20px;  
+    font-size: 18px;  
+    font-weight: bold;  
+}  
+#feedback {  
+    margin-top: 10px;  
+    font-size: 16px;  
+}  
+</style>  
+<div id="tool-app">  
+    <div id="challenge">Match all words starting with "a" and ending with "e".</div>  
+    <input type="text" id="regex" placeholder="Enter your Regular Expression">  
+    <button id="test-btn">Test Your Regex</button>  
+    <div id="feedback"></div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const challenges = [  
+    {  
+        text: 'Match all words starting with "a" and ending with "e".',  
+        testStrings: ['apple', 'ace', 'angle', 'alone', 'acre'],  
+        regexTest: /^a.*e$/  
+    },  
+    {  
+        text: 'Find all numbers with exactly 3 digits.',  
+        testStrings: ['123', '456', '12', '1234', '789'],  
+        regexTest: /^\d{3}$/  
+    },  
+    {  
+        text: 'Capture email addresses.',  
+        testStrings: ['example@mail.com', 'test@domain.org', 'notAnEmail', 'another.test@mail'],  
+        regexTest: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/  
+    }  
+];  
+
+let currentChallenge = 0;  
+
+function showChallenge(index) {  
+    const challenge = challenges[index];  
+    document.getElementById('challenge').innerText = challenge.text;  
+}  
+
+function testRegex() {  
+    const inputRegex = new RegExp(document.getElementById('regex').value);  
+    const challenge = challenges[currentChallenge];  
+    const results = challenge.testStrings.map(str => ({  
+        str,  
+        isMatch: inputRegex.test(str) === challenge.regexTest.test(str)  
+    }));  
+
+    if (results.every(res => res.isMatch)) {  
+        document.getElementById('feedback').innerHTML = `<span style="color: lightgreen;">Correct! 🎉</span>`;  
+        currentChallenge = (currentChallenge + 1) % challenges.length;  
+        setTimeout(() => {  
+            showChallenge(currentChallenge);  
+            document.getElementById('regex').value = '';  
+            document.getElementById('feedback').innerHTML = '';  
+        }, 1500);  
+    } else {  
+        document.getElementById('feedback').innerHTML = `<span style="color: lightcoral;">Incorrect. Try again! ❌</span>`;  
+    }  
+}  
+
+document.getElementById('test-btn').addEventListener('click', testRegex);  
+showChallenge(currentChallenge);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,139 @@
+---
+layout: null
+title: "Body Symphony Visualizer"
+category: "Health"
+description: "An interactive tool where users can input their daily activities, diet, and sleep data to generate a mesmerizing real-time symphony of animated \"body systems\" (like circulatory, respiratory, and digestive systems), showcasing how lifestyle choices impact health."
+permalink: "/tools/daily-20260606-25-body-symphony-visualizer.html"
+generated_by: "api-true-ai"
+generated_date: "20260606"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Body Symphony Visualizer | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool where users can input their daily activities, diet, and sleep data to generate a mesmerizing real-time symphony of animated &quot;body systems&quot; (like circulatory, respiratory, and digestive systems), showcasing how lifestyle choices impact health. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Body Symphony Visualizer | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool where users can input their daily activities, diet, and sleep data to generate a mesmerizing real-time symphony of animated &quot;body systems&quot; (like circulatory, respiratory, and digestive systems), showcasing how lifestyle choices impact health. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Body Symphony Visualizer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool where users can input their daily activities, diet, and sleep data to generate a mesmerizing real-time symphony of animated &quot;body systems&quot; (like circulatory, respiratory, and digestive systems), showcasing how lifestyle choices impact health. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Body Symphony Visualizer</h1>
+    <p class="seo-subtitle">An interactive tool where users can input their daily activities, diet, and sleep data to generate a mesmerizing real-time symphony of animated &quot;body systems&quot; (like circulatory, respiratory, and digestive systems), showcasing how lifestyle choices impact health.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to bottom, #85FFBD, #FFFB7D);  
+  color: #333;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 80%;  
+  max-width: 1200px;  
+  padding: 20px;  
+  background: white;  
+  border-radius: 12px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
+}  
+#input-data {  
+  display: flex;  
+  flex-direction: column;  
+  gap: 10px;  
+  margin-bottom: 20px;  
+}  
+input[type="range"] {  
+  width: 100%;  
+}  
+.canvas-container {  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  position: relative;  
+  border: 1px solid #ddd;  
+  border-radius: 10px;  
+  overflow: hidden;  
+  height: 400px;  
+}  
+canvas {  
+  display: block;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Body Symphony Visualizer</h1>  
+  <div id="input-data">  
+    <label>Activity Level: <input type="range" id="activity" min="1" max="10" value="5"></label>  
+    <label>Diet Quality: <input type="range" id="diet" min="1" max="10" value="5"></label>  
+    <label>Sleep Hours: <input type="range" id="sleep" min="4" max="12" value="7"></label>  
+  </div>  
+  <div class="canvas-container">  
+    <canvas id="bodyVisualizer"></canvas>  
+  </div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById('bodyVisualizer');  
+const ctx = canvas.getContext('2d');  
+canvas.width = document.querySelector('.canvas-container').clientWidth;  
+canvas.height = 400;  
+
+const inputs = {  
+  activity: 5,  
+  diet: 5,  
+  sleep: 7,  
+};  
+
+document.querySelectorAll('#input-data input').forEach(input => {  
+  input.addEventListener('input', e => {  
+    inputs[e.target.id] = +e.target.value;  
+    drawVisualizer();  
+  });  
+});  
+
+function drawVisualizer() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+
+  const colors = ['#FF6F61', '#6BBDFF', '#FFD166'];  
+  const radii = [inputs.activity * 10, inputs.diet * 15, inputs.sleep * 20];  
+
+  for (let i = 0; i < colors.length; i++) {  
+    ctx.beginPath();  
+    ctx.arc(canvas.width / 2, canvas.height / 2, radii[i], 0, Math.PI * 2);  
+    ctx.fillStyle = colors[i] + '88';  
+    ctx.fill();  
+    ctx.closePath();  
+  }  
+}  
+
+drawVisualizer();  
+window.addEventListener('resize', () => {  
+  canvas.width = document.querySelector('.canvas-container').clientWidth;  
+  drawVisualizer();  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

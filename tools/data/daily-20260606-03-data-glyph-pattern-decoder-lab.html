@@ -1,0 +1,93 @@
+---
+layout: null
+title: "Data Glyph: Pattern Decoder Lab"
+category: "Data"
+description: "Uncover hidden patterns and anomalies in datasets by interacting with dynamic glyphs that transform based on your inputs."
+permalink: "/tools/daily-20260606-03-data-glyph-pattern-decoder-lab.html"
+generated_by: "api-true-ai"
+generated_date: "20260606"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Glyph: Pattern Decoder Lab | Free Online Interactive Tool</title>
+  <meta name="description" content="Uncover hidden patterns and anomalies in datasets by interacting with dynamic glyphs that transform based on your inputs. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Glyph: Pattern Decoder Lab | Free Online Interactive Tool">
+  <meta property="og:description" content="Uncover hidden patterns and anomalies in datasets by interacting with dynamic glyphs that transform based on your inputs. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Glyph: Pattern Decoder Lab | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Uncover hidden patterns and anomalies in datasets by interacting with dynamic glyphs that transform based on your inputs. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Glyph: Pattern Decoder Lab</h1>
+    <p class="seo-subtitle">Uncover hidden patterns and anomalies in datasets by interacting with dynamic glyphs that transform based on your inputs.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #1c1c1c; color: #f5f5f5; display: flex; justify-content: center; align-items: center; height: 100vh; }  
+  #tool-app { width: 80vw; height: 80vh; background: #282828; border-radius: 10px; padding: 20px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); display: grid; grid-template-columns: 1fr 3fr; gap: 20px; }  
+  #data-input { display: flex; flex-direction: column; }  
+  #data-input textarea { width: 100%; height: 50%; background: #333; color: #f5f5f5; border: none; border-radius: 5px; margin-bottom: 10px; padding: 10px; }  
+  #data-input button { background: #3b82f6; border: none; padding: 10px; color: #fff; border-radius: 5px; cursor: pointer; }  
+  #data-input button:hover { background: #2563eb; }  
+  #visualizer { position: relative; background: #1c1c1c; border: 2px solid #444; border-radius: 5px; overflow: hidden; display: flex; justify-content: center; align-items: center; }  
+  .glyph { width: 50px; height: 50px; border-radius: 50%; display: inline-block; transform-origin: center; position: absolute; }  
+</style>  
+<div id="tool-app">  
+  <div id="data-input">  
+    <textarea id="data-text" placeholder="Paste your dataset (comma-separated numbers or text)..."></textarea>  
+    <button id="analyze-btn">Analyze Patterns</button>  
+  </div>  
+  <div id="visualizer"></div>  
+</div>  
+<script>  
+document.getElementById('analyze-btn').addEventListener('click', () => {  
+    const dataInput = document.getElementById('data-text').value.trim();  
+    const visualizer = document.getElementById('visualizer');  
+    visualizer.innerHTML = '';  
+    if (!dataInput) return alert('Please paste some data to analyze!');  
+      
+    const dataArray = dataInput.split(',').map(item => item.trim());  
+    const uniqueValues = [...new Set(dataArray)];  
+    const centerX = visualizer.offsetWidth / 2;  
+    const centerY = visualizer.offsetHeight / 2;  
+    const radius = 100;  
+      
+    uniqueValues.forEach((value, index) => {  
+        const angle = (index / uniqueValues.length) * 2 * Math.PI;  
+        const x = centerX + radius * Math.cos(angle);  
+        const y = centerY + radius * Math.sin(angle);  
+          
+        const glyph = document.createElement('div');  
+        glyph.className = 'glyph';  
+        glyph.style.backgroundColor = `hsl(${(index / uniqueValues.length) * 360}, 70%, 50%)`;  
+        glyph.style.transform = `scale(${Math.random() + 0.5})`;  
+        glyph.style.left = `${x}px`;  
+        glyph.style.top = `${y}px`;  
+        glyph.innerText = value.length > 3 ? value.slice(0, 3) + '…' : value;  
+        glyph.style.display = 'flex';  
+        glyph.style.justifyContent = 'center';  
+        glyph.style.alignItems = 'center';  
+        glyph.style.fontSize = '12px';  
+        glyph.style.color = '#fff';  
+        visualizer.appendChild(glyph);  
+    });  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
