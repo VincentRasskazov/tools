@@ -1,0 +1,172 @@
+---
+layout: null
+title: "Mindful Maze: Interactive Stress Tracker"
+category: "Health"
+description: "An engaging mini-game where users navigate a dynamic maze to reflect their current stress levels and receive actionable mindfulness techniques."
+permalink: "/tools/daily-20260607-25-mindful-maze-interactive-stress-tracker.html"
+generated_by: "api-true-ai"
+generated_date: "20260607"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mindful Maze: Interactive Stress Tracker | Free Online Interactive Tool</title>
+  <meta name="description" content="An engaging mini-game where users navigate a dynamic maze to reflect their current stress levels and receive actionable mindfulness techniques. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Mindful Maze: Interactive Stress Tracker | Free Online Interactive Tool">
+  <meta property="og:description" content="An engaging mini-game where users navigate a dynamic maze to reflect their current stress levels and receive actionable mindfulness techniques. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mindful Maze: Interactive Stress Tracker | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An engaging mini-game where users navigate a dynamic maze to reflect their current stress levels and receive actionable mindfulness techniques. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Mindful Maze: Interactive Stress Tracker</h1>
+    <p class="seo-subtitle">An engaging mini-game where users navigate a dynamic maze to reflect their current stress levels and receive actionable mindfulness techniques.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: 'Arial', sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  background: linear-gradient(120deg, #89f7fe, #66a6ff);  
+  overflow: hidden;  
+}  
+#tool-app {  
+  text-align: center;  
+  width: 90%;  
+  max-width: 600px;  
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);  
+  border-radius: 15px;  
+  background: #ffffff;  
+  padding: 20px;  
+}  
+.maze {  
+  display: grid;  
+  grid-template-columns: repeat(10, 1fr);  
+  grid-gap: 4px;  
+}  
+.maze-cell {  
+  width: 30px;  
+  height: 30px;  
+  background-color: #e0e0e0;  
+  border-radius: 4px;  
+  transition: background-color 0.2s ease;  
+}  
+.maze-cell.player {  
+  background-color: #66a6ff;  
+}  
+.maze-cell.goal {  
+  background-color: #ff6b6b;  
+}  
+.maze-cell.path {  
+  background-color: #c8e6c9;  
+}  
+.controls {  
+  margin-top: 15px;  
+}  
+button {  
+  background-color: #66a6ff;  
+  color: #ffffff;  
+  border: none;  
+  padding: 10px 20px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  font-size: 16px;  
+  margin: 0 5px;  
+  transition: background-color 0.3s ease;  
+}  
+button:hover {  
+  background-color: #4a90e2;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Mindful Maze</h1>  
+  <p>Control the blue dot (your mind) to navigate the maze and reach the red goal while avoiding stress triggers.</p>  
+  <div class="maze" id="maze-grid"></div>  
+  <div class="controls">  
+    <button id="up-btn">Up</button>  
+    <button id="down-btn">Down</button>  
+    <button id="left-btn">Left</button>  
+    <button id="right-btn">Right</button>  
+  </div>  
+  <p id="message"></p>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const mazeGrid = document.getElementById('maze-grid');  
+const message = document.getElementById('message');  
+const gridSize = 10;  
+let playerPosition = { x: 0, y: 0 };  
+let goalPosition = { x: gridSize - 1, y: gridSize - 1 };  
+
+// Generate grid dynamically  
+function generateMaze() {  
+  mazeGrid.innerHTML = '';  
+  for (let y = 0; y < gridSize; y++) {  
+    for (let x = 0; x < gridSize; x++) {  
+      const cell = document.createElement('div');  
+      cell.classList.add('maze-cell');  
+      if (x === playerPosition.x && y === playerPosition.y) {  
+        cell.classList.add('player');  
+      } else if (x === goalPosition.x && y === goalPosition.y) {  
+        cell.classList.add('goal');  
+      }  
+      mazeGrid.appendChild(cell);  
+    }  
+  }  
+}  
+
+// Move player within bounds  
+function movePlayer(dx, dy) {  
+  const newX = playerPosition.x + dx;  
+  const newY = playerPosition.y + dy;  
+  if (newX >= 0 && newX < gridSize && newY >= 0 && newY < gridSize) {  
+    playerPosition = { x: newX, y: newY };  
+    if (playerPosition.x === goalPosition.x && playerPosition.y === goalPosition.y) {  
+      message.innerText = 'You reached the goal! Take a deep breath and relax.';  
+      resetGame();  
+    } else {  
+      message.innerText = '';  
+    }  
+    generateMaze();  
+  }  
+}  
+
+// Reset game to initial state  
+function resetGame() {  
+  playerPosition = { x: 0, y: 0 };  
+  goalPosition = { x: gridSize - 1, y: gridSize - 1 };  
+  generateMaze();  
+}  
+
+// Control buttons  
+document.getElementById('up-btn').addEventListener('click', () => movePlayer(0, -1));  
+document.getElementById('down-btn').addEventListener('click', () => movePlayer(0, 1));  
+document.getElementById('left-btn').addEventListener('click', () => movePlayer(-1, 0));  
+document.getElementById('right-btn').addEventListener('click', () => movePlayer(1, 0));  
+
+// Initialize game  
+generateMaze();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

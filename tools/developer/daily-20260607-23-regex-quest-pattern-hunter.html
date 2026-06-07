@@ -1,0 +1,107 @@
+---
+layout: null
+title: "Regex Quest: Pattern Hunter"
+category: "Developer"
+description: "A gamified interactive tool where you solve challenges by crafting regular expressions to unlock hidden treasures in a dungeon-like environment."
+permalink: "/tools/daily-20260607-23-regex-quest-pattern-hunter.html"
+generated_by: "api-true-ai"
+generated_date: "20260607"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Quest: Pattern Hunter | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified interactive tool where you solve challenges by crafting regular expressions to unlock hidden treasures in a dungeon-like environment. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Regex Quest: Pattern Hunter | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified interactive tool where you solve challenges by crafting regular expressions to unlock hidden treasures in a dungeon-like environment. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Regex Quest: Pattern Hunter | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified interactive tool where you solve challenges by crafting regular expressions to unlock hidden treasures in a dungeon-like environment. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Regex Quest: Pattern Hunter</h1>
+    <p class="seo-subtitle">A gamified interactive tool where you solve challenges by crafting regular expressions to unlock hidden treasures in a dungeon-like environment.</p>
+    <style>  
+  body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; background: #1e1e2e; color: #e5e5e5; display: flex; justify-content: center; align-items: center; height: 100vh; }  
+  #tool-app { text-align: center; max-width: 600px; padding: 20px; background: #2a2a3d; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); }  
+  h1 { font-size: 24px; color: #ffa726; }  
+  .grid { font-family: monospace; display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 20px 0; }  
+  .cell { padding: 10px; border: 2px solid #444; border-radius: 5px; background-color: #333; color: #ffa726; text-align: center; cursor: pointer; }  
+  .cell.locked { background-color: #555; color: #999; cursor: not-allowed; }  
+  input { padding: 10px; width: 100%; margin-bottom: 15px; border: 1px solid #444; border-radius: 5px; background: #333; color: #ffa726; }  
+  button { background: #ffa726; border: none; padding: 10px 20px; color: #1e1e2e; font-size: 16px; border-radius: 5px; cursor: pointer; }  
+  button:hover { background: #ff6f00; }  
+  .message { margin: 15px 0; font-size: 16px; }  
+</style>  
+<div id="tool-app">  
+  <h1>Regex Quest: Pattern Hunter</h1>  
+  <p>Craft a regex pattern to unlock the treasures!</p>  
+  <div class="grid" id="grid"></div>  
+  <input type="text" id="regexInput" placeholder="Enter regex pattern" />  
+  <button id="submitRegex">Test Regex</button>  
+  <p class="message" id="message"></p>  
+</div>  
+<script>  
+  const treasures = ["gold3", "silver12", "gemstone7", "diamondXX", "ruby98", "sword4", "shield21", "crown99", "magic7", "coin2"];  
+  const lockedCells = treasures.map(item => ({ value: item, isLocked: true }));  
+  const grid = document.getElementById('grid');  
+  const message = document.getElementById('message');  
+
+  function renderGrid() {  
+    grid.innerHTML = '';  
+    lockedCells.forEach((cell, index) => {  
+      const cellDiv = document.createElement('div');  
+      cellDiv.className = 'cell' + (cell.isLocked ? ' locked' : '');  
+      cellDiv.innerText = cell.isLocked ? '???' : cell.value;  
+      grid.appendChild(cellDiv);  
+    });  
+  }  
+
+  function testRegex() {  
+    const regexInput = document.getElementById('regexInput').value;  
+    try {  
+      const regex = new RegExp(regexInput);  
+      let successfulMatches = 0;  
+      lockedCells.forEach(cell => {  
+        if (cell.isLocked && regex.test(cell.value)) {  
+          cell.isLocked = false;  
+          successfulMatches++;  
+        }  
+      });  
+      if (successfulMatches > 0) {  
+        message.innerText = `You unlocked ${successfulMatches} treasure(s)!`;  
+        message.style.color = '#ffa726';  
+      } else {  
+        message.innerText = `No matches found. Try again!`;  
+        message.style.color = '#e57373';  
+      }  
+      renderGrid();  
+    } catch (error) {  
+      message.innerText = `Invalid regex: ${error.message}`;  
+      message.style.color = '#e57373';  
+    }  
+  }  
+
+  document.getElementById('submitRegex').addEventListener('click', testRegex);  
+
+  renderGrid();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,130 @@
+---
+layout: null
+title: "\"EchoMaze: The Soundwave Puzzle Builder\""
+category: "Games"
+description: "A unique game where players manipulate soundwaves to navigate through an echo-based maze, solving puzzles using frequency, amplitude, and reflection mechanics."
+permalink: "/tools/daily-20260607-20-echomaze-the-soundwave-puzzle-builder.html"
+generated_by: "api-true-ai"
+generated_date: "20260607"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>&quot;EchoMaze: The Soundwave Puzzle Builder&quot; | Free Online Interactive Tool</title>
+  <meta name="description" content="A unique game where players manipulate soundwaves to navigate through an echo-based maze, solving puzzles using frequency, amplitude, and reflection mechanics. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="&quot;EchoMaze: The Soundwave Puzzle Builder&quot; | Free Online Interactive Tool">
+  <meta property="og:description" content="A unique game where players manipulate soundwaves to navigate through an echo-based maze, solving puzzles using frequency, amplitude, and reflection mechanics. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="&quot;EchoMaze: The Soundwave Puzzle Builder&quot; | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A unique game where players manipulate soundwaves to navigate through an echo-based maze, solving puzzles using frequency, amplitude, and reflection mechanics. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>&quot;EchoMaze: The Soundwave Puzzle Builder&quot;</h1>
+    <p class="seo-subtitle">A unique game where players manipulate soundwaves to navigate through an echo-based maze, solving puzzles using frequency, amplitude, and reflection mechanics.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: linear-gradient(180deg, #2a2a72, #009ffd); margin: 0; color: white; }  
+  #tool-app { max-width: 800px; margin: 50px auto; text-align: center; }  
+  .maze { display: grid; grid-template-columns: repeat(10, 40px); grid-gap: 5px; margin: 20px auto; }  
+  .cell { width: 40px; height: 40px; background: #1b1b32; display: flex; align-items: center; justify-content: center; position: relative; }  
+  .cell.active { background: #ffdd00; }  
+  .cell.goal { background: #00ff88; }  
+  .soundwave { width: 5px; height: 5px; background: red; border-radius: 50%; position: absolute; animation: pulse 0.5s infinite; }  
+  @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(3); opacity: 0; } }  
+  button { margin: 10px; padding: 10px 20px; font-size: 16px; border: none; background: #ffdd00; color: #1b1b32; cursor: pointer; border-radius: 5px; }  
+  button:disabled { background: #666; cursor: not-allowed; }  
+</style>  
+<div id="tool-app">  
+  <h1>EchoMaze: The Soundwave Puzzle Builder</h1>  
+  <p>Manipulate soundwaves to escape the maze. Use soundwave bursts to reveal paths and hidden obstacles!</p>  
+  <div class="maze" id="maze"></div>  
+  <button id="send-wave">Send Soundwave</button>  
+  <p id="status"></p>  
+</div>  
+<script>  
+  // Variables for game state  
+  const mazeData = [  
+    [0, 0, 0, 1, 0, 0, 0, 0, 0, 0],  
+    [1, 1, 0, 1, 0, 1, 1, 1, 1, 0],  
+    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0],  
+    [0, 1, 1, 1, 0, 1, 0, 1, 1, 0],  
+    [0, 0, 0, 1, 0, 0, 0, 1, 0, 0],  
+    [0, 1, 0, 1, 1, 1, 0, 1, 0, 1],  
+    [0, 1, 0, 0, 0, 0, 0, 1, 0, 1],  
+    [0, 1, 1, 1, 1, 1, 1, 1, 0, 1],  
+    [0, 0, 0, 0, 0, 0, 0, 1, 0, 0],  
+    [2, 1, 1, 1, 0, 1, 1, 1, 1, 3],  
+  ];  
+  const maze = document.getElementById('maze');  
+  const status = document.getElementById('status');  
+  let playerPosition = { x: 0, y: 9 };  
+  
+  // Generate maze grid  
+  function drawMaze() {  
+    maze.innerHTML = '';  
+    mazeData.forEach((row, y) => {  
+      row.forEach((cell, x) => {  
+        const div = document.createElement('div');  
+        div.className = 'cell';  
+        if (cell === 1) div.style.backgroundColor = 'gray';  
+        if (cell === 2) div.classList.add('active');  
+        if (cell === 3) div.classList.add('goal');  
+        maze.appendChild(div);  
+      });  
+    });  
+  }  
+  
+  // Send a soundwave  
+  function sendSoundwave() {  
+    const wave = document.createElement('div');  
+    wave.className = 'soundwave';  
+    const cell = maze.children[playerPosition.y * 10 + playerPosition.x];  
+    cell.appendChild(wave);  
+    soundPropagation(playerPosition.x, playerPosition.y, wave);  
+  }  
+  
+  // Simulate soundwave propagation  
+  function soundPropagation(x, y, wave) {  
+    let radius = 1;  
+    const interval = setInterval(() => {  
+      for (let i = -radius; i <= radius; i++) {  
+        for (let j = -radius; j <= radius; j++) {  
+          const newX = x + i;  
+          const newY = y + j;  
+          if (newX >= 0 && newX < 10 && newY >= 0 && newY < 10) {  
+            const cell = maze.children[newY * 10 + newX];  
+            if (mazeData[newY][newX] === 1) cell.style.backgroundColor = '#555';  
+            else if (mazeData[newY][newX] === 0) cell.style.backgroundColor = '#444';  
+          }  
+        }  
+      }  
+      radius++;  
+      if (radius > 5) {  
+        clearInterval(interval);  
+        wave.remove();  
+      }  
+    }, 200);  
+  }  
+  
+  // Initialize game  
+  drawMaze();  
+  document.getElementById('send-wave').addEventListener('click', sendSoundwave);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

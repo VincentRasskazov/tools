@@ -1,0 +1,181 @@
+---
+layout: null
+title: "Task Tangle: Priority Unraveling Game"
+category: "Productivity"
+description: "A dynamic visual puzzle game that helps users prioritize tasks by untangling interconnected goals based on urgency and importance."
+permalink: "/tools/daily-20260607-22-task-tangle-priority-unraveling-game.html"
+generated_by: "api-true-ai"
+generated_date: "20260607"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Tangle: Priority Unraveling Game | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic visual puzzle game that helps users prioritize tasks by untangling interconnected goals based on urgency and importance. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Task Tangle: Priority Unraveling Game | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic visual puzzle game that helps users prioritize tasks by untangling interconnected goals based on urgency and importance. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Task Tangle: Priority Unraveling Game | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic visual puzzle game that helps users prioritize tasks by untangling interconnected goals based on urgency and importance. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Task Tangle: Priority Unraveling Game</h1>
+    <p class="seo-subtitle">A dynamic visual puzzle game that helps users prioritize tasks by untangling interconnected goals based on urgency and importance.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(135deg, #f0f8ff, #dbe7f0);  
+  color: #333;  
+  margin: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  width: 80vw;  
+  height: 80vh;  
+  background: white;  
+  border-radius: 12px;  
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);  
+  position: relative;  
+  overflow: hidden;  
+}  
+.task-node {  
+  width: 100px;  
+  height: 100px;  
+  background: #f6a5c0;  
+  border-radius: 50%;  
+  position: absolute;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  color: white;  
+  font-weight: bold;  
+  cursor: grab;  
+  user-select: none;  
+}  
+.task-node.active {  
+  background: #6ec1e4;  
+  transform: scale(1.2);  
+  cursor: grabbing;  
+}  
+.connection-line {  
+  position: absolute;  
+  background: #888;  
+  width: 2px;  
+  transform-origin: left center;  
+}  
+</style>  
+<div id="tool-app"></div>  
+<script>  
+// Interactive JavaScript logic here  
+const app = document.getElementById("tool-app");  
+
+const tasks = [  
+  { id: 1, name: "Email Replies", x: 100, y: 150 },  
+  { id: 2, name: "Project Proposal", x: 300, y: 100 },  
+  { id: 3, name: "Team Meeting", x: 500, y: 250 },  
+  { id: 4, name: "Code Review", x: 700, y: 400 },  
+];  
+
+const connections = [  
+  { from: 1, to: 2 },  
+  { from: 2, to: 3 },  
+  { from: 3, to: 4 },  
+  { from: 1, to: 4 },  
+];  
+
+let activeNode = null;  
+
+function createNode(task) {  
+  const node = document.createElement("div");  
+  node.className = "task-node";  
+  node.style.left = `${task.x}px`;  
+  node.style.top = `${task.y}px`;  
+  node.textContent = task.name;  
+  node.dataset.id = task.id;  
+
+  node.addEventListener("mousedown", (e) => {  
+    activeNode = { node, offsetX: e.offsetX, offsetY: e.offsetY };  
+    node.classList.add("active");  
+  });  
+  document.addEventListener("mousemove", (e) => {  
+    if (activeNode) {  
+      const { node, offsetX, offsetY } = activeNode;  
+      node.style.left = `${e.clientX - offsetX}px`;  
+      node.style.top = `${e.clientY - offsetY}px`;  
+      updateConnections();  
+    }  
+  });  
+  document.addEventListener("mouseup", () => {  
+    if (activeNode) {  
+      activeNode.node.classList.remove("active");  
+      activeNode = null;  
+    }  
+  });  
+
+  app.appendChild(node);  
+}  
+
+function createConnection(fromNode, toNode) {  
+  const line = document.createElement("div");  
+  line.className = "connection-line";  
+  updateLine(line, fromNode, toNode);  
+  app.appendChild(line);  
+  return line;  
+}  
+
+function updateLine(line, fromNode, toNode) {  
+  const fromRect = fromNode.getBoundingClientRect();  
+  const toRect = toNode.getBoundingClientRect();  
+  const x1 = fromRect.left + fromRect.width / 2;  
+  const y1 = fromRect.top + fromRect.height / 2;  
+  const x2 = toRect.left + toRect.width / 2;  
+  const y2 = toRect.top + toRect.height / 2;  
+
+  const angle = Math.atan2(y2 - y1, x2 - x1);  
+  const length = Math.hypot(x2 - x1, y2 - y1);  
+
+  line.style.left = `${x1}px`;  
+  line.style.top = `${y1}px`;  
+  line.style.width = `${length}px`;  
+  line.style.transform = `rotate(${angle}rad)`;  
+}  
+
+function updateConnections() {  
+  connections.forEach(({ from, to }, index) => {  
+    const fromNode = document.querySelector(`[data-id="${from}"]`);  
+    const toNode = document.querySelector(`[data-id="${to}"]`);  
+    const line = app.querySelectorAll(".connection-line")[index];  
+    updateLine(line, fromNode, toNode);  
+  });  
+}  
+
+tasks.forEach(createNode);  
+connections.map(({ from, to }) => {  
+  const fromNode = document.querySelector(`[data-id="${from}"]`);  
+  const toNode = document.querySelector(`[data-id="${to}"]`);  
+  createConnection(fromNode, toNode);  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

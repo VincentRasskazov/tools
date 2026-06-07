@@ -1,0 +1,172 @@
+---
+layout: null
+title: "CipherCraft: Interactive Encryption Playground"
+category: "Cybersecurity"
+description: "A dynamic tool where users can create, test, and break custom ciphers while visualizing encryption processes in real-time."
+permalink: "/tools/daily-20260607-13-ciphercraft-interactive-encryption-playground.html"
+generated_by: "api-true-ai"
+generated_date: "20260607"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CipherCraft: Interactive Encryption Playground | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic tool where users can create, test, and break custom ciphers while visualizing encryption processes in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CipherCraft: Interactive Encryption Playground | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic tool where users can create, test, and break custom ciphers while visualizing encryption processes in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CipherCraft: Interactive Encryption Playground | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic tool where users can create, test, and break custom ciphers while visualizing encryption processes in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CipherCraft: Interactive Encryption Playground</h1>
+    <p class="seo-subtitle">A dynamic tool where users can create, test, and break custom ciphers while visualizing encryption processes in real-time.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: #0d1117; color: #c9d1d9; margin: 0; padding: 0; }  
+  #tool-app { padding: 20px; max-width: 800px; margin: 0 auto; }  
+  h1, h2 { text-align: center; }  
+  .cipher-box { background: #161b22; padding: 20px; border-radius: 8px; margin-bottom: 20px; }  
+  label { display: block; margin-bottom: 10px; font-weight: bold; }  
+  input, textarea, select { width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #30363d; border-radius: 4px; background: #0d1117; color: #c9d1d9; }  
+  button { background: #238636; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; }  
+  button:hover { background: #2ea043; }  
+  .output { margin-top: 20px; padding: 10px; background: #21262d; border-radius: 4px; }  
+  .visualization { display: flex; justify-content: space-evenly; align-items: center; margin-top: 20px; }  
+  .visualization div { width: 100px; height: 100px; background: #238636; border: 2px solid #2ea043; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; font-size: 18px; }  
+</style>  
+<div id="tool-app">  
+  <h1>CipherCraft</h1>  
+  <h2>Create, Test, Break!</h2>  
+  <div class="cipher-box">  
+    <label for="input-text">Enter Text to Encrypt:</label>  
+    <textarea id="input-text" rows="3" placeholder="Type your message..."></textarea>  
+
+    <label for="cipher-type">Select Cipher Type:</label>  
+    <select id="cipher-type">  
+      <option value="caesar">Caesar Cipher</option>  
+      <option value="atbash">Atbash Cipher</option>  
+      <option value="custom">Custom Cipher</option>  
+    </select>  
+
+    <label for="shift-key" id="shift-key-label" style="display: none;">Shift Key (for Caesar Cipher):</label>  
+    <input type="number" id="shift-key" style="display: none;" min="1" max="25" value="3">  
+
+    <button id="encrypt-btn">Encrypt</button>  
+    <button id="break-btn">Attempt to Break</button>  
+  </div>  
+
+  <h2>Output</h2>  
+  <div class="output" id="output-box">Your encrypted/decrypted text will appear here...</div>  
+
+  <h2>Visualization</h2>  
+  <div class="visualization" id="visualization">  
+    <div>Start</div>  
+    <div>Encrypt</div>  
+    <div>Decrypt</div>  
+  </div>  
+</div>  
+<script>  
+  const inputText = document.getElementById('input-text');  
+  const cipherType = document.getElementById('cipher-type');  
+  const shiftKey = document.getElementById('shift-key');  
+  const shiftKeyLabel = document.getElementById('shift-key-label');  
+  const encryptBtn = document.getElementById('encrypt-btn');  
+  const breakBtn = document.getElementById('break-btn');  
+  const outputBox = document.getElementById('output-box');  
+  const visualization = document.getElementById('visualization');  
+
+  cipherType.addEventListener('change', () => {  
+    if (cipherType.value === 'caesar') {  
+      shiftKey.style.display = 'block';  
+      shiftKeyLabel.style.display = 'block';  
+    } else {  
+      shiftKey.style.display = 'none';  
+      shiftKeyLabel.style.display = 'none';  
+    }  
+  });  
+
+  const caesarCipher = (text, shift, decrypt = false) => {  
+    const shiftVal = decrypt ? -shift : shift;  
+    return text.split('').map(char => {  
+      if (/[a-zA-Z]/.test(char)) {  
+        const base = char === char.toUpperCase() ? 65 : 97;  
+        return String.fromCharCode(((char.charCodeAt(0) - base + shiftVal + 26) % 26) + base);  
+      }  
+      return char;  
+    }).join('');  
+  };  
+
+  const atbashCipher = (text) => {  
+    return text.split('').map(char => {  
+      if (/[a-zA-Z]/.test(char)) {  
+        const base = char === char.toUpperCase() ? 65 : 97;  
+        return String.fromCharCode(25 - (char.charCodeAt(0) - base) + base);  
+      }  
+      return char;  
+    }).join('');  
+  };  
+
+  encryptBtn.addEventListener('click', () => {  
+    visualization.innerHTML = `<div>Start</div><div>Encrypting...</div><div>Done</div>`;  
+
+    const text = inputText.value;  
+    const cipher = cipherType.value;  
+    let result = '';  
+
+    if (cipher === 'caesar') {  
+      const shift = parseInt(shiftKey.value, 10);  
+      result = caesarCipher(text, shift);  
+    } else if (cipher === 'atbash') {  
+      result = atbashCipher(text);  
+    } else {  
+      result = "Custom cipher not yet implemented.";  
+    }  
+
+    setTimeout(() => {  
+      visualization.innerHTML = `<div>Start</div><div>Encrypt</div><div>Completed</div>`;  
+      outputBox.textContent = result;  
+    }, 1000);  
+  });  
+
+  breakBtn.addEventListener('click', () => {  
+    visualization.innerHTML = `<div>Trying...</div><div>Breaking...</div><div>Done</div>`;  
+
+    const text = inputText.value;  
+    const cipher = cipherType.value;  
+    let result = '';  
+
+    if (cipher === 'caesar') {  
+      for (let i = 1; i < 26; i++) {  
+        result += `Key ${i}: ${caesarCipher(text, i, true)}\n`;  
+      }  
+    } else if (cipher === 'atbash') {  
+      result = atbashCipher(text);  
+    } else {  
+      result = "Breaking custom ciphers is not yet implemented.";  
+    }  
+
+    setTimeout(() => {  
+      visualization.innerHTML = `<div>Start</div><div>Break</div><div>Completed</div>`;  
+      outputBox.textContent = result;  
+    }, 1000);  
+  });  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

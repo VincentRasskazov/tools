@@ -1,0 +1,148 @@
+---
+layout: null
+title: "DevCircuit: Logic Flow Builder"
+category: "Developer"
+description: "An interactive tool where developers visually design and debug logic flows using draggable components, connections, and real-time feedback."
+permalink: "/tools/daily-20260607-02-devcircuit-logic-flow-builder.html"
+generated_by: "api-true-ai"
+generated_date: "20260607"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevCircuit: Logic Flow Builder | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool where developers visually design and debug logic flows using draggable components, connections, and real-time feedback. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DevCircuit: Logic Flow Builder | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool where developers visually design and debug logic flows using draggable components, connections, and real-time feedback. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DevCircuit: Logic Flow Builder | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool where developers visually design and debug logic flows using draggable components, connections, and real-time feedback. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DevCircuit: Logic Flow Builder</h1>
+    <p class="seo-subtitle">An interactive tool where developers visually design and debug logic flows using draggable components, connections, and real-time feedback.</p>
+    <style>  
+  #tool-app {  
+    font-family: 'Roboto', sans-serif;  
+    margin: 20px auto;  
+    max-width: 900px;  
+    text-align: center;  
+  }  
+  .canvas {  
+    border: 2px dashed #ccc;  
+    height: 500px;  
+    position: relative;  
+    overflow: hidden;  
+    background: #f9f9f9;  
+  }  
+  .node {  
+    width: 120px;  
+    height: 50px;  
+    background: #4caf50;  
+    color: #fff;  
+    line-height: 50px;  
+    text-align: center;  
+    border-radius: 5px;  
+    position: absolute;  
+    cursor: grab;  
+  }  
+  .node:active {  
+    cursor: grabbing;  
+  }  
+  .connection {  
+    position: absolute;  
+    background: #2196f3;  
+    height: 2px;  
+    transform-origin: 0 0;  
+  }  
+  .menu {  
+    display: flex;  
+    justify-content: space-around;  
+    margin-top: 20px;  
+  }  
+  .menu button {  
+    padding: 10px 20px;  
+    background: #2196f3;  
+    color: #fff;  
+    border: none;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    transition: background 0.3s;  
+  }  
+  .menu button:hover {  
+    background: #1976d2;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h1>DevCircuit: Logic Flow Builder</h1>  
+  <p>Drag and connect nodes to design and test logic flows in real-time!</p>  
+  <div class="menu">  
+    <button onclick="addNode()">Add Node</button>  
+    <button onclick="testFlow()">Test Logic Flow</button>  
+    <button onclick="clearCanvas()">Clear Canvas</button>  
+  </div>  
+  <div class="canvas" id="canvas"></div>  
+</div>  
+<script>  
+let nodeId = 0;  
+let connections = [];  
+
+function addNode() {  
+  const canvas = document.getElementById('canvas');  
+  const node = document.createElement('div');  
+  node.classList.add('node');  
+  node.textContent = `Node ${++nodeId}`;  
+  node.style.top = `${Math.random() * (canvas.clientHeight - 50)}px`;  
+  node.style.left = `${Math.random() * (canvas.clientWidth - 120)}px`;  
+  node.draggable = true;  
+  node.id = `node-${nodeId}`;  
+  node.addEventListener('dragstart', (e) => startDrag(e, node.id));  
+  node.addEventListener('dragend', (e) => endDrag(e, node));  
+  canvas.appendChild(node);  
+}  
+
+function startDrag(e, id) {  
+  e.dataTransfer.setData('nodeId', id);  
+}  
+
+function endDrag(e, node) {  
+  const canvas = document.getElementById('canvas');  
+  const rect = canvas.getBoundingClientRect();  
+  node.style.top = `${e.clientY - rect.top - 25}px`;  
+  node.style.left = `${e.clientX - rect.left - 60}px`;  
+}  
+
+function testFlow() {  
+  const canvas = document.getElementById('canvas');  
+  if (canvas.children.length < 2) {  
+    alert('Add at least 2 nodes and connect them to test the flow!');  
+    return;  
+  }  
+
+  alert(`Testing logic flow with ${connections.length} connections.`);  
+}  
+
+function clearCanvas() {  
+  document.getElementById('canvas').innerHTML = '';  
+  connections = [];  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,145 @@
+---
+layout: null
+title: "Wellness Maze Explorer"
+category: "Health"
+description: "A gamified interactive tool where users navigate a dynamic maze by answering mental health and wellness-related prompts, with personalized feedback and relaxation tips at each step."
+permalink: "/tools/daily-20260607-07-wellness-maze-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260607"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wellness Maze Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified interactive tool where users navigate a dynamic maze by answering mental health and wellness-related prompts, with personalized feedback and relaxation tips at each step. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Wellness Maze Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified interactive tool where users navigate a dynamic maze by answering mental health and wellness-related prompts, with personalized feedback and relaxation tips at each step. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Wellness Maze Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified interactive tool where users navigate a dynamic maze by answering mental health and wellness-related prompts, with personalized feedback and relaxation tips at each step. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Wellness Maze Explorer</h1>
+    <p class="seo-subtitle">A gamified interactive tool where users navigate a dynamic maze by answering mental health and wellness-related prompts, with personalized feedback and relaxation tips at each step.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: linear-gradient(to bottom, #a8e063, #56ab2f); color: #fff; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }  
+  #tool-app { width: 90%; max-width: 600px; text-align: center; }  
+  .maze-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; margin: 20px 0; }  
+  .maze-cell { background: #86c232; border: 2px solid #5b8a3c; height: 50px; display: flex; justify-content: center; align-items: center; cursor: pointer; font-size: 14px; font-weight: bold; transition: background 0.3s; }  
+  .maze-cell.active { background: #f6d743; }  
+  .maze-cell.completed { background: #6b6b6b; cursor: default; }  
+  .prompt-box { background: #ffffff; color: #000; padding: 15px; border-radius: 5px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); }  
+  .prompt-question { margin-bottom: 15px; font-size: 16px; }  
+  .prompt-options button { background: #86c232; color: #fff; border: none; margin: 5px; padding: 10px 15px; border-radius: 4px; cursor: pointer; transition: all 0.3s ease; }  
+  .prompt-options button:hover { background: #5b8a3c; }  
+</style>  
+<div id="tool-app">  
+  <h1>Wellness Maze Explorer</h1>  
+  <div class="maze-grid" id="maze">  
+    <!-- Maze cells will be dynamically generated -->  
+  </div>  
+  <div class="prompt-box" id="prompt-box" style="display: none;">  
+    <div class="prompt-question" id="prompt-question"></div>  
+    <div class="prompt-options" id="prompt-options"></div>  
+  </div>  
+</div>  
+<script>  
+  const questions = [  
+    {  
+      question: "What’s a simple way to relax during a busy day?",  
+      options: ["Take deep breaths", "Watch TV", "Ignore stress"],  
+      correct: 0,  
+      tip: "Deep breathing is effective in reducing stress levels quickly."  
+    },  
+    {  
+      question: "How much water should you drink daily?",  
+      options: ["1-2 glasses", "8 glasses", "As much as possible"],  
+      correct: 1,  
+      tip: "Proper hydration helps improve energy and focus."  
+    },  
+    {  
+      question: "What is a good way to boost mental health?",  
+      options: ["Sleep 4 hours", "Exercise regularly", "Overthink less"],  
+      correct: 1,  
+      tip: "Exercise releases endorphins which elevate mood naturally."  
+    }  
+  ];  
+  const mazeSize = 5;  
+  const maze = document.getElementById("maze");  
+  const promptBox = document.getElementById("prompt-box");  
+  const promptQuestion = document.getElementById("prompt-question");  
+  const promptOptions = document.getElementById("prompt-options");  
+  const playerPosition = { x: 0, y: 0 };  
+  
+  function generateMaze() {  
+    maze.innerHTML = "";  
+    for (let y = 0; y < mazeSize; y++) {  
+      for (let x = 0; x < mazeSize; x++) {  
+        const cell = document.createElement("div");  
+        cell.className = "maze-cell";  
+        cell.dataset.x = x;  
+        cell.dataset.y = y;  
+        if (x === 0 && y === 0) cell.classList.add("active");  
+        maze.appendChild(cell);  
+      }  
+    }  
+  }  
+  
+  function showPrompt(cell) {  
+    const questionIndex = Math.floor(Math.random() * questions.length);  
+    const question = questions[questionIndex];  
+    promptQuestion.innerText = question.question;  
+    promptOptions.innerHTML = "";  
+    question.options.forEach((option, index) => {  
+      const button = document.createElement("button");  
+      button.innerText = option;  
+      button.onclick = () => {  
+        if (index === question.correct) {  
+          cell.classList.add("completed");  
+          alert("Correct! " + question.tip);  
+        } else {  
+          alert("Try again! " + question.tip);  
+        }  
+        promptBox.style.display = "none";  
+      };  
+      promptOptions.appendChild(button);  
+    });  
+    promptBox.style.display = "block";  
+  }  
+  
+  maze.addEventListener("click", (e) => {  
+    const target = e.target;  
+    if (!target.classList.contains("maze-cell") || target.classList.contains("completed")) return;  
+  
+    const x = parseInt(target.dataset.x);  
+    const y = parseInt(target.dataset.y);  
+    if (Math.abs(playerPosition.x - x) + Math.abs(playerPosition.y - y) === 1) {  
+      document.querySelector(".maze-cell.active").classList.remove("active");  
+      target.classList.add("active");  
+      playerPosition.x = x;  
+      playerPosition.y = y;  
+      showPrompt(target);  
+    }  
+  });  
+  
+  generateMaze();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,123 @@
+---
+layout: null
+title: "Portfolio Puzzle: Financial Asset Balancer"
+category: "Finance"
+description: "A gamified drag-and-drop tool where users assemble a balanced financial portfolio by combining assets, managing risk, and optimizing returns, with real-time feedback and visual analytics."
+permalink: "/tools/daily-20260607-06-portfolio-puzzle-financial-asset-balancer.html"
+generated_by: "api-true-ai"
+generated_date: "20260607"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Puzzle: Financial Asset Balancer | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified drag-and-drop tool where users assemble a balanced financial portfolio by combining assets, managing risk, and optimizing returns, with real-time feedback and visual analytics. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Portfolio Puzzle: Financial Asset Balancer | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified drag-and-drop tool where users assemble a balanced financial portfolio by combining assets, managing risk, and optimizing returns, with real-time feedback and visual analytics. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Portfolio Puzzle: Financial Asset Balancer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified drag-and-drop tool where users assemble a balanced financial portfolio by combining assets, managing risk, and optimizing returns, with real-time feedback and visual analytics. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Portfolio Puzzle: Financial Asset Balancer</h1>
+    <p class="seo-subtitle">A gamified drag-and-drop tool where users assemble a balanced financial portfolio by combining assets, managing risk, and optimizing returns, with real-time feedback and visual analytics.</p>
+    <style>  
+body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f9; color: #333; }  
+#tool-app { text-align: center; padding: 20px; }  
+#game-board { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; max-width: 600px; margin: 20px auto; }  
+.asset { padding: 10px; background: #e1e7f0; border: 2px solid #ccd4e0; border-radius: 4px; cursor: grab; }  
+#portfolio { margin-top: 20px; padding: 20px; border: 2px dashed #ccd4e0; border-radius: 5px; background: #fff; min-height: 150px; display: flex; flex-wrap: wrap; justify-content: space-around; }  
+.asset:hover { background: #d0dbec; }  
+#feedback { margin-top: 20px; font-size: 1.2em; }  
+</style>  
+<div id="tool-app">  
+  <h1>Portfolio Puzzle: Financial Asset Balancer</h1>  
+  <p>Drag and drop the financial assets into your portfolio to maximize returns while managing risk!</p>  
+  <div id="game-board"></div>  
+  <div id="portfolio">  
+    <p>Drop assets here to build your portfolio</p>  
+  </div>  
+  <div id="feedback"></div>  
+</div>  
+<script>  
+const assets = [  
+  { name: "Stocks", type: "High Risk", value: 8 },  
+  { name: "Bonds", type: "Low Risk", value: 3 },  
+  { name: "Real Estate", type: "Moderate Risk", value: 5 },  
+  { name: "Crypto", type: "High Risk", value: 9 },  
+  { name: "Gold", type: "Low Risk", value: 4 },  
+  { name: "Mutual Funds", type: "Moderate Risk", value: 6 }  
+];  
+
+const gameBoard = document.getElementById("game-board");  
+const portfolio = document.getElementById("portfolio");  
+const feedback = document.getElementById("feedback");  
+
+let portfolioValue = 0;  
+let highRiskCount = 0;  
+
+assets.forEach((asset, index) => {  
+  const assetElem = document.createElement("div");  
+  assetElem.className = "asset";  
+  assetElem.draggable = true;  
+  assetElem.textContent = `${asset.name} (${asset.type}) - Score: ${asset.value}`;  
+  assetElem.dataset.value = asset.value;  
+  assetElem.dataset.type = asset.type;  
+  assetElem.addEventListener("dragstart", (e) => {  
+    e.dataTransfer.setData("text/plain", index);  
+  });  
+  gameBoard.appendChild(assetElem);  
+});  
+
+portfolio.addEventListener("dragover", (e) => {  
+  e.preventDefault();  
+});  
+
+portfolio.addEventListener("drop", (e) => {  
+  e.preventDefault();  
+  const assetIndex = e.dataTransfer.getData("text/plain");  
+  const asset = assets[assetIndex];  
+
+  if (portfolioValue + asset.value > 20) {  
+    feedback.textContent = "Portfolio risk is too high! Adjust your assets.";  
+    feedback.style.color = "#e63946";  
+    return;  
+  }  
+
+  if (asset.type === "High Risk") highRiskCount++;  
+  if (highRiskCount > 2) {  
+    feedback.textContent = "Too many high-risk assets! Diversify your portfolio.";  
+    feedback.style.color = "#e63946";  
+    highRiskCount--;  
+    return;  
+  }  
+
+  portfolioValue += asset.value;  
+  const assetElem = document.createElement("div");  
+  assetElem.className = "asset";  
+  assetElem.textContent = `${asset.name} (${asset.type}) - Score: ${asset.value}`;  
+  portfolio.appendChild(assetElem);  
+
+  feedback.textContent = `Portfolio Score: ${portfolioValue} (Max: 20)`;  
+  feedback.style.color = portfolioValue === 20 ? "#2a9d8f" : "#2a9d8f";  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
