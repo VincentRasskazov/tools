@@ -1,0 +1,222 @@
+---
+layout: null
+title: "WordWeaver: Dynamic Story Mapping"
+category: "Writing"
+description: "A creative tool that lets writers build interactive, branching storylines by visually linking plot points, characters, and events in a dynamic graph."
+permalink: "/tools/daily-20260608-02-wordweaver-dynamic-story-mapping.html"
+generated_by: "api-true-ai"
+generated_date: "20260608"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordWeaver: Dynamic Story Mapping | Free Online Interactive Tool</title>
+  <meta name="description" content="A creative tool that lets writers build interactive, branching storylines by visually linking plot points, characters, and events in a dynamic graph. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="WordWeaver: Dynamic Story Mapping | Free Online Interactive Tool">
+  <meta property="og:description" content="A creative tool that lets writers build interactive, branching storylines by visually linking plot points, characters, and events in a dynamic graph. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WordWeaver: Dynamic Story Mapping | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A creative tool that lets writers build interactive, branching storylines by visually linking plot points, characters, and events in a dynamic graph. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>WordWeaver: Dynamic Story Mapping</h1>
+    <p class="seo-subtitle">A creative tool that lets writers build interactive, branching storylines by visually linking plot points, characters, and events in a dynamic graph.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to bottom right, #f8f9fa, #e9ecef);  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 90%;  
+  height: 90%;  
+  background: white;  
+  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.2);  
+  border-radius: 10px;  
+  display: flex;  
+  flex-direction: column;  
+  padding: 20px;  
+  box-sizing: border-box;  
+}  
+#canvas-container {  
+  flex: 1;  
+  border: 2px dashed #6c757d;  
+  position: relative;  
+  overflow: hidden;  
+  border-radius: 5px;  
+  cursor: grab;  
+}  
+.node {  
+  position: absolute;  
+  padding: 10px;  
+  background: #17a2b8;  
+  color: white;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  transform: translate(-50%, -50%);  
+  font-size: 14px;  
+  text-align: center;  
+}  
+.node.selected {  
+  background: #ffc107;  
+}  
+.controls {  
+  display: flex;  
+  justify-content: space-between;  
+  margin-top: 10px;  
+}  
+button {  
+  padding: 8px 12px;  
+  border: none;  
+  border-radius: 5px;  
+  background: #007bff;  
+  color: white;  
+  cursor: pointer;  
+  font-size: 14px;  
+}  
+button:disabled {  
+  background: #6c757d;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="canvas-container"></div>  
+  <div class="controls">  
+    <button id="add-node">Add Node</button>  
+    <button id="connect-nodes" disabled>Connect Nodes</button>  
+    <button id="delete-node" disabled>Delete Node</button>  
+  </div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById('canvas-container');  
+const addNodeBtn = document.getElementById('add-node');  
+const connectNodesBtn = document.getElementById('connect-nodes');  
+const deleteNodeBtn = document.getElementById('delete-node');  
+
+let nodes = [];  
+let connections = [];  
+let selectedNode = null;  
+let connectingNode = null;  
+
+function createNode(x, y) {  
+  const node = document.createElement('div');  
+  node.classList.add('node');  
+  node.textContent = `Node ${nodes.length + 1}`;  
+  node.style.left = `${x}px`;  
+  node.style.top = `${y}px`;  
+
+  node.addEventListener('click', (e) => {  
+    e.stopPropagation();  
+    if (connectingNode) {  
+      connections.push({ from: connectingNode, to: node });  
+      connectingNode = null;  
+      connectNodesBtn.disabled = true;  
+    } else {  
+      if (selectedNode) {  
+        selectedNode.classList.remove('selected');  
+      }  
+      selectedNode = node;  
+      selectedNode.classList.add('selected');  
+      deleteNodeBtn.disabled = false;  
+      connectNodesBtn.disabled = false;  
+    }  
+  });  
+
+  canvas.appendChild(node);  
+  nodes.push(node);  
+}  
+
+function drawConnections() {  
+  canvas.querySelectorAll('svg').forEach((svg) => svg.remove());  
+  connections.forEach(({ from, to }) => {  
+    const x1 = from.offsetLeft + from.offsetWidth / 2;  
+    const y1 = from.offsetTop + from.offsetHeight / 2;  
+    const x2 = to.offsetLeft + to.offsetWidth / 2;  
+    const y2 = to.offsetTop + to.offsetHeight / 2;  
+
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');  
+    svg.style.position = 'absolute';  
+    svg.style.left = '0';  
+    svg.style.top = '0';  
+    svg.style.width = '100%';  
+    svg.style.height = '100%';  
+    svg.style.pointerEvents = 'none';  
+
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');  
+    line.setAttribute('x1', x1);  
+    line.setAttribute('y1', y1);  
+    line.setAttribute('x2', x2);  
+    line.setAttribute('y2', y2);  
+    line.setAttribute('stroke', 'black');  
+    line.setAttribute('stroke-width', '2');  
+
+    svg.appendChild(line);  
+    canvas.appendChild(svg);  
+  });  
+}  
+
+addNodeBtn.addEventListener('click', () => {  
+  const x = Math.random() * (canvas.clientWidth - 50) + 25;  
+  const y = Math.random() * (canvas.clientHeight - 50) + 25;  
+  createNode(x, y);  
+});  
+
+connectNodesBtn.addEventListener('click', () => {  
+  if (selectedNode) {  
+    connectingNode = selectedNode;  
+    connectNodesBtn.disabled = true;  
+  }  
+});  
+
+deleteNodeBtn.addEventListener('click', () => {  
+  if (selectedNode) {  
+    const index = nodes.indexOf(selectedNode);  
+    nodes.splice(index, 1);  
+    connections = connections.filter(  
+      (conn) => conn.from !== selectedNode && conn.to !== selectedNode  
+    );  
+    canvas.removeChild(selectedNode);  
+    selectedNode = null;  
+    deleteNodeBtn.disabled = true;  
+    connectNodesBtn.disabled = true;  
+    drawConnections();  
+  }  
+});  
+
+canvas.addEventListener('click', () => {  
+  if (selectedNode) {  
+    selectedNode.classList.remove('selected');  
+    selectedNode = null;  
+    deleteNodeBtn.disabled = true;  
+    connectNodesBtn.disabled = true;  
+  }  
+});  
+
+setInterval(drawConnections, 50);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,182 @@
+---
+layout: null
+title: "PixelQuest: Dynamic Color Adventure"
+category: "Games"
+description: "A real-time pixel art game where players paint a grid with colors to complete evolving patterns while racing against a timer."
+permalink: "/tools/daily-20260608-08-pixelquest-dynamic-color-adventure.html"
+generated_by: "api-true-ai"
+generated_date: "20260608"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PixelQuest: Dynamic Color Adventure | Free Online Interactive Tool</title>
+  <meta name="description" content="A real-time pixel art game where players paint a grid with colors to complete evolving patterns while racing against a timer. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PixelQuest: Dynamic Color Adventure | Free Online Interactive Tool">
+  <meta property="og:description" content="A real-time pixel art game where players paint a grid with colors to complete evolving patterns while racing against a timer. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PixelQuest: Dynamic Color Adventure | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A real-time pixel art game where players paint a grid with colors to complete evolving patterns while racing against a timer. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PixelQuest: Dynamic Color Adventure</h1>
+    <p class="seo-subtitle">A real-time pixel art game where players paint a grid with colors to complete evolving patterns while racing against a timer.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background: linear-gradient(135deg, #ff7eb3, #ff758c);  
+  color: white;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  text-align: center;  
+  max-width: 600px;  
+}  
+.grid {  
+  display: grid;  
+  grid-template-columns: repeat(10, 40px);  
+  gap: 5px;  
+  margin: 20px auto;  
+}  
+.cell {  
+  width: 40px;  
+  height: 40px;  
+  background-color: #ffffff;  
+  border: 1px solid #cccccc;  
+  cursor: pointer;  
+}  
+.cell.active {  
+  background-color: #ff7eb3;  
+}  
+.timer {  
+  font-size: 24px;  
+  margin-top: 10px;  
+}  
+.pattern {  
+  margin: 20px;  
+  font-size: 18px;  
+}  
+.start-btn {  
+  padding: 10px 20px;  
+  background: #ffffff;  
+  color: #ff758c;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer;  
+}  
+.start-btn:hover {  
+  background: #ffb3cc;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>PixelQuest</h1>  
+  <div class="pattern">Match this pattern:</div>  
+  <div id="pattern-grid" class="grid"></div>  
+  <div class="timer">Time Left: <span id="time-left">60</span> seconds</div>  
+  <div id="game-grid" class="grid"></div>  
+  <button class="start-btn" id="start-btn">Start Game</button>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const gameGrid = document.getElementById('game-grid');  
+const patternGrid = document.getElementById('pattern-grid');  
+const timeLeftDisplay = document.getElementById('time-left');  
+const startBtn = document.getElementById('start-btn');  
+
+let timer;  
+let timeLeft = 60;  
+let pattern = [];  
+let gridState = [];  
+
+// Initialize grids  
+function createGrid(grid, isPattern = false) {  
+  grid.innerHTML = '';  
+  for (let i = 0; i < 100; i++) {  
+    const cell = document.createElement('div');  
+    cell.classList.add('cell');  
+    if (!isPattern) {  
+      cell.addEventListener('click', () => handleCellClick(cell, i));  
+    }  
+    grid.appendChild(cell);  
+  }  
+}  
+
+function generatePattern() {  
+  pattern = Array.from({ length: 100 }, () => Math.random() < 0.2);  
+  const cells = patternGrid.children;  
+  for (let i = 0; i < cells.length; i++) {  
+    cells[i].classList.toggle('active', pattern[i]);  
+  }  
+}  
+
+function handleCellClick(cell, index) {  
+  cell.classList.toggle('active');  
+  gridState[index] = !gridState[index];  
+  checkMatch();  
+}  
+
+function checkMatch() {  
+  if (JSON.stringify(pattern) === JSON.stringify(gridState)) {  
+    clearInterval(timer);  
+    alert('You matched the pattern!');  
+    resetGame();  
+  }  
+}  
+
+function startGame() {  
+  timeLeft = 60;  
+  timeLeftDisplay.textContent = timeLeft;  
+  gridState = Array(100).fill(false);  
+  createGrid(gameGrid);  
+  createGrid(patternGrid, true);  
+  generatePattern();  
+
+  timer = setInterval(() => {  
+    timeLeft--;  
+    timeLeftDisplay.textContent = timeLeft;  
+    if (timeLeft <= 0) {  
+      clearInterval(timer);  
+      alert('Time is up! Try again.');  
+      resetGame();  
+    }  
+  }, 1000);  
+}  
+
+function resetGame() {  
+  clearInterval(timer);  
+  startBtn.disabled = false;  
+  gameGrid.innerHTML = '';  
+  patternGrid.innerHTML = '';  
+  timeLeftDisplay.textContent = '60';  
+}  
+
+startBtn.addEventListener('click', () => {  
+  startBtn.disabled = true;  
+  startGame();  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

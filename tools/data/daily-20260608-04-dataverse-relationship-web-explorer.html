@@ -1,0 +1,134 @@
+---
+layout: null
+title: "DataVerse: Relationship Web Explorer"
+category: "Data"
+description: "An interactive tool to visually map, analyze, and uncover hidden connections between data points in a dynamic web-like interface."
+permalink: "/tools/daily-20260608-04-dataverse-relationship-web-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260608"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataVerse: Relationship Web Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool to visually map, analyze, and uncover hidden connections between data points in a dynamic web-like interface. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataVerse: Relationship Web Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool to visually map, analyze, and uncover hidden connections between data points in a dynamic web-like interface. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataVerse: Relationship Web Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool to visually map, analyze, and uncover hidden connections between data points in a dynamic web-like interface. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataVerse: Relationship Web Explorer</h1>
+    <p class="seo-subtitle">An interactive tool to visually map, analyze, and uncover hidden connections between data points in a dynamic web-like interface.</p>
+    <style>  
+  /* Modern, beautiful inline CSS */  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #1e1e2f; color: #ffffff; }  
+  #tool-app { width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; }  
+  canvas { border: 1px solid #444; background: #282c34; }  
+</style>  
+<div id="tool-app">  
+  <canvas id="data-verse" width="800" height="600"></canvas>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById('data-verse');  
+const ctx = canvas.getContext('2d');  
+
+let nodes = [];  
+let links = [];  
+let draggingNode = null;  
+
+function createNode(x, y, label) {  
+  return { x, y, label, radius: 15, color: '#6c5ce7' };  
+}  
+
+function connectNodes(node1, node2) {  
+  links.push({ source: node1, target: node2 });  
+}  
+
+canvas.addEventListener('mousedown', (e) => {  
+  const { offsetX, offsetY } = e;  
+  const clickedNode = nodes.find(node => Math.hypot(node.x - offsetX, node.y - offsetY) <= node.radius);  
+  if (clickedNode) draggingNode = clickedNode;  
+});  
+
+canvas.addEventListener('mousemove', (e) => {  
+  if (draggingNode) {  
+    const { offsetX, offsetY } = e;  
+    draggingNode.x = offsetX;  
+    draggingNode.y = offsetY;  
+    draw();  
+  }  
+});  
+
+canvas.addEventListener('mouseup', () => {  
+  draggingNode = null;  
+});  
+
+canvas.addEventListener('dblclick', (e) => {  
+  const { offsetX, offsetY } = e;  
+  const label = prompt('Enter node label:');  
+  if (label) {  
+    const newNode = createNode(offsetX, offsetY, label);  
+    nodes.push(newNode);  
+    if (nodes.length > 1) {  
+      connectNodes(nodes[nodes.length - 2], newNode);  
+    }  
+    draw();  
+  }  
+});  
+
+function draw() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+
+  // Draw links  
+  links.forEach(link => {  
+    ctx.beginPath();  
+    ctx.moveTo(link.source.x, link.source.y);  
+    ctx.lineTo(link.target.x, link.target.y);  
+    ctx.strokeStyle = '#dfe6e9';  
+    ctx.lineWidth = 2;  
+    ctx.stroke();  
+  });  
+
+  // Draw nodes  
+  nodes.forEach(node => {  
+    ctx.beginPath();  
+    ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);  
+    ctx.fillStyle = node.color;  
+    ctx.fill();  
+    ctx.strokeStyle = '#ffffff';  
+    ctx.stroke();  
+
+    ctx.fillStyle = '#ffffff';  
+    ctx.font = '12px Arial';  
+    ctx.textAlign = 'center';  
+    ctx.textBaseline = 'middle';  
+    ctx.fillText(node.label, node.x, node.y);  
+  });  
+}  
+
+// Initialize with a single node  
+nodes.push(createNode(canvas.width / 2, canvas.height / 2, 'Start'));  
+draw();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,175 @@
+---
+layout: null
+title: "WealthWeb: Interactive Financial Network Visualizer"
+category: "Finance"
+description: "A dynamic tool that visualizes your financial connections as an evolving web, helping you understand relationships between income, expenses, investments, and savings."
+permalink: "/tools/daily-20260608-11-wealthweb-interactive-financial-network-visualizer.html"
+generated_by: "api-true-ai"
+generated_date: "20260608"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WealthWeb: Interactive Financial Network Visualizer | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic tool that visualizes your financial connections as an evolving web, helping you understand relationships between income, expenses, investments, and savings. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="WealthWeb: Interactive Financial Network Visualizer | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic tool that visualizes your financial connections as an evolving web, helping you understand relationships between income, expenses, investments, and savings. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WealthWeb: Interactive Financial Network Visualizer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic tool that visualizes your financial connections as an evolving web, helping you understand relationships between income, expenses, investments, and savings. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>WealthWeb: Interactive Financial Network Visualizer</h1>
+    <p class="seo-subtitle">A dynamic tool that visualizes your financial connections as an evolving web, helping you understand relationships between income, expenses, investments, and savings.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+  background: linear-gradient(to right, #2c3e50, #bdc3c7);  
+  color: #ecf0f1;  
+}  
+#tool-app {  
+  width: 80%;  
+  height: 80%;  
+  background: rgba(255, 255, 255, 0.1);  
+  border-radius: 20px;  
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);  
+  display: flex;  
+  flex-direction: column;  
+  padding: 20px;  
+  overflow: hidden;  
+  position: relative;  
+}  
+canvas {  
+  width: 100%;  
+  height: 100%;  
+}  
+#controls {  
+  position: absolute;  
+  bottom: 20px;  
+  left: 20px;  
+  display: flex;  
+  gap: 10px;  
+}  
+button {  
+  padding: 10px 20px;  
+  border: none;  
+  border-radius: 5px;  
+  background-color: #16a085;  
+  color: #fff;  
+  font-size: 14px;  
+  cursor: pointer;  
+  transition: background-color 0.3s;  
+}  
+button:hover {  
+  background-color: #1abc9c;  
+}  
+</style>  
+<div id="tool-app">  
+  <canvas id="networkCanvas"></canvas>  
+  <div id="controls">  
+    <button onclick="addNode('income')">Add Income</button>  
+    <button onclick="addNode('expense')">Add Expense</button>  
+    <button onclick="addNode('investment')">Add Investment</button>  
+    <button onclick="resetNetwork()">Reset</button>  
+  </div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById("networkCanvas");  
+const ctx = canvas.getContext("2d");  
+canvas.width = canvas.parentElement.clientWidth;  
+canvas.height = canvas.parentElement.clientHeight;  
+
+let nodes = [];  
+let links = [];  
+
+class Node {  
+  constructor(type, x, y) {  
+    this.type = type;  
+    this.x = x;  
+    this.y = y;  
+    this.radius = 20;  
+    this.color = this.getColor();  
+  }  
+
+  getColor() {  
+    switch (this.type) {  
+      case "income": return "#27ae60";  
+      case "expense": return "#c0392b";  
+      case "investment": return "#2980b9";  
+      default: return "#7f8c8d";  
+    }  
+  }  
+
+  draw() {  
+    ctx.beginPath();  
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);  
+    ctx.fillStyle = this.color;  
+    ctx.fill();  
+    ctx.closePath();  
+  }  
+}  
+
+function addNode(type) {  
+  const x = Math.random() * canvas.width;  
+  const y = Math.random() * canvas.height;  
+  const node = new Node(type, x, y);  
+  nodes.push(node);  
+  connectNodes(node);  
+  draw();  
+}  
+
+function connectNodes(node) {  
+  nodes.forEach((existingNode) => {  
+    if (existingNode !== node && Math.random() > 0.7) {  
+      links.push({ start: existingNode, end: node });  
+    }  
+  });  
+}  
+
+function draw() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  links.forEach((link) => {  
+    ctx.beginPath();  
+    ctx.moveTo(link.start.x, link.start.y);  
+    ctx.lineTo(link.end.x, link.end.y);  
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.3)";  
+    ctx.stroke();  
+    ctx.closePath();  
+  });  
+  nodes.forEach((node) => node.draw());  
+}  
+
+function resetNetwork() {  
+  nodes = [];  
+  links = [];  
+  draw();  
+}  
+
+draw();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

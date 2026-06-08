@@ -1,0 +1,129 @@
+---
+layout: null
+title: "WordWeaver: Interactive Etymology Explorer"
+category: "Education"
+description: "A dynamic tool that lets users visually explore the origins, relationships, and evolution of words across languages and time."
+permalink: "/tools/daily-20260608-07-wordweaver-interactive-etymology-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260608"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordWeaver: Interactive Etymology Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic tool that lets users visually explore the origins, relationships, and evolution of words across languages and time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="WordWeaver: Interactive Etymology Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic tool that lets users visually explore the origins, relationships, and evolution of words across languages and time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WordWeaver: Interactive Etymology Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic tool that lets users visually explore the origins, relationships, and evolution of words across languages and time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>WordWeaver: Interactive Etymology Explorer</h1>
+    <p class="seo-subtitle">A dynamic tool that lets users visually explore the origins, relationships, and evolution of words across languages and time.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f9; color: #333; }  
+  #tool-app { max-width: 800px; margin: 50px auto; padding: 20px; background: #fff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px; }  
+  .word { display: inline-block; padding: 10px 15px; margin: 5px; background: #007BFF; color: #fff; border-radius: 5px; cursor: pointer; transition: transform 0.2s, background 0.2s; }  
+  .word:hover { transform: scale(1.1); background: #0056b3; }  
+  .details { margin-top: 20px; padding: 15px; background: #f9f9f9; border-radius: 5px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); }  
+  .details h2 { margin-top: 0; }  
+  .tree { margin-top: 20px; }  
+  .branch { padding-left: 20px; position: relative; }  
+  .branch::before {  
+    content: "";  
+    position: absolute;  
+    top: 8px;  
+    left: -20px;  
+    width: 15px;  
+    height: 1px;  
+    background: #333;  
+  }  
+  .branch::after {  
+    content: "";  
+    position: absolute;  
+    top: 0;  
+    left: -20px;  
+    width: 1px;  
+    height: 100%;  
+    background: #333;  
+  }  
+</style>  
+<div id="tool-app">  
+  <div id="word-container">  
+    <span class="word" onclick="fetchWordData('education')">Education</span>  
+    <span class="word" onclick="fetchWordData('knowledge')">Knowledge</span>  
+    <span class="word" onclick="fetchWordData('school')">School</span>  
+    <span class="word" onclick="fetchWordData('learning')">Learning</span>  
+    <span class="word" onclick="fetchWordData('teach')">Teach</span>  
+  </div>  
+  <div id="details-container" class="details"></div>  
+</div>  
+<script>  
+const mockEtymologyData = {  
+  "education": {  
+    origin: "Latin",  
+    definition: "The process of receiving or giving systematic instruction.",  
+    tree: { "educare": { "ex": { "ducere": "to lead or bring up" } } }  
+  },  
+  "knowledge": {  
+    origin: "Old English",  
+    definition: "Facts, information, and skills acquired by a person through experience or education.",  
+    tree: { "cnāwan": { "to know": {} } }  
+  },  
+  "school": {  
+    origin: "Greek",  
+    definition: "An institution for educating children.",  
+    tree: { "scholē": { "leisure or philosophy": {} } }  
+  },  
+  "learning": {  
+    origin: "Old English",  
+    definition: "The acquisition of knowledge or skills through experience.",  
+    tree: { "leornian": { "to learn": {} } }  
+  },  
+  "teach": {  
+    origin: "Old English",  
+    definition: "To show or explain to someone how to do something.",  
+    tree: { "tǣcan": { "to show": {} } }  
+  }  
+};  
+
+function fetchWordData(word) {  
+  const data = mockEtymologyData[word];  
+  if (!data) return;  
+
+  const treeHtml = createTree(data.tree);  
+  document.getElementById("details-container").innerHTML = `  
+    <h2>${word.charAt(0).toUpperCase() + word.slice(1)} (${data.origin})</h2>  
+    <p><strong>Definition:</strong> ${data.definition}</p>  
+    <div class="tree">${treeHtml}</div>  
+  `;  
+}  
+
+function createTree(tree, depth = 0) {  
+  let html = "";  
+  for (const key in tree) {  
+    html += `<div class="branch">${key}${createTree(tree[key], depth + 1)}</div>`;  
+  }  
+  return html;  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

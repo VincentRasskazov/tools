@@ -1,0 +1,186 @@
+---
+layout: null
+title: "FlowGrid: Task Dependency Mapper"
+category: "Productivity"
+description: "Visually map tasks with dependencies and simulate how delays or completions impact your workflow in real time."
+permalink: "/tools/daily-20260608-06-flowgrid-task-dependency-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260608"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlowGrid: Task Dependency Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="Visually map tasks with dependencies and simulate how delays or completions impact your workflow in real time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="FlowGrid: Task Dependency Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="Visually map tasks with dependencies and simulate how delays or completions impact your workflow in real time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FlowGrid: Task Dependency Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visually map tasks with dependencies and simulate how delays or completions impact your workflow in real time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>FlowGrid: Task Dependency Mapper</h1>
+    <p class="seo-subtitle">Visually map tasks with dependencies and simulate how delays or completions impact your workflow in real time.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: #f4f4f4;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  color: #333;  
+}  
+#tool-app {  
+  width: 80%;  
+  height: 80%;  
+  background: #ffffff;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  
+  border-radius: 10px;  
+  overflow: hidden;  
+  display: flex;  
+  flex-direction: column;  
+}  
+header {  
+  background: #6200ea;  
+  color: white;  
+  padding: 1rem;  
+  text-align: center;  
+  font-size: 1.5rem;  
+}  
+#canvas-container {  
+  flex: 1;  
+  position: relative;  
+  background: #e8eaf6;  
+  cursor: grab;  
+}  
+.node {  
+  position: absolute;  
+  width: 120px;  
+  height: 50px;  
+  background: #ffffff;  
+  border: 2px solid #6200ea;  
+  border-radius: 5px;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  font-size: 0.9rem;  
+  cursor: pointer;  
+  user-select: none;  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  
+}  
+.node.dragging {  
+  opacity: 0.7;  
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);  
+}  
+.line {  
+  stroke: #6200ea;  
+  stroke-width: 2;  
+  pointer-events: none;  
+}  
+footer {  
+  background: #6200ea;  
+  color: white;  
+  padding: 0.5rem;  
+  text-align: center;  
+  font-size: 0.8rem;  
+}  
+</style>  
+<div id="tool-app">  
+  <header>FlowGrid: Task Dependency Mapper</header>  
+  <div id="canvas-container"></div>  
+  <footer>Drag, drop, and connect tasks to see their dependencies in action!</footer>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById('canvas-container');  
+const nodes = [];  
+let draggingNode = null;  
+let isDragging = false;  
+const connections = [];  
+
+function createNode(id, x = 100, y = 100) {  
+  const node = document.createElement('div');  
+  node.className = 'node';  
+  node.innerText = `Task ${id}`;  
+  node.style.left = `${x}px`;  
+  node.style.top = `${y}px`;  
+  node.dataset.id = id;  
+  canvas.appendChild(node);  
+  node.addEventListener('mousedown', (e) => {  
+    draggingNode = node;  
+    isDragging = true;  
+  });  
+  node.addEventListener('mouseup', () => {  
+    isDragging = false;  
+    draggingNode = null;  
+  });  
+  nodes.push(node);  
+}  
+
+function updateConnections() {  
+  const existingLines = document.querySelectorAll('.line');  
+  existingLines.forEach(line => line.remove());  
+
+  connections.forEach(([from, to]) => {  
+    const fromNode = nodes.find(node => node.dataset.id === from);  
+    const toNode = nodes.find(node => node.dataset.id === to);  
+
+    if (fromNode && toNode) {  
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');  
+      line.classList.add('line');  
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');  
+
+      const startX = fromNode.offsetLeft + fromNode.offsetWidth / 2;  
+      const startY = fromNode.offsetTop + fromNode.offsetHeight / 2;  
+      const endX = toNode.offsetLeft + toNode.offsetWidth / 2;  
+      const endY = toNode.offsetTop + toNode.offsetHeight / 2;  
+
+      line.setAttribute('x1', startX);  
+      line.setAttribute('y1', startY);  
+      line.setAttribute('x2', endX);  
+      line.setAttribute('y2', endY);  
+
+      svg.appendChild(line);  
+      canvas.appendChild(svg);  
+    }  
+  });  
+}  
+
+canvas.addEventListener('mousemove', (e) => {  
+  if (isDragging && draggingNode) {  
+    draggingNode.style.left = `${e.clientX - canvas.offsetLeft - draggingNode.offsetWidth / 2}px`;  
+    draggingNode.style.top = `${e.clientY - canvas.offsetTop - draggingNode.offsetHeight / 2}px`;  
+    updateConnections();  
+  }  
+});  
+
+// Add some test nodes and connections  
+createNode(1, 100, 100);  
+createNode(2, 300, 200);  
+createNode(3, 500, 300);  
+connections.push([1, 2], [2, 3]);  
+updateConnections();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
