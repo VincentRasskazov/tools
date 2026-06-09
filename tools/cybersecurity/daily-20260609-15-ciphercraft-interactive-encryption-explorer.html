@@ -1,0 +1,148 @@
+---
+layout: null
+title: "CipherCraft: Interactive Encryption Explorer"
+category: "Cybersecurity"
+description: "A gamified tool where users craft and visualize their own encryption algorithms while defending against simulated cyber-attacks."
+permalink: "/tools/daily-20260609-15-ciphercraft-interactive-encryption-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260609"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CipherCraft: Interactive Encryption Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool where users craft and visualize their own encryption algorithms while defending against simulated cyber-attacks. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CipherCraft: Interactive Encryption Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool where users craft and visualize their own encryption algorithms while defending against simulated cyber-attacks. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CipherCraft: Interactive Encryption Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool where users craft and visualize their own encryption algorithms while defending against simulated cyber-attacks. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CipherCraft: Interactive Encryption Explorer</h1>
+    <p class="seo-subtitle">A gamified tool where users craft and visualize their own encryption algorithms while defending against simulated cyber-attacks.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);  
+  color: #fff;  
+  margin: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  width: 80%;  
+  max-width: 800px;  
+  background: rgba(0, 0, 0, 0.8);  
+  padding: 20px;  
+  border-radius: 15px;  
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);  
+}  
+#cipher-grid {  
+  display: grid;  
+  grid-template-columns: repeat(8, 50px);  
+  gap: 5px;  
+  margin: 20px 0;  
+}  
+.cell {  
+  width: 50px;  
+  height: 50px;  
+  background: #3a3a3a;  
+  border: 1px solid #444;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  color: #fff;  
+  font-size: 14px;  
+  cursor: pointer;  
+  user-select: none;  
+}  
+.cell.active {  
+  background: #ff6f61;  
+  border-color: #ff9b8a;  
+}  
+#instructions {  
+  font-size: 16px;  
+  margin-bottom: 10px;  
+  text-align: center;  
+}  
+#result {  
+  margin-top: 15px;  
+  font-size: 14px;  
+  text-align: center;  
+}  
+button {  
+  background: #ff6f61;  
+  border: none;  
+  color: #fff;  
+  padding: 10px 15px;  
+  font-size: 16px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  transition: background 0.3s ease;  
+}  
+button:hover {  
+  background: #ff9b8a;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="instructions">Select cells to craft a cipher pattern and test it against attacks!</div>  
+  <div id="cipher-grid"></div>  
+  <button id="simulate-attack">Simulate Attack</button>  
+  <div id="result"></div>  
+</div>  
+<script>  
+const gridSize = 8;  
+const grid = Array.from({ length: gridSize * gridSize }, () => false);  
+const cipherGrid = document.getElementById('cipher-grid');  
+const resultDiv = document.getElementById('result');  
+
+// Initialize grid  
+for (let i = 0; i < grid.length; i++) {  
+  const cell = document.createElement('div');  
+  cell.className = 'cell';  
+  cell.innerText = i + 1;  
+  cell.addEventListener('click', () => toggleCell(i));  
+  cipherGrid.appendChild(cell);  
+}  
+
+function toggleCell(index) {  
+  grid[index] = !grid[index];  
+  const cell = cipherGrid.children[index];  
+  cell.classList.toggle('active', grid[index]);  
+}  
+
+document.getElementById('simulate-attack').addEventListener('click', () => {  
+  const activeCells = grid.reduce((acc, active, index) => active ? [...acc, index + 1] : acc, []);  
+  let resilience = Math.round((activeCells.length / grid.length) * 100);  
+  let attackOutcome = resilience > 60 ? 'Successful defense!' : 'System compromised!';  
+  resultDiv.innerHTML = `<strong>Active cells:</strong> ${activeCells.join(', ')}<br>  
+                         <strong>Resilience:</strong> ${resilience}%<br>  
+                         <strong>Outcome:</strong> ${attackOutcome}`;  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

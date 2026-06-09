@@ -1,0 +1,146 @@
+---
+layout: null
+title: "CodeFlow Symphony"
+category: "Developer"
+description: "A highly interactive tool where developers visually compose and debug asynchronous code flows using drag-and-drop \"function nodes\" and animated data streams."
+permalink: "/tools/daily-20260609-08-codeflow-symphony.html"
+generated_by: "api-true-ai"
+generated_date: "20260609"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeFlow Symphony | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive tool where developers visually compose and debug asynchronous code flows using drag-and-drop &quot;function nodes&quot; and animated data streams. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CodeFlow Symphony | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive tool where developers visually compose and debug asynchronous code flows using drag-and-drop &quot;function nodes&quot; and animated data streams. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CodeFlow Symphony | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive tool where developers visually compose and debug asynchronous code flows using drag-and-drop &quot;function nodes&quot; and animated data streams. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CodeFlow Symphony</h1>
+    <p class="seo-subtitle">A highly interactive tool where developers visually compose and debug asynchronous code flows using drag-and-drop &quot;function nodes&quot; and animated data streams.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: #1e1e2f;  
+  color: #c7d1d9;  
+  margin: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 90%;  
+  height: 90%;  
+  background: #2e2e3e;  
+  border: 2px solid #444;  
+  border-radius: 10px;  
+  display: flex;  
+  flex-direction: column;  
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);  
+}  
+#canvas {  
+  flex: 1;  
+  background: radial-gradient(circle at center, #3a3f4b, #1e1e2f);  
+  position: relative;  
+  overflow: hidden;  
+  border-radius: 0 0 10px 10px;  
+  cursor: grab;  
+}  
+#node-bar {  
+  display: flex;  
+  justify-content: space-around;  
+  padding: 10px;  
+  background: #222230;  
+  color: #fff;  
+  border-radius: 10px 10px 0 0;  
+}  
+.node {  
+  padding: 10px 20px;  
+  margin: 5px;  
+  background: #4c4c6d;  
+  color: #fff;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  user-select: none;  
+}  
+.node-drag {  
+  position: absolute;  
+  transform: translate(-50%, -50%);  
+  z-index: 10;  
+  border: 1px solid #aaa;  
+}  
+.connection {  
+  position: absolute;  
+  pointer-events: none;  
+  stroke: #6cb2ff;  
+  stroke-width: 2;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="node-bar">  
+    <div class="node" draggable="true" data-type="input">Input</div>  
+    <div class="node" draggable="true" data-type="process">Process</div>  
+    <div class="node" draggable="true" data-type="output">Output</div>  
+  </div>  
+  <div id="canvas"></div>  
+</div>  
+<script>  
+const canvas = document.getElementById('canvas');  
+const nodeBar = document.getElementById('node-bar');  
+
+let activeNode = null;  
+let connections = [];  
+
+nodeBar.addEventListener('dragstart', (e) => {  
+  activeNode = e.target.cloneNode(true);  
+  activeNode.classList.add('node-drag');  
+  document.body.appendChild(activeNode);  
+});  
+
+document.addEventListener('drag', (e) => {  
+  if (activeNode) {  
+    activeNode.style.left = `${e.clientX}px`;  
+    activeNode.style.top = `${e.clientY}px`;  
+  }  
+});  
+
+document.addEventListener('dragend', (e) => {  
+  if (activeNode) {  
+    const bounds = canvas.getBoundingClientRect();  
+    if (e.clientX > bounds.left && e.clientX < bounds.right &&  
+        e.clientY > bounds.top && e.clientY < bounds.bottom) {  
+      const newNode = activeNode.cloneNode(true);  
+      newNode.style.left = `${e.clientX - bounds.left}px`;  
+      newNode.style.top = `${e.clientY - bounds.top}px`;  
+      newNode.style.position = 'absolute';  
+      canvas.appendChild(newNode);  
+    }  
+    activeNode.remove();  
+    activeNode = null;  
+  }  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

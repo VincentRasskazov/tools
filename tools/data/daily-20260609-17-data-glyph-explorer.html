@@ -1,0 +1,191 @@
+---
+layout: null
+title: "Data Glyph Explorer"
+category: "Data"
+description: "An interactive tool that turns datasets into unique, animated glyphs, allowing users to visually compare and analyze patterns in data through creative shapes and dynamic transformations."
+permalink: "/tools/daily-20260609-17-data-glyph-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260609"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Glyph Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool that turns datasets into unique, animated glyphs, allowing users to visually compare and analyze patterns in data through creative shapes and dynamic transformations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Glyph Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool that turns datasets into unique, animated glyphs, allowing users to visually compare and analyze patterns in data through creative shapes and dynamic transformations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Glyph Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool that turns datasets into unique, animated glyphs, allowing users to visually compare and analyze patterns in data through creative shapes and dynamic transformations. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Glyph Explorer</h1>
+    <p class="seo-subtitle">An interactive tool that turns datasets into unique, animated glyphs, allowing users to visually compare and analyze patterns in data through creative shapes and dynamic transformations.</p>
+    ```html
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #1e1e2f;
+    color: #fff;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+  #tool-app {
+    width: 80%;
+    height: 80%;
+    background-color: #282a36;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  input, select {
+    background: #44475a;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 4px;
+    margin: 0 5px;
+  }
+  canvas {
+    border-radius: 8px;
+    background: #44475a;
+  }
+</style>
+<div id="tool-app">
+  <div class="controls">
+    <input id="data-input" type="text" placeholder="Enter comma-separated values (e.g., 4,8,15,16,23,42)" />
+    <select id="glyph-type">
+      <option value="circle">Circle</option>
+      <option value="polygon">Polygon</option>
+      <option value="wave">Wave</option>
+    </select>
+    <button id="render-btn">Render Glyph</button>
+  </div>
+  <canvas id="glyph-canvas" width="600" height="400"></canvas>
+</div>
+<script>
+  const canvas = document.getElementById('glyph-canvas');
+  const ctx = canvas.getContext('2d');
+  const renderBtn = document.getElementById('render-btn');
+  const dataInput = document.getElementById('data-input');
+  const glyphType = document.getElementById('glyph-type');
+
+  function clearCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
+  function drawCircleGlyph(data) {
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const maxRadius = Math.min(centerX, centerY) - 20;
+
+    data.forEach((value, index) => {
+      const radius = (value / Math.max(...data)) * maxRadius;
+      const angle = (2 * Math.PI / data.length) * index;
+      const x = centerX + Math.cos(angle) * radius;
+      const y = centerY + Math.sin(angle) * radius;
+      ctx.beginPath();
+      ctx.arc(x, y, 10, 0, 2 * Math.PI);
+      ctx.fillStyle = `hsl(${(index * 360) / data.length}, 70%, 50%)`;
+      ctx.fill();
+    });
+  }
+
+  function drawPolygonGlyph(data) {
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const maxRadius = Math.min(centerX, centerY) - 20;
+
+    ctx.beginPath();
+    data.forEach((value, index) => {
+      const radius = (value / Math.max(...data)) * maxRadius;
+      const angle = (2 * Math.PI / data.length) * index;
+      const x = centerX + Math.cos(angle) * radius;
+      const y = centerY + Math.sin(angle) * radius;
+      if (index === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
+    });
+    ctx.closePath();
+    ctx.strokeStyle = '#8be9fd';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    ctx.fillStyle = 'rgba(139, 233, 253, 0.5)';
+    ctx.fill();
+  }
+
+  function drawWaveGlyph(data) {
+    const maxAmplitude = canvas.height / 3;
+    const step = canvas.width / data.length;
+
+    ctx.beginPath();
+    data.forEach((value, index) => {
+      const amplitude = (value / Math.max(...data)) * maxAmplitude;
+      const x = index * step;
+      const y = canvas.height / 2 + amplitude * Math.sin((index / data.length) * Math.PI * 2);
+      if (index === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
+    });
+    ctx.strokeStyle = '#ff79c6';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+  }
+
+  renderBtn.addEventListener('click', () => {
+    const data = dataInput.value.split(',').map(Number).filter(n => !isNaN(n));
+    if (!data.length) {
+      alert('Please enter valid comma-separated numbers.');
+      return;
+    }
+    clearCanvas();
+    switch (glyphType.value) {
+      case 'circle':
+        drawCircleGlyph(data);
+        break;
+      case 'polygon':
+        drawPolygonGlyph(data);
+        break;
+      case 'wave':
+        drawWaveGlyph(data);
+        break;
+    }
+  });
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,132 @@
+---
+layout: null
+title: "PlotTwist Story Weave"
+category: "Writing"
+description: "A dynamic storytelling game where users collaboratively build a branching story, introducing plot twists by dragging and connecting narrative nodes."
+permalink: "/tools/daily-20260609-07-plottwist-story-weave.html"
+generated_by: "api-true-ai"
+generated_date: "20260609"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PlotTwist Story Weave | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic storytelling game where users collaboratively build a branching story, introducing plot twists by dragging and connecting narrative nodes. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PlotTwist Story Weave | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic storytelling game where users collaboratively build a branching story, introducing plot twists by dragging and connecting narrative nodes. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PlotTwist Story Weave | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic storytelling game where users collaboratively build a branching story, introducing plot twists by dragging and connecting narrative nodes. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PlotTwist Story Weave</h1>
+    <p class="seo-subtitle">A dynamic storytelling game where users collaboratively build a branching story, introducing plot twists by dragging and connecting narrative nodes.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background: linear-gradient(to right, #f7cac9, #92a8d1);  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  height: 100vh;  
+  color: #333;  
+}  
+#tool-app {  
+  width: 80%;  
+  height: 80%;  
+  background: #fff;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
+  overflow: hidden;  
+  position: relative;  
+}  
+.node {  
+  position: absolute;  
+  background: #92a8d1;  
+  color: #fff;  
+  padding: 10px 15px;  
+  border-radius: 8px;  
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);  
+  cursor: pointer;  
+  user-select: none;  
+}  
+.connector {  
+  position: absolute;  
+  width: 2px;  
+  background: #333;  
+}  
+</style>  
+<div id="tool-app">  
+</div>  
+<script>  
+const app = document.getElementById('tool-app');  
+
+let nodes = [];  
+let connectors = [];  
+
+// Create initial node  
+createNode(200, 200, 'Once upon a time...');  
+
+function createNode(x, y, text) {  
+  const node = document.createElement('div');  
+  node.className = 'node';  
+  node.style.left = `${x}px`;  
+  node.style.top = `${y}px`;  
+  node.textContent = text;  
+  node.draggable = true;  
+
+  node.addEventListener('dragstart', (e) => {  
+    e.dataTransfer.setData('text/plain', nodes.indexOf(node));  
+  });  
+
+  node.addEventListener('dblclick', () => {  
+    const newText = prompt('Add your plot twist or continuation:');  
+    if (newText) {  
+      const rect = node.getBoundingClientRect();  
+      const newNode = createNode(rect.x + 150, rect.y + 150, newText);  
+      createConnector(node, newNode);  
+    }  
+  });  
+
+  app.appendChild(node);  
+  nodes.push(node);  
+  return node;  
+}  
+
+function createConnector(node1, node2) {  
+  const connector = document.createElement('div');  
+  connector.className = 'connector';  
+  const rect1 = node1.getBoundingClientRect();  
+  const rect2 = node2.getBoundingClientRect();  
+  connector.style.left = `${rect1.left + rect1.width / 2}px`;  
+  connector.style.top = `${rect1.top + rect1.height / 2}px`;  
+  connector.style.width = `${Math.hypot(rect2.left - rect1.left, rect2.top - rect1.top)}px`;  
+
+  const angle = Math.atan2(rect2.top - rect1.top, rect2.left - rect1.left) * (180 / Math.PI);  
+  connector.style.transform = `rotate(${angle}deg)`;  
+
+  app.appendChild(connector);  
+  connectors.push(connector);  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
