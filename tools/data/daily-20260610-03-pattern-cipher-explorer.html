@@ -1,0 +1,167 @@
+---
+layout: null
+title: "\"Pattern Cipher Explorer\""
+category: "Data"
+description: "Uncover hidden messages by analyzing and creating complex visual data patterns using customizable encryption algorithms."
+permalink: "/tools/daily-20260610-03-pattern-cipher-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260610"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>&quot;Pattern Cipher Explorer&quot; | Free Online Interactive Tool</title>
+  <meta name="description" content="Uncover hidden messages by analyzing and creating complex visual data patterns using customizable encryption algorithms. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="&quot;Pattern Cipher Explorer&quot; | Free Online Interactive Tool">
+  <meta property="og:description" content="Uncover hidden messages by analyzing and creating complex visual data patterns using customizable encryption algorithms. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="&quot;Pattern Cipher Explorer&quot; | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Uncover hidden messages by analyzing and creating complex visual data patterns using customizable encryption algorithms. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>&quot;Pattern Cipher Explorer&quot;</h1>
+    <p class="seo-subtitle">Uncover hidden messages by analyzing and creating complex visual data patterns using customizable encryption algorithms.</p>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #2b2b2b, #121212);
+    color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+  #tool-app {
+    width: 90%;
+    max-width: 800px;
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+    text-align: center;
+  }
+  .cipher-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 40px);
+    gap: 5px;
+    margin: 20px auto;
+    max-width: 90%;
+    justify-content: center;
+  }
+  .grid-item {
+    width: 40px;
+    height: 40px;
+    background: #333;
+    border: 1px solid #555;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .grid-item.active {
+    background: #4caf50;
+  }
+  .controls {
+    margin: 20px 0;
+  }
+  button {
+    background: #4caf50;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  button:hover {
+    background: #45a049;
+  }
+</style>
+<div id="tool-app">
+  <h1>Pattern Cipher Explorer</h1>
+  <p>Click on the grid to create a cipher pattern. Use the controls to analyze or encrypt a message!</p>
+  <div class="cipher-grid" id="cipher-grid"></div>
+  <div class="controls">
+    <textarea id="input-message" placeholder="Enter a message to encode" rows="3" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px;"></textarea>
+    <button id="encode-btn">Encode</button>
+    <button id="reset-btn">Reset Grid</button>
+  </div>
+  <p id="output-message" style="word-break: break-word;"></p>
+</div>
+<script>
+  const grid = document.getElementById('cipher-grid');
+  const rows = 10;
+  const cols = 10;
+  const gridItems = [];
+  const cipherPattern = [];
+  
+  function createGrid() {
+    grid.innerHTML = '';
+    for (let r = 0; r < rows; r++) {
+      cipherPattern[r] = [];
+      for (let c = 0; c < cols; c++) {
+        const div = document.createElement('div');
+        div.classList.add('grid-item');
+        div.addEventListener('click', () => toggleGridItem(r, c, div));
+        grid.appendChild(div);
+        gridItems.push(div);
+        cipherPattern[r][c] = 0;
+      }
+    }
+  }
+
+  function toggleGridItem(row, col, element) {
+    cipherPattern[row][col] = cipherPattern[row][col] ? 0 : 1;
+    element.classList.toggle('active');
+  }
+
+  function encodeMessage() {
+    const message = document.getElementById('input-message').value;
+    if (!message.trim()) {
+      alert('Please enter a message to encode!');
+      return;
+    }
+    let encodedMessage = '';
+    for (let i = 0; i < message.length; i++) {
+      const charCode = message.charCodeAt(i);
+      let patternChar = cipherPattern[i % rows][i % cols] ? '#' : '.';
+      encodedMessage += String.fromCharCode(charCode) + patternChar;
+    }
+    document.getElementById('output-message').textContent = `Encoded Message: ${encodedMessage}`;
+  }
+
+  function resetGrid() {
+    gridItems.forEach(item => item.classList.remove('active'));
+    for (let r = 0; r < rows; r++) {
+      cipherPattern[r].fill(0);
+    }
+    document.getElementById('output-message').textContent = '';
+  }
+
+  document.getElementById('encode-btn').addEventListener('click', encodeMessage);
+  document.getElementById('reset-btn').addEventListener('click', resetGrid);
+
+  createGrid();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

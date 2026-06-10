@@ -1,0 +1,106 @@
+---
+layout: null
+title: "FocusFlow: Task Stream Visualizer"
+category: "Productivity"
+description: "A real-time, interactive flowchart tool that lets you visually map and manage your tasks, priorities, and dependencies with dynamic animations and progress tracking."
+permalink: "/tools/daily-20260610-10-focusflow-task-stream-visualizer.html"
+generated_by: "api-true-ai"
+generated_date: "20260610"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusFlow: Task Stream Visualizer | Free Online Interactive Tool</title>
+  <meta name="description" content="A real-time, interactive flowchart tool that lets you visually map and manage your tasks, priorities, and dependencies with dynamic animations and progress tracking. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="FocusFlow: Task Stream Visualizer | Free Online Interactive Tool">
+  <meta property="og:description" content="A real-time, interactive flowchart tool that lets you visually map and manage your tasks, priorities, and dependencies with dynamic animations and progress tracking. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FocusFlow: Task Stream Visualizer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A real-time, interactive flowchart tool that lets you visually map and manage your tasks, priorities, and dependencies with dynamic animations and progress tracking. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>FocusFlow: Task Stream Visualizer</h1>
+    <p class="seo-subtitle">A real-time, interactive flowchart tool that lets you visually map and manage your tasks, priorities, and dependencies with dynamic animations and progress tracking.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f7f6; display: flex; justify-content: center; align-items: center; height: 100vh; }  
+  #tool-app { width: 80%; height: 80%; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); padding: 20px; display: flex; flex-direction: column; }  
+  .toolbar { display: flex; justify-content: space-between; margin-bottom: 10px; }  
+  button { background-color: #4caf50; color: white; border: none; border-radius: 5px; padding: 10px; cursor: pointer; transition: background-color 0.2s ease; }  
+  button:hover { background-color: #45a049; }  
+  #canvas { flex-grow: 1; border: 2px dashed #ddd; border-radius: 8px; position: relative; overflow: hidden; }  
+  .node { position: absolute; background-color: #fffbcc; border-radius: 8px; padding: 10px; cursor: grab; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }  
+  .node:hover { background: #fff59d; }  
+  .connector { position: absolute; pointer-events: none; stroke: #4caf50; stroke-width: 2; }  
+</style>  
+<div id="tool-app">  
+  <div class="toolbar">  
+    <button id="add-task">Add Task</button>  
+    <button id="clear-tasks">Clear All</button>  
+  </div>  
+  <div id="canvas"></div>  
+</div>  
+<script>  
+const canvas = document.getElementById('canvas');  
+const addTaskButton = document.getElementById('add-task');  
+const clearTasksButton = document.getElementById('clear-tasks');  
+let nodeId = 0;  
+let isDragging = false;  
+let dragOffset = { x: 0, y: 0 };  
+let selectedNode = null;  
+
+const createNode = () => {  
+  const node = document.createElement('div');  
+  node.className = 'node';  
+  node.id = `node-${nodeId++}`;  
+  node.style.left = `${Math.random() * (canvas.clientWidth - 100)}px`;  
+  node.style.top = `${Math.random() * (canvas.clientHeight - 50)}px`;  
+  node.textContent = `Task ${nodeId}`;  
+  node.draggable = false;  
+  node.addEventListener('mousedown', (e) => onNodeMouseDown(e, node));  
+  node.addEventListener('mouseup', (e) => onNodeMouseUp(e, node));  
+  canvas.appendChild(node);  
+};  
+
+const onNodeMouseDown = (e, node) => {  
+  isDragging = true;  
+  selectedNode = node;  
+  dragOffset.x = e.clientX - node.offsetLeft;  
+  dragOffset.y = e.clientY - node.offsetTop;  
+};  
+
+const onNodeMouseUp = () => {  
+  isDragging = false;  
+  selectedNode = null;  
+};  
+
+document.addEventListener('mousemove', (e) => {  
+  if (isDragging && selectedNode) {  
+    selectedNode.style.left = `${e.clientX - dragOffset.x}px`;  
+    selectedNode.style.top = `${e.clientY - dragOffset.y}px`;  
+  }  
+});  
+
+addTaskButton.addEventListener('click', createNode);  
+clearTasksButton.addEventListener('click', () => {  
+  canvas.innerHTML = '';  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

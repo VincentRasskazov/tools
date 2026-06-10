@@ -1,0 +1,203 @@
+---
+layout: null
+title: "Task Tangle: Dependency Mapper"
+category: "Productivity"
+description: "An interactive web tool where users visually map and untangle task dependencies to optimize productivity workflows."
+permalink: "/tools/daily-20260610-14-task-tangle-dependency-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260610"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Tangle: Dependency Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive web tool where users visually map and untangle task dependencies to optimize productivity workflows. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Task Tangle: Dependency Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive web tool where users visually map and untangle task dependencies to optimize productivity workflows. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Task Tangle: Dependency Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive web tool where users visually map and untangle task dependencies to optimize productivity workflows. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Task Tangle: Dependency Mapper</h1>
+    <p class="seo-subtitle">An interactive web tool where users visually map and untangle task dependencies to optimize productivity workflows.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+    font-family: Arial, sans-serif;  
+    background: linear-gradient(to bottom right, #f8f9fa, #e9ecef);  
+    height: 100vh;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    margin: 0;  
+    overflow: hidden;  
+}  
+#tool-app {  
+    width: 90%;  
+    height: 80%;  
+    background: #ffffff;  
+    border-radius: 12px;  
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);  
+    overflow: hidden;  
+    display: flex;  
+    flex-direction: column;  
+}  
+header {  
+    background: #007bff;  
+    color: #ffffff;  
+    padding: 1rem;  
+    font-size: 1.5rem;  
+    text-align: center;  
+}  
+canvas {  
+    flex-grow: 1;  
+    cursor: grab;  
+}  
+button {  
+    background-color: #28a745;  
+    color: white;  
+    border: none;  
+    padding: 0.5rem 1rem;  
+    margin: 0.5rem;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    font-size: 1rem;  
+    align-self: center;  
+}  
+button:hover {  
+    background-color: #218838;  
+}  
+</style>  
+<div id="tool-app">  
+    <header>Task Tangle: Dependency Mapper</header>  
+    <canvas id="taskCanvas"></canvas>  
+    <button id="resetBtn">Reset</button>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById('taskCanvas');  
+const ctx = canvas.getContext('2d');  
+const resetBtn = document.getElementById('resetBtn');  
+let tasks = [];  
+let draggingTask = null;  
+let offsetX, offsetY;  
+
+canvas.width = canvas.parentElement.offsetWidth;  
+canvas.height = canvas.parentElement.offsetHeight - 50;  
+
+class Task {  
+    constructor(x, y, label) {  
+        this.x = x;  
+        this.y = y;  
+        this.radius = 30;  
+        this.label = label;  
+        this.dependencies = [];  
+    }  
+
+    draw() {  
+        ctx.beginPath();  
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);  
+        ctx.fillStyle = "#17a2b8";  
+        ctx.fill();  
+        ctx.strokeStyle = "#0056b3";  
+        ctx.lineWidth = 2;  
+        ctx.stroke();  
+        ctx.closePath();  
+
+        ctx.fillStyle = "#ffffff";  
+        ctx.font = "14px Arial";  
+        ctx.textAlign = "center";  
+        ctx.textBaseline = "middle";  
+        ctx.fillText(this.label, this.x, this.y);  
+    }  
+
+    isClicked(mx, my) {  
+        return Math.sqrt((this.x - mx) ** 2 + (this.y - my) ** 2) <= this.radius;  
+    }  
+}  
+
+function drawConnections() {  
+    tasks.forEach(task => {  
+        task.dependencies.forEach(dep => {  
+            ctx.beginPath();  
+            ctx.moveTo(task.x, task.y);  
+            ctx.lineTo(dep.x, dep.y);  
+            ctx.strokeStyle = "#6c757d";  
+            ctx.lineWidth = 2;  
+            ctx.stroke();  
+        });  
+    });  
+}  
+
+function drawTasks() {  
+    ctx.clearRect(0, 0, canvas.width, canvas.height);  
+    drawConnections();  
+    tasks.forEach(task => task.draw());  
+}  
+
+function addTask(x, y) {  
+    const label = `Task ${tasks.length + 1}`;  
+    tasks.push(new Task(x, y, label));  
+    drawTasks();  
+}  
+
+function findTask(mx, my) {  
+    return tasks.find(task => task.isClicked(mx, my));  
+}  
+
+canvas.addEventListener('mousedown', (e) => {  
+    const rect = canvas.getBoundingClientRect();  
+    const mx = e.clientX - rect.left;  
+    const my = e.clientY - rect.top;  
+    const clickedTask = findTask(mx, my);  
+
+    if (clickedTask) {  
+        draggingTask = clickedTask;  
+        offsetX = mx - clickedTask.x;  
+        offsetY = my - clickedTask.y;  
+    } else {  
+        addTask(mx, my);  
+    }  
+});  
+
+canvas.addEventListener('mousemove', (e) => {  
+    if (!draggingTask) return;  
+    const rect = canvas.getBoundingClientRect();  
+    const mx = e.clientX - rect.left;  
+    const my = e.clientY - rect.top;  
+    draggingTask.x = mx - offsetX;  
+    draggingTask.y = my - offsetY;  
+    drawTasks();  
+});  
+
+canvas.addEventListener('mouseup', () => {  
+    draggingTask = null;  
+});  
+
+resetBtn.addEventListener('click', () => {  
+    tasks = [];  
+    drawTasks();  
+});  
+
+drawTasks();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

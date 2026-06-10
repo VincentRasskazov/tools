@@ -1,0 +1,154 @@
+---
+layout: null
+title: "Portfolio Tectonics"
+category: "Finance"
+description: "Visualize and balance your investment portfolio by simulating tectonic plate movements, where each asset class behaves like a dynamic landmass."
+permalink: "/tools/daily-20260610-09-portfolio-tectonics.html"
+generated_by: "api-true-ai"
+generated_date: "20260610"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Tectonics | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize and balance your investment portfolio by simulating tectonic plate movements, where each asset class behaves like a dynamic landmass. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Portfolio Tectonics | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize and balance your investment portfolio by simulating tectonic plate movements, where each asset class behaves like a dynamic landmass. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Portfolio Tectonics | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize and balance your investment portfolio by simulating tectonic plate movements, where each asset class behaves like a dynamic landmass. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Portfolio Tectonics</h1>
+    <p class="seo-subtitle">Visualize and balance your investment portfolio by simulating tectonic plate movements, where each asset class behaves like a dynamic landmass.</p>
+    <style>  
+  body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; background-color: #1e222a; color: #ffffff; }  
+  #tool-app { padding: 20px; display: flex; flex-direction: column; align-items: center; }  
+  canvas { background: #2a2f3a; border: 2px solid #4caf50; margin-top: 20px; }  
+  #controls { margin-top: 20px; display: flex; gap: 20px; align-items: center; }  
+  button { background: #4caf50; color: white; border: none; padding: 10px 15px; cursor: pointer; font-size: 14px; border-radius: 5px; }  
+  button:hover { background: #69d57d; }  
+</style>  
+<div id="tool-app">  
+  <h1>Portfolio Tectonics</h1>  
+  <p>Drag and reposition asset classes (landmasses) to balance your portfolio's risk and growth potential!</p>  
+  <canvas id="canvas" width="800" height="600"></canvas>  
+  <div id="controls">  
+    <button id="reset">Reset Simulation</button>  
+    <button id="analyze">Analyze Balance</button>  
+  </div>  
+  <p id="feedback"></p>  
+</div>  
+<script>  
+const canvas = document.getElementById('canvas');  
+const ctx = canvas.getContext('2d');  
+const landmasses = [];  
+const colors = ['#e57373', '#64b5f6', '#81c784', '#ffd54f', '#ba68c8'];  
+const assetLabels = ['Stocks', 'Bonds', 'Real Estate', 'Commodities', 'Cash'];  
+let selected = null;  
+
+function initSimulation() {  
+  landmasses.splice(0, landmasses.length);  
+  for (let i = 0; i < 5; i++) {  
+    landmasses.push({  
+      x: Math.random() * 700 + 50,  
+      y: Math.random() * 500 + 50,  
+      radius: Math.random() * 50 + 30,  
+      color: colors[i],  
+      label: assetLabels[i],  
+      dx: Math.random() * 4 - 2,  
+      dy: Math.random() * 4 - 2,  
+    });  
+  }  
+}  
+
+function drawLandmasses() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  landmasses.forEach(mass => {  
+    ctx.beginPath();  
+    ctx.arc(mass.x, mass.y, mass.radius, 0, Math.PI * 2);  
+    ctx.fillStyle = mass.color;  
+    ctx.fill();  
+    ctx.closePath();  
+    ctx.fillStyle = 'white';  
+    ctx.font = '14px Arial';  
+    ctx.fillText(mass.label, mass.x - mass.radius / 2, mass.y + 5);  
+  });  
+}  
+
+function updatePositions() {  
+  landmasses.forEach(mass => {  
+    mass.x += mass.dx;  
+    mass.y += mass.dy;  
+    if (mass.x + mass.radius > canvas.width || mass.x - mass.radius < 0) mass.dx *= -1;  
+    if (mass.y + mass.radius > canvas.height || mass.y - mass.radius < 0) mass.dy *= -1;  
+  });  
+}  
+
+canvas.addEventListener('mousedown', (e) => {  
+  const rect = canvas.getBoundingClientRect();  
+  const mouseX = e.clientX - rect.left;  
+  const mouseY = e.clientY - rect.top;  
+  landmasses.forEach(mass => {  
+    if (Math.hypot(mouseX - mass.x, mouseY - mass.y) < mass.radius) {  
+      selected = mass;  
+    }  
+  });  
+});  
+
+canvas.addEventListener('mousemove', (e) => {  
+  if (selected) {  
+    const rect = canvas.getBoundingClientRect();  
+    selected.x = e.clientX - rect.left;  
+    selected.y = e.clientY - rect.top;  
+  }  
+});  
+
+canvas.addEventListener('mouseup', () => {  
+  selected = null;  
+});  
+
+document.getElementById('reset').addEventListener('click', () => {  
+  initSimulation();  
+  document.getElementById('feedback').textContent = '';  
+});  
+
+document.getElementById('analyze').addEventListener('click', () => {  
+  const totalArea = landmasses.reduce((acc, mass) => acc + Math.PI * Math.pow(mass.radius, 2), 0);  
+  let balanceRatio = 0;  
+  landmasses.forEach(mass => {  
+    const area = Math.PI * Math.pow(mass.radius, 2);  
+    balanceRatio += Math.abs(area / totalArea - 0.2);  
+  });  
+  const balanceScore = ((1 - balanceRatio / landmasses.length) * 100).toFixed(2);  
+  document.getElementById('feedback').textContent = `Portfolio balance score: ${balanceScore}%`;  
+});  
+
+function animate() {  
+  updatePositions();  
+  drawLandmasses();  
+  requestAnimationFrame(animate);  
+}  
+
+initSimulation();  
+animate();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

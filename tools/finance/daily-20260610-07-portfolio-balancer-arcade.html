@@ -1,0 +1,153 @@
+---
+layout: null
+title: "Portfolio Balancer Arcade"
+category: "Finance"
+description: "An interactive mini-game where users juggle a dynamic mix of assets to achieve balance in a simulated portfolio while avoiding risks like market crashes and bad investments."
+permalink: "/tools/daily-20260610-07-portfolio-balancer-arcade.html"
+generated_by: "api-true-ai"
+generated_date: "20260610"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Balancer Arcade | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive mini-game where users juggle a dynamic mix of assets to achieve balance in a simulated portfolio while avoiding risks like market crashes and bad investments. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Portfolio Balancer Arcade | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive mini-game where users juggle a dynamic mix of assets to achieve balance in a simulated portfolio while avoiding risks like market crashes and bad investments. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Portfolio Balancer Arcade | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive mini-game where users juggle a dynamic mix of assets to achieve balance in a simulated portfolio while avoiding risks like market crashes and bad investments. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Portfolio Balancer Arcade</h1>
+    <p class="seo-subtitle">An interactive mini-game where users juggle a dynamic mix of assets to achieve balance in a simulated portfolio while avoiding risks like market crashes and bad investments.</p>
+    <style>  
+#tool-app {  
+  font-family: Arial, sans-serif;  
+  max-width: 800px;  
+  margin: auto;  
+  text-align: center;  
+}  
+#game-area {  
+  border: 2px solid #444;  
+  margin-top: 20px;  
+  height: 400px;  
+  position: relative;  
+  background: #f0f4f8;  
+  overflow: hidden;  
+}  
+.asset {  
+  position: absolute;  
+  background-color: #28a745;  
+  color: #fff;  
+  padding: 10px;  
+  border-radius: 50%;  
+  cursor: pointer;  
+  text-align: center;  
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);  
+}  
+#scoreboard {  
+  margin-top: 15px;  
+  font-size: 1.2em;  
+  color: #333;  
+}  
+button {  
+  background-color: #007bff;  
+  border: none;  
+  color: white;  
+  padding: 10px 20px;  
+  text-transform: uppercase;  
+  cursor: pointer;  
+  border-radius: 5px;  
+}  
+button:hover {  
+  background-color: #0056b3;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Portfolio Balancer Arcade</h1>  
+  <p>Drag and drop assets to maintain a balanced investment portfolio while dodging risks that drop from above!</p>  
+  <button id="start-game">Start Game</button>  
+  <div id="scoreboard">Score: 0</div>  
+  <div id="game-area"></div>  
+</div>  
+<script>  
+let score = 0;  
+let gameInterval;  
+
+document.getElementById('start-game').addEventListener('click', startGame);  
+
+function startGame() {  
+  document.getElementById('game-area').innerHTML = '';  
+  score = 0;  
+  updateScore();  
+  gameInterval = setInterval(spawnAsset, 1000);  
+}  
+
+function spawnAsset() {  
+  const asset = document.createElement('div');  
+  asset.className = 'asset';  
+  asset.style.left = Math.random() * 90 + '%';  
+  asset.style.top = '0px';  
+  asset.innerText = Math.random() > 0.5 ? 'Stock' : 'Bond';  
+  asset.dataset.type = asset.innerText;  
+
+  asset.addEventListener('click', () => {  
+    adjustScore(asset.dataset.type);  
+    asset.remove();  
+  });  
+
+  document.getElementById('game-area').appendChild(asset);  
+  animateAsset(asset);  
+}  
+
+function animateAsset(asset) {  
+  let top = 0;  
+  const interval = setInterval(() => {  
+    top += 2;  
+    asset.style.top = top + 'px';  
+    if (top > 380) {  
+      clearInterval(interval);  
+      handleMiss(asset);  
+    }  
+  }, 20);  
+}  
+
+function adjustScore(type) {  
+  if (type === 'Stock') {  
+    score += 10;  
+  } else if (type === 'Bond') {  
+    score += 5;  
+  }  
+  updateScore();  
+}  
+
+function handleMiss(asset) {  
+  asset.remove();  
+  score -= 10;  
+  updateScore();  
+}  
+
+function updateScore() {  
+  document.getElementById('scoreboard').innerText = 'Score: ' + score;  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
