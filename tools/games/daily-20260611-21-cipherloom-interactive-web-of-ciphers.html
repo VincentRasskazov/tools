@@ -1,0 +1,165 @@
+---
+layout: null
+title: "CipherLoom: Interactive Web of Ciphers"
+category: "Games"
+description: "A mini-game where players untangle an interactive web of interconnected ciphers to decode a hidden message."
+permalink: "/tools/daily-20260611-21-cipherloom-interactive-web-of-ciphers.html"
+generated_by: "api-true-ai"
+generated_date: "20260611"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CipherLoom: Interactive Web of Ciphers | Free Online Interactive Tool</title>
+  <meta name="description" content="A mini-game where players untangle an interactive web of interconnected ciphers to decode a hidden message. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CipherLoom: Interactive Web of Ciphers | Free Online Interactive Tool">
+  <meta property="og:description" content="A mini-game where players untangle an interactive web of interconnected ciphers to decode a hidden message. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CipherLoom: Interactive Web of Ciphers | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A mini-game where players untangle an interactive web of interconnected ciphers to decode a hidden message. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CipherLoom: Interactive Web of Ciphers</h1>
+    <p class="seo-subtitle">A mini-game where players untangle an interactive web of interconnected ciphers to decode a hidden message.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(135deg, #2b5876, #4e4376);  
+  color: #ffffff;  
+  text-align: center;  
+  padding: 20px;  
+}  
+#tool-app {  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  height: 80vh;  
+}  
+#gameCanvas {  
+  background: #1c1c1c;  
+  border: 2px solid #ffffff;  
+  border-radius: 8px;  
+}  
+.message {  
+  margin-top: 15px;  
+  font-size: 1.2em;  
+  font-weight: 600;  
+}  
+</style>  
+<div id="tool-app">  
+  <canvas id="gameCanvas" width="600" height="400"></canvas>  
+  <p class="message" id="statusMessage">Decode the secret message!</p>  
+</div>  
+<script>  
+const canvas = document.getElementById('gameCanvas');  
+const ctx = canvas.getContext('2d');  
+const nodes = [];  
+const edges = [];  
+let secretMessage = "HELLOCIPHER";  
+let decodedMessage = "_".repeat(secretMessage.length).split("");  
+
+// Initialize nodes and edges  
+function initializeGame() {  
+  for (let i = 0; i < secretMessage.length; i++) {  
+    nodes.push({  
+      x: Math.random() * canvas.width,  
+      y: Math.random() * canvas.height,  
+      letter: secretMessage[i],  
+      connected: false  
+    });  
+  }  
+  for (let i = 0; i < secretMessage.length; i++) {  
+    let targetIndex = (i + Math.floor(Math.random() * (secretMessage.length - 1)) + 1) % secretMessage.length;  
+    edges.push({ from: i, to: targetIndex });  
+  }  
+}  
+
+// Draw the game  
+function drawGame() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+
+  // Draw edges  
+  edges.forEach(edge => {  
+    let fromNode = nodes[edge.from];  
+    let toNode = nodes[edge.to];  
+    ctx.strokeStyle = "#ffffff";  
+    ctx.beginPath();  
+    ctx.moveTo(fromNode.x, fromNode.y);  
+    ctx.lineTo(toNode.x, toNode.y);  
+    ctx.stroke();  
+  });  
+
+  // Draw nodes  
+  nodes.forEach((node, index) => {  
+    ctx.fillStyle = node.connected ? "#00ff00" : "#ff0000";  
+    ctx.beginPath();  
+    ctx.arc(node.x, node.y, 15, 0, Math.PI * 2);  
+    ctx.fill();  
+    ctx.fillStyle = "#ffffff";  
+    ctx.font = "14px Arial";  
+    ctx.textAlign = "center";  
+    ctx.textBaseline = "middle";  
+    ctx.fillText(node.connected ? node.letter : "?", node.x, node.y);  
+  });  
+}  
+
+// Detect click on nodes  
+canvas.addEventListener('click', (e) => {  
+  const rect = canvas.getBoundingClientRect();  
+  const mouseX = e.clientX - rect.left;  
+  const mouseY = e.clientY - rect.top;  
+
+  nodes.forEach((node, index) => {  
+    if (Math.hypot(node.x - mouseX, node.y - mouseY) < 15) {  
+      node.connected = !node.connected;  
+      updateMessage();  
+    }  
+  });  
+});  
+
+// Update decoded message  
+function updateMessage() {  
+  nodes.forEach((node, index) => {  
+    if (node.connected) {  
+      decodedMessage[index] = node.letter;  
+    } else {  
+      decodedMessage[index] = "_";  
+    }  
+  });  
+
+  document.getElementById('statusMessage').textContent = decodedMessage.join("");  
+
+  if (decodedMessage.join("") === secretMessage) {  
+    document.getElementById('statusMessage').textContent = "Congratulations! You've decoded the message! 🎉";  
+  }  
+}  
+
+// Game loop  
+function gameLoop() {  
+  drawGame();  
+  requestAnimationFrame(gameLoop);  
+}  
+
+initializeGame();  
+gameLoop();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

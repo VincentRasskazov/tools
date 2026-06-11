@@ -1,0 +1,194 @@
+---
+layout: null
+title: "Data Genome Mapper"
+category: "Data"
+description: "An interactive tool that visualizes and \"splices\" datasets like DNA strands, allowing users to manipulate, merge, and analyze data streams in real-time."
+permalink: "/tools/daily-20260611-02-data-genome-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260611"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Genome Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool that visualizes and &quot;splices&quot; datasets like DNA strands, allowing users to manipulate, merge, and analyze data streams in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Genome Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool that visualizes and &quot;splices&quot; datasets like DNA strands, allowing users to manipulate, merge, and analyze data streams in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Genome Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool that visualizes and &quot;splices&quot; datasets like DNA strands, allowing users to manipulate, merge, and analyze data streams in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Genome Mapper</h1>
+    <p class="seo-subtitle">An interactive tool that visualizes and &quot;splices&quot; datasets like DNA strands, allowing users to manipulate, merge, and analyze data streams in real-time.</p>
+    <style>  
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  #tool-app {
+    width: 90%;
+    max-width: 800px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+  }
+
+  #controls {
+    padding: 20px;
+    background: #f7f7f7;
+    border-bottom: 1px solid #ddd;
+  }
+
+  #controls input, #controls button {
+    margin-right: 8px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  #visualizer {
+    padding: 20px;
+    height: 400px;
+    overflow-y: auto;
+    background: #eaf7ff;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-content: flex-start;
+  }
+
+  .data-strand {
+    background: #4facfe;
+    padding: 10px;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .data-strand:hover {
+    transform: scale(1.1);
+    background: #00c6ff;
+  }
+
+  .highlighted {
+    background: #ff6b6b !important;
+  }
+</style>  
+<div id="tool-app">  
+  <div id="controls">  
+    <input type="text" id="data-input" placeholder="Enter data segment (e.g., 101010)" />  
+    <button id="add-strand">Add Strand</button>  
+    <button id="splice-selected">Splice Selected</button>  
+    <button id="analyze-data">Analyze</button>  
+  </div>  
+  <div id="visualizer">  
+    <!-- Data strands will appear here -->  
+  </div>  
+</div>  
+<script>  
+  const visualizer = document.getElementById("visualizer");  
+  const dataInput = document.getElementById("data-input");  
+  const addStrandButton = document.getElementById("add-strand");  
+  const spliceSelectedButton = document.getElementById("splice-selected");  
+  const analyzeButton = document.getElementById("analyze-data");  
+
+  let selectedStrands = [];  
+
+  // Add a new strand of data  
+  addStrandButton.addEventListener("click", () => {  
+    const data = dataInput.value.trim();  
+    if (data) {  
+      const strand = document.createElement("div");  
+      strand.className = "data-strand";  
+      strand.textContent = data;  
+      strand.addEventListener("click", () => toggleSelection(strand));  
+      visualizer.appendChild(strand);  
+      dataInput.value = "";  
+    }  
+  });  
+
+  // Toggle selection of a strand  
+  function toggleSelection(strand) {  
+    if (selectedStrands.includes(strand)) {  
+      strand.classList.remove("highlighted");  
+      selectedStrands = selectedStrands.filter((s) => s !== strand);  
+    } else {  
+      strand.classList.add("highlighted");  
+      selectedStrands.push(strand);  
+    }  
+  }  
+
+  // Splice selected strands  
+  spliceSelectedButton.addEventListener("click", () => {  
+    if (selectedStrands.length === 2) {  
+      const [strand1, strand2] = selectedStrands;  
+      const combinedData = strand1.textContent + strand2.textContent;  
+
+      // Create new strand  
+      const newStrand = document.createElement("div");  
+      newStrand.className = "data-strand";  
+      newStrand.textContent = combinedData;  
+      newStrand.addEventListener("click", () => toggleSelection(newStrand));  
+      
+      // Remove old strands and add new  
+      strand1.remove();  
+      strand2.remove();  
+      visualizer.appendChild(newStrand);  
+
+      // Clear selection  
+      selectedStrands = [];  
+    } else {  
+      alert("Select exactly 2 strands to splice!");  
+    }  
+  });  
+
+  // Analyze all strands  
+  analyzeButton.addEventListener("click", () => {  
+    const allStrands = visualizer.querySelectorAll(".data-strand");  
+    if (allStrands.length === 0) {  
+      alert("No data to analyze!");  
+      return;  
+    }  
+
+    const analysis = Array.from(allStrands).map((strand) => ({
+      data: strand.textContent,
+      length: strand.textContent.length,
+      uniqueCharacters: new Set(strand.textContent).size,
+    }));  
+
+    console.log("Data Analysis:", analysis);  
+    alert(`Analyzed ${analysis.length} strands. Check console for details.`);  
+  });  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

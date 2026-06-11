@@ -1,0 +1,145 @@
+---
+layout: null
+title: "CodeGlyph: Interactive Regex Pattern Explorer"
+category: "Developer"
+description: "A playful and visually interactive tool for crafting, testing, and understanding regular expressions using dynamic visualizations and gamified challenges."
+permalink: "/tools/daily-20260611-16-codeglyph-interactive-regex-pattern-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260611"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeGlyph: Interactive Regex Pattern Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="A playful and visually interactive tool for crafting, testing, and understanding regular expressions using dynamic visualizations and gamified challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CodeGlyph: Interactive Regex Pattern Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="A playful and visually interactive tool for crafting, testing, and understanding regular expressions using dynamic visualizations and gamified challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CodeGlyph: Interactive Regex Pattern Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A playful and visually interactive tool for crafting, testing, and understanding regular expressions using dynamic visualizations and gamified challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CodeGlyph: Interactive Regex Pattern Explorer</h1>
+    <p class="seo-subtitle">A playful and visually interactive tool for crafting, testing, and understanding regular expressions using dynamic visualizations and gamified challenges.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: 'Arial', sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  background: linear-gradient(135deg, #1e3c72, #2a5298);  
+  color: #fff;  
+}  
+#tool-app {  
+  background: #ffffff;  
+  color: #333;  
+  border-radius: 12px;  
+  padding: 20px;  
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);  
+  width: 80%;  
+  max-width: 800px;  
+  text-align: center;  
+}  
+.regex-input {  
+  margin-bottom: 20px;  
+  font-size: 1.2em;  
+  padding: 10px;  
+  width: calc(100% - 24px);  
+  border: 2px solid #2a5298;  
+  border-radius: 5px;  
+}  
+#visualization {  
+  margin-top: 20px;  
+  padding: 10px;  
+  border: 1px dashed #ccc;  
+  border-radius: 8px;  
+  background: #f9f9f9;  
+}  
+.challenge {  
+  margin-top: 20px;  
+  font-size: 1.1em;  
+  padding: 10px 10px;  
+  background: #2a5298;  
+  color: #fff;  
+  border-radius: 6px;  
+  cursor: pointer;  
+  display: inline-block;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>CodeGlyph</h1>  
+  <p>Visualize and master Regular Expressions!</p>  
+  <input type="text" id="regex" class="regex-input" placeholder="Enter your regex here...">  
+  <div id="visualization">Regex Visualization will appear here...</div>  
+  <div class="challenge" onclick="generateChallenge()">🎯 Start Random Challenge</div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const sampleStrings = [  
+  "hello123world",  
+  "email@example.com",  
+  "https://example.org",  
+  "Phone: (123) 456-7890",  
+  "29-Feb-2020",  
+  "AaBbCcDd1234",  
+  "ABCD123!@#",  
+];  
+
+function visualizeRegex() {  
+  const regexInput = document.getElementById("regex").value;  
+  const visualizationDiv = document.getElementById("visualization");  
+
+  try {  
+    const regex = new RegExp(regexInput);  
+    const matches = sampleStrings.map(str => {  
+      const match = str.match(regex);  
+      return `<div style="padding: 5px; border-bottom: 1px solid #ddd;">  
+                <strong>${str}</strong>: <span style="color: ${match ? 'green' : 'red'};">${match ? 'Matched' : 'No Match'}</span>  
+              </div>`;  
+    });  
+
+    visualizationDiv.innerHTML = matches.join("");  
+  } catch (e) {  
+    visualizationDiv.innerHTML = `<span style="color: red;">Invalid regex pattern</span>`;  
+  }  
+}  
+
+function generateChallenge() {  
+  const challenges = [  
+    ["Match a valid email address.", "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b"],  
+    ["Find all words starting with 'A'.", "\\bA\\w*"],  
+    ["Match any URL starting with http or https.", "https?://[\\w.-]+"],  
+    ["Find a valid date in DD-MMM-YYYY format.", "\\b\\d{2}-[A-Za-z]{3}-\\d{4}\\b"],  
+  ];  
+
+  const randomChallenge = challenges[Math.floor(Math.random() * challenges.length)];  
+  document.getElementById("regex").value = randomChallenge[1];  
+  visualizeRegex();  
+  alert(randomChallenge[0]);  
+}  
+
+document.getElementById("regex").addEventListener("input", visualizeRegex);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

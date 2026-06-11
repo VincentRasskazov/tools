@@ -1,0 +1,120 @@
+---
+layout: null
+title: "MindPulse: Stress & Focus Interactive Visualizer"
+category: "Health"
+description: "A dynamic browser tool that visualizes your mental state by mapping your response speed and accuracy in a series of mindfulness-based interactive challenges."
+permalink: "/tools/daily-20260611-08-mindpulse-stress-focus-interactive-visualizer.html"
+generated_by: "api-true-ai"
+generated_date: "20260611"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindPulse: Stress &amp; Focus Interactive Visualizer | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic browser tool that visualizes your mental state by mapping your response speed and accuracy in a series of mindfulness-based interactive challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="MindPulse: Stress &amp; Focus Interactive Visualizer | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic browser tool that visualizes your mental state by mapping your response speed and accuracy in a series of mindfulness-based interactive challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MindPulse: Stress &amp; Focus Interactive Visualizer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic browser tool that visualizes your mental state by mapping your response speed and accuracy in a series of mindfulness-based interactive challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>MindPulse: Stress &amp; Focus Interactive Visualizer</h1>
+    <p class="seo-subtitle">A dynamic browser tool that visualizes your mental state by mapping your response speed and accuracy in a series of mindfulness-based interactive challenges.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: #f0f8ff; color: #333; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }  
+  #tool-app { width: 80%; max-width: 600px; background: #fff; padding: 20px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); border-radius: 10px; text-align: center; }  
+  .button { display: inline-block; margin: 10px; padding: 10px 20px; background: #4caf50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }  
+  .button:disabled { background: #ddd; cursor: not-allowed; }  
+  .graph { width: 100%; height: 150px; background: linear-gradient(to right, #6a11cb, #2575fc); border-radius: 10px; margin: 20px 0; position: relative; }  
+  .dot { width: 10px; height: 10px; background: #fff; border-radius: 50%; position: absolute; }  
+  #status { font-weight: bold; margin-top: 10px; }  
+</style>  
+<div id="tool-app">  
+  <h2>MindPulse: Stress & Focus Interactive Visualizer</h2>  
+  <p>Test your focus and stress levels in real-time by responding to challenges!</p>  
+  <button id="start-button" class="button">Start Challenge</button>  
+  <div class="graph" id="graph-container"></div>  
+  <div id="status"></div>  
+</div>  
+<script>  
+  const app = document.getElementById('tool-app');  
+  const startButton = document.getElementById('start-button');  
+  const graphContainer = document.getElementById('graph-container');  
+  const status = document.getElementById('status');  
+  let challenges = [];  
+  let startTime;  
+  
+  startButton.addEventListener('click', () => {  
+    startButton.disabled = true;  
+    challenges = [];  
+    startTime = Date.now();  
+    status.textContent = 'Get ready...';  
+    graphContainer.innerHTML = '';  
+    setTimeout(() => launchChallenge(), 1000);  
+  });  
+  
+  function launchChallenge() {  
+    if (challenges.length >= 10) {  
+      calculateResults();  
+      return;  
+    }  
+  
+    const reactionTime = Math.random() * 2000 + 1000;  
+    status.textContent = `Focus! Click the button when it turns green.`;  
+    setTimeout(() => {  
+      const challengeStartTime = Date.now();  
+      status.textContent = 'Click now!';  
+      startButton.textContent = 'Click!';  
+      startButton.style.background = '#4caf50';  
+      startButton.disabled = false;  
+  
+      startButton.onclick = () => {  
+        const challengeEndTime = Date.now();  
+        const responseTime = challengeEndTime - challengeStartTime;  
+        challenges.push(responseTime);  
+        visualizeResponse(responseTime, challenges.length - 1);  
+        startButton.onclick = null;  
+        startButton.textContent = 'Start Challenge';  
+        startButton.style.background = '#ddd';  
+        startButton.disabled = true;  
+        setTimeout(() => launchChallenge(), 500);  
+      };  
+    }, reactionTime);  
+  }  
+  
+  function visualizeResponse(responseTime, index) {  
+    const accuracy = Math.max(0, 100 - responseTime / 20);  
+    const dot = document.createElement('div');  
+    dot.className = 'dot';  
+    dot.style.left = `${index * 10}%`;  
+    dot.style.bottom = `${accuracy}%`;  
+    graphContainer.appendChild(dot);  
+  }  
+  
+  function calculateResults() {  
+    const averageReaction = challenges.reduce((a, b) => a + b, 0) / challenges.length;  
+    const accuracy = Math.max(0, 100 - averageReaction / 20);  
+    status.textContent = `Your average response time: ${averageReaction.toFixed(2)} ms. Accuracy: ${accuracy.toFixed(2)}%.`;  
+    startButton.disabled = false;  
+  }  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,141 @@
+---
+layout: null
+title: "WordWeave: Interactive Idea Mapper"
+category: "Writing"
+description: "Create interactive word association webs to generate, connect, and expand upon ideas visually for creative writing or brainstorming."
+permalink: "/tools/daily-20260611-18-wordweave-interactive-idea-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260611"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordWeave: Interactive Idea Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="Create interactive word association webs to generate, connect, and expand upon ideas visually for creative writing or brainstorming. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="WordWeave: Interactive Idea Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="Create interactive word association webs to generate, connect, and expand upon ideas visually for creative writing or brainstorming. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WordWeave: Interactive Idea Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Create interactive word association webs to generate, connect, and expand upon ideas visually for creative writing or brainstorming. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>WordWeave: Interactive Idea Mapper</h1>
+    <p class="seo-subtitle">Create interactive word association webs to generate, connect, and expand upon ideas visually for creative writing or brainstorming.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f4f4f9; color: #333; }  
+#tool-app { max-width: 800px; margin: 0 auto; }  
+#canvas-container { border: 2px solid #ccc; border-radius: 10px; background: #fff; width: 100%; height: 500px; position: relative; overflow: hidden; }  
+.node { position: absolute; padding: 10px 20px; font-size: 14px; border: 2px solid #6c63ff; background: #dfe7fd; border-radius: 20px; cursor: move; transition: transform 0.2s, box-shadow 0.2s; }  
+.node:hover { box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); }  
+.line { position: absolute; width: 2px; background: #6c63ff; transform-origin: top left; }  
+button { background: #6c63ff; color: #fff; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; }  
+button:hover { background: #5848c2; }  
+.controls { margin-top: 10px; text-align: center; }  
+</style>  
+<div id="tool-app">  
+  <div id="canvas-container"></div>  
+  <div class="controls">  
+    <button id="addNodeBtn">Add Word</button>  
+    <button id="clearBtn">Clear Map</button>  
+  </div>  
+</div>  
+<script>  
+const canvas = document.getElementById('canvas-container');  
+const addNodeBtn = document.getElementById('addNodeBtn');  
+const clearBtn = document.getElementById('clearBtn');  
+let nodes = [];  
+let lines = [];  
+
+function createNode(x, y, text = 'New Word') {  
+  const node = document.createElement('div');  
+  node.className = 'node';  
+  node.contentEditable = true;  
+  node.innerText = text;  
+  node.style.left = x + 'px';  
+  node.style.top = y + 'px';  
+
+  node.onmousedown = (e) => {  
+    const offsetX = e.clientX - node.offsetLeft;  
+    const offsetY = e.clientY - node.offsetTop;  
+
+    function moveAt(event) {  
+      node.style.left = event.clientX - offsetX + 'px';  
+      node.style.top = event.clientY - offsetY + 'px';  
+      updateLines();  
+    }  
+
+    document.addEventListener('mousemove', moveAt);  
+
+    document.onmouseup = () => {  
+      document.removeEventListener('mousemove', moveAt);  
+      document.onmouseup = null;  
+    };  
+  };  
+
+  canvas.appendChild(node);  
+  nodes.push(node);  
+
+  node.addEventListener('dblclick', () => {  
+    if (nodes.length > 1) {  
+      const targetNode = nodes.find(n => n !== node);  
+      createLineBetweenNodes(node, targetNode);  
+    }  
+  });  
+}  
+
+function createLineBetweenNodes(node1, node2) {  
+  const line = document.createElement('div');  
+  line.className = 'line';  
+  canvas.appendChild(line);  
+  lines.push({ line, node1, node2 });  
+  updateLines();  
+}  
+
+function updateLines() {  
+  lines.forEach(({ line, node1, node2 }) => {  
+    const x1 = node1.offsetLeft + node1.offsetWidth / 2;  
+    const y1 = node1.offsetTop + node1.offsetHeight / 2;  
+    const x2 = node2.offsetLeft + node2.offsetWidth / 2;  
+    const y2 = node2.offsetTop + node2.offsetHeight / 2;  
+    const length = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);  
+    const angle = Math.atan2(y2 - y1, x2 - x1) * (180 / Math.PI);  
+    line.style.width = length + 'px';  
+    line.style.transform = `rotate(${angle}deg)`;  
+    line.style.left = x1 + 'px';  
+    line.style.top = y1 + 'px';  
+  });  
+}  
+
+addNodeBtn.addEventListener('click', () => {  
+  createNode(Math.random() * (canvas.clientWidth - 100), Math.random() * (canvas.clientHeight - 50));  
+});  
+
+clearBtn.addEventListener('click', () => {  
+  nodes.forEach(node => node.remove());  
+  lines.forEach(({ line }) => line.remove());  
+  nodes = [];  
+  lines = [];  
+});  
+
+createNode(100, 100, 'Start Here');  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

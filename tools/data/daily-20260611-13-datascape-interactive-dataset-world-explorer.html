@@ -1,0 +1,153 @@
+---
+layout: null
+title: "DataScape: Interactive Dataset World Explorer"
+category: "Data"
+description: "Explore and manipulate datasets as an interactive 3D landscape where each data point forms part of a living, breathing world."
+permalink: "/tools/daily-20260611-13-datascape-interactive-dataset-world-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260611"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataScape: Interactive Dataset World Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Explore and manipulate datasets as an interactive 3D landscape where each data point forms part of a living, breathing world. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataScape: Interactive Dataset World Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Explore and manipulate datasets as an interactive 3D landscape where each data point forms part of a living, breathing world. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataScape: Interactive Dataset World Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Explore and manipulate datasets as an interactive 3D landscape where each data point forms part of a living, breathing world. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataScape: Interactive Dataset World Explorer</h1>
+    <p class="seo-subtitle">Explore and manipulate datasets as an interactive 3D landscape where each data point forms part of a living, breathing world.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  background: linear-gradient(135deg, #1e3c72, #2a5298);  
+  overflow: hidden;  
+  color: white;  
+}  
+#tool-app {  
+  width: 100%;  
+  height: 100%;  
+  position: relative;  
+}  
+canvas {  
+  display: block;  
+}  
+#control-panel {  
+  position: absolute;  
+  top: 20px;  
+  left: 20px;  
+  background: rgba(0, 0, 0, 0.6);  
+  padding: 10px;  
+  border-radius: 8px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);  
+}  
+button {  
+  background: #4CAF50;  
+  border: none;  
+  color: white;  
+  padding: 10px 20px;  
+  text-align: center;  
+  font-size: 14px;  
+  margin: 5px;  
+  cursor: pointer;  
+  border-radius: 4px;  
+}  
+button:hover {  
+  background: #45a049;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="control-panel">  
+    <button id="load-data-btn">Load Dataset</button>  
+    <button id="toggle-view-btn">Toggle View</button>  
+    <button id="reset-world-btn">Reset</button>  
+  </div>  
+  <canvas id="data-canvas"></canvas>  
+</div>  
+<script>  
+const canvas = document.getElementById('data-canvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = window.innerWidth;  
+canvas.height = window.innerHeight;  
+
+let dataPoints = [];  
+let isScatterView = true;  
+
+function generateRandomData() {  
+  dataPoints = Array.from({ length: 100 }, () => ({  
+    x: Math.random() * canvas.width,  
+    y: Math.random() * canvas.height,  
+    size: Math.random() * 8 + 2,  
+    color: `hsl(${Math.random() * 360}, 100%, 50%)`,  
+  }));  
+  renderWorld();  
+}  
+
+function renderWorld() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  dataPoints.forEach(point => {  
+    ctx.beginPath();  
+    ctx.arc(point.x, point.y, point.size, 0, 2 * Math.PI);  
+    ctx.fillStyle = point.color;  
+    ctx.fill();  
+  });  
+}  
+
+function toggleView() {  
+  isScatterView = !isScatterView;  
+  if (isScatterView) {  
+    dataPoints.forEach(p => {  
+      p.x = Math.random() * canvas.width;  
+      p.y = Math.random() * canvas.height;  
+    });  
+  } else {  
+    const centerX = canvas.width / 2;  
+    const centerY = canvas.height / 2;  
+    dataPoints.forEach((p, i) => {  
+      const angle = (i / dataPoints.length) * 2 * Math.PI;  
+      const radius = canvas.width * 0.3;  
+      p.x = centerX + radius * Math.cos(angle);  
+      p.y = centerY + radius * Math.sin(angle);  
+    });  
+  }  
+  renderWorld();  
+}  
+
+document.getElementById('load-data-btn').addEventListener('click', generateRandomData);  
+document.getElementById('toggle-view-btn').addEventListener('click', toggleView);  
+document.getElementById('reset-world-btn').addEventListener('click', () => {  
+  dataPoints = [];  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+});  
+
+generateRandomData();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

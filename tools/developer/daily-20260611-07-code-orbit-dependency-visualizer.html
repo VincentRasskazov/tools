@@ -1,0 +1,130 @@
+---
+layout: null
+title: "Code Orbit: Dependency Visualizer"
+category: "Developer"
+description: "Explore and interact with a dynamic orbital map of your project's code dependencies to better understand module relationships and optimize architecture."
+permalink: "/tools/daily-20260611-07-code-orbit-dependency-visualizer.html"
+generated_by: "api-true-ai"
+generated_date: "20260611"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Orbit: Dependency Visualizer | Free Online Interactive Tool</title>
+  <meta name="description" content="Explore and interact with a dynamic orbital map of your project's code dependencies to better understand module relationships and optimize architecture. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Code Orbit: Dependency Visualizer | Free Online Interactive Tool">
+  <meta property="og:description" content="Explore and interact with a dynamic orbital map of your project's code dependencies to better understand module relationships and optimize architecture. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Code Orbit: Dependency Visualizer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Explore and interact with a dynamic orbital map of your project's code dependencies to better understand module relationships and optimize architecture. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Code Orbit: Dependency Visualizer</h1>
+    <p class="seo-subtitle">Explore and interact with a dynamic orbital map of your project's code dependencies to better understand module relationships and optimize architecture.</p>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #1e1e2f;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+  #tool-app {
+    width: 80vw;
+    height: 80vh;
+    background: #282a36;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+    position: relative;
+    overflow: hidden;
+  }
+  .node {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    position: absolute;
+    background-color: #ff6f61;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .node:hover {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  .edge {
+    position: absolute;
+    width: 2px;
+    background-color: #888;
+    transform-origin: top left;
+    pointer-events: none;
+  }
+</style>
+<div id="tool-app"></div>
+<script>
+  const toolApp = document.getElementById("tool-app");
+
+  const nodes = [
+    { id: 1, name: "index.js", x: 400, y: 300, dependencies: [2, 3] },
+    { id: 2, name: "utils.js", x: 200, y: 100, dependencies: [4] },
+    { id: 3, name: "api.js", x: 600, y: 500, dependencies: [] },
+    { id: 4, name: "config.js", x: 120, y: 400, dependencies: [] }
+  ];
+
+  function createNodeElement(node) {
+    const el = document.createElement("div");
+    el.classList.add("node");
+    el.style.left = `${node.x}px`;
+    el.style.top = `${node.y}px`;
+    el.setAttribute("data-id", node.id);
+    el.title = node.name;
+    el.addEventListener("click", () => alert(`Node: ${node.name}`));
+    return el;
+  }
+
+  function createEdgeElement(from, to) {
+    const edge = document.createElement("div");
+    edge.classList.add("edge");
+    const xDiff = to.x - from.x;
+    const yDiff = to.y - from.y;
+    const length = Math.sqrt(xDiff * xDiff + yDiff * yDiff);
+    const angle = Math.atan2(yDiff, xDiff) * (180 / Math.PI);
+    edge.style.width = `${length}px`;
+    edge.style.left = `${from.x}px`;
+    edge.style.top = `${from.y}px`;
+    edge.style.transform = `rotate(${angle}deg)`;
+    return edge;
+  }
+
+  nodes.forEach(node => {
+    toolApp.appendChild(createNodeElement(node));
+    node.dependencies.forEach(depId => {
+      const depNode = nodes.find(n => n.id === depId);
+      const edge = createEdgeElement(node, depNode);
+      toolApp.appendChild(edge);
+    });
+  });
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

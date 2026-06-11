@@ -1,0 +1,187 @@
+---
+layout: null
+title: "PulseMaze: Interactive Cardiovascular Explorer"
+category: "Health"
+description: "Navigate through a dynamic maze while learning about heart rate zones, exercise types, and cardiovascular health."
+permalink: "/tools/daily-20260611-11-pulsemaze-interactive-cardiovascular-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260611"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PulseMaze: Interactive Cardiovascular Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate through a dynamic maze while learning about heart rate zones, exercise types, and cardiovascular health. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PulseMaze: Interactive Cardiovascular Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate through a dynamic maze while learning about heart rate zones, exercise types, and cardiovascular health. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PulseMaze: Interactive Cardiovascular Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate through a dynamic maze while learning about heart rate zones, exercise types, and cardiovascular health. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PulseMaze: Interactive Cardiovascular Explorer</h1>
+    <p class="seo-subtitle">Navigate through a dynamic maze while learning about heart rate zones, exercise types, and cardiovascular health.</p>
+    <style>  
+body {  
+  font-family: 'Arial', sans-serif;  
+  margin: 0;  
+  background: linear-gradient(120deg, #ff7e5f, #feb47b);  
+  color: #333;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+
+#tool-app {  
+  width: 80%;  
+  height: 90%;  
+  background: #fff;  
+  border-radius: 15px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  padding: 1rem;  
+}  
+
+#maze-container {  
+  width: 100%;  
+  height: calc(100% - 120px);  
+  border: 2px solid #333;  
+  position: relative;  
+  overflow: hidden;  
+}  
+
+.cell {  
+  position: absolute;  
+  width: 8%;  
+  height: 8%;  
+  background-color: #f08080;  
+  border-radius: 4px;  
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);  
+}  
+
+.cell.goal {  
+  background-color: #98fb98;  
+}  
+
+#health-info {  
+  margin-top: 10px;  
+  text-align: center;  
+  font-size: 0.9rem;  
+}  
+
+button {  
+  padding: 0.6rem 1.2rem;  
+  font-size: 1rem;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  background: #feb47b;  
+  color: #fff;  
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);  
+  transition: background-color 0.3s;  
+}  
+
+button:hover {  
+  background: #ff7e5f;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>PulseMaze</h1>  
+  <p>Navigate the maze and boost your cardiovascular knowledge!</p>  
+  <div id="maze-container"></div>  
+  <div id="health-info">Heart Rate Zone: <span id="heart-rate-zone">Resting</span></div>  
+  <button id="start-game">Start Game</button>  
+</div>  
+<script>  
+const mazeContainer = document.getElementById("maze-container");  
+const healthInfo = document.getElementById("heart-rate-zone");  
+const button = document.getElementById("start-game");  
+
+const gridSize = 12;  
+const cellSize = 100 / gridSize;  
+let playerPosition = { x: 0, y: 0 };  
+
+const heartRateZones = ["Resting", "Light Activity", "Moderate Activity", "Intense Exercise"];  
+
+function createMaze() {  
+  mazeContainer.innerHTML = "";  
+  for (let row = 0; row < gridSize; row++) {  
+    for (let col = 0; col < gridSize; col++) {  
+      const cell = document.createElement("div");  
+      cell.classList.add("cell");  
+      cell.style.top = `${cellSize * row}%`;  
+      cell.style.left = `${cellSize * col}%`;  
+
+      if (row === gridSize - 1 && col === gridSize - 1) {  
+        cell.classList.add("goal");  
+      }  
+      mazeContainer.appendChild(cell);  
+    }  
+  }  
+  updatePlayerPosition();  
+}  
+
+function updatePlayerPosition() {  
+  const playerCell = document.createElement("div");  
+  playerCell.classList.add("cell");  
+  playerCell.style.backgroundColor = "#87ceeb";  
+  playerCell.style.top = `${playerPosition.y * cellSize}%`;  
+  playerCell.style.left = `${playerPosition.x * cellSize}%`;  
+  mazeContainer.appendChild(playerCell);  
+
+  const progress = Math.floor(((playerPosition.x + playerPosition.y) / (gridSize * 2)) * heartRateZones.length);  
+  healthInfo.textContent = heartRateZones[progress];  
+}  
+
+function movePlayer(direction) {  
+  if (direction === "up" && playerPosition.y > 0) playerPosition.y--;  
+  if (direction === "down" && playerPosition.y < gridSize - 1) playerPosition.y++;  
+  if (direction === "left" && playerPosition.x > 0) playerPosition.x--;  
+  if (direction === "right" && playerPosition.x < gridSize - 1) playerPosition.x++;  
+  createMaze();  
+}  
+
+button.addEventListener("click", () => {  
+  playerPosition = { x: 0, y: 0 };  
+  createMaze();  
+  document.addEventListener("keydown", (e) => {  
+    switch (e.key) {  
+      case "ArrowUp":  
+        movePlayer("up");  
+        break;  
+      case "ArrowDown":  
+        movePlayer("down");  
+        break;  
+      case "ArrowLeft":  
+        movePlayer("left");  
+        break;  
+      case "ArrowRight":  
+        movePlayer("right");  
+        break;  
+    }  
+  });  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
