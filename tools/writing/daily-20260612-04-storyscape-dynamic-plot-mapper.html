@@ -1,0 +1,192 @@
+---
+layout: null
+title: "StoryScape: Dynamic Plot Mapper"
+category: "Writing"
+description: "A highly interactive tool that helps writers visually craft and evolve intricate storylines using draggable nodes, branching paths, and real-time conflict analysis."
+permalink: "/tools/daily-20260612-04-storyscape-dynamic-plot-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260612"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StoryScape: Dynamic Plot Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive tool that helps writers visually craft and evolve intricate storylines using draggable nodes, branching paths, and real-time conflict analysis. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="StoryScape: Dynamic Plot Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive tool that helps writers visually craft and evolve intricate storylines using draggable nodes, branching paths, and real-time conflict analysis. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StoryScape: Dynamic Plot Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive tool that helps writers visually craft and evolve intricate storylines using draggable nodes, branching paths, and real-time conflict analysis. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>StoryScape: Dynamic Plot Mapper</h1>
+    <p class="seo-subtitle">A highly interactive tool that helps writers visually craft and evolve intricate storylines using draggable nodes, branching paths, and real-time conflict analysis.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(135deg, #1e3c72, #2a5298);  
+  color: #fff;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+}  
+#tool-app {  
+  width: 90%;  
+  max-width: 1200px;  
+  background: #ffffff10;  
+  border: 2px solid #ffffff50;  
+  border-radius: 12px;  
+  padding: 20px;  
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);  
+}  
+h1 {  
+  text-align: center;  
+  margin-bottom: 20px;  
+  font-size: 2rem;  
+  color: #ffdd57;  
+}  
+canvas {  
+  width: 100%;  
+  height: 70vh;  
+  display: block;  
+  background-color: #ffffff10;  
+  border: 1px dashed #ffffff50;  
+  border-radius: 8px;  
+}  
+button {  
+  background: #ffdd57;  
+  color: #333;  
+  border: none;  
+  padding: 10px 15px;  
+  font-size: 1rem;  
+  border-radius: 8px;  
+  cursor: pointer;  
+  margin-right: 10px;  
+}  
+button:hover {  
+  background: #ffc107;  
+}  
+.controls {  
+  display: flex;  
+  justify-content: center;  
+  margin-top: 15px;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>StoryScape: Dynamic Plot Mapper</h1>  
+  <canvas id="plotCanvas"></canvas>  
+  <div class="controls">  
+    <button id="addNode">Add Node</button>  
+    <button id="clearCanvas">Clear</button>  
+  </div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+class StoryNode {  
+  constructor(id, x, y) {  
+    this.id = id;  
+    this.x = x;  
+    this.y = y;  
+    this.connections = [];  
+  }  
+
+  connectTo(node) {  
+    if (!this.connections.includes(node)) {  
+      this.connections.push(node);  
+    }  
+  }  
+}  
+
+const canvas = document.getElementById("plotCanvas");  
+const ctx = canvas.getContext("2d");  
+canvas.width = canvas.offsetWidth;  
+canvas.height = canvas.offsetHeight;  
+
+let nodes = [];  
+let draggingNode = null;  
+
+canvas.addEventListener("mousedown", (e) => {  
+  const { offsetX, offsetY } = e;  
+  draggingNode = nodes.find(  
+    node => Math.hypot(node.x - offsetX, node.y - offsetY) < 20  
+  );  
+});  
+
+canvas.addEventListener("mousemove", (e) => {  
+  if (draggingNode) {  
+    draggingNode.x = e.offsetX;  
+    draggingNode.y = e.offsetY;  
+    drawCanvas();  
+  }  
+});  
+
+canvas.addEventListener("mouseup", () => {  
+  draggingNode = null;  
+});  
+
+document.getElementById("addNode").addEventListener("click", () => {  
+  const id = `Node ${nodes.length + 1}`;  
+  const newNode = new StoryNode(id, canvas.width / 2, canvas.height / 2);  
+  nodes.push(newNode);  
+  drawCanvas();  
+});  
+
+document.getElementById("clearCanvas").addEventListener("click", () => {  
+  nodes = [];  
+  drawCanvas();  
+});  
+
+function drawCanvas() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+
+  // Draw connections  
+  nodes.forEach(node => {  
+    node.connections.forEach(connection => {  
+      ctx.beginPath();  
+      ctx.moveTo(node.x, node.y);  
+      ctx.lineTo(connection.x, connection.y);  
+      ctx.strokeStyle = "#ffffff";  
+      ctx.lineWidth = 2;  
+      ctx.stroke();  
+    });  
+  });  
+
+  // Draw nodes  
+  nodes.forEach(node => {  
+    ctx.beginPath();  
+    ctx.arc(node.x, node.y, 20, 0, Math.PI * 2);  
+    ctx.fillStyle = "#ffdd57";  
+    ctx.fill();  
+    ctx.strokeStyle = "#333";  
+    ctx.lineWidth = 2;  
+    ctx.stroke();  
+    ctx.fillStyle = "#333";  
+    ctx.font = "12px Arial";  
+    ctx.fillText(node.id, node.x - 10, node.y + 4);  
+  });  
+}  
+
+drawCanvas();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
