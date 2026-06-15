@@ -1,0 +1,150 @@
+---
+layout: null
+title: "Regex Quest: Pattern Explorer Game"
+category: "Developer"
+description: "An interactive mini-game where developers solve puzzles by crafting regex patterns to unlock levels and uncover hidden secrets."
+permalink: "/tools/daily-20260615-18-regex-quest-pattern-explorer-game.html"
+generated_by: "api-true-ai"
+generated_date: "20260615"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Quest: Pattern Explorer Game | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive mini-game where developers solve puzzles by crafting regex patterns to unlock levels and uncover hidden secrets. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Regex Quest: Pattern Explorer Game | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive mini-game where developers solve puzzles by crafting regex patterns to unlock levels and uncover hidden secrets. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Regex Quest: Pattern Explorer Game | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive mini-game where developers solve puzzles by crafting regex patterns to unlock levels and uncover hidden secrets. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Regex Quest: Pattern Explorer Game</h1>
+    <p class="seo-subtitle">An interactive mini-game where developers solve puzzles by crafting regex patterns to unlock levels and uncover hidden secrets.</p>
+    <style>  
+/* Sleek and modern design */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  background: linear-gradient(135deg, #282c34, #3a3f47);  
+  color: #fff;  
+}  
+#tool-app {  
+  background: #1e1e1e;  
+  padding: 20px;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);  
+  text-align: center;  
+  width: 400px;  
+}  
+button {  
+  background: #61dafb;  
+  border: none;  
+  padding: 10px 15px;  
+  font-size: 16px;  
+  cursor: pointer;  
+  border-radius: 5px;  
+  margin-top: 10px;  
+}  
+button:hover {  
+  background: #21a1f1;  
+}  
+input {  
+  width: 100%;  
+  padding: 10px;  
+  border: 1px solid #ccc;  
+  border-radius: 5px;  
+  margin-bottom: 10px;  
+  font-size: 16px;  
+}  
+.predefined-text {  
+  background: #333;  
+  padding: 10px;  
+  border-radius: 5px;  
+  margin-top: 10px;  
+  font-size: 16px;  
+}  
+#results {  
+  margin-top: 20px;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Regex Quest: Pattern Explorer</h1>  
+  <p>Craft the correct regex pattern to solve the challenge below:</p>  
+  <div class="predefined-text" id="challenge-text"></div>  
+  <input type="text" id="regex-input" placeholder="Enter your regex pattern here..." />  
+  <button onclick="checkRegex()">Test Pattern</button>  
+  <div id="results"></div>  
+</div>  
+<script>  
+// Sample game levels  
+const levels = [  
+  { text: "Match all words starting with 'a': apple, art, banana, apricot", regex: /\ba\w*/g },  
+  { text: "Match all numbers: 123, abc, 456, 789", regex: /\d+/g },  
+  { text: "Match all words ending with 'ing': swimming, walking, run, dancing", regex: /\b\w+ing\b/g },  
+];  
+
+let currentLevel = 0;  
+
+function loadLevel(level) {  
+  const challengeText = document.getElementById("challenge-text");  
+  const results = document.getElementById("results");  
+  results.innerHTML = "";  
+  challengeText.textContent = levels[level].text;  
+}  
+
+function checkRegex() {  
+  const userInput = document.getElementById("regex-input").value;  
+  const challengeText = levels[currentLevel].text;  
+  const correctRegex = levels[currentLevel].regex;  
+
+  try {  
+    const userRegex = new RegExp(userInput, "g");  
+    const userMatches = challengeText.match(userRegex) || [];  
+    const correctMatches = challengeText.match(correctRegex) || [];  
+
+    const results = document.getElementById("results");  
+    if (JSON.stringify(userMatches) === JSON.stringify(correctMatches)) {  
+      results.innerHTML = `<p style="color: lime;">Correct! You matched: ${userMatches.join(", ")}</p>`;  
+      currentLevel++;  
+      if (currentLevel < levels.length) {  
+        loadLevel(currentLevel);  
+      } else {  
+        results.innerHTML = `<p style="color: lime;">Congratulations! You completed all levels!</p>`;  
+      }  
+    } else {  
+      results.innerHTML = `<p style="color: red;">Incorrect! Your matches: ${userMatches.join(", ")}</p>`;  
+    }  
+  } catch (error) {  
+    const results = document.getElementById("results");  
+    results.innerHTML = `<p style="color: orange;">Invalid regex pattern!</p>`;  
+  }  
+}  
+
+// Initialize the first level  
+loadLevel(currentLevel);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,112 @@
+---
+layout: null
+title: "PhishDetect Simulator"
+category: "Cybersecurity"
+description: "A gamified phishing email simulator where users must identify and flag fraudulent emails from real ones in an interactive inbox environment."
+permalink: "/tools/daily-20260615-22-phishdetect-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260615"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhishDetect Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified phishing email simulator where users must identify and flag fraudulent emails from real ones in an interactive inbox environment. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PhishDetect Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified phishing email simulator where users must identify and flag fraudulent emails from real ones in an interactive inbox environment. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PhishDetect Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified phishing email simulator where users must identify and flag fraudulent emails from real ones in an interactive inbox environment. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PhishDetect Simulator</h1>
+    <p class="seo-subtitle">A gamified phishing email simulator where users must identify and flag fraudulent emails from real ones in an interactive inbox environment.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0; }  
+  #tool-app { max-width: 800px; margin: 50px auto; background: white; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); overflow: hidden; }  
+  .email { padding: 15px; border-bottom: 1px solid #ddd; cursor: pointer; transition: background 0.2s; }  
+  .email:hover { background: #f9f9f9; }  
+  .email-header { font-weight: bold; color: #333; }  
+  .email-body { color: #666; margin-top: 5px; }  
+  .actions { text-align: center; padding: 15px; }  
+  .actions button { padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; cursor: pointer; }  
+  .flag { background: #ff5c5c; color: white; }  
+  .safe { background: #5cc85c; color: white; }  
+  .result { padding: 10px; text-align: center; font-weight: bold; }  
+</style>  
+<div id="tool-app">  
+  <div id="emails"></div>  
+  <div class="actions">  
+    <button class="safe" onclick="markSafe()">Mark Safe</button>  
+    <button class="flag" onclick="flagPhish()">Flag as Phishing</button>  
+  </div>  
+  <div class="result" id="result"></div>  
+</div>  
+<script>  
+  const emails = [  
+    { subject: "Your account is in danger!", body: "Click here to reset your password: http://fake-reset.com", type: "phish" },  
+    { subject: "Discounts on your favorite stores", body: "Use this coupon: SAVE20 at checkout! Visit http://deals.com", type: "safe" },  
+    { subject: "Payroll Update", body: "Provide your SSN to ensure uninterrupted payments.", type: "phish" },  
+    { subject: "Vacation Approved", body: "Your request for leave has been approved for next month.", type: "safe" }  
+  ];  
+
+  let currentIndex = 0;  
+  let score = 0;  
+
+  function displayEmail(index) {  
+    const emailContainer = document.getElementById("emails");  
+    emailContainer.innerHTML = `  
+      <div class="email">  
+        <div class="email-header">${emails[index].subject}</div>  
+        <div class="email-body">${emails[index].body}</div>  
+      </div>  
+    `;  
+    document.getElementById("result").innerText = "";  
+  }  
+
+  function markSafe() {  
+    evaluateChoice("safe");  
+  }  
+
+  function flagPhish() {  
+    evaluateChoice("phish");  
+  }  
+
+  function evaluateChoice(choice) {  
+    const currentEmail = emails[currentIndex];  
+    if (currentEmail.type === choice) {  
+      score++;  
+      document.getElementById("result").innerText = "Correct!";  
+    } else {  
+      document.getElementById("result").innerText = "Incorrect!";  
+    }  
+    currentIndex++;  
+    if (currentIndex < emails.length) {  
+      displayEmail(currentIndex);  
+    } else {  
+      document.getElementById("emails").innerText = "Game Over! Your final score: " + score;  
+      document.querySelector(".actions").style.display = "none";  
+    }  
+  }  
+
+  displayEmail(currentIndex);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

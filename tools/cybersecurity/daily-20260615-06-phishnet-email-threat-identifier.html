@@ -1,0 +1,193 @@
+---
+layout: null
+title: "PhishNet: Email Threat Identifier"
+category: "Cybersecurity"
+description: "An interactive tool that simulates email inboxes, challenging users to identify phishing attempts and learn about common red flags in a gamified environment."
+permalink: "/tools/daily-20260615-06-phishnet-email-threat-identifier.html"
+generated_by: "api-true-ai"
+generated_date: "20260615"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhishNet: Email Threat Identifier | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool that simulates email inboxes, challenging users to identify phishing attempts and learn about common red flags in a gamified environment. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PhishNet: Email Threat Identifier | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool that simulates email inboxes, challenging users to identify phishing attempts and learn about common red flags in a gamified environment. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PhishNet: Email Threat Identifier | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool that simulates email inboxes, challenging users to identify phishing attempts and learn about common red flags in a gamified environment. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PhishNet: Email Threat Identifier</h1>
+    <p class="seo-subtitle">An interactive tool that simulates email inboxes, challenging users to identify phishing attempts and learn about common red flags in a gamified environment.</p>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #2d3436;
+    color: #dfe6e9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  #tool-app {
+    width: 80%;
+    max-width: 800px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    color: #2d3436;
+  }
+  header {
+    background: #0984e3;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  #email-container {
+    padding: 20px;
+    font-size: 1em;
+  }
+  .email {
+    padding: 10px;
+    border-bottom: 1px solid #dcdde1;
+  }
+  .email span.subject {
+    font-weight: bold;
+    display: inline-block;
+    margin-right: 10px;
+  }
+  .email span.sender {
+    font-style: italic;
+    color: #636e72;
+  }
+  .actions {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  button {
+    border: none;
+    padding: 8px 15px;
+    font-size: 0.9em;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .mark-phish {
+    background: #d63031;
+    color: white;
+  }
+  .mark-safe {
+    background: #00b894;
+    color: white;
+  }
+  #score {
+    text-align: center;
+    padding: 10px;
+    font-size: 1.2em;
+    background: #dfe6e9;
+  }
+</style>
+<div id="tool-app">
+  <header>PhishNet: Email Threat Identifier</header>
+  <div id="email-container"></div>
+  <div id="score">Score: 0</div>
+</div>
+<script>
+const emails = [
+  {
+    subject: "Your account has been compromised!",
+    sender: "security@banking-secure.com",
+    content: "Dear user, please click below to reset your password immediately.",
+    isPhishing: true
+  },
+  {
+    subject: "Congrats, you've won!",
+    sender: "lottery@winnings.com",
+    content: "Claim your $1,000,000 prize now by providing your bank details here.",
+    isPhishing: true
+  },
+  {
+    subject: "Weekly Newsletter",
+    sender: "news@trustedsource.com",
+    content: "Here's your weekly dose of updates. Thank you for subscribing!",
+    isPhishing: false
+  },
+  {
+    subject: "Important Security Update",
+    sender: "support@reliable-email.com",
+    content: "Please update your software by visiting our official site.",
+    isPhishing: false
+  },
+  {
+    subject: "URGENT: Payment Required",
+    sender: "billing@fakecompany.io",
+    content: "Your subscription will be deactivated unless payment is made immediately.",
+    isPhishing: true
+  }
+];
+let score = 0;
+function renderEmails() {
+  const container = document.getElementById('email-container');
+  container.innerHTML = '';
+  emails.forEach((email, index) => {
+    const emailElement = document.createElement('div');
+    emailElement.className = 'email';
+    emailElement.innerHTML = `
+      <span class="subject">${email.subject}</span>
+      <span class="sender">(${email.sender})</span>
+      <p>${email.content}</p>
+      <div class="actions">
+        <button class="mark-phish" onclick="handleMark(${index}, true)">Mark as Phishing</button>
+        <button class="mark-safe" onclick="handleMark(${index}, false)">Mark as Safe</button>
+      </div>
+    `;
+    container.appendChild(emailElement);
+  });
+}
+function handleMark(index, markedPhish) {
+  const email = emails[index];
+  if (email.isPhishing === markedPhish) {
+    score++;
+    alert('Correct!');
+  } else {
+    alert('Incorrect!');
+  }
+  emails.splice(index, 1);
+  updateScore();
+  renderEmails();
+  if (emails.length === 0) {
+    alert('Game Over! Your final score is ' + score);
+  }
+}
+function updateScore() {
+  document.getElementById('score').textContent = 'Score: ' + score;
+}
+renderEmails();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

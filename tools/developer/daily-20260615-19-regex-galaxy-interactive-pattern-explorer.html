@@ -1,0 +1,118 @@
+---
+layout: null
+title: "Regex Galaxy: Interactive Pattern Explorer"
+category: "Developer"
+description: "An immersive mini-game where developers navigate a galaxy of regex challenges, visually matching patterns to unlock new planets and enhance their regex mastery."
+permalink: "/tools/daily-20260615-19-regex-galaxy-interactive-pattern-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260615"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Galaxy: Interactive Pattern Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="An immersive mini-game where developers navigate a galaxy of regex challenges, visually matching patterns to unlock new planets and enhance their regex mastery. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Regex Galaxy: Interactive Pattern Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="An immersive mini-game where developers navigate a galaxy of regex challenges, visually matching patterns to unlock new planets and enhance their regex mastery. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Regex Galaxy: Interactive Pattern Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An immersive mini-game where developers navigate a galaxy of regex challenges, visually matching patterns to unlock new planets and enhance their regex mastery. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Regex Galaxy: Interactive Pattern Explorer</h1>
+    <p class="seo-subtitle">An immersive mini-game where developers navigate a galaxy of regex challenges, visually matching patterns to unlock new planets and enhance their regex mastery.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: radial-gradient(circle, #1a1a40, #000); color: white; margin: 0; overflow: hidden; }  
+  #tool-app { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }  
+  canvas { border: 1px solid white; display: block; }  
+  .controls { margin-top: 20px; text-align: center; }  
+  .controls input { padding: 10px; font-size: 16px; margin-right: 10px; }  
+  .controls button { padding: 10px 20px; font-size: 16px; background: #4caf50; color: white; border: none; cursor: pointer; }  
+  .controls button:disabled { background: #888; cursor: not-allowed; }  
+</style>  
+<div id="tool-app">  
+  <canvas id="galaxyCanvas" width="800" height="600"></canvas>  
+  <div class="controls">  
+    <input id="regexInput" type="text" placeholder="Enter Regex Pattern" />  
+    <button id="matchButton">Match Patterns</button>  
+    <p id="feedback" style="margin-top: 10px;"></p>  
+  </div>  
+</div>  
+<script>  
+const canvas = document.getElementById('galaxyCanvas');  
+const ctx = canvas.getContext('2d');  
+const regexInput = document.getElementById('regexInput');  
+const matchButton = document.getElementById('matchButton');  
+const feedback = document.getElementById('feedback');  
+
+// Game data  
+let planets = [  
+  { x: 100, y: 100, radius: 40, color: 'blue', target: 'abc', matched: false },  
+  { x: 300, y: 200, radius: 50, color: 'red', target: '123', matched: false },  
+  { x: 500, y: 400, radius: 30, color: 'green', target: 'xy9', matched: false },  
+  { x: 700, y: 150, radius: 50, color: 'purple', target: 'hello123', matched: false }  
+];  
+
+// Draw the galaxy  
+function drawGalaxy() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  planets.forEach(planet => {  
+    ctx.beginPath();  
+    ctx.arc(planet.x, planet.y, planet.radius, 0, Math.PI * 2);  
+    ctx.fillStyle = planet.matched ? 'gray' : planet.color;  
+    ctx.fill();  
+    ctx.fillStyle = 'white';  
+    ctx.font = '14px Arial';  
+    ctx.fillText(planet.matched ? '✓' : planet.target, planet.x - planet.radius / 2, planet.y + 5);  
+  });  
+}  
+
+// Regex matching logic  
+matchButton.addEventListener('click', () => {  
+  const regex = new RegExp(regexInput.value);  
+  let matchedAny = false;  
+  planets.forEach(planet => {  
+    if (!planet.matched && regex.test(planet.target)) {  
+      planet.matched = true;  
+      matchedAny = true;  
+    }  
+  });  
+  if (matchedAny) {  
+    feedback.textContent = 'Great! You matched a pattern!';  
+    feedback.style.color = 'lightgreen';  
+  } else {  
+    feedback.textContent = 'No match found. Try again!';  
+    feedback.style.color = 'red';  
+  }  
+  drawGalaxy();  
+
+  // Check for win condition  
+  if (planets.every(planet => planet.matched)) {  
+    feedback.textContent = 'Congratulations! You unlocked the entire galaxy!';  
+    feedback.style.color = 'gold';  
+    matchButton.disabled = true;  
+  }  
+});  
+
+// Initial render  
+drawGalaxy();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

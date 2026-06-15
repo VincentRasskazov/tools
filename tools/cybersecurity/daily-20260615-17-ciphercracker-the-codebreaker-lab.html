@@ -1,0 +1,196 @@
+---
+layout: null
+title: "CipherCracker: The Codebreaker Lab"
+category: "Cybersecurity"
+description: "A gamified tool where users interactively decrypt various encoded messages using real cryptographic techniques, all while learning about classic and modern ciphers."
+permalink: "/tools/daily-20260615-17-ciphercracker-the-codebreaker-lab.html"
+generated_by: "api-true-ai"
+generated_date: "20260615"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CipherCracker: The Codebreaker Lab | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool where users interactively decrypt various encoded messages using real cryptographic techniques, all while learning about classic and modern ciphers. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CipherCracker: The Codebreaker Lab | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool where users interactively decrypt various encoded messages using real cryptographic techniques, all while learning about classic and modern ciphers. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CipherCracker: The Codebreaker Lab | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool where users interactively decrypt various encoded messages using real cryptographic techniques, all while learning about classic and modern ciphers. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CipherCracker: The Codebreaker Lab</h1>
+    <p class="seo-subtitle">A gamified tool where users interactively decrypt various encoded messages using real cryptographic techniques, all while learning about classic and modern ciphers.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  text-align: center;  
+  background: linear-gradient(135deg, #1e293b, #334155);  
+  color: #f8fafc;  
+  margin: 0;  
+  padding: 0;  
+}  
+h1 {  
+  margin-top: 20px;  
+  color: #38bdf8;  
+}  
+#tool-app {  
+  margin: 0 auto;  
+  max-width: 600px;  
+  padding: 20px;  
+  background: #0f172a;  
+  border-radius: 8px;  
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);  
+}  
+button {  
+  background-color: #38bdf8;  
+  color: #0f172a;  
+  border: none;  
+  padding: 10px 15px;  
+  border-radius: 8px;  
+  cursor: pointer;  
+  font-size: 16px;  
+  margin: 5px;  
+}  
+button:hover {  
+  background-color: #0ea5e9;  
+}  
+textarea {  
+  width: calc(100% - 20px);  
+  height: 100px;  
+  margin: 10px 0;  
+  padding: 10px;  
+  border: 2px solid #38bdf8;  
+  border-radius: 8px;  
+  background: #1e293b;  
+  color: #f8fafc;  
+}  
+#output {  
+  margin-top: 20px;  
+  padding: 10px;  
+  background: #1e293b;  
+  border: 2px solid #38bdf8;  
+  border-radius: 8px;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>CipherCracker: The Codebreaker Lab</h1>  
+  <p>Choose a cipher type, enter an encoded message, and start cracking! Learn as you go.</p>  
+  <label for="cipher-type">Cipher Type:</label>  
+  <select id="cipher-type">  
+    <option value="caesar">Caesar Cipher</option>  
+    <option value="vigenere">Vigenère Cipher</option>  
+    <option value="base64">Base64</option>  
+  </select>  
+  <textarea id="input-text" placeholder="Enter your encoded message here"></textarea>  
+  <br>  
+  <button id="decode-btn">Decode</button>  
+  <button id="hint-btn">Hint</button>  
+  <div id="output"></div>  
+</div>  
+<script>  
+document.getElementById('decode-btn').addEventListener('click', () => {  
+  const cipherType = document.getElementById('cipher-type').value;  
+  const input = document.getElementById('input-text').value;  
+  const output = document.getElementById('output');  
+
+  if (!input.trim()) {  
+    output.innerHTML = '<p style="color: #f87171;">Please enter a valid encoded message.</p>';  
+    return;  
+  }  
+
+  let decodedMessage = '';  
+  switch (cipherType) {  
+    case 'caesar':  
+      decodedMessage = decodeCaesar(input);  
+      break;  
+    case 'vigenere':  
+      decodedMessage = decodeVigenere(input);  
+      break;  
+    case 'base64':  
+      try {  
+        decodedMessage = atob(input);  
+      } catch (e) {  
+        decodedMessage = 'Invalid Base64 input.';  
+      }  
+      break;  
+    default:  
+      decodedMessage = 'Invalid cipher type.';  
+  }  
+  output.innerHTML = `<p>Decoded Message:</p><p style="color: #a3e635;">${decodedMessage}</p>`;  
+});  
+
+document.getElementById('hint-btn').addEventListener('click', () => {  
+  const cipherType = document.getElementById('cipher-type').value;  
+  const output = document.getElementById('output');  
+
+  let hint = '';  
+  switch (cipherType) {  
+    case 'caesar':  
+      hint = 'Caesar Cipher shifts each letter by a fixed number of places. Try all 26 possibilities!';  
+      break;  
+    case 'vigenere':  
+      hint = 'Vigenère Cipher uses a keyword to shift letters. Look for repeated patterns!';  
+      break;  
+    case 'base64':  
+      hint = 'Base64 encodes binary data into readable text. Use decoding functions!';  
+      break;  
+    default:  
+      hint = 'Invalid cipher type.';  
+  }  
+  output.innerHTML = `<p style="color: #facc15;">Hint:</p><p>${hint}</p>`;  
+});  
+
+function decodeCaesar(input) {  
+  const shift = 3;  
+  return input  
+    .split('')  
+    .map(char => {  
+      if (char.match(/[a-z]/i)) {  
+        const code = char.charCodeAt(0);  
+        const base = char === char.toUpperCase() ? 65 : 97;  
+        return String.fromCharCode(((code - base - shift + 26) % 26) + base);  
+      }  
+      return char;  
+    })  
+    .join('');  
+}  
+
+function decodeVigenere(input) {  
+  const keyword = 'KEY';  
+  let result = '';  
+  let keywordIndex = 0;  
+  for (let i = 0; i < input.length; i++) {  
+    const char = input[i];  
+    if (char.match(/[a-z]/i)) {  
+      const code = char.charCodeAt(0);  
+      const base = char === char.toUpperCase() ? 65 : 97;  
+      const shift = keyword[keywordIndex % keyword.length].toUpperCase().charCodeAt(0) - 65;  
+      result += String.fromCharCode(((code - base - shift + 26) % 26) + base);  
+      keywordIndex++;  
+    } else {  
+      result += char;  
+    }  
+  }  
+  return result ? result : 'Unable to decode. Please check your input and try again.';  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

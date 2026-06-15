@@ -1,0 +1,128 @@
+---
+layout: null
+title: "Code Constellation: Interactive Debugging Galaxy"
+category: "Games"
+description: "Navigate a galaxy of interconnected code snippets to debug and refactor, solving logic puzzles and learning coding patterns along the way."
+permalink: "/tools/daily-20260615-23-code-constellation-interactive-debugging-galaxy.html"
+generated_by: "api-true-ai"
+generated_date: "20260615"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Constellation: Interactive Debugging Galaxy | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate a galaxy of interconnected code snippets to debug and refactor, solving logic puzzles and learning coding patterns along the way. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Code Constellation: Interactive Debugging Galaxy | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate a galaxy of interconnected code snippets to debug and refactor, solving logic puzzles and learning coding patterns along the way. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Code Constellation: Interactive Debugging Galaxy | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate a galaxy of interconnected code snippets to debug and refactor, solving logic puzzles and learning coding patterns along the way. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Code Constellation: Interactive Debugging Galaxy</h1>
+    <p class="seo-subtitle">Navigate a galaxy of interconnected code snippets to debug and refactor, solving logic puzzles and learning coding patterns along the way.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: radial-gradient(circle, #1a1a40, #000); color: #fff; margin: 0; overflow: hidden; }  
+  #tool-app { display: flex; justify-content: center; align-items: center; height: 100vh; }  
+  .star { border-radius: 50%; background: #fff; position: absolute; transition: transform 0.2s; }  
+  .code-popup { position: fixed; background: rgba(0, 0, 0, 0.8); padding: 20px; border: 2px solid #fff; border-radius: 10px; max-width: 400px; }  
+  .solve-button { background: #1a73e8; color: #fff; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px; margin-top: 10px; }  
+</style>  
+<div id="tool-app">  
+  <canvas id="galaxyCanvas"></canvas>  
+  <div id="popup" class="code-popup" style="display:none;">  
+    <p id="question"></p>  
+    <textarea id="codeInput" rows="5" cols="40" placeholder="Type your fix here..."></textarea><br>  
+    <button id="submitCode" class="solve-button">Submit</button>  
+  </div>  
+</div>  
+<script>  
+  const canvas = document.getElementById('galaxyCanvas');  
+  const ctx = canvas.getContext('2d');  
+  const popup = document.getElementById('popup');  
+  const questionEl = document.getElementById('question');  
+  const codeInput = document.getElementById('codeInput');  
+  const submitCode = document.getElementById('submitCode');  
+  canvas.width = window.innerWidth;  
+  canvas.height = window.innerHeight;  
+  const stars = [];  
+
+  const puzzles = [  
+    { question: "Fix this loop so it stops at 10:\nfor(let i=0; i<15; i+=2){console.log(i);}", solution: "for(let i=0; i<=10; i+=2){console.log(i);}" },  
+    { question: "Fix this function so it returns the correct sum:\nfunction add(a,b){ return a - b; }", solution: "function add(a,b){ return a + b; }" },  
+    { question: "Fix this conditional so it works:\nif(x = 10){ console.log('Equal'); }", solution: "if(x === 10){ console.log('Equal'); }" }  
+  ];  
+
+  let activePuzzle = null;  
+
+  function createStars() {  
+    for (let i = 0; i < 50; i++) {  
+      stars.push({  
+        x: Math.random() * canvas.width,  
+        y: Math.random() * canvas.height,  
+        size: Math.random() * 3 + 1,  
+        puzzleIndex: Math.floor(Math.random() * puzzles.length)  
+      });  
+    }  
+  }  
+
+  function renderStars() {  
+    ctx.clearRect(0, 0, canvas.width, canvas.height);  
+    stars.forEach((star, index) => {  
+      ctx.beginPath();  
+      ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);  
+      ctx.fillStyle = '#fff';  
+      ctx.fill();  
+      ctx.closePath();  
+    });  
+  }  
+
+  function handleClick(e) {  
+    const x = e.clientX;  
+    const y = e.clientY;  
+
+    stars.forEach((star, index) => {  
+      const distance = Math.sqrt(Math.pow(x - star.x, 2) + Math.pow(y - star.y, 2));  
+      if (distance < star.size * 2) {  
+        activePuzzle = puzzles[star.puzzleIndex];  
+        questionEl.textContent = activePuzzle.question;  
+        popup.style.display = 'block';  
+        codeInput.value = '';  
+      }  
+    });  
+  }  
+
+  function checkSolution() {  
+    if (codeInput.value.trim() === activePuzzle.solution) {  
+      alert("Correct! You fixed the code!");  
+      popup.style.display = 'none';  
+    } else {  
+      alert("Try again!");  
+    }  
+  }  
+
+  canvas.addEventListener('click', handleClick);  
+  submitCode.addEventListener('click', checkSolution);  
+
+  createStars();  
+  setInterval(renderStars, 50);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
