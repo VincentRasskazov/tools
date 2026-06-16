@@ -1,0 +1,161 @@
+---
+layout: null
+title: "StockFlow Simulator"
+category: "Finance"
+description: "A real-time, interactive mini-game where users balance investments, expenses, and savings to grow their virtual portfolio while responding to simulated market events."
+permalink: "/tools/daily-20260616-14-stockflow-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260616"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StockFlow Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="A real-time, interactive mini-game where users balance investments, expenses, and savings to grow their virtual portfolio while responding to simulated market events. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="StockFlow Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="A real-time, interactive mini-game where users balance investments, expenses, and savings to grow their virtual portfolio while responding to simulated market events. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StockFlow Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A real-time, interactive mini-game where users balance investments, expenses, and savings to grow their virtual portfolio while responding to simulated market events. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>StockFlow Simulator</h1>
+    <p class="seo-subtitle">A real-time, interactive mini-game where users balance investments, expenses, and savings to grow their virtual portfolio while responding to simulated market events.</p>
+    <style>  
+  #tool-app {  
+    font-family: Arial, sans-serif;  
+    text-align: center;  
+    margin: 20px;  
+  }  
+  #game-board {  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    justify-content: center;  
+    background: #f0f4f8;  
+    border-radius: 8px;  
+    padding: 20px;  
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);  
+    max-width: 600px;  
+    margin: 0 auto;  
+  }  
+  .game-stat {  
+    margin: 10px 0;  
+    font-size: 18px;  
+    font-weight: bold;  
+  }  
+  .event-log {  
+    margin-top: 10px;  
+    max-height: 200px;  
+    overflow-y: auto;  
+    background: #ffffff;  
+    border: 1px solid #ccc;  
+    border-radius: 5px;  
+    padding: 10px;  
+    text-align: left;  
+    width: 100%;  
+  }  
+  button {  
+    background-color: #4CAF50;  
+    color: white;  
+    padding: 10px 20px;  
+    border: none;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    margin: 10px;  
+  }  
+  button:hover {  
+    background-color: #45a049;  
+  }  
+</style>  
+<div id="tool-app">  
+  <div id="game-board">  
+    <h1>StockFlow Simulator</h1>  
+    <div class="game-stat">Portfolio Value: $<span id="portfolio-value">1000</span></div>  
+    <div class="game-stat">Savings: $<span id="savings">500</span></div>  
+    <div class="game-stat">Expenses: $<span id="expenses">200</span></div>  
+    <button onclick="invest()">Invest</button>  
+    <button onclick="save()">Save</button>  
+    <button onclick="spend()">Spend</button>  
+    <button onclick="nextTurn()">Next Turn</button>  
+    <div class="event-log" id="event-log">  
+      <p>Welcome to StockFlow Simulator! Make your moves to grow your portfolio.</p>  
+    </div>  
+  </div>  
+</div>  
+<script>  
+  let portfolioValue = 1000;  
+  let savings = 500;  
+  let expenses = 200;  
+  let turn = 0;  
+
+  const eventLog = document.getElementById("event-log");  
+
+  function logEvent(message) {  
+    const newEvent = document.createElement("p");  
+    newEvent.textContent = `Turn ${turn}: ${message}`;  
+    eventLog.appendChild(newEvent);  
+    eventLog.scrollTop = eventLog.scrollHeight;  
+  }  
+
+  function updateStats() {  
+    document.getElementById("portfolio-value").textContent = portfolioValue;  
+    document.getElementById("savings").textContent = savings;  
+    document.getElementById("expenses").textContent = expenses;  
+  }  
+
+  function invest() {  
+    portfolioValue += Math.floor(Math.random() * 50);  
+    logEvent("You invested in the market and gained some returns.");  
+    updateStats();  
+  }  
+
+  function save() {  
+    const savedAmount = Math.min(100, portfolioValue * 0.1);  
+    savings += savedAmount;  
+    portfolioValue -= savedAmount;  
+    logEvent(`You saved $${savedAmount}.`);  
+    updateStats();  
+  }  
+
+  function spend() {  
+    const spendAmount = Math.floor(Math.random() * 20) + expenses;  
+    if (savings >= spendAmount) {  
+      savings -= spendAmount;  
+      logEvent(`You spent $${spendAmount} and covered it with your savings.`);  
+    } else {  
+      logEvent("You spent money but couldn't fully cover it, affecting your portfolio.");  
+      portfolioValue -= (spendAmount - savings);  
+      savings = 0;  
+    }  
+    updateStats();  
+  }  
+
+  function nextTurn() {  
+    turn++;  
+    const marketEvent = Math.random() > 0.5 ? "positive" : "negative";  
+    const marketChange = Math.floor(Math.random() * 100);  
+    portfolioValue += marketEvent === "positive" ? marketChange : -marketChange;  
+    logEvent(`Market shift: ${marketEvent === "positive" ? "gain" : "loss"} of $${marketChange}.`);  
+    updateStats();  
+  }  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

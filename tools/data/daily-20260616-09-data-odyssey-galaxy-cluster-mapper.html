@@ -1,0 +1,186 @@
+---
+layout: null
+title: "Data Odyssey: Galaxy Cluster Mapper"
+category: "Data"
+description: "Visualize interconnected datasets as interactive galaxies, where nodes represent data points and edges are visual relationships, enabling exploration of complex systems."
+permalink: "/tools/daily-20260616-09-data-odyssey-galaxy-cluster-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260616"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Odyssey: Galaxy Cluster Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize interconnected datasets as interactive galaxies, where nodes represent data points and edges are visual relationships, enabling exploration of complex systems. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Odyssey: Galaxy Cluster Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize interconnected datasets as interactive galaxies, where nodes represent data points and edges are visual relationships, enabling exploration of complex systems. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Odyssey: Galaxy Cluster Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize interconnected datasets as interactive galaxies, where nodes represent data points and edges are visual relationships, enabling exploration of complex systems. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Odyssey: Galaxy Cluster Mapper</h1>
+    <p class="seo-subtitle">Visualize interconnected datasets as interactive galaxies, where nodes represent data points and edges are visual relationships, enabling exploration of complex systems.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background: linear-gradient(120deg, #020024, #090979, #00d4ff);  
+  color: white;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 100vw;  
+  height: 100vh;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  position: relative;  
+}  
+canvas {  
+  display: block;  
+}  
+#hud {  
+  position: absolute;  
+  top: 20px;  
+  left: 20px;  
+  background: rgba(0, 0, 0, 0.8);  
+  padding: 10px;  
+  border-radius: 8px;  
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);  
+}  
+#hud input, #hud button {  
+  margin: 5px;  
+}  
+</style>  
+<div id="tool-app">  
+  <canvas id="galaxyCanvas"></canvas>  
+  <div id="hud">  
+    <h3>Galaxy Cluster Mapper</h3>  
+    <label for="dataInput">Enter Data (JSON):</label>  
+    <textarea id="dataInput" rows="5" cols="40"></textarea><br>  
+    <button id="loadDataBtn">Load Data</button><br>  
+  </div>  
+</div>  
+<script>  
+const canvas = document.getElementById('galaxyCanvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = window.innerWidth;  
+canvas.height = window.innerHeight;  
+  
+let galaxies = [];  
+let zoom = 1;  
+let offsetX = canvas.width / 2;  
+let offsetY = canvas.height / 2;  
+  
+document.getElementById('loadDataBtn').addEventListener('click', () => {  
+  const rawData = document.getElementById('dataInput').value;  
+  try {  
+    const parsedData = JSON.parse(rawData);  
+    galaxies = generateGalaxy(parsedData);  
+  } catch (e) {  
+    alert('Invalid JSON format. Please fix and try again.');  
+  }  
+});  
+  
+function generateGalaxy(data) {  
+  const nodes = [];  
+  const edges = [];  
+  
+  Object.entries(data).forEach(([key, value], idx) => {  
+    nodes.push({ id: key, x: Math.random() * canvas.width, y: Math.random() * canvas.height });  
+    if (Array.isArray(value)) {  
+      value.forEach(subVal => {  
+        edges.push({ from: key, to: subVal });  
+      });  
+    } else {  
+      edges.push({ from: key, to: value });  
+    }  
+  });  
+  
+  return { nodes, edges };  
+}  
+  
+function drawGalaxy() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  ctx.save();  
+  ctx.translate(offsetX, offsetY);  
+  ctx.scale(zoom, zoom);  
+  
+  galaxies.edges.forEach(edge => {  
+    const fromNode = galaxies.nodes.find(node => node.id === edge.from);  
+    const toNode = galaxies.nodes.find(node => node.id === edge.to);  
+    if (fromNode && toNode) {  
+      ctx.beginPath();  
+      ctx.strokeStyle = 'rgba(255,255,255,0.5)';  
+      ctx.moveTo(fromNode.x, fromNode.y);  
+      ctx.lineTo(toNode.x, toNode.y);  
+      ctx.stroke();  
+    }  
+  });  
+  
+  galaxies.nodes.forEach(node => {  
+    ctx.beginPath();  
+    ctx.fillStyle = '#FFD700';  
+    ctx.arc(node.x, node.y, 5, 0, Math.PI * 2);  
+    ctx.fill();  
+    ctx.fillStyle = '#FFFFFF';  
+    ctx.fillText(node.id, node.x + 10, node.y + 5);  
+  });  
+  
+  ctx.restore();  
+}  
+  
+function animate() {  
+  drawGalaxy();  
+  requestAnimationFrame(animate);  
+}  
+  
+canvas.addEventListener('wheel', (e) => {  
+  e.preventDefault();  
+  zoom += e.deltaY * -0.001;  
+  zoom = Math.min(Math.max(0.5, zoom), 4);  
+});  
+  
+canvas.addEventListener('mousedown', (e) => {  
+  let startX = e.clientX;  
+  let startY = e.clientY;  
+  
+  function onMouseMove(event) {  
+    offsetX += event.clientX - startX;  
+    offsetY += event.clientY - startY;  
+    startX = event.clientX;  
+    startY = event.clientY;  
+  }  
+  
+  function onMouseUp() {  
+    canvas.removeEventListener('mousemove', onMouseMove);  
+    canvas.removeEventListener('mouseup', onMouseUp);  
+  }  
+  
+  canvas.addEventListener('mousemove', onMouseMove);  
+  canvas.addEventListener('mouseup', onMouseUp);  
+});  
+  
+animate();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

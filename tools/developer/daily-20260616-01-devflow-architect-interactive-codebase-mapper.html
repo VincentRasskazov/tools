@@ -1,0 +1,179 @@
+---
+layout: null
+title: "DevFlow Architect: Interactive Codebase Mapper"
+category: "Developer"
+description: "Visually design, explore, and simulate the flow of interconnected modules in a codebase to optimize architecture and debugging."
+permalink: "/tools/daily-20260616-01-devflow-architect-interactive-codebase-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260616"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevFlow Architect: Interactive Codebase Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="Visually design, explore, and simulate the flow of interconnected modules in a codebase to optimize architecture and debugging. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DevFlow Architect: Interactive Codebase Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="Visually design, explore, and simulate the flow of interconnected modules in a codebase to optimize architecture and debugging. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DevFlow Architect: Interactive Codebase Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visually design, explore, and simulate the flow of interconnected modules in a codebase to optimize architecture and debugging. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DevFlow Architect: Interactive Codebase Mapper</h1>
+    <p class="seo-subtitle">Visually design, explore, and simulate the flow of interconnected modules in a codebase to optimize architecture and debugging.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background-color: #f1f5f9;  
+  color: #333;  
+}  
+#tool-app {  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  height: 100vh;  
+}  
+#canvas {  
+  border: 2px solid #007acc;  
+  background-color: #eaf4fc;  
+}  
+.controls {  
+  margin: 10px;  
+}  
+button {  
+  background-color: #007acc;  
+  color: white;  
+  border: none;  
+  padding: 10px 20px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  margin: 5px;  
+}  
+button:disabled {  
+  background-color: #aaa;  
+  cursor: not-allowed;  
+}  
+</style>  
+<div id="tool-app">  
+  <div class="controls">  
+    <button id="addModule">Add Module</button>  
+    <button id="simulateFlow" disabled>Simulate Flow</button>  
+  </div>  
+  <canvas id="canvas" width="800" height="600"></canvas>  
+</div>  
+<script>  
+const canvas = document.getElementById('canvas');  
+const ctx = canvas.getContext('2d');  
+let modules = [];  
+let connections = [];  
+let isAddingConnection = false;  
+let selectedModule = null;  
+
+document.getElementById('addModule').addEventListener('click', () => {  
+  const id = `Module-${modules.length + 1}`;  
+  const x = Math.random() * (canvas.width - 100) + 50;  
+  const y = Math.random() * (canvas.height - 100) + 50;  
+
+  modules.push({ id, x, y, width: 80, height: 50 });  
+  drawCanvas();  
+
+  document.getElementById('simulateFlow').disabled = modules.length < 2;  
+});  
+
+canvas.addEventListener('click', (event) => {  
+  const rect = canvas.getBoundingClientRect();  
+  const mouseX = event.clientX - rect.left;  
+  const mouseY = event.clientY - rect.top;  
+
+  const clickedModule = modules.find(  
+    (mod) =>  
+      mouseX >= mod.x &&  
+      mouseX <= mod.x + mod.width &&  
+      mouseY >= mod.y &&  
+      mouseY <= mod.y + mod.height  
+  );  
+
+  if (isAddingConnection && clickedModule) {  
+    if (selectedModule && selectedModule.id !== clickedModule.id) {  
+      connections.push({  
+        from: selectedModule.id,  
+        to: clickedModule.id,  
+      });  
+      selectedModule = null;  
+      isAddingConnection = false;  
+    } else {  
+      alert('Cannot connect a module to itself.');  
+    }  
+    drawCanvas();  
+  } else if (clickedModule) {  
+    selectedModule = clickedModule;  
+    isAddingConnection = true;  
+  }  
+});  
+
+document.getElementById('simulateFlow').addEventListener('click', () => {  
+  let visited = {};  
+  let output = 'Simulation Flow:\n';  
+
+  function traverse(moduleId) {  
+    if (visited[moduleId]) return;  
+    visited[moduleId] = true;  
+    output += `${moduleId} → `;  
+
+    connections  
+      .filter((conn) => conn.from === moduleId)  
+      .forEach((conn) => traverse(conn.to));  
+  }  
+
+  if (modules.length > 0) traverse(modules[0].id);  
+  alert(output.slice(0, -2));  
+});  
+
+function drawCanvas() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+
+  connections.forEach((conn) => {  
+    const from = modules.find((mod) => mod.id === conn.from);  
+    const to = modules.find((mod) => mod.id === conn.to);  
+    if (from && to) {  
+      ctx.beginPath();  
+      ctx.moveTo(from.x + from.width / 2, from.y + from.height / 2);  
+      ctx.lineTo(to.x + to.width / 2, to.y + to.height / 2);  
+      ctx.strokeStyle = '#007acc';  
+      ctx.stroke();  
+    }  
+  });  
+
+  modules.forEach((mod) => {  
+    ctx.fillStyle = '#007acc';  
+    ctx.fillRect(mod.x, mod.y, mod.width, mod.height);  
+    ctx.fillStyle = '#fff';  
+    ctx.font = 'bold 14px Arial';  
+    ctx.textAlign = 'center';  
+    ctx.fillText(mod.id, mod.x + mod.width / 2, mod.y + mod.height / 2 + 5);  
+  });  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

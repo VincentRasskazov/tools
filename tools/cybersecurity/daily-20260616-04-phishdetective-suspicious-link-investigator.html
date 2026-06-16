@@ -1,0 +1,158 @@
+---
+layout: null
+title: "PhishDetective: Suspicious Link Investigator"
+category: "Cybersecurity"
+description: "Analyze and interactively explore the hidden details of URLs to uncover potential phishing indicators in real-time."
+permalink: "/tools/daily-20260616-04-phishdetective-suspicious-link-investigator.html"
+generated_by: "api-true-ai"
+generated_date: "20260616"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhishDetective: Suspicious Link Investigator | Free Online Interactive Tool</title>
+  <meta name="description" content="Analyze and interactively explore the hidden details of URLs to uncover potential phishing indicators in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PhishDetective: Suspicious Link Investigator | Free Online Interactive Tool">
+  <meta property="og:description" content="Analyze and interactively explore the hidden details of URLs to uncover potential phishing indicators in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PhishDetective: Suspicious Link Investigator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Analyze and interactively explore the hidden details of URLs to uncover potential phishing indicators in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PhishDetective: Suspicious Link Investigator</h1>
+    <p class="seo-subtitle">Analyze and interactively explore the hidden details of URLs to uncover potential phishing indicators in real-time.</p>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #121212;
+    color: #e0e0e0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  #tool-app {
+    width: 80%;
+    max-width: 600px;
+    background: #1e1e1e;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  }
+  input[type="text"], button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    border: 1px solid #333;
+    background: #2b2b2b;
+    color: #e0e0e0;
+    font-size: 16px;
+    outline: none;
+  }
+  button {
+    cursor: pointer;
+    background: #4caf50;
+    border-color: #4caf50;
+    font-weight: bold;
+    transition: background 0.3s ease;
+  }
+  button:hover {
+    background: #45a049;
+  }
+  .results {
+    margin-top: 20px;
+  }
+  .results p {
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 4px;
+    background: #333;
+  }
+  .flag {
+    color: #ff5722;
+    font-weight: bold;
+  }
+  .safe {
+    color: #4caf50;
+    font-weight: bold;
+  }
+</style>
+<div id="tool-app">
+  <h2>PhishDetective</h2>
+  <p>Enter a URL to uncover potential phishing risks and hidden details:</p>
+  <input id="url-input" type="text" placeholder="Enter URL (e.g., http://example.com)">
+  <button onclick="analyzeURL()">Analyze URL</button>
+  <div class="results" id="results"></div>
+</div>
+<script>
+  function analyzeURL() {
+    const urlInput = document.getElementById("url-input").value.trim();
+    const resultsDiv = document.getElementById("results");
+    resultsDiv.innerHTML = ""; // Clear previous results
+
+    if (!urlInput.startsWith("http://") && !urlInput.startsWith("https://")) {
+      resultsDiv.innerHTML = '<p class="flag">Error: URL must start with "http://" or "https://".</p>';
+      return;
+    }
+
+    try {
+      const url = new URL(urlInput);
+
+      // Extract details
+      const domain = url.hostname;
+      const path = url.pathname;
+      const query = url.search;
+      const suspiciousPatterns = ["login", "verify", "update", "secure", "bank"];
+      const flagMessages = [];
+
+      // Check for suspicious keywords
+      suspiciousPatterns.forEach(keyword => {
+        if (domain.includes(keyword) || path.includes(keyword) || query.includes(keyword)) {
+          flagMessages.push(`Possible phishing keyword detected: "${keyword}"`);
+        }
+      });
+
+      // Check for HTTP instead of HTTPS
+      if (url.protocol !== "https:") {
+        flagMessages.push("Connection is not secure (uses HTTP instead of HTTPS).");
+      }
+
+      // Display results
+      resultsDiv.innerHTML += `<p><b>Domain:</b> ${domain}</p>`;
+      resultsDiv.innerHTML += `<p><b>Path:</b> ${path || "/"}</p>`;
+      resultsDiv.innerHTML += `<p><b>Query:</b> ${query || "None"}</p>`;
+
+      if (flagMessages.length > 0) {
+        flagMessages.forEach(msg => {
+          resultsDiv.innerHTML += `<p class="flag">${msg}</p>`;
+        });
+      } else {
+        resultsDiv.innerHTML += `<p class="safe">No suspicious patterns detected. URL seems safe.</p>`;
+      }
+
+    } catch (error) {
+      resultsDiv.innerHTML = '<p class="flag">Error: Invalid URL format.</p>';
+    }
+  }
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

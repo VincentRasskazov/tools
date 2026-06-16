@@ -1,0 +1,193 @@
+---
+layout: null
+title: "WordWeaver: Interactive Storyline Builder"
+category: "Writing"
+description: "A visually dynamic tool that lets users craft engaging storylines by connecting character arcs, plot points, and themes through an interactive drag-and-drop web."
+permalink: "/tools/daily-20260616-19-wordweaver-interactive-storyline-builder.html"
+generated_by: "api-true-ai"
+generated_date: "20260616"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordWeaver: Interactive Storyline Builder | Free Online Interactive Tool</title>
+  <meta name="description" content="A visually dynamic tool that lets users craft engaging storylines by connecting character arcs, plot points, and themes through an interactive drag-and-drop web. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="WordWeaver: Interactive Storyline Builder | Free Online Interactive Tool">
+  <meta property="og:description" content="A visually dynamic tool that lets users craft engaging storylines by connecting character arcs, plot points, and themes through an interactive drag-and-drop web. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WordWeaver: Interactive Storyline Builder | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A visually dynamic tool that lets users craft engaging storylines by connecting character arcs, plot points, and themes through an interactive drag-and-drop web. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>WordWeaver: Interactive Storyline Builder</h1>
+    <p class="seo-subtitle">A visually dynamic tool that lets users craft engaging storylines by connecting character arcs, plot points, and themes through an interactive drag-and-drop web.</p>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  #tool-app {
+    width: 90%;
+    max-width: 800px;
+    height: 600px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+  }
+  #canvas {
+    width: 100%;
+    height: 100%;
+  }
+  #controls {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    gap: 10px;
+  }
+  .btn {
+    padding: 8px 16px;
+    background: #0078ff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .btn:hover {
+    background: #005fcc;
+  }
+</style>
+<div id="tool-app">
+  <div id="controls">
+    <button class="btn" id="add-node">Add Node</button>
+    <button class="btn" id="clear-canvas">Clear</button>
+  </div>
+  <canvas id="canvas"></canvas>
+</div>
+<script>
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = canvas.clientWidth;
+  canvas.height = canvas.clientHeight;
+
+  let nodes = [];
+  let connections = [];
+  let draggingNode = null;
+  let offsetX, offsetY;
+
+  function drawCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw connections
+    ctx.strokeStyle = '#888';
+    ctx.lineWidth = 2;
+    connections.forEach(conn => {
+      const [from, to] = conn;
+      ctx.beginPath();
+      ctx.moveTo(from.x, from.y);
+      ctx.lineTo(to.x, to.y);
+      ctx.stroke();
+    });
+
+    // Draw nodes
+    nodes.forEach(node => {
+      ctx.fillStyle = '#0078ff';
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, 20, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = 'white';
+      ctx.font = 'bold 14px Arial';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(node.label, node.x, node.y);
+    });
+  }
+
+  function addNode() {
+    const node = {
+      x: Math.random() * (canvas.width - 100) + 50,
+      y: Math.random() * (canvas.height - 100) + 50,
+      label: `N${nodes.length + 1}`,
+    };
+    nodes.push(node);
+    drawCanvas();
+  }
+
+  function clearCanvas() {
+    nodes = [];
+    connections = [];
+    drawCanvas();
+  }
+
+  function getNodeAt(x, y) {
+    return nodes.find(node => Math.sqrt((node.x - x) ** 2 + (node.y - y) ** 2) < 20);
+  }
+
+  canvas.addEventListener('mousedown', e => {
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+
+    const node = getNodeAt(mouseX, mouseY);
+    if (node) {
+      draggingNode = node;
+      offsetX = mouseX - node.x;
+      offsetY = mouseY - node.y;
+    }
+  });
+
+  canvas.addEventListener('mousemove', e => {
+    if (draggingNode) {
+      const rect = canvas.getBoundingClientRect();
+      draggingNode.x = e.clientX - rect.left - offsetX;
+      draggingNode.y = e.clientY - rect.top - offsetY;
+      drawCanvas();
+    }
+  });
+
+  canvas.addEventListener('mouseup', e => {
+    if (draggingNode) {
+      const rect = canvas.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+
+      const toNode = getNodeAt(mouseX, mouseY);
+      if (toNode && toNode !== draggingNode) {
+        connections.push([draggingNode, toNode]);
+      }
+      draggingNode = null;
+      drawCanvas();
+    }
+  });
+
+  document.getElementById('add-node').addEventListener('click', addNode);
+  document.getElementById('clear-canvas').addEventListener('click', clearCanvas);
+
+  drawCanvas();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
