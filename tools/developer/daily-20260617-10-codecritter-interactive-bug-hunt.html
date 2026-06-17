@@ -1,0 +1,108 @@
+---
+layout: null
+title: "CodeCritter: Interactive Bug Hunt"
+category: "Developer"
+description: "An interactive debugging mini-game where developers race against time to fix randomized code bugs in a simulated real-world project."
+permalink: "/tools/daily-20260617-10-codecritter-interactive-bug-hunt.html"
+generated_by: "api-true-ai"
+generated_date: "20260617"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeCritter: Interactive Bug Hunt | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive debugging mini-game where developers race against time to fix randomized code bugs in a simulated real-world project. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CodeCritter: Interactive Bug Hunt | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive debugging mini-game where developers race against time to fix randomized code bugs in a simulated real-world project. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CodeCritter: Interactive Bug Hunt | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive debugging mini-game where developers race against time to fix randomized code bugs in a simulated real-world project. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CodeCritter: Interactive Bug Hunt</h1>
+    <p class="seo-subtitle">An interactive debugging mini-game where developers race against time to fix randomized code bugs in a simulated real-world project.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: #1e1e2f; color: #f4f4f4; margin: 0; overflow: hidden; }  
+  #tool-app { padding: 20px; max-width: 900px; margin: auto; }  
+  .bug-line { margin: 5px 0; padding: 10px; background: #2a2a3b; border-radius: 5px; display: flex; justify-content: space-between; }  
+  button { background: #56ccf2; color: #1e1e2f; border: none; padding: 8px 12px; border-radius: 3px; cursor: pointer; }  
+  button:hover { background: #2d9cdb; }  
+  .highlight { color: #eb5757; font-weight: bold; }  
+  .timer { font-size: 24px; margin-bottom: 10px; text-align: center; }  
+</style>  
+<div id="tool-app">  
+  <div class="timer">Time Left: <span id="time-left">120</span>s</div>  
+  <div id="instruction">Locate and fix the bugs in the code snippets below!</div>  
+  <div id="code-container"></div>  
+</div>  
+<script>  
+// JavaScript Logic  
+const bugs = [  
+  { id: 1, line: 'function add(a, b) { return a - b; }', fixed: 'function add(a, b) { return a + b; }' },  
+  { id: 2, line: 'const greet = ["Hello", "World"].join(".");', fixed: 'const greet = ["Hello", "World"].join(" ");' },  
+  { id: 3, line: 'let isDone = true; if (isDone = false) { doSomething(); }', fixed: 'let isDone = true; if (isDone === false) { doSomething(); }' },  
+  { id: 4, line: 'const pi = 3.14; pi = 3.14159;', fixed: 'let pi = 3.14; pi = 3.14159;' }  
+];  
+  
+let timeLeft = 120;  
+let score = 0;  
+  
+function startGame() {  
+  const container = document.getElementById('code-container');  
+  bugs.forEach(bug => {  
+    const div = document.createElement('div');  
+    div.className = 'bug-line';  
+    div.innerHTML = `  
+      <span class="bug-code">${bug.line}</span>  
+      <button onclick="fixBug(${bug.id})">Fix</button>  
+    `;  
+    div.setAttribute('data-id', bug.id);  
+    container.appendChild(div);  
+  });  
+  startTimer();  
+}  
+  
+function fixBug(id) {  
+  const bug = bugs.find(b => b.id === id);  
+  const element = document.querySelector(`.bug-line[data-id="${id}"]`);  
+  if (element) {  
+    const codeSpan = element.querySelector('.bug-code');  
+    codeSpan.innerHTML = `<span class="highlight">${bug.fixed}</span>`;  
+    element.querySelector('button').disabled = true;  
+    score++;  
+  }  
+}  
+  
+function startTimer() {  
+  const timerElement = document.getElementById('time-left');  
+  const interval = setInterval(() => {  
+    timeLeft--;  
+    timerElement.innerText = timeLeft;  
+    if (timeLeft === 0) {  
+      clearInterval(interval);  
+      alert(`Time's up! Your score: ${score}/${bugs.length}`);  
+    }  
+  }, 1000);  
+}  
+  
+startGame();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,186 @@
+---
+layout: null
+title: "CipherCraft: Interactive Cryptography Sandbox"
+category: "Education"
+description: "A hands-on tool that lets users explore, create, and break classic ciphers like Caesar, Vigenère, and Transposition while learning cryptographic concepts."
+permalink: "/tools/daily-20260617-20-ciphercraft-interactive-cryptography-sandbox.html"
+generated_by: "api-true-ai"
+generated_date: "20260617"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CipherCraft: Interactive Cryptography Sandbox | Free Online Interactive Tool</title>
+  <meta name="description" content="A hands-on tool that lets users explore, create, and break classic ciphers like Caesar, Vigenère, and Transposition while learning cryptographic concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CipherCraft: Interactive Cryptography Sandbox | Free Online Interactive Tool">
+  <meta property="og:description" content="A hands-on tool that lets users explore, create, and break classic ciphers like Caesar, Vigenère, and Transposition while learning cryptographic concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CipherCraft: Interactive Cryptography Sandbox | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A hands-on tool that lets users explore, create, and break classic ciphers like Caesar, Vigenère, and Transposition while learning cryptographic concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CipherCraft: Interactive Cryptography Sandbox</h1>
+    <p class="seo-subtitle">A hands-on tool that lets users explore, create, and break classic ciphers like Caesar, Vigenère, and Transposition while learning cryptographic concepts.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+  background: linear-gradient(135deg, #1e3c72, #2a5298);  
+  color: #fff;  
+}  
+#tool-app {  
+  background: rgba(255, 255, 255, 0.1);  
+  border-radius: 10px;  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  
+  padding: 20px;  
+  max-width: 600px;  
+  width: 100%;  
+  text-align: center;  
+}  
+button {  
+  background: #ff6b6b;  
+  border: none;  
+  color: #fff;  
+  padding: 10px 20px;  
+  cursor: pointer;  
+  font-size: 16px;  
+  margin: 5px;  
+  border-radius: 5px;  
+  transition: background 0.3s ease;  
+}  
+button:hover {  
+  background: #ff4757;  
+}  
+textarea, select {  
+  width: calc(100% - 20px);  
+  margin-bottom: 10px;  
+  padding: 10px;  
+  border: 1px solid #ddd;  
+  border-radius: 5px;  
+  background: #f9f9f9;  
+  color: #333;  
+}  
+textarea {  
+  resize: none;  
+  height: 100px;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>CipherCraft</h1>  
+  <p>Select a cipher type, input a message, and choose to encrypt or decrypt to see the magic of cryptography in action!</p>  
+  <select id="cipher-type">  
+    <option value="caesar">Caesar Cipher</option>  
+    <option value="vigenere">Vigenère Cipher</option>  
+    <option value="transposition">Transposition Cipher</option>  
+  </select>  
+  <textarea id="input-text" placeholder="Enter your message here..."></textarea>  
+  <textarea id="key" placeholder="Enter key (if required)"></textarea>  
+  <div>  
+    <button id="encrypt">Encrypt</button>  
+    <button id="decrypt">Decrypt</button>  
+  </div>  
+  <h3>Result</h3>  
+  <textarea id="output-text" readonly placeholder="Your result will appear here..."></textarea>  
+</div>  
+<script>  
+// JavaScript logic for CipherCraft  
+function caesarCipher(str, shift, decrypt = false) {  
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';  
+  const offset = decrypt ? -shift : shift;  
+  return str  
+    .toUpperCase()  
+    .split('')  
+    .map(char => {  
+      const idx = alphabet.indexOf(char);  
+      if (idx === -1) return char;  
+      return alphabet[(idx + offset + 26) % 26];  
+    })  
+    .join('');  
+}  
+
+function vigenereCipher(str, key, decrypt = false) {  
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';  
+  str = str.toUpperCase();  
+  key = key.toUpperCase();  
+  let keyIndex = 0;  
+  return str  
+    .split('')  
+    .map(char => {  
+      const idx = alphabet.indexOf(char);  
+      if (idx === -1) return char;  
+      const shift = alphabet.indexOf(key[keyIndex % key.length]) * (decrypt ? -1 : 1);  
+      keyIndex++;  
+      return alphabet[(idx + shift + 26) % 26];  
+    })  
+    .join('');  
+}  
+
+function transpositionCipher(str, key, decrypt = false) {  
+  const rows = Math.ceil(str.length / key);  
+  if (decrypt) {  
+    const columns = key;  
+    const grid = Array.from({ length: rows }, () => '');  
+    let idx = 0;  
+    for (let col = 0; col < columns; col++) {  
+      for (let row = 0; row < rows; row++) {  
+        if (idx < str.length) {  
+          grid[row] += str[idx];  
+          idx++;  
+        }  
+      }  
+    }  
+    return grid.join('');  
+  } else {  
+    const grid = Array.from({ length: key }, () => '');  
+    for (let i = 0; i < str.length; i++) {  
+      grid[i % key] += str[i];  
+    }  
+    return grid.join('');  
+  }  
+}  
+
+document.getElementById('encrypt').addEventListener('click', () => {  
+  const type = document.getElementById('cipher-type').value;  
+  const text = document.getElementById('input-text').value;  
+  const key = document.getElementById('key').value;  
+  let result = '';  
+  if (type === 'caesar') result = caesarCipher(text, parseInt(key, 10));  
+  if (type === 'vigenere') result = vigenereCipher(text, key);  
+  if (type === 'transposition') result = transpositionCipher(text, parseInt(key, 10));  
+  document.getElementById('output-text').value = result;  
+});  
+
+document.getElementById('decrypt').addEventListener('click', () => {  
+  const type = document.getElementById('cipher-type').value;  
+  const text = document.getElementById('input-text').value;  
+  const key = document.getElementById('key').value;  
+  let result = '';  
+  if (type === 'caesar') result = caesarCipher(text, parseInt(key, 10), true);  
+  if (type === 'vigenere') result = vigenereCipher(text, key, true);  
+  if (type === 'transposition') result = transpositionCipher(text, parseInt(key, 10), true);  
+  document.getElementById('output-text').value = result;  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

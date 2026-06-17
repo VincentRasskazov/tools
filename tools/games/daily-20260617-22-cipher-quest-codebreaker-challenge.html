@@ -1,0 +1,140 @@
+---
+layout: null
+title: "Cipher Quest: Codebreaker Challenge"
+category: "Games"
+description: "A dynamic mini-game where players decode encrypted messages under time pressure using various cryptographic techniques."
+permalink: "/tools/daily-20260617-22-cipher-quest-codebreaker-challenge.html"
+generated_by: "api-true-ai"
+generated_date: "20260617"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cipher Quest: Codebreaker Challenge | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic mini-game where players decode encrypted messages under time pressure using various cryptographic techniques. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Cipher Quest: Codebreaker Challenge | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic mini-game where players decode encrypted messages under time pressure using various cryptographic techniques. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cipher Quest: Codebreaker Challenge | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic mini-game where players decode encrypted messages under time pressure using various cryptographic techniques. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Cipher Quest: Codebreaker Challenge</h1>
+    <p class="seo-subtitle">A dynamic mini-game where players decode encrypted messages under time pressure using various cryptographic techniques.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(135deg, #141E30, #243B55);  
+  color: #F5F5F5;  
+  text-align: center;  
+  margin: 0;  
+  padding: 0;  
+}  
+#tool-app {  
+  padding: 20px;  
+}  
+#cipher-box {  
+  margin: 20px auto;  
+  background: #1E2A38;  
+  padding: 20px;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);  
+  display: inline-block;  
+}  
+button {  
+  padding: 10px 20px;  
+  background: #50C878;  
+  border: none;  
+  border-radius: 5px;  
+  color: white;  
+  font-weight: bold;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+button:hover {  
+  background: #45AD68;  
+}  
+input[type="text"] {  
+  padding: 10px;  
+  width: 80%;  
+  margin-bottom: 10px;  
+  border: 1px solid #ddd;  
+  border-radius: 5px;  
+}  
+#timer {  
+  font-size: 1.5em;  
+  margin: 15px 0;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Cipher Quest</h1>  
+  <div id="cipher-box">  
+    <p><strong>Encrypted Message:</strong> <span id="encrypted-message"></span></p>  
+    <input type="text" id="user-input" placeholder="Type your decoded message here" />  
+    <button onclick="checkAnswer()">Submit</button>  
+    <p id="timer">⏱ Time Left: <span id="time-left">30</span>s</p>  
+    <p id="feedback"></p>  
+  </div>  
+</div>  
+<script>  
+const encryptedMessages = [  
+  { plain: "HELLO", cipher: "URYYB", hint: "ROT13 Encryption" },  
+  { plain: "WORLD", cipher: "DLROW", hint: "Reversed Text" },  
+  { plain: "SECURE", cipher: "5 3 3 21 18 5", hint: "Alphabet Position" }  
+];  
+
+let currentMessage = {};  
+let timer;  
+let timeLeft = 30;  
+
+function startGame() {  
+  const randomIndex = Math.floor(Math.random() * encryptedMessages.length);  
+  currentMessage = encryptedMessages[randomIndex];  
+  document.getElementById("encrypted-message").innerText = `${currentMessage.cipher} (Hint: ${currentMessage.hint})`;  
+  document.getElementById("feedback").innerText = "";  
+  document.getElementById("user-input").value = "";  
+  timeLeft = 30;  
+  document.getElementById("time-left").innerText = timeLeft;  
+  clearInterval(timer);  
+  timer = setInterval(() => {  
+    timeLeft--;  
+    document.getElementById("time-left").innerText = timeLeft;  
+    if (timeLeft <= 0) {  
+      clearInterval(timer);  
+      document.getElementById("feedback").innerText = "⏰ Time's up! The correct answer was: " + currentMessage.plain;  
+    }  
+  }, 1000);  
+}  
+
+function checkAnswer() {  
+  const userAnswer = document.getElementById("user-input").value.toUpperCase();  
+  if (userAnswer === currentMessage.plain) {  
+    document.getElementById("feedback").innerText = "✅ Correct! Starting next challenge...";  
+    setTimeout(startGame, 2000);  
+  } else {  
+    document.getElementById("feedback").innerText = "❌ Incorrect. Try again!";  
+  }  
+}  
+
+// Start the first challenge  
+startGame();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
