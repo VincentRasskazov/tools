@@ -1,0 +1,139 @@
+---
+layout: null
+title: "Data Atlas: Interactive Relationship Mapper"
+category: "Data"
+description: "Visualize, connect, and interact with complex data relationships in a gamified 3D environment."
+permalink: "/tools/daily-20260618-20-data-atlas-interactive-relationship-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260618"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Atlas: Interactive Relationship Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize, connect, and interact with complex data relationships in a gamified 3D environment. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Atlas: Interactive Relationship Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize, connect, and interact with complex data relationships in a gamified 3D environment. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Atlas: Interactive Relationship Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize, connect, and interact with complex data relationships in a gamified 3D environment. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Atlas: Interactive Relationship Mapper</h1>
+    <p class="seo-subtitle">Visualize, connect, and interact with complex data relationships in a gamified 3D environment.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: linear-gradient(135deg, #1e3c72, #2a5298); color: #fff; }  
+  #tool-app { width: 80%; height: 80%; border: 2px solid #fff; border-radius: 10px; background: #1c1c1c; display: flex; flex-direction: column; justify-content: space-between; padding: 20px; }  
+  #canvas { width: 100%; height: 80%; background: #000; border: 1px dashed #fff; border-radius: 5px; }  
+  .controls { display: flex; justify-content: space-between; }  
+  button { padding: 10px 20px; font-size: 16px; color: #fff; background: #2a5298; border: none; border-radius: 5px; cursor: pointer; transition: background 0.3s; }  
+  button:hover { background: #1e3c72; }  
+</style>  
+<div id="tool-app">  
+  <div id="canvas"></div>  
+  <div class="controls">  
+    <button id="addNode">Add Node</button>  
+    <button id="addConnection">Add Connection</button>  
+    <button id="reset">Reset</button>  
+  </div>  
+</div>  
+<script>  
+function generateRandomColor() {  
+  return `hsl(${Math.random() * 360}, 70%, 50%)`;  
+}  
+
+let dataNodes = [];  
+let connections = [];  
+const canvas = document.getElementById("canvas");  
+
+function render() {  
+  canvas.innerHTML = "";  
+
+  dataNodes.forEach((node, index) => {  
+    const el = document.createElement("div");  
+    el.style.position = "absolute";  
+    el.style.top = node.y + "px";  
+    el.style.left = node.x + "px";  
+    el.style.width = "20px";  
+    el.style.height = "20px";  
+    el.style.borderRadius = "50%";  
+    el.style.background = node.color;  
+    el.style.cursor = "grab";  
+    el.title = `Node ${index + 1}`;  
+    el.onmousedown = (e) => startDragging(e, node);  
+    canvas.appendChild(el);  
+  });  
+
+  connections.forEach((conn) => {  
+    const line = document.createElement("div");  
+    line.style.position = "absolute";  
+    line.style.width = Math.sqrt(  
+      Math.pow(conn.target.x - conn.source.x, 2) +   
+      Math.pow(conn.target.y - conn.source.y, 2)  
+    ) + "px";  
+    line.style.height = "2px";  
+    line.style.background = "#fff";  
+    line.style.transformOrigin = "0 50%";  
+    line.style.transform = `rotate(${Math.atan2(conn.target.y - conn.source.y, conn.target.x - conn.source.x)}rad)`;  
+    line.style.left = conn.source.x + 10 + "px";  
+    line.style.top = conn.source.y + 10 + "px";  
+    canvas.appendChild(line);  
+  });  
+}  
+
+function startDragging(e, node) {  
+  const onMouseMove = (moveEvent) => {  
+    node.x = moveEvent.clientX - canvas.offsetLeft - 10;  
+    node.y = moveEvent.clientY - canvas.offsetTop - 10;  
+    render();  
+  };  
+
+  const onMouseUp = () => {  
+    document.removeEventListener("mousemove", onMouseMove);  
+    document.removeEventListener("mouseup", onMouseUp);  
+  };  
+
+  document.addEventListener("mousemove", onMouseMove);  
+  document.addEventListener("mouseup", onMouseUp);  
+}  
+
+document.getElementById("addNode").addEventListener("click", () => {  
+  dataNodes.push({ x: Math.random() * canvas.offsetWidth, y: Math.random() * canvas.offsetHeight, color: generateRandomColor() });  
+  render();  
+});  
+
+document.getElementById("addConnection").addEventListener("click", () => {  
+  if (dataNodes.length < 2) return alert("Need at least 2 nodes to connect!");  
+  const source = dataNodes[Math.floor(Math.random() * dataNodes.length)];  
+  const target = dataNodes[Math.floor(Math.random() * dataNodes.length)];  
+  if (source !== target) connections.push({ source, target });  
+  render();  
+});  
+
+document.getElementById("reset").addEventListener("click", () => {  
+  dataNodes = [];  
+  connections = [];  
+  render();  
+});  
+
+render();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

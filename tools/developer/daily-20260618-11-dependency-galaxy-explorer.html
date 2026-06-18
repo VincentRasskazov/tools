@@ -1,0 +1,171 @@
+---
+layout: null
+title: "Dependency Galaxy Explorer"
+category: "Developer"
+description: "An interactive 3D visualization tool to explore and analyze relationships and dependencies between your project's libraries and modules."
+permalink: "/tools/daily-20260618-11-dependency-galaxy-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260618"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dependency Galaxy Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive 3D visualization tool to explore and analyze relationships and dependencies between your project's libraries and modules. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Dependency Galaxy Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive 3D visualization tool to explore and analyze relationships and dependencies between your project's libraries and modules. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dependency Galaxy Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive 3D visualization tool to explore and analyze relationships and dependencies between your project's libraries and modules. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Dependency Galaxy Explorer</h1>
+    <p class="seo-subtitle">An interactive 3D visualization tool to explore and analyze relationships and dependencies between your project's libraries and modules.</p>
+    <style>  
+body {  
+  margin: 0;  
+  font-family: Arial, sans-serif;  
+}  
+#tool-app {  
+  width: 100vw;  
+  height: 100vh;  
+  background: radial-gradient(circle, #1e1e2f, #141424);  
+  overflow: hidden;  
+  position: relative;  
+}  
+#info-box {  
+  position: absolute;  
+  bottom: 20px;  
+  left: 20px;  
+  padding: 10px 15px;  
+  background: rgba(0, 0, 0, 0.6);  
+  color: white;  
+  border-radius: 8px;  
+  font-size: 0.9rem;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);  
+}  
+.node {  
+  fill: #ff6f61;  
+  transition: r 0.3s ease, fill 0.3s ease;  
+}  
+.node:hover {  
+  fill: #ffd26f;  
+}  
+.link {  
+  stroke: rgba(255, 255, 255, 0.5);  
+  stroke-width: 1.5px;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="info-box">Hover over nodes to explore dependencies.</div>  
+</div>  
+<script src="https://d3js.org/d3.v7.min.js"></script>  
+<script>  
+const width = window.innerWidth;  
+const height = window.innerHeight;  
+
+const svg = d3.select("#tool-app")  
+  .append("svg")  
+  .attr("width", width)  
+  .attr("height", height);  
+
+const simulation = d3.forceSimulation()  
+  .force("link", d3.forceLink().id(d => d.id).distance(100))  
+  .force("charge", d3.forceManyBody().strength(-300))  
+  .force("center", d3.forceCenter(width / 2, height / 2));  
+
+const data = {  
+  nodes: [  
+    { id: "App" },  
+    { id: "Library A" },  
+    { id: "Library B" },  
+    { id: "Module 1" },  
+    { id: "Module 2" },  
+    { id: "Module 3" }  
+  ],  
+  links: [  
+    { source: "App", target: "Library A" },  
+    { source: "App", target: "Library B" },  
+    { source: "Library A", target: "Module 1" },  
+    { source: "Library A", target: "Module 2" },  
+    { source: "Library B", target: "Module 3" }  
+  ]  
+};  
+
+const link = svg.append("g")  
+  .attr("class", "links")  
+  .selectAll("line")  
+  .data(data.links)  
+  .enter().append("line")  
+  .attr("class", "link");  
+
+const node = svg.append("g")  
+  .attr("class", "nodes")  
+  .selectAll("circle")  
+  .data(data.nodes)  
+  .enter().append("circle")  
+  .attr("class", "node")  
+  .attr("r", 10)  
+  .call(d3.drag()  
+    .on("start", dragstarted)  
+    .on("drag", dragged)  
+    .on("end", dragended));  
+
+node.append("title")  
+  .text(d => d.id);  
+
+simulation  
+  .nodes(data.nodes)  
+  .on("tick", ticked);  
+
+simulation.force("link")  
+  .links(data.links);  
+
+function ticked() {  
+  link  
+    .attr("x1", d => d.source.x)  
+    .attr("y1", d => d.source.y)  
+    .attr("x2", d => d.target.x)  
+    .attr("y2", d => d.target.y);  
+
+  node  
+    .attr("cx", d => d.x)  
+    .attr("cy", d => d.y);  
+}  
+
+function dragstarted(event, d) {  
+  if (!event.active) simulation.alphaTarget(0.3).restart();  
+  d.fx = d.x;  
+  d.fy = d.y;  
+}  
+
+function dragged(event, d) {  
+  d.fx = event.x;  
+  d.fy = event.y;  
+}  
+
+function dragended(event, d) {  
+  if (!event.active) simulation.alphaTarget(0);  
+  d.fx = null;  
+  d.fy = null;  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

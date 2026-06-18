@@ -1,0 +1,148 @@
+---
+layout: null
+title: "DevCircuit: The Debugging Flow Simulator"
+category: "Developer"
+description: "Navigate a dynamic circuit board to debug code by solving interactive puzzles, tracing variable flows, and identifying logical errors in a gamified environment."
+permalink: "/tools/daily-20260618-24-devcircuit-the-debugging-flow-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260618"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevCircuit: The Debugging Flow Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate a dynamic circuit board to debug code by solving interactive puzzles, tracing variable flows, and identifying logical errors in a gamified environment. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DevCircuit: The Debugging Flow Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate a dynamic circuit board to debug code by solving interactive puzzles, tracing variable flows, and identifying logical errors in a gamified environment. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DevCircuit: The Debugging Flow Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate a dynamic circuit board to debug code by solving interactive puzzles, tracing variable flows, and identifying logical errors in a gamified environment. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DevCircuit: The Debugging Flow Simulator</h1>
+    <p class="seo-subtitle">Navigate a dynamic circuit board to debug code by solving interactive puzzles, tracing variable flows, and identifying logical errors in a gamified environment.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  background: linear-gradient(to bottom right, #1e3c72, #2a5298);  
+  margin: 0;  
+}  
+#tool-app {  
+  width: 80%;  
+  max-width: 1000px;  
+  background: #ffffff;  
+  border-radius: 12px;  
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);  
+  padding: 20px;  
+}  
+#game-container {  
+  display: flex;  
+  flex-wrap: wrap;  
+  gap: 12px;  
+}  
+.debug-node {  
+  width: 80px;  
+  height: 80px;  
+  border: 2px solid #4CAF50;  
+  border-radius: 8px;  
+  background: #e8f5e9;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  cursor: pointer;  
+  transition: transform 0.2s ease-in-out;  
+}  
+.debug-node:hover {  
+  transform: scale(1.1);  
+  background: #81c784;  
+}  
+#debug-output {  
+  margin-top: 20px;  
+  font-size: 18px;  
+  color: #333;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>DevCircuit: Debugging Flow Simulator</h1>  
+  <p>Trace the code through nodes, solve puzzles, and debug errors in this interactive logic game!</p>  
+  <div id="game-container"></div>  
+  <div id="debug-output"></div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const app = document.getElementById('game-container');  
+const debugOutput = document.getElementById('debug-output');  
+let gameState = {  
+  nodes: [],  
+  currentNode: null,  
+  steps: 0,  
+};  
+
+function createNode(id, type, solution) {  
+  const node = document.createElement('div');  
+  node.classList.add('debug-node');  
+  node.textContent = type === 'error' ? '⚠️' : '🟢';  
+  node.dataset.id = id;  
+  node.dataset.type = type;  
+  node.dataset.solution = solution;  
+  node.onclick = () => handleNodeClick(id);  
+  app.appendChild(node);  
+  return { id, type, solution, visited: false };  
+}  
+
+function handleNodeClick(id) {  
+  const node = gameState.nodes.find((n) => n.id === id);  
+  if (!node.visited) {  
+    gameState.steps++;  
+    node.visited = true;  
+    debugOutput.textContent = `You visited node ${id}. Steps taken: ${gameState.steps}`;  
+
+    if (node.type === 'error') {  
+      alert(`Error encountered! Solve this: ${node.solution}`);  
+    }  
+
+    // Simulate flow  
+    if (id < gameState.nodes.length - 1) {  
+      gameState.currentNode = gameState.nodes[id + 1];  
+    } else {  
+      debugOutput.textContent = `🎉 Debugging Complete! Total steps: ${gameState.steps}`;  
+    }  
+  }  
+}  
+
+function initializeGame() {  
+  const nodeCount = 10;  
+  for (let i = 0; i < nodeCount; i++) {  
+    const type = Math.random() > 0.7 ? 'error' : 'normal';  
+    const solution = type === 'error' ? `Solve ${i} + 1 = ?` : '';  
+    gameState.nodes.push(createNode(i, type, solution));  
+  }  
+  gameState.currentNode = gameState.nodes[0];  
+}  
+
+initializeGame();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

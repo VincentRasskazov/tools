@@ -1,0 +1,109 @@
+---
+layout: null
+title: "PhishNet Defender: Interactive Email Threat Simulator"
+category: "Cybersecurity"
+description: "A mini-game where users interactively analyze simulated emails to identify phishing attempts and improve their cybersecurity skills."
+permalink: "/tools/daily-20260618-25-phishnet-defender-interactive-email-threat-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260618"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhishNet Defender: Interactive Email Threat Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="A mini-game where users interactively analyze simulated emails to identify phishing attempts and improve their cybersecurity skills. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PhishNet Defender: Interactive Email Threat Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="A mini-game where users interactively analyze simulated emails to identify phishing attempts and improve their cybersecurity skills. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PhishNet Defender: Interactive Email Threat Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A mini-game where users interactively analyze simulated emails to identify phishing attempts and improve their cybersecurity skills. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PhishNet Defender: Interactive Email Threat Simulator</h1>
+    <p class="seo-subtitle">A mini-game where users interactively analyze simulated emails to identify phishing attempts and improve their cybersecurity skills.</p>
+    <style>  
+  body { font-family: 'Arial', sans-serif; background-color: #1e1e2f; color: #fff; margin: 0; padding: 0; }  
+  #tool-app { max-width: 800px; margin: 20px auto; padding: 20px; background: #282c3f; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }  
+  .email-list { list-style: none; padding: 0; }  
+  .email-item { padding: 20px; margin-bottom: 10px; background: #202433; border-radius: 4px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }  
+  .email-item:hover { transform: scale(1.05); box-shadow: 0 4px 15px rgba(0,0,0,0.4); }  
+  .email-details { display: none; background: #32364d; padding: 15px; border-radius: 4px; margin-top: 10px; }  
+  .analyze-btn { background: #4caf50; color: #fff; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin-top: 10px; }  
+  .result { margin-top: 15px; font-size: 1.2em; }  
+</style>  
+<div id="tool-app">  
+  <h1>PhishNet Defender</h1>  
+  <p>Click an email to inspect its details, then analyze it to determine if it's phishing or safe.</p>  
+  <ul class="email-list">  
+    <li class="email-item" data-id="1">Subject: "Account Verification Needed"</li>  
+    <li class="email-item" data-id="2">Subject: "Congratulations! You've Won"</li>  
+    <li class="email-item" data-id="3">Subject: "Your Invoice is Ready"</li>  
+  </ul>  
+  <div id="email-details" class="email-details"></div>  
+</div>  
+<script>  
+const emails = {  
+  1: {  
+    subject: "Account Verification Needed",  
+    sender: "security@bank.com",  
+    body: "Dear Customer, Please click this <a href='http://fakebank.com'>link</a> to verify your account.",  
+    isPhishing: true  
+  },  
+  2: {  
+    subject: "Congratulations! You've Won",  
+    sender: "promo@lottery.com",  
+    body: "You've won $1,000,000! Reply with your bank details to claim your prize.",  
+    isPhishing: true  
+  },  
+  3: {  
+    subject: "Your Invoice is Ready",  
+    sender: "billing@company.com",  
+    body: "Your recent purchase invoice is attached. Please review it and let us know if you have questions.",  
+    isPhishing: false  
+  }  
+};  
+
+document.querySelectorAll('.email-item').forEach(item => {  
+  item.addEventListener('click', () => {  
+    const emailId = item.getAttribute('data-id');  
+    const email = emails[emailId];  
+    const emailDetails = document.getElementById('email-details');  
+    emailDetails.innerHTML = `  
+      <h3>${email.subject}</h3>  
+      <p><strong>Sender:</strong> ${email.sender}</p>  
+      <p>${email.body}</p>  
+      <button class="analyze-btn" onclick="analyzeEmail(${emailId})">Analyze Email</button>  
+      <div class="result" id="result-${emailId}"></div>  
+    `;  
+    emailDetails.style.display = 'block';  
+  });  
+});  
+
+function analyzeEmail(id) {  
+  const result = document.getElementById(`result-${id}`);  
+  if (emails[id].isPhishing) {  
+    result.innerHTML = "<span style='color: red;'>⚠️ This email is a phishing attempt! Be cautious!</span>";  
+  } else {  
+    result.innerHTML = "<span style='color: green;'>✅ This email is safe.</span>";  
+  }  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
