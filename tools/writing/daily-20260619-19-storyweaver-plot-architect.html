@@ -1,0 +1,156 @@
+---
+layout: null
+title: "StoryWeaver: Plot Architect"
+category: "Writing"
+description: "A dynamic tool that lets users visually construct and analyze story arcs, character relationships, and pacing through an interactive drag-and-drop interface."
+permalink: "/tools/daily-20260619-19-storyweaver-plot-architect.html"
+generated_by: "api-true-ai"
+generated_date: "20260619"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StoryWeaver: Plot Architect | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic tool that lets users visually construct and analyze story arcs, character relationships, and pacing through an interactive drag-and-drop interface. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="StoryWeaver: Plot Architect | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic tool that lets users visually construct and analyze story arcs, character relationships, and pacing through an interactive drag-and-drop interface. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StoryWeaver: Plot Architect | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic tool that lets users visually construct and analyze story arcs, character relationships, and pacing through an interactive drag-and-drop interface. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>StoryWeaver: Plot Architect</h1>
+    <p class="seo-subtitle">A dynamic tool that lets users visually construct and analyze story arcs, character relationships, and pacing through an interactive drag-and-drop interface.</p>
+    <style>  
+  body { font-family: 'Arial', sans-serif; background-color: #f9f9f9; margin: 0; padding: 20px; }  
+  #tool-app { max-width: 900px; margin: auto; background: #fff; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); padding: 20px; }  
+  .node { display: inline-block; padding: 10px; margin: 10px; background-color: #f1f8ff; border: 2px solid #007acc; border-radius: 5px; cursor: pointer; }  
+  .node:hover { background-color: #dbeeff; }  
+  .connection { stroke: #007acc; stroke-width: 2; }  
+</style>  
+<div id="tool-app">  
+  <h1>StoryWeaver: Plot Architect</h1>  
+  <p>Drag and link components to craft the structure of your story:</p>  
+  <div style="display: flex; gap: 10px;">  
+    <button id="add-character">Add Character</button>  
+    <button id="add-plot">Add Plot Point</button>  
+    <button id="add-relationship">Add Relationship</button>  
+  </div>  
+  <svg id="canvas" width="100%" height="400" style="border: 1px solid #ccc; margin-top: 20px;">  
+    <!-- Dynamic elements will be added here -->  
+  </svg>  
+</div>  
+<script>  
+  const canvas = document.getElementById('canvas');  
+  let nodes = [];  
+  let connections = [];  
+
+  const createNode = (type, text) => {  
+    const newNode = {  
+      id: `node-${nodes.length}`,  
+      type,  
+      text,  
+      x: Math.random() * (canvas.clientWidth - 100),  
+      y: Math.random() * (canvas.clientHeight - 100),  
+    };  
+    nodes.push(newNode);  
+    renderNodes();  
+  };  
+
+  const createConnection = (fromId, toId) => {  
+    connections.push({ from: fromId, to: toId });  
+    renderConnections();  
+  };  
+
+  const renderNodes = () => {  
+    canvas.innerHTML = '';  
+    nodes.forEach(node => {  
+      const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');  
+      group.setAttribute('transform', `translate(${node.x}, ${node.y})`);  
+      group.setAttribute('class', 'node-group');  
+      group.setAttribute('id', node.id);  
+      group.setAttribute('draggable', true);  
+
+      const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');  
+      rect.setAttribute('width', 100);  
+      rect.setAttribute('height', 50);  
+      rect.setAttribute('fill', '#f1f8ff');  
+      rect.setAttribute('stroke', '#007acc');  
+      rect.setAttribute('rx', 8);  
+
+      const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');  
+      text.setAttribute('x', 50);  
+      text.setAttribute('y', 25);  
+      text.setAttribute('dominant-baseline', 'middle');  
+      text.setAttribute('text-anchor', 'middle');  
+      text.setAttribute('fill', '#007acc');  
+      text.textContent = node.text;  
+
+      group.appendChild(rect);  
+      group.appendChild(text);  
+
+      group.addEventListener('dragstart', (e) => {  
+        e.dataTransfer.setData('text/plain', node.id);  
+      });  
+      group.addEventListener('dblclick', () => {  
+        const target = prompt('Connect this node to which node ID?');  
+        if (target) createConnection(node.id, target);  
+      });  
+
+      canvas.appendChild(group);  
+    });  
+  };  
+
+  const renderConnections = () => {  
+    connections.forEach(connection => {  
+      const fromNode = nodes.find(n => n.id === connection.from);  
+      const toNode = nodes.find(n => n.id === connection.to);  
+
+      if (fromNode && toNode) {  
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');  
+        line.setAttribute('x1', fromNode.x + 50);  
+        line.setAttribute('y1', fromNode.y + 25);  
+        line.setAttribute('x2', toNode.x + 50);  
+        line.setAttribute('y2', toNode.y + 25);  
+        line.setAttribute('class', 'connection');  
+
+        canvas.insertBefore(line, canvas.firstChild);  
+      }  
+    });  
+  };  
+
+  document.getElementById('add-character').addEventListener('click', () => {  
+    const name = prompt('Enter character name:');  
+    if (name) createNode('character', name);  
+  });  
+
+  document.getElementById('add-plot').addEventListener('click', () => {  
+    const description = prompt('Enter plot point:');  
+    if (description) createNode('plot', description);  
+  });  
+
+  document.getElementById('add-relationship').addEventListener('click', () => {  
+    const from = prompt('Enter source node ID:');  
+    const to = prompt('Enter target node ID:');  
+    if (from && to) createConnection(from, to);  
+  });  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

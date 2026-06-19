@@ -1,0 +1,147 @@
+---
+layout: null
+title: "CodeCipher: Interactive Encryption Explorer"
+category: "Education"
+description: "Learn and experiment with classic and modern encryption techniques by encoding and decoding messages in real-time, while unlocking interactive challenges."
+permalink: "/tools/daily-20260619-02-codecipher-interactive-encryption-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260619"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeCipher: Interactive Encryption Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Learn and experiment with classic and modern encryption techniques by encoding and decoding messages in real-time, while unlocking interactive challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CodeCipher: Interactive Encryption Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Learn and experiment with classic and modern encryption techniques by encoding and decoding messages in real-time, while unlocking interactive challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CodeCipher: Interactive Encryption Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Learn and experiment with classic and modern encryption techniques by encoding and decoding messages in real-time, while unlocking interactive challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CodeCipher: Interactive Encryption Explorer</h1>
+    <p class="seo-subtitle">Learn and experiment with classic and modern encryption techniques by encoding and decoding messages in real-time, while unlocking interactive challenges.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f7fc; color: #333; }  
+  #tool-app { max-width: 900px; margin: 50px auto; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }  
+  h1 { text-align: center; font-size: 24px; margin-bottom: 20px; }  
+  .input-group { margin-bottom: 20px; }  
+  label { display: block; margin-bottom: 10px; font-weight: bold; }  
+  input, select, textarea { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; }  
+  button { background: #0078d4; color: white; border: none; padding: 10px 20px; font-size: 16px; border-radius: 4px; cursor: pointer; }  
+  button:hover { background: #005fa3; }  
+  .output { background: #f0f4fa; padding: 10px; border-radius: 4px; font-family: monospace; }  
+  .challenge { margin-top: 30px; background: #fdf8e4; padding: 15px; border: 1px solid #ffd700; border-radius: 4px; }  
+  .challenge h3 { margin: 0 0 10px 0; }  
+</style>  
+<div id="tool-app">  
+  <h1>CodeCipher: Interactive Encryption Explorer</h1>  
+  <div class="input-group">  
+    <label for="input-text">Enter your message:</label>  
+    <textarea id="input-text" rows="3" placeholder="Type your message here..."></textarea>  
+  </div>  
+  <div class="input-group">  
+    <label for="cipher-method">Choose an encryption method:</label>  
+    <select id="cipher-method">  
+      <option value="caesar">Caesar Cipher</option>  
+      <option value="vigenere">Vigenère Cipher</option>  
+      <option value="morse">Morse Code</option>  
+      <option value="reverse">Reverse Cipher</option>  
+    </select>  
+  </div>  
+  <div class="input-group" id="key-group">  
+    <label for="key-input">Enter a key (if applicable):</label>  
+    <input type="text" id="key-input" placeholder="E.g., shift number, keyword, etc.">  
+  </div>  
+  <button id="encrypt-btn">Encrypt Message</button>  
+  <div class="output" id="output-text"></div>  
+  <div class="challenge" id="challenge-box" style="display: none;">  
+    <h3>Challenge:</h3>  
+    <p id="challenge-text"></p>  
+  </div>  
+</div>  
+<script>  
+  const cipherMethods = {  
+    caesar: (text, key) => {  
+      const shift = parseInt(key) || 0;  
+      return text.replace(/[a-zA-Z]/g, char => {  
+        const base = char.charCodeAt(0) < 97 ? 65 : 97;  
+        return String.fromCharCode(((char.charCodeAt(0) - base + shift) % 26 + 26) % 26 + base);  
+      });  
+    },  
+    vigenere: (text, key) => {  
+      if (!key) return "Key required for Vigenère Cipher.";  
+      key = key.toUpperCase();  
+      let keyIndex = 0;  
+      return text.replace(/[a-zA-Z]/g, char => {  
+        const base = char.charCodeAt(0) < 97 ? 65 : 97;  
+        const shift = key.charCodeAt(keyIndex % key.length) - 65;  
+        keyIndex++;  
+        return String.fromCharCode(((char.charCodeAt(0) - base + shift) % 26 + 26) % 26 + base);  
+      });  
+    },  
+    morse: (text) => {  
+      const morseCode = {  
+        A: ".-", B: "-...", C: "-.-.", D: "-..", E: ".", F: "..-.", G: "--.",  
+        H: "....", I: "..", J: ".---", K: "-.-", L: ".-..", M: "--",  
+        N: "-.", O: "---", P: ".--.", Q: "--.-", R: ".-.", S: "...",  
+        T: "-", U: "..-", V: "...-", W: ".--", X: "-..-", Y: "-.--", Z: "--..",  
+        "1": ".----", "2": "..---", "3": "...--", "4": "....-", "5": ".....",  
+        "6": "-....", "7": "--...", "8": "---..", "9": "----.", "0": "-----",  
+        " ": "/", ".": ".-.-.-", ",": "--..--", "?": "..--..", "'": ".----.",  
+        "!": "-.-.--", "/": "-..-.", "(": "-.--.", ")": "-.--.-", "&": ".-...",  
+        ":": "---...", ";": "-.-.-.", "=": "-...-", "+": ".-.-.", "-": "-....-",  
+        _: "..--.-", "\"": ".-..-.", $: "...-..-", "@": ".--.-."  
+      };  
+      return text.toUpperCase().split('').map(char => morseCode[char] || char).join(' ');  
+    },  
+    reverse: (text) => text.split('').reverse().join('')  
+  };  
+
+  const challenges = [  
+    { method: "caesar", text: "Secret message: KHOOR", key: "3", answer: "HELLO" },  
+    { method: "vigenere", text: "Ciphered text: RIJVS", key: "KEY", answer: "HELLO" },  
+    { method: "morse", text: "Decrypt: .... . .-.. .-.. ---", answer: "HELLO" },  
+    { method: "reverse", text: "Reverse this: OLLEH", answer: "HELLO" }  
+  ];  
+
+  const inputText = document.getElementById("input-text");  
+  const cipherMethod = document.getElementById("cipher-method");  
+  const keyInput = document.getElementById("key-input");  
+  const outputText = document.getElementById("output-text");  
+  const challengeBox = document.getElementById("challenge-box");  
+  const challengeText = document.getElementById("challenge-text");  
+
+  document.getElementById("encrypt-btn").addEventListener("click", () => {  
+    const text = inputText.value;  
+    const method = cipherMethod.value;  
+    const key = keyInput.value;  
+    const cipherFunc = cipherMethods[method];  
+    const result = cipherFunc ? cipherFunc(text, key) : "Invalid cipher method.";  
+    outputText.textContent = `Result: ${result}`;  
+
+    // Generate a challenge  
+    const challenge = challenges[Math.floor(Math.random() * challenges.length)];  
+    challengeBox.style.display = "block";  
+    challengeText.textContent = `${challenge.text} (Key: ${challenge.key || "N/A"})`;  
+  });  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
