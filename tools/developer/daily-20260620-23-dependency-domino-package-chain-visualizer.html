@@ -1,0 +1,131 @@
+---
+layout: null
+title: "Dependency Domino: Package Chain Visualizer"
+category: "Developer"
+description: "A dynamic, interactive tool that visualizes your project's npm package dependencies as a cascading domino effect, allowing you to identify critical points and optimize your dependency structure."
+permalink: "/tools/daily-20260620-23-dependency-domino-package-chain-visualizer.html"
+generated_by: "api-true-ai"
+generated_date: "20260620"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dependency Domino: Package Chain Visualizer | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, interactive tool that visualizes your project's npm package dependencies as a cascading domino effect, allowing you to identify critical points and optimize your dependency structure. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Dependency Domino: Package Chain Visualizer | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, interactive tool that visualizes your project's npm package dependencies as a cascading domino effect, allowing you to identify critical points and optimize your dependency structure. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dependency Domino: Package Chain Visualizer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, interactive tool that visualizes your project's npm package dependencies as a cascading domino effect, allowing you to identify critical points and optimize your dependency structure. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Dependency Domino: Package Chain Visualizer</h1>
+    <p class="seo-subtitle">A dynamic, interactive tool that visualizes your project's npm package dependencies as a cascading domino effect, allowing you to identify critical points and optimize your dependency structure.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #1e1e2f; color: #f3f3f3; display: flex; justify-content: center; align-items: center; height: 100vh; }  
+  #tool-app { width: 80%; height: 80%; background: #282c34; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); display: flex; flex-direction: column; align-items: center; padding: 20px; }  
+  h1 { margin: 0; color: #61dafb; }  
+  canvas { flex-grow: 1; width: 100%; border-radius: 8px; }  
+  #fileInput { margin-top: 10px; padding: 8px 12px; border: none; border-radius: 5px; background: #61dafb; color: #282c34; cursor: pointer; font-size: 16px; }  
+  #fileInput:hover { background: #4db3d8; }  
+</style>  
+<div id="tool-app">  
+  <h1>Dependency Domino</h1>  
+  <canvas id="dependencyCanvas"></canvas>  
+  <input id="fileInput" type="file" accept=".json" />  
+</div>  
+<script>  
+  const canvas = document.getElementById('dependencyCanvas');  
+  const ctx = canvas.getContext('2d');  
+  canvas.width = canvas.parentElement.clientWidth;  
+  canvas.height = canvas.parentElement.clientHeight - 50;  
+
+  const fileInput = document.getElementById('fileInput');  
+  let nodes = [];  
+  let links = [];  
+
+  fileInput.addEventListener('change', async (e) => {  
+    const file = e.target.files[0];  
+    if (file) {  
+      const text = await file.text();  
+      try {  
+        const jsonData = JSON.parse(text);  
+        if (jsonData.dependencies) {  
+          parseDependencies(jsonData.dependencies);  
+          drawGraph();  
+        } else {  
+          alert('Invalid package.json: no dependencies found.');  
+        }  
+      } catch (err) {  
+        alert('Invalid JSON file.');  
+      }  
+    }  
+  });  
+
+  function parseDependencies(dependencies, parent = null, depth = 0, position = { x: canvas.width / 2, y: 50 }) {  
+    Object.keys(dependencies).forEach((dep, index) => {  
+      const node = { id: dep, depth, position };  
+      nodes.push(node);  
+      if (parent) links.push({ from: parent.id, to: dep });  
+
+      const newDepth = depth + 1;  
+      const newPos = {  
+        x: position.x + (index - Object.keys(dependencies).length / 2) * 150,  
+        y: position.y + 100  
+      };  
+
+      if (typeof dependencies[dep] === 'object' && dependencies[dep].dependencies) {  
+        parseDependencies(dependencies[dep].dependencies, node, newDepth, newPos);  
+      }  
+    });  
+  }  
+
+  function drawGraph() {  
+    ctx.clearRect(0, 0, canvas.width, canvas.height);  
+    links.forEach(link => {  
+      const fromNode = nodes.find(node => node.id === link.from);  
+      const toNode = nodes.find(node => node.id === link.to);  
+      if (fromNode && toNode) {  
+        ctx.beginPath();  
+        ctx.moveTo(fromNode.position.x, fromNode.position.y);  
+        ctx.lineTo(toNode.position.x, toNode.position.y);  
+        ctx.strokeStyle = '#61dafb';  
+        ctx.lineWidth = 2;  
+        ctx.stroke();  
+      }  
+    });  
+
+    nodes.forEach(node => {  
+      ctx.beginPath();  
+      ctx.arc(node.position.x, node.position.y, 20, 0, Math.PI * 2);  
+      ctx.fillStyle = '#61dafb';  
+      ctx.fill();  
+      ctx.strokeStyle = '#282c34';  
+      ctx.lineWidth = 3;  
+      ctx.stroke();  
+      ctx.fillStyle = '#282c34';  
+      ctx.font = '12px Arial';  
+      ctx.textAlign = 'center';  
+      ctx.fillText(node.id, node.position.x, node.position.y + 4);  
+    });  
+  }  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

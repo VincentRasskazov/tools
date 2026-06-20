@@ -1,0 +1,153 @@
+---
+layout: null
+title: "AdLoom: Interactive Campaign Web Visualizer"
+category: "Marketing"
+description: "Create, customize, and simulate the reach and engagement of marketing campaigns through a dynamic, interactive flowchart tool."
+permalink: "/tools/daily-20260620-21-adloom-interactive-campaign-web-visualizer.html"
+generated_by: "api-true-ai"
+generated_date: "20260620"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdLoom: Interactive Campaign Web Visualizer | Free Online Interactive Tool</title>
+  <meta name="description" content="Create, customize, and simulate the reach and engagement of marketing campaigns through a dynamic, interactive flowchart tool. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="AdLoom: Interactive Campaign Web Visualizer | Free Online Interactive Tool">
+  <meta property="og:description" content="Create, customize, and simulate the reach and engagement of marketing campaigns through a dynamic, interactive flowchart tool. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AdLoom: Interactive Campaign Web Visualizer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Create, customize, and simulate the reach and engagement of marketing campaigns through a dynamic, interactive flowchart tool. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>AdLoom: Interactive Campaign Web Visualizer</h1>
+    <p class="seo-subtitle">Create, customize, and simulate the reach and engagement of marketing campaigns through a dynamic, interactive flowchart tool.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f4f4f9; }  
+  #tool-app { width: 90%; max-width: 1200px; background: #ffffff; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); padding: 20px; }  
+  .node { padding: 10px; background: #007bff; color: white; border-radius: 4px; display: inline-block; cursor: grab; margin: 8px; user-select: none; }  
+  .dragging { opacity: 0.7; }  
+  #canvas { position: relative; border: 2px dashed #ccc; height: 500px; overflow: hidden; }  
+  .line { position: absolute; width: 2px; background: #ff6f61; transform-origin: top left; }  
+  button { margin: 10px 5px; padding: 8px 12px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; }  
+  button:disabled { background: #ccc; cursor: not-allowed; }  
+</style>  
+<div id="tool-app">  
+  <h1>AdLoom: Interactive Campaign Web Visualizer</h1>  
+  <p>Drag and drop nodes (representing ads, platforms, and user engagement points) onto the canvas to simulate your campaign's flow and reach potential.</p>  
+  <button id="add-node">Add Node</button>  
+  <button id="clear-canvas" disabled>Clear Canvas</button>  
+  <div id="canvas"></div>  
+</div>  
+<script>  
+  const app = document.getElementById('tool-app');  
+  const canvas = document.getElementById('canvas');  
+  const addNodeBtn = document.getElementById('add-node');  
+  const clearCanvasBtn = document.getElementById('clear-canvas');  
+  let connections = [];  
+  let draggingNode = null;  
+
+  // Add a new interactive node  
+  addNodeBtn.addEventListener('click', () => {  
+    const node = document.createElement('div');  
+    node.classList.add('node');  
+    node.textContent = 'Node';  
+    node.style.position = 'absolute';  
+    node.style.left = '50px';  
+    node.style.top = '50px';  
+    canvas.appendChild(node);  
+    makeNodeDraggable(node);  
+    clearCanvasBtn.disabled = false;  
+  });  
+
+  // Clear the canvas  
+  clearCanvasBtn.addEventListener('click', () => {  
+    canvas.innerHTML = '';  
+    connections = [];  
+    clearCanvasBtn.disabled = true;  
+  });  
+
+  // Make nodes draggable and connectable  
+  function makeNodeDraggable(node) {  
+    node.addEventListener('mousedown', (e) => {  
+      draggingNode = { node, startX: e.clientX, startY: e.clientY, initX: parseInt(node.style.left), initY: parseInt(node.style.top) };  
+      node.classList.add('dragging');  
+    });  
+
+    document.addEventListener('mousemove', (e) => {  
+      if (draggingNode) {  
+        const deltaX = e.clientX - draggingNode.startX;  
+        const deltaY = e.clientY - draggingNode.startY;  
+        draggingNode.node.style.left = `${draggingNode.initX + deltaX}px`;  
+        draggingNode.node.style.top = `${draggingNode.initY + deltaY}px`;  
+        updateConnections();  
+      }  
+    });  
+
+    document.addEventListener('mouseup', () => {  
+      if (draggingNode) {  
+        draggingNode.node.classList.remove('dragging');  
+        draggingNode = null;  
+      }  
+    });  
+
+    node.addEventListener('dblclick', () => {  
+      if (connections.length > 0) {  
+        const target = prompt('Connect to target node: (type "Node" to create a new connection)');  
+        const targetNode = Array.from(canvas.children).find((n) => n.textContent === target);  
+        if (targetNode) createConnection(node, targetNode);  
+      }  
+    });  
+  }  
+
+  // Create a visual connection between two nodes  
+  function createConnection(fromNode, toNode) {  
+    const line = document.createElement('div');  
+    line.classList.add('line');  
+    canvas.appendChild(line);  
+    connections.push({ from: fromNode, to: toNode, line });  
+    updateConnections();  
+  }  
+
+  // Update connection lines positions  
+  function updateConnections() {  
+    connections.forEach(({ from, to, line }) => {  
+      const fromRect = from.getBoundingClientRect();  
+      const toRect = to.getBoundingClientRect();  
+      const canvasRect = canvas.getBoundingClientRect();  
+
+      const x1 = fromRect.left + fromRect.width / 2 - canvasRect.left;  
+      const y1 = fromRect.top + fromRect.height / 2 - canvasRect.top;  
+      const x2 = toRect.left + toRect.width / 2 - canvasRect.left;  
+      const y2 = toRect.top + toRect.height / 2 - canvasRect.top;  
+
+      const dx = x2 - x1;  
+      const dy = y2 - y1;  
+      const length = Math.sqrt(dx * dx + dy * dy);  
+      const angle = Math.atan2(dy, dx) * (180 / Math.PI);  
+
+      line.style.left = `${x1}px`;  
+      line.style.top = `${y1}px`;  
+      line.style.width = `${length}px`;  
+      line.style.transform = `rotate(${angle}deg)`;  
+    });  
+  }  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

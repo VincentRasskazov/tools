@@ -1,0 +1,167 @@
+---
+layout: null
+title: "Word Weave: Plot Thread Generator"
+category: "Writing"
+description: "A dynamic interactive tool that helps writers visually weave complex storylines by connecting characters, events, and themes into an animated, editable web."
+permalink: "/tools/daily-20260620-15-word-weave-plot-thread-generator.html"
+generated_by: "api-true-ai"
+generated_date: "20260620"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word Weave: Plot Thread Generator | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic interactive tool that helps writers visually weave complex storylines by connecting characters, events, and themes into an animated, editable web. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Word Weave: Plot Thread Generator | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic interactive tool that helps writers visually weave complex storylines by connecting characters, events, and themes into an animated, editable web. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Word Weave: Plot Thread Generator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic interactive tool that helps writers visually weave complex storylines by connecting characters, events, and themes into an animated, editable web. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Word Weave: Plot Thread Generator</h1>
+    <p class="seo-subtitle">A dynamic interactive tool that helps writers visually weave complex storylines by connecting characters, events, and themes into an animated, editable web.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background: linear-gradient(to bottom, #f3f4f6, #e1e6ee);  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  width: 80%;  
+  height: 80%;  
+  background: white;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);  
+  position: relative;  
+  overflow: hidden;  
+  padding: 20px;  
+}  
+canvas {  
+  width: 100%;  
+  height: 100%;  
+  display: block;  
+}  
+#controls {  
+  position: absolute;  
+  top: 10px;  
+  left: 10px;  
+  background: rgba(255, 255, 255, 0.9);  
+  padding: 10px;  
+  border-radius: 5px;  
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  
+}  
+button, input {  
+  margin: 5px;  
+  padding: 8px 12px;  
+  border: 1px solid #ccc;  
+  border-radius: 4px;  
+  background: #f9f9f9;  
+  cursor: pointer;  
+}  
+button:hover {  
+  background: #e0e0e0;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="controls">  
+    <input type="text" id="nodeName" placeholder="Add character, event, or theme" />  
+    <button id="addNode">Add Node</button>  
+    <button id="clearCanvas">Clear All</button>  
+  </div>  
+  <canvas id="plotCanvas"></canvas>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById("plotCanvas");  
+const ctx = canvas.getContext("2d");  
+canvas.width = canvas.offsetWidth;  
+canvas.height = canvas.offsetHeight;  
+const nodes = [];  
+const links = [];  
+
+canvas.addEventListener("click", (e) => {  
+  const rect = canvas.getBoundingClientRect();  
+  const x = e.clientX - rect.left;  
+  const y = e.clientY - rect.top;  
+  const clickedNode = nodes.find(node => Math.hypot(node.x - x, node.y - y) < 20);  
+  if (clickedNode) {  
+    clickedNode.selected = !clickedNode.selected;  
+    if (nodes.filter(n => n.selected).length === 2) {  
+      const [nodeA, nodeB] = nodes.filter(n => n.selected);  
+      links.push({ source: nodeA, target: nodeB });  
+      nodeA.selected = nodeB.selected = false;  
+    }  
+  }  
+  draw();  
+});  
+
+document.getElementById("addNode").addEventListener("click", () => {  
+  const name = document.getElementById("nodeName").value;  
+  if (name.trim()) {  
+    nodes.push({  
+      name,  
+      x: Math.random() * canvas.width,  
+      y: Math.random() * canvas.height,  
+      selected: false  
+    });  
+    document.getElementById("nodeName").value = "";  
+    draw();  
+  }  
+});  
+
+document.getElementById("clearCanvas").addEventListener("click", () => {  
+  nodes.length = links.length = 0;  
+  draw();  
+});  
+
+function draw() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  links.forEach(link => {  
+    ctx.beginPath();  
+    ctx.moveTo(link.source.x, link.source.y);  
+    ctx.lineTo(link.target.x, link.target.y);  
+    ctx.strokeStyle = "#888";  
+    ctx.stroke();  
+  });  
+  nodes.forEach(node => {  
+    ctx.beginPath();  
+    ctx.arc(node.x, node.y, 20, 0, Math.PI * 2);  
+    ctx.fillStyle = node.selected ? "#ffadad" : "#6ac3ff";  
+    ctx.fill();  
+    ctx.strokeStyle = "#333";  
+    ctx.stroke();  
+    ctx.fillStyle = "#000";  
+    ctx.font = "12px Arial";  
+    ctx.textAlign = "center";  
+    ctx.fillText(node.name, node.x, node.y + 4);  
+  });  
+}  
+
+draw();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

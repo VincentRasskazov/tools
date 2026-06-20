@@ -1,0 +1,182 @@
+---
+layout: null
+title: "Data Orbit: Interactive Relationship Mapper"
+category: "Data"
+description: "Visualize and explore complex data relationships by creating interactive, orbiting nodes that reveal hidden connections in your dataset."
+permalink: "/tools/daily-20260620-18-data-orbit-interactive-relationship-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260620"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Orbit: Interactive Relationship Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize and explore complex data relationships by creating interactive, orbiting nodes that reveal hidden connections in your dataset. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Orbit: Interactive Relationship Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize and explore complex data relationships by creating interactive, orbiting nodes that reveal hidden connections in your dataset. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Orbit: Interactive Relationship Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize and explore complex data relationships by creating interactive, orbiting nodes that reveal hidden connections in your dataset. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Orbit: Interactive Relationship Mapper</h1>
+    <p class="seo-subtitle">Visualize and explore complex data relationships by creating interactive, orbiting nodes that reveal hidden connections in your dataset.</p>
+    <style>  
+  body {  
+    font-family: Arial, sans-serif;  
+    margin: 0;  
+    height: 100vh;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    background: radial-gradient(circle, #1e3c72, #2a5298);  
+    color: #fff;  
+  }  
+
+  #tool-app {  
+    width: 80%;  
+    height: 80%;  
+    background: rgba(255, 255, 255, 0.1);  
+    border-radius: 15px;  
+    border: 2px solid #ffffff55;  
+    overflow: hidden;  
+    position: relative;  
+  }  
+
+  canvas {  
+    width: 100%;  
+    height: 100%;  
+    display: block;  
+  }  
+
+  #data-input {  
+    position: absolute;  
+    bottom: 20px;  
+    left: 20px;  
+    right: 20px;  
+    display: flex;  
+    gap: 10px;  
+  }  
+
+  input[type="text"] {  
+    flex: 1;  
+    padding: 10px;  
+    border-radius: 5px;  
+    border: none;  
+    font-size: 16px;  
+  }  
+
+  button {  
+    padding: 10px 20px;  
+    background: #ffffff44;  
+    border: none;  
+    border-radius: 5px;  
+    color: white;  
+    font-size: 16px;  
+    cursor: pointer;  
+    transition: background 0.3s ease;  
+  }  
+
+  button:hover {  
+    background: #ffffff88;  
+  }  
+</style>  
+<div id="tool-app">  
+  <canvas id="orbit-canvas"></canvas>  
+  <div id="data-input">  
+    <input type="text" id="node-input" placeholder="Enter a data node (e.g., 'A:B, B:C')">  
+    <button id="add-node">Add Node</button>  
+  </div>  
+</div>  
+<script>  
+const canvas = document.getElementById('orbit-canvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = canvas.clientWidth;  
+canvas.height = canvas.clientHeight;  
+
+let nodes = [];  
+let links = [];  
+
+function draw() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+
+  // Draw links  
+  links.forEach(link => {  
+    ctx.beginPath();  
+    ctx.moveTo(link.source.x, link.source.y);  
+    ctx.lineTo(link.target.x, link.target.y);  
+    ctx.strokeStyle = '#ffffff55';  
+    ctx.lineWidth = 2;  
+    ctx.stroke();  
+  });  
+
+  // Draw nodes  
+  nodes.forEach(node => {  
+    ctx.beginPath();  
+    ctx.arc(node.x, node.y, 10, 0, Math.PI * 2);  
+    ctx.fillStyle = '#ffdd57';  
+    ctx.fill();  
+    ctx.strokeStyle = '#ffffff';  
+    ctx.lineWidth = 2;  
+    ctx.stroke();  
+
+    ctx.fillStyle = '#fff';  
+    ctx.font = '12px Arial';  
+    ctx.fillText(node.label, node.x + 15, node.y + 5);  
+
+    // Update position for orbit animation  
+    const angle = (Date.now() / 1000) * 0.5 + node.angleOffset;  
+    node.x = canvas.width / 2 + node.orbitRadius * Math.cos(angle);  
+    node.y = canvas.height / 2 + node.orbitRadius * Math.sin(angle);  
+  });  
+
+  requestAnimationFrame(draw);  
+}  
+
+function addNode(input) {  
+  const pairs = input.split(',').map(pair => pair.split(':').map(s => s.trim()));  
+  pairs.forEach(([source, target]) => {  
+    let sourceNode = nodes.find(node => node.label === source);  
+    let targetNode = nodes.find(node => node.label === target);  
+
+    if (!sourceNode) {  
+      sourceNode = { label: source, x: canvas.width / 2, y: canvas.height / 2, orbitRadius: 50 + nodes.length * 20, angleOffset: Math.random() * Math.PI * 2 };  
+      nodes.push(sourceNode);  
+    }  
+
+    if (!targetNode) {  
+      targetNode = { label: target, x: canvas.width / 2, y: canvas.height / 2, orbitRadius: 50 + nodes.length * 20, angleOffset: Math.random() * Math.PI * 2 };  
+      nodes.push(targetNode);  
+    }  
+
+    links.push({ source: sourceNode, target: targetNode });  
+  });  
+}  
+
+document.getElementById('add-node').addEventListener('click', () => {  
+  const input = document.getElementById('node-input').value;  
+  addNode(input);  
+  document.getElementById('node-input').value = '';  
+});  
+
+draw();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

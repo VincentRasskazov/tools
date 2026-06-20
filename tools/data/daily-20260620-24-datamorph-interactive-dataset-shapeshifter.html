@@ -1,0 +1,157 @@
+---
+layout: null
+title: "DataMorph: Interactive Dataset Shapeshifter"
+category: "Data"
+description: "Transform, merge, and visualize multi-dimensional datasets in real-time with drag-and-drop interactivity."
+permalink: "/tools/daily-20260620-24-datamorph-interactive-dataset-shapeshifter.html"
+generated_by: "api-true-ai"
+generated_date: "20260620"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataMorph: Interactive Dataset Shapeshifter | Free Online Interactive Tool</title>
+  <meta name="description" content="Transform, merge, and visualize multi-dimensional datasets in real-time with drag-and-drop interactivity. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataMorph: Interactive Dataset Shapeshifter | Free Online Interactive Tool">
+  <meta property="og:description" content="Transform, merge, and visualize multi-dimensional datasets in real-time with drag-and-drop interactivity. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataMorph: Interactive Dataset Shapeshifter | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Transform, merge, and visualize multi-dimensional datasets in real-time with drag-and-drop interactivity. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataMorph: Interactive Dataset Shapeshifter</h1>
+    <p class="seo-subtitle">Transform, merge, and visualize multi-dimensional datasets in real-time with drag-and-drop interactivity.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f9; color: #333; }  
+  #tool-app { max-width: 900px; margin: 50px auto; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); }  
+  h1 { text-align: center; font-size: 24px; margin-bottom: 20px; }  
+  .drop-area { border: 2px dashed #8a2be2; border-radius: 5px; padding: 30px; text-align: center; cursor: pointer; margin-bottom: 20px; background: #fafaff; }  
+  .drop-area:hover { background: #f0e8ff; }  
+  .dataset-table { width: 100%; border-collapse: collapse; margin-top: 20px; }  
+  .dataset-table th, .dataset-table td { border: 1px solid #ddd; padding: 10px; text-align: center; }  
+  .actions { display: flex; justify-content: space-around; margin-top: 20px; }  
+  button { padding: 10px 20px; font-size: 16px; border: none; border-radius: 5px; cursor: pointer; background: #8a2be2; color: #fff; }  
+  button:hover { background: #5e1996; }  
+</style>  
+<div id="tool-app">  
+  <h1>DataMorph: Interactive Dataset Shapeshifter</h1>  
+  <div class="drop-area" id="dropArea">Drag & Drop Your Dataset Here (CSV or JSON)</div>  
+  <table class="dataset-table" id="dataTable"></table>  
+  <div class="actions">  
+    <button id="mergeBtn">Merge Columns</button>  
+    <button id="filterBtn">Filter Rows</button>  
+    <button id="visualizeBtn">Visualize Data</button>  
+  </div>  
+  <canvas id="dataChart" style="width: 100%; height: 400px; display: none;"></canvas>  
+</div>  
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  
+<script>  
+  const dropArea = document.getElementById('dropArea');  
+  const dataTable = document.getElementById('dataTable');  
+  const dataChart = document.getElementById('dataChart');  
+  const mergeBtn = document.getElementById('mergeBtn');  
+  const filterBtn = document.getElementById('filterBtn');  
+  const visualizeBtn = document.getElementById('visualizeBtn');  
+  let dataset = [];  
+
+  dropArea.addEventListener('dragover', (e) => {  
+    e.preventDefault();  
+    dropArea.style.background = '#d6cfff';  
+  });  
+
+  dropArea.addEventListener('dragleave', () => {  
+    dropArea.style.background = '#fafaff';  
+  });  
+
+  dropArea.addEventListener('drop', (e) => {  
+    e.preventDefault();  
+    dropArea.style.background = '#fafaff';  
+    const file = e.dataTransfer.files[0];  
+    const reader = new FileReader();  
+    reader.onload = (event) => {  
+      const content = event.target.result;  
+      if (file.type === 'application/json') {  
+        dataset = JSON.parse(content);  
+      } else if (file.type === 'text/csv') {  
+        dataset = csvToJson(content);  
+      }  
+      renderTable(dataset);  
+    };  
+    reader.readAsText(file);  
+  });  
+
+  mergeBtn.addEventListener('click', () => {  
+    const keys = Object.keys(dataset[0]);  
+    const mergedKey = prompt(`Enter two column names to merge (comma-separated) from: ${keys.join(', ')}`);  
+    const [key1, key2] = mergedKey.split(',').map(k => k.trim());  
+    if (dataset[0][key1] && dataset[0][key2]) {  
+      dataset = dataset.map(row => ({ ...row, [key1]: `${row[key1]} ${row[key2]}` }));  
+      renderTable(dataset);  
+    } else {  
+      alert('Invalid column names!');  
+    }  
+  });  
+
+  filterBtn.addEventListener('click', () => {  
+    const key = prompt('Enter column name to filter:');  
+    const value = prompt(`Enter value to filter rows where "${key}" contains:`);  
+    if (dataset[0][key]) {  
+      dataset = dataset.filter(row => row[key].includes(value));  
+      renderTable(dataset);  
+    } else {  
+      alert('Invalid column name!');  
+    }  
+  });  
+
+  visualizeBtn.addEventListener('click', () => {  
+    const keys = Object.keys(dataset[0]);  
+    const xKey = prompt(`Enter column name for X-axis (from: ${keys.join(', ')}):`);  
+    const yKey = prompt(`Enter column name for Y-axis (from: ${keys.join(', ')}):`);  
+    if (dataset[0][xKey] && dataset[0][yKey]) {  
+      const labels = dataset.map(row => row[xKey]);  
+      const data = dataset.map(row => parseFloat(row[yKey]));  
+      const ctx = dataChart.getContext('2d');  
+      dataChart.style.display = 'block';  
+      new Chart(ctx, {  
+        type: 'bar',  
+        data: {  
+          labels,  
+          datasets: [{ label: `${yKey} by ${xKey}`, data, backgroundColor: '#8a2be2', borderColor: '#5e1996', borderWidth: 1 }]  
+        },  
+        options: { responsive: true }  
+      });  
+    } else {  
+      alert('Invalid column names!');  
+    }  
+  });  
+
+  function renderTable(data) {  
+    let html = '<thead><tr>' + Object.keys(data[0]).map(key => `<th>${key}</th>`).join('') + '</tr></thead>';  
+    html += '<tbody>' + data.map(row => '<tr>' + Object.values(row).map(val => `<td>${val}</td>`).join('') + '</tr>').join('') + '</tbody>';  
+    dataTable.innerHTML = html;  
+  }  
+
+  function csvToJson(csv) {  
+    const [header, ...rows] = csv.split('\n').map(row => row.split(','));  
+    return rows.map(row => row.reduce((acc, val, i) => ({ ...acc, [header[i]]: val }), {}));  
+  }  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

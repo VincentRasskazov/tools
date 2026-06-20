@@ -1,0 +1,184 @@
+---
+layout: null
+title: "DataOrbit: Interactive Dataset Galaxy Explorer"
+category: "Data"
+description: "Navigate a galaxy of interconnected datasets, visualizing relationships, patterns, and anomalies in a 3D space."
+permalink: "/tools/daily-20260620-07-dataorbit-interactive-dataset-galaxy-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260620"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataOrbit: Interactive Dataset Galaxy Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate a galaxy of interconnected datasets, visualizing relationships, patterns, and anomalies in a 3D space. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataOrbit: Interactive Dataset Galaxy Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate a galaxy of interconnected datasets, visualizing relationships, patterns, and anomalies in a 3D space. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataOrbit: Interactive Dataset Galaxy Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate a galaxy of interconnected datasets, visualizing relationships, patterns, and anomalies in a 3D space. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataOrbit: Interactive Dataset Galaxy Explorer</h1>
+    <p class="seo-subtitle">Navigate a galaxy of interconnected datasets, visualizing relationships, patterns, and anomalies in a 3D space.</p>
+    <style>  
+  body {  
+    font-family: Arial, sans-serif;  
+    margin: 0;  
+    background: radial-gradient(circle, #000428, #004e92);  
+    overflow: hidden;  
+  }  
+  #tool-app {  
+    width: 100vw;  
+    height: 100vh;  
+    position: relative;  
+  }  
+  canvas {  
+    display: block;  
+  }  
+  .tooltip {  
+    position: absolute;  
+    background: rgba(0, 0, 0, 0.8);  
+    color: white;  
+    padding: 5px 10px;  
+    border-radius: 5px;  
+    font-size: 12px;  
+    pointer-events: none;  
+  }  
+</style>  
+<div id="tool-app">  
+  <div id="tooltip" class="tooltip" style="display: none;"></div>  
+</div>  
+<script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>  
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>  
+<script>  
+const app = document.getElementById('tool-app');  
+const tooltip = document.getElementById('tooltip');
+
+// Scene setup  
+const scene = new THREE.Scene();  
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);  
+const renderer = new THREE.WebGLRenderer();  
+renderer.setSize(window.innerWidth, window.innerHeight);  
+app.appendChild(renderer.domElement);  
+
+// Dataset simulation  
+const data = [  
+  { id: 1, label: 'Dataset A', size: 20, connections: [2, 3] },  
+  { id: 2, label: 'Dataset B', size: 15, connections: [1, 4] },  
+  { id: 3, label: 'Dataset C', size: 25, connections: [1] },  
+  { id: 4, label: 'Dataset D', size: 10, connections: [2, 5] },  
+  { id: 5, label: 'Dataset E', size: 30, connections: [4] }  
+];  
+
+const nodes = {};  
+const lines = [];  
+
+// Create nodes  
+data.forEach(item => {  
+  const geometry = new THREE.SphereGeometry(item.size / 10, 32, 32);  
+  const material = new THREE.MeshBasicMaterial({ color: Math.random() * 0xffffff });  
+  const sphere = new THREE.Mesh(geometry, material);  
+
+  sphere.position.x = Math.random() * 50 - 25;  
+  sphere.position.y = Math.random() * 50 - 25;  
+  sphere.position.z = Math.random() * 50 - 25;  
+
+  sphere.userData = item;  
+  nodes[item.id] = sphere;  
+
+  scene.add(sphere);  
+});  
+
+// Create connections  
+data.forEach(item => {  
+  item.connections.forEach(connId => {  
+    const material = new THREE.LineBasicMaterial({ color: 0xffffff });  
+    const geometry = new THREE.BufferGeometry().setFromPoints([  
+      nodes[item.id].position,  
+      nodes[connId].position  
+    ]);  
+
+    const line = new THREE.Line(geometry, material);  
+    lines.push(line);  
+    scene.add(line);  
+  });  
+});  
+
+// Tooltip display  
+function showTooltip(text, x, y) {  
+  tooltip.style.left = x + 'px';  
+  tooltip.style.top = y + 'px';  
+  tooltip.textContent = text;  
+  tooltip.style.display = 'block';  
+}  
+
+function hideTooltip() {  
+  tooltip.style.display = 'none';  
+}  
+
+// Interactivity setup  
+const raycaster = new THREE.Raycaster();  
+const mouse = new THREE.Vector2();  
+
+function onMouseMove(event) {  
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;  
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;  
+
+  raycaster.setFromCamera(mouse, camera);  
+  const intersects = raycaster.intersectObjects(Object.values(nodes));  
+
+  if (intersects.length > 0) {  
+    const intersect = intersects[0];  
+    const data = intersect.object.userData;  
+    showTooltip(`${data.label}`, event.clientX, event.clientY);  
+  } else {  
+    hideTooltip();  
+  }  
+}  
+
+app.addEventListener('mousemove', onMouseMove);  
+
+// Camera setup  
+camera.position.z = 100;  
+
+// Animation loop  
+function animate() {  
+  requestAnimationFrame(animate);  
+
+  Object.values(nodes).forEach(node => {  
+    node.rotation.x += 0.01;  
+    node.rotation.y += 0.01;  
+  });  
+
+  renderer.render(scene, camera);  
+}  
+
+animate();  
+
+// Resize handling  
+window.addEventListener('resize', () => {  
+  camera.aspect = window.innerWidth / window.innerHeight;  
+  camera.updateProjectionMatrix();  
+  renderer.setSize(window.innerWidth, window.innerHeight);  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

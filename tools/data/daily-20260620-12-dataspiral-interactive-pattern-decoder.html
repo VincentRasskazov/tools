@@ -1,0 +1,108 @@
+---
+layout: null
+title: "DataSpiral: Interactive Pattern Decoder"
+category: "Data"
+description: "Explore and decode hidden patterns in dynamic, spiraling data visualizations to uncover encrypted meanings."
+permalink: "/tools/daily-20260620-12-dataspiral-interactive-pattern-decoder.html"
+generated_by: "api-true-ai"
+generated_date: "20260620"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataSpiral: Interactive Pattern Decoder | Free Online Interactive Tool</title>
+  <meta name="description" content="Explore and decode hidden patterns in dynamic, spiraling data visualizations to uncover encrypted meanings. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataSpiral: Interactive Pattern Decoder | Free Online Interactive Tool">
+  <meta property="og:description" content="Explore and decode hidden patterns in dynamic, spiraling data visualizations to uncover encrypted meanings. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataSpiral: Interactive Pattern Decoder | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Explore and decode hidden patterns in dynamic, spiraling data visualizations to uncover encrypted meanings. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataSpiral: Interactive Pattern Decoder</h1>
+    <p class="seo-subtitle">Explore and decode hidden patterns in dynamic, spiraling data visualizations to uncover encrypted meanings.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: #1e1e2f; color: #f0f0f0; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }  
+  #tool-app { width: 80%; height: 80%; background: #282c34; border-radius: 10px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); display: flex; justify-content: center; align-items: center; flex-direction: column; }  
+  canvas { border: 2px solid #61dafb; border-radius: 10px; }  
+  #hint-bar { margin-top: 15px; background: #20232a; padding: 10px 15px; border-radius: 5px; }  
+  #hint-bar span { color: #61dafb; font-weight: bold; }  
+</style>  
+<div id="tool-app">  
+  <canvas id="spiralCanvas" width="600" height="600"></canvas>  
+  <div id="hint-bar">Hint: Adjust the pattern with your <span>keyboard</span> or <span>mouse</span> to find the secret.</div>  
+</div>  
+<script>  
+  const canvas = document.getElementById('spiralCanvas');  
+  const ctx = canvas.getContext('2d');  
+  const centerX = canvas.width / 2;  
+  const centerY = canvas.height / 2;  
+  let angleIncrement = 0.1;  
+  let radiusIncrement = 2;  
+  let angle = 0;  
+  let radius = 0;  
+  let isDecoding = false;  
+
+  function drawSpiral() {  
+    ctx.clearRect(0, 0, canvas.width, canvas.height);  
+    ctx.beginPath();  
+    ctx.moveTo(centerX, centerY);  
+
+    for(let i = 0; i < 500; i++) {  
+      const x = centerX + radius * Math.cos(angle);  
+      const y = centerY + radius * Math.sin(angle);  
+      ctx.lineTo(x, y);  
+      angle += angleIncrement;  
+      radius += radiusIncrement;  
+    }  
+
+    ctx.strokeStyle = isDecoding ? '#ff7675' : '#61dafb';  
+    ctx.lineWidth = 2;  
+    ctx.stroke();  
+  }  
+
+  function resetSpiral() {  
+    angle = 0;  
+    radius = 0;  
+    drawSpiral();  
+  }  
+
+  document.addEventListener('keydown', (e) => {  
+    if(e.key === 'ArrowUp') radiusIncrement += 0.5;  
+    if(e.key === 'ArrowDown') radiusIncrement -= 0.5;  
+    if(e.key === 'ArrowRight') angleIncrement += 0.01;  
+    if(e.key === 'ArrowLeft') angleIncrement -= 0.01;  
+    isDecoding = true;  
+    drawSpiral();  
+
+    if(radiusIncrement === 6 && angleIncrement === 0.2) { // Example for a hidden combo  
+      alert('You have decoded the pattern!');  
+    }  
+  });  
+
+  canvas.addEventListener('click', () => {  
+    isDecoding = !isDecoding;  
+    resetSpiral();  
+  });  
+
+  resetSpiral();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,157 @@
+---
+layout: null
+title: "CipherMaze: The Codebreaker Quest"
+category: "Games"
+description: "Navigate a dynamically generated maze of encrypted strings by solving progressively challenging codebreaking puzzles."
+permalink: "/tools/daily-20260620-04-ciphermaze-the-codebreaker-quest.html"
+generated_by: "api-true-ai"
+generated_date: "20260620"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CipherMaze: The Codebreaker Quest | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate a dynamically generated maze of encrypted strings by solving progressively challenging codebreaking puzzles. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CipherMaze: The Codebreaker Quest | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate a dynamically generated maze of encrypted strings by solving progressively challenging codebreaking puzzles. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CipherMaze: The Codebreaker Quest | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate a dynamically generated maze of encrypted strings by solving progressively challenging codebreaking puzzles. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CipherMaze: The Codebreaker Quest</h1>
+    <p class="seo-subtitle">Navigate a dynamically generated maze of encrypted strings by solving progressively challenging codebreaking puzzles.</p>
+    <style>  
+body {  
+  font-family: 'Arial', sans-serif;  
+  background-color: #1e1f26;  
+  color: #ffffff;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  width: 80%;  
+  max-width: 600px;  
+  background: #2b2d3a;  
+  border-radius: 10px;  
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);  
+  padding: 20px;  
+  text-align: center;  
+}  
+button {  
+  background-color: #4caf50;  
+  color: white;  
+  border: none;  
+  padding: 10px 20px;  
+  margin: 10px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  font-size: 16px;  
+}  
+button:hover {  
+  background-color: #45a049;  
+}  
+#maze {  
+  display: grid;  
+  grid-template-columns: repeat(5, 1fr);  
+  gap: 10px;  
+}  
+.maze-cell {  
+  padding: 10px;  
+  border-radius: 5px;  
+  background-color: #393b4d;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+.maze-cell:hover {  
+  background-color: #4caf50;  
+}  
+.solved {  
+  background-color: #4caf50 !important;  
+  pointer-events: none;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>CipherMaze: The Codebreaker Quest</h1>  
+  <p id="instructions">Solve the coded string in each cell to move forward. Click on a cell to begin!</p>  
+  <div id="maze"></div>  
+  <p id="status"></p>  
+</div>  
+<script>  
+// Game logic  
+const mazeSize = 5;  
+let solvedCells = 0;  
+
+const generateCipherString = () => {  
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";  
+  let cipher = "";  
+  for (let i = 0; i < 6; i++) {  
+    cipher += chars.charAt(Math.floor(Math.random() * chars.length));  
+  }  
+  return cipher;  
+};  
+
+const mazeContainer = document.getElementById("maze");  
+const instructions = document.getElementById("instructions");  
+const status = document.getElementById("status");  
+
+const buildMaze = () => {  
+  for (let i = 0; i < mazeSize * mazeSize; i++) {  
+    const cell = document.createElement("div");  
+    cell.classList.add("maze-cell");  
+    const cipher = generateCipherString();  
+    cell.setAttribute("data-cipher", cipher);  
+    cell.textContent = "???";  
+    cell.addEventListener("click", () => solveCipher(cell, cipher));  
+    mazeContainer.appendChild(cell);  
+  }  
+  mazeContainer.style.gridTemplateColumns = `repeat(${mazeSize}, auto)`;  
+};  
+
+const solveCipher = (cell, cipher) => {  
+  const userInput = prompt(`Decrypt this code: ${cipher}`);  
+  const decoded = atob(cipher);  
+
+  if (userInput === decoded) {  
+    cell.textContent = decoded;  
+    cell.classList.add("solved");  
+    solvedCells++;  
+    updateStatus();  
+    if (solvedCells === mazeSize * mazeSize) {  
+      instructions.textContent = "Congratulations, you've solved the CipherMaze!";  
+    }  
+  } else {  
+    alert("Incorrect! Try again.");  
+  }  
+};  
+
+const updateStatus = () => {  
+  status.textContent = `Solved: ${solvedCells}/${mazeSize * mazeSize}`;  
+};  
+
+buildMaze();  
+updateStatus();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

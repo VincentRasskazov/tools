@@ -1,0 +1,127 @@
+---
+layout: null
+title: "StoryFractal: Plot Twister Simulator"
+category: "Writing"
+description: "A dynamic interactive tool that generates branching plot twists for your story, allowing you to explore \"what-if\" scenarios and visualize complex narratives in real-time."
+permalink: "/tools/daily-20260620-16-storyfractal-plot-twister-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260620"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StoryFractal: Plot Twister Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic interactive tool that generates branching plot twists for your story, allowing you to explore &quot;what-if&quot; scenarios and visualize complex narratives in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="StoryFractal: Plot Twister Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic interactive tool that generates branching plot twists for your story, allowing you to explore &quot;what-if&quot; scenarios and visualize complex narratives in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StoryFractal: Plot Twister Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic interactive tool that generates branching plot twists for your story, allowing you to explore &quot;what-if&quot; scenarios and visualize complex narratives in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>StoryFractal: Plot Twister Simulator</h1>
+    <p class="seo-subtitle">A dynamic interactive tool that generates branching plot twists for your story, allowing you to explore &quot;what-if&quot; scenarios and visualize complex narratives in real-time.</p>
+    <style>  
+  /* Clean and vibrant design */  
+  body { font-family: 'Arial', sans-serif; background: linear-gradient(to right, #f9f9f9, #eef2f3); margin: 0; padding: 20px; }  
+  #tool-app { max-width: 800px; margin: 0 auto; background: white; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); padding: 20px; }  
+  h1 { text-align: center; color: #333; }  
+  .plot-node { display: inline-block; margin: 10px; padding: 10px; background: #ddeeff; border-radius: 6px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }  
+  .plot-node:hover { transform: scale(1.1); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); }  
+  .connector { stroke: #888; stroke-width: 2px; }  
+  .controls { text-align: center; margin-top: 20px; }  
+  button { padding: 10px 20px; margin: 5px; border: none; background: #007bff; color: white; border-radius: 4px; cursor: pointer; transition: background 0.2s; }  
+  button:hover { background: #0056b3; }  
+</style>  
+<div id="tool-app">  
+  <h1>StoryFractal: Plot Twister Simulator</h1>  
+  <svg id="plot-canvas" width="100%" height="500px" style="border:1px solid #ccc;"></svg>  
+  <div class="controls">  
+    <button onclick="addNode()">Add Twist</button>  
+    <button onclick="resetPlot()">Reset</button>  
+  </div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+let plotData = [{ id: 0, text: "Start", x: 400, y: 50 }];  
+const canvas = document.getElementById('plot-canvas');  
+const svgNS = "http://www.w3.org/2000/svg";  
+
+function drawPlot() {  
+  canvas.innerHTML = "";  
+  plotData.forEach(node => {  
+    // Draw connector lines  
+    if (node.parentId !== undefined) {  
+      const parent = plotData.find(n => n.id === node.parentId);  
+      const line = document.createElementNS(svgNS, "line");  
+      line.setAttribute("x1", parent.x);  
+      line.setAttribute("y1", parent.y + 20);  
+      line.setAttribute("x2", node.x);  
+      line.setAttribute("y2", node.y - 20);  
+      line.setAttribute("class", "connector");  
+      canvas.appendChild(line);  
+    }  
+
+    // Draw nodes  
+    const circle = document.createElementNS(svgNS, "circle");  
+    circle.setAttribute("cx", node.x);  
+    circle.setAttribute("cy", node.y);  
+    circle.setAttribute("r", 20);  
+    circle.setAttribute("fill", "#ddeeff");  
+    circle.setAttribute("stroke", "#007bff");  
+    circle.setAttribute("stroke-width", 2);  
+    canvas.appendChild(circle);  
+
+    // Draw text  
+    const text = document.createElementNS(svgNS, "text");  
+    text.setAttribute("x", node.x);  
+    text.setAttribute("y", node.y + 6);  
+    text.setAttribute("text-anchor", "middle");  
+    text.setAttribute("font-size", "12px");  
+    text.setAttribute("fill", "#333");  
+    text.textContent = node.text;  
+    canvas.appendChild(text);  
+  });  
+}  
+
+function addNode() {  
+  const parentId = prompt("Enter the ID of the parent node (or leave blank for root):");  
+  const parent = parentId !== "" ? plotData.find(n => n.id === parseInt(parentId)) : null;  
+  const text = prompt("Describe the plot twist:");  
+  const newNode = {  
+    id: plotData.length,  
+    text: text || "New Twist",  
+    x: parent ? parent.x + (Math.random() * 200 - 100) : 400,  
+    y: parent ? parent.y + 100 : 150,  
+    parentId: parent ? parent.id : undefined  
+  };  
+  plotData.push(newNode);  
+  drawPlot();  
+}  
+
+function resetPlot() {  
+  plotData = [{ id: 0, text: "Start", x: 400, y: 50 }];  
+  drawPlot();  
+}  
+
+drawPlot();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

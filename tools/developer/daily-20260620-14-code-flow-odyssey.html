@@ -1,0 +1,212 @@
+---
+layout: null
+title: "Code Flow Odyssey"
+category: "Developer"
+description: "A captivating mini-game where developers visually debug and optimize code by navigating a character through a maze of logic gates, loops, and conditions to reach the desired output."
+permalink: "/tools/daily-20260620-14-code-flow-odyssey.html"
+generated_by: "api-true-ai"
+generated_date: "20260620"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Flow Odyssey | Free Online Interactive Tool</title>
+  <meta name="description" content="A captivating mini-game where developers visually debug and optimize code by navigating a character through a maze of logic gates, loops, and conditions to reach the desired output. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Code Flow Odyssey | Free Online Interactive Tool">
+  <meta property="og:description" content="A captivating mini-game where developers visually debug and optimize code by navigating a character through a maze of logic gates, loops, and conditions to reach the desired output. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Code Flow Odyssey | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A captivating mini-game where developers visually debug and optimize code by navigating a character through a maze of logic gates, loops, and conditions to reach the desired output. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Code Flow Odyssey</h1>
+    <p class="seo-subtitle">A captivating mini-game where developers visually debug and optimize code by navigating a character through a maze of logic gates, loops, and conditions to reach the desired output.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to right, #1e3c72, #2a5298);  
+  color: #fff;  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  height: 100vh;  
+  margin: 0;  
+}  
+#tool-app {  
+  text-align: center;  
+  width: 80%;  
+  max-width: 800px;  
+  background: #243b55;  
+  border-radius: 10px;  
+  padding: 20px;  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  
+}  
+#gameCanvas {  
+  background: #000;  
+  display: block;  
+  margin: 20px auto;  
+  border: 2px solid #fff;  
+  border-radius: 10px;  
+}  
+#instructions {  
+  margin-top: 20px;  
+  font-size: 14px;  
+  line-height: 1.5;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Code Flow Odyssey</h1>  
+  <canvas id="gameCanvas" width="600" height="400"></canvas>  
+  <div id="instructions">  
+    <p>Guide your character through a maze of programming logic! Use arrow keys to move and interact with logic gates to optimize the code path. Avoid infinite loops and runtime errors to complete the level!</p>  
+    <p>Goal: Reach the "Output" node by solving the puzzles along the way.</p>  
+  </div>  
+</div>  
+<script>  
+const canvas = document.getElementById('gameCanvas');  
+const ctx = canvas.getContext('2d');  
+
+const gridSize = 40;  
+const rows = canvas.height / gridSize;  
+const cols = canvas.width / gridSize;  
+
+let player = { x: 0, y: 0 };  
+let goal = { x: cols - 1, y: rows - 1 };  
+let obstacles = [];  
+let logicGates = [];  
+
+for (let i = 0; i < 20; i++) {  
+  obstacles.push({  
+    x: Math.floor(Math.random() * cols),  
+    y: Math.floor(Math.random() * rows)  
+  });  
+}  
+
+for (let i = 0; i < 5; i++) {  
+  logicGates.push({  
+    x: Math.floor(Math.random() * cols),  
+    y: Math.floor(Math.random() * rows),  
+    type: Math.random() > 0.5 ? 'AND' : 'OR'  
+  });  
+}  
+
+const drawGrid = () => {  
+  for (let x = 0; x < canvas.width; x += gridSize) {  
+    for (let y = 0; y < canvas.height; y += gridSize) {  
+      ctx.strokeStyle = '#555';  
+      ctx.strokeRect(x, y, gridSize, gridSize);  
+    }  
+  }  
+};  
+
+const drawPlayer = () => {  
+  ctx.fillStyle = '#4CAF50';  
+  ctx.fillRect(player.x * gridSize, player.y * gridSize, gridSize, gridSize);  
+};  
+
+const drawGoal = () => {  
+  ctx.fillStyle = '#FFD700';  
+  ctx.fillRect(goal.x * gridSize, goal.y * gridSize, gridSize, gridSize);  
+};  
+
+const drawObstacles = () => {  
+  ctx.fillStyle = '#FF4D4D';  
+  obstacles.forEach(obstacle => {  
+    ctx.fillRect(obstacle.x * gridSize, obstacle.y * gridSize, gridSize, gridSize);  
+  });  
+};  
+
+const drawLogicGates = () => {  
+  ctx.fillStyle = '#1E90FF';  
+  logicGates.forEach(gate => {  
+    ctx.fillRect(gate.x * gridSize, gate.y * gridSize, gridSize, gridSize);  
+    ctx.fillStyle = '#fff';  
+    ctx.font = '12px Arial';  
+    ctx.fillText(gate.type, gate.x * gridSize + 5, gate.y * gridSize + 25);  
+    ctx.fillStyle = '#1E90FF';  
+  });  
+};  
+
+const updateGame = () => {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  drawGrid();  
+  drawObstacles();  
+  drawLogicGates();  
+  drawPlayer();  
+  drawGoal();  
+};  
+
+const movePlayer = (dx, dy) => {  
+  const newX = player.x + dx;  
+  const newY = player.y + dy;  
+
+  if (newX >= 0 && newX < cols && newY >= 0 && newY < rows) {  
+    const isObstacle = obstacles.some(obstacle => obstacle.x === newX && obstacle.y === newY);  
+    if (!isObstacle) {  
+      player.x = newX;  
+      player.y = newY;  
+
+      const logicGate = logicGates.find(gate => gate.x === player.x && gate.y === player.y);  
+      if (logicGate) {  
+        if (logicGate.type === 'AND') {  
+          // Example: Implement logic for AND gate interaction  
+          alert('AND gate passed! Continue!');  
+        } else if (logicGate.type === 'OR') {  
+          // Example: Implement logic for OR gate interaction  
+          alert('OR gate passed! Keep going!');  
+        }  
+      }  
+
+      if (player.x === goal.x && player.y === goal.y) {  
+        alert('Congratulations! You reached the Output!');  
+        resetGame();  
+      }  
+    }  
+  }  
+  updateGame();  
+};  
+
+const resetGame = () => {  
+  player = { x: 0, y: 0 };  
+  updateGame();  
+};  
+
+document.addEventListener('keydown', (e) => {  
+  switch (e.key) {  
+    case 'ArrowUp':  
+      movePlayer(0, -1);  
+      break;  
+    case 'ArrowDown':  
+      movePlayer(0, 1);  
+      break;  
+    case 'ArrowLeft':  
+      movePlayer(-1, 0);  
+      break;  
+    case 'ArrowRight':  
+      movePlayer(1, 0);  
+      break;  
+  }  
+});  
+
+updateGame();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
