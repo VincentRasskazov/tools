@@ -1,0 +1,166 @@
+---
+layout: null
+title: "Stock Market Wave Rider"
+category: "Finance"
+description: "A dynamic mini-game where users navigate a surfboard through market trends, avoiding risks and catching opportunities to maximize gains."
+permalink: "/tools/daily-20260622-18-stock-market-wave-rider.html"
+generated_by: "api-true-ai"
+generated_date: "20260622"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Market Wave Rider | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic mini-game where users navigate a surfboard through market trends, avoiding risks and catching opportunities to maximize gains. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Stock Market Wave Rider | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic mini-game where users navigate a surfboard through market trends, avoiding risks and catching opportunities to maximize gains. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Stock Market Wave Rider | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic mini-game where users navigate a surfboard through market trends, avoiding risks and catching opportunities to maximize gains. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Stock Market Wave Rider</h1>
+    <p class="seo-subtitle">A dynamic mini-game where users navigate a surfboard through market trends, avoiding risks and catching opportunities to maximize gains.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to bottom, #1e3c72, #2a5298);  
+  color: #ffffff;  
+}  
+#tool-app {  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  height: 100vh;  
+}  
+.canvas-container {  
+  position: relative;  
+  width: 80vw;  
+  height: 50vh;  
+  border: 2px solid #ffffff;  
+  border-radius: 10px;  
+  background: #87ceeb;  
+  overflow: hidden;  
+}  
+.scoreboard {  
+  margin-top: 20px;  
+  font-size: 18px;  
+}  
+.button {  
+  margin-top: 10px;  
+  padding: 10px 20px;  
+  font-size: 16px;  
+  background-color: #28a745;  
+  color: white;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer;  
+}  
+.button:hover {  
+  background-color: #218838;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Stock Market Wave Rider</h1>  
+  <div class="canvas-container">  
+    <canvas id="gameCanvas" width="800" height="400"></canvas>  
+  </div>  
+  <div class="scoreboard">Score: <span id="score">0</span></div>  
+  <button class="button" id="startButton">Start Game</button>  
+</div>  
+<script>  
+const canvas = document.getElementById('gameCanvas');  
+const ctx = canvas.getContext('2d');  
+let score = 0;  
+let gameInterval;  
+let player = { x: 100, y: 200, width: 40, height: 10, dy: 0 };  
+let waves = [];  
+
+function drawPlayer() {  
+  ctx.fillStyle = "#f0a500";  
+  ctx.fillRect(player.x, player.y, player.width, player.height);  
+}  
+
+function drawWave(wave) {  
+  ctx.fillStyle = wave.type === 'opportunity' ? '#28a745' : '#dc3545';  
+  ctx.beginPath();  
+  ctx.arc(wave.x, wave.y, wave.radius, 0, Math.PI * 2);  
+  ctx.fill();  
+}  
+
+function updatePlayer() {  
+  player.y += player.dy;  
+  if (player.y < 0) player.y = 0;  
+  if (player.y > canvas.height - player.height) player.y = canvas.height - player.height;  
+}  
+
+function updateWave(wave) {  
+  wave.x -= wave.dx;  
+}  
+
+function detectCollision(wave) {  
+  if (wave.x < player.x + player.width && wave.x + wave.radius > player.x &&  
+      wave.y < player.y + player.height && wave.y + wave.radius > player.y) {  
+    if (wave.type === 'opportunity') {  
+      score += 10;  
+    } else {  
+      score -= 10;  
+    }  
+    return true;  
+  }  
+  return false;  
+}  
+
+function generateWave() {  
+  const type = Math.random() > 0.5 ? 'opportunity' : 'risk';  
+  waves.push({ x: canvas.width, y: Math.random() * canvas.height, radius: 20, dx: 3, type });  
+}  
+
+function gameLoop() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  drawPlayer();  
+  waves.forEach((wave, index) => {  
+    updateWave(wave);  
+    drawWave(wave);  
+    if (detectCollision(wave)) {  
+      waves.splice(index, 1);  
+    }  
+  });  
+  updatePlayer();  
+  document.getElementById('score').innerText = score;  
+  if (Math.random() > 0.95) generateWave();  
+}  
+
+document.getElementById('startButton').onclick = () => {  
+  score = 0;  
+  waves = [];  
+  player.dy = 0;  
+  if (gameInterval) clearInterval(gameInterval);  
+  gameInterval = setInterval(gameLoop, 30);  
+  document.addEventListener('keydown', (e) => {  
+    if (e.key === 'ArrowUp') player.dy = -4;  
+    if (e.key === 'ArrowDown') player.dy = 4;  
+  });  
+  document.addEventListener('keyup', () => player.dy = 0);  
+};  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

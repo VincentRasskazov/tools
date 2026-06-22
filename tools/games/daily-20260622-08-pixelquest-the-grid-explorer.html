@@ -1,0 +1,158 @@
+---
+layout: null
+title: "\"PixelQuest: The Grid Explorer\""
+category: "Games"
+description: "Dive into an interactive pixel-based world where you must solve puzzles, navigate traps, and unlock secrets to reach the hidden treasure on a dynamically generated grid."
+permalink: "/tools/daily-20260622-08-pixelquest-the-grid-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260622"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>&quot;PixelQuest: The Grid Explorer&quot; | Free Online Interactive Tool</title>
+  <meta name="description" content="Dive into an interactive pixel-based world where you must solve puzzles, navigate traps, and unlock secrets to reach the hidden treasure on a dynamically generated grid. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="&quot;PixelQuest: The Grid Explorer&quot; | Free Online Interactive Tool">
+  <meta property="og:description" content="Dive into an interactive pixel-based world where you must solve puzzles, navigate traps, and unlock secrets to reach the hidden treasure on a dynamically generated grid. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="&quot;PixelQuest: The Grid Explorer&quot; | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Dive into an interactive pixel-based world where you must solve puzzles, navigate traps, and unlock secrets to reach the hidden treasure on a dynamically generated grid. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>&quot;PixelQuest: The Grid Explorer&quot;</h1>
+    <p class="seo-subtitle">Dive into an interactive pixel-based world where you must solve puzzles, navigate traps, and unlock secrets to reach the hidden treasure on a dynamically generated grid.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to bottom, #2b5876, #4e4376);  
+  color: #fff;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+}  
+#tool-app {  
+  width: 300px;  
+  height: 300px;  
+  display: grid;  
+  grid-template-columns: repeat(10, 1fr);  
+  grid-template-rows: repeat(10, 1fr);  
+  gap: 2px;  
+}  
+.cell {  
+  width: 30px;  
+  height: 30px;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  background-color: #444;  
+  border-radius: 4px;  
+  cursor: pointer;  
+  transition: background-color 0.2s, transform 0.2s;  
+}  
+.cell.player {  
+  background-color: #4caf50;  
+}  
+.cell.goal {  
+  background-color: #ff5722;  
+}  
+.cell.trap {  
+  background-color: #e91e63;  
+}  
+.cell.path {  
+  background-color: #2196f3;  
+}  
+</style>  
+<div id="tool-app"></div>  
+<script>  
+// Interactive JavaScript logic here  
+const app = document.getElementById("tool-app");  
+const gridSize = 10;  
+let playerPosition = { x: 0, y: 0 };  
+let goalPosition = { x: 9, y: 9 };  
+let traps = [];  
+
+// Helper to generate random positions  
+function getRandomPosition() {  
+  return {  
+    x: Math.floor(Math.random() * gridSize),  
+    y: Math.floor(Math.random() * gridSize),  
+  };  
+}  
+
+// Initialize traps  
+for (let i = 0; i < 10; i++) {  
+  let trap;  
+  do {  
+    trap = getRandomPosition();  
+  } while ((trap.x === 0 && trap.y === 0) || (trap.x === 9 && trap.y === 9));  
+  traps.push(trap);  
+}  
+
+// Create grid  
+function createGrid() {  
+  app.innerHTML = "";  
+  for (let y = 0; y < gridSize; y++) {  
+    for (let x = 0; x < gridSize; x++) {  
+      const cell = document.createElement("div");  
+      cell.classList.add("cell");  
+
+      if (x === playerPosition.x && y === playerPosition.y) {  
+        cell.classList.add("player");  
+      } else if (x === goalPosition.x && y === goalPosition.y) {  
+        cell.classList.add("goal");  
+      } else if (traps.some(trap => trap.x === x && trap.y === y)) {  
+        cell.classList.add("trap");  
+      }  
+
+      app.appendChild(cell);  
+    }  
+  }  
+}  
+
+// Movement logic  
+document.addEventListener("keydown", (e) => {  
+  const { x, y } = playerPosition;  
+
+  if (e.key === "ArrowUp" && y > 0) playerPosition.y--;  
+  if (e.key === "ArrowDown" && y < gridSize - 1) playerPosition.y++;  
+  if (e.key === "ArrowLeft" && x > 0) playerPosition.x--;  
+  if (e.key === "ArrowRight" && x < gridSize - 1) playerPosition.x++;  
+
+  const isTrap = traps.some(trap => trap.x === playerPosition.x && trap.y === playerPosition.y);  
+  if (isTrap) {  
+    alert("You hit a trap! Game over.");  
+    location.reload();  
+  }  
+
+  if (playerPosition.x === goalPosition.x && playerPosition.y === goalPosition.y) {  
+    alert("Congratulations! You reached the goal!");  
+    location.reload();  
+  }  
+
+  createGrid();  
+});  
+
+createGrid();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

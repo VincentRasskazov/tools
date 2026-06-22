@@ -1,0 +1,165 @@
+---
+layout: null
+title: "DataFractal Explorer"
+category: "Data"
+description: "A captivating tool that visualizes and gamifies the structure of complex datasets as interactive fractals, enabling users to explore and manipulate data relationships dynamically."
+permalink: "/tools/daily-20260622-10-datafractal-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260622"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataFractal Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="A captivating tool that visualizes and gamifies the structure of complex datasets as interactive fractals, enabling users to explore and manipulate data relationships dynamically. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataFractal Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="A captivating tool that visualizes and gamifies the structure of complex datasets as interactive fractals, enabling users to explore and manipulate data relationships dynamically. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataFractal Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A captivating tool that visualizes and gamifies the structure of complex datasets as interactive fractals, enabling users to explore and manipulate data relationships dynamically. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataFractal Explorer</h1>
+    <p class="seo-subtitle">A captivating tool that visualizes and gamifies the structure of complex datasets as interactive fractals, enabling users to explore and manipulate data relationships dynamically.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  margin: 0;  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to bottom, #1e3c72, #2a5298);  
+  color: white;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+
+#tool-app {  
+  width: 80vw;  
+  height: 80vh;  
+  background: rgba(255, 255, 255, 0.1);  
+  border: 1px solid rgba(255, 255, 255, 0.3);  
+  border-radius: 12px;  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);  
+  position: relative;  
+}  
+
+canvas {  
+  border-radius: 12px;  
+}  
+
+#info-bar {  
+  position: absolute;  
+  bottom: 10px;  
+  width: 100%;  
+  text-align: center;  
+  font-size: 14px;  
+  color: rgba(255, 255, 255, 0.9);  
+}  
+</style>  
+<div id="tool-app">  
+  <canvas id="fractalCanvas" width="600" height="600"></canvas>  
+  <div id="info-bar">Click on fractal nodes to expand or collapse data branches!</div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+
+const canvas = document.getElementById("fractalCanvas");  
+const ctx = canvas.getContext("2d");  
+const width = canvas.width;  
+const height = canvas.height;  
+
+let data = {  
+  name: "Root",  
+  children: [  
+    { name: "Node A", children: [{ name: "Sub A1" }, { name: "Sub A2" }] },  
+    { name: "Node B", children: [{ name: "Sub B1" }, { name: "Sub B2" }] },  
+    { name: "Node C", children: [] }  
+  ]  
+};  
+
+let nodes = [];  
+
+function drawFractal(node, x, y, angle, depth, parent) {  
+  if (depth > 5) return;  
+  const branchLength = 80 / (depth + 1);  
+  const endX = x + Math.cos(angle) * branchLength;  
+  const endY = y + Math.sin(angle) * branchLength;  
+
+  if (parent) {  
+    ctx.beginPath();  
+    ctx.moveTo(parent.x, parent.y);  
+    ctx.lineTo(endX, endY);  
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.6)";  
+    ctx.lineWidth = 2;  
+    ctx.stroke();  
+  }  
+
+  const nodeObj = {  
+    ...node,  
+    x: endX,  
+    y: endY,  
+    expanded: node.expanded || false,  
+    depth: depth  
+  };  
+  nodes.push(nodeObj);  
+
+  ctx.beginPath();  
+  ctx.arc(endX, endY, 5, 0, Math.PI * 2);  
+  ctx.fillStyle = "white";  
+  ctx.fill();  
+
+  if (node.expanded && node.children) {  
+    const angleStep = Math.PI / node.children.length;  
+    node.children.forEach((child, index) => {  
+      drawFractal(child, endX, endY, angle - angleStep * (index - (node.children.length - 1) / 2), depth + 1, nodeObj);  
+    });  
+  }  
+}  
+
+function render() {  
+  ctx.clearRect(0, 0, width, height);  
+  nodes = [];  
+  drawFractal(data, width / 2, height / 2, -Math.PI / 2, 0, null);  
+}  
+
+canvas.addEventListener("click", (e) => {  
+  const rect = canvas.getBoundingClientRect();  
+  const mouseX = e.clientX - rect.left;  
+  const mouseY = e.clientY - rect.top;  
+
+  nodes.forEach((node) => {  
+    const dist = Math.sqrt((mouseX - node.x) ** 2 + (mouseY - node.y) ** 2);  
+    if (dist < 10) {  
+      node.expanded = !node.expanded;  
+      render();  
+    }  
+  });  
+});  
+
+render();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
