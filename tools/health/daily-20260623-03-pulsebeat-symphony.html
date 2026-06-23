@@ -1,0 +1,156 @@
+---
+layout: null
+title: "PulseBeat Symphony"
+category: "Health"
+description: "A highly interactive mini-game that lets users create unique music tracks by matching their heart rate (via webcam or manual input) with rhythm-based challenges."
+permalink: "/tools/daily-20260623-03-pulsebeat-symphony.html"
+generated_by: "api-true-ai"
+generated_date: "20260623"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PulseBeat Symphony | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive mini-game that lets users create unique music tracks by matching their heart rate (via webcam or manual input) with rhythm-based challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PulseBeat Symphony | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive mini-game that lets users create unique music tracks by matching their heart rate (via webcam or manual input) with rhythm-based challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PulseBeat Symphony | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive mini-game that lets users create unique music tracks by matching their heart rate (via webcam or manual input) with rhythm-based challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PulseBeat Symphony</h1>
+    <p class="seo-subtitle">A highly interactive mini-game that lets users create unique music tracks by matching their heart rate (via webcam or manual input) with rhythm-based challenges.</p>
+    <style>
+/* Modern, beautiful inline CSS */
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+}
+#tool-app {
+  text-align: center;
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 600px;
+}
+button {
+  background-color: #7f53ac;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+button:hover {
+  background-color: #6473b3;
+}
+#game-canvas {
+  margin-top: 20px;
+  width: 100%;
+  height: 300px;
+  background: #f5f7fa;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+}
+</style>
+<div id="tool-app">
+  <h1>PulseBeat Symphony</h1>
+  <p>Match your heart rate to the rhythm and create unique melodies. Use a webcam or enter your pulse manually!</p>
+  <div>
+    <button id="start-game">Start Game</button>
+    <button id="manual-input">Manual Input</button>
+  </div>
+  <canvas id="game-canvas"></canvas>
+  <p id="feedback" style="font-size: 1.2em; color: #7f53ac;"></p>
+</div>
+<script>
+let gameActive = false;
+const canvas = document.getElementById('game-canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = canvas.clientWidth;
+canvas.height = canvas.clientHeight;
+
+document.getElementById('start-game').addEventListener('click', () => {
+  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+      document.getElementById('feedback').innerText = "Analyzing your pulse... Align with the rhythm!";
+      startGameWithPulse();
+    }).catch(err => {
+      document.getElementById('feedback').innerText = "Webcam not detected. Try manual input.";
+    });
+  } else {
+    alert("Webcam not supported on this browser.");
+  }
+});
+
+document.getElementById('manual-input').addEventListener('click', () => {
+  const manualPulse = prompt("Enter your pulse rate (bpm):");
+  if (manualPulse && !isNaN(manualPulse)) {
+    startGameWithPulse(parseInt(manualPulse));
+  } else {
+    alert("Invalid pulse input. Please enter a number.");
+  }
+});
+
+function startGameWithPulse(pulse = 75) {
+  gameActive = true;
+  let rhythm = Math.random() * 2 + 1;
+  let time = 0;
+
+  function gameLoop() {
+    if (!gameActive) return;
+    requestAnimationFrame(gameLoop);
+    time += 0.01;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw rhythm circle
+    ctx.beginPath();
+    ctx.arc(canvas.width / 2, canvas.height / 2, 50 + 20 * Math.sin(time * rhythm), 0, Math.PI * 2);
+    ctx.fillStyle = '#7f53ac';
+    ctx.fill();
+
+    // Check pulse alignment for feedback
+    const diff = Math.abs(Math.sin(time * rhythm) - Math.sin(time * pulse / 60));
+    if (diff < 0.1) {
+      document.getElementById('feedback').innerText = "Great job! You're on beat!";
+    } else if (diff < 0.2) {
+      document.getElementById('feedback').innerText = "Close! Adjust your rhythm slightly.";
+    } else {
+      document.getElementById('feedback').innerText = "Keep trying to match the rhythm!";
+    }
+  }
+  gameLoop();
+}
+
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

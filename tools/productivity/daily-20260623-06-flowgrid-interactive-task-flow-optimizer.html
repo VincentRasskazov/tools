@@ -1,0 +1,140 @@
+---
+layout: null
+title: "FlowGrid: Interactive Task Flow Optimizer"
+category: "Productivity"
+description: "A dynamic, interactive logic grid where users visually map out, rearrange, and analyze task dependencies to maximize productivity and streamline workflows."
+permalink: "/tools/daily-20260623-06-flowgrid-interactive-task-flow-optimizer.html"
+generated_by: "api-true-ai"
+generated_date: "20260623"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlowGrid: Interactive Task Flow Optimizer | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, interactive logic grid where users visually map out, rearrange, and analyze task dependencies to maximize productivity and streamline workflows. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="FlowGrid: Interactive Task Flow Optimizer | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, interactive logic grid where users visually map out, rearrange, and analyze task dependencies to maximize productivity and streamline workflows. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FlowGrid: Interactive Task Flow Optimizer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, interactive logic grid where users visually map out, rearrange, and analyze task dependencies to maximize productivity and streamline workflows. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>FlowGrid: Interactive Task Flow Optimizer</h1>
+    <p class="seo-subtitle">A dynamic, interactive logic grid where users visually map out, rearrange, and analyze task dependencies to maximize productivity and streamline workflows.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f9; color: #333; }  
+  #tool-app { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }  
+  .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 20px; }  
+  .task { width: 100px; height: 100px; background-color: #fff; border: 2px solid #ddd; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: grab; }  
+  .task.dragging { opacity: 0.5; }  
+  .grid-placeholder { width: 100px; height: 100px; background-color: #e4e4e4; border: 2px dashed #bbb; }  
+  #controls { margin-top: 20px; display: flex; gap: 10px; }  
+  button { background-color: #007BFF; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }  
+  button:disabled { background-color: #ccc; }  
+</style>  
+<div id="tool-app">  
+  <div class="grid" id="task-grid"></div>  
+  <div id="controls">  
+    <button id="analyze-btn" disabled>Analyze Flow</button>  
+    <button id="reset-btn">Reset Grid</button>  
+  </div>  
+</div>  
+<script>  
+  const taskGrid = document.getElementById("task-grid");  
+  const analyzeBtn = document.getElementById("analyze-btn");  
+  const resetBtn = document.getElementById("reset-btn");  
+  
+  let tasks = ["A", "B", "C", "D", "E"];  
+  let dependencies = []; // Array of pairs [from, to] indicating task dependencies  
+
+  function createGrid() {  
+    taskGrid.innerHTML = "";  
+    tasks.forEach((task, index) => {  
+      const taskDiv = document.createElement("div");  
+      taskDiv.className = "task";  
+      taskDiv.draggable = true;  
+      taskDiv.textContent = task;  
+      taskDiv.dataset.index = index;  
+      taskGrid.appendChild(taskDiv);  
+    });  
+    for (let i = tasks.length; i < 25; i++) {  
+      const placeholder = document.createElement("div");  
+      placeholder.className = "grid-placeholder";  
+      taskGrid.appendChild(placeholder);  
+    }  
+    setupDragAndDrop();  
+  }  
+  
+  function setupDragAndDrop() {  
+    const taskElements = document.querySelectorAll(".task");  
+    taskElements.forEach(task => {  
+      task.addEventListener("dragstart", dragStart);  
+      task.addEventListener("dragend", dragEnd);  
+    });  
+  
+    const placeholders = document.querySelectorAll(".grid-placeholder");  
+    placeholders.forEach(placeholder => {  
+      placeholder.addEventListener("dragover", dragOver);  
+      placeholder.addEventListener("drop", drop);  
+    });  
+  }  
+  
+  let dragged;  
+  function dragStart(event) {  
+    dragged = event.target;  
+    dragged.classList.add("dragging");  
+  }  
+  
+  function dragEnd(event) {  
+    dragged.classList.remove("dragging");  
+  }  
+  
+  function dragOver(event) {  
+    event.preventDefault();  
+  }  
+  
+  function drop(event) {  
+    const index = Array.from(taskGrid.children).indexOf(event.target);  
+    if (index !== -1) {  
+      tasks.splice(index, 0, tasks.splice(dragged.dataset.index, 1)[0]);  
+      createGrid();  
+      analyzeBtn.disabled = tasks.length < 2;  
+    }  
+  }  
+  
+  analyzeBtn.addEventListener("click", () => {  
+    dependencies = [];  
+    for (let i = 1; i < tasks.length; i++) {  
+      dependencies.push([tasks[i - 1], tasks[i]]);  
+    }  
+    alert("Task Dependencies Analyzed: " + JSON.stringify(dependencies));  
+  });  
+  
+  resetBtn.addEventListener("click", () => {  
+    tasks = ["A", "B", "C", "D", "E"];  
+    dependencies = [];  
+    createGrid();  
+    analyzeBtn.disabled = true;  
+  });  
+  
+  createGrid();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

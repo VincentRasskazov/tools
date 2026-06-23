@@ -1,0 +1,126 @@
+---
+layout: null
+title: "StoryWeaver: Dynamic Plot Generator"
+category: "Writing"
+description: "An interactive tool that generates branching storylines based on user input and visualizes them as a dynamic, interactive flowchart."
+permalink: "/tools/daily-20260623-05-storyweaver-dynamic-plot-generator.html"
+generated_by: "api-true-ai"
+generated_date: "20260623"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StoryWeaver: Dynamic Plot Generator | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool that generates branching storylines based on user input and visualizes them as a dynamic, interactive flowchart. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="StoryWeaver: Dynamic Plot Generator | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool that generates branching storylines based on user input and visualizes them as a dynamic, interactive flowchart. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StoryWeaver: Dynamic Plot Generator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool that generates branching storylines based on user input and visualizes them as a dynamic, interactive flowchart. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>StoryWeaver: Dynamic Plot Generator</h1>
+    <p class="seo-subtitle">An interactive tool that generates branching storylines based on user input and visualizes them as a dynamic, interactive flowchart.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f9f9f9; }  
+  #tool-app { display: flex; flex-direction: column; align-items: center; padding: 20px; }  
+  h1 { color: #333; margin-bottom: 10px; }  
+  #input-container { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }  
+  #story-graph { width: 100%; height: 500px; background: #fff; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 8px; overflow: hidden; }  
+  button { padding: 10px 15px; border: none; border-radius: 5px; background-color: #007BFF; color: white; cursor: pointer; }  
+  button:hover { background-color: #0056b3; }  
+  .node { padding: 10px; border-radius: 5px; background-color: #007BFF; color: white; text-align: center; }  
+  .link { stroke: #333; stroke-width: 2px; }  
+</style>  
+<div id="tool-app">  
+  <h1>StoryWeaver</h1>  
+  <div id="input-container">  
+    <input id="story-prompt" type="text" placeholder="Enter a story prompt..." style="padding: 10px; width: 300px; border: 1px solid #ccc; border-radius: 5px;">  
+    <button id="generate-button">Generate Story Path</button>  
+  </div>  
+  <div id="story-graph"></div>  
+</div>  
+<script>  
+const app = document.getElementById('story-graph');  
+const button = document.getElementById('generate-button');  
+
+button.addEventListener('click', () => {  
+  const prompt = document.getElementById('story-prompt').value;  
+  if (!prompt.trim()) {  
+    alert('Please enter a story prompt!');  
+    return;  
+  }  
+  app.innerHTML = '';  
+  generateStoryGraph(prompt);  
+});  
+
+function generateStoryGraph(prompt) {  
+  // Mock branching logic  
+  const branches = [  
+    { id: '1', text: prompt, children: ['2', '3'] },  
+    { id: '2', text: 'The character takes a brave step forward.', children: ['4', '5'] },  
+    { id: '3', text: 'The character hesitates, pondering their choices.', children: ['6'] },  
+    { id: '4', text: 'They encounter a helpful stranger.', children: [] },  
+    { id: '5', text: 'A hidden trap is revealed!', children: [] },  
+    { id: '6', text: 'A mysterious letter arrives.', children: [] }  
+  ];  
+
+  const width = app.clientWidth, height = app.clientHeight;  
+  const svg = d3.select(app).append('svg').attr('width', width).attr('height', height);  
+
+  const simulation = d3.forceSimulation(branches)  
+    .force('link', d3.forceLink().id(d => d.id))  
+    .force('charge', d3.forceManyBody())  
+    .force('center', d3.forceCenter(width / 2, height / 2));  
+
+  const link = svg.append('g')  
+    .selectAll('.link')  
+    .data(branches.slice(1))  
+    .enter().append('line')  
+    .attr('class', 'link');  
+
+  const node = svg.append('g')  
+    .selectAll('.node')  
+    .data(branches)  
+    .enter().append('g')  
+    .attr('class', 'node');  
+
+  node.append('circle')  
+    .attr('r', 20)  
+    .attr('fill', '#007BFF');  
+
+  node.append('text')  
+    .text(d => d.text)  
+    .attr('font-size', '12px')  
+    .attr('fill', 'white')  
+    .attr('x', -20)  
+    .attr('y', 5);  
+
+  simulation.nodes(branches).on('tick', () => {  
+    link.attr('x1', d => d.source.x)  
+      .attr('y1', d => d.source.y)  
+      .attr('x2', d => d.target.x)  
+      .attr('y2', d => d.target.y);  
+    node.attr('transform', d => `translate(${d.x}, ${d.y})`);  
+  });  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

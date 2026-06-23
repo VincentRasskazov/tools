@@ -1,0 +1,165 @@
+---
+layout: null
+title: "DataMorph: Interactive Dataset Shapeshifter"
+category: "Data"
+description: "Transform and interact with datasets in real-time, using draggable nodes and visual connections to reshape, filter, and analyze data flows."
+permalink: "/tools/daily-20260623-13-datamorph-interactive-dataset-shapeshifter.html"
+generated_by: "api-true-ai"
+generated_date: "20260623"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataMorph: Interactive Dataset Shapeshifter | Free Online Interactive Tool</title>
+  <meta name="description" content="Transform and interact with datasets in real-time, using draggable nodes and visual connections to reshape, filter, and analyze data flows. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataMorph: Interactive Dataset Shapeshifter | Free Online Interactive Tool">
+  <meta property="og:description" content="Transform and interact with datasets in real-time, using draggable nodes and visual connections to reshape, filter, and analyze data flows. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataMorph: Interactive Dataset Shapeshifter | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Transform and interact with datasets in real-time, using draggable nodes and visual connections to reshape, filter, and analyze data flows. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataMorph: Interactive Dataset Shapeshifter</h1>
+    <p class="seo-subtitle">Transform and interact with datasets in real-time, using draggable nodes and visual connections to reshape, filter, and analyze data flows.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body { font-family: Arial, sans-serif; background: #1e1e2f; color: #e8e8f5; margin: 0; }  
+#tool-app { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; padding: 20px; }  
+canvas { border: 2px solid #444; border-radius: 12px; background: #29293d; }  
+#toolbar { display: flex; gap: 10px; margin-top: 10px; }  
+button { background: #5858a6; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; transition: background 0.3s ease; }  
+button:hover { background: #7a7ad1; }  
+</style>  
+<div id="tool-app">  
+  <canvas id="dataCanvas" width="800" height="500"></canvas>  
+  <div id="toolbar">  
+    <button id="addNode">Add Node</button>  
+    <button id="resetCanvas">Reset</button>  
+  </div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById('dataCanvas');  
+const ctx = canvas.getContext('2d');  
+let nodes = [];  
+let connections = [];  
+let draggingNode = null;  
+
+// Node class  
+class Node {  
+  constructor(x, y) {  
+    this.x = x;  
+    this.y = y;  
+    this.radius = 20;  
+    this.color = 'lime';  
+  }  
+  draw() {  
+    ctx.beginPath();  
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);  
+    ctx.fillStyle = this.color;  
+    ctx.fill();  
+    ctx.strokeStyle = 'white';  
+    ctx.stroke();  
+  }  
+}  
+
+// Connection class  
+class Connection {  
+  constructor(nodeA, nodeB) {  
+    this.nodeA = nodeA;  
+    this.nodeB = nodeB;  
+  }  
+  draw() {  
+    ctx.beginPath();  
+    ctx.moveTo(this.nodeA.x, this.nodeA.y);  
+    ctx.lineTo(this.nodeB.x, this.nodeB.y);  
+    ctx.strokeStyle = 'white';  
+    ctx.lineWidth = 2;  
+    ctx.stroke();  
+  }  
+}  
+
+// Add node  
+document.getElementById('addNode').addEventListener('click', () => {  
+  const x = Math.random() * (canvas.width - 40) + 20;  
+  const y = Math.random() * (canvas.height - 40) + 20;  
+  nodes.push(new Node(x, y));  
+  drawCanvas();  
+});  
+
+// Reset canvas  
+document.getElementById('resetCanvas').addEventListener('click', () => {  
+  nodes = [];  
+  connections = [];  
+  drawCanvas();  
+});  
+
+// Draw canvas  
+function drawCanvas() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  connections.forEach(conn => conn.draw());  
+  nodes.forEach(node => node.draw());  
+}  
+
+// Dragging logic  
+canvas.addEventListener('mousedown', (event) => {  
+  const { offsetX, offsetY } = event;  
+  draggingNode = nodes.find(node => {  
+    const dx = offsetX - node.x;  
+    const dy = offsetY - node.y;  
+    return Math.sqrt(dx * dx + dy * dy) < node.radius;  
+  });  
+});  
+
+canvas.addEventListener('mousemove', (event) => {  
+  if (draggingNode) {  
+    const { offsetX, offsetY } = event;  
+    draggingNode.x = offsetX;  
+    draggingNode.y = offsetY;  
+    drawCanvas();  
+  }  
+});  
+
+canvas.addEventListener('mouseup', () => {  
+  draggingNode = null;  
+});  
+
+// Connect nodes  
+canvas.addEventListener('dblclick', (event) => {  
+  const { offsetX, offsetY } = event;  
+  const clickedNode = nodes.find(node => {  
+    const dx = offsetX - node.x;  
+    const dy = offsetY - node.y;  
+    return Math.sqrt(dx * dx + dy * dy) < node.radius;  
+  });  
+
+  if (clickedNode) {  
+    if (draggingNode && draggingNode !== clickedNode) {  
+      connections.push(new Connection(draggingNode, clickedNode));  
+      draggingNode = null;  
+      drawCanvas();  
+    } else {  
+      draggingNode = clickedNode;  
+    }  
+  }  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
