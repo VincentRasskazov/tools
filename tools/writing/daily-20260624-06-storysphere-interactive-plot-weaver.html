@@ -1,0 +1,185 @@
+---
+layout: null
+title: "StorySphere: Interactive Plot Weaver"
+category: "Writing"
+description: "A dynamic, 3D narrative-building tool where users connect story elements, characters, and plot points to visualize and refine their stories."
+permalink: "/tools/daily-20260624-06-storysphere-interactive-plot-weaver.html"
+generated_by: "api-true-ai"
+generated_date: "20260624"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StorySphere: Interactive Plot Weaver | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, 3D narrative-building tool where users connect story elements, characters, and plot points to visualize and refine their stories. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="StorySphere: Interactive Plot Weaver | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, 3D narrative-building tool where users connect story elements, characters, and plot points to visualize and refine their stories. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StorySphere: Interactive Plot Weaver | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, 3D narrative-building tool where users connect story elements, characters, and plot points to visualize and refine their stories. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>StorySphere: Interactive Plot Weaver</h1>
+    <p class="seo-subtitle">A dynamic, 3D narrative-building tool where users connect story elements, characters, and plot points to visualize and refine their stories.</p>
+    <style>  
+  #tool-app {
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle, #1e1e2f, #121214);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    overflow: hidden;
+  }
+  .node {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #6d6db5, #4c4c89);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 14px;
+    color: white;
+    position: absolute;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  .node:hover {
+    transform: scale(1.1);
+  }
+  .connection {
+    position: absolute;
+    stroke: #8888ff;
+    stroke-width: 2px;
+  }
+  #controls {
+    position: absolute;
+    bottom: 20px;
+    width: 80%;
+    text-align: center;
+    z-index: 10;
+  }
+  button {
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background: #4444aa;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  button:hover {
+    background-color: #6666cc;
+  }
+</style>  
+<div id="tool-app">  
+  <svg id="connections" style="position:absolute; top:0; left:0; width:100%; height:100%;"></svg>  
+  <div id="node-container"></div>  
+  <div id="controls">  
+    <button onclick="addNode()">Add Node</button>  
+    <button onclick="clearNodes()">Clear</button>  
+  </div>  
+</div>  
+<script>  
+  const nodeContainer = document.getElementById('node-container');  
+  const connections = document.getElementById('connections');  
+  const nodes = [];  
+  const connectionsData = [];  
+
+  function addNode() {  
+    const node = document.createElement('div');  
+    node.className = 'node';  
+    node.contentEditable = true;  
+    node.innerText = 'New Idea';  
+    node.style.left = `${Math.random() * 80 + 10}vw`;  
+    node.style.top = `${Math.random() * 80 + 10}vh`;  
+    node.addEventListener('mousedown', startDrag);  
+
+    nodeContainer.appendChild(node);  
+    nodes.push(node);  
+    redrawConnections();  
+  }  
+
+  function startDrag(e) {  
+    const node = e.target;  
+    let offsetX = e.clientX - node.offsetLeft;  
+    let offsetY = e.clientY - node.offsetTop;  
+
+    function onDrag(event) {  
+      node.style.left = `${event.clientX - offsetX}px`;  
+      node.style.top = `${event.clientY - offsetY}px`;  
+      redrawConnections();  
+    }  
+
+    function stopDrag() {  
+      document.removeEventListener('mousemove', onDrag);  
+      document.removeEventListener('mouseup', stopDrag);  
+    }  
+
+    document.addEventListener('mousemove', onDrag);  
+    document.addEventListener('mouseup', stopDrag);  
+  }  
+
+  function redrawConnections() {  
+    connections.innerHTML = '';  
+    connectionsData.forEach(([node1, node2]) => {  
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');  
+      const rect1 = node1.getBoundingClientRect();  
+      const rect2 = node2.getBoundingClientRect();  
+
+      line.setAttribute('x1', rect1.left + rect1.width / 2);  
+      line.setAttribute('y1', rect1.top + rect1.height / 2);  
+      line.setAttribute('x2', rect2.left + rect2.width / 2);  
+      line.setAttribute('y2', rect2.top + rect2.height / 2);  
+      line.className = 'connection';  
+      connections.appendChild(line);  
+    });  
+  }  
+
+  function clearNodes() {  
+    nodes.length = 0;  
+    connectionsData.length = 0;  
+    nodeContainer.innerHTML = '';  
+    connections.innerHTML = '';  
+  }  
+
+  nodeContainer.addEventListener('click', (e) => {  
+    if (e.target.className === 'node') {  
+      if (window.selectedNode && window.selectedNode !== e.target) {  
+        connectionsData.push([window.selectedNode, e.target]);  
+        window.selectedNode = null;  
+        redrawConnections();  
+      } else {  
+        window.selectedNode = e.target;  
+      }  
+    } else {  
+      window.selectedNode = null;  
+    }  
+  });  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,144 @@
+---
+layout: null
+title: "PhishDetect: Email Threat Simulator"
+category: "Cybersecurity"
+description: "An interactive game where users must identify phishing emails and malicious links from simulated inbox scenarios to improve their cybersecurity awareness."
+permalink: "/tools/daily-20260624-20-phishdetect-email-threat-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260624"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhishDetect: Email Threat Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive game where users must identify phishing emails and malicious links from simulated inbox scenarios to improve their cybersecurity awareness. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PhishDetect: Email Threat Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive game where users must identify phishing emails and malicious links from simulated inbox scenarios to improve their cybersecurity awareness. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PhishDetect: Email Threat Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive game where users must identify phishing emails and malicious links from simulated inbox scenarios to improve their cybersecurity awareness. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PhishDetect: Email Threat Simulator</h1>
+    <p class="seo-subtitle">An interactive game where users must identify phishing emails and malicious links from simulated inbox scenarios to improve their cybersecurity awareness.</p>
+    <style>  
+body {  
+  font-family: 'Arial', sans-serif;  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  background-color: #1e1e2f;  
+  color: #fff;  
+  height: 100vh;  
+  margin: 0;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 80%;  
+  max-width: 900px;  
+  background: #2a2a40;  
+  padding: 20px;  
+  border-radius: 12px;  
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);  
+}  
+.email-box {  
+  background: #393960;  
+  padding: 15px;  
+  margin-bottom: 10px;  
+  border-radius: 8px;  
+  cursor: pointer;  
+  transition: transform 0.2s;  
+}  
+.email-box:hover {  
+  transform: scale(1.02);  
+  background: #4a4a76;  
+}  
+.email-header {  
+  font-weight: bold;  
+  margin-bottom: 5px;  
+}  
+.email-content {  
+  font-size: 0.9em;  
+}  
+.result-box {  
+  padding: 15px;  
+  margin-top: 20px;  
+  background: #4a4a76;  
+  border-radius: 8px;  
+  display: none;  
+}  
+.result-box.success {  
+  background: #4caf50;  
+}  
+.result-box.fail {  
+  background: #f44336;  
+}  
+</style>  
+<div id="tool-app">  
+  <h2>PhishDetect: Email Threat Simulator</h2>  
+  <p>Select the phishing email(s) from the list below:</p>  
+  <div id="emails"></div>  
+  <button id="submit-btn" style="margin-top: 20px; padding: 10px 20px; border: none; background: #008cba; color: #fff; border-radius: 6px; cursor: pointer;">Submit</button>  
+  <div id="result" class="result-box"></div>  
+</div>  
+<script>  
+const emails = [  
+  { id: 1, header: "Your account has been compromised!", content: "Click here to reset your password immediately.", isPhishing: true },  
+  { id: 2, header: "Congratulations, you've won a prize!", content: "Claim your reward now by clicking this link.", isPhishing: true },  
+  { id: 3, header: "Weekly newsletter from TechTalk", content: "Check out our latest articles on tech trends.", isPhishing: false },  
+  { id: 4, header: "Update your payment information", content: "Your subscription is about to expire. Update your info here.", isPhishing: true },  
+  { id: 5, header: "Event invitation: Cybersecurity Conference 2023", content: "Join us for a free online conference on cybersecurity trends.", isPhishing: false }  
+];  
+
+const emailContainer = document.getElementById('emails');  
+const resultBox = document.getElementById('result');  
+const submitBtn = document.getElementById('submit-btn');  
+
+emails.forEach(email => {  
+  const emailDiv = document.createElement('div');  
+  emailDiv.classList.add('email-box');  
+  emailDiv.innerHTML = `  
+    <div class="email-header">${email.header}</div>  
+    <div class="email-content">${email.content}</div>  
+  `;  
+  emailDiv.dataset.id = email.id;  
+  emailDiv.addEventListener('click', () => {  
+    emailDiv.classList.toggle('selected');  
+  });  
+  emailContainer.appendChild(emailDiv);  
+});  
+
+submitBtn.addEventListener('click', () => {  
+  const selectedEmails = Array.from(document.querySelectorAll('.email-box.selected')).map(div => parseInt(div.dataset.id));  
+  const correctPhishingIds = emails.filter(email => email.isPhishing).map(email => email.id);  
+  
+  if (JSON.stringify(selectedEmails.sort()) === JSON.stringify(correctPhishingIds.sort())) {  
+    resultBox.textContent = "Correct! You identified all phishing emails.";  
+    resultBox.className = "result-box success";  
+  } else {  
+    resultBox.textContent = "Incorrect. Review your choices and try again.";  
+    resultBox.className = "result-box fail";  
+  }  
+  resultBox.style.display = 'block';  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

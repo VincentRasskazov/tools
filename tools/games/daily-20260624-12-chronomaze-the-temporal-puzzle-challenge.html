@@ -1,0 +1,208 @@
+---
+layout: null
+title: "ChronoMaze: The Temporal Puzzle Challenge"
+category: "Games"
+description: "A time-twisting puzzle game where players manipulate past, present, and future states to solve intricate mazes."
+permalink: "/tools/daily-20260624-12-chronomaze-the-temporal-puzzle-challenge.html"
+generated_by: "api-true-ai"
+generated_date: "20260624"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChronoMaze: The Temporal Puzzle Challenge | Free Online Interactive Tool</title>
+  <meta name="description" content="A time-twisting puzzle game where players manipulate past, present, and future states to solve intricate mazes. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="ChronoMaze: The Temporal Puzzle Challenge | Free Online Interactive Tool">
+  <meta property="og:description" content="A time-twisting puzzle game where players manipulate past, present, and future states to solve intricate mazes. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ChronoMaze: The Temporal Puzzle Challenge | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A time-twisting puzzle game where players manipulate past, present, and future states to solve intricate mazes. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>ChronoMaze: The Temporal Puzzle Challenge</h1>
+    <p class="seo-subtitle">A time-twisting puzzle game where players manipulate past, present, and future states to solve intricate mazes.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+    font-family: 'Arial', sans-serif;  
+    background: linear-gradient(to bottom, #1a1a2e, #16213e);  
+    color: #ffffff;  
+    margin: 0;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+    overflow: hidden;  
+}  
+#tool-app {  
+    width: 90%;  
+    max-width: 600px;  
+    text-align: center;  
+    background: #0f3460;  
+    border-radius: 12px;  
+    padding: 20px;  
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.8);  
+}  
+#maze-grid {  
+    display: grid;  
+    grid-template-columns: repeat(6, 1fr);  
+    gap: 5px;  
+    margin: 20px 0;  
+}  
+.cell {  
+    width: 40px;  
+    height: 40px;  
+    background-color: #e94560;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    font-size: 20px;  
+    font-weight: bold;  
+    cursor: pointer;  
+    border-radius: 5px;  
+    transition: transform 0.2s, background-color 0.2s;  
+}  
+.cell:hover {  
+    transform: scale(1.1);  
+    background-color: #53354a;  
+}  
+.controls {  
+    display: flex;  
+    justify-content: space-between;  
+    margin-top: 20px;  
+}  
+button {  
+    padding: 10px 20px;  
+    font-size: 16px;  
+    background: #1f4068;  
+    border: none;  
+    color: white;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    transition: background 0.3s;  
+}  
+button:hover {  
+    background: #16213e;  
+}  
+</style>  
+<div id="tool-app">  
+    <h1>ChronoMaze</h1>  
+    <p>Control time to navigate the maze! Use "Rewind", "Pause", and "Fast Forward" to manipulate the maze state and reach the goal.</p>  
+    <div id="maze-grid"></div>  
+    <div class="controls">  
+        <button id="rewind">⏪ Rewind</button>  
+        <button id="pause">⏸ Pause</button>  
+        <button id="fast-forward">⏩ Fast Forward</button>  
+    </div>  
+    <p id="status">Navigate the maze to reach the 🏁!</p>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const app = document.querySelector('#tool-app');  
+const mazeGrid = document.querySelector('#maze-grid');  
+const statusText = document.querySelector('#status');  
+
+// Maze configuration  
+const mazeSize = 6;  
+const totalCells = mazeSize * mazeSize;  
+const mazeState = {  
+    currentGrid: [],  
+    history: [],  
+    future: [],  
+};  
+let playerIndex = 0;  
+let goalIndex = totalCells - 1;  
+
+// Initialize maze  
+function initMaze() {  
+    mazeGrid.innerHTML = '';  
+    mazeState.currentGrid = Array(totalCells).fill('');  
+    playerIndex = 0;  
+    mazeState.currentGrid[playerIndex] = '🔵';  
+    mazeState.currentGrid[goalIndex] = '🏁';  
+    mazeState.history = [[...mazeState.currentGrid]];  
+    mazeState.future = [];  
+    renderMaze();  
+}  
+
+// Render maze  
+function renderMaze() {  
+    mazeGrid.style.gridTemplateColumns = `repeat(${mazeSize}, 1fr)`;  
+    mazeGrid.innerHTML = '';  
+    mazeState.currentGrid.forEach((cell, i) => {  
+        const cellDiv = document.createElement('div');  
+        cellDiv.className = 'cell';  
+        cellDiv.textContent = cell;  
+        cellDiv.addEventListener('click', () => movePlayer(i));  
+        mazeGrid.appendChild(cellDiv);  
+    });  
+    checkWinCondition();  
+}  
+
+// Move player  
+function movePlayer(index) {  
+    if (Math.abs(index - playerIndex) === 1 || Math.abs(index - playerIndex) === mazeSize) {  
+        mazeState.history.push([...mazeState.currentGrid]);  
+        mazeState.future = [];  
+        mazeState.currentGrid[playerIndex] = '';  
+        mazeState.currentGrid[index] = '🔵';  
+        playerIndex = index;  
+        renderMaze();  
+    }  
+}  
+
+// Check win condition  
+function checkWinCondition() {  
+    if (playerIndex === goalIndex) {  
+        statusText.textContent = '🎉 You reached the goal! 🎉';  
+        document.querySelectorAll('.cell').forEach(cell => cell.style.pointerEvents = 'none');  
+    } else {  
+        statusText.textContent = 'Navigate the maze to reach the 🏁!';  
+    }  
+}  
+
+// Time control buttons  
+document.querySelector('#rewind').addEventListener('click', () => {  
+    if (mazeState.history.length > 1) {  
+        mazeState.future.push(mazeState.history.pop());  
+        mazeState.currentGrid = [...mazeState.history[mazeState.history.length - 1]];  
+        playerIndex = mazeState.currentGrid.indexOf('🔵');  
+        renderMaze();  
+    }  
+});  
+
+document.querySelector('#pause').addEventListener('click', () => {  
+    alert('Game paused. Click OK to resume.');  
+});  
+
+document.querySelector('#fast-forward').addEventListener('click', () => {  
+    if (mazeState.future.length > 0) {  
+        mazeState.history.push(mazeState.future.pop());  
+        mazeState.currentGrid = [...mazeState.history[mazeState.history.length - 1]];  
+        playerIndex = mazeState.currentGrid.indexOf('🔵');  
+        renderMaze();  
+    }  
+});  
+
+// Initialize on load  
+initMaze();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,151 @@
+---
+layout: null
+title: "Nutrient Navigator"
+category: "Health"
+description: "Explore a virtual grocery store to build a balanced meal while learning about the nutritional content of each food item."
+permalink: "/tools/daily-20260624-21-nutrient-navigator.html"
+generated_by: "api-true-ai"
+generated_date: "20260624"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nutrient Navigator | Free Online Interactive Tool</title>
+  <meta name="description" content="Explore a virtual grocery store to build a balanced meal while learning about the nutritional content of each food item. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Nutrient Navigator | Free Online Interactive Tool">
+  <meta property="og:description" content="Explore a virtual grocery store to build a balanced meal while learning about the nutritional content of each food item. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nutrient Navigator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Explore a virtual grocery store to build a balanced meal while learning about the nutritional content of each food item. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Nutrient Navigator</h1>
+    <p class="seo-subtitle">Explore a virtual grocery store to build a balanced meal while learning about the nutritional content of each food item.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background-color: #f0f8ff;  
+  margin: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  width: 80%;  
+  max-width: 1200px;  
+  background: white;  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  
+  border-radius: 10px;  
+  overflow: hidden;  
+  display: flex;  
+  flex-direction: column;  
+}  
+#store {  
+  display: grid;  
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));  
+  gap: 10px;  
+  padding: 20px;  
+  background: #e6ffe6;  
+}  
+.food-item {  
+  border: 1px solid #ccc;  
+  border-radius: 5px;  
+  padding: 10px;  
+  cursor: pointer;  
+  transition: transform 0.3s;  
+}  
+.food-item:hover {  
+  transform: scale(1.05);  
+}  
+#meal-summary {  
+  padding: 20px;  
+  background: #ffe6e6;  
+  border-top: 2px solid #ccc;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="store"></div>  
+  <div id="meal-summary">  
+    <h3>Your Meal Summary:</h3>  
+    <ul id="meal-list"></ul>  
+    <p><strong>Total Calories:</strong> <span id="total-calories">0</span></p>  
+    <p><strong>Nutrition Breakdown:</strong></p>  
+    <ul id="nutrition-breakdown"></ul>  
+  </div>  
+</div>  
+<script>  
+const foodItems = [  
+  { name: 'Apple', calories: 95, nutrition: { carbs: 25, protein: 0.5, fat: 0.3 } },  
+  { name: 'Chicken Breast', calories: 165, nutrition: { carbs: 0, protein: 31, fat: 3.6 } },  
+  { name: 'Brown Rice', calories: 215, nutrition: { carbs: 45, protein: 5, fat: 1.7 } },  
+  { name: 'Broccoli', calories: 55, nutrition: { carbs: 11, protein: 4.7, fat: 0.3 } },  
+  { name: 'Avocado', calories: 240, nutrition: { carbs: 12, protein: 3, fat: 22 } },  
+  { name: 'Salmon', calories: 208, nutrition: { carbs: 0, protein: 20, fat: 13 } },  
+];  
+
+const store = document.getElementById('store');  
+const mealList = document.getElementById('meal-list');  
+const totalCalories = document.getElementById('total-calories');  
+const nutritionBreakdown = document.getElementById('nutrition-breakdown');  
+
+let meal = [];  
+let nutritionTotals = { carbs: 0, protein: 0, fat: 0 };  
+
+foodItems.forEach(item => {  
+  const foodDiv = document.createElement('div');  
+  foodDiv.className = 'food-item';  
+  foodDiv.innerHTML = `<strong>${item.name}</strong><br>Calories: ${item.calories}`;  
+  foodDiv.onclick = () => addToMeal(item);  
+  store.appendChild(foodDiv);  
+});  
+
+function addToMeal(item) {  
+  meal.push(item);  
+  updateMealSummary();  
+}  
+
+function updateMealSummary() {  
+  mealList.innerHTML = '';  
+  nutritionTotals = { carbs: 0, protein: 0, fat: 0 };  
+  let totalCaloriesCount = 0;  
+
+  meal.forEach(item => {  
+    const li = document.createElement('li');  
+    li.textContent = `${item.name} - ${item.calories} calories`;  
+    mealList.appendChild(li);  
+
+    totalCaloriesCount += item.calories;  
+    nutritionTotals.carbs += item.nutrition.carbs;  
+    nutritionTotals.protein += item.nutrition.protein;  
+    nutritionTotals.fat += item.nutrition.fat;  
+  });  
+
+  totalCalories.textContent = totalCaloriesCount;  
+  nutritionBreakdown.innerHTML = '';  
+  Object.keys(nutritionTotals).forEach(key => {  
+    const li = document.createElement('li');  
+    li.textContent = `${key.charAt(0).toUpperCase() + key.slice(1)}: ${nutritionTotals[key]}g`;  
+    nutritionBreakdown.appendChild(li);  
+  });  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

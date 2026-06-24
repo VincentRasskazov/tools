@@ -1,0 +1,153 @@
+---
+layout: null
+title: "Regex Quest: Pattern Hunter"
+category: "Developer"
+description: "An interactive mini-game where developers solve progressively harder puzzles by crafting regular expressions to match text patterns."
+permalink: "/tools/daily-20260624-08-regex-quest-pattern-hunter.html"
+generated_by: "api-true-ai"
+generated_date: "20260624"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Quest: Pattern Hunter | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive mini-game where developers solve progressively harder puzzles by crafting regular expressions to match text patterns. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Regex Quest: Pattern Hunter | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive mini-game where developers solve progressively harder puzzles by crafting regular expressions to match text patterns. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Regex Quest: Pattern Hunter | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive mini-game where developers solve progressively harder puzzles by crafting regular expressions to match text patterns. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Regex Quest: Pattern Hunter</h1>
+    <p class="seo-subtitle">An interactive mini-game where developers solve progressively harder puzzles by crafting regular expressions to match text patterns.</p>
+    <style>  
+body {  
+    font-family: Arial, sans-serif;  
+    background: linear-gradient(to right, #1e3c72, #2a5298);  
+    color: #fff;  
+    margin: 0;  
+    padding: 0;  
+    display: flex;  
+    flex-direction: column;  
+    height: 100vh;  
+    justify-content: center;  
+    align-items: center;  
+}  
+#tool-app {  
+    text-align: center;  
+    background: rgba(0, 0, 0, 0.5);  
+    padding: 20px;  
+    border-radius: 10px;  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  
+    width: 90%;  
+    max-width: 600px;  
+}  
+#puzzle-container {  
+    margin-top: 20px;  
+}  
+button {  
+    background: #ff9800;  
+    border: none;  
+    padding: 10px 15px;  
+    border-radius: 5px;  
+    color: white;  
+    font-size: 16px;  
+    cursor: pointer;  
+    transition: background 0.3s;  
+}  
+button:hover {  
+    background: #e67e22;  
+}  
+input[type="text"] {  
+    padding: 10px;  
+    font-size: 16px;  
+    margin: 10px 0;  
+    border: 1px solid #ccc;  
+    border-radius: 5px;  
+    width: 80%;  
+}  
+</style>  
+<div id="tool-app">  
+    <h1>Regex Quest: Pattern Hunter</h1>  
+    <p id="puzzle-description">Solve this regex puzzle: Match all words starting with "a"!</p>  
+    <div id="puzzle-container">  
+        <pre id="puzzle-text">apple antelope banana artichoke apricot blueberry avocado</pre>  
+        <input type="text" id="regex-input" placeholder="Enter your regex pattern here" />  
+        <button onclick="checkSolution()">Submit</button>  
+    </div>  
+    <p id="feedback"></p>  
+</div>  
+<script>  
+const puzzles = [  
+    {  
+        description: 'Match all words starting with "a"!',  
+        text: 'apple antelope banana artichoke apricot blueberry avocado',  
+        solution: /^a\w*/g  
+    },  
+    {  
+        description: 'Match all 4-letter words!',  
+        text: 'bear lion tiger wolf hawk',  
+        solution: /\b\w{4}\b/g  
+    },  
+    {  
+        description: 'Match all words ending with "ing"!',  
+        text: 'running swimming jumping sleeping eating walking',  
+        solution: /\w+ing\b/g  
+    }  
+];  
+  
+let currentPuzzleIndex = 0;  
+  
+function loadPuzzle() {  
+    const puzzle = puzzles[currentPuzzleIndex];  
+    document.getElementById('puzzle-description').innerText = puzzle.description;  
+    document.getElementById('puzzle-text').innerText = puzzle.text;  
+    document.getElementById('regex-input').value = '';  
+    document.getElementById('feedback').innerText = '';  
+}  
+  
+function checkSolution() {  
+    const userRegex = document.getElementById('regex-input').value;  
+    const puzzle = puzzles[currentPuzzleIndex];  
+    try {  
+        const regex = new RegExp(userRegex, 'g');  
+        const matches = puzzle.text.match(regex) || [];  
+        const expected = puzzle.text.match(puzzle.solution) || [];  
+        if (JSON.stringify(matches) === JSON.stringify(expected)) {  
+            document.getElementById('feedback').innerText = 'Correct! Moving to the next puzzle...';  
+            currentPuzzleIndex++;  
+            if (currentPuzzleIndex < puzzles.length) {  
+                setTimeout(loadPuzzle, 2000);  
+            } else {  
+                document.getElementById('feedback').innerText = 'Congratulations! You completed all puzzles!';  
+            }  
+        } else {  
+            document.getElementById('feedback').innerText = 'Not quite correct, try again!';  
+        }  
+    } catch (e) {  
+        document.getElementById('feedback').innerText = 'Invalid regex pattern. Please revise and try again.';  
+    }  
+}  
+  
+loadPuzzle();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

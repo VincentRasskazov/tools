@@ -1,0 +1,159 @@
+---
+layout: null
+title: "Regex Galaxy Explorer"
+category: "Developer"
+description: "Explore and master regular expressions in an interactive galaxy-themed game where you match patterns to repair star systems and uncover hidden cosmic artifacts."
+permalink: "/tools/daily-20260624-10-regex-galaxy-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260624"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Galaxy Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Explore and master regular expressions in an interactive galaxy-themed game where you match patterns to repair star systems and uncover hidden cosmic artifacts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Regex Galaxy Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Explore and master regular expressions in an interactive galaxy-themed game where you match patterns to repair star systems and uncover hidden cosmic artifacts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Regex Galaxy Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Explore and master regular expressions in an interactive galaxy-themed game where you match patterns to repair star systems and uncover hidden cosmic artifacts. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Regex Galaxy Explorer</h1>
+    <p class="seo-subtitle">Explore and master regular expressions in an interactive galaxy-themed game where you match patterns to repair star systems and uncover hidden cosmic artifacts.</p>
+    <style>  
+  body {  
+    font-family: Arial, sans-serif;  
+    margin: 0;  
+    padding: 0;  
+    background: linear-gradient(135deg, #0b0d2e, #042a52);  
+    color: white;  
+    overflow: hidden;  
+  }  
+  #tool-app {  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    justify-content: center;  
+    height: 100vh;  
+    text-align: center;  
+  }  
+  .galaxy-view {  
+    display: flex;  
+    flex-wrap: wrap;  
+    max-width: 90%;  
+    margin: 20px auto;  
+    gap: 15px;  
+  }  
+  .star-system {  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    width: 100px;  
+    height: 100px;  
+    border: 2px solid #fff;  
+    border-radius: 50%;  
+    background: radial-gradient(circle, #1a2a6c, #b21f1f, #fdbb2d);  
+    font-size: 12px;  
+    color: white;  
+  }  
+  .popup {  
+    position: fixed;  
+    top: 50%;  
+    left: 50%;  
+    transform: translate(-50%, -50%);  
+    width: 300px;  
+    padding: 20px;  
+    background: white;  
+    color: black;  
+    border-radius: 10px;  
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);  
+  }  
+  .popup button {  
+    background: #2d89ef;  
+    color: white;  
+    border: none;  
+    padding: 10px 20px;  
+    border-radius: 5px;  
+    cursor: pointer;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h1>Regex Galaxy Explorer</h1>  
+  <p>Click on star systems to fix patterns and unlock cosmic secrets!</p>  
+  <div class="galaxy-view" id="galaxy"></div>  
+</div>  
+<script>  
+const patterns = [  
+  { id: 1, target: "\\d+", hint: "Match any number(s)" },  
+  { id: 2, target: "[A-Za-z]+", hint: "Match letters only" },  
+  { id: 3, target: "[aeiou]", hint: "Find vowels" },  
+  { id: 4, target: "\\w{5}", hint: "Match words with 5 characters" },  
+  { id: 5, target: "\\bcat\\b", hint: "Match the word 'cat'" },  
+];  
+  
+const galaxy = document.getElementById("galaxy");  
+let currentPattern = null;  
+  
+function displayPopup(pattern) {  
+  const popup = document.createElement("div");  
+  popup.className = "popup";  
+  popup.innerHTML = `  
+    <h2>Fix the Star System</h2>  
+    <p><strong>Hint:</strong> ${pattern.hint}</p>  
+    <input type="text" id="regex-input" placeholder="Enter your regex">  
+    <button onclick="validateRegex(${pattern.id})">Test Regex</button>  
+    <button onclick="closePopup()">Cancel</button>  
+  `;  
+  document.body.appendChild(popup);  
+  currentPattern = pattern;  
+}  
+  
+function closePopup() {  
+  const popup = document.querySelector(".popup");  
+  if (popup) popup.remove();  
+}  
+  
+function validateRegex(patternId) {  
+  const input = document.getElementById("regex-input").value;  
+  const pattern = patterns.find(p => p.id === patternId);  
+  const regex = new RegExp(pattern.target);  
+  if (regex.test(input)) {  
+    alert("Correct! Star system repaired!");  
+    closePopup();  
+    const star = document.querySelector(`.star-system[data-id="${patternId}"]`);  
+    star.classList.add("repaired");  
+    star.textContent = "Repaired!";  
+  } else {  
+    alert("Incorrect regex. Try again!");  
+  }  
+}  
+  
+patterns.forEach(pattern => {  
+  const star = document.createElement("div");  
+  star.className = "star-system";  
+  star.dataset.id = pattern.id;  
+  star.textContent = `Star #${pattern.id}`;  
+  star.onclick = () => displayPopup(pattern);  
+  galaxy.appendChild(star);  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
