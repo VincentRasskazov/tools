@@ -1,0 +1,154 @@
+---
+layout: null
+title: "ChronoChronicles: Timeline Builder"
+category: "Education"
+description: "Build interactive, customizable historical or fictional timelines by dragging and dropping events, connecting them with cause-effect arrows, and exploring intricate relationships between events."
+permalink: "/tools/daily-20260625-03-chronochronicles-timeline-builder.html"
+generated_by: "api-true-ai"
+generated_date: "20260625"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChronoChronicles: Timeline Builder | Free Online Interactive Tool</title>
+  <meta name="description" content="Build interactive, customizable historical or fictional timelines by dragging and dropping events, connecting them with cause-effect arrows, and exploring intricate relationships between events. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="ChronoChronicles: Timeline Builder | Free Online Interactive Tool">
+  <meta property="og:description" content="Build interactive, customizable historical or fictional timelines by dragging and dropping events, connecting them with cause-effect arrows, and exploring intricate relationships between events. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ChronoChronicles: Timeline Builder | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Build interactive, customizable historical or fictional timelines by dragging and dropping events, connecting them with cause-effect arrows, and exploring intricate relationships between events. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>ChronoChronicles: Timeline Builder</h1>
+    <p class="seo-subtitle">Build interactive, customizable historical or fictional timelines by dragging and dropping events, connecting them with cause-effect arrows, and exploring intricate relationships between events.</p>
+    <style>  
+body {  
+  font-family: 'Arial', sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  background: linear-gradient(to right, #4facfe, #00f2fe);  
+}  
+#tool-app {  
+  background: white;  
+  border-radius: 10px;  
+  width: 90%;  
+  height: 80%;  
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);  
+  display: flex;  
+  flex-direction: column;  
+  padding: 20px;  
+  overflow: hidden;  
+}  
+#timeline {  
+  flex: 1;  
+  position: relative;  
+  border: 2px dashed #ccc;  
+  border-radius: 5px;  
+  background-color: #f9f9f9;  
+}  
+.event {  
+  position: absolute;  
+  background: #ffe566;  
+  border-radius: 5px;  
+  padding: 10px;  
+  cursor: grab;  
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);  
+}  
+.event.dragging {  
+  opacity: 0.5;  
+  cursor: grabbing;  
+}  
+#controls {  
+  display: flex;  
+  justify-content: space-between;  
+  margin-top: 10px;  
+}  
+button {  
+  padding: 10px 15px;  
+  background: #4facfe;  
+  color: white;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  font-size: 16px;  
+  transition: background 0.3s;  
+}  
+button:hover {  
+  background: #3a8cdd;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="timeline"></div>  
+  <div id="controls">  
+    <button id="add-event">Add Event</button>  
+    <button id="clear-timeline">Clear Timeline</button>  
+  </div>  
+</div>  
+<script>  
+const timeline = document.querySelector("#timeline");  
+const addEventButton = document.querySelector("#add-event");  
+const clearButton = document.querySelector("#clear-timeline");  
+let draggingEvent = null;  
+
+addEventButton.addEventListener("click", () => {  
+  const event = document.createElement("div");  
+  event.classList.add("event");  
+  event.contentEditable = true;  
+  event.style.top = `${Math.random() * 80}%`;  
+  event.style.left = `${Math.random() * 80}%`;  
+  event.textContent = "New Event";  
+  addDragEventListeners(event);  
+  timeline.appendChild(event);  
+});  
+
+clearButton.addEventListener("click", () => {  
+  timeline.innerHTML = "";  
+});  
+
+function addDragEventListeners(event) {  
+  event.addEventListener("mousedown", (e) => {  
+    draggingEvent = event;  
+    draggingEvent.classList.add("dragging");  
+  });  
+
+  document.addEventListener("mouseup", () => {  
+    if (draggingEvent) {  
+      draggingEvent.classList.remove("dragging");  
+      draggingEvent = null;  
+    }  
+  });  
+
+  document.addEventListener("mousemove", (e) => {  
+    if (draggingEvent) {  
+      const rect = timeline.getBoundingClientRect();  
+      const x = e.clientX - rect.left;  
+      const y = e.clientY - rect.top;  
+      draggingEvent.style.left = `${x}px`;  
+      draggingEvent.style.top = `${y}px`;  
+    }  
+  });  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

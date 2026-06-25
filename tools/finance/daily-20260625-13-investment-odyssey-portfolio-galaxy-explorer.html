@@ -1,0 +1,127 @@
+---
+layout: null
+title: "Investment Odyssey: Portfolio Galaxy Explorer"
+category: "Finance"
+description: "Navigate an interactive galaxy of investment options, where each star represents a financial asset, and learn how portfolio diversification affects risk and reward through dynamic simulations."
+permalink: "/tools/daily-20260625-13-investment-odyssey-portfolio-galaxy-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260625"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Investment Odyssey: Portfolio Galaxy Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate an interactive galaxy of investment options, where each star represents a financial asset, and learn how portfolio diversification affects risk and reward through dynamic simulations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Investment Odyssey: Portfolio Galaxy Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate an interactive galaxy of investment options, where each star represents a financial asset, and learn how portfolio diversification affects risk and reward through dynamic simulations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Investment Odyssey: Portfolio Galaxy Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate an interactive galaxy of investment options, where each star represents a financial asset, and learn how portfolio diversification affects risk and reward through dynamic simulations. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Investment Odyssey: Portfolio Galaxy Explorer</h1>
+    <p class="seo-subtitle">Navigate an interactive galaxy of investment options, where each star represents a financial asset, and learn how portfolio diversification affects risk and reward through dynamic simulations.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: #0b132b; color: #f0f0f0; margin: 0; overflow: hidden; }  
+  #tool-app { position: relative; width: 100vw; height: 100vh; }  
+  canvas { display: block; }  
+  #info { position: absolute; top: 10px; left: 10px; background: rgba(0, 0, 0, 0.7); padding: 10px; border-radius: 8px; }  
+  button { background: #1c2541; color: #f0f0f0; border: none; border-radius: 4px; padding: 8px 12px; cursor: pointer; }  
+  button:hover { background: #3a506b; }  
+</style>  
+<div id="tool-app">  
+  <div id="info">  
+    <p>Welcome to the Portfolio Galaxy Explorer! Click on stars to select assets and see how they affect your portfolio's risk and reward.</p>  
+    <button id="reset">Reset Galaxy</button>  
+  </div>  
+  <canvas id="galaxyCanvas"></canvas>  
+</div>  
+<script>  
+  const canvas = document.getElementById('galaxyCanvas');  
+  const ctx = canvas.getContext('2d');  
+  canvas.width = window.innerWidth;  
+  canvas.height = window.innerHeight;  
+
+  const stars = [];  
+  const selectedAssets = [];  
+
+  const random = (min, max) => Math.random() * (max - min) + min;  
+
+  const generateStar = () => ({  
+    x: random(0, canvas.width),  
+    y: random(0, canvas.height),  
+    size: random(3, 8),  
+    color: `hsl(${random(200, 260)}, 70%, 80%)`,  
+    asset: { name: `Asset-${Math.ceil(random(1, 100))}`, expectedReturn: random(3, 15), risk: random(2, 10) }  
+  });  
+
+  const drawStar = (star) => {  
+    ctx.beginPath();  
+    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);  
+    ctx.fillStyle = star.color;  
+    ctx.fill();  
+    ctx.closePath();  
+  };  
+
+  const updatePortfolio = () => {  
+    const totalReturn = selectedAssets.reduce((sum, asset) => sum + asset.expectedReturn, 0);  
+    const totalRisk = selectedAssets.reduce((sum, asset) => sum + asset.risk, 0);  
+    document.getElementById('info').innerHTML = `<p>Selected Assets: ${selectedAssets.map(a => a.name).join(', ') || 'None'}</p>` +  
+      `<p>Total Expected Return: ${totalReturn.toFixed(2)}%</p>` +  
+      `<p>Total Risk Level: ${totalRisk.toFixed(2)}</p>` +  
+      `<button id="reset">Reset Galaxy</button>`;  
+    document.getElementById('reset').addEventListener('click', resetGalaxy);  
+  };  
+
+  const resetGalaxy = () => {  
+    stars.length = 0;  
+    selectedAssets.length = 0;  
+    for (let i = 0; i < 100; i++) stars.push(generateStar());  
+    drawGalaxy();  
+    updatePortfolio();  
+  };  
+
+  const drawGalaxy = () => {  
+    ctx.clearRect(0, 0, canvas.width, canvas.height);  
+    stars.forEach(drawStar);  
+  };  
+
+  canvas.addEventListener('click', (e) => {  
+    const { offsetX, offsetY } = e;  
+    const clickedStar = stars.find(star =>  
+      Math.hypot(star.x - offsetX, star.y - offsetY) < star.size  
+    );  
+    if (clickedStar && !selectedAssets.includes(clickedStar.asset)) {  
+      selectedAssets.push(clickedStar.asset);  
+      clickedStar.color = 'yellow';  
+      updatePortfolio();  
+    }  
+  });  
+
+  window.addEventListener('resize', () => {  
+    canvas.width = window.innerWidth;  
+    canvas.height = window.innerHeight;  
+    drawGalaxy();  
+  });  
+
+  resetGalaxy();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

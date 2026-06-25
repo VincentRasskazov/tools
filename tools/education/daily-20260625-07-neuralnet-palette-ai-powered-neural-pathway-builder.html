@@ -1,0 +1,180 @@
+---
+layout: null
+title: "NeuralNet Palette: AI-Powered Neural Pathway Builder"
+category: "Education"
+description: "A highly interactive tool where users visualize, build, and experiment with artificial neural networks to solve educational tasks and understand machine learning concepts."
+permalink: "/tools/daily-20260625-07-neuralnet-palette-ai-powered-neural-pathway-builder.html"
+generated_by: "api-true-ai"
+generated_date: "20260625"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NeuralNet Palette: AI-Powered Neural Pathway Builder | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive tool where users visualize, build, and experiment with artificial neural networks to solve educational tasks and understand machine learning concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="NeuralNet Palette: AI-Powered Neural Pathway Builder | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive tool where users visualize, build, and experiment with artificial neural networks to solve educational tasks and understand machine learning concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NeuralNet Palette: AI-Powered Neural Pathway Builder | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive tool where users visualize, build, and experiment with artificial neural networks to solve educational tasks and understand machine learning concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>NeuralNet Palette: AI-Powered Neural Pathway Builder</h1>
+    <p class="seo-subtitle">A highly interactive tool where users visualize, build, and experiment with artificial neural networks to solve educational tasks and understand machine learning concepts.</p>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  #tool-app {
+    width: 80vw;
+    height: 80vh;
+    background: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+  .header {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #333333;
+  }
+  .canvas-container {
+    flex: 1;
+    position: relative;
+    border: 2px dashed #cccccc;
+    margin: 10px 0;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+  .footer {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555555;
+  }
+  .node {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    background: #4caf50;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    color: #ffffff;
+    font-weight: bold;
+  }
+  .connection {
+    stroke: #888888;
+    stroke-width: 2;
+  }
+</style>  
+<div id="tool-app">  
+  <div class="header">NeuralNet Palette: AI-Powered Neural Pathway Builder</div>  
+  <div class="canvas-container" id="canvas-container"></div>  
+  <div class="footer">Drag nodes to connect them and build your neural network!</div>  
+</div>  
+<script>  
+  const canvasContainer = document.getElementById('canvas-container');  
+  const nodes = [];  
+  const connections = [];  
+
+  function createNode(x, y, label) {  
+    const node = document.createElement('div');  
+    node.className = 'node';  
+    node.innerText = label;  
+    node.style.left = `${x}px`;  
+    node.style.top = `${y}px`;  
+    node.draggable = true;  
+    canvasContainer.appendChild(node);  
+    nodes.push({ element: node, x, y });  
+
+    node.addEventListener('dragstart', (e) => {  
+      e.dataTransfer.setData('text', label);  
+    });  
+
+    node.addEventListener('dragend', (e) => {  
+      const rect = canvasContainer.getBoundingClientRect();  
+      const newX = e.clientX - rect.left - 25;  
+      const newY = e.clientY - rect.top - 25;  
+      node.style.left = `${newX}px`;  
+      node.style.top = `${newY}px`;  
+      updateConnections();  
+    });  
+  }  
+
+  function drawConnection(fromNode, toNode) {  
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');  
+    svg.setAttribute('class', 'connection');  
+    svg.setAttribute('width', '100%');  
+    svg.setAttribute('height', '100%');  
+    svg.setAttribute('style', 'position:absolute;top:0;left:0;pointer-events:none;');  
+
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');  
+    const x1 = fromNode.x + 25;  
+    const y1 = fromNode.y + 25;  
+    const x2 = toNode.x + 25;  
+    const y2 = toNode.y + 25;  
+
+    line.setAttribute('x1', x1);  
+    line.setAttribute('y1', y1);  
+    line.setAttribute('x2', x2);  
+    line.setAttribute('y2', y2);  
+
+    svg.appendChild(line);  
+    canvasContainer.appendChild(svg);  
+    connections.push({ svg, fromNode, toNode });  
+  }  
+
+  function updateConnections() {  
+    connections.forEach(({ svg, fromNode, toNode }) => {  
+      canvasContainer.removeChild(svg);  
+    });  
+    connections.splice(0, connections.length);  
+
+    nodes.forEach((nodeA) => {  
+      nodes.forEach((nodeB) => {  
+        if (nodeA !== nodeB) drawConnection(nodeA, nodeB);  
+      });  
+    });  
+  }  
+
+  // Create initial nodes  
+  createNode(100, 100, 'Input');  
+  createNode(300, 100, 'Hidden');  
+  createNode(500, 100, 'Output');  
+
+  updateConnections();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,172 @@
+---
+layout: null
+title: "CipherCraft: Interactive Encryption Explorer"
+category: "Cybersecurity"
+description: "Dive into the world of encryption by crafting, breaking, and analyzing ciphers in a gamified setting."
+permalink: "/tools/daily-20260625-08-ciphercraft-interactive-encryption-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260625"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CipherCraft: Interactive Encryption Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Dive into the world of encryption by crafting, breaking, and analyzing ciphers in a gamified setting. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CipherCraft: Interactive Encryption Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Dive into the world of encryption by crafting, breaking, and analyzing ciphers in a gamified setting. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CipherCraft: Interactive Encryption Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Dive into the world of encryption by crafting, breaking, and analyzing ciphers in a gamified setting. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CipherCraft: Interactive Encryption Explorer</h1>
+    <p class="seo-subtitle">Dive into the world of encryption by crafting, breaking, and analyzing ciphers in a gamified setting.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background-color: #1e1e2f;  
+  color: #f0f0f0;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  width: 90%;  
+  max-width: 800px;  
+  background: #29294d;  
+  border-radius: 12px;  
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);  
+  overflow: hidden;  
+  padding: 20px;  
+}  
+h1 {  
+  text-align: center;  
+  color: #66d9ef;  
+}  
+.action-buttons {  
+  display: flex;  
+  gap: 10px;  
+  margin-bottom: 20px;  
+}  
+button {  
+  padding: 10px 20px;  
+  border: none;  
+  border-radius: 8px;  
+  background-color: #5d5dfc;  
+  color: white;  
+  font-size: 16px;  
+  cursor: pointer;  
+  transition: background-color 0.3s;  
+}  
+button:hover {  
+  background-color: #4040bf;  
+}  
+#output {  
+  margin-top: 20px;  
+  font-size: 16px;  
+  background: #1e1e2f;  
+  padding: 10px;  
+  border-radius: 8px;  
+  border: 1px solid #5d5dfc;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>CipherCraft: Interactive Encryption Explorer</h1>  
+  <div class="action-buttons">  
+    <button onclick="encrypt()">Encrypt a Message</button>  
+    <button onclick="decrypt()">Decrypt a Cipher</button>  
+    <button onclick="analyze()">Analyze Cipher Strength</button>  
+  </div>  
+  <div id="output">Choose an action to begin!</div>  
+</div>  
+<script>  
+const output = document.getElementById('output');  
+
+function encrypt() {  
+  const message = prompt('Enter a message to encrypt:');  
+  if (!message) {  
+    output.innerHTML = 'No message entered!';  
+    return;  
+  }  
+
+  const key = Math.floor(Math.random() * 26) + 1;  
+  const encryptedMessage = message.split('').map(char => {  
+    if (char.match(/[a-zA-Z]/)) {  
+      const charCode = char.charCodeAt(0);  
+      const base = charCode >= 97 ? 97 : 65;  
+      return String.fromCharCode(((charCode - base + key) % 26) + base);  
+    }  
+    return char;  
+  }).join('');  
+
+  output.innerHTML = `Encrypted Message: <b>${encryptedMessage}</b><br>Key: <b>${key}</b>`;  
+}  
+
+function decrypt() {  
+  const cipher = prompt('Enter a cipher to decrypt:');  
+  const key = parseInt(prompt('Enter the decryption key (1-26):'), 10);  
+
+  if (!cipher || isNaN(key) || key < 1 || key > 26) {  
+    output.innerHTML = 'Invalid input!';  
+    return;  
+  }  
+
+  const decryptedMessage = cipher.split('').map(char => {  
+    if (char.match(/[a-zA-Z]/)) {  
+      const charCode = char.charCodeAt(0);  
+      const base = charCode >= 97 ? 97 : 65;  
+      return String.fromCharCode(((charCode - base - key + 26) % 26) + base);  
+    }  
+    return char;  
+  }).join('');  
+
+  output.innerHTML = `Decrypted Message: <b>${decryptedMessage}</b>`;  
+}  
+
+function analyze() {  
+  const cipher = prompt('Enter a cipher to analyze:');  
+  if (!cipher) {  
+    output.innerHTML = 'No cipher entered!';  
+    return;  
+  }  
+
+  const letterCounts = {};  
+  const totalLetters = cipher.split('').filter(char => char.match(/[a-zA-Z]/)).length;  
+
+  cipher.split('').forEach(char => {  
+    if (char.match(/[a-zA-Z]/)) {  
+      letterCounts[char] = (letterCounts[char] || 0) + 1;  
+    }  
+  });  
+
+  let analysis = 'Cipher Analysis:<br>';  
+  for (const [char, count] of Object.entries(letterCounts)) {  
+    const percentage = ((count / totalLetters) * 100).toFixed(2);  
+    analysis += `${char}: ${count} (${percentage}% of cipher)<br>`;  
+  }  
+
+  output.innerHTML = analysis;  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

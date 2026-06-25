@@ -1,0 +1,188 @@
+---
+layout: null
+title: "Data Bloom: Interactive Dataset Correlation Mapper"
+category: "Data"
+description: "Visualize and interact with datasets to uncover hidden correlations and relationships through a dynamic bloom-style animation."
+permalink: "/tools/daily-20260625-12-data-bloom-interactive-dataset-correlation-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260625"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Bloom: Interactive Dataset Correlation Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize and interact with datasets to uncover hidden correlations and relationships through a dynamic bloom-style animation. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Bloom: Interactive Dataset Correlation Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize and interact with datasets to uncover hidden correlations and relationships through a dynamic bloom-style animation. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Bloom: Interactive Dataset Correlation Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize and interact with datasets to uncover hidden correlations and relationships through a dynamic bloom-style animation. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Bloom: Interactive Dataset Correlation Mapper</h1>
+    <p class="seo-subtitle">Visualize and interact with datasets to uncover hidden correlations and relationships through a dynamic bloom-style animation.</p>
+    <style>  
+  #tool-app {  
+    font-family: Arial, sans-serif;  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    padding: 20px;  
+    background: radial-gradient(circle, #1e3c72, #2a5298);  
+    color: white;  
+  }  
+  canvas {  
+    border: 2px solid white;  
+    border-radius: 10px;  
+    margin-top: 20px;  
+    background-color: #f5f5f5;  
+  }  
+  .controls {  
+    display: flex;  
+    gap: 15px;  
+    margin-top: 15px;  
+  }  
+  .controls input, .controls button {  
+    padding: 10px;  
+    font-size: 16px;  
+    border: none;  
+    border-radius: 5px;  
+  }  
+  .controls button {  
+    background-color: #4caf50;  
+    color: white;  
+    cursor: pointer;  
+  }  
+  .controls button:hover {  
+    background-color: #45a049;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h1>Data Bloom: Interactive Dataset Correlation Mapper</h1>  
+  <p>Upload your dataset and explore correlations through animated blooms!</p>  
+  <div class="controls">  
+    <input type="file" id="fileInput" accept=".csv" />  
+    <button id="generateBloom">Generate Bloom</button>  
+  </div>  
+  <canvas id="bloomCanvas" width="800" height="600"></canvas>  
+</div>  
+<script>  
+  const canvas = document.getElementById('bloomCanvas');  
+  const ctx = canvas.getContext('2d');  
+
+  const maxRadius = 100;  
+  const centerX = canvas.width / 2;  
+  const centerY = canvas.height / 2;  
+  let nodes = [];  
+
+  document.getElementById('generateBloom').addEventListener('click', () => {  
+    const fileInput = document.getElementById('fileInput');  
+    if (!fileInput.files.length) {  
+      alert('Please upload a CSV file.');  
+      return;  
+    }  
+
+    const file = fileInput.files[0];  
+    const reader = new FileReader();  
+    reader.onload = function (e) {  
+      const data = parseCSV(e.target.result);  
+      if (data.length > 0) {  
+        generateNodes(data);  
+        drawBloom();  
+      } else {  
+        alert('Invalid or empty CSV file! Please try again.');  
+      }  
+    };  
+    reader.readAsText(file);  
+  });  
+
+  function parseCSV(data) {  
+    const rows = data.split('\n');  
+    const parsedData = rows.map(row => row.split(',').map(Number));  
+    return parsedData.filter(row => row.length > 1); // Filter out invalid rows  
+  }  
+
+  function generateNodes(data) {  
+    nodes = data.map((row, index) => {  
+      return {  
+        x: centerX + Math.random() * 200 - 100,  
+        y: centerY + Math.random() * 200 - 100,  
+        radius: 10,  
+        color: `hsl(${Math.random() * 360}, 100%, 50%)`,  
+        data: row  
+      };  
+    });  
+  }  
+
+  function drawBloom() {  
+    ctx.clearRect(0, 0, canvas.width, canvas.height);  
+    nodes.forEach((node, index) => {  
+      drawNode(node);  
+      drawConnections(node, index);  
+    });  
+  }  
+
+  function drawNode(node) {  
+    ctx.beginPath();  
+    ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);  
+    ctx.fillStyle = node.color;  
+    ctx.fill();  
+    ctx.closePath();  
+  }  
+
+  function drawConnections(node, index) {  
+    nodes.forEach((targetNode, targetIndex) => {  
+      if (index !== targetIndex) {  
+        const correlation = calculateCorrelation(node.data, targetNode.data);  
+        if (correlation > 0.5) { // Only draw connections for strong correlations  
+          ctx.beginPath();  
+          ctx.moveTo(node.x, node.y);  
+          ctx.lineTo(targetNode.x, targetNode.y);  
+          ctx.strokeStyle = `rgba(255, 255, 255, ${correlation})`;  
+          ctx.lineWidth = correlation * 5;  
+          ctx.stroke();  
+          ctx.closePath();  
+        }  
+      }  
+    });  
+  }  
+
+  function calculateCorrelation(dataset1, dataset2) {  
+    const mean1 = dataset1.reduce((a, b) => a + b) / dataset1.length;  
+    const mean2 = dataset2.reduce((a, b) => a + b) / dataset2.length;  
+
+    let numerator = 0;  
+    let denom1 = 0;  
+    let denom2 = 0;  
+
+    for (let i = 0; i < dataset1.length; i++) {  
+      const deviation1 = dataset1[i] - mean1;  
+      const deviation2 = dataset2[i] - mean2;  
+      numerator += deviation1 * deviation2;  
+      denom1 += Math.pow(deviation1, 2);  
+      denom2 += Math.pow(deviation2, 2);  
+    }  
+
+    const denominator = Math.sqrt(denom1) * Math.sqrt(denom2);  
+    return denominator ? numerator / denominator : 0;  
+  }  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
