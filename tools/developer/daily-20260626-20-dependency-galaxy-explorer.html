@@ -1,0 +1,187 @@
+---
+layout: null
+title: "Dependency Galaxy Explorer"
+category: "Developer"
+description: "A highly interactive mini-game where developers navigate a galaxy of interconnected project dependencies, resolving conflicts and optimizing package versions to maintain system stability."
+permalink: "/tools/daily-20260626-20-dependency-galaxy-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260626"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dependency Galaxy Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive mini-game where developers navigate a galaxy of interconnected project dependencies, resolving conflicts and optimizing package versions to maintain system stability. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Dependency Galaxy Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive mini-game where developers navigate a galaxy of interconnected project dependencies, resolving conflicts and optimizing package versions to maintain system stability. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dependency Galaxy Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive mini-game where developers navigate a galaxy of interconnected project dependencies, resolving conflicts and optimizing package versions to maintain system stability. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Dependency Galaxy Explorer</h1>
+    <p class="seo-subtitle">A highly interactive mini-game where developers navigate a galaxy of interconnected project dependencies, resolving conflicts and optimizing package versions to maintain system stability.</p>
+    <style>  
+body {  
+  font-family: 'Arial', sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background: linear-gradient(to bottom, #1a1a40, #000);  
+  color: #fff;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 90%;  
+  height: 90%;  
+  border: 2px solid #fff;  
+  border-radius: 10px;  
+  background-color: #0f0f3d;  
+  position: relative;  
+  display: flex;  
+  flex-direction: column;  
+  overflow: hidden;  
+}  
+canvas {  
+  width: 100%;  
+  height: 100%;  
+  display: block;  
+}  
+#instructions {  
+  position: absolute;  
+  top: 10px;  
+  left: 10px;  
+  background: rgba(0, 0, 0, 0.7);  
+  padding: 10px;  
+  border-radius: 5px;  
+  font-size: 14px;  
+}  
+</style>  
+<div id="tool-app">  
+  <canvas id="gameCanvas"></canvas>  
+  <div id="instructions">  
+    <strong>Instructions:</strong><br>  
+    - Use arrow keys to navigate your spaceship.<br>  
+    - Click on nodes to resolve dependency conflicts.<br>  
+    - Optimize versions to gain stability points.<br>  
+    - Avoid crashing into unstable nodes!  
+  </div>  
+</div>  
+<script>  
+const canvas = document.getElementById('gameCanvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = window.innerWidth * 0.9;  
+canvas.height = window.innerHeight * 0.9;  
+
+// Game variables  
+let galaxyNodes = [];  
+let spaceship = { x: canvas.width / 2, y: canvas.height / 2, size: 20, speed: 5 };  
+let stabilityPoints = 0;  
+
+// Node class  
+class GalaxyNode {  
+  constructor(x, y, conflicts) {  
+    this.x = x;  
+    this.y = y;  
+    this.size = 30;  
+    this.conflicts = conflicts;  
+    this.solved = false;  
+  }  
+  draw() {  
+    ctx.fillStyle = this.solved ? 'lime' : 'red';  
+    ctx.beginPath();  
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);  
+    ctx.fill();  
+    ctx.closePath();  
+  }  
+}  
+
+// Create random nodes  
+function generateGalaxyNodes(count) {  
+  for (let i = 0; i < count; i++) {  
+    const x = Math.random() * canvas.width;  
+    const y = Math.random() * canvas.height;  
+    const conflicts = Math.floor(Math.random() * 3) + 1;  
+    galaxyNodes.push(new GalaxyNode(x, y, conflicts));  
+  }  
+}  
+
+generateGalaxyNodes(10);  
+
+// Draw spaceship  
+function drawSpaceship() {  
+  ctx.fillStyle = 'blue';  
+  ctx.beginPath();  
+  ctx.arc(spaceship.x, spaceship.y, spaceship.size, 0, Math.PI * 2);  
+  ctx.fill();  
+  ctx.closePath();  
+}  
+
+// Resolve conflicts on node click  
+canvas.addEventListener('click', (event) => {  
+  const rect = canvas.getBoundingClientRect();  
+  const mouseX = event.clientX - rect.left;  
+  const mouseY = event.clientY - rect.top;  
+
+  galaxyNodes.forEach(node => {  
+    const distance = Math.sqrt((node.x - mouseX) ** 2 + (node.y - mouseY) ** 2);  
+    if (distance < node.size && !node.solved) {  
+      node.solved = true;  
+      stabilityPoints += node.conflicts;  
+    }  
+  });  
+});  
+
+// Update spaceship position  
+document.addEventListener('keydown', (event) => {  
+  switch (event.key) {  
+    case 'ArrowUp':  
+      spaceship.y -= spaceship.speed;  
+      break;  
+    case 'ArrowDown':  
+      spaceship.y += spaceship.speed;  
+      break;  
+    case 'ArrowLeft':  
+      spaceship.x -= spaceship.speed;  
+      break;  
+    case 'ArrowRight':  
+      spaceship.x += spaceship.speed;  
+      break;  
+  }  
+});  
+
+// Game loop  
+function gameLoop() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  drawSpaceship();  
+  galaxyNodes.forEach(node => node.draw());  
+  ctx.fillStyle = '#fff';  
+  ctx.font = '16px Arial';  
+  ctx.fillText(`Stability Points: ${stabilityPoints}`, 10, canvas.height - 10);  
+  requestAnimationFrame(gameLoop);  
+}  
+
+gameLoop();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

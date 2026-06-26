@@ -1,0 +1,160 @@
+---
+layout: null
+title: "Regex Quest: Pattern Slayer"
+category: "Developer"
+description: "A gamified interactive tool where developers solve progressively harder regex-based puzzles to defeat \"data monsters\" and unlock new challenges."
+permalink: "/tools/daily-20260626-14-regex-quest-pattern-slayer.html"
+generated_by: "api-true-ai"
+generated_date: "20260626"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Quest: Pattern Slayer | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified interactive tool where developers solve progressively harder regex-based puzzles to defeat &quot;data monsters&quot; and unlock new challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Regex Quest: Pattern Slayer | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified interactive tool where developers solve progressively harder regex-based puzzles to defeat &quot;data monsters&quot; and unlock new challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Regex Quest: Pattern Slayer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified interactive tool where developers solve progressively harder regex-based puzzles to defeat &quot;data monsters&quot; and unlock new challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Regex Quest: Pattern Slayer</h1>
+    <p class="seo-subtitle">A gamified interactive tool where developers solve progressively harder regex-based puzzles to defeat &quot;data monsters&quot; and unlock new challenges.</p>
+    <style>  
+body {  
+    font-family: 'Arial', sans-serif;  
+    margin: 0;  
+    padding: 0;  
+    background: linear-gradient(135deg, #2c3e50, #3498db);  
+    color: white;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+    overflow: hidden;  
+}  
+#tool-app {  
+    text-align: center;  
+    max-width: 600px;  
+    padding: 20px;  
+    border-radius: 10px;  
+    background: rgba(0, 0, 0, 0.8);  
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);  
+}  
+button {  
+    padding: 10px 20px;  
+    margin: 10px;  
+    font-size: 1rem;  
+    background: #e74c3c;  
+    color: white;  
+    border: none;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    transition: background 0.3s;  
+}  
+button:hover {  
+    background: #c0392b;  
+}  
+input[type="text"] {  
+    width: 100%;  
+    padding: 10px;  
+    margin: 10px 0;  
+    font-size: 1.2rem;  
+    border: 1px solid #7f8c8d;  
+    border-radius: 5px;  
+    background: #34495e;  
+    color: white;  
+}  
+#monster {  
+    font-size: 5rem;  
+    margin: 20px 0;  
+    animation: pulse 1s infinite;  
+}  
+@keyframes pulse {  
+    0%, 100% { transform: scale(1); }  
+    50% { transform: scale(1.1); }  
+}  
+</style>  
+<div id="tool-app">  
+    <h1>Regex Quest: Pattern Slayer</h1>  
+    <div id="level-display">Level: 1</div>  
+    <div id="monster">👾</div>  
+    <p id="task">Match the pattern: <span id="regex-hint"></span></p>  
+    <input type="text" id="regex-input" placeholder="Enter your regex here...">  
+    <button id="submit-btn">Attack!</button>  
+    <p id="feedback"></p>  
+</div>  
+<script>  
+const levels = [  
+    { hint: "Starts with 'a' and ends with 'z'", regex: /^a.*z$/ },  
+    { hint: "Contains exactly three digits", regex: /^[a-zA-Z]*\\d{3}[a-zA-Z]*$/ },  
+    { hint: "Only uppercase letters", regex: /^[A-Z]+$/ },  
+    { hint: "A valid email address", regex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$/ },  
+    { hint: "A 5-digit ZIP code", regex: /^\\d{5}$/ }  
+];  
+
+let currentLevel = 0;  
+
+const levelDisplay = document.getElementById("level-display");  
+const monster = document.getElementById("monster");  
+const task = document.getElementById("regex-hint");  
+const input = document.getElementById("regex-input");  
+const feedback = document.getElementById("feedback");  
+const submitBtn = document.getElementById("submit-btn");  
+
+function startLevel() {  
+    levelDisplay.textContent = `Level: ${currentLevel + 1}`;  
+    task.textContent = levels[currentLevel].hint;  
+    input.value = "";  
+    feedback.textContent = "";  
+}  
+
+function checkRegex() {  
+    const userInput = input.value.trim();  
+    const validRegex = levels[currentLevel].regex;  
+
+    try {  
+        if (new RegExp(userInput).toString() === validRegex.toString()) {  
+            feedback.textContent = "Correct! You defeated the monster! 🎉";  
+            feedback.style.color = "#2ecc71";  
+            currentLevel++;  
+            if (currentLevel < levels.length) {  
+                setTimeout(startLevel, 1000);  
+            } else {  
+                feedback.textContent = "Congratulations! You completed the quest! 🏆";  
+                submitBtn.disabled = true;  
+            }  
+        } else {  
+            feedback.textContent = "Incorrect! Try again! ❌";  
+            feedback.style.color = "#e74c3c";  
+        }  
+    } catch (e) {  
+        feedback.textContent = "Invalid Regex Syntax! ⚠️";  
+        feedback.style.color = "#f1c40f";  
+    }  
+}  
+
+submitBtn.addEventListener("click", checkRegex);  
+
+startLevel();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

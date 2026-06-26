@@ -1,0 +1,155 @@
+---
+layout: null
+title: "CodeCrypt: The Interactive Encryption Playground"
+category: "Developer"
+description: "A dynamic browser tool where developers can experiment with live encryption techniques, crack hidden cyphers, and visualize data transformations in real-time using various algorithms."
+permalink: "/tools/daily-20260626-02-codecrypt-the-interactive-encryption-playground.html"
+generated_by: "api-true-ai"
+generated_date: "20260626"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeCrypt: The Interactive Encryption Playground | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic browser tool where developers can experiment with live encryption techniques, crack hidden cyphers, and visualize data transformations in real-time using various algorithms. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CodeCrypt: The Interactive Encryption Playground | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic browser tool where developers can experiment with live encryption techniques, crack hidden cyphers, and visualize data transformations in real-time using various algorithms. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CodeCrypt: The Interactive Encryption Playground | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic browser tool where developers can experiment with live encryption techniques, crack hidden cyphers, and visualize data transformations in real-time using various algorithms. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CodeCrypt: The Interactive Encryption Playground</h1>
+    <p class="seo-subtitle">A dynamic browser tool where developers can experiment with live encryption techniques, crack hidden cyphers, and visualize data transformations in real-time using various algorithms.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background: linear-gradient(120deg, #282c34, #4d79ff);  
+  color: #ffffff;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  width: 80%;  
+  max-width: 800px;  
+  background: #1c1f24;  
+  border-radius: 12px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);  
+  padding: 20px;  
+}  
+button {  
+  background-color: #4d79ff;  
+  border: none;  
+  color: white;  
+  padding: 10px 20px;  
+  margin: 10px 0;  
+  border-radius: 4px;  
+  cursor: pointer;  
+}  
+button:hover {  
+  background-color: #3c63cc;  
+}  
+textarea, select, input {  
+  width: 100%;  
+  padding: 10px;  
+  margin: 10px 0;  
+  border: 1px solid #4d79ff;  
+  border-radius: 4px;  
+  background-color: #2a2e34;  
+  color: white;  
+}  
+#output {  
+  margin-top: 20px;  
+  padding: 10px;  
+  border: 1px solid #4d79ff;  
+  border-radius: 4px;  
+  background-color: #333842;  
+  color: white;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>CodeCrypt: The Interactive Encryption Playground</h1>  
+  <p>Enter a string to encrypt or decrypt and explore various algorithms!</p>  
+  <textarea id="input-text" placeholder="Type your text here..."></textarea>  
+  <label for="algorithm">Choose an algorithm:</label>  
+  <select id="algorithm">  
+    <option value="base64">Base64</option>  
+    <option value="rot13">ROT13</option>  
+    <option value="sha256">SHA-256</option>  
+  </select>  
+  <button id="encrypt-btn">Encrypt</button>  
+  <button id="decrypt-btn">Decrypt</button>  
+  <div id="output"></div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+document.getElementById('encrypt-btn').addEventListener('click', () => {  
+  const input = document.getElementById('input-text').value;  
+  const algorithm = document.getElementById('algorithm').value;  
+  let result = '';  
+
+  if (algorithm === 'base64') {  
+    result = btoa(input);  
+  } else if (algorithm === 'rot13') {  
+    result = input.replace(/[a-zA-Z]/g, function(c) {  
+      return String.fromCharCode(c.charCodeAt(0) + (c.toLowerCase() < 'n' ? 13 : -13));  
+    });  
+  } else if (algorithm === 'sha256') {  
+    const encoder = new TextEncoder();  
+    const data = encoder.encode(input);  
+    crypto.subtle.digest('SHA-256', data).then(hash => {  
+      result = Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');  
+      document.getElementById('output').innerText = `Encrypted: ${result}`;  
+    });  
+    return;  
+  }  
+
+  document.getElementById('output').innerText = `Encrypted: ${result}`;  
+});  
+
+document.getElementById('decrypt-btn').addEventListener('click', () => {  
+  const input = document.getElementById('input-text').value;  
+  const algorithm = document.getElementById('algorithm').value;  
+  let result = '';  
+
+  if (algorithm === 'base64') {  
+    try {  
+      result = atob(input);  
+    } catch (e) {  
+      result = 'Invalid Base64 string';  
+    }  
+  } else if (algorithm === 'rot13') {  
+    result = input.replace(/[a-zA-Z]/g, function(c) {  
+      return String.fromCharCode(c.charCodeAt(0) + (c.toLowerCase() < 'n' ? 13 : -13));  
+    });  
+  } else {  
+    result = 'Decryption not supported for this algorithm';  
+  }  
+
+  document.getElementById('output').innerText = `Decrypted: ${result}`;  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

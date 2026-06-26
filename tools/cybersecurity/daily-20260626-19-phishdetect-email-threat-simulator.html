@@ -1,0 +1,167 @@
+---
+layout: null
+title: "PhishDetect: Email Threat Simulator"
+category: "Cybersecurity"
+description: "Simulate spear-phishing attacks in an interactive game to train yourself in spotting malicious email tactics."
+permalink: "/tools/daily-20260626-19-phishdetect-email-threat-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260626"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhishDetect: Email Threat Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="Simulate spear-phishing attacks in an interactive game to train yourself in spotting malicious email tactics. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PhishDetect: Email Threat Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="Simulate spear-phishing attacks in an interactive game to train yourself in spotting malicious email tactics. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PhishDetect: Email Threat Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Simulate spear-phishing attacks in an interactive game to train yourself in spotting malicious email tactics. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PhishDetect: Email Threat Simulator</h1>
+    <p class="seo-subtitle">Simulate spear-phishing attacks in an interactive game to train yourself in spotting malicious email tactics.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background: #1e1e2f;  
+  color: #f4f4f9;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  background: #282a36;  
+  border: 2px solid #44475a;  
+  border-radius: 8px;  
+  width: 90%;  
+  max-width: 800px;  
+  padding: 20px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);  
+}  
+.email {  
+  background: #44475a;  
+  border-radius: 5px;  
+  padding: 10px 20px;  
+  margin-bottom: 15px;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+.email:hover {  
+  background: #6272a4;  
+}  
+.email-header {  
+  font-weight: bold;  
+  margin-bottom: 5px;  
+}  
+.result {  
+  margin-top: 20px;  
+  font-size: 1.2em;  
+  text-align: center;  
+}  
+button {  
+  background: #50fa7b;  
+  border: none;  
+  color: #282a36;  
+  padding: 10px 20px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+button:hover {  
+  background: #45e06f;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>PhishDetect: Email Threat Simulator</h1>  
+  <div id="email-list">  
+    <!-- Emails will be dynamically added here -->  
+  </div>  
+  <button id="next-round-btn" style="display:none;">Next Round</button>  
+  <div class="result" id="result"></div>  
+</div>  
+<script>  
+const emails = [  
+  { subject: "Urgent: Reset Your Password Now!", sender: "security@banking-alert.com", isPhishing: true },  
+  { subject: "Congratulations! You've won a free vacation!", sender: "claims@randomtravel.com", isPhishing: true },  
+  { subject: "Weekly Newsletter: Tips for Secure Browsing", sender: "info@secureworld.com", isPhishing: false },  
+  { subject: "Delivery Notification: Your package is on the way", sender: "orders@trustedstore.com", isPhishing: false }  
+];  
+
+let score = 0;  
+let round = 0;  
+
+// Selectors  
+const emailList = document.getElementById('email-list');  
+const resultDiv = document.getElementById('result');  
+const nextRoundBtn = document.getElementById('next-round-btn');  
+
+function loadRound() {  
+  emailList.innerHTML = '';  
+  resultDiv.innerHTML = '';  
+  nextRoundBtn.style.display = 'none';  
+  shuffle(emails).slice(0, 3).forEach((email, index) => {  
+    const emailDiv = document.createElement('div');  
+    emailDiv.className = 'email';  
+    emailDiv.innerHTML = `<div class="email-header">${email.subject}</div><div>${email.sender}</div>`;  
+    emailDiv.addEventListener('click', () => evaluateClick(email, emailDiv));  
+    emailList.appendChild(emailDiv);  
+  });  
+}  
+
+function evaluateClick(email, emailDiv) {  
+  const allEmails = document.querySelectorAll('.email');  
+  allEmails.forEach(mail => mail.style.pointerEvents = 'none');  
+  if (email.isPhishing) {  
+    score++;  
+    emailDiv.style.background = '#ff5555';  
+  } else {  
+    emailDiv.style.background = '#50fa7b';  
+  }  
+  resultDiv.innerHTML = `Your score: ${score}`;  
+  nextRoundBtn.style.display = 'block';  
+}  
+
+function shuffle(array) {  
+  for (let i = array.length - 1; i > 0; i--) {  
+    const j = Math.floor(Math.random() * (i + 1));  
+    [array[i], array[j]] = [array[j], array[i]];  
+  }  
+  return array;  
+}  
+
+nextRoundBtn.addEventListener('click', () => {  
+  round++;  
+  if (round < 5) {  
+    loadRound();  
+  } else {  
+    resultDiv.innerHTML += `<br>Game Over! Final Score: ${score}/5`;  
+    nextRoundBtn.style.display = 'none';  
+  }  
+});  
+
+// Initialize game  
+loadRound();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
