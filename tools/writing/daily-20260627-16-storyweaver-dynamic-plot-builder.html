@@ -1,0 +1,212 @@
+---
+layout: null
+title: "StoryWeaver: Dynamic Plot Builder"
+category: "Writing"
+description: "Create and interact with branching storylines in real-time, visualized as an expandable, animated web of plot arcs and character decisions."
+permalink: "/tools/daily-20260627-16-storyweaver-dynamic-plot-builder.html"
+generated_by: "api-true-ai"
+generated_date: "20260627"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StoryWeaver: Dynamic Plot Builder | Free Online Interactive Tool</title>
+  <meta name="description" content="Create and interact with branching storylines in real-time, visualized as an expandable, animated web of plot arcs and character decisions. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="StoryWeaver: Dynamic Plot Builder | Free Online Interactive Tool">
+  <meta property="og:description" content="Create and interact with branching storylines in real-time, visualized as an expandable, animated web of plot arcs and character decisions. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StoryWeaver: Dynamic Plot Builder | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Create and interact with branching storylines in real-time, visualized as an expandable, animated web of plot arcs and character decisions. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>StoryWeaver: Dynamic Plot Builder</h1>
+    <p class="seo-subtitle">Create and interact with branching storylines in real-time, visualized as an expandable, animated web of plot arcs and character decisions.</p>
+    <style>  
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #f3ec78, #af4261);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  #tool-app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 20px;
+  }
+  #story-canvas {
+    border: 2px solid #333;
+    background: #fff;
+    margin-top: 20px;
+    width: 90%;
+    height: 70vh;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+  .node {
+    position: absolute;
+    background: #ffce54;
+    border-radius: 50%;
+    padding: 10px 20px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transform-origin: center;
+    transition: transform 0.2s ease-in-out;
+  }
+  .node:hover {
+    transform: scale(1.1);
+  }
+  .connector {
+    position: absolute;
+    width: 2px;
+    background: #4a89dc;
+    transform-origin: top left;
+  }
+  #controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  #controls input {
+    font-size: 14px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  #controls button {
+    background: #4a89dc;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  #controls button:hover {
+    background: #357ab6;
+  }
+</style>  
+<div id="tool-app">  
+  <h1>StoryWeaver: Dynamic Plot Builder</h1>  
+  <div id="controls">  
+    <input id="node-text" type="text" placeholder="Enter plot point..." />  
+    <button id="add-node">Add Plot Point</button>  
+  </div>  
+  <div id="story-canvas"></div>  
+</div>  
+<script>  
+  const canvas = document.getElementById('story-canvas');  
+  const addNodeBtn = document.getElementById('add-node');  
+  const nodeTextInput = document.getElementById('node-text');  
+  let nodes = [];  
+  let lines = [];  
+  
+  function createNode(x, y, text) {  
+    const node = document.createElement('div');  
+    node.classList.add('node');  
+    node.style.left = `${x}px`;  
+    node.style.top = `${y}px`;  
+    node.textContent = text;  
+    node.draggable = true;  
+  
+    node.addEventListener('dragstart', (event) => {  
+      event.dataTransfer.setData('text/plain', nodes.indexOf(node));  
+    });  
+  
+    node.addEventListener('dblclick', () => {  
+      const newText = prompt('Edit plot point:', node.textContent);  
+      if (newText) {  
+        node.textContent = newText;  
+      }  
+    });  
+  
+    canvas.appendChild(node);  
+    nodes.push(node);  
+  }  
+  
+  canvas.addEventListener('dragover', (event) => {  
+    event.preventDefault();  
+  });  
+  
+  canvas.addEventListener('drop', (event) => {  
+    event.preventDefault();  
+    const index = event.dataTransfer.getData('text/plain');  
+    const node = nodes[index];  
+    node.style.left = `${event.clientX - canvas.offsetLeft}px`;  
+    node.style.top = `${event.clientY - canvas.offsetTop}px`;  
+    redrawConnections();  
+  });  
+  
+  function drawLine(nodeA, nodeB) {  
+    const line = document.createElement('div');  
+    line.classList.add('connector');  
+    canvas.appendChild(line);  
+    updateLine(line, nodeA, nodeB);  
+    lines.push({ line, nodeA, nodeB });  
+  }  
+  
+  function updateLine(line, nodeA, nodeB) {  
+    const rectA = nodeA.getBoundingClientRect();  
+    const rectB = nodeB.getBoundingClientRect();  
+    const x1 = rectA.left + rectA.width / 2;  
+    const y1 = rectA.top + rectA.height / 2;  
+    const x2 = rectB.left + rectB.width / 2;  
+    const y2 = rectB.top + rectB.height / 2;  
+    const length = Math.hypot(x2 - x1, y2 - y1);  
+    const angle = Math.atan2(y2 - y1, x2 - x1);  
+    line.style.width = `${length}px`;  
+    line.style.transform = `rotate(${angle}rad)`;  
+    line.style.left = `${x1 - canvas.offsetLeft}px`;  
+    line.style.top = `${y1 - canvas.offsetTop}px`;  
+  }  
+  
+  function redrawConnections() {  
+    lines.forEach(({ line, nodeA, nodeB }) => {  
+      updateLine(line, nodeA, nodeB);  
+    });  
+  }  
+  
+  addNodeBtn.addEventListener('click', () => {  
+    const text = nodeTextInput.value.trim();  
+    if (!text) return;  
+  
+    const x = Math.random() * (canvas.offsetWidth - 100) + 10;  
+    const y = Math.random() * (canvas.offsetHeight - 100) + 10;  
+    createNode(x, y, text);  
+  
+    if (nodes.length > 1) {  
+      drawLine(nodes[nodes.length - 2], nodes[nodes.length - 1]);  
+    }  
+  
+    nodeTextInput.value = '';  
+  });  
+  
+  // Create initial node  
+  createNode(200, 200, 'Start Your Story Here');  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

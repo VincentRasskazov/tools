@@ -1,0 +1,168 @@
+---
+layout: null
+title: "WordSpiral: The Vocabulary Odyssey"
+category: "Writing"
+description: "An interactive word expansion tool where users grow a spiral galaxy of interconnected synonyms and related phrases by inputting words and exploring their meanings."
+permalink: "/tools/daily-20260627-20-wordspiral-the-vocabulary-odyssey.html"
+generated_by: "api-true-ai"
+generated_date: "20260627"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordSpiral: The Vocabulary Odyssey | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive word expansion tool where users grow a spiral galaxy of interconnected synonyms and related phrases by inputting words and exploring their meanings. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="WordSpiral: The Vocabulary Odyssey | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive word expansion tool where users grow a spiral galaxy of interconnected synonyms and related phrases by inputting words and exploring their meanings. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WordSpiral: The Vocabulary Odyssey | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive word expansion tool where users grow a spiral galaxy of interconnected synonyms and related phrases by inputting words and exploring their meanings. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>WordSpiral: The Vocabulary Odyssey</h1>
+    <p class="seo-subtitle">An interactive word expansion tool where users grow a spiral galaxy of interconnected synonyms and related phrases by inputting words and exploring their meanings.</p>
+    ```html
+<style>
+/* Modern, beautiful inline CSS */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  background: radial-gradient(circle, #1e1e2f, #141421);
+  color: white;
+  overflow: hidden;
+}
+#tool-app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+#input-container {
+  margin: 1rem 0;
+}
+input {
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
+button {
+  margin-left: 1rem;
+  padding: 0.6rem 1rem;
+  font-size: 1.2rem;
+  border: none;
+  background: #5a5aff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+button:hover {
+  background: #4040ff;
+}
+#galaxy {
+  position: relative;
+  height: 50vh;
+  width: 80vw;
+  margin-top: 2rem;
+  overflow: hidden;
+  border: 2px solid #333;
+  border-radius: 10px;
+  background: #1b1b2b;
+}
+.word-node {
+  position: absolute;
+  background: #4caf50;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s, background 0.3s;
+}
+.word-node:hover {
+  transform: scale(1.2);
+  background: #45a049;
+}
+</style>
+<div id="tool-app">
+  <h1>WordSpiral: The Vocabulary Odyssey</h1>
+  <div id="input-container">
+    <input type="text" id="word-input" placeholder="Enter a word..." />
+    <button id="explore-button">Explore</button>
+  </div>
+  <div id="galaxy"></div>
+</div>
+<script>
+const galaxy = document.getElementById('galaxy');
+const exploreButton = document.getElementById('explore-button');
+const wordInput = document.getElementById('word-input');
+let wordData = {};
+
+function fetchSynonyms(word) {
+  return fetch(\`https://api.datamuse.com/words?ml=\${word}\`)
+    .then(response => response.json())
+    .catch(() => []);
+}
+
+function spawnWordNode(word, x, y) {
+  const node = document.createElement('div');
+  node.classList.add('word-node');
+  node.style.left = x + 'px';
+  node.style.top = y + 'px';
+  node.innerText = word;
+  node.onclick = () => expandWord(word, x, y);
+  galaxy.appendChild(node);
+}
+
+function expandWord(word, parentX, parentY) {
+  if (wordData[word]) return; // Prevent re-expansion
+  wordData[word] = true;
+
+  fetchSynonyms(word).then(synonyms => {
+    synonyms.slice(0, 6).forEach((synObj, index) => {
+      const angle = (Math.PI / 3) * index;
+      const x = parentX + Math.cos(angle) * 100;
+      const y = parentY + Math.sin(angle) * 100;
+
+      spawnWordNode(synObj.word, x, y);
+    });
+  });
+}
+
+exploreButton.addEventListener('click', () => {
+  const word = wordInput.value.trim();
+  if (word) {
+    spawnWordNode(word, galaxy.clientWidth / 2, galaxy.clientHeight / 2);
+    expandWord(word, galaxy.clientWidth / 2, galaxy.clientHeight / 2);
+    wordInput.value = '';
+  }
+});
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

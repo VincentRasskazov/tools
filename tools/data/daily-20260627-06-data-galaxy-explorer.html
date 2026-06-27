@@ -1,0 +1,168 @@
+---
+layout: null
+title: "Data Galaxy Explorer"
+category: "Data"
+description: "Embark on a journey through an interactive universe of datasets, where users can explore, visualize, and manipulate data clusters as if navigating a cosmos."
+permalink: "/tools/daily-20260627-06-data-galaxy-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260627"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Galaxy Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Embark on a journey through an interactive universe of datasets, where users can explore, visualize, and manipulate data clusters as if navigating a cosmos. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Galaxy Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Embark on a journey through an interactive universe of datasets, where users can explore, visualize, and manipulate data clusters as if navigating a cosmos. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Galaxy Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Embark on a journey through an interactive universe of datasets, where users can explore, visualize, and manipulate data clusters as if navigating a cosmos. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Galaxy Explorer</h1>
+    <p class="seo-subtitle">Embark on a journey through an interactive universe of datasets, where users can explore, visualize, and manipulate data clusters as if navigating a cosmos.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background: radial-gradient(circle, #1b1b3a, #0d0d1a);  
+  color: white;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 100vw;  
+  height: 100vh;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+}  
+canvas {  
+  display: block;  
+}  
+button {  
+  position: absolute;  
+  top: 10px;  
+  left: 10px;  
+  padding: 10px 20px;  
+  font-size: 16px;  
+  background-color: #ff007f;  
+  color: white;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer;  
+}  
+button:hover {  
+  background-color: #ff3399;  
+}  
+</style>  
+<div id="tool-app">  
+  <button id="reset-button">Reset Galaxy</button>  
+  <canvas id="galaxy-canvas"></canvas>  
+</div>  
+<script>  
+const canvas = document.getElementById('galaxy-canvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = window.innerWidth;  
+canvas.height = window.innerHeight;  
+
+const stars = [];  
+const dataClusters = [];  
+
+function generateStars() {  
+  for (let i = 0; i < 300; i++) {  
+    stars.push({  
+      x: Math.random() * canvas.width,  
+      y: Math.random() * canvas.height,  
+      size: Math.random() * 2 + 1,  
+      color: `rgba(255, 255, ${Math.floor(Math.random() * 155 + 100)}, 0.8)` // Soft yellow  
+    });  
+  }  
+}  
+
+function generateDataClusters() {  
+  for (let i = 0; i < 10; i++) {  
+    dataClusters.push({  
+      x: Math.random() * canvas.width,  
+      y: Math.random() * canvas.height,  
+      radius: Math.random() * 20 + 30,  
+      data: Math.floor(Math.random() * 1000),  
+      color: `hsl(${Math.random() * 360}, 70%, 50%)`  
+    });  
+  }  
+}  
+
+function drawGalaxy() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+
+  // Draw stars  
+  stars.forEach(star => {  
+    ctx.beginPath();  
+    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);  
+    ctx.fillStyle = star.color;  
+    ctx.fill();  
+  });  
+
+  // Draw data clusters  
+  dataClusters.forEach(cluster => {  
+    ctx.beginPath();  
+    ctx.arc(cluster.x, cluster.y, cluster.radius, 0, Math.PI * 2);  
+    ctx.fillStyle = cluster.color;  
+    ctx.fill();  
+    ctx.fillStyle = 'white';  
+    ctx.font = '14px Arial';  
+    ctx.fillText(`Data: ${cluster.data}`, cluster.x - cluster.radius / 2, cluster.y);  
+  });  
+}  
+
+function interactWithCluster(x, y) {  
+  dataClusters.forEach(cluster => {  
+    const dx = x - cluster.x;  
+    const dy = y - cluster.y;  
+    const distance = Math.sqrt(dx * dx + dy * dy);  
+    if (distance < cluster.radius) {  
+      cluster.data += Math.floor(Math.random() * 100);  
+      cluster.radius += 5;  
+      cluster.color = `hsl(${Math.random() * 360}, 70%, 50%)`;  
+    }  
+  });  
+}  
+
+canvas.addEventListener('click', (e) => {  
+  const x = e.clientX;  
+  const y = e.clientY;  
+  interactWithCluster(x, y);  
+  drawGalaxy();  
+});  
+
+document.getElementById('reset-button').addEventListener('click', () => {  
+  stars.length = 0;  
+  dataClusters.length = 0;  
+  generateStars();  
+  generateDataClusters();  
+  drawGalaxy();  
+});  
+
+generateStars();  
+generateDataClusters();  
+drawGalaxy();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,170 @@
+---
+layout: null
+title: "TaskTunnels: Interactive Focus Adventure"
+category: "Productivity"
+description: "Gamify your productivity by navigating tasks through a dynamic 3D tunnel, where completing tasks propels you forward in a visually rich, interactive journey."
+permalink: "/tools/daily-20260627-12-tasktunnels-interactive-focus-adventure.html"
+generated_by: "api-true-ai"
+generated_date: "20260627"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskTunnels: Interactive Focus Adventure | Free Online Interactive Tool</title>
+  <meta name="description" content="Gamify your productivity by navigating tasks through a dynamic 3D tunnel, where completing tasks propels you forward in a visually rich, interactive journey. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="TaskTunnels: Interactive Focus Adventure | Free Online Interactive Tool">
+  <meta property="og:description" content="Gamify your productivity by navigating tasks through a dynamic 3D tunnel, where completing tasks propels you forward in a visually rich, interactive journey. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TaskTunnels: Interactive Focus Adventure | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Gamify your productivity by navigating tasks through a dynamic 3D tunnel, where completing tasks propels you forward in a visually rich, interactive journey. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>TaskTunnels: Interactive Focus Adventure</h1>
+    <p class="seo-subtitle">Gamify your productivity by navigating tasks through a dynamic 3D tunnel, where completing tasks propels you forward in a visually rich, interactive journey.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: 'Arial', sans-serif;  
+  background: linear-gradient(to bottom, #28313b, #485461);  
+  color: #fff;  
+  margin: 0;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 100vw;  
+  height: 100vh;  
+  display: flex;  
+  flex-direction: column;  
+  justify-content: center;  
+  align-items: center;  
+  position: relative;  
+}  
+canvas {  
+  position: absolute;  
+  top: 0;  
+  left: 0;  
+}  
+#task-input {  
+  z-index: 10;  
+  margin-top: 20px;  
+  display: flex;  
+  justify-content: center;  
+  gap: 10px;  
+}  
+input[type="text"] {  
+  padding: 10px;  
+  width: 300px;  
+  border: none;  
+  border-radius: 5px;  
+  outline: none;  
+  font-size: 16px;  
+}  
+button {  
+  padding: 10px 20px;  
+  border: none;  
+  border-radius: 5px;  
+  background: #1dd1a1;  
+  color: #fff;  
+  font-size: 16px;  
+  cursor: pointer;  
+  transition: background 0.3s ease;  
+}  
+button:hover {  
+  background: #10ac84;  
+}  
+</style>  
+<div id="tool-app">  
+  <canvas id="gameCanvas"></canvas>  
+  <div id="task-input">  
+    <input type="text" id="task" placeholder="Enter your task..." />  
+    <button onclick="addTask()">Add Task</button>  
+  </div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById('gameCanvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = window.innerWidth;  
+canvas.height = window.innerHeight;  
+  
+let tasks = [];  
+let progress = 0;  
+let speed = 2;  
+
+function addTask() {  
+  const taskInput = document.getElementById('task');  
+  const taskText = taskInput.value.trim();  
+  if (taskText) {  
+    tasks.push({ text: taskText, completed: false });  
+    taskInput.value = '';  
+  }  
+}  
+
+function drawTunnel() {  
+  ctx.fillStyle = '#1e272e';  
+  ctx.fillRect(0, 0, canvas.width, canvas.height);  
+  
+  ctx.strokeStyle = '#00d2d3';  
+  ctx.lineWidth = 5;  
+  
+  for (let i = progress; i < progress + 1000; i += 200) {  
+    const size = canvas.width / 2;  
+    ctx.beginPath();  
+    ctx.moveTo(0, i);  
+    ctx.lineTo(canvas.width, i);  
+    ctx.stroke();  
+  }  
+}  
+
+function drawTaskProgress() {  
+  const completed = tasks.filter(t => t.completed).length;  
+  const percentage = (completed / tasks.length) * 100 || 0;  
+  
+  ctx.font = '20px Arial';  
+  ctx.fillStyle = '#fff';  
+  ctx.fillText(`Tasks: ${completed}/${tasks.length} (${percentage.toFixed(1)}%)`, 20, 40);  
+}  
+
+function gameLoop() {  
+  drawTunnel();  
+  drawTaskProgress();  
+  progress += speed;  
+  
+  if (progress > 200) {  
+    if (tasks.length && tasks[0].completed) {  
+      tasks.shift();  
+    }  
+  
+    progress = 0;  
+  }  
+  
+  requestAnimationFrame(gameLoop);  
+}  
+
+canvas.addEventListener('click', () => {  
+  if (tasks.length) {  
+    tasks[0].completed = true;  
+  }  
+});  
+
+gameLoop();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,130 @@
+---
+layout: null
+title: "Data Odyssey: Cluster Explorer"
+category: "Data"
+description: "Navigate a galaxy of data clusters, discovering patterns, connections, and anomalies through interactive spatial exploration."
+permalink: "/tools/daily-20260627-23-data-odyssey-cluster-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260627"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Odyssey: Cluster Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate a galaxy of data clusters, discovering patterns, connections, and anomalies through interactive spatial exploration. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Odyssey: Cluster Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate a galaxy of data clusters, discovering patterns, connections, and anomalies through interactive spatial exploration. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Odyssey: Cluster Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate a galaxy of data clusters, discovering patterns, connections, and anomalies through interactive spatial exploration. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Odyssey: Cluster Explorer</h1>
+    <p class="seo-subtitle">Navigate a galaxy of data clusters, discovering patterns, connections, and anomalies through interactive spatial exploration.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);  
+  color: white;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+canvas {  
+  border: 2px solid white;  
+  border-radius: 10px;  
+}  
+#instructions {  
+  position: absolute;  
+  bottom: 20px;  
+  width: 100%;  
+  text-align: center;  
+  font-size: 1.2rem;  
+}  
+</style>  
+<div id="tool-app">  
+  <canvas id="dataCanvas"></canvas>  
+</div>  
+<div id="instructions">  
+  Use your mouse to explore and click on clusters to analyze hidden data connections!  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+
+const canvas = document.getElementById('dataCanvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = window.innerWidth * 0.8;  
+canvas.height = window.innerHeight * 0.8;  
+
+const clusters = [];  
+const clusterColors = ['#FF5733', '#C70039', '#900C3F', '#581845', '#FFC300'];  
+
+function generateClusters() {  
+  for (let i = 0; i < 50; i++) {  
+    clusters.push({  
+      x: Math.random() * canvas.width,  
+      y: Math.random() * canvas.height,  
+      radius: Math.random() * 25 + 10,  
+      color: clusterColors[Math.floor(Math.random() * clusterColors.length)],  
+      data: Array.from({length: 5}, () => (Math.random() * 100).toFixed(2)),  
+    });  
+  }  
+}  
+
+function drawClusters() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  clusters.forEach(cluster => {  
+    ctx.beginPath();  
+    ctx.arc(cluster.x, cluster.y, cluster.radius, 0, Math.PI * 2);  
+    ctx.fillStyle = cluster.color;  
+    ctx.fill();  
+    ctx.closePath();  
+  });  
+}  
+
+canvas.addEventListener('click', (e) => {  
+  const rect = canvas.getBoundingClientRect();  
+  const mouseX = e.clientX - rect.left;  
+  const mouseY = e.clientY - rect.top;  
+
+  clusters.forEach(cluster => {  
+    const distance = Math.sqrt(Math.pow(mouseX - cluster.x, 2) + Math.pow(mouseY - cluster.y, 2));  
+    if (distance < cluster.radius) {  
+      alert(`Cluster Data: ${cluster.data.join(', ')}`);  
+    }  
+  });  
+});  
+
+function animate() {  
+  drawClusters();  
+  requestAnimationFrame(animate);  
+}  
+
+generateClusters();  
+animate();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

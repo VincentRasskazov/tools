@@ -1,0 +1,158 @@
+---
+layout: null
+title: "Campaign Constellation Mapper"
+category: "Marketing"
+description: "A highly interactive tool where users create and visualize interconnected nodes of marketing campaigns as constellations, with real-time feedback on potential reach, overlap, and engagement."
+permalink: "/tools/daily-20260627-03-campaign-constellation-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260627"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campaign Constellation Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive tool where users create and visualize interconnected nodes of marketing campaigns as constellations, with real-time feedback on potential reach, overlap, and engagement. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Campaign Constellation Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive tool where users create and visualize interconnected nodes of marketing campaigns as constellations, with real-time feedback on potential reach, overlap, and engagement. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Campaign Constellation Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive tool where users create and visualize interconnected nodes of marketing campaigns as constellations, with real-time feedback on potential reach, overlap, and engagement. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Campaign Constellation Mapper</h1>
+    <p class="seo-subtitle">A highly interactive tool where users create and visualize interconnected nodes of marketing campaigns as constellations, with real-time feedback on potential reach, overlap, and engagement.</p>
+    <style>  
+  #tool-app {  
+    font-family: Arial, sans-serif;  
+    margin: 20px auto;  
+    max-width: 800px;  
+    height: 600px;  
+    background: linear-gradient(135deg, #1e3c72, #2a5298);  
+    border-radius: 12px;  
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);  
+    position: relative;  
+    overflow: hidden;  
+  }  
+  .node {  
+    position: absolute;  
+    border-radius: 50%;  
+    background: #ffd700;  
+    width: 20px;  
+    height: 20px;  
+    cursor: pointer;  
+    transform: translate(-10px, -10px);  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    font-size: 12px;  
+    font-weight: bold;  
+    color: #000;  
+  }  
+  .line {  
+    position: absolute;  
+    background: rgba(255, 255, 255, 0.5);  
+    height: 2px;  
+    transform-origin: 0 0;  
+  }  
+</style>  
+<div id="tool-app">  
+  <canvas id="canvas" width="800" height="600" style="position:absolute; top:0; left:0;"></canvas>  
+</div>  
+<script>  
+  const app = document.getElementById('tool-app');  
+  const canvas = document.getElementById('canvas');  
+  const ctx = canvas.getContext('2d');  
+  const nodes = [];  
+  const connections = [];  
+
+  const createNode = (x, y, name) => {  
+    const node = document.createElement('div');  
+    node.className = 'node';  
+    node.style.left = x + 'px';  
+    node.style.top = y + 'px';  
+    node.innerText = name;  
+    node.draggable = true;  
+
+    node.addEventListener('dragstart', (e) => {  
+      e.dataTransfer.setData('text/plain', JSON.stringify({ id: node.id }));  
+    });  
+
+    nodes.push({ id: name, x, y, element: node });  
+    app.appendChild(node);  
+  };  
+
+  const drawConnections = () => {  
+    ctx.clearRect(0, 0, canvas.width, canvas.height);  
+    connections.forEach(({ from, to }) => {  
+      const startX = from.x + 10;  
+      const startY = from.y + 10;  
+      const endX = to.x + 10;  
+      const endY = to.y + 10;  
+      const angle = Math.atan2(endY - startY, endX - startX);  
+      const length = Math.sqrt((endX - startX) ** 2 + (endY - startY) ** 2);  
+
+      ctx.beginPath();  
+      ctx.moveTo(startX, startY);  
+      ctx.lineTo(endX, endY);  
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';  
+      ctx.lineWidth = 2;  
+      ctx.stroke();  
+    });  
+  };  
+
+  app.addEventListener('dblclick', (e) => {  
+    const name = prompt('Enter campaign name:');  
+    if (name) {  
+      createNode(e.offsetX, e.offsetY, name);  
+    }  
+  });  
+
+  app.addEventListener('dragover', (e) => {  
+    e.preventDefault();  
+  });  
+
+  app.addEventListener('drop', (e) => {  
+    e.preventDefault();  
+    const data = JSON.parse(e.dataTransfer.getData('text/plain'));  
+    const node = nodes.find((n) => n.id === data.id);  
+    node.x = e.offsetX;  
+    node.y = e.offsetY;  
+    node.element.style.left = `${node.x}px`;  
+    node.element.style.top = `${node.y}px`;  
+    drawConnections();  
+  });  
+
+  app.addEventListener('click', (e) => {  
+    if (!e.target.classList.contains('node')) return;  
+    const node = nodes.find((n) => n.element === e.target);  
+    const targetName = prompt('Enter name of node to connect to:');  
+    if (targetName) {  
+      const targetNode = nodes.find((n) => n.id === targetName);  
+      if (targetNode && targetNode !== node) {  
+        connections.push({ from: node, to: targetNode });  
+        drawConnections();  
+      } else {  
+        alert('Invalid target node.');  
+      }  
+    }  
+  });  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
