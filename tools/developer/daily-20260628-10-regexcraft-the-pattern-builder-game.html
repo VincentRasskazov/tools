@@ -1,0 +1,168 @@
+---
+layout: null
+title: "RegexCraft: The Pattern Builder Game"
+category: "Developer"
+description: "An interactive game where developers solve regex challenges by building and testing patterns in real-time against tricky datasets."
+permalink: "/tools/daily-20260628-10-regexcraft-the-pattern-builder-game.html"
+generated_by: "api-true-ai"
+generated_date: "20260628"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RegexCraft: The Pattern Builder Game | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive game where developers solve regex challenges by building and testing patterns in real-time against tricky datasets. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="RegexCraft: The Pattern Builder Game | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive game where developers solve regex challenges by building and testing patterns in real-time against tricky datasets. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="RegexCraft: The Pattern Builder Game | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive game where developers solve regex challenges by building and testing patterns in real-time against tricky datasets. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>RegexCraft: The Pattern Builder Game</h1>
+    <p class="seo-subtitle">An interactive game where developers solve regex challenges by building and testing patterns in real-time against tricky datasets.</p>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #1e1e2f;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  #tool-app {
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+    margin: 20px auto;
+  }
+  .game-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .dataset, .regex-builder {
+    background: #29293d;
+    border-radius: 8px;
+    padding: 20px;
+    border: 1px solid #ffffff20;
+  }
+  .dataset pre {
+    background: #1e1e2f;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+  }
+  .regex-input {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .regex-input input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ffffff50;
+    border-radius: 5px;
+    background: #33334e;
+    color: #ffffff;
+  }
+  .regex-input button {
+    padding: 8px 15px;
+    background: #3d85c6;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .regex-input button:hover {
+    background: #3571a3;
+  }
+  .results {
+    margin-top: 20px;
+  }
+  .results span {
+    display: inline-block;
+    background: #3a3a5a;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 5px;
+  }
+</style>
+<div id="tool-app">
+  <h1>RegexCraft: The Pattern Builder Game</h1>
+  <div class="game-grid">
+    <div class="dataset">
+      <h2>Dataset</h2>
+      <pre id="dataset-content"></pre>
+    </div>
+    <div class="regex-builder">
+      <h2>Build Your Regex</h2>
+      <div class="regex-input">
+        <input id="regex-input" type="text" placeholder="Enter your regex pattern" />
+        <button id="test-regex">Test</button>
+      </div>
+      <div class="results">
+        <h3>Matches:</h3>
+        <div id="match-results"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  const datasets = [
+    "Emails: alice@example.com, bob@sample.org, john@website.net",
+    "Log Dates: [2023-01-15], [2023-02-16], [2023-03-17]",
+    "Phone Numbers: (123) 456-7890, 987-654-3210, +1-800-555-0199",
+    "URLs: https://example.com, http://test.org, www.website.net",
+  ];
+  
+  const datasetElement = document.getElementById('dataset-content');
+  const regexInputElement = document.getElementById('regex-input');
+  const matchResultsElement = document.getElementById('match-results');
+  
+  // Randomly select a dataset
+  const currentDataset = datasets[Math.floor(Math.random() * datasets.length)];
+  datasetElement.textContent = currentDataset;
+  
+  document.getElementById('test-regex').addEventListener('click', () => {
+    const regexString = regexInputElement.value;
+    matchResultsElement.innerHTML = '';
+    
+    try {
+      const regex = new RegExp(regexString, 'g');
+      const matches = Array.from(currentDataset.matchAll(regex));
+      
+      if (matches.length > 0) {
+        matches.forEach(match => {
+          const matchSpan = document.createElement('span');
+          matchSpan.textContent = match[0];
+          matchResultsElement.appendChild(matchSpan);
+        });
+      } else {
+        matchResultsElement.textContent = 'No matches found.';
+      }
+    } catch (error) {
+      matchResultsElement.textContent = 'Invalid regex pattern.';
+    }
+  });
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

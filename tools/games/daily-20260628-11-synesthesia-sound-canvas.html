@@ -1,0 +1,161 @@
+---
+layout: null
+title: "Synesthesia Sound Canvas"
+category: "Games"
+description: "Paint interactive visual art that transforms into unique music based on brush strokes, speed, and patterns."
+permalink: "/tools/daily-20260628-11-synesthesia-sound-canvas.html"
+generated_by: "api-true-ai"
+generated_date: "20260628"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Synesthesia Sound Canvas | Free Online Interactive Tool</title>
+  <meta name="description" content="Paint interactive visual art that transforms into unique music based on brush strokes, speed, and patterns. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Synesthesia Sound Canvas | Free Online Interactive Tool">
+  <meta property="og:description" content="Paint interactive visual art that transforms into unique music based on brush strokes, speed, and patterns. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Synesthesia Sound Canvas | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Paint interactive visual art that transforms into unique music based on brush strokes, speed, and patterns. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Synesthesia Sound Canvas</h1>
+    <p class="seo-subtitle">Paint interactive visual art that transforms into unique music based on brush strokes, speed, and patterns.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  height: 100vh;  
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);  
+}  
+#tool-app {  
+  width: 80%;  
+  height: 80%;  
+  border: 5px solid #fff;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);  
+  background-color: #222;  
+  border-radius: 15px;  
+  overflow: hidden;  
+  position: relative;  
+}  
+canvas {  
+  display: block;  
+}  
+.controls {  
+  position: absolute;  
+  bottom: 10px;  
+  left: 50%;  
+  transform: translateX(-50%);  
+  display: flex;  
+  gap: 15px;  
+}  
+.button {  
+  background: #fff;  
+  color: #222;  
+  border: none;  
+  padding: 10px 20px;  
+  cursor: pointer;  
+  border-radius: 5px;  
+  transition: background 0.3s ease;  
+}  
+.button:hover {  
+  background: #ccc;  
+}  
+</style>  
+<div id="tool-app">  
+  <canvas id="soundCanvas"></canvas>  
+  <div class="controls">  
+    <button class="button" id="clearCanvas">Clear</button>  
+    <button class="button" id="playMusic">Play Music</button>  
+  </div>  
+</div>  
+<script>  
+const canvas = document.getElementById('soundCanvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = window.innerWidth * 0.8;  
+canvas.height = window.innerHeight * 0.8;  
+
+let isDrawing = false;  
+let strokes = [];  
+
+function startDrawing(e) {  
+  isDrawing = true;  
+  strokes.push([]);  
+}  
+
+function draw(e) {  
+  if (!isDrawing) return;  
+  const x = e.offsetX;  
+  const y = e.offsetY;  
+  strokes[strokes.length - 1].push({ x, y });  
+
+  ctx.strokeStyle = `hsl(${x % 360}, 100%, 50%)`;  
+  ctx.lineWidth = Math.random() * 5 + 1;  
+  ctx.beginPath();  
+  ctx.moveTo(x, y);  
+  ctx.lineTo(x, y);  
+  ctx.stroke();  
+}  
+
+function stopDrawing() {  
+  isDrawing = false;  
+}  
+
+function clearCanvas() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  strokes = [];  
+}  
+
+function playMusic() {  
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();  
+
+  strokes.forEach((stroke, index) => {  
+    const oscillator = audioCtx.createOscillator();  
+    oscillator.type = 'sine';  
+    const gainNode = audioCtx.createGain();  
+    oscillator.connect(gainNode).connect(audioCtx.destination);  
+
+    stroke.forEach((point, i) => {  
+      const freq = (point.x / canvas.width) * 1000 + 200;  
+      const time = audioCtx.currentTime + (i * 0.05);  
+      oscillator.frequency.setValueAtTime(freq, time);  
+      gainNode.gain.setValueAtTime((point.y / canvas.height), time);  
+    });  
+
+    oscillator.start(audioCtx.currentTime + index * 0.5);  
+    oscillator.stop(audioCtx.currentTime + index * 0.5 + stroke.length * 0.05);  
+  });  
+}  
+
+canvas.addEventListener('mousedown', startDrawing);  
+canvas.addEventListener('mousemove', draw);  
+canvas.addEventListener('mouseup', stopDrawing);  
+canvas.addEventListener('mouseleave', stopDrawing);  
+
+document.getElementById('clearCanvas').addEventListener('click', clearCanvas);  
+document.getElementById('playMusic').addEventListener('click', playMusic);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
