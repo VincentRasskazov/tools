@@ -1,0 +1,109 @@
+---
+layout: null
+title: "Debugger's Maze: Codebug Hunt"
+category: "Developer"
+description: "Navigate a visually stunning interactive maze where each path is a bug in the code and you solve puzzles to debug it while learning coding concepts."
+permalink: "/tools/daily-20260629-24-debugger-s-maze-codebug-hunt.html"
+generated_by: "api-true-ai"
+generated_date: "20260629"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debugger's Maze: Codebug Hunt | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate a visually stunning interactive maze where each path is a bug in the code and you solve puzzles to debug it while learning coding concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Debugger's Maze: Codebug Hunt | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate a visually stunning interactive maze where each path is a bug in the code and you solve puzzles to debug it while learning coding concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Debugger's Maze: Codebug Hunt | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate a visually stunning interactive maze where each path is a bug in the code and you solve puzzles to debug it while learning coding concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Debugger's Maze: Codebug Hunt</h1>
+    <p class="seo-subtitle">Navigate a visually stunning interactive maze where each path is a bug in the code and you solve puzzles to debug it while learning coding concepts.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; background: #1e1e2f; color: #f5f5fa; }  
+  #tool-app { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }  
+  .maze-grid { display: grid; grid-template-columns: repeat(5, 60px); grid-gap: 5px; }  
+  .maze-cell { width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; background-color: #3a3a55; color: #fff; border: 2px solid #1e1e2f; font-size: 14px; cursor: pointer; }  
+  .maze-cell.bug { background-color: #ff4d4d; }  
+  .maze-cell.player { background-color: #4caf50; }  
+  .maze-cell.exit { background-color: #2196f3; }  
+  .instruction { margin: 20px; font-size: 16px; text-align: center; }  
+</style>  
+<div id="tool-app">  
+  <div class="instruction">Navigate the maze! Click bugs to solve them, reach the blue exit to win!</div>  
+  <div class="maze-grid" id="mazeGrid"></div>  
+</div>  
+<script>  
+  const rows = 5;  
+  const cols = 5;  
+  let playerPosition = { x: 0, y: 0 };  
+
+  const mazeGrid = document.getElementById('mazeGrid');  
+
+  const maze = Array.from({ length: rows }, () => Array.from({ length: cols }, () => 'empty'));  
+  maze[0][0] = 'player';  
+  maze[4][4] = 'exit';  
+
+  for (let i = 0; i < 5; i++) {  
+    let bugX = Math.floor(Math.random() * rows);  
+    let bugY = Math.floor(Math.random() * cols);  
+    if (maze[bugX][bugY] === 'empty') maze[bugX][bugY] = 'bug';  
+  }  
+
+  function renderMaze() {  
+    mazeGrid.innerHTML = '';  
+    maze.forEach((row, rowIndex) => {  
+      row.forEach((cell, colIndex) => {  
+        const div = document.createElement('div');  
+        div.classList.add('maze-cell', cell);  
+        if (cell === 'bug') div.textContent = '🐛';  
+        if (cell === 'player') div.textContent = '👾';  
+        if (cell === 'exit') div.textContent = '🚪';  
+        div.addEventListener('click', () => handleCellClick(rowIndex, colIndex));  
+        mazeGrid.appendChild(div);  
+      });  
+    });  
+  }  
+
+  function handleCellClick(row, col) {  
+    const dx = Math.abs(playerPosition.x - row);  
+    const dy = Math.abs(playerPosition.y - col);  
+
+    if ((dx === 1 && dy === 0) || (dx === 0 && dy === 1)) {  
+      if (maze[row][col] === 'bug') {  
+        maze[row][col] = 'empty';  
+        alert('Bug fixed!');  
+      } else if (maze[row][col] === 'exit') {  
+        alert('You won!');  
+        return;  
+      }  
+      maze[playerPosition.x][playerPosition.y] = 'empty';  
+      playerPosition = { x: row, y: col };  
+      maze[row][col] = 'player';  
+      renderMaze();  
+    }  
+  }  
+
+  renderMaze();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

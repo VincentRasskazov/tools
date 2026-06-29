@@ -1,0 +1,178 @@
+---
+layout: null
+title: "FocusForge: Task Flow Shaper"
+category: "Productivity"
+description: "A highly interactive drag-and-drop tool to visually map and gamify your daily tasks by chaining them into a dynamic productivity \"river\" with customizable rules and progress animations."
+permalink: "/tools/daily-20260629-13-focusforge-task-flow-shaper.html"
+generated_by: "api-true-ai"
+generated_date: "20260629"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusForge: Task Flow Shaper | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive drag-and-drop tool to visually map and gamify your daily tasks by chaining them into a dynamic productivity &quot;river&quot; with customizable rules and progress animations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="FocusForge: Task Flow Shaper | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive drag-and-drop tool to visually map and gamify your daily tasks by chaining them into a dynamic productivity &quot;river&quot; with customizable rules and progress animations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FocusForge: Task Flow Shaper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive drag-and-drop tool to visually map and gamify your daily tasks by chaining them into a dynamic productivity &quot;river&quot; with customizable rules and progress animations. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>FocusForge: Task Flow Shaper</h1>
+    <p class="seo-subtitle">A highly interactive drag-and-drop tool to visually map and gamify your daily tasks by chaining them into a dynamic productivity &quot;river&quot; with customizable rules and progress animations.</p>
+    <style>  
+  #tool-app {  
+    font-family: Arial, sans-serif;  
+    width: 100%;  
+    height: 100vh;  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    justify-content: space-around;  
+    background: linear-gradient(45deg, #f7f8fc, #e4ecf7);  
+  }  
+  .task-container {  
+    display: flex;  
+    gap: 10px;  
+    overflow-x: auto;  
+    padding: 20px;  
+    border: 2px dashed #b3c0d1;  
+    background: #ffffff;  
+    border-radius: 10px;  
+  }  
+  .task {  
+    padding: 10px 20px;  
+    background: #74b9ff;  
+    color: white;  
+    font-weight: bold;  
+    border-radius: 5px;  
+    cursor: grab;  
+    user-select: none;  
+  }  
+  .task.completed {  
+    background: #00b894;  
+    text-decoration: line-through;  
+  }  
+  #task-input {  
+    padding: 10px;  
+    border: 1px solid #b2bec3;  
+    border-radius: 5px;  
+    width: 300px;  
+  }  
+  #add-task-btn {  
+    padding: 10px 20px;  
+    background: #6c5ce7;  
+    color: white;  
+    border: none;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    transition: background 0.3s;  
+  }  
+  #add-task-btn:hover {  
+    background: #4d5be0;  
+  }  
+  .progress-bar-container {  
+    width: 80%;  
+    height: 20px;  
+    background: #dfe6e9;  
+    border-radius: 10px;  
+    overflow: hidden;  
+    margin: 20px 0;  
+  }  
+  .progress-bar {  
+    height: 100%;  
+    background: #00cec9;  
+    width: 0;  
+    transition: width 0.5s;  
+  }  
+</style>  
+<div id="tool-app">  
+  <div class="task-container" id="task-container"></div>  
+  <div>  
+    <input id="task-input" type="text" placeholder="Enter a task and press Add">  
+    <button id="add-task-btn">Add Task</button>  
+  </div>  
+  <div class="progress-bar-container">  
+    <div id="progress-bar" class="progress-bar"></div>  
+  </div>  
+</div>  
+<script>  
+  let tasks = [];  
+
+  const taskInput = document.getElementById('task-input');  
+  const taskContainer = document.getElementById('task-container');  
+  const progressBar = document.getElementById('progress-bar');  
+
+  document.getElementById('add-task-btn').addEventListener('click', () => {  
+    const taskText = taskInput.value.trim();  
+    if (taskText) {  
+      tasks.push({ text: taskText, completed: false });  
+      renderTasks();  
+      taskInput.value = '';  
+    }  
+  });  
+
+  function renderTasks() {  
+    taskContainer.innerHTML = '';  
+    tasks.forEach((task, index) => {  
+      const taskDiv = document.createElement('div');  
+      taskDiv.className = 'task';  
+      if (task.completed) taskDiv.classList.add('completed');  
+      taskDiv.textContent = task.text;  
+      taskDiv.draggable = true;  
+
+      taskDiv.addEventListener('click', () => {  
+        task.completed = !task.completed;  
+        updateProgress();  
+        renderTasks();  
+      });  
+
+      taskDiv.addEventListener('dragstart', (e) => {  
+        e.dataTransfer.setData('text/plain', index);  
+      });  
+
+      taskContainer.appendChild(taskDiv);  
+    });  
+    updateProgress();  
+  }  
+
+  taskContainer.addEventListener('dragover', (e) => {  
+    e.preventDefault();  
+  });  
+
+  taskContainer.addEventListener('drop', (e) => {  
+    const draggedIndex = e.dataTransfer.getData('text/plain');  
+    const droppedIndex = Array.from(taskContainer.children).indexOf(e.target);  
+    if (draggedIndex >= 0 && droppedIndex >= 0) {  
+      const [movedTask] = tasks.splice(draggedIndex, 1);  
+      tasks.splice(droppedIndex, 0, movedTask);  
+      renderTasks();  
+    }  
+  });  
+
+  function updateProgress() {  
+    const completedTasks = tasks.filter(task => task.completed).length;  
+    const progress = (completedTasks / tasks.length) || 0;  
+    progressBar.style.width = `${progress * 100}%`;  
+  }  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

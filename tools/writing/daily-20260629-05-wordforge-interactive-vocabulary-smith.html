@@ -1,0 +1,128 @@
+---
+layout: null
+title: "WordForge: Interactive Vocabulary Smith"
+category: "Writing"
+description: "A gamified tool where users craft words using prefixes, roots, and suffixes to forge powerful thematic terms, earning points for creativity and accuracy."
+permalink: "/tools/daily-20260629-05-wordforge-interactive-vocabulary-smith.html"
+generated_by: "api-true-ai"
+generated_date: "20260629"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordForge: Interactive Vocabulary Smith | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool where users craft words using prefixes, roots, and suffixes to forge powerful thematic terms, earning points for creativity and accuracy. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="WordForge: Interactive Vocabulary Smith | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool where users craft words using prefixes, roots, and suffixes to forge powerful thematic terms, earning points for creativity and accuracy. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WordForge: Interactive Vocabulary Smith | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool where users craft words using prefixes, roots, and suffixes to forge powerful thematic terms, earning points for creativity and accuracy. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>WordForge: Interactive Vocabulary Smith</h1>
+    <p class="seo-subtitle">A gamified tool where users craft words using prefixes, roots, and suffixes to forge powerful thematic terms, earning points for creativity and accuracy.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: #f4f4f9; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }  
+  #tool-app { background: #fff; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 90%; max-width: 600px; padding: 20px; }  
+  h1 { text-align: center; color: #333; }  
+  .word-builder { display: flex; justify-content: space-around; margin: 20px 0; }  
+  select { padding: 10px; font-size: 16px; }  
+  .results { text-align: center; margin-top: 20px; }  
+  .results span { display: block; margin: 10px 0; font-weight: bold; font-size: 18px; }  
+  .points { background: #28a745; color: white; padding: 10px; border-radius: 5px; }  
+  button { padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }  
+  button:disabled { background: #ccc; }  
+</style>  
+<div id="tool-app">  
+  <h1>WordForge</h1>  
+  <div class="word-builder">  
+    <select id="prefix-select">  
+      <option value="">Choose prefix</option>  
+      <option value="un-">un-</option>  
+      <option value="re-">re-</option>  
+      <option value="mis-">mis-</option>  
+    </select>  
+    <select id="root-select">  
+      <option value="">Choose root</option>  
+      <option value="form">form</option>  
+      <option value="act">act</option>  
+      <option value="press">press</option>  
+    </select>  
+    <select id="suffix-select">  
+      <option value="">Choose suffix</option>  
+      <option value="-able">-able</option>  
+      <option value="-ness">-ness</option>  
+      <option value="-ion">-ion</option>  
+    </select>  
+  </div>  
+  <div class="results">  
+    <span id="crafted-word">Your Word: <strong>---</strong></span>  
+    <button id="submit-word" disabled>Forge Word</button>  
+    <span id="points" class="points">Points: 0</span>  
+  </div>  
+</div>  
+<script>  
+  const prefixSelect = document.getElementById('prefix-select');  
+  const rootSelect = document.getElementById('root-select');  
+  const suffixSelect = document.getElementById('suffix-select');  
+  const craftedWordDisplay = document.getElementById('crafted-word');  
+  const submitButton = document.getElementById('submit-word');  
+  const pointsDisplay = document.getElementById('points');  
+
+  let points = 0;  
+
+  function updateWord() {  
+    const prefix = prefixSelect.value;  
+    const root = rootSelect.value;  
+    const suffix = suffixSelect.value;  
+
+    const word = `${prefix}${root}${suffix}`;  
+    craftedWordDisplay.innerHTML = `Your Word: <strong>${word || "---"}</strong>`;  
+
+    submitButton.disabled = !root;  
+  }  
+
+  function calculatePoints(word) {  
+    const lengthPoints = word.length;  
+    const creativityPoints = (word.match(/[^aeiou]/g) || []).length;  
+    return lengthPoints + creativityPoints;  
+  }  
+
+  function forgeWord() {  
+    const prefix = prefixSelect.value;  
+    const root = rootSelect.value;  
+    const suffix = suffixSelect.value;  
+
+    const word = `${prefix}${root}${suffix}`;  
+    if (root) {  
+      const wordPoints = calculatePoints(word);  
+      points += wordPoints;  
+      pointsDisplay.textContent = `Points: ${points}`;  
+      alert(`You forged the word "${word}" and earned ${wordPoints} points!`);  
+    }  
+  }  
+
+  prefixSelect.addEventListener('change', updateWord);  
+  rootSelect.addEventListener('change', updateWord);  
+  suffixSelect.addEventListener('change', updateWord);  
+  submitButton.addEventListener('click', forgeWord);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

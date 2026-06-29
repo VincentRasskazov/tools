@@ -1,0 +1,184 @@
+---
+layout: null
+title: "FlowGrid: Task Dependency Game"
+category: "Productivity"
+description: "A visually interactive tool where users gamify task management by connecting and organizing tasks in a dynamic flowchart, ensuring dependencies and priorities align for maximum productivity."
+permalink: "/tools/daily-20260629-04-flowgrid-task-dependency-game.html"
+generated_by: "api-true-ai"
+generated_date: "20260629"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlowGrid: Task Dependency Game | Free Online Interactive Tool</title>
+  <meta name="description" content="A visually interactive tool where users gamify task management by connecting and organizing tasks in a dynamic flowchart, ensuring dependencies and priorities align for maximum productivity. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="FlowGrid: Task Dependency Game | Free Online Interactive Tool">
+  <meta property="og:description" content="A visually interactive tool where users gamify task management by connecting and organizing tasks in a dynamic flowchart, ensuring dependencies and priorities align for maximum productivity. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FlowGrid: Task Dependency Game | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A visually interactive tool where users gamify task management by connecting and organizing tasks in a dynamic flowchart, ensuring dependencies and priorities align for maximum productivity. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>FlowGrid: Task Dependency Game</h1>
+    <p class="seo-subtitle">A visually interactive tool where users gamify task management by connecting and organizing tasks in a dynamic flowchart, ensuring dependencies and priorities align for maximum productivity.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to right, #6a11cb, #2575fc);  
+  color: #ffffff;  
+  text-align: center;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  background: #ffffff;  
+  border-radius: 12px;  
+  padding: 20px;  
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);  
+  max-width: 800px;  
+  width: 90%;  
+  height: 80%;  
+  overflow: hidden;  
+}  
+.task {  
+  position: absolute;  
+  background: #6a11cb;  
+  color: #ffffff;  
+  border: 2px solid #ffffff;  
+  border-radius: 50%;  
+  width: 80px;  
+  height: 80px;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  cursor: grab;  
+}  
+.task.connected {  
+  background: #2575fc;  
+}  
+.connector {  
+  position: absolute;  
+  width: 2px;  
+  background: #ffffff;  
+  transform-origin: top left;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>FlowGrid: Task Dependency Game</h1>  
+  <p>Drag tasks to position them and connect dependencies to create a productive flow!</p>  
+  <p><strong>Instructions:</strong> Drag tasks to organize your workflow, then click and drag from one task to another to connect them.</p>  
+  <div id="task-container"></div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const app = document.getElementById("tool-app");  
+const taskContainer = document.createElement("div");  
+taskContainer.id = "task-container";  
+taskContainer.style.position = "relative";  
+taskContainer.style.width = "100%";  
+taskContainer.style.height = "calc(100% - 150px)";  
+taskContainer.style.border = "2px dashed #ccc";  
+taskContainer.style.borderRadius = "10px";  
+taskContainer.style.overflow = "hidden";  
+app.appendChild(taskContainer);  
+  
+let tasks = [];  
+let connectors = [];  
+let taskCount = 0;  
+  
+function createTask(x, y) {  
+  const task = document.createElement("div");  
+  task.className = "task";  
+  task.textContent = `Task ${taskCount + 1}`;  
+  task.style.left = `${x}px`;  
+  task.style.top = `${y}px`;  
+  
+  task.draggable = true;  
+  task.ondragstart = (e) => {  
+    e.dataTransfer.setData("task-id", task.id);  
+  };  
+  
+  task.ondragend = (e) => {  
+    const rect = taskContainer.getBoundingClientRect();  
+    task.style.left = `${e.pageX - rect.left - 40}px`;  
+    task.style.top = `${e.pageY - rect.top - 40}px`;  
+  };  
+  
+  task.onclick = () => {  
+    task.classList.toggle("connected");  
+  };  
+  
+  taskContainer.appendChild(task);  
+  tasks.push(task);  
+  taskCount++;  
+}  
+  
+function connectTasks(task1, task2) {  
+  const rect1 = task1.getBoundingClientRect();  
+  const rect2 = task2.getBoundingClientRect();  
+  const line = document.createElement("div");  
+  line.className = "connector";  
+  
+  const startX = rect1.left + rect1.width / 2;  
+  const startY = rect1.top + rect1.height / 2;  
+  const endX = rect2.left + rect2.width / 2;  
+  const endY = rect2.top + rect2.height / 2;  
+  
+  const dx = endX - startX;  
+  const dy = endY - startY;  
+  const distance = Math.sqrt(dx * dx + dy * dy);  
+  
+  line.style.width = `${distance}px`;  
+  line.style.left = `${startX}px`;  
+  line.style.top = `${startY}px`;  
+  line.style.transform = `rotate(${Math.atan2(dy, dx)}rad)`;  
+  
+  taskContainer.appendChild(line);  
+  connectors.push(line);  
+}  
+  
+taskContainer.onclick = (e) => {  
+  if (e.target === taskContainer) {  
+    createTask(e.offsetX, e.offsetY);  
+  }  
+};  
+  
+let selectedTask = null;  
+taskContainer.addEventListener("mousedown", (e) => {  
+  if (e.target.classList.contains("task")) {  
+    selectedTask = e.target;  
+  }  
+});  
+  
+taskContainer.addEventListener("mouseup", (e) => {  
+  if (selectedTask && e.target.classList.contains("task") && e.target !== selectedTask) {  
+    connectTasks(selectedTask, e.target);  
+  }  
+  selectedTask = null;  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
