@@ -1,0 +1,205 @@
+---
+layout: null
+title: "WordWeaver: Dynamic Story Map"
+category: "Writing"
+description: "A visual interactive tool that lets writers build, connect, and explore intricate webs of characters, plot points, and settings to craft their stories."
+permalink: "/tools/daily-20260630-16-wordweaver-dynamic-story-map.html"
+generated_by: "api-true-ai"
+generated_date: "20260630"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordWeaver: Dynamic Story Map | Free Online Interactive Tool</title>
+  <meta name="description" content="A visual interactive tool that lets writers build, connect, and explore intricate webs of characters, plot points, and settings to craft their stories. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="WordWeaver: Dynamic Story Map | Free Online Interactive Tool">
+  <meta property="og:description" content="A visual interactive tool that lets writers build, connect, and explore intricate webs of characters, plot points, and settings to craft their stories. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WordWeaver: Dynamic Story Map | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A visual interactive tool that lets writers build, connect, and explore intricate webs of characters, plot points, and settings to craft their stories. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>WordWeaver: Dynamic Story Map</h1>
+    <p class="seo-subtitle">A visual interactive tool that lets writers build, connect, and explore intricate webs of characters, plot points, and settings to craft their stories.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: 'Arial', sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  background: linear-gradient(135deg, #f2f2f2, #d8e3e7);  
+}  
+#tool-app {  
+  width: 90%;  
+  height: 90%;  
+  background: white;  
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);  
+  border-radius: 10px;  
+  padding: 20px;  
+  display: flex;  
+  flex-direction: column;  
+  overflow: hidden;  
+  position: relative;  
+}  
+#map-container {  
+  flex: 1;  
+  position: relative;  
+  overflow: auto;  
+  border: 1px solid #ccc;  
+  background: #f9f9f9;  
+  border-radius: 8px;  
+}  
+.node {  
+  position: absolute;  
+  padding: 10px 15px;  
+  background: #6c91c2;  
+  color: white;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  font-size: 14px;  
+  text-align: center;  
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);  
+}  
+.line {  
+  stroke: #aaa;  
+  stroke-width: 2;  
+}  
+#toolbar {  
+  display: flex;  
+  justify-content: space-between;  
+  align-items: center;  
+  padding: 10px 0;  
+  border-top: 1px solid #ddd;  
+}  
+button {  
+  padding: 8px 12px;  
+  font-size: 14px;  
+  background: #6c91c2;  
+  color: white;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer;  
+}  
+button:hover {  
+  background: #547ba5;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="map-container"></div>  
+  <div id="toolbar">  
+    <button id="add-node">Add Node</button>  
+    <button id="save-map">Save Map</button>  
+  </div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const app = document.getElementById('tool-app');  
+const mapContainer = document.getElementById('map-container');  
+let isDragging = false;  
+let startX, startY, currentNode, nodes = [], connections = [];  
+
+// Function to render nodes and connections  
+function renderMap() {  
+  mapContainer.innerHTML = '';  
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');  
+  svg.style.position = 'absolute';  
+  svg.style.width = '100%';  
+  svg.style.height = '100%';  
+  mapContainer.appendChild(svg);  
+
+  // Render connections  
+  connections.forEach(({ from, to }) => {  
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');  
+    const fromNode = nodes[from];  
+    const toNode = nodes[to];  
+    line.setAttribute('x1', fromNode.x + 75);  
+    line.setAttribute('y1', fromNode.y + 20);  
+    line.setAttribute('x2', toNode.x + 75);  
+    line.setAttribute('y2', toNode.y + 20);  
+    line.setAttribute('class', 'line');  
+    svg.appendChild(line);  
+  });  
+
+  // Render nodes  
+  nodes.forEach((node, index) => {  
+    const div = document.createElement('div');  
+    div.innerText = node.text;  
+    div.classList.add('node');  
+    div.style.left = `${node.x}px`;  
+    div.style.top = `${node.y}px`;  
+    div.draggable = true;  
+
+    // Drag and drop logic  
+    div.ondragstart = (e) => {  
+      isDragging = true;  
+      currentNode = index;  
+      startX = e.clientX - node.x;  
+      startY = e.clientY - node.y;  
+    };  
+    div.ondragend = (e) => {  
+      isDragging = false;  
+      if (currentNode !== null) {  
+        nodes[currentNode].x = e.clientX - startX;  
+        nodes[currentNode].y = e.clientY - startY;  
+        renderMap();  
+      }  
+    };  
+
+    div.onclick = () => {  
+      const connectionTarget = prompt('Connect to node index (e.g., 0, 1, 2):');  
+      const targetIndex = parseInt(connectionTarget);  
+      if (!isNaN(targetIndex) && nodes[targetIndex]) {  
+        connections.push({ from: index, to: targetIndex });  
+        renderMap();  
+      }  
+    };  
+
+    mapContainer.appendChild(div);  
+  });  
+}  
+
+// Add functionality to buttons  
+document.getElementById('add-node').onclick = () => {  
+  const nodeName = prompt('Enter node text:');  
+  if (nodeName && nodeName.trim()) {  
+    nodes.push({ text: nodeName.trim(), x: 100, y: 100 });  
+    renderMap();  
+  }  
+};  
+
+document.getElementById('save-map').onclick = () => {  
+  const data = JSON.stringify({ nodes, connections });  
+  const blob = new Blob([data], { type: 'application/json' });  
+  const url = URL.createObjectURL(blob);  
+  const a = document.createElement('a');  
+  a.href = url;  
+  a.download = 'story-map.json';  
+  a.click();  
+};  
+
+// Initial render  
+renderMap();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

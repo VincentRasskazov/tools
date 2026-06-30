@@ -1,0 +1,116 @@
+---
+layout: null
+title: "FocusFlow Mapper"
+category: "Productivity"
+description: "A dynamic, interactive \"flow state\" visualizer that tracks and gamifies your productivity bursts using customizable goal nodes and real-time feedback loops."
+permalink: "/tools/daily-20260630-06-focusflow-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260630"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusFlow Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, interactive &quot;flow state&quot; visualizer that tracks and gamifies your productivity bursts using customizable goal nodes and real-time feedback loops. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="FocusFlow Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, interactive &quot;flow state&quot; visualizer that tracks and gamifies your productivity bursts using customizable goal nodes and real-time feedback loops. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FocusFlow Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, interactive &quot;flow state&quot; visualizer that tracks and gamifies your productivity bursts using customizable goal nodes and real-time feedback loops. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>FocusFlow Mapper</h1>
+    <p class="seo-subtitle">A dynamic, interactive &quot;flow state&quot; visualizer that tracks and gamifies your productivity bursts using customizable goal nodes and real-time feedback loops.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: #f4f4f9; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }  
+  #tool-app { width: 90%; max-width: 800px; padding: 20px; background: #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 10px; }  
+  .node { display: inline-block; padding: 10px 15px; margin: 10px; border-radius: 50%; background: #0078D4; color: white; text-align: center; cursor: pointer; }  
+  .node.completed { background: #34c759; }  
+  .line { position: absolute; background: #0078D4; height: 4px; transform-origin: 0 0; }  
+  #status { margin-top: 20px; text-align: center; font-size: 18px; }  
+</style>  
+<div id="tool-app">  
+  <h2>FocusFlow Mapper</h2>  
+  <div id="canvas" style="position: relative; height: 400px;"></div>  
+  <div id="status">Click a node to begin working on a task!</div>  
+</div>  
+<script>  
+const app = document.getElementById('canvas');  
+const statusBar = document.getElementById('status');  
+
+let nodeId = 1;  
+let nodes = [];  
+
+function createNode(text, x, y) {  
+  const node = document.createElement('div');  
+  node.className = 'node';  
+  node.textContent = text;  
+  node.style.left = `${x}px`;  
+  node.style.top = `${y}px`;  
+  node.style.position = 'absolute';  
+  node.id = `node-${nodeId}`;  
+  node.dataset.id = nodeId++;  
+  node.addEventListener('click', () => {  
+    if (!node.classList.contains('completed')) {  
+      node.classList.add('completed');  
+      statusBar.textContent = `Completed task: ${text}`;  
+    } else {  
+      statusBar.textContent = `Task "${text}" is already completed.`;  
+    }  
+  });  
+  app.appendChild(node);  
+  nodes.push({ id: node.dataset.id, x, y, element: node });  
+}  
+
+function drawConnections() {  
+  nodes.forEach((nodeA, index) => {  
+    nodes.forEach((nodeB) => {  
+      if (nodeA.id !== nodeB.id) {  
+        const line = document.createElement('div');  
+        line.className = 'line';  
+        const x1 = nodeA.x + 25;  
+        const y1 = nodeA.y + 25;  
+        const x2 = nodeB.x + 25;  
+        const y2 = nodeB.y + 25;  
+        const length = Math.hypot(x2 - x1, y2 - y1);  
+        line.style.width = `${length}px`;  
+        line.style.left = `${x1}px`;  
+        line.style.top = `${y1}px`;  
+        const angle = Math.atan2(y2 - y1, x2 - x1) * (180 / Math.PI);  
+        line.style.transform = `rotate(${angle}deg)`;  
+        app.appendChild(line);  
+      }  
+    });  
+  });  
+}  
+
+// Initialize nodes  
+createNode('Start', 100, 100);  
+createNode('Research', 300, 200);  
+createNode('Design', 500, 100);  
+createNode('Build', 700, 300);  
+createNode('Test', 400, 400);  
+createNode('Launch', 200, 300);  
+
+// Draw connections  
+drawConnections();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,168 @@
+---
+layout: null
+title: "MindMaze: Neural Path Builder"
+category: "Health"
+description: "A gamified tool where users interactively build and visualize neural pathways in the brain by solving challenges related to mental health and cognitive function."
+permalink: "/tools/daily-20260630-04-mindmaze-neural-path-builder.html"
+generated_by: "api-true-ai"
+generated_date: "20260630"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindMaze: Neural Path Builder | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool where users interactively build and visualize neural pathways in the brain by solving challenges related to mental health and cognitive function. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="MindMaze: Neural Path Builder | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool where users interactively build and visualize neural pathways in the brain by solving challenges related to mental health and cognitive function. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MindMaze: Neural Path Builder | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool where users interactively build and visualize neural pathways in the brain by solving challenges related to mental health and cognitive function. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>MindMaze: Neural Path Builder</h1>
+    <p class="seo-subtitle">A gamified tool where users interactively build and visualize neural pathways in the brain by solving challenges related to mental health and cognitive function.</p>
+    <style>  
+  body {  
+    font-family: 'Arial', sans-serif;  
+    background: #f0f8ff;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+    margin: 0;  
+  }  
+  #tool-app {  
+    width: 90%;  
+    max-width: 800px;  
+    height: 90%;  
+    border-radius: 10px;  
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);  
+    background: linear-gradient(145deg, #e0f7fa, #ffffff);  
+    padding: 20px;  
+    display: flex;  
+    flex-direction: column;  
+    justify-content: space-between;  
+  }  
+  #maze-container {  
+    display: grid;  
+    grid-template-columns: repeat(8, 1fr);  
+    grid-gap: 4px;  
+    margin-top: 20px;  
+  }  
+  .neuron-node {  
+    width: 40px;  
+    height: 40px;  
+    background: #b7e4c7;  
+    border: 2px solid #84a98c;  
+    border-radius: 50%;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    cursor: pointer;  
+    transition: transform 0.2s ease-in-out;  
+  }  
+  .neuron-node.active {  
+    background: #06d6a0;  
+    transform: scale(1.2);  
+  }  
+  #instructions {  
+    font-size: 1.1rem;  
+    color: #333;  
+    text-align: center;  
+    margin-bottom: 10px;  
+  }  
+  #score-board {  
+    font-size: 1.2rem;  
+    text-align: center;  
+    color: #028090;  
+  }  
+</style>  
+<div id="tool-app">  
+  <div id="instructions">Connect the neurons to complete the pathway! Start by clicking on a glowing node.</div>  
+  <div id="maze-container"></div>  
+  <div id="score-board">Score: 0</div>  
+</div>  
+<script>  
+  const app = document.getElementById('tool-app');  
+  const mazeContainer = document.getElementById('maze-container');  
+  const scoreBoard = document.getElementById('score-board');  
+  const instructions = document.getElementById('instructions');  
+
+  let maze = [];  
+  let activeNode = null;  
+  let score = 0;  
+  const pathLength = 6;  
+
+  const createMaze = () => {  
+    mazeContainer.innerHTML = '';  
+    maze = [];  
+    for (let i = 0; i < 64; i++) {  
+      const node = document.createElement('div');  
+      node.classList.add('neuron-node');  
+      node.dataset.index = i;  
+      maze.push(node);  
+      mazeContainer.appendChild(node);  
+    }  
+    highlightStartNode();  
+  };  
+
+  const highlightStartNode = () => {  
+    const startIndex = Math.floor(Math.random() * maze.length);  
+    maze[startIndex].classList.add('active');  
+    activeNode = startIndex;  
+  };  
+
+  const handleNodeClick = (node) => {  
+    const index = parseInt(node.dataset.index);  
+    if (index === activeNode || !node.classList.contains('active')) return;  
+
+    const diff = Math.abs(index - activeNode);  
+    if (diff === 1 || diff === 8) {  
+      node.classList.add('active');  
+      activeNode = index;  
+      score += 10;  
+      scoreBoard.innerText = `Score: ${score}`;  
+      checkPathCompletion();  
+    }  
+  };  
+
+  const checkPathCompletion = () => {  
+    const activeNodes = maze.filter(node => node.classList.contains('active'));  
+    if (activeNodes.length === pathLength) {  
+      instructions.innerText = 'You completed the neural pathway! Generating a new maze...';  
+      setTimeout(() => {  
+        score += 50;  
+        scoreBoard.innerText = `Score: ${score}`;  
+        createMaze();  
+        instructions.innerText = 'Connect the neurons to complete the pathway! Start by clicking on a glowing node.';  
+      }, 2000);  
+    }  
+  };  
+
+  mazeContainer.addEventListener('click', (e) => {  
+    if (e.target.classList.contains('neuron-node')) {  
+      handleNodeClick(e.target);  
+    }  
+  });  
+
+  createMaze();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,170 @@
+---
+layout: null
+title: "TaskTangle: Priority Web Weaver"
+category: "Productivity"
+description: "A dynamic, interactive tool that lets you visually map, prioritize, and untangle your task dependencies into a clean, actionable flowchart."
+permalink: "/tools/daily-20260630-02-tasktangle-priority-web-weaver.html"
+generated_by: "api-true-ai"
+generated_date: "20260630"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskTangle: Priority Web Weaver | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, interactive tool that lets you visually map, prioritize, and untangle your task dependencies into a clean, actionable flowchart. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="TaskTangle: Priority Web Weaver | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, interactive tool that lets you visually map, prioritize, and untangle your task dependencies into a clean, actionable flowchart. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TaskTangle: Priority Web Weaver | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, interactive tool that lets you visually map, prioritize, and untangle your task dependencies into a clean, actionable flowchart. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>TaskTangle: Priority Web Weaver</h1>
+    <p class="seo-subtitle">A dynamic, interactive tool that lets you visually map, prioritize, and untangle your task dependencies into a clean, actionable flowchart.</p>
+    <style>  
+  #tool-app {  
+    font-family: Arial, sans-serif;  
+    margin: 20px;  
+  }  
+  .task {  
+    display: inline-block;  
+    padding: 10px 20px;  
+    margin: 10px;  
+    background: #4CAF50;  
+    color: white;  
+    border-radius: 5px;  
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
+    cursor: grab;  
+    user-select: none;  
+  }  
+  .task.connected {  
+    background: #2196F3;  
+  }  
+  #canvas {  
+    border: 2px dashed #ccc;  
+    width: 100%;  
+    height: 400px;  
+    position: relative;  
+    overflow: hidden;  
+  }  
+  canvas {  
+    position: absolute;  
+    top: 0;  
+    left: 0;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h1>TaskTangle: Priority Web Weaver</h1>  
+  <p>Drag and drop tasks into the canvas. Connect them to visualize dependencies and determine priority flow.</p>  
+  <button id="add-task">Add Task</button>  
+  <button id="clear-canvas">Clear Canvas</button>  
+  <div id="canvas"></div>  
+</div>  
+<script>  
+  const app = document.getElementById('tool-app');  
+  const canvas = document.getElementById('canvas');  
+  const addTaskBtn = document.getElementById('add-task');  
+  const clearCanvasBtn = document.getElementById('clear-canvas');  
+  let draggingTask = null;  
+  let connections = [];  
+
+  function createTask(id) {  
+    const task = document.createElement('div');  
+    task.className = 'task';  
+    task.textContent = `Task ${id}`;  
+    task.draggable = true;  
+    task.style.position = 'absolute';  
+    task.style.left = `${Math.random() * 300}px`;  
+    task.style.top = `${Math.random() * 300}px`;  
+    canvas.appendChild(task);  
+
+    task.addEventListener('dragstart', (e) => {  
+      draggingTask = task;  
+      e.dataTransfer.setData('text/plain', null);  
+    });  
+
+    task.addEventListener('dragend', (e) => {  
+      draggingTask = null;  
+      const rect = canvas.getBoundingClientRect();  
+      const offsetX = e.clientX - rect.left;  
+      const offsetY = e.clientY - rect.top;  
+      task.style.left = `${offsetX}px`;  
+      task.style.top = `${offsetY}px`;  
+      redrawConnections();  
+    });  
+
+    task.addEventListener('click', () => {  
+      task.classList.toggle('connected');  
+      updateConnections();  
+    });  
+  }  
+
+  let taskCounter = 1;  
+  addTaskBtn.addEventListener('click', () => {  
+    createTask(taskCounter++);  
+  });  
+
+  clearCanvasBtn.addEventListener('click', () => {  
+    while (canvas.firstChild) {  
+      canvas.removeChild(canvas.firstChild);  
+    }  
+    connections = [];  
+    taskCounter = 1;  
+    redrawConnections();  
+  });  
+
+  const ctx = document.createElement('canvas');  
+  ctx.width = canvas.offsetWidth;  
+  ctx.height = canvas.offsetHeight;  
+  canvas.appendChild(ctx);  
+
+  const canvasContext = ctx.getContext('2d');  
+
+  function updateConnections() {  
+    const connectedTasks = Array.from(document.querySelectorAll('.task.connected'));  
+    connections = connectedTasks.map((task) => {  
+      const rect = task.getBoundingClientRect();  
+      const canvasRect = canvas.getBoundingClientRect();  
+      return {  
+        x: rect.left + rect.width / 2 - canvasRect.left,  
+        y: rect.top + rect.height / 2 - canvasRect.top,  
+      };  
+    });  
+    redrawConnections();  
+  }  
+
+  function redrawConnections() {  
+    canvasContext.clearRect(0, 0, ctx.width, ctx.height);  
+    if (connections.length > 1) {  
+      for (let i = 0; i < connections.length - 1; i++) {  
+        const from = connections[i];  
+        const to = connections[i + 1];  
+        canvasContext.beginPath();  
+        canvasContext.moveTo(from.x, from.y);  
+        canvasContext.lineTo(to.x, to.y);  
+        canvasContext.strokeStyle = '#FF5722';  
+        canvasContext.lineWidth = 2;  
+        canvasContext.stroke();  
+      }  
+    }  
+  }  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
