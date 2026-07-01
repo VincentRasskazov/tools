@@ -1,0 +1,133 @@
+---
+layout: null
+title: "DataMorph Playground"
+category: "Data"
+description: "An interactive tool that lets users visually transform and morph datasets in real-time using drag-and-drop filters, split/merge operations, and fun animations."
+permalink: "/tools/daily-20260701-02-datamorph-playground.html"
+generated_by: "api-true-ai"
+generated_date: "20260701"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataMorph Playground | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool that lets users visually transform and morph datasets in real-time using drag-and-drop filters, split/merge operations, and fun animations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataMorph Playground | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool that lets users visually transform and morph datasets in real-time using drag-and-drop filters, split/merge operations, and fun animations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataMorph Playground | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool that lets users visually transform and morph datasets in real-time using drag-and-drop filters, split/merge operations, and fun animations. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataMorph Playground</h1>
+    <p class="seo-subtitle">An interactive tool that lets users visually transform and morph datasets in real-time using drag-and-drop filters, split/merge operations, and fun animations.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f9; color: #333; }  
+  #tool-app { margin: 20px auto; max-width: 960px; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); }  
+  #data-table { width: 100%; margin-bottom: 20px; border-collapse: collapse; }  
+  #data-table th, #data-table td { padding: 10px; text-align: left; border: 1px solid #ddd; }  
+  .filter, .transform { display: inline-block; padding: 10px 15px; margin: 5px; background: #007BFF; color: #fff; border-radius: 5px; cursor: pointer; transition: background 0.3s; }  
+  .filter:hover, .transform:hover { background: #0056b3; }  
+  #output { margin-top: 20px; padding: 10px; background: #e9ecef; border-radius: 5px; font-family: monospace; }  
+</style>  
+<div id="tool-app">  
+  <h1>🌀 DataMorph Playground</h1>  
+  <p>Load a dataset, apply filters, and watch your data morph in real time!</p>  
+  <table id="data-table">  
+    <thead>  
+      <tr>  
+        <th>Name</th>  
+        <th>Age</th>  
+        <th>Country</th>  
+        <th>Score</th>  
+      </tr>  
+    </thead>  
+    <tbody>  
+      <tr><td>Anna</td><td>22</td><td>USA</td><td>85</td></tr>  
+      <tr><td>Ben</td><td>34</td><td>UK</td><td>90</td></tr>  
+      <tr><td>Chen</td><td>19</td><td>China</td><td>70</td></tr>  
+      <tr><td>Dana</td><td>47</td><td>USA</td><td>95</td></tr>  
+      <tr><td>Eva</td><td>29</td><td>Germany</td><td>88</td></tr>  
+    </tbody>  
+  </table>  
+
+  <div>  
+    <button class="filter" onclick="applyFilter('age > 25')">Filter Age > 25</button>  
+    <button class="filter" onclick="applyFilter('score > 80')">Filter Score > 80</button>  
+    <button class="transform" onclick="addColumn('Rank', calculateRank)">Add Rank</button>  
+    <button class="transform" onclick="resetData()">Reset Data</button>  
+  </div>  
+
+  <div id="output">  
+    <strong>Output:</strong>  
+    <pre id="output-text">[Dataset transformations will appear here]</pre>  
+  </div>  
+</div>  
+<script>  
+  const originalData = [  
+    { Name: 'Anna', Age: 22, Country: 'USA', Score: 85 },  
+    { Name: 'Ben', Age: 34, Country: 'UK', Score: 90 },  
+    { Name: 'Chen', Age: 19, Country: 'China', Score: 70 },  
+    { Name: 'Dana', Age: 47, Country: 'USA', Score: 95 },  
+    { Name: 'Eva', Age: 29, Country: 'Germany', Score: 88 }  
+  ];  
+  let currentData = [...originalData];  
+
+  function renderTable(data) {  
+    const tbody = document.querySelector('#data-table tbody');  
+    tbody.innerHTML = '';  
+    data.forEach(row => {  
+      const tr = document.createElement('tr');  
+      Object.values(row).forEach(cell => {  
+        const td = document.createElement('td');  
+        td.textContent = cell;  
+        tr.appendChild(td);  
+      });  
+      tbody.appendChild(tr);  
+    });  
+    document.getElementById('output-text').textContent = JSON.stringify(data, null, 2);  
+  }  
+
+  function applyFilter(condition) {  
+    currentData = currentData.filter(row => eval(condition.replace(/([a-zA-Z]+)/g, 'row["$1"]')));  
+    renderTable(currentData);  
+  }  
+
+  function addColumn(columnName, calculator) {  
+    currentData = currentData.map((row, index) => ({  
+      ...row,  
+      [columnName]: calculator(row, index)  
+    }));  
+    renderTable(currentData);  
+  }  
+
+  function calculateRank(row, index) {  
+    return index + 1;  
+  }  
+
+  function resetData() {  
+    currentData = [...originalData];  
+    renderTable(currentData);  
+  }  
+
+  renderTable(currentData);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

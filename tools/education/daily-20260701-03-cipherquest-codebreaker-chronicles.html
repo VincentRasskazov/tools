@@ -1,0 +1,140 @@
+---
+layout: null
+title: "CipherQuest: Codebreaker Chronicles"
+category: "Education"
+description: "A gamified interactive tool where users decrypt progressively harder encoded messages using classic ciphers while learning cryptographic techniques."
+permalink: "/tools/daily-20260701-03-cipherquest-codebreaker-chronicles.html"
+generated_by: "api-true-ai"
+generated_date: "20260701"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CipherQuest: Codebreaker Chronicles | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified interactive tool where users decrypt progressively harder encoded messages using classic ciphers while learning cryptographic techniques. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CipherQuest: Codebreaker Chronicles | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified interactive tool where users decrypt progressively harder encoded messages using classic ciphers while learning cryptographic techniques. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CipherQuest: Codebreaker Chronicles | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified interactive tool where users decrypt progressively harder encoded messages using classic ciphers while learning cryptographic techniques. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CipherQuest: Codebreaker Chronicles</h1>
+    <p class="seo-subtitle">A gamified interactive tool where users decrypt progressively harder encoded messages using classic ciphers while learning cryptographic techniques.</p>
+    <style>  
+body {  
+  font-family: 'Arial', sans-serif;  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  background: linear-gradient(135deg, #2c3e50, #4ca1af);  
+  height: 100vh;  
+  margin: 0;  
+  color: #f4f4f4;  
+}  
+#tool-app {  
+  background: #34495e;  
+  padding: 20px;  
+  border-radius: 8px;  
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);  
+  text-align: center;  
+  max-width: 400px;  
+}  
+button {  
+  background: #e74c3c;  
+  color: white;  
+  border: none;  
+  padding: 10px 20px;  
+  font-size: 16px;  
+  border-radius: 4px;  
+  cursor: pointer;  
+  margin-top: 10px;  
+}  
+button:hover {  
+  background: #c0392b;  
+}  
+textarea {  
+  width: 100%;  
+  margin-top: 10px;  
+  padding: 10px;  
+  border: none;  
+  border-radius: 4px;  
+  text-align: left;  
+  font-family: 'Courier New', monospace;  
+  resize: none;  
+}  
+</style>  
+<div id="tool-app">  
+  <h2>CipherQuest</h2>  
+  <p>Level: <span id="level">1</span></p>  
+  <p id="cipher-text">Decode this: <code id="encoded-text">Uifsf jt b tfdsfu!<code></p>  
+  <p>Hint: Ceasar Cipher (Shift +1)</p>  
+  <textarea id="user-answer" rows="3" placeholder="Type your answer here..."></textarea>  
+  <button onclick="checkAnswer()">Submit Answer</button>  
+  <p id="feedback"></p>  
+</div>  
+<script>  
+const levels = [  
+  {  
+    question: "Uifsf jt b tfdsfu!",  
+    answer: "There is a secret",  
+    hint: "Ceasar Cipher (Shift +1)"  
+  },  
+  {  
+    question: "Dlzo: Drgs sgzs sxr!",  
+    answer: "Yeah: Keep that up!",  
+    hint: "Atbash Cipher"  
+  },  
+  {  
+    question: "Khoor Zruog!",  
+    answer: "Hello World!",  
+    hint: "Ceasar Cipher (Shift +3)"  
+  }  
+];  
+  
+let currentLevel = 0;  
+  
+function loadLevel() {  
+  document.getElementById("level").textContent = currentLevel + 1;  
+  document.getElementById("encoded-text").textContent = levels[currentLevel].question;  
+  document.getElementById("feedback").textContent = "";  
+  document.getElementById("user-answer").value = "";  
+}  
+  
+function checkAnswer() {  
+  const userAnswer = document.getElementById("user-answer").value.trim();  
+  if (userAnswer.toLowerCase() === levels[currentLevel].answer.toLowerCase()) {  
+    document.getElementById("feedback").textContent = "Correct! Moving to the next level...";  
+    currentLevel++;  
+    if (currentLevel < levels.length) {  
+      setTimeout(loadLevel, 1000);  
+    } else {  
+      document.getElementById("feedback").textContent = "Congratulations, you've mastered all levels!";  
+    }  
+  } else {  
+    document.getElementById("feedback").textContent = "Incorrect! Try again.";  
+  }  
+}  
+  
+loadLevel();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,156 @@
+---
+layout: null
+title: "Learniverse: Interactive Concept Map Explorer"
+category: "Education"
+description: "An educational tool where users can explore, create, and connect interactive concept maps on various topics to visualize relationships and enhance learning."
+permalink: "/tools/daily-20260701-08-learniverse-interactive-concept-map-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260701"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learniverse: Interactive Concept Map Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="An educational tool where users can explore, create, and connect interactive concept maps on various topics to visualize relationships and enhance learning. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Learniverse: Interactive Concept Map Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="An educational tool where users can explore, create, and connect interactive concept maps on various topics to visualize relationships and enhance learning. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Learniverse: Interactive Concept Map Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An educational tool where users can explore, create, and connect interactive concept maps on various topics to visualize relationships and enhance learning. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Learniverse: Interactive Concept Map Explorer</h1>
+    <p class="seo-subtitle">An educational tool where users can explore, create, and connect interactive concept maps on various topics to visualize relationships and enhance learning.</p>
+    <style>  
+  #tool-app {  
+    font-family: Arial, sans-serif;  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    margin: 20px;  
+  }  
+  .node {  
+    border: 2px solid #4CAF50;  
+    padding: 10px;  
+    border-radius: 50%;  
+    text-align: center;  
+    cursor: pointer;  
+    background-color: #e8f5e9;  
+    position: absolute;  
+  }  
+  .line {  
+    position: absolute;  
+    stroke: #4CAF50;  
+    stroke-width: 2;  
+  }  
+  #canvas-container {  
+    position: relative;  
+    width: 800px;  
+    height: 600px;  
+    border: 1px solid #ddd;  
+    background-color: #f9f9f9;  
+  }  
+  #toolbar {  
+    margin: 10px 0;  
+  }  
+  button {  
+    margin: 0 5px;  
+    padding: 5px 10px;  
+    font-size: 14px;  
+    cursor: pointer;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h1>Learniverse: Interactive Concept Map Explorer</h1>  
+  <p>Create and connect nodes to visualize and study relationships between concepts.</p>  
+  <div id="toolbar">  
+    <button id="add-node">Add Node</button>  
+    <button id="connect-nodes">Connect Nodes</button>  
+    <button id="clear-map">Clear Map</button>  
+  </div>  
+  <div id="canvas-container"></div>  
+</div>  
+<script>  
+const canvas = document.getElementById('canvas-container');  
+const addNodeBtn = document.getElementById('add-node');  
+const connectNodesBtn = document.getElementById('connect-nodes');  
+const clearBtn = document.getElementById('clear-map');  
+
+let nodes = [];  
+let lines = [];  
+let connecting = false;  
+let firstNode = null;  
+
+// Add node logic  
+addNodeBtn.addEventListener('click', () => {  
+  const node = document.createElement('div');  
+  node.classList.add('node');  
+  node.textContent = `Node ${nodes.length + 1}`;  
+  node.style.left = `${Math.random() * 600 + 50}px`;  
+  node.style.top = `${Math.random() * 400 + 50}px`;  
+  canvas.appendChild(node);  
+  nodes.push(node);  
+
+  node.addEventListener('click', () => {  
+    if (connecting) {  
+      if (!firstNode) {  
+        firstNode = node;  
+        firstNode.style.borderColor = '#FF5722';  
+      } else {  
+        drawLine(firstNode, node);  
+        firstNode.style.borderColor = '#4CAF50';  
+        firstNode = null;  
+      }  
+    }  
+  });  
+});  
+
+// Connect nodes logic  
+connectNodesBtn.addEventListener('click', () => {  
+  connecting = !connecting;  
+  connectNodesBtn.textContent = connecting ? 'Stop Connecting' : 'Connect Nodes';  
+  if (!connecting && firstNode) {  
+    firstNode.style.borderColor = '#4CAF50';  
+    firstNode = null;  
+  }  
+});  
+
+// Clear map logic  
+clearBtn.addEventListener('click', () => {  
+  nodes.forEach(node => canvas.removeChild(node));  
+  lines.forEach(line => canvas.removeChild(line));  
+  nodes = [];  
+  lines = [];  
+});  
+
+// Draw line between two nodes  
+function drawLine(node1, node2) {  
+  const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');  
+  line.setAttribute('x1', node1.offsetLeft + node1.offsetWidth / 2);  
+  line.setAttribute('y1', node1.offsetTop + node1.offsetHeight / 2);  
+  line.setAttribute('x2', node2.offsetLeft + node2.offsetWidth / 2);  
+  line.setAttribute('y2', node2.offsetTop + node2.offsetHeight / 2);  
+  line.classList.add('line');  
+  canvas.appendChild(line);  
+  lines.push(line);  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

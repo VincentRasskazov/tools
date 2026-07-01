@@ -1,0 +1,188 @@
+---
+layout: null
+title: "TaskFlow Tangle"
+category: "Productivity"
+description: "A visual, interactive tool that gamifies task prioritization by untangling interconnected task nodes based on deadlines, importance, and dependencies."
+permalink: "/tools/daily-20260701-12-taskflow-tangle.html"
+generated_by: "api-true-ai"
+generated_date: "20260701"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskFlow Tangle | Free Online Interactive Tool</title>
+  <meta name="description" content="A visual, interactive tool that gamifies task prioritization by untangling interconnected task nodes based on deadlines, importance, and dependencies. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="TaskFlow Tangle | Free Online Interactive Tool">
+  <meta property="og:description" content="A visual, interactive tool that gamifies task prioritization by untangling interconnected task nodes based on deadlines, importance, and dependencies. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TaskFlow Tangle | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A visual, interactive tool that gamifies task prioritization by untangling interconnected task nodes based on deadlines, importance, and dependencies. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>TaskFlow Tangle</h1>
+    <p class="seo-subtitle">A visual, interactive tool that gamifies task prioritization by untangling interconnected task nodes based on deadlines, importance, and dependencies.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to right, #6a11cb, #2575fc);  
+  color: #fff;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+}  
+#tool-app {  
+  width: 80%;  
+  height: 80%;  
+  background: #fff;  
+  border-radius: 16px;  
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);  
+  overflow: hidden;  
+  display: flex;  
+  flex-direction: column;  
+}  
+#header {  
+  padding: 20px;  
+  background: #2575fc;  
+  color: #fff;  
+  text-align: center;  
+  font-size: 24px;  
+  font-weight: bold;  
+}  
+#canvas {  
+  flex: 1;  
+  background: #f8f8f8;  
+  position: relative;  
+}  
+.task-node {  
+  position: absolute;  
+  width: 100px;  
+  height: 100px;  
+  background: #6a11cb;  
+  border-radius: 50%;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  color: #fff;  
+  cursor: grab;  
+}  
+.task-node.active {  
+  cursor: grabbing;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="header">TaskFlow Tangle</div>  
+  <div id="canvas"></div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById('canvas');  
+const nodes = [];  
+const connections = [];  
+
+function createNode(id, x, y, label) {  
+  const node = document.createElement('div');  
+  node.classList.add('task-node');  
+  node.style.left = `${x}px`;  
+  node.style.top = `${y}px`;  
+  node.textContent = label;  
+  node.dataset.id = id;  
+  canvas.appendChild(node);  
+  nodes.push({ id, x, y, element: node });  
+  enableDrag(node);  
+}  
+
+function connectNodes(id1, id2) {  
+  const node1 = nodes.find(n => n.id === id1);  
+  const node2 = nodes.find(n => n.id === id2);  
+
+  const connection = document.createElement('div');  
+  connection.style.position = 'absolute';  
+  connection.style.background = '#2575fc';  
+  connection.style.height = '4px';  
+  connection.style.transformOrigin = '0 0';  
+  connection.style.zIndex = 0;  
+  canvas.appendChild(connection);  
+
+  updateConnection(connection, node1, node2);  
+  connections.push({ connection, node1, node2 });  
+}  
+
+function updateConnection(connection, node1, node2) {  
+  const dx = node2.x - node1.x;  
+  const dy = node2.y - node1.y;  
+  const length = Math.sqrt(dx * dx + dy * dy);  
+  const angle = Math.atan2(dy, dx) * (180 / Math.PI);  
+
+  connection.style.width = `${length}px`;  
+  connection.style.transform = `rotate(${angle}deg)`;  
+  connection.style.left = `${node1.x + 50}px`;  
+  connection.style.top = `${node1.y + 50}px`;  
+}  
+
+function enableDrag(element) {  
+  let isDragging = false;  
+  let offsetX, offsetY;  
+
+  element.addEventListener('mousedown', (e) => {  
+    isDragging = true;  
+    offsetX = e.offsetX;  
+    offsetY = e.offsetY;  
+    element.classList.add('active');  
+  });  
+
+  document.addEventListener('mousemove', (e) => {  
+    if (isDragging) {  
+      const x = e.clientX - offsetX;  
+      const y = e.clientY - offsetY;  
+      element.style.left = `${x}px`;  
+      element.style.top = `${y}px`;  
+
+      const node = nodes.find(n => n.element === element);  
+      node.x = x;  
+      node.y = y;  
+
+      connections.forEach(({ connection, node1, node2 }) => {  
+        if (node.element === node1.element || node.element === node2.element) {  
+          updateConnection(connection, node1, node2);  
+        }  
+      });  
+    }  
+  });  
+
+  document.addEventListener('mouseup', () => {  
+    isDragging = false;  
+    element.classList.remove('active');  
+  });  
+}  
+
+// Demo setup  
+createNode(1, 100, 100, 'A');  
+createNode(2, 300, 300, 'B');  
+createNode(3, 500, 100, 'C');  
+connectNodes(1, 2);  
+connectNodes(2, 3);  
+connectNodes(3, 1);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
