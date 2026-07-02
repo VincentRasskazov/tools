@@ -1,0 +1,169 @@
+---
+layout: null
+title: "Synapse Spark: Neural Network Builder"
+category: "Education"
+description: "A highly interactive mini-game where users construct and train a simplified neural network visually, learning the basics of AI and machine learning."
+permalink: "/tools/daily-20260702-04-synapse-spark-neural-network-builder.html"
+generated_by: "api-true-ai"
+generated_date: "20260702"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Synapse Spark: Neural Network Builder | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive mini-game where users construct and train a simplified neural network visually, learning the basics of AI and machine learning. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Synapse Spark: Neural Network Builder | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive mini-game where users construct and train a simplified neural network visually, learning the basics of AI and machine learning. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Synapse Spark: Neural Network Builder | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive mini-game where users construct and train a simplified neural network visually, learning the basics of AI and machine learning. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Synapse Spark: Neural Network Builder</h1>
+    <p class="seo-subtitle">A highly interactive mini-game where users construct and train a simplified neural network visually, learning the basics of AI and machine learning.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: 'Arial', sans-serif;  
+  background: linear-gradient(120deg, #1e3c72, #2a5298);  
+  color: #fff;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  background: #ffffff11;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
+  border-radius: 12px;  
+  padding: 20px;  
+  width: 90%;  
+  max-width: 800px;  
+  text-align: center;  
+}  
+#neural-network {  
+  display: flex;  
+  justify-content: space-around;  
+  align-items: center;  
+  margin: 20px 0;  
+}  
+.node {  
+  width: 30px;  
+  height: 30px;  
+  background-color: #6a89cc;  
+  border-radius: 50%;  
+  display: inline-block;  
+  margin: 5px;  
+  position: relative;  
+  cursor: pointer;  
+  transition: transform 0.2s, background-color 0.3s;  
+}  
+.node:hover {  
+  transform: scale(1.2);  
+  background-color: #4a69bd;  
+}  
+.line {  
+  width: 2px;  
+  background-color: #82ccdd;  
+  position: absolute;  
+  transform-origin: top left;  
+}  
+.button {  
+  background-color: #60a3bc;  
+  border: none;  
+  color: white;  
+  padding: 8px 16px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  transition: background-color 0.3s;  
+}  
+.button:hover {  
+  background-color: #3c6382;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Synapse Spark: Neural Network Builder</h1>  
+  <p>Drag nodes, connect them, and adjust values to train your first visual neural network.</p>  
+  <div id="neural-network"></div>  
+  <button class="button" id="add-layer">Add Layer</button>  
+  <button class="button" id="train-network">Train Network</button>  
+  <p id="output"></p>  
+</div>  
+<script>  
+const app = document.getElementById('neural-network');  
+const output = document.getElementById('output');  
+let layers = [[]];  
+
+function createNode(layerIndex) {  
+  const node = document.createElement('div');  
+  node.className = 'node';  
+  node.dataset.layer = layerIndex;  
+  node.onclick = () => {  
+    if (!node.dataset.active) {  
+      node.dataset.active = true;  
+      node.style.backgroundColor = '#38ada9';  
+    } else {  
+      delete node.dataset.active;  
+      node.style.backgroundColor = '#6a89cc';  
+    }  
+  };  
+  return node;  
+}  
+
+function renderNetwork() {  
+  app.innerHTML = '';  
+  layers.forEach((layer, layerIndex) => {  
+    const layerDiv = document.createElement('div');  
+    layerDiv.className = 'layer';  
+    layer.forEach(node => {  
+      layerDiv.appendChild(node);  
+    });  
+    app.appendChild(layerDiv);  
+  });  
+}  
+
+document.getElementById('add-layer').onclick = () => {  
+  const newLayer = [];  
+  for (let i = 0; i < 5; i++) {  
+    newLayer.push(createNode(layers.length));  
+  }  
+  layers.push(newLayer);  
+  renderNetwork();  
+};  
+
+document.getElementById('train-network').onclick = () => {  
+  let activeNodes = layers.flat().filter(node => node.dataset.active);  
+  if (activeNodes.length === 0) {  
+    output.innerText = 'No active nodes to train. Activate some by clicking them!';  
+    return;  
+  }  
+  output.innerText = 'Training network...';  
+  setTimeout(() => {  
+    output.innerText = `Training complete! ${activeNodes.length} active nodes successfully trained.`;  
+  }, 2000);  
+};  
+
+renderNetwork();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

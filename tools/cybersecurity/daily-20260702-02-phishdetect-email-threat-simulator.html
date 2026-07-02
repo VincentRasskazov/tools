@@ -1,0 +1,103 @@
+---
+layout: null
+title: "PhishDetect: Email Threat Simulator"
+category: "Cybersecurity"
+description: "A highly interactive tool where users identify phishing attempts in simulated emails, training their cybersecurity instincts."
+permalink: "/tools/daily-20260702-02-phishdetect-email-threat-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260702"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhishDetect: Email Threat Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive tool where users identify phishing attempts in simulated emails, training their cybersecurity instincts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PhishDetect: Email Threat Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive tool where users identify phishing attempts in simulated emails, training their cybersecurity instincts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PhishDetect: Email Threat Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive tool where users identify phishing attempts in simulated emails, training their cybersecurity instincts. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PhishDetect: Email Threat Simulator</h1>
+    <p class="seo-subtitle">A highly interactive tool where users identify phishing attempts in simulated emails, training their cybersecurity instincts.</p>
+    <style>  
+body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; }  
+#tool-app { max-width: 800px; margin: 50px auto; padding: 20px; background: white; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); border-radius: 8px; }  
+.email-container { margin-bottom: 20px; padding: 15px; background-color: #f1f1f1; border: 1px solid #ccc; border-radius: 5px; }  
+.email-header { font-weight: bold; font-size: 1.1em; margin-bottom: 10px; }  
+.email-content { font-size: 0.95em; line-height: 1.5; background-color: #fff; padding: 10px; border-radius: 5px; border: 1px solid #ddd; }  
+.button-group { text-align: center; margin-top: 20px; }  
+button { font-size: 16px; padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; }  
+button.detect { background: #28a745; color: white; }  
+button.detect:hover { background: #218838; }  
+button.ignore { background: #dc3545; color: white; }  
+button.ignore:hover { background: #c82333; }  
+.feedback { font-size: 1em; font-weight: bold; margin-top: 20px; padding: 10px; border-radius: 5px; display: none; }  
+.feedback.correct { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }  
+.feedback.incorrect { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }  
+</style>  
+<div id="tool-app">  
+  <div class="email-container">  
+    <div class="email-header">From: <span id="email-sender"></span> | Subject: <span id="email-subject"></span></div>  
+    <div class="email-content" id="email-content"></div>  
+    <div class="button-group">  
+      <button class="detect" onclick="checkPhishing(true)">Report as Phishing</button>  
+      <button class="ignore" onclick="checkPhishing(false)">Ignore</button>  
+    </div>  
+  </div>  
+  <div id="feedback" class="feedback"></div>  
+</div>  
+<script>  
+const emails = [  
+  { sender: 'bank-security@secure.com', subject: 'Urgent: Your Account is Locked!', content: 'Please click this link immediately to verify your account information or your account will be permanently suspended.', isPhish: true },  
+  { sender: 'friend@example.com', subject: 'Hey, check this out!', content: 'I found this cool article and thought you might like it: https://example.com/fun-article', isPhish: false },  
+  { sender: 'admin@paypal-secured.com', subject: 'Payment Failure Alert', content: 'We couldn\'t process your last payment. Please log in to verify your information: http://paypal-secure-login.com', isPhish: true },  
+  { sender: 'newsletter@shopping.com', subject: 'Your Monthly Deals Are Here!', content: 'Click here to see the latest deals on your favorite products: https://shopping.com/deals', isPhish: false },  
+  { sender: 'support@companyupdate.com', subject: 'Software Update Required', content: 'A critical update is available. Download it now to secure your computer: http://unverified-update-link.com', isPhish: true }  
+];  
+let currentEmailIndex = 0;  
+function displayEmail() {  
+  const email = emails[currentEmailIndex];  
+  document.getElementById('email-sender').innerText = email.sender;  
+  document.getElementById('email-subject').innerText = email.subject;  
+  document.getElementById('email-content').innerText = email.content;  
+  document.getElementById('feedback').style.display = 'none';  
+}  
+function checkPhishing(isReported) {  
+  const email = emails[currentEmailIndex];  
+  const feedback = document.getElementById('feedback');  
+  if ((isReported && email.isPhish) || (!isReported && !email.isPhish)) {  
+    feedback.innerText = 'Correct!';  
+    feedback.className = 'feedback correct';  
+  } else {  
+    feedback.innerText = 'Incorrect!';  
+    feedback.className = 'feedback incorrect';  
+  }  
+  feedback.style.display = 'block';  
+  setTimeout(() => {  
+    currentEmailIndex = (currentEmailIndex + 1) % emails.length;  
+    displayEmail();  
+  }, 2000);  
+}  
+displayEmail();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
