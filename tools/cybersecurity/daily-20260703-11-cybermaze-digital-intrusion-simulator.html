@@ -1,0 +1,123 @@
+---
+layout: null
+title: "CyberMaze: Digital Intrusion Simulator"
+category: "Cybersecurity"
+description: "Navigate a dynamic, procedurally generated virtual \"network maze\" while avoiding security threats and solving encryption puzzles to secure data nodes."
+permalink: "/tools/daily-20260703-11-cybermaze-digital-intrusion-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260703"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberMaze: Digital Intrusion Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate a dynamic, procedurally generated virtual &quot;network maze&quot; while avoiding security threats and solving encryption puzzles to secure data nodes. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CyberMaze: Digital Intrusion Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate a dynamic, procedurally generated virtual &quot;network maze&quot; while avoiding security threats and solving encryption puzzles to secure data nodes. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CyberMaze: Digital Intrusion Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate a dynamic, procedurally generated virtual &quot;network maze&quot; while avoiding security threats and solving encryption puzzles to secure data nodes. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CyberMaze: Digital Intrusion Simulator</h1>
+    <p class="seo-subtitle">Navigate a dynamic, procedurally generated virtual &quot;network maze&quot; while avoiding security threats and solving encryption puzzles to secure data nodes.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #0f172a; color: #e2e8f0; }  
+  #tool-app { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }  
+  .maze-container { display: grid; grid-template-columns: repeat(10, 50px); grid-gap: 5px; }  
+  .maze-cell { width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border: 1px solid #334155; text-align: center; }  
+  .path { background-color: #16a34a; }  
+  .threat { background-color: #dc2626; color: #fff; }  
+  .player { background-color: #3b82f6; color: #fff; }  
+  .node { background-color: #fbbf24; color: #000; }  
+  button { margin-top: 20px; padding: 10px 20px; border: none; background-color: #2563eb; color: #fff; font-size: 16px; border-radius: 5px; cursor: pointer; }  
+  button:hover { background-color: #1d4ed8; }  
+</style>  
+<div id="tool-app">  
+  <h1>CyberMaze</h1>  
+  <p>Guide the player through the maze, avoid threats, and secure all data nodes!</p>  
+  <div class="maze-container" id="maze"></div>  
+  <button id="reset-btn">Reset Maze</button>  
+</div>  
+<script>  
+  const toolApp = document.getElementById("tool-app");  
+  const mazeGrid = document.getElementById("maze");  
+  const resetBtn = document.getElementById("reset-btn");  
+
+  const size = 10;  
+  const maze = [];  
+  let playerPosition = { x: 0, y: 0 };  
+
+  function generateMaze() {  
+    mazeGrid.innerHTML = "";  
+    maze.length = 0;  
+    for (let y = 0; y < size; y++) {  
+      const row = [];  
+      for (let x = 0; x < size; x++) {  
+        const cell = { x, y, type: "path" };  
+        if (Math.random() < 0.2) cell.type = "threat";  
+        if (Math.random() < 0.05) cell.type = "node";  
+        if (x === 0 && y === 0) cell.type = "player";  
+        row.push(cell);  
+      }  
+      maze.push(row);  
+    }  
+    renderMaze();  
+  }  
+
+  function renderMaze() {  
+    mazeGrid.innerHTML = "";  
+    maze.forEach(row => {  
+      row.forEach(cell => {  
+        const div = document.createElement("div");  
+        div.className = `maze-cell ${cell.type}`;  
+        if (cell.type === "player") div.textContent = "P";  
+        if (cell.type === "node") div.textContent = "N";  
+        mazeGrid.appendChild(div);  
+      });  
+    });  
+  }  
+
+  function movePlayer(dx, dy) {  
+    const newX = playerPosition.x + dx;  
+    const newY = playerPosition.y + dy;  
+    if (newX < 0 || newX >= size || newY < 0 || newY >= size) return;  
+    const targetCell = maze[newY][newX];  
+    if (targetCell.type === "threat") return alert("You've been caught by a threat!");  
+    if (targetCell.type === "node") alert("Data node secured!");  
+    maze[playerPosition.y][playerPosition.x].type = "path";  
+    targetCell.type = "player";  
+    playerPosition = { x: newX, y: newY };  
+    renderMaze();  
+  }  
+
+  document.addEventListener("keydown", (e) => {  
+    if (e.key === "ArrowUp") movePlayer(0, -1);  
+    if (e.key === "ArrowDown") movePlayer(0, 1);  
+    if (e.key === "ArrowLeft") movePlayer(-1, 0);  
+    if (e.key === "ArrowRight") movePlayer(1, 0);  
+  });  
+
+  resetBtn.addEventListener("click", generateMaze);  
+
+  generateMaze();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
