@@ -1,0 +1,161 @@
+---
+layout: null
+title: "FlowGrid: Task Prioritization Maze"
+category: "Productivity"
+description: "Gamify your task management by navigating a maze where each choice helps you prioritize tasks based on urgency and importance."
+permalink: "/tools/daily-20260704-04-flowgrid-task-prioritization-maze.html"
+generated_by: "api-true-ai"
+generated_date: "20260704"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlowGrid: Task Prioritization Maze | Free Online Interactive Tool</title>
+  <meta name="description" content="Gamify your task management by navigating a maze where each choice helps you prioritize tasks based on urgency and importance. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="FlowGrid: Task Prioritization Maze | Free Online Interactive Tool">
+  <meta property="og:description" content="Gamify your task management by navigating a maze where each choice helps you prioritize tasks based on urgency and importance. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FlowGrid: Task Prioritization Maze | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Gamify your task management by navigating a maze where each choice helps you prioritize tasks based on urgency and importance. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>FlowGrid: Task Prioritization Maze</h1>
+    <p class="seo-subtitle">Gamify your task management by navigating a maze where each choice helps you prioritize tasks based on urgency and importance.</p>
+    <style>  
+#tool-app {  
+  font-family: Arial, sans-serif;  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  height: 100vh;  
+  margin: 0;  
+  background: linear-gradient(120deg, #f6d365, #fda085);  
+  color: #333;  
+}  
+#maze-container {  
+  display: grid;  
+  grid-template-columns: repeat(5, 50px);  
+  grid-gap: 5px;  
+  margin-bottom: 20px;  
+}  
+.cell {  
+  width: 50px;  
+  height: 50px;  
+  border: 1px solid #ccc;  
+  background-color: #fff;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  font-size: 12px;  
+  cursor: pointer;  
+  transition: background-color 0.3s, transform 0.2s;  
+}  
+.cell.active {  
+  background-color: #4caf50;  
+  color: #fff;  
+  transform: scale(1.1);  
+}  
+.cell.task {  
+  background-color: #f39c12;  
+  color: #fff;  
+  cursor: pointer;  
+}  
+#task-list {  
+  margin-top: 10px;  
+  text-align: center;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>FlowGrid: Task Prioritization Maze</h1>  
+  <p>Navigate the maze to prioritize your tasks based on importance vs. urgency!</p>  
+  <div id="maze-container"></div>  
+  <div id="task-list">  
+    <h3>Prioritized Tasks:</h3>  
+    <ul id="tasks"></ul>  
+  </div>  
+</div>  
+<script>  
+const mazeSize = 5;  
+const mazeContainer = document.getElementById("maze-container");  
+const tasksElement = document.getElementById("tasks");  
+const tasks = ["Write Report", "Reply Emails", "Plan Presentation", "Code Review", "Team Meeting"];  
+let position = { x: 0, y: 0 };  
+let prioritizedTasks = [];  
+
+function generateMaze() {  
+  for (let row = 0; row < mazeSize; row++) {  
+    for (let col = 0; col < mazeSize; col++) {  
+      const cell = document.createElement("div");  
+      cell.className = "cell";  
+      cell.dataset.row = row;  
+      cell.dataset.col = col;  
+
+      if (Math.random() > 0.7 && tasks.length > 0) {  
+        cell.classList.add("task");  
+        cell.textContent = tasks.pop();  
+      }  
+
+      cell.addEventListener("click", () => movePlayer(row, col, cell));  
+      mazeContainer.appendChild(cell);  
+    }  
+  }  
+
+  updatePlayerPosition();  
+}  
+
+function movePlayer(row, col, cell) {  
+  const dx = Math.abs(row - position.x);  
+  const dy = Math.abs(col - position.y);  
+
+  if ((dx === 1 && dy === 0) || (dy === 1 && dx === 0)) {  
+    position = { x: row, y: col };  
+    if (cell.classList.contains("task")) {  
+      prioritizedTasks.push(cell.textContent);  
+      cell.textContent = "";  
+      cell.classList.remove("task");  
+    }  
+    updatePlayerPosition();  
+  }  
+}  
+
+function updatePlayerPosition() {  
+  document.querySelectorAll(".cell").forEach(cell => cell.classList.remove("active"));  
+  const currentCell = document.querySelector(  
+    `.cell[data-row='${position.x}'][data-col='${position.y}']`  
+  );  
+  currentCell.classList.add("active");  
+
+  renderTaskList();  
+}  
+
+function renderTaskList() {  
+  tasksElement.innerHTML = "";  
+  prioritizedTasks.forEach(task => {  
+    const li = document.createElement("li");  
+    li.textContent = task;  
+    tasksElement.appendChild(li);  
+  });  
+}  
+
+generateMaze();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,115 @@
+---
+layout: null
+title: "PixelSmith: Collaborative Pixel Art Forge"
+category: "Games"
+description: "A real-time collaborative browser tool where players co-create pixel art on a shared canvas, working together while uncovering hidden challenges and surprise animations."
+permalink: "/tools/daily-20260704-21-pixelsmith-collaborative-pixel-art-forge.html"
+generated_by: "api-true-ai"
+generated_date: "20260704"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PixelSmith: Collaborative Pixel Art Forge | Free Online Interactive Tool</title>
+  <meta name="description" content="A real-time collaborative browser tool where players co-create pixel art on a shared canvas, working together while uncovering hidden challenges and surprise animations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PixelSmith: Collaborative Pixel Art Forge | Free Online Interactive Tool">
+  <meta property="og:description" content="A real-time collaborative browser tool where players co-create pixel art on a shared canvas, working together while uncovering hidden challenges and surprise animations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PixelSmith: Collaborative Pixel Art Forge | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A real-time collaborative browser tool where players co-create pixel art on a shared canvas, working together while uncovering hidden challenges and surprise animations. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PixelSmith: Collaborative Pixel Art Forge</h1>
+    <p class="seo-subtitle">A real-time collaborative browser tool where players co-create pixel art on a shared canvas, working together while uncovering hidden challenges and surprise animations.</p>
+    <style>  
+body { font-family: Arial, sans-serif; background: #282c34; color: #f5f5f5; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }  
+#tool-app { width: 90%; max-width: 800px; height: 600px; background: #1e1e1e; border: 2px solid #444; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.4); overflow: hidden; display: flex; flex-direction: column; }  
+#canvas-container { flex: 1; display: flex; justify-content: center; align-items: center; position: relative; }  
+canvas { border: 1px solid #444; cursor: crosshair; }  
+#toolbar { background: #333; padding: 10px; display: flex; justify-content: space-between; align-items: center; }  
+.color-picker { width: 20px; height: 20px; border: 2px solid #fff; cursor: pointer; margin-right: 5px; }  
+#chat { flex: 0 0 auto; background: #222; padding: 10px; display: flex; flex-direction: column; border-top: 1px solid #444; }  
+#chat-input { margin-top: 5px; padding: 5px; background: #333; color: #f5f5f5; border: none; border-radius: 3px; outline: none; }  
+</style>  
+<div id="tool-app">  
+  <div id="toolbar">  
+    <div id="color-palette">  
+      <div class="color-picker" style="background: #ff0000;" data-color="#ff0000"></div>  
+      <div class="color-picker" style="background: #00ff00;" data-color="#00ff00"></div>  
+      <div class="color-picker" style="background: #0000ff;" data-color="#0000ff"></div>  
+      <div class="color-picker" style="background: #ffff00;" data-color="#ffff00"></div>  
+      <div class="color-picker" style="background: #ff00ff;" data-color="#ff00ff"></div>  
+      <div class="color-picker" style="background: #00ffff;" data-color="#00ffff"></div>  
+      <div class="color-picker" style="background: #ffffff;" data-color="#ffffff"></div>  
+      <div class="color-picker" style="background: #000000;" data-color="#000000"></div>  
+    </div>  
+    <span>Collaborative Pixel Art</span>  
+  </div>  
+  <div id="canvas-container">  
+    <canvas width="600" height="400"></canvas>  
+  </div>  
+  <div id="chat">  
+    <div id="chat-log" style="overflow-y: auto; max-height: 100px; flex: 1;"></div>  
+    <input id="chat-input" placeholder="Type a message...">  
+  </div>  
+</div>  
+<script>  
+const canvas = document.querySelector('canvas');  
+const ctx = canvas.getContext('2d');  
+const colorPickers = document.querySelectorAll('.color-picker');  
+const chatInput = document.getElementById('chat-input');  
+const chatLog = document.getElementById('chat-log');  
+let currentColor = '#000000';  
+
+colorPickers.forEach(picker => {  
+  picker.addEventListener('click', () => {  
+    currentColor = picker.dataset.color;  
+  });  
+});  
+
+canvas.addEventListener('mousedown', e => {  
+  const rect = canvas.getBoundingClientRect();  
+  const x = Math.floor((e.clientX - rect.left) / 10) * 10;  
+  const y = Math.floor((e.clientY - rect.top) / 10) * 10;  
+  ctx.fillStyle = currentColor;  
+  ctx.fillRect(x, y, 10, 10);  
+});  
+
+chatInput.addEventListener('keypress', e => {  
+  if (e.key === 'Enter') {  
+    const message = chatInput.value;  
+    chatLog.innerHTML += `<div>${message}</div>`;  
+    chatInput.value = '';  
+    chatLog.scrollTop = chatLog.scrollHeight;  
+  }  
+});  
+
+// Initialize canvas grid  
+ctx.fillStyle = '#ffffff';  
+ctx.fillRect(0, 0, canvas.width, canvas.height);  
+ctx.strokeStyle = '#cccccc';  
+for (let x = 0; x < canvas.width; x += 10) {  
+  for (let y = 0; y < canvas.height; y += 10) {  
+    ctx.strokeRect(x, y, 10, 10);  
+  }  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

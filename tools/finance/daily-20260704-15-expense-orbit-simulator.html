@@ -1,0 +1,143 @@
+---
+layout: null
+title: "Expense Orbit Simulator"
+category: "Finance"
+description: "A dynamic mini-game where users manage virtual planets representing financial goals, balancing income streams and expenses to maintain stable orbits and avoid crashes."
+permalink: "/tools/daily-20260704-15-expense-orbit-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260704"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Orbit Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic mini-game where users manage virtual planets representing financial goals, balancing income streams and expenses to maintain stable orbits and avoid crashes. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Expense Orbit Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic mini-game where users manage virtual planets representing financial goals, balancing income streams and expenses to maintain stable orbits and avoid crashes. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Expense Orbit Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic mini-game where users manage virtual planets representing financial goals, balancing income streams and expenses to maintain stable orbits and avoid crashes. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Expense Orbit Simulator</h1>
+    <p class="seo-subtitle">A dynamic mini-game where users manage virtual planets representing financial goals, balancing income streams and expenses to maintain stable orbits and avoid crashes.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);  
+  color: #ffffff;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  width: 90%;  
+  max-width: 800px;  
+  text-align: center;  
+}  
+#canvas {  
+  border: 1px solid #ffffff;  
+  border-radius: 8px;  
+  background: #111;  
+}  
+button {  
+  margin-top: 20px;  
+  padding: 10px 20px;  
+  background-color: #3a9efd;  
+  border: none;  
+  border-radius: 5px;  
+  color: #fff;  
+  cursor: pointer;  
+}  
+button:hover {  
+  background-color: #1d7ed4;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Expense Orbit Simulator</h1>  
+  <canvas id="canvas" width="600" height="400"></canvas>  
+  <br>  
+  <button onclick="startGame()">Start Game</button>  
+</div>  
+<script>  
+const canvas = document.getElementById("canvas");  
+const ctx = canvas.getContext("2d");  
+let gameActive = false;  
+let planets = [];  
+let income = 100;  
+let expenses = 70;  
+
+function startGame() {  
+  gameActive = true;  
+  income = 100;  
+  expenses = 70;  
+  planets = [  
+    {x: 150, y: 200, size: 20, speed: 1, name: "Savings", color: "green"},  
+    {x: 300, y: 200, size: 30, speed: 1.5, name: "Emergency Fund", color: "yellow"},  
+    {x: 450, y: 200, size: 40, speed: 2, name: "Vacation", color: "blue"}  
+  ];  
+  gameLoop();  
+}  
+
+function drawPlanet(planet) {  
+  ctx.beginPath();  
+  ctx.arc(planet.x, planet.y, planet.size, 0, Math.PI * 2);  
+  ctx.fillStyle = planet.color;  
+  ctx.fill();  
+  ctx.closePath();  
+  ctx.fillStyle = "white";  
+  ctx.font = "12px Arial";  
+  ctx.fillText(planet.name, planet.x - planet.size, planet.y + planet.size + 10);  
+}  
+
+function gameLoop() {  
+  if (!gameActive) return;  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+
+  planets.forEach(planet => {  
+    planet.x += planet.speed;  
+    if (planet.x - planet.size > canvas.width) planet.x = -planet.size;  
+    drawPlanet(planet);  
+  });  
+
+  ctx.fillStyle = "white";  
+  ctx.font = "16px Arial";  
+  ctx.fillText(`Income: $${income}`, 10, 20);  
+  ctx.fillText(`Expenses: $${expenses}`, 10, 40);  
+
+  income -= Math.random() * 2;  
+  expenses += Math.random() * 1.5;  
+
+  if (income < expenses) {  
+    gameActive = false;  
+    alert("Failure: Your expenses exceeded your income!");  
+  } else if (income > 200) {  
+    gameActive = false;  
+    alert("Success: You've stabilized your financial orbits!");  
+  } else {  
+    requestAnimationFrame(gameLoop);  
+  }  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

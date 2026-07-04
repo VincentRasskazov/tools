@@ -1,0 +1,192 @@
+---
+layout: null
+title: "Wealth Constellation Mapper"
+category: "Finance"
+description: "A dynamic, interactive visualization tool that maps your financial habits, income sources, and expenses as a constellation, allowing you to identify patterns and optimize your financial \"galaxy.\""
+permalink: "/tools/daily-20260704-16-wealth-constellation-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260704"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wealth Constellation Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, interactive visualization tool that maps your financial habits, income sources, and expenses as a constellation, allowing you to identify patterns and optimize your financial &quot;galaxy.&quot; Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Wealth Constellation Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, interactive visualization tool that maps your financial habits, income sources, and expenses as a constellation, allowing you to identify patterns and optimize your financial &quot;galaxy.&quot; Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Wealth Constellation Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, interactive visualization tool that maps your financial habits, income sources, and expenses as a constellation, allowing you to identify patterns and optimize your financial &quot;galaxy.&quot; Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Wealth Constellation Mapper</h1>
+    <p class="seo-subtitle">A dynamic, interactive visualization tool that maps your financial habits, income sources, and expenses as a constellation, allowing you to identify patterns and optimize your financial &quot;galaxy.&quot;</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: radial-gradient(circle, #1a1a40, #000);  
+  color: #fff;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 90%;  
+  height: 90%;  
+  border: 2px solid #4fffd5;  
+  border-radius: 12px;  
+  position: relative;  
+  background: #0b0b3b;  
+  overflow: hidden;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);  
+}  
+.canvas-container {  
+  position: absolute;  
+  width: 100%;  
+  height: 100%;  
+}  
+#map-canvas {  
+  display: block;  
+}  
+#info-panel {  
+  position: absolute;  
+  top: 10px;  
+  right: 10px;  
+  background: rgba(0, 0, 0, 0.7);  
+  color: #4fffd5;  
+  padding: 10px;  
+  border-radius: 8px;  
+  font-size: 14px;  
+  max-width: 250px;  
+}  
+.info-item {  
+  margin-bottom: 10px;  
+}  
+.info-title {  
+  font-weight: bold;  
+}  
+</style>  
+<div id="tool-app">  
+  <canvas id="map-canvas"></canvas>  
+  <div id="info-panel">  
+    <div class="info-item">  
+      <div class="info-title">Income Sources:</div>  
+      <ul id="income-list"></ul>  
+    </div>  
+    <div class="info-item">  
+      <div class="info-title">Expense Nodes:</div>  
+      <ul id="expense-list"></ul>  
+    </div>  
+    <button id="add-node-btn">+ Add Node</button>  
+  </div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById("map-canvas");  
+const ctx = canvas.getContext("2d");  
+const infoPanel = document.getElementById("info-panel");  
+const incomeList = document.getElementById("income-list");  
+const expenseList = document.getElementById("expense-list");  
+const addNodeBtn = document.getElementById("add-node-btn");  
+
+canvas.width = canvas.parentElement.offsetWidth;  
+canvas.height = canvas.parentElement.offsetHeight;  
+
+const nodes = [];  
+
+function drawNode(x, y, type, name) {  
+  ctx.beginPath();  
+  ctx.arc(x, y, 10, 0, 2 * Math.PI);  
+  ctx.fillStyle = type === "income" ? "#4fffd5" : "#ff4f4f";  
+  ctx.fill();  
+  ctx.strokeStyle = "#fff";  
+  ctx.stroke();  
+  ctx.closePath();  
+
+  ctx.fillStyle = "#fff";  
+  ctx.font = "12px Arial";  
+  ctx.fillText(name, x + 15, y);  
+}  
+
+function renderCanvas() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+
+  nodes.forEach(({ x, y, type, name, links }) => {  
+    drawNode(x, y, type, name);  
+    links.forEach((link) => {  
+      const targetNode = nodes.find((node) => node.name === link);  
+      if (targetNode) {  
+        ctx.beginPath();  
+        ctx.moveTo(x, y);  
+        ctx.lineTo(targetNode.x, targetNode.y);  
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.5)";  
+        ctx.stroke();  
+        ctx.closePath();  
+      }  
+    });  
+  });  
+}  
+
+function updateInfoPanel() {  
+  incomeList.innerHTML = "";  
+  expenseList.innerHTML = "";  
+
+  nodes.forEach((node) => {  
+    const li = document.createElement("li");  
+    li.textContent = node.name;  
+    if (node.type === "income") {  
+      incomeList.appendChild(li);  
+    } else {  
+      expenseList.appendChild(li);  
+    }  
+  });  
+}  
+
+addNodeBtn.addEventListener("click", () => {  
+  const name = prompt("Enter the name of the node (e.g., 'Salary' or 'Groceries'):");  
+  const type = prompt("Enter the type (income/expense):").toLowerCase();  
+  const x = Math.random() * canvas.width;  
+  const y = Math.random() * canvas.height;  
+
+  if (name && (type === "income" || type === "expense")) {  
+    const newNode = { x, y, type, name, links: [] };  
+    nodes.push(newNode);  
+
+    const linkName = prompt("Optionally, connect this node to an existing node (enter the name, or leave blank):");  
+    if (linkName) {  
+      newNode.links.push(linkName);  
+    }  
+
+    renderCanvas();  
+    updateInfoPanel();  
+  }  
+});  
+
+// Initialize Canvas  
+renderCanvas();  
+updateInfoPanel();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,150 @@
+---
+layout: null
+title: "SynTaxplorer: The Syntax Tree Navigator"
+category: "Education"
+description: "Visualize and interact with sentence structures by dynamically building syntax trees to learn grammar and language concepts."
+permalink: "/tools/daily-20260704-10-syntaxplorer-the-syntax-tree-navigator.html"
+generated_by: "api-true-ai"
+generated_date: "20260704"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SynTaxplorer: The Syntax Tree Navigator | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize and interact with sentence structures by dynamically building syntax trees to learn grammar and language concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="SynTaxplorer: The Syntax Tree Navigator | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize and interact with sentence structures by dynamically building syntax trees to learn grammar and language concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SynTaxplorer: The Syntax Tree Navigator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize and interact with sentence structures by dynamically building syntax trees to learn grammar and language concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>SynTaxplorer: The Syntax Tree Navigator</h1>
+    <p class="seo-subtitle">Visualize and interact with sentence structures by dynamically building syntax trees to learn grammar and language concepts.</p>
+    <style>  
+  #tool-app {  
+    font-family: Arial, sans-serif;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);  
+  }  
+  .syntax-tree-container {  
+    width: 80%;  
+    height: 80%;  
+    background: white;  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+    border-radius: 8px;  
+    display: flex;  
+    flex-direction: column;  
+    padding: 16px;  
+    overflow: auto;  
+  }  
+  .input-row {  
+    display: flex;  
+    margin-bottom: 16px;  
+  }  
+  #sentence-input {  
+    flex: 1;  
+    padding: 8px;  
+    font-size: 16px;  
+    border: 1px solid #ced4da;  
+    border-radius: 4px;  
+  }  
+  #parse-btn {  
+    padding: 8px 16px;  
+    margin-left: 8px;  
+    background: #007bff;  
+    color: white;  
+    border: none;  
+    border-radius: 4px;  
+    cursor: pointer;  
+  }  
+  #parse-btn:hover {  
+    background: #0056b3;  
+  }  
+  .tree {  
+    display: flex;  
+    justify-content: center;  
+    align-items: flex-start;  
+    flex-wrap: wrap;  
+  }  
+  .tree-node {  
+    margin: 8px;  
+    padding: 8px 16px;  
+    background: #f1f3f5;  
+    border: 1px solid #dee2e6;  
+    border-radius: 4px;  
+    cursor: pointer;  
+    transition: background 0.3s;  
+  }  
+  .tree-node:hover {  
+    background: #e9ecef;  
+  }  
+</style>  
+<div id="tool-app">  
+  <div class="syntax-tree-container">  
+    <div class="input-row">  
+      <input id="sentence-input" type="text" placeholder="Type a sentence to parse..." />  
+      <button id="parse-btn">Parse Sentence</button>  
+    </div>  
+    <div id="syntax-tree" class="tree"></div>  
+  </div>  
+</div>  
+<script>  
+  const partsOfSpeech = {  
+    noun: ["dog", "cat", "book", "city", "child"],  
+    verb: ["runs", "jumps", "reads", "writes", "plays"],  
+    article: ["the", "a", "an"],  
+    adjective: ["big", "small", "red", "happy", "fast"],  
+    preposition: ["on", "in", "at", "near", "with"],  
+  };  
+  
+  function parseSentence(sentence) {  
+    const words = sentence.toLowerCase().split(/\s+/);  
+    return words.map(word => {  
+      for (const [type, list] of Object.entries(partsOfSpeech)) {  
+        if (list.includes(word)) return { word, type };  
+      }  
+      return { word, type: "unknown" };  
+    });  
+  }  
+  
+  function renderSyntaxTree(parsedWords) {  
+    const syntaxTree = document.getElementById("syntax-tree");  
+    syntaxTree.innerHTML = "";  
+    parsedWords.forEach(({ word, type }) => {  
+      const node = document.createElement("div");  
+      node.className = "tree-node";  
+      node.textContent = `${word} (${type})`;  
+      node.title = `This is a ${type}`;  
+      syntaxTree.appendChild(node);  
+    });  
+  }  
+  
+  document.getElementById("parse-btn").addEventListener("click", () => {  
+    const sentenceInput = document.getElementById("sentence-input");  
+    const parsedWords = parseSentence(sentenceInput.value);  
+    renderSyntaxTree(parsedWords);  
+  });  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
