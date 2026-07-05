@@ -1,0 +1,143 @@
+---
+layout: null
+title: "Neural Breath Navigator"
+category: "Health"
+description: "A captivating mini-game where users breathe in sync with an animated neural network to observe real-time effects on brain activity visuals."
+permalink: "/tools/daily-20260705-05-neural-breath-navigator.html"
+generated_by: "api-true-ai"
+generated_date: "20260705"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neural Breath Navigator | Free Online Interactive Tool</title>
+  <meta name="description" content="A captivating mini-game where users breathe in sync with an animated neural network to observe real-time effects on brain activity visuals. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Neural Breath Navigator | Free Online Interactive Tool">
+  <meta property="og:description" content="A captivating mini-game where users breathe in sync with an animated neural network to observe real-time effects on brain activity visuals. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Neural Breath Navigator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A captivating mini-game where users breathe in sync with an animated neural network to observe real-time effects on brain activity visuals. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Neural Breath Navigator</h1>
+    <p class="seo-subtitle">A captivating mini-game where users breathe in sync with an animated neural network to observe real-time effects on brain activity visuals.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background-color: #121212;  
+  color: #ffffff;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  text-align: center;  
+}  
+#neural-canvas {  
+  width: 90vw;  
+  height: 50vh;  
+  border: 2px solid #4CAF50;  
+  border-radius: 15px;  
+  margin-top: 20px;  
+  background: radial-gradient(circle, #1E1E1E, #121212);  
+}  
+#instructions {  
+  margin-top: 20px;  
+  font-size: 1.2em;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Neural Breath Navigator</h1>  
+  <p id="instructions">Breathe in sync with the pulsating neural network below. Press and hold the spacebar to breathe in, release to breathe out.</p>  
+  <canvas id="neural-canvas"></canvas>  
+</div>  
+<script>  
+const canvas = document.getElementById('neural-canvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = canvas.offsetWidth;  
+canvas.height = canvas.offsetHeight;  
+
+let isBreathing = false;  
+let breathIntensity = 0;  
+let nodes = [];  
+
+function createNodes() {  
+  for (let i = 0; i < 50; i++) {  
+    nodes.push({  
+      x: Math.random() * canvas.width,  
+      y: Math.random() * canvas.height,  
+      radius: Math.random() * 5 + 2,  
+      dx: Math.random() * 2 - 1,  
+      dy: Math.random() * 2 - 1,  
+    });  
+  }  
+}  
+
+function drawNodes() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  nodes.forEach(node => {  
+    node.x += node.dx * breathIntensity;  
+    node.y += node.dy * breathIntensity;  
+
+    // Keep nodes inside canvas  
+    if (node.x < 0 || node.x > canvas.width) node.dx = -node.dx;  
+    if (node.y < 0 || node.y > canvas.height) node.dy = -node.dy;  
+
+    ctx.beginPath();  
+    ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);  
+    ctx.fillStyle = `rgba(76, 175, 80, ${0.5 + breathIntensity * 0.3})`;  
+    ctx.fill();  
+  });  
+}  
+
+function updateBreathIntensity() {  
+  if (isBreathing) {  
+    breathIntensity = Math.min(breathIntensity + 0.02, 1);  
+  } else {  
+    breathIntensity = Math.max(breathIntensity - 0.02, 0);  
+  }  
+}  
+
+function animate() {  
+  updateBreathIntensity();  
+  drawNodes();  
+  requestAnimationFrame(animate);  
+}  
+
+window.addEventListener('keydown', (e) => {  
+  if (e.code === 'Space') {  
+    isBreathing = true;  
+  }  
+});  
+
+window.addEventListener('keyup', (e) => {  
+  if (e.code === 'Space') {  
+    isBreathing = false;  
+  }  
+});  
+
+createNodes();  
+animate();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

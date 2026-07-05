@@ -1,0 +1,117 @@
+---
+layout: null
+title: "Focus Fractal: Task Prioritization Visualizer"
+category: "Productivity"
+description: "A mesmerizing fractal-based tool that helps you visually organize and prioritize tasks by dynamically adjusting their importance and interdependencies."
+permalink: "/tools/daily-20260705-08-focus-fractal-task-prioritization-visualizer.html"
+generated_by: "api-true-ai"
+generated_date: "20260705"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Focus Fractal: Task Prioritization Visualizer | Free Online Interactive Tool</title>
+  <meta name="description" content="A mesmerizing fractal-based tool that helps you visually organize and prioritize tasks by dynamically adjusting their importance and interdependencies. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Focus Fractal: Task Prioritization Visualizer | Free Online Interactive Tool">
+  <meta property="og:description" content="A mesmerizing fractal-based tool that helps you visually organize and prioritize tasks by dynamically adjusting their importance and interdependencies. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Focus Fractal: Task Prioritization Visualizer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A mesmerizing fractal-based tool that helps you visually organize and prioritize tasks by dynamically adjusting their importance and interdependencies. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Focus Fractal: Task Prioritization Visualizer</h1>
+    <p class="seo-subtitle">A mesmerizing fractal-based tool that helps you visually organize and prioritize tasks by dynamically adjusting their importance and interdependencies.</p>
+    <style>  
+  body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; background: #1e2a38; color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; }  
+  #tool-app { width: 80%; height: 80%; display: flex; flex-direction: column; align-items: center; }  
+  canvas { border: 1px solid #ccc; margin-top: 20px; background: #202b3a; }  
+  #controls { margin-bottom: 10px; }  
+  button { background: #4caf50; color: white; border: none; padding: 10px 15px; margin: 0 5px; cursor: pointer; border-radius: 5px; }  
+  button:hover { background: #45a049; }  
+</style>  
+<div id="tool-app">  
+  <div id="controls">  
+    <button id="add-task">Add Task</button>  
+    <button id="reset">Reset</button>  
+  </div>  
+  <canvas id="fractal-canvas"></canvas>  
+</div>  
+<script>  
+const canvas = document.getElementById('fractal-canvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = window.innerWidth * 0.8;  
+canvas.height = window.innerHeight * 0.7;  
+
+let tasks = [];  
+let centerX = canvas.width / 2;  
+let centerY = canvas.height / 2;  
+let radius = 200;  
+
+function drawFractal() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  if (tasks.length === 0) return;  
+
+  tasks.forEach((task, index) => {  
+    const angle = (index / tasks.length) * Math.PI * 2;  
+    const x = centerX + Math.cos(angle) * radius;  
+    const y = centerY + Math.sin(angle) * radius;  
+
+    // Draw connection lines  
+    ctx.beginPath();  
+    ctx.moveTo(centerX, centerY);  
+    ctx.lineTo(x, y);  
+    ctx.strokeStyle = '#ccc';  
+    ctx.stroke();  
+
+    // Draw task node  
+    ctx.beginPath();  
+    ctx.arc(x, y, 20, 0, Math.PI * 2);  
+    ctx.fillStyle = task.color;  
+    ctx.fill();  
+    ctx.stroke();  
+    ctx.closePath();  
+
+    // Draw task label  
+    ctx.fillStyle = '#fff';  
+    ctx.font = '14px Arial';  
+    ctx.fillText(task.label, x - 10, y + 5);  
+  });  
+}  
+
+function addTask() {  
+  const label = prompt('Enter task name:', `Task ${tasks.length + 1}`);  
+  if (!label) return;  
+  const color = `hsl(${Math.random() * 360}, 100%, 50%)`;  
+  tasks.push({ label, color });  
+  drawFractal();  
+}  
+
+function resetTasks() {  
+  tasks = [];  
+  drawFractal();  
+}  
+
+document.getElementById('add-task').addEventListener('click', addTask);  
+document.getElementById('reset').addEventListener('click', resetTasks);  
+
+drawFractal();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

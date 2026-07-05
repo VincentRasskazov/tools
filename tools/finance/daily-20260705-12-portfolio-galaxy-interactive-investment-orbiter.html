@@ -1,0 +1,184 @@
+---
+layout: null
+title: "Portfolio Galaxy: Interactive Investment Orbiter"
+category: "Finance"
+description: "Visualize and interact with your investment portfolio as a dynamic galaxy, where each asset becomes a celestial body with gravity and movement based on its size, performance, and risk."
+permalink: "/tools/daily-20260705-12-portfolio-galaxy-interactive-investment-orbiter.html"
+generated_by: "api-true-ai"
+generated_date: "20260705"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Galaxy: Interactive Investment Orbiter | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize and interact with your investment portfolio as a dynamic galaxy, where each asset becomes a celestial body with gravity and movement based on its size, performance, and risk. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Portfolio Galaxy: Interactive Investment Orbiter | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize and interact with your investment portfolio as a dynamic galaxy, where each asset becomes a celestial body with gravity and movement based on its size, performance, and risk. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Portfolio Galaxy: Interactive Investment Orbiter | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize and interact with your investment portfolio as a dynamic galaxy, where each asset becomes a celestial body with gravity and movement based on its size, performance, and risk. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Portfolio Galaxy: Interactive Investment Orbiter</h1>
+    <p class="seo-subtitle">Visualize and interact with your investment portfolio as a dynamic galaxy, where each asset becomes a celestial body with gravity and movement based on its size, performance, and risk.</p>
+    <style>  
+body {  
+  margin: 0;  
+  background: radial-gradient(circle, #000428, #004e92);  
+  font-family: Arial, sans-serif;  
+  color: #ffffff;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 100vw;  
+  height: 100vh;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  position: relative;  
+}  
+canvas {  
+  display: block;  
+}  
+.info-panel {  
+  position: absolute;  
+  top: 10px;  
+  left: 10px;  
+  background: rgba(0, 0, 0, 0.7);  
+  padding: 10px 15px;  
+  border-radius: 8px;  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);  
+}  
+.info-panel h1 {  
+  font-size: 18px;  
+  margin: 0 0 10px;  
+}  
+.info-panel p {  
+  font-size: 14px;  
+  margin: 5px 0;  
+}  
+</style>  
+<div id="tool-app">  
+  <canvas id="portfolioCanvas"></canvas>  
+  <div class="info-panel">  
+    <h1>Portfolio Galaxy</h1>  
+    <p>Hover over orbs to explore your investments</p>  
+    <p id="assetInfo">Asset details will appear here.</p>  
+  </div>  
+</div>  
+<script>  
+const canvas = document.getElementById("portfolioCanvas");  
+const ctx = canvas.getContext("2d");  
+canvas.width = window.innerWidth;  
+canvas.height = window.innerHeight;  
+  
+const assets = [  
+  { name: "Stock A", value: 50, risk: 3, performance: 4 },  
+  { name: "Stock B", value: 80, risk: 2, performance: 5 },  
+  { name: "Crypto C", value: 30, risk: 7, performance: 9 },  
+  { name: "Bond D", value: 100, risk: 1, performance: 1 },  
+  { name: "ETF E", value: 60, risk: 4, performance: 6 }  
+];  
+  
+const orbs = [];  
+const G = 0.05;  
+  
+function init() {  
+  assets.forEach((asset, index) => {  
+    const angle = Math.random() * Math.PI * 2;  
+    const distance = Math.random() * 200 + 50;  
+    orbs.push({  
+      x: canvas.width / 2 + Math.cos(angle) * distance,  
+      y: canvas.height / 2 + Math.sin(angle) * distance,  
+      vx: Math.random() * 2 - 1,  
+      vy: Math.random() * 2 - 1,  
+      size: asset.value / 10,  
+      color: getColor(asset.risk),  
+      asset  
+    });  
+  });  
+}  
+  
+function getColor(risk) {  
+  const r = Math.min(255, Math.floor(risk * 30));  
+  const g = Math.max(0, 255 - risk * 30);  
+  return `rgb(${r},${g},100)`;  
+}  
+  
+function drawOrb(orb) {  
+  ctx.beginPath();  
+  ctx.arc(orb.x, orb.y, orb.size, 0, Math.PI * 2);  
+  ctx.fillStyle = orb.color;  
+  ctx.fill();  
+}  
+  
+function updateOrbs() {  
+  orbs.forEach((orb) => {  
+    const dx = canvas.width / 2 - orb.x;  
+    const dy = canvas.height / 2 - orb.y;  
+    const distance = Math.sqrt(dx * dx + dy * dy);  
+    const force = G * (orb.asset.value / distance);  
+    orb.vx += (dx / distance) * force;  
+    orb.vy += (dy / distance) * force;  
+    orb.x += orb.vx;  
+    orb.y += orb.vy;  
+  });  
+}  
+  
+function handleMouseMove(event) {  
+  const mouseX = event.clientX;  
+  const mouseY = event.clientY;  
+  let hoverAsset = null;  
+  
+  orbs.forEach(orb => {  
+    const dx = mouseX - orb.x;  
+    const dy = mouseY - orb.y;  
+    const distance = Math.sqrt(dx * dx + dy * dy);  
+    if (distance < orb.size) {  
+      hoverAsset = orb.asset;  
+    }  
+  });  
+  
+  const assetInfo = document.getElementById("assetInfo");  
+  if (hoverAsset) {  
+    assetInfo.innerHTML = `  
+      <strong>${hoverAsset.name}</strong><br>  
+      Value: $${hoverAsset.value}K<br>  
+      Risk: ${hoverAsset.risk}/10<br>  
+      Performance: ${hoverAsset.performance}/10  
+    `;  
+  } else {  
+    assetInfo.textContent = "Hover over orbs to explore your investments";  
+  }  
+}  
+  
+function animate() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  updateOrbs();  
+  orbs.forEach(drawOrb);  
+  requestAnimationFrame(animate);  
+}  
+  
+canvas.addEventListener("mousemove", handleMouseMove);  
+init();  
+animate();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

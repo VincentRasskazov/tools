@@ -1,0 +1,154 @@
+---
+layout: null
+title: "CodeMap Explorer"
+category: "Developer"
+description: "Navigate complex codebases visually by exploring interconnected files and functions in an interactive 3D space."
+permalink: "/tools/daily-20260705-07-codemap-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260705"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeMap Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate complex codebases visually by exploring interconnected files and functions in an interactive 3D space. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CodeMap Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate complex codebases visually by exploring interconnected files and functions in an interactive 3D space. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CodeMap Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate complex codebases visually by exploring interconnected files and functions in an interactive 3D space. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CodeMap Explorer</h1>
+    <p class="seo-subtitle">Navigate complex codebases visually by exploring interconnected files and functions in an interactive 3D space.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background-color: #1e1e2f;  
+  color: white;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  width: 90%;  
+  height: 90%;  
+  border: 2px solid #5c6ac4;  
+  border-radius: 10px;  
+  background: linear-gradient(135deg, #2e3264, #3a4080);  
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);  
+}  
+canvas {  
+  display: block;  
+}  
+</style>  
+<div id="tool-app">  
+  <canvas id="canvas"></canvas>  
+</div>  
+<script>  
+const canvas = document.getElementById('canvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = window.innerWidth * 0.85;  
+canvas.height = window.innerHeight * 0.85;  
+
+const nodes = [];  
+const edges = [];  
+
+function generateNodes() {  
+  for (let i = 0; i < 25; i++) {  
+    nodes.push({  
+      x: Math.random() * canvas.width,  
+      y: Math.random() * canvas.height,  
+      radius: 8,  
+      name: `File_${i}`,  
+    });  
+  }  
+}  
+
+function generateEdges() {  
+  for (let i = 0; i < nodes.length; i++) {  
+    let linkCount = Math.floor(Math.random() * 3) + 1;  
+    for (let j = 0; j < linkCount; j++) {  
+      edges.push({  
+        from: i,  
+        to: Math.floor(Math.random() * nodes.length),  
+      });  
+    }  
+  }  
+}  
+
+function drawNodes() {  
+  nodes.forEach((node) => {  
+    ctx.beginPath();  
+    ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);  
+    ctx.fillStyle = '#5c6ac4';  
+    ctx.fill();  
+    ctx.strokeStyle = '#ffffff';  
+    ctx.stroke();  
+    ctx.closePath();  
+  });  
+}  
+
+function drawEdges() {  
+  edges.forEach((edge) => {  
+    const fromNode = nodes[edge.from];  
+    const toNode = nodes[edge.to];  
+    ctx.beginPath();  
+    ctx.moveTo(fromNode.x, fromNode.y);  
+    ctx.lineTo(toNode.x, toNode.y);  
+    ctx.strokeStyle = '#ffffff88';  
+    ctx.stroke();  
+    ctx.closePath();  
+  });  
+}  
+
+function highlightNode(x, y) {  
+  nodes.forEach((node) => {  
+    if (  
+      Math.sqrt((x - node.x) ** 2 + (y - node.y) ** 2) <  
+      node.radius + 5  
+    ) {  
+      ctx.beginPath();  
+      ctx.arc(node.x, node.y, node.radius + 5, 0, Math.PI * 2);  
+      ctx.fillStyle = '#f56a79';  
+      ctx.fill();  
+      ctx.closePath();  
+    }  
+  });  
+}  
+
+canvas.addEventListener('mousemove', (e) => {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  drawEdges();  
+  drawNodes();  
+  highlightNode(e.offsetX, e.offsetY);  
+});  
+
+generateNodes();  
+generateEdges();  
+drawEdges();  
+drawNodes();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
