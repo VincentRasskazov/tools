@@ -1,0 +1,213 @@
+---
+layout: null
+title: "Dataflow Debugger: Real-Time Dependency Visualizer"
+category: "Developer"
+description: "Visualize, debug, and manipulate data dependencies in your code logic using an interactive drag-and-drop graph interface."
+permalink: "/tools/daily-20260706-12-dataflow-debugger-real-time-dependency-visualizer.html"
+generated_by: "api-true-ai"
+generated_date: "20260706"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dataflow Debugger: Real-Time Dependency Visualizer | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize, debug, and manipulate data dependencies in your code logic using an interactive drag-and-drop graph interface. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Dataflow Debugger: Real-Time Dependency Visualizer | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize, debug, and manipulate data dependencies in your code logic using an interactive drag-and-drop graph interface. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dataflow Debugger: Real-Time Dependency Visualizer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize, debug, and manipulate data dependencies in your code logic using an interactive drag-and-drop graph interface. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Dataflow Debugger: Real-Time Dependency Visualizer</h1>
+    <p class="seo-subtitle">Visualize, debug, and manipulate data dependencies in your code logic using an interactive drag-and-drop graph interface.</p>
+    <style>  
+body {  
+  font-family: 'Arial', sans-serif;  
+  background-color: #2b2b2b;  
+  color: #f0f0f0;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+
+#tool-app {  
+  width: 80vw;  
+  height: 80vh;  
+  background-color: #1e1e1e;  
+  border: 2px solid #444;  
+  border-radius: 10px;  
+  position: relative;  
+  display: flex;  
+  flex-direction: column;  
+}  
+
+#toolbar {  
+  padding: 10px;  
+  background-color: #333;  
+  display: flex;  
+  justify-content: space-between;  
+  align-items: center;  
+  border-bottom: 2px solid #444;  
+}  
+
+#canvas {  
+  flex: 1;  
+  position: relative;  
+  overflow: hidden;  
+  cursor: grab;  
+}  
+
+.node {  
+  position: absolute;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  width: 100px;  
+  height: 50px;  
+  background-color: #4caf50;  
+  color: white;  
+  border-radius: 5px;  
+  text-align: center;  
+  cursor: pointer;  
+}  
+
+.connection {  
+  position: absolute;  
+  background: white;  
+  width: 2px;  
+}  
+</style>  
+
+<div id="tool-app">  
+  <div id="toolbar">  
+    <button id="add-node">Add Node</button>  
+    <button id="clear-all">Clear All</button>  
+  </div>  
+  <div id="canvas"></div>  
+</div>  
+
+<script>  
+const app = document.querySelector("#tool-app");  
+const canvas = document.querySelector("#canvas");  
+const addNodeButton = document.querySelector("#add-node");  
+const clearAllButton = document.querySelector("#clear-all");  
+
+let nodes = [];  
+let connections = [];  
+
+let isDragging = false;  
+let currentNode = null;  
+let offsetX, offsetY;  
+
+function addNode(x = 100, y = 100) {  
+  const node = document.createElement("div");  
+  node.className = "node";  
+  node.style.left = x + "px";  
+  node.style.top = y + "px";  
+  node.textContent = "Node " + (nodes.length + 1);  
+
+  node.addEventListener("mousedown", startDrag);  
+  node.addEventListener("mouseup", endDrag);  
+  node.addEventListener("dblclick", handleNodeConnection);  
+
+  nodes.push(node);  
+  canvas.appendChild(node);  
+}  
+
+function handleNodeConnection(event) {  
+  event.stopPropagation();  
+  const target = event.target;  
+
+  if (!currentNode) {  
+    currentNode = target;  
+    target.style.backgroundColor = "#ff9800";  
+  } else {  
+    if (currentNode !== target) {  
+      connectNodes(currentNode, target);  
+    }  
+    currentNode.style.backgroundColor = "#4caf50";  
+    currentNode = null;  
+  }  
+}  
+
+function connectNodes(node1, node2) {  
+  const connection = document.createElement("div");  
+  connection.className = "connection";  
+
+  const node1Rect = node1.getBoundingClientRect();  
+  const node2Rect = node2.getBoundingClientRect();  
+
+  const x1 = node1Rect.left + node1Rect.width / 2;  
+  const y1 = node1Rect.top + node1Rect.height / 2;  
+  const x2 = node2Rect.left + node2Rect.width / 2;  
+  const y2 = node2Rect.top + node2Rect.height / 2;  
+
+  const length = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);  
+  const angle = Math.atan2(y2 - y1, x2 - x1) * (180 / Math.PI);  
+
+  connection.style.width = length + "px";  
+  connection.style.transform = `rotate(${angle}deg)`;  
+  connection.style.left = x1 + "px";  
+  connection.style.top = y1 + "px";  
+
+  connections.push(connection);  
+  canvas.appendChild(connection);  
+}  
+
+function startDrag(event) {  
+  isDragging = true;  
+  currentNode = event.target;  
+  offsetX = event.offsetX;  
+  offsetY = event.offsetY;  
+  document.addEventListener("mousemove", onDrag);  
+}  
+
+function onDrag(event) {  
+  if (!isDragging || !currentNode) return;  
+  const x = event.clientX - offsetX;  
+  const y = event.clientY - offsetY;  
+
+  currentNode.style.left = x + "px";  
+  currentNode.style.top = y + "px";  
+}  
+
+function endDrag() {  
+  isDragging = false;  
+  currentNode = null;  
+  document.removeEventListener("mousemove", onDrag);  
+}  
+
+addNodeButton.addEventListener("click", () => addNode());  
+
+clearAllButton.addEventListener("click", () => {  
+  nodes.forEach(node => canvas.removeChild(node));  
+  connections.forEach(conn => canvas.removeChild(conn));  
+  nodes = [];  
+  connections = [];  
+});  
+
+addNode();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

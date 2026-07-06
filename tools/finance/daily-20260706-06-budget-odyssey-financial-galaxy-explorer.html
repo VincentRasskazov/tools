@@ -1,0 +1,132 @@
+---
+layout: null
+title: "Budget Odyssey: Financial Galaxy Explorer"
+category: "Finance"
+description: "Navigate a dynamic galaxy where each planet represents a budget category, and make strategic decisions to optimize your financial trajectory."
+permalink: "/tools/daily-20260706-06-budget-odyssey-financial-galaxy-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260706"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Budget Odyssey: Financial Galaxy Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate a dynamic galaxy where each planet represents a budget category, and make strategic decisions to optimize your financial trajectory. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Budget Odyssey: Financial Galaxy Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate a dynamic galaxy where each planet represents a budget category, and make strategic decisions to optimize your financial trajectory. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Budget Odyssey: Financial Galaxy Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate a dynamic galaxy where each planet represents a budget category, and make strategic decisions to optimize your financial trajectory. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Budget Odyssey: Financial Galaxy Explorer</h1>
+    <p class="seo-subtitle">Navigate a dynamic galaxy where each planet represents a budget category, and make strategic decisions to optimize your financial trajectory.</p>
+    <style>  
+  body {  
+    font-family: Arial, sans-serif;  
+    background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);  
+    color: white;  
+    margin: 0;  
+    overflow: hidden;  
+  }  
+  #tool-app {  
+    position: relative;  
+    width: 100vw;  
+    height: 100vh;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+  }  
+  canvas {  
+    border: 2px solid white;  
+    background-color: black;  
+    border-radius: 8px;  
+  }  
+</style>  
+<div id="tool-app">  
+  <canvas id="galaxyCanvas" width="800" height="600"></canvas>  
+</div>  
+<script>  
+const canvas = document.getElementById('galaxyCanvas');  
+const ctx = canvas.getContext('2d');  
+
+let planets = [];  
+let budget = 1000;  
+let message = 'Click on planets to allocate your budget wisely!';  
+
+function Planet(x, y, name, budgetImpact) {  
+  this.x = x;  
+  this.y = y;  
+  this.radius = 30;  
+  this.name = name;  
+  this.budgetImpact = budgetImpact;  
+  this.color = `hsl(${Math.random() * 360}, 70%, 50%)`;  
+}  
+
+function initializePlanets() {  
+  planets = [  
+    new Planet(150, 200, 'Savings', 50),  
+    new Planet(400, 300, 'Investments', -100),  
+    new Planet(600, 150, 'Entertainment', -50),  
+    new Planet(700, 400, 'Emergency Fund', 70),  
+    new Planet(300, 450, 'Groceries', -30),  
+  ];  
+}  
+
+function drawGalaxy() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  ctx.fillStyle = 'white';  
+  ctx.font = '18px Arial';  
+  ctx.fillText(`Budget: $${budget}`, 20, 30);  
+  ctx.fillText(message, 20, 60);  
+
+  planets.forEach((planet) => {  
+    ctx.beginPath();  
+    ctx.arc(planet.x, planet.y, planet.radius, 0, Math.PI * 2);  
+    ctx.fillStyle = planet.color;  
+    ctx.fill();  
+    ctx.closePath();  
+
+    ctx.fillStyle = 'white';  
+    ctx.font = '14px Arial';  
+    ctx.fillText(planet.name, planet.x - planet.radius / 2, planet.y + 4);  
+  });  
+}  
+
+canvas.addEventListener('click', (e) => {  
+  const rect = canvas.getBoundingClientRect();  
+  const mouseX = e.clientX - rect.left;  
+  const mouseY = e.clientY - rect.top;  
+
+  planets.forEach((planet) => {  
+    const distance = Math.sqrt((mouseX - planet.x) ** 2 + (mouseY - planet.y) ** 2);  
+    if (distance < planet.radius) {  
+      budget += planet.budgetImpact;  
+      message = `Allocated to ${planet.name}! Budget impact: $${planet.budgetImpact}`;  
+      drawGalaxy();  
+    }  
+  });  
+});  
+
+initializePlanets();  
+drawGalaxy();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

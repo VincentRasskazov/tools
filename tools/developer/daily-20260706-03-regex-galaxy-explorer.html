@@ -1,0 +1,117 @@
+---
+layout: null
+title: "Regex Galaxy Explorer"
+category: "Developer"
+description: "Navigate a cosmic starfield of strings to visually test, debug, and refine your regular expressions in real time."
+permalink: "/tools/daily-20260706-03-regex-galaxy-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260706"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Galaxy Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate a cosmic starfield of strings to visually test, debug, and refine your regular expressions in real time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Regex Galaxy Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate a cosmic starfield of strings to visually test, debug, and refine your regular expressions in real time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Regex Galaxy Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate a cosmic starfield of strings to visually test, debug, and refine your regular expressions in real time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Regex Galaxy Explorer</h1>
+    <p class="seo-subtitle">Navigate a cosmic starfield of strings to visually test, debug, and refine your regular expressions in real time.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background-color: #0a0f29; color: #ffffff; margin: 0; overflow: hidden; }  
+  canvas { display: block; }  
+  #regex-controls { position: absolute; top: 10px; left: 10px; background: rgba(0, 0, 0, 0.7); padding: 15px; border-radius: 8px; }  
+  input, button { margin-top: 5px; padding: 8px; font-size: 16px; border: none; border-radius: 5px; }  
+  button { background-color: #1e90ff; color: #fff; cursor: pointer; }  
+  button:hover { background-color: #0078e7; }  
+</style>  
+<div id="regex-controls">  
+  <label for="regex-input">Enter Regex:</label><br>  
+  <input type="text" id="regex-input" placeholder="e.g., \\b\\w{5}\\b" /><br>  
+  <button id="test-regex">Test Regex</button>  
+  <button id="clear-regex">Clear</button>  
+  <p id="regex-feedback" style="margin-top: 10px; font-size: 14px;"></p>  
+</div>  
+<canvas id="starfield"></canvas>  
+<script>  
+const canvas = document.getElementById('starfield');  
+const ctx = canvas.getContext('2d');  
+canvas.width = window.innerWidth;  
+canvas.height = window.innerHeight;  
+
+// Star data  
+const stars = Array.from({ length: 200 }, () => ({  
+  x: Math.random() * canvas.width,  
+  y: Math.random() * canvas.height,  
+  text: generateRandomString(),  
+  matched: false,  
+}));  
+
+function generateRandomString() {  
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';  
+  return Array.from({ length: 5 + Math.floor(Math.random() * 6) })  
+    .map(() => chars[Math.floor(Math.random() * chars.length)])  
+    .join('');  
+}  
+
+function drawStars() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  for (const star of stars) {  
+    ctx.fillStyle = star.matched ? '#32CD32' : '#FFFFFF';  
+    ctx.beginPath();  
+    ctx.arc(star.x, star.y, 5, 0, Math.PI * 2);  
+    ctx.fill();  
+    ctx.font = '14px Arial';  
+    ctx.fillText(star.text, star.x + 8, star.y + 4);  
+  }  
+}  
+
+document.getElementById('test-regex').addEventListener('click', () => {  
+  const regexInput = document.getElementById('regex-input').value.trim();  
+  let regex;  
+  try {  
+    regex = new RegExp(regexInput);  
+    stars.forEach(star => {  
+      star.matched = regex.test(star.text);  
+    });  
+    document.getElementById('regex-feedback').textContent = 'Regex applied successfully!';  
+    document.getElementById('regex-feedback').style.color = '#32CD32';  
+  } catch (e) {  
+    document.getElementById('regex-feedback').textContent = 'Invalid regex! Please try again.';  
+    document.getElementById('regex-feedback').style.color = '#FF4500';  
+  }  
+  drawStars();  
+});  
+
+document.getElementById('clear-regex').addEventListener('click', () => {  
+  stars.forEach(star => (star.matched = false));  
+  document.getElementById('regex-input').value = '';  
+  document.getElementById('regex-feedback').textContent = '';  
+  drawStars();  
+});  
+
+drawStars();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

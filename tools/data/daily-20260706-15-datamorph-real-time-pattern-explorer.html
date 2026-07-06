@@ -1,0 +1,144 @@
+---
+layout: null
+title: "DataMorph: Real-Time Pattern Explorer"
+category: "Data"
+description: "Interactively uncover hidden patterns in large datasets using dynamic transformations and visual effects."
+permalink: "/tools/daily-20260706-15-datamorph-real-time-pattern-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260706"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataMorph: Real-Time Pattern Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Interactively uncover hidden patterns in large datasets using dynamic transformations and visual effects. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataMorph: Real-Time Pattern Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Interactively uncover hidden patterns in large datasets using dynamic transformations and visual effects. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataMorph: Real-Time Pattern Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Interactively uncover hidden patterns in large datasets using dynamic transformations and visual effects. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataMorph: Real-Time Pattern Explorer</h1>
+    <p class="seo-subtitle">Interactively uncover hidden patterns in large datasets using dynamic transformations and visual effects.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(135deg, #1a1a2e, #16213e);  
+  color: white;  
+  margin: 0;  
+  padding: 0;  
+}  
+#tool-app {  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  height: 100vh;  
+}  
+button {  
+  background-color: #0f4c75;  
+  color: white;  
+  border: none;  
+  padding: 10px 20px;  
+  margin: 10px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  transition: background-color 0.3s;  
+}  
+button:hover {  
+  background-color: #1b262c;  
+}  
+canvas {  
+  margin-top: 20px;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>DataMorph: Real-Time Pattern Explorer</h1>  
+  <p>Drag & drop your dataset (CSV, JSON) or use sample data below</p>  
+  <button id="load-sample">Load Sample Data</button>  
+  <button id="upload-data">Upload Your Data</button>  
+  <canvas id="visualizer" width="800" height="400"></canvas>  
+</div>  
+<script>  
+const canvas = document.getElementById('visualizer');  
+const ctx = canvas.getContext('2d');  
+
+let dataset = [];  
+
+document.getElementById('load-sample').addEventListener('click', () => {  
+  dataset = generateSampleData();  
+  renderVisualization(dataset);  
+});  
+
+document.getElementById('upload-data').addEventListener('click', () => {  
+  const input = document.createElement('input');  
+  input.type = 'file';  
+  input.accept = '.csv, .json';  
+  input.addEventListener('change', handleFileUpload);  
+  input.click();  
+});  
+
+function handleFileUpload(event) {  
+  const file = event.target.files[0];  
+  const reader = new FileReader();  
+  reader.onload = () => {  
+    try {  
+      dataset = parseData(reader.result, file.type);  
+      renderVisualization(dataset);  
+    } catch (error) {  
+      alert('Error parsing file. Please upload a valid CSV or JSON.');  
+    }  
+  };  
+  reader.readAsText(file);  
+}  
+
+function parseData(data, fileType) {  
+  if (fileType === 'application/json') {  
+    return JSON.parse(data);  
+  }  
+  if (fileType === 'text/csv') {  
+    return data.split('\n').map(row => row.split(','));  
+  }  
+  throw new Error('Unsupported file type');  
+}  
+
+function generateSampleData() {  
+  return Array.from({ length: 100 }, (_, i) => ({  
+    x: i,  
+    y: Math.sin(i / 10) * 50 + Math.random() * 10  
+  }));  
+}  
+
+function renderVisualization(data) {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  ctx.strokeStyle = '#0f4c75';  
+  ctx.beginPath();  
+  data.forEach((point, index) => {  
+    const x = (index / data.length) * canvas.width;  
+    const y = canvas.height / 2 - point.y;  
+    index === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);  
+  });  
+  ctx.stroke();  
+}  
+
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

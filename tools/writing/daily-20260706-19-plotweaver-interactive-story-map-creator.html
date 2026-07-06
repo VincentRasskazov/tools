@@ -1,0 +1,173 @@
+---
+layout: null
+title: "PlotWeaver: Interactive Story Map Creator"
+category: "Writing"
+description: "Create branching, interactive storylines with visual nodes, character arcs, and dynamic plot connections in real time."
+permalink: "/tools/daily-20260706-19-plotweaver-interactive-story-map-creator.html"
+generated_by: "api-true-ai"
+generated_date: "20260706"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PlotWeaver: Interactive Story Map Creator | Free Online Interactive Tool</title>
+  <meta name="description" content="Create branching, interactive storylines with visual nodes, character arcs, and dynamic plot connections in real time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PlotWeaver: Interactive Story Map Creator | Free Online Interactive Tool">
+  <meta property="og:description" content="Create branching, interactive storylines with visual nodes, character arcs, and dynamic plot connections in real time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PlotWeaver: Interactive Story Map Creator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Create branching, interactive storylines with visual nodes, character arcs, and dynamic plot connections in real time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PlotWeaver: Interactive Story Map Creator</h1>
+    <p class="seo-subtitle">Create branching, interactive storylines with visual nodes, character arcs, and dynamic plot connections in real time.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to right, #4b79a1, #283e51);  
+  color: #fff;  
+  margin: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  width: 80%;  
+  height: 90%;  
+  background: #ffffff11;  
+  border: 2px solid #fff;  
+  border-radius: 10px;  
+  overflow: hidden;  
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);  
+  display: flex;  
+  flex-direction: column;  
+}  
+#header {  
+  padding: 10px;  
+  background: #ffffff22;  
+  text-align: center;  
+  font-size: 1.5em;  
+  font-weight: bold;  
+}  
+#workspace {  
+  flex: 1;  
+  position: relative;  
+  cursor: grab;  
+  overflow: hidden;  
+}  
+.node {  
+  position: absolute;  
+  background: #ff5e57;  
+  color: #fff;  
+  padding: 10px;  
+  border-radius: 5px;  
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);  
+  cursor: pointer;  
+}  
+.node.selected {  
+  background: #57a0ff;  
+}  
+#controls {  
+  padding: 10px;  
+  background: #ffffff22;  
+  display: flex;  
+  justify-content: space-between;  
+}  
+button {  
+  background: #57a0ff;  
+  border: none;  
+  padding: 10px 20px;  
+  border-radius: 5px;  
+  color: white;  
+  font-size: 1em;  
+  cursor: pointer;  
+  transition: background 0.2s ease;  
+}  
+button:hover {  
+  background: #4b79a1;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="header">PlotWeaver: Interactive Story Map Creator</div>  
+  <div id="workspace"></div>  
+  <div id="controls">  
+    <button id="add-node">Add Node</button>  
+    <button id="clear-all">Clear All</button>  
+  </div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const app = document.getElementById('tool-app');  
+const workspace = document.getElementById('workspace');  
+const addNodeBtn = document.getElementById('add-node');  
+const clearAllBtn = document.getElementById('clear-all');  
+
+let nodeId = 0;  
+let isDragging = false;  
+let selectedNode = null;  
+
+// Add new node functionality  
+addNodeBtn.addEventListener('click', () => {  
+  const node = document.createElement('div');  
+  node.className = 'node';  
+  node.innerText = `Node ${++nodeId}`;  
+  node.style.left = `${Math.random() * (workspace.offsetWidth - 100)}px`;  
+  node.style.top = `${Math.random() * (workspace.offsetHeight - 50)}px`;  
+  node.setAttribute('draggable', false);  
+  workspace.appendChild(node);  
+  addNodeListeners(node);  
+});  
+
+// Clear all nodes functionality  
+clearAllBtn.addEventListener('click', () => {  
+  workspace.innerHTML = '';  
+  nodeId = 0;  
+});  
+
+// Add listeners for node interactions  
+function addNodeListeners(node) {  
+  node.addEventListener('mousedown', (e) => {  
+    selectedNode = node;  
+    isDragging = true;  
+    node.classList.add('selected');  
+  });  
+
+  node.addEventListener('mouseup', () => {  
+    isDragging = false;  
+    node.classList.remove('selected');  
+    selectedNode = null;  
+  });  
+}  
+
+// Workspace mousemove event for dragging nodes  
+workspace.addEventListener('mousemove', (e) => {  
+  if (isDragging && selectedNode) {  
+    const rect = workspace.getBoundingClientRect();  
+    const x = e.clientX - rect.left;  
+    const y = e.clientY - rect.top;  
+    selectedNode.style.left = `${x - selectedNode.offsetWidth / 2}px`;  
+    selectedNode.style.top = `${y - selectedNode.offsetHeight / 2}px`;  
+  }  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

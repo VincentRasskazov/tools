@@ -1,0 +1,121 @@
+---
+layout: null
+title: "ChronoCanvas: Interactive Time Mapping"
+category: "Productivity"
+description: "A dynamic, drag-and-drop visual scheduler that lets users \"paint\" their day with tasks, instantly calculating productivity scores based on activity balance."
+permalink: "/tools/daily-20260706-11-chronocanvas-interactive-time-mapping.html"
+generated_by: "api-true-ai"
+generated_date: "20260706"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChronoCanvas: Interactive Time Mapping | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, drag-and-drop visual scheduler that lets users &quot;paint&quot; their day with tasks, instantly calculating productivity scores based on activity balance. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="ChronoCanvas: Interactive Time Mapping | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, drag-and-drop visual scheduler that lets users &quot;paint&quot; their day with tasks, instantly calculating productivity scores based on activity balance. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ChronoCanvas: Interactive Time Mapping | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, drag-and-drop visual scheduler that lets users &quot;paint&quot; their day with tasks, instantly calculating productivity scores based on activity balance. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>ChronoCanvas: Interactive Time Mapping</h1>
+    <p class="seo-subtitle">A dynamic, drag-and-drop visual scheduler that lets users &quot;paint&quot; their day with tasks, instantly calculating productivity scores based on activity balance.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; }  
+  #tool-app { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background: #f7f8fa; }  
+  .canvas-container { display: flex; flex-direction: column; align-items: center; border: 2px solid #ddd; border-radius: 10px; width: 80%; max-width: 600px; margin: 20px; background: #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }  
+  .task-palette { display: flex; justify-content: center; padding: 10px; background: #eee; border-bottom: 2px solid #ddd; }  
+  .task { width: 80px; height: 30px; margin: 5px; text-align: center; line-height: 30px; border-radius: 5px; cursor: pointer; color: white; font-weight: bold; }  
+  .task.work { background: #4CAF50; }  
+  .task.break { background: #2196F3; }  
+  .task.study { background: #FF9800; }  
+  .task.exercise { background: #E91E63; }  
+  .time-row { display: flex; width: 100%; border-bottom: 1px solid #ddd; }  
+  .time-slot { flex: 1; height: 40px; border-right: 1px solid #ddd; position: relative; }  
+  .task-block { position: absolute; top: 0; bottom: 0; left: 0; right: 0; border-radius: 3px; }  
+  .status { padding: 10px; text-align: center; background: #fafafa; font-size: 14px; }  
+</style>  
+<div id="tool-app">  
+  <div class="canvas-container">  
+    <div class="task-palette">  
+      <div class="task work" draggable="true" ondragstart="drag(event)" data-task="work">Work</div>  
+      <div class="task break" draggable="true" ondragstart="drag(event)" data-task="break">Break</div>  
+      <div class="task study" draggable="true" ondragstart="drag(event)" data-task="study">Study</div>  
+      <div class="task exercise" draggable="true" ondragstart="drag(event)" data-task="exercise">Exercise</div>  
+    </div>  
+    <div id="time-grid">  
+      <!-- Time slots dynamically populated by script -->  
+    </div>  
+  </div>  
+  <div class="status" id="status">Drag tasks into the schedule to design your day!</div>  
+</div>  
+<script>  
+  const timeGrid = document.getElementById("time-grid");  
+  const status = document.getElementById("status");  
+  const hours = 12;  
+
+  // Create time slots dynamically  
+  for (let i = 0; i < hours; i++) {  
+    const row = document.createElement("div");  
+    row.className = "time-row";  
+
+    const timeSlot = document.createElement("div");  
+    timeSlot.className = "time-slot";  
+    timeSlot.setAttribute("ondrop", "drop(event)");  
+    timeSlot.setAttribute("ondragover", "allowDrop(event)");  
+
+    row.appendChild(timeSlot);  
+    timeGrid.appendChild(row);  
+  }  
+
+  let activityCounts = { work: 0, break: 0, study: 0, exercise: 0 };  
+
+  function allowDrop(event) {  
+    event.preventDefault();  
+  }  
+
+  function drag(event) {  
+    event.dataTransfer.setData("task", event.target.getAttribute("data-task"));  
+  }  
+
+  function drop(event) {  
+    event.preventDefault();  
+    const task = event.dataTransfer.getData("task");  
+    const taskBlock = document.createElement("div");  
+    taskBlock.className = `task-block ${task}`;  
+    event.target.innerHTML = "";  
+    event.target.appendChild(taskBlock);  
+    activityCounts[task]++;  
+    updateStatus();  
+  }  
+
+  function updateStatus() {  
+    const total = Object.values(activityCounts).reduce((a, b) => a + b, 0);  
+    const workRatio = (activityCounts.work / total) * 100 || 0;  
+    const breakRatio = (activityCounts.break / total) * 100 || 0;  
+    const studyRatio = (activityCounts.study / total) * 100 || 0;  
+    const exerciseRatio = (activityCounts.exercise / total) * 100 || 0;  
+
+    status.innerHTML = `Work: ${workRatio.toFixed(1)}%, Break: ${breakRatio.toFixed(1)}%, Study: ${studyRatio.toFixed(1)}%, Exercise: ${exerciseRatio.toFixed(1)}%`;  
+  }  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
