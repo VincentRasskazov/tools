@@ -1,0 +1,154 @@
+---
+layout: null
+title: "Synapse Sparks: Brain Circuit Builder"
+category: "Education"
+description: "A dynamic mini-game where users assemble neuron networks to simulate real-world brain functions and test their knowledge of neuroscience concepts."
+permalink: "/tools/daily-20260707-18-synapse-sparks-brain-circuit-builder.html"
+generated_by: "api-true-ai"
+generated_date: "20260707"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Synapse Sparks: Brain Circuit Builder | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic mini-game where users assemble neuron networks to simulate real-world brain functions and test their knowledge of neuroscience concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Synapse Sparks: Brain Circuit Builder | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic mini-game where users assemble neuron networks to simulate real-world brain functions and test their knowledge of neuroscience concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Synapse Sparks: Brain Circuit Builder | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic mini-game where users assemble neuron networks to simulate real-world brain functions and test their knowledge of neuroscience concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Synapse Sparks: Brain Circuit Builder</h1>
+    <p class="seo-subtitle">A dynamic mini-game where users assemble neuron networks to simulate real-world brain functions and test their knowledge of neuroscience concepts.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to bottom, #89CFF0, #E0FFFF);  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  background: #fff;  
+  border-radius: 8px;  
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);  
+  width: 90%;  
+  max-width: 700px;  
+  padding: 20px;  
+  text-align: center;  
+}  
+button {  
+  background-color: #4CAF50;  
+  color: white;  
+  padding: 10px 20px;  
+  border: none;  
+  border-radius: 8px;  
+  cursor: pointer;  
+  margin: 5px;  
+}  
+button:hover {  
+  background-color: #45a049;  
+}  
+.neuron {  
+  border: 2px solid #4CAF50;  
+  border-radius: 50%;  
+  width: 50px;  
+  height: 50px;  
+  display: inline-block;  
+  position: absolute;  
+  cursor: pointer;  
+}  
+.connection {  
+  position: absolute;  
+  background-color: #4CAF50;  
+  width: 2px;  
+  transform-origin: top left;  
+  z-index: -1;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Synapse Sparks: Brain Circuit Builder</h1>  
+  <p>Connect the neurons to form a functioning neural circuit. Understand concepts like synaptic transmission and brain pathways!</p>  
+  <button onclick="startGame()">Start Game</button>  
+  <button onclick="resetGame()">Reset</button>  
+  <div id="game-area" style="position: relative; height: 400px; margin-top: 20px;"></div>  
+</div>  
+<script>  
+const neurons = [];  
+const connections = [];  
+const gameArea = document.getElementById("game-area");  
+
+function startGame() {  
+  resetGame();  
+  for (let i = 0; i < 10; i++) {  
+    const neuron = document.createElement("div");  
+    neuron.className = "neuron";  
+    neuron.style.left = Math.random() * 90 + "%";  
+    neuron.style.top = Math.random() * 90 + "%";  
+    neuron.dataset.index = i;  
+    neuron.onclick = () => connectNeuron(neuron);  
+    gameArea.appendChild(neuron);  
+    neurons.push(neuron);  
+  }  
+}  
+
+function resetGame() {  
+  neurons.length = 0;  
+  connections.length = 0;  
+  gameArea.innerHTML = "";  
+}  
+
+function connectNeuron(neuron) {  
+  if (connections.length === 0 || connections[connections.length - 1].length === 2) {  
+    connections.push([neuron]);  
+  } else {  
+    connections[connections.length - 1].push(neuron);  
+    drawConnection(connections[connections.length - 1]);  
+  }  
+}  
+
+function drawConnection(connection) {  
+  if (connection.length !== 2) return;  
+  const [startNeuron, endNeuron] = connection;  
+  const line = document.createElement("div");  
+  const startRect = startNeuron.getBoundingClientRect();  
+  const endRect = endNeuron.getBoundingClientRect();  
+  const startX = startRect.left + startRect.width / 2;  
+  const startY = startRect.top + startRect.height / 2;  
+  const endX = endRect.left + endRect.width / 2;  
+  const endY = endRect.top + endRect.height / 2;  
+  const length = Math.sqrt((endX - startX) ** 2 + (endY - startY) ** 2);  
+  const angle = Math.atan2(endY - startY, endX - startX);  
+
+  line.className = "connection";  
+  line.style.height = length + "px";  
+  line.style.transform = `rotate(${angle}rad)`;  
+  line.style.left = startX + "px";  
+  line.style.top = startY + "px";  
+
+  gameArea.appendChild(line);  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

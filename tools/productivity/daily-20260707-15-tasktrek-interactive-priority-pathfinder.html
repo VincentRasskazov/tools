@@ -1,0 +1,162 @@
+---
+layout: null
+title: "TaskTrek: Interactive Priority Pathfinder"
+category: "Productivity"
+description: "A gamified tool where users visually navigate a maze of tasks, prioritizing and organizing their to-dos into an efficient path to productivity."
+permalink: "/tools/daily-20260707-15-tasktrek-interactive-priority-pathfinder.html"
+generated_by: "api-true-ai"
+generated_date: "20260707"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskTrek: Interactive Priority Pathfinder | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool where users visually navigate a maze of tasks, prioritizing and organizing their to-dos into an efficient path to productivity. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="TaskTrek: Interactive Priority Pathfinder | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool where users visually navigate a maze of tasks, prioritizing and organizing their to-dos into an efficient path to productivity. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TaskTrek: Interactive Priority Pathfinder | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool where users visually navigate a maze of tasks, prioritizing and organizing their to-dos into an efficient path to productivity. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>TaskTrek: Interactive Priority Pathfinder</h1>
+    <p class="seo-subtitle">A gamified tool where users visually navigate a maze of tasks, prioritizing and organizing their to-dos into an efficient path to productivity.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f9; color: #333; }  
+  #tool-app { display: flex; flex-direction: column; align-items: center; padding: 20px; }  
+  .maze-container { display: grid; grid-template-columns: repeat(5, 60px); gap: 10px; margin: 20px auto; }  
+  .cell { width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; border: 2px solid #ccc; background: #fff; cursor: pointer; }  
+  .cell.task { background: #ffdd57; border-color: #f5c518; }  
+  .cell.start { background: #4caf50; color: white; }  
+  .cell.end { background: #f44336; color: white; }  
+  .cell.visited { background: #9e9e9e; color: white; }  
+  .controls { margin-top: 10px; }  
+  .controls button { padding: 10px 20px; margin: 0 5px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }  
+  .controls button:disabled { background: #ccc; cursor: not-allowed; }  
+</style>  
+<div id="tool-app">  
+  <h1>TaskTrek: Interactive Priority Pathfinder</h1>  
+  <div class="maze-container" id="maze"></div>  
+  <div class="controls">  
+    <button id="start-btn">Start</button>  
+    <button id="reset-btn" disabled>Reset</button>  
+  </div>  
+</div>  
+<script>  
+  const app = document.querySelector('#maze');  
+  const size = 5; // 5x5 grid  
+  const tasks = [  
+    { task: 'Email', priority: 3 },  
+    { task: 'Presentation', priority: 5 },  
+    { task: 'Code Review', priority: 4 },  
+    { task: 'Meeting', priority: 2 },  
+    { task: 'Research', priority: 1 }  
+  ];  
+  let visitedCells = [];  
+  let currentPosition = { x: 0, y: 0 };  
+  let taskOrder = [];  
+
+  function createMaze() {  
+    app.innerHTML = '';  
+    visitedCells = [];  
+    currentPosition = { x: 0, y: 0 };  
+    taskOrder = [];  
+
+    for (let y = 0; y < size; y++) {  
+      for (let x = 0; x < size; x++) {  
+        const cell = document.createElement('div');  
+        cell.classList.add('cell');  
+        cell.dataset.x = x;  
+        cell.dataset.y = y;  
+
+        if (x === 0 && y === 0) {  
+          cell.classList.add('start');  
+          cell.textContent = 'Start';  
+        } else if (x === size - 1 && y === size - 1) {  
+          cell.classList.add('end');  
+          cell.textContent = 'End';  
+        } else if (Math.random() < 0.3) {  
+          const task = tasks[Math.floor(Math.random() * tasks.length)];  
+          cell.classList.add('task');  
+          cell.textContent = `${task.task}`;  
+          cell.dataset.priority = task.priority;  
+        }  
+
+        app.appendChild(cell);  
+      }  
+    }  
+  }  
+
+  function moveToCell(x, y) {  
+    const cells = document.querySelectorAll('.cell');  
+    const targetCell = [...cells].find(  
+      (cell) => parseInt(cell.dataset.x) === x && parseInt(cell.dataset.y) === y  
+    );  
+
+    if (targetCell && !visitedCells.includes(targetCell)) {  
+      visitedCells.push(targetCell);  
+      targetCell.classList.add('visited');  
+
+      if (targetCell.classList.contains('task')) {  
+        taskOrder.push({  
+          task: targetCell.textContent,  
+          priority: targetCell.dataset.priority  
+        });  
+      }  
+    }  
+  }  
+
+  document.querySelector('#start-btn').addEventListener('click', () => {  
+    document.querySelector('#reset-btn').disabled = false;  
+    moveToCell(0, 0);  
+    alert('Navigate through the grid by clicking on cells to collect tasks!');  
+  });  
+
+  document.querySelector('#reset-btn').addEventListener('click', () => {  
+    createMaze();  
+    document.querySelector('#reset-btn').disabled = true;  
+  });  
+
+  app.addEventListener('click', (e) => {  
+    const x = parseInt(e.target.dataset.x);  
+    const y = parseInt(e.target.dataset.y);  
+
+    if (  
+      Math.abs(currentPosition.x - x) + Math.abs(currentPosition.y - y) === 1  
+    ) {  
+      currentPosition = { x, y };  
+      moveToCell(x, y);  
+
+      if (x === size - 1 && y === size - 1) {  
+        alert(  
+          `Congratulations! You've completed the path! Task Order: ${taskOrder  
+            .sort((a, b) => b.priority - a.priority)  
+            .map(t => `${t.task} (Priority: ${t.priority})`)  
+            .join(', ')}`  
+        );  
+        document.querySelector('#reset-btn').disabled = true;  
+      }  
+    }  
+  });  
+
+  createMaze();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

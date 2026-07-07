@@ -1,0 +1,202 @@
+---
+layout: null
+title: "TaskFlow Tetris"
+category: "Productivity"
+description: "A gamified interactive mini-tool where you organize falling \"task blocks\" into a timeline grid, optimizing your daily schedule while balancing priorities and deadlines."
+permalink: "/tools/daily-20260707-23-taskflow-tetris.html"
+generated_by: "api-true-ai"
+generated_date: "20260707"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskFlow Tetris | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified interactive mini-tool where you organize falling &quot;task blocks&quot; into a timeline grid, optimizing your daily schedule while balancing priorities and deadlines. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="TaskFlow Tetris | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified interactive mini-tool where you organize falling &quot;task blocks&quot; into a timeline grid, optimizing your daily schedule while balancing priorities and deadlines. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TaskFlow Tetris | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified interactive mini-tool where you organize falling &quot;task blocks&quot; into a timeline grid, optimizing your daily schedule while balancing priorities and deadlines. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>TaskFlow Tetris</h1>
+    <p class="seo-subtitle">A gamified interactive mini-tool where you organize falling &quot;task blocks&quot; into a timeline grid, optimizing your daily schedule while balancing priorities and deadlines.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f3f4f6; display: flex; align-items: center; justify-content: center; height: 100vh; }  
+#tool-app { width: 400px; height: 600px; background: #fff; border-radius: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); overflow: hidden; position: relative; }  
+header { background: #4caf50; color: white; padding: 10px 20px; text-align: center; font-size: 1.2em; }  
+canvas { display: block; background: #e0e0e0; margin: 10px auto; border: 2px solid #4caf50; }  
+#task-info { padding: 10px; text-align: center; color: #555; font-size: 0.9em; }  
+</style>  
+<div id="tool-app">  
+  <header>TaskFlow Tetris</header>  
+  <canvas id="gameCanvas" width="300" height="400"></canvas>  
+  <div id="task-info">Organize tasks efficiently to earn productivity points!</div>  
+</div>  
+<script>  
+const canvas = document.getElementById('gameCanvas');  
+const ctx = canvas.getContext('2d');  
+const grid = [];  
+const rows = 20;  
+const cols = 10;  
+const blockSize = 20;  
+const colors = ['#ff7043', '#29b6f6', '#ab47bc', '#7e57c2', '#66bb6a'];  
+let currentBlock, score = 0;  
+  
+class Block {  
+  constructor() {  
+    this.x = Math.floor(cols / 2) - 1;  
+    this.y = 0;  
+    this.shape = this.getRandomShape();  
+    this.color = colors[Math.floor(Math.random() * colors.length)];  
+  }  
+  
+  getRandomShape() {  
+    const shapes = [  
+      [[1, 1, 1], [0, 1, 0]], // T  
+      [[1, 1], [1, 1]],       // Square  
+      [[1, 1, 1, 1]],         // Line  
+      [[0, 1, 1], [1, 1, 0]], // Z  
+      [[1, 1, 0], [0, 1, 1]]  // S  
+    ];  
+    return shapes[Math.floor(Math.random() * shapes.length)];  
+  }  
+  
+  rotate() {  
+    this.shape = this.shape[0].map((_, i) => this.shape.map(row => row[i]).reverse());  
+  }  
+}  
+  
+function initGrid() {  
+  for (let r = 0; r < rows; r++) {  
+    grid[r] = Array(cols).fill(0);  
+  }  
+}  
+  
+function drawGrid() {  
+  for (let r = 0; r < rows; r++) {  
+    for (let c = 0; c < cols; c++) {  
+      ctx.fillStyle = grid[r][c] || '#e0e0e0';  
+      ctx.fillRect(c * blockSize, r * blockSize, blockSize - 1, blockSize - 1);  
+    }  
+  }  
+}  
+  
+function drawBlock(block) {  
+  ctx.fillStyle = block.color;  
+  block.shape.forEach((row, r) => {  
+    row.forEach((cell, c) => {  
+      if (cell) {  
+        ctx.fillRect((block.x + c) * blockSize, (block.y + r) * blockSize, blockSize - 1, blockSize - 1);  
+      }  
+    });  
+  });  
+}  
+  
+function moveBlockDown() {  
+  clearBlock(currentBlock);  
+  currentBlock.y++;  
+  if (collision()) {  
+    currentBlock.y--;  
+    mergeBlock(currentBlock);  
+    clearRows();  
+    currentBlock = new Block();  
+    if (collision()) {  
+      alert('Game Over! Final Score: ' + score);  
+      initGrid();  
+      score = 0;  
+    }  
+  }  
+  drawGrid();  
+  drawBlock(currentBlock);  
+}  
+  
+function clearBlock(block) {  
+  block.shape.forEach((row, r) => {  
+    row.forEach((cell, c) => {  
+      if (cell) {  
+        let y = block.y + r;  
+        let x = block.x + c;  
+        if (y >= 0 && x >= 0 && x < cols && y < rows) {  
+          grid[y][x] = 0;  
+        }  
+      }  
+    });  
+  });  
+}  
+  
+function collision() {  
+  return currentBlock.shape.some((row, r) => {  
+    return row.some((cell, c) => {  
+      if (cell) {  
+        let y = currentBlock.y + r;  
+        let x = currentBlock.x + c;  
+        return y >= rows || x < 0 || x >= cols || (y >= 0 && grid[y][x]);  
+      }  
+      return false;  
+    });  
+  });  
+}  
+  
+function mergeBlock(block) {  
+  block.shape.forEach((row, r) => {  
+    row.forEach((cell, c) => {  
+      if (cell) {  
+        grid[block.y + r][block.x + c] = block.color;  
+      }  
+    });  
+  });  
+}  
+  
+function clearRows() {  
+  for (let r = rows - 1; r >= 0; r--) {  
+    if (grid[r].every(cell => cell)) {  
+      grid.splice(r, 1);  
+      grid.unshift(Array(cols).fill(0));  
+      score += 100;  
+      document.getElementById('task-info').textContent = `Score: ${score}`;  
+    }  
+  }  
+}  
+  
+document.addEventListener('keydown', e => {  
+  clearBlock(currentBlock);  
+  if (e.key === 'ArrowLeft') currentBlock.x--;  
+  if (e.key === 'ArrowRight') currentBlock.x++;  
+  if (e.key === 'ArrowUp') currentBlock.rotate();  
+  if (e.key === 'ArrowDown') moveBlockDown();  
+  if (collision()) {  
+    if (e.key === 'ArrowLeft') currentBlock.x++;  
+    if (e.key === 'ArrowRight') currentBlock.x--;  
+    if (e.key === 'ArrowUp') currentBlock.rotate();  
+  }  
+  drawGrid();  
+  drawBlock(currentBlock);  
+});  
+  
+initGrid();  
+currentBlock = new Block();  
+setInterval(moveBlockDown, 500);  
+drawGrid();  
+drawBlock(currentBlock);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
