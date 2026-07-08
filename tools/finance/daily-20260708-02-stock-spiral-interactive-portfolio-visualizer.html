@@ -1,0 +1,145 @@
+---
+layout: null
+title: "Stock Spiral: Interactive Portfolio Visualizer"
+category: "Finance"
+description: "A dynamic spiral visualizer that maps your stock portfolio's performance over time, with interactive nodes revealing insights like gains, losses, and diversification metrics."
+permalink: "/tools/daily-20260708-02-stock-spiral-interactive-portfolio-visualizer.html"
+generated_by: "api-true-ai"
+generated_date: "20260708"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Spiral: Interactive Portfolio Visualizer | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic spiral visualizer that maps your stock portfolio's performance over time, with interactive nodes revealing insights like gains, losses, and diversification metrics. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Stock Spiral: Interactive Portfolio Visualizer | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic spiral visualizer that maps your stock portfolio's performance over time, with interactive nodes revealing insights like gains, losses, and diversification metrics. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Stock Spiral: Interactive Portfolio Visualizer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic spiral visualizer that maps your stock portfolio's performance over time, with interactive nodes revealing insights like gains, losses, and diversification metrics. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Stock Spiral: Interactive Portfolio Visualizer</h1>
+    <p class="seo-subtitle">A dynamic spiral visualizer that maps your stock portfolio's performance over time, with interactive nodes revealing insights like gains, losses, and diversification metrics.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: #1e1e2e;  
+  color: #f8f8f2;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  position: relative;  
+  width: 80vw;  
+  height: 80vh;  
+  border-radius: 50%;  
+  background: radial-gradient(circle, #44475a, #282a36);  
+  overflow: hidden;  
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);  
+}  
+.node {  
+  position: absolute;  
+  width: 20px;  
+  height: 20px;  
+  background: #ff5555;  
+  border-radius: 50%;  
+  cursor: pointer;  
+  transition: transform 0.2s, background 0.3s;  
+}  
+.node:hover {  
+  transform: scale(1.5);  
+  background: #50fa7b;  
+}  
+.tooltip {  
+  position: absolute;  
+  padding: 8px;  
+  background: rgba(0, 0, 0, 0.8);  
+  color: #f8f8f2;  
+  border-radius: 5px;  
+  font-size: 14px;  
+  visibility: hidden;  
+  white-space: nowrap;  
+  pointer-events: none;  
+  z-index: 10;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="tooltip" class="tooltip"></div>  
+</div>  
+<script>  
+// JavaScript logic for Stock Spiral  
+const toolApp = document.getElementById('tool-app');  
+const tooltip = document.getElementById('tooltip');  
+
+// Sample stock portfolio data  
+const portfolio = [  
+  { name: 'AAPL', performance: 15, sector: 'Tech' },  
+  { name: 'GOOGL', performance: 10, sector: 'Tech' },  
+  { name: 'AMZN', performance: -5, sector: 'E-commerce' },  
+  { name: 'TSLA', performance: 20, sector: 'Auto' },  
+  { name: 'MSFT', performance: 12, sector: 'Tech' },  
+];  
+
+// Spiral layout settings  
+const centerX = toolApp.offsetWidth / 2;  
+const centerY = toolApp.offsetHeight / 2;  
+const spirals = 3;  
+const nodeDistance = 50;  
+
+// Create nodes dynamically  
+portfolio.forEach((stock, index) => {  
+  const angle = index * (Math.PI * 2 * spirals) / portfolio.length;  
+  const radius = nodeDistance + index * 20;  
+  const x = centerX + radius * Math.cos(angle);  
+  const y = centerY + radius * Math.sin(angle);  
+
+  const node = document.createElement('div');  
+  node.className = 'node';  
+  node.style.left = `${x}px`;  
+  node.style.top = `${y}px`;  
+  node.dataset.name = stock.name;  
+  node.dataset.performance = stock.performance;  
+  node.dataset.sector = stock.sector;  
+
+  node.addEventListener('mouseenter', (e) => {  
+    tooltip.style.visibility = 'visible';  
+    tooltip.style.left = `${e.pageX + 10}px`;  
+    tooltip.style.top = `${e.pageY - 10}px`;  
+    tooltip.innerHTML = `  
+      <strong>${stock.name}</strong><br>  
+      Performance: ${stock.performance}%<br>  
+      Sector: ${stock.sector}  
+    `;  
+  });  
+
+  node.addEventListener('mouseleave', () => {  
+    tooltip.style.visibility = 'hidden';  
+  });  
+
+  toolApp.appendChild(node);  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

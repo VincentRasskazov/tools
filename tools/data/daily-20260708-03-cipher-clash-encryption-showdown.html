@@ -1,0 +1,177 @@
+---
+layout: null
+title: "Cipher Clash: Encryption Showdown"
+category: "Data"
+description: "A dynamic mini-game where players decrypt strings under time pressure using various ciphers while learning cybersecurity principles."
+permalink: "/tools/daily-20260708-03-cipher-clash-encryption-showdown.html"
+generated_by: "api-true-ai"
+generated_date: "20260708"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cipher Clash: Encryption Showdown | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic mini-game where players decrypt strings under time pressure using various ciphers while learning cybersecurity principles. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Cipher Clash: Encryption Showdown | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic mini-game where players decrypt strings under time pressure using various ciphers while learning cybersecurity principles. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cipher Clash: Encryption Showdown | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic mini-game where players decrypt strings under time pressure using various ciphers while learning cybersecurity principles. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Cipher Clash: Encryption Showdown</h1>
+    <p class="seo-subtitle">A dynamic mini-game where players decrypt strings under time pressure using various ciphers while learning cybersecurity principles.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: #1e1e2e;  
+  color: #ffffff;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+}  
+#tool-app {  
+  text-align: center;  
+  max-width: 600px;  
+  padding: 20px;  
+  background: #242436;  
+  border: 2px solid #4a4a6a;  
+  border-radius: 12px;  
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);  
+}  
+#game-container {  
+  margin-top: 20px;  
+}  
+button {  
+  cursor: pointer;  
+  background-color: #4a4ae8;  
+  color: white;  
+  border: none;  
+  padding: 10px 20px;  
+  border-radius: 8px;  
+  font-size: 18px;  
+  margin: 10px;  
+}  
+button:hover {  
+  background-color: #6b6be8;  
+}  
+#ciphered-string {  
+  font-size: 20px;  
+  color: #d1d1ff;  
+  margin: 15px 0;  
+}  
+#time-left, #score {  
+  font-weight: bold;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Cipher Clash</h1>  
+  <p>Decode the string quickly to score high! Learn ciphers while racing against the clock.</p>  
+  <div id="game-container">  
+    <p id="ciphered-string"></p>  
+    <p>Time left: <span id="time-left">30</span> seconds</p>  
+    <p>Score: <span id="score">0</span></p>  
+    <input type="text" id="user-input" placeholder="Your answer..." />  
+    <button id="submit-btn">Submit</button>  
+    <button id="start-btn">Start Game</button>  
+  </div>  
+</div>  
+<script>  
+const cipheredStringElement = document.getElementById("ciphered-string");  
+const timeLeftElement = document.getElementById("time-left");  
+const scoreElement = document.getElementById("score");  
+const userInputElement = document.getElementById("user-input");  
+const submitButton = document.getElementById("submit-btn");  
+const startButton = document.getElementById("start-btn");  
+
+let score = 0;  
+let timeLeft = 30;  
+let currentCipher = "";  
+let currentAnswer = "";  
+let timerInterval = null;  
+
+const ciphers = [  
+  { name: "Caesar Cipher", encode: (str) => str.replace(/[a-z]/g, (c) => String.fromCharCode(((c.charCodeAt(0) - 97 + 3) % 26) + 97)), decode: (str) => str.replace(/[a-z]/g, (c) => String.fromCharCode(((c.charCodeAt(0) - 97 - 3 + 26) % 26) + 97)) },  
+  { name: "Reverse Cipher", encode: (str) => str.split("").reverse().join(""), decode: (str) => str.split("").reverse().join("") },  
+  { name: "Atbash Cipher", encode: (str) => str.replace(/[a-z]/g, (c) => String.fromCharCode(122 - (c.charCodeAt(0) - 97))), decode: (str) => str.replace(/[a-z]/g, (c) => String.fromCharCode(122 - (c.charCodeAt(0) - 97))) }  
+];  
+
+function startGame() {  
+  score = 0;  
+  timeLeft = 30;  
+  scoreElement.textContent = score;  
+  timeLeftElement.textContent = timeLeft;  
+  startButton.disabled = true;  
+  submitButton.disabled = false;  
+  userInputElement.disabled = false;  
+  userInputElement.focus();  
+  generateCipher();  
+  timerInterval = setInterval(() => {  
+    timeLeft--;  
+    timeLeftElement.textContent = timeLeft;  
+    if (timeLeft <= 0) {  
+      endGame();  
+    }  
+  }, 1000);  
+}  
+
+function generateCipher() {  
+  const randomCipher = ciphers[Math.floor(Math.random() * ciphers.length)];  
+  currentCipher = randomCipher.name;  
+  const originalString = generateRandomString();  
+  currentAnswer = originalString;  
+  const encodedString = randomCipher.encode(originalString);  
+  cipheredStringElement.textContent = `${currentCipher}: ${encodedString}`;  
+}  
+
+function generateRandomString() {  
+  const characters = "abcdefghijklmnopqrstuvwxyz";  
+  let result = "";  
+  for (let i = 0; i < 5; i++) {  
+    result += characters.charAt(Math.floor(Math.random() * characters.length));  
+  }  
+  return result;  
+}  
+
+function checkAnswer() {  
+  const userAnswer = userInputElement.value.trim().toLowerCase();  
+  if (userAnswer === currentAnswer) {  
+    score += 10;  
+    scoreElement.textContent = score;  
+    userInputElement.value = "";  
+    generateCipher();  
+  }  
+}  
+
+function endGame() {  
+  clearInterval(timerInterval);  
+  startButton.disabled = false;  
+  submitButton.disabled = true;  
+  userInputElement.disabled = true;  
+  alert(`Time's up! Your final score: ${score}`);  
+}  
+
+startButton.addEventListener("click", startGame);  
+submitButton.addEventListener("click", checkAnswer);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
