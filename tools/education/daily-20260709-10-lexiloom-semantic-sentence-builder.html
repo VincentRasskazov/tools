@@ -1,0 +1,122 @@
+---
+layout: null
+title: "LexiLoom: Semantic Sentence Builder"
+category: "Education"
+description: "A gamified tool where users weave sentences by dragging and dropping word fragments, learning grammar, syntax, and semantics interactively."
+permalink: "/tools/daily-20260709-10-lexiloom-semantic-sentence-builder.html"
+generated_by: "api-true-ai"
+generated_date: "20260709"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LexiLoom: Semantic Sentence Builder | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool where users weave sentences by dragging and dropping word fragments, learning grammar, syntax, and semantics interactively. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="LexiLoom: Semantic Sentence Builder | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool where users weave sentences by dragging and dropping word fragments, learning grammar, syntax, and semantics interactively. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LexiLoom: Semantic Sentence Builder | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool where users weave sentences by dragging and dropping word fragments, learning grammar, syntax, and semantics interactively. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>LexiLoom: Semantic Sentence Builder</h1>
+    <p class="seo-subtitle">A gamified tool where users weave sentences by dragging and dropping word fragments, learning grammar, syntax, and semantics interactively.</p>
+    <style>  
+body { font-family: Arial, sans-serif; background: linear-gradient(to right, #74ebd5, #9face6); margin: 0; padding: 20px; color: #333; }  
+#tool-app { max-width: 800px; margin: 0 auto; background: #fff; border-radius: 8px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); padding: 20px; }  
+#word-pool, #sentence-builder { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }  
+.word { cursor: grab; display: inline-block; padding: 10px 15px; background: #f7f7f7; border-radius: 5px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); }  
+.word.dragging { opacity: 0.5; }  
+#sentence-output { font-weight: bold; font-size: 1.2em; color: #4CAF50; }  
+button { padding: 10px 15px; border: none; border-radius: 5px; background: #4CAF50; color: #fff; cursor: pointer; transition: background 0.3s; }  
+button:hover { background: #45A049; }  
+</style>  
+<div id="tool-app">  
+  <h1>LexiLoom: Semantic Sentence Builder</h1>  
+  <p>Drag and drop the word fragments to construct a valid and meaningful sentence. Learn grammar as you play!</p>  
+  <div id="word-pool">  
+    <!-- Word fragments will be dynamically inserted here -->  
+  </div>  
+  <div id="sentence-builder">  
+    <!-- Drop words here to form a sentence -->  
+  </div>  
+  <button id="check-sentence">Check Sentence</button>  
+  <p id="sentence-output"></p>  
+</div>  
+<script>  
+// Word fragments for the game  
+const wordFragments = ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog", "."];  
+const correctSentence = "The quick brown fox jumps over the lazy dog.";  
+  
+const wordPool = document.getElementById("word-pool");  
+const sentenceBuilder = document.getElementById("sentence-builder");  
+const sentenceOutput = document.getElementById("sentence-output");  
+const checkButton = document.getElementById("check-sentence");  
+  
+// Populate the word pool  
+function populateWordPool() {  
+  wordFragments.forEach(word => {  
+    const wordElement = document.createElement("div");  
+    wordElement.classList.add("word");  
+    wordElement.draggable = true;  
+    wordElement.textContent = word;  
+
+    // Drag events  
+    wordElement.addEventListener("dragstart", () => {  
+      wordElement.classList.add("dragging");  
+    });  
+    wordElement.addEventListener("dragend", () => {  
+      wordElement.classList.remove("dragging");  
+    });  
+    wordPool.appendChild(wordElement);  
+  });  
+}  
+  
+// Drag and drop functionality  
+sentenceBuilder.addEventListener("dragover", e => {  
+  e.preventDefault();  
+  const draggingElement = document.querySelector(".dragging");  
+  if (draggingElement) {  
+    sentenceBuilder.appendChild(draggingElement);  
+  }  
+});  
+  
+wordPool.addEventListener("dragover", e => {  
+  e.preventDefault();  
+  const draggingElement = document.querySelector(".dragging");  
+  if (draggingElement) {  
+    wordPool.appendChild(draggingElement);  
+  }  
+});  
+  
+// Check if the sentence is correct  
+checkButton.addEventListener("click", () => {  
+  const formedSentence = Array.from(sentenceBuilder.children).map(word => word.textContent).join(" ");  
+  if (formedSentence.trim() === correctSentence) {  
+    sentenceOutput.textContent = "Correct! Great job!";  
+  } else {  
+    sentenceOutput.textContent = "Not quite. Try again!";  
+  }  
+});  
+  
+populateWordPool();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

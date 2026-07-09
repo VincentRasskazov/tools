@@ -1,0 +1,198 @@
+---
+layout: null
+title: "Portfolio Jigsaw: Asset Allocation Visualizer"
+category: "Finance"
+description: "A dynamic drag-and-drop game where users build and balance an investment portfolio by piecing together asset \"jigsaw\" tiles based on risk, return, and diversification goals."
+permalink: "/tools/daily-20260709-05-portfolio-jigsaw-asset-allocation-visualizer.html"
+generated_by: "api-true-ai"
+generated_date: "20260709"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Jigsaw: Asset Allocation Visualizer | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic drag-and-drop game where users build and balance an investment portfolio by piecing together asset &quot;jigsaw&quot; tiles based on risk, return, and diversification goals. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Portfolio Jigsaw: Asset Allocation Visualizer | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic drag-and-drop game where users build and balance an investment portfolio by piecing together asset &quot;jigsaw&quot; tiles based on risk, return, and diversification goals. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Portfolio Jigsaw: Asset Allocation Visualizer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic drag-and-drop game where users build and balance an investment portfolio by piecing together asset &quot;jigsaw&quot; tiles based on risk, return, and diversification goals. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Portfolio Jigsaw: Asset Allocation Visualizer</h1>
+    <p class="seo-subtitle">A dynamic drag-and-drop game where users build and balance an investment portfolio by piecing together asset &quot;jigsaw&quot; tiles based on risk, return, and diversification goals.</p>
+    ```html
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #1e3c72, #2a5298);
+    color: white;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  #tool-app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  #game-board {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    width: 90%;
+    max-width: 720px;
+    border: 4px solid #fff;
+    background: #324a70;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  .tile {
+    width: 100%;
+    padding-top: 100%;
+    position: relative;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid white;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: grab;
+    user-select: none;
+    transition: transform 0.2s ease;
+  }
+  .tile:hover {
+    transform: scale(1.05);
+  }
+  .tile.dragging {
+    cursor: grabbing;
+    opacity: 0.7;
+  }
+  .tile-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    font-weight: bold;
+  }
+  #stats {
+    margin-top: 20px;
+    font-size: 1.2em;
+    text-align: center;
+  }
+</style>
+<div id="tool-app">
+  <div id="game-board"></div>
+  <div id="stats">
+    <p><strong>Risk:</strong> <span id="risk-score">0</span></p>
+    <p><strong>Diversification:</strong> <span id="diversification-score">0</span></p>
+    <p><strong>Return Potential:</strong> <span id="return-score">0</span></p>
+  </div>
+</div>
+<script>
+  const ASSETS = [
+    { type: "Stocks", risk: 8, diversification: 2, return: 9 },
+    { type: "Bonds", risk: 4, diversification: 3, return: 4 },
+    { type: "Real Estate", risk: 6, diversification: 4, return: 7 },
+    { type: "Commodities", risk: 7, diversification: 5, return: 6 },
+    { type: "Crypto", risk: 10, diversification: 1, return: 10 },
+    { type: "Cash", risk: 1, diversification: 1, return: 1 },
+  ];
+
+  const MAX_TILES = 12;
+  const gameBoard = document.getElementById("game-board");
+  const riskScoreEl = document.getElementById("risk-score");
+  const diversificationScoreEl = document.getElementById("diversification-score");
+  const returnScoreEl = document.getElementById("return-score");
+
+  const state = {
+    risk: 0,
+    diversification: 0,
+    return: 0,
+    tiles: [],
+  };
+
+  function createTile(asset) {
+    const tile = document.createElement("div");
+    tile.className = "tile";
+    tile.draggable = true;
+
+    const content = document.createElement("div");
+    content.className = "tile-content";
+    content.innerHTML = `<strong>${asset.type}</strong><br>Risk: ${asset.risk}<br>Return: ${asset.return}`;
+    tile.appendChild(content);
+
+    tile.addEventListener("dragstart", () => {
+      tile.classList.add("dragging");
+      tile.dataset.asset = JSON.stringify(asset);
+    });
+
+    tile.addEventListener("dragend", () => {
+      tile.classList.remove("dragging");
+    });
+
+    return tile;
+  }
+
+  function updateStats() {
+    state.risk = state.tiles.reduce((sum, tile) => sum + tile.risk, 0);
+    state.diversification = state.tiles.reduce((sum, tile) => sum + tile.diversification, 0);
+    state.return = state.tiles.reduce((sum, tile) => sum + tile.return, 0);
+
+    riskScoreEl.textContent = state.risk;
+    diversificationScoreEl.textContent = state.diversification;
+    returnScoreEl.textContent = state.return;
+  }
+
+  gameBoard.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    const draggingTile = document.querySelector(".dragging");
+    gameBoard.appendChild(draggingTile);
+  });
+
+  gameBoard.addEventListener("drop", (e) => {
+    const draggingTile = document.querySelector(".dragging");
+    const asset = JSON.parse(draggingTile.dataset.asset);
+
+    if (state.tiles.length < MAX_TILES) {
+      state.tiles.push(asset);
+      updateStats();
+    } else {
+      alert("You can't add more tiles!");
+    }
+  });
+
+  function initializeGame() {
+    state.tiles = [];
+    updateStats();
+
+    gameBoard.innerHTML = "";
+    ASSETS.forEach((asset) => {
+      const tile = createTile(asset);
+      gameBoard.appendChild(tile);
+    });
+  }
+
+  initializeGame();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

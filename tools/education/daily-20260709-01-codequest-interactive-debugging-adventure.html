@@ -1,0 +1,172 @@
+---
+layout: null
+title: "\"CodeQuest: Interactive Debugging Adventure\""
+category: "Education"
+description: "A gamified educational tool where users navigate through a virtual world by solving coding challenges and debugging errors to progress."
+permalink: "/tools/daily-20260709-01-codequest-interactive-debugging-adventure.html"
+generated_by: "api-true-ai"
+generated_date: "20260709"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>&quot;CodeQuest: Interactive Debugging Adventure&quot; | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified educational tool where users navigate through a virtual world by solving coding challenges and debugging errors to progress. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="&quot;CodeQuest: Interactive Debugging Adventure&quot; | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified educational tool where users navigate through a virtual world by solving coding challenges and debugging errors to progress. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="&quot;CodeQuest: Interactive Debugging Adventure&quot; | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified educational tool where users navigate through a virtual world by solving coding challenges and debugging errors to progress. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>&quot;CodeQuest: Interactive Debugging Adventure&quot;</h1>
+    <p class="seo-subtitle">A gamified educational tool where users navigate through a virtual world by solving coding challenges and debugging errors to progress.</p>
+    <style>
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);
+  color: white;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+#tool-app {
+  margin: 20px auto;
+  width: 80%;
+  max-width: 1000px;
+  background: #282c34;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+}
+#game-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+#output-terminal {
+  width: 100%;
+  background: black;
+  color: green;
+  font-family: monospace;
+  padding: 20px;
+  text-align: left;
+  height: 200px;
+  overflow-y: auto;
+  border-radius: 10px;
+  border: 1px solid #444;
+}
+#action-buttons {
+  display: flex;
+  gap: 10px;
+}
+button {
+  background: #61dafb;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #282c34;
+}
+button:hover {
+  background: #21a1f1;
+}
+</style>
+<div id="tool-app">
+  <h1>CodeQuest: Interactive Debugging Adventure</h1>
+  <div id="game-screen">
+    <div id="output-terminal">Welcome to CodeQuest! Solve the puzzles to progress. Type your commands below.</div>
+    <input id="user-input" type="text" placeholder="Type your code here..." style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #444;">
+    <div id="action-buttons">
+      <button id="submit-button">Run Code</button>
+      <button id="hint-button">Get Hint</button>
+      <button id="restart-button">Restart</button>
+    </div>
+  </div>
+</div>
+<script>
+const terminal = document.getElementById('output-terminal');
+const userInput = document.getElementById('user-input');
+const submitButton = document.getElementById('submit-button');
+const hintButton = document.getElementById('hint-button');
+const restartButton = document.getElementById('restart-button');
+
+let currentChallenge = 0;
+const challenges = [
+  { 
+    prompt: "Write a function to reverse the string 'CodeQuest'.",
+    solution: "function reverseString(str) { return str.split('').reverse().join(''); } reverseString('CodeQuest');",
+    hint: "Use split(), reverse(), and join() methods."
+  },
+  {
+    prompt: "Fix the error in the following code: \n let number = '42'; console.log(number.toUpperCase());",
+    solution: "let number = '42'; console.log(number);",
+    hint: "Remember: 'toUpperCase()' works on strings, not numeric strings."
+  },
+  {
+    prompt: "Write a loop to print numbers from 1 to 5.",
+    solution: "for (let i = 1; i <= 5; i++) { console.log(i); }",
+    hint: "A 'for' loop is ideal for this challenge."
+  }
+];
+
+function displayPrompt() {
+  const challenge = challenges[currentChallenge];
+  terminal.innerHTML = `Challenge ${currentChallenge + 1}: ${challenge.prompt}`;
+}
+
+function checkSolution() {
+  const userCode = userInput.value.trim();
+  const expectedCode = challenges[currentChallenge].solution.trim();
+  
+  if (userCode === expectedCode) {
+    terminal.innerHTML += "\nSuccess! Moving to the next challenge...";
+    currentChallenge++;
+    if (currentChallenge < challenges.length) {
+      displayPrompt();
+    } else {
+      terminal.innerHTML += "\n🎉 Congratulations! You've completed CodeQuest!";
+    }
+  } else {
+    terminal.innerHTML += "\nIncorrect. Try again.";
+  }
+  userInput.value = '';
+}
+
+function provideHint() {
+  terminal.innerHTML += `\nHint: ${challenges[currentChallenge].hint}`;
+}
+
+function restartGame() {
+  currentChallenge = 0;
+  displayPrompt();
+  terminal.innerHTML = "Welcome back to CodeQuest! Solve the puzzles to progress.";
+}
+
+submitButton.addEventListener('click', checkSolution);
+hintButton.addEventListener('click', provideHint);
+restartButton.addEventListener('click', restartGame);
+
+window.onload = displayPrompt;
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

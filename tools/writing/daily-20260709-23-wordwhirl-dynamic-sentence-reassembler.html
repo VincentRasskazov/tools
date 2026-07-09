@@ -1,0 +1,136 @@
+---
+layout: null
+title: "WordWhirl: Dynamic Sentence Reassembler"
+category: "Writing"
+description: "A sentence-shuffling mini-game where users reconstruct jumbled sentences within a time limit to sharpen their syntax and grammar skills."
+permalink: "/tools/daily-20260709-23-wordwhirl-dynamic-sentence-reassembler.html"
+generated_by: "api-true-ai"
+generated_date: "20260709"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordWhirl: Dynamic Sentence Reassembler | Free Online Interactive Tool</title>
+  <meta name="description" content="A sentence-shuffling mini-game where users reconstruct jumbled sentences within a time limit to sharpen their syntax and grammar skills. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="WordWhirl: Dynamic Sentence Reassembler | Free Online Interactive Tool">
+  <meta property="og:description" content="A sentence-shuffling mini-game where users reconstruct jumbled sentences within a time limit to sharpen their syntax and grammar skills. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WordWhirl: Dynamic Sentence Reassembler | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A sentence-shuffling mini-game where users reconstruct jumbled sentences within a time limit to sharpen their syntax and grammar skills. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>WordWhirl: Dynamic Sentence Reassembler</h1>
+    <p class="seo-subtitle">A sentence-shuffling mini-game where users reconstruct jumbled sentences within a time limit to sharpen their syntax and grammar skills.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: #f4f4f9; color: #333; text-align: center; margin: 0; padding: 20px; }  
+  h1 { color: #4CAF50; }  
+  #tool-app { max-width: 600px; margin: 0 auto; padding: 20px; background: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 8px; }  
+  #sentence-container { margin: 20px 0; }  
+  .word { display: inline-block; margin: 5px; padding: 10px; background: #e0e0e0; border-radius: 5px; cursor: pointer; }  
+  #reassembled { min-height: 40px; border: 2px dashed #ccc; padding: 10px; border-radius: 5px; margin-top: 20px; }  
+  .hidden { display: none; }  
+  #result { margin-top: 20px; font-weight: bold; }  
+  button { padding: 10px 20px; background: #4CAF50; border: none; color: #fff; border-radius: 5px; cursor: pointer; }  
+  button:hover { background: #45a049; }  
+</style>  
+<div id="tool-app">  
+  <h1>WordWhirl</h1>  
+  <p>Reassemble the sentence by dragging the words into the correct order!</p>  
+  <div id="sentence-container"></div>  
+  <div id="reassembled" ondrop="drop(event)" ondragover="allowDrop(event)">  
+    Drag words here in the correct order  
+  </div>  
+  <button onclick="checkSentence()">Check Sentence</button>  
+  <div id="result" class="hidden"></div>  
+</div>  
+<script>  
+const sentences = [  
+  "The quick brown fox jumps over the lazy dog.",  
+  "Learning to code is both challenging and rewarding.",  
+  "A journey of a thousand miles begins with a single step."  
+];  
+let currentSentence = "";  
+let shuffledWords = [];  
+
+function shuffleArray(array) {  
+  for (let i = array.length - 1; i > 0; i--) {  
+    const j = Math.floor(Math.random() * (i + 1));  
+    [array[i], array[j]] = [array[j], array[i]];  
+  }  
+  return array;  
+}  
+
+function setupGame() {  
+  const randomIndex = Math.floor(Math.random() * sentences.length);  
+  currentSentence = sentences[randomIndex];  
+  shuffledWords = shuffleArray(currentSentence.split(" "));  
+  
+  const sentenceContainer = document.getElementById("sentence-container");  
+  sentenceContainer.innerHTML = "";  
+  
+  shuffledWords.forEach((word, index) => {  
+    const wordElement = document.createElement("span");  
+    wordElement.textContent = word;  
+    wordElement.className = "word";  
+    wordElement.draggable = true;  
+    wordElement.id = `word-${index}`;  
+    wordElement.ondragstart = drag;  
+    sentenceContainer.appendChild(wordElement);  
+  });  
+  
+  document.getElementById("reassembled").innerHTML = "Drag words here in the correct order";  
+  document.getElementById("result").classList.add("hidden");  
+}  
+
+function allowDrop(event) {  
+  event.preventDefault();  
+}  
+
+function drag(event) {  
+  event.dataTransfer.setData("text", event.target.id);  
+}  
+
+function drop(event) {  
+  event.preventDefault();  
+  const wordId = event.dataTransfer.getData("text");  
+  const draggedWord = document.getElementById(wordId);  
+  event.target.appendChild(draggedWord);  
+}  
+
+function checkSentence() {  
+  const reassembled = Array.from(document.getElementById("reassembled").children)  
+    .map((child) => child.textContent)  
+    .join(" ");  
+  
+  const result = document.getElementById("result");  
+  if (reassembled === currentSentence) {  
+    result.textContent = "Correct! 🎉";  
+    result.style.color = "green";  
+  } else {  
+    result.textContent = "Incorrect. Try again! ❌";  
+    result.style.color = "red";  
+  }  
+  result.classList.remove("hidden");  
+}  
+
+setupGame();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

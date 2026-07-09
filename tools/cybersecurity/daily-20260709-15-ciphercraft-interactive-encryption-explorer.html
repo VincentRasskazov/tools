@@ -1,0 +1,154 @@
+---
+layout: null
+title: "CipherCraft: Interactive Encryption Explorer"
+category: "Cybersecurity"
+description: "A mini-game where users create and break custom ciphers while learning about real-world encryption techniques."
+permalink: "/tools/daily-20260709-15-ciphercraft-interactive-encryption-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260709"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CipherCraft: Interactive Encryption Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="A mini-game where users create and break custom ciphers while learning about real-world encryption techniques. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CipherCraft: Interactive Encryption Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="A mini-game where users create and break custom ciphers while learning about real-world encryption techniques. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CipherCraft: Interactive Encryption Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A mini-game where users create and break custom ciphers while learning about real-world encryption techniques. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CipherCraft: Interactive Encryption Explorer</h1>
+    <p class="seo-subtitle">A mini-game where users create and break custom ciphers while learning about real-world encryption techniques.</p>
+    <style>  
+  body {  
+    font-family: Arial, sans-serif;  
+    margin: 0;  
+    padding: 0;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+    background: linear-gradient(135deg, #2b5876, #4e4376);  
+    color: #fff;  
+  }  
+  #tool-app {  
+    background: #1e1e2f;  
+    border-radius: 10px;  
+    width: 90%;  
+    max-width: 600px;  
+    padding: 20px;  
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);  
+  }  
+  h1 {  
+    text-align: center;  
+  }  
+  .cipher-controls, .cipher-output {  
+    margin-top: 20px;  
+  }  
+  input, textarea, button, select {  
+    width: 100%;  
+    margin-top: 10px;  
+    padding: 10px;  
+    border: none;  
+    border-radius: 5px;  
+    outline: none;  
+    font-size: 1rem;  
+  }  
+  button {  
+    background: #4e4376;  
+    color: #fff;  
+    cursor: pointer;  
+    transition: background 0.2s ease-in-out;  
+  }  
+  button:hover {  
+    background: #2b5876;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h1>CipherCraft</h1>  
+  <div class="cipher-controls">  
+    <label for="cipher-method">Choose Cipher Method:</label>  
+    <select id="cipher-method">  
+      <option value="caesar">Caesar Cipher</option>  
+      <option value="substitution">Substitution Cipher</option>  
+      <option value="reverse">Reverse Cipher</option>  
+    </select>  
+    <label for="key-input">Enter Key (if applicable):</label>  
+    <input id="key-input" type="text" placeholder="Enter key (e.g., 3 for Caesar)">  
+  </div>  
+  <div class="cipher-input">  
+    <label for="input-text">Enter Text to Encrypt:</label>  
+    <textarea id="input-text" rows="4" placeholder="Type your text here..."></textarea>  
+  </div>  
+  <button id="encrypt-btn">Encrypt Text</button>  
+  <div class="cipher-output">  
+    <label for="output-text">Encrypted Text:</label>  
+    <textarea id="output-text" rows="4" readonly></textarea>  
+  </div>  
+</div>  
+<script>  
+  document.getElementById('encrypt-btn').addEventListener('click', () => {  
+    const method = document.getElementById('cipher-method').value;  
+    const key = document.getElementById('key-input').value;  
+    const inputText = document.getElementById('input-text').value;  
+    let outputText = '';  
+  
+    if (method === 'caesar') {  
+      const shift = parseInt(key) || 0;  
+      outputText = inputText  
+        .split('')  
+        .map(char => {  
+          if (/[a-z]/i.test(char)) {  
+            const isUpperCase = char === char.toUpperCase();  
+            let charCode = char.toLowerCase().charCodeAt(0);  
+            charCode = ((charCode - 97 + shift) % 26) + 97;  
+            return isUpperCase  
+              ? String.fromCharCode(charCode).toUpperCase()  
+              : String.fromCharCode(charCode);  
+          }  
+          return char;  
+        })  
+        .join('');  
+    } else if (method === 'substitution') {  
+      const alphabet = 'abcdefghijklmnopqrstuvwxyz';  
+      const shuffled = key.toLowerCase();  
+      outputText = inputText  
+        .split('')  
+        .map(char => {  
+          if (/[a-z]/i.test(char)) {  
+            const isUpperCase = char === char.toUpperCase();  
+            const index = alphabet.indexOf(char.toLowerCase());  
+            const newChar = shuffled[index] || char;  
+            return isUpperCase ? newChar.toUpperCase() : newChar;  
+          }  
+          return char;  
+        })  
+        .join('');  
+    } else if (method === 'reverse') {  
+      outputText = inputText.split('').reverse().join('');  
+    }  
+  
+    document.getElementById('output-text').value = outputText;  
+  });  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

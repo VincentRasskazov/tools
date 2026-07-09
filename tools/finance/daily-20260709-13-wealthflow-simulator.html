@@ -1,0 +1,164 @@
+---
+layout: null
+title: "WealthFlow Simulator"
+category: "Finance"
+description: "An interactive tool that lets users simulate their financial decisions over time with branching \"choose-your-path\" scenarios to visualize the impact of spending, saving, and investing."
+permalink: "/tools/daily-20260709-13-wealthflow-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260709"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WealthFlow Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool that lets users simulate their financial decisions over time with branching &quot;choose-your-path&quot; scenarios to visualize the impact of spending, saving, and investing. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="WealthFlow Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool that lets users simulate their financial decisions over time with branching &quot;choose-your-path&quot; scenarios to visualize the impact of spending, saving, and investing. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WealthFlow Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool that lets users simulate their financial decisions over time with branching &quot;choose-your-path&quot; scenarios to visualize the impact of spending, saving, and investing. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>WealthFlow Simulator</h1>
+    <p class="seo-subtitle">An interactive tool that lets users simulate their financial decisions over time with branching &quot;choose-your-path&quot; scenarios to visualize the impact of spending, saving, and investing.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to bottom, #e3f2fd, #90caf9);  
+  color: #0d47a1;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  background: white;  
+  border-radius: 8px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
+  width: 90%;  
+  max-width: 600px;  
+  padding: 20px;  
+}  
+button {  
+  background: #64b5f6;  
+  color: white;  
+  border: none;  
+  border-radius: 5px;  
+  padding: 10px 20px;  
+  margin: 10px 5px;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+button:hover {  
+  background: #42a5f5;  
+}  
+.progress-bar {  
+  height: 20px;  
+  background: #bbdefb;  
+  border-radius: 10px;  
+  overflow: hidden;  
+  margin-bottom: 20px;  
+  position: relative;  
+}  
+.progress {  
+  height: 100%;  
+  background: #1e88e5;  
+  width: 0%;  
+  transition: width 0.5s;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>WealthFlow Simulator</h1>  
+  <div class="progress-bar">  
+    <div class="progress" id="progress"></div>  
+  </div>  
+  <div id="scenario"></div>  
+  <div id="choices"></div>  
+</div>  
+<script>  
+const scenarios = [  
+  {  
+    id: 1,  
+    text: "You received your first salary. What do you do?",  
+    choices: [  
+      { text: "Spend it all on a vacation", impact: { wealth: -30 } },  
+      { text: "Save 50% and invest the rest", impact: { wealth: +20 } },  
+      { text: "Spend 20% and save the rest", impact: { wealth: +10 } }  
+    ]  
+  },  
+  {  
+    id: 2,  
+    text: "Your car broke down. How do you handle it?",  
+    choices: [  
+      { text: "Buy a brand-new car on credit", impact: { wealth: -40 } },  
+      { text: "Repair the old car", impact: { wealth: -10 } },  
+      { text: "Use public transport for now", impact: { wealth: +5 } }  
+    ]  
+  },  
+  {  
+    id: 3,  
+    text: "You got a surprise bonus. How do you use it?",  
+    choices: [  
+      { text: "Invest in stocks", impact: { wealth: +30 } },  
+      { text: "Deposit in a savings account", impact: { wealth: +10 } },  
+      { text: "Buy luxury items", impact: { wealth: -20 } }  
+    ]  
+  }  
+];  
+
+let currentScenario = 0;  
+let wealth = 50;  
+
+function updateUI() {  
+  const scenarioContainer = document.getElementById("scenario");  
+  const choicesContainer = document.getElementById("choices");  
+  const progressBar = document.getElementById("progress");  
+
+  if (currentScenario >= scenarios.length) {  
+    scenarioContainer.innerHTML = `<h2>Simulation complete!</h2><p>Your final wealth score: ${wealth}</p>`;  
+    choicesContainer.innerHTML = "";  
+    return;  
+  }  
+
+  const scenario = scenarios[currentScenario];  
+  scenarioContainer.innerHTML = `<p>${scenario.text}</p>`;  
+  choicesContainer.innerHTML = "";  
+
+  scenario.choices.forEach((choice, index) => {  
+    const button = document.createElement("button");  
+    button.textContent = choice.text;  
+    button.onclick = () => {  
+      wealth += choice.impact.wealth;  
+      wealth = Math.max(0, Math.min(100, wealth));  
+      progressBar.style.width = `${wealth}%`;  
+      currentScenario++;  
+      updateUI();  
+    };  
+    choicesContainer.appendChild(button);  
+  });  
+}  
+
+updateUI();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
