@@ -1,0 +1,114 @@
+---
+layout: null
+title: "RegEx Quest: Pattern Adventure"
+category: "Developer"
+description: "An interactive game where developers solve regex puzzles to uncover hidden treasures in a dynamically generated map."
+permalink: "/tools/daily-20260710-05-regex-quest-pattern-adventure.html"
+generated_by: "api-true-ai"
+generated_date: "20260710"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RegEx Quest: Pattern Adventure | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive game where developers solve regex puzzles to uncover hidden treasures in a dynamically generated map. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="RegEx Quest: Pattern Adventure | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive game where developers solve regex puzzles to uncover hidden treasures in a dynamically generated map. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="RegEx Quest: Pattern Adventure | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive game where developers solve regex puzzles to uncover hidden treasures in a dynamically generated map. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>RegEx Quest: Pattern Adventure</h1>
+    <p class="seo-subtitle">An interactive game where developers solve regex puzzles to uncover hidden treasures in a dynamically generated map.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: #2e3b4e; color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }  
+  #tool-app { width: 90%; max-width: 800px; background: #1c2531; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); }  
+  h1 { text-align: center; margin-bottom: 10px; }  
+  .instructions { text-align: center; font-size: 14px; margin-bottom: 20px; }  
+  #game-board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }  
+  .tile { background: #34495e; color: white; border: 1px solid #5d6d7e; text-align: center; padding: 20px; border-radius: 5px; cursor: pointer; }  
+  .tile.active { background: #16a085; cursor: default; }  
+  .input-section { display: flex; justify-content: center; margin-top: 20px; }  
+  input[type="text"] { flex: 1; padding: 10px; border: 1px solid #5d6d7e; border-radius: 5px; margin-right: 10px; }  
+  button { padding: 10px 20px; background: #2980b9; color: white; border: none; border-radius: 5px; cursor: pointer; }  
+  button:hover { background: #3498db; }  
+  .result-message { text-align: center; margin-top: 10px; }  
+</style>  
+<div id="tool-app">  
+  <h1>RegEx Quest: Pattern Adventure</h1>  
+  <p class="instructions">Click tiles to reveal clues. Write a regex pattern to match the hidden word and unlock treasures!</p>  
+  <div id="game-board">  
+    <!-- Tiles dynamically populate here -->  
+  </div>  
+  <div class="input-section">  
+    <input type="text" id="regex-input" placeholder="Enter your regex pattern" />  
+    <button id="submit-button">Submit</button>  
+  </div>  
+  <p class="result-message" id="result-message"></p>  
+</div>  
+<script>  
+  const words = ["treasure", "adventure", "coding", "regex", "hidden", "map", "explorer", "patterns"];  
+  let activeWord = "";  
+  const tiles = [];  
+    
+  function generateBoard() {  
+    const board = document.getElementById("game-board");  
+    words.forEach((word, index) => {  
+      const tile = document.createElement("div");  
+      tile.className = "tile";  
+      tile.dataset.word = word;  
+      tile.textContent = `Tile ${index + 1}`;  
+      tile.onclick = () => revealTile(tile);  
+      tiles.push(tile);  
+      board.appendChild(tile);  
+    });  
+  }  
+    
+  function revealTile(tile) {  
+    if (tile.classList.contains("active")) return;  
+    activeWord = tile.dataset.word;  
+    tile.textContent = activeWord;  
+    tile.classList.add("active");  
+  }  
+    
+  document.getElementById("submit-button").addEventListener("click", () => {  
+    const regexInput = document.getElementById("regex-input").value;  
+    const resultMessage = document.getElementById("result-message");  
+    if (!activeWord) {  
+      resultMessage.textContent = "Click on a tile to reveal the hidden word!";  
+      return;  
+    }  
+    try {  
+      const regex = new RegExp(regexInput);  
+      if (regex.test(activeWord)) {  
+        resultMessage.textContent = `Success! You've matched "${activeWord}" with your regex!`;  
+      } else {  
+        resultMessage.textContent = `Incorrect! "${activeWord}" does not match your regex.`;  
+      }  
+    } catch (e) {  
+      resultMessage.textContent = "Invalid regex pattern! Try again.";  
+    }  
+  });  
+    
+  generateBoard();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

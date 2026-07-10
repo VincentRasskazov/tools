@@ -1,0 +1,153 @@
+---
+layout: null
+title: "Portfolio Puzzle Builder"
+category: "Finance"
+description: "A gamified tool that lets users create and balance a visual puzzle representation of their investment portfolio while dynamically adjusting risk and diversification metrics."
+permalink: "/tools/daily-20260710-12-portfolio-puzzle-builder.html"
+generated_by: "api-true-ai"
+generated_date: "20260710"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Puzzle Builder | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool that lets users create and balance a visual puzzle representation of their investment portfolio while dynamically adjusting risk and diversification metrics. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Portfolio Puzzle Builder | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool that lets users create and balance a visual puzzle representation of their investment portfolio while dynamically adjusting risk and diversification metrics. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Portfolio Puzzle Builder | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool that lets users create and balance a visual puzzle representation of their investment portfolio while dynamically adjusting risk and diversification metrics. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Portfolio Puzzle Builder</h1>
+    <p class="seo-subtitle">A gamified tool that lets users create and balance a visual puzzle representation of their investment portfolio while dynamically adjusting risk and diversification metrics.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to right, #283048, #859398);  
+  color: #fff;  
+  margin: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  width: 80%;  
+  max-width: 600px;  
+  padding: 20px;  
+  background: #2E2E3A;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);  
+}  
+#puzzle-container {  
+  display: grid;  
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));  
+  gap: 10px;  
+}  
+.puzzle-piece {  
+  border: 2px solid #fff;  
+  border-radius: 4px;  
+  background: #3A3A4A;  
+  color: #fff;  
+  font-size: 12px;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  cursor: grab;  
+}  
+#status-bar {  
+  margin-top: 20px;  
+  font-size: 14px;  
+  text-align: center;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Portfolio Puzzle Builder</h1>  
+  <p>Drag pieces to form a balanced portfolio. Aim for optimal risk and diversification!</p>  
+  <div id="puzzle-container">  
+    <!-- Puzzle pieces will be dynamically generated -->  
+  </div>  
+  <div id="status-bar">Risk: 0 | Diversification: 0%</div>  
+</div>  
+<script>  
+const app = document.getElementById('tool-app');  
+const puzzleContainer = document.getElementById('puzzle-container');  
+const statusBar = document.getElementById('status-bar');  
+
+const assets = [  
+  { name: 'Stocks', risk: 70, diversification: 30 },  
+  { name: 'Bonds', risk: 30, diversification: 60 },  
+  { name: 'Real Estate', risk: 50, diversification: 40 },  
+  { name: 'Crypto', risk: 90, diversification: 10 },  
+  { name: 'Commodities', risk: 60, diversification: 20 }  
+];  
+
+let riskTotal = 0;  
+let diversificationTotal = 0;  
+
+function updateStatus() {  
+  statusBar.innerText = `Risk: ${riskTotal} | Diversification: ${diversificationTotal}%`;  
+}  
+
+function createPuzzlePiece(asset) {  
+  const piece = document.createElement('div');  
+  piece.classList.add('puzzle-piece');  
+  piece.innerText = asset.name;  
+  piece.draggable = true;  
+  piece.dataset.risk = asset.risk;  
+  piece.dataset.diversification = asset.diversification;  
+
+  piece.addEventListener('dragstart', (e) => {  
+    e.dataTransfer.setData('text/plain', JSON.stringify(asset));  
+  });  
+
+  return piece;  
+}  
+
+function handleDrop(e) {  
+  e.preventDefault();  
+  const asset = JSON.parse(e.dataTransfer.getData('text/plain'));  
+
+  riskTotal += asset.risk;  
+  diversificationTotal += asset.diversification;  
+
+  const droppedPiece = createPuzzlePiece(asset);  
+  droppedPiece.draggable = false;  
+  puzzleContainer.appendChild(droppedPiece);  
+
+  updateStatus();  
+}  
+
+function handleDragOver(e) {  
+  e.preventDefault();  
+}  
+
+assets.forEach(asset => {  
+  puzzleContainer.appendChild(createPuzzlePiece(asset));  
+});  
+
+puzzleContainer.addEventListener('dragover', handleDragOver);  
+puzzleContainer.addEventListener('drop', handleDrop);  
+
+updateStatus();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

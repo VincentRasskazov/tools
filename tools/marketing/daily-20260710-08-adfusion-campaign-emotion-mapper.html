@@ -1,0 +1,189 @@
+---
+layout: null
+title: "AdFusion: Campaign Emotion Mapper"
+category: "Marketing"
+description: "An interactive mini-game that lets marketers design ad campaigns by visually blending graphics, colors, and emojis to match target audience emotions, while AI scores the emotional resonance of their designs."
+permalink: "/tools/daily-20260710-08-adfusion-campaign-emotion-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260710"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdFusion: Campaign Emotion Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive mini-game that lets marketers design ad campaigns by visually blending graphics, colors, and emojis to match target audience emotions, while AI scores the emotional resonance of their designs. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="AdFusion: Campaign Emotion Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive mini-game that lets marketers design ad campaigns by visually blending graphics, colors, and emojis to match target audience emotions, while AI scores the emotional resonance of their designs. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AdFusion: Campaign Emotion Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive mini-game that lets marketers design ad campaigns by visually blending graphics, colors, and emojis to match target audience emotions, while AI scores the emotional resonance of their designs. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>AdFusion: Campaign Emotion Mapper</h1>
+    <p class="seo-subtitle">An interactive mini-game that lets marketers design ad campaigns by visually blending graphics, colors, and emojis to match target audience emotions, while AI scores the emotional resonance of their designs.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: 'Arial', sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background-color: #f0f2f5;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  background: #ffffff;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+  padding: 20px;  
+  width: 80%;  
+  max-width: 600px;  
+  text-align: center;  
+}  
+#canvas {  
+  border: 1px solid #ddd;  
+  border-radius: 8px;  
+  width: 100%;  
+  height: 300px;  
+  margin-bottom: 15px;  
+  cursor: crosshair;  
+}  
+button {  
+  background-color: #007BFF;  
+  color: white;  
+  border: none;  
+  border-radius: 25px;  
+  padding: 10px 20px;  
+  cursor: pointer;  
+  margin: 5px;  
+  transition: background-color 0.2s;  
+}  
+button:hover {  
+  background-color: #0056b3;  
+}  
+.emotion-container {  
+  display: flex;  
+  justify-content: center;  
+  gap: 8px;  
+  margin-bottom: 15px;  
+}  
+.emotion {  
+  cursor: pointer;  
+  font-size: 24px;  
+}  
+</style>  
+<div id="tool-app">  
+  <canvas id="canvas"></canvas>  
+  <div class="emotion-container">  
+    <span class="emotion">😊</span>  
+    <span class="emotion">😢</span>  
+    <span class="emotion">😡</span>  
+    <span class="emotion">😮</span>  
+    <span class="emotion">😍</span>  
+  </div>  
+  <button id="analyze-button">Analyze Emotional Resonance</button>  
+  <div id="analysis-result"></div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById('canvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = canvas.offsetWidth;  
+canvas.height = canvas.offsetHeight;  
+
+let isDrawing = false;  
+let currentEmotion = '';  
+
+// Set up drawing  
+canvas.addEventListener('mousedown', () => isDrawing = true);  
+canvas.addEventListener('mouseup', () => isDrawing = false);  
+canvas.addEventListener('mousemove', draw);  
+function draw(e) {  
+  if (!isDrawing) return;  
+  ctx.fillStyle = currentEmotion ? getEmotionColor(currentEmotion) : '#000';  
+  ctx.beginPath();  
+  ctx.arc(e.offsetX, e.offsetY, 5, 0, Math.PI * 2);  
+  ctx.fill();  
+}  
+
+// Handle emotion selection  
+document.querySelectorAll('.emotion').forEach(el => {  
+  el.addEventListener('click', () => {  
+    currentEmotion = el.textContent;  
+    document.querySelectorAll('.emotion').forEach(em => em.style.border = '');  
+    el.style.border = '2px solid #007BFF';  
+  });  
+});  
+
+// Analyze emotional resonance  
+document.getElementById('analyze-button').addEventListener('click', () => {  
+  const analysisResult = analyzeCanvas(canvas);  
+  document.getElementById('analysis-result').textContent = `Emotional Resonance Score: ${analysisResult}`;  
+});  
+
+// Utility functions  
+function getEmotionColor(emotion) {  
+  const colors = {  
+    '😊': '#FFD700',  
+    '😢': '#1E90FF',  
+    '😡': '#FF4500',  
+    '😮': '#8A2BE2',  
+    '😍': '#FF69B4'  
+  };  
+  return colors[emotion] || '#000';  
+}  
+
+function analyzeCanvas(canvas) {  
+  const pixelData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;  
+  const colors = {  
+    'FFD700': '😊',  
+    '1E90FF': '😢',  
+    'FF4500': '😡',  
+    '8A2BE2': '😮',  
+    'FF69B4': '😍'  
+  };  
+  const emotionCounts = {};  
+
+  for (let i = 0; i < pixelData.length; i += 4) {  
+    const hexColor = rgbToHex(pixelData[i], pixelData[i + 1], pixelData[i + 2]);  
+    if (colors[hexColor]) {  
+      emotionCounts[colors[hexColor]] = (emotionCounts[colors[hexColor]] || 0) + 1;  
+    }  
+  }  
+
+  let maxEmotion = '';  
+  let maxCount = 0;  
+  for (const [emotion, count] of Object.entries(emotionCounts)) {  
+    if (count > maxCount) {  
+      maxEmotion = emotion;  
+      maxCount = count;  
+    }  
+  }  
+  return `${maxEmotion} (${Math.round((maxCount / (canvas.width * canvas.height)) * 100)}%)`;  
+}  
+
+function rgbToHex(r, g, b) {  
+  return [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('').toUpperCase();  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

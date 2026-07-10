@@ -1,0 +1,178 @@
+---
+layout: null
+title: "StoryWeaver: Interactive Narrative Builder"
+category: "Writing"
+description: "Craft, branch, and visualize complex storylines in real time with interactive drag-and-drop story nodes."
+permalink: "/tools/daily-20260710-14-storyweaver-interactive-narrative-builder.html"
+generated_by: "api-true-ai"
+generated_date: "20260710"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StoryWeaver: Interactive Narrative Builder | Free Online Interactive Tool</title>
+  <meta name="description" content="Craft, branch, and visualize complex storylines in real time with interactive drag-and-drop story nodes. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="StoryWeaver: Interactive Narrative Builder | Free Online Interactive Tool">
+  <meta property="og:description" content="Craft, branch, and visualize complex storylines in real time with interactive drag-and-drop story nodes. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StoryWeaver: Interactive Narrative Builder | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Craft, branch, and visualize complex storylines in real time with interactive drag-and-drop story nodes. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>StoryWeaver: Interactive Narrative Builder</h1>
+    <p class="seo-subtitle">Craft, branch, and visualize complex storylines in real time with interactive drag-and-drop story nodes.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);  
+}  
+#tool-app {  
+  width: 90%;  
+  height: 90%;  
+  background: #fff;  
+  border-radius: 15px;  
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);  
+  display: flex;  
+  flex-direction: column;  
+  overflow: hidden;  
+}  
+#toolbar {  
+  background: #4a90e2;  
+  color: #fff;  
+  padding: 10px;  
+  display: flex;  
+  justify-content: space-between;  
+  align-items: center;  
+}  
+#canvas {  
+  flex: 1;  
+  position: relative;  
+  overflow: auto;  
+  cursor: grab;  
+}  
+.story-node {  
+  position: absolute;  
+  background: #ffeaa7;  
+  border: 2px solid #fdcb6e;  
+  border-radius: 10px;  
+  padding: 15px;  
+  width: 150px;  
+  cursor: pointer;  
+  text-align: center;  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  
+  transition: transform 0.2s;  
+}  
+.story-node:hover {  
+  transform: scale(1.05);  
+}  
+.connection {  
+  position: absolute;  
+  stroke: #636e72;  
+  stroke-width: 2;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="toolbar">  
+    <button id="addNodeBtn">Add Node</button>  
+    <button id="saveStoryBtn">Save Story</button>  
+  </div>  
+  <div id="canvas"></div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById('canvas');  
+const addNodeBtn = document.getElementById('addNodeBtn');  
+const saveStoryBtn = document.getElementById('saveStoryBtn');  
+let nodeCount = 0;  
+let connections = [];  
+let isConnecting = false;  
+let fromNode = null;  
+
+function createNode(x, y) {  
+  const node = document.createElement('div');  
+  node.className = 'story-node';  
+  node.style.left = `${x}px`;  
+  node.style.top = `${y}px`;  
+  node.textContent = `Node ${++nodeCount}`;  
+  node.setAttribute('data-id', nodeCount);  
+  node.addEventListener('mousedown', (e) => startConnection(e, node));  
+  canvas.appendChild(node);  
+}  
+
+function drawConnection(fromNode, toNode) {  
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');  
+  const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');  
+  const fromRect = fromNode.getBoundingClientRect();  
+  const toRect = toNode.getBoundingClientRect();  
+  const startX = fromRect.left + fromRect.width / 2 + canvas.scrollLeft;  
+  const startY = fromRect.top + fromRect.height / 2 + canvas.scrollTop;  
+  const endX = toRect.left + toRect.width / 2 + canvas.scrollLeft;  
+  const endY = toRect.top + toRect.height / 2 + canvas.scrollTop;  
+
+  svg.className = 'connection';  
+  svg.style.position = 'absolute';  
+  svg.style.left = '0';  
+  svg.style.top = '0';  
+  svg.style.width = '100%';  
+  svg.style.height = '100%';  
+  line.setAttribute('x1', startX);  
+  line.setAttribute('y1', startY);  
+  line.setAttribute('x2', endX);  
+  line.setAttribute('y2', endY);  
+  svg.appendChild(line);  
+  canvas.appendChild(svg);  
+  connections.push({ from: fromNode, to: toNode });  
+}  
+
+function startConnection(e, node) {  
+  if (!isConnecting) {  
+    isConnecting = true;  
+    fromNode = node;  
+  } else {  
+    isConnecting = false;  
+    drawConnection(fromNode, node);  
+  }  
+}  
+
+canvas.addEventListener('dblclick', (e) => {  
+  createNode(e.offsetX, e.offsetY);  
+});  
+
+addNodeBtn.addEventListener('click', () => {  
+  createNode(50, 50);  
+});  
+
+saveStoryBtn.addEventListener('click', () => {  
+  const storyData = connections.map((conn) => ({  
+    from: conn.from.getAttribute('data-id'),  
+    to: conn.to.getAttribute('data-id'),  
+  }));  
+  alert(JSON.stringify(storyData, null, 2));  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
