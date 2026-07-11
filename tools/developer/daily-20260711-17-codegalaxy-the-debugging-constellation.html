@@ -1,0 +1,148 @@
+---
+layout: null
+title: "CodeGalaxy: The Debugging Constellation"
+category: "Developer"
+description: "Navigate a galaxy of interconnected code snippets to debug and optimize a virtual program in a visually immersive, gamified experience."
+permalink: "/tools/daily-20260711-17-codegalaxy-the-debugging-constellation.html"
+generated_by: "api-true-ai"
+generated_date: "20260711"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeGalaxy: The Debugging Constellation | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate a galaxy of interconnected code snippets to debug and optimize a virtual program in a visually immersive, gamified experience. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CodeGalaxy: The Debugging Constellation | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate a galaxy of interconnected code snippets to debug and optimize a virtual program in a visually immersive, gamified experience. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CodeGalaxy: The Debugging Constellation | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate a galaxy of interconnected code snippets to debug and optimize a virtual program in a visually immersive, gamified experience. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CodeGalaxy: The Debugging Constellation</h1>
+    <p class="seo-subtitle">Navigate a galaxy of interconnected code snippets to debug and optimize a virtual program in a visually immersive, gamified experience.</p>
+    <style>  
+body {  
+  margin: 0;  
+  font-family: Arial, sans-serif;  
+  background: radial-gradient(circle, #001f3f, #00122b);  
+  color: #ffffff;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  position: relative;  
+}  
+#galaxy-container {  
+  width: 90%;  
+  height: 90%;  
+  position: relative;  
+  border: 2px solid #00ffff;  
+  border-radius: 10px;  
+  overflow: hidden;  
+}  
+.node {  
+  position: absolute;  
+  width: 80px;  
+  height: 80px;  
+  background: linear-gradient(45deg, #ff5c5c, #ff9c5c);  
+  border: 2px solid #ffffff;  
+  border-radius: 50%;  
+  text-align: center;  
+  line-height: 80px;  
+  font-size: 14px;  
+  font-weight: bold;  
+  cursor: pointer;  
+  transition: transform 0.2s;  
+}  
+.node:hover {  
+  transform: scale(1.2);  
+}  
+#info-panel {  
+  position: absolute;  
+  bottom: 10px;  
+  left: 10px;  
+  padding: 15px;  
+  background: rgba(0, 0, 0, 0.8);  
+  border-radius: 5px;  
+  box-shadow: 0 0 10px #00ffff;  
+  color: #ffffff;  
+  font-size: 16px;  
+  max-width: 300px;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="galaxy-container"></div>  
+  <div id="info-panel">  
+    <strong>Instructions:</strong><br>  
+    Click on the nodes to debug the code snippets. Fix all issues to complete the galaxy!  
+  </div>  
+</div>  
+<script>  
+const app = document.getElementById('galaxy-container');  
+const infoPanel = document.getElementById('info-panel');  
+
+const nodes = [  
+  { id: 1, x: 20, y: 40, code: "let x = 10", error: "Add a semicolon.", fixed: false },  
+  { id: 2, x: 70, y: 20, code: "console.lg('Hello!')", error: "Fix the method name.", fixed: false },  
+  { id: 3, x: 50, y: 70, code: "if true { return 1; }", error: "Missing parentheses in 'if'.", fixed: false }  
+];  
+
+function renderNodes() {  
+  app.innerHTML = '';  
+  nodes.forEach(node => {  
+    const div = document.createElement('div');  
+    div.classList.add('node');  
+    div.style.left = `${node.x}%`;  
+    div.style.top = `${node.y}%`;  
+    div.textContent = `Node ${node.id}`;  
+    div.onclick = () => handleNodeClick(node);  
+    app.appendChild(div);  
+  });  
+}  
+
+function handleNodeClick(node) {  
+  if (node.fixed) {  
+    infoPanel.innerHTML = `<strong>Node ${node.id}:</strong> Already fixed!`;  
+    return;  
+  }  
+  const fix = prompt(`Node ${node.id} Code:\n"${node.code}"\n\nError: ${node.error}\n\nEnter the corrected code:`);  
+  if (fix && fix.trim() !== node.code) {  
+    node.fixed = true;  
+    infoPanel.innerHTML = `<strong>Node ${node.id}:</strong> Fixed!`;  
+    checkCompletion();  
+  } else {  
+    infoPanel.innerHTML = `<strong>Node ${node.id}:</strong> Not fixed. Try again!`;  
+  }  
+}  
+
+function checkCompletion() {  
+  if (nodes.every(node => node.fixed)) {  
+    infoPanel.innerHTML = '<strong>Congratulations!</strong> You have debugged the entire galaxy!';  
+  }  
+}  
+
+renderNodes();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

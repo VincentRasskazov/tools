@@ -1,0 +1,170 @@
+---
+layout: null
+title: "PulseQuest: Interactive Heart Rate Explorer"
+category: "Health"
+description: "A gamified visualization tool where users simulate different activities and track the impact on heart rate zones, learning about cardio health in a dynamic way."
+permalink: "/tools/daily-20260711-12-pulsequest-interactive-heart-rate-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260711"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PulseQuest: Interactive Heart Rate Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified visualization tool where users simulate different activities and track the impact on heart rate zones, learning about cardio health in a dynamic way. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PulseQuest: Interactive Heart Rate Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified visualization tool where users simulate different activities and track the impact on heart rate zones, learning about cardio health in a dynamic way. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PulseQuest: Interactive Heart Rate Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified visualization tool where users simulate different activities and track the impact on heart rate zones, learning about cardio health in a dynamic way. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PulseQuest: Interactive Heart Rate Explorer</h1>
+    <p class="seo-subtitle">A gamified visualization tool where users simulate different activities and track the impact on heart rate zones, learning about cardio health in a dynamic way.</p>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #6dd5fa, #ffffff);
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+
+  #tool-app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .activity-select {
+    margin: 20px;
+  }
+
+  .activity-option {
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #6dd5fa;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .activity-option:hover {
+    background-color: #3498db;
+  }
+
+  #heart-rate-output {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    color: #e74c3c;
+  }
+
+  #chart-container {
+    margin-top: 40px;
+    width: 80%;
+    height: 200px;
+    background: #f7f7f7;
+    border-radius: 10px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+
+  .bar {
+    width: 20%;
+    height: 0;
+    margin: 0 10px;
+    background-color: #3498db;
+    transition: height 0.5s ease;
+  }
+
+  .bar.active {
+    background-color: #e74c3c;
+  }
+</style>
+<div id="tool-app">
+  <h1>PulseQuest: Interactive Heart Rate Explorer</h1>
+  <div class="activity-select">
+    <button class="activity-option" data-rate="60">Resting</button>
+    <button class="activity-option" data-rate="90">Walking</button>
+    <button class="activity-option" data-rate="120">Running</button>
+    <button class="activity-option" data-rate="160">Intense Exercise</button>
+    <button class="activity-option" data-rate="200">Extreme Effort</button>
+  </div>
+  <div id="heart-rate-output">Heart Rate: 0 bpm</div>
+  <div id="chart-container">
+    <div class="bar" data-zone="Rest"></div>
+    <div class="bar" data-zone="Light"></div>
+    <div class="bar" data-zone="Moderate"></div>
+    <div class="bar" data-zone="Intense"></div>
+    <div class="bar" data-zone="Extreme"></div>
+  </div>
+</div>
+<script>
+  const activityButtons = document.querySelectorAll('.activity-option');
+  const heartRateOutput = document.getElementById('heart-rate-output');
+  const bars = document.querySelectorAll('.bar');
+  
+  activityButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const rate = parseInt(button.getAttribute('data-rate'));
+      
+      // Update heart rate output
+      heartRateOutput.textContent = `Heart Rate: ${rate} bpm`;
+
+      // Update visualization
+      bars.forEach(bar => {
+        const zone = bar.getAttribute('data-zone');
+        bar.classList.remove('active');
+        switch (zone) {
+          case 'Rest':
+            bar.style.height = rate <= 70 ? '80%' : '20%';
+            bar.classList.toggle('active', rate <= 70);
+            break;
+          case 'Light':
+            bar.style.height = rate > 70 && rate <= 100 ? '60%' : '20%';
+            bar.classList.toggle('active', rate > 70 && rate <= 100);
+            break;
+          case 'Moderate':
+            bar.style.height = rate > 100 && rate <= 140 ? '40%' : '20%';
+            bar.classList.toggle('active', rate > 100 && rate <= 140);
+            break;
+          case 'Intense':
+            bar.style.height = rate > 140 && rate <= 180 ? '60%' : '20%';
+            bar.classList.toggle('active', rate > 140 && rate <= 180);
+            break;
+          case 'Extreme':
+            bar.style.height = rate > 180 ? '80%' : '20%';
+            bar.classList.toggle('active', rate > 180);
+            break;
+        }
+      });
+    });
+  });
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

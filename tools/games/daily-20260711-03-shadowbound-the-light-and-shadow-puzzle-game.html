@@ -1,0 +1,185 @@
+---
+layout: null
+title: "Shadowbound: The Light and Shadow Puzzle Game"
+category: "Games"
+description: "A dynamic single-page game where players manipulate light sources and obstacles to solve intricate shadow-based puzzles."
+permalink: "/tools/daily-20260711-03-shadowbound-the-light-and-shadow-puzzle-game.html"
+generated_by: "api-true-ai"
+generated_date: "20260711"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shadowbound: The Light and Shadow Puzzle Game | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic single-page game where players manipulate light sources and obstacles to solve intricate shadow-based puzzles. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Shadowbound: The Light and Shadow Puzzle Game | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic single-page game where players manipulate light sources and obstacles to solve intricate shadow-based puzzles. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Shadowbound: The Light and Shadow Puzzle Game | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic single-page game where players manipulate light sources and obstacles to solve intricate shadow-based puzzles. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Shadowbound: The Light and Shadow Puzzle Game</h1>
+    <p class="seo-subtitle">A dynamic single-page game where players manipulate light sources and obstacles to solve intricate shadow-based puzzles.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(135deg, #1e1e2e, #3a3a5c);  
+  color: #f5f5f5;  
+  margin: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 90%;  
+  max-width: 800px;  
+  height: 90%;  
+  border-radius: 10px;  
+  background: #2e2e40;  
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  padding: 20px;  
+}  
+canvas {  
+  border: 1px solid #555;  
+  background: #1a1a2a;  
+}  
+button {  
+  padding: 10px 20px;  
+  margin-top: 20px;  
+  border: none;  
+  border-radius: 5px;  
+  background: #4caf50;  
+  color: #fff;  
+  font-size: 16px;  
+  cursor: pointer;  
+  transition: 0.3s ease;  
+}  
+button:hover {  
+  background: #45a049;  
+}  
+</style>  
+<div id="tool-app">  
+  <canvas id="gameCanvas" width="600" height="400"></canvas>  
+  <button id="restartButton">Restart</button>  
+</div>  
+<script>  
+const canvas = document.getElementById("gameCanvas");  
+const ctx = canvas.getContext("2d");  
+const restartButton = document.getElementById("restartButton");  
+
+let lightSource = { x: 100, y: 200 };  
+let obstacles = [  
+  { x: 200, y: 100, width: 50, height: 50 },  
+  { x: 300, y: 250, width: 80, height: 20 },  
+  { x: 400, y: 150, width: 40, height: 40 }  
+];  
+let target = { x: 550, y: 350, width: 20, height: 20 };  
+let dragging = false;  
+
+canvas.addEventListener("mousedown", (e) => {  
+  const rect = canvas.getBoundingClientRect();  
+  const mouseX = e.clientX - rect.left;  
+  const mouseY = e.clientY - rect.top;  
+
+  if (Math.hypot(mouseX - lightSource.x, mouseY - lightSource.y) < 10) {  
+    dragging = true;  
+  }  
+});  
+
+canvas.addEventListener("mousemove", (e) => {  
+  if (dragging) {  
+    const rect = canvas.getBoundingClientRect();  
+    lightSource.x = e.clientX - rect.left;  
+    lightSource.y = e.clientY - rect.top;  
+    drawScene();  
+  }  
+});  
+
+canvas.addEventListener("mouseup", () => {  
+  dragging = false;  
+});  
+
+restartButton.addEventListener("click", () => {  
+  lightSource = { x: 100, y: 200 };  
+  drawScene();  
+});  
+
+function drawScene() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  drawObstacles();  
+  drawLightSource();  
+  drawTarget();  
+  checkWinCondition();  
+}  
+
+function drawLightSource() {  
+  ctx.beginPath();  
+  ctx.arc(lightSource.x, lightSource.y, 10, 0, Math.PI * 2);  
+  ctx.fillStyle = "yellow";  
+  ctx.fill();  
+
+  ctx.beginPath();  
+  ctx.moveTo(lightSource.x, lightSource.y);  
+  ctx.strokeStyle = "rgba(255, 255, 0, 0.2)";  
+  ctx.lineWidth = 2;  
+  obstacles.forEach(ob => {  
+    const shadowX1 = ob.x - lightSource.x;  
+    const shadowY1 = ob.y - lightSource.y;  
+    const shadowX2 = ob.x + ob.width - lightSource.x;  
+    const shadowY2 = ob.y + ob.height - lightSource.y;  
+    ctx.lineTo(shadowX1 * 10 + lightSource.x, shadowY1 * 10 + lightSource.y);  
+    ctx.lineTo(shadowX2 * 10 + lightSource.x, shadowY2 * 10 + lightSource.y);  
+  });  
+  ctx.stroke();  
+}  
+
+function drawObstacles() {  
+  obstacles.forEach(ob => {  
+    ctx.fillStyle = "gray";  
+    ctx.fillRect(ob.x, ob.y, ob.width, ob.height);  
+  });  
+}  
+
+function drawTarget() {  
+  ctx.fillStyle = "green";  
+  ctx.fillRect(target.x, target.y, target.width, target.height);  
+}  
+
+function checkWinCondition() {  
+  const dx = lightSource.x - target.x - target.width / 2;  
+  const dy = lightSource.y - target.y - target.height / 2;  
+  if (Math.hypot(dx, dy) < 10) {  
+    ctx.fillStyle = "white";  
+    ctx.font = "30px Arial";  
+    ctx.fillText("You Win!", canvas.width / 2 - 50, canvas.height / 2);  
+  }  
+}  
+
+drawScene();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

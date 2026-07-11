@@ -1,0 +1,186 @@
+---
+layout: null
+title: "DataMorph: Interactive Data Shape Transformer"
+category: "Data"
+description: "A playful tool that lets you dynamically reshape and visualize data arrays into tables, grids, pies, and node graphs using drag-and-drop and live transformations."
+permalink: "/tools/daily-20260711-20-datamorph-interactive-data-shape-transformer.html"
+generated_by: "api-true-ai"
+generated_date: "20260711"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataMorph: Interactive Data Shape Transformer | Free Online Interactive Tool</title>
+  <meta name="description" content="A playful tool that lets you dynamically reshape and visualize data arrays into tables, grids, pies, and node graphs using drag-and-drop and live transformations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataMorph: Interactive Data Shape Transformer | Free Online Interactive Tool">
+  <meta property="og:description" content="A playful tool that lets you dynamically reshape and visualize data arrays into tables, grids, pies, and node graphs using drag-and-drop and live transformations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataMorph: Interactive Data Shape Transformer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A playful tool that lets you dynamically reshape and visualize data arrays into tables, grids, pies, and node graphs using drag-and-drop and live transformations. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataMorph: Interactive Data Shape Transformer</h1>
+    <p class="seo-subtitle">A playful tool that lets you dynamically reshape and visualize data arrays into tables, grids, pies, and node graphs using drag-and-drop and live transformations.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(135deg, #1e3c72, #2a5298);  
+  color: white;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  background: white;  
+  color: #333;  
+  border-radius: 12px;  
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);  
+  width: 90%;  
+  max-width: 800px;  
+  padding: 20px;  
+  box-sizing: border-box;  
+}  
+button {  
+  background: #1e88e5;  
+  border: none;  
+  color: white;  
+  font-size: 16px;  
+  padding: 10px 20px;  
+  margin: 10px;  
+  border-radius: 8px;  
+  cursor: pointer;  
+}  
+button:hover {  
+  background: #1565c0;  
+}  
+.canvas-container {  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  margin-top: 20px;  
+  position: relative;  
+  height: 400px;  
+  border: 2px solid #ddd;  
+  border-radius: 8px;  
+  background: #f9f9f9;  
+  overflow: hidden;  
+}  
+.node {  
+  position: absolute;  
+  width: 20px;  
+  height: 20px;  
+  background: #1e88e5;  
+  border-radius: 50%;  
+  text-align: center;  
+  line-height: 20px;  
+  color: white;  
+  font-weight: bold;  
+  cursor: grab;  
+}  
+.node:active {  
+  cursor: grabbing;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>DataMorph: Interactive Data Shape Transformer</h1>  
+  <p>Drag and drop the nodes to reshape data into exciting visualizations like grids, graphs, and more. Click "Transform" to switch views dynamically!</p>  
+  <button id="transform-btn">Transform Data</button>  
+  <div class="canvas-container" id="canvas"></div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById('canvas');  
+const transformBtn = document.getElementById('transform-btn');  
+let mode = 'grid'; // Modes: 'grid', 'graph', 'pie'  
+const nodes = [];  
+
+// Initialize data points  
+for (let i = 0; i < 10; i++) {  
+  const node = document.createElement('div');  
+  node.className = 'node';  
+  node.innerText = i + 1;  
+  node.style.top = `${Math.random() * 80}%`;  
+  node.style.left = `${Math.random() * 80}%`;  
+  node.draggable = true;  
+
+  // Drag behavior  
+  node.addEventListener('mousedown', (e) => {  
+    const offsetX = e.offsetX;  
+    const offsetY = e.offsetY;  
+
+    function onMouseMove(event) {  
+      node.style.left = `${event.pageX - canvas.offsetLeft - offsetX}px`;  
+      node.style.top = `${event.pageY - canvas.offsetTop - offsetY}px`;  
+    }  
+
+    document.addEventListener('mousemove', onMouseMove);  
+    document.addEventListener('mouseup', () => {  
+      document.removeEventListener('mousemove', onMouseMove);  
+    }, { once: true });  
+  });  
+
+  nodes.push(node);  
+  canvas.appendChild(node);  
+}  
+
+// Transform button logic  
+transformBtn.addEventListener('click', () => {  
+  if (mode === 'grid') {  
+    // Arrange in a grid  
+    const cols = Math.ceil(Math.sqrt(nodes.length));  
+    const cellWidth = canvas.offsetWidth / cols;  
+    const cellHeight = canvas.offsetHeight / cols;  
+
+    nodes.forEach((node, i) => {  
+      const row = Math.floor(i / cols);  
+      const col = i % cols;  
+      node.style.left = `${col * cellWidth + cellWidth / 2 - 10}px`;  
+      node.style.top = `${row * cellHeight + cellHeight / 2 - 10}px`;  
+    });  
+    mode = 'graph';  
+  } else if (mode === 'graph') {  
+    // Arrange in a circular graph  
+    const centerX = canvas.offsetWidth / 2;  
+    const centerY = canvas.offsetHeight / 2;  
+    const radius = Math.min(canvas.offsetWidth, canvas.offsetHeight) / 3;  
+
+    nodes.forEach((node, i) => {  
+      const angle = (i / nodes.length) * Math.PI * 2;  
+      node.style.left = `${centerX + radius * Math.cos(angle) - 10}px`;  
+      node.style.top = `${centerY + radius * Math.sin(angle) - 10}px`;  
+    });  
+    mode = 'pie';  
+  } else if (mode === 'pie') {  
+    // Scatter randomly  
+    nodes.forEach((node) => {  
+      node.style.left = `${Math.random() * 80}%`;  
+      node.style.top = `${Math.random() * 80}%`;  
+    });  
+    mode = 'grid';  
+  }  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
