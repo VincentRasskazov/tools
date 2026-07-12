@@ -1,0 +1,141 @@
+---
+layout: null
+title: "MindMesh: Interactive Idea Weaver"
+category: "Productivity"
+description: "A dynamic, interactive tool that lets users visually connect ideas, tasks, and projects into a stunning web-like mind map, complete with smart suggestions and prioritization hints."
+permalink: "/tools/daily-20260712-15-mindmesh-interactive-idea-weaver.html"
+generated_by: "api-true-ai"
+generated_date: "20260712"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindMesh: Interactive Idea Weaver | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, interactive tool that lets users visually connect ideas, tasks, and projects into a stunning web-like mind map, complete with smart suggestions and prioritization hints. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="MindMesh: Interactive Idea Weaver | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, interactive tool that lets users visually connect ideas, tasks, and projects into a stunning web-like mind map, complete with smart suggestions and prioritization hints. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MindMesh: Interactive Idea Weaver | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, interactive tool that lets users visually connect ideas, tasks, and projects into a stunning web-like mind map, complete with smart suggestions and prioritization hints. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>MindMesh: Interactive Idea Weaver</h1>
+    <p class="seo-subtitle">A dynamic, interactive tool that lets users visually connect ideas, tasks, and projects into a stunning web-like mind map, complete with smart suggestions and prioritization hints.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f0f4f8; }  
+  #tool-app { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }  
+  .mindmap-container { width: 90%; height: 80%; background: white; border-radius: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); position: relative; overflow: hidden; }  
+  .node { background: #4CAF50; color: white; padding: 10px 15px; border-radius: 20px; position: absolute; cursor: pointer; transition: transform 0.2s; }  
+  .node:hover { transform: scale(1.1); }  
+  .line { position: absolute; width: 2px; background: #888; }  
+  .toolbar { margin-top: 10px; }  
+  .toolbar button { padding: 8px 12px; margin: 0 5px; background: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; }  
+  .toolbar button:hover { background: #0056b3; }  
+</style>  
+<div id="tool-app">  
+  <div class="mindmap-container" id="mindmap"></div>  
+  <div class="toolbar">  
+    <button onclick="addNode()">Add Node</button>  
+    <button onclick="clearNodes()">Clear Map</button>  
+  </div>  
+</div>  
+<script>  
+  const mindmap = document.getElementById('mindmap');  
+  const nodes = [];  
+
+  function addNode() {  
+    const node = document.createElement('div');  
+    node.className = 'node';  
+    node.contentEditable = true;  
+    node.innerText = 'New Idea';  
+    node.style.left = Math.random() * (mindmap.offsetWidth - 100) + 'px';  
+    node.style.top = Math.random() * (mindmap.offsetHeight - 50) + 'px';  
+
+    node.onmousedown = function (e) {  
+      let shiftX = e.clientX - node.getBoundingClientRect().left;  
+      let shiftY = e.clientY - node.getBoundingClientRect().top;  
+
+      const moveAt = (pageX, pageY) => {  
+        node.style.left = pageX - shiftX + 'px';  
+        node.style.top = pageY - shiftY + 'px';  
+        updateConnections(node);  
+      };  
+
+      const onMouseMove = (event) => moveAt(event.pageX, event.pageY);  
+      document.addEventListener('mousemove', onMouseMove);  
+
+      node.onmouseup = function () {  
+        document.removeEventListener('mousemove', onMouseMove);  
+        node.onmouseup = null;  
+      };  
+    };  
+
+    node.ondragstart = () => false;  
+
+    mindmap.appendChild(node);  
+    nodes.push(node);  
+
+    if (nodes.length > 1) {  
+      for (const existingNode of nodes) {  
+        if (existingNode !== node) drawConnection(existingNode, node);  
+      }  
+    }  
+  }  
+
+  function drawConnection(node1, node2) {  
+    const line = document.createElement('div');  
+    line.className = 'line';  
+    mindmap.appendChild(line);  
+
+    const updateLine = () => {  
+      const rect1 = node1.getBoundingClientRect();  
+      const rect2 = node2.getBoundingClientRect();  
+      const x1 = rect1.left + rect1.width / 2;  
+      const y1 = rect1.top + rect1.height / 2;  
+      const x2 = rect2.left + rect2.width / 2;  
+      const y2 = rect2.top + rect2.height / 2;  
+
+      const length = Math.hypot(x2 - x1, y2 - y1);  
+      const angle = Math.atan2(y2 - y1, x2 - x1) * (180 / Math.PI);  
+
+      line.style.width = length + 'px';  
+      line.style.transform = `rotate(${angle}deg)`;  
+      line.style.left = x1 + 'px';  
+      line.style.top = y1 + 'px';  
+    };  
+
+    updateLine();  
+    node1.updateLine = updateLine;  
+    node2.updateLine = updateLine;  
+  }  
+
+  function updateConnections(movingNode) {  
+    nodes.forEach((node) => {  
+      if (node.updateLine) node.updateLine();  
+    });  
+  }  
+
+  function clearNodes() {  
+    mindmap.innerHTML = '';  
+    nodes.length = 0;  
+  }  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

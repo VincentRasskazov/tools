@@ -1,0 +1,151 @@
+---
+layout: null
+title: "DataMorph Playground"
+category: "Data"
+description: "A dynamic, gamified tool that lets users transform datasets visually by dragging, merging, filtering, and reshaping data blocks to uncover hidden patterns and insights."
+permalink: "/tools/daily-20260712-06-datamorph-playground.html"
+generated_by: "api-true-ai"
+generated_date: "20260712"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataMorph Playground | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, gamified tool that lets users transform datasets visually by dragging, merging, filtering, and reshaping data blocks to uncover hidden patterns and insights. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataMorph Playground | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, gamified tool that lets users transform datasets visually by dragging, merging, filtering, and reshaping data blocks to uncover hidden patterns and insights. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataMorph Playground | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, gamified tool that lets users transform datasets visually by dragging, merging, filtering, and reshaping data blocks to uncover hidden patterns and insights. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataMorph Playground</h1>
+    <p class="seo-subtitle">A dynamic, gamified tool that lets users transform datasets visually by dragging, merging, filtering, and reshaping data blocks to uncover hidden patterns and insights.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: 'Arial', sans-serif;  
+  background: linear-gradient(120deg, #2b5876, #4e4376);  
+  color: #fff;  
+  margin: 0;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  height: 100vh;  
+  text-align: center;  
+}  
+#canvas {  
+  background: #1c1c1c;  
+  border: 2px solid #fff;  
+  border-radius: 10px;  
+  width: 80vw;  
+  height: 60vh;  
+  overflow: hidden;  
+  position: relative;  
+}  
+.data-block {  
+  position: absolute;  
+  width: 100px;  
+  height: 50px;  
+  background: #38a1db;  
+  border-radius: 5px;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  font-size: 14px;  
+  font-weight: bold;  
+  cursor: grab;  
+  transition: transform 0.2s, box-shadow 0.2s;  
+}  
+.data-block:active {  
+  cursor: grabbing;  
+  transform: scale(1.1);  
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);  
+}  
+.controls {  
+  margin-top: 20px;  
+}  
+button {  
+  background: #ff6b6b;  
+  border: none;  
+  color: #fff;  
+  padding: 10px 20px;  
+  font-size: 16px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  transition: background 0.2s;  
+}  
+button:hover {  
+  background: #d55757;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>DataMorph Playground</h1>  
+  <div id="canvas"></div>  
+  <div class="controls">  
+    <button onclick="addBlock()">Add Block</button>  
+    <button onclick="clearCanvas()">Clear All</button>  
+  </div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById('canvas');  
+const blockColors = ['#38a1db', '#31d0c6', '#f7b731', '#eb3b5a', '#8854d0'];  
+
+function addBlock() {  
+  const block = document.createElement('div');  
+  block.className = 'data-block';  
+  block.style.top = `${Math.random() * 50 + 10}%`;  
+  block.style.left = `${Math.random() * 50 + 10}%`;  
+  block.style.background = blockColors[Math.floor(Math.random() * blockColors.length)];  
+  block.textContent = Math.floor(Math.random() * 100);  
+
+  block.addEventListener('mousedown', function (event) {  
+    const offsetX = event.clientX - block.offsetLeft;  
+    const offsetY = event.clientY - block.offsetTop;  
+    const onMouseMove = (e) => {  
+      block.style.left = `${e.clientX - offsetX}px`;  
+      block.style.top = `${e.clientY - offsetY}px`;  
+    };  
+    document.addEventListener('mousemove', onMouseMove);  
+    document.addEventListener('mouseup', () => {  
+      document.removeEventListener('mousemove', onMouseMove);  
+    }, { once: true });  
+  });  
+
+  block.addEventListener('dblclick', function () {  
+    block.textContent = Number(block.textContent) + 1;  
+  });  
+
+  canvas.appendChild(block);  
+}  
+
+function clearCanvas() {  
+  while (canvas.firstChild) {  
+    canvas.removeChild(canvas.firstChild);  
+  }  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
