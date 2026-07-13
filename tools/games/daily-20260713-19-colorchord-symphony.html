@@ -1,0 +1,168 @@
+---
+layout: null
+title: "ColorChord Symphony"
+category: "Games"
+description: "Create harmonious melodies by connecting colorful nodes, each representing a musical note, to form your own interactive symphony."
+permalink: "/tools/daily-20260713-19-colorchord-symphony.html"
+generated_by: "api-true-ai"
+generated_date: "20260713"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ColorChord Symphony | Free Online Interactive Tool</title>
+  <meta name="description" content="Create harmonious melodies by connecting colorful nodes, each representing a musical note, to form your own interactive symphony. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="ColorChord Symphony | Free Online Interactive Tool">
+  <meta property="og:description" content="Create harmonious melodies by connecting colorful nodes, each representing a musical note, to form your own interactive symphony. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ColorChord Symphony | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Create harmonious melodies by connecting colorful nodes, each representing a musical note, to form your own interactive symphony. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>ColorChord Symphony</h1>
+    <p class="seo-subtitle">Create harmonious melodies by connecting colorful nodes, each representing a musical note, to form your own interactive symphony.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to bottom, #2b5876, #4e4376);  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  color: white;  
+}  
+#tool-app {  
+  width: 80%;  
+  height: 80%;  
+  background: rgba(255, 255, 255, 0.1);  
+  border-radius: 15px;  
+  display: flex;  
+  flex-direction: column;  
+  justify-content: space-between;  
+  padding: 20px;  
+  overflow: hidden;  
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);  
+}  
+#canvas {  
+  flex: 1;  
+  background: rgba(0, 0, 0, 0.4);  
+  border-radius: 10px;  
+  position: relative;  
+  overflow: hidden;  
+  cursor: pointer;  
+}  
+#instructions {  
+  font-size: 14px;  
+  text-align: center;  
+  margin-top: 10px;  
+}  
+.node {  
+  position: absolute;  
+  width: 40px;  
+  height: 40px;  
+  border-radius: 50%;  
+  background: linear-gradient(to bottom right, #ff7eb3, #ff758c);  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  color: white;  
+  font-weight: bold;  
+  cursor: pointer;  
+  user-select: none;  
+}  
+.line {  
+  position: absolute;  
+  background: rgba(255, 255, 255, 0.8);  
+  transform-origin: top left;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="canvas"></div>  
+  <div id="instructions">Click anywhere to add a note. Drag to connect nodes and create your symphony!</div>  
+</div>  
+<script>  
+const canvas = document.getElementById('canvas');  
+const notes = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];  
+let nodes = [];  
+
+function createNode(x, y) {  
+  const node = document.createElement('div');  
+  node.classList.add('node');  
+  node.style.left = `${x - 20}px`;  
+  node.style.top = `${y - 20}px`;  
+  node.textContent = notes[Math.floor(Math.random() * notes.length)];  
+
+  node.addEventListener('mousedown', (e) => {  
+    e.preventDefault();  
+    canvas.dataset.draggingNode = nodes.indexOf(node);  
+  });  
+
+  canvas.appendChild(node);  
+  nodes.push(node);  
+}  
+
+function createLine(x1, y1, x2, y2) {  
+  const line = document.createElement('div');  
+  line.classList.add('line');  
+  const length = Math.hypot(x2 - x1, y2 - y1);  
+  const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;  
+  line.style.width = `${length}px`;  
+  line.style.height = `4px`;  
+  line.style.left = `${x1}px`;  
+  line.style.top = `${y1}px`;  
+  line.style.transform = `rotate(${angle}deg)`;  
+  canvas.appendChild(line);  
+}  
+
+canvas.addEventListener('click', (e) => {  
+  if (e.target === canvas) {  
+    createNode(e.offsetX, e.offsetY);  
+  }  
+});  
+
+canvas.addEventListener('mousemove', (e) => {  
+  if (canvas.dataset.draggingNode !== undefined) {  
+    const nodeIndex = parseInt(canvas.dataset.draggingNode, 10);  
+    const node = nodes[nodeIndex];  
+    const rect = canvas.getBoundingClientRect();  
+    const x = e.clientX - rect.left - 20;  
+    const y = e.clientY - rect.top - 20;  
+    node.style.left = `${x}px`;  
+    node.style.top = `${y}px`;  
+  }  
+});  
+
+canvas.addEventListener('mouseup', (e) => {  
+  if (canvas.dataset.draggingNode !== undefined) {  
+    const nodeIndex = parseInt(canvas.dataset.draggingNode, 10);  
+    const node = nodes[nodeIndex];  
+    const rect = canvas.getBoundingClientRect();  
+    const x = e.clientX - rect.left;  
+    const y = e.clientY - rect.top;  
+    createLine(parseFloat(node.style.left) + 20, parseFloat(node.style.top) + 20, x, y);  
+    canvas.dataset.draggingNode = undefined;  
+  }  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

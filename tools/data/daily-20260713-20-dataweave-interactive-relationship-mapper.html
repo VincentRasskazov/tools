@@ -1,0 +1,146 @@
+---
+layout: null
+title: "DataWeave: Interactive Relationship Mapper"
+category: "Data"
+description: "A dynamic tool that lets users visually map and analyze connections between complex datasets by drawing nodes and links, revealing hidden patterns and relationships."
+permalink: "/tools/daily-20260713-20-dataweave-interactive-relationship-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260713"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataWeave: Interactive Relationship Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic tool that lets users visually map and analyze connections between complex datasets by drawing nodes and links, revealing hidden patterns and relationships. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataWeave: Interactive Relationship Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic tool that lets users visually map and analyze connections between complex datasets by drawing nodes and links, revealing hidden patterns and relationships. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataWeave: Interactive Relationship Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic tool that lets users visually map and analyze connections between complex datasets by drawing nodes and links, revealing hidden patterns and relationships. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataWeave: Interactive Relationship Mapper</h1>
+    <p class="seo-subtitle">A dynamic tool that lets users visually map and analyze connections between complex datasets by drawing nodes and links, revealing hidden patterns and relationships.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f4f4f9; }  
+  #tool-app { width: 80%; height: 80%; background: #ffffff; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); border-radius: 10px; position: relative; overflow: hidden; }  
+  canvas { width: 100%; height: 100%; }  
+  #controls { position: absolute; top: 10px; left: 10px; background: rgba(255, 255, 255, 0.9); padding: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); }  
+  .button { display: inline-block; padding: 8px 15px; margin: 5px; background: #4CAF50; color: #fff; border-radius: 5px; cursor: pointer; font-size: 14px; }  
+  .button:hover { background: #45a049; }  
+</style>  
+<div id="tool-app">  
+  <canvas id="mapCanvas"></canvas>  
+  <div id="controls">  
+    <div class="button" onclick="addNode()">Add Node</div>  
+    <div class="button" onclick="resetMap()">Clear Map</div>  
+    <div class="button" onclick="analyze()">Analyze Connections</div>  
+  </div>  
+</div>  
+<script>  
+const canvas = document.getElementById('mapCanvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = canvas.parentElement.clientWidth;  
+canvas.height = canvas.parentElement.clientHeight;  
+let nodes = [];  
+let links = [];  
+let selectedNode = null;  
+
+class Node {  
+  constructor(x, y, id) {  
+    this.x = x;  
+    this.y = y;  
+    this.id = id;  
+    this.radius = 20;  
+  }  
+  draw() {  
+    ctx.beginPath();  
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);  
+    ctx.fillStyle = '#4CAF50';  
+    ctx.fill();  
+    ctx.stroke();  
+    ctx.fillStyle = '#fff';  
+    ctx.textAlign = 'center';  
+    ctx.font = '12px Arial';  
+    ctx.fillText(this.id, this.x, this.y + 4);  
+  }  
+}  
+
+function addNode() {  
+  const x = Math.random() * canvas.width;  
+  const y = Math.random() * canvas.height;  
+  const id = `Node ${nodes.length + 1}`;  
+  nodes.push(new Node(x, y, id));  
+  draw();  
+}  
+
+function draw() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  links.forEach(link => {  
+    ctx.beginPath();  
+    ctx.moveTo(link.from.x, link.from.y);  
+    ctx.lineTo(link.to.x, link.to.y);  
+    ctx.strokeStyle = '#555';  
+    ctx.stroke();  
+  });  
+  nodes.forEach(node => node.draw());  
+}  
+
+function getNodeAt(x, y) {  
+  return nodes.find(node => Math.hypot(node.x - x, node.y - y) <= node.radius);  
+}  
+
+function mouseDown(event) {  
+  const rect = canvas.getBoundingClientRect();  
+  const x = event.clientX - rect.left;  
+  const y = event.clientY - rect.top;  
+  const node = getNodeAt(x, y);  
+  if (node) {  
+    if (selectedNode && selectedNode !== node) {  
+      links.push({ from: selectedNode, to: node });  
+      selectedNode = null;  
+    } else {  
+      selectedNode = node;  
+    }  
+  } else {  
+    selectedNode = null;  
+  }  
+  draw();  
+}  
+
+function resetMap() {  
+  nodes = [];  
+  links = [];  
+  selectedNode = null;  
+  draw();  
+}  
+
+function analyze() {  
+  const connections = nodes.map(node => ({  
+    node: node.id,  
+    connections: links.filter(link => link.from === node || link.to === node).length  
+  }));  
+  alert(JSON.stringify(connections, null, 2));  
+}  
+
+canvas.addEventListener('mousedown', mouseDown);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

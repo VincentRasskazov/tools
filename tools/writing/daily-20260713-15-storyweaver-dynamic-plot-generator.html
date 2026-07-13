@@ -1,0 +1,188 @@
+---
+layout: null
+title: "StoryWeaver: Dynamic Plot Generator"
+category: "Writing"
+description: "A fully interactive tool where users weave storylines by connecting plot points on a visual web, dynamically generating branching narratives based on their choices."
+permalink: "/tools/daily-20260713-15-storyweaver-dynamic-plot-generator.html"
+generated_by: "api-true-ai"
+generated_date: "20260713"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StoryWeaver: Dynamic Plot Generator | Free Online Interactive Tool</title>
+  <meta name="description" content="A fully interactive tool where users weave storylines by connecting plot points on a visual web, dynamically generating branching narratives based on their choices. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="StoryWeaver: Dynamic Plot Generator | Free Online Interactive Tool">
+  <meta property="og:description" content="A fully interactive tool where users weave storylines by connecting plot points on a visual web, dynamically generating branching narratives based on their choices. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StoryWeaver: Dynamic Plot Generator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A fully interactive tool where users weave storylines by connecting plot points on a visual web, dynamically generating branching narratives based on their choices. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>StoryWeaver: Dynamic Plot Generator</h1>
+    <p class="seo-subtitle">A fully interactive tool where users weave storylines by connecting plot points on a visual web, dynamically generating branching narratives based on their choices.</p>
+    <style>  
+  #tool-app {  
+    font-family: 'Arial', sans-serif;  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    padding: 20px;  
+    background: linear-gradient(120deg, #f6d365, #fda085);  
+    height: 100vh;  
+    color: #333;  
+  }  
+  .plot-point {  
+    background: #fff;  
+    border: 2px solid #555;  
+    border-radius: 50%;  
+    width: 120px;  
+    height: 120px;  
+    display: flex;  
+    align-items: center;  
+    justify-content: center;  
+    position: absolute;  
+    text-align: center;  
+    font-size: 14px;  
+    font-weight: bold;  
+    cursor: pointer;  
+    transition: transform 0.2s;  
+  }  
+  .plot-point:hover {  
+    transform: scale(1.1);  
+  }  
+  #story-web {  
+    position: relative;  
+    width: 80%;  
+    height: 80%;  
+    border: 2px dashed #333;  
+    border-radius: 8px;  
+    overflow: hidden;  
+    background: #fff;  
+  }  
+  .line {  
+    stroke: #555;  
+    stroke-width: 2;  
+  }  
+  #controls {  
+    margin-top: 20px;  
+  }  
+  button {  
+    padding: 10px 20px;  
+    border: none;  
+    border-radius: 4px;  
+    background: #555;  
+    color: #fff;  
+    cursor: pointer;  
+    margin: 0 5px;  
+    transition: background 0.2s;  
+  }  
+  button:hover {  
+    background: #333;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h1>StoryWeaver</h1>  
+  <div id="story-web"></div>  
+  <div id="controls">  
+    <button id="add-plot-point">Add Plot Point</button>  
+    <button id="export-story">Export Story</button>  
+  </div>  
+</div>  
+<script>  
+// JavaScript for StoryWeaver  
+const plotWeb = document.getElementById('story-web');  
+const addPlotBtn = document.getElementById('add-plot-point');  
+const exportStoryBtn = document.getElementById('export-story');  
+
+let plotPoints = [];  
+let connections = [];  
+let idCounter = 0;  
+
+function createPlotPoint(x, y, text = "New Plot") {  
+  const plot = document.createElement('div');  
+  plot.className = 'plot-point';  
+  plot.style.left = `${x}px`;  
+  plot.style.top = `${y}px`;  
+  plot.textContent = text;  
+  plot.dataset.id = idCounter++;  
+
+  plot.addEventListener('mousedown', (e) => startConnecting(e, plot));  
+
+  plotWeb.appendChild(plot);  
+  plotPoints.push(plot);  
+}  
+
+function startConnecting(event, plot) {  
+  const fromId = plot.dataset.id;  
+  const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');  
+  line.classList.add('line');  
+  line.setAttribute('x1', event.clientX);  
+  line.setAttribute('y1', event.clientY);  
+  line.setAttribute('x2', event.clientX);  
+  line.setAttribute('y2', event.clientY);  
+  plotWeb.appendChild(line);  
+
+  function moveLine(e) {  
+    line.setAttribute('x2', e.clientX);  
+    line.setAttribute('y2', e.clientY);  
+  }  
+
+  function stopConnecting(e) {  
+    const toPlot = document.elementFromPoint(e.clientX, e.clientY)?.closest('.plot-point');  
+    if (toPlot && toPlot !== plot) {  
+      line.setAttribute('x2', toPlot.offsetLeft + 60);  
+      line.setAttribute('y2', toPlot.offsetTop + 60);  
+      connections.push({  
+        from: fromId,  
+        to: toPlot.dataset.id,  
+      });  
+    } else {  
+      line.remove();  
+    }  
+    document.removeEventListener('mousemove', moveLine);  
+    document.removeEventListener('mouseup', stopConnecting);  
+  }  
+  document.addEventListener('mousemove', moveLine);  
+  document.addEventListener('mouseup', stopConnecting);  
+}  
+
+addPlotBtn.addEventListener('click', () => {  
+  const x = Math.random() * (plotWeb.offsetWidth - 120);  
+  const y = Math.random() * (plotWeb.offsetHeight - 120);  
+  createPlotPoint(x, y);  
+});  
+
+exportStoryBtn.addEventListener('click', () => {  
+  const storyData = plotPoints.map(point => ({  
+    id: point.dataset.id,  
+    text: point.textContent,  
+    x: point.style.left,  
+    y: point.style.top,  
+  }));  
+  console.log({  
+    nodes: storyData,  
+    connections,  
+  });  
+  alert("Story data exported to console!");  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

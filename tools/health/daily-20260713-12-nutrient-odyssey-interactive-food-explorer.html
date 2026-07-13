@@ -1,0 +1,151 @@
+---
+layout: null
+title: "Nutrient Odyssey: Interactive Food Explorer"
+category: "Health"
+description: "Navigate a vibrant food galaxy where users can explore and balance nutrient constellations to learn about healthy eating and nutritional value in an engaging way."
+permalink: "/tools/daily-20260713-12-nutrient-odyssey-interactive-food-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260713"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nutrient Odyssey: Interactive Food Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate a vibrant food galaxy where users can explore and balance nutrient constellations to learn about healthy eating and nutritional value in an engaging way. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Nutrient Odyssey: Interactive Food Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate a vibrant food galaxy where users can explore and balance nutrient constellations to learn about healthy eating and nutritional value in an engaging way. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nutrient Odyssey: Interactive Food Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate a vibrant food galaxy where users can explore and balance nutrient constellations to learn about healthy eating and nutritional value in an engaging way. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Nutrient Odyssey: Interactive Food Explorer</h1>
+    <p class="seo-subtitle">Navigate a vibrant food galaxy where users can explore and balance nutrient constellations to learn about healthy eating and nutritional value in an engaging way.</p>
+    <style>  
+  body {  
+    font-family: Arial, sans-serif;  
+    background: #1d1e26;  
+    color: #f4f4f9;  
+    margin: 0;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+  }  
+  #tool-app {  
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);  
+    border-radius: 10px;  
+    background: #292a36;  
+    padding: 20px;  
+    width: 80%;  
+    max-width: 900px;  
+    text-align: center;  
+  }  
+  canvas {  
+    border: 1px solid #444;  
+    border-radius: 5px;  
+    display: block;  
+    margin: 0 auto;  
+  }  
+  .label {  
+    margin-top: 10px;  
+    font-size: 14px;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h1>Nutrient Odyssey</h1>  
+  <p>Use your knowledge of nutrition to balance the galaxy and learn about food values!</p>  
+  <canvas id="gameCanvas" width="600" height="400"></canvas>  
+  <p class="label">Drag food orbits to balance nutrients. Earn stars for a harmonious plate!</p>  
+</div>  
+<script>  
+const canvas = document.getElementById("gameCanvas");  
+const ctx = canvas.getContext("2d");  
+
+// Galaxy and initial setup  
+const galaxy = {  
+  stars: [],  
+  foods: [  
+    { name: "Apple", x: 150, y: 200, nutrient: "Vitamin C", value: 10 },  
+    { name: "Spinach", x: 300, y: 100, nutrient: "Iron", value: 15 },  
+    { name: "Salmon", x: 450, y: 300, nutrient: "Omega-3", value: 20 },  
+  ],  
+  harmony: 0,  
+};  
+
+function drawGalaxy() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+
+  // Draw stars  
+  galaxy.stars.forEach((star) => {  
+    ctx.beginPath();  
+    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);  
+    ctx.fillStyle = star.color;  
+    ctx.fill();  
+  });  
+
+  // Draw foods  
+  galaxy.foods.forEach((food) => {  
+    ctx.beginPath();  
+    ctx.arc(food.x, food.y, 20, 0, Math.PI * 2);  
+    ctx.fillStyle = "#ff6f61";  
+    ctx.fill();  
+    ctx.fillStyle = "#fff";  
+    ctx.font = "12px Arial";  
+    ctx.fillText(food.name, food.x - 20, food.y - 25);  
+  });  
+
+  // Harmony Level  
+  ctx.fillStyle = "#fff";  
+  ctx.font = "16px Arial";  
+  ctx.fillText(`Harmony: ${galaxy.harmony}`, 20, 30);  
+}  
+
+let draggingFood = null;  
+
+canvas.addEventListener("mousedown", (e) => {  
+  const mouseX = e.offsetX;  
+  const mouseY = e.offsetY;  
+  galaxy.foods.forEach((food) => {  
+    const distance = Math.sqrt((food.x - mouseX) ** 2 + (food.y - mouseY) ** 2);  
+    if (distance < 20) {  
+      draggingFood = food;  
+    }  
+  });  
+});  
+
+canvas.addEventListener("mousemove", (e) => {  
+  if (draggingFood) {  
+    draggingFood.x = e.offsetX;  
+    draggingFood.y = e.offsetY;  
+    galaxy.harmony += 1; // Adjust harmony for interaction  
+    drawGalaxy();  
+  }  
+});  
+
+canvas.addEventListener("mouseup", () => {  
+  draggingFood = null;  
+});  
+
+// Initial draw  
+drawGalaxy();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

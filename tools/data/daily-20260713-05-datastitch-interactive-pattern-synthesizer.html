@@ -1,0 +1,185 @@
+---
+layout: null
+title: "DataStitch: Interactive Pattern Synthesizer"
+category: "Data"
+description: "A tool that lets users create, manipulate, and visualize intricate data patterns by weaving virtual threads on a dynamic loom, turning abstract datasets into stunning, customizable artworks."
+permalink: "/tools/daily-20260713-05-datastitch-interactive-pattern-synthesizer.html"
+generated_by: "api-true-ai"
+generated_date: "20260713"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataStitch: Interactive Pattern Synthesizer | Free Online Interactive Tool</title>
+  <meta name="description" content="A tool that lets users create, manipulate, and visualize intricate data patterns by weaving virtual threads on a dynamic loom, turning abstract datasets into stunning, customizable artworks. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataStitch: Interactive Pattern Synthesizer | Free Online Interactive Tool">
+  <meta property="og:description" content="A tool that lets users create, manipulate, and visualize intricate data patterns by weaving virtual threads on a dynamic loom, turning abstract datasets into stunning, customizable artworks. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataStitch: Interactive Pattern Synthesizer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A tool that lets users create, manipulate, and visualize intricate data patterns by weaving virtual threads on a dynamic loom, turning abstract datasets into stunning, customizable artworks. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataStitch: Interactive Pattern Synthesizer</h1>
+    <p class="seo-subtitle">A tool that lets users create, manipulate, and visualize intricate data patterns by weaving virtual threads on a dynamic loom, turning abstract datasets into stunning, customizable artworks.</p>
+    <style>  
+body {  
+  font-family: 'Arial', sans-serif;  
+  background: linear-gradient(145deg, #1e293b, #3b82f6);  
+  color: #fff;  
+  margin: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 90%;  
+  max-width: 1200px;  
+  height: 650px;  
+  background: #1e40af;  
+  border-radius: 12px;  
+  display: flex;  
+  flex-direction: column;  
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);  
+  overflow: hidden;  
+}  
+#controls {  
+  display: flex;  
+  justify-content: space-between;  
+  align-items: center;  
+  padding: 10px 15px;  
+  background: #1e293b;  
+  border-bottom: 2px solid #3b82f6;  
+}  
+button {  
+  background-color: #3b82f6;  
+  border: none;  
+  color: #fff;  
+  padding: 10px 15px;  
+  border-radius: 8px;  
+  cursor: pointer;  
+  margin-left: 10px;  
+  font-weight: bold;  
+}  
+button:hover {  
+  background-color: #2563eb;  
+}  
+#canvas {  
+  flex: 1;  
+  background: #0f172a;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  position: relative;  
+  overflow: hidden;  
+}  
+.dot {  
+  width: 10px;  
+  height: 10px;  
+  border-radius: 50%;  
+  position: absolute;  
+  background: #3b82f6;  
+  pointer-events: none;  
+}  
+.line {  
+  position: absolute;  
+  background: #3b82f6;  
+  pointer-events: none;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="controls">  
+    <div>  
+      <label for="threads">Threads:</label>  
+      <input type="number" id="threads" min="2" max="50" value="10">  
+    </div>  
+    <div>  
+      <button id="generate">Generate Pattern</button>  
+      <button id="clear">Clear</button>  
+    </div>  
+  </div>  
+  <div id="canvas"></div>  
+</div>  
+<script>  
+const canvas = document.getElementById('canvas');  
+const generateButton = document.getElementById('generate');  
+const clearButton = document.getElementById('clear');  
+const threadsInput = document.getElementById('threads');  
+
+function clearCanvas() {  
+  while (canvas.firstChild) {  
+    canvas.removeChild(canvas.firstChild);  
+  }  
+}  
+
+function createDot(x, y) {  
+  const dot = document.createElement('div');  
+  dot.classList.add('dot');  
+  dot.style.left = `${x}px`;  
+  dot.style.top = `${y}px`;  
+  canvas.appendChild(dot);  
+  return dot;  
+}  
+
+function createLine(dot1, dot2) {  
+  const line = document.createElement('div');  
+  line.classList.add('line');  
+  const x1 = dot1.offsetLeft + dot1.offsetWidth / 2;  
+  const y1 = dot1.offsetTop + dot1.offsetHeight / 2;  
+  const x2 = dot2.offsetLeft + dot2.offsetWidth / 2;  
+  const y2 = dot2.offsetTop + dot2.offsetHeight / 2;  
+  const length = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);  
+  const angle = Math.atan2(y2 - y1, x2 - x1);  
+  line.style.width = `${length}px`;  
+  line.style.height = '2px';  
+  line.style.transform = `rotate(${angle}rad)`;  
+  line.style.left = `${x1}px`;  
+  line.style.top = `${y1}px`;  
+  canvas.appendChild(line);  
+}  
+
+function generatePattern() {  
+  clearCanvas();  
+  const threads = parseInt(threadsInput.value);  
+  const radius = Math.min(canvas.offsetWidth, canvas.offsetHeight) / 2 - 20;  
+  const centerX = canvas.offsetWidth / 2;  
+  const centerY = canvas.offsetHeight / 2;  
+  const dots = [];  
+
+  for (let i = 0; i < threads; i++) {  
+    const angle = (i / threads) * Math.PI * 2;  
+    const x = centerX + radius * Math.cos(angle);  
+    const y = centerY + radius * Math.sin(angle);  
+    dots.push(createDot(x, y));  
+  }  
+
+  for (let i = 0; i < dots.length; i++) {  
+    for (let j = i + 1; j < dots.length; j++) {  
+      createLine(dots[i], dots[j]);  
+    }  
+  }  
+}  
+
+generateButton.addEventListener('click', generatePattern);  
+clearButton.addEventListener('click', clearCanvas);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

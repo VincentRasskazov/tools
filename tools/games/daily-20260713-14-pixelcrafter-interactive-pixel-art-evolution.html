@@ -1,0 +1,184 @@
+---
+layout: null
+title: "PixelCrafter: Interactive Pixel Art Evolution"
+category: "Games"
+description: "Create evolving pixel art by defining rules and watching patterns morph as generations progress."
+permalink: "/tools/daily-20260713-14-pixelcrafter-interactive-pixel-art-evolution.html"
+generated_by: "api-true-ai"
+generated_date: "20260713"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PixelCrafter: Interactive Pixel Art Evolution | Free Online Interactive Tool</title>
+  <meta name="description" content="Create evolving pixel art by defining rules and watching patterns morph as generations progress. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PixelCrafter: Interactive Pixel Art Evolution | Free Online Interactive Tool">
+  <meta property="og:description" content="Create evolving pixel art by defining rules and watching patterns morph as generations progress. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PixelCrafter: Interactive Pixel Art Evolution | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Create evolving pixel art by defining rules and watching patterns morph as generations progress. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PixelCrafter: Interactive Pixel Art Evolution</h1>
+    <p class="seo-subtitle">Create evolving pixel art by defining rules and watching patterns morph as generations progress.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: 'Arial', sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  background: linear-gradient(135deg, #1e3c72, #2a5298);  
+  color: white;  
+}  
+#tool-app {  
+  background: #ffffff;  
+  color: #000;  
+  padding: 20px;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);  
+  width: 90%;  
+  max-width: 600px;  
+  text-align: center;  
+}  
+canvas {  
+  border: 1px solid #000;  
+  margin-top: 20px;  
+}  
+button {  
+  background: #4caf50;  
+  color: white;  
+  border: none;  
+  padding: 10px 20px;  
+  font-size: 16px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  margin: 5px;  
+}  
+button:hover {  
+  background: #45a049;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>PixelCrafter</h1>  
+  <p>Design initial patterns and evolve them using cellular automata rules!</p>  
+  <canvas id="pixelCanvas" width="300" height="300"></canvas>  
+  <br>  
+  <button id="start">Start Evolution</button>  
+  <button id="reset">Reset</button>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById('pixelCanvas');  
+const ctx = canvas.getContext('2d');  
+const resolution = 10;  
+const rows = canvas.height / resolution;  
+const cols = canvas.width / resolution;  
+let grid = createGrid();  
+
+// Create initial grid  
+function createGrid() {  
+  return new Array(rows).fill(null).map(() => new Array(cols).fill(0));  
+}  
+
+// Draw grid on the canvas  
+function drawGrid() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  for (let row = 0; row < grid.length; row++) {  
+    for (let col = 0; col < grid[row].length; col++) {  
+      const cell = grid[row][col];  
+      ctx.beginPath();  
+      ctx.rect(col * resolution, row * resolution, resolution, resolution);  
+      ctx.fillStyle = cell ? 'black' : 'white';  
+      ctx.fill();  
+      ctx.stroke();  
+    }  
+  }  
+}  
+
+// Update grid based on rules  
+function updateGrid() {  
+  const nextGrid = createGrid();  
+  for (let row = 0; row < grid.length; row++) {  
+    for (let col = 0; col < grid[row].length; col++) {  
+      const neighbors = countNeighbors(grid, row, col);  
+      const cell = grid[row][col];  
+      nextGrid[row][col] = cell ? (neighbors === 2 || neighbors === 3 ? 1 : 0) : (neighbors === 3 ? 1 : 0);  
+    }  
+  }  
+  grid = nextGrid;  
+}  
+
+// Count neighboring cells  
+function countNeighbors(grid, row, col) {  
+  let count = 0;  
+  for (let i = -1; i < 2; i++) {  
+    for (let j = -1; j < 2; j++) {  
+      if (i === 0 && j === 0) continue;  
+      const x = row + i;  
+      const y = col + j;  
+      if (x >= 0 && x < rows && y >= 0 && y < cols) {  
+        count += grid[x][y];  
+      }  
+    }  
+  }  
+  return count;  
+}  
+
+// Toggle cells on canvas click  
+canvas.addEventListener('click', (event) => {  
+  const rect = canvas.getBoundingClientRect();  
+  const x = event.clientX - rect.left;  
+  const y = event.clientY - rect.top;  
+  const row = Math.floor(y / resolution);  
+  const col = Math.floor(x / resolution);  
+  grid[row][col] = grid[row][col] ? 0 : 1;  
+  drawGrid();  
+});  
+
+let intervalId;  
+document.getElementById('start').addEventListener('click', () => {  
+  if (intervalId) {  
+    clearInterval(intervalId);  
+    intervalId = null;  
+  } else {  
+    intervalId = setInterval(() => {  
+      updateGrid();  
+      drawGrid();  
+    }, 500);  
+  }  
+});  
+
+document.getElementById('reset').addEventListener('click', () => {  
+  grid = createGrid();  
+  drawGrid();  
+  if (intervalId) {  
+    clearInterval(intervalId);  
+    intervalId = null;  
+  }  
+});  
+
+drawGrid();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

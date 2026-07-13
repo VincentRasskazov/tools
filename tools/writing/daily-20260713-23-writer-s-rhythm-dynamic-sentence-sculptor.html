@@ -1,0 +1,118 @@
+---
+layout: null
+title: "Writer's Rhythm: Dynamic Sentence Sculptor"
+category: "Writing"
+description: "A gamified tool that challenges users to rewrite sentences with varying constraints, such as tone, word count, or literary style, while visualizing their changes in real-time on a dynamic feedback graph."
+permalink: "/tools/daily-20260713-23-writer-s-rhythm-dynamic-sentence-sculptor.html"
+generated_by: "api-true-ai"
+generated_date: "20260713"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Writer's Rhythm: Dynamic Sentence Sculptor | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool that challenges users to rewrite sentences with varying constraints, such as tone, word count, or literary style, while visualizing their changes in real-time on a dynamic feedback graph. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Writer's Rhythm: Dynamic Sentence Sculptor | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool that challenges users to rewrite sentences with varying constraints, such as tone, word count, or literary style, while visualizing their changes in real-time on a dynamic feedback graph. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Writer's Rhythm: Dynamic Sentence Sculptor | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool that challenges users to rewrite sentences with varying constraints, such as tone, word count, or literary style, while visualizing their changes in real-time on a dynamic feedback graph. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Writer's Rhythm: Dynamic Sentence Sculptor</h1>
+    <p class="seo-subtitle">A gamified tool that challenges users to rewrite sentences with varying constraints, such as tone, word count, or literary style, while visualizing their changes in real-time on a dynamic feedback graph.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body { font-family: Arial, sans-serif; background: #f4f4f9; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }  
+#tool-app { background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 80%; max-width: 600px; }  
+h1 { text-align: center; color: #333; }  
+textarea { width: 100%; height: 100px; margin-top: 10px; border: 1px solid #ddd; border-radius: 5px; padding: 10px; font-size: 16px; }  
+button { background: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }  
+button:hover { background: #45a049; }  
+#feedback { margin-top: 20px; font-size: 14px; color: #555; }  
+#feedback-graph { display: flex; margin-top: 10px; }  
+.bar { height: 20px; margin-right: 5px; background: #4CAF50; flex-grow: 1; transition: height 0.3s; }  
+</style>  
+<div id="tool-app">  
+  <h1>Writer's Rhythm</h1>  
+  <p>Rewrite the sentence below based on the constraints, and see your progress visually!</p>  
+  <textarea id="input-sentence" placeholder="Start typing here..."></textarea>  
+  <button id="submit-button">Analyze Sentence</button>  
+  <div id="feedback"></div>  
+  <div id="feedback-graph"></div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const toolApp = document.getElementById('tool-app');  
+const inputSentence = document.getElementById('input-sentence');  
+const submitButton = document.getElementById('submit-button');  
+const feedbackDiv = document.getElementById('feedback');  
+const feedbackGraph = document.getElementById('feedback-graph');  
+
+const constraints = [  
+  { name: "Word Count", target: 10 },  
+  { name: "Positive Tone", target: "positive" },  
+  { name: "Metaphor Use", target: "metaphor" },  
+];  
+
+function analyzeSentence(sentence) {  
+  let analyses = [];  
+  // Analyze word count  
+  let wordCount = sentence.split(" ").filter(word => word.trim().length > 0).length;  
+  analyses.push({ name: "Word Count", value: wordCount, target: constraints[0].target });  
+
+  // Analyze for positive tone (simplified check for happy words)  
+  const positiveWords = ["happy", "great", "joyful", "amazing", "positive"];  
+  let positiveScore = sentence.split(" ").filter(word => positiveWords.includes(word.toLowerCase())).length;  
+  analyses.push({ name: "Positive Tone", value: positiveScore > 1 ? "positive" : "neutral", target: constraints[1].target });  
+
+  // Analyze for metaphor use (simplified check for "like" or "as")  
+  let metaphorScore = sentence.includes("like") || sentence.includes("as") ? "metaphor" : "none";  
+  analyses.push({ name: "Metaphor Use", value: metaphorScore, target: constraints[2].target });  
+
+  return analyses;  
+}  
+
+function renderFeedback(analyses) {  
+  feedbackDiv.innerHTML = '';  
+  feedbackGraph.innerHTML = '';  
+
+  analyses.forEach(analysis => {  
+    let text = `${analysis.name}: ${analysis.value} (Target: ${analysis.target})`;  
+    feedbackDiv.innerHTML += `<p>${text}</p>`;  
+
+    let barHeight = analysis.value === analysis.target || analysis.value >= analysis.target ? 100 : (analysis.value / analysis.target) * 100;  
+    let barColor = barHeight === 100 ? '#4CAF50' : '#f44336';  
+    let bar = document.createElement('div');  
+    bar.className = 'bar';  
+    bar.style.height = `${Math.min(barHeight, 100)}px`;  
+    bar.style.background = barColor;  
+    feedbackGraph.appendChild(bar);  
+  });  
+}  
+
+submitButton.addEventListener('click', () => {  
+  const sentence = inputSentence.value;  
+  const analyses = analyzeSentence(sentence);  
+  renderFeedback(analyses);  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

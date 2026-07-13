@@ -1,0 +1,193 @@
+---
+layout: null
+title: "Mindful Maze: Stress Navigator"
+category: "Health"
+description: "Navigate through an interactive labyrinth while reflecting on your mental health, using mood-based checkpoints to guide stress relief techniques."
+permalink: "/tools/daily-20260713-18-mindful-maze-stress-navigator.html"
+generated_by: "api-true-ai"
+generated_date: "20260713"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mindful Maze: Stress Navigator | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate through an interactive labyrinth while reflecting on your mental health, using mood-based checkpoints to guide stress relief techniques. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Mindful Maze: Stress Navigator | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate through an interactive labyrinth while reflecting on your mental health, using mood-based checkpoints to guide stress relief techniques. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mindful Maze: Stress Navigator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate through an interactive labyrinth while reflecting on your mental health, using mood-based checkpoints to guide stress relief techniques. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Mindful Maze: Stress Navigator</h1>
+    <p class="seo-subtitle">Navigate through an interactive labyrinth while reflecting on your mental health, using mood-based checkpoints to guide stress relief techniques.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+  background: linear-gradient(to bottom, #8EC5FC, #E0C3FC);  
+}  
+#tool-app {  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  flex-direction: column;  
+  width: 80%;  
+  max-width: 500px;  
+  background: white;  
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);  
+  border-radius: 10px;  
+  padding: 20px;  
+}  
+#maze-container {  
+  display: grid;  
+  grid-template-columns: repeat(5, 60px);  
+  grid-template-rows: repeat(5, 60px);  
+  gap: 5px;  
+}  
+.cell {  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  font-size: 14px;  
+  font-weight: bold;  
+  text-align: center;  
+  background: #F3F3F3;  
+  border: 1px solid #CCC;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+.cell.checkpoint {  
+  background: #FFB6C1;  
+  color: #333;  
+}  
+.cell.current {  
+  background: #6D8BEB;  
+  color: white;  
+}  
+.cell.finish {  
+  background: #7ACB7E;  
+  color: white;  
+}  
+#reflection {  
+  margin-top: 20px;  
+  text-align: center;  
+  display: none;  
+}  
+#reflection textarea {  
+  width: 90%;  
+  height: 100px;  
+  margin-top: 10px;  
+  border-radius: 5px;  
+  border: 1px solid #CCC;  
+  padding: 10px;  
+  font-size: 14px;  
+}  
+</style>  
+<div id="tool-app">  
+  <h2>Mindful Maze</h2>  
+  <p>Navigate through the maze and reflect at checkpoints to reduce stress.</p>  
+  <div id="maze-container"></div>  
+  <div id="reflection">  
+    <h3>Reflection Time</h3>  
+    <p>How are you feeling right now? Write your thoughts below:</p>  
+    <textarea id="reflection-textarea"></textarea>  
+    <button id="continue-button">Continue</button>  
+  </div>  
+</div>  
+<script>  
+// JavaScript logic here  
+const mazeContainer = document.getElementById('maze-container');  
+const reflectionDiv = document.getElementById('reflection');  
+const reflectionTextarea = document.getElementById('reflection-textarea');  
+const continueButton = document.getElementById('continue-button');  
+const mazeSize = 5;  
+let currentPosition = { x: 0, y: 0 };  
+let finished = false;  
+  
+function createMaze() {  
+  mazeContainer.innerHTML = '';  
+  for (let y = 0; y < mazeSize; y++) {  
+    for (let x = 0; x < mazeSize; x++) {  
+      const cell = document.createElement('div');  
+      cell.classList.add('cell');  
+      cell.dataset.x = x;  
+      cell.dataset.y = y;  
+      if (x === 0 && y === 0) {  
+        cell.classList.add('current');  
+      } else if (x === Math.floor(Math.random() * mazeSize) && y === Math.floor(Math.random() * mazeSize)) {  
+        cell.classList.add('checkpoint');  
+      } else if (x === mazeSize - 1 && y === mazeSize - 1) {  
+        cell.classList.add('finish');  
+      }  
+      mazeContainer.appendChild(cell);  
+    }  
+  }  
+}  
+  
+function movePlayer(x, y) {  
+  if (finished) return;  
+  const newCell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);  
+  if (newCell) {  
+    document.querySelector('.cell.current').classList.remove('current');  
+    newCell.classList.add('current');  
+    currentPosition = { x, y };  
+    if (newCell.classList.contains('checkpoint')) {  
+      reflectionDiv.style.display = 'block';  
+    } else if (newCell.classList.contains('finish')) {  
+      alert('Congrats! You completed the maze.');  
+      finished = true;  
+    }  
+  }  
+}  
+
+function handleKeyPress(event) {  
+  switch (event.key) {  
+    case 'ArrowUp':  
+      movePlayer(currentPosition.x, currentPosition.y - 1);  
+      break;  
+    case 'ArrowDown':  
+      movePlayer(currentPosition.x, currentPosition.y + 1);  
+      break;  
+    case 'ArrowLeft':  
+      movePlayer(currentPosition.x - 1, currentPosition.y);  
+      break;  
+    case 'ArrowRight':  
+      movePlayer(currentPosition.x + 1, currentPosition.y);  
+      break;  
+  }  
+}  
+  
+continueButton.addEventListener('click', () => {  
+  reflectionTextarea.value = '';  
+  reflectionDiv.style.display = 'none';  
+});  
+  
+document.addEventListener('keydown', handleKeyPress);  
+createMaze();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

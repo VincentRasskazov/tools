@@ -1,0 +1,163 @@
+---
+layout: null
+title: "PhishDetect Interactive Lab"
+category: "Cybersecurity"
+description: "An engaging mini-game where users analyze simulated emails to spot phishing attempts and improve their cybersecurity awareness."
+permalink: "/tools/daily-20260713-02-phishdetect-interactive-lab.html"
+generated_by: "api-true-ai"
+generated_date: "20260713"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhishDetect Interactive Lab | Free Online Interactive Tool</title>
+  <meta name="description" content="An engaging mini-game where users analyze simulated emails to spot phishing attempts and improve their cybersecurity awareness. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PhishDetect Interactive Lab | Free Online Interactive Tool">
+  <meta property="og:description" content="An engaging mini-game where users analyze simulated emails to spot phishing attempts and improve their cybersecurity awareness. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PhishDetect Interactive Lab | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An engaging mini-game where users analyze simulated emails to spot phishing attempts and improve their cybersecurity awareness. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PhishDetect Interactive Lab</h1>
+    <p class="seo-subtitle">An engaging mini-game where users analyze simulated emails to spot phishing attempts and improve their cybersecurity awareness.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  background-color: #1a1a2e;  
+  color: #e0e0e0;  
+}  
+#tool-app {  
+  width: 80%;  
+  margin-top: 20px;  
+  border-radius: 8px;  
+  background-color: #0f3460;  
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);  
+  padding: 20px;  
+}  
+.email-container {  
+  margin: 20px;  
+  padding: 15px;  
+  border: 1px solid #16213e;  
+  background-color: #e94560;  
+  border-radius: 5px;  
+}  
+.options {  
+  display: flex;  
+  justify-content: space-between;  
+  margin-top: 10px;  
+}  
+button {  
+  cursor: pointer;  
+  padding: 10px 20px;  
+  background-color: #16213e;  
+  color: #e0e0e0;  
+  border: none;  
+  border-radius: 5px;  
+  transition: background-color 0.3s ease;  
+}  
+button:hover {  
+  background-color: #e94560;  
+}  
+.score-container {  
+  margin-top: 20px;  
+  padding: 15px;  
+  background-color: #0f3460;  
+  border-radius: 8px;  
+  text-align: center;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>PhishDetect Interactive Lab</h1>  
+  <div id="email-display"></div>  
+  <div id="score-display" class="score-container">  
+    <h3>Score: <span id="score">0</span></h3>  
+  </div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const emails = [  
+  {  
+    text: "Dear user, your account is about to expire. Click here to renew it immediately: http://fake-link.com",  
+    isPhishing: true  
+  },  
+  {  
+    text: "Reminder: Your meeting with the HR team is scheduled for 3 PM today. Please call if you need to reschedule.",  
+    isPhishing: false  
+  },  
+  {  
+    text: "Congratulations! You've won a free iPhone. Claim your prize by clicking here: http://scam-link.xyz",  
+    isPhishing: true  
+  },  
+  {  
+    text: "Hi John, please find attached the project document for your review. Let me know your thoughts.",  
+    isPhishing: false  
+  }  
+];  
+
+let score = 0;  
+const emailDisplay = document.getElementById('email-display');  
+const scoreDisplay = document.getElementById('score');  
+
+function loadEmail() {  
+  emailDisplay.innerHTML = '';  
+  const email = emails[Math.floor(Math.random() * emails.length)];  
+
+  const emailDiv = document.createElement('div');  
+  emailDiv.classList.add('email-container');  
+  emailDiv.innerHTML = `<p>${email.text}</p>`;  
+
+  const optionsDiv = document.createElement('div');  
+  optionsDiv.classList.add('options');  
+
+  const safeButton = document.createElement('button');  
+  safeButton.textContent = "Safe";  
+  safeButton.onclick = () => handleAnswer(false, email.isPhishing);  
+
+  const phishingButton = document.createElement('button');  
+  phishingButton.textContent = "Phishing";  
+  phishingButton.onclick = () => handleAnswer(true, email.isPhishing);  
+
+  optionsDiv.appendChild(safeButton);  
+  optionsDiv.appendChild(phishingButton);  
+  emailDiv.appendChild(optionsDiv);  
+  emailDisplay.appendChild(emailDiv);  
+}  
+
+function handleAnswer(userAnswer, actualAnswer) {  
+  if (userAnswer === actualAnswer) {  
+    score++;  
+  } else {  
+    score--;  
+  }  
+  scoreDisplay.textContent = score;  
+  loadEmail();  
+}  
+
+loadEmail();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

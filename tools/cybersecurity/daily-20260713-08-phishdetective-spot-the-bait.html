@@ -1,0 +1,110 @@
+---
+layout: null
+title: "PhishDetective: Spot the Bait"
+category: "Cybersecurity"
+description: "An interactive mini-game where players identify phishing attempts in simulated emails, messages, and websites to sharpen their cybersecurity instincts."
+permalink: "/tools/daily-20260713-08-phishdetective-spot-the-bait.html"
+generated_by: "api-true-ai"
+generated_date: "20260713"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhishDetective: Spot the Bait | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive mini-game where players identify phishing attempts in simulated emails, messages, and websites to sharpen their cybersecurity instincts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PhishDetective: Spot the Bait | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive mini-game where players identify phishing attempts in simulated emails, messages, and websites to sharpen their cybersecurity instincts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PhishDetective: Spot the Bait | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive mini-game where players identify phishing attempts in simulated emails, messages, and websites to sharpen their cybersecurity instincts. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PhishDetective: Spot the Bait</h1>
+    <p class="seo-subtitle">An interactive mini-game where players identify phishing attempts in simulated emails, messages, and websites to sharpen their cybersecurity instincts.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f9; color: #333; }  
+  #tool-app { padding: 20px; max-width: 800px; margin: 50px auto; background: #fff; border: 1px solid #ddd; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px; }  
+  h1 { text-align: center; color: #007acc; }  
+  .email { border: 1px dashed #aaa; margin: 20px 0; padding: 15px; border-radius: 5px; background-color: #fdfdfd; }  
+  .options { text-align: center; margin-top: 15px; }  
+  .option-btn { padding: 10px 20px; margin: 10px; background: #007acc; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }  
+  .option-btn:hover { background: #005f99; }  
+  .result { text-align: center; margin-top: 20px; font-size: 18px; background: #e0f7fa; padding: 10px; border-radius: 5px; }  
+</style>  
+<div id="tool-app">  
+  <h1>PhishDetective: Spot the Bait</h1>  
+  <div class="email" id="email-content">  
+    <!-- Email content will be dynamically generated here -->  
+  </div>  
+  <div class="options">  
+    <button class="option-btn" onclick="handleSelection(true)">Mark as Phishing</button>  
+    <button class="option-btn" onclick="handleSelection(false)">Mark as Safe</button>  
+  </div>  
+  <div id="result" class="result"></div>  
+</div>  
+<script>  
+  const emails = [  
+    {  
+      text: "Urgent: Your account has been locked! Click here to reset your password immediately.",  
+      isPhishing: true  
+    },  
+    {  
+      text: "Reminder: Your Netflix subscription will renew on October 30. Thank you for being a valued customer.",  
+      isPhishing: false  
+    },  
+    {  
+      text: "Congratulations! You've won a $500 gift card. Claim your prize by entering your bank details.",  
+      isPhishing: true  
+    },  
+    {  
+      text: "Dear customer, your recent order #34567 has been shipped. Track your parcel here.",  
+      isPhishing: false  
+    }  
+  ];  
+
+  let currentEmailIndex = 0;  
+  const emailContent = document.getElementById("email-content");  
+  const result = document.getElementById("result");  
+
+  function loadEmail(index) {  
+    const email = emails[index];  
+    emailContent.textContent = email.text;  
+    result.textContent = "";  
+  }  
+
+  function handleSelection(isPhishingSelected) {  
+    const email = emails[currentEmailIndex];  
+    if (isPhishingSelected === email.isPhishing) {  
+      result.textContent = "✅ Correct!";  
+      result.style.background = "#d4edda";  
+      result.style.color = "#155724";  
+    } else {  
+      result.textContent = "❌ Incorrect. Be careful!";  
+      result.style.background = "#f8d7da";  
+      result.style.color = "#721c24";  
+    }  
+    currentEmailIndex = (currentEmailIndex + 1) % emails.length;  
+    setTimeout(() => loadEmail(currentEmailIndex), 1500);  
+  }  
+
+  loadEmail(currentEmailIndex);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

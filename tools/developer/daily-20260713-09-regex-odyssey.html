@@ -1,0 +1,139 @@
+---
+layout: null
+title: "Regex Odyssey"
+category: "Developer"
+description: "Embark on a gamified journey to master regular expressions by solving interactive puzzles and matching patterns in real-time."
+permalink: "/tools/daily-20260713-09-regex-odyssey.html"
+generated_by: "api-true-ai"
+generated_date: "20260713"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Odyssey | Free Online Interactive Tool</title>
+  <meta name="description" content="Embark on a gamified journey to master regular expressions by solving interactive puzzles and matching patterns in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Regex Odyssey | Free Online Interactive Tool">
+  <meta property="og:description" content="Embark on a gamified journey to master regular expressions by solving interactive puzzles and matching patterns in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Regex Odyssey | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Embark on a gamified journey to master regular expressions by solving interactive puzzles and matching patterns in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Regex Odyssey</h1>
+    <p class="seo-subtitle">Embark on a gamified journey to master regular expressions by solving interactive puzzles and matching patterns in real-time.</p>
+    <style>  
+#tool-app {  
+  font-family: Arial, sans-serif;  
+  color: #2c3e50;  
+  text-align: center;  
+  margin: 50px;  
+}  
+#game-board {  
+  display: grid;  
+  grid-template-columns: repeat(5, 1fr);  
+  gap: 10px;  
+}  
+.cell {  
+  background-color: #ecf0f1;  
+  border: 1px solid #bdc3c7;  
+  padding: 20px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  user-select: none;  
+}  
+.cell.match {  
+  background-color: #2ecc71;  
+  color: white;  
+}  
+.cell.no-match {  
+  background-color: #e74c3c;  
+  color: white;  
+}  
+#regex-input {  
+  margin: 20px;  
+  padding: 10px;  
+  font-size: 16px;  
+  border: 1px solid #bdc3c7;  
+  border-radius: 5px;  
+  width: 300px;  
+}  
+#submit-btn {  
+  margin-top: 10px;  
+  padding: 10px 20px;  
+  background-color: #3498db;  
+  color: white;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer;  
+}  
+#submit-btn:hover {  
+  background-color: #2980b9;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Regex Odyssey</h1>  
+  <p>Enter a regular expression to find matching patterns among the cells!</p>  
+  <input id="regex-input" type="text" placeholder="Enter your regex here" />  
+  <button id="submit-btn">Test Regex</button>  
+  <div id="game-board"></div>  
+</div>  
+<script>  
+// Generate random strings for the game board  
+const generateRandomString = () => {  
+  const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';  
+  let result = '';  
+  for (let i = 0; i < 5; i++) {  
+    result += chars.charAt(Math.floor(Math.random() * chars.length));  
+  }  
+  return result;  
+};  
+
+// Create the game board  
+const board = [];  
+for (let i = 0; i < 25; i++) {  
+  board.push(generateRandomString());  
+}  
+
+const gameBoard = document.getElementById('game-board');  
+board.forEach((text, index) => {  
+  const cell = document.createElement('div');  
+  cell.classList.add('cell');  
+  cell.textContent = text;  
+  gameBoard.appendChild(cell);  
+});  
+
+// Attach event listener to the button  
+document.getElementById('submit-btn').addEventListener('click', () => {  
+  const regexInput = document.getElementById('regex-input').value;  
+  const regex = new RegExp(regexInput);  
+  const cells = document.querySelectorAll('.cell');  
+  cells.forEach(cell => {  
+    if (regex.test(cell.textContent)) {  
+      cell.classList.add('match');  
+      cell.classList.remove('no-match');  
+    } else {  
+      cell.classList.add('no-match');  
+      cell.classList.remove('match');  
+    }  
+  });  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
