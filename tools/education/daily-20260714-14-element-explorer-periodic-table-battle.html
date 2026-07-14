@@ -1,0 +1,171 @@
+---
+layout: null
+title: "Element Explorer: Periodic Table Battle"
+category: "Education"
+description: "A gamified periodic table where users duel an AI by solving element-based puzzles, matching properties, and identifying compounds to \"capture\" elements."
+permalink: "/tools/daily-20260714-14-element-explorer-periodic-table-battle.html"
+generated_by: "api-true-ai"
+generated_date: "20260714"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Element Explorer: Periodic Table Battle | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified periodic table where users duel an AI by solving element-based puzzles, matching properties, and identifying compounds to &quot;capture&quot; elements. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Element Explorer: Periodic Table Battle | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified periodic table where users duel an AI by solving element-based puzzles, matching properties, and identifying compounds to &quot;capture&quot; elements. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Element Explorer: Periodic Table Battle | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified periodic table where users duel an AI by solving element-based puzzles, matching properties, and identifying compounds to &quot;capture&quot; elements. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Element Explorer: Periodic Table Battle</h1>
+    <p class="seo-subtitle">A gamified periodic table where users duel an AI by solving element-based puzzles, matching properties, and identifying compounds to &quot;capture&quot; elements.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: 'Arial', sans-serif;  
+  background: linear-gradient(120deg, #4facfe, #00f2fe);  
+  color: #333;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  background: #fff;  
+  border-radius: 12px;  
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);  
+  width: 80%;  
+  max-width: 900px;  
+  padding: 20px;  
+  text-align: center;  
+}  
+.header {  
+  font-size: 24px;  
+  margin-bottom: 10px;  
+}  
+.board {  
+  display: grid;  
+  grid-template-columns: repeat(10, 1fr);  
+  gap: 8px;  
+  margin: 20px 0;  
+}  
+.element {  
+  padding: 10px;  
+  background: #4facfe;  
+  border-radius: 6px;  
+  color: white;  
+  font-weight: bold;  
+  cursor: pointer;  
+  transition: transform 0.2s, background 0.2s;  
+}  
+.element:hover {  
+  background: #00c6ff;  
+  transform: scale(1.1);  
+}  
+#status {  
+  margin-top: 20px;  
+  font-size: 18px;  
+}  
+.button {  
+  background-color: #00b894;  
+  border: none;  
+  color: white;  
+  padding: 10px 20px;  
+  font-size: 16px;  
+  border-radius: 6px;  
+  cursor: pointer;  
+  transition: background-color 0.2s;  
+}  
+.button:hover {  
+  background-color: #019374;  
+}  
+</style>  
+<div id="tool-app">  
+  <div class="header">Element Explorer: Periodic Table Battle</div>  
+  <div class="board" id="periodic-table"></div>  
+  <button class="button" id="start-game">Start Game</button>  
+  <div id="status">Click "Start Game" to begin!</div>  
+</div>  
+<script>  
+const elements = [  
+  { symbol: 'H', name: 'Hydrogen' }, { symbol: 'He', name: 'Helium' },  
+  { symbol: 'Li', name: 'Lithium' }, { symbol: 'Be', name: 'Beryllium' },  
+  { symbol: 'B', name: 'Boron' }, { symbol: 'C', name: 'Carbon' },  
+  { symbol: 'N', name: 'Nitrogen' }, { symbol: 'O', name: 'Oxygen' },  
+  { symbol: 'F', name: 'Fluorine' }, { symbol: 'Ne', name: 'Neon' }  
+];  
+
+const table = document.getElementById('periodic-table');  
+const statusDiv = document.getElementById('status');  
+const startButton = document.getElementById('start-game');  
+
+let playerTurn = true;  
+let captured = [];  
+
+function renderTable() {  
+  table.innerHTML = '';  
+  elements.forEach((el, index) => {  
+    const elDiv = document.createElement('div');  
+    elDiv.classList.add('element');  
+    elDiv.textContent = el.symbol;  
+    elDiv.onclick = () => {  
+      if (captured.includes(index)) return;  
+      if (playerTurn) {  
+        captured.push(index);  
+        elDiv.style.background = '#00b894';  
+        elDiv.style.pointerEvents = 'none';  
+        statusDiv.innerHTML = `You captured ${el.name}! AI's turn...`;  
+        playerTurn = false;  
+        setTimeout(aiTurn, 1000);  
+      }  
+    };  
+    table.appendChild(elDiv);  
+  });  
+}  
+
+function aiTurn() {  
+  let available = elements.map((_, i) => i).filter(i => !captured.includes(i));  
+  if (available.length === 0) {  
+    statusDiv.innerHTML = 'Game Over! No more elements to capture.';  
+    return;  
+  }  
+  let choice = available[Math.floor(Math.random() * available.length)];  
+  captured.push(choice);  
+  statusDiv.innerHTML = `AI captured ${elements[choice].name}! Your turn.`;  
+  renderTable();  
+  playerTurn = true;  
+}  
+
+startButton.onclick = () => {  
+  captured = [];  
+  playerTurn = true;  
+  statusDiv.innerHTML = 'Game Started! Your turn.';  
+  renderTable();  
+};  
+
+renderTable();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

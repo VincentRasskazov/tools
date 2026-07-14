@@ -1,0 +1,144 @@
+---
+layout: null
+title: "WordMorph: Semantic Evolution Playground"
+category: "Writing"
+description: "Explore how individual words transform into entirely new meanings through a dynamic, interactive semantic evolution game."
+permalink: "/tools/daily-20260714-10-wordmorph-semantic-evolution-playground.html"
+generated_by: "api-true-ai"
+generated_date: "20260714"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordMorph: Semantic Evolution Playground | Free Online Interactive Tool</title>
+  <meta name="description" content="Explore how individual words transform into entirely new meanings through a dynamic, interactive semantic evolution game. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="WordMorph: Semantic Evolution Playground | Free Online Interactive Tool">
+  <meta property="og:description" content="Explore how individual words transform into entirely new meanings through a dynamic, interactive semantic evolution game. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WordMorph: Semantic Evolution Playground | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Explore how individual words transform into entirely new meanings through a dynamic, interactive semantic evolution game. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>WordMorph: Semantic Evolution Playground</h1>
+    <p class="seo-subtitle">Explore how individual words transform into entirely new meanings through a dynamic, interactive semantic evolution game.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(90deg, #f6d365, #fda085);  
+  color: #333;  
+  margin: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  text-align: center;  
+  background: white;  
+  padding: 20px;  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  
+  border-radius: 10px;  
+  width: 80%;  
+  max-width: 600px;  
+}  
+#word-box {  
+  font-size: 24px;  
+  font-weight: bold;  
+  margin: 20px 0;  
+  color: #444;  
+}  
+#input-field {  
+  width: 80%;  
+  padding: 10px;  
+  margin: 10px 0;  
+  border: 1px solid #ddd;  
+  border-radius: 5px;  
+  font-size: 16px;  
+}  
+#submit-btn {  
+  padding: 10px 20px;  
+  background-color: #f67e7d;  
+  color: white;  
+  border: none;  
+  border-radius: 5px;  
+  font-size: 16px;  
+  cursor: pointer;  
+  transition: background-color 0.3s;  
+}  
+#submit-btn:hover {  
+  background-color: #f45d4c;  
+}  
+#history {  
+  text-align: left;  
+  margin-top: 20px;  
+  padding: 10px;  
+  background-color: #f9f9f9;  
+  border: 1px solid #eee;  
+  border-radius: 5px;  
+  max-height: 200px;  
+  overflow-y: auto;  
+}  
+.word-evolution {  
+  margin: 5px 0;  
+  font-size: 14px;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>WordMorph</h1>  
+  <p>Start with a word and watch how its meaning evolves as you add context!</p>  
+  <div id="word-box">"Invent"</div>  
+  <input type="text" id="input-field" placeholder="Add a related word or phrase..." />  
+  <button id="submit-btn">Evolve!</button>  
+  <div id="history">  
+    <h3>Word Evolution History:</h3>  
+  </div>  
+</div>  
+<script>  
+const wordBox = document.getElementById('word-box');  
+const inputField = document.getElementById('input-field');  
+const submitBtn = document.getElementById('submit-btn');  
+const history = document.getElementById('history');  
+  
+let currentWord = 'Invent';  
+let historyLog = [`<span>Start: "${currentWord}"</span>`];  
+  
+submitBtn.addEventListener('click', () => {  
+  const userInput = inputField.value.trim();  
+  if (userInput) {  
+    currentWord = evolveWord(currentWord, userInput);  
+    wordBox.textContent = `"${currentWord}"`;  
+    historyLog.push(`<span class="word-evolution">"${userInput}" ➡ "${currentWord}"</span>`);  
+    renderHistory();  
+    inputField.value = '';  
+  }  
+});  
+  
+function evolveWord(word, context) {  
+  const randomChar = String.fromCharCode(97 + Math.floor(Math.random() * 26));  
+  return `${word.slice(0, Math.floor(word.length / 2))}${randomChar}${context.slice(-3)}`;  
+}  
+  
+function renderHistory() {  
+  history.innerHTML = `<h3>Word Evolution History:</h3>${historyLog.join('<br>')}`;  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
