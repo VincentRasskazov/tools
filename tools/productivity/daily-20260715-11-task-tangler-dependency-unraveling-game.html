@@ -1,0 +1,196 @@
+---
+layout: null
+title: "Task Tangler: Dependency Unraveling Game"
+category: "Productivity"
+description: "A visual and interactive mini-game where users untangle task dependencies to better plan and prioritize their projects."
+permalink: "/tools/daily-20260715-11-task-tangler-dependency-unraveling-game.html"
+generated_by: "api-true-ai"
+generated_date: "20260715"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Tangler: Dependency Unraveling Game | Free Online Interactive Tool</title>
+  <meta name="description" content="A visual and interactive mini-game where users untangle task dependencies to better plan and prioritize their projects. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Task Tangler: Dependency Unraveling Game | Free Online Interactive Tool">
+  <meta property="og:description" content="A visual and interactive mini-game where users untangle task dependencies to better plan and prioritize their projects. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Task Tangler: Dependency Unraveling Game | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A visual and interactive mini-game where users untangle task dependencies to better plan and prioritize their projects. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Task Tangler: Dependency Unraveling Game</h1>
+    <p class="seo-subtitle">A visual and interactive mini-game where users untangle task dependencies to better plan and prioritize their projects.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: 'Arial', sans-serif;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+  background: linear-gradient(135deg, #74ebd5, #9face6);  
+}  
+#tool-app {  
+  background: #ffffff;  
+  border-radius: 12px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);  
+  width: 80%;  
+  max-width: 600px;  
+  padding: 20px;  
+  text-align: center;  
+}  
+.node {  
+  width: 100px;  
+  height: 100px;  
+  border-radius: 50%;  
+  background: #6c63ff;  
+  color: #fff;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  position: absolute;  
+  cursor: pointer;  
+  font-size: 14px;  
+  font-weight: bold;  
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);  
+}  
+.connection {  
+  position: absolute;  
+  width: 2px;  
+  background: #6c63ff;  
+  transform-origin: top left;  
+}  
+</style>  
+<div id="tool-app">  
+  <h2>Task Tangler</h2>  
+  <p>Untangle the tasks by dragging the nodes until no lines cross!</p>  
+  <div id="play-area" style="position:relative; width:100%; height:400px; background:#f5f5f5; border:1px solid #ddd; border-radius:8px; overflow:hidden;"></div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+(function() {  
+  const app = document.getElementById('play-area');  
+  const nodes = [  
+    { id: 1, x: 50, y: 50, label: "Task A" },  
+    { id: 2, x: 300, y: 80, label: "Task B" },  
+    { id: 3, x: 150, y: 300, label: "Task C" },  
+    { id: 4, x: 400, y: 250, label: "Task D" }  
+  ];  
+  const connections = [  
+    { from: 1, to: 2 },  
+    { from: 1, to: 3 },  
+    { from: 2, to: 4 },  
+    { from: 3, to: 4 }  
+  ];  
+  const elements = {};  
+
+  function createNode(node) {  
+    const div = document.createElement('div');  
+    div.classList.add('node');  
+    div.style.left = `${node.x}px`;  
+    div.style.top = `${node.y}px`;  
+    div.textContent = node.label;  
+    div.draggable = true;  
+    div.addEventListener('dragstart', dragStart);  
+    div.addEventListener('drag', drag);  
+    div.addEventListener('dragend', dragEnd);  
+    app.appendChild(div);  
+    elements[node.id] = div;  
+  }  
+
+  function createConnection(line) {  
+    const div = document.createElement('div');  
+    div.classList.add('connection');  
+    app.appendChild(div);  
+    updateConnection(line, div);  
+    elements[`${line.from}-${line.to}`] = div;  
+  }  
+
+  function updateConnection(line, div) {  
+    const start = elements[line.from].getBoundingClientRect();  
+    const end = elements[line.to].getBoundingClientRect();  
+    const x1 = start.left + start.width / 2;  
+    const y1 = start.top + start.height / 2;  
+    const x2 = end.left + end.width / 2;  
+    const y2 = end.top + end.height / 2;  
+    const length = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);  
+    const angle = Math.atan2(y2 - y1, x2 - x1) * (180 / Math.PI);  
+    div.style.width = `${length}px`;  
+    div.style.transform = `rotate(${angle}deg)`;  
+    div.style.left = `${x1}px`;  
+    div.style.top = `${y1}px`;  
+  }  
+
+  function dragStart(e) {  
+    e.dataTransfer.setData('text', e.target.textContent);  
+  }  
+
+  function drag(e) {  
+    if (e.clientX === 0 && e.clientY === 0) return;  
+    const target = e.target;  
+    target.style.left = `${e.clientX - 50}px`;  
+    target.style.top = `${e.clientY - 50}px`;  
+    const id = parseInt(target.textContent.split(' ')[1]);  
+    nodes.find(n => n.id === id).x = e.clientX - 50;  
+    nodes.find(n => n.id === id).y = e.clientY - 50;  
+    connections.forEach(line => {  
+      updateConnection(line, elements[`${line.from}-${line.to}`]);  
+    });  
+  }  
+
+  function dragEnd() {  
+    checkSolved();  
+  }  
+
+  function checkSolved() {  
+    let isSolved = true;  
+    for (let i = 0; i < connections.length; i++) {  
+      for (let j = i + 1; j < connections.length; j++) {  
+        if (linesCross(connections[i], connections[j])) {  
+          isSolved = false;  
+        }  
+      }  
+    }  
+    if (isSolved) {  
+      alert('Congratulations! You have untangled the tasks!');  
+    }  
+  }  
+
+  function linesCross(line1, line2) {  
+    const a = nodes.find(n => n.id === line1.from);  
+    const b = nodes.find(n => n.id === line1.to);  
+    const c = nodes.find(n => n.id === line2.from);  
+    const d = nodes.find(n => n.id === line2.to);  
+
+    function ccw(p1, p2, p3) {  
+      return (p3.y - p1.y) * (p2.x - p1.x) > (p2.y - p1.y) * (p3.x - p1.x);  
+    }  
+
+    return (ccw(a, c, d) !== ccw(b, c, d)) && (ccw(a, b, c) !== ccw(a, b, d));  
+  }  
+
+  nodes.forEach(createNode);  
+  connections.forEach(createConnection);  
+})();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

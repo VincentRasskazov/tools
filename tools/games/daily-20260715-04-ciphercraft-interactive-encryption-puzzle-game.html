@@ -1,0 +1,188 @@
+---
+layout: null
+title: "CipherCraft: Interactive Encryption Puzzle Game"
+category: "Games"
+description: "A gamified tool where users solve encryption puzzles by experimenting with ciphers, keys, and decoding mechanisms to unlock secret messages."
+permalink: "/tools/daily-20260715-04-ciphercraft-interactive-encryption-puzzle-game.html"
+generated_by: "api-true-ai"
+generated_date: "20260715"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CipherCraft: Interactive Encryption Puzzle Game | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool where users solve encryption puzzles by experimenting with ciphers, keys, and decoding mechanisms to unlock secret messages. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CipherCraft: Interactive Encryption Puzzle Game | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool where users solve encryption puzzles by experimenting with ciphers, keys, and decoding mechanisms to unlock secret messages. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CipherCraft: Interactive Encryption Puzzle Game | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool where users solve encryption puzzles by experimenting with ciphers, keys, and decoding mechanisms to unlock secret messages. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CipherCraft: Interactive Encryption Puzzle Game</h1>
+    <p class="seo-subtitle">A gamified tool where users solve encryption puzzles by experimenting with ciphers, keys, and decoding mechanisms to unlock secret messages.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(120deg, #1e3c72, #2a5298);  
+  color: #fff;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  background: rgba(255, 255, 255, 0.1);  
+  border: 2px solid rgba(255, 255, 255, 0.2);  
+  border-radius: 15px;  
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);  
+  width: 80%;  
+  max-width: 800px;  
+  padding: 20px;  
+}  
+#display {  
+  font-family: monospace;  
+  background: rgba(0, 0, 0, 0.5);  
+  padding: 10px;  
+  border-radius: 10px;  
+  margin-bottom: 20px;  
+  font-size: 1.2em;  
+  white-space: pre-line;  
+}  
+button {  
+  background: #4caf50;  
+  border: none;  
+  color: white;  
+  padding: 10px 20px;  
+  text-align: center;  
+  font-size: 1em;  
+  margin: 5px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+button:hover {  
+  background: #45a049;  
+}  
+input, select {  
+  padding: 10px;  
+  margin: 5px 10px;  
+  border: 1px solid #ccc;  
+  border-radius: 5px;  
+  font-size: 1em;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="display">Decrypt this: <span id="cipheredMessage">Uryyb Jbeyq</span></div>  
+  <div>  
+    <label for="cipherType">Cipher Type:</label>  
+    <select id="cipherType">  
+      <option value="rot13">ROT13</option>  
+      <option value="caesar">Caesar</option>  
+      <option value="vigenere">Vigenère</option>  
+    </select>  
+  </div>  
+  <div id="keyInputContainer">  
+    <label for="keyInput">Key (optional):</label>  
+    <input type="text" id="keyInput" />  
+  </div>  
+  <button id="attemptDecrypt">Attempt Decrypt</button>  
+  <div>Message: <span id="result">???</span></div>  
+</div>  
+<script>  
+const messages = [  
+  { text: "Uryyb Jbeyq", cipher: "rot13", key: "" },  
+  { text: "Khoor Zruog", cipher: "caesar", key: "3" },  
+  { text: "Lxfopv EfRnhr", cipher: "vigenere", key: "LEMON" }  
+];  
+  
+let currentMessageIndex = 0;  
+const display = document.getElementById("cipheredMessage");  
+const resultDisplay = document.getElementById("result");  
+const cipherTypeSelect = document.getElementById("cipherType");  
+const keyInput = document.getElementById("keyInput");  
+  
+function updateMessage() {  
+  const message = messages[currentMessageIndex];  
+  display.textContent = message.text;  
+}  
+  
+function decryptRot13(input) {  
+  return input.replace(/[a-zA-Z]/g, (char) => {  
+    const start = char <= "Z" ? 65 : 97;  
+    return String.fromCharCode(((char.charCodeAt(0) - start + 13) % 26) + start);  
+  });  
+}  
+  
+function decryptCaesar(input, shift) {  
+  return input.replace(/[a-zA-Z]/g, (char) => {  
+    const start = char <= "Z" ? 65 : 97;  
+    return String.fromCharCode(((char.charCodeAt(0) - start - shift + 26) % 26) + start);  
+  });  
+}  
+  
+function decryptVigenere(input, key) {  
+  let result = "";  
+  key = key.toUpperCase();  
+  let keyIndex = 0;  
+  for (let i = 0; i < input.length; i++) {  
+    const char = input[i];  
+    if (/[a-zA-Z]/.test(char)) {  
+      const start = char <= "Z" ? 65 : 97;  
+      const keyChar = key[keyIndex % key.length].charCodeAt(0) - 65;  
+      result += String.fromCharCode(((char.charCodeAt(0) - start - keyChar + 26) % 26) + start);  
+      keyIndex++;  
+    } else {  
+      result += char;  
+    }  
+  }  
+  return result;  
+}  
+  
+document.getElementById("attemptDecrypt").addEventListener("click", () => {  
+  const selectedCipher = cipherTypeSelect.value;  
+  const userKey = keyInput.value;  
+  const currentMessage = messages[currentMessageIndex];  
+  let decryptedMessage = "";  
+  
+  if (selectedCipher === "rot13") {  
+    decryptedMessage = decryptRot13(currentMessage.text);  
+  } else if (selectedCipher === "caesar") {  
+    decryptedMessage = decryptCaesar(currentMessage.text, parseInt(userKey) || 0);  
+  } else if (selectedCipher === "vigenere") {  
+    decryptedMessage = decryptVigenere(currentMessage.text, userKey || "");  
+  }  
+  
+  if (decryptedMessage === "Hello World" || decryptedMessage === "HELLO WORLD") {  
+    resultDisplay.textContent = "Correct! The message is: " + decryptedMessage;  
+    currentMessageIndex = (currentMessageIndex + 1) % messages.length;  
+    updateMessage();  
+  } else {  
+    resultDisplay.textContent = "Incorrect. Try again.";  
+  }  
+});  
+  
+updateMessage();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

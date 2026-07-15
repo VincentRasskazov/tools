@@ -1,0 +1,139 @@
+---
+layout: null
+title: "FocusFlow: Interactive Distraction Tracker"
+category: "Productivity"
+description: "A single-page tool that lets users visually track and eliminate distractions by dragging and dropping tasks or interruptions into a \"focus funnel\" for analysis."
+permalink: "/tools/daily-20260715-09-focusflow-interactive-distraction-tracker.html"
+generated_by: "api-true-ai"
+generated_date: "20260715"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusFlow: Interactive Distraction Tracker | Free Online Interactive Tool</title>
+  <meta name="description" content="A single-page tool that lets users visually track and eliminate distractions by dragging and dropping tasks or interruptions into a &quot;focus funnel&quot; for analysis. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="FocusFlow: Interactive Distraction Tracker | Free Online Interactive Tool">
+  <meta property="og:description" content="A single-page tool that lets users visually track and eliminate distractions by dragging and dropping tasks or interruptions into a &quot;focus funnel&quot; for analysis. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FocusFlow: Interactive Distraction Tracker | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A single-page tool that lets users visually track and eliminate distractions by dragging and dropping tasks or interruptions into a &quot;focus funnel&quot; for analysis. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>FocusFlow: Interactive Distraction Tracker</h1>
+    <p class="seo-subtitle">A single-page tool that lets users visually track and eliminate distractions by dragging and dropping tasks or interruptions into a &quot;focus funnel&quot; for analysis.</p>
+    <style>  
+  #tool-app {  
+    font-family: Arial, sans-serif;  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    margin: 20px;  
+  }  
+  h1 {  
+    color: #4CAF50;  
+    margin-bottom: 20px;  
+  }  
+  .funnel-area {  
+    border: 3px dashed #4CAF50;  
+    width: 300px;  
+    height: 400px;  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    justify-content: center;  
+    margin-bottom: 20px;  
+    position: relative;  
+    overflow: hidden;  
+  }  
+  .funnel-item {  
+    background-color: #FFD54F;  
+    padding: 10px 15px;  
+    margin: 10px;  
+    border-radius: 5px;  
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);  
+    cursor: grab;  
+  }  
+  #distraction-input {  
+    margin-top: 10px;  
+    padding: 10px;  
+    border: 1px solid #ccc;  
+    border-radius: 5px;  
+    width: 300px;  
+  }  
+  #add-distraction {  
+    margin-top: 10px;  
+    background-color: #4CAF50;  
+    color: white;  
+    border: none;  
+    padding: 10px;  
+    border-radius: 5px;  
+    cursor: pointer;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h1>FocusFlow: Interactive Distraction Tracker</h1>  
+  <div class="funnel-area" id="funnel">  
+    <span id="empty-message">Drag distractions here to analyze focus!</span>  
+  </div>  
+  <input type="text" id="distraction-input" placeholder="Type a distraction..." />  
+  <button id="add-distraction">Add Distraction</button>  
+</div>  
+<script>  
+const funnel = document.getElementById("funnel");  
+const distractionInput = document.getElementById("distraction-input");  
+const addDistractionBtn = document.getElementById("add-distraction");  
+const emptyMessage = document.getElementById("empty-message");  
+
+addDistractionBtn.addEventListener("click", () => {  
+  const text = distractionInput.value.trim();  
+  if (text === "") return;  
+
+  const item = document.createElement("div");  
+  item.className = "funnel-item";  
+  item.textContent = text;  
+  item.draggable = true;  
+  funnel.appendChild(item);  
+  distractionInput.value = "";  
+  updateEmptyMessage();  
+
+  item.addEventListener("dragstart", (e) => {  
+    e.dataTransfer.setData("text/plain", e.target.textContent);  
+  });  
+});  
+
+funnel.addEventListener("dragover", (e) => {  
+  e.preventDefault();  
+});  
+
+funnel.addEventListener("drop", (e) => {  
+  const droppedItemText = e.dataTransfer.getData("text/plain");  
+  const items = Array.from(funnel.getElementsByClassName("funnel-item"));  
+  const distractionCount = items.length;  
+  const focusIndex = 100 - distractionCount * 10;  
+  console.log(`Focus Index: ${focusIndex}%`);  
+});  
+
+function updateEmptyMessage() {  
+  const items = funnel.getElementsByClassName("funnel-item").length;  
+  emptyMessage.style.display = items === 0 ? "block" : "none";  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
