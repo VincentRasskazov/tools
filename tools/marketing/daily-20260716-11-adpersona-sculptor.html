@@ -1,0 +1,111 @@
+---
+layout: null
+title: "AdPersona Sculptor"
+category: "Marketing"
+description: "Create and refine AI-driven marketing personas by interacting with a dynamic, gamified decision-making tree based on user behaviors and preferences."
+permalink: "/tools/daily-20260716-11-adpersona-sculptor.html"
+generated_by: "api-true-ai"
+generated_date: "20260716"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdPersona Sculptor | Free Online Interactive Tool</title>
+  <meta name="description" content="Create and refine AI-driven marketing personas by interacting with a dynamic, gamified decision-making tree based on user behaviors and preferences. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="AdPersona Sculptor | Free Online Interactive Tool">
+  <meta property="og:description" content="Create and refine AI-driven marketing personas by interacting with a dynamic, gamified decision-making tree based on user behaviors and preferences. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AdPersona Sculptor | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Create and refine AI-driven marketing personas by interacting with a dynamic, gamified decision-making tree based on user behaviors and preferences. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>AdPersona Sculptor</h1>
+    <p class="seo-subtitle">Create and refine AI-driven marketing personas by interacting with a dynamic, gamified decision-making tree based on user behaviors and preferences.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f4f4f9; color: #333; }  
+  #tool-app { max-width: 800px; margin: 50px auto; background: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 5px; padding: 20px; }  
+  .persona-tree { list-style: none; padding-left: 20px; }  
+  .persona-node { margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 3px; background: #fafafa; cursor: pointer; transition: background 0.3s; }  
+  .persona-node:hover { background: #eef; }  
+  .result-box { margin-top: 20px; padding: 15px; background: #e8f5e9; border: 1px solid #c8e6c9; border-radius: 5px; }  
+  .result-heading { font-weight: bold; margin-bottom: 10px; }  
+</style>  
+<div id="tool-app">  
+  <h1>AdPersona Sculptor</h1>  
+  <p>Navigate your choices below to build a detailed marketing persona. Each choice shapes the personality and preference profile of your target audience.</p>  
+  <ul class="persona-tree" id="tree-root">  
+    <li class="persona-node" data-node="tech-savvy">Tech-Savvy Professional</li>  
+    <li class="persona-node" data-node="eco-conscious">Eco-Conscious Consumer</li>  
+    <li class="persona-node" data-node="budget-buyer">Budget-Focused Buyer</li>  
+  </ul>  
+  <div id="result" class="result-box" style="display: none;">  
+    <div class="result-heading">Your Persona:</div>  
+    <div id="persona-details"></div>  
+  </div>  
+</div>  
+<script>  
+  const treeData = {  
+    "tech-savvy": {  
+      description: "A forward-thinker who loves gadgets and cutting-edge technologies.",  
+      options: {  
+        "innovator": "Always seeking the newest innovation.",  
+        "problem-solver": "Focuses on tools that solve problems efficiently."  
+      }  
+    },  
+    "eco-conscious": {  
+      description: "A consumer who values sustainability and low environmental impact.",  
+      options: {  
+        "minimalist": "Prefers minimal consumption and waste.",  
+        "activist": "Engages in programs and campaigns for eco-awareness."  
+      }  
+    },  
+    "budget-buyer": {  
+      description: "A price-conscious individual who values affordability.",  
+      options: {  
+        "value-seeker": "Looks for the best deals and value for money.",  
+        "quality-conscious": "Prefers affordable yet durable products."  
+      }  
+    }  
+  };  
+
+  const root = document.getElementById("tree-root");  
+  const resultBox = document.getElementById("result");  
+  const personaDetails = document.getElementById("persona-details");  
+
+  root.addEventListener("click", (e) => {  
+    if (e.target.classList.contains("persona-node")) {  
+      const nodeId = e.target.dataset.node;  
+      const nodeData = treeData[nodeId];  
+      if (nodeData) {  
+        // Render next step  
+        personaDetails.innerHTML = `<p>${nodeData.description}</p><ul>` +  
+          Object.entries(nodeData.options)  
+            .map(([key, value]) => `<li class="persona-node" data-node="${key}">${value}</li>`)  
+            .join("") +  
+          `</ul>`;  
+
+        resultBox.style.display = "block";  
+        resultBox.scrollIntoView({ behavior: "smooth" });  
+      }  
+    }  
+  });  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

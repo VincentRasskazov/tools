@@ -1,0 +1,150 @@
+---
+layout: null
+title: "Campaign Galaxy Explorer"
+category: "Marketing"
+description: "Navigate a dynamic galaxy of marketing channels, where users interactively build and optimize campaigns by unlocking and connecting planets representing target audiences, platforms, and strategies."
+permalink: "/tools/daily-20260716-10-campaign-galaxy-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260716"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campaign Galaxy Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate a dynamic galaxy of marketing channels, where users interactively build and optimize campaigns by unlocking and connecting planets representing target audiences, platforms, and strategies. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Campaign Galaxy Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate a dynamic galaxy of marketing channels, where users interactively build and optimize campaigns by unlocking and connecting planets representing target audiences, platforms, and strategies. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Campaign Galaxy Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate a dynamic galaxy of marketing channels, where users interactively build and optimize campaigns by unlocking and connecting planets representing target audiences, platforms, and strategies. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Campaign Galaxy Explorer</h1>
+    <p class="seo-subtitle">Navigate a dynamic galaxy of marketing channels, where users interactively build and optimize campaigns by unlocking and connecting planets representing target audiences, platforms, and strategies.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background: radial-gradient(circle, #1a1a2e, #16213e);  
+  color: #ffffff;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  position: relative;  
+  width: 100vw;  
+  height: 100vh;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+}  
+.planet {  
+  width: 100px;  
+  height: 100px;  
+  border-radius: 50%;  
+  position: absolute;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  text-align: center;  
+  color: #fff;  
+  cursor: pointer;  
+  transform-origin: center;  
+  animation: rotate 20s linear infinite;  
+}  
+.planet:hover {  
+  transform: scale(1.2);  
+  animation-play-state: paused;  
+}  
+@keyframes rotate {  
+  0% { transform: rotate(0deg); }  
+  100% { transform: rotate(360deg); }  
+}  
+.connection {  
+  position: absolute;  
+  height: 2px;  
+  background: #ffffff88;  
+  transform-origin: 0 0;  
+}  
+</style>  
+<div id="tool-app">  
+</div>  
+<script>  
+const app = document.getElementById('tool-app');  
+
+// Create a galaxy of planets  
+const planets = [  
+  { id: 'social', name: 'Social Media', x: 300, y: 200, color: '#ff5722' },  
+  { id: 'email', name: 'Email Marketing', x: 500, y: 150, color: '#2196f3' },  
+  { id: 'seo', name: 'SEO', x: 700, y: 300, color: '#4caf50' },  
+  { id: 'ppc', name: 'PPC Ads', x: 400, y: 450, color: '#ffeb3b' },  
+  { id: 'content', name: 'Content Marketing', x: 600, y: 500, color: '#9c27b0' }  
+];  
+
+let connections = [];  
+
+function createPlanet(planet) {  
+  const planetDiv = document.createElement('div');  
+  planetDiv.className = 'planet';  
+  planetDiv.style.backgroundColor = planet.color;  
+  planetDiv.style.left = `${planet.x}px`;  
+  planetDiv.style.top = `${planet.y}px`;  
+  planetDiv.textContent = planet.name;  
+  planetDiv.addEventListener('click', () => toggleConnection(planet));  
+  app.appendChild(planetDiv);  
+}  
+
+function toggleConnection(planet) {  
+  const existing = connections.find(c => c.from === planet.id);  
+  if (existing) {  
+    connections = connections.filter(c => c.from !== planet.id);  
+    renderConnections();  
+  } else {  
+    const target = prompt('Connect to which channel? (social, email, seo, ppc, content)');  
+    if (target && target !== planet.id && planets.find(p => p.id === target)) {  
+      connections.push({ from: planet.id, to: target });  
+      renderConnections();  
+    }  
+  }  
+}  
+
+function renderConnections() {  
+  document.querySelectorAll('.connection').forEach(c => c.remove());  
+  connections.forEach(({ from, to }) => {  
+    const fromPlanet = planets.find(p => p.id === from);  
+    const toPlanet = planets.find(p => p.id === to);  
+    const line = document.createElement('div');  
+    line.className = 'connection';  
+    const dx = toPlanet.x - fromPlanet.x;  
+    const dy = toPlanet.y - fromPlanet.y;  
+    const length = Math.sqrt(dx * dx + dy * dy);  
+    line.style.width = `${length}px`;  
+    line.style.left = `${fromPlanet.x + 50}px`;  
+    line.style.top = `${fromPlanet.y + 50}px`;  
+    line.style.transform = `rotate(${Math.atan2(dy, dx)}rad)`;  
+    app.appendChild(line);  
+  });  
+}  
+
+planets.forEach(createPlanet);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

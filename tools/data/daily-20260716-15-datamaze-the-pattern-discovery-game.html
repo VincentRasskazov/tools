@@ -1,0 +1,198 @@
+---
+layout: null
+title: "DataMaze: The Pattern Discovery Game"
+category: "Data"
+description: "Navigate through a dynamic maze of shifting data points to uncover hidden patterns and solve analytical challenges."
+permalink: "/tools/daily-20260716-15-datamaze-the-pattern-discovery-game.html"
+generated_by: "api-true-ai"
+generated_date: "20260716"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataMaze: The Pattern Discovery Game | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate through a dynamic maze of shifting data points to uncover hidden patterns and solve analytical challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataMaze: The Pattern Discovery Game | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate through a dynamic maze of shifting data points to uncover hidden patterns and solve analytical challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataMaze: The Pattern Discovery Game | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate through a dynamic maze of shifting data points to uncover hidden patterns and solve analytical challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataMaze: The Pattern Discovery Game</h1>
+    <p class="seo-subtitle">Navigate through a dynamic maze of shifting data points to uncover hidden patterns and solve analytical challenges.</p>
+    <style>  
+  body {  
+    font-family: Arial, sans-serif;  
+    margin: 0;  
+    padding: 0;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+    background: linear-gradient(to right, #4facfe, #00f2fe);  
+  }  
+  #tool-app {  
+    background: #fff;  
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);  
+    border-radius: 10px;  
+    padding: 20px;  
+    width: 80%;  
+    max-width: 800px;  
+    height: 80%;  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    justify-content: center;  
+  }  
+  #maze-container {  
+    display: grid;  
+    grid-template-columns: repeat(10, 1fr);  
+    grid-gap: 5px;  
+    width: 100%;  
+    height: 70%;  
+  }  
+  .maze-cell {  
+    background: #efecec;  
+    border: 1px solid #ccc;  
+    border-radius: 4px;  
+    display: flex;  
+    align-items: center;  
+    justify-content: center;  
+    font-weight: bold;  
+    cursor: pointer;  
+    transition: background 0.3s, transform 0.2s;  
+  }  
+  .maze-cell.active {  
+    background: #4facfe;  
+    color: #fff;  
+    transform: scale(1.1);  
+  }  
+  #status-bar {  
+    margin-top: 20px;  
+    width: 100%;  
+    text-align: center;  
+    font-size: 1.2em;  
+    font-weight: bold;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h1>DataMaze</h1>  
+  <div id="maze-container"></div>  
+  <div id="status-bar">Find the hidden pattern!</div>  
+</div>  
+<script>  
+  const app = document.getElementById('tool-app');  
+  const mazeContainer = document.getElementById('maze-container');  
+  const statusBar = document.getElementById('status-bar');  
+
+  const mazeSize = 10;  
+  const patternLength = 3;  
+  let cellData = [];  
+  let activePattern = [];  
+  let userPattern = [];  
+
+  // Initialize the maze  
+  function createMaze() {  
+    mazeContainer.innerHTML = '';  
+    cellData = [];  
+    activePattern = [];  
+
+    for (let i = 0; i < mazeSize * mazeSize; i++) {  
+      const cell = document.createElement('div');  
+      cell.className = 'maze-cell';  
+      cell.dataset.id = i;  
+      mazeContainer.appendChild(cell);  
+
+      cell.addEventListener('click', () => handleCellClick(cell));  
+
+      cellData.push({ id: i, active: false });  
+    }  
+
+    generatePattern();  
+  }  
+
+  // Generate a random pattern  
+  function generatePattern() {  
+    const randomIndices = [];  
+    while (randomIndices.length < patternLength) {  
+      let index = Math.floor(Math.random() * cellData.length);  
+      if (!randomIndices.includes(index)) randomIndices.push(index);  
+    }  
+
+    randomIndices.forEach(index => {  
+      cellData[index].active = true;  
+      activePattern.push(index);  
+
+      // Temporarily show the pattern  
+      const cell = mazeContainer.children[index];  
+      cell.classList.add('active');  
+    });  
+
+    setTimeout(() => {  
+      mazeContainer.querySelectorAll('.maze-cell.active').forEach(cell =>  
+        cell.classList.remove('active')  
+      );  
+    }, 1000);  
+  }  
+
+  // Handle cell clicks  
+  function handleCellClick(cell) {  
+    const id = parseInt(cell.dataset.id);  
+
+    if (userPattern.includes(id)) return;  
+    userPattern.push(id);  
+
+    if (cellData[id].active) {  
+      cell.classList.add('active');  
+    } else {  
+      cell.classList.add('error');  
+      setTimeout(() => cell.classList.remove('error'), 500);  
+    }  
+
+    checkPattern();  
+  }  
+
+  // Check if the user pattern matches the active pattern  
+  function checkPattern() {  
+    if (userPattern.length === activePattern.length) {  
+      if (JSON.stringify(userPattern.sort()) === JSON.stringify(activePattern.sort())) {  
+        statusBar.textContent = 'Pattern Matched! Generating new maze...';  
+        setTimeout(() => {  
+          userPattern = [];  
+          createMaze();  
+          statusBar.textContent = 'Find the hidden pattern!';  
+        }, 1500);  
+      } else {  
+        statusBar.textContent = 'Incorrect pattern! Try again.';  
+        userPattern = [];  
+
+        mazeContainer.querySelectorAll('.maze-cell.active').forEach(cell =>  
+          cell.classList.remove('active')  
+        );  
+      }  
+    }  
+  }  
+
+  // Initialize the tool  
+  createMaze();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

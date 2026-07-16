@@ -1,0 +1,167 @@
+---
+layout: null
+title: "ChronoCanvas: Dynamic Timeblock Designer"
+category: "Productivity"
+description: "An immersive visual tool where users drag, resize, and layer interactive blocks to dynamically allocate and tweak their daily schedule in real time."
+permalink: "/tools/daily-20260716-09-chronocanvas-dynamic-timeblock-designer.html"
+generated_by: "api-true-ai"
+generated_date: "20260716"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChronoCanvas: Dynamic Timeblock Designer | Free Online Interactive Tool</title>
+  <meta name="description" content="An immersive visual tool where users drag, resize, and layer interactive blocks to dynamically allocate and tweak their daily schedule in real time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="ChronoCanvas: Dynamic Timeblock Designer | Free Online Interactive Tool">
+  <meta property="og:description" content="An immersive visual tool where users drag, resize, and layer interactive blocks to dynamically allocate and tweak their daily schedule in real time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ChronoCanvas: Dynamic Timeblock Designer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An immersive visual tool where users drag, resize, and layer interactive blocks to dynamically allocate and tweak their daily schedule in real time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>ChronoCanvas: Dynamic Timeblock Designer</h1>
+    <p class="seo-subtitle">An immersive visual tool where users drag, resize, and layer interactive blocks to dynamically allocate and tweak their daily schedule in real time.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);  
+}  
+#tool-app {  
+  width: 80%;  
+  max-width: 1200px;  
+  height: 80%;  
+  background: white;  
+  border-radius: 16px;  
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);  
+  overflow: hidden;  
+  display: grid;  
+  grid-template-rows: auto 1fr;  
+}  
+#header {  
+  background: #6a89cc;  
+  color: white;  
+  padding: 20px;  
+  text-align: center;  
+  font-size: 24px;  
+}  
+#canvas-container {  
+  position: relative;  
+  background: #f1f2f6;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  overflow: auto;  
+}  
+.block {  
+  position: absolute;  
+  background: #ff6b6b;  
+  color: white;  
+  border-radius: 8px;  
+  padding: 10px;  
+  font-size: 14px;  
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);  
+  cursor: pointer;  
+}  
+button {  
+  margin-top: 10px;  
+  padding: 10px 20px;  
+  border: none;  
+  border-radius: 8px;  
+  background: #ff6b6b;  
+  color: white;  
+  font-size: 16px;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+button:hover {  
+  background: #ff4757;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="header">ChronoCanvas: Dynamic Timeblock Designer</div>  
+  <div id="canvas-container"></div>  
+</div>  
+<script>  
+const canvasContainer = document.getElementById('canvas-container');
+
+let blocks = [];
+let idCounter = 0;
+
+function createBlock(x, y, width, height, label) {
+  const block = document.createElement('div');
+  block.classList.add('block');
+  block.style.left = `${x}px`;
+  block.style.top = `${y}px`;
+  block.style.width = `${width}px`;
+  block.style.height = `${height}px`;
+  block.innerText = label || `Task ${idCounter + 1}`;
+  
+  // Add drag functionality
+  let isDragging = false;
+  let offsetX, offsetY;
+
+  block.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    offsetX = e.offsetX;
+    offsetY = e.offsetY;
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (isDragging) {
+      block.style.left = `${e.pageX - offsetX}px`;
+      block.style.top = `${e.pageY - offsetY}px`;
+    }
+  });
+
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+  });
+
+  // Resize functionality
+  block.addEventListener('dblclick', () => {
+    const newWidth = prompt('Enter new width (px):', block.offsetWidth);
+    const newHeight = prompt('Enter new height (px):', block.offsetHeight);
+    if (newWidth) block.style.width = `${newWidth}px`;
+    if (newHeight) block.style.height = `${newHeight}px`;
+  });
+
+  canvasContainer.appendChild(block);
+  blocks.push(block);
+  idCounter++;
+}
+
+canvasContainer.addEventListener('dblclick', (e) => {
+  const x = e.offsetX;
+  const y = e.offsetY;
+  createBlock(x, y, 100, 50);
+});
+
+createBlock(50, 50, 150, 75, 'Example Task');
+createBlock(250, 100, 100, 60, 'Example Task 2');
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
