@@ -1,0 +1,171 @@
+---
+layout: null
+title: "Financial Galaxy: Interactive Budget Constellation Builder"
+category: "Finance"
+description: "Visualize and gamify your monthly expenses by turning them into a dynamic star constellation, where aligning stars unlocks insights for better financial planning."
+permalink: "/tools/daily-20260717-20-financial-galaxy-interactive-budget-constellation-builder.html"
+generated_by: "api-true-ai"
+generated_date: "20260717"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Galaxy: Interactive Budget Constellation Builder | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize and gamify your monthly expenses by turning them into a dynamic star constellation, where aligning stars unlocks insights for better financial planning. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Financial Galaxy: Interactive Budget Constellation Builder | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize and gamify your monthly expenses by turning them into a dynamic star constellation, where aligning stars unlocks insights for better financial planning. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Financial Galaxy: Interactive Budget Constellation Builder | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize and gamify your monthly expenses by turning them into a dynamic star constellation, where aligning stars unlocks insights for better financial planning. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Financial Galaxy: Interactive Budget Constellation Builder</h1>
+    <p class="seo-subtitle">Visualize and gamify your monthly expenses by turning them into a dynamic star constellation, where aligning stars unlocks insights for better financial planning.</p>
+    <style>  
+  body {  
+    font-family: 'Arial', sans-serif;  
+    background: linear-gradient(to bottom, #021B79, #0575E6);  
+    color: #fff;  
+    margin: 0;  
+    padding: 0;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+    overflow: hidden;  
+  }  
+  #tool-app {  
+    width: 800px;  
+    height: 600px;  
+    position: relative;  
+    border: 2px solid #fff;  
+    border-radius: 10px;  
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);  
+    background-color: #000;  
+    overflow: hidden;  
+  }  
+  canvas {  
+    position: absolute;  
+    top: 0;  
+    left: 0;  
+    width: 100%;  
+    height: 100%;  
+  }  
+  .tooltip {  
+    position: absolute;  
+    background: rgba(255, 255, 255, 0.9);  
+    color: #000;  
+    padding: 5px 10px;  
+    border-radius: 5px;  
+    font-size: 14px;  
+    display: none;  
+  }  
+</style>  
+<div id="tool-app">  
+  <canvas id="galaxyCanvas"></canvas>  
+  <div class="tooltip" id="tooltip"></div>  
+</div>  
+<script>  
+const canvas = document.getElementById('galaxyCanvas');  
+const ctx = canvas.getContext('2d');  
+const tooltip = document.getElementById('tooltip');  
+
+canvas.width = canvas.offsetWidth;  
+canvas.height = canvas.offsetHeight;  
+
+const budgetCategories = [  
+  { name: "Rent", amount: 1000, x: 150, y: 100, radius: 30, color: "#FF5733" },  
+  { name: "Food", amount: 500, x: 300, y: 200, radius: 25, color: "#FFC300" },  
+  { name: "Transportation", amount: 200, x: 450, y: 150, radius: 20, color: "#DAF7A6" },  
+  { name: "Savings", amount: 400, x: 600, y: 300, radius: 30, color: "#33FF57" },  
+  { name: "Entertainment", amount: 150, x: 350, y: 400, radius: 15, color: "#3375FF" }  
+];  
+
+let dragging = null;  
+
+function drawGalaxy() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  
+  // Draw lines  
+  ctx.beginPath();  
+  ctx.strokeStyle = "#ffffff";  
+  ctx.lineWidth = 2;  
+  budgetCategories.forEach((category, index) => {  
+    for (let i = index + 1; i < budgetCategories.length; i++) {  
+      ctx.moveTo(category.x, category.y);  
+      ctx.lineTo(budgetCategories[i].x, budgetCategories[i].y);  
+    }  
+  });  
+  ctx.stroke();  
+  
+  // Draw circles  
+  budgetCategories.forEach(category => {  
+    ctx.beginPath();  
+    ctx.arc(category.x, category.y, category.radius, 0, Math.PI * 2);  
+    ctx.fillStyle = category.color;  
+    ctx.fill();  
+  });  
+}  
+
+function getMousePos(canvas, event) {  
+  const rect = canvas.getBoundingClientRect();  
+  return {  
+    x: event.clientX - rect.left,  
+    y: event.clientY - rect.top  
+  };  
+}  
+
+canvas.addEventListener('mousedown', (event) => {  
+  const mousePos = getMousePos(canvas, event);  
+  dragging = budgetCategories.find(category =>  
+    Math.sqrt((mousePos.x - category.x) ** 2 + (mousePos.y - category.y) ** 2) < category.radius  
+  );  
+});  
+
+canvas.addEventListener('mousemove', (event) => {  
+  const mousePos = getMousePos(canvas, event);  
+  if (dragging) {  
+    dragging.x = mousePos.x;  
+    dragging.y = mousePos.y;  
+    drawGalaxy();  
+  } else {  
+    const hovered = budgetCategories.find(category =>  
+      Math.sqrt((mousePos.x - category.x) ** 2 + (mousePos.y - category.y) ** 2) < category.radius  
+    );  
+
+    if (hovered) {  
+      tooltip.style.display = 'block';  
+      tooltip.style.left = mousePos.x + 10 + 'px';  
+      tooltip.style.top = mousePos.y + 10 + 'px';  
+      tooltip.innerHTML = `${hovered.name}: $${hovered.amount}`;  
+    } else {  
+      tooltip.style.display = 'none';  
+    }  
+  }  
+});  
+
+canvas.addEventListener('mouseup', () => {  
+  dragging = null;  
+});  
+
+drawGalaxy();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

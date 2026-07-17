@@ -1,0 +1,134 @@
+---
+layout: null
+title: "DataPulse: Live Stream Dependency Mapper"
+category: "Data"
+description: "Visualize and interact with a real-time web of interconnected data streams to explore how changes ripple through dependencies."
+permalink: "/tools/daily-20260717-21-datapulse-live-stream-dependency-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260717"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataPulse: Live Stream Dependency Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize and interact with a real-time web of interconnected data streams to explore how changes ripple through dependencies. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataPulse: Live Stream Dependency Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize and interact with a real-time web of interconnected data streams to explore how changes ripple through dependencies. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataPulse: Live Stream Dependency Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize and interact with a real-time web of interconnected data streams to explore how changes ripple through dependencies. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataPulse: Live Stream Dependency Mapper</h1>
+    <p class="seo-subtitle">Visualize and interact with a real-time web of interconnected data streams to explore how changes ripple through dependencies.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: #1a1a2e; color: #eaeaea; margin: 0; overflow: hidden; }  
+  #tool-app { width: 100vw; height: 100vh; position: relative; display: flex; justify-content: center; align-items: center; }  
+  canvas { display: block; }  
+  #info-box { position: absolute; bottom: 10px; left: 10px; background: rgba(0, 0, 0, 0.8); padding: 10px; border-radius: 5px; font-size: 14px; }  
+</style>  
+<div id="tool-app">  
+  <canvas id="dataCanvas"></canvas>  
+  <div id="info-box">Click nodes to modify values. Watch ripples propagate!</div>  
+</div>  
+<script>  
+const canvas = document.getElementById("dataCanvas");  
+const ctx = canvas.getContext("2d");  
+canvas.width = window.innerWidth;  
+canvas.height = window.innerHeight;  
+
+const nodes = [];  
+const links = [];  
+const radius = 30;  
+
+function createNode(x, y, value) {  
+  return { id: nodes.length, x, y, value, connectedTo: [] };  
+}  
+
+function connectNodes(node1, node2) {  
+  links.push({ from: node1, to: node2 });  
+  node1.connectedTo.push(node2);  
+  node2.connectedTo.push(node1);  
+}  
+
+function drawNode(node) {  
+  ctx.beginPath();  
+  ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);  
+  ctx.fillStyle = `hsl(${node.value * 36}, 100%, 50%)`;  
+  ctx.fill();  
+  ctx.strokeStyle = "#fff";  
+  ctx.stroke();  
+  ctx.closePath();  
+  ctx.fillStyle = "#fff";  
+  ctx.textAlign = "center";  
+  ctx.fillText(node.value, node.x, node.y + 4);  
+}  
+
+function drawLink(link) {  
+  ctx.beginPath();  
+  ctx.moveTo(link.from.x, link.from.y);  
+  ctx.lineTo(link.to.x, link.to.y);  
+  ctx.strokeStyle = "#777";  
+  ctx.stroke();  
+  ctx.closePath();  
+}  
+
+function drawGraph() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  links.forEach(drawLink);  
+  nodes.forEach(drawNode);  
+}  
+
+function propagateChange(node) {  
+  node.connectedTo.forEach(connectedNode => {  
+    connectedNode.value = (connectedNode.value + 1) % 10;  
+    propagateChange(connectedNode);  
+  });  
+}  
+
+canvas.addEventListener("click", (e) => {  
+  const rect = canvas.getBoundingClientRect();  
+  const mouseX = e.clientX - rect.left;  
+  const mouseY = e.clientY - rect.top;  
+
+  nodes.forEach(node => {  
+    const dx = mouseX - node.x;  
+    const dy = mouseY - node.y;  
+    if (Math.sqrt(dx * dx + dy * dy) < radius) {  
+      node.value = (node.value + 1) % 10;  
+      propagateChange(node);  
+      drawGraph();  
+    }  
+  });  
+});  
+
+// Generate example graph  
+nodes.push(createNode(300, 300, 1));  
+nodes.push(createNode(500, 300, 2));  
+nodes.push(createNode(400, 500, 3));  
+nodes.push(createNode(600, 500, 4));  
+connectNodes(nodes[0], nodes[1]);  
+connectNodes(nodes[1], nodes[2]);  
+connectNodes(nodes[2], nodes[3]);  
+
+drawGraph();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
