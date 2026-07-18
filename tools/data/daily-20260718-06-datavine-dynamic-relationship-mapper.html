@@ -1,0 +1,169 @@
+---
+layout: null
+title: "DataVine: Dynamic Relationship Mapper"
+category: "Data"
+description: "A real-time interactive tool that lets users visually map and explore data relationships, correlations, and anomalies in an evolving, vine-like network."
+permalink: "/tools/daily-20260718-06-datavine-dynamic-relationship-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260718"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataVine: Dynamic Relationship Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="A real-time interactive tool that lets users visually map and explore data relationships, correlations, and anomalies in an evolving, vine-like network. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataVine: Dynamic Relationship Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="A real-time interactive tool that lets users visually map and explore data relationships, correlations, and anomalies in an evolving, vine-like network. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataVine: Dynamic Relationship Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A real-time interactive tool that lets users visually map and explore data relationships, correlations, and anomalies in an evolving, vine-like network. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataVine: Dynamic Relationship Mapper</h1>
+    <p class="seo-subtitle">A real-time interactive tool that lets users visually map and explore data relationships, correlations, and anomalies in an evolving, vine-like network.</p>
+    <style>  
+  body {  
+    font-family: Arial, sans-serif;  
+    background-color: #f4f4f9;  
+    margin: 0;  
+    padding: 0;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+  }  
+  #tool-app {  
+    width: 80%;  
+    height: 80%;  
+    border: 2px solid #4CAF50;  
+    border-radius: 10px;  
+    background: white;  
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);  
+    overflow: hidden;  
+    position: relative;  
+  }  
+  canvas {  
+    width: 100%;  
+    height: 100%;  
+  }  
+  .controls-panel {  
+    position: absolute;  
+    top: 10px;  
+    left: 10px;  
+    background: rgba(255, 255, 255, 0.8);  
+    padding: 10px;  
+    border: 1px solid #ccc;  
+    border-radius: 5px;  
+    font-size: 14px;  
+    z-index: 10;  
+  }  
+  .controls-panel input,  
+  .controls-panel button {  
+    margin-top: 5px;  
+    padding: 5px 10px;  
+    border: 1px solid #ccc;  
+    border-radius: 5px;  
+    font-size: 14px;  
+  }  
+</style>  
+<div id="tool-app">  
+  <canvas id="data-vine-canvas"></canvas>  
+  <div class="controls-panel">  
+    <h3>DataVine Controls</h3>  
+    <label for="node-input">Add Data Node:</label><br>  
+    <input id="node-input" type="text" placeholder="Enter data point..." /><br>  
+    <button id="add-node">Add Node</button><br>  
+    <button id="reset-vine">Reset Mapper</button>  
+  </div>  
+</div>  
+<script>  
+const canvas = document.getElementById('data-vine-canvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = canvas.offsetWidth;  
+canvas.height = canvas.offsetHeight;  
+
+const nodes = [];  
+const links = [];  
+
+// Function to draw nodes and vines  
+function drawGraph() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  links.forEach(link => {  
+    ctx.beginPath();  
+    ctx.moveTo(link.source.x, link.source.y);  
+    ctx.lineTo(link.target.x, link.target.y);  
+    ctx.strokeStyle = '#4CAF50';  
+    ctx.lineWidth = 1.5;  
+    ctx.stroke();  
+  });  
+
+  nodes.forEach(node => {  
+    ctx.beginPath();  
+    ctx.arc(node.x, node.y, 10, 0, Math.PI * 2);  
+    ctx.fillStyle = '#ff5722';  
+    ctx.fill();  
+    ctx.strokeStyle = '#333';  
+    ctx.lineWidth = 1;  
+    ctx.stroke();  
+    ctx.font = '12px Arial';  
+    ctx.fillStyle = '#000';  
+    ctx.fillText(node.label, node.x + 12, node.y);  
+  });  
+}  
+
+// Add a new data node  
+function addNode(label) {  
+  const newNode = {  
+    label,  
+    x: Math.random() * canvas.width,  
+    y: Math.random() * canvas.height  
+  };  
+  nodes.forEach(node => {  
+    if (Math.random() > 0.5) {  
+      links.push({ source: node, target: newNode });  
+    }  
+  });  
+  nodes.push(newNode);  
+  drawGraph();  
+}  
+
+// Reset graph  
+function resetGraph() {  
+  nodes.length = 0;  
+  links.length = 0;  
+  drawGraph();  
+}  
+
+// Event listeners  
+document.getElementById('add-node').addEventListener('click', () => {  
+  const input = document.getElementById('node-input');  
+  if (input.value.trim() !== '') {  
+    addNode(input.value.trim());  
+    input.value = '';  
+  }  
+});  
+
+document.getElementById('reset-vine').addEventListener('click', resetGraph);  
+
+// Initialize  
+drawGraph();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

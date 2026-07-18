@@ -1,0 +1,134 @@
+---
+layout: null
+title: "TaskOrbit: Interactive Focus Galaxy"
+category: "Productivity"
+description: "Visualize your tasks as a dynamic galaxy, where planets represent tasks, their orbits indicate priority, and gravitational pull changes based on your focus time."
+permalink: "/tools/daily-20260718-05-taskorbit-interactive-focus-galaxy.html"
+generated_by: "api-true-ai"
+generated_date: "20260718"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskOrbit: Interactive Focus Galaxy | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize your tasks as a dynamic galaxy, where planets represent tasks, their orbits indicate priority, and gravitational pull changes based on your focus time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="TaskOrbit: Interactive Focus Galaxy | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize your tasks as a dynamic galaxy, where planets represent tasks, their orbits indicate priority, and gravitational pull changes based on your focus time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TaskOrbit: Interactive Focus Galaxy | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize your tasks as a dynamic galaxy, where planets represent tasks, their orbits indicate priority, and gravitational pull changes based on your focus time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>TaskOrbit: Interactive Focus Galaxy</h1>
+    <p class="seo-subtitle">Visualize your tasks as a dynamic galaxy, where planets represent tasks, their orbits indicate priority, and gravitational pull changes based on your focus time.</p>
+    <style>  
+  body {  
+    font-family: 'Arial', sans-serif;  
+    background: radial-gradient(circle, #1a1a40, #09091a);  
+    color: white;  
+    margin: 0;  
+    overflow: hidden;  
+  }  
+  #tool-app {  
+    position: relative;  
+    width: 100vw;  
+    height: 100vh;  
+  }  
+  canvas {  
+    display: block;  
+  }  
+  .task-input {  
+    position: absolute;  
+    top: 20px;  
+    left: 50%;  
+    transform: translateX(-50%);  
+    z-index: 10;  
+    display: flex;  
+    gap: 10px;  
+  }  
+  .task-input input, .task-input button {  
+    padding: 10px;  
+    font-size: 16px;  
+    border: none;  
+    border-radius: 5px;  
+  }  
+  .task-input input {  
+    flex: 1;  
+  }  
+</style>  
+<div id="tool-app">  
+  <div class="task-input">  
+    <input type="text" id="task-name" placeholder="Enter task name..." />  
+    <button id="add-task">Add Task</button>  
+  </div>  
+  <canvas id="galaxy"></canvas>  
+</div>  
+<script>  
+const canvas = document.getElementById('galaxy');  
+const ctx = canvas.getContext('2d');  
+const tasks = [];  
+let galaxyCenter = { x: window.innerWidth / 2, y: window.innerHeight / 2 };  
+canvas.width = window.innerWidth;  
+canvas.height = window.innerHeight;  
+
+document.getElementById('add-task').addEventListener('click', () => {  
+  const taskName = document.getElementById('task-name').value.trim();  
+  if (taskName) {  
+    const task = {  
+      name: taskName,  
+      radius: Math.random() * 200 + 50,  
+      angle: Math.random() * Math.PI * 2,  
+      speed: Math.random() * 0.05 + 0.01,  
+    };  
+    tasks.push(task);  
+    document.getElementById('task-name').value = '';  
+  }  
+});  
+
+function drawGalaxy() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  tasks.forEach((task, index) => {  
+    task.angle += task.speed;  
+    const x = galaxyCenter.x + task.radius * Math.cos(task.angle);  
+    const y = galaxyCenter.y + task.radius * Math.sin(task.angle);  
+
+    // Draw orbit  
+    ctx.beginPath();  
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';  
+    ctx.arc(galaxyCenter.x, galaxyCenter.y, task.radius, 0, Math.PI * 2);  
+    ctx.stroke();  
+
+    // Draw planet (task)  
+    ctx.beginPath();  
+    ctx.fillStyle = `hsl(${(index * 50) % 360}, 80%, 50%)`;  
+    ctx.arc(x, y, 10, 0, Math.PI * 2);  
+    ctx.fill();  
+
+    // Draw task name  
+    ctx.font = '16px Arial';  
+    ctx.fillStyle = 'white';  
+    ctx.fillText(task.name, x + 15, y + 5);  
+  });  
+  requestAnimationFrame(drawGalaxy);  
+}  
+drawGalaxy();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

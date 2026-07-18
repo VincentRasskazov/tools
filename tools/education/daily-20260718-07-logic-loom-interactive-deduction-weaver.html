@@ -1,0 +1,195 @@
+---
+layout: null
+title: "\"Logic Loom: Interactive Deduction Weaver\""
+category: "Education"
+description: "A highly interactive mini-game where users untangle logical puzzles by connecting statements and visualizing relationships in a dynamic web of reasoning."
+permalink: "/tools/daily-20260718-07-logic-loom-interactive-deduction-weaver.html"
+generated_by: "api-true-ai"
+generated_date: "20260718"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>&quot;Logic Loom: Interactive Deduction Weaver&quot; | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive mini-game where users untangle logical puzzles by connecting statements and visualizing relationships in a dynamic web of reasoning. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="&quot;Logic Loom: Interactive Deduction Weaver&quot; | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive mini-game where users untangle logical puzzles by connecting statements and visualizing relationships in a dynamic web of reasoning. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="&quot;Logic Loom: Interactive Deduction Weaver&quot; | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive mini-game where users untangle logical puzzles by connecting statements and visualizing relationships in a dynamic web of reasoning. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>&quot;Logic Loom: Interactive Deduction Weaver&quot;</h1>
+    <p class="seo-subtitle">A highly interactive mini-game where users untangle logical puzzles by connecting statements and visualizing relationships in a dynamic web of reasoning.</p>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f6f8fa;
+  }
+  #tool-app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+  }
+  .loom-container {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    height: 500px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  .node {
+    position: absolute;
+    cursor: pointer;
+    background: #4caf50;
+    color: #ffffff;
+    border-radius: 50%;
+    padding: 10px 15px;
+    font-size: 14px;
+    transition: transform 0.2s;
+  }
+  .node:hover {
+    transform: scale(1.1);
+  }
+  .connection {
+    position: absolute;
+    background: #2196f3;
+    height: 2px;
+    transform-origin: left center;
+  }
+  #instructions {
+    font-size: 18px;
+    margin-bottom: 16px;
+    color: #333;
+  }
+  #score {
+    margin-top: 16px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #4caf50;
+  }
+</style>
+<div id="tool-app">
+  <div id="instructions">Connect the logical statements to solve the puzzle!</div>
+  <div class="loom-container" id="loom-container"></div>
+  <div id="score">Score: 0</div>
+</div>
+<script>
+(() => {
+  const app = document.getElementById('tool-app');
+  const loomContainer = document.getElementById('loom-container');
+  const scoreDisplay = document.getElementById('score');
+  let score = 0;
+
+  const nodes = [
+    { id: "A", text: "A: All cats are mammals", x: 50, y: 50 },
+    { id: "B", text: "B: All mammals are animals", x: 500, y: 50 },
+    { id: "C", text: "C: Therefore, all cats are animals", x: 300, y: 400 },
+    { id: "D", text: "D: Some dogs are mammals", x: 300, y: 200 },
+  ];
+
+  const solutions = [
+    { from: "A", to: "C" },
+    { from: "B", to: "C" },
+  ];
+
+  let userConnections = [];
+
+  const createNode = (node) => {
+    const el = document.createElement('div');
+    el.className = 'node';
+    el.id = `node-${node.id}`;
+    el.textContent = node.text;
+    el.style.left = `${node.x}px`;
+    el.style.top = `${node.y}px`;
+    el.dataset.id = node.id;
+    loomContainer.appendChild(el);
+    return el;
+  };
+
+  const drawConnection = (fromNode, toNode) => {
+    const rect1 = fromNode.getBoundingClientRect();
+    const rect2 = toNode.getBoundingClientRect();
+
+    const x1 = rect1.left + rect1.width / 2;
+    const y1 = rect1.top + rect1.height / 2;
+    const x2 = rect2.left + rect2.width / 2;
+    const y2 = rect2.top + rect2.height / 2;
+
+    const length = Math.hypot(x2 - x1, y2 - y1);
+    const angle = Math.atan2(y2 - y1, x2 - x1) * (180 / Math.PI);
+
+    const line = document.createElement('div');
+    line.className = 'connection';
+    line.style.width = `${length}px`;
+    line.style.left = `${x1}px`;
+    line.style.top = `${y1}px`;
+    line.style.transform = `rotate(${angle}deg)`;
+    loomContainer.appendChild(line);
+  };
+
+  const checkSolution = () => {
+    if (
+      userConnections.length === solutions.length &&
+      userConnections.every((conn) =>
+        solutions.some(
+          (sol) => sol.from === conn.from && sol.to === conn.to
+        )
+      )
+    ) {
+      score += 10;
+      scoreDisplay.textContent = `Score: ${score}`;
+      alert('Correct! Puzzle solved!');
+    }
+  };
+
+  let activeNode = null;
+
+  nodes.forEach((node) => {
+    const nodeEl = createNode(node);
+
+    nodeEl.addEventListener('mousedown', () => {
+      activeNode = nodeEl;
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (activeNode && activeNode !== nodeEl) {
+        const from = activeNode.dataset.id;
+        const to = nodeEl.dataset.id;
+        userConnections.push({ from, to });
+        drawConnection(activeNode, nodeEl);
+        checkSolution();
+      }
+      activeNode = null;
+    });
+  });
+})();
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

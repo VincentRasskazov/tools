@@ -1,0 +1,145 @@
+---
+layout: null
+title: "Mindful Maze: Stress Navigator"
+category: "Health"
+description: "A calming interactive maze game where players navigate a labyrinth of stress triggers and choices, practicing guided mindfulness techniques along the way."
+permalink: "/tools/daily-20260718-14-mindful-maze-stress-navigator.html"
+generated_by: "api-true-ai"
+generated_date: "20260718"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mindful Maze: Stress Navigator | Free Online Interactive Tool</title>
+  <meta name="description" content="A calming interactive maze game where players navigate a labyrinth of stress triggers and choices, practicing guided mindfulness techniques along the way. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Mindful Maze: Stress Navigator | Free Online Interactive Tool">
+  <meta property="og:description" content="A calming interactive maze game where players navigate a labyrinth of stress triggers and choices, practicing guided mindfulness techniques along the way. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mindful Maze: Stress Navigator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A calming interactive maze game where players navigate a labyrinth of stress triggers and choices, practicing guided mindfulness techniques along the way. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Mindful Maze: Stress Navigator</h1>
+    <p class="seo-subtitle">A calming interactive maze game where players navigate a labyrinth of stress triggers and choices, practicing guided mindfulness techniques along the way.</p>
+    <style>  
+body {  
+  font-family: 'Arial', sans-serif;  
+  background: linear-gradient(to bottom, #a8edea, #fed6e3);  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+}  
+#tool-app {  
+  background: #ffffff;  
+  border-radius: 16px;  
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
+  width: 80%;  
+  max-width: 600px;  
+  padding: 20px;  
+  text-align: center;  
+}  
+.maze-grid {  
+  display: grid;  
+  grid-template-columns: repeat(5, 60px);  
+  grid-gap: 8px;  
+  justify-content: center;  
+  margin-top: 20px;  
+}  
+.cell {  
+  width: 60px;  
+  height: 60px;  
+  border-radius: 8px;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  font-size: 14px;  
+  color: #fff;  
+}  
+.start { background: #4caf50; }  
+.end { background: #ff5722; }  
+.path { background: #03a9f4; cursor: pointer; }  
+.obstacle { background: #9e9e9e; }  
+.active { background: #fdd835; }  
+</style>  
+<div id="tool-app">  
+  <h1>Mindful Maze: Stress Navigator</h1>  
+  <p>Navigate the maze and practice mindfulness! Click on blue "path" squares to move, avoid grey "obstacles," and reach the red "end" square. Reflect on prompts along the way.</p>  
+  <div class="maze-grid" id="maze"></div>  
+  <p id="prompt"></p>  
+</div>  
+<script>  
+const maze = [  
+  ['start', 'path', 'path', 'obstacle', 'path'],  
+  ['obstacle', 'obstacle', 'path', 'obstacle', 'path'],  
+  ['path', 'path', 'path', 'path', 'path'],  
+  ['path', 'obstacle', 'obstacle', 'obstacle', 'path'],  
+  ['path', 'path', 'path', 'path', 'end']  
+];  
+
+const prompts = [  
+  "Take a deep breath. What are you grateful for?",  
+  "Picture a calming place. What does it look like?",  
+  "Stretch your hands and relax your shoulders.",  
+  "What’s one positive thing about your day so far?",  
+  "Smile! Even small smiles can boost your mood."  
+];  
+
+const mazeElement = document.getElementById('maze');  
+const promptElement = document.getElementById('prompt');  
+let position = [0, 0];  
+
+function renderMaze() {  
+  mazeElement.innerHTML = '';  
+  for (let i = 0; i < maze.length; i++) {  
+    for (let j = 0; j < maze[i].length; j++) {  
+      const cell = document.createElement('div');  
+      cell.className = `cell ${maze[i][j]}`;  
+      if (i === position[0] && j === position[1]) {  
+        cell.classList.add('active');  
+      }  
+      cell.addEventListener('click', () => move(i, j));  
+      mazeElement.appendChild(cell);  
+    }  
+  }  
+}  
+
+function move(row, col) {  
+  const [currentRow, currentCol] = position;  
+  if (  
+    Math.abs(row - currentRow) + Math.abs(col - currentCol) === 1 &&  
+    maze[row][col] !== 'obstacle'  
+  ) {  
+    position = [row, col];  
+    if (maze[row][col] === 'end') {  
+      promptElement.textContent = "Congratulations! You've completed the maze. Take a moment to enjoy your achievement.";  
+    } else {  
+      const randomPrompt = prompts[Math.floor(Math.random() * prompts.length)];  
+      promptElement.textContent = randomPrompt;  
+    }  
+    renderMaze();  
+  }  
+}  
+
+renderMaze();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

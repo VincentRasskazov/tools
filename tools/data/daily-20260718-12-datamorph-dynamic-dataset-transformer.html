@@ -1,0 +1,177 @@
+---
+layout: null
+title: "DataMorph: Dynamic Dataset Transformer"
+category: "Data"
+description: "An interactive tool that lets users visually manipulate, morph, and reshape datasets in real-time with draggable nodes, filters, and transformation logic."
+permalink: "/tools/daily-20260718-12-datamorph-dynamic-dataset-transformer.html"
+generated_by: "api-true-ai"
+generated_date: "20260718"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataMorph: Dynamic Dataset Transformer | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool that lets users visually manipulate, morph, and reshape datasets in real-time with draggable nodes, filters, and transformation logic. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataMorph: Dynamic Dataset Transformer | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool that lets users visually manipulate, morph, and reshape datasets in real-time with draggable nodes, filters, and transformation logic. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataMorph: Dynamic Dataset Transformer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool that lets users visually manipulate, morph, and reshape datasets in real-time with draggable nodes, filters, and transformation logic. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataMorph: Dynamic Dataset Transformer</h1>
+    <p class="seo-subtitle">An interactive tool that lets users visually manipulate, morph, and reshape datasets in real-time with draggable nodes, filters, and transformation logic.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(135deg, #1f1c2c, #928dab);  
+  color: #fff;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 80%;  
+  height: 80%;  
+  background: rgba(255, 255, 255, 0.1);  
+  border: 2px solid rgba(255, 255, 255, 0.3);  
+  border-radius: 12px;  
+  display: flex;  
+  flex-direction: column;  
+  padding: 20px;  
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);  
+}  
+#canvas {  
+  flex: 1;  
+  background: rgba(255, 255, 255, 0.05);  
+  border: 1px solid rgba(255, 255, 255, 0.2);  
+  border-radius: 8px;  
+  position: relative;  
+  overflow: hidden;  
+}  
+#controls {  
+  margin-top: 10px;  
+  display: flex;  
+  justify-content: space-between;  
+}  
+button {  
+  background: #6c63ff;  
+  border: none;  
+  color: #fff;  
+  padding: 10px 20px;  
+  font-size: 14px;  
+  cursor: pointer;  
+  border-radius: 8px;  
+  transition: background 0.3s ease;  
+}  
+button:hover {  
+  background: #5146d9;  
+}  
+.node {  
+  position: absolute;  
+  width: 100px;  
+  height: 40px;  
+  background: #ff6f61;  
+  color: #fff;  
+  border-radius: 4px;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  cursor: grab;  
+  user-select: none;  
+  font-size: 12px;  
+  transition: transform 0.1s;  
+}  
+.node:hover {  
+  background: #ff3b2f;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="canvas"></div>  
+  <div id="controls">  
+    <button id="add-node">Add Node</button>  
+    <button id="clear-nodes">Clear All</button>  
+    <button id="export-data">Export Data</button>  
+  </div>  
+</div>  
+<script>  
+const canvas = document.getElementById('canvas');  
+const addNodeBtn = document.getElementById('add-node');  
+const clearNodesBtn = document.getElementById('clear-nodes');  
+const exportDataBtn = document.getElementById('export-data');  
+
+let nodes = [];  
+
+function createNode(x, y, label = 'Node') {  
+  const node = document.createElement('div');  
+  node.className = 'node';  
+  node.textContent = label;  
+  node.style.left = `${x}px`;  
+  node.style.top = `${y}px`;  
+
+  let offsetX = 0;  
+  let offsetY = 0;  
+  let isDragging = false;  
+
+  node.addEventListener('mousedown', (e) => {  
+    offsetX = e.offsetX;  
+    offsetY = e.offsetY;  
+    isDragging = true;  
+    node.style.cursor = 'grabbing';  
+  });  
+
+  document.addEventListener('mousemove', (e) => {  
+    if (isDragging) {  
+      const newX = e.clientX - offsetX;  
+      const newY = e.clientY - offsetY;  
+      node.style.left = `${newX}px`;  
+      node.style.top = `${newY}px`;  
+    }  
+  });  
+
+  document.addEventListener('mouseup', () => {  
+    isDragging = false;  
+    node.style.cursor = 'grab';  
+  });  
+
+  canvas.appendChild(node);  
+  nodes.push({ label, x, y });  
+}  
+
+addNodeBtn.addEventListener('click', () => {  
+  const x = Math.random() * (canvas.offsetWidth - 100);  
+  const y = Math.random() * (canvas.offsetHeight - 40);  
+  createNode(x, y, `Node ${nodes.length + 1}`);  
+});  
+
+clearNodesBtn.addEventListener('click', () => {  
+  nodes = [];  
+  canvas.innerHTML = '';  
+});  
+
+exportDataBtn.addEventListener('click', () => {  
+  alert(JSON.stringify(nodes, null, 2));  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,143 @@
+---
+layout: null
+title: "CodeCipher: Interactive Encryption Explorer"
+category: "Education"
+description: "A gamified tool where users learn about encryption by dragging and dropping elements to create custom ciphers and decrypt hidden messages."
+permalink: "/tools/daily-20260718-04-codecipher-interactive-encryption-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260718"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeCipher: Interactive Encryption Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool where users learn about encryption by dragging and dropping elements to create custom ciphers and decrypt hidden messages. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CodeCipher: Interactive Encryption Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool where users learn about encryption by dragging and dropping elements to create custom ciphers and decrypt hidden messages. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CodeCipher: Interactive Encryption Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool where users learn about encryption by dragging and dropping elements to create custom ciphers and decrypt hidden messages. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CodeCipher: Interactive Encryption Explorer</h1>
+    <p class="seo-subtitle">A gamified tool where users learn about encryption by dragging and dropping elements to create custom ciphers and decrypt hidden messages.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to right, #141e30, #243b55);  
+  color: #fff;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 80%;  
+  max-width: 1000px;  
+  background: #1e293b;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);  
+  border-radius: 8px;  
+  padding: 20px;  
+}  
+h1 {  
+  text-align: center;  
+  font-size: 2em;  
+  margin-bottom: 10px;  
+}  
+#cipher-area {  
+  display: flex;  
+  flex-wrap: wrap;  
+  justify-content: space-around;  
+  margin: 20px 0;  
+}  
+.draggable, .drop-zone {  
+  padding: 10px;  
+  border-radius: 5px;  
+  background: #334e68;  
+  color: white;  
+  margin: 10px;  
+  text-align: center;  
+  cursor: pointer;  
+}  
+.drop-zone {  
+  background: #102a43;  
+  border: 2px dashed #486581;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>CodeCipher</h1>  
+  <p>Learn how encryption works by building your own cipher! Drag and drop components to encrypt or decrypt the message below.</p>  
+  <div id="message-area">  
+    <h3>Original Message: <span id="original-message">HELLO WORLD</span></h3>  
+    <h3>Encrypted Message: <span id="encrypted-message">?????</span></h3>  
+  </div>  
+  <div id="cipher-area">  
+    <div class="draggable" draggable="true" data-action="shift">Shift Cipher</div>  
+    <div class="draggable" draggable="true" data-action="reverse">Reverse Cipher</div>  
+    <div class="draggable" draggable="true" data-action="swap">Swap Vowels</div>  
+    <div class="drop-zone">Drop Here to Encrypt</div>  
+  </div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+let originalMessage = "HELLO WORLD";  
+let encryptedMessage = "";  
+
+document.querySelectorAll('.draggable').forEach(el => {  
+  el.addEventListener('dragstart', event => {  
+    event.dataTransfer.setData('text', event.target.dataset.action);  
+  });  
+});  
+
+document.querySelector('.drop-zone').addEventListener('dragover', event => {  
+  event.preventDefault();  
+});  
+
+document.querySelector('.drop-zone').addEventListener('drop', event => {  
+  event.preventDefault();  
+  const action = event.dataTransfer.getData('text');  
+  if (action) {  
+    encryptedMessage = applyCipher(originalMessage, action);  
+    document.getElementById('encrypted-message').innerText = encryptedMessage;  
+  }  
+});  
+
+function applyCipher(message, action) {  
+  switch (action) {  
+    case 'shift':  
+      return message.split('').map(char => {  
+        if (char === ' ') return char;  
+        return String.fromCharCode(((char.charCodeAt(0) - 65 + 1) % 26) + 65);  
+      }).join('');  
+    case 'reverse':  
+      return message.split('').reverse().join('');  
+    case 'swap':  
+      return message.replace(/[AEIOU]/g, 'X');  
+    default:  
+      return message;  
+  }  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
