@@ -1,0 +1,190 @@
+---
+layout: null
+title: "Cipher Cracker: The Codebreaker Challenge"
+category: "Cybersecurity"
+description: "A highly interactive mini-game where users solve progressively harder encoded messages using various ciphers, testing their cybersecurity and cryptography skills."
+permalink: "/tools/daily-20260719-11-cipher-cracker-the-codebreaker-challenge.html"
+generated_by: "api-true-ai"
+generated_date: "20260719"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cipher Cracker: The Codebreaker Challenge | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive mini-game where users solve progressively harder encoded messages using various ciphers, testing their cybersecurity and cryptography skills. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Cipher Cracker: The Codebreaker Challenge | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive mini-game where users solve progressively harder encoded messages using various ciphers, testing their cybersecurity and cryptography skills. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cipher Cracker: The Codebreaker Challenge | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive mini-game where users solve progressively harder encoded messages using various ciphers, testing their cybersecurity and cryptography skills. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Cipher Cracker: The Codebreaker Challenge</h1>
+    <p class="seo-subtitle">A highly interactive mini-game where users solve progressively harder encoded messages using various ciphers, testing their cybersecurity and cryptography skills.</p>
+    <style>  
+  body {  
+    font-family: Arial, sans-serif;  
+    background: linear-gradient(120deg, #2c3e50, #4ca1af);  
+    color: #fff;  
+    margin: 0;  
+    padding: 20px;  
+    text-align: center;  
+  }  
+  #tool-app {  
+    max-width: 600px;  
+    margin: auto;  
+    background: #34495e;  
+    padding: 20px;  
+    border-radius: 10px;  
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);  
+  }  
+  button {  
+    background: #1abc9c;  
+    border: none;  
+    color: #fff;  
+    padding: 10px 20px;  
+    font-size: 16px;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    margin-top: 20px;  
+  }  
+  button:hover {  
+    background: #16a085;  
+  }  
+  .cipher-message {  
+    font-weight: bold;  
+    font-size: 18px;  
+    margin: 20px 0;  
+  }  
+  .input-container {  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    margin-top: 20px;  
+  }  
+  .input-container input {  
+    padding: 10px;  
+    font-size: 16px;  
+    border-radius: 5px;  
+    border: 1px solid #ccc;  
+    margin-right: 10px;  
+  }  
+  .message-history {  
+    text-align: left;  
+    background: #2c3e50;  
+    padding: 10px;  
+    border-radius: 5px;  
+    margin-top: 20px;  
+    max-height: 200px;  
+    overflow-y: auto;  
+  }  
+  .message-history div {  
+    padding: 5px 0;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h1>Cipher Cracker: The Codebreaker Challenge</h1>  
+  <p>Decode the message to move to the next level! Each level features a new cipher and added complexity.</p>  
+  <div class="cipher-message" id="cipher-message">Encoded Message: ???</div>  
+  <div class="input-container">  
+    <input type="text" id="user-input" placeholder="Your Answer" />  
+    <button id="submit-btn">Submit</button>  
+  </div>  
+  <div id="result"></div>  
+  <h2>Message History</h2>  
+  <div class="message-history" id="message-history"></div>  
+</div>  
+<script>  
+const messages = [  
+  { text: "QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD", cipher: "caesar", shift: 23 },  
+  { text: "SGZV QGMJ", cipher: "caesar", shift: 25 },  
+  { text: ".... . .-.. .-.. --- / .-- --- .-. .-.. -..", cipher: "morse" },  
+  { text: "Uryyb Jbeyq", cipher: "rot13" },  
+];  
+
+const messageHistory = [];  
+
+let currentLevel = 0;  
+
+function decodeMessage(message) {  
+  const { text, cipher, shift } = message;  
+  if (cipher === "caesar") {  
+    return text  
+      .split("")  
+      .map(char => {  
+        if (char.match(/[A-Za-z]/)) {  
+          const base = char === char.toUpperCase() ? 65 : 97;  
+          return String.fromCharCode(((char.charCodeAt(0) - base - shift + 26) % 26) + base);  
+        }  
+        return char;  
+      })  
+      .join("");  
+  } else if (cipher === "morse") {  
+    const morseCode = {  
+      ".-": "A", "-...": "B", "-.-.": "C", "-..": "D", ".": "E", "..-.": "F", "--.": "G",  
+      "....": "H", "..": "I", ".---": "J", "-.-": "K", ".-..": "L", "--": "M", "-.": "N",  
+      "---": "O", ".--.": "P", "--.-": "Q", ".-.": "R", "...": "S", "-": "T", "..-": "U",  
+      "...-": "V", ".--": "W", "-..-": "X", "-.--": "Y", "--..": "Z", "/": " ", "-----": "0",  
+      ".----": "1", "..---": "2", "...--": "3", "....-": "4", ".....": "5", "-....": "6",  
+      "--...": "7", "---..": "8", "----.": "9"  
+    };  
+    return text.split(" ").map(code => morseCode[code] || code).join("");  
+  } else if (cipher === "rot13") {  
+    return text.replace(/[A-Za-z]/g, char => {  
+      const base = char <= "Z" ? 65 : 97;  
+      return String.fromCharCode(((char.charCodeAt(0) - base + 13) % 26) + base);  
+    });  
+  }  
+  return text;  
+}  
+
+function loadNextMessage() {  
+  if (currentLevel >= messages.length) {  
+    document.getElementById("cipher-message").innerText = "Congratulations! You've completed all challenges!";  
+    document.getElementById("submit-btn").disabled = true;  
+    return;  
+  }  
+  const message = messages[currentLevel];  
+  document.getElementById("cipher-message").innerText = `Encoded Message: ${message.text}`;  
+}  
+
+document.getElementById("submit-btn").addEventListener("click", () => {  
+  const userInput = document.getElementById("user-input").value.trim();  
+  const decodedMessage = decodeMessage(messages[currentLevel]);  
+
+  if (userInput.toUpperCase() === decodedMessage.toUpperCase()) {  
+    messageHistory.push(`Level ${currentLevel + 1}: Correct! Decoded message: "${decodedMessage}"`);  
+    currentLevel++;  
+    loadNextMessage();  
+  } else {  
+    messageHistory.push(`Level ${currentLevel + 1}: Incorrect! Try again.`);  
+  }  
+
+  document.getElementById("message-history").innerHTML = messageHistory  
+    .map(message => `<div>${message}</div>`)  
+    .join("");  
+
+  document.getElementById("user-input").value = "";  
+});  
+
+loadNextMessage();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,171 @@
+---
+layout: null
+title: "Mindful Maze Explorer"
+category: "Health"
+description: "Navigate a dynamic, meditative maze that adapts to your stress levels using real-time breathing input and interactive calming challenges."
+permalink: "/tools/daily-20260719-02-mindful-maze-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260719"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mindful Maze Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate a dynamic, meditative maze that adapts to your stress levels using real-time breathing input and interactive calming challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Mindful Maze Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate a dynamic, meditative maze that adapts to your stress levels using real-time breathing input and interactive calming challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mindful Maze Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate a dynamic, meditative maze that adapts to your stress levels using real-time breathing input and interactive calming challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Mindful Maze Explorer</h1>
+    <p class="seo-subtitle">Navigate a dynamic, meditative maze that adapts to your stress levels using real-time breathing input and interactive calming challenges.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: 'Arial', sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background: linear-gradient(to right, #a8c0ff, #3f2b96);  
+  color: #fff;  
+}  
+#tool-app {  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  height: 100vh;  
+  overflow: hidden;  
+  text-align: center;  
+}  
+#maze-container {  
+  width: 90%;  
+  height: 70%;  
+  border: 5px solid #fff;  
+  border-radius: 10px;  
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4);  
+  background: #000;  
+  position: relative;  
+}  
+.cell {  
+  width: calc(100% / 10);  
+  height: calc(100% / 10);  
+  position: absolute;  
+  box-sizing: border-box;  
+  transition: background 0.3s ease;  
+}  
+.cell.path {  
+  background: #3f2b96;  
+}  
+.cell.active {  
+  background: #a8c0ff;  
+}  
+#control-container {  
+  margin-top: 20px;  
+}  
+button {  
+  padding: 10px 20px;  
+  background: #3f2b96;  
+  color: #fff;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  transition: background 0.3s ease;  
+}  
+button:hover {  
+  background: #a8c0ff;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Mindful Maze Explorer</h1>  
+  <p>Navigate through the maze while using calming techniques to reduce stress!</p>  
+  <div id="maze-container"></div>  
+  <div id="control-container">  
+    <button id="start-button">Start Game</button>  
+    <button id="restart-button" style="display: none;">Restart</button>  
+  </div>  
+</div>  
+<script>  
+const rows = 10, cols = 10;  
+const mazeContainer = document.getElementById('maze-container');  
+const startButton = document.getElementById('start-button');  
+const restartButton = document.getElementById('restart-button');  
+let maze = [];  
+let activeCell = { x: 0, y: 0 };  
+
+function createMaze() {  
+  mazeContainer.innerHTML = '';  
+  maze = [];  
+  for (let r = 0; r < rows; r++) {  
+    maze[r] = [];  
+    for (let c = 0; c < cols; c++) {  
+      const cell = document.createElement('div');  
+      cell.className = 'cell';  
+      cell.style.top = `${(r / rows) * 100}%`;  
+      cell.style.left = `${(c / cols) * 100}%`;  
+      mazeContainer.appendChild(cell);  
+      maze[r][c] = cell;  
+    }  
+  }  
+  maze[activeCell.y][activeCell.x].classList.add('active');  
+}  
+
+function updateMaze() {  
+  maze.forEach(row => row.forEach(cell => cell.classList.remove('active')));  
+  maze[activeCell.y][activeCell.x].classList.add('active');  
+}  
+
+function move(direction) {  
+  maze[activeCell.y][activeCell.x].classList.remove('active');  
+  switch(direction) {  
+    case 'up': if (activeCell.y > 0) activeCell.y--; break;  
+    case 'down': if (activeCell.y < rows - 1) activeCell.y++; break;  
+    case 'left': if (activeCell.x > 0) activeCell.x--; break;  
+    case 'right': if (activeCell.x < cols - 1) activeCell.x++; break;  
+  }  
+  updateMaze();  
+}  
+
+function startGame() {  
+  activeCell = { x: 0, y: 0 };  
+  createMaze();  
+  document.addEventListener('keydown', (e) => {  
+    const directionMap = {  
+      'ArrowUp': 'up',  
+      'ArrowDown': 'down',  
+      'ArrowLeft': 'left',  
+      'ArrowRight': 'right'  
+    };  
+    if (directionMap[e.key]) move(directionMap[e.key]);  
+  });  
+  startButton.style.display = 'none';  
+  restartButton.style.display = 'inline-block';  
+}  
+
+startButton.addEventListener('click', startGame);  
+restartButton.addEventListener('click', () => {  
+  startButton.style.display = 'inline-block';  
+  restartButton.style.display = 'none';  
+  mazeContainer.innerHTML = '';  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

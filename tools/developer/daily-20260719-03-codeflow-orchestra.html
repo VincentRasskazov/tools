@@ -1,0 +1,138 @@
+---
+layout: null
+title: "CodeFlow Orchestra"
+category: "Developer"
+description: "A dynamic, interactive tool that lets developers visually orchestrate and simulate async JavaScript code flows using draggable nodes, timelines, and real-time debugging insights."
+permalink: "/tools/daily-20260719-03-codeflow-orchestra.html"
+generated_by: "api-true-ai"
+generated_date: "20260719"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeFlow Orchestra | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, interactive tool that lets developers visually orchestrate and simulate async JavaScript code flows using draggable nodes, timelines, and real-time debugging insights. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CodeFlow Orchestra | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, interactive tool that lets developers visually orchestrate and simulate async JavaScript code flows using draggable nodes, timelines, and real-time debugging insights. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CodeFlow Orchestra | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, interactive tool that lets developers visually orchestrate and simulate async JavaScript code flows using draggable nodes, timelines, and real-time debugging insights. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CodeFlow Orchestra</h1>
+    <p class="seo-subtitle">A dynamic, interactive tool that lets developers visually orchestrate and simulate async JavaScript code flows using draggable nodes, timelines, and real-time debugging insights.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: #1e1e2f; color: #ffffff; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }  
+  #tool-app { width: 80%; height: 80%; background: #2e2e3f; border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); display: flex; flex-direction: column; }  
+  #header { background: #3e3e4f; padding: 16px; text-align: center; font-size: 1.5em; font-weight: bold; border-bottom: 2px solid #56566f; }  
+  #canvas { flex: 1; position: relative; overflow: hidden; }  
+  .node { position: absolute; width: 120px; height: 60px; background: #5e5e7f; border: 2px solid #8e8ea0; border-radius: 8px; display: flex; justify-content: center; align-items: center; cursor: move; }  
+  .node:hover { background: #7e7ea0; }  
+  .connector { position: absolute; pointer-events: none; stroke: #8e8ea0; stroke-width: 2; }  
+  #footer { background: #3e3e4f; padding: 10px; display: flex; justify-content: space-between; align-items: center; border-top: 2px solid #56566f; }  
+  #playBtn, #resetBtn { background: #8e8ea0; border: none; border-radius: 5px; color: #ffffff; padding: 10px 20px; cursor: pointer; }  
+  #playBtn:hover, #resetBtn:hover { background: #b0b0d0; }  
+</style>  
+<div id="tool-app">  
+  <div id="header">CodeFlow Orchestra</div>  
+  <div id="canvas"></div>  
+  <div id="footer">  
+    <button id="resetBtn">Reset</button>  
+    <button id="playBtn">Run Flow</button>  
+  </div>  
+</div>  
+<script>  
+const app = document.getElementById('tool-app');  
+const canvas = document.getElementById('canvas');  
+const playBtn = document.getElementById('playBtn');  
+const resetBtn = document.getElementById('resetBtn');  
+let nodes = [];  
+let connections = [];  
+
+function createNode(x, y, label) {  
+  const node = document.createElement('div');  
+  node.className = 'node';  
+  node.style.left = `${x}px`;  
+  node.style.top = `${y}px`;  
+  node.innerHTML = label;  
+  node.draggable = true;  
+
+  let offsetX, offsetY;  
+  node.addEventListener('dragstart', e => {  
+    offsetX = e.offsetX;  
+    offsetY = e.offsetY;  
+  });  
+  node.addEventListener('dragend', e => {  
+    node.style.left = `${e.pageX - offsetX}px`;  
+    node.style.top = `${e.pageY - offsetY}px`;  
+    updateConnections();  
+  });  
+
+  nodes.push({ element: node, x, y, label });  
+  canvas.appendChild(node);  
+}  
+
+function connectNodes(node1, node2) {  
+  const connector = document.createElementNS('http://www.w3.org/2000/svg', 'line');  
+  connector.classList.add('connector');  
+  canvas.appendChild(connector);  
+  connections.push({ connector, node1, node2 });  
+  updateConnections();  
+}  
+
+function updateConnections() {  
+  connections.forEach(({ connector, node1, node2 }) => {  
+    const rect1 = node1.element.getBoundingClientRect();  
+    const rect2 = node2.element.getBoundingClientRect();  
+    const x1 = rect1.left + rect1.width / 2 - canvas.getBoundingClientRect().left;  
+    const y1 = rect1.top + rect1.height / 2 - canvas.getBoundingClientRect().top;  
+    const x2 = rect2.left + rect2.width / 2 - canvas.getBoundingClientRect().left;  
+    const y2 = rect2.top + rect2.height / 2 - canvas.getBoundingClientRect().top;  
+
+    connector.setAttribute('x1', x1);  
+    connector.setAttribute('y1', y1);  
+    connector.setAttribute('x2', x2);  
+    connector.setAttribute('y2', y2);  
+  });  
+}  
+
+playBtn.addEventListener('click', () => {  
+  const sequence = [];  
+  nodes.forEach(node => {  
+    sequence.push(node.label);  
+  });  
+  alert(`Executing sequence: ${sequence.join(' → ')}`);  
+});  
+
+resetBtn.addEventListener('click', () => {  
+  canvas.innerHTML = '';  
+  nodes = [];  
+  connections = [];  
+});  
+
+// Initialize with a few nodes  
+createNode(100, 100, 'Start');  
+createNode(300, 200, 'Task 1');  
+createNode(500, 100, 'Task 2');  
+connectNodes(nodes[0], nodes[1]);  
+connectNodes(nodes[1], nodes[2]);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
