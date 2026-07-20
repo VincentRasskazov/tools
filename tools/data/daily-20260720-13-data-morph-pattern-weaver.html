@@ -1,0 +1,140 @@
+---
+layout: null
+title: "Data Morph: Pattern Weaver"
+category: "Data"
+description: "An interactive tool where users can input any dataset (numbers, strings, etc.) and watch as it dynamically morphs into visually stunning, animated patterns, revealing hidden structures and correlations."
+permalink: "/tools/daily-20260720-13-data-morph-pattern-weaver.html"
+generated_by: "api-true-ai"
+generated_date: "20260720"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Morph: Pattern Weaver | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool where users can input any dataset (numbers, strings, etc.) and watch as it dynamically morphs into visually stunning, animated patterns, revealing hidden structures and correlations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Morph: Pattern Weaver | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool where users can input any dataset (numbers, strings, etc.) and watch as it dynamically morphs into visually stunning, animated patterns, revealing hidden structures and correlations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Morph: Pattern Weaver | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool where users can input any dataset (numbers, strings, etc.) and watch as it dynamically morphs into visually stunning, animated patterns, revealing hidden structures and correlations. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Morph: Pattern Weaver</h1>
+    <p class="seo-subtitle">An interactive tool where users can input any dataset (numbers, strings, etc.) and watch as it dynamically morphs into visually stunning, animated patterns, revealing hidden structures and correlations.</p>
+    <style>
+  body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #1e1e2f;
+    color: #e5e5e5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+  #tool-app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+    width: 80%;
+    max-width: 900px;
+  }
+  input, textarea {
+    width: 80%;
+    max-width: 700px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background-color: #2e2e3f;
+    color: #e5e5e5;
+    font-size: 16px;
+  }
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  button:hover {
+    background-color: #0056b3;
+  }
+  canvas {
+    border: 1px solid #444;
+    border-radius: 5px;
+    background: #12121a;
+  }
+</style>
+<div id="tool-app">
+  <h1>Data Morph: Pattern Weaver</h1>
+  <p>Paste your data below to watch it transform into mesmerizing visual patterns.</p>
+  <textarea id="data-input" rows="8" placeholder="Enter numbers, strings, or mixed data (comma-separated)..."></textarea>
+  <button id="generate-pattern">Weave Patterns</button>
+  <canvas id="pattern-canvas" width="700" height="400"></canvas>
+</div>
+<script>
+  const canvas = document.getElementById('pattern-canvas');
+  const ctx = canvas.getContext('2d');
+  const inputField = document.getElementById('data-input');
+  const button = document.getElementById('generate-pattern');
+
+  function drawPattern(dataArray) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const colors = ['#f94144', '#f3722c', '#f9c74f', '#90be6d', '#577590'];
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const maxRadius = Math.min(canvas.width, canvas.height) / 2 - 20;
+
+    dataArray.forEach((value, index) => {
+      const angle = (index / dataArray.length) * Math.PI * 2;
+      const radius = (parseInt(value) || 1) * (maxRadius / Math.max(...dataArray));
+      const color = colors[index % colors.length];
+      const x = centerX + Math.cos(angle) * radius;
+      const y = centerY + Math.sin(angle) * radius;
+
+      ctx.beginPath();
+      ctx.arc(x, y, 10, 0, Math.PI * 2);
+      ctx.fillStyle = color;
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.moveTo(centerX, centerY);
+      ctx.lineTo(x, y);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    });
+  }
+
+  button.addEventListener('click', () => {
+    const rawData = inputField.value.trim().split(',');
+    const cleanedData = rawData.map(item => parseFloat(item) || item.length || 1);
+    drawPattern(cleanedData);
+  });
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,140 @@
+---
+layout: null
+title: "Data Galaxy: Interactive Dataset Constellation Mapper"
+category: "Data"
+description: "Visualize and explore relationships between data points as stars in a 3D galaxy, with interactive clustering, filtering, and pathfinding to uncover hidden insights."
+permalink: "/tools/daily-20260720-07-data-galaxy-interactive-dataset-constellation-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260720"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Galaxy: Interactive Dataset Constellation Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize and explore relationships between data points as stars in a 3D galaxy, with interactive clustering, filtering, and pathfinding to uncover hidden insights. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Galaxy: Interactive Dataset Constellation Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize and explore relationships between data points as stars in a 3D galaxy, with interactive clustering, filtering, and pathfinding to uncover hidden insights. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Galaxy: Interactive Dataset Constellation Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize and explore relationships between data points as stars in a 3D galaxy, with interactive clustering, filtering, and pathfinding to uncover hidden insights. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Galaxy: Interactive Dataset Constellation Mapper</h1>
+    <p class="seo-subtitle">Visualize and explore relationships between data points as stars in a 3D galaxy, with interactive clustering, filtering, and pathfinding to uncover hidden insights.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  margin: 0;  
+  overflow: hidden;  
+  background: radial-gradient(circle, #000428, #004e92);  
+  color: white;  
+  font-family: 'Arial', sans-serif;  
+}  
+#tool-app {  
+  width: 100vw;  
+  height: 100vh;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+}  
+#galaxy-info {  
+  position: absolute;  
+  top: 10px;  
+  left: 10px;  
+  background: rgba(0, 0, 0, 0.7);  
+  padding: 10px 15px;  
+  border-radius: 8px;  
+  font-size: 14px;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="galaxy-info">Hover over a star to see its details. Use your scroll wheel to zoom in/out!</div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const app = document.getElementById("tool-app");  
+const canvas = document.createElement("canvas");  
+canvas.width = window.innerWidth;  
+canvas.height = window.innerHeight;  
+app.appendChild(canvas);  
+
+const ctx = canvas.getContext("2d");  
+let stars = [];  
+let zoom = 1;  
+let offsetX = canvas.width / 2;  
+let offsetY = canvas.height / 2;  
+
+// Generate random dataset as stars  
+function generateStars(numStars) {  
+  stars = Array.from({ length: numStars }, () => ({  
+    x: Math.random() * 2000 - 1000,  
+    y: Math.random() * 2000 - 1000,  
+    size: Math.random() * 3 + 1,  
+    cluster: Math.floor(Math.random() * 10),  
+    data: { value: Math.floor(Math.random() * 100), id: Math.random().toString(36).substring(2) }  
+  }));  
+}  
+
+// Draw stars on canvas  
+function drawStars() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  stars.forEach(star => {  
+    const screenX = (star.x - offsetX) * zoom + canvas.width / 2;  
+    const screenY = (star.y - offsetY) * zoom + canvas.height / 2;  
+
+    ctx.beginPath();  
+    ctx.arc(screenX, screenY, star.size * zoom, 0, Math.PI * 2);  
+    ctx.fillStyle = `hsl(${star.cluster * 36}, 70%, 50%)`;  
+    ctx.fill();  
+  });  
+}  
+
+// Handle zoom and movement  
+canvas.addEventListener("wheel", (e) => {  
+  zoom += e.deltaY * -0.001;  
+  zoom = Math.min(Math.max(zoom, 0.5), 5);  
+  drawStars();  
+});  
+
+canvas.addEventListener("mousemove", (e) => {  
+  const rect = canvas.getBoundingClientRect();  
+  const mouseX = (e.clientX - rect.left - canvas.width / 2) / zoom + offsetX;  
+  const mouseY = (e.clientY - rect.top - canvas.height / 2) / zoom + offsetY;  
+
+  const hoverStar = stars.find(star => {  
+    const dx = star.x - mouseX;  
+    const dy = star.y - mouseY;  
+    return Math.sqrt(dx * dx + dy * dy) < star.size * zoom * 10;  
+  });  
+
+  const infoDiv = document.getElementById("galaxy-info");  
+  if (hoverStar) {  
+    infoDiv.innerText = `Star ID: ${hoverStar.data.id}\nValue: ${hoverStar.data.value}\nCluster: ${hoverStar.cluster}`;  
+  } else {  
+    infoDiv.innerText = "Hover over a star to see its details. Use your scroll wheel to zoom in/out!";  
+  }  
+});  
+
+// Initial setup  
+generateStars(500);  
+drawStars();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

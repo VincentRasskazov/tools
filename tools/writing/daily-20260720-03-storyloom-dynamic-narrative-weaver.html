@@ -1,0 +1,121 @@
+---
+layout: null
+title: "StoryLoom: Dynamic Narrative Weaver"
+category: "Writing"
+description: "A game-like tool where users build branching storylines by dragging and connecting interactive plot nodes, with instant visualization of narrative flow."
+permalink: "/tools/daily-20260720-03-storyloom-dynamic-narrative-weaver.html"
+generated_by: "api-true-ai"
+generated_date: "20260720"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StoryLoom: Dynamic Narrative Weaver | Free Online Interactive Tool</title>
+  <meta name="description" content="A game-like tool where users build branching storylines by dragging and connecting interactive plot nodes, with instant visualization of narrative flow. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="StoryLoom: Dynamic Narrative Weaver | Free Online Interactive Tool">
+  <meta property="og:description" content="A game-like tool where users build branching storylines by dragging and connecting interactive plot nodes, with instant visualization of narrative flow. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StoryLoom: Dynamic Narrative Weaver | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A game-like tool where users build branching storylines by dragging and connecting interactive plot nodes, with instant visualization of narrative flow. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>StoryLoom: Dynamic Narrative Weaver</h1>
+    <p class="seo-subtitle">A game-like tool where users build branching storylines by dragging and connecting interactive plot nodes, with instant visualization of narrative flow.</p>
+    <style>  
+body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f9; color: #333; }  
+#tool-app { padding: 20px; }  
+.node { border: 2px solid #4CAF50; border-radius: 8px; background: #fff; padding: 10px; margin: 10px; cursor: grab; display: inline-block; position: absolute; text-align: center; }  
+.node.connected { border-color: #2196F3; }  
+.canvas { border: 2px dashed #aaa; height: 80vh; position: relative; overflow: hidden; }  
+</style>  
+<div id="tool-app">  
+  <h1>StoryLoom: Dynamic Narrative Weaver</h1>  
+  <p>Drag nodes below into the canvas and connect them to create your story!</p>  
+  <div id="controls">  
+    <button onclick="addNode()">+ Add Node</button>  
+  </div>  
+  <div class="canvas" id="canvas"></div>  
+</div>  
+<script>  
+const canvas = document.getElementById('canvas');  
+let nodeIdCounter = 0;  
+
+canvas.addEventListener('mousedown', (e) => e.preventDefault());  
+
+function addNode() {  
+  const node = document.createElement('div');  
+  node.className = 'node';  
+  node.id = `node-${nodeIdCounter++}`;  
+  node.draggable = true;  
+  node.innerText = "Node " + nodeIdCounter;  
+  node.style.left = '10px';  
+  node.style.top = '10px';  
+  node.addEventListener('dragstart', dragStart);  
+  node.addEventListener('dragover', dragOver);  
+  node.addEventListener('drop', drop);  
+  canvas.appendChild(node);  
+}  
+
+let dragSource = null;  
+
+function dragStart(e) {  
+  dragSource = e.target;  
+  e.dataTransfer.setData('text/plain', e.target.id);  
+}  
+
+function dragOver(e) {  
+  e.preventDefault();  
+}  
+
+function drop(e) {  
+  e.preventDefault();  
+  const droppedNode = document.getElementById(e.dataTransfer.getData('text/plain'));  
+  if (droppedNode !== e.target) {  
+    drawLine(droppedNode, e.target);  
+    e.target.classList.add('connected');  
+  }  
+}  
+
+function drawLine(source, target) {  
+  const line = document.createElement('canvas');  
+  const ctx = line.getContext('2d');  
+  line.width = canvas.offsetWidth;  
+  line.height = canvas.offsetHeight;  
+  line.style.position = 'absolute';  
+  canvas.appendChild(line);  
+
+  const sourceRect = source.getBoundingClientRect();  
+  const targetRect = target.getBoundingClientRect();  
+
+  const startX = sourceRect.left + sourceRect.width / 2 - canvas.offsetLeft;  
+  const startY = sourceRect.top + sourceRect.height / 2 - canvas.offsetTop;  
+  const endX = targetRect.left + targetRect.width / 2 - canvas.offsetLeft;  
+  const endY = targetRect.top + targetRect.height / 2 - canvas.offsetTop;  
+
+  ctx.beginPath();  
+  ctx.moveTo(startX, startY);  
+  ctx.lineTo(endX, endY);  
+  ctx.strokeStyle = '#FF5722';  
+  ctx.lineWidth = 2;  
+  ctx.stroke();  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
