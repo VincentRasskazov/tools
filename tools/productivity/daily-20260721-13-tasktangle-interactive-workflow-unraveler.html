@@ -1,0 +1,187 @@
+---
+layout: null
+title: "TaskTangle: Interactive Workflow Unraveler"
+category: "Productivity"
+description: "A dynamic web tool where users visually map, connect, and untangle their complex tasks in a gamified productivity chart."
+permalink: "/tools/daily-20260721-13-tasktangle-interactive-workflow-unraveler.html"
+generated_by: "api-true-ai"
+generated_date: "20260721"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskTangle: Interactive Workflow Unraveler | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic web tool where users visually map, connect, and untangle their complex tasks in a gamified productivity chart. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="TaskTangle: Interactive Workflow Unraveler | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic web tool where users visually map, connect, and untangle their complex tasks in a gamified productivity chart. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TaskTangle: Interactive Workflow Unraveler | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic web tool where users visually map, connect, and untangle their complex tasks in a gamified productivity chart. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>TaskTangle: Interactive Workflow Unraveler</h1>
+    <p class="seo-subtitle">A dynamic web tool where users visually map, connect, and untangle their complex tasks in a gamified productivity chart.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: 'Arial', sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background: linear-gradient(120deg, #ff9a9e, #fad0c4);  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  background: #ffffff;  
+  width: 90%;  
+  height: 90%;  
+  border-radius: 20px;  
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);  
+  position: relative;  
+  display: flex;  
+  overflow: hidden;  
+}  
+canvas {  
+  width: 100%;  
+  height: 100%;  
+  display: block;  
+}  
+#controls {  
+  position: absolute;  
+  top: 10px;  
+  right: 10px;  
+  z-index: 10;  
+}  
+button {  
+  background-color: #4caf50;  
+  color: white;  
+  padding: 10px 15px;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  font-size: 14px;  
+  margin: 5px;  
+}  
+button:hover {  
+  background-color: #45a049;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="controls">  
+    <button id="add-node">Add Task</button>  
+    <button id="clear-all">Clear All</button>  
+  </div>  
+  <canvas id="canvas"></canvas>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const canvas = document.getElementById('canvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = canvas.offsetWidth;  
+canvas.height = canvas.offsetHeight;  
+
+const nodes = [];  
+const connections = [];  
+let draggedNode = null;  
+
+// Node class  
+class Node {  
+  constructor(x, y, label = 'Task') {  
+    this.x = x;  
+    this.y = y;  
+    this.radius = 30;  
+    this.label = prompt("Enter Task Name:", label) || 'Task';  
+    this.color = '#6c5ce7';  
+  }  
+
+  draw() {  
+    ctx.beginPath();  
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);  
+    ctx.fillStyle = this.color;  
+    ctx.fill();  
+    ctx.closePath();  
+    ctx.fillStyle = '#fff';  
+    ctx.font = '14px Arial';  
+    ctx.textAlign = 'center';  
+    ctx.textBaseline = 'middle';  
+    ctx.fillText(this.label, this.x, this.y);  
+  }  
+}  
+
+// Handle canvas interactions  
+canvas.addEventListener('mousedown', (e) => {  
+  const mouseX = e.clientX - canvas.getBoundingClientRect().left;  
+  const mouseY = e.clientY - canvas.getBoundingClientRect().top;  
+
+  draggedNode = nodes.find(  
+    (node) =>  
+      Math.sqrt((node.x - mouseX) ** 2 + (node.y - mouseY) ** 2) <  
+      node.radius  
+  );  
+});  
+
+canvas.addEventListener('mousemove', (e) => {  
+  if (draggedNode) {  
+    draggedNode.x = e.clientX - canvas.getBoundingClientRect().left;  
+    draggedNode.y = e.clientY - canvas.getBoundingClientRect().top;  
+    draw();  
+  }  
+});  
+
+canvas.addEventListener('mouseup', () => {  
+  draggedNode = null;  
+});  
+
+// Draw function  
+function draw() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  connections.forEach(([start, end]) => {  
+    ctx.beginPath();  
+    ctx.moveTo(start.x, start.y);  
+    ctx.lineTo(end.x, end.y);  
+    ctx.strokeStyle = '#636e72';  
+    ctx.lineWidth = 2;  
+    ctx.stroke();  
+    ctx.closePath();  
+  });  
+  nodes.forEach((node) => node.draw());  
+}  
+
+// Add a new node  
+document.getElementById('add-node').addEventListener('click', () => {  
+  const x = Math.random() * canvas.width;  
+  const y = Math.random() * canvas.height;  
+  const newNode = new Node(x, y);  
+  nodes.push(newNode);  
+  draw();  
+});  
+
+// Clear all nodes  
+document.getElementById('clear-all').addEventListener('click', () => {  
+  nodes.length = 0;  
+  connections.length = 0;  
+  draw();  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

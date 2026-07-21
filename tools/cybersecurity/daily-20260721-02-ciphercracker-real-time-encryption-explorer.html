@@ -1,0 +1,202 @@
+---
+layout: null
+title: "CipherCracker: Real-Time Encryption Explorer"
+category: "Cybersecurity"
+description: "A highly interactive tool where users visualize, manipulate, and break down classic encryption algorithms like Caesar, Vigenère, and Substitution Ciphers in real-time."
+permalink: "/tools/daily-20260721-02-ciphercracker-real-time-encryption-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260721"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CipherCracker: Real-Time Encryption Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive tool where users visualize, manipulate, and break down classic encryption algorithms like Caesar, Vigenère, and Substitution Ciphers in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CipherCracker: Real-Time Encryption Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive tool where users visualize, manipulate, and break down classic encryption algorithms like Caesar, Vigenère, and Substitution Ciphers in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CipherCracker: Real-Time Encryption Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive tool where users visualize, manipulate, and break down classic encryption algorithms like Caesar, Vigenère, and Substitution Ciphers in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CipherCracker: Real-Time Encryption Explorer</h1>
+    <p class="seo-subtitle">A highly interactive tool where users visualize, manipulate, and break down classic encryption algorithms like Caesar, Vigenère, and Substitution Ciphers in real-time.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(120deg, #2b5876, #4e4376);  
+  color: #fff;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+}  
+#tool-app {  
+  background: rgba(0, 0, 0, 0.8);  
+  padding: 20px;  
+  border-radius: 10px;  
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);  
+  width: 90%;  
+  max-width: 800px;  
+  text-align: center;  
+}  
+button {  
+  background: #ff7e5f;  
+  border: none;  
+  color: white;  
+  padding: 10px 20px;  
+  margin: 5px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  font-size: 16px;  
+}  
+button:hover {  
+  background: #feb47b;  
+}  
+textarea, input {  
+  width: 100%;  
+  padding: 10px;  
+  margin: 10px 0;  
+  border-radius: 5px;  
+  border: none;  
+  font-size: 16px;  
+}  
+.output {  
+  background: rgba(255, 255, 255, 0.1);  
+  padding: 10px;  
+  border-radius: 5px;  
+  margin-top: 10px;  
+  font-family: monospace;  
+}  
+.hidden {  
+  display: none;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>CipherCracker: Real-Time Encryption Explorer</h1>  
+  <p>Type a message below and interact with encryption algorithms to see how they process your text.</p>  
+  <textarea id="inputText" placeholder="Enter your text..."></textarea>  
+  <div>  
+    <select id="cipherType">  
+      <option value="caesar">Caesar Cipher</option>  
+      <option value="vigenere">Vigenère Cipher</option>  
+      <option value="substitution">Substitution Cipher</option>  
+    </select>  
+    <input type="text" id="key" placeholder="Enter a key (e.g., shift or keyword)" />  
+  </div>  
+  <button onclick="encrypt()">Encrypt</button>  
+  <button onclick="decrypt()">Decrypt</button>  
+  <div class="output hidden" id="resultContainer">  
+    <h3>Result:</h3>  
+    <p id="result"></p>  
+  </div>  
+</div>  
+<script>  
+function caesarCipher(str, shift, decrypt = false) {  
+  if (decrypt) shift = -shift;  
+  return str  
+    .split("")  
+    .map((char) => {  
+      if (!char.match(/[a-zA-Z]/)) return char;  
+      const charCode = char.charCodeAt(0);  
+      const base = charCode >= 65 && charCode <= 90 ? 65 : 97;  
+      return String.fromCharCode(((charCode - base + shift + 26) % 26) + base);  
+    })  
+    .join("");  
+}  
+
+function vigenereCipher(str, key, decrypt = false) {  
+  key = key.toLowerCase();  
+  let keyIndex = 0;  
+  return str  
+    .split("")  
+    .map((char) => {  
+      if (!char.match(/[a-zA-Z]/)) return char;  
+      const charCode = char.charCodeAt(0);  
+      const base = charCode >= 65 && charCode <= 90 ? 65 : 97;  
+      const shift = (key.charCodeAt(keyIndex % key.length) - 97) * (decrypt ? -1 : 1);  
+      keyIndex++;  
+      return String.fromCharCode(((charCode - base + shift + 26) % 26) + base);  
+    })  
+    .join("");  
+}  
+
+function substitutionCipher(str, key, decrypt = false) {  
+  const alphabet = "abcdefghijklmnopqrstuvwxyz";  
+  key = key.toLowerCase();  
+  if (decrypt) {  
+    const reverseKey = key.split("").reduce((obj, char, i) => {  
+      obj[char] = alphabet[i];  
+      return obj;  
+    }, {});  
+    return str  
+      .split("")  
+      .map((char) => reverseKey[char.toLowerCase()] || char)  
+      .join("");  
+  } else {  
+    return str  
+      .split("")  
+      .map((char) => {  
+        const index = alphabet.indexOf(char.toLowerCase());  
+        return index !== -1 ? key[index] : char;  
+      })  
+      .join("");  
+  }  
+}  
+
+function encrypt() {  
+  const text = document.getElementById("inputText").value;  
+  const cipherType = document.getElementById("cipherType").value;  
+  const key = document.getElementById("key").value;  
+  let result = "";  
+
+  if (cipherType === "caesar") {  
+    result = caesarCipher(text, parseInt(key));  
+  } else if (cipherType === "vigenere") {  
+    result = vigenereCipher(text, key);  
+  } else if (cipherType === "substitution") {  
+    result = substitutionCipher(text, key);  
+  }  
+
+  document.getElementById("result").textContent = result;  
+  document.getElementById("resultContainer").classList.remove("hidden");  
+}  
+
+function decrypt() {  
+  const text = document.getElementById("inputText").value;  
+  const cipherType = document.getElementById("cipherType").value;  
+  const key = document.getElementById("key").value;  
+  let result = "";  
+
+  if (cipherType === "caesar") {  
+    result = caesarCipher(text, parseInt(key), true);  
+  } else if (cipherType === "vigenere") {  
+    result = vigenereCipher(text, key, true);  
+  } else if (cipherType === "substitution") {  
+    result = substitutionCipher(text, key, true);  
+  }  
+
+  document.getElementById("result").textContent = result;  
+  document.getElementById("resultContainer").classList.remove("hidden");  
+}  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,192 @@
+---
+layout: null
+title: "Productivity Prism: Task Flow Architect"
+category: "Productivity"
+description: "Visually design, simulate, and optimize task workflows with an interactive drag-and-drop system that dynamically analyzes bottlenecks and time efficiency."
+permalink: "/tools/daily-20260721-08-productivity-prism-task-flow-architect.html"
+generated_by: "api-true-ai"
+generated_date: "20260721"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productivity Prism: Task Flow Architect | Free Online Interactive Tool</title>
+  <meta name="description" content="Visually design, simulate, and optimize task workflows with an interactive drag-and-drop system that dynamically analyzes bottlenecks and time efficiency. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Productivity Prism: Task Flow Architect | Free Online Interactive Tool">
+  <meta property="og:description" content="Visually design, simulate, and optimize task workflows with an interactive drag-and-drop system that dynamically analyzes bottlenecks and time efficiency. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Productivity Prism: Task Flow Architect | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visually design, simulate, and optimize task workflows with an interactive drag-and-drop system that dynamically analyzes bottlenecks and time efficiency. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Productivity Prism: Task Flow Architect</h1>
+    <p class="seo-subtitle">Visually design, simulate, and optimize task workflows with an interactive drag-and-drop system that dynamically analyzes bottlenecks and time efficiency.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 20px;  
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);  
+}  
+#tool-app {  
+  max-width: 960px;  
+  margin: 0 auto;  
+  padding: 20px;  
+  background: white;  
+  border-radius: 8px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  
+}  
+.task-node {  
+  display: inline-block;  
+  padding: 10px 20px;  
+  margin: 10px;  
+  background-color: #6c5ce7;  
+  color: white;  
+  border-radius: 4px;  
+  cursor: grab;  
+  user-select: none;  
+}  
+.task-node.dragging {  
+  opacity: 0.6;  
+}  
+.connection {  
+  stroke: #fd79a8;  
+  stroke-width: 3px;  
+  fill: none;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Productivity Prism</h1>  
+  <p>Drag and connect task nodes to design your workflow, and see real-time analysis below.</p>  
+  <div id="workflow-area" style="position: relative; height: 400px; border: 2px dashed #dfe6e9; border-radius: 8px; overflow: hidden;"></div>  
+  <div id="analysis-output" style="margin-top: 20px; font-size: 1.1em; color: #636e72;"></div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+
+const workflowArea = document.getElementById("workflow-area");  
+const analysisOutput = document.getElementById("analysis-output");  
+let taskIdCounter = 0;  
+let connections = [];  
+
+function createTaskNode(text) {  
+  const node = document.createElement("div");  
+  node.className = "task-node";  
+  node.textContent = text;  
+  node.draggable = true;  
+  node.style.position = "absolute";  
+  node.style.left = `${Math.random() * 80 + 10}%`;  
+  node.style.top = `${Math.random() * 80 + 10}%`;  
+
+  node.addEventListener("dragstart", (e) => {  
+    node.classList.add("dragging");  
+    e.dataTransfer.setData("text/plain", node.id);  
+  });  
+  node.addEventListener("dragend", () => node.classList.remove("dragging"));  
+
+  node.id = `task-node-${taskIdCounter++}`;  
+  workflowArea.appendChild(node);  
+
+  node.addEventListener("click", () => {  
+    if (connections.length) {  
+      const connection = connections.find(  
+        (conn) => conn.target === node.id  
+      );  
+      if (connection) {  
+        connections = connections.filter((conn) => conn !== connection);  
+        updateVisualization();  
+      }  
+    }  
+  });  
+
+  return node;  
+}  
+
+function createConnection(sourceId, targetId) {  
+  connections.push({ source: sourceId, target: targetId });  
+  updateVisualization();  
+}  
+
+function updateVisualization() {  
+  const svg = workflowArea.querySelector("svg");  
+  if (svg) svg.remove();  
+
+  const newSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");  
+  newSvg.setAttribute("width", workflowArea.offsetWidth);  
+  newSvg.setAttribute("height", workflowArea.offsetHeight);  
+
+  connections.forEach(({ source, target }) => {  
+    const sourceNode = document.getElementById(source);  
+    const targetNode = document.getElementById(target);  
+    const sourceRect = sourceNode.getBoundingClientRect();  
+    const targetRect = targetNode.getBoundingClientRect();  
+
+    const startX = sourceRect.left + sourceRect.width / 2 - workflowArea.offsetLeft;  
+    const startY = sourceRect.top + sourceRect.height / 2 - workflowArea.offsetTop;  
+    const endX = targetRect.left + targetRect.width / 2 - workflowArea.offsetLeft;  
+    const endY = targetRect.top + targetRect.height / 2 - workflowArea.offsetTop;  
+
+    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");  
+    line.setAttribute("x1", startX);  
+    line.setAttribute("y1", startY);  
+    line.setAttribute("x2", endX);  
+    line.setAttribute("y2", endY);  
+    line.classList.add("connection");  
+    newSvg.appendChild(line);  
+  });  
+
+  workflowArea.appendChild(newSvg);  
+  analyzeWorkflow();  
+}  
+
+function analyzeWorkflow() {  
+  const taskCount = workflowArea.querySelectorAll(".task-node").length;  
+  const connectionCount = connections.length;  
+
+  analysisOutput.innerHTML = `  
+    <strong>Workflow Analysis:</strong><br>  
+    Total Tasks: ${taskCount}<br>  
+    Total Connections: ${connectionCount}<br>  
+    Efficiency Ratio: ${(connectionCount / taskCount).toFixed(2)}  
+  `;  
+}  
+
+// Add initial tasks  
+createTaskNode("Start Task");  
+createTaskNode("Follow-Up Task");  
+createTaskNode("Final Task");  
+
+// Enable drag-and-drop for creating connections  
+workflowArea.addEventListener("dragover", (e) => e.preventDefault());  
+workflowArea.addEventListener("drop", (e) => {  
+  e.preventDefault();  
+  const sourceId = e.dataTransfer.getData("text/plain");  
+  const sourceNode = document.getElementById(sourceId);  
+  if (!sourceNode) return;  
+
+  const targetNode = e.target.closest(".task-node");  
+  if (!targetNode || targetNode.id === sourceId) return;  
+
+  createConnection(sourceId, targetNode.id);  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

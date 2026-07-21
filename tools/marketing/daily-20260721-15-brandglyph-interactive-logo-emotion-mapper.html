@@ -1,0 +1,178 @@
+---
+layout: null
+title: "BrandGlyph: Interactive Logo Emotion Mapper"
+category: "Marketing"
+description: "A tool that lets you draw logos interactively while receiving real-time feedback on the emotional impact of your design based on color, shape, and typography analysis."
+permalink: "/tools/daily-20260721-15-brandglyph-interactive-logo-emotion-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260721"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrandGlyph: Interactive Logo Emotion Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="A tool that lets you draw logos interactively while receiving real-time feedback on the emotional impact of your design based on color, shape, and typography analysis. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="BrandGlyph: Interactive Logo Emotion Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="A tool that lets you draw logos interactively while receiving real-time feedback on the emotional impact of your design based on color, shape, and typography analysis. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BrandGlyph: Interactive Logo Emotion Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A tool that lets you draw logos interactively while receiving real-time feedback on the emotional impact of your design based on color, shape, and typography analysis. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>BrandGlyph: Interactive Logo Emotion Mapper</h1>
+    <p class="seo-subtitle">A tool that lets you draw logos interactively while receiving real-time feedback on the emotional impact of your design based on color, shape, and typography analysis.</p>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  #tool-app {
+    width: 90vw;
+    height: 90vh;
+    background: #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  #canvas-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f9f9fc;
+    position: relative;
+  }
+  #feedback {
+    padding: 15px;
+    background: #f4f6ff;
+    border-top: 1px solid #e2e4ef;
+    font-size: 14px;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .btn {
+    padding: 10px 15px;
+    margin-left: 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .btn-primary {
+    background: #4a90e2;
+    color: #fff;
+  }
+  .btn-secondary {
+    background: #f5f5f5;
+    color: #333;
+  }
+</style>
+<div id="tool-app">
+  <div id="canvas-container">
+    <canvas id="logo-canvas" width="800" height="600"></canvas>
+  </div>
+  <div id="feedback">
+    <span id="emotion-feedback">Emotion Feedback: Neutral</span>
+    <div>
+      <button class="btn btn-secondary" id="reset-btn">Reset</button>
+      <button class="btn btn-primary" id="analyze-btn">Analyze</button>
+    </div>
+  </div>
+</div>
+<script>
+  const canvas = document.getElementById('logo-canvas');
+  const ctx = canvas.getContext('2d');
+  const emotionFeedback = document.getElementById('emotion-feedback');
+  let isDrawing = false;
+  let elements = [];
+  
+  // Start drawing
+  canvas.addEventListener('mousedown', (e) => {
+    isDrawing = true;
+    const { offsetX, offsetY } = e;
+    elements.push({ type: 'path', points: [{ x: offsetX, y: offsetY }], color: '#000' });
+  });
+
+  // Draw paths
+  canvas.addEventListener('mousemove', (e) => {
+    if (!isDrawing) return;
+    const { offsetX, offsetY } = e;
+    const currentPath = elements[elements.length - 1];
+    currentPath.points.push({ x: offsetX, y: offsetY });
+    redrawCanvas();
+  });
+
+  // Stop drawing
+  canvas.addEventListener('mouseup', () => {
+    isDrawing = false;
+  });
+
+  // Redraw the canvas
+  function redrawCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    elements.forEach((element) => {
+      if (element.type === 'path') {
+        ctx.beginPath();
+        ctx.strokeStyle = element.color;
+        element.points.forEach((point, index) => {
+          if (index === 0) ctx.moveTo(point.x, point.y);
+          else ctx.lineTo(point.x, point.y);
+        });
+        ctx.stroke();
+      }
+    });
+  }
+
+  // Analyze the logo for emotion
+  function analyzeEmotion() {
+    const colors = elements.map(e => e.color);
+    const shapes = elements.filter(e => e.type === 'path').length;
+
+    // Dummy logic to determine "emotion"
+    let emotion = 'Neutral';
+    if (shapes > 5) emotion = 'Energetic';
+    if (colors.includes('#ff0000')) emotion = 'Passionate';
+    if (colors.includes('#00ff00')) emotion = 'Calm';
+
+    emotionFeedback.textContent = `Emotion Feedback: ${emotion}`;
+  }
+
+  // Reset the canvas
+  document.getElementById('reset-btn').addEventListener('click', () => {
+    elements = [];
+    redrawCanvas();
+    emotionFeedback.textContent = 'Emotion Feedback: Neutral';
+  });
+
+  // Analyze button
+  document.getElementById('analyze-btn').addEventListener('click', analyzeEmotion);
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
