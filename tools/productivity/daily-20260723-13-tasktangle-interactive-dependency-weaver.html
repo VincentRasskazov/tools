@@ -1,0 +1,146 @@
+---
+layout: null
+title: "TaskTangle: Interactive Dependency Weaver"
+category: "Productivity"
+description: "Visualize and manage task dependencies in a dynamic, interactive web of connections to optimize your workflow."
+permalink: "/tools/daily-20260723-13-tasktangle-interactive-dependency-weaver.html"
+generated_by: "api-true-ai"
+generated_date: "20260723"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskTangle: Interactive Dependency Weaver | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize and manage task dependencies in a dynamic, interactive web of connections to optimize your workflow. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="TaskTangle: Interactive Dependency Weaver | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize and manage task dependencies in a dynamic, interactive web of connections to optimize your workflow. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TaskTangle: Interactive Dependency Weaver | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize and manage task dependencies in a dynamic, interactive web of connections to optimize your workflow. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>TaskTangle: Interactive Dependency Weaver</h1>
+    <p class="seo-subtitle">Visualize and manage task dependencies in a dynamic, interactive web of connections to optimize your workflow.</p>
+    <style>  
+  body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f4f4f9; color: #333; }  
+  #tool-app { width: 90%; height: 90%; border: 2px solid #ccc; border-radius: 10px; background: #fff; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); overflow: hidden; position: relative; }  
+  .task-node { position: absolute; border: 2px solid #6c63ff; background: #e0e7ff; padding: 10px 15px; border-radius: 8px; cursor: grab; user-select: none; }  
+  .task-node.dragging { cursor: grabbing; }  
+  .connection-line { position: absolute; stroke: #6c63ff; stroke-width: 2; }  
+  #add-task-btn { position: absolute; bottom: 15px; left: 15px; padding: 10px 20px; border: none; background: #6c63ff; color: #fff; border-radius: 5px; cursor: pointer; font-size: 14px; }  
+  #add-task-btn:hover { background: #4b47cc; }  
+</style>  
+<div id="tool-app">  
+  <button id="add-task-btn">Add Task</button>  
+</div>  
+<script>  
+  const app = document.getElementById("tool-app");  
+  const addTaskBtn = document.getElementById("add-task-btn");  
+  const tasks = [];  
+  const connections = [];  
+
+  let isDragging = false;  
+  let lineStart = null;  
+  let draggingNode = null;  
+
+  addTaskBtn.addEventListener("click", () => {  
+    const newTask = createTaskNode();  
+    tasks.push(newTask);  
+    app.appendChild(newTask);  
+  });  
+
+  function createTaskNode() {  
+    const node = document.createElement("div");  
+    node.className = "task-node";  
+    node.style.left = `${Math.random() * 75 + 10}%`;  
+    node.style.top = `${Math.random() * 75 + 10}%`;  
+    node.draggable = false;  
+    node.textContent = `Task ${tasks.length + 1}`;  
+
+    node.addEventListener("mousedown", (e) => {  
+      isDragging = true;  
+      draggingNode = node;  
+      node.classList.add("dragging");  
+    });  
+
+    node.addEventListener("mouseup", (e) => {  
+      isDragging = false;  
+      if (lineStart && lineStart !== node) {  
+        connectTasks(lineStart, node);  
+      }  
+      lineStart = null;  
+      node.classList.remove("dragging");  
+    });  
+
+    node.addEventListener("dblclick", () => {  
+      if (!lineStart) {  
+        lineStart = node;  
+        node.classList.add("selected");  
+      } else {  
+        lineStart.classList.remove("selected");  
+        lineStart = null;  
+      }  
+    });  
+
+    return node;  
+  }  
+
+  function connectTasks(task1, task2) {  
+    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");  
+    line.classList.add("connection-line");  
+    app.appendChild(line);  
+    connections.push({ task1, task2, line });  
+    updateConnections();  
+  }  
+
+  function updateConnections() {  
+    connections.forEach(({ task1, task2, line }) => {  
+      const rect1 = task1.getBoundingClientRect();  
+      const rect2 = task2.getBoundingClientRect();  
+      const x1 = rect1.left + rect1.width / 2;  
+      const y1 = rect1.top + rect1.height / 2;  
+      const x2 = rect2.left + rect2.width / 2;  
+      const y2 = rect2.top + rect2.height / 2;  
+      line.setAttribute("x1", x1);  
+      line.setAttribute("y1", y1);  
+      line.setAttribute("x2", x2);  
+      line.setAttribute("y2", y2);  
+    });  
+  }  
+
+  app.addEventListener("mousemove", (e) => {  
+    if (isDragging && draggingNode) {  
+      const rect = app.getBoundingClientRect();  
+      draggingNode.style.left = `${e.clientX - rect.left - draggingNode.offsetWidth / 2}px`;  
+      draggingNode.style.top = `${e.clientY - rect.top - draggingNode.offsetHeight / 2}px`;  
+      updateConnections();  
+    }  
+  });  
+
+  app.addEventListener("mouseup", () => {  
+    isDragging = false;  
+    if (draggingNode) {  
+      draggingNode.classList.remove("dragging");  
+    }  
+    draggingNode = null;  
+  });  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

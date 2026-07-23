@@ -1,0 +1,202 @@
+---
+layout: null
+title: "Cipher Clash: Interactive Encryption Battle"
+category: "Games"
+description: "A competitive mini-game where players race to encrypt and decrypt strings using various ciphers while dodging real-time hacking attempts."
+permalink: "/tools/daily-20260723-07-cipher-clash-interactive-encryption-battle.html"
+generated_by: "api-true-ai"
+generated_date: "20260723"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cipher Clash: Interactive Encryption Battle | Free Online Interactive Tool</title>
+  <meta name="description" content="A competitive mini-game where players race to encrypt and decrypt strings using various ciphers while dodging real-time hacking attempts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Cipher Clash: Interactive Encryption Battle | Free Online Interactive Tool">
+  <meta property="og:description" content="A competitive mini-game where players race to encrypt and decrypt strings using various ciphers while dodging real-time hacking attempts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cipher Clash: Interactive Encryption Battle | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A competitive mini-game where players race to encrypt and decrypt strings using various ciphers while dodging real-time hacking attempts. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Cipher Clash: Interactive Encryption Battle</h1>
+    <p class="seo-subtitle">A competitive mini-game where players race to encrypt and decrypt strings using various ciphers while dodging real-time hacking attempts.</p>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #1c1c1c;
+    color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+  #tool-app {
+    width: 80%;
+    max-width: 800px;
+    text-align: center;
+    background: #282828;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+  }
+  h1 {
+    color: #37d67a;
+  }
+  .cipher-area {
+    margin: 20px 0;
+  }
+  .cipher-area input, .cipher-area select, .cipher-area button {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+  }
+  .output-display {
+    margin-top: 20px;
+    padding: 15px;
+    background: #111;
+    border-radius: 8px;
+    color: #37d67a;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  #hacking-alert {
+    color: #ff6b6b;
+    font-weight: bold;
+    animation: pulse 1s infinite;
+  }
+  @keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+  }
+</style>
+<div id="tool-app">
+  <h1>Cipher Clash</h1>
+  <p>Encrypt and decrypt strings quickly to score points. Watch out for hacking alerts!</p>
+  <div class="cipher-area">
+    <input type="text" id="input-text" placeholder="Enter text to encrypt">
+    <select id="cipher-type">
+      <option value="caesar">Caesar Cipher</option>
+      <option value="reverse">Reverse Cipher</option>
+    </select>
+    <button id="encrypt-btn">Encrypt</button>
+    <button id="decrypt-btn">Decrypt</button>
+  </div>
+  <div id="output-section">
+    <h3>Output:</h3>
+    <div class="output-display" id="output-display">Encrypted/Decrypted text will appear here.</div>
+  </div>
+  <div id="score-section">
+    <h3>Score: <span id="score">0</span></h3>
+  </div>
+  <div id="hacking-alert" style="display: none;">⚠️ HACKING ATTEMPT DETECTED!</div>
+</div>
+<script>
+  let score = 0;
+  let hackingTimer;
+
+  const updateScore = (points) => {
+    score += points;
+    document.getElementById("score").innerText = score;
+  };
+
+  const showHackingAlert = () => {
+    const alert = document.getElementById("hacking-alert");
+    alert.style.display = "block";
+    setTimeout(() => {
+      alert.style.display = "none";
+    }, 2000);
+  };
+
+  const caesarCipher = (str, shift) => {
+    return str
+      .split("")
+      .map(char => 
+        char.match(/[a-z]/i) 
+          ? String.fromCharCode((char.charCodeAt(0) + shift - 65) % 26 + 65)
+          : char
+      )
+      .join("");
+  };
+
+  const reverseCipher = (str) => {
+    return str.split("").reverse().join("");
+  };
+
+  document.getElementById("encrypt-btn").addEventListener("click", () => {
+    const text = document.getElementById("input-text").value;
+    const cipherType = document.getElementById("cipher-type").value;
+
+    if (!text) return;
+
+    let result;
+    if (cipherType === "caesar") {
+      result = caesarCipher(text, 3);
+    } else if (cipherType === "reverse") {
+      result = reverseCipher(text);
+    }
+
+    document.getElementById("output-display").innerText = result;
+    updateScore(10);
+
+    // Random hacking alert trigger
+    if (Math.random() < 0.3) {
+      showHackingAlert();
+      updateScore(-5);
+    }
+  });
+
+  document.getElementById("decrypt-btn").addEventListener("click", () => {
+    const text = document.getElementById("input-text").value;
+    const cipherType = document.getElementById("cipher-type").value;
+
+    if (!text) return;
+
+    let result;
+    if (cipherType === "caesar") {
+      result = caesarCipher(text, -3);
+    } else if (cipherType === "reverse") {
+      result = reverseCipher(text);
+    }
+
+    document.getElementById("output-display").innerText = result;
+    updateScore(10);
+
+    // Random hacking alert trigger
+    if (Math.random() < 0.3) {
+      showHackingAlert();
+      updateScore(-5);
+    }
+  });
+
+  hackingTimer = setInterval(() => {
+    if (Math.random() < 0.2) {
+      showHackingAlert();
+      updateScore(-10);
+    }
+  }, 5000);
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
