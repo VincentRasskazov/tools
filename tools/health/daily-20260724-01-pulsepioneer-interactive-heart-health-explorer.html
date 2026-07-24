@@ -1,0 +1,161 @@
+---
+layout: null
+title: "PulsePioneer: Interactive Heart Health Explorer"
+category: "Health"
+description: "A mini-game that lets users simulate and optimize blood flow through a virtual circulatory system to learn about heart health."
+permalink: "/tools/daily-20260724-01-pulsepioneer-interactive-heart-health-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260724"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PulsePioneer: Interactive Heart Health Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="A mini-game that lets users simulate and optimize blood flow through a virtual circulatory system to learn about heart health. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PulsePioneer: Interactive Heart Health Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="A mini-game that lets users simulate and optimize blood flow through a virtual circulatory system to learn about heart health. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PulsePioneer: Interactive Heart Health Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A mini-game that lets users simulate and optimize blood flow through a virtual circulatory system to learn about heart health. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PulsePioneer: Interactive Heart Health Explorer</h1>
+    <p class="seo-subtitle">A mini-game that lets users simulate and optimize blood flow through a virtual circulatory system to learn about heart health.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  background: linear-gradient(to bottom, #ff9a8b, #ff6a6a, #ff99ac);  
+}  
+#tool-app {  
+  width: 80%;  
+  height: 80%;  
+  background: #fff;  
+  border-radius: 15px;  
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);  
+  overflow: hidden;  
+  position: relative;  
+}  
+#gameCanvas {  
+  width: 100%;  
+  height: 100%;  
+  display: block;  
+}  
+#hud {  
+  position: absolute;  
+  bottom: 10px;  
+  left: 10px;  
+  right: 10px;  
+  display: flex;  
+  justify-content: space-between;  
+  align-items: center;  
+  font-size: 16px;  
+  background: rgba(255, 255, 255, 0.8);  
+  padding: 10px;  
+  border-radius: 5px;  
+}  
+button {  
+  padding: 5px 10px;  
+  background: #ff6a6a;  
+  color: #fff;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer;  
+}  
+button:hover {  
+  background: #ff4a4a;  
+}  
+</style>  
+<div id="tool-app">  
+  <canvas id="gameCanvas"></canvas>  
+  <div id="hud">  
+    <span>Heart Rate: <span id="heartRate">0</span> BPM</span>  
+    <button id="startGameButton">Start Game</button>  
+  </div>  
+</div>  
+<script>  
+const canvas = document.getElementById('gameCanvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = canvas.parentElement.clientWidth;  
+canvas.height = canvas.parentElement.clientHeight;  
+
+let heartRate = 60;  
+let isGameRunning = false;  
+let arteries = [];  
+let pulseProgress = 0;  
+
+function drawCircle(x, y, radius, color) {  
+  ctx.beginPath();  
+  ctx.arc(x, y, radius, 0, Math.PI * 2);  
+  ctx.fillStyle = color;  
+  ctx.fill();  
+  ctx.closePath();  
+}  
+
+function createArteries() {  
+  arteries = Array.from({ length: 5 }, (_, i) => ({  
+    x: canvas.width / 2,  
+    y: canvas.height / 6 + i * canvas.height / 6,  
+    radius: 30,  
+    color: '#ff6a6a'  
+  }));  
+}  
+
+function updateArteries() {  
+  arteries.forEach((artery, index) => {  
+    artery.radius = Math.max(10, 30 + Math.sin(pulseProgress + index) * 15);  
+    artery.color = artery.radius > 25 ? '#ff4a4a' : '#ff99ac';  
+  });  
+  pulseProgress += 0.1;  
+}  
+
+function drawArteries() {  
+  arteries.forEach(artery => {  
+    drawCircle(artery.x, artery.y, artery.radius, artery.color);  
+  });  
+}  
+
+function gameLoop() {  
+  if (!isGameRunning) return;  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  updateArteries();  
+  drawArteries();  
+  heartRate++;  
+  document.getElementById('heartRate').innerText = heartRate;  
+  requestAnimationFrame(gameLoop);  
+}  
+
+document.getElementById('startGameButton').addEventListener('click', () => {  
+  if (!isGameRunning) {  
+    isGameRunning = true;  
+    heartRate = 60;  
+    pulseProgress = 0;  
+    createArteries();  
+    gameLoop();  
+  }  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

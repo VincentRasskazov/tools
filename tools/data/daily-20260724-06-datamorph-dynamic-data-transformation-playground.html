@@ -1,0 +1,157 @@
+---
+layout: null
+title: "DataMorph: Dynamic Data Transformation Playground"
+category: "Data"
+description: "A highly interactive tool where users can drag, drop, and link data nodes to create dynamic real-time visual transformations and uncover hidden patterns."
+permalink: "/tools/daily-20260724-06-datamorph-dynamic-data-transformation-playground.html"
+generated_by: "api-true-ai"
+generated_date: "20260724"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataMorph: Dynamic Data Transformation Playground | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive tool where users can drag, drop, and link data nodes to create dynamic real-time visual transformations and uncover hidden patterns. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataMorph: Dynamic Data Transformation Playground | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive tool where users can drag, drop, and link data nodes to create dynamic real-time visual transformations and uncover hidden patterns. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataMorph: Dynamic Data Transformation Playground | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive tool where users can drag, drop, and link data nodes to create dynamic real-time visual transformations and uncover hidden patterns. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataMorph: Dynamic Data Transformation Playground</h1>
+    <p class="seo-subtitle">A highly interactive tool where users can drag, drop, and link data nodes to create dynamic real-time visual transformations and uncover hidden patterns.</p>
+    <style>  
+body { font-family: Arial, sans-serif; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: linear-gradient(to bottom, #283048, #859398); color: #fff; }  
+#tool-app { width: 80%; height: 80%; background: #1e1e2f; border-radius: 12px; display: flex; flex-direction: column; padding: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }  
+#canvas-container { flex-grow: 1; position: relative; background: #2b2b3d; border: 2px solid #444; border-radius: 8px; overflow: hidden; }  
+.node { position: absolute; background: #5a5aad; color: #fff; padding: 10px; border-radius: 5px; cursor: grab; user-select: none; transition: box-shadow 0.2s; }  
+.node:hover { box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4); }  
+.data-link { stroke: #fff; stroke-width: 2; }  
+.controls { display: flex; justify-content: space-between; margin-top: 10px; }  
+button { background: #5a5aad; color: #fff; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; transition: background 0.2s; }  
+button:hover { background: #7777d1; }  
+</style>  
+<div id="tool-app">  
+  <div class="controls">  
+    <button id="add-node">Add Data Node</button>  
+    <button id="clear-all">Clear All</button>  
+  </div>  
+  <div id="canvas-container"></div>  
+</div>  
+<script>  
+const toolApp = document.getElementById('tool-app');  
+const canvasContainer = document.getElementById('canvas-container');  
+const addNodeButton = document.getElementById('add-node');  
+const clearAllButton = document.getElementById('clear-all');  
+const nodes = [];  
+const links = [];  
+  
+function createNode(x, y) {  
+  const node = document.createElement('div');  
+  node.classList.add('node');  
+  node.style.left = `${x}px`;  
+  node.style.top = `${y}px`;  
+  node.textContent = `Node ${nodes.length + 1}`;  
+  node.dataset.id = nodes.length;  
+  
+  let isDragging = false;  
+  let offsetX, offsetY;  
+  
+  node.addEventListener('mousedown', (e) => {  
+    isDragging = true;  
+    offsetX = e.offsetX;  
+    offsetY = e.offsetY;  
+    node.style.cursor = 'grabbing';  
+  });  
+  
+  document.addEventListener('mousemove', (e) => {  
+    if (isDragging) {  
+      node.style.left = `${e.pageX - offsetX}px`;  
+      node.style.top = `${e.pageY - offsetY}px`;  
+      updateLinks(node.dataset.id);  
+    }  
+  });  
+  
+  document.addEventListener('mouseup', () => {  
+    isDragging = false;  
+    node.style.cursor = 'grab';  
+  });  
+  
+  canvasContainer.appendChild(node);  
+  nodes.push(node);  
+}  
+  
+function connectNodes(node1, node2) {  
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');  
+  const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');  
+  svg.style.position = 'absolute';  
+  svg.style.top = '0';  
+  svg.style.left = '0';  
+  svg.style.width = '100%';  
+  svg.style.height = '100%';  
+  line.classList.add('data-link');  
+  svg.appendChild(line);  
+  canvasContainer.appendChild(svg);  
+  
+  const link = { line, node1, node2 };  
+  links.push(link);  
+  updateLink(link);  
+}  
+  
+function updateLink(link) {  
+  const rect1 = nodes[link.node1].getBoundingClientRect();  
+  const rect2 = nodes[link.node2].getBoundingClientRect();  
+  const x1 = rect1.left + rect1.width / 2;  
+  const y1 = rect1.top + rect1.height / 2;  
+  const x2 = rect2.left + rect2.width / 2;  
+  const y2 = rect2.top + rect2.height / 2;  
+  link.line.setAttribute('x1', x1);  
+  link.line.setAttribute('y1', y1);  
+  link.line.setAttribute('x2', x2);  
+  link.line.setAttribute('y2', y2);  
+}  
+  
+function updateLinks(nodeId) {  
+  links.forEach((link) => {  
+    if (link.node1 == nodeId || link.node2 == nodeId) {  
+      updateLink(link);  
+    }  
+  });  
+}  
+  
+addNodeButton.addEventListener('click', () => {  
+  const x = Math.random() * (canvasContainer.offsetWidth - 100);  
+  const y = Math.random() * (canvasContainer.offsetHeight - 50);  
+  createNode(x, y);  
+  
+  if (nodes.length > 1) {  
+    connectNodes(nodes.length - 2, nodes.length - 1);  
+  }  
+});  
+  
+clearAllButton.addEventListener('click', () => {  
+  nodes.length = 0;  
+  links.length = 0;  
+  canvasContainer.innerHTML = '';  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

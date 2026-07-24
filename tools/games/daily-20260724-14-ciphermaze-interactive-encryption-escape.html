@@ -1,0 +1,201 @@
+---
+layout: null
+title: "CipherMaze: Interactive Encryption Escape"
+category: "Games"
+description: "A puzzle game where players navigate a visual maze by solving encryption and decryption challenges to unlock paths and escape."
+permalink: "/tools/daily-20260724-14-ciphermaze-interactive-encryption-escape.html"
+generated_by: "api-true-ai"
+generated_date: "20260724"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CipherMaze: Interactive Encryption Escape | Free Online Interactive Tool</title>
+  <meta name="description" content="A puzzle game where players navigate a visual maze by solving encryption and decryption challenges to unlock paths and escape. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CipherMaze: Interactive Encryption Escape | Free Online Interactive Tool">
+  <meta property="og:description" content="A puzzle game where players navigate a visual maze by solving encryption and decryption challenges to unlock paths and escape. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CipherMaze: Interactive Encryption Escape | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A puzzle game where players navigate a visual maze by solving encryption and decryption challenges to unlock paths and escape. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CipherMaze: Interactive Encryption Escape</h1>
+    <p class="seo-subtitle">A puzzle game where players navigate a visual maze by solving encryption and decryption challenges to unlock paths and escape.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(135deg, #1e1e2f, #3a3a5e);  
+  color: #fff;  
+  margin: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 600px;  
+  height: 600px;  
+  display: grid;  
+  grid-template-columns: repeat(5, 1fr);  
+  grid-template-rows: repeat(5, 1fr);  
+  gap: 2px;  
+}  
+.cell {  
+  background: #282840;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  font-size: 24px;  
+  font-weight: bold;  
+  border: 1px solid #444;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+.cell.active {  
+  background: #4CAF50;  
+}  
+.cell.locked {  
+  background: #DD2C00;  
+}  
+#challenge {  
+  position: fixed;  
+  bottom: 20px;  
+  left: 50%;  
+  transform: translateX(-50%);  
+  background: #222;  
+  padding: 15px;  
+  border-radius: 8px;  
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);  
+  width: 400px;  
+  text-align: center;  
+  display: none;  
+}  
+button {  
+  background: #4CAF50;  
+  color: white;  
+  border: none;  
+  padding: 10px 15px;  
+  cursor: pointer;  
+  font-size: 16px;  
+  border-radius: 5px;  
+}  
+button:hover {  
+  background: #45a049;  
+}  
+</style>  
+<div id="tool-app"></div>  
+<div id="challenge">  
+  <p id="challenge-text"></p>  
+  <input id="challenge-input" type="text" placeholder="Enter your answer..." />  
+  <button id="submit-btn">Submit</button>  
+</div>  
+<script>  
+const app = document.getElementById('tool-app');  
+const challengeBox = document.getElementById('challenge');  
+const challengeText = document.getElementById('challenge-text');  
+const challengeInput = document.getElementById('challenge-input');  
+const submitButton = document.getElementById('submit-btn');  
+
+const gridSize = 5;  
+let playerPosition = [0, 0];  
+let challenges = {};  
+
+function createGrid() {  
+  for (let row = 0; row < gridSize; row++) {  
+    for (let col = 0; col < gridSize; col++) {  
+      const cell = document.createElement('div');  
+      cell.classList.add('cell');  
+      cell.dataset.row = row;  
+      cell.dataset.col = col;  
+      if (row === 0 && col === 0) cell.classList.add('active');  
+      if (Math.random() > 0.7) {  
+        cell.classList.add('locked');  
+        challenges[`${row},${col}`] = generateChallenge();  
+      }  
+      app.appendChild(cell);  
+    }  
+  }  
+}  
+
+function generateChallenge() {  
+  const types = ['Caesar Cipher', 'Reverse String', 'Base64 Decode'];  
+  const selectedType = types[Math.floor(Math.random() * types.length)];  
+
+  let question, answer;  
+  switch (selectedType) {  
+    case 'Caesar Cipher':  
+      const shift = Math.floor(Math.random() * 10) + 1;  
+      const original = 'DECRYPT';  
+      question = `Decrypt: ${caesarCipher(original, shift)} (Shift: ${shift})`;  
+      answer = 'DECRYPT';  
+      break;  
+    case 'Reverse String':  
+      const str = 'PUZZLE';  
+      question = `Reverse this string: ${str.split('').reverse().join('')}`;  
+      answer = str;  
+      break;  
+    case 'Base64 Decode':  
+      const encoded = btoa('ANSWER');  
+      question = `Decode this Base64: ${encoded}`;  
+      answer = 'ANSWER';  
+      break;  
+  }  
+  return { question, answer };  
+}  
+
+function caesarCipher(text, shift) {  
+  return text.split('').map(char => {  
+    if (char.match(/[A-Za-z]/)) {  
+      const base = char.charCodeAt(0) < 97 ? 65 : 97;  
+      return String.fromCharCode(((char.charCodeAt(0) - base + shift) % 26) + base);  
+    }  
+    return char;  
+  }).join('');  
+}  
+
+function handleCellClick(event) {  
+  const cell = event.target;  
+  if (!cell.classList.contains('locked')) return;  
+
+  const row = parseInt(cell.dataset.row, 10);  
+  const col = parseInt(cell.dataset.col, 10);  
+  const challenge = challenges[`${row},${col}`];  
+
+  challengeBox.style.display = 'block';  
+  challengeText.textContent = challenge.question;  
+  challengeInput.value = '';  
+
+  submitButton.onclick = () => {  
+    if (challengeInput.value.toUpperCase() === challenge.answer) {  
+      cell.classList.remove('locked');  
+      cell.classList.add('active');  
+      challengeBox.style.display = 'none';  
+    } else {  
+      alert('Incorrect! Try again.');  
+    }  
+  };  
+}  
+
+app.addEventListener('click', handleCellClick);  
+createGrid();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

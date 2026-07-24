@@ -1,0 +1,159 @@
+---
+layout: null
+title: "TaskTangle: Priority Weaver"
+category: "Productivity"
+description: "An interactive drag-and-drop tool that lets users visualize and weave their tasks into connected clusters based on priority, dependencies, and urgency."
+permalink: "/tools/daily-20260724-09-tasktangle-priority-weaver.html"
+generated_by: "api-true-ai"
+generated_date: "20260724"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskTangle: Priority Weaver | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive drag-and-drop tool that lets users visualize and weave their tasks into connected clusters based on priority, dependencies, and urgency. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="TaskTangle: Priority Weaver | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive drag-and-drop tool that lets users visualize and weave their tasks into connected clusters based on priority, dependencies, and urgency. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TaskTangle: Priority Weaver | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive drag-and-drop tool that lets users visualize and weave their tasks into connected clusters based on priority, dependencies, and urgency. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>TaskTangle: Priority Weaver</h1>
+    <p class="seo-subtitle">An interactive drag-and-drop tool that lets users visualize and weave their tasks into connected clusters based on priority, dependencies, and urgency.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+    font-family: Arial, sans-serif;  
+    background-color: #f4f4f9;  
+    margin: 0;  
+    padding: 0;  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    justify-content: center;  
+}  
+#tool-app {  
+    width: 80%;  
+    height: 80vh;  
+    background-color: #ffffff;  
+    border-radius: 10px;  
+    box-shadow: 0px 4px 6px rgba(0,0,0,0.1);  
+    overflow: hidden;  
+    position: relative;  
+}  
+.task {  
+    padding: 10px 20px;  
+    background-color: #0088cc;  
+    color: white;  
+    border-radius: 5px;  
+    cursor: move;  
+    position: absolute;  
+    text-align: center;  
+    font-size: 14px;  
+}  
+.link {  
+    stroke: #888;  
+    stroke-width: 2;  
+}  
+</style>  
+<div id="tool-app">  
+    <svg id="connections" width="100%" height="100%" style="position: absolute; z-index: 0;"></svg>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const app = document.getElementById('tool-app');  
+const tasks = [  
+    { id: 1, name: 'Task A', x: 50, y: 100 },  
+    { id: 2, name: 'Task B', x: 200, y: 300 },  
+    { id: 3, name: 'Task C', x: 400, y: 150 },  
+];  
+const connections = [];  
+
+function createTaskElement(task) {  
+    const div = document.createElement('div');  
+    div.className = 'task';  
+    div.textContent = task.name;  
+    div.style.left = `${task.x}px`;  
+    div.style.top = `${task.y}px`;  
+    div.draggable = true;  
+    div.dataset.id = task.id;  
+    
+    div.addEventListener('dragstart', (e) => {  
+        e.dataTransfer.setData('text/plain', JSON.stringify(task));  
+    });  
+    
+    div.addEventListener('dragend', (e) => {  
+        const rect = app.getBoundingClientRect();  
+        task.x = e.clientX - rect.left;  
+        task.y = e.clientY - rect.top;  
+        div.style.left = `${task.x}px`;  
+        div.style.top = `${task.y}px`;  
+        updateConnections();  
+    });  
+    
+    app.appendChild(div);  
+}  
+
+function drawConnection(from, to) {  
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');  
+    line.classList.add('link');  
+    line.setAttribute('x1', from.x);  
+    line.setAttribute('y1', from.y);  
+    line.setAttribute('x2', to.x);  
+    line.setAttribute('y2', to.y);  
+    return line;  
+}  
+
+function updateConnections() {  
+    const svg = document.getElementById('connections');  
+    svg.innerHTML = '';  
+    connections.forEach(({ fromId, toId }) => {  
+        const fromTask = tasks.find(t => t.id === fromId);  
+        const toTask = tasks.find(t => t.id === toId);  
+        svg.appendChild(drawConnection(fromTask, toTask));  
+    });  
+}  
+
+tasks.forEach(createTaskElement);  
+
+app.addEventListener('dragover', (e) => { e.preventDefault(); });  
+
+app.addEventListener('drop', (e) => {  
+    const draggedTask = JSON.parse(e.dataTransfer.getData('text/plain'));  
+    const rect = app.getBoundingClientRect();  
+    const dropX = e.clientX - rect.left;  
+    const dropY = e.clientY - rect.top;  
+
+    const targetTask = tasks.find(t => {  
+        return (  
+            dropX > t.x && dropX < t.x + 80 &&  
+            dropY > t.y && dropY < t.y + 40  
+        );  
+    });  
+
+    if (targetTask && targetTask.id !== draggedTask.id) {  
+        connections.push({ fromId: draggedTask.id, toId: targetTask.id });  
+        updateConnections();  
+    }  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

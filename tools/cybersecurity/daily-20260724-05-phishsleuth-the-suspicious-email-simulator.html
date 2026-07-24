@@ -1,0 +1,156 @@
+---
+layout: null
+title: "PhishSleuth: The Suspicious Email Simulator"
+category: "Cybersecurity"
+description: "An interactive mini-game where users analyze simulated phishing emails to identify red flags and improve their cybersecurity awareness."
+permalink: "/tools/daily-20260724-05-phishsleuth-the-suspicious-email-simulator.html"
+generated_by: "api-true-ai"
+generated_date: "20260724"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhishSleuth: The Suspicious Email Simulator | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive mini-game where users analyze simulated phishing emails to identify red flags and improve their cybersecurity awareness. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PhishSleuth: The Suspicious Email Simulator | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive mini-game where users analyze simulated phishing emails to identify red flags and improve their cybersecurity awareness. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PhishSleuth: The Suspicious Email Simulator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive mini-game where users analyze simulated phishing emails to identify red flags and improve their cybersecurity awareness. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PhishSleuth: The Suspicious Email Simulator</h1>
+    <p class="seo-subtitle">An interactive mini-game where users analyze simulated phishing emails to identify red flags and improve their cybersecurity awareness.</p>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1c1c3c, #374068);
+    color: white;
+    margin: 0;
+    padding: 0;
+  }
+  #tool-app {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #2c2c4c;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  }
+  #email-viewer {
+    background: #1d1d3a;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  }
+  #email-viewer h2 {
+    margin: 0 0 10px;
+  }
+  #feedback {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 20px;
+  }
+  .button {
+    padding: 10px 20px;
+    background: #4c5b82;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+  }
+  .button:hover {
+    background: #5b6a95;
+  }
+</style>
+<div id="tool-app">
+  <h1>PhishSleuth: The Suspicious Email Simulator</h1>
+  <div id="email-viewer">
+    <h2>Email Subject: <span id="email-subject"></span></h2>
+    <p><b>Sender:</b> <span id="email-sender"></span></p>
+    <p><b>Body:</b></p>
+    <p id="email-body"></p>
+  </div>
+  <div>
+    <button class="button" id="flag-phishing">Flag as Phishing</button>
+    <button class="button" id="mark-safe">Mark as Safe</button>
+  </div>
+  <div id="feedback"></div>
+</div>
+<script>
+  const emails = [
+    {
+      subject: "Urgent: Verify Your Account Now",
+      sender: "support@bankingsecure.com",
+      body: "Dear Customer, your account will be suspended unless you verify your information. Click the link below immediately to avoid issues.",
+      isPhishing: true
+    },
+    {
+      subject: "Team Meeting Scheduled",
+      sender: "manager@company.com",
+      body: "Hi Team, the next meeting is scheduled for Monday at 10 AM. Please check the agenda in the attached PDF.",
+      isPhishing: false
+    },
+    {
+      subject: "Congratulations! You've Won!",
+      sender: "prizes@contestwinner.net",
+      body: "You've won a $1000 gift card! Click here to claim your prize. Act fast, this offer expires in 24 hours.",
+      isPhishing: true
+    },
+    {
+      subject: "Invoice Receipt",
+      sender: "billing@trustedvendor.com",
+      body: "Thank you for your payment. Attached is your receipt for the transaction.",
+      isPhishing: false
+    }
+  ];
+
+  let currentEmailIndex = 0;
+
+  function loadEmail(index) {
+    const email = emails[index];
+    document.getElementById('email-subject').innerText = email.subject;
+    document.getElementById('email-sender').innerText = email.sender;
+    document.getElementById('email-body').innerText = email.body;
+    document.getElementById('feedback').innerText = "";
+  }
+
+  function evaluateChoice(isPhishingChoice) {
+    const email = emails[currentEmailIndex];
+    if (email.isPhishing === isPhishingChoice) {
+      document.getElementById('feedback').innerText = "Correct! You identified this email correctly.";
+      document.getElementById('feedback').style.color = "#4caf50";
+    } else {
+      document.getElementById('feedback').innerText = "Incorrect. Review the details carefully.";
+      document.getElementById('feedback').style.color = "#f44336";
+    }
+    currentEmailIndex = (currentEmailIndex + 1) % emails.length;
+    setTimeout(() => loadEmail(currentEmailIndex), 2000);
+  }
+
+  document.getElementById('flag-phishing').addEventListener('click', () => evaluateChoice(true));
+  document.getElementById('mark-safe').addEventListener('click', () => evaluateChoice(false));
+
+  loadEmail(currentEmailIndex);
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
