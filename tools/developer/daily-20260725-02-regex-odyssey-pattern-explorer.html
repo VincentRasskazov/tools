@@ -1,0 +1,153 @@
+---
+layout: null
+title: "Regex Odyssey: Pattern Explorer"
+category: "Developer"
+description: "A gamified adventure that teaches and tests your regex skills by solving interactive string-matching challenges."
+permalink: "/tools/daily-20260725-02-regex-odyssey-pattern-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260725"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Odyssey: Pattern Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified adventure that teaches and tests your regex skills by solving interactive string-matching challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Regex Odyssey: Pattern Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified adventure that teaches and tests your regex skills by solving interactive string-matching challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Regex Odyssey: Pattern Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified adventure that teaches and tests your regex skills by solving interactive string-matching challenges. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Regex Odyssey: Pattern Explorer</h1>
+    <p class="seo-subtitle">A gamified adventure that teaches and tests your regex skills by solving interactive string-matching challenges.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+    font-family: Arial, sans-serif;  
+    background: linear-gradient(120deg, #1e293b, #3b82f6);  
+    color: #fff;  
+    margin: 0;  
+    padding: 0;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+}  
+#tool-app {  
+    background: #1e40af;  
+    padding: 20px;  
+    border-radius: 10px;  
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);  
+    width: 80%;  
+    max-width: 600px;  
+    text-align: center;  
+}  
+h1 {  
+    margin: 0 0 10px 0;  
+}  
+#challenge, #feedback {  
+    margin: 10px 0;  
+}  
+input, button {  
+    padding: 10px;  
+    margin: 5px 0;  
+    border: none;  
+    border-radius: 5px;  
+    font-size: 16px;  
+}  
+input {  
+    width: 100%;  
+}  
+button {  
+    background-color: #3b82f6;  
+    color: white;  
+    cursor: pointer;  
+}  
+button:hover {  
+    background-color: #2563eb;  
+}  
+</style>  
+<div id="tool-app">  
+    <h1>Regex Odyssey</h1>  
+    <div id="challenge"></div>  
+    <input type="text" id="regex-input" placeholder="Enter your regex here..." />  
+    <button id="submit-button">Submit</button>  
+    <div id="feedback"></div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const challenges = [  
+    {  
+        description: "Find all words starting with capital letters.",  
+        testString: "Hello world, Regex is Fun!",  
+        solution: /^[A-Z][a-z]*$/g  
+    },  
+    {  
+        description: "Match all email addresses.",  
+        testString: "Contact us at support@example.com, or sales@regexodyssey.com",  
+        solution: /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g  
+    },  
+    {  
+        description: "Extract all 5-digit ZIP codes.",  
+        testString: "Send packages to 12345, 67890, or 23456-7890.",  
+        solution: /\b\d{5}(?:-\d{4})?\b/g  
+    }  
+];  
+
+let currentChallenge = 0;  
+
+const challengeElement = document.getElementById("challenge");  
+const feedbackElement = document.getElementById("feedback");  
+const regexInput = document.getElementById("regex-input");  
+const submitButton = document.getElementById("submit-button");  
+
+function loadChallenge() {  
+    const challenge = challenges[currentChallenge];  
+    challengeElement.innerHTML = `<p>${challenge.description}</p><pre>${challenge.testString}</pre>`;  
+    regexInput.value = "";  
+    feedbackElement.textContent = "";  
+}  
+
+submitButton.addEventListener("click", () => {  
+    const userRegex = new RegExp(regexInput.value, "g");  
+    const challenge = challenges[currentChallenge];  
+    const testMatches = [...challenge.testString.matchAll(userRegex)];  
+    const solutionMatches = [...challenge.testString.matchAll(challenge.solution)];  
+
+    if (JSON.stringify(testMatches) === JSON.stringify(solutionMatches)) {  
+        feedbackElement.textContent = "Correct!";  
+        feedbackElement.style.color = "green";  
+        currentChallenge++;  
+        if (currentChallenge < challenges.length) {  
+            setTimeout(loadChallenge, 1000);  
+        } else {  
+            feedbackElement.textContent = "Congratulations! You've completed all challenges!";  
+        }  
+    } else {  
+        feedbackElement.textContent = "Try again.";  
+        feedbackElement.style.color = "red";  
+    }  
+});  
+
+loadChallenge();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

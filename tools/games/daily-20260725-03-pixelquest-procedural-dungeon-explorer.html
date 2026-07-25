@@ -1,0 +1,168 @@
+---
+layout: null
+title: "PixelQuest: Procedural Dungeon Explorer"
+category: "Games"
+description: "An interactive game where players navigate a procedurally generated dungeon, collecting treasures and avoiding traps in real-time."
+permalink: "/tools/daily-20260725-03-pixelquest-procedural-dungeon-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260725"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PixelQuest: Procedural Dungeon Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive game where players navigate a procedurally generated dungeon, collecting treasures and avoiding traps in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PixelQuest: Procedural Dungeon Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive game where players navigate a procedurally generated dungeon, collecting treasures and avoiding traps in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PixelQuest: Procedural Dungeon Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive game where players navigate a procedurally generated dungeon, collecting treasures and avoiding traps in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PixelQuest: Procedural Dungeon Explorer</h1>
+    <p class="seo-subtitle">An interactive game where players navigate a procedurally generated dungeon, collecting treasures and avoiding traps in real-time.</p>
+    <style>  
+  body {  
+    font-family: 'Arial', sans-serif;  
+    background: linear-gradient(135deg, #1b1b2f, #162447);  
+    color: #ffffff;  
+    margin: 0;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+    overflow: hidden;  
+  }  
+  #tool-app {  
+    width: 500px;  
+    height: 500px;  
+    background-color: #222831;  
+    border: 2px solid #00adb5;  
+    display: flex;  
+    flex-wrap: wrap;  
+    position: relative;  
+  }  
+  .tile {  
+    width: calc(100% / 10);  
+    height: calc(100% / 10);  
+    box-sizing: border-box;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    font-size: 0.9em;  
+    cursor: pointer;  
+  }  
+  .player {  
+    background-color: #00adb5;  
+    border-radius: 50%;  
+  }  
+  .treasure {  
+    background-color: gold;  
+    border-radius: 50%;  
+  }  
+  .trap {  
+    background-color: red;  
+    border-radius: 50%;  
+  }  
+</style>  
+<div id="tool-app"></div>  
+<script>  
+const gridSize = 10;  
+let playerPosition = { x: 0, y: 0 };  
+let treasures = [];  
+let traps = [];  
+let score = 0;  
+
+function generateRandomPosition() {  
+  return {  
+    x: Math.floor(Math.random() * gridSize),  
+    y: Math.floor(Math.random() * gridSize),  
+  };  
+}  
+
+function createGrid() {  
+  const app = document.getElementById("tool-app");  
+  app.innerHTML = "";  
+  for (let y = 0; y < gridSize; y++) {  
+    for (let x = 0; x < gridSize; x++) {  
+      const tile = document.createElement("div");  
+      tile.classList.add("tile");  
+      tile.dataset.x = x;  
+      tile.dataset.y = y;  
+      if (x === playerPosition.x && y === playerPosition.y) {  
+        const player = document.createElement("div");  
+        player.classList.add("player");  
+        tile.appendChild(player);  
+      } else if (treasures.some(t => t.x === x && t.y === y)) {  
+        const treasure = document.createElement("div");  
+        treasure.classList.add("treasure");  
+        tile.appendChild(treasure);  
+      } else if (traps.some(t => t.x === x && t.y === y)) {  
+        const trap = document.createElement("div");  
+        trap.classList.add("trap");  
+        tile.appendChild(trap);  
+      }  
+      app.appendChild(tile);  
+    }  
+  }  
+}  
+
+function updateGame(event) {  
+  const key = event.key;  
+  let newX = playerPosition.x;  
+  let newY = playerPosition.y;  
+
+  if (key === "ArrowUp" && newY > 0) newY--;  
+  if (key === "ArrowDown" && newY < gridSize - 1) newY++;  
+  if (key === "ArrowLeft" && newX > 0) newX--;  
+  if (key === "ArrowRight" && newX < gridSize - 1) newX++;  
+
+  playerPosition = { x: newX, y: newY };  
+
+  const treasureIndex = treasures.findIndex(t => t.x === newX && t.y === newY);  
+  if (treasureIndex !== -1) {  
+    treasures.splice(treasureIndex, 1);  
+    score += 10;  
+    alert(`You found a treasure! Score: ${score}`);  
+  }  
+
+  const trapIndex = traps.findIndex(t => t.x === newX && t.y === newY);  
+  if (trapIndex !== -1) {  
+    alert("You hit a trap! Game Over.");  
+    score = 0;  
+    playerPosition = { x: 0, y: 0 };  
+    treasures = Array(5).fill(0).map(() => generateRandomPosition());  
+    traps = Array(3).fill(0).map(() => generateRandomPosition());  
+  }  
+
+  createGrid();  
+}  
+
+function startGame() {  
+  treasures = Array(5).fill(0).map(() => generateRandomPosition());  
+  traps = Array(3).fill(0).map(() => generateRandomPosition());  
+  createGrid();  
+  document.addEventListener("keydown", updateGame);  
+}  
+
+startGame();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
