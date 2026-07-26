@@ -1,0 +1,149 @@
+---
+layout: null
+title: "LogicForge: Interactive Circuit Puzzle Builder"
+category: "Education"
+description: "A visually engaging tool where users design and debug virtual logic circuits to solve electrifying puzzles and learn digital logic concepts."
+permalink: "/tools/daily-20260726-22-logicforge-interactive-circuit-puzzle-builder.html"
+generated_by: "api-true-ai"
+generated_date: "20260726"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LogicForge: Interactive Circuit Puzzle Builder | Free Online Interactive Tool</title>
+  <meta name="description" content="A visually engaging tool where users design and debug virtual logic circuits to solve electrifying puzzles and learn digital logic concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="LogicForge: Interactive Circuit Puzzle Builder | Free Online Interactive Tool">
+  <meta property="og:description" content="A visually engaging tool where users design and debug virtual logic circuits to solve electrifying puzzles and learn digital logic concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LogicForge: Interactive Circuit Puzzle Builder | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A visually engaging tool where users design and debug virtual logic circuits to solve electrifying puzzles and learn digital logic concepts. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>LogicForge: Interactive Circuit Puzzle Builder</h1>
+    <p class="seo-subtitle">A visually engaging tool where users design and debug virtual logic circuits to solve electrifying puzzles and learn digital logic concepts.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(to bottom, #1e3c72, #2a5298);  
+  color: #fff;  
+  margin: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  background: #ffffff10;  
+  padding: 20px;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
+  width: 80%;  
+  max-width: 800px;  
+}  
+button {  
+  background: #ff8c42;  
+  border: none;  
+  padding: 10px 20px;  
+  color: white;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  transition: transform 0.2s;  
+}  
+button:hover {  
+  transform: scale(1.05);  
+}  
+.circuit-board {  
+  display: grid;  
+  grid-template-columns: repeat(8, 1fr);  
+  grid-gap: 10px;  
+  margin-top: 20px;  
+}  
+.circuit-node {  
+  width: 40px;  
+  height: 40px;  
+  background: #2e8b57;  
+  border: 2px solid #fff;  
+  border-radius: 5px;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  font-weight: bold;  
+  color: white;  
+  transition: background 0.3s, transform 0.2s;  
+}  
+.circuit-node.active {  
+  background: #20b2aa;  
+  transform: scale(1.1);  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>LogicForge</h1>  
+  <p>Create and debug circuits to light up the board!</p>  
+  <p>Click nodes to toggle their state, and use logic gates to connect them!</p>  
+  <div class="circuit-board" id="circuit-board"></div>  
+  <button id="check-solution">Check Solution</button>  
+  <p id="result" style="margin-top: 20px; font-size: 1.2em;"></p>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const board = document.getElementById("circuit-board");  
+const result = document.getElementById("result");  
+const rows = 8;  
+const cols = 8;  
+let grid = [];  
+
+// Initialize grid  
+function createBoard() {  
+  for (let r = 0; r < rows; r++) {  
+    for (let c = 0; c < cols; c++) {  
+      const node = document.createElement("div");  
+      node.classList.add("circuit-node");  
+      node.dataset.active = "false";  
+      node.addEventListener("click", () => toggleNode(node));  
+      board.appendChild(node);  
+      grid.push({ element: node, active: false });  
+    }  
+  }  
+}  
+
+// Toggle node state  
+function toggleNode(node) {  
+  const isActive = node.dataset.active === "true";  
+  node.dataset.active = isActive ? "false" : "true";  
+  node.classList.toggle("active", !isActive);  
+}  
+
+// Check solution  
+document.getElementById("check-solution").addEventListener("click", () => {  
+  const activeCount = grid.filter(({ element }) => element.dataset.active === "true").length;  
+  if (activeCount === rows) {  
+    result.textContent = "Success! You solved the puzzle!";  
+    result.style.color = "#00ff00";  
+  } else {  
+    result.textContent = "Try again! Ensure exactly one row is fully connected.";  
+    result.style.color = "#ff0000";  
+  }  
+});  
+
+createBoard();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

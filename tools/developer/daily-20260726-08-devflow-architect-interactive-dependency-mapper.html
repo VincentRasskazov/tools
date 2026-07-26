@@ -1,0 +1,206 @@
+---
+layout: null
+title: "DevFlow Architect: Interactive Dependency Mapper"
+category: "Developer"
+description: "A dynamic tool that lets developers visually map, analyze, and simulate dependencies between modules, libraries, and services in real-time."
+permalink: "/tools/daily-20260726-08-devflow-architect-interactive-dependency-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260726"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevFlow Architect: Interactive Dependency Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic tool that lets developers visually map, analyze, and simulate dependencies between modules, libraries, and services in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DevFlow Architect: Interactive Dependency Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic tool that lets developers visually map, analyze, and simulate dependencies between modules, libraries, and services in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DevFlow Architect: Interactive Dependency Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic tool that lets developers visually map, analyze, and simulate dependencies between modules, libraries, and services in real-time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DevFlow Architect: Interactive Dependency Mapper</h1>
+    <p class="seo-subtitle">A dynamic tool that lets developers visually map, analyze, and simulate dependencies between modules, libraries, and services in real-time.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  background: linear-gradient(90deg, #1D3557, #457B9D);  
+  color: #F1FAEE;  
+}  
+#tool-app {  
+  width: 80%;  
+  height: 80%;  
+  background: #A8DADC;  
+  border-radius: 10px;  
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);  
+  display: flex;  
+  flex-direction: column;  
+  padding: 20px;  
+  box-sizing: border-box;  
+}  
+#map-area {  
+  flex: 1;  
+  background: #F1FAEE;  
+  border: 2px solid #457B9D;  
+  border-radius: 5px;  
+  position: relative;  
+  overflow: hidden;  
+}  
+.node {  
+  position: absolute;  
+  background: #1D3557;  
+  color: #F1FAEE;  
+  padding: 10px;  
+  border-radius: 5px;  
+  cursor: grab;  
+  user-select: none;  
+  transition: transform 0.2s ease;  
+}  
+.node:active {  
+  cursor: grabbing;  
+}  
+.connection {  
+  position: absolute;  
+  background: #E63946;  
+  height: 2px;  
+  transform-origin: left center;  
+}  
+.controls {  
+  display: flex;  
+  justify-content: space-between;  
+  margin-top: 10px;  
+}  
+button {  
+  background: #1D3557;  
+  border: none;  
+  color: #F1FAEE;  
+  padding: 10px 15px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  transition: background 0.3s ease;  
+}  
+button:hover {  
+  background: #457B9D;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="map-area"></div>  
+  <div class="controls">  
+    <button id="add-node">Add Node</button>  
+    <button id="clear-map">Clear Map</button>  
+  </div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const mapArea = document.getElementById('map-area');  
+const addNodeButton = document.getElementById('add-node');  
+const clearMapButton = document.getElementById('clear-map');  
+
+let nodes = [];  
+
+function createNode(x = 100, y = 100) {  
+  const node = document.createElement('div');  
+  node.className = 'node';  
+  node.innerText = `Module ${nodes.length + 1}`;  
+  node.style.left = `${x}px`;  
+  node.style.top = `${y}px`;  
+  node.draggable = false;  
+
+  function drag(event) {  
+    const rect = mapArea.getBoundingClientRect();  
+    const newX = event.clientX - rect.left - node.offsetWidth / 2;  
+    const newY = event.clientY - rect.top - node.offsetHeight / 2;  
+    node.style.left = `${newX}px`;  
+    node.style.top = `${newY}px`;  
+    updateConnections();  
+  }  
+
+  // Drag and drop start/stop  
+  node.addEventListener('mousedown', () => {  
+    mapArea.addEventListener('mousemove', drag);  
+    node.classList.add('dragging');  
+  });  
+  window.addEventListener('mouseup', () => {  
+    mapArea.removeEventListener('mousemove', drag);  
+    node.classList.remove('dragging');  
+  });  
+
+  mapArea.appendChild(node);  
+  nodes.push(node);  
+}  
+
+function createConnection(node1, node2) {  
+  const connection = document.createElement('div');  
+  connection.className = 'connection';  
+  mapArea.appendChild(connection);  
+
+  function updateConnection() {  
+    const rect1 = node1.getBoundingClientRect();  
+    const rect2 = node2.getBoundingClientRect();  
+    const x1 = rect1.left + rect1.width / 2 - mapArea.getBoundingClientRect().left;  
+    const y1 = rect1.top + rect1.height / 2 - mapArea.getBoundingClientRect().top;  
+    const x2 = rect2.left + rect2.width / 2 - mapArea.getBoundingClientRect().left;  
+    const y2 = rect2.top + rect2.height / 2 - mapArea.getBoundingClientRect().top;  
+
+    const dx = x2 - x1;  
+    const dy = y2 - y1;  
+    const distance = Math.sqrt(dx * dx + dy * dy);  
+    const angle = Math.atan2(dy, dx) * (180 / Math.PI);  
+
+    connection.style.width = `${distance}px`;  
+    connection.style.transform = `translate(${x1}px, ${y1}px) rotate(${angle}deg)`;  
+  }  
+
+  updateConnection();  
+  const observer = new MutationObserver(updateConnection);  
+  observer.observe(node1, { attributes: true });  
+  observer.observe(node2, { attributes: true });  
+  return connection;  
+}  
+
+function updateConnections() {  
+  document.querySelectorAll('.connection').forEach(conn => conn.remove());  
+  for (let i = 0; i < nodes.length; i++) {  
+    for (let j = i + 1; j < nodes.length; j++) {  
+      createConnection(nodes[i], nodes[j]);  
+    }  
+  }  
+}  
+
+addNodeButton.addEventListener('click', () => {  
+  createNode(100 + Math.random() * 200, 100 + Math.random() * 200);  
+});  
+
+clearMapButton.addEventListener('click', () => {  
+  nodes = [];  
+  mapArea.innerHTML = '';  
+});  
+
+createNode(150, 150);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

@@ -1,0 +1,145 @@
+---
+layout: null
+title: "DataOrbit: Dynamic Relationship Mapper"
+category: "Data"
+description: "An interactive tool that lets you visualize and manipulate dynamic relationships between datasets as orbiting celestial bodies, revealing hidden connections and trends."
+permalink: "/tools/daily-20260726-19-dataorbit-dynamic-relationship-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260726"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataOrbit: Dynamic Relationship Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool that lets you visualize and manipulate dynamic relationships between datasets as orbiting celestial bodies, revealing hidden connections and trends. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataOrbit: Dynamic Relationship Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool that lets you visualize and manipulate dynamic relationships between datasets as orbiting celestial bodies, revealing hidden connections and trends. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataOrbit: Dynamic Relationship Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool that lets you visualize and manipulate dynamic relationships between datasets as orbiting celestial bodies, revealing hidden connections and trends. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataOrbit: Dynamic Relationship Mapper</h1>
+    <p class="seo-subtitle">An interactive tool that lets you visualize and manipulate dynamic relationships between datasets as orbiting celestial bodies, revealing hidden connections and trends.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background: radial-gradient(circle, #1a1a2e, #16213e);  
+  color: #f0f0f0;  
+}  
+#tool-app {  
+  width: 100vw;  
+  height: 100vh;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  overflow: hidden;  
+  position: relative;  
+}  
+.planet {  
+  position: absolute;  
+  border-radius: 50%;  
+  background: linear-gradient(45deg, #ff9a9e, #fad0c4);  
+  cursor: pointer;  
+  transition: transform 0.2s ease;  
+}  
+.planet:hover {  
+  transform: scale(1.2);  
+}  
+.connection {  
+  position: absolute;  
+  background: rgba(255, 255, 255, 0.2);  
+  height: 2px;  
+  transform-origin: 0% 50%;  
+  pointer-events: none;  
+}  
+</style>  
+<div id="tool-app"></div>  
+<script>  
+const data = [  
+  { id: 1, label: "Dataset A", orbitRadius: 100 },  
+  { id: 2, label: "Dataset B", orbitRadius: 150 },  
+  { id: 3, label: "Dataset C", orbitRadius: 200 },  
+  { id: 4, label: "Dataset D", orbitRadius: 250 },  
+];  
+
+const connections = [  
+  { from: 1, to: 2 },  
+  { from: 2, to: 3 },  
+  { from: 3, to: 4 },  
+  { from: 4, to: 1 },  
+];  
+
+const app = document.getElementById("tool-app");  
+const center = { x: window.innerWidth / 2, y: window.innerHeight / 2 };  
+
+function createPlanet(dataItem) {  
+  const planet = document.createElement("div");  
+  planet.classList.add("planet");  
+  planet.style.width = "50px";  
+  planet.style.height = "50px";  
+  planet.style.left = `${center.x + dataItem.orbitRadius * Math.cos(0) - 25}px`;  
+  planet.style.top = `${center.y + dataItem.orbitRadius * Math.sin(0) - 25}px`;  
+  planet.dataset.id = dataItem.id;  
+  planet.textContent = dataItem.label;  
+  app.appendChild(planet);  
+}  
+
+function createConnection(fromPlanet, toPlanet) {  
+  const connection = document.createElement("div");  
+  connection.classList.add("connection");  
+  const x1 = parseFloat(fromPlanet.style.left) + 25;  
+  const y1 = parseFloat(fromPlanet.style.top) + 25;  
+  const x2 = parseFloat(toPlanet.style.left) + 25;  
+  const y2 = parseFloat(toPlanet.style.top) + 25;  
+  const length = Math.hypot(x2 - x1, y2 - y1);  
+  connection.style.width = `${length}px`;  
+  const angle = Math.atan2(y2 - y1, x2 - x1) * (180 / Math.PI);  
+  connection.style.transform = `translate(${x1}px, ${y1}px) rotate(${angle}deg)`;  
+  app.appendChild(connection);  
+}  
+
+data.forEach((item) => createPlanet(item));  
+
+connections.forEach((link) => {  
+  const fromPlanet = document.querySelector(`.planet[data-id='${link.from}']`);  
+  const toPlanet = document.querySelector(`.planet[data-id='${link.to}']`);  
+  createConnection(fromPlanet, toPlanet);  
+});  
+
+let angle = 0;  
+function animate() {  
+  angle += 0.01;  
+  data.forEach((item) => {  
+    const planet = document.querySelector(`.planet[data-id='${item.id}']`);  
+    const x = center.x + item.orbitRadius * Math.cos(angle + item.id);  
+    const y = center.y + item.orbitRadius * Math.sin(angle + item.id);  
+    planet.style.left = `${x - 25}px`;  
+    planet.style.top = `${y - 25}px`;  
+  });  
+  requestAnimationFrame(animate);  
+}  
+
+animate();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

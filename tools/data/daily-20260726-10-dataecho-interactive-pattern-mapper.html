@@ -1,0 +1,151 @@
+---
+layout: null
+title: "DataEcho: Interactive Pattern Mapper"
+category: "Data"
+description: "Visualize and interact with recurring patterns in datasets by dynamically highlighting trends, anomalies, and correlations through an intuitive mini-game interface."
+permalink: "/tools/daily-20260726-10-dataecho-interactive-pattern-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260726"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataEcho: Interactive Pattern Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize and interact with recurring patterns in datasets by dynamically highlighting trends, anomalies, and correlations through an intuitive mini-game interface. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataEcho: Interactive Pattern Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize and interact with recurring patterns in datasets by dynamically highlighting trends, anomalies, and correlations through an intuitive mini-game interface. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataEcho: Interactive Pattern Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize and interact with recurring patterns in datasets by dynamically highlighting trends, anomalies, and correlations through an intuitive mini-game interface. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataEcho: Interactive Pattern Mapper</h1>
+    <p class="seo-subtitle">Visualize and interact with recurring patterns in datasets by dynamically highlighting trends, anomalies, and correlations through an intuitive mini-game interface.</p>
+    <style>  
+#tool-app {  
+  font-family: Arial, sans-serif;  
+  text-align: center;  
+  margin: 20px;  
+}  
+#pattern-grid {  
+  display: grid;  
+  grid-template-columns: repeat(10, 50px);  
+  grid-gap: 5px;  
+  justify-content: center;  
+}  
+.cell {  
+  width: 50px;  
+  height: 50px;  
+  background-color: #e3e3e3;  
+  border: 1px solid #ccc;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  cursor: pointer;  
+  transition: background-color 0.2s ease;  
+}  
+.cell.active {  
+  background-color: #6c63ff;  
+  color: #fff;  
+  font-weight: bold;  
+}  
+#controls {  
+  margin-top: 20px;  
+}  
+button {  
+  padding: 10px 20px;  
+  background-color: #6c63ff;  
+  color: #fff;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  transition: background-color 0.2s ease;  
+}  
+button:hover {  
+  background-color: #5a52e0;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>DataEcho: Interactive Pattern Mapper</h1>  
+  <p>Click cells to uncover hidden patterns, analyze trends, and score points for finding anomalies!</p>  
+  <div id="pattern-grid"></div>  
+  <div id="controls">  
+    <button id="start-button">Start Game</button>  
+    <p id="score-display">Score: 0</p>  
+  </div>  
+</div>  
+<script>  
+const gridSize = 10;  
+const patternGrid = document.getElementById('pattern-grid');  
+const scoreDisplay = document.getElementById('score-display');  
+let score = 0;  
+let activeCells = [];  
+
+function generateGrid() {  
+  patternGrid.innerHTML = '';  
+  for (let i = 0; i < gridSize * gridSize; i++) {  
+    const cell = document.createElement('div');  
+    cell.className = 'cell';  
+    cell.dataset.index = i;  
+    cell.addEventListener('click', () => handleCellClick(cell));  
+    patternGrid.appendChild(cell);  
+  }  
+}  
+
+function activatePattern() {  
+  const totalCells = gridSize * gridSize;  
+  const patternLength = Math.floor(Math.random() * 10) + 3;  
+  activeCells = [];  
+  for (let i = 0; i < patternLength; i++) {  
+    const randomIndex = Math.floor(Math.random() * totalCells);  
+    activeCells.push(randomIndex);  
+  }  
+  activeCells.forEach(index => {  
+    const cell = document.querySelector(`.cell[data-index="${index}"]`);  
+    cell.classList.add('active');  
+    setTimeout(() => cell.classList.remove('active'), 1500);  
+  });  
+}  
+
+function handleCellClick(cell) {  
+  const cellIndex = parseInt(cell.dataset.index);  
+  if (activeCells.includes(cellIndex)) {  
+    score += 10;  
+    activeCells.splice(activeCells.indexOf(cellIndex), 1);  
+    cell.classList.add('active');  
+  } else {  
+    score -= 5;  
+    cell.style.backgroundColor = '#ff6c6c';  
+    setTimeout(() => cell.style.backgroundColor = '#e3e3e3', 500);  
+  }  
+  scoreDisplay.innerText = `Score: ${score}`;  
+}  
+
+document.getElementById('start-button').addEventListener('click', () => {  
+  score = 0;  
+  scoreDisplay.innerText = `Score: ${score}`;  
+  generateGrid();  
+  activatePattern();  
+});  
+
+generateGrid();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
