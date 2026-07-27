@@ -1,0 +1,120 @@
+---
+layout: null
+title: "CodeGlyph: Interactive Regex Debugger Game"
+category: "Developer"
+description: "A gamified experience where developers solve progressively harder regex puzzles by matching patterns in visually dynamic and animated text streams."
+permalink: "/tools/daily-20260727-07-codeglyph-interactive-regex-debugger-game.html"
+generated_by: "api-true-ai"
+generated_date: "20260727"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeGlyph: Interactive Regex Debugger Game | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified experience where developers solve progressively harder regex puzzles by matching patterns in visually dynamic and animated text streams. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CodeGlyph: Interactive Regex Debugger Game | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified experience where developers solve progressively harder regex puzzles by matching patterns in visually dynamic and animated text streams. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CodeGlyph: Interactive Regex Debugger Game | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified experience where developers solve progressively harder regex puzzles by matching patterns in visually dynamic and animated text streams. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CodeGlyph: Interactive Regex Debugger Game</h1>
+    <p class="seo-subtitle">A gamified experience where developers solve progressively harder regex puzzles by matching patterns in visually dynamic and animated text streams.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body { font-family: Arial, sans-serif; background: #1e1e2f; color: #f8f8f2; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }  
+#tool-app { text-align: center; max-width: 600px; background: #282c34; padding: 20px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); }  
+h1 { color: #61dafb; margin-bottom: 20px; }  
+#text-stream { font-family: monospace; color: #f8f8f2; background: #1e1e2f; padding: 10px; border-radius: 5px; border: 1px solid #61dafb; min-height: 100px; overflow-y: auto; white-space: pre-wrap; }  
+#regex-input { width: calc(100% - 22px); padding: 10px; font-size: 16px; border: 2px solid #61dafb; border-radius: 5px; margin-top: 20px; }  
+button { padding: 10px 20px; background: #61dafb; color: #1e1e2f; font-size: 16px; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px; }  
+button:hover { background: #21a1f1; }  
+.match { background-color: rgba(97, 218, 251, 0.3); }  
+</style>  
+<div id="tool-app">  
+  <h1>CodeGlyph: Interactive Regex Debugger Game</h1>  
+  <div id="text-stream"></div>  
+  <input id="regex-input" type="text" placeholder="Enter your regex pattern here" />  
+  <button id="check-pattern">Check Pattern</button>  
+  <p id="level-info"></p>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const levels = [  
+  { text: "apple banana apple cherry banana", target: /apple/g },  
+  { text: "123 456 789 101112", target: /\d{3}/g },  
+  { text: "cat bat rat mat sat", target: /[cr]at/g },  
+  { text: "heLLo HeLlo hELLo hi", target: /hello/gi },  
+  { text: "start123 end456 middle789", target: /\w+\d+/g }  
+];  
+let currentLevel = 0;  
+
+const textStream = document.getElementById("text-stream");  
+const regexInput = document.getElementById("regex-input");  
+const checkButton = document.getElementById("check-pattern");  
+const levelInfo = document.getElementById("level-info");  
+
+function loadLevel() {  
+  const level = levels[currentLevel];  
+  textStream.textContent = level.text;  
+  levelInfo.textContent = `Level ${currentLevel + 1}/${levels.length}`;  
+  regexInput.value = "";  
+}  
+
+function highlightMatches(pattern) {  
+  const level = levels[currentLevel];  
+  const re = new RegExp(pattern);  
+  let highlightedText = level.text.replace(re, (match) => `<span class="match">${match}</span>`);  
+  textStream.innerHTML = highlightedText;  
+}  
+
+checkButton.addEventListener("click", () => {  
+  const userPattern = regexInput.value;  
+  if (!userPattern) return;  
+  
+  try {  
+    const level = levels[currentLevel];  
+    const userRegex = new RegExp(userPattern, "g");  
+    const matches = level.text.match(userRegex);  
+    const correctMatches = level.text.match(level.target);  
+
+    if (JSON.stringify(matches) === JSON.stringify(correctMatches)) {  
+      alert("Correct! Moving to the next level.");  
+      currentLevel++;  
+      if (currentLevel < levels.length) {  
+        loadLevel();  
+      } else {  
+        alert("Congratulations! You completed all levels.");  
+        location.reload();  
+      }  
+    } else {  
+      alert("Incorrect. Try again!");  
+      highlightMatches(userPattern);  
+    }  
+  } catch (err) {  
+    alert("Invalid regex pattern!");  
+  }  
+});  
+
+loadLevel();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

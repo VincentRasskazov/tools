@@ -1,0 +1,155 @@
+---
+layout: null
+title: "Data Prism: The Pattern Discovery Game"
+category: "Data"
+description: "Visualize and uncover hidden patterns in datasets through an interactive matching and sorting mini-game."
+permalink: "/tools/daily-20260727-22-data-prism-the-pattern-discovery-game.html"
+generated_by: "api-true-ai"
+generated_date: "20260727"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Prism: The Pattern Discovery Game | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize and uncover hidden patterns in datasets through an interactive matching and sorting mini-game. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Data Prism: The Pattern Discovery Game | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize and uncover hidden patterns in datasets through an interactive matching and sorting mini-game. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Prism: The Pattern Discovery Game | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize and uncover hidden patterns in datasets through an interactive matching and sorting mini-game. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Data Prism: The Pattern Discovery Game</h1>
+    <p class="seo-subtitle">Visualize and uncover hidden patterns in datasets through an interactive matching and sorting mini-game.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(120deg, #6a11cb, #2575fc);  
+  color: #fff;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+}  
+#tool-app {  
+  width: 80%;  
+  max-width: 600px;  
+  background: rgba(255, 255, 255, 0.1);  
+  border-radius: 12px;  
+  padding: 20px;  
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);  
+  backdrop-filter: blur(10px);  
+}  
+h1 {  
+  text-align: center;  
+  font-size: 24px;  
+  margin-bottom: 20px;  
+}  
+#dataset-container {  
+  display: flex;  
+  flex-wrap: wrap;  
+  justify-content: center;  
+  gap: 10px;  
+}  
+.dataset-item {  
+  width: 50px;  
+  height: 50px;  
+  background-color: #fff;  
+  color: #000;  
+  font-size: 18px;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  transition: transform 0.2s, background-color 0.3s;  
+}  
+.dataset-item:hover {  
+  transform: scale(1.1);  
+  background-color: #6a11cb;  
+  color: #fff;  
+}  
+#pattern-overlay {  
+  margin-top: 20px;  
+  text-align: center;  
+  font-size: 18px;  
+  opacity: 0.8;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>Data Prism: The Pattern Discovery Game</h1>  
+  <div id="dataset-container"></div>  
+  <div id="pattern-overlay">Find and match patterns!</div>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const datasetContainer = document.getElementById("dataset-container");  
+const overlay = document.getElementById("pattern-overlay");  
+
+// Generate random dataset  
+const dataset = [];  
+for (let i = 0; i < 20; i++) {  
+  dataset.push(Math.floor(Math.random() * 100));  
+}  
+
+// Render dataset as tiles  
+dataset.forEach((num, idx) => {  
+  const tile = document.createElement("div");  
+  tile.className = "dataset-item";  
+  tile.textContent = num;  
+  tile.dataset.value = num;  
+  tile.dataset.index = idx;  
+  datasetContainer.appendChild(tile);  
+});  
+
+let pattern = [];  
+
+// Add interactivity to tiles  
+datasetContainer.addEventListener("click", (e) => {  
+  if (e.target.classList.contains("dataset-item")) {  
+    const value = e.target.dataset.value;  
+    pattern.push(value);  
+    e.target.style.backgroundColor = "#2575fc";  
+    e.target.style.color = "#fff";  
+
+    // Check for pattern  
+    if (pattern.length >= 3) {  
+      const isSequential = pattern.every((val, i, arr) =>  
+        i === 0 || parseInt(val) > parseInt(arr[i - 1])  
+      );  
+
+      if (isSequential) {  
+        overlay.textContent = "Great! You've found a sequential pattern: " + pattern.join(", ");  
+        pattern = [];  
+        document.querySelectorAll(".dataset-item").forEach((tile) => {  
+          tile.style.backgroundColor = "#fff";  
+          tile.style.color = "#000";  
+        });  
+      } else {  
+        overlay.textContent = "Not a pattern. Try again!";  
+      }  
+    }  
+  }  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

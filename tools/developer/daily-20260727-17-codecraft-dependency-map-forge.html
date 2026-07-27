@@ -1,0 +1,126 @@
+---
+layout: null
+title: "CodeCraft: Dependency Map Forge"
+category: "Developer"
+description: "A highly interactive tool that lets developers visually build, explore, and optimize dependency trees for their projects, complete with draggable nodes, real-time impact analysis, and performance suggestions."
+permalink: "/tools/daily-20260727-17-codecraft-dependency-map-forge.html"
+generated_by: "api-true-ai"
+generated_date: "20260727"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeCraft: Dependency Map Forge | Free Online Interactive Tool</title>
+  <meta name="description" content="A highly interactive tool that lets developers visually build, explore, and optimize dependency trees for their projects, complete with draggable nodes, real-time impact analysis, and performance suggestions. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CodeCraft: Dependency Map Forge | Free Online Interactive Tool">
+  <meta property="og:description" content="A highly interactive tool that lets developers visually build, explore, and optimize dependency trees for their projects, complete with draggable nodes, real-time impact analysis, and performance suggestions. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CodeCraft: Dependency Map Forge | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A highly interactive tool that lets developers visually build, explore, and optimize dependency trees for their projects, complete with draggable nodes, real-time impact analysis, and performance suggestions. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CodeCraft: Dependency Map Forge</h1>
+    <p class="seo-subtitle">A highly interactive tool that lets developers visually build, explore, and optimize dependency trees for their projects, complete with draggable nodes, real-time impact analysis, and performance suggestions.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #1e1e2f; color: #fff; }  
+  #tool-app { padding: 20px; }  
+  .node { background: #4a90e2; border-radius: 50%; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px; cursor: grab; position: absolute; }  
+  .node.active { background: #e67e22; }  
+  .line { stroke: #fff; stroke-width: 2; }  
+</style>  
+<div id="tool-app">  
+  <h1>CodeCraft: Dependency Map Forge</h1>  
+  <p>Drag nodes to adjust your dependency tree. Click on nodes to view details and optimize connections.</p>  
+  <svg id="canvas" width="100%" height="500" style="border:1px solid #fff;"></svg>  
+  <button id="add-node" style="margin-top: 10px; padding: 10px 15px; background: #4a90e2; border: none; border-radius: 5px; color: white;">Add Node</button>  
+</div>  
+<script>  
+  const app = document.getElementById('tool-app');  
+  const canvas = document.getElementById('canvas');  
+  const addNodeBtn = document.getElementById('add-node');  
+
+  let nodes = [];  
+  let links = [];  
+  let activeNode = null;  
+
+  addNodeBtn.addEventListener('click', () => {  
+    const id = `node-${nodes.length}`;  
+    const newNode = { id, x: Math.random() * 500, y: Math.random() * 400 };  
+    nodes.push(newNode);  
+    render();  
+  });  
+
+  function render() {  
+    canvas.innerHTML = '';  
+
+    // Render connections  
+    links.forEach(link => {  
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');  
+      line.setAttribute('x1', link.source.x);  
+      line.setAttribute('y1', link.source.y);  
+      line.setAttribute('x2', link.target.x);  
+      line.setAttribute('y2', link.target.y);  
+      line.classList.add('line');  
+      canvas.appendChild(line);  
+    });  
+
+    // Render nodes  
+    nodes.forEach(node => {  
+      const circle = document.createElement('div');  
+      circle.className = `node ${node === activeNode ? 'active' : ''}`;  
+      circle.style.left = `${node.x}px`;  
+      circle.style.top = `${node.y}px`;  
+      circle.textContent = node.id;  
+
+      circle.onmousedown = () => {  
+        activeNode = node;  
+        circle.style.cursor = 'grabbing';  
+      };  
+
+      circle.onmouseup = () => {  
+        activeNode = null;  
+        circle.style.cursor = 'grab';  
+      };  
+
+      circle.onmousemove = (e) => {  
+        if (activeNode) {  
+          activeNode.x = e.clientX;  
+          activeNode.y = e.clientY;  
+          render();  
+        }  
+      };  
+
+      circle.ondblclick = () => {  
+        const targetId = prompt('Link to node ID:');  
+        const targetNode = nodes.find(n => n.id === targetId);  
+        if (targetNode) {  
+          links.push({ source: node, target: targetNode });  
+          render();  
+        } else {  
+          alert('Node not found!');  
+        }  
+      };  
+
+      app.appendChild(circle);  
+    });  
+  }  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

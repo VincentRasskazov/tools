@@ -1,0 +1,170 @@
+---
+layout: null
+title: "MindMaze: Cognitive Fitness Explorer"
+category: "Health"
+description: "A dynamic mini-game that challenges users to navigate a 3D maze while solving mental exercises related to memory, focus, and quick decision-making to boost cognitive health."
+permalink: "/tools/daily-20260727-06-mindmaze-cognitive-fitness-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260727"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindMaze: Cognitive Fitness Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic mini-game that challenges users to navigate a 3D maze while solving mental exercises related to memory, focus, and quick decision-making to boost cognitive health. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="MindMaze: Cognitive Fitness Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic mini-game that challenges users to navigate a 3D maze while solving mental exercises related to memory, focus, and quick decision-making to boost cognitive health. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MindMaze: Cognitive Fitness Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic mini-game that challenges users to navigate a 3D maze while solving mental exercises related to memory, focus, and quick decision-making to boost cognitive health. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>MindMaze: Cognitive Fitness Explorer</h1>
+    <p class="seo-subtitle">A dynamic mini-game that challenges users to navigate a 3D maze while solving mental exercises related to memory, focus, and quick decision-making to boost cognitive health.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background: linear-gradient(to right, #56ccf2, #2f80ed);  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  width: 80%;  
+  height: 80%;  
+  background: #ffffff;  
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);  
+  border-radius: 10px;  
+  display: grid;  
+  grid-template-rows: auto 1fr;  
+}  
+#maze-container {  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  position: relative;  
+  overflow: hidden;  
+}  
+#maze {  
+  border: 2px dashed #333;  
+  width: 90%;  
+  height: 90%;  
+  position: relative;  
+}  
+#player {  
+  width: 20px;  
+  height: 20px;  
+  background-color: #e74c3c;  
+  position: absolute;  
+}  
+#question {  
+  font-size: 18px;  
+  margin: 10px;  
+}  
+button {  
+  background-color: #27ae60;  
+  color: white;  
+  border: none;  
+  padding: 10px 15px;  
+  cursor: pointer;  
+  border-radius: 5px;  
+}  
+button:hover {  
+  background-color: #2ecc71;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="question">Solve this: What is 9 + 6?</div>  
+  <div id="maze-container">  
+    <div id="maze">  
+      <div id="player"></div>  
+    </div>  
+  </div>  
+</div>  
+<script>  
+const maze = document.getElementById('maze');  
+const player = document.getElementById('player');  
+const questionDiv = document.getElementById('question');  
+let playerX = 0;  
+let playerY = 0;  
+
+const questions = [  
+  { q: 'What is 9 + 6?', a: '15' },  
+  { q: 'What color is the sky?', a: 'blue' },  
+  { q: 'Solve: 12 * 3?', a: '36' },  
+];  
+let currentQuestion = 0;  
+
+function askQuestion() {  
+  questionDiv.innerText = questions[currentQuestion].q;  
+}  
+
+function movePlayer(x, y) {  
+  playerX += x;  
+  playerY += y;  
+  player.style.transform = `translate(${playerX}px, ${playerY}px)`;  
+
+  // Collision detection: Increase cognitive challenge  
+  if (playerX > maze.offsetWidth - player.offsetWidth || playerY > maze.offsetHeight - player.offsetHeight || playerX < 0 || playerY < 0) {  
+    alert('Oops! You hit a wall. Try again.');  
+    resetPlayer();  
+  }  
+}  
+
+function resetPlayer() {  
+  playerX = 0;  
+  playerY = 0;  
+  player.style.transform = `translate(${playerX}px, ${playerY}px)`;  
+}  
+
+window.addEventListener('keydown', (e) => {  
+  switch (e.key) {  
+    case 'ArrowUp': movePlayer(0, -20); break;  
+    case 'ArrowDown': movePlayer(0, 20); break;  
+    case 'ArrowLeft': movePlayer(-20, 0); break;  
+    case 'ArrowRight': movePlayer(20, 0); break;  
+  }  
+
+  // Check if player solves the question  
+  if (Math.abs(playerX) > 100 && Math.abs(playerY) > 100) {  
+    let userAnswer = prompt('Answer the question: ' + questions[currentQuestion].q);  
+    if (userAnswer === questions[currentQuestion].a) {  
+      alert('Correct! You cleared the level!');  
+      currentQuestion++;  
+      if (currentQuestion >= questions.length) {  
+        alert('Congratulations, you completed the maze!');  
+        resetPlayer();  
+        currentQuestion = 0;  
+      }  
+      askQuestion();  
+    } else {  
+      alert('Wrong answer! Try again.');  
+      resetPlayer();  
+    }  
+  }  
+});  
+
+askQuestion();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

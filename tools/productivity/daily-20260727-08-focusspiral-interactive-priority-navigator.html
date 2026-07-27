@@ -1,0 +1,169 @@
+---
+layout: null
+title: "FocusSpiral: Interactive Priority Navigator"
+category: "Productivity"
+description: "A dynamic spiral-based tool where users organize tasks by dragging and dropping them into spiraling levels of priority, with real-time visual feedback and progress tracking."
+permalink: "/tools/daily-20260727-08-focusspiral-interactive-priority-navigator.html"
+generated_by: "api-true-ai"
+generated_date: "20260727"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusSpiral: Interactive Priority Navigator | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic spiral-based tool where users organize tasks by dragging and dropping them into spiraling levels of priority, with real-time visual feedback and progress tracking. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="FocusSpiral: Interactive Priority Navigator | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic spiral-based tool where users organize tasks by dragging and dropping them into spiraling levels of priority, with real-time visual feedback and progress tracking. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FocusSpiral: Interactive Priority Navigator | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic spiral-based tool where users organize tasks by dragging and dropping them into spiraling levels of priority, with real-time visual feedback and progress tracking. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>FocusSpiral: Interactive Priority Navigator</h1>
+    <p class="seo-subtitle">A dynamic spiral-based tool where users organize tasks by dragging and dropping them into spiraling levels of priority, with real-time visual feedback and progress tracking.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: 'Arial', sans-serif;  
+  background: linear-gradient(to right, #4facfe, #00f2fe);  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+}  
+#tool-app {  
+  background: white;  
+  border-radius: 15px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
+  width: 500px;  
+  height: 500px;  
+  position: relative;  
+  overflow: hidden;  
+}  
+.task {  
+  position: absolute;  
+  width: 100px;  
+  height: 50px;  
+  background: #ff6b6b;  
+  color: white;  
+  font-size: 14px;  
+  border-radius: 5px;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  cursor: grab;  
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);  
+}  
+.task.dragging {  
+  opacity: 0.7;  
+  transform: scale(1.1);  
+  cursor: grabbing;  
+}  
+#spiral {  
+  position: absolute;  
+  top: 50%;  
+  left: 50%;  
+  width: 800px;  
+  height: 800px;  
+  transform: translate(-50%, -50%) scale(0.7);  
+}  
+</style>  
+<div id="tool-app">  
+  <svg id="spiral"></svg>  
+</div>  
+<script>  
+// Interactive JavaScript logic here  
+const app = document.querySelector("#tool-app");  
+const spiralSVG = document.querySelector("#spiral");  
+const tasks = [  
+  { id: 1, text: "Complete report" },  
+  { id: 2, text: "Plan meeting agenda" },  
+  { id: 3, text: "Reply to emails" },  
+  { id: 4, text: "Brainstorm ideas" },  
+];  
+
+// Generate spiral path  
+function createSpiral() {  
+  const centerX = 400;  
+  const centerY = 400;  
+  const points = [];  
+  const totalPoints = 400;  
+  const radiusIncrement = 1.5;  
+  let radius = 10;  
+  let angle = 0;  
+  for (let i = 0; i < totalPoints; i++) {  
+    const x = centerX + radius * Math.cos(angle);  
+    const y = centerY + radius * Math.sin(angle);  
+    points.push(`${x},${y}`);  
+    radius += radiusIncrement;  
+    angle += Math.PI / 15;  
+  }  
+  return points;  
+}  
+
+// Draw spiral  
+function drawSpiral() {  
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "polyline");  
+  path.setAttribute("points", createSpiral().join(" "));  
+  path.setAttribute("stroke", "#2d98da");  
+  path.setAttribute("fill", "none");  
+  path.setAttribute("stroke-width", 2);  
+  spiralSVG.appendChild(path);  
+}  
+
+// Create draggable tasks  
+function createTasks() {  
+  tasks.forEach((task, index) => {  
+    const taskDiv = document.createElement("div");  
+    taskDiv.classList.add("task");  
+    taskDiv.textContent = task.text;  
+    taskDiv.style.left = `${50 + index * 10}px`;  
+    taskDiv.style.top = `${100 + index * 10}px`;  
+    taskDiv.draggable = true;  
+    app.appendChild(taskDiv);  
+
+    // Drag events  
+    taskDiv.addEventListener("dragstart", (e) => {  
+      e.target.classList.add("dragging");  
+    });  
+    taskDiv.addEventListener("dragend", (e) => {  
+      e.target.classList.remove("dragging");  
+    });  
+  });  
+}  
+
+// Drag-and-drop functionality  
+app.addEventListener("dragover", (e) => {  
+  e.preventDefault();  
+  const dragging = document.querySelector(".dragging");  
+  if (dragging) {  
+    const rect = app.getBoundingClientRect();  
+    dragging.style.left = `${e.clientX - rect.left - dragging.offsetWidth / 2}px`;  
+    dragging.style.top = `${e.clientY - rect.top - dragging.offsetHeight / 2}px`;  
+  }  
+});  
+
+// Initialize  
+drawSpiral();  
+createTasks();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
