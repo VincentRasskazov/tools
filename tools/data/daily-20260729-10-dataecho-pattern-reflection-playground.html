@@ -1,0 +1,179 @@
+---
+layout: null
+title: "DataEcho: Pattern Reflection Playground"
+category: "Data"
+description: "Explore, manipulate, and visualize repeating data patterns interactively with real-time mirroring and transformations."
+permalink: "/tools/daily-20260729-10-dataecho-pattern-reflection-playground.html"
+generated_by: "api-true-ai"
+generated_date: "20260729"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataEcho: Pattern Reflection Playground | Free Online Interactive Tool</title>
+  <meta name="description" content="Explore, manipulate, and visualize repeating data patterns interactively with real-time mirroring and transformations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataEcho: Pattern Reflection Playground | Free Online Interactive Tool">
+  <meta property="og:description" content="Explore, manipulate, and visualize repeating data patterns interactively with real-time mirroring and transformations. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataEcho: Pattern Reflection Playground | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Explore, manipulate, and visualize repeating data patterns interactively with real-time mirroring and transformations. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataEcho: Pattern Reflection Playground</h1>
+    <p class="seo-subtitle">Explore, manipulate, and visualize repeating data patterns interactively with real-time mirroring and transformations.</p>
+    <style>  
+  #tool-app {  
+    font-family: 'Arial', sans-serif;  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    justify-content: center;  
+    height: 100vh;  
+    background: linear-gradient(135deg, #8EC5FC, #E0C3FC);  
+    color: #333;  
+  }  
+
+  h2 {  
+    margin-top: 0;  
+  }  
+
+  .grid-container {  
+    display: grid;  
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));  
+    gap: 5px;  
+    width: 80%;  
+    margin: 20px 0;  
+  }  
+
+  .grid-item {  
+    width: 50px;  
+    height: 50px;  
+    display: flex;  
+    align-items: center;  
+    justify-content: center;  
+    background: #ffffff;  
+    border: 1px solid #ccc;  
+    border-radius: 4px;  
+    cursor: pointer;  
+    transition: transform 0.2s, background-color 0.2s;  
+  }  
+
+  .grid-item:hover {  
+    transform: scale(1.1);  
+    background-color: #a3d2ca;  
+  }  
+
+  .controls {  
+    display: flex;  
+    gap: 15px;  
+    margin-top: 20px;  
+  }  
+
+  button {  
+    padding: 10px 15px;  
+    background-color: #4CAF50;  
+    color: white;  
+    border: none;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    transition: background-color 0.3s;  
+  }  
+
+  button:hover {  
+    background-color: #45a049;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h2>DataEcho: Pattern Reflection Playground</h2>  
+  <p>Click on squares to generate patterns. Choose how the grid reflects your input.</p>  
+  <div class="grid-container" id="grid"></div>  
+  <div class="controls">  
+    <button id="reflect-x">Reflect X-Axis</button>  
+    <button id="reflect-y">Reflect Y-Axis</button>  
+    <button id="reflect-diagonal">Reflect Diagonal</button>  
+    <button id="clear-grid">Clear Grid</button>  
+  </div>  
+</div>  
+<script>  
+const gridContainer = document.getElementById('grid');  
+const gridSize = 8; // 8x8 grid  
+
+// Create grid  
+for (let i = 0; i < gridSize * gridSize; i++) {  
+  const cell = document.createElement('div');  
+  cell.className = 'grid-item';  
+  cell.dataset.index = i;  
+  cell.addEventListener('click', () => toggleCell(cell));  
+  gridContainer.appendChild(cell);  
+}  
+
+// Toggle cell state (color on/off)  
+function toggleCell(cell) {  
+  cell.classList.toggle('active');  
+  cell.style.backgroundColor = cell.classList.contains('active') ? '#FF6F61' : '#ffffff';  
+}  
+
+// Reflection logic  
+function reflect(axis) {  
+  const cells = document.querySelectorAll('.grid-item');  
+  const activeIndices = Array.from(cells).reduce((acc, cell, index) => {  
+    if (cell.classList.contains('active')) acc.push(index);  
+    return acc;  
+  }, []);  
+
+  let newIndices = [];  
+
+  activeIndices.forEach(index => {  
+    const x = index % gridSize;  
+    const y = Math.floor(index / gridSize);  
+
+    let newX = x, newY = y;  
+
+    if (axis === 'x') newY = gridSize - 1 - y;  
+    if (axis === 'y') newX = gridSize - 1 - x;  
+    if (axis === 'diagonal') [newX, newY] = [y, x];  
+
+    const newIndex = newY * gridSize + newX;  
+    newIndices.push(newIndex);  
+  });  
+
+  cells.forEach(cell => cell.classList.remove('active'));  
+  newIndices.forEach(index => {  
+    const cell = cells[index];  
+    if (cell) {  
+      cell.classList.add('active');  
+      cell.style.backgroundColor = '#FF6F61';  
+    }  
+  });  
+}  
+
+// Event listeners for reflection buttons  
+document.getElementById('reflect-x').addEventListener('click', () => reflect('x'));  
+document.getElementById('reflect-y').addEventListener('click', () => reflect('y'));  
+document.getElementById('reflect-diagonal').addEventListener('click', () => reflect('diagonal'));  
+document.getElementById('clear-grid').addEventListener('click', () => {  
+  document.querySelectorAll('.grid-item').forEach(cell => {  
+    cell.classList.remove('active');  
+    cell.style.backgroundColor = '#ffffff';  
+  });  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

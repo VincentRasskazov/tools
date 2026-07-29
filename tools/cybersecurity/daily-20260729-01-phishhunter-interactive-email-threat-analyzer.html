@@ -1,0 +1,146 @@
+---
+layout: null
+title: "PhishHunter: Interactive Email Threat Analyzer"
+category: "Cybersecurity"
+description: "A gamified tool where users identify phishing risks in simulated emails to sharpen their cybersecurity skills."
+permalink: "/tools/daily-20260729-01-phishhunter-interactive-email-threat-analyzer.html"
+generated_by: "api-true-ai"
+generated_date: "20260729"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhishHunter: Interactive Email Threat Analyzer | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool where users identify phishing risks in simulated emails to sharpen their cybersecurity skills. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PhishHunter: Interactive Email Threat Analyzer | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool where users identify phishing risks in simulated emails to sharpen their cybersecurity skills. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PhishHunter: Interactive Email Threat Analyzer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool where users identify phishing risks in simulated emails to sharpen their cybersecurity skills. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PhishHunter: Interactive Email Threat Analyzer</h1>
+    <p class="seo-subtitle">A gamified tool where users identify phishing risks in simulated emails to sharpen their cybersecurity skills.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background-color: #1b1b2f;  
+  color: #ececec;  
+}  
+#tool-app {  
+  max-width: 800px;  
+  margin: 50px auto;  
+  padding: 20px;  
+  background: #24243e;  
+  border-radius: 8px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);  
+}  
+button {  
+  background-color: #00adb5;  
+  color: #fff;  
+  border: none;  
+  padding: 10px 20px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  font-size: 16px;  
+}  
+button:hover {  
+  background-color: #00dedb;  
+}  
+.email-container {  
+  margin: 20px 0;  
+  padding: 20px;  
+  background: #393e46;  
+  border-radius: 5px;  
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);  
+}  
+.correct {  
+  color: #00ff80;  
+}  
+.incorrect {  
+  color: #ff6363;  
+}  
+</style>  
+<div id="tool-app">  
+  <h1>PhishHunter: Interactive Email Threat Analyzer</h1>  
+  <p>Analyze simulated emails and decide if the email is safe or a phishing attempt!</p>  
+  <div id="email-container" class="email-container">  
+    <!-- Email content will dynamically load here -->  
+  </div>  
+  <button id="safe-btn">Mark as Safe</button>  
+  <button id="phish-btn">Mark as Phishing</button>  
+  <p id="result" style="margin-top: 20px; font-size: 18px;"></p>  
+</div>  
+<script>  
+const emails = [  
+  {  
+    content: "Dear user, your account has been suspended. Click <a href='http://fakebank.com/login'>here</a> to verify your identity.",  
+    isPhishing: true  
+  },  
+  {  
+    content: "Hi John, your recent purchase has been successfully recorded. Let us know if you need anything else.",  
+    isPhishing: false  
+  },  
+  {  
+    content: "You've won a prize! Claim your reward by providing your personal details <a href='http://badsite.com'>here</a>.",  
+    isPhishing: true  
+  },  
+  {  
+    content: "Reminder: Your scheduled meeting is tomorrow at 10:00 AM. Here’s the Zoom link: <a href='https://zoom.us/meeting123'>Join Meeting</a>.",  
+    isPhishing: false  
+  }  
+];  
+
+let currentEmailIndex = 0;  
+
+function loadEmail() {  
+  if (currentEmailIndex >= emails.length) {  
+    document.getElementById("email-container").innerHTML =  
+      "<p>You've analyzed all emails! Refresh the page to play again.</p>";  
+    document.getElementById("safe-btn").style.display = "none";  
+    document.getElementById("phish-btn").style.display = "none";  
+    return;  
+  }  
+
+  const email = emails[currentEmailIndex];  
+  document.getElementById("email-container").innerHTML = `<p>${email.content}</p>`;  
+  document.getElementById("result").innerText = "";  
+}  
+
+function evaluateEmail(isSafe) {  
+  const email = emails[currentEmailIndex];  
+  const isCorrect = isSafe !== email.isPhishing;  
+  const resultText = isCorrect ? "Correct!" : "Incorrect.";  
+  const resultClass = isCorrect ? "correct" : "incorrect";  
+  document.getElementById("result").innerHTML =  
+    `<span class="${resultClass}">${resultText}</span>`;  
+  currentEmailIndex++;  
+  setTimeout(loadEmail, 2000);  
+}  
+
+document.getElementById("safe-btn").addEventListener("click", () => evaluateEmail(true));  
+document.getElementById("phish-btn").addEventListener("click", () => evaluateEmail(false));  
+
+loadEmail();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

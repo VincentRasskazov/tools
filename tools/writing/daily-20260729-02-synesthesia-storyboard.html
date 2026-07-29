@@ -1,0 +1,147 @@
+---
+layout: null
+title: "Synesthesia Storyboard"
+category: "Writing"
+description: "Transforms your writing into an interactive, color-coded, and sound-enhanced visual experience, analyzing tone, mood, and pacing in real time."
+permalink: "/tools/daily-20260729-02-synesthesia-storyboard.html"
+generated_by: "api-true-ai"
+generated_date: "20260729"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Synesthesia Storyboard | Free Online Interactive Tool</title>
+  <meta name="description" content="Transforms your writing into an interactive, color-coded, and sound-enhanced visual experience, analyzing tone, mood, and pacing in real time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Synesthesia Storyboard | Free Online Interactive Tool">
+  <meta property="og:description" content="Transforms your writing into an interactive, color-coded, and sound-enhanced visual experience, analyzing tone, mood, and pacing in real time. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Synesthesia Storyboard | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Transforms your writing into an interactive, color-coded, and sound-enhanced visual experience, analyzing tone, mood, and pacing in real time. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Synesthesia Storyboard</h1>
+    <p class="seo-subtitle">Transforms your writing into an interactive, color-coded, and sound-enhanced visual experience, analyzing tone, mood, and pacing in real time.</p>
+    <style>  
+  body {  
+    font-family: Arial, sans-serif;  
+    margin: 0;  
+    padding: 0;  
+    background: #1e1e2f;  
+    color: #ffffff;  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    justify-content: center;  
+    height: 100vh;  
+    overflow: hidden;  
+  }  
+  #tool-app {  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    width: 80%;  
+    max-width: 800px;  
+  }  
+  textarea {  
+    width: 100%;  
+    height: 150px;  
+    background: #2b2b3d;  
+    color: #ffffff;  
+    font-size: 16px;  
+    border: 1px solid #444;  
+    border-radius: 5px;  
+    padding: 10px;  
+    margin-bottom: 20px;  
+    resize: none;  
+  }  
+  canvas {  
+    width: 100%;  
+    height: 300px;  
+    border: 1px solid #444;  
+    background: #0a0a14;  
+    border-radius: 5px;  
+  }  
+  .legend {  
+    display: flex;  
+    justify-content: space-between;  
+    width: 100%;  
+    margin-top: 10px;  
+    font-size: 14px;  
+    color: #bbb;  
+  }  
+</style>  
+<div id="tool-app">  
+  <textarea id="user-text" placeholder="Type or paste your story here..."></textarea>  
+  <canvas id="story-canvas"></canvas>  
+  <div class="legend">  
+    <span>Blue: Calm</span>  
+    <span>Red: Intense</span>  
+    <span>Green: Positive</span>  
+    <span>Yellow: Neutral</span>  
+  </div>  
+</div>  
+<script>  
+const canvas = document.getElementById("story-canvas");  
+const ctx = canvas.getContext("2d");  
+const textArea = document.getElementById("user-text");  
+   
+canvas.width = canvas.offsetWidth;  
+canvas.height = canvas.offsetHeight;  
+  
+const tones = {  
+  calm: "#4da6ff",  
+  intense: "#ff4d4d",  
+  positive: "#4dff88",  
+  neutral: "#ffff66"  
+};  
+  
+function analyzeTone(text) {  
+  const toneScores = { calm: 0, intense: 0, positive: 0, neutral: 0 };  
+  const words = text.split(/\s+/);  
+  words.forEach(word => {  
+    word = word.toLowerCase();  
+    if (["peace", "relax", "gentle", "soft", "quiet"].includes(word)) toneScores.calm++;  
+    if (["angry", "loud", "furious", "rage", "fight"].includes(word)) toneScores.intense++;  
+    if (["happy", "joy", "love", "smile", "bright"].includes(word)) toneScores.positive++;  
+    if (!Object.values(toneScores).some(score => score)) toneScores.neutral++;  
+  });  
+  return Object.keys(toneScores).map(tone => ({ tone, score: toneScores[tone] }));  
+}  
+  
+function visualizeText() {  
+  const text = textArea.value;  
+  const toneData = analyzeTone(text);  
+  const totalScore = toneData.reduce((sum, tone) => sum + tone.score, 0);  
+  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  let x = 0;  
+  
+  toneData.forEach(({ tone, score }) => {  
+    const width = (canvas.width * score) / totalScore;  
+    ctx.fillStyle = tones[tone];  
+    ctx.fillRect(x, 0, width, canvas.height);  
+    x += width;  
+  });  
+}  
+  
+textArea.addEventListener("input", visualizeText);  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

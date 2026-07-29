@@ -1,0 +1,169 @@
+---
+layout: null
+title: "Synapse Spark: Mind Map Collider"
+category: "Productivity"
+description: "A dynamic, interactive tool that lets you create, merge, and animate thought maps by colliding ideas into clusters, helping you brainstorm and prioritize with kinetic energy."
+permalink: "/tools/daily-20260729-03-synapse-spark-mind-map-collider.html"
+generated_by: "api-true-ai"
+generated_date: "20260729"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Synapse Spark: Mind Map Collider | Free Online Interactive Tool</title>
+  <meta name="description" content="A dynamic, interactive tool that lets you create, merge, and animate thought maps by colliding ideas into clusters, helping you brainstorm and prioritize with kinetic energy. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="Synapse Spark: Mind Map Collider | Free Online Interactive Tool">
+  <meta property="og:description" content="A dynamic, interactive tool that lets you create, merge, and animate thought maps by colliding ideas into clusters, helping you brainstorm and prioritize with kinetic energy. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Synapse Spark: Mind Map Collider | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A dynamic, interactive tool that lets you create, merge, and animate thought maps by colliding ideas into clusters, helping you brainstorm and prioritize with kinetic energy. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>Synapse Spark: Mind Map Collider</h1>
+    <p class="seo-subtitle">A dynamic, interactive tool that lets you create, merge, and animate thought maps by colliding ideas into clusters, helping you brainstorm and prioritize with kinetic energy.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(135deg, #88d8b0, #ffd3b6);  
+  color: #333;  
+  margin: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  overflow: hidden;  
+}  
+#tool-app {  
+  width: 90%;  
+  height: 90%;  
+  background: white;  
+  border-radius: 12px;  
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);  
+  overflow: hidden;  
+  position: relative;  
+}  
+.node {  
+  width: 120px;  
+  height: 120px;  
+  background: #ff6f61;  
+  border-radius: 50%;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  color: white;  
+  font-weight: bold;  
+  position: absolute;  
+  cursor: grab;  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  
+  user-select: none;  
+  transition: transform 0.2s ease;  
+}  
+.node:hover {  
+  transform: scale(1.1);  
+}  
+#add-node {  
+  position: absolute;  
+  bottom: 20px;  
+  left: 50%;  
+  transform: translateX(-50%);  
+  padding: 10px 20px;  
+  background: #88d8b0;  
+  color: white;  
+  font-size: 16px;  
+  font-weight: bold;  
+  border: none;  
+  border-radius: 8px;  
+  cursor: pointer;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  
+}  
+#add-node:hover {  
+  background: #66c9a1;  
+}  
+</style>  
+<div id="tool-app">  
+  <button id="add-node">Add Idea</button>  
+</div>  
+<script>  
+const container = document.getElementById('tool-app');  
+let idCounter = 0;  
+
+function createNode(x, y, text) {  
+  const node = document.createElement('div');  
+  node.classList.add('node');  
+  node.style.left = `${x}px`;  
+  node.style.top = `${y}px`;  
+  node.textContent = text;  
+  node.draggable = true;  
+
+  node.addEventListener('dragstart', (e) => {  
+    e.dataTransfer.setData('text/plain', node.id);  
+  });  
+
+  node.addEventListener('mousedown', () => {  
+    node.style.zIndex = 1000;  
+  });  
+
+  node.addEventListener('mouseup', () => {  
+    node.style.zIndex = '';  
+  });  
+
+  container.appendChild(node);  
+  return node;  
+}  
+
+function collisionCheck() {  
+  const nodes = [...document.getElementsByClassName('node')];  
+  for (let i = 0; i < nodes.length - 1; i++) {  
+    for (let j = i + 1; j < nodes.length; j++) {  
+      const rect1 = nodes[i].getBoundingClientRect();  
+      const rect2 = nodes[j].getBoundingClientRect();  
+      if (  
+        rect1.x < rect2.x + rect2.width &&  
+        rect1.x + rect1.width > rect2.x &&  
+        rect1.y < rect2.y + rect2.height &&  
+        rect1.y + rect1.height > rect2.y  
+      ) {  
+        mergeNodes(nodes[i], nodes[j]);  
+      }  
+    }  
+  }  
+}  
+
+function mergeNodes(node1, node2) {  
+  const newText = `${node1.textContent} + ${node2.textContent}`;  
+  const newNode = createNode(  
+    (parseFloat(node1.style.left) + parseFloat(node2.style.left)) / 2,  
+    (parseFloat(node1.style.top) + parseFloat(node2.style.top)) / 2,  
+    newText  
+  );  
+  node1.remove();  
+  node2.remove();  
+}  
+
+container.addEventListener('dragend', collisionCheck);  
+
+document.getElementById('add-node').addEventListener('click', () => {  
+  const x = Math.random() * (container.offsetWidth - 120);  
+  const y = Math.random() * (container.offsetHeight - 120);  
+  createNode(x, y, `Idea ${++idCounter}`);  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
