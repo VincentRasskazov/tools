@@ -1,0 +1,130 @@
+---
+layout: null
+title: "MindMap Forge"
+category: "Productivity"
+description: "An interactive tool that lets users visually brainstorm, connect, and prioritize ideas dynamically with draggable nodes and real-time analytics."
+permalink: "/tools/daily-20260730-07-mindmap-forge.html"
+generated_by: "api-true-ai"
+generated_date: "20260730"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindMap Forge | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive tool that lets users visually brainstorm, connect, and prioritize ideas dynamically with draggable nodes and real-time analytics. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="MindMap Forge | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive tool that lets users visually brainstorm, connect, and prioritize ideas dynamically with draggable nodes and real-time analytics. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MindMap Forge | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive tool that lets users visually brainstorm, connect, and prioritize ideas dynamically with draggable nodes and real-time analytics. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>MindMap Forge</h1>
+    <p class="seo-subtitle">An interactive tool that lets users visually brainstorm, connect, and prioritize ideas dynamically with draggable nodes and real-time analytics.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background-color: #f4f6f8; margin: 0; padding: 0; }  
+  #tool-app { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }  
+  .node { border-radius: 50%; width: 100px; height: 100px; background-color: #4caf50; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: grab; position: absolute; }  
+  #canvas { position: relative; width: 90%; height: 80vh; background: #e0e0e0; border: 2px dashed #bdbdbd; border-radius: 10px; overflow: hidden; }  
+  .form-section { margin-top: 20px; }  
+  button { background: #4caf50; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }  
+  input { padding: 10px; border: 2px solid #bdbdbd; border-radius: 5px; margin-right: 10px; }  
+</style>  
+<div id="tool-app">  
+  <h1>MindMap Forge</h1>  
+  <div id="canvas"></div>  
+  <div class="form-section">  
+    <input id="node-input" type="text" placeholder="Enter idea text" />  
+    <button id="add-node-btn">Add Idea Node</button>  
+  </div>  
+</div>  
+<script>  
+// JavaScript: MindMap Forge logic  
+const canvas = document.getElementById('canvas');  
+const addNodeBtn = document.getElementById('add-node-btn');  
+const nodeInput = document.getElementById('node-input');  
+let nodes = [];  
+let connections = [];  
+
+function createNode(text) {  
+  const node = document.createElement('div');  
+  node.className = 'node';  
+  node.textContent = text;  
+  node.style.left = `${Math.random() * (canvas.offsetWidth - 100)}px`;  
+  node.style.top = `${Math.random() * (canvas.offsetHeight - 100)}px`;  
+  node.draggable = true;  
+
+  node.ondragstart = (e) => {  
+    e.dataTransfer.setData('text/plain', JSON.stringify({ id: node.dataset.id }));  
+  };  
+
+  node.dataset.id = nodes.length;  
+  nodes.push({ id: nodes.length, text, x: node.style.left, y: node.style.top });  
+  canvas.appendChild(node);  
+}  
+
+function drawConnections() {  
+  canvas.querySelectorAll('svg').forEach((svg) => svg.remove());  
+  connections.forEach(({ from, to }) => {  
+    const fromNode = document.querySelector(`[data-id="${from}"]`);  
+    const toNode = document.querySelector(`[data-id="${to}"]`);  
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');  
+    svg.setAttribute('width', canvas.offsetWidth);  
+    svg.setAttribute('height', canvas.offsetHeight);  
+    svg.style.position = 'absolute';  
+    svg.style.left = 0;  
+    svg.style.top = 0;  
+
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');  
+    line.setAttribute('x1', parseInt(fromNode.style.left) + 50);  
+    line.setAttribute('y1', parseInt(fromNode.style.top) + 50);  
+    line.setAttribute('x2', parseInt(toNode.style.left) + 50);  
+    line.setAttribute('y2', parseInt(toNode.style.top) + 50);  
+    line.setAttribute('stroke', '#757575');  
+    line.setAttribute('stroke-width', '2');  
+    svg.appendChild(line);  
+    canvas.appendChild(svg);  
+  });  
+}  
+
+canvas.addEventListener('click', (e) => {  
+  if (e.target.className === 'node') {  
+    const selectedNode = e.target;  
+    const previousSelected = document.querySelector('.node.selected');  
+    if (previousSelected && previousSelected !== selectedNode) {  
+      connections.push({ from: previousSelected.dataset.id, to: selectedNode.dataset.id });  
+      drawConnections();  
+      previousSelected.classList.remove('selected');  
+    } else {  
+      selectedNode.classList.toggle('selected');  
+    }  
+  }  
+});  
+
+addNodeBtn.addEventListener('click', () => {  
+  const text = nodeInput.value.trim();  
+  if (text) {  
+    createNode(text);  
+    nodeInput.value = '';  
+  }  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

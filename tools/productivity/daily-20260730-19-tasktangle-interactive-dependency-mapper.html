@@ -1,0 +1,172 @@
+---
+layout: null
+title: "TaskTangle: Interactive Dependency Mapper"
+category: "Productivity"
+description: "Visualize and untangle complex task dependencies in real-time with an interactive web of connections."
+permalink: "/tools/daily-20260730-19-tasktangle-interactive-dependency-mapper.html"
+generated_by: "api-true-ai"
+generated_date: "20260730"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskTangle: Interactive Dependency Mapper | Free Online Interactive Tool</title>
+  <meta name="description" content="Visualize and untangle complex task dependencies in real-time with an interactive web of connections. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="TaskTangle: Interactive Dependency Mapper | Free Online Interactive Tool">
+  <meta property="og:description" content="Visualize and untangle complex task dependencies in real-time with an interactive web of connections. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TaskTangle: Interactive Dependency Mapper | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Visualize and untangle complex task dependencies in real-time with an interactive web of connections. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>TaskTangle: Interactive Dependency Mapper</h1>
+    <p class="seo-subtitle">Visualize and untangle complex task dependencies in real-time with an interactive web of connections.</p>
+    <style>  
+  #tool-app {  
+    font-family: Arial, sans-serif;  
+    max-width: 800px;  
+    margin: 50px auto;  
+    border: 2px solid #4CAF50;  
+    border-radius: 8px;  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  
+    padding: 20px;  
+    background: #f9f9f9;  
+  }  
+  #task-input {  
+    width: calc(100% - 50px);  
+    margin-bottom: 10px;  
+    padding: 10px;  
+    font-size: 16px;  
+    border: 1px solid #ccc;  
+    border-radius: 4px;  
+  }  
+  #add-task-btn {  
+    padding: 10px 20px;  
+    background: #4CAF50;  
+    color: white;  
+    border: none;  
+    border-radius: 4px;  
+    cursor: pointer;  
+  }  
+  #add-task-btn:hover {  
+    background: #45a049;  
+  }  
+  #task-graph {  
+    width: 100%;  
+    height: 500px;  
+    border: 1px solid #ddd;  
+    border-radius: 4px;  
+    background: #ffffff;  
+  }  
+</style>  
+<div id="tool-app">  
+  <h2>TaskTangle: Interactive Dependency Mapper</h2>  
+  <input id="task-input" type="text" placeholder="Enter a task (e.g., 'Write Report')">  
+  <button id="add-task-btn">Add Task</button>  
+  <div id="task-graph"></div>  
+</div>  
+<script>  
+const app = document.getElementById('task-graph');  
+const tasks = {};  
+let taskId = 0;  
+
+// Initialize the canvas for the graph  
+const canvas = document.createElement('canvas');  
+canvas.width = app.clientWidth;  
+canvas.height = app.clientHeight;  
+const ctx = canvas.getContext('2d');  
+app.appendChild(canvas);  
+
+// Function to redraw the graph  
+function drawGraph() {  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+  Object.keys(tasks).forEach((id) => {  
+    const task = tasks[id];  
+    ctx.beginPath();  
+    ctx.arc(task.x, task.y, 20, 0, Math.PI * 2);  
+    ctx.fillStyle = task.color;  
+    ctx.fill();  
+    ctx.stroke();  
+    ctx.fillStyle = '#000';  
+    ctx.fillText(task.name, task.x - 20, task.y - 30);  
+    
+    task.dependsOn.forEach((depId) => {  
+      const depTask = tasks[depId];  
+      ctx.beginPath();  
+      ctx.moveTo(task.x, task.y);  
+      ctx.lineTo(depTask.x, depTask.y);  
+      ctx.strokeStyle = '#999';  
+      ctx.stroke();  
+    });  
+  });  
+}  
+
+// Add a task to the graph  
+function addTask(taskName) {  
+  const x = Math.random() * (canvas.width - 100) + 50;  
+  const y = Math.random() * (canvas.height - 100) + 50;  
+  const id = taskId++;  
+  tasks[id] = {  
+    id,  
+    name: taskName,  
+    x,  
+    y,  
+    color: `hsl(${Math.random() * 360}, 100%, 75%)`,  
+    dependsOn: [],  
+  };  
+
+  // Add interactivity to connect tasks  
+  canvas.addEventListener('click', (e) => {  
+    const rect = canvas.getBoundingClientRect();  
+    const offsetX = e.clientX - rect.left;  
+    const offsetY = e.clientY - rect.top;  
+
+    Object.values(tasks).forEach((task) => {  
+      const dx = task.x - offsetX;  
+      const dy = task.y - offsetY;  
+      if (Math.sqrt(dx * dx + dy * dy) < 20) {  
+        const otherTaskId = prompt('Enter the ID of the task to connect to:');  
+        if (tasks[otherTaskId]) {  
+          task.dependsOn.push(parseInt(otherTaskId));  
+          drawGraph();  
+        } else {  
+          alert('Invalid task ID');  
+        }  
+      }  
+    });  
+  });  
+    
+  drawGraph();  
+}  
+
+// Event listener for adding tasks  
+document.getElementById('add-task-btn').addEventListener('click', () => {  
+  const taskInput = document.getElementById('task-input');  
+  const taskName = taskInput.value.trim();  
+  if (taskName) {  
+    addTask(taskName);  
+    taskInput.value = '';  
+  }  
+});  
+
+drawGraph();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

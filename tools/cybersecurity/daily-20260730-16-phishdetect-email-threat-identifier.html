@@ -1,0 +1,154 @@
+---
+layout: null
+title: "PhishDetect: Email Threat Identifier"
+category: "Cybersecurity"
+description: "A mini-game where players analyze simulated emails to identify phishing attempts and learn about common red flags."
+permalink: "/tools/daily-20260730-16-phishdetect-email-threat-identifier.html"
+generated_by: "api-true-ai"
+generated_date: "20260730"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhishDetect: Email Threat Identifier | Free Online Interactive Tool</title>
+  <meta name="description" content="A mini-game where players analyze simulated emails to identify phishing attempts and learn about common red flags. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PhishDetect: Email Threat Identifier | Free Online Interactive Tool">
+  <meta property="og:description" content="A mini-game where players analyze simulated emails to identify phishing attempts and learn about common red flags. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PhishDetect: Email Threat Identifier | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A mini-game where players analyze simulated emails to identify phishing attempts and learn about common red flags. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PhishDetect: Email Threat Identifier</h1>
+    <p class="seo-subtitle">A mini-game where players analyze simulated emails to identify phishing attempts and learn about common red flags.</p>
+    <style>  
+/* Modern, beautiful inline CSS */  
+body {  
+  font-family: Arial, sans-serif;  
+  background: #1e1e2f;  
+  color: #f4f4f9;  
+  margin: 0;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+}  
+#tool-app {  
+  background: #2b2b3d;  
+  border-radius: 12px;  
+  padding: 20px;  
+  width: 80%;  
+  max-width: 700px;  
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);  
+}  
+.email-container {  
+  background: #3a3a51;  
+  border-radius: 8px;  
+  padding: 15px;  
+  margin-bottom: 15px;  
+  color: #fff;  
+  cursor: pointer;  
+  transition: transform 0.2s ease, background 0.3s ease;  
+}  
+.email-container:hover {  
+  transform: scale(1.02);  
+  background: #444466;  
+}  
+.phishing {  
+  border-left: 5px solid #ff4d4d;  
+}  
+.safe {  
+  border-left: 5px solid #4caf50;  
+}  
+.result-area {  
+  text-align: center;  
+  margin-top: 20px;  
+}  
+button {  
+  padding: 10px 20px;  
+  margin-top: 15px;  
+  font-size: 16px;  
+  color: #fff;  
+  background: #6a5acd;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  transition: background 0.3s ease;  
+}  
+button:hover {  
+  background: #7b6ed6;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="email-list">  
+    <!-- Emails will be dynamically rendered here -->  
+  </div>  
+  <div class="result-area">  
+    <p id="feedback"></p>  
+    <button onclick="startGame()">Start New Game</button>  
+  </div>  
+</div>  
+<script>  
+const emails = [  
+  { content: "Your account has been compromised. Click here to reset your password.", type: "phishing" },  
+  { content: "Upcoming event: Company-wide cybersecurity training next week.", type: "safe" },  
+  { content: "Congratulations! You've won a prize. Please provide your credit card details.", type: "phishing" },  
+  { content: "Reminder: Submit your project report by Friday 5 PM.", type: "safe" },  
+  { content: "Urgent: Verify your account information to avoid deactivation.", type: "phishing" },  
+  { content: "Your package will be delivered tomorrow. Track your shipment here.", type: "safe" },  
+];  
+
+let score = 0;  
+
+function startGame() {  
+  const emailList = document.getElementById("email-list");  
+  emailList.innerHTML = "";  
+  score = 0;  
+  document.getElementById("feedback").innerText = "";  
+
+  const shuffledEmails = emails.sort(() => Math.random() - 0.5);  
+  shuffledEmails.forEach((email, index) => {  
+    const emailDiv = document.createElement("div");  
+    emailDiv.innerText = email.content;  
+    emailDiv.className = "email-container";  
+    emailDiv.onclick = () => evaluateEmail(email, emailDiv);  
+    emailList.appendChild(emailDiv);  
+  });  
+}  
+
+function evaluateEmail(email, emailDiv) {  
+  if (email.type === "phishing") {  
+    emailDiv.classList.add("phishing");  
+    score++;  
+  } else {  
+    emailDiv.classList.add("safe");  
+  }  
+  emailDiv.onclick = null;  
+
+  const remainingEmails = document.querySelectorAll(".email-container:not(.phishing):not(.safe)");  
+  if (remainingEmails.length === 0) {  
+    document.getElementById("feedback").innerText = `Game Over! You identified ${score} phishing email(s) correctly.`;  
+  }  
+}  
+
+startGame();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

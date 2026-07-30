@@ -1,0 +1,105 @@
+---
+layout: null
+title: "DataGlyph: Interactive Visualization Cipher"
+category: "Data"
+description: "Transform any text or data sequence into a dynamic, interactive glyph that morphs based on customizable parameters, revealing hidden patterns and relationships."
+permalink: "/tools/daily-20260730-25-dataglyph-interactive-visualization-cipher.html"
+generated_by: "api-true-ai"
+generated_date: "20260730"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataGlyph: Interactive Visualization Cipher | Free Online Interactive Tool</title>
+  <meta name="description" content="Transform any text or data sequence into a dynamic, interactive glyph that morphs based on customizable parameters, revealing hidden patterns and relationships. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="DataGlyph: Interactive Visualization Cipher | Free Online Interactive Tool">
+  <meta property="og:description" content="Transform any text or data sequence into a dynamic, interactive glyph that morphs based on customizable parameters, revealing hidden patterns and relationships. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DataGlyph: Interactive Visualization Cipher | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Transform any text or data sequence into a dynamic, interactive glyph that morphs based on customizable parameters, revealing hidden patterns and relationships. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>DataGlyph: Interactive Visualization Cipher</h1>
+    <p class="seo-subtitle">Transform any text or data sequence into a dynamic, interactive glyph that morphs based on customizable parameters, revealing hidden patterns and relationships.</p>
+    <style>  
+  body { font-family: Arial, sans-serif; background: #141627; color: #ffffff; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }  
+  #tool-app { width: 80vw; height: 80vh; border: 2px solid #4CAF50; border-radius: 12px; background: #202437; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); }  
+  #input-area { margin-bottom: 20px; display: flex; justify-content: space-between; }  
+  textarea { width: 40vw; height: 120px; background: #282C4A; color: #ffffff; border: none; border-radius: 8px; padding: 10px; font-size: 1rem; resize: none; }  
+  button { background: #4CAF50; color: #ffffff; border: none; padding: 10px 20px; font-size: 1rem; border-radius: 8px; cursor: pointer; transition: background 0.3s; }  
+  button:hover { background: #45A049; }  
+  canvas { border: 1px solid #4CAF50; border-radius: 8px; background: #1C2033; }  
+</style>  
+<div id="tool-app">  
+  <div id="input-area">  
+    <textarea id="data-input" placeholder="Enter your data..."></textarea>  
+    <button id="generate-btn">Generate Glyph</button>  
+  </div>  
+  <canvas id="glyph-canvas" width="600" height="400"></canvas>  
+</div>  
+<script>  
+const canvas = document.getElementById('glyph-canvas');  
+const ctx = canvas.getContext('2d');  
+const input = document.getElementById('data-input');  
+const button = document.getElementById('generate-btn');  
+
+function stringToColor(str, alpha=1) {  
+  let hash = 0;  
+  for (let i = 0; i < str.length; i++) {  
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);  
+  }  
+  const color = [0, 0, 0].map((_, i) => (hash >> (i * 8)) & 255);  
+  return `rgba(${color.join(",")},${alpha})`;  
+}  
+
+function drawGlyph(data) {  
+  const normalized = Array.from(data).map(char => char.charCodeAt(0) % 256);  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  
+
+  const centerX = canvas.width / 2;  
+  const centerY = canvas.height / 2;  
+  const maxRadius = Math.min(canvas.width, canvas.height) / 2 - 20;  
+
+  ctx.beginPath();  
+  normalized.forEach((val, index) => {  
+    const angle = (index / normalized.length) * 2 * Math.PI;  
+    const radius = maxRadius * (val / 255);  
+    const x = centerX + radius * Math.cos(angle);  
+    const y = centerY + radius * Math.sin(angle);  
+    ctx.lineTo(x, y);  
+  });  
+  ctx.closePath();  
+  ctx.fillStyle = stringToColor(data, 0.3);  
+  ctx.fill();  
+  ctx.strokeStyle = stringToColor(data);  
+  ctx.stroke();  
+}  
+
+button.addEventListener('click', () => {  
+  const data = input.value.trim();  
+  if (data) {  
+    drawGlyph(data);  
+  } else {  
+    alert('Please enter some data!');  
+  }  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

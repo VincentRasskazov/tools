@@ -1,0 +1,172 @@
+---
+layout: null
+title: "PixelSprinter: Dynamic Maze Escape"
+category: "Games"
+description: "Navigate a procedurally generated pixel maze by solving interactive puzzles and avoiding dynamic obstacles."
+permalink: "/tools/daily-20260730-04-pixelsprinter-dynamic-maze-escape.html"
+generated_by: "api-true-ai"
+generated_date: "20260730"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PixelSprinter: Dynamic Maze Escape | Free Online Interactive Tool</title>
+  <meta name="description" content="Navigate a procedurally generated pixel maze by solving interactive puzzles and avoiding dynamic obstacles. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PixelSprinter: Dynamic Maze Escape | Free Online Interactive Tool">
+  <meta property="og:description" content="Navigate a procedurally generated pixel maze by solving interactive puzzles and avoiding dynamic obstacles. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PixelSprinter: Dynamic Maze Escape | Free Online Interactive Tool">
+  <meta name="twitter:description" content="Navigate a procedurally generated pixel maze by solving interactive puzzles and avoiding dynamic obstacles. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PixelSprinter: Dynamic Maze Escape</h1>
+    <p class="seo-subtitle">Navigate a procedurally generated pixel maze by solving interactive puzzles and avoiding dynamic obstacles.</p>
+    <style>  
+body {  
+  font-family: Arial, sans-serif;  
+  background: linear-gradient(135deg, #1e3c72, #2a5298);  
+  color: #ffffff;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 100vh;  
+  margin: 0;  
+}  
+#tool-app {  
+  width: 90%;  
+  max-width: 600px;  
+  height: 90%;  
+  border: 2px solid #ffffff;  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);  
+  background: #2d3748;  
+  position: relative;  
+  overflow: hidden;  
+}  
+canvas {  
+  width: 100%;  
+  height: 100%;  
+}  
+#statusPanel {  
+  position: absolute;  
+  top: 10px;  
+  left: 10px;  
+  background: rgba(0, 0, 0, 0.7);  
+  padding: 10px;  
+  border-radius: 8px;  
+  font-size: 14px;  
+}  
+button {  
+  margin-top: 10px;  
+  padding: 5px 10px;  
+  background: #4caf50;  
+  color: white;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer;  
+}  
+button:hover {  
+  background: #45a049;  
+}  
+</style>  
+<div id="tool-app">  
+  <div id="statusPanel">  
+    <div><strong>Level:</strong> <span id="level">1</span></div>  
+    <div><strong>Timer:</strong> <span id="timer">0</span>s</div>  
+    <button onclick="startGame()">Start Game</button>  
+  </div>  
+  <canvas id="gameCanvas"></canvas>  
+</div>  
+<script>  
+const canvas = document.getElementById('gameCanvas');  
+const ctx = canvas.getContext('2d');  
+canvas.width = canvas.parentElement.clientWidth;  
+canvas.height = canvas.parentElement.clientHeight;  
+
+let maze = [];  
+let player = { x: 1, y: 1 };  
+let timer = 0;  
+let level = 1;  
+let gameInterval;  
+
+function generateMaze(level) {  
+  const size = 10 + level * 2;  
+  maze = Array(size).fill().map(() => Array(size).fill(1));  
+  for (let x = 1; x < size - 1; x += 2) {  
+    for (let y = 1; y < size - 1; y += 2) {  
+      maze[x][y] = 0;  
+      const dir = [[0, 1], [1, 0], [0, -1], [-1, 0]][Math.floor(Math.random() * 4)];  
+      maze[x + dir[0]][y + dir[1]] = 0;  
+    }  
+  }  
+  maze[size - 2][size - 2] = 0;  
+}  
+
+function drawMaze() {  
+  const cellSize = canvas.width / maze.length;  
+  maze.forEach((row, x) => {  
+    row.forEach((cell, y) => {  
+      ctx.fillStyle = cell === 1 ? '#606c76' : '#ffffff';  
+      ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);  
+    });  
+  });  
+  ctx.fillStyle = '#4caf50';  
+  ctx.fillRect(player.x * cellSize, player.y * cellSize, cellSize, cellSize);  
+}  
+
+function movePlayer(dx, dy) {  
+  const newX = player.x + dx;  
+  const newY = player.y + dy;  
+  if (maze[newX] && maze[newX][newY] === 0) {  
+    player.x = newX;  
+    player.y = newY;  
+    if (newX === maze.length - 2 && newY === maze.length - 2) {  
+      alert('Level Complete!');  
+      level++;  
+      startGame();  
+    }  
+  }  
+}  
+
+function updateTimer() {  
+  timer++;  
+  document.getElementById('timer').textContent = timer;  
+}  
+
+function startGame() {  
+  clearInterval(gameInterval);  
+  generateMaze(level);  
+  player = { x: 1, y: 1 };  
+  timer = 0;  
+  document.getElementById('level').textContent = level;  
+  gameInterval = setInterval(() => {  
+    updateTimer();  
+    drawMaze();  
+  }, 100);  
+}  
+
+window.addEventListener('keydown', (e) => {  
+  if (e.key === 'ArrowUp') movePlayer(-1, 0);  
+  if (e.key === 'ArrowDown') movePlayer(1, 0);  
+  if (e.key === 'ArrowLeft') movePlayer(0, -1);  
+  if (e.key === 'ArrowRight') movePlayer(0, 1);  
+});  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

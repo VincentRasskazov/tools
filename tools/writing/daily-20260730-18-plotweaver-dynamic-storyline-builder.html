@@ -1,0 +1,146 @@
+---
+layout: null
+title: "PlotWeaver: Dynamic Storyline Builder"
+category: "Writing"
+description: "An interactive mini-game where users craft and visualize branching storylines in real-time, complete with dynamic character arcs and plot twists."
+permalink: "/tools/daily-20260730-18-plotweaver-dynamic-storyline-builder.html"
+generated_by: "api-true-ai"
+generated_date: "20260730"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PlotWeaver: Dynamic Storyline Builder | Free Online Interactive Tool</title>
+  <meta name="description" content="An interactive mini-game where users craft and visualize branching storylines in real-time, complete with dynamic character arcs and plot twists. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="PlotWeaver: Dynamic Storyline Builder | Free Online Interactive Tool">
+  <meta property="og:description" content="An interactive mini-game where users craft and visualize branching storylines in real-time, complete with dynamic character arcs and plot twists. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PlotWeaver: Dynamic Storyline Builder | Free Online Interactive Tool">
+  <meta name="twitter:description" content="An interactive mini-game where users craft and visualize branching storylines in real-time, complete with dynamic character arcs and plot twists. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>PlotWeaver: Dynamic Storyline Builder</h1>
+    <p class="seo-subtitle">An interactive mini-game where users craft and visualize branching storylines in real-time, complete with dynamic character arcs and plot twists.</p>
+    <style>  
+#tool-app {  
+  font-family: Arial, sans-serif;  
+  max-width: 800px;  
+  margin: 20px auto;  
+  padding: 20px;  
+  border: 2px solid #4CAF50;  
+  border-radius: 10px;  
+  background: #f9f9f9;  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  
+}  
+#story-board {  
+  display: flex;  
+  flex-wrap: wrap;  
+  gap: 15px;  
+}  
+.story-node {  
+  padding: 10px;  
+  border: 2px solid #4CAF50;  
+  border-radius: 5px;  
+  background: #fff;  
+  width: 150px;  
+  text-align: center;  
+  cursor: pointer;  
+  word-wrap: break-word;  
+}  
+.story-node:hover {  
+  background: #e8f5e9;  
+}  
+#controls {  
+  margin-top: 20px;  
+  display: flex;  
+  flex-direction: column;  
+  gap: 10px;  
+}  
+button {  
+  padding: 10px;  
+  background: #4CAF50;  
+  color: white;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer;  
+}  
+button:hover {  
+  background: #45a049;  
+}  
+</style>  
+<div id="tool-app">  
+  <h2>PlotWeaver: Dynamic Storyline Builder</h2>  
+  <p>Drag-and-drop your way to a compelling storyline. Double-click any node to expand it!</p>  
+  <div id="story-board"></div>  
+  <div id="controls">  
+    <button id="add-node">Add New Plot Point</button>  
+    <button id="export-story">Export Story</button>  
+  </div>  
+</div>  
+<script>  
+const storyBoard = document.getElementById("story-board");  
+const addNodeButton = document.getElementById("add-node");  
+const exportButton = document.getElementById("export-story");  
+
+// Initialize story data  
+let storyData = [];  
+
+// Add a new node  
+addNodeButton.addEventListener("click", () => {  
+  const newNode = {  
+    id: `node-${storyData.length + 1}`,  
+    content: "Double-click to edit",  
+  };  
+  storyData.push(newNode);  
+  renderStoryNodes();  
+});  
+
+// Render the story nodes  
+function renderStoryNodes() {  
+  storyBoard.innerHTML = "";  
+  storyData.forEach((node, index) => {  
+    const nodeDiv = document.createElement("div");  
+    nodeDiv.className = "story-node";  
+    nodeDiv.textContent = node.content;  
+    nodeDiv.dataset.index = index;  
+    nodeDiv.addEventListener("dblclick", () => editNode(index));  
+    storyBoard.appendChild(nodeDiv);  
+  });  
+}  
+
+// Edit a node's content  
+function editNode(index) {  
+  const newContent = prompt("Edit this plot point:", storyData[index].content);  
+  if (newContent !== null) {  
+    storyData[index].content = newContent;  
+    renderStoryNodes();  
+  }  
+}  
+
+// Export the story data  
+exportButton.addEventListener("click", () => {  
+  alert("Your Storyline:\n\n" + storyData.map((node, i) => `${i + 1}. ${node.content}`).join("\n"));  
+});  
+
+// Initial render  
+renderStoryNodes();  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>

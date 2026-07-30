@@ -1,0 +1,192 @@
+---
+layout: null
+title: "CodeCritters: Interactive Codebase Explorer"
+category: "Developer"
+description: "A gamified tool where developers navigate a dungeon-like map of their codebase, battling bugs and collecting performance boosts to improve their code quality."
+permalink: "/tools/daily-20260730-17-codecritters-interactive-codebase-explorer.html"
+generated_by: "api-true-ai"
+generated_date: "20260730"
+generated_model: "gpt-4.1"
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeCritters: Interactive Codebase Explorer | Free Online Interactive Tool</title>
+  <meta name="description" content="A gamified tool where developers navigate a dungeon-like map of their codebase, battling bugs and collecting performance boosts to improve their code quality. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:title" content="CodeCritters: Interactive Codebase Explorer | Free Online Interactive Tool">
+  <meta property="og:description" content="A gamified tool where developers navigate a dungeon-like map of their codebase, battling bugs and collecting performance boosts to improve their code quality. Use this free online utility directly in your browser. No signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CodeCritters: Interactive Codebase Explorer | Free Online Interactive Tool">
+  <meta name="twitter:description" content="A gamified tool where developers navigate a dungeon-like map of their codebase, battling bugs and collecting performance boosts to improve their code quality. Use this free online utility directly in your browser. No signup required.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/white?text=Vincent%27s+Tools+Hub">
+  <style>
+    :root { --primary: #3b82f6; --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: #e2e8f0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #f4f7f9 0%, #e2e8f0 100%); min-height: 100vh; color: var(--text); margin: 0; padding: 20px 20px 80px 20px; line-height: 1.5; }
+    .tool-container { max-width: 800px; margin: 40px auto; background: var(--surface); padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; }
+    .seo-subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <div class="tool-container">
+    <h1>CodeCritters: Interactive Codebase Explorer</h1>
+    <p class="seo-subtitle">A gamified tool where developers navigate a dungeon-like map of their codebase, battling bugs and collecting performance boosts to improve their code quality.</p>
+    <style>  
+  #tool-app {
+    font-family: 'Arial', sans-serif;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 2px solid #333;
+    border-radius: 10px;
+    background: #f3f3f3;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  #map {
+    display: grid;
+    grid-template-columns: repeat(10, 40px);
+    grid-gap: 2px;
+    justify-content: center;
+    margin: 20px auto;
+  }
+  .tile {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ddd;
+    color: #333;
+    font-size: 14px;
+  }
+  .tile.player { background: #4CAF50; color: white; }
+  .tile.bug { background: #f44336; color: white; }
+  .tile.performance { background: #2196F3; color: white; }
+  .tile.empty { background: #ccc; }
+  #log {
+    height: 100px;
+    overflow-y: auto;
+    text-align: left;
+    background: #222;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  button:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+  }
+</style>  
+<div id="tool-app">  
+  <h1>CodeCritters</h1>  
+  <p>Navigate the codebase, battle bugs, and collect performance boosts!</p>  
+  <div id="map"></div>  
+  <div>  
+    <button id="up">Up</button>  
+    <button id="left">Left</button>  
+    <button id="down">Down</button>  
+    <button id="right">Right</button>  
+  </div>  
+  <div id="log"></div>  
+</div>  
+<script>  
+const mapSize = 10;  
+const map = [];  
+const logMessages = [];  
+const player = { x: 0, y: 0, score: 0 };  
+
+function initMap() {  
+  for (let y = 0; y < mapSize; y++) {  
+    const row = [];  
+    for (let x = 0; x < mapSize; x++) {  
+      const tileType = Math.random() < 0.1  
+        ? 'bug'  
+        : Math.random() < 0.1  
+        ? 'performance'  
+        : 'empty';  
+      row.push(tileType);  
+    }  
+    map.push(row);  
+  }  
+  map[player.y][player.x] = 'player';  
+}  
+
+function renderMap() {  
+  const mapDiv = document.getElementById('map');  
+  mapDiv.innerHTML = '';  
+  map.forEach((row, y) => {  
+    row.forEach((tile, x) => {  
+      const div = document.createElement('div');  
+      div.className = `tile ${tile}`;  
+      div.textContent = '';  
+      if (tile === 'bug') div.textContent = '🐛';  
+      if (tile === 'performance') div.textContent = '⚡';  
+      if (tile === 'player') div.textContent = '🧑‍💻';  
+      mapDiv.appendChild(div);  
+    });  
+  });  
+}  
+
+function log(message) {  
+  logMessages.push(message);  
+  if (logMessages.length > 5) logMessages.shift();  
+  document.getElementById('log').innerHTML = logMessages  
+    .map(msg => `<p>${msg}</p>`)  
+    .join('');  
+}  
+
+function movePlayer(dx, dy) {  
+  const newX = player.x + dx;  
+  const newY = player.y + dy;  
+
+  if (newX < 0 || newX >= mapSize || newY < 0 || newY >= mapSize) {  
+    log('❌ You hit a wall!');  
+    return;  
+  }  
+
+  const targetTile = map[newY][newX];  
+
+  if (targetTile === 'bug') {  
+    player.score -= 10;  
+    log('🐛 You encountered a bug! Score: ' + player.score);  
+  } else if (targetTile === 'performance') {  
+    player.score += 20;  
+    log('⚡ You found a performance boost! Score: ' + player.score);  
+  }  
+
+  map[player.y][player.x] = 'empty';  
+  player.x = newX;  
+  player.y = newY;  
+  map[player.y][player.x] = 'player';  
+  renderMap();  
+}  
+
+document.getElementById('up').onclick = () => movePlayer(0, -1);  
+document.getElementById('down').onclick = () => movePlayer(0, 1);  
+document.getElementById('left').onclick = () => movePlayer(-1, 0);  
+document.getElementById('right').onclick = () => movePlayer(1, 0);  
+
+initMap();  
+renderMap();  
+log('Welcome to CodeCritters!');  
+</script>
+  </div>
+  <a href="/tools/" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); font-size: 1rem; z-index: 9999;">
+    🏠 Return to tool chooser
+  </a>
+</body>
+</html>
